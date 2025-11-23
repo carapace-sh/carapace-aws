@@ -1,448 +1,6 @@
 name: pi
 description: AWS Performance Insights
 commands:
-    - name: get-resource-metrics
-      description: Retrieve Performance Insights metrics for a set of data sources over a time period.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --end-time=!: The date and time specifying the end of the requested time series query range.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: An immutable identifier for a data source that is unique for an Amazon Web Services Region.
-        --max-results=: The maximum number of items to return in the response.
-        --metric-queries=!: An array of one or more queries to perform.
-        --next-token=: An optional pagination token provided by a previous request.
-        --period-alignment=: The returned timestamp which is the start or end time of the time periods.
-        --period-in-seconds=: The granularity, in seconds, of the data points returned from Performance Insights.
-        --service-type=!: The Amazon Web Services service for which Performance Insights returns metrics.
-        --start-time=!: The date and time specifying the beginning of the requested time series query range.
-      completion:
-        flag:
-            period-alignment:
-                - END_TIME
-                - START_TIME
-            service-type:
-                - RDS
-                - DOCDB
-      documentation:
-        command: |-
-            Retrieve Performance Insights metrics for a set of data sources over a time period. You can provide specific dimension groups and dimensions, and provide filtering criteria for each group. You must specify an aggregate function for each metric.
-
-            Each response element returns a maximum of 500 bytes. For larger elements, such as SQL statements, only the first 500 bytes are returned.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            end-time: |-
-                The date and time specifying the end of the requested time series query range. The value specified is *exclusive*. Thus, the command returns data points less than (but not equal to) `EndTime`.
-
-                The value for `EndTime` must be later than the value for `StartTime`.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            identifier: |-
-                An immutable identifier for a data source that is unique for an Amazon Web Services Region. Performance Insights gathers metrics from this data source. In the console, the identifier is shown as *ResourceID*. When you call `DescribeDBInstances`, the identifier is returned as `DbiResourceId`.
-
-                To use a DB instance as a data source, specify its `DbiResourceId` value. For example, specify `db-ABCDEFGHIJKLMNOPQRSTU1VW2X`.
-            max-results: The maximum number of items to return in the response.
-            metric-queries: An array of one or more queries to perform. Each query must specify a Performance Insights metric and specify an aggregate function, and you can provide filtering criteria. You must append the aggregate function to the metric. For example, to find the average for the metric `db.load` you must use `db.load.avg`. Valid values for aggregate functions include `.avg`, `.min`, `.max`, and `.sum`.
-            next-token: An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the token, up to the value specified by `MaxRecords`.
-            period-alignment: The returned timestamp which is the start or end time of the time periods. The default value is `END_TIME`.
-            period-in-seconds: |-
-                The granularity, in seconds, of the data points returned from Performance Insights. A period can be as short as one second, or as long as one day (86400 seconds). Valid values are:
-
-                - `1` (one second)
-                - `60` (one minute)
-                - `300` (five minutes)
-                - `3600` (one hour)
-                - `86400` (twenty-four hours)
-
-                If you don't specify `PeriodInSeconds`, then Performance Insights will choose a value for you, with a goal of returning roughly 100-200 data points in the response.
-            service-type: |-
-                The Amazon Web Services service for which Performance Insights returns metrics. Valid values are as follows:
-
-                - `RDS`
-                - `DOCDB`
-            start-time: |-
-                The date and time specifying the beginning of the requested time series query range. You can't specify a `StartTime` that is earlier than 7 days ago. By default, Performance Insights has 7 days of retention, but you can extend this range up to 2 years. The value specified is *inclusive*. Thus, the command returns data points equal to or greater than `StartTime`.
-
-                The value for `StartTime` must be earlier than the value for `EndTime`.
-    - name: list-available-resource-metrics
-      description: Retrieve metrics of the specified types that can be queried for a specified DB instance.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: An immutable identifier for a data source that is unique within an Amazon Web Services Region.
-        --max-results=: The maximum number of items to return.
-        --metric-types=!: The types of metrics to return in the response.
-        --next-token=: An optional pagination token provided by a previous request.
-        --service-type=!: The Amazon Web Services service for which Performance Insights returns metrics.
-      completion:
-        flag:
-            service-type:
-                - RDS
-                - DOCDB
-      documentation:
-        command: Retrieve metrics of the specified types that can be queried for a specified DB instance.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            identifier: An immutable identifier for a data source that is unique within an Amazon Web Services Region. Performance Insights gathers metrics from this data source. To use an Amazon RDS DB instance as a data source, specify its `DbiResourceId` value. For example, specify `db-ABCDEFGHIJKLMNOPQRSTU1VWZ`.
-            max-results: The maximum number of items to return. If the `MaxRecords` value is less than the number of existing items, the response includes a pagination token.
-            metric-types: |-
-                The types of metrics to return in the response. Valid values in the array include the following:
-
-                - `os` (OS counter metrics) - All engines
-                - `db` (DB load metrics) - All engines except for Amazon DocumentDB
-                - `db.sql.stats` (per-SQL metrics) - All engines except for Amazon DocumentDB
-                - `db.sql_tokenized.stats` (per-SQL digest metrics) - All engines except for Amazon DocumentDB
-            next-token: An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the token, up to the value specified by `MaxRecords`.
-            service-type: The Amazon Web Services service for which Performance Insights returns metrics.
-    - name: create-performance-analysis-report
-      description: Creates a new performance analysis report for a specific time period for the DB instance.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --end-time=!: The end time defined for the analysis report.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: An immutable, Amazon Web Services Region-unique identifier for a data source.
-        --service-type=!: The Amazon Web Services service for which Performance Insights will return metrics.
-        --start-time=!: The start time defined for the analysis report.
-        --tags=: The metadata assigned to the analysis report consisting of a key-value pair.
-      completion:
-        flag:
-            service-type:
-                - RDS
-                - DOCDB
-      documentation:
-        command: Creates a new performance analysis report for a specific time period for the DB instance.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            end-time: The end time defined for the analysis report.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            identifier: |-
-                An immutable, Amazon Web Services Region-unique identifier for a data source. Performance Insights gathers metrics from this data source.
-
-                To use an Amazon RDS instance as a data source, you specify its `DbiResourceId` value. For example, specify `db-ADECBTYHKTSAUMUZQYPDS2GW4A`.
-            service-type: The Amazon Web Services service for which Performance Insights will return metrics. Valid value is `RDS`.
-            start-time: The start time defined for the analysis report.
-            tags: The metadata assigned to the analysis report consisting of a key-value pair.
-    - name: get-dimension-key-details
-      description: Get the attributes of the specified dimension group for a DB instance or data source.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-identifier=!: The ID of the dimension group from which to retrieve dimension details.
-        --group=!: The name of the dimension group.
-        --identifier=!: The ID for a data source from which to gather dimension data.
-        --requested-dimensions=: A list of dimensions to retrieve the detail data for within the given dimension group.
-        --service-type=!: The Amazon Web Services service for which Performance Insights returns data.
-      completion:
-        flag:
-            service-type:
-                - RDS
-                - DOCDB
-      documentation:
-        command: Get the attributes of the specified dimension group for a DB instance or data source. For example, if you specify a SQL ID, `GetDimensionKeyDetails` retrieves the full text of the dimension `db.sql.statement` associated with this ID. This operation is useful because `GetResourceMetrics` and `DescribeDimensionKeys` don't support retrieval of large SQL statement text, lock snapshots, and execution plans.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            group: |-
-                The name of the dimension group. Performance Insights searches the specified group for the dimension group ID. The following group name values are valid:
-
-                - `db.execution_plan` (Amazon RDS and Aurora only)
-                - `db.lock_snapshot` (Aurora only)
-                - `db.query` (Amazon DocumentDB only)
-                - `db.sql` (Amazon RDS and Aurora only)
-            group-identifier: |-
-                The ID of the dimension group from which to retrieve dimension details. For dimension group `db.sql`, the group ID is `db.sql.id`. The following group ID values are valid:
-
-                - `db.execution_plan.id` for dimension group `db.execution_plan` (Aurora and RDS only)
-                - `db.sql.id` for dimension group `db.sql` (Aurora and RDS only)
-                - `db.query.id` for dimension group `db.query` (DocumentDB only)
-                - For the dimension group `db.lock_snapshot`, the `GroupIdentifier` is the epoch timestamp when Performance Insights captured the snapshot, in seconds. You can retrieve this value with the `GetResourceMetrics` operation for a 1 second period.
-            identifier: The ID for a data source from which to gather dimension data. This ID must be immutable and unique within an Amazon Web Services Region. When a DB instance is the data source, specify its `DbiResourceId` value. For example, specify `db-ABCDEFGHIJKLMNOPQRSTU1VW2X`.
-            requested-dimensions: |-
-                A list of dimensions to retrieve the detail data for within the given dimension group. If you don't specify this parameter, Performance Insights returns all dimension data within the specified dimension group. Specify dimension names for the following dimension groups:
-
-                - `db.execution_plan` - Specify the dimension name `db.execution_plan.raw_plan` or the short dimension name `raw_plan` (Amazon RDS and Aurora only)
-                - `db.lock_snapshot` - Specify the dimension name `db.lock_snapshot.lock_trees` or the short dimension name `lock_trees`. (Aurora only)
-                - `db.sql` - Specify either the full dimension name `db.sql.statement` or the short dimension name `statement` (Aurora and RDS only).
-                - `db.query` - Specify either the full dimension name `db.query.statement` or the short dimension name `statement` (DocumentDB only).
-            service-type: The Amazon Web Services service for which Performance Insights returns data. The only valid value is `RDS`.
-    - name: get-resource-metadata
-      description: Retrieve the metadata for different features.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: An immutable identifier for a data source that is unique for an Amazon Web Services Region.
-        --service-type=!: The Amazon Web Services service for which Performance Insights returns metrics.
-      completion:
-        flag:
-            service-type:
-                - RDS
-                - DOCDB
-      documentation:
-        command: Retrieve the metadata for different features. For example, the metadata might indicate that a feature is turned on or off on a specific DB instance.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            identifier: An immutable identifier for a data source that is unique for an Amazon Web Services Region. Performance Insights gathers metrics from this data source. To use a DB instance as a data source, specify its `DbiResourceId` value. For example, specify `db-ABCDEFGHIJKLMNOPQRSTU1VW2X`.
-            service-type: The Amazon Web Services service for which Performance Insights returns metrics.
-    - name: list-available-resource-dimensions
-      description: Retrieve the dimensions that can be queried for each specified metric type on a specified DB instance.
-      flags:
-        --authorized-actions=: The actions to discover the dimensions you are authorized to access.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: An immutable identifier for a data source that is unique within an Amazon Web Services Region.
-        --max-results=: The maximum number of items to return in the response.
-        --metrics=!: The types of metrics for which to retrieve dimensions.
-        --next-token=: An optional pagination token provided by a previous request.
-        --service-type=!: The Amazon Web Services service for which Performance Insights returns metrics.
-      completion:
-        flag:
-            service-type:
-                - RDS
-                - DOCDB
-      documentation:
-        command: Retrieve the dimensions that can be queried for each specified metric type on a specified DB instance.
-        flag:
-            authorized-actions: |-
-                The actions to discover the dimensions you are authorized to access. If you specify multiple actions, then the response will contain the dimensions common for all the actions.
-
-                When you don't specify this request parameter or provide an empty list, the response contains all the available dimensions for the target database engine whether or not you are authorized to access them.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            identifier: An immutable identifier for a data source that is unique within an Amazon Web Services Region. Performance Insights gathers metrics from this data source. To use an Amazon RDS DB instance as a data source, specify its `DbiResourceId` value. For example, specify `db-ABCDEFGHIJKLMNOPQRSTU1VWZ`.
-            max-results: The maximum number of items to return in the response. If more items exist than the specified `MaxRecords` value, a pagination token is included in the response so that the remaining results can be retrieved.
-            metrics: The types of metrics for which to retrieve dimensions. Valid values include `db.load`.
-            next-token: An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the token, up to the value specified by `MaxRecords`.
-            service-type: The Amazon Web Services service for which Performance Insights returns metrics.
-    - name: list-performance-analysis-reports
-      description: Lists all the analysis reports created for the DB instance.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: An immutable identifier for a data source that is unique for an Amazon Web Services Region.
-        --list-tags: Specifies whether or not to include the list of tags in the response.
-        --max-results=: The maximum number of items to return in the response.
-        --next-token=: An optional pagination token provided by a previous request.
-        --no-list-tags: Specifies whether or not to include the list of tags in the response.
-        --service-type=!: The Amazon Web Services service for which Performance Insights returns metrics.
-      completion:
-        flag:
-            service-type:
-                - RDS
-                - DOCDB
-      documentation:
-        command: Lists all the analysis reports created for the DB instance. The reports are sorted based on the start time of each report.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            identifier: |-
-                An immutable identifier for a data source that is unique for an Amazon Web Services Region. Performance Insights gathers metrics from this data source. In the console, the identifier is shown as *ResourceID*. When you call `DescribeDBInstances`, the identifier is returned as `DbiResourceId`.
-
-                To use a DB instance as a data source, specify its `DbiResourceId` value. For example, specify `db-ABCDEFGHIJKLMNOPQRSTU1VW2X`.
-            list-tags: Specifies whether or not to include the list of tags in the response.
-            max-results: The maximum number of items to return in the response. If more items exist than the specified `MaxResults` value, a pagination token is included in the response so that the remaining results can be retrieved.
-            next-token: An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the token, up to the value specified by `MaxResults`.
-            service-type: The Amazon Web Services service for which Performance Insights returns metrics. Valid value is `RDS`.
-    - name: list-tags-for-resource
-      description: Retrieves all the metadata tags associated with Amazon RDS Performance Insights resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: Lists all the tags for the Amazon RDS Performance Insights resource.
-        --service-type=!: List the tags for the Amazon Web Services service for which Performance Insights returns metrics.
-      completion:
-        flag:
-            service-type:
-                - RDS
-                - DOCDB
-      documentation:
-        command: Retrieves all the metadata tags associated with Amazon RDS Performance Insights resource.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-arn: Lists all the tags for the Amazon RDS Performance Insights resource. This value is an Amazon Resource Name (ARN). For information about creating an ARN, see [Constructing an RDS Amazon Resource Name (ARN)](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing).
-            service-type: List the tags for the Amazon Web Services service for which Performance Insights returns metrics. Valid value is `RDS`.
-    - name: tag-resource
-      description: Adds metadata tags to the Amazon RDS Performance Insights resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon RDS Performance Insights resource that the tags are added to.
-        --service-type=!: The Amazon Web Services service for which Performance Insights returns metrics.
-        --tags=!: The metadata assigned to an Amazon RDS resource consisting of a key-value pair.
-      completion:
-        flag:
-            service-type:
-                - RDS
-                - DOCDB
-      documentation:
-        command: Adds metadata tags to the Amazon RDS Performance Insights resource.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-arn: The Amazon RDS Performance Insights resource that the tags are added to. This value is an Amazon Resource Name (ARN). For information about creating an ARN, see [Constructing an RDS Amazon Resource Name (ARN)](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing).
-            service-type: The Amazon Web Services service for which Performance Insights returns metrics. Valid value is `RDS`.
-            tags: The metadata assigned to an Amazon RDS resource consisting of a key-value pair.
-    - name: untag-resource
-      description: Deletes the metadata tags from the Amazon RDS Performance Insights resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon RDS Performance Insights resource that the tags are added to.
-        --service-type=!: List the tags for the Amazon Web Services service for which Performance Insights returns metrics.
-        --tag-keys=!: The metadata assigned to an Amazon RDS Performance Insights resource consisting of a key-value pair.
-      completion:
-        flag:
-            service-type:
-                - RDS
-                - DOCDB
-      documentation:
-        command: Deletes the metadata tags from the Amazon RDS Performance Insights resource.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-arn: The Amazon RDS Performance Insights resource that the tags are added to. This value is an Amazon Resource Name (ARN). For information about creating an ARN, see [Constructing an RDS Amazon Resource Name (ARN)](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing).
-            service-type: List the tags for the Amazon Web Services service for which Performance Insights returns metrics. Valid value is `RDS`.
-            tag-keys: The metadata assigned to an Amazon RDS Performance Insights resource consisting of a key-value pair.
     - name: delete-performance-analysis-report
       description: Deletes a performance analysis report.
       flags:
@@ -457,30 +15,6 @@ commands:
             service-type:
                 - RDS
                 - DOCDB
-      documentation:
-        command: Deletes a performance analysis report.
-        flag:
-            analysis-report-id: The unique identifier of the analysis report for deletion.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            identifier: |-
-                An immutable identifier for a data source that is unique for an Amazon Web Services Region. Performance Insights gathers metrics from this data source. In the console, the identifier is shown as *ResourceID*. When you call `DescribeDBInstances`, the identifier is returned as `DbiResourceId`.
-
-                To use a DB instance as a data source, specify its `DbiResourceId` value. For example, specify `db-ABCDEFGHIJKLMNOPQRSTU1VW2X`.
-            service-type: The Amazon Web Services service for which Performance Insights will return metrics. Valid value is `RDS`.
     - name: describe-dimension-keys
       description: For a specific time period, retrieve the top `N` dimension keys for a metric.
       flags:
@@ -504,78 +38,122 @@ commands:
             service-type:
                 - RDS
                 - DOCDB
-      documentation:
-        command: |-
-            For a specific time period, retrieve the top `N` dimension keys for a metric.
-
-            Each response element returns a maximum of 500 bytes. For larger elements, such as SQL statements, only the first 500 bytes are returned.
+    - name: get-dimension-key-details
+      description: Get the attributes of the specified dimension group for a DB instance or data source.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-identifier=!: The ID of the dimension group from which to retrieve dimension details.
+        --group=!: The name of the dimension group.
+        --identifier=!: The ID for a data source from which to gather dimension data.
+        --requested-dimensions=: A list of dimensions to retrieve the detail data for within the given dimension group.
+        --service-type=!: The Amazon Web Services service for which Performance Insights returns data.
+      completion:
         flag:
-            additional-metrics: |-
-                Additional metrics for the top `N` dimension keys. If the specified dimension group in the `GroupBy` parameter is `db.sql_tokenized`, you can specify per-SQL metrics to get the values for the top `N` SQL digests. The response syntax is as follows: `"AdditionalMetrics" : { "string" : "string" }`.
-
-                The only supported statistic function is `.avg`.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            end-time: |-
-                The date and time specifying the end of the requested time series data. The value specified is *exclusive*, which means that data points less than (but not equal to) `EndTime` are returned.
-
-                The value for `EndTime` must be later than the value for `StartTime`.
-            filter: |-
-                One or more filters to apply in the request. Restrictions:
-
-                - Any number of filters by the same dimension, as specified in the `GroupBy` or `Partition` parameters.
-                - A single filter for any other dimension in this dimension group.
-
-                The `db.sql.db_id` filter isn't available for RDS for SQL Server DB instances.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            group-by: A specification for how to aggregate the data points from a query result. You must specify a valid dimension group. Performance Insights returns all dimensions within this group, unless you provide the names of specific dimensions within this group. You can also request that Performance Insights return a limited number of values for a dimension.
-            identifier: |-
-                An immutable, Amazon Web Services Region-unique identifier for a data source. Performance Insights gathers metrics from this data source.
-
-                To use an Amazon RDS instance as a data source, you specify its `DbiResourceId` value. For example, specify `db-FAIHNTYBKTGAUSUZQYPDS2GW4A`.
-            max-results: The maximum number of items to return in the response. If more items exist than the specified `MaxRecords` value, a pagination token is included in the response so that the remaining results can be retrieved.
-            metric: |-
-                The name of a Performance Insights metric to be measured.
-
-                Valid values for `Metric` are:
-
-                - `db.load.avg` - A scaled representation of the number of active sessions for the database engine.
-                - `db.sampledload.avg` - The raw number of active sessions for the database engine.
-
-                If the number of active sessions is less than an internal Performance Insights threshold, `db.load.avg` and `db.sampledload.avg` are the same value. If the number of active sessions is greater than the internal threshold, Performance Insights samples the active sessions, with `db.load.avg` showing the scaled values, `db.sampledload.avg` showing the raw values, and `db.sampledload.avg` less than `db.load.avg`. For most use cases, you can query `db.load.avg` only.
-            next-token: An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the token, up to the value specified by `MaxRecords`.
-            partition-by: For each dimension specified in `GroupBy`, specify a secondary dimension to further subdivide the partition keys in the response.
-            period-in-seconds: |-
-                The granularity, in seconds, of the data points returned from Performance Insights. A period can be as short as one second, or as long as one day (86400 seconds). Valid values are:
-
-                - `1` (one second)
-                - `60` (one minute)
-                - `300` (five minutes)
-                - `3600` (one hour)
-                - `86400` (twenty-four hours)
-
-                If you don't specify `PeriodInSeconds`, then Performance Insights chooses a value for you, with a goal of returning roughly 100-200 data points in the response.
-            service-type: |-
-                The Amazon Web Services service for which Performance Insights will return metrics. Valid values are as follows:
-
-                - `RDS`
-                - `DOCDB`
-            start-time: |-
-                The date and time specifying the beginning of the requested time series data. You must specify a `StartTime` within the past 7 days. The value specified is *inclusive*, which means that data points equal to or greater than `StartTime` are returned.
-
-                The value for `StartTime` must be earlier than the value for `EndTime`.
+            service-type:
+                - RDS
+                - DOCDB
+    - name: get-resource-metadata
+      description: Retrieve the metadata for different features.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: An immutable identifier for a data source that is unique for an Amazon Web Services Region.
+        --service-type=!: The Amazon Web Services service for which Performance Insights returns metrics.
+      completion:
+        flag:
+            service-type:
+                - RDS
+                - DOCDB
+    - name: get-resource-metrics
+      description: Retrieve Performance Insights metrics for a set of data sources over a time period.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=!: The date and time specifying the end of the requested time series query range.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: An immutable identifier for a data source that is unique for an Amazon Web Services Region.
+        --max-results=: The maximum number of items to return in the response.
+        --metric-queries=!: An array of one or more queries to perform.
+        --next-token=: An optional pagination token provided by a previous request.
+        --period-alignment=: The returned timestamp which is the start or end time of the time periods.
+        --period-in-seconds=: The granularity, in seconds, of the data points returned from Performance Insights.
+        --service-type=!: The Amazon Web Services service for which Performance Insights returns metrics.
+        --start-time=!: The date and time specifying the beginning of the requested time series query range.
+      completion:
+        flag:
+            period-alignment:
+                - END_TIME
+                - START_TIME
+            service-type:
+                - RDS
+                - DOCDB
+    - name: list-available-resource-dimensions
+      description: Retrieve the dimensions that can be queried for each specified metric type on a specified DB instance.
+      flags:
+        --authorized-actions=: The actions to discover the dimensions you are authorized to access.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: An immutable identifier for a data source that is unique within an Amazon Web Services Region.
+        --max-results=: The maximum number of items to return in the response.
+        --metrics=!: The types of metrics for which to retrieve dimensions.
+        --next-token=: An optional pagination token provided by a previous request.
+        --service-type=!: The Amazon Web Services service for which Performance Insights returns metrics.
+      completion:
+        flag:
+            service-type:
+                - RDS
+                - DOCDB
+    - name: list-performance-analysis-reports
+      description: Lists all the analysis reports created for the DB instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: An immutable identifier for a data source that is unique for an Amazon Web Services Region.
+        --list-tags: Specifies whether or not to include the list of tags in the response.
+        --max-results=: The maximum number of items to return in the response.
+        --next-token=: An optional pagination token provided by a previous request.
+        --no-list-tags: Specifies whether or not to include the list of tags in the response.
+        --service-type=!: The Amazon Web Services service for which Performance Insights returns metrics.
+      completion:
+        flag:
+            service-type:
+                - RDS
+                - DOCDB
+    - name: untag-resource
+      description: Deletes the metadata tags from the Amazon RDS Performance Insights resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon RDS Performance Insights resource that the tags are added to.
+        --service-type=!: List the tags for the Amazon Web Services service for which Performance Insights returns metrics.
+        --tag-keys=!: The metadata assigned to an Amazon RDS Performance Insights resource consisting of a key-value pair.
+      completion:
+        flag:
+            service-type:
+                - RDS
+                - DOCDB
+    - name: create-performance-analysis-report
+      description: Creates a new performance analysis report for a specific time period for the DB instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=!: The end time defined for the analysis report.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: An immutable, Amazon Web Services Region-unique identifier for a data source.
+        --service-type=!: The Amazon Web Services service for which Performance Insights will return metrics.
+        --start-time=!: The start time defined for the analysis report.
+        --tags=: The metadata assigned to the analysis report consisting of a key-value pair.
+      completion:
+        flag:
+            service-type:
+                - RDS
+                - DOCDB
     - name: get-performance-analysis-report
       description: Retrieves the report including the report ID, status, time details, and the insights with recommendations.
       flags:
@@ -597,29 +175,46 @@ commands:
             text-format:
                 - PLAIN_TEXT
                 - MARKDOWN
-      documentation:
-        command: Retrieves the report including the report ID, status, time details, and the insights with recommendations. The report status can be `RUNNING`, `SUCCEEDED`, or `FAILED`. The insights include the `description` and `recommendation` fields.
+    - name: list-available-resource-metrics
+      description: Retrieve metrics of the specified types that can be queried for a specified DB instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: An immutable identifier for a data source that is unique within an Amazon Web Services Region.
+        --max-results=: The maximum number of items to return.
+        --metric-types=!: The types of metrics to return in the response.
+        --next-token=: An optional pagination token provided by a previous request.
+        --service-type=!: The Amazon Web Services service for which Performance Insights returns metrics.
+      completion:
         flag:
-            accept-language: The text language in the report. The default language is `EN_US` (English).
-            analysis-report-id: A unique identifier of the created analysis report. For example, `report-12345678901234567`
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            identifier: |-
-                An immutable identifier for a data source that is unique for an Amazon Web Services Region. Performance Insights gathers metrics from this data source. In the console, the identifier is shown as *ResourceID*. When you call `DescribeDBInstances`, the identifier is returned as `DbiResourceId`.
-
-                To use a DB instance as a data source, specify its `DbiResourceId` value. For example, specify `db-ABCDEFGHIJKLMNOPQRSTU1VW2X`.
-            service-type: The Amazon Web Services service for which Performance Insights will return metrics. Valid value is `RDS`.
-            text-format: Indicates the text format in the report. The options are `PLAIN_TEXT` or `MARKDOWN`. The default value is `plain text`.
+            service-type:
+                - RDS
+                - DOCDB
+    - name: list-tags-for-resource
+      description: Retrieves all the metadata tags associated with Amazon RDS Performance Insights resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: Lists all the tags for the Amazon RDS Performance Insights resource.
+        --service-type=!: List the tags for the Amazon Web Services service for which Performance Insights returns metrics.
+      completion:
+        flag:
+            service-type:
+                - RDS
+                - DOCDB
+    - name: tag-resource
+      description: Adds metadata tags to the Amazon RDS Performance Insights resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon RDS Performance Insights resource that the tags are added to.
+        --service-type=!: The Amazon Web Services service for which Performance Insights returns metrics.
+        --tags=!: The metadata assigned to an Amazon RDS resource consisting of a key-value pair.
+      completion:
+        flag:
+            service-type:
+                - RDS
+                - DOCDB

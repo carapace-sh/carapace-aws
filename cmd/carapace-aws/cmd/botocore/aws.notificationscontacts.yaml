@@ -1,39 +1,21 @@
 name: notificationscontacts
 description: AWS User Notifications Contacts
 commands:
-    - name: create-email-contact
-      description: Creates an email contact for the provided email address.
+    - name: activate-email-contact
+      description: Activates an email contact using an activation code.
       flags:
+        --arn=!: The Amazon Resource Name (ARN) of the resource.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --email-address=!: The email address this email contact points to.
+        --code=!: The activation code for this email contact.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the email contact.
-        --tags=: A map of tags assigned to a resource.
-      documentation:
-        command: Creates an email contact for the provided email address.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            email-address: |-
-                The email address this email contact points to. The activation email and any subscribed emails are sent here.
-
-                This email address can't receive emails until it's activated.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            name: The name of the email contact.
-            tags: A map of tags assigned to a resource. A tag is a string-to-string map of key-value pairs.
+    - name: delete-email-contact
+      description: Deletes an email contact.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the resource.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-email-contact
       description: Returns an email contact.
       flags:
@@ -41,25 +23,6 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Returns an email contact.
-        flag:
-            arn: The Amazon Resource Name (ARN) of the email contact to get.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
     - name: list-email-contacts
       description: Lists all email contacts created under the Account.
       flags:
@@ -71,71 +34,6 @@ commands:
         --next-token=: An optional token returned from a prior request.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Lists all email contacts created under the Account.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
-            next-token: An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: list-tags-for-resource
-      description: Lists all of the tags associated with the Amazon Resource Name (ARN) that you specify.
-      flags:
-        --arn=!: The ARN you specified to list the tags of.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Lists all of the tags associated with the Amazon Resource Name (ARN) that you specify. The resource can be a user, server, or role.
-        flag:
-            arn: The ARN you specified to list the tags of.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
     - name: tag-resource
       description: Attaches a key-value pair to a resource, as identified by its Amazon Resource Name (ARN).
       flags:
@@ -144,115 +42,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --tags=!: A list of tags to apply to the configuration.
-      documentation:
-        command: Attaches a key-value pair to a resource, as identified by its Amazon Resource Name (ARN). Taggable resources in AWS User Notifications Contacts include email contacts.
-        flag:
-            arn: The ARN of the configuration.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            tags: A list of tags to apply to the configuration.
-    - name: activate-email-contact
-      description: Activates an email contact using an activation code.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the resource.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --code=!: The activation code for this email contact.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Activates an email contact using an activation code. This code is in the activation email sent to the email address associated with this email contact.
-        flag:
-            arn: The Amazon Resource Name (ARN) of the resource.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            code: |-
-                The activation code for this email contact.
-
-                An email contact has a maximum of five activation attempts. Activation codes expire after 12 hours and are generated by the [SendActivationCode](https://docs.aws.amazon.com/notificationscontacts/latest/APIReference/API_SendActivationCode.html) API action.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: delete-email-contact
-      description: Deletes an email contact.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the resource.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: |-
-            Deletes an email contact.
-
-            Deleting an email contact removes it from all associated notification configurations.
-        flag:
-            arn: The Amazon Resource Name (ARN) of the resource.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: send-activation-code
-      description: Sends an activation email to the email address associated with the specified email contact.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the resource.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: |-
-            Sends an activation email to the email address associated with the specified email contact.
-
-            It might take a few minutes for the activation email to arrive. If it doesn't arrive, check in your spam folder or try sending another activation email.
-        flag:
-            arn: The Amazon Resource Name (ARN) of the resource.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
     - name: untag-resource
       description: Detaches a key-value pair from a resource, as identified by its Amazon Resource Name (ARN).
       flags:
@@ -261,23 +50,26 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --tag-keys=!: Specifies a list of tag keys that you want to remove from the specified resources.
-      documentation:
-        command: Detaches a key-value pair from a resource, as identified by its Amazon Resource Name (ARN). Taggable resources in AWS User Notifications Contacts include email contacts..
-        flag:
-            arn: The value of the resource that will have the tag removed. An Amazon Resource Name (ARN) is an identifier for a specific AWS resource, such as a server, user, or role.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            tag-keys: Specifies a list of tag keys that you want to remove from the specified resources.
+    - name: create-email-contact
+      description: Creates an email contact for the provided email address.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --email-address=!: The email address this email contact points to.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the email contact.
+        --tags=: A map of tags assigned to a resource.
+    - name: list-tags-for-resource
+      description: Lists all of the tags associated with the Amazon Resource Name (ARN) that you specify.
+      flags:
+        --arn=!: The ARN you specified to list the tags of.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: send-activation-code
+      description: Sends an activation email to the email address associated with the specified email contact.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the resource.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.

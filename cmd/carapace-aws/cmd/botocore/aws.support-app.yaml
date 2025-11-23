@@ -1,6 +1,35 @@
 name: support-app
 description: AWS Support App
 commands:
+    - name: delete-slack-channel-configuration
+      description: Deletes a Slack channel configuration from your Amazon Web Services account.
+      flags:
+        --channel-id=!: The channel ID in Slack.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --team-id=!: The team ID in Slack.
+    - name: delete-slack-workspace-configuration
+      description: Deletes a Slack workspace configuration from your Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --team-id=!: The team ID in Slack.
+    - name: list-slack-workspace-configurations
+      description: Lists the Slack workspace configurations for an Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --next-token=: If the results of a search are large, the API only returns a portion of the results and includes a `nextToken` pagination token in the response.
+    - name: register-slack-workspace-for-organization
+      description: Registers a Slack workspace for your Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --team-id=!: The team ID in Slack.
     - name: create-slack-channel-configuration
       description: Creates a Slack channel configuration for your Amazon Web Services account.
       flags:
@@ -24,183 +53,12 @@ commands:
                 - none
                 - all
                 - high
-      documentation:
-        command: |-
-            Creates a Slack channel configuration for your Amazon Web Services account.
-
-            - You can add up to 5 Slack workspaces for your account.
-            - You can add up to 20 Slack channels for your account.
-
-            A Slack channel can have up to 100 Amazon Web Services accounts. This means that only 100 accounts can add the same Slack channel to the Amazon Web Services Support App. We recommend that you only add the accounts that you need to manage support cases for your organization. This can reduce the notifications about case updates that you receive in the Slack channel.
-
-            We recommend that you choose a private Slack channel so that only members in that channel have read and write access to your support cases. Anyone in your Slack channel can create, update, or resolve support cases for your account. Users require an invitation to join private channels.
-        flag:
-            channel-id: The channel ID in Slack. This ID identifies a channel within a Slack workspace.
-            channel-name: The name of the Slack channel that you configure for the Amazon Web Services Support App.
-            channel-role-arn: The Amazon Resource Name (ARN) of an IAM role that you want to use to perform operations on Amazon Web Services. For more information, see [Managing access to the Amazon Web Services Support App](https://docs.aws.amazon.com/awssupport/latest/user/support-app-permissions.html) in the *Amazon Web Services Support User Guide*.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            notify-on-add-correspondence-to-case: Whether you want to get notified when a support case has a new correspondence.
-            notify-on-case-severity: |-
-                The case severity for a support case that you want to receive notifications.
-
-                If you specify `high` or `all`, you must specify `true` for at least one of the following parameters:
-
-                - `notifyOnAddCorrespondenceToCase`
-                - `notifyOnCreateOrReopenCase`
-                - `notifyOnResolveCase`
-
-                If you specify `none`, the following parameters must be null or `false`:
-
-                - `notifyOnAddCorrespondenceToCase`
-                - `notifyOnCreateOrReopenCase`
-                - `notifyOnResolveCase`
-
-                If you don't specify these parameters in your request, they default to `false`.
-            notify-on-create-or-reopen-case: Whether you want to get notified when a support case is created or reopened.
-            notify-on-resolve-case: Whether you want to get notified when a support case is resolved.
-            team-id: The team ID in Slack. This ID uniquely identifies a Slack workspace, such as `T012ABCDEFG`.
-    - name: delete-account-alias
-      description: Deletes an alias for an Amazon Web Services account ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Deletes an alias for an Amazon Web Services account ID. The alias appears in the Amazon Web Services Support App page of the Amazon Web Services Support Center. The alias also appears in Slack messages from the Amazon Web Services Support App.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
     - name: get-account-alias
       description: Retrieves the alias from an Amazon Web Services account ID.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Retrieves the alias from an Amazon Web Services account ID. The alias appears in the Amazon Web Services Support App page of the Amazon Web Services Support Center. The alias also appears in Slack messages from the Amazon Web Services Support App.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: put-account-alias
-      description: Creates or updates an individual alias for each Amazon Web Services account ID.
-      flags:
-        --account-alias=!: An alias or short name for an Amazon Web Services account.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Creates or updates an individual alias for each Amazon Web Services account ID. The alias appears in the Amazon Web Services Support App page of the Amazon Web Services Support Center. The alias also appears in Slack messages from the Amazon Web Services Support App.
-        flag:
-            account-alias: An alias or short name for an Amazon Web Services account.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: delete-slack-channel-configuration
-      description: Deletes a Slack channel configuration from your Amazon Web Services account.
-      flags:
-        --channel-id=!: The channel ID in Slack.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --team-id=!: The team ID in Slack.
-      documentation:
-        command: Deletes a Slack channel configuration from your Amazon Web Services account. This operation doesn't delete your Slack channel.
-        flag:
-            channel-id: The channel ID in Slack. This ID identifies a channel within a Slack workspace.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            team-id: The team ID in Slack. This ID uniquely identifies a Slack workspace, such as `T012ABCDEFG`.
-    - name: delete-slack-workspace-configuration
-      description: Deletes a Slack workspace configuration from your Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --team-id=!: The team ID in Slack.
-      documentation:
-        command: Deletes a Slack workspace configuration from your Amazon Web Services account. This operation doesn't delete your Slack workspace.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            team-id: The team ID in Slack. This ID uniquely identifies a Slack workspace, such as `T012ABCDEFG`.
     - name: list-slack-channel-configurations
       description: Lists the Slack channel configurations for an Amazon Web Services account.
       flags:
@@ -208,90 +66,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --next-token=: If the results of a search are large, the API only returns a portion of the results and includes a `nextToken` pagination token in the response.
-      documentation:
-        command: Lists the Slack channel configurations for an Amazon Web Services account.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            next-token: If the results of a search are large, the API only returns a portion of the results and includes a `nextToken` pagination token in the response. To retrieve the next batch of results, reissue the search request and include the returned token. When the API returns the last set of results, the response doesn't include a pagination token value.
-    - name: list-slack-workspace-configurations
-      description: Lists the Slack workspace configurations for an Amazon Web Services account.
+    - name: put-account-alias
+      description: Creates or updates an individual alias for each Amazon Web Services account ID.
       flags:
+        --account-alias=!: An alias or short name for an Amazon Web Services account.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --next-token=: If the results of a search are large, the API only returns a portion of the results and includes a `nextToken` pagination token in the response.
-      documentation:
-        command: Lists the Slack workspace configurations for an Amazon Web Services account.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            next-token: If the results of a search are large, the API only returns a portion of the results and includes a `nextToken` pagination token in the response. To retrieve the next batch of results, reissue the search request and include the returned token. When the API returns the last set of results, the response doesn't include a pagination token value.
-    - name: register-slack-workspace-for-organization
-      description: Registers a Slack workspace for your Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --team-id=!: The team ID in Slack.
-      documentation:
-        command: |-
-            Registers a Slack workspace for your Amazon Web Services account. To call this API, your account must be part of an organization in Organizations.
-
-            If you're the *management account* and you want to register Slack workspaces for your organization, you must complete the following tasks:
-
-            1. Sign in to the [Amazon Web Services Support Center](https://console.aws.amazon.com/support/app) and authorize the Slack workspaces where you want your organization to have access to. See [Authorize a Slack workspace](https://docs.aws.amazon.com/awssupport/latest/user/authorize-slack-workspace.html) in the *Amazon Web Services Support User Guide*.
-            2. Call the `RegisterSlackWorkspaceForOrganization` API to authorize each Slack workspace for the organization.
-
-            After the management account authorizes the Slack workspace, member accounts can call this API to authorize the same Slack workspace for their individual accounts. Member accounts don't need to authorize the Slack workspace manually through the [Amazon Web Services Support Center](https://console.aws.amazon.com/support/app).
-
-            To use the Amazon Web Services Support App, each account must then complete the following tasks:
-
-            - Create an Identity and Access Management (IAM) role with the required permission. For more information, see [Managing access to the Amazon Web Services Support App](https://docs.aws.amazon.com/awssupport/latest/user/support-app-permissions.html).
-            - Configure a Slack channel to use the Amazon Web Services Support App for support cases for that account. For more information, see [Configuring a Slack channel](https://docs.aws.amazon.com/awssupport/latest/user/add-your-slack-channel.html).
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            team-id: The team ID in Slack. This ID uniquely identifies a Slack workspace, such as `T012ABCDEFG`. Specify the Slack workspace that you want to use for your organization.
     - name: update-slack-channel-configuration
       description: Updates the configuration for a Slack channel, such as case update notifications.
       flags:
@@ -315,44 +96,9 @@ commands:
                 - none
                 - all
                 - high
-      documentation:
-        command: Updates the configuration for a Slack channel, such as case update notifications.
-        flag:
-            channel-id: The channel ID in Slack. This ID identifies a channel within a Slack workspace.
-            channel-name: The Slack channel name that you want to update.
-            channel-role-arn: The Amazon Resource Name (ARN) of an IAM role that you want to use to perform operations on Amazon Web Services. For more information, see [Managing access to the Amazon Web Services Support App](https://docs.aws.amazon.com/awssupport/latest/user/support-app-permissions.html) in the *Amazon Web Services Support User Guide*.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            notify-on-add-correspondence-to-case: Whether you want to get notified when a support case has a new correspondence.
-            notify-on-case-severity: |-
-                The case severity for a support case that you want to receive notifications.
-
-                If you specify `high` or `all`, at least one of the following parameters must be `true`:
-
-                - `notifyOnAddCorrespondenceToCase`
-                - `notifyOnCreateOrReopenCase`
-                - `notifyOnResolveCase`
-
-                If you specify `none`, any of the following parameters that you specify in your request must be `false`:
-
-                - `notifyOnAddCorrespondenceToCase`
-                - `notifyOnCreateOrReopenCase`
-                - `notifyOnResolveCase`
-
-                If you don't specify these parameters in your request, the Amazon Web Services Support App uses the current values by default.
-            notify-on-create-or-reopen-case: Whether you want to get notified when a support case is created or reopened.
-            notify-on-resolve-case: Whether you want to get notified when a support case is resolved.
-            team-id: The team ID in Slack. This ID uniquely identifies a Slack workspace, such as `T012ABCDEFG`.
+    - name: delete-account-alias
+      description: Deletes an alias for an Amazon Web Services account ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.

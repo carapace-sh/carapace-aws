@@ -1,6 +1,25 @@
 name: migration-hub-refactor-spaces
 description: AWS Migration Hub Refactor Spaces
 commands:
+    - name: delete-resource-policy
+      description: Deletes the resource policy set for the environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: Amazon Resource Name (ARN) of the resource associated with the policy.
+    - name: list-applications
+      description: Lists all the Amazon Web Services Migration Hub Refactor Spaces applications within an environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-identifier=!: The ID of the environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return with a single call.
+        --next-token=: The token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-environment-vpcs
       description: Lists all Amazon Web Services Migration Hub Refactor Spaces service virtual private clouds (VPCs) that are part of the environment.
       flags:
@@ -13,127 +32,81 @@ commands:
         --next-token=: The token for the next page of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Lists all Amazon Web Services Migration Hub Refactor Spaces service virtual private clouds (VPCs) that are part of the environment.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-identifier: The ID of the environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned `nextToken` value.
-            next-token: The token for the next page of results.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: list-environments
-      description: Lists Amazon Web Services Migration Hub Refactor Spaces environments owned by a caller account or shared with the caller account.
+    - name: list-routes
+      description: Lists all the Amazon Web Services Migration Hub Refactor Spaces routes within an application.
       flags:
+        --application-identifier=!: The ID of the application.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-identifier=!: The ID of the environment.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return with a single call.
         --next-token=: The token for the next page of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Lists Amazon Web Services Migration Hub Refactor Spaces environments owned by a caller account or shared with the caller account.
+    - name: create-environment
+      description: Creates an Amazon Web Services Migration Hub Refactor Spaces environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --description=: The description of the environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the environment.
+        --network-fabric-type=!: The network fabric type of the environment.
+        --tags=: The tags to assign to the environment.
+      completion:
         flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned `nextToken` value.
-            next-token: The token for the next page of results.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: tag-resource
-      description: Removes the tags of a given resource.
+            network-fabric-type:
+                - TRANSIT_GATEWAY
+                - NONE
+    - name: delete-service
+      description: Deletes an Amazon Web Services Migration Hub Refactor Spaces service.
+      flags:
+        --application-identifier=!: Deletes a Refactor Spaces service.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-identifier=!: The ID of the environment that the service is in.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-identifier=!: The ID of the service to delete.
+    - name: get-application
+      description: Gets an Amazon Web Services Migration Hub Refactor Spaces application.
+      flags:
+        --application-identifier=!: The ID of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-identifier=!: The ID of the environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-service
+      description: Gets an Amazon Web Services Migration Hub Refactor Spaces service.
+      flags:
+        --application-identifier=!: The ID of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-identifier=!: The ID of the environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-identifier=!: The ID of the service.
+    - name: list-services
+      description: Lists all the Amazon Web Services Migration Hub Refactor Spaces services within an application.
+      flags:
+        --application-identifier=!: The ID of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-identifier=!: The ID of the environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return with a single call.
+        --next-token=: The token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: Lists the tags of a resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-        --tags=!: The new or modified tags for the resource.
-      documentation:
-        command: |-
-            Removes the tags of a given resource. Tags are metadata which can be used to manage a resource. To tag a resource, the caller account must be the same as the resource’s `OwnerAccountId`. Tagging resources in other accounts is not supported.
-
-            Amazon Web Services Migration Hub Refactor Spaces does not propagate tags to orchestrated resources, such as an environment’s transit gateway.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-arn: The Amazon Resource Name (ARN) of the resource.
-            tags: The new or modified tags for the resource.
     - name: untag-resource
       description: Adds to or modifies the tags of the given resource.
       flags:
@@ -142,26 +115,21 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
         --tag-keys=!: The list of keys of the tags to be removed from the resource.
-      documentation:
-        command: Adds to or modifies the tags of the given resource. Tags are metadata which can be used to manage a resource. To untag a resource, the caller account must be the same as the resource’s `OwnerAccountId`. Untagging resources across accounts is not supported.
+    - name: update-route
+      description: Updates an Amazon Web Services Migration Hub Refactor Spaces route.
+      flags:
+        --activation-state=!: If set to `ACTIVE`, traffic is forwarded to this route’s service after the route is updated.
+        --application-identifier=!: The ID of the application within which the route is being updated.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-identifier=!: The ID of the environment in which the route is being updated.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --route-identifier=!: The unique identifier of the route to update.
+      completion:
         flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-arn: The Amazon Resource Name (ARN) of the resource.
-            tag-keys: The list of keys of the tags to be removed from the resource.
+            activation-state:
+                - ACTIVE
+                - INACTIVE
     - name: create-application
       description: Creates an Amazon Web Services Migration Hub Refactor Spaces application.
       flags:
@@ -179,165 +147,40 @@ commands:
         flag:
             proxy-type:
                 - API_GATEWAY
-      documentation:
-        command: |-
-            Creates an Amazon Web Services Migration Hub Refactor Spaces application. The account that owns the environment also owns the applications created inside the environment, regardless of the account that creates the application. Refactor Spaces provisions an Amazon API Gateway, API Gateway VPC link, and Network Load Balancer for the application proxy inside your account.
-
-            In environments created with a [CreateEnvironment:NetworkFabricType](https://docs.aws.amazon.com/migrationhub-refactor-spaces/latest/APIReference/API_CreateEnvironment.html#migrationhubrefactorspaces-CreateEnvironment-request-NetworkFabricType) of `NONE` you need to configure [VPC to VPC connectivity](https://docs.aws.amazon.com/whitepapers/latest/aws-vpc-connectivity-options/amazon-vpc-to-amazon-vpc-connectivity-options.html) between your service VPC and the application proxy VPC to route traffic through the application proxy to a service with a private URL endpoint. For more information, see [Create an application](https://docs.aws.amazon.com/migrationhub-refactor-spaces/latest/userguide/getting-started-create-application.html) in the *Refactor Spaces User Guide*.
-        flag:
-            api-gateway-proxy: A wrapper object holding the API Gateway endpoint type and stage name for the proxy.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-            environment-identifier: The unique identifier of the environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            name: The name to use for the application.
-            proxy-type: The proxy type of the proxy created within the application.
-            tags: The tags to assign to the application. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key-value pair.
-            vpc-id: The ID of the virtual private cloud (VPC).
-    - name: create-environment
-      description: Creates an Amazon Web Services Migration Hub Refactor Spaces environment.
+    - name: create-route
+      description: Creates an Amazon Web Services Migration Hub Refactor Spaces route.
       flags:
+        --application-identifier=!: The ID of the application within which the route is being created.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --description=: The description of the environment.
+        --default-route=: Configuration for the default route type.
+        --environment-identifier=!: The ID of the environment in which the route is created.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the environment.
-        --network-fabric-type=!: The network fabric type of the environment.
-        --tags=: The tags to assign to the environment.
+        --route-type=!: The route type of the route.
+        --service-identifier=!: The ID of the service in which the route is created.
+        --tags=: The tags to assign to the route.
+        --uri-path-route=: The configuration for the URI path route type.
       completion:
         flag:
-            network-fabric-type:
-                - TRANSIT_GATEWAY
-                - NONE
-      documentation:
-        command: |-
-            Creates an Amazon Web Services Migration Hub Refactor Spaces environment. The caller owns the environment resource, and all Refactor Spaces applications, services, and routes created within the environment. They are referred to as the *environment owner*. The environment owner has cross-account visibility and control of Refactor Spaces resources that are added to the environment by other accounts that the environment is shared with.
-
-            When creating an environment with a [CreateEnvironment:NetworkFabricType](https://docs.aws.amazon.com/migrationhub-refactor-spaces/latest/APIReference/API_CreateEnvironment.html#migrationhubrefactorspaces-CreateEnvironment-request-NetworkFabricType) of `TRANSIT_GATEWAY`, Refactor Spaces provisions a transit gateway to enable services in VPCs to communicate directly across accounts. If [CreateEnvironment:NetworkFabricType](https://docs.aws.amazon.com/migrationhub-refactor-spaces/latest/APIReference/API_CreateEnvironment.html#migrationhubrefactorspaces-CreateEnvironment-request-NetworkFabricType) is `NONE`, Refactor Spaces does not create a transit gateway and you must use your network infrastructure to route traffic to services with private URL endpoints.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-            description: The description of the environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            name: The name of the environment.
-            network-fabric-type: The network fabric type of the environment.
-            tags: The tags to assign to the environment. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key-value pair.
-    - name: delete-resource-policy
-      description: Deletes the resource policy set for the environment.
+            route-type:
+                - DEFAULT
+                - URI_PATH
+    - name: delete-application
+      description: Deletes an Amazon Web Services Migration Hub Refactor Spaces application.
+      flags:
+        --application-identifier=!: The ID of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-identifier=!: The ID of the environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-environment
+      description: Deletes an Amazon Web Services Migration Hub Refactor Spaces environment.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-identifier=!: The ID of the environment.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: Amazon Resource Name (ARN) of the resource associated with the policy.
-      documentation:
-        command: Deletes the resource policy set for the environment.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            identifier: Amazon Resource Name (ARN) of the resource associated with the policy.
-    - name: delete-route
-      description: Deletes an Amazon Web Services Migration Hub Refactor Spaces route.
-      flags:
-        --application-identifier=!: The ID of the application to delete the route from.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-identifier=!: The ID of the environment to delete the route from.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --route-identifier=!: The ID of the route to delete.
-      documentation:
-        command: Deletes an Amazon Web Services Migration Hub Refactor Spaces route.
-        flag:
-            application-identifier: The ID of the application to delete the route from.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-identifier: The ID of the environment to delete the route from.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            route-identifier: The ID of the route to delete.
-    - name: delete-service
-      description: Deletes an Amazon Web Services Migration Hub Refactor Spaces service.
-      flags:
-        --application-identifier=!: Deletes a Refactor Spaces service.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-identifier=!: The ID of the environment that the service is in.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --service-identifier=!: The ID of the service to delete.
-      documentation:
-        command: Deletes an Amazon Web Services Migration Hub Refactor Spaces service.
-        flag:
-            application-identifier: |-
-                Deletes a Refactor Spaces service.
-
-                The `RefactorSpacesSecurityGroup` security group must be removed from all Amazon Web Services resources in the virtual private cloud (VPC) prior to deleting a service with a URL endpoint in a VPC.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-identifier: The ID of the environment that the service is in.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            service-identifier: The ID of the service to delete.
     - name: get-environment
       description: Gets an Amazon Web Services Migration Hub Refactor Spaces environment.
       flags:
@@ -345,25 +188,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --environment-identifier=!: The ID of the environment.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Gets an Amazon Web Services Migration Hub Refactor Spaces environment.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-identifier: The ID of the environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
     - name: get-route
       description: Gets an Amazon Web Services Migration Hub Refactor Spaces route.
       flags:
@@ -373,187 +197,6 @@ commands:
         --environment-identifier=!: The ID of the environment.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --route-identifier=!: The ID of the route.
-      documentation:
-        command: Gets an Amazon Web Services Migration Hub Refactor Spaces route.
-        flag:
-            application-identifier: The ID of the application.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-identifier: The ID of the environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            route-identifier: The ID of the route.
-    - name: list-routes
-      description: Lists all the Amazon Web Services Migration Hub Refactor Spaces routes within an application.
-      flags:
-        --application-identifier=!: The ID of the application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-identifier=!: The ID of the environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return with a single call.
-        --next-token=: The token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Lists all the Amazon Web Services Migration Hub Refactor Spaces routes within an application.
-        flag:
-            application-identifier: The ID of the application.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-identifier: The ID of the environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned `nextToken` value.
-            next-token: The token for the next page of results.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: delete-environment
-      description: Deletes an Amazon Web Services Migration Hub Refactor Spaces environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-identifier=!: The ID of the environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Deletes an Amazon Web Services Migration Hub Refactor Spaces environment. Before you can delete an environment, you must first delete any applications and services within the environment.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-identifier: The ID of the environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: list-services
-      description: Lists all the Amazon Web Services Migration Hub Refactor Spaces services within an application.
-      flags:
-        --application-identifier=!: The ID of the application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-identifier=!: The ID of the environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return with a single call.
-        --next-token=: The token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Lists all the Amazon Web Services Migration Hub Refactor Spaces services within an application.
-        flag:
-            application-identifier: The ID of the application.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-identifier: The ID of the environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned `nextToken` value.
-            next-token: The token for the next page of results.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: list-tags-for-resource
-      description: Lists the tags of a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-      documentation:
-        command: Lists the tags of a resource. The caller account must be the same as the resource’s `OwnerAccountId`. Listing tags in other accounts is not supported.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-arn: The Amazon Resource Name (ARN) of the resource.
     - name: put-resource-policy
       description: Attaches a resource-based permission policy to the Amazon Web Services Migration Hub Refactor Spaces environment.
       flags:
@@ -562,63 +205,14 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --policy=!: A JSON-formatted string for an Amazon Web Services resource-based policy.
         --resource-arn=!: The Amazon Resource Name (ARN) of the resource to which the policy is being attached.
-      documentation:
-        command: Attaches a resource-based permission policy to the Amazon Web Services Migration Hub Refactor Spaces environment. The policy must contain the same actions and condition statements as the `arn:aws:ram::aws:permission/AWSRAMDefaultPermissionRefactorSpacesEnvironment` permission in Resource Access Manager. The policy must not contain new lines or blank lines.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            policy: A JSON-formatted string for an Amazon Web Services resource-based policy.
-            resource-arn: The Amazon Resource Name (ARN) of the resource to which the policy is being attached.
-    - name: update-route
-      description: Updates an Amazon Web Services Migration Hub Refactor Spaces route.
+    - name: tag-resource
+      description: Removes the tags of a given resource.
       flags:
-        --activation-state=!: If set to `ACTIVE`, traffic is forwarded to this route’s service after the route is updated.
-        --application-identifier=!: The ID of the application within which the route is being updated.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-identifier=!: The ID of the environment in which the route is being updated.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --route-identifier=!: The unique identifier of the route to update.
-      completion:
-        flag:
-            activation-state:
-                - ACTIVE
-                - INACTIVE
-      documentation:
-        command: Updates an Amazon Web Services Migration Hub Refactor Spaces route.
-        flag:
-            activation-state: If set to `ACTIVE`, traffic is forwarded to this route’s service after the route is updated.
-            application-identifier: The ID of the application within which the route is being updated.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-identifier: The ID of the environment in which the route is being updated.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            route-identifier: The unique identifier of the route to update.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+        --tags=!: The new or modified tags for the resource.
     - name: create-service
       description: Creates an Amazon Web Services Migration Hub Refactor Spaces service.
       flags:
@@ -640,168 +234,15 @@ commands:
             endpoint-type:
                 - LAMBDA
                 - URL
-      documentation:
-        command: |-
-            Creates an Amazon Web Services Migration Hub Refactor Spaces service. The account owner of the service is always the environment owner, regardless of which account in the environment creates the service. Services have either a URL endpoint in a virtual private cloud (VPC), or a Lambda function endpoint.
-
-            If an Amazon Web Services resource is launched in a service VPC, and you want it to be accessible to all of an environment’s services with VPCs and routes, apply the `RefactorSpacesSecurityGroup` to the resource. Alternatively, to add more cross-account constraints, apply your own security group.
-        flag:
-            application-identifier: The ID of the application which the service is created.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-            description: The description of the service.
-            endpoint-type: The type of endpoint to use for the service. The type can be a URL in a VPC or an Lambda function.
-            environment-identifier: The ID of the environment in which the service is created.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            lambda-endpoint: The configuration for the Lambda endpoint type.
-            name: The name of the service.
-            tags: The tags to assign to the service. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key-value pair..
-            url-endpoint: The configuration for the URL endpoint type. When creating a route to a service, Refactor Spaces automatically resolves the address in the `UrlEndpointInput` object URL when the Domain Name System (DNS) time-to-live (TTL) expires, or every 60 seconds for TTLs less than 60 seconds.
-            vpc-id: The ID of the VPC.
-    - name: delete-application
-      description: Deletes an Amazon Web Services Migration Hub Refactor Spaces application.
+    - name: delete-route
+      description: Deletes an Amazon Web Services Migration Hub Refactor Spaces route.
       flags:
-        --application-identifier=!: The ID of the application.
+        --application-identifier=!: The ID of the application to delete the route from.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-identifier=!: The ID of the environment.
+        --environment-identifier=!: The ID of the environment to delete the route from.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Deletes an Amazon Web Services Migration Hub Refactor Spaces application. Before you can delete an application, you must first delete any services or routes within the application.
-        flag:
-            application-identifier: The ID of the application.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-identifier: The ID of the environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: get-service
-      description: Gets an Amazon Web Services Migration Hub Refactor Spaces service.
-      flags:
-        --application-identifier=!: The ID of the application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-identifier=!: The ID of the environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --service-identifier=!: The ID of the service.
-      documentation:
-        command: Gets an Amazon Web Services Migration Hub Refactor Spaces service.
-        flag:
-            application-identifier: The ID of the application.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-identifier: The ID of the environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            service-identifier: The ID of the service.
-    - name: create-route
-      description: Creates an Amazon Web Services Migration Hub Refactor Spaces route.
-      flags:
-        --application-identifier=!: The ID of the application within which the route is being created.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --default-route=: Configuration for the default route type.
-        --environment-identifier=!: The ID of the environment in which the route is created.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --route-type=!: The route type of the route.
-        --service-identifier=!: The ID of the service in which the route is created.
-        --tags=: The tags to assign to the route.
-        --uri-path-route=: The configuration for the URI path route type.
-      completion:
-        flag:
-            route-type:
-                - DEFAULT
-                - URI_PATH
-      documentation:
-        command: "Creates an Amazon Web Services Migration Hub Refactor Spaces route. The account owner of the service resource is always the environment owner, regardless of which account creates the route. Routes target a service in the application. If an application does not have any routes, then the first route must be created as a `DEFAULT` `RouteType`.\n\nWhen created, the default route defaults to an active state so state is not a required input. However, like all other state values the state of the default route can be updated after creation, but only when all other routes are also inactive. Conversely, no route can be active without the default route also being active.\n\nWhen you create a route, Refactor Spaces configures the Amazon API Gateway to send traffic to the target service as follows:\n\n- **URL Endpoints**\n  \n  If the service has a URL endpoint, and the endpoint resolves to a private IP address, Refactor Spaces routes traffic using the API Gateway VPC link. If a service endpoint resolves to a public IP address, Refactor Spaces routes traffic over the public internet. Services can have HTTP or HTTPS URL endpoints. For HTTPS URLs, publicly-signed certificates are supported. Private Certificate Authorities (CAs) are permitted only if the CA's domain is also publicly resolvable.\n  \n  Refactor Spaces automatically resolves the public Domain Name System (DNS) names that are set in `CreateService:UrlEndpoint`when you create a service. The DNS names resolve when the DNS time-to-live (TTL) expires, or every 60 seconds for TTLs less than 60 seconds. This periodic DNS resolution ensures that the route configuration remains up-to-date.\n  \n  **One-time health check**\n  \n  A one-time health check is performed on the service when either the route is updated from inactive to active, or when it is created with an active state. If the health check fails, the route transitions the route state to `FAILED`, an error code of `SERVICE_ENDPOINT_HEALTH_CHECK_FAILURE` is provided, and no traffic is sent to the service.\n  \n  For private URLs, a target group is created on the Network Load Balancer and the load balancer target group runs default target health checks. By default, the health check is run against the service endpoint URL. Optionally, the health check can be performed against a different protocol, port, and/or path using the [CreateService:UrlEndpoint](https://docs.aws.amazon.com/migrationhub-refactor-spaces/latest/APIReference/API_CreateService.html#migrationhubrefactorspaces-CreateService-request-UrlEndpoint) parameter. All other health check settings for the load balancer use the default values described in the [Health checks for your target groups](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html) in the *Elastic Load Balancing guide*. The health check is considered successful if at least one target within the target group transitions to a healthy state.\n- **Lambda function endpoints**\n  \n  If the service has an Lambda function endpoint, then Refactor Spaces configures the Lambda function's resource policy to allow the application's API Gateway to invoke the function.\n  \n  The Lambda function state is checked. If the function is not active, the function configuration is updated so that Lambda resources are provisioned. If the Lambda state is `Failed`, then the route creation fails. For more information, see the [GetFunctionConfiguration's State response parameter](https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunctionConfiguration.html#SSS-GetFunctionConfiguration-response-State) in the *Lambda Developer Guide*.\n  \n  A check is performed to determine that a Lambda function with the specified ARN exists. If it does not exist, the health check fails. For public URLs, a connection is opened to the public endpoint. If the URL is not reachable, the health check fails.\n\n**Environments without a network bridge**\n\nWhen you create environments without a network bridge ([CreateEnvironment:NetworkFabricType](https://docs.aws.amazon.com/migrationhub-refactor-spaces/latest/APIReference/API_CreateEnvironment.html#migrationhubrefactorspaces-CreateEnvironment-request-NetworkFabricType) is `NONE)` and you use your own networking infrastructure, you need to configure [VPC to VPC connectivity](https://docs.aws.amazon.com/whitepapers/latest/aws-vpc-connectivity-options/amazon-vpc-to-amazon-vpc-connectivity-options.html) between your network and the application proxy VPC. Route creation from the application proxy to service endpoints will fail if your network is not configured to connect to the application proxy VPC. For more information, see [Create a route](https://docs.aws.amazon.com/migrationhub-refactor-spaces/latest/userguide/getting-started-create-role.html) in the *Refactor Spaces User Guide*."
-        flag:
-            application-identifier: The ID of the application within which the route is being created.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-            default-route: Configuration for the default route type.
-            environment-identifier: The ID of the environment in which the route is created.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            route-type: The route type of the route. `DEFAULT` indicates that all traffic that does not match another route is forwarded to the default route. Applications must have a default route before any other routes can be created. `URI_PATH` indicates a route that is based on a URI path.
-            service-identifier: The ID of the service in which the route is created. Traffic that matches this route is forwarded to this service.
-            tags: The tags to assign to the route. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key-value pair..
-            uri-path-route: The configuration for the URI path route type.
-    - name: get-application
-      description: Gets an Amazon Web Services Migration Hub Refactor Spaces application.
-      flags:
-        --application-identifier=!: The ID of the application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-identifier=!: The ID of the environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Gets an Amazon Web Services Migration Hub Refactor Spaces application.
-        flag:
-            application-identifier: The ID of the application.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-identifier: The ID of the environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
+        --route-identifier=!: The ID of the route to delete.
     - name: get-resource-policy
       description: Gets the resource-based permission policy that is set for the given environment.
       flags:
@@ -809,74 +250,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identifier=!: The Amazon Resource Name (ARN) of the resource associated with the policy.
-      documentation:
-        command: Gets the resource-based permission policy that is set for the given environment.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            identifier: The Amazon Resource Name (ARN) of the resource associated with the policy.
-    - name: list-applications
-      description: Lists all the Amazon Web Services Migration Hub Refactor Spaces applications within an environment.
+    - name: list-environments
+      description: Lists Amazon Web Services Migration Hub Refactor Spaces environments owned by a caller account or shared with the caller account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-identifier=!: The ID of the environment.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return with a single call.
         --next-token=: The token for the next page of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Lists all the Amazon Web Services Migration Hub Refactor Spaces applications within an environment.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-identifier: The ID of the environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned `nextToken` value.
-            next-token: The token for the next page of results.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.

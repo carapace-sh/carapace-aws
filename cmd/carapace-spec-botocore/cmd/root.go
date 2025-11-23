@@ -28,6 +28,10 @@ var rootCmd = &cobra.Command{
 			return err
 		}
 
+		if cmd.Flag("no-doc").Changed {
+			stripDoc(command)
+		}
+
 		dir, err := os.MkdirTemp("", "carapace-spec-botocore-*")
 		if err != nil {
 			return err
@@ -65,6 +69,7 @@ func Execute() error {
 
 func init() {
 	carapace.Gen(rootCmd).Standalone()
+	rootCmd.Flags().Bool("no-doc", false, "strip documentation")
 }
 
 func CamelCaseToDash(s string) string {
@@ -180,7 +185,7 @@ func parse(path string) (*command.Command, error) {
 		if !serviceDir.IsDir() {
 			continue
 		}
-		path := filepath.Join(os.Args[1], serviceDir.Name())
+		path := filepath.Join(path, serviceDir.Name())
 		versions, err := os.ReadDir(path)
 		if err != nil {
 			return nil, err
@@ -395,4 +400,12 @@ func parseWaiters(folder string) (map[string]Waiter, error) {
 		return nil, err
 	}
 	return waiters.Waiters, nil
+}
+
+func stripDoc(command *command.Command) {
+	command.Documentation.Command = ""
+	command.Documentation.Flag = nil
+	for index := range command.Commands {
+		stripDoc(&command.Commands[index])
+	}
 }

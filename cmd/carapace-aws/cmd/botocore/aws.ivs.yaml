@@ -1,6 +1,46 @@
 name: ivs
 description: Amazon Interactive Video Service
 commands:
+    - name: delete-channel
+      description: Deletes the specified channel and its associated stream keys.
+      flags:
+        --arn=!: ARN of the channel to be deleted.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: import-playback-key-pair
+      description: Imports the public portion of a new key pair and returns its `arn` and `fingerprint`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: Playback-key-pair name.
+        --public-key-material=!: The public portion of a customer-generated key pair.
+        --tags=: Any tags provided with the request are added to the playback key pair tags.
+    - name: list-tags-for-resource
+      description: Gets information about Amazon Web Services tags for the specified ARN.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource to be retrieved.
+    - name: tag-resource
+      description: Adds or updates tags for the Amazon Web Services resource with the specified ARN.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: ARN of the resource for which tags are to be added or updated.
+        --tags=!: Array of tags to be added or updated.
+    - name: list-stream-sessions
+      description: Gets a summary of current and previous streams for a specified channel in your account, in the AWS region where the API request is processed.
+      flags:
+        --channel-arn=!: Channel ARN used to filter the list.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Maximum number of streams to return.
+        --next-token=: The first stream to retrieve.
     - name: batch-get-stream-key
       description: Performs [GetStreamKey]() on multiple ARNs simultaneously.
       flags:
@@ -8,54 +48,13 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Performs [GetStreamKey]() on multiple ARNs simultaneously.
-        flag:
-            arns: Array of ARNs, one per stream key.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: stop-stream
-      description: Disconnects the incoming RTMPS stream for the specified channel.
+    - name: batch-start-viewer-session-revocation
+      description: Performs [StartViewerSessionRevocation]() on multiple channel ARN and viewer ID pairs simultaneously.
       flags:
-        --channel-arn=!: ARN of the channel for which the stream is to be stopped.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: |-
-            Disconnects the incoming RTMPS stream for the specified channel. Can be used in conjunction with [DeleteStreamKey]() to prevent further streaming to a channel.
-
-            Many streaming client-software libraries automatically reconnect a dropped RTMPS session, so to stop the stream permanently, you may want to first revoke the `streamKey` attached to the channel.
-        flag:
-            channel-arn: ARN of the channel for which the stream is to be stopped.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
+        --viewer-sessions=!: Array of viewer sessions, one per channel-ARN and viewer-ID pair.
     - name: create-channel
       description: Creates a new channel and an associated stream key to start streaming.
       flags:
@@ -91,439 +90,6 @@ commands:
                 - STANDARD
                 - ADVANCED_SD
                 - ADVANCED_HD
-      documentation:
-        command: Creates a new channel and an associated stream key to start streaming.
-        flag:
-            authorized: 'Whether the channel is private (enabled for playback authorization). Default: `false`.'
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            container-format: 'Indicates which content-packaging format is used (MPEG-TS or fMP4). If `multitrackInputConfiguration` is specified and `enabled` is `true`, then `containerFormat` is required and must be set to `FRAGMENTED_MP4`. Otherwise, `containerFormat` may be set to `TS` or `FRAGMENTED_MP4`. Default: `TS`.'
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            insecure-ingest: 'Whether the channel allows insecure RTMP and SRT ingest. Default: `false`.'
-            latency-mode: 'Channel latency mode. Use `NORMAL` to broadcast and deliver live video up to Full HD. Use `LOW` for near-real-time interaction with viewers. Default: `LOW`.'
-            multitrack-input-configuration: 'Object specifying multitrack input configuration. Default: no multitrack input configuration is specified.'
-            name: Channel name.
-            playback-restriction-policy-arn: 'Playback-restriction-policy ARN. A valid ARN value here both specifies the ARN and enables playback restriction. Default: "" (empty string, no playback restriction policy is applied).'
-            preset: Optional transcode preset for the channel. This is selectable only for `ADVANCED_HD` and `ADVANCED_SD` channel types. For those channel types, the default `preset` is `HIGHER_BANDWIDTH_DELIVERY`. For other channel types (`BASIC` and `STANDARD`), `preset` is the empty string (`""`).
-            recording-configuration-arn: 'Recording-configuration ARN. A valid ARN value here both specifies the ARN and enables recording. Default: "" (empty string, recording is disabled).'
-            tags: Array of 1-50 maps, each of the form `string:string (key:value)`. See [Best practices and strategies](https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html) in *Tagging Amazon Web Services Resources and Tag Editor* for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.
-            type: 'Channel type, which determines the allowable resolution and bitrate. *If you exceed the allowable input resolution or bitrate, the stream probably will disconnect immediately.* Default: `STANDARD`. For details, see [Channel Types](https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/channel-types.html).'
-    - name: create-stream-key
-      description: Creates a stream key, used to initiate a stream, for the specified channel ARN.
-      flags:
-        --channel-arn=!: ARN of the channel for which to create the stream key.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: Array of 1-50 maps, each of the form `string:string (key:value)`.
-      documentation:
-        command: |-
-            Creates a stream key, used to initiate a stream, for the specified channel ARN.
-
-            Note that [CreateChannel]() creates a stream key. If you subsequently use CreateStreamKey on the same channel, it will fail because a stream key already exists and there is a limit of 1 stream key per channel. To reset the stream key on a channel, use [DeleteStreamKey]() and then CreateStreamKey.
-        flag:
-            channel-arn: ARN of the channel for which to create the stream key.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            tags: Array of 1-50 maps, each of the form `string:string (key:value)`. See [Best practices and strategies](https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html) in *Tagging Amazon Web Services Resources and Tag Editor* for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.
-    - name: delete-channel
-      description: Deletes the specified channel and its associated stream keys.
-      flags:
-        --arn=!: ARN of the channel to be deleted.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: |-
-            Deletes the specified channel and its associated stream keys.
-
-            If you try to delete a live channel, you will get an error (409 ConflictException). To delete a channel that is live, call [StopStream](), wait for the Amazon EventBridge "Stream End" event (to verify that the stream's state is no longer Live), then call DeleteChannel. (See [Using EventBridge with Amazon IVS](https://docs.aws.amazon.com/ivs/latest/userguide/eventbridge.html).)
-        flag:
-            arn: ARN of the channel to be deleted.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: get-playback-restriction-policy
-      description: Gets the specified playback restriction policy.
-      flags:
-        --arn=!: ARN of the playback restriction policy to be returned.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Gets the specified playback restriction policy.
-        flag:
-            arn: ARN of the playback restriction policy to be returned.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: get-stream
-      description: Gets information about the active (live) stream on a specified channel.
-      flags:
-        --channel-arn=!: Channel ARN for stream to be accessed.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Gets information about the active (live) stream on a specified channel.
-        flag:
-            channel-arn: Channel ARN for stream to be accessed.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: import-playback-key-pair
-      description: Imports the public portion of a new key pair and returns its `arn` and `fingerprint`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: Playback-key-pair name.
-        --public-key-material=!: The public portion of a customer-generated key pair.
-        --tags=: Any tags provided with the request are added to the playback key pair tags.
-      documentation:
-        command: Imports the public portion of a new key pair and returns its `arn` and `fingerprint`. The `privateKey` can then be used to generate viewer authorization tokens, to grant viewers access to private channels. For more information, see [Setting Up Private Channels](https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html) in the *Amazon IVS User Guide*.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            name: Playback-key-pair name. The value does not need to be unique.
-            public-key-material: The public portion of a customer-generated key pair.
-            tags: Any tags provided with the request are added to the playback key pair tags. See [Best practices and strategies](https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html) in *Tagging Amazon Web Services Resources and Tag Editor* for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.
-    - name: batch-start-viewer-session-revocation
-      description: Performs [StartViewerSessionRevocation]() on multiple channel ARN and viewer ID pairs simultaneously.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --viewer-sessions=!: Array of viewer sessions, one per channel-ARN and viewer-ID pair.
-      documentation:
-        command: Performs [StartViewerSessionRevocation]() on multiple channel ARN and viewer ID pairs simultaneously.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            viewer-sessions: Array of viewer sessions, one per channel-ARN and viewer-ID pair.
-    - name: get-stream-key
-      description: Gets stream-key information for a specified ARN.
-      flags:
-        --arn=!: ARN for the stream key to be retrieved.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Gets stream-key information for a specified ARN.
-        flag:
-            arn: ARN for the stream key to be retrieved.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: put-metadata
-      description: Inserts metadata into the active stream of the specified channel.
-      flags:
-        --channel-arn=!: ARN of the channel into which metadata is inserted.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --metadata=!: Metadata to insert into the stream.
-      documentation:
-        command: Inserts metadata into the active stream of the specified channel. At most 5 requests per second per channel are allowed, each with a maximum 1 KB payload. (If 5 TPS is not sufficient for your needs, we recommend batching your data into a single PutMetadata call.) At most 155 requests per second per account are allowed. Also see [Embedding Metadata within a Video Stream](https://docs.aws.amazon.com/ivs/latest/userguide/metadata.html) in the *Amazon IVS User Guide*.
-        flag:
-            channel-arn: ARN of the channel into which metadata is inserted. This channel must have an active stream.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            metadata: 'Metadata to insert into the stream. Maximum: 1 KB per request.'
-    - name: batch-get-channel
-      description: Performs [GetChannel]() on multiple ARNs simultaneously.
-      flags:
-        --arns=!: Array of ARNs, one per channel.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Performs [GetChannel]() on multiple ARNs simultaneously.
-        flag:
-            arns: Array of ARNs, one per channel.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: delete-playback-restriction-policy
-      description: Deletes the specified playback restriction policy.
-      flags:
-        --arn=!: ARN of the playback restriction policy to be deleted.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Deletes the specified playback restriction policy.
-        flag:
-            arn: ARN of the playback restriction policy to be deleted.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: list-playback-key-pairs
-      description: Gets summary information about playback key pairs.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Maximum number of key pairs to return.
-        --next-token=: The first key pair to retrieve.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Gets summary information about playback key pairs. For more information, see [Setting Up Private Channels](https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html) in the *Amazon IVS User Guide*.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: 'Maximum number of key pairs to return. Default: your service quota or 100, whichever is smaller.'
-            next-token: The first key pair to retrieve. This is used for pagination; see the `nextToken` response field.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: get-channel
-      description: Gets the channel configuration for the specified channel ARN.
-      flags:
-        --arn=!: ARN of the channel for which the configuration is to be retrieved.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Gets the channel configuration for the specified channel ARN. See also [BatchGetChannel]().
-        flag:
-            arn: ARN of the channel for which the configuration is to be retrieved.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: get-recording-configuration
-      description: Gets the recording configuration for the specified ARN.
-      flags:
-        --arn=!: ARN of the recording configuration to be retrieved.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Gets the recording configuration for the specified ARN.
-        flag:
-            arn: ARN of the recording configuration to be retrieved.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: list-playback-restriction-policies
-      description: Gets summary information about playback restriction policies.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: Maximum number of policies to return.
-        --next-token=: The first policy to retrieve.
-      documentation:
-        command: Gets summary information about playback restriction policies.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-results: 'Maximum number of policies to return. Default: 1.'
-            next-token: The first policy to retrieve. This is used for pagination; see the `nextToken` response field.
     - name: list-recording-configurations
       description: Gets summary information about all recording configurations in your account, in the Amazon Web Services region where the API request is processed.
       flags:
@@ -535,502 +101,6 @@ commands:
         --next-token=: The first recording configuration to retrieve.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Gets summary information about all recording configurations in your account, in the Amazon Web Services region where the API request is processed.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: 'Maximum number of recording configurations to return. Default: your service quota or 100, whichever is smaller.'
-            next-token: The first recording configuration to retrieve. This is used for pagination; see the `nextToken` response field.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: list-stream-keys
-      description: Gets summary information about stream keys for the specified channel.
-      flags:
-        --channel-arn=!: Channel ARN used to filter the list.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Maximum number of streamKeys to return.
-        --next-token=: The first stream key to retrieve.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Gets summary information about stream keys for the specified channel.
-        flag:
-            channel-arn: Channel ARN used to filter the list.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: 'Maximum number of streamKeys to return. Default: 1.'
-            next-token: The first stream key to retrieve. This is used for pagination; see the `nextToken` response field.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: tag-resource
-      description: Adds or updates tags for the Amazon Web Services resource with the specified ARN.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: ARN of the resource for which tags are to be added or updated.
-        --tags=!: Array of tags to be added or updated.
-      documentation:
-        command: Adds or updates tags for the Amazon Web Services resource with the specified ARN.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-arn: ARN of the resource for which tags are to be added or updated. The ARN must be URL-encoded.
-            tags: Array of tags to be added or updated. Array of maps, each of the form `string:string (key:value)`. See [Best practices and strategies](https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html) in *Tagging Amazon Web Services Resources and Tag Editor* for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.
-    - name: untag-resource
-      description: Removes tags from the resource with the specified ARN.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: ARN of the resource for which tags are to be removed.
-        --tag-keys=!: Array of tags to be removed.
-      documentation:
-        command: Removes tags from the resource with the specified ARN.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-arn: ARN of the resource for which tags are to be removed. The ARN must be URL-encoded.
-            tag-keys: Array of tags to be removed. Array of maps, each of the form `string:string (key:value)`. See [Best practices and strategies](https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html) in *Tagging Amazon Web Services Resources and Tag Editor* for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.
-    - name: list-tags-for-resource
-      description: Gets information about Amazon Web Services tags for the specified ARN.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource to be retrieved.
-      documentation:
-        command: Gets information about Amazon Web Services tags for the specified ARN.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-arn: The ARN of the resource to be retrieved. The ARN must be URL-encoded.
-    - name: create-playback-restriction-policy
-      description: Creates a new playback restriction policy, for constraining playback by countries and/or origins.
-      flags:
-        --allowed-countries=: A list of country codes that control geoblocking restriction.
-        --allowed-origins=: A list of origin sites that control CORS restriction.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --enable-strict-origin-enforcement: Whether channel playback is constrained by origin site.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: Playback-restriction-policy name.
-        --no-enable-strict-origin-enforcement: Whether channel playback is constrained by origin site.
-        --tags=: Array of 1-50 maps, each of the form `string:string (key:value)`.
-      documentation:
-        command: Creates a new playback restriction policy, for constraining playback by countries and/or origins.
-        flag:
-            allowed-countries: 'A list of country codes that control geoblocking restriction. Allowed values are the officially assigned [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) codes. Default: All countries (an empty array).'
-            allowed-origins: 'A list of origin sites that control CORS restriction. Allowed values are the same as valid values of the Origin header defined at [https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin). Default: All origins (an empty array).'
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            enable-strict-origin-enforcement: 'Whether channel playback is constrained by origin site. Default: `false`.'
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            name: Playback-restriction-policy name. The value does not need to be unique.
-            tags: Array of 1-50 maps, each of the form `string:string (key:value)`. See [Best practices and strategies](https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html) in *Tagging Amazon Web Services Resources and Tag Editor* for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.
-    - name: create-recording-configuration
-      description: Creates a new recording configuration, used to enable recording to Amazon S3.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --destination-configuration=!: A complex type that contains a destination configuration for where recorded video will be stored.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: Recording-configuration name.
-        --recording-reconnect-window-seconds=: If a broadcast disconnects and then reconnects within the specified interval, the multiple streams will be considered a single broadcast and merged together.
-        --rendition-configuration=: Object that describes which renditions should be recorded for a stream.
-        --tags=: Array of 1-50 maps, each of the form `string:string (key:value)`.
-        --thumbnail-configuration=: A complex type that allows you to enable/disable the recording of thumbnails for a live session and modify the interval at which thumbnails are generated for the live session.
-      documentation:
-        command: |-
-            Creates a new recording configuration, used to enable recording to Amazon S3.
-
-            **Known issue:** In the us-east-1 region, if you use the Amazon Web Services CLI to create a recording configuration, it returns success even if the S3 bucket is in a different region. In this case, the `state` of the recording configuration is `CREATE_FAILED` (instead of `ACTIVE`). (In other regions, the CLI correctly returns failure if the bucket is in a different region.)
-
-            **Workaround:** Ensure that your S3 bucket is in the same region as the recording configuration. If you create a recording configuration in a different region as your S3 bucket, delete that recording configuration and create a new one with an S3 bucket from the correct region.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            destination-configuration: A complex type that contains a destination configuration for where recorded video will be stored.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            name: Recording-configuration name. The value does not need to be unique.
-            recording-reconnect-window-seconds: 'If a broadcast disconnects and then reconnects within the specified interval, the multiple streams will be considered a single broadcast and merged together. Default: 0.'
-            rendition-configuration: Object that describes which renditions should be recorded for a stream.
-            tags: Array of 1-50 maps, each of the form `string:string (key:value)`. See [Best practices and strategies](https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html) in *Tagging Amazon Web Services Resources and Tag Editor* for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.
-            thumbnail-configuration: A complex type that allows you to enable/disable the recording of thumbnails for a live session and modify the interval at which thumbnails are generated for the live session.
-    - name: delete-playback-key-pair
-      description: Deletes a specified authorization key pair.
-      flags:
-        --arn=!: ARN of the key pair to be deleted.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Deletes a specified authorization key pair. This invalidates future viewer tokens generated using the key pair’s `privateKey`. For more information, see [Setting Up Private Channels](https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html) in the *Amazon IVS User Guide*.
-        flag:
-            arn: ARN of the key pair to be deleted.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: list-stream-sessions
-      description: Gets a summary of current and previous streams for a specified channel in your account, in the AWS region where the API request is processed.
-      flags:
-        --channel-arn=!: Channel ARN used to filter the list.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: Maximum number of streams to return.
-        --next-token=: The first stream to retrieve.
-      documentation:
-        command: Gets a summary of current and previous streams for a specified channel in your account, in the AWS region where the API request is processed.
-        flag:
-            channel-arn: Channel ARN used to filter the list.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-results: 'Maximum number of streams to return. Default: 100.'
-            next-token: The first stream to retrieve. This is used for pagination; see the `nextToken` response field.
-    - name: list-streams
-      description: Gets summary information about live streams in your account, in the Amazon Web Services region where the API request is processed.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter-by=: Filters the stream list to match the specified criterion.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Maximum number of streams to return.
-        --next-token=: The first stream to retrieve.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Gets summary information about live streams in your account, in the Amazon Web Services region where the API request is processed.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            filter-by: Filters the stream list to match the specified criterion.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: 'Maximum number of streams to return. Default: 100.'
-            next-token: The first stream to retrieve. This is used for pagination; see the `nextToken` response field.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: delete-recording-configuration
-      description: Deletes the recording configuration for the specified ARN.
-      flags:
-        --arn=!: ARN of the recording configuration to be deleted.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: |-
-            Deletes the recording configuration for the specified ARN.
-
-            If you try to delete a recording configuration that is associated with a channel, you will get an error (409 ConflictException). To avoid this, for all channels that reference the recording configuration, first use [UpdateChannel]() to set the `recordingConfigurationArn` field to an empty string, then use DeleteRecordingConfiguration.
-        flag:
-            arn: ARN of the recording configuration to be deleted.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: get-playback-key-pair
-      description: Gets a specified playback authorization key pair and returns the `arn` and `fingerprint`.
-      flags:
-        --arn=!: ARN of the key pair to be returned.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Gets a specified playback authorization key pair and returns the `arn` and `fingerprint`. The `privateKey` held by the caller can be used to generate viewer authorization tokens, to grant viewers access to private channels. For more information, see [Setting Up Private Channels](https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html) in the *Amazon IVS User Guide*.
-        flag:
-            arn: ARN of the key pair to be returned.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: get-stream-session
-      description: Gets metadata on a specified stream.
-      flags:
-        --channel-arn=!: ARN of the channel resource
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --stream-id=: Unique identifier for a live or previously live stream in the specified channel.
-      documentation:
-        command: Gets metadata on a specified stream.
-        flag:
-            channel-arn: ARN of the channel resource
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            stream-id: Unique identifier for a live or previously live stream in the specified channel. If no `streamId` is provided, this returns the most recent stream session for the channel, if it exists.
-    - name: list-channels
-      description: Gets summary information about all channels in your account, in the Amazon Web Services region where the API request is processed.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter-by-name=: Filters the channel list to match the specified name.
-        --filter-by-playback-restriction-policy-arn=: Filters the channel list to match the specified policy.
-        --filter-by-recording-configuration-arn=: Filters the channel list to match the specified recording-configuration ARN.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Maximum number of channels to return.
-        --next-token=: The first channel to retrieve.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Gets summary information about all channels in your account, in the Amazon Web Services region where the API request is processed. This list can be filtered to match a specified name or recording-configuration ARN. Filters are mutually exclusive and cannot be used together. If you try to use both filters, you will get an error (409 ConflictException).
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            filter-by-name: Filters the channel list to match the specified name.
-            filter-by-playback-restriction-policy-arn: Filters the channel list to match the specified policy.
-            filter-by-recording-configuration-arn: Filters the channel list to match the specified recording-configuration ARN.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: 'Maximum number of channels to return. Default: 100.'
-            next-token: The first channel to retrieve. This is used for pagination; see the `nextToken` response field.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
     - name: start-viewer-session-revocation
       description: Starts the process of revoking the viewer session associated with a specified channel ARN and viewer ID.
       flags:
@@ -1040,27 +110,6 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --viewer-id=!: The ID of the viewer associated with the viewer session to revoke.
         --viewer-session-versions-less-than-or-equal-to=: An optional filter on which versions of the viewer session to revoke.
-      documentation:
-        command: Starts the process of revoking the viewer session associated with a specified channel ARN and viewer ID. Optionally, you can provide a version to revoke viewer sessions less than and including that version. For instructions on associating a viewer ID with a viewer session, see [Setting Up Private Channels](https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html).
-        flag:
-            channel-arn: The ARN of the channel associated with the viewer session to revoke.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            viewer-id: The ID of the viewer associated with the viewer session to revoke. Do not use this field for personally identifying, confidential, or sensitive information.
-            viewer-session-versions-less-than-or-equal-to: 'An optional filter on which versions of the viewer session to revoke. All versions less than or equal to the specified version will be revoked. Default: 0.'
     - name: update-channel
       description: Updates a channel's configuration.
       flags:
@@ -1096,35 +145,106 @@ commands:
                 - STANDARD
                 - ADVANCED_SD
                 - ADVANCED_HD
-      documentation:
-        command: Updates a channel's configuration. Live channels cannot be updated. You must stop the ongoing stream, update the channel, and restart the stream for the changes to take effect.
-        flag:
-            arn: ARN of the channel to be updated.
-            authorized: Whether the channel is private (enabled for playback authorization).
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            container-format: 'Indicates which content-packaging format is used (MPEG-TS or fMP4). If `multitrackInputConfiguration` is specified and `enabled` is `true`, then `containerFormat` is required and must be set to `FRAGMENTED_MP4`. Otherwise, `containerFormat` may be set to `TS` or `FRAGMENTED_MP4`. Default: `TS`.'
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            insecure-ingest: 'Whether the channel allows insecure RTMP and SRT ingest. Default: `false`.'
-            latency-mode: Channel latency mode. Use `NORMAL` to broadcast and deliver live video up to Full HD. Use `LOW` for near-real-time interaction with viewers.
-            multitrack-input-configuration: 'Object specifying multitrack input configuration. Default: no multitrack input configuration is specified.'
-            name: Channel name.
-            playback-restriction-policy-arn: Playback-restriction-policy ARN. A valid ARN value here both specifies the ARN and enables playback restriction. If this is set to an empty string, playback restriction policy is disabled.
-            preset: Optional transcode preset for the channel. This is selectable only for `ADVANCED_HD` and `ADVANCED_SD` channel types. For those channel types, the default `preset` is `HIGHER_BANDWIDTH_DELIVERY`. For other channel types (`BASIC` and `STANDARD`), `preset` is the empty string (`""`).
-            recording-configuration-arn: Recording-configuration ARN. A valid ARN value here both specifies the ARN and enables recording. If this is set to an empty string, recording is disabled.
-            type: 'Channel type, which determines the allowable resolution and bitrate. *If you exceed the allowable input resolution or bitrate, the stream probably will disconnect immediately.* Default: `STANDARD`. For details, see [Channel Types](https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/channel-types.html).'
+    - name: create-stream-key
+      description: Creates a stream key, used to initiate a stream, for the specified channel ARN.
+      flags:
+        --channel-arn=!: ARN of the channel for which to create the stream key.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: Array of 1-50 maps, each of the form `string:string (key:value)`.
+    - name: delete-recording-configuration
+      description: Deletes the recording configuration for the specified ARN.
+      flags:
+        --arn=!: ARN of the recording configuration to be deleted.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: stop-stream
+      description: Disconnects the incoming RTMPS stream for the specified channel.
+      flags:
+        --channel-arn=!: ARN of the channel for which the stream is to be stopped.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: batch-get-channel
+      description: Performs [GetChannel]() on multiple ARNs simultaneously.
+      flags:
+        --arns=!: Array of ARNs, one per channel.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-playback-restriction-policy
+      description: Deletes the specified playback restriction policy.
+      flags:
+        --arn=!: ARN of the playback restriction policy to be deleted.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-recording-configuration
+      description: Gets the recording configuration for the specified ARN.
+      flags:
+        --arn=!: ARN of the recording configuration to be retrieved.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-stream
+      description: Gets information about the active (live) stream on a specified channel.
+      flags:
+        --channel-arn=!: Channel ARN for stream to be accessed.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-playback-key-pairs
+      description: Gets summary information about playback key pairs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of key pairs to return.
+        --next-token=: The first key pair to retrieve.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-stream-keys
+      description: Gets summary information about stream keys for the specified channel.
+      flags:
+        --channel-arn=!: Channel ARN used to filter the list.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of streamKeys to return.
+        --next-token=: The first stream key to retrieve.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: create-playback-restriction-policy
+      description: Creates a new playback restriction policy, for constraining playback by countries and/or origins.
+      flags:
+        --allowed-countries=: A list of country codes that control geoblocking restriction.
+        --allowed-origins=: A list of origin sites that control CORS restriction.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --enable-strict-origin-enforcement: Whether channel playback is constrained by origin site.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: Playback-restriction-policy name.
+        --no-enable-strict-origin-enforcement: Whether channel playback is constrained by origin site.
+        --tags=: Array of 1-50 maps, each of the form `string:string (key:value)`.
+    - name: delete-playback-key-pair
+      description: Deletes a specified authorization key pair.
+      flags:
+        --arn=!: ARN of the key pair to be deleted.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: put-metadata
+      description: Inserts metadata into the active stream of the specified channel.
+      flags:
+        --channel-arn=!: ARN of the channel into which metadata is inserted.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --metadata=!: Metadata to insert into the stream.
     - name: update-playback-restriction-policy
       description: Updates a specified playback restriction policy.
       flags:
@@ -1137,29 +257,74 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=: Playback-restriction-policy name.
         --no-enable-strict-origin-enforcement: Whether channel playback is constrained by origin site.
-      documentation:
-        command: Updates a specified playback restriction policy.
-        flag:
-            allowed-countries: 'A list of country codes that control geoblocking restriction. Allowed values are the officially assigned [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) codes. Default: All countries (an empty array).'
-            allowed-origins: 'A list of origin sites that control CORS restriction. Allowed values are the same as valid values of the Origin header defined at [https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin). Default: All origins (an empty array).'
-            arn: ARN of the playback-restriction-policy to be updated.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            enable-strict-origin-enforcement: 'Whether channel playback is constrained by origin site. Default: `false`.'
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            name: Playback-restriction-policy name. The value does not need to be unique.
+    - name: list-streams
+      description: Gets summary information about live streams in your account, in the Amazon Web Services region where the API request is processed.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-by=: Filters the stream list to match the specified criterion.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of streams to return.
+        --next-token=: The first stream to retrieve.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-playback-restriction-policy
+      description: Gets the specified playback restriction policy.
+      flags:
+        --arn=!: ARN of the playback restriction policy to be returned.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-stream-key
+      description: Gets stream-key information for a specified ARN.
+      flags:
+        --arn=!: ARN for the stream key to be retrieved.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-channels
+      description: Gets summary information about all channels in your account, in the Amazon Web Services region where the API request is processed.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-by-name=: Filters the channel list to match the specified name.
+        --filter-by-playback-restriction-policy-arn=: Filters the channel list to match the specified policy.
+        --filter-by-recording-configuration-arn=: Filters the channel list to match the specified recording-configuration ARN.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of channels to return.
+        --next-token=: The first channel to retrieve.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-playback-restriction-policies
+      description: Gets summary information about playback restriction policies.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Maximum number of policies to return.
+        --next-token=: The first policy to retrieve.
+    - name: create-recording-configuration
+      description: Creates a new recording configuration, used to enable recording to Amazon S3.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --destination-configuration=!: A complex type that contains a destination configuration for where recorded video will be stored.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: Recording-configuration name.
+        --recording-reconnect-window-seconds=: If a broadcast disconnects and then reconnects within the specified interval, the multiple streams will be considered a single broadcast and merged together.
+        --rendition-configuration=: Object that describes which renditions should be recorded for a stream.
+        --tags=: Array of 1-50 maps, each of the form `string:string (key:value)`.
+        --thumbnail-configuration=: A complex type that allows you to enable/disable the recording of thumbnails for a live session and modify the interval at which thumbnails are generated for the live session.
+    - name: untag-resource
+      description: Removes tags from the resource with the specified ARN.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: ARN of the resource for which tags are to be removed.
+        --tag-keys=!: Array of tags to be removed.
     - name: delete-stream-key
       description: Deletes the stream key for the specified ARN, so it can no longer be used to stream.
       flags:
@@ -1167,22 +332,25 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Deletes the stream key for the specified ARN, so it can no longer be used to stream.
-        flag:
-            arn: ARN of the stream key to be deleted.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
+    - name: get-channel
+      description: Gets the channel configuration for the specified channel ARN.
+      flags:
+        --arn=!: ARN of the channel for which the configuration is to be retrieved.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-playback-key-pair
+      description: Gets a specified playback authorization key pair and returns the `arn` and `fingerprint`.
+      flags:
+        --arn=!: ARN of the key pair to be returned.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-stream-session
+      description: Gets metadata on a specified stream.
+      flags:
+        --channel-arn=!: ARN of the channel resource
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --stream-id=: Unique identifier for a live or previously live stream in the specified channel.

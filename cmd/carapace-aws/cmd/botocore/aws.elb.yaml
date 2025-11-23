@@ -1,63 +1,14 @@
 name: elb
 description: Elastic Load Balancing
 commands:
-    - name: create-load-balancer-listeners
-      description: Creates one or more listeners for the specified load balancer.
+    - name: remove-tags
+      description: Removes one or more tags from the specified load balancer.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --listeners=!: The listeners.
-        --load-balancer-name=!: The name of the load balancer.
-      documentation:
-        command: |-
-            Creates one or more listeners for the specified load balancer. If a listener with the specified port does not already exist, it is created; otherwise, the properties of the new listener must match the properties of the existing listener.
-
-            For more information, see [Listeners for Your Classic Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html) in the *Classic Load Balancers Guide*.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            listeners: The listeners.
-            load-balancer-name: The name of the load balancer.
-    - name: describe-tags
-      description: Describes the tags associated with the specified load balancers.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --load-balancer-names=!: The names of the load balancers.
-      documentation:
-        command: Describes the tags associated with the specified load balancers.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            load-balancer-names: The names of the load balancers.
+        --load-balancer-names=!: The name of the load balancer.
+        --tags=!: The list of tag keys to remove.
     - name: apply-security-groups-to-load-balancer
       description: Associates one or more security groups with your load balancer in a virtual private cloud (VPC).
       flags:
@@ -66,495 +17,23 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --load-balancer-name=!: The name of the load balancer.
         --security-groups=!: The IDs of the security groups to associate with the load balancer.
-      documentation:
-        command: |-
-            Associates one or more security groups with your load balancer in a virtual private cloud (VPC). The specified security groups override the previously associated security groups.
-
-            For more information, see [Security Groups for Load Balancers in a VPC](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-security-groups.html#elb-vpc-security-groups) in the *Classic Load Balancers Guide*.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            load-balancer-name: The name of the load balancer.
-            security-groups: The IDs of the security groups to associate with the load balancer. Note that you cannot specify the name of the security group.
-    - name: deregister-instances-from-load-balancer
-      description: Deregisters the specified instances from the specified load balancer.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instances=!: The IDs of the instances.
-        --load-balancer-name=!: The name of the load balancer.
-      documentation:
-        command: |-
-            Deregisters the specified instances from the specified load balancer. After the instance is deregistered, it no longer receives traffic from the load balancer.
-
-            You can use [DescribeLoadBalancers]() to verify that the instance is deregistered from the load balancer.
-
-            For more information, see [Register or De-Register EC2 Instances](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-deregister-register-instances.html) in the *Classic Load Balancers Guide*.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            instances: The IDs of the instances.
-            load-balancer-name: The name of the load balancer.
-    - name: describe-account-limits
-      description: Describes the current Elastic Load Balancing resource limits for your AWS account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: The marker for the next set of results.
-        --max-items=: The  total number of items to return in the command's output.
-        --page-size=: The maximum number of results to return with this call.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: |-
-            Describes the current Elastic Load Balancing resource limits for your AWS account.
-
-            For more information, see [Limits for Your Classic Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-limits.html) in the *Classic Load Balancers Guide*.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            marker: The marker for the next set of results. (You received this marker from a previous call.)
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            page-size: The maximum number of results to return with this call.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: detach-load-balancer-from-subnets
-      description: Removes the specified subnets from the set of configured subnets for the load balancer.
+    - name: attach-load-balancer-to-subnets
+      description: Adds one or more subnets to the set of configured subnets for the specified load balancer.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --load-balancer-name=!: The name of the load balancer.
-        --subnets=!: The IDs of the subnets.
-      documentation:
-        command: |-
-            Removes the specified subnets from the set of configured subnets for the load balancer.
-
-            After a subnet is removed, all EC2 instances registered with the load balancer in the removed subnet go into the `OutOfService` state. Then, the load balancer balances the traffic among the remaining routable subnets.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            load-balancer-name: The name of the load balancer.
-            subnets: The IDs of the subnets.
-    - name: create-lb-cookie-stickiness-policy
-      description: Generates a stickiness policy with sticky session lifetimes controlled by the lifetime of the browser (user-agent) or a specified expiration period.
+        --subnets=!: The IDs of the subnets to add.
+    - name: create-app-cookie-stickiness-policy
+      description: Generates a stickiness policy with sticky session lifetimes that follow that of an application-generated cookie.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cookie-expiration-period=: The time period, in seconds, after which the cookie should be considered stale.
+        --cookie-name=!: The name of the application cookie used for stickiness.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --load-balancer-name=!: The name of the load balancer.
         --policy-name=!: The name of the policy being created.
-      documentation:
-        command: |-
-            Generates a stickiness policy with sticky session lifetimes controlled by the lifetime of the browser (user-agent) or a specified expiration period. This policy can be associated only with HTTP/HTTPS listeners.
-
-            When a load balancer implements this policy, the load balancer uses a special cookie to track the instance for each request. When the load balancer receives a request, it first checks to see if this cookie is present in the request. If so, the load balancer sends the request to the application server specified in the cookie. If not, the load balancer sends the request to a server that is chosen based on the existing load-balancing algorithm.
-
-            A cookie is inserted into the response for binding subsequent requests from the same user to that server. The validity of the cookie is based on the cookie expiration time, which is specified in the policy configuration.
-
-            For more information, see [Duration-Based Session Stickiness](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-duration) in the *Classic Load Balancers Guide*.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cookie-expiration-period: The time period, in seconds, after which the cookie should be considered stale. If you do not specify this parameter, the default value is 0, which indicates that the sticky session should last for the duration of the browser session.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            load-balancer-name: The name of the load balancer.
-            policy-name: The name of the policy being created. Policy names must consist of alphanumeric characters and dashes (-). This name must be unique within the set of policies for this load balancer.
-    - name: describe-instance-health
-      description: Describes the state of the specified instances with respect to the specified load balancer.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instances=: The IDs of the instances.
-        --load-balancer-name=!: The name of the load balancer.
-      documentation:
-        command: Describes the state of the specified instances with respect to the specified load balancer. If no instances are specified, the call describes the state of all instances that are currently registered with the load balancer. If instances are specified, their state is returned even if they are no longer registered with the load balancer. The state of terminated instances is not returned.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            instances: The IDs of the instances.
-            load-balancer-name: The name of the load balancer.
-    - name: delete-load-balancer
-      description: Deletes the specified load balancer.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --load-balancer-name=!: The name of the load balancer.
-      documentation:
-        command: |-
-            Deletes the specified load balancer.
-
-            If you are attempting to recreate a load balancer, you must reconfigure all settings. The DNS name associated with a deleted load balancer are no longer usable. The name and associated DNS record of the deleted load balancer no longer exist and traffic sent to any of its IP addresses is no longer delivered to your instances.
-
-            If the load balancer does not exist or has already been deleted, the call to `DeleteLoadBalancer` still succeeds.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            load-balancer-name: The name of the load balancer.
-    - name: describe-load-balancer-attributes
-      description: Describes the attributes for the specified load balancer.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --load-balancer-name=!: The name of the load balancer.
-      documentation:
-        command: Describes the attributes for the specified load balancer.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            load-balancer-name: The name of the load balancer.
-    - name: disable-availability-zones-for-load-balancer
-      description: Removes the specified Availability Zones from the set of Availability Zones for the specified load balancer in EC2-Classic or a default VPC.
-      flags:
-        --availability-zones=!: The Availability Zones.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --load-balancer-name=!: The name of the load balancer.
-      documentation:
-        command: |-
-            Removes the specified Availability Zones from the set of Availability Zones for the specified load balancer in EC2-Classic or a default VPC.
-
-            For load balancers in a non-default VPC, use [DetachLoadBalancerFromSubnets]().
-
-            There must be at least one Availability Zone registered with a load balancer at all times. After an Availability Zone is removed, all instances registered with the load balancer that are in the removed Availability Zone go into the `OutOfService` state. Then, the load balancer attempts to equally balance the traffic among its remaining Availability Zones.
-
-            For more information, see [Add or Remove Availability Zones](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-az.html) in the *Classic Load Balancers Guide*.
-        flag:
-            availability-zones: The Availability Zones.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            load-balancer-name: The name of the load balancer.
-    - name: configure-health-check
-      description: Specifies the health check settings to use when evaluating the health state of your EC2 instances.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --health-check=!: The configuration information.
-        --load-balancer-name=!: The name of the load balancer.
-      documentation:
-        command: |-
-            Specifies the health check settings to use when evaluating the health state of your EC2 instances.
-
-            For more information, see [Configure Health Checks for Your Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-healthchecks.html) in the *Classic Load Balancers Guide*.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            health-check: The configuration information.
-            load-balancer-name: The name of the load balancer.
-    - name: modify-load-balancer-attributes
-      description: Modifies the attributes of the specified load balancer.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --load-balancer-attributes=!: The attributes for the load balancer.
-        --load-balancer-name=!: The name of the load balancer.
-      documentation:
-        command: |-
-            Modifies the attributes of the specified load balancer.
-
-            You can modify the load balancer attributes, such as `AccessLogs`, `ConnectionDraining`, and `CrossZoneLoadBalancing` by either enabling or disabling them. Or, you can modify the load balancer attribute `ConnectionSettings` by specifying an idle connection timeout value for your load balancer.
-
-            For more information, see the following in the *Classic Load Balancers Guide*:
-
-            - [Cross-Zone Load Balancing](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-crosszone-lb.html)
-            - [Connection Draining](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-conn-drain.html)
-            - [Access Logs](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/access-log-collection.html)
-            - [Idle Connection Timeout](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-idle-timeout.html)
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            load-balancer-attributes: The attributes for the load balancer.
-            load-balancer-name: The name of the load balancer.
-    - name: set-load-balancer-policies-of-listener
-      description: Replaces the current set of policies for the specified load balancer port with the specified set of policies.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --load-balancer-name=!: The name of the load balancer.
-        --load-balancer-port=!: The external port of the load balancer.
-        --policy-names=!: The names of the policies.
-      documentation:
-        command: |-
-            Replaces the current set of policies for the specified load balancer port with the specified set of policies.
-
-            To enable back-end server authentication, use [SetLoadBalancerPoliciesForBackendServer]().
-
-            For more information about setting policies, see [Update the SSL Negotiation Configuration](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/ssl-config-update.html), [Duration-Based Session Stickiness](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-duration), and [Application-Controlled Session Stickiness](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-application) in the *Classic Load Balancers Guide*.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            load-balancer-name: The name of the load balancer.
-            load-balancer-port: The external port of the load balancer.
-            policy-names: The names of the policies. This list must include all policies to be enabled. If you omit a policy that is currently enabled, it is disabled. If the list is empty, all current policies are disabled.
-    - name: delete-load-balancer-listeners
-      description: Deletes the specified listeners from the specified load balancer.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --load-balancer-name=!: The name of the load balancer.
-        --load-balancer-ports=!: The client port numbers of the listeners.
-      documentation:
-        command: Deletes the specified listeners from the specified load balancer.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            load-balancer-name: The name of the load balancer.
-            load-balancer-ports: The client port numbers of the listeners.
-    - name: describe-load-balancer-policies
-      description: Describes the specified policies.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --load-balancer-name=: The name of the load balancer.
-        --policy-names=: The names of the policies.
-      documentation:
-        command: |-
-            Describes the specified policies.
-
-            If you specify a load balancer name, the action returns the descriptions of all policies created for the load balancer. If you specify a policy name associated with your load balancer, the action returns the description of that policy. If you don't specify a load balancer name, the action returns descriptions of the specified sample policies, or descriptions of all sample policies. The names of the sample policies have the `ELBSample-` prefix.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            load-balancer-name: The name of the load balancer.
-            policy-names: The names of the policies.
-    - name: set-load-balancer-policies-for-backend-server
-      description: Replaces the set of policies associated with the specified port on which the EC2 instance is listening with a new set of policies.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-port=!: The port number associated with the EC2 instance.
-        --load-balancer-name=!: The name of the load balancer.
-        --policy-names=!: The names of the policies.
-      documentation:
-        command: |-
-            Replaces the set of policies associated with the specified port on which the EC2 instance is listening with a new set of policies. At this time, only the back-end server authentication policy type can be applied to the instance ports; this policy type is composed of multiple public key policies.
-
-            Each time you use `SetLoadBalancerPoliciesForBackendServer` to enable the policies, use the `PolicyNames` parameter to list the policies that you want to enable.
-
-            You can use [DescribeLoadBalancers]() or [DescribeLoadBalancerPolicies]() to verify that the policy is associated with the EC2 instance.
-
-            For more information about enabling back-end instance authentication, see [Configure Back-end Instance Authentication](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-create-https-ssl-load-balancer.html#configure_backendauth_clt) in the *Classic Load Balancers Guide*. For more information about Proxy Protocol, see [Configure Proxy Protocol Support](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-proxy-protocol.html) in the *Classic Load Balancers Guide*.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            instance-port: The port number associated with the EC2 instance.
-            load-balancer-name: The name of the load balancer.
-            policy-names: The names of the policies. If the list is empty, then all current polices are removed from the EC2 instance.
     - name: create-load-balancer
       description: Creates a Classic Load Balancer.
       flags:
@@ -568,116 +47,30 @@ commands:
         --security-groups=: The IDs of the security groups to assign to the load balancer.
         --subnets=: The IDs of the subnets in your VPC to attach to the load balancer.
         --tags=: A list of tags to assign to the load balancer.
-      documentation:
-        command: |-
-            Creates a Classic Load Balancer.
-
-            You can add listeners, security groups, subnets, and tags when you create your load balancer, or you can add them later using [CreateLoadBalancerListeners](), [ApplySecurityGroupsToLoadBalancer](), [AttachLoadBalancerToSubnets](), and [AddTags]().
-
-            To describe your current load balancers, see [DescribeLoadBalancers](). When you are finished with a load balancer, you can delete it using [DeleteLoadBalancer]().
-
-            You can create up to 20 load balancers per region per account. You can request an increase for the number of load balancers for your account. For more information, see [Limits for Your Classic Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-limits.html) in the *Classic Load Balancers Guide*.
-        flag:
-            availability-zones: |-
-                One or more Availability Zones from the same region as the load balancer.
-
-                You must specify at least one Availability Zone.
-
-                You can add more Availability Zones after you create the load balancer using [EnableAvailabilityZonesForLoadBalancer]().
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            listeners: |-
-                The listeners.
-
-                For more information, see [Listeners for Your Classic Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html) in the *Classic Load Balancers Guide*.
-            load-balancer-name: |-
-                The name of the load balancer.
-
-                This name must be unique within your set of load balancers for the region, must have a maximum of 32 characters, must contain only alphanumeric characters or hyphens, and cannot begin or end with a hyphen.
-            scheme: |-
-                The type of a load balancer. Valid only for load balancers in a VPC.
-
-                By default, Elastic Load Balancing creates an Internet-facing load balancer with a DNS name that resolves to public IP addresses. For more information about Internet-facing and Internal load balancers, see [Load Balancer Scheme](https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/how-elastic-load-balancing-works.html#load-balancer-scheme) in the *Elastic Load Balancing User Guide*.
-
-                Specify `internal` to create a load balancer with a DNS name that resolves to private IP addresses.
-            security-groups: The IDs of the security groups to assign to the load balancer.
-            subnets: The IDs of the subnets in your VPC to attach to the load balancer. Specify one subnet per Availability Zone specified in `AvailabilityZones`.
-            tags: |-
-                A list of tags to assign to the load balancer.
-
-                For more information about tagging your load balancer, see [Tag Your Classic Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html) in the *Classic Load Balancers Guide*.
-    - name: delete-load-balancer-policy
-      description: Deletes the specified policy from the specified load balancer.
+    - name: modify-load-balancer-attributes
+      description: Modifies the attributes of the specified load balancer.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --load-balancer-attributes=!: The attributes for the load balancer.
         --load-balancer-name=!: The name of the load balancer.
-        --policy-name=!: The name of the policy.
-      documentation:
-        command: Deletes the specified policy from the specified load balancer. This policy must not be enabled for any listeners.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            load-balancer-name: The name of the load balancer.
-            policy-name: The name of the policy.
-    - name: describe-load-balancer-policy-types
-      description: Describes the specified load balancer policy types or all load balancer policy types.
+    - name: configure-health-check
+      description: Specifies the health check settings to use when evaluating the health state of your EC2 instances.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-type-names=: The names of the policy types.
-      documentation:
-        command: |-
-            Describes the specified load balancer policy types or all load balancer policy types.
-
-            The description of each type indicates how it can be used. For example, some policies can be used only with layer 7 listeners, some policies can be used only with layer 4 listeners, and some policies can be used only with your EC2 instances.
-
-            You can use [CreateLoadBalancerPolicy]() to create a policy configuration for any of these policy types. Then, depending on the policy type, use either [SetLoadBalancerPoliciesOfListener]() or [SetLoadBalancerPoliciesForBackendServer]() to set the policy.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            policy-type-names: The names of the policy types. If no names are specified, describes all policy types defined by Elastic Load Balancing.
+        --health-check=!: The configuration information.
+        --load-balancer-name=!: The name of the load balancer.
+    - name: describe-load-balancer-policies
+      description: Describes the specified policies.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --load-balancer-name=: The name of the load balancer.
+        --policy-names=: The names of the policies.
     - name: describe-load-balancers
       description: Describes the specified the load balancers.
       flags:
@@ -689,39 +82,63 @@ commands:
         --max-items=: The  total number of items to return in the command's output.
         --page-size=: The maximum number of results to return with this call (a number from 1 to 400).
         --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Describes the specified the load balancers. If no load balancers are specified, the call describes all of your load balancers.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            load-balancer-names: The names of the load balancers.
-            marker: The marker for the next set of results. (You received this marker from a previous call.)
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            page-size: The maximum number of results to return with this call (a number from 1 to 400). The default is 400.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+    - name: set-load-balancer-policies-for-backend-server
+      description: Replaces the set of policies associated with the specified port on which the EC2 instance is listening with a new set of policies.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-port=!: The port number associated with the EC2 instance.
+        --load-balancer-name=!: The name of the load balancer.
+        --policy-names=!: The names of the policies.
+    - name: set-load-balancer-policies-of-listener
+      description: Replaces the current set of policies for the specified load balancer port with the specified set of policies.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --load-balancer-name=!: The name of the load balancer.
+        --load-balancer-port=!: The external port of the load balancer.
+        --policy-names=!: The names of the policies.
+    - name: add-tags
+      description: Adds the specified tags to the specified load balancer.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --load-balancer-names=!: The name of the load balancer.
+        --tags=!: The tags.
+    - name: create-lb-cookie-stickiness-policy
+      description: Generates a stickiness policy with sticky session lifetimes controlled by the lifetime of the browser (user-agent) or a specified expiration period.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cookie-expiration-period=: The time period, in seconds, after which the cookie should be considered stale.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --load-balancer-name=!: The name of the load balancer.
+        --policy-name=!: The name of the policy being created.
+    - name: delete-load-balancer
+      description: Deletes the specified load balancer.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --load-balancer-name=!: The name of the load balancer.
+    - name: create-load-balancer-listeners
+      description: Creates one or more listeners for the specified load balancer.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --listeners=!: The listeners.
+        --load-balancer-name=!: The name of the load balancer.
+    - name: describe-load-balancer-policy-types
+      description: Describes the specified load balancer policy types or all load balancer policy types.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-type-names=: The names of the policy types.
     - name: enable-availability-zones-for-load-balancer
       description: Adds the specified Availability Zones to the set of Availability Zones for the specified load balancer in EC2-Classic or a default VPC.
       flags:
@@ -730,31 +147,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --load-balancer-name=!: The name of the load balancer.
-      documentation:
-        command: |-
-            Adds the specified Availability Zones to the set of Availability Zones for the specified load balancer in EC2-Classic or a default VPC.
-
-            For load balancers in a non-default VPC, use [AttachLoadBalancerToSubnets]().
-
-            The load balancer evenly distributes requests across all its registered Availability Zones that contain instances. For more information, see [Add or Remove Availability Zones](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-az.html) in the *Classic Load Balancers Guide*.
-        flag:
-            availability-zones: The Availability Zones. These must be in the same region as the load balancer.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            load-balancer-name: The name of the load balancer.
+    - name: register-instances-with-load-balancer
+      description: Adds the specified instances to the specified load balancer.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instances=!: The IDs of the instances.
+        --load-balancer-name=!: The name of the load balancer.
     - name: set-load-balancer-listener-ssl-certificate
       description: Sets the certificate that terminates the specified listener's SSL connections.
       flags:
@@ -764,100 +164,14 @@ commands:
         --load-balancer-name=!: The name of the load balancer.
         --load-balancer-port=!: The port that uses the specified SSL certificate.
         --ssl-certificate-id=!: The Amazon Resource Name (ARN) of the SSL certificate.
-      documentation:
-        command: |-
-            Sets the certificate that terminates the specified listener's SSL connections. The specified certificate replaces any prior certificate that was used on the same load balancer and port.
-
-            For more information about updating your SSL certificate, see [Replace the SSL Certificate for Your Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-update-ssl-cert.html) in the *Classic Load Balancers Guide*.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            load-balancer-name: The name of the load balancer.
-            load-balancer-port: The port that uses the specified SSL certificate.
-            ssl-certificate-id: The Amazon Resource Name (ARN) of the SSL certificate.
-    - name: add-tags
-      description: Adds the specified tags to the specified load balancer.
+    - name: disable-availability-zones-for-load-balancer
+      description: Removes the specified Availability Zones from the set of Availability Zones for the specified load balancer in EC2-Classic or a default VPC.
       flags:
+        --availability-zones=!: The Availability Zones.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --load-balancer-names=!: The name of the load balancer.
-        --tags=!: The tags.
-      documentation:
-        command: |-
-            Adds the specified tags to the specified load balancer. Each load balancer can have a maximum of 10 tags.
-
-            Each tag consists of a key and an optional value. If a tag with the same key is already associated with the load balancer, `AddTags` updates its value.
-
-            For more information, see [Tag Your Classic Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html) in the *Classic Load Balancers Guide*.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            load-balancer-names: The name of the load balancer. You can specify one load balancer only.
-            tags: The tags.
-    - name: create-app-cookie-stickiness-policy
-      description: Generates a stickiness policy with sticky session lifetimes that follow that of an application-generated cookie.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cookie-name=!: The name of the application cookie used for stickiness.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --load-balancer-name=!: The name of the load balancer.
-        --policy-name=!: The name of the policy being created.
-      documentation:
-        command: |-
-            Generates a stickiness policy with sticky session lifetimes that follow that of an application-generated cookie. This policy can be associated only with HTTP/HTTPS listeners.
-
-            This policy is similar to the policy created by [CreateLBCookieStickinessPolicy](), except that the lifetime of the special Elastic Load Balancing cookie, `AWSELB`, follows the lifetime of the application-generated cookie specified in the policy configuration. The load balancer only inserts a new stickiness cookie when the application response includes a new application cookie.
-
-            If the application cookie is explicitly removed or expires, the session stops being sticky until a new application cookie is issued.
-
-            For more information, see [Application-Controlled Session Stickiness](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-application) in the *Classic Load Balancers Guide*.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cookie-name: The name of the application cookie used for stickiness.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            load-balancer-name: The name of the load balancer.
-            policy-name: The name of the policy being created. Policy names must consist of alphanumeric characters and dashes (-). This name must be unique within the set of policies for this load balancer.
     - name: create-load-balancer-policy
       description: Creates a policy with the specified attributes for the specified load balancer.
       flags:
@@ -868,188 +182,73 @@ commands:
         --policy-attributes=: The policy attributes.
         --policy-name=!: The name of the load balancer policy to be created.
         --policy-type-name=!: The name of the base policy type.
-      documentation:
-        command: |-
-            Creates a policy with the specified attributes for the specified load balancer.
-
-            Policies are settings that are saved for your load balancer and that can be applied to the listener or the application server, depending on the policy type.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            load-balancer-name: The name of the load balancer.
-            policy-attributes: The policy attributes.
-            policy-name: The name of the load balancer policy to be created. This name must be unique within the set of policies for this load balancer.
-            policy-type-name: The name of the base policy type. To get the list of policy types, use [DescribeLoadBalancerPolicyTypes]().
-    - name: register-instances-with-load-balancer
-      description: Adds the specified instances to the specified load balancer.
+    - name: delete-load-balancer-policy
+      description: Deletes the specified policy from the specified load balancer.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --load-balancer-name=!: The name of the load balancer.
+        --policy-name=!: The name of the policy.
+    - name: describe-account-limits
+      description: Describes the current Elastic Load Balancing resource limits for your AWS account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: The marker for the next set of results.
+        --max-items=: The  total number of items to return in the command's output.
+        --page-size=: The maximum number of results to return with this call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-load-balancer-attributes
+      description: Describes the attributes for the specified load balancer.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --load-balancer-name=!: The name of the load balancer.
+    - name: describe-tags
+      description: Describes the tags associated with the specified load balancers.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --load-balancer-names=!: The names of the load balancers.
+    - name: detach-load-balancer-from-subnets
+      description: Removes the specified subnets from the set of configured subnets for the load balancer.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --load-balancer-name=!: The name of the load balancer.
+        --subnets=!: The IDs of the subnets.
+    - name: deregister-instances-from-load-balancer
+      description: Deregisters the specified instances from the specified load balancer.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instances=!: The IDs of the instances.
         --load-balancer-name=!: The name of the load balancer.
-      documentation:
-        command: |-
-            Adds the specified instances to the specified load balancer.
-
-            The instance must be a running instance in the same network as the load balancer (EC2-Classic or the same VPC). If you have EC2-Classic instances and a load balancer in a VPC with ClassicLink enabled, you can link the EC2-Classic instances to that VPC and then register the linked EC2-Classic instances with the load balancer in the VPC.
-
-            Note that `RegisterInstanceWithLoadBalancer` completes when the request has been registered. Instance registration takes a little time to complete. To check the state of the registered instances, use [DescribeLoadBalancers]() or [DescribeInstanceHealth]().
-
-            After the instance is registered, it starts receiving traffic and requests from the load balancer. Any instance that is not in one of the Availability Zones registered for the load balancer is moved to the `OutOfService` state. If an Availability Zone is added to the load balancer later, any instances registered with the load balancer move to the `InService` state.
-
-            To deregister instances from a load balancer, use [DeregisterInstancesFromLoadBalancer]().
-
-            For more information, see [Register or De-Register EC2 Instances](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-deregister-register-instances.html) in the *Classic Load Balancers Guide*.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            instances: The IDs of the instances.
-            load-balancer-name: The name of the load balancer.
-    - name: remove-tags
-      description: Removes one or more tags from the specified load balancer.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --load-balancer-names=!: The name of the load balancer.
-        --tags=!: The list of tag keys to remove.
-      documentation:
-        command: Removes one or more tags from the specified load balancer.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            load-balancer-names: The name of the load balancer. You can specify a maximum of one load balancer name.
-            tags: The list of tag keys to remove.
-    - name: attach-load-balancer-to-subnets
-      description: Adds one or more subnets to the set of configured subnets for the specified load balancer.
+    - name: delete-load-balancer-listeners
+      description: Deletes the specified listeners from the specified load balancer.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --load-balancer-name=!: The name of the load balancer.
-        --subnets=!: The IDs of the subnets to add.
-      documentation:
-        command: |-
-            Adds one or more subnets to the set of configured subnets for the specified load balancer.
-
-            The load balancer evenly distributes requests across all registered subnets. For more information, see [Add or Remove Subnets for Your Load Balancer in a VPC](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-manage-subnets.html) in the *Classic Load Balancers Guide*.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            load-balancer-name: The name of the load balancer.
-            subnets: The IDs of the subnets to add. You can add only one subnet per Availability Zone.
+        --load-balancer-ports=!: The client port numbers of the listeners.
+    - name: describe-instance-health
+      description: Describes the state of the specified instances with respect to the specified load balancer.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instances=: The IDs of the instances.
+        --load-balancer-name=!: The name of the load balancer.
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:
-        - name: instance-deregistered
-          description: Describes the state of the specified instances with respect to the specified load balancer.
-          flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-            --instances=: The IDs of the instances.
-            --load-balancer-name=!: The name of the load balancer.
-          documentation:
-            command: Describes the state of the specified instances with respect to the specified load balancer. If no instances are specified, the call describes the state of all instances that are currently registered with the load balancer. If instances are specified, their state is returned even if they are no longer registered with the load balancer. The state of terminated instances is not returned.
-            flag:
-                cli-input-json: |-
-                    Reads arguments from the JSON string provided.
-                    The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                    It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                cli-input-yaml: |-
-                    Reads arguments from the JSON string provided.
-                    The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                    It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                generate-cli-skeleton: |-
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                instances: The IDs of the instances.
-                load-balancer-name: The name of the load balancer.
-        - name: any-instance-in-service
-          description: Describes the state of the specified instances with respect to the specified load balancer.
-          flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-            --instances=: The IDs of the instances.
-            --load-balancer-name=!: The name of the load balancer.
-          documentation:
-            command: Describes the state of the specified instances with respect to the specified load balancer. If no instances are specified, the call describes the state of all instances that are currently registered with the load balancer. If instances are specified, their state is returned even if they are no longer registered with the load balancer. The state of terminated instances is not returned.
-            flag:
-                cli-input-json: |-
-                    Reads arguments from the JSON string provided.
-                    The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                    It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                cli-input-yaml: |-
-                    Reads arguments from the JSON string provided.
-                    The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                    It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                generate-cli-skeleton: |-
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                instances: The IDs of the instances.
-                load-balancer-name: The name of the load balancer.
         - name: instance-in-service
           description: Describes the state of the specified instances with respect to the specified load balancer.
           flags:
@@ -1058,23 +257,19 @@ commands:
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --instances=: The IDs of the instances.
             --load-balancer-name=!: The name of the load balancer.
-          documentation:
-            command: Describes the state of the specified instances with respect to the specified load balancer. If no instances are specified, the call describes the state of all instances that are currently registered with the load balancer. If instances are specified, their state is returned even if they are no longer registered with the load balancer. The state of terminated instances is not returned.
-            flag:
-                cli-input-json: |-
-                    Reads arguments from the JSON string provided.
-                    The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                    It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                cli-input-yaml: |-
-                    Reads arguments from the JSON string provided.
-                    The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                    It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                generate-cli-skeleton: |-
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                instances: The IDs of the instances.
-                load-balancer-name: The name of the load balancer.
+        - name: instance-deregistered
+          description: Describes the state of the specified instances with respect to the specified load balancer.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --instances=: The IDs of the instances.
+            --load-balancer-name=!: The name of the load balancer.
+        - name: any-instance-in-service
+          description: Describes the state of the specified instances with respect to the specified load balancer.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --instances=: The IDs of the instances.
+            --load-balancer-name=!: The name of the load balancer.

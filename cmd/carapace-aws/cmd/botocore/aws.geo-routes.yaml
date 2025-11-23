@@ -1,6 +1,48 @@
 name: geo-routes
 description: Amazon Location Service Routes V2
 commands:
+    - name: calculate-isolines
+      description: Use the `CalculateIsolines` action to find service areas that can be reached in a given threshold of time, distance.
+      flags:
+        --allow=: Features that are allowed while calculating an isoline.
+        --arrival-time=: Time of arrival at the destination.
+        --avoid=: Features that are avoided while calculating a route.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --depart-now: Uses the current time as the time of departure.
+        --departure-time=: Time of departure from thr origin.
+        --destination-options=: Destination related options.
+        --destination=: The final position for the route.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --isoline-geometry-format=: The format of the returned IsolineGeometry.
+        --isoline-granularity=: Defines the granularity of the returned Isoline.
+        --key=: 'Optional: The API key to be used for authorization.'
+        --no-depart-now: Uses the current time as the time of departure.
+        --optimize-isoline-for=: Specifies the optimization criteria for when calculating an isoline.
+        --optimize-routing-for=: Specifies the optimization criteria for calculating a route.
+        --origin-options=: Origin related options.
+        --origin=: The start position for the route.
+        --thresholds=!: Threshold to be used for the isoline calculation.
+        --traffic=: Traffic related options.
+        --travel-mode-options=: Travel mode related options for the provided travel mode.
+        --travel-mode=: Specifies the mode of transport when calculating a route.
+      completion:
+        flag:
+            isoline-geometry-format:
+                - FlexiblePolyline
+                - Simple
+            optimize-isoline-for:
+                - AccurateCalculation
+                - BalancedCalculation
+                - FastCalculation
+            optimize-routing-for:
+                - FastestRoute
+                - ShortestRoute
+            travel-mode:
+                - Car
+                - Pedestrian
+                - Scooter
+                - Truck
     - name: calculate-route-matrix
       description: Use `CalculateRouteMatrix` to compute results for all pairs of Origins to Destinations.
       flags:
@@ -31,61 +73,6 @@ commands:
                 - Pedestrian
                 - Scooter
                 - Truck
-      documentation:
-        command: Use `CalculateRouteMatrix` to compute results for all pairs of Origins to Destinations. Each row corresponds to one entry in Origins. Each entry in the row corresponds to the route from that entry in Origins to an entry in Destinations positions.
-        flag:
-            allow: Features that are allowed while calculating a route.
-            avoid: Features that are avoided while calculating a route. Avoidance is on a best-case basis. If an avoidance can't be satisfied for a particular case, it violates the avoidance and the returned response produces a notice for the violation.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            depart-now: Uses the current time as the time of departure.
-            departure-time: |-
-                Time of departure from thr origin.
-
-                Time format:`YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm`
-
-                Examples:
-
-                `2020-04-22T17:57:24Z`
-
-                `2020-04-22T17:57:24+02:00`
-            destinations: |-
-                List of destinations for the route.
-
-                Route calculations are billed for each origin and destination pair. If you use a large matrix of origins and destinations, your costs will increase accordingly. See [Amazon Location's pricing page](https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html%60) for more information.
-            exclude: Features to be strictly excluded while calculating the route.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            key: 'Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request.'
-            optimize-routing-for: |-
-                Specifies the optimization criteria for calculating a route.
-
-                Default Value: `FastestRoute`
-            origins: |-
-                The position in longitude and latitude for the origin.
-
-                Route calculations are billed for each origin and destination pair. Using a large amount of Origins in a request can lead you to incur unexpected charges. See [Amazon Location's pricing page](https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html%60) for more information.
-            routing-boundary: |-
-                Boundary within which the matrix is to be calculated. All data, origins and destinations outside the boundary are considered invalid.
-
-                When request routing boundary was set as AutoCircle, the response routing boundary will return Circle derived from the AutoCircle settings.
-            traffic: Traffic related options.
-            travel-mode: |-
-                Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility.
-
-                Default Value: `Car`
-            travel-mode-options: Travel mode related options for the provided travel mode.
     - name: calculate-routes
       description: '`CalculateRoutes` computes routes given the following required parameters: `Origin` and `Destination`.'
       flags:
@@ -137,92 +124,6 @@ commands:
             travel-step-type:
                 - Default
                 - TurnByTurn
-      documentation:
-        command: '`CalculateRoutes` computes routes given the following required parameters: `Origin` and `Destination`.'
-        flag:
-            allow: Features that are allowed while calculating a route.
-            arrival-time: |-
-                Time of arrival at the destination.
-
-                Time format:`YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm`
-
-                Examples:
-
-                `2020-04-22T17:57:24Z`
-
-                `2020-04-22T17:57:24+02:00`
-            avoid: Features that are avoided while calculating a route. Avoidance is on a best-case basis. If an avoidance can't be satisfied for a particular case, it violates the avoidance and the returned response produces a notice for the violation.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            depart-now: Uses the current time as the time of departure.
-            departure-time: |-
-                Time of departure from thr origin.
-
-                Time format:`YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm`
-
-                Examples:
-
-                `2020-04-22T17:57:24Z`
-
-                `2020-04-22T17:57:24+02:00`
-            destination: 'The final position for the route. In the World Geodetic System (WGS 84) format: `[longitude, latitude]`.'
-            destination-options: Destination related options.
-            driver: Driver related options.
-            exclude: Features to be strictly excluded while calculating the route.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            instructions-measurement-system: Measurement system to be used for instructions within steps in the response.
-            key: 'Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request.'
-            languages: |-
-                List of languages for instructions within steps in the response.
-
-                Instructions in the requested language are returned only if they are available.
-            leg-additional-features: |-
-                A list of optional additional parameters such as timezone that can be requested for each result.
-
-                - `Elevation`: Retrieves the elevation information for each location.
-                - `Incidents`: Provides information on traffic incidents along the route.
-                - `PassThroughWaypoints`: Indicates waypoints that are passed through without stopping.
-                - `Summary`: Returns a summary of the route, including distance and duration.
-                - `Tolls`: Supplies toll cost information along the route.
-                - `TravelStepInstructions`: Provides step-by-step instructions for travel along the route.
-                - `TruckRoadTypes`: Returns information about road types suitable for trucks.
-                - `TypicalDuration`: Gives typical travel duration based on historical data.
-                - `Zones`: Specifies the time zone information for each waypoint.
-            leg-geometry-format: |-
-                Specifies the format of the geometry returned for each leg of the route. You can choose between two different geometry encoding formats.
-
-                `FlexiblePolyline`: A compact and precise encoding format for the leg geometry. For more information on the format, see the GitHub repository for [`FlexiblePolyline`](https://github.com/heremaps/flexible-polyline) .
-
-                `Simple`: A less compact encoding, which is easier to decode but may be less precise and result in larger payloads.
-            max-alternatives: Maximum number of alternative routes to be provided in the response, if available.
-            optimize-routing-for: |-
-                Specifies the optimization criteria for calculating a route.
-
-                Default Value: `FastestRoute`
-            origin: The start position for the route.
-            origin-options: Origin related options.
-            span-additional-features: A list of optional features such as SpeedLimit that can be requested for a Span. A span is a section of a Leg for which the requested features have the same values.
-            tolls: Toll related options.
-            traffic: Traffic related options.
-            travel-mode: |-
-                Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility.
-
-                Default Value: `Car`
-            travel-mode-options: Travel mode related options for the provided travel mode.
-            travel-step-type: Type of step returned by the response. Default provides basic steps intended for web based applications. TurnByTurn provides detailed instructions with more granularity intended for a turn based navigation system.
-            waypoints: List of waypoints between the Origin and Destination.
     - name: optimize-waypoints
       description: '`OptimizeWaypoints` calculates the optimal order to travel between a set of waypoints to minimize either the travel time or the distance travelled during the journey, based on road network restrictions and the traffic pattern data.'
       flags:
@@ -254,54 +155,6 @@ commands:
                 - Pedestrian
                 - Scooter
                 - Truck
-      documentation:
-        command: '`OptimizeWaypoints` calculates the optimal order to travel between a set of waypoints to minimize either the travel time or the distance travelled during the journey, based on road network restrictions and the traffic pattern data.'
-        flag:
-            avoid: Features that are avoided. Avoidance is on a best-case basis. If an avoidance can't be satisfied for a particular case, this setting is ignored.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            clustering: Clustering allows you to specify how nearby waypoints can be clustered to improve the optimized sequence.
-            departure-time: |-
-                Departure time from the waypoint.
-
-                Time format:`YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm`
-
-                Examples:
-
-                `2020-04-22T17:57:24Z`
-
-                `2020-04-22T17:57:24+02:00`
-            destination: 'The final position for the route in the World Geodetic System (WGS 84) format: `[longitude, latitude]`.'
-            destination-options: Destination related options.
-            driver: Driver related options.
-            exclude: Features to be strictly excluded while calculating the route.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            key: 'Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request.'
-            optimize-sequencing-for: |-
-                Specifies the optimization criteria for the calculated sequence.
-
-                Default Value: `FastestRoute`.
-            origin: The start position for the route.
-            origin-options: Origin related options.
-            traffic: Traffic-related options.
-            travel-mode: |-
-                Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility.
-
-                Default Value: `Car`
-            travel-mode-options: Travel mode related options for the provided travel mode.
-            waypoints: List of waypoints between the `Origin` and `Destination`.
     - name: snap-to-roads
       description: '`SnapToRoads` matches GPS trace to roads most likely traveled on.'
       flags:
@@ -324,151 +177,3 @@ commands:
                 - Pedestrian
                 - Scooter
                 - Truck
-      documentation:
-        command: '`SnapToRoads` matches GPS trace to roads most likely traveled on.'
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            key: 'Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request.'
-            snap-radius: |-
-                The radius around the provided tracepoint that is considered for snapping.
-
-                **Unit**: `meters`
-
-                Default value: `300`
-            snapped-geometry-format: |-
-                Chooses what the returned SnappedGeometry format should be.
-
-                Default Value: `FlexiblePolyline`
-            trace-points: List of trace points to be snapped onto the road network.
-            travel-mode: |-
-                Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility.
-
-                Default Value: `Car`
-            travel-mode-options: Travel mode related options for the provided travel mode.
-    - name: calculate-isolines
-      description: Use the `CalculateIsolines` action to find service areas that can be reached in a given threshold of time, distance.
-      flags:
-        --allow=: Features that are allowed while calculating an isoline.
-        --arrival-time=: Time of arrival at the destination.
-        --avoid=: Features that are avoided while calculating a route.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --depart-now: Uses the current time as the time of departure.
-        --departure-time=: Time of departure from thr origin.
-        --destination-options=: Destination related options.
-        --destination=: The final position for the route.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --isoline-geometry-format=: The format of the returned IsolineGeometry.
-        --isoline-granularity=: Defines the granularity of the returned Isoline.
-        --key=: 'Optional: The API key to be used for authorization.'
-        --no-depart-now: Uses the current time as the time of departure.
-        --optimize-isoline-for=: Specifies the optimization criteria for when calculating an isoline.
-        --optimize-routing-for=: Specifies the optimization criteria for calculating a route.
-        --origin-options=: Origin related options.
-        --origin=: The start position for the route.
-        --thresholds=!: Threshold to be used for the isoline calculation.
-        --traffic=: Traffic related options.
-        --travel-mode-options=: Travel mode related options for the provided travel mode.
-        --travel-mode=: Specifies the mode of transport when calculating a route.
-      completion:
-        flag:
-            isoline-geometry-format:
-                - FlexiblePolyline
-                - Simple
-            optimize-isoline-for:
-                - AccurateCalculation
-                - BalancedCalculation
-                - FastCalculation
-            optimize-routing-for:
-                - FastestRoute
-                - ShortestRoute
-            travel-mode:
-                - Car
-                - Pedestrian
-                - Scooter
-                - Truck
-      documentation:
-        command: Use the `CalculateIsolines` action to find service areas that can be reached in a given threshold of time, distance.
-        flag:
-            allow: Features that are allowed while calculating an isoline.
-            arrival-time: |-
-                Time of arrival at the destination.
-
-                Time format: `YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm`
-
-                Examples:
-
-                `2020-04-22T17:57:24Z`
-
-                `2020-04-22T17:57:24+02:00`
-            avoid: Features that are avoided while calculating a route. Avoidance is on a best-case basis. If an avoidance can't be satisfied for a particular case, it violates the avoidance and the returned response produces a notice for the violation.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            depart-now: Uses the current time as the time of departure.
-            departure-time: |-
-                Time of departure from thr origin.
-
-                Time format:`YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm`
-
-                Examples:
-
-                `2020-04-22T17:57:24Z`
-
-                `2020-04-22T17:57:24+02:00`
-            destination: 'The final position for the route. In the World Geodetic System (WGS 84) format: `[longitude, latitude]`.'
-            destination-options: Destination related options.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            isoline-geometry-format: |-
-                The format of the returned IsolineGeometry.
-
-                Default Value:`FlexiblePolyline`
-            isoline-granularity: Defines the granularity of the returned Isoline.
-            key: 'Optional: The API key to be used for authorization. Either an API key or valid SigV4 signature must be provided when making a request.'
-            optimize-isoline-for: |-
-                Specifies the optimization criteria for when calculating an isoline. AccurateCalculation generates an isoline of higher granularity that is more precise. FastCalculation generates an isoline faster by reducing the granularity, and in turn the quality of the isoline. BalancedCalculation generates an isoline by balancing between quality and performance.
-
-                Default Value: `BalancedCalculation`
-            optimize-routing-for: |-
-                Specifies the optimization criteria for calculating a route.
-
-                Default Value: `FastestRoute`
-            origin: The start position for the route.
-            origin-options: Origin related options.
-            thresholds: |-
-                Threshold to be used for the isoline calculation. Up to 3 thresholds per provided type can be requested.
-
-                You incur a calculation charge for each threshold. Using a large amount of thresholds in a request can lead you to incur unexpected charges. See [Amazon Location's pricing page](https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html%60) for more information.
-            traffic: Traffic related options.
-            travel-mode: |-
-                Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility.
-
-                The mode `Scooter` also applies to motorcycles, set to `Scooter` when wanted to calculate options for motorcycles.
-
-                Default Value: `Car`
-            travel-mode-options: Travel mode related options for the provided travel mode.

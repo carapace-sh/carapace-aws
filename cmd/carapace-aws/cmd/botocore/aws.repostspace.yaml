@@ -1,6 +1,39 @@
 name: repostspace
 description: AWS re:Post Private
 commands:
+    - name: batch-add-role
+      description: Add a role to multiple users or groups in a private re:Post.
+      flags:
+        --accessor-ids=!: The user or group accessor identifiers to add the role to.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --role=!: The role to add to the users or groups.
+        --space-id=!: The unique ID of the private re:Post.
+      completion:
+        flag:
+            role:
+                - EXPERT
+                - MODERATOR
+                - ADMINISTRATOR
+                - SUPPORTREQUESTOR
+    - name: batch-remove-channel-role-from-accessors
+      description: Remove a role from multiple users or groups in a private re:Post channel.
+      flags:
+        --accessor-ids=!: The users or groups identifiers to remove the role from.
+        --channel-id=!: The unique ID of the private re:Post channel.
+        --channel-role=!: The channel role to remove from the users or groups.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --space-id=!: The unique ID of the private re:Post.
+      completion:
+        flag:
+            channel-role:
+                - ASKER
+                - EXPERT
+                - MODERATOR
+                - SUPPORTREQUESTOR
     - name: batch-remove-role
       description: Remove a role from multiple users or groups in a private re:Post.
       flags:
@@ -17,27 +50,138 @@ commands:
                 - MODERATOR
                 - ADMINISTRATOR
                 - SUPPORTREQUESTOR
-      documentation:
-        command: Remove a role from multiple users or groups in a private re:Post.
+    - name: create-channel
+      description: Creates a channel in an AWS re:Post Private private re:Post.
+      flags:
+        --channel-description=: A description for the channel.
+        --channel-name=!: The name for the channel.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --space-id=!: The unique ID of the private re:Post.
+    - name: get-channel
+      description: Displays information about a channel in a private re:Post.
+      flags:
+        --channel-id=!: The unique ID of the private re:Post channel.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --space-id=!: The unique ID of the private re:Post.
+    - name: register-admin
+      description: Adds a user or group to the list of administrators of the private re:Post.
+      flags:
+        --admin-id=!: The ID of the administrator.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --space-id=!: The ID of the private re:Post.
+    - name: send-invites
+      description: Sends an invitation email to selected users and groups.
+      flags:
+        --accessor-ids=!: The array of identifiers for the users and groups.
+        --body=!: The body of the invite.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --space-id=!: The ID of the private re:Post.
+        --title=!: The title of the invite.
+    - name: batch-add-channel-role-to-accessors
+      description: Add role to multiple users or groups in a private re:Post channel.
+      flags:
+        --accessor-ids=!: The user or group identifiers to add the role to.
+        --channel-id=!: The unique ID of the private re:Post channel.
+        --channel-role=!: The channel role to add to the users or groups.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --space-id=!: The unique ID of the private re:Post.
+      completion:
         flag:
-            accessor-ids: The user or group accessor identifiers to remove the role from.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            role: The role to remove from the users or groups.
-            space-id: The unique ID of the private re:Post.
+            channel-role:
+                - ASKER
+                - EXPERT
+                - MODERATOR
+                - SUPPORTREQUESTOR
+    - name: deregister-admin
+      description: Removes the user or group from the list of administrators of the private re:Post.
+      flags:
+        --admin-id=!: The ID of the admin to remove.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --space-id=!: The ID of the private re:Post to remove the admin from.
+    - name: list-channels
+      description: Returns the list of channel within a private re:Post with some information about each channel.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of channels to include in the results.
+        --next-token=: The token for the next set of channel to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --space-id=!: The unique ID of the private re:Post.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-spaces
+      description: Returns a list of AWS re:Post Private private re:Posts in the account with some information about each private re:Post.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of private re:Posts to include in the results.
+        --next-token=: The token for the next set of private re:Posts to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: tag-resource
+      description: Associates tags with an AWS re:Post Private resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource that the tag is associated with.
+        --tags=!: The list of tag keys and values that must be associated with the resource.
+    - name: untag-resource
+      description: Removes the association of the tag with the AWS re:Post Private resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource.
+        --tag-keys=!: The key values of the tag.
+    - name: update-space
+      description: Modifies an existing AWS re:Post Private private re:Post.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description for the private re:Post.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --role-arn=: The IAM role that grants permissions to the private re:Post to convert unanswered questions into AWS support tickets.
+        --space-id=!: The unique ID of this private re:Post.
+        --supported-email-domains=: ""
+        --tier=: The pricing tier of this private re:Post.
+      completion:
+        flag:
+            tier:
+                - BASIC
+                - STANDARD
+    - name: list-tags-for-resource
+      description: Returns the tags that are associated with the AWS re:Post Private resource specified by the resourceArn.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource that the tags are associated with.
+    - name: update-channel
+      description: Modifies an existing channel.
+      flags:
+        --channel-description=: A description for the channel.
+        --channel-id=!: The unique ID of the private re:Post channel.
+        --channel-name=!: The name for the channel.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --space-id=!: The unique ID of the private re:Post.
     - name: create-space
       description: Creates an AWS re:Post Private private re:Post.
       flags:
@@ -57,258 +201,6 @@ commands:
             tier:
                 - BASIC
                 - STANDARD
-      documentation:
-        command: Creates an AWS re:Post Private private re:Post.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            description: A description for the private re:Post. This is used only to help you identify this private re:Post.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            name: The name for the private re:Post. This must be unique in your account.
-            role-arn: The IAM role that grants permissions to the private re:Post to convert unanswered questions into AWS support tickets.
-            subdomain: The subdomain that you use to access your AWS re:Post Private private re:Post. All custom subdomains must be approved by AWS before use. In addition to your custom subdomain, all private re:Posts are issued an AWS generated subdomain for immediate use.
-            supported-email-domains: ""
-            tags: The list of tags associated with the private re:Post.
-            tier: The pricing tier for the private re:Post.
-            user-kms-key: The AWS KMS key ARN that’s used for the AWS KMS encryption. If you don't provide a key, your data is encrypted by default with a key that AWS owns and manages for you.
-    - name: deregister-admin
-      description: Removes the user or group from the list of administrators of the private re:Post.
-      flags:
-        --admin-id=!: The ID of the admin to remove.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --space-id=!: The ID of the private re:Post to remove the admin from.
-      documentation:
-        command: Removes the user or group from the list of administrators of the private re:Post.
-        flag:
-            admin-id: The ID of the admin to remove.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            space-id: The ID of the private re:Post to remove the admin from.
-    - name: register-admin
-      description: Adds a user or group to the list of administrators of the private re:Post.
-      flags:
-        --admin-id=!: The ID of the administrator.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --space-id=!: The ID of the private re:Post.
-      documentation:
-        command: Adds a user or group to the list of administrators of the private re:Post.
-        flag:
-            admin-id: The ID of the administrator.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            space-id: The ID of the private re:Post.
-    - name: send-invites
-      description: Sends an invitation email to selected users and groups.
-      flags:
-        --accessor-ids=!: The array of identifiers for the users and groups.
-        --body=!: The body of the invite.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --space-id=!: The ID of the private re:Post.
-        --title=!: The title of the invite.
-      documentation:
-        command: Sends an invitation email to selected users and groups.
-        flag:
-            accessor-ids: The array of identifiers for the users and groups.
-            body: The body of the invite.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            space-id: The ID of the private re:Post.
-            title: The title of the invite.
-    - name: untag-resource
-      description: Removes the association of the tag with the AWS re:Post Private resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource.
-        --tag-keys=!: The key values of the tag.
-      documentation:
-        command: Removes the association of the tag with the AWS re:Post Private resource.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-arn: The ARN of the resource.
-            tag-keys: The key values of the tag.
-    - name: update-channel
-      description: Modifies an existing channel.
-      flags:
-        --channel-description=: A description for the channel.
-        --channel-id=!: The unique ID of the private re:Post channel.
-        --channel-name=!: The name for the channel.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --space-id=!: The unique ID of the private re:Post.
-      documentation:
-        command: Modifies an existing channel.
-        flag:
-            channel-description: A description for the channel. This is used only to help you identify this channel.
-            channel-id: The unique ID of the private re:Post channel.
-            channel-name: The name for the channel. This must be unique per private re:Post.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            space-id: The unique ID of the private re:Post.
-    - name: update-space
-      description: Modifies an existing AWS re:Post Private private re:Post.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description for the private re:Post.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --role-arn=: The IAM role that grants permissions to the private re:Post to convert unanswered questions into AWS support tickets.
-        --space-id=!: The unique ID of this private re:Post.
-        --supported-email-domains=: ""
-        --tier=: The pricing tier of this private re:Post.
-      completion:
-        flag:
-            tier:
-                - BASIC
-                - STANDARD
-      documentation:
-        command: Modifies an existing AWS re:Post Private private re:Post.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            description: A description for the private re:Post. This is used only to help you identify this private re:Post.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            role-arn: The IAM role that grants permissions to the private re:Post to convert unanswered questions into AWS support tickets.
-            space-id: The unique ID of this private re:Post.
-            supported-email-domains: ""
-            tier: The pricing tier of this private re:Post.
-    - name: batch-add-channel-role-to-accessors
-      description: Add role to multiple users or groups in a private re:Post channel.
-      flags:
-        --accessor-ids=!: The user or group identifiers to add the role to.
-        --channel-id=!: The unique ID of the private re:Post channel.
-        --channel-role=!: The channel role to add to the users or groups.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --space-id=!: The unique ID of the private re:Post.
-      completion:
-        flag:
-            channel-role:
-                - ASKER
-                - EXPERT
-                - MODERATOR
-                - SUPPORTREQUESTOR
-      documentation:
-        command: Add role to multiple users or groups in a private re:Post channel.
-        flag:
-            accessor-ids: The user or group identifiers to add the role to.
-            channel-id: The unique ID of the private re:Post channel.
-            channel-role: The channel role to add to the users or groups.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            space-id: The unique ID of the private re:Post.
     - name: delete-space
       description: Deletes an AWS re:Post Private private re:Post.
       flags:
@@ -316,200 +208,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --space-id=!: The unique ID of the private re:Post.
-      documentation:
-        command: Deletes an AWS re:Post Private private re:Post.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            space-id: The unique ID of the private re:Post.
-    - name: get-channel
-      description: Displays information about a channel in a private re:Post.
-      flags:
-        --channel-id=!: The unique ID of the private re:Post channel.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --space-id=!: The unique ID of the private re:Post.
-      documentation:
-        command: Displays information about a channel in a private re:Post.
-        flag:
-            channel-id: The unique ID of the private re:Post channel.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            space-id: The unique ID of the private re:Post.
-    - name: list-spaces
-      description: Returns a list of AWS re:Post Private private re:Posts in the account with some information about each private re:Post.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of private re:Posts to include in the results.
-        --next-token=: The token for the next set of private re:Posts to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Returns a list of AWS re:Post Private private re:Posts in the account with some information about each private re:Post.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The maximum number of private re:Posts to include in the results.
-            next-token: The token for the next set of private re:Posts to return. You receive this token from a previous ListSpaces operation.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: tag-resource
-      description: Associates tags with an AWS re:Post Private resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource that the tag is associated with.
-        --tags=!: The list of tag keys and values that must be associated with the resource.
-      documentation:
-        command: Associates tags with an AWS re:Post Private resource. Currently, the only resource that can be tagged is the private re:Post. If you specify a new tag key for the resource, the tag is appended to the list of tags that are associated with the resource. If you specify a tag key that’s already associated with the resource, the new tag value that you specify replaces the previous value for that tag.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-arn: The ARN of the resource that the tag is associated with.
-            tags: The list of tag keys and values that must be associated with the resource. You can associate tag keys only, tags (key and values) only, or a combination of tag keys and tags.
-    - name: batch-remove-channel-role-from-accessors
-      description: Remove a role from multiple users or groups in a private re:Post channel.
-      flags:
-        --accessor-ids=!: The users or groups identifiers to remove the role from.
-        --channel-id=!: The unique ID of the private re:Post channel.
-        --channel-role=!: The channel role to remove from the users or groups.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --space-id=!: The unique ID of the private re:Post.
-      completion:
-        flag:
-            channel-role:
-                - ASKER
-                - EXPERT
-                - MODERATOR
-                - SUPPORTREQUESTOR
-      documentation:
-        command: Remove a role from multiple users or groups in a private re:Post channel.
-        flag:
-            accessor-ids: The users or groups identifiers to remove the role from.
-            channel-id: The unique ID of the private re:Post channel.
-            channel-role: The channel role to remove from the users or groups.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            space-id: The unique ID of the private re:Post.
-    - name: create-channel
-      description: Creates a channel in an AWS re:Post Private private re:Post.
-      flags:
-        --channel-description=: A description for the channel.
-        --channel-name=!: The name for the channel.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --space-id=!: The unique ID of the private re:Post.
-      documentation:
-        command: Creates a channel in an AWS re:Post Private private re:Post.
-        flag:
-            channel-description: A description for the channel. This is used only to help you identify this channel.
-            channel-name: The name for the channel. This must be unique per private re:Post.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            space-id: The unique ID of the private re:Post.
     - name: get-space
       description: Displays information about the AWS re:Post Private private re:Post.
       flags:
@@ -517,140 +215,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --space-id=!: The ID of the private re:Post.
-      documentation:
-        command: Displays information about the AWS re:Post Private private re:Post.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            space-id: The ID of the private re:Post.
-    - name: list-channels
-      description: Returns the list of channel within a private re:Post with some information about each channel.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of channels to include in the results.
-        --next-token=: The token for the next set of channel to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --space-id=!: The unique ID of the private re:Post.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Returns the list of channel within a private re:Post with some information about each channel.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The maximum number of channels to include in the results.
-            next-token: The token for the next set of channel to return. You receive this token from a previous ListChannels operation.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            space-id: The unique ID of the private re:Post.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: list-tags-for-resource
-      description: Returns the tags that are associated with the AWS re:Post Private resource specified by the resourceArn.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource that the tags are associated with.
-      documentation:
-        command: Returns the tags that are associated with the AWS re:Post Private resource specified by the resourceArn. The only resource that can be tagged is a private re:Post.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-arn: The ARN of the resource that the tags are associated with.
-    - name: batch-add-role
-      description: Add a role to multiple users or groups in a private re:Post.
-      flags:
-        --accessor-ids=!: The user or group accessor identifiers to add the role to.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --role=!: The role to add to the users or groups.
-        --space-id=!: The unique ID of the private re:Post.
-      completion:
-        flag:
-            role:
-                - EXPERT
-                - MODERATOR
-                - ADMINISTRATOR
-                - SUPPORTREQUESTOR
-      documentation:
-        command: Add a role to multiple users or groups in a private re:Post.
-        flag:
-            accessor-ids: The user or group accessor identifiers to add the role to.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            role: The role to add to the users or groups.
-            space-id: The unique ID of the private re:Post.
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:
@@ -662,26 +226,6 @@ commands:
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --space-id=!: The unique ID of the private re:Post.
-          documentation:
-            command: Displays information about a channel in a private re:Post.
-            flag:
-                channel-id: The unique ID of the private re:Post channel.
-                cli-input-json: |-
-                    Reads arguments from the JSON string provided.
-                    The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                    It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                cli-input-yaml: |-
-                    Reads arguments from the JSON string provided.
-                    The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                    It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                generate-cli-skeleton: |-
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                space-id: The unique ID of the private re:Post.
         - name: channel-deleted
           description: Displays information about a channel in a private re:Post.
           flags:
@@ -690,26 +234,6 @@ commands:
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --space-id=!: The unique ID of the private re:Post.
-          documentation:
-            command: Displays information about a channel in a private re:Post.
-            flag:
-                channel-id: The unique ID of the private re:Post channel.
-                cli-input-json: |-
-                    Reads arguments from the JSON string provided.
-                    The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                    It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                cli-input-yaml: |-
-                    Reads arguments from the JSON string provided.
-                    The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                    It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                generate-cli-skeleton: |-
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                space-id: The unique ID of the private re:Post.
         - name: space-created
           description: Displays information about the AWS re:Post Private private re:Post.
           flags:
@@ -717,25 +241,6 @@ commands:
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --space-id=!: The ID of the private re:Post.
-          documentation:
-            command: Displays information about the AWS re:Post Private private re:Post.
-            flag:
-                cli-input-json: |-
-                    Reads arguments from the JSON string provided.
-                    The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                    It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                cli-input-yaml: |-
-                    Reads arguments from the JSON string provided.
-                    The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                    It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                generate-cli-skeleton: |-
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                space-id: The ID of the private re:Post.
         - name: space-deleted
           description: Displays information about the AWS re:Post Private private re:Post.
           flags:
@@ -743,22 +248,3 @@ commands:
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --space-id=!: The ID of the private re:Post.
-          documentation:
-            command: Displays information about the AWS re:Post Private private re:Post.
-            flag:
-                cli-input-json: |-
-                    Reads arguments from the JSON string provided.
-                    The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                    It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                cli-input-yaml: |-
-                    Reads arguments from the JSON string provided.
-                    The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                    It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                generate-cli-skeleton: |-
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                space-id: The ID of the private re:Post.

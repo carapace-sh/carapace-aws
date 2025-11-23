@@ -1,64 +1,26 @@
 name: chatbot
 description: AWS Chatbot
 commands:
-    - name: delete-chime-webhook-configuration
-      description: Deletes a Amazon Chime webhook configuration for AWS Chatbot.
+    - name: delete-slack-user-identity
+      description: Deletes a user level permission for a Slack channel configuration.
       flags:
-        --chat-configuration-arn=!: The Amazon Resource Name (ARN) of the ChimeWebhookConfiguration to delete.
+        --chat-configuration-arn=!: The ARN of the SlackChannelConfiguration associated with the user identity to delete.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Deletes a Amazon Chime webhook configuration for AWS Chatbot.
-        flag:
-            chat-configuration-arn: The Amazon Resource Name (ARN) of the ChimeWebhookConfiguration to delete.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: delete-microsoft-teams-configured-team
-      description: Deletes the Microsoft Teams team authorization allowing for channels to be configured in that Microsoft Teams team.
+        --slack-team-id=!: The ID of the Slack workspace authorized with AWS Chatbot.
+        --slack-user-id=!: The ID of the user in Slack
+    - name: delete-slack-workspace-authorization
+      description: Deletes the Slack workspace authorization that allows channels to be configured in that workspace.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --team-id=!: The ID of the Microsoft Teams team authorized with AWS Chatbot.
-      documentation:
-        command: Deletes the Microsoft Teams team authorization allowing for channels to be configured in that Microsoft Teams team. Note that the Microsoft Teams team must have no channels configured to remove it.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            team-id: |-
-                The ID of the Microsoft Teams team authorized with AWS Chatbot.
-
-                To get the team ID, you must perform the initial authorization flow with Microsoft Teams in the AWS Chatbot console. Then you can copy and paste the team ID from the console. For more information, see [Step 1: Configure a Microsoft Teams client](https://docs.aws.amazon.com/chatbot/latest/adminguide/teams-setup.html#teams-client-setup) in the *AWS Chatbot Administrator Guide*.
-    - name: list-microsoft-teams-configured-teams
-      description: Lists all authorized Microsoft Teams for an AWS Account
+        --slack-team-id=!: The ID of the Slack workspace authorized with AWS Chatbot.
+    - name: describe-slack-user-identities
+      description: Lists all Slack user identities with a mapped role.
       flags:
+        --chat-configuration-arn=: The Amazon Resource Name (ARN) of the SlackChannelConfiguration associated with the user identities to describe.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -67,251 +29,6 @@ commands:
         --next-token=: An optional token returned from a prior request.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Lists all authorized Microsoft Teams for an AWS Account
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
-            next-token: An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: update-chime-webhook-configuration
-      description: Updates a Amazon Chime webhook configuration.
-      flags:
-        --chat-configuration-arn=!: The Amazon Resource Name (ARN) of the ChimeWebhookConfiguration to update.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --iam-role-arn=: A user-defined role that AWS Chatbot assumes.
-        --logging-level=: Logging levels include `ERROR`, `INFO`, or `NONE`.
-        --sns-topic-arns=: The ARNs of the SNS topics that deliver notifications to AWS Chatbot.
-        --webhook-description=: A description of the webhook.
-        --webhook-url=: The URL for the Amazon Chime webhook.
-      documentation:
-        command: Updates a Amazon Chime webhook configuration.
-        flag:
-            chat-configuration-arn: The Amazon Resource Name (ARN) of the ChimeWebhookConfiguration to update.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            iam-role-arn: |-
-                A user-defined role that AWS Chatbot assumes. This is not the service-linked role.
-
-                For more information, see [IAM policies for AWS Chatbot](https://docs.aws.amazon.com/chatbot/latest/adminguide/chatbot-iam-policies.html) in the *AWS Chatbot Administrator Guide*.
-            logging-level: Logging levels include `ERROR`, `INFO`, or `NONE`.
-            sns-topic-arns: The ARNs of the SNS topics that deliver notifications to AWS Chatbot.
-            webhook-description: |-
-                A description of the webhook. We recommend using the convention `RoomName/WebhookName`.
-
-                For more information, see [Tutorial: Get started with Amazon Chime](https://docs.aws.amazon.com/chatbot/latest/adminguide/chime-setup.html) in the *AWS Chatbot Administrator Guide*.
-            webhook-url: The URL for the Amazon Chime webhook.
-    - name: delete-microsoft-teams-channel-configuration
-      description: Deletes a Microsoft Teams channel configuration for AWS Chatbot
-      flags:
-        --chat-configuration-arn=!: The Amazon Resource Name (ARN) of the MicrosoftTeamsChannelConfiguration associated with the user identity to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Deletes a Microsoft Teams channel configuration for AWS Chatbot
-        flag:
-            chat-configuration-arn: The Amazon Resource Name (ARN) of the MicrosoftTeamsChannelConfiguration associated with the user identity to delete.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: get-account-preferences
-      description: Returns AWS Chatbot account preferences.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Returns AWS Chatbot account preferences.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: get-microsoft-teams-channel-configuration
-      description: Returns a Microsoft Teams channel configuration in an AWS account.
-      flags:
-        --chat-configuration-arn=!: The Amazon Resource Name (ARN) of the MicrosoftTeamsChannelConfiguration to retrieve.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Returns a Microsoft Teams channel configuration in an AWS account.
-        flag:
-            chat-configuration-arn: The Amazon Resource Name (ARN) of the MicrosoftTeamsChannelConfiguration to retrieve.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: tag-resource
-      description: Attaches a key-value pair to a resource, as identified by its Amazon Resource Name (ARN).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the configuration.
-        --tags=!: A list of tags to apply to the configuration.
-      documentation:
-        command: Attaches a key-value pair to a resource, as identified by its Amazon Resource Name (ARN). Resources are users, servers, roles, and other entities.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-arn: The ARN of the configuration.
-            tags: A list of tags to apply to the configuration.
-    - name: untag-resource
-      description: Detaches a key-value pair from a resource, as identified by its Amazon Resource Name (ARN).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The value of the resource that will have the tag removed.
-        --tag-keys=!: TagKeys are key-value pairs assigned to ARNs that can be used to group and search for resources by type.
-      documentation:
-        command: Detaches a key-value pair from a resource, as identified by its Amazon Resource Name (ARN). Resources are users, servers, roles, and other entities.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-arn: The value of the resource that will have the tag removed. An Amazon Resource Name (ARN) is an identifier for a specific AWS resource, such as a server, user, or role.
-            tag-keys: TagKeys are key-value pairs assigned to ARNs that can be used to group and search for resources by type. This metadata can be attached to resources for any purpose.
-    - name: update-custom-action
-      description: Updates a custom action.
-      flags:
-        --alias-name=: The name used to invoke this action in the chat channel.
-        --attachments=: Defines when this custom action button should be attached to a notification.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --custom-action-arn=!: The fully defined Amazon Resource Name (ARN) of the custom action.
-        --definition=!: The definition of the command to run when invoked as an alias or as an action button.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Updates a custom action.
-        flag:
-            alias-name: The name used to invoke this action in the chat channel. For example, `@aws run my-alias`.
-            attachments: Defines when this custom action button should be attached to a notification.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            custom-action-arn: The fully defined Amazon Resource Name (ARN) of the custom action.
-            definition: The definition of the command to run when invoked as an alias or as an action button.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
     - name: update-microsoft-teams-channel-configuration
       description: Updates an Microsoft Teams channel configuration.
       flags:
@@ -327,329 +44,14 @@ commands:
         --no-user-authorization-required: Enables use of a user role requirement in your chat configuration.
         --sns-topic-arns=: The Amazon Resource Names (ARNs) of the SNS topics that deliver notifications to AWS Chatbot.
         --user-authorization-required: Enables use of a user role requirement in your chat configuration.
-      documentation:
-        command: Updates an Microsoft Teams channel configuration.
-        flag:
-            channel-id: The ID of the Microsoft Teams channel.
-            channel-name: The name of the Microsoft Teams channel.
-            chat-configuration-arn: The Amazon Resource Name (ARN) of the TeamsChannelConfiguration to update.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            guardrail-policy-arns: The list of IAM policy ARNs that are applied as channel guardrails. The AWS managed `AdministratorAccess` policy is applied by default if this is not set.
-            iam-role-arn: |-
-                A user-defined role that AWS Chatbot assumes. This is not the service-linked role.
-
-                For more information, see [IAM policies for AWS Chatbot](https://docs.aws.amazon.com/chatbot/latest/adminguide/chatbot-iam-policies.html) in the *AWS Chatbot Administrator Guide*.
-            logging-level: Logging levels include `ERROR`, `INFO`, or `NONE`.
-            sns-topic-arns: The Amazon Resource Names (ARNs) of the SNS topics that deliver notifications to AWS Chatbot.
-            user-authorization-required: Enables use of a user role requirement in your chat configuration.
-    - name: delete-microsoft-teams-user-identity
-      description: Identifes a user level permission for a channel configuration.
+    - name: associate-to-configuration
+      description: Links a resource (for example, a custom action) to a channel configuration.
       flags:
-        --chat-configuration-arn=!: The ARN of the MicrosoftTeamsChannelConfiguration associated with the user identity to delete.
+        --chat-configuration=!: The channel configuration to associate with the resource.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-id=!: The Microsoft Teams user ID.
-      documentation:
-        command: Identifes a user level permission for a channel configuration.
-        flag:
-            chat-configuration-arn: The ARN of the MicrosoftTeamsChannelConfiguration associated with the user identity to delete.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            user-id: The Microsoft Teams user ID.
-    - name: delete-slack-channel-configuration
-      description: Deletes a Slack channel configuration for AWS Chatbot
-      flags:
-        --chat-configuration-arn=!: The Amazon Resource Name (ARN) of the SlackChannelConfiguration to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Deletes a Slack channel configuration for AWS Chatbot
-        flag:
-            chat-configuration-arn: The Amazon Resource Name (ARN) of the SlackChannelConfiguration to delete.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: get-custom-action
-      description: Returns a custom action.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --custom-action-arn=!: Returns the fully defined Amazon Resource Name (ARN) of the custom action.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Returns a custom action.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            custom-action-arn: Returns the fully defined Amazon Resource Name (ARN) of the custom action.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: list-microsoft-teams-channel-configurations
-      description: Lists all AWS Chatbot Microsoft Teams channel configurations in an AWS account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to include in the response.
-        --next-token=: An optional token returned from a prior request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --team-id=: The ID of the Microsoft Teams authorized with AWS Chatbot.
-      documentation:
-        command: Lists all AWS Chatbot Microsoft Teams channel configurations in an AWS account.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
-            next-token: An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            team-id: |-
-                The ID of the Microsoft Teams authorized with AWS Chatbot.
-
-                To get the team ID, you must perform the initial authorization flow with Microsoft Teams in the AWS Chatbot console. Then you can copy and paste the team ID from the console. For more information, see [Step 1: Configure a Microsoft Teams client](https://docs.aws.amazon.com/chatbot/latest/adminguide/teams-setup.html#teams-client-setup) in the *AWS Chatbot Administrator Guide*.
-    - name: list-tags-for-resource
-      description: Lists all of the tags associated with the Amazon Resource Name (ARN) that you specify.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource to list tags for.
-      documentation:
-        command: Lists all of the tags associated with the Amazon Resource Name (ARN) that you specify. The resource can be a user, server, or role.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-arn: The ARN of the resource to list tags for.
-    - name: create-slack-channel-configuration
-      description: Creates an AWS Chatbot confugration for Slack.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration-name=!: The name of the configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --guardrail-policy-arns=: The list of IAM policy ARNs that are applied as channel guardrails.
-        --iam-role-arn=!: A user-defined role that AWS Chatbot assumes.
-        --logging-level=: Logging levels include `ERROR`, `INFO`, or `NONE`.
-        --no-user-authorization-required: Enables use of a user role requirement in your chat configuration.
-        --slack-channel-id=!: The ID of the Slack channel.
-        --slack-channel-name=: The name of the Slack channel.
-        --slack-team-id=!: The ID of the Slack workspace authorized with AWS Chatbot.
-        --sns-topic-arns=: The Amazon Resource Names (ARNs) of the SNS topics that deliver notifications to AWS Chatbot.
-        --tags=: A map of tags assigned to a resource.
-        --user-authorization-required: Enables use of a user role requirement in your chat configuration.
-      documentation:
-        command: Creates an AWS Chatbot confugration for Slack.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            configuration-name: The name of the configuration.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            guardrail-policy-arns: The list of IAM policy ARNs that are applied as channel guardrails. The AWS managed `AdministratorAccess` policy is applied by default if this is not set.
-            iam-role-arn: |-
-                A user-defined role that AWS Chatbot assumes. This is not the service-linked role.
-
-                For more information, see [IAM policies for AWS Chatbot](https://docs.aws.amazon.com/chatbot/latest/adminguide/chatbot-iam-policies.html) in the *AWS Chatbot Administrator Guide*.
-            logging-level: Logging levels include `ERROR`, `INFO`, or `NONE`.
-            slack-channel-id: |-
-                The ID of the Slack channel.
-
-                To get this ID, open Slack, right click on the channel name in the left pane, then choose Copy Link. The channel ID is the 9-character string at the end of the URL. For example, ABCBBLZZZ.
-            slack-channel-name: The name of the Slack channel.
-            slack-team-id: The ID of the Slack workspace authorized with AWS Chatbot.
-            sns-topic-arns: The Amazon Resource Names (ARNs) of the SNS topics that deliver notifications to AWS Chatbot.
-            tags: A map of tags assigned to a resource. A tag is a string-to-string map of key-value pairs.
-            user-authorization-required: Enables use of a user role requirement in your chat configuration.
-    - name: delete-slack-user-identity
-      description: Deletes a user level permission for a Slack channel configuration.
-      flags:
-        --chat-configuration-arn=!: The ARN of the SlackChannelConfiguration associated with the user identity to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --slack-team-id=!: The ID of the Slack workspace authorized with AWS Chatbot.
-        --slack-user-id=!: The ID of the user in Slack
-      documentation:
-        command: Deletes a user level permission for a Slack channel configuration.
-        flag:
-            chat-configuration-arn: The ARN of the SlackChannelConfiguration associated with the user identity to delete.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            slack-team-id: The ID of the Slack workspace authorized with AWS Chatbot.
-            slack-user-id: The ID of the user in Slack
-    - name: describe-slack-channel-configurations
-      description: Lists Slack channel configurations optionally filtered by ChatConfigurationArn
-      flags:
-        --chat-configuration-arn=: An optional Amazon Resource Name (ARN) of a SlackChannelConfiguration to describe.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to include in the response.
-        --next-token=: An optional token returned from a prior request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Lists Slack channel configurations optionally filtered by ChatConfigurationArn
-        flag:
-            chat-configuration-arn: An optional Amazon Resource Name (ARN) of a SlackChannelConfiguration to describe.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
-            next-token: An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+        --resource=!: The resource Amazon Resource Name (ARN) to link.
     - name: create-chime-webhook-configuration
       description: Creates an AWS Chatbot configuration for Amazon Chime.
       flags:
@@ -663,65 +65,6 @@ commands:
         --tags=: A map of tags assigned to a resource.
         --webhook-description=!: A description of the webhook.
         --webhook-url=!: The URL for the Amazon Chime webhook.
-      documentation:
-        command: Creates an AWS Chatbot configuration for Amazon Chime.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            configuration-name: The name of the configuration.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            iam-role-arn: |-
-                A user-defined role that AWS Chatbot assumes. This is not the service-linked role.
-
-                For more information, see [IAM policies for AWS Chatbot](https://docs.aws.amazon.com/chatbot/latest/adminguide/chatbot-iam-policies.html) in the *AWS Chatbot Administrator Guide*.
-            logging-level: Logging levels include `ERROR`, `INFO`, or `NONE`.
-            sns-topic-arns: The Amazon Resource Names (ARNs) of the SNS topics that deliver notifications to AWS Chatbot.
-            tags: A map of tags assigned to a resource. A tag is a string-to-string map of key-value pairs.
-            webhook-description: |-
-                A description of the webhook. We recommend using the convention `RoomName/WebhookName`.
-
-                For more information, see [Tutorial: Get started with Amazon Chime](https://docs.aws.amazon.com/chatbot/latest/adminguide/chime-setup.html) in the *AWS Chatbot Administrator Guide*.
-            webhook-url: The URL for the Amazon Chime webhook.
-    - name: disassociate-from-configuration
-      description: Unlink a resource, for example a custom action, from a channel configuration.
-      flags:
-        --chat-configuration=!: The channel configuration the resource is being disassociated from.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource=!: The resource (for example, a custom action) Amazon Resource Name (ARN) to unlink.
-      documentation:
-        command: Unlink a resource, for example a custom action, from a channel configuration.
-        flag:
-            chat-configuration: The channel configuration the resource is being disassociated from.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource: The resource (for example, a custom action) Amazon Resource Name (ARN) to unlink.
     - name: list-associations
       description: Lists resources associated with a channel configuration.
       flags:
@@ -734,100 +77,8 @@ commands:
         --next-token=: An optional token returned from a prior request.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Lists resources associated with a channel configuration.
-        flag:
-            chat-configuration: The channel configuration to list associations for.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
-            next-token: An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: describe-slack-user-identities
-      description: Lists all Slack user identities with a mapped role.
-      flags:
-        --chat-configuration-arn=: The Amazon Resource Name (ARN) of the SlackChannelConfiguration associated with the user identities to describe.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to include in the response.
-        --next-token=: An optional token returned from a prior request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Lists all Slack user identities with a mapped role.
-        flag:
-            chat-configuration-arn: The Amazon Resource Name (ARN) of the SlackChannelConfiguration associated with the user identities to describe.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
-            next-token: An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: list-custom-actions
-      description: Lists custom actions defined in this account.
+    - name: list-microsoft-teams-configured-teams
+      description: Lists all authorized Microsoft Teams for an AWS Account
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -837,223 +88,14 @@ commands:
         --next-token=: An optional token returned from a prior request.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Lists custom actions defined in this account.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
-            next-token: An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: list-microsoft-teams-user-identities
-      description: A list all Microsoft Teams user identities with a mapped role.
+    - name: delete-microsoft-teams-user-identity
+      description: Identifes a user level permission for a channel configuration.
       flags:
-        --chat-configuration-arn=: The Amazon Resource Name (ARN) of the MicrosoftTeamsChannelConfiguration associated with the user identities to list.
+        --chat-configuration-arn=!: The ARN of the MicrosoftTeamsChannelConfiguration associated with the user identity to delete.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to include in the response.
-        --next-token=: An optional token returned from a prior request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: A list all Microsoft Teams user identities with a mapped role.
-        flag:
-            chat-configuration-arn: The Amazon Resource Name (ARN) of the MicrosoftTeamsChannelConfiguration associated with the user identities to list.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
-            next-token: An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: update-account-preferences
-      description: Updates AWS Chatbot account preferences.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-training-data-collection-enabled: Turns on training data collection.
-        --no-user-authorization-required: Enables use of a user role requirement in your chat configuration.
-        --training-data-collection-enabled: Turns on training data collection.
-        --user-authorization-required: Enables use of a user role requirement in your chat configuration.
-      documentation:
-        command: Updates AWS Chatbot account preferences.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            training-data-collection-enabled: |-
-                Turns on training data collection.
-
-                This helps improve the AWS Chatbot experience by allowing AWS Chatbot to store and use your customer information, such as AWS Chatbot configurations, notifications, user inputs, AWS Chatbot generated responses, and interaction data. This data helps us to continuously improve and develop Artificial Intelligence (AI) technologies. Your data is not shared with any third parties and is protected using sophisticated controls to prevent unauthorized access and misuse. AWS Chatbot does not store or use interactions in chat channels with Amazon Q for training AI technologies for AWS Chatbot.
-            user-authorization-required: Enables use of a user role requirement in your chat configuration.
-    - name: associate-to-configuration
-      description: Links a resource (for example, a custom action) to a channel configuration.
-      flags:
-        --chat-configuration=!: The channel configuration to associate with the resource.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource=!: The resource Amazon Resource Name (ARN) to link.
-      documentation:
-        command: Links a resource (for example, a custom action) to a channel configuration.
-        flag:
-            chat-configuration: The channel configuration to associate with the resource.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource: The resource Amazon Resource Name (ARN) to link.
-    - name: create-custom-action
-      description: Creates a custom action that can be invoked as an alias or as a button on a notification.
-      flags:
-        --action-name=!: The name of the custom action.
-        --alias-name=: The name used to invoke this action in a chat channel.
-        --attachments=: Defines when this custom action button should be attached to a notification.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --definition=!: The definition of the command to run when invoked as an alias or as an action button.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: A map of tags assigned to a resource.
-      documentation:
-        command: Creates a custom action that can be invoked as an alias or as a button on a notification.
-        flag:
-            action-name: The name of the custom action. This name is included in the Amazon Resource Name (ARN).
-            alias-name: The name used to invoke this action in a chat channel. For example, `@aws run my-alias`.
-            attachments: Defines when this custom action button should be attached to a notification.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: |-
-                A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, subsequent retries with the same client token returns the result from the original successful request.
-
-                If you do not specify a client token, one is automatically generated by the SDK.
-            definition: The definition of the command to run when invoked as an alias or as an action button.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            tags: A map of tags assigned to a resource. A tag is a string-to-string map of key-value pairs.
-    - name: delete-slack-workspace-authorization
-      description: Deletes the Slack workspace authorization that allows channels to be configured in that workspace.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --slack-team-id=!: The ID of the Slack workspace authorized with AWS Chatbot.
-      documentation:
-        command: Deletes the Slack workspace authorization that allows channels to be configured in that workspace. This requires all configured channels in the workspace to be deleted.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            slack-team-id: The ID of the Slack workspace authorized with AWS Chatbot.
+        --user-id=!: The Microsoft Teams user ID.
     - name: describe-slack-workspaces
       description: List all authorized Slack workspaces connected to the AWS Account onboarded with AWS Chatbot.
       flags:
@@ -1065,45 +107,33 @@ commands:
         --next-token=: An optional token returned from a prior request.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: List all authorized Slack workspaces connected to the AWS Account onboarded with AWS Chatbot.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
-            next-token: An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+    - name: disassociate-from-configuration
+      description: Unlink a resource, for example a custom action, from a channel configuration.
+      flags:
+        --chat-configuration=!: The channel configuration the resource is being disassociated from.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource=!: The resource (for example, a custom action) Amazon Resource Name (ARN) to unlink.
+    - name: get-microsoft-teams-channel-configuration
+      description: Returns a Microsoft Teams channel configuration in an AWS account.
+      flags:
+        --chat-configuration-arn=!: The Amazon Resource Name (ARN) of the MicrosoftTeamsChannelConfiguration to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-microsoft-teams-channel-configurations
+      description: Lists all AWS Chatbot Microsoft Teams channel configurations in an AWS account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to include in the response.
+        --next-token=: An optional token returned from a prior request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --team-id=: The ID of the Microsoft Teams authorized with AWS Chatbot.
     - name: create-microsoft-teams-channel-configuration
       description: Creates an AWS Chatbot configuration for Microsoft Teams.
       flags:
@@ -1123,72 +153,33 @@ commands:
         --team-name=: The name of the Microsoft Teams Team.
         --tenant-id=!: The ID of the Microsoft Teams tenant.
         --user-authorization-required: Enables use of a user role requirement in your chat configuration.
-      documentation:
-        command: Creates an AWS Chatbot configuration for Microsoft Teams.
-        flag:
-            channel-id: The ID of the Microsoft Teams channel.
-            channel-name: The name of the Microsoft Teams channel.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            configuration-name: The name of the configuration.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            guardrail-policy-arns: The list of IAM policy ARNs that are applied as channel guardrails. The AWS managed `AdministratorAccess` policy is applied by default if this is not set.
-            iam-role-arn: |-
-                A user-defined role that AWS Chatbot assumes. This is not the service-linked role.
-
-                For more information, see [IAM policies for AWS Chatbot](https://docs.aws.amazon.com/chatbot/latest/adminguide/chatbot-iam-policies.html) in the *AWS Chatbot Administrator Guide*.
-            logging-level: Logging levels include `ERROR`, `INFO`, or `NONE`.
-            sns-topic-arns: The Amazon Resource Names (ARNs) of the SNS topics that deliver notifications to AWS Chatbot.
-            tags: A map of tags assigned to a resource. A tag is a string-to-string map of key-value pairs.
-            team-id: |-
-                The ID of the Microsoft Teams authorized with AWS Chatbot.
-
-                To get the team ID, you must perform the initial authorization flow with Microsoft Teams in the AWS Chatbot console. Then you can copy and paste the team ID from the console. For more information, see [Step 1: Configure a Microsoft Teams client](https://docs.aws.amazon.com/chatbot/latest/adminguide/teams-setup.html#teams-client-setup) in the *AWS Chatbot Administrator Guide*.
-            team-name: The name of the Microsoft Teams Team.
-            tenant-id: The ID of the Microsoft Teams tenant.
-            user-authorization-required: Enables use of a user role requirement in your chat configuration.
-    - name: delete-custom-action
-      description: Deletes a custom action.
+    - name: get-account-preferences
+      description: Returns AWS Chatbot account preferences.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --custom-action-arn=!: The fully defined ARN of the custom action.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Deletes a custom action.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            custom-action-arn: The fully defined ARN of the custom action.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: describe-chime-webhook-configurations
-      description: Lists Amazon Chime webhook configurations optionally filtered by ChatConfigurationArn
+    - name: update-account-preferences
+      description: Updates AWS Chatbot account preferences.
       flags:
-        --chat-configuration-arn=: An optional Amazon Resource Name (ARN) of a ChimeWebhookConfiguration to describe.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-training-data-collection-enabled: Turns on training data collection.
+        --no-user-authorization-required: Enables use of a user role requirement in your chat configuration.
+        --training-data-collection-enabled: Turns on training data collection.
+        --user-authorization-required: Enables use of a user role requirement in your chat configuration.
+    - name: delete-slack-channel-configuration
+      description: Deletes a Slack channel configuration for AWS Chatbot
+      flags:
+        --chat-configuration-arn=!: The Amazon Resource Name (ARN) of the SlackChannelConfiguration to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-slack-channel-configurations
+      description: Lists Slack channel configurations optionally filtered by ChatConfigurationArn
+      flags:
+        --chat-configuration-arn=: An optional Amazon Resource Name (ARN) of a SlackChannelConfiguration to describe.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -1197,46 +188,29 @@ commands:
         --next-token=: An optional token returned from a prior request.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Lists Amazon Chime webhook configurations optionally filtered by ChatConfigurationArn
-        flag:
-            chat-configuration-arn: An optional Amazon Resource Name (ARN) of a ChimeWebhookConfiguration to describe.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
-            next-token: An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+    - name: list-tags-for-resource
+      description: Lists all of the tags associated with the Amazon Resource Name (ARN) that you specify.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource to list tags for.
+    - name: tag-resource
+      description: Attaches a key-value pair to a resource, as identified by its Amazon Resource Name (ARN).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the configuration.
+        --tags=!: A list of tags to apply to the configuration.
+    - name: untag-resource
+      description: Detaches a key-value pair from a resource, as identified by its Amazon Resource Name (ARN).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The value of the resource that will have the tag removed.
+        --tag-keys=!: TagKeys are key-value pairs assigned to ARNs that can be used to group and search for resources by type.
     - name: update-slack-channel-configuration
       description: Updates a Slack channel configuration.
       flags:
@@ -1252,35 +226,124 @@ commands:
         --slack-channel-name=: The name of the Slack channel.
         --sns-topic-arns=: The Amazon Resource Names (ARNs) of the SNS topics that deliver notifications to AWS Chatbot.
         --user-authorization-required: Enables use of a user role requirement in your chat configuration.
-      documentation:
-        command: Updates a Slack channel configuration.
-        flag:
-            chat-configuration-arn: The Amazon Resource Name (ARN) of the SlackChannelConfiguration to update.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            guardrail-policy-arns: The list of IAM policy ARNs that are applied as channel guardrails. The AWS managed `AdministratorAccess` policy is applied by default if this is not set.
-            iam-role-arn: |-
-                A user-defined role that AWS Chatbot assumes. This is not the service-linked role.
-
-                For more information, see [IAM policies for AWS Chatbot](https://docs.aws.amazon.com/chatbot/latest/adminguide/chatbot-iam-policies.html) in the *AWS Chatbot Administrator Guide*.
-            logging-level: Logging levels include `ERROR`, `INFO`, or `NONE`.
-            slack-channel-id: |-
-                The ID of the Slack channel.
-
-                To get this ID, open Slack, right click on the channel name in the left pane, then choose Copy Link. The channel ID is the 9-character string at the end of the URL. For example, ABCBBLZZZ.
-            slack-channel-name: The name of the Slack channel.
-            sns-topic-arns: The Amazon Resource Names (ARNs) of the SNS topics that deliver notifications to AWS Chatbot.
-            user-authorization-required: Enables use of a user role requirement in your chat configuration.
+    - name: create-slack-channel-configuration
+      description: Creates an AWS Chatbot confugration for Slack.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-name=!: The name of the configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --guardrail-policy-arns=: The list of IAM policy ARNs that are applied as channel guardrails.
+        --iam-role-arn=!: A user-defined role that AWS Chatbot assumes.
+        --logging-level=: Logging levels include `ERROR`, `INFO`, or `NONE`.
+        --no-user-authorization-required: Enables use of a user role requirement in your chat configuration.
+        --slack-channel-id=!: The ID of the Slack channel.
+        --slack-channel-name=: The name of the Slack channel.
+        --slack-team-id=!: The ID of the Slack workspace authorized with AWS Chatbot.
+        --sns-topic-arns=: The Amazon Resource Names (ARNs) of the SNS topics that deliver notifications to AWS Chatbot.
+        --tags=: A map of tags assigned to a resource.
+        --user-authorization-required: Enables use of a user role requirement in your chat configuration.
+    - name: delete-microsoft-teams-configured-team
+      description: Deletes the Microsoft Teams team authorization allowing for channels to be configured in that Microsoft Teams team.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --team-id=!: The ID of the Microsoft Teams team authorized with AWS Chatbot.
+    - name: describe-chime-webhook-configurations
+      description: Lists Amazon Chime webhook configurations optionally filtered by ChatConfigurationArn
+      flags:
+        --chat-configuration-arn=: An optional Amazon Resource Name (ARN) of a ChimeWebhookConfiguration to describe.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to include in the response.
+        --next-token=: An optional token returned from a prior request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: create-custom-action
+      description: Creates a custom action that can be invoked as an alias or as a button on a notification.
+      flags:
+        --action-name=!: The name of the custom action.
+        --alias-name=: The name used to invoke this action in a chat channel.
+        --attachments=: Defines when this custom action button should be attached to a notification.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --definition=!: The definition of the command to run when invoked as an alias or as an action button.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: A map of tags assigned to a resource.
+    - name: delete-chime-webhook-configuration
+      description: Deletes a Amazon Chime webhook configuration for AWS Chatbot.
+      flags:
+        --chat-configuration-arn=!: The Amazon Resource Name (ARN) of the ChimeWebhookConfiguration to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-custom-action
+      description: Deletes a custom action.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --custom-action-arn=!: The fully defined ARN of the custom action.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-custom-action
+      description: Returns a custom action.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --custom-action-arn=!: Returns the fully defined Amazon Resource Name (ARN) of the custom action.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-custom-actions
+      description: Lists custom actions defined in this account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to include in the response.
+        --next-token=: An optional token returned from a prior request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-microsoft-teams-user-identities
+      description: A list all Microsoft Teams user identities with a mapped role.
+      flags:
+        --chat-configuration-arn=: The Amazon Resource Name (ARN) of the MicrosoftTeamsChannelConfiguration associated with the user identities to list.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to include in the response.
+        --next-token=: An optional token returned from a prior request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-chime-webhook-configuration
+      description: Updates a Amazon Chime webhook configuration.
+      flags:
+        --chat-configuration-arn=!: The Amazon Resource Name (ARN) of the ChimeWebhookConfiguration to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --iam-role-arn=: A user-defined role that AWS Chatbot assumes.
+        --logging-level=: Logging levels include `ERROR`, `INFO`, or `NONE`.
+        --sns-topic-arns=: The ARNs of the SNS topics that deliver notifications to AWS Chatbot.
+        --webhook-description=: A description of the webhook.
+        --webhook-url=: The URL for the Amazon Chime webhook.
+    - name: update-custom-action
+      description: Updates a custom action.
+      flags:
+        --alias-name=: The name used to invoke this action in the chat channel.
+        --attachments=: Defines when this custom action button should be attached to a notification.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --custom-action-arn=!: The fully defined Amazon Resource Name (ARN) of the custom action.
+        --definition=!: The definition of the command to run when invoked as an alias or as an action button.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-microsoft-teams-channel-configuration
+      description: Deletes a Microsoft Teams channel configuration for AWS Chatbot
+      flags:
+        --chat-configuration-arn=!: The Amazon Resource Name (ARN) of the MicrosoftTeamsChannelConfiguration associated with the user identity to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.

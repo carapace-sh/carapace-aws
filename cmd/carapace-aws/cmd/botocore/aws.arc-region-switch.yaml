@@ -1,234 +1,26 @@
 name: arc-region-switch
 description: ARC - Region switch
 commands:
-    - name: approve-plan-execution-step
-      description: Approves a step in a plan execution that requires manual approval.
+    - name: start-plan-execution
+      description: Starts the execution of a Region switch plan.
       flags:
-        --approval=!: The status of approval for a plan execution step.
+        --action=!: The action to perform.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --comment=: A comment that you can enter about a plan execution.
-        --execution-id=!: The execution identifier of a plan execution.
+        --comment=: An optional comment explaining why the plan execution is being started.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --plan-arn=!: The Amazon Resource Name (ARN) of the plan.
-        --step-name=!: The name of a step in a plan execution.
+        --latest-version=: A boolean value indicating whether to use the latest version of the plan.
+        --mode=: The plan execution mode.
+        --plan-arn=!: The Amazon Resource Name (ARN) of the plan to execute.
+        --target-region=!: The Amazon Web Services Region to target with this execution.
       completion:
         flag:
-            approval:
-                - approve
-                - decline
-      documentation:
-        command: |-
-            Approves a step in a plan execution that requires manual approval. When you create a plan, you can include approval steps that require manual intervention before the execution can proceed. This operation allows you to provide that approval.
-
-            You must specify the plan ARN, execution ID, step name, and approval status. You can also provide an optional comment explaining the approval decision.
-        flag:
-            approval: The status of approval for a plan execution step.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            comment: A comment that you can enter about a plan execution.
-            execution-id: The execution identifier of a plan execution.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            plan-arn: The Amazon Resource Name (ARN) of the plan.
-            step-name: The name of a step in a plan execution.
-    - name: get-plan
-      description: Retrieves detailed information about a Region switch plan.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the plan.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Retrieves detailed information about a Region switch plan. You must specify the ARN of the plan.
-        flag:
-            arn: The Amazon Resource Name (ARN) of the plan.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: get-plan-execution
-      description: Retrieves detailed information about a specific plan execution.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --execution-id=!: The execution identifier of a plan execution.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The number of objects that you want to return with this call.
-        --next-token=: Specifies that you want to receive the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --plan-arn=!: The Amazon Resource Name (ARN) of the plan with the execution to retrieve.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Retrieves detailed information about a specific plan execution. You must specify the plan ARN and execution ID.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            execution-id: The execution identifier of a plan execution.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The number of objects that you want to return with this call.
-            next-token: Specifies that you want to receive the next page of results. Valid only if you received a `nextToken` response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's `nextToken` response to request the next page of results.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            plan-arn: The Amazon Resource Name (ARN) of the plan with the execution to retrieve.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: list-plan-execution-events
-      description: Lists the events that occurred during a plan execution.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --execution-id=!: The execution identifier of a plan execution.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The number of objects that you want to return with this call.
-        --name=: The name of the plan execution event.
-        --next-token=: Specifies that you want to receive the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --plan-arn=!: The Amazon Resource Name (ARN) of the plan.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Lists the events that occurred during a plan execution. These events provide a detailed timeline of the execution process.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            execution-id: The execution identifier of a plan execution.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The number of objects that you want to return with this call.
-            name: The name of the plan execution event.
-            next-token: Specifies that you want to receive the next page of results. Valid only if you received a `nextToken` response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's `nextToken` response to request the next page of results.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            plan-arn: The Amazon Resource Name (ARN) of the plan.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: list-plans
-      description: Lists all Region switch plans in your Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The number of objects that you want to return with this call.
-        --next-token=: Specifies that you want to receive the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Lists all Region switch plans in your Amazon Web Services account.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The number of objects that you want to return with this call.
-            next-token: Specifies that you want to receive the next page of results. Valid only if you received a `nextToken` response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's `nextToken` response to request the next page of results.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            action:
+                - activate
+                - deactivate
+            mode:
+                - graceful
+                - ungraceful
     - name: create-plan
       description: Creates a new Region switch plan.
       flags:
@@ -251,328 +43,20 @@ commands:
             recovery-approach:
                 - activeActive
                 - activePassive
-      documentation:
-        command: |-
-            Creates a new Region switch plan. A plan defines the steps required to shift traffic from one Amazon Web Services Region to another.
-
-            You must specify a name for the plan, the primary Region, and at least one additional Region. You can also provide a description, execution role, recovery time objective, associated alarms, triggers, and workflows that define the steps to execute during a Region switch.
-        flag:
-            associated-alarms: The alarms associated with a Region switch plan.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            description: The description of a Region switch plan.
-            execution-role: An execution role is a way to categorize a Region switch plan.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            name: The name of a Region switch plan.
-            primary-region: The primary Amazon Web Services Region for the application. This is the Region where the application normally runs before any Region switch occurs.
-            recovery-approach: The recovery approach for a Region switch plan, which can be active/active (activeActive) or active/passive (activePassive).
-            recovery-time-objective-minutes: Optionally, you can specify an recovery time objective for a Region switch plan, in minutes.
-            regions: An array that specifies the Amazon Web Services Regions for a Region switch plan. Specify two Regions.
-            tags: The tags to apply to the Region switch plan.
-            triggers: The triggers associated with a Region switch plan.
-            workflows: An array of workflows included in a Region switch plan.
-    - name: delete-plan
-      description: Deletes a Region switch plan.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the plan.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: |-
-            Deletes a Region switch plan. You must specify the ARN of the plan to delete.
-
-            You cannot delete a plan that has an active execution in progress.
-        flag:
-            arn: The Amazon Resource Name (ARN) of the plan.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: get-plan-in-region
-      description: Retrieves information about a Region switch plan in a specific Amazon Web Services Region.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the plan in Region.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Retrieves information about a Region switch plan in a specific Amazon Web Services Region. This operation is useful for getting Region-specific information about a plan.
-        flag:
-            arn: The Amazon Resource Name (ARN) of the plan in Region.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: start-plan-execution
-      description: Starts the execution of a Region switch plan.
-      flags:
-        --action=!: The action to perform.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --comment=: An optional comment explaining why the plan execution is being started.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --latest-version=: A boolean value indicating whether to use the latest version of the plan.
-        --mode=: The plan execution mode.
-        --plan-arn=!: The Amazon Resource Name (ARN) of the plan to execute.
-        --target-region=!: The Amazon Web Services Region to target with this execution.
-      completion:
-        flag:
-            action:
-                - activate
-                - deactivate
-            mode:
-                - graceful
-                - ungraceful
-      documentation:
-        command: |-
-            Starts the execution of a Region switch plan. You can execute a plan in either PRACTICE or RECOVERY mode.
-
-            In PRACTICE mode, the execution simulates the steps without making actual changes to your application's traffic routing. In RECOVERY mode, the execution performs actual changes to shift traffic between Regions.
-        flag:
-            action: The action to perform. Valid values are ACTIVATE (to shift traffic to the target Region) or DEACTIVATE (to shift traffic away from the target Region).
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            comment: An optional comment explaining why the plan execution is being started.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            latest-version: A boolean value indicating whether to use the latest version of the plan. If set to false, you must specify a specific version.
-            mode: The plan execution mode. Valid values are `Practice`, for testing without making actual changes, or `Recovery`, for actual traffic shifting and application recovery.
-            plan-arn: The Amazon Resource Name (ARN) of the plan to execute.
-            target-region: The Amazon Web Services Region to target with this execution. This is the Region that traffic will be shifted to or from, depending on the action.
-    - name: update-plan-execution-step
-      description: Updates a specific step in an in-progress plan execution.
-      flags:
-        --action-to-take=!: The updated action to take for the step.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --comment=!: An optional comment about the plan execution.
-        --execution-id=!: The unique identifier of the plan execution containing the step to update.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --plan-arn=!: The Amazon Resource Name (ARN) of the plan containing the execution step to update.
-        --step-name=!: The name of the execution step to update.
-      completion:
-        flag:
-            action-to-take:
-                - switchToUngraceful
-                - skip
-      documentation:
-        command: Updates a specific step in an in-progress plan execution. This operation allows you to modify the step's comment or action.
-        flag:
-            action-to-take: The updated action to take for the step. This can be used to skip or retry a step.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            comment: An optional comment about the plan execution.
-            execution-id: The unique identifier of the plan execution containing the step to update.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            plan-arn: The Amazon Resource Name (ARN) of the plan containing the execution step to update.
-            step-name: The name of the execution step to update.
-    - name: get-plan-evaluation-status
-      description: Retrieves the evaluation status of a Region switch plan.
+    - name: list-plan-execution-events
+      description: Lists the events that occurred during a plan execution.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --execution-id=!: The execution identifier of a plan execution.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The number of objects that you want to return with this call.
+        --name=: The name of the plan execution event.
         --next-token=: Specifies that you want to receive the next page of results.
         --page-size=: The size of each page to get in the AWS service call.
-        --plan-arn=!: The Amazon Resource Name (ARN) of the Region switch plan to retrieve evaluation status for.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Retrieves the evaluation status of a Region switch plan. The evaluation status provides information about the last time the plan was evaluated and any warnings or issues detected.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The number of objects that you want to return with this call.
-            next-token: Specifies that you want to receive the next page of results. Valid only if you received a `nextToken` response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's `nextToken` response to request the next page of results.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            plan-arn: The Amazon Resource Name (ARN) of the Region switch plan to retrieve evaluation status for.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: list-tags-for-resource
-      description: Lists the tags attached to a Region switch resource.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the resource.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Lists the tags attached to a Region switch resource.
-        flag:
-            arn: The Amazon Resource Name (ARN) of the resource.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: update-plan
-      description: Updates an existing Region switch plan.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the plan.
-        --associated-alarms=: The updated CloudWatch alarms associated with the plan.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The updated description for the Region switch plan.
-        --execution-role=!: The updated IAM role ARN that grants Region switch the permissions needed to execute the plan steps.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recovery-time-objective-minutes=: The updated target recovery time objective (RTO) in minutes for the plan.
-        --triggers=: The updated conditions that can automatically trigger the execution of the plan.
-        --workflows=!: The updated workflows for the Region switch plan.
-      documentation:
-        command: Updates an existing Region switch plan. You can modify the plan's description, workflows, execution role, recovery time objective, associated alarms, and triggers.
-        flag:
-            arn: The Amazon Resource Name (ARN) of the plan.
-            associated-alarms: The updated CloudWatch alarms associated with the plan.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            description: The updated description for the Region switch plan.
-            execution-role: The updated IAM role ARN that grants Region switch the permissions needed to execute the plan steps.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            recovery-time-objective-minutes: The updated target recovery time objective (RTO) in minutes for the plan.
-            triggers: The updated conditions that can automatically trigger the execution of the plan.
-            workflows: The updated workflows for the Region switch plan.
-    - name: cancel-plan-execution
-      description: Cancels an in-progress plan execution.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --comment=: A comment that you can enter about canceling a plan execution step.
-        --execution-id=!: The execution identifier of a plan execution.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --plan-arn=!: The Amazon Resource Name (ARN) of the plan.
-      documentation:
-        command: |-
-            Cancels an in-progress plan execution. This operation stops the execution of the plan and prevents any further steps from being processed.
-
-            You must specify the plan ARN and execution ID. You can also provide an optional comment explaining why the execution was canceled.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            comment: A comment that you can enter about canceling a plan execution step.
-            execution-id: The execution identifier of a plan execution.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            plan-arn: The Amazon Resource Name (ARN) of the plan.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-plan-executions
       description: Lists the executions of a Region switch plan.
       flags:
@@ -600,153 +84,6 @@ commands:
                 - failed
                 - pending
                 - completedMonitoringApplicationHealth
-      documentation:
-        command: Lists the executions of a Region switch plan. This operation returns information about both current and historical executions.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The number of objects that you want to return with this call.
-            next-token: Specifies that you want to receive the next page of results. Valid only if you received a `nextToken` response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's `nextToken` response to request the next page of results.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            plan-arn: The ARN for the plan.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            state: The state of the plan execution. For example, the plan execution might be In Progress.
-    - name: list-plans-in-region
-      description: Lists all Region switch plans in your Amazon Web Services account that are available in the current Amazon Web Services Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The number of objects that you want to return with this call.
-        --next-token=: Specifies that you want to receive the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Lists all Region switch plans in your Amazon Web Services account that are available in the current Amazon Web Services Region.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The number of objects that you want to return with this call.
-            next-token: Specifies that you want to receive the next page of results. Valid only if you received a `nextToken` response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's `nextToken` response to request the next page of results.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: list-route53-health-checks
-      description: List the Amazon Route 53 health checks.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the Amazon Route 53 health check request.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hosted-zone-id=: The hosted zone ID for the health checks.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The number of objects that you want to return with this call.
-        --next-token=: Specifies that you want to receive the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --record-name=: The record name for the health checks.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: List the Amazon Route 53 health checks.
-        flag:
-            arn: The Amazon Resource Name (ARN) of the Amazon Route 53 health check request.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            hosted-zone-id: The hosted zone ID for the health checks.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The number of objects that you want to return with this call.
-            next-token: Specifies that you want to receive the next page of results. Valid only if you received a `nextToken` response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's `nextToken` response to request the next page of results.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            record-name: The record name for the health checks.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
     - name: tag-resource
       description: Adds or updates tags for a Region switch resource.
       flags:
@@ -755,26 +92,53 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --tags=!: Tags that you add to a resource.
-      documentation:
-        command: Adds or updates tags for a Region switch resource. You can assign metadata to your resources in the form of tags, which are key-value pairs.
-        flag:
-            arn: The Amazon Resource Name (ARN) for a tag that you add to a resource.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            tags: Tags that you add to a resource. You can add a maximum of 50 tags in Region switch.
+    - name: update-plan
+      description: Updates an existing Region switch plan.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the plan.
+        --associated-alarms=: The updated CloudWatch alarms associated with the plan.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The updated description for the Region switch plan.
+        --execution-role=!: The updated IAM role ARN that grants Region switch the permissions needed to execute the plan steps.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recovery-time-objective-minutes=: The updated target recovery time objective (RTO) in minutes for the plan.
+        --triggers=: The updated conditions that can automatically trigger the execution of the plan.
+        --workflows=!: The updated workflows for the Region switch plan.
+    - name: cancel-plan-execution
+      description: Cancels an in-progress plan execution.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --comment=: A comment that you can enter about canceling a plan execution step.
+        --execution-id=!: The execution identifier of a plan execution.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --plan-arn=!: The Amazon Resource Name (ARN) of the plan.
+    - name: get-plan-evaluation-status
+      description: Retrieves the evaluation status of a Region switch plan.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The number of objects that you want to return with this call.
+        --next-token=: Specifies that you want to receive the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --plan-arn=!: The Amazon Resource Name (ARN) of the Region switch plan to retrieve evaluation status for.
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-plan-execution
+      description: Retrieves detailed information about a specific plan execution.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --execution-id=!: The execution identifier of a plan execution.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The number of objects that you want to return with this call.
+        --next-token=: Specifies that you want to receive the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --plan-arn=!: The Amazon Resource Name (ARN) of the plan with the execution to retrieve.
+        --starting-token=: A token to specify where to start paginating.
     - name: untag-resource
       description: Removes tags from a Region switch resource.
       flags:
@@ -783,26 +147,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-tag-keys=!: Tag keys that you remove from a resource.
-      documentation:
-        command: Removes tags from a Region switch resource.
-        flag:
-            arn: The Amazon Resource Name (ARN) for a tag you remove a resource from.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-tag-keys: Tag keys that you remove from a resource.
     - name: update-plan-execution
       description: Updates an in-progress plan execution.
       flags:
@@ -820,28 +164,102 @@ commands:
                 - switchToUngraceful
                 - pause
                 - resume
-      documentation:
-        command: Updates an in-progress plan execution. This operation allows you to modify certain aspects of the execution, such as adding a comment or changing the action.
+    - name: update-plan-execution-step
+      description: Updates a specific step in an in-progress plan execution.
+      flags:
+        --action-to-take=!: The updated action to take for the step.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --comment=!: An optional comment about the plan execution.
+        --execution-id=!: The unique identifier of the plan execution containing the step to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --plan-arn=!: The Amazon Resource Name (ARN) of the plan containing the execution step to update.
+        --step-name=!: The name of the execution step to update.
+      completion:
         flag:
-            action: The action specified for a plan execution, for example, Switch to Graceful or Pause.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            comment: An optional comment about the plan execution.
-            execution-id: The execution identifier of a plan execution.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            plan-arn: The Amazon Resource Name (ARN) of the plan with the execution to update.
+            action-to-take:
+                - switchToUngraceful
+                - skip
+    - name: delete-plan
+      description: Deletes a Region switch plan.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the plan.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-plan
+      description: Retrieves detailed information about a Region switch plan.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the plan.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-plans
+      description: Lists all Region switch plans in your Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The number of objects that you want to return with this call.
+        --next-token=: Specifies that you want to receive the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-route53-health-checks
+      description: List the Amazon Route 53 health checks.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the Amazon Route 53 health check request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --hosted-zone-id=: The hosted zone ID for the health checks.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The number of objects that you want to return with this call.
+        --next-token=: Specifies that you want to receive the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --record-name=: The record name for the health checks.
+        --starting-token=: A token to specify where to start paginating.
+    - name: approve-plan-execution-step
+      description: Approves a step in a plan execution that requires manual approval.
+      flags:
+        --approval=!: The status of approval for a plan execution step.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --comment=: A comment that you can enter about a plan execution.
+        --execution-id=!: The execution identifier of a plan execution.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --plan-arn=!: The Amazon Resource Name (ARN) of the plan.
+        --step-name=!: The name of a step in a plan execution.
+      completion:
+        flag:
+            approval:
+                - approve
+                - decline
+    - name: get-plan-in-region
+      description: Retrieves information about a Region switch plan in a specific Amazon Web Services Region.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the plan in Region.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-plans-in-region
+      description: Lists all Region switch plans in your Amazon Web Services account that are available in the current Amazon Web Services Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The number of objects that you want to return with this call.
+        --next-token=: Specifies that you want to receive the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: Lists the tags attached to a Region switch resource.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the resource.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:
@@ -857,46 +275,6 @@ commands:
             --page-size=: The size of each page to get in the AWS service call.
             --plan-arn=!: The Amazon Resource Name (ARN) of the Region switch plan to retrieve evaluation status for.
             --starting-token=: A token to specify where to start paginating.
-          documentation:
-            command: Retrieves the evaluation status of a Region switch plan. The evaluation status provides information about the last time the plan was evaluated and any warnings or issues detected.
-            flag:
-                cli-input-json: |-
-                    Reads arguments from the JSON string provided.
-                    The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                    It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                cli-input-yaml: |-
-                    Reads arguments from the JSON string provided.
-                    The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                    It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                generate-cli-skeleton: |-
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                max-items: |-
-                    The total number of items to return in the command's output.
-                    If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                    To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                    Do not use the NextToken response element directly outside of the AWS CLI.
-
-                    For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-                max-results: The number of objects that you want to return with this call.
-                next-token: Specifies that you want to receive the next page of results. Valid only if you received a `nextToken` response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's `nextToken` response to request the next page of results.
-                page-size: |-
-                    The size of each page to get in the AWS service call.
-                    This does not affect the number of items returned in the command's output.
-                    Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                    This can help prevent the AWS service calls from timing out.
-
-                    For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-                plan-arn: The Amazon Resource Name (ARN) of the Region switch plan to retrieve evaluation status for.
-                starting-token: |-
-                    A token to specify where to start paginating.
-                    This is the NextToken from a previously truncated response.
-
-                    For usage examples, see Pagination in the AWS Command Line Interface User Guide.
         - name: plan-execution-completed
           description: Retrieves detailed information about a specific plan execution.
           flags:
@@ -910,44 +288,3 @@ commands:
             --page-size=: The size of each page to get in the AWS service call.
             --plan-arn=!: The Amazon Resource Name (ARN) of the plan with the execution to retrieve.
             --starting-token=: A token to specify where to start paginating.
-          documentation:
-            command: Retrieves detailed information about a specific plan execution. You must specify the plan ARN and execution ID.
-            flag:
-                cli-input-json: |-
-                    Reads arguments from the JSON string provided.
-                    The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                    It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                cli-input-yaml: |-
-                    Reads arguments from the JSON string provided.
-                    The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                    It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                execution-id: The execution identifier of a plan execution.
-                generate-cli-skeleton: |-
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                max-items: |-
-                    The total number of items to return in the command's output.
-                    If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                    To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                    Do not use the NextToken response element directly outside of the AWS CLI.
-
-                    For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-                max-results: The number of objects that you want to return with this call.
-                next-token: Specifies that you want to receive the next page of results. Valid only if you received a `nextToken` response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's `nextToken` response to request the next page of results.
-                page-size: |-
-                    The size of each page to get in the AWS service call.
-                    This does not affect the number of items returned in the command's output.
-                    Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                    This can help prevent the AWS service calls from timing out.
-
-                    For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-                plan-arn: The Amazon Resource Name (ARN) of the plan with the execution to retrieve.
-                starting-token: |-
-                    A token to specify where to start paginating.
-                    This is the NextToken from a previously truncated response.
-
-                    For usage examples, see Pagination in the AWS Command Line Interface User Guide.

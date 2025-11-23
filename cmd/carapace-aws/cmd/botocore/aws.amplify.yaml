@@ -1,6 +1,20 @@
 name: amplify
 description: AWS Amplify
 commands:
+    - name: get-app
+      description: Returns an existing Amplify app specified by an app ID.
+      flags:
+        --app-id=!: The unique ID for an Amplify app.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-artifact-url
+      description: Returns the artifact info that corresponds to an artifact id.
+      flags:
+        --artifact-id=!: The unique ID for an artifact.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-backend-environment
       description: Returns a backend environment for an Amplify app.
       flags:
@@ -9,68 +23,16 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --environment-name=!: The name for the backend environment.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: |-
-            Returns a backend environment for an Amplify app.
-
-            This API is available only to Amplify Gen 1 applications where the backend is created using Amplify Studio or the Amplify command line interface (CLI). This API isn’t available to Amplify Gen 2 applications. When you deploy an application with Amplify Gen 2, you provision the app's backend infrastructure using Typescript code.
-        flag:
-            app-id: The unique id for an Amplify app.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-name: The name for the backend environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: list-artifacts
-      description: Returns a list of end-to-end testing artifacts for a specified app, branch, and job.
+    - name: list-backend-environments
+      description: Lists the backend environments for an Amplify app.
       flags:
         --app-id=!: The unique ID for an Amplify app.
-        --branch-name=!: The name of a branch that is part of an Amplify app.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-name=: The name of the backend environment
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The unique ID for a job.
         --max-results=: The maximum number of records to list in a single response.
         --next-token=: A pagination token.
-      documentation:
-        command: |-
-            Returns a list of end-to-end testing artifacts for a specified app, branch, and job.
-
-            To return the build artifacts, use the [GetJob](https://docs.aws.amazon.com/amplify/latest/APIReference/API_GetJob.html) API.
-
-            For more information about Amplify testing support, see [Setting up end-to-end Cypress tests for your Amplify application](https://docs.aws.amazon.com/amplify/latest/userguide/running-tests.html) in the *Amplify Hosting User Guide*.
-        flag:
-            app-id: The unique ID for an Amplify app.
-            branch-name: The name of a branch that is part of an Amplify app.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            job-id: The unique ID for a job.
-            max-results: The maximum number of records to list in a single response.
-            next-token: A pagination token. Set to null to start listing artifacts from start. If a non-null pagination token is returned in a result, pass its value in here to list more artifacts.
     - name: list-branches
       description: Lists the branches of an Amplify app.
       flags:
@@ -83,126 +45,115 @@ commands:
         --next-token=: A pagination token.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Lists the branches of an Amplify app.
-        flag:
-            app-id: The unique ID for an Amplify app.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The maximum number of records to list in a single response.
-            next-token: A pagination token. Set to null to start listing branches from the start. If a non-null pagination token is returned in a result, pass its value in here to list more branches.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: list-webhooks
-      description: Returns a list of webhooks for an Amplify app.
+    - name: update-app
+      description: Updates an existing Amplify app.
       flags:
+        --access-token=: The personal access token for a GitHub repository for an Amplify app.
         --app-id=!: The unique ID for an Amplify app.
+        --auto-branch-creation-config=: The automated branch creation configuration for an Amplify app.
+        --auto-branch-creation-patterns=: Describes the automated branch creation glob patterns for an Amplify app.
+        --basic-auth-credentials=: The basic authorization credentials for an Amplify app.
+        --build-spec=: The build specification (build spec) for an Amplify app.
+        --cache-config=: The cache configuration for the Amplify app.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --compute-role-arn=: The Amazon Resource Name (ARN) of the IAM role to assign to an SSR app.
+        --custom-headers=: The custom HTTP headers for an Amplify app.
+        --custom-rules=: The custom redirect and rewrite rules for an Amplify app.
+        --description=: The description for an Amplify app.
+        --enable-auto-branch-creation: Enables automated branch creation for an Amplify app.
+        --enable-basic-auth: Enables basic authorization for an Amplify app.
+        --enable-branch-auto-build: Enables branch auto-building for an Amplify app.
+        --enable-branch-auto-deletion: Automatically disconnects a branch in the Amplify console when you delete a branch from your Git repository.
+        --environment-variables=: The environment variables for an Amplify app.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of records to list in a single response.
-        --next-token=: A pagination token.
-      documentation:
-        command: Returns a list of webhooks for an Amplify app.
+        --iam-service-role-arn=: The Amazon Resource Name (ARN) of the IAM service role for the Amplify app.
+        --job-config=: Describes the configuration details that apply to the jobs for an Amplify app.
+        --name=: The name for an Amplify app.
+        --no-enable-auto-branch-creation: Enables automated branch creation for an Amplify app.
+        --no-enable-basic-auth: Enables basic authorization for an Amplify app.
+        --no-enable-branch-auto-build: Enables branch auto-building for an Amplify app.
+        --no-enable-branch-auto-deletion: Automatically disconnects a branch in the Amplify console when you delete a branch from your Git repository.
+        --oauth-token=: The OAuth token for a third-party source control system for an Amplify app.
+        --platform=: The platform for the Amplify app.
+        --repository=: The name of the Git repository for an Amplify app.
+      completion:
         flag:
-            app-id: The unique ID for an Amplify app.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-results: The maximum number of records to list in a single response.
-            next-token: A pagination token. Set to null to start listing webhooks from the start. If non-null,the pagination token is returned in a result. Pass its value in here to list more webhooks.
-    - name: start-job
-      description: Starts a new job for a branch of an Amplify app.
+            platform:
+                - WEB
+                - WEB_DYNAMIC
+                - WEB_COMPUTE
+    - name: create-app
+      description: Creates a new Amplify app.
+      flags:
+        --access-token=: The personal access token for a GitHub repository for an Amplify app.
+        --auto-branch-creation-config=: The automated branch creation configuration for an Amplify app.
+        --auto-branch-creation-patterns=: The automated branch creation glob patterns for an Amplify app.
+        --basic-auth-credentials=: The credentials for basic authorization for an Amplify app.
+        --build-spec=: The build specification (build spec) for an Amplify app.
+        --cache-config=: The cache configuration for the Amplify app.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --compute-role-arn=: The Amazon Resource Name (ARN) of the IAM role to assign to an SSR app.
+        --custom-headers=: The custom HTTP headers for an Amplify app.
+        --custom-rules=: The custom rewrite and redirect rules for an Amplify app.
+        --description=: The description of the Amplify app.
+        --enable-auto-branch-creation: Enables automated branch creation for an Amplify app.
+        --enable-basic-auth: Enables basic authorization for an Amplify app.
+        --enable-branch-auto-build: Enables the auto building of branches for an Amplify app.
+        --enable-branch-auto-deletion: Automatically disconnects a branch in the Amplify console when you delete a branch from your Git repository.
+        --environment-variables=: The environment variables map for an Amplify app.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --iam-service-role-arn=: The Amazon Resource Name (ARN) of the IAM service role for the Amplify app.
+        --job-config=: Describes the configuration details that apply to the jobs for an Amplify app.
+        --name=!: The name of the Amplify app.
+        --no-enable-auto-branch-creation: Enables automated branch creation for an Amplify app.
+        --no-enable-basic-auth: Enables basic authorization for an Amplify app.
+        --no-enable-branch-auto-build: Enables the auto building of branches for an Amplify app.
+        --no-enable-branch-auto-deletion: Automatically disconnects a branch in the Amplify console when you delete a branch from your Git repository.
+        --oauth-token=: The OAuth token for a third-party source control system for an Amplify app.
+        --platform=: The platform for the Amplify app.
+        --repository=: The Git repository for the Amplify app.
+        --tags=: The tag for an Amplify app.
+      completion:
+        flag:
+            platform:
+                - WEB
+                - WEB_DYNAMIC
+                - WEB_COMPUTE
+    - name: create-deployment
+      description: Creates a deployment for a manually deployed Amplify app.
       flags:
         --app-id=!: The unique ID for an Amplify app.
         --branch-name=!: The name of the branch to use for the job.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --commit-id=: The commit ID from a third-party repository provider for the job.
-        --commit-message=: The commit message from a third-party repository provider for the job.
-        --commit-time=: The commit date and time for the job.
+        --file-map=: An optional file map that contains the file name as the key and the file content md5 hash as the value.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=: The unique ID for an existing job.
-        --job-reason=: A descriptive reason for starting the job.
-        --job-type=!: Describes the type for the job.
-      completion:
-        flag:
-            job-type:
-                - RELEASE
-                - RETRY
-                - MANUAL
-                - WEB_HOOK
-      documentation:
-        command: Starts a new job for a branch of an Amplify app.
-        flag:
-            app-id: The unique ID for an Amplify app.
-            branch-name: The name of the branch to use for the job.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            commit-id: The commit ID from a third-party repository provider for the job.
-            commit-message: The commit message from a third-party repository provider for the job.
-            commit-time: The commit date and time for the job.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            job-id: The unique ID for an existing job. This is required if the value of `jobType` is `RETRY`.
-            job-reason: A descriptive reason for starting the job.
-            job-type: |-
-                Describes the type for the job. The job type `RELEASE` starts a new job with the latest change from the specified branch. This value is available only for apps that are connected to a repository.
-
-                The job type `RETRY` retries an existing job. If the job type value is `RETRY`, the `jobId` is also required.
+    - name: tag-resource
+      description: Tags the resource with a tag key and value.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) to use to tag a resource.
+        --tags=!: The tags used to tag the resource.
+    - name: create-webhook
+      description: Creates a new webhook on an Amplify app.
+      flags:
+        --app-id=!: The unique ID for an Amplify app.
+        --branch-name=!: The name for a branch that is part of an Amplify app.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description for a webhook.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-app
+      description: Deletes an existing Amplify app specified by an app ID.
+      flags:
+        --app-id=!: The unique ID for an Amplify app.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-branch
       description: Deletes a branch for an Amplify app.
       flags:
@@ -211,78 +162,26 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Deletes a branch for an Amplify app.
-        flag:
-            app-id: The unique ID for an Amplify app.
-            branch-name: The name of the branch.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: delete-webhook
-      description: Deletes a webhook.
+    - name: delete-domain-association
+      description: Deletes a domain association for an Amplify app.
       flags:
+        --app-id=!: The unique id for an Amplify app.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-domain-associations
+      description: Returns the domain associations for an Amplify app.
+      flags:
+        --app-id=!: The unique ID for an Amplify app.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --webhook-id=!: The unique ID for a webhook.
-      documentation:
-        command: Deletes a webhook.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            webhook-id: The unique ID for a webhook.
-    - name: get-artifact-url
-      description: Returns the artifact info that corresponds to an artifact id.
-      flags:
-        --artifact-id=!: The unique ID for an artifact.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Returns the artifact info that corresponds to an artifact id.
-        flag:
-            artifact-id: The unique ID for an artifact.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of records to list in a single response.
+        --next-token=: A pagination token.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: start-deployment
       description: Starts a deployment for a manually deployed app.
       flags:
@@ -299,158 +198,23 @@ commands:
             source-url-type:
                 - ZIP
                 - BUCKET_PREFIX
-      documentation:
-        command: |-
-            Starts a deployment for a manually deployed app. Manually deployed apps are not connected to a Git repository.
-
-            The maximum duration between the `CreateDeployment` call and the `StartDeployment` call cannot exceed 8 hours. If the duration exceeds 8 hours, the `StartDeployment` call and the associated `Job` will fail.
-        flag:
-            app-id: The unique ID for an Amplify app.
-            branch-name: The name of the branch to use for the deployment job.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            job-id: The job ID for this deployment that is generated by the `CreateDeployment` request.
-            source-url: The source URL for the deployment that is used when calling `StartDeployment` without `CreateDeployment`. The source URL can be either an HTTP GET URL that is publicly accessible and downloads a single .zip file, or an Amazon S3 bucket and prefix.
-            source-url-type: The type of source specified by the `sourceURL`. If the value is `ZIP`, the source is a .zip file. If the value is `BUCKET_PREFIX`, the source is an Amazon S3 bucket and prefix. If no value is specified, the default is `ZIP`.
-    - name: update-domain-association
-      description: Creates a new domain association for an Amplify app.
+    - name: untag-resource
+      description: Untags a resource with a specified Amazon Resource Name (ARN).
       flags:
-        --app-id=!: The unique ID for an Amplify app.
-        --auto-sub-domain-creation-patterns=: Sets the branch patterns for automatic subdomain creation.
-        --auto-sub-domain-iam-role=: The required AWS Identity and Access Management (IAM) service role for the Amazon Resource Name (ARN) for automatically creating subdomains.
-        --certificate-settings=: The type of SSL/TLS certificate to use for your custom domain.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain.
-        --enable-auto-sub-domain: Enables the automated creation of subdomains for branches.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-enable-auto-sub-domain: Enables the automated creation of subdomains for branches.
-        --sub-domain-settings=: Describes the settings for the subdomain.
-      documentation:
-        command: Creates a new domain association for an Amplify app.
-        flag:
-            app-id: The unique ID for an Amplify app.
-            auto-sub-domain-creation-patterns: Sets the branch patterns for automatic subdomain creation.
-            auto-sub-domain-iam-role: The required AWS Identity and Access Management (IAM) service role for the Amazon Resource Name (ARN) for automatically creating subdomains.
-            certificate-settings: The type of SSL/TLS certificate to use for your custom domain.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            domain-name: The name of the domain.
-            enable-auto-sub-domain: Enables the automated creation of subdomains for branches.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            sub-domain-settings: Describes the settings for the subdomain.
-    - name: create-deployment
-      description: Creates a deployment for a manually deployed Amplify app.
-      flags:
-        --app-id=!: The unique ID for an Amplify app.
-        --branch-name=!: The name of the branch to use for the job.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --file-map=: An optional file map that contains the file name as the key and the file content md5 hash as the value.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: |-
-            Creates a deployment for a manually deployed Amplify app. Manually deployed apps are not connected to a Git repository.
-
-            The maximum duration between the `CreateDeployment` call and the `StartDeployment` call cannot exceed 8 hours. If the duration exceeds 8 hours, the `StartDeployment` call and the associated `Job` will fail.
-        flag:
-            app-id: The unique ID for an Amplify app.
-            branch-name: The name of the branch to use for the job.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            file-map: An optional file map that contains the file name as the key and the file content md5 hash as the value. If this argument is provided, the service will generate a unique upload URL per file. Otherwise, the service will only generate a single upload URL for the zipped files.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: delete-app
-      description: Deletes an existing Amplify app specified by an app ID.
-      flags:
-        --app-id=!: The unique ID for an Amplify app.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Deletes an existing Amplify app specified by an app ID.
-        flag:
-            app-id: The unique ID for an Amplify app.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: get-domain-association
-      description: Returns the domain information for an Amplify app.
+        --resource-arn=!: The Amazon Resource Name (ARN) to use to untag a resource.
+        --tag-keys=!: The tag keys to use to untag a resource.
+    - name: update-webhook
+      description: Updates a webhook.
       flags:
-        --app-id=!: The unique id for an Amplify app.
+        --branch-name=: The name for a branch that is part of an Amplify app.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain.
+        --description=: The description for a webhook.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Returns the domain information for an Amplify app.
-        flag:
-            app-id: The unique id for an Amplify app.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            domain-name: The name of the domain.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
+        --webhook-id=!: The unique ID for a webhook.
     - name: create-backend-environment
       description: Creates a new backend environment for an Amplify app.
       flags:
@@ -461,161 +225,56 @@ commands:
         --environment-name=!: The name for the backend environment.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --stack-name=: The AWS CloudFormation stack name of a backend environment.
-      documentation:
-        command: |-
-            Creates a new backend environment for an Amplify app.
-
-            This API is available only to Amplify Gen 1 applications where the backend is created using Amplify Studio or the Amplify command line interface (CLI). This API isn’t available to Amplify Gen 2 applications. When you deploy an application with Amplify Gen 2, you provision the app's backend infrastructure using Typescript code.
-        flag:
-            app-id: The unique ID for an Amplify app.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            deployment-artifacts: The name of deployment artifacts.
-            environment-name: The name for the backend environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            stack-name: The AWS CloudFormation stack name of a backend environment.
-    - name: list-apps
-      description: Returns a list of the existing Amplify apps.
+    - name: delete-backend-environment
+      description: Deletes a backend environment for an Amplify app.
       flags:
+        --app-id=!: The unique ID of an Amplify app.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-name=!: The name of a backend environment of an Amplify app.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of records to list in a single response.
-        --next-token=: A pagination token.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Returns a list of the existing Amplify apps.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The maximum number of records to list in a single response.
-            next-token: A pagination token. If non-null, the pagination token is returned in a result. Pass its value in another request to retrieve more entries.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: list-domain-associations
-      description: Returns the domain associations for an Amplify app.
+    - name: get-job
+      description: Returns a job for a branch of an Amplify app.
       flags:
         --app-id=!: The unique ID for an Amplify app.
+        --branch-name=!: The name of the branch to use for the job.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of records to list in a single response.
-        --next-token=: A pagination token.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Returns the domain associations for an Amplify app.
-        flag:
-            app-id: The unique ID for an Amplify app.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The maximum number of records to list in a single response.
-            next-token: A pagination token. Set to null to start listing apps from the start. If non-null, a pagination token is returned in a result. Pass its value in here to list more projects.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: tag-resource
-      description: Tags the resource with a tag key and value.
+        --job-id=!: The unique ID for the job.
+    - name: get-webhook
+      description: Returns the webhook information that corresponds to a specified webhook ID.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) to use to tag a resource.
-        --tags=!: The tags used to tag the resource.
-      documentation:
-        command: Tags the resource with a tag key and value.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-arn: The Amazon Resource Name (ARN) to use to tag a resource.
-            tags: The tags used to tag the resource.
+        --webhook-id=!: The unique ID for a webhook.
+    - name: list-artifacts
+      description: Returns a list of end-to-end testing artifacts for a specified app, branch, and job.
+      flags:
+        --app-id=!: The unique ID for an Amplify app.
+        --branch-name=!: The name of a branch that is part of an Amplify app.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The unique ID for a job.
+        --max-results=: The maximum number of records to list in a single response.
+        --next-token=: A pagination token.
+    - name: delete-webhook
+      description: Deletes a webhook.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --webhook-id=!: The unique ID for a webhook.
+    - name: get-branch
+      description: Returns a branch for an Amplify app.
+      flags:
+        --app-id=!: The unique ID for an Amplify app.
+        --branch-name=!: The name of the branch.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: update-branch
       description: Updates a branch for an Amplify app.
       flags:
@@ -656,84 +315,15 @@ commands:
                 - DEVELOPMENT
                 - EXPERIMENTAL
                 - PULL_REQUEST
-      documentation:
-        command: Updates a branch for an Amplify app.
-        flag:
-            app-id: The unique ID for an Amplify app.
-            backend: |-
-                The backend for a `Branch` of an Amplify app. Use for a backend created from an CloudFormation stack.
-
-                This field is available to Amplify Gen 2 apps only. When you deploy an application with Amplify Gen 2, you provision the app's backend infrastructure using Typescript code.
-            backend-environment-arn: |-
-                The Amazon Resource Name (ARN) for a backend environment that is part of a Gen 1 Amplify app.
-
-                This field is available to Amplify Gen 1 apps only where the backend is created using Amplify Studio or the Amplify command line interface (CLI).
-            basic-auth-credentials: The basic authorization credentials for the branch. You must base64-encode the authorization credentials and provide them in the format `user:password`.
-            branch-name: The name of the branch.
-            build-spec: The build specification (build spec) for the branch.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            compute-role-arn: The Amazon Resource Name (ARN) of the IAM role to assign to a branch of an SSR app. The SSR Compute role allows the Amplify Hosting compute service to securely access specific Amazon Web Services resources based on the role's permissions. For more information about the SSR Compute role, see [Adding an SSR Compute role](https://docs.aws.amazon.com/amplify/latest/userguide/amplify-SSR-compute-role.html) in the *Amplify User Guide*.
-            description: The description for the branch.
-            display-name: The display name for a branch. This is used as the default domain prefix.
-            enable-auto-build: Enables auto building for the branch.
-            enable-basic-auth: Enables basic authorization for the branch.
-            enable-notification: Enables notifications for the branch.
-            enable-performance-mode: |-
-                Enables performance mode for the branch.
-
-                Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. When performance mode is enabled, hosting configuration or code changes can take up to 10 minutes to roll out.
-            enable-pull-request-preview: Enables pull request previews for this branch.
-            enable-skew-protection: |-
-                Specifies whether the skew protection feature is enabled for the branch.
-
-                Deployment skew protection is available to Amplify applications to eliminate version skew issues between client and servers in web applications. When you apply skew protection to a branch, you can ensure that your clients always interact with the correct version of server-side assets, regardless of when a deployment occurs. For more information about skew protection, see [Skew protection for Amplify deployments](https://docs.aws.amazon.com/amplify/latest/userguide/skew-protection.html) in the *Amplify User Guide*.
-            environment-variables: The environment variables for the branch.
-            framework: The framework for the branch.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            pull-request-environment-name: The Amplify environment name for the pull request.
-            stage: Describes the current stage for the branch.
-            ttl: The content Time to Live (TTL) for the website in seconds.
-    - name: delete-domain-association
-      description: Deletes a domain association for an Amplify app.
+    - name: delete-job
+      description: Deletes a job for a branch of an Amplify app.
       flags:
-        --app-id=!: The unique id for an Amplify app.
+        --app-id=!: The unique ID for an Amplify app.
+        --branch-name=!: The name of the branch to use for the job.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Deletes a domain association for an Amplify app.
-        flag:
-            app-id: The unique id for an Amplify app.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            domain-name: The name of the domain.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
+        --job-id=!: The unique ID for the job.
     - name: generate-access-logs
       description: Returns the website access logs for a specific time range using a presigned URL.
       flags:
@@ -744,112 +334,17 @@ commands:
         --end-time=: The time at which the logs should end.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --start-time=: The time at which the logs should start.
-      documentation:
-        command: Returns the website access logs for a specific time range using a presigned URL.
-        flag:
-            app-id: The unique ID for an Amplify app.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            domain-name: The name of the domain.
-            end-time: The time at which the logs should end. The time range specified is inclusive of the end time.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            start-time: The time at which the logs should start. The time range specified is inclusive of the start time.
-    - name: get-app
-      description: Returns an existing Amplify app specified by an app ID.
+    - name: list-apps
+      description: Returns a list of the existing Amplify apps.
       flags:
-        --app-id=!: The unique ID for an Amplify app.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Returns an existing Amplify app specified by an app ID.
-        flag:
-            app-id: The unique ID for an Amplify app.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: get-branch
-      description: Returns a branch for an Amplify app.
-      flags:
-        --app-id=!: The unique ID for an Amplify app.
-        --branch-name=!: The name of the branch.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Returns a branch for an Amplify app.
-        flag:
-            app-id: The unique ID for an Amplify app.
-            branch-name: The name of the branch.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: get-job
-      description: Returns a job for a branch of an Amplify app.
-      flags:
-        --app-id=!: The unique ID for an Amplify app.
-        --branch-name=!: The name of the branch to use for the job.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The unique ID for the job.
-      documentation:
-        command: Returns a job for a branch of an Amplify app.
-        flag:
-            app-id: The unique ID for an Amplify app.
-            branch-name: The name of the branch to use for the job.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            job-id: The unique ID for the job.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of records to list in a single response.
+        --next-token=: A pagination token.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-jobs
       description: Lists the jobs for a branch of an Amplify app.
       flags:
@@ -863,47 +358,22 @@ commands:
         --next-token=: A pagination token.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Lists the jobs for a branch of an Amplify app.
-        flag:
-            app-id: The unique ID for an Amplify app.
-            branch-name: The name of the branch to use for the request.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The maximum number of records to list in a single response.
-            next-token: A pagination token. Set to null to start listing steps from the start. If a non-null pagination token is returned in a result, pass its value in here to list more steps.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+    - name: list-tags-for-resource
+      description: Returns a list of tags for a specified Amazon Resource Name (ARN).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) to use to list tags.
+    - name: list-webhooks
+      description: Returns a list of webhooks for an Amplify app.
+      flags:
+        --app-id=!: The unique ID for an Amplify app.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of records to list in a single response.
+        --next-token=: A pagination token.
     - name: stop-job
       description: Stops a job that is in progress for a branch of an Amplify app.
       flags:
@@ -913,125 +383,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --job-id=!: The unique id for the job.
-      documentation:
-        command: Stops a job that is in progress for a branch of an Amplify app.
-        flag:
-            app-id: The unique ID for an Amplify app.
-            branch-name: The name of the branch to use for the stop job request.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            job-id: The unique id for the job.
-    - name: create-app
-      description: Creates a new Amplify app.
-      flags:
-        --access-token=: The personal access token for a GitHub repository for an Amplify app.
-        --auto-branch-creation-config=: The automated branch creation configuration for an Amplify app.
-        --auto-branch-creation-patterns=: The automated branch creation glob patterns for an Amplify app.
-        --basic-auth-credentials=: The credentials for basic authorization for an Amplify app.
-        --build-spec=: The build specification (build spec) for an Amplify app.
-        --cache-config=: The cache configuration for the Amplify app.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --compute-role-arn=: The Amazon Resource Name (ARN) of the IAM role to assign to an SSR app.
-        --custom-headers=: The custom HTTP headers for an Amplify app.
-        --custom-rules=: The custom rewrite and redirect rules for an Amplify app.
-        --description=: The description of the Amplify app.
-        --enable-auto-branch-creation: Enables automated branch creation for an Amplify app.
-        --enable-basic-auth: Enables basic authorization for an Amplify app.
-        --enable-branch-auto-build: Enables the auto building of branches for an Amplify app.
-        --enable-branch-auto-deletion: Automatically disconnects a branch in the Amplify console when you delete a branch from your Git repository.
-        --environment-variables=: The environment variables map for an Amplify app.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --iam-service-role-arn=: The Amazon Resource Name (ARN) of the IAM service role for the Amplify app.
-        --job-config=: Describes the configuration details that apply to the jobs for an Amplify app.
-        --name=!: The name of the Amplify app.
-        --no-enable-auto-branch-creation: Enables automated branch creation for an Amplify app.
-        --no-enable-basic-auth: Enables basic authorization for an Amplify app.
-        --no-enable-branch-auto-build: Enables the auto building of branches for an Amplify app.
-        --no-enable-branch-auto-deletion: Automatically disconnects a branch in the Amplify console when you delete a branch from your Git repository.
-        --oauth-token=: The OAuth token for a third-party source control system for an Amplify app.
-        --platform=: The platform for the Amplify app.
-        --repository=: The Git repository for the Amplify app.
-        --tags=: The tag for an Amplify app.
-      completion:
-        flag:
-            platform:
-                - WEB
-                - WEB_DYNAMIC
-                - WEB_COMPUTE
-      documentation:
-        command: Creates a new Amplify app.
-        flag:
-            access-token: |-
-                The personal access token for a GitHub repository for an Amplify app. The personal access token is used to authorize access to a GitHub repository using the Amplify GitHub App. The token is not stored.
-
-                Use `accessToken` for GitHub repositories only. To authorize access to a repository provider such as Bitbucket or CodeCommit, use `oauthToken`.
-
-                You must specify either `accessToken` or `oauthToken` when you create a new app.
-
-                Existing Amplify apps deployed from a GitHub repository using OAuth continue to work with CI/CD. However, we strongly recommend that you migrate these apps to use the GitHub App. For more information, see [Migrating an existing OAuth app to the Amplify GitHub App](https://docs.aws.amazon.com/amplify/latest/userguide/setting-up-GitHub-access.html#migrating-to-github-app-auth) in the *Amplify User Guide* .
-            auto-branch-creation-config: The automated branch creation configuration for an Amplify app.
-            auto-branch-creation-patterns: The automated branch creation glob patterns for an Amplify app.
-            basic-auth-credentials: The credentials for basic authorization for an Amplify app. You must base64-encode the authorization credentials and provide them in the format `user:password`.
-            build-spec: The build specification (build spec) for an Amplify app.
-            cache-config: The cache configuration for the Amplify app.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            compute-role-arn: The Amazon Resource Name (ARN) of the IAM role to assign to an SSR app. The SSR Compute role allows the Amplify Hosting compute service to securely access specific Amazon Web Services resources based on the role's permissions. For more information about the SSR Compute role, see [Adding an SSR Compute role](https://docs.aws.amazon.com/amplify/latest/userguide/amplify-SSR-compute-role.html) in the *Amplify User Guide*.
-            custom-headers: The custom HTTP headers for an Amplify app.
-            custom-rules: The custom rewrite and redirect rules for an Amplify app.
-            description: The description of the Amplify app.
-            enable-auto-branch-creation: Enables automated branch creation for an Amplify app.
-            enable-basic-auth: Enables basic authorization for an Amplify app. This will apply to all branches that are part of this app.
-            enable-branch-auto-build: Enables the auto building of branches for an Amplify app.
-            enable-branch-auto-deletion: Automatically disconnects a branch in the Amplify console when you delete a branch from your Git repository.
-            environment-variables: |-
-                The environment variables map for an Amplify app.
-
-                For a list of the environment variables that are accessible to Amplify by default, see [Amplify Environment variables](https://docs.aws.amazon.com/amplify/latest/userguide/amplify-console-environment-variables.html) in the *Amplify Hosting User Guide*.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            iam-service-role-arn: The Amazon Resource Name (ARN) of the IAM service role for the Amplify app.
-            job-config: Describes the configuration details that apply to the jobs for an Amplify app.
-            name: The name of the Amplify app.
-            oauth-token: |-
-                The OAuth token for a third-party source control system for an Amplify app. The OAuth token is used to create a webhook and a read-only deploy key using SSH cloning. The OAuth token is not stored.
-
-                Use `oauthToken` for repository providers other than GitHub, such as Bitbucket or CodeCommit. To authorize access to GitHub as your repository provider, use `accessToken`.
-
-                You must specify either `oauthToken` or `accessToken` when you create a new app.
-
-                Existing Amplify apps deployed from a GitHub repository using OAuth continue to work with CI/CD. However, we strongly recommend that you migrate these apps to use the GitHub App. For more information, see [Migrating an existing OAuth app to the Amplify GitHub App](https://docs.aws.amazon.com/amplify/latest/userguide/setting-up-GitHub-access.html#migrating-to-github-app-auth) in the *Amplify User Guide* .
-            platform: |-
-                The platform for the Amplify app. For a static app, set the platform type to `WEB`. For a dynamic server-side rendered (SSR) app, set the platform type to `WEB_COMPUTE`. For an app requiring Amplify Hosting's original SSR support only, set the platform type to `WEB_DYNAMIC`.
-
-                If you are deploying an SSG only app with Next.js version 14 or later, you must set the platform type to `WEB_COMPUTE` and set the artifacts `baseDirectory` to `.next` in the application's build settings. For an example of the build specification settings, see [Amplify build settings for a Next.js 14 SSG application](https://docs.aws.amazon.com/amplify/latest/userguide/deploy-nextjs-app.html#build-setting-detection-ssg-14) in the *Amplify Hosting User Guide*.
-            repository: The Git repository for the Amplify app.
-            tags: The tag for an Amplify app.
     - name: create-branch
       description: Creates a new branch for an Amplify app.
       flags:
@@ -1073,360 +424,49 @@ commands:
                 - DEVELOPMENT
                 - EXPERIMENTAL
                 - PULL_REQUEST
-      documentation:
-        command: Creates a new branch for an Amplify app.
-        flag:
-            app-id: The unique ID for an Amplify app.
-            backend: |-
-                The backend for a `Branch` of an Amplify app. Use for a backend created from an CloudFormation stack.
-
-                This field is available to Amplify Gen 2 apps only. When you deploy an application with Amplify Gen 2, you provision the app's backend infrastructure using Typescript code.
-            backend-environment-arn: |-
-                The Amazon Resource Name (ARN) for a backend environment that is part of a Gen 1 Amplify app.
-
-                This field is available to Amplify Gen 1 apps only where the backend is created using Amplify Studio or the Amplify command line interface (CLI).
-            basic-auth-credentials: The basic authorization credentials for the branch. You must base64-encode the authorization credentials and provide them in the format `user:password`.
-            branch-name: The name for the branch.
-            build-spec: The build specification (build spec) for the branch.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            compute-role-arn: The Amazon Resource Name (ARN) of the IAM role to assign to a branch of an SSR app. The SSR Compute role allows the Amplify Hosting compute service to securely access specific Amazon Web Services resources based on the role's permissions. For more information about the SSR Compute role, see [Adding an SSR Compute role](https://docs.aws.amazon.com/amplify/latest/userguide/amplify-SSR-compute-role.html) in the *Amplify User Guide*.
-            description: The description for the branch.
-            display-name: The display name for a branch. This is used as the default domain prefix.
-            enable-auto-build: Enables auto building for the branch.
-            enable-basic-auth: Enables basic authorization for the branch.
-            enable-notification: Enables notifications for the branch.
-            enable-performance-mode: |-
-                Enables performance mode for the branch.
-
-                Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. When performance mode is enabled, hosting configuration or code changes can take up to 10 minutes to roll out.
-            enable-pull-request-preview: Enables pull request previews for this branch.
-            enable-skew-protection: |-
-                Specifies whether the skew protection feature is enabled for the branch.
-
-                Deployment skew protection is available to Amplify applications to eliminate version skew issues between client and servers in web applications. When you apply skew protection to a branch, you can ensure that your clients always interact with the correct version of server-side assets, regardless of when a deployment occurs. For more information about skew protection, see [Skew protection for Amplify deployments](https://docs.aws.amazon.com/amplify/latest/userguide/skew-protection.html) in the *Amplify User Guide*.
-            environment-variables: The environment variables for the branch.
-            framework: The framework for the branch.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            pull-request-environment-name: The Amplify environment name for the pull request.
-            stage: Describes the current stage for the branch.
-            tags: The tag for the branch.
-            ttl: The content Time To Live (TTL) for the website in seconds.
-    - name: create-webhook
-      description: Creates a new webhook on an Amplify app.
+    - name: get-domain-association
+      description: Returns the domain information for an Amplify app.
       flags:
-        --app-id=!: The unique ID for an Amplify app.
-        --branch-name=!: The name for a branch that is part of an Amplify app.
+        --app-id=!: The unique id for an Amplify app.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The description for a webhook.
+        --domain-name=!: The name of the domain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Creates a new webhook on an Amplify app.
-        flag:
-            app-id: The unique ID for an Amplify app.
-            branch-name: The name for a branch that is part of an Amplify app.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            description: The description for a webhook.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: update-app
-      description: Updates an existing Amplify app.
+    - name: start-job
+      description: Starts a new job for a branch of an Amplify app.
       flags:
-        --access-token=: The personal access token for a GitHub repository for an Amplify app.
         --app-id=!: The unique ID for an Amplify app.
-        --auto-branch-creation-config=: The automated branch creation configuration for an Amplify app.
-        --auto-branch-creation-patterns=: Describes the automated branch creation glob patterns for an Amplify app.
-        --basic-auth-credentials=: The basic authorization credentials for an Amplify app.
-        --build-spec=: The build specification (build spec) for an Amplify app.
-        --cache-config=: The cache configuration for the Amplify app.
+        --branch-name=!: The name of the branch to use for the job.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --compute-role-arn=: The Amazon Resource Name (ARN) of the IAM role to assign to an SSR app.
-        --custom-headers=: The custom HTTP headers for an Amplify app.
-        --custom-rules=: The custom redirect and rewrite rules for an Amplify app.
-        --description=: The description for an Amplify app.
-        --enable-auto-branch-creation: Enables automated branch creation for an Amplify app.
-        --enable-basic-auth: Enables basic authorization for an Amplify app.
-        --enable-branch-auto-build: Enables branch auto-building for an Amplify app.
-        --enable-branch-auto-deletion: Automatically disconnects a branch in the Amplify console when you delete a branch from your Git repository.
-        --environment-variables=: The environment variables for an Amplify app.
+        --commit-id=: The commit ID from a third-party repository provider for the job.
+        --commit-message=: The commit message from a third-party repository provider for the job.
+        --commit-time=: The commit date and time for the job.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --iam-service-role-arn=: The Amazon Resource Name (ARN) of the IAM service role for the Amplify app.
-        --job-config=: Describes the configuration details that apply to the jobs for an Amplify app.
-        --name=: The name for an Amplify app.
-        --no-enable-auto-branch-creation: Enables automated branch creation for an Amplify app.
-        --no-enable-basic-auth: Enables basic authorization for an Amplify app.
-        --no-enable-branch-auto-build: Enables branch auto-building for an Amplify app.
-        --no-enable-branch-auto-deletion: Automatically disconnects a branch in the Amplify console when you delete a branch from your Git repository.
-        --oauth-token=: The OAuth token for a third-party source control system for an Amplify app.
-        --platform=: The platform for the Amplify app.
-        --repository=: The name of the Git repository for an Amplify app.
+        --job-id=: The unique ID for an existing job.
+        --job-reason=: A descriptive reason for starting the job.
+        --job-type=!: Describes the type for the job.
       completion:
         flag:
-            platform:
-                - WEB
-                - WEB_DYNAMIC
-                - WEB_COMPUTE
-      documentation:
-        command: Updates an existing Amplify app.
-        flag:
-            access-token: |-
-                The personal access token for a GitHub repository for an Amplify app. The personal access token is used to authorize access to a GitHub repository using the Amplify GitHub App. The token is not stored.
-
-                Use `accessToken` for GitHub repositories only. To authorize access to a repository provider such as Bitbucket or CodeCommit, use `oauthToken`.
-
-                You must specify either `accessToken` or `oauthToken` when you update an app.
-
-                Existing Amplify apps deployed from a GitHub repository using OAuth continue to work with CI/CD. However, we strongly recommend that you migrate these apps to use the GitHub App. For more information, see [Migrating an existing OAuth app to the Amplify GitHub App](https://docs.aws.amazon.com/amplify/latest/userguide/setting-up-GitHub-access.html#migrating-to-github-app-auth) in the *Amplify User Guide* .
-            app-id: The unique ID for an Amplify app.
-            auto-branch-creation-config: The automated branch creation configuration for an Amplify app.
-            auto-branch-creation-patterns: Describes the automated branch creation glob patterns for an Amplify app.
-            basic-auth-credentials: The basic authorization credentials for an Amplify app. You must base64-encode the authorization credentials and provide them in the format `user:password`.
-            build-spec: The build specification (build spec) for an Amplify app.
-            cache-config: The cache configuration for the Amplify app.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            compute-role-arn: The Amazon Resource Name (ARN) of the IAM role to assign to an SSR app. The SSR Compute role allows the Amplify Hosting compute service to securely access specific Amazon Web Services resources based on the role's permissions. For more information about the SSR Compute role, see [Adding an SSR Compute role](https://docs.aws.amazon.com/amplify/latest/userguide/amplify-SSR-compute-role.html) in the *Amplify User Guide*.
-            custom-headers: The custom HTTP headers for an Amplify app.
-            custom-rules: The custom redirect and rewrite rules for an Amplify app.
-            description: The description for an Amplify app.
-            enable-auto-branch-creation: Enables automated branch creation for an Amplify app.
-            enable-basic-auth: Enables basic authorization for an Amplify app.
-            enable-branch-auto-build: Enables branch auto-building for an Amplify app.
-            enable-branch-auto-deletion: Automatically disconnects a branch in the Amplify console when you delete a branch from your Git repository.
-            environment-variables: The environment variables for an Amplify app.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            iam-service-role-arn: The Amazon Resource Name (ARN) of the IAM service role for the Amplify app.
-            job-config: Describes the configuration details that apply to the jobs for an Amplify app.
-            name: The name for an Amplify app.
-            oauth-token: |-
-                The OAuth token for a third-party source control system for an Amplify app. The OAuth token is used to create a webhook and a read-only deploy key using SSH cloning. The OAuth token is not stored.
-
-                Use `oauthToken` for repository providers other than GitHub, such as Bitbucket or CodeCommit.
-
-                To authorize access to GitHub as your repository provider, use `accessToken`.
-
-                You must specify either `oauthToken` or `accessToken` when you update an app.
-
-                Existing Amplify apps deployed from a GitHub repository using OAuth continue to work with CI/CD. However, we strongly recommend that you migrate these apps to use the GitHub App. For more information, see [Migrating an existing OAuth app to the Amplify GitHub App](https://docs.aws.amazon.com/amplify/latest/userguide/setting-up-GitHub-access.html#migrating-to-github-app-auth) in the *Amplify User Guide* .
-            platform: |-
-                The platform for the Amplify app. For a static app, set the platform type to `WEB`. For a dynamic server-side rendered (SSR) app, set the platform type to `WEB_COMPUTE`. For an app requiring Amplify Hosting's original SSR support only, set the platform type to `WEB_DYNAMIC`.
-
-                If you are deploying an SSG only app with Next.js version 14 or later, you must set the platform type to `WEB_COMPUTE`.
-            repository: The name of the Git repository for an Amplify app.
-    - name: delete-backend-environment
-      description: Deletes a backend environment for an Amplify app.
-      flags:
-        --app-id=!: The unique ID of an Amplify app.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-name=!: The name of a backend environment of an Amplify app.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: |-
-            Deletes a backend environment for an Amplify app.
-
-            This API is available only to Amplify Gen 1 applications where the backend is created using Amplify Studio or the Amplify command line interface (CLI). This API isn’t available to Amplify Gen 2 applications. When you deploy an application with Amplify Gen 2, you provision the app's backend infrastructure using Typescript code.
-        flag:
-            app-id: The unique ID of an Amplify app.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-name: The name of a backend environment of an Amplify app.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: get-webhook
-      description: Returns the webhook information that corresponds to a specified webhook ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --webhook-id=!: The unique ID for a webhook.
-      documentation:
-        command: Returns the webhook information that corresponds to a specified webhook ID.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            webhook-id: The unique ID for a webhook.
-    - name: list-backend-environments
-      description: Lists the backend environments for an Amplify app.
+            job-type:
+                - RELEASE
+                - RETRY
+                - MANUAL
+                - WEB_HOOK
+    - name: update-domain-association
+      description: Creates a new domain association for an Amplify app.
       flags:
         --app-id=!: The unique ID for an Amplify app.
+        --auto-sub-domain-creation-patterns=: Sets the branch patterns for automatic subdomain creation.
+        --auto-sub-domain-iam-role=: The required AWS Identity and Access Management (IAM) service role for the Amazon Resource Name (ARN) for automatically creating subdomains.
+        --certificate-settings=: The type of SSL/TLS certificate to use for your custom domain.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-name=: The name of the backend environment
+        --domain-name=!: The name of the domain.
+        --enable-auto-sub-domain: Enables the automated creation of subdomains for branches.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of records to list in a single response.
-        --next-token=: A pagination token.
-      documentation:
-        command: |-
-            Lists the backend environments for an Amplify app.
-
-            This API is available only to Amplify Gen 1 applications where the backend is created using Amplify Studio or the Amplify command line interface (CLI). This API isn’t available to Amplify Gen 2 applications. When you deploy an application with Amplify Gen 2, you provision the app's backend infrastructure using Typescript code.
-        flag:
-            app-id: The unique ID for an Amplify app.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-name: The name of the backend environment
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-results: The maximum number of records to list in a single response.
-            next-token: A pagination token. Set to null to start listing backend environments from the start. If a non-null pagination token is returned in a result, pass its value in here to list more backend environments.
-    - name: list-tags-for-resource
-      description: Returns a list of tags for a specified Amazon Resource Name (ARN).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) to use to list tags.
-      documentation:
-        command: Returns a list of tags for a specified Amazon Resource Name (ARN).
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-arn: The Amazon Resource Name (ARN) to use to list tags.
-    - name: untag-resource
-      description: Untags a resource with a specified Amazon Resource Name (ARN).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) to use to untag a resource.
-        --tag-keys=!: The tag keys to use to untag a resource.
-      documentation:
-        command: Untags a resource with a specified Amazon Resource Name (ARN).
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-arn: The Amazon Resource Name (ARN) to use to untag a resource.
-            tag-keys: The tag keys to use to untag a resource.
-    - name: update-webhook
-      description: Updates a webhook.
-      flags:
-        --branch-name=: The name for a branch that is part of an Amplify app.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The description for a webhook.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --webhook-id=!: The unique ID for a webhook.
-      documentation:
-        command: Updates a webhook.
-        flag:
-            branch-name: The name for a branch that is part of an Amplify app.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            description: The description for a webhook.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            webhook-id: The unique ID for a webhook.
+        --no-enable-auto-sub-domain: Enables the automated creation of subdomains for branches.
+        --sub-domain-settings=: Describes the settings for the subdomain.
     - name: create-domain-association
       description: Creates a new domain association for an Amplify app.
       flags:
@@ -1441,58 +481,3 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-enable-auto-sub-domain: Enables the automated creation of subdomains for branches.
         --sub-domain-settings=!: The setting for the subdomain.
-      documentation:
-        command: Creates a new domain association for an Amplify app. This action associates a custom domain with the Amplify app
-        flag:
-            app-id: The unique ID for an Amplify app.
-            auto-sub-domain-creation-patterns: Sets the branch patterns for automatic subdomain creation.
-            auto-sub-domain-iam-role: The required AWS Identity and Access Management (IAM) service role for the Amazon Resource Name (ARN) for automatically creating subdomains.
-            certificate-settings: The type of SSL/TLS certificate to use for your custom domain. If you don't specify a certificate type, Amplify uses the default certificate that it provisions and manages for you.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            domain-name: The domain name for the domain association.
-            enable-auto-sub-domain: Enables the automated creation of subdomains for branches.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            sub-domain-settings: The setting for the subdomain.
-    - name: delete-job
-      description: Deletes a job for a branch of an Amplify app.
-      flags:
-        --app-id=!: The unique ID for an Amplify app.
-        --branch-name=!: The name of the branch to use for the job.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The unique ID for the job.
-      documentation:
-        command: Deletes a job for a branch of an Amplify app.
-        flag:
-            app-id: The unique ID for an Amplify app.
-            branch-name: The name of the branch to use for the job.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            job-id: The unique ID for the job.
