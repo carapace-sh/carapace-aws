@@ -62,8 +62,11 @@ func TestService(t *testing.T) {
 						bridge.ActionAws("aws"),
 						carapace.Batch(
 							bridge.ActionCarapace("carapace-aws"),
-							// force positional completion as well as aws completes 'outfile' for streaming operations
-							bridge.ActionCarapace("carapace-aws").Chdir(testDir).Invoke(carapace.NewContext(service, operation.Name, "")).ToA(),
+							// force positional completion for outfile if available (returned by aws completer for streaming operations)
+							bridge.ActionCarapace("carapace-aws").
+								Chdir(testDir).
+								Invoke(carapace.NewContext(service, operation.Name, "")).
+								Retain("outfile").ToA(),
 						).ToA(),
 						carapace.NewContext(service, operation.Name, "--"),
 					)
