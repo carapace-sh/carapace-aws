@@ -1,6 +1,22 @@
 name: mwaa
 description: AmazonMWAA
 commands:
+    - name: publish-metrics
+      description: '**Internal only**.'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-name=!: '**Internal only**.'
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --metric-data=!: '**Internal only**.'
+    - name: untag-resource
+      description: Removes key-value tag pairs associated to your Amazon Managed Workflows for Apache Airflow (MWAA) environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the Amazon MWAA environment.
+        --tag-keys=!: The key-value tag pair you want to remove.
     - name: create-cli-token
       description: Creates a CLI token for the Airflow CLI.
       flags:
@@ -15,6 +31,24 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the Amazon MWAA environment.
+    - name: get-environment
+      description: Describes an Amazon Managed Workflows for Apache Airflow (MWAA) environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the Amazon MWAA environment.
+    - name: list-environments
+      description: Lists the Amazon Managed Workflows for Apache Airflow (MWAA) environments.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to retrieve per page.
+        --next-token=: Retrieves the next page of the results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-tags-for-resource
       description: Lists the key-value tag pairs associated to the Amazon Managed Workflows for Apache Airflow (MWAA) environment.
       flags:
@@ -22,14 +56,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the Amazon MWAA environment.
-    - name: publish-metrics
-      description: '**Internal only**.'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-name=!: '**Internal only**.'
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --metric-data=!: '**Internal only**.'
     - name: tag-resource
       description: Associates key-value tag pairs to your Amazon Managed Workflows for Apache Airflow (MWAA) environment.
       flags:
@@ -38,6 +64,43 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the Amazon MWAA environment.
         --tags=!: The key-value tag pairs you want to associate to your environment.
+    - name: update-environment
+      description: Updates an Amazon Managed Workflows for Apache Airflow (MWAA) environment.
+      flags:
+        --airflow-configuration-options=: A list of key-value pairs containing the Apache Airflow configuration options you want to attach to your environment.
+        --airflow-version=: The Apache Airflow version for your environment.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dag-s3-path=: The relative path to the DAGs folder on your Amazon S3 bucket.
+        --environment-class=: The environment class type.
+        --execution-role-arn=: The Amazon Resource Name (ARN) of the execution role in IAM that allows MWAA to access Amazon Web Services resources in your environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --logging-configuration=: The Apache Airflow log types to send to CloudWatch Logs.
+        --max-webservers=: The maximum number of web servers that you want to run in your environment.
+        --max-workers=: The maximum number of workers that you want to run in your environment.
+        --min-webservers=: The minimum number of web servers that you want to run in your environment.
+        --min-workers=: The minimum number of workers that you want to run in your environment.
+        --name=!: The name of your Amazon MWAA environment.
+        --network-configuration=: The VPC networking components used to secure and enable network traffic between the Amazon Web Services resources for your environment.
+        --plugins-s3-object-version=: The version of the plugins.zip file on your Amazon S3 bucket.
+        --plugins-s3-path=: The relative path to the `plugins.zip` file on your Amazon S3 bucket.
+        --requirements-s3-object-version=: The version of the requirements.txt file on your Amazon S3 bucket.
+        --requirements-s3-path=: The relative path to the `requirements.txt` file on your Amazon S3 bucket.
+        --schedulers=: The number of Apache Airflow schedulers to run in your Amazon MWAA environment.
+        --source-bucket-arn=: The Amazon Resource Name (ARN) of the Amazon S3 bucket where your DAG code and supporting files are stored.
+        --startup-script-s3-object-version=: The version of the startup shell script in your Amazon S3 bucket.
+        --startup-script-s3-path=: The relative path to the startup shell script in your Amazon S3 bucket.
+        --webserver-access-mode=: The Apache Airflow *Web server* access mode.
+        --weekly-maintenance-window-start=: 'The day and time of the week in Coordinated Universal Time (UTC) 24-hour standard time to start weekly maintenance updates of your environment in the following format: `DAY:HH:MM`.'
+        --worker-replacement-strategy=: The worker replacement strategy to use when updating the environment.
+      completion:
+        flag:
+            webserver-access-mode:
+                - PRIVATE_ONLY
+                - PUBLIC_ONLY
+            worker-replacement-strategy:
+                - FORCED
+                - GRACEFUL
     - name: create-environment
       description: Creates an Amazon Managed Workflows for Apache Airflow (Amazon MWAA) environment.
       flags:
@@ -84,13 +147,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the Amazon MWAA environment.
-    - name: get-environment
-      description: Describes an Amazon Managed Workflows for Apache Airflow (MWAA) environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the Amazon MWAA environment.
     - name: invoke-rest-api
       description: Invokes the Apache Airflow REST API on the webserver with the specified inputs.
       flags:
@@ -110,59 +166,3 @@ commands:
                 - POST
                 - PATCH
                 - DELETE
-    - name: list-environments
-      description: Lists the Amazon Managed Workflows for Apache Airflow (MWAA) environments.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to retrieve per page.
-        --next-token=: Retrieves the next page of the results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: untag-resource
-      description: Removes key-value tag pairs associated to your Amazon Managed Workflows for Apache Airflow (MWAA) environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the Amazon MWAA environment.
-        --tag-keys=!: The key-value tag pair you want to remove.
-    - name: update-environment
-      description: Updates an Amazon Managed Workflows for Apache Airflow (MWAA) environment.
-      flags:
-        --airflow-configuration-options=: A list of key-value pairs containing the Apache Airflow configuration options you want to attach to your environment.
-        --airflow-version=: The Apache Airflow version for your environment.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dag-s3-path=: The relative path to the DAGs folder on your Amazon S3 bucket.
-        --environment-class=: The environment class type.
-        --execution-role-arn=: The Amazon Resource Name (ARN) of the execution role in IAM that allows MWAA to access Amazon Web Services resources in your environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --logging-configuration=: The Apache Airflow log types to send to CloudWatch Logs.
-        --max-webservers=: The maximum number of web servers that you want to run in your environment.
-        --max-workers=: The maximum number of workers that you want to run in your environment.
-        --min-webservers=: The minimum number of web servers that you want to run in your environment.
-        --min-workers=: The minimum number of workers that you want to run in your environment.
-        --name=!: The name of your Amazon MWAA environment.
-        --network-configuration=: The VPC networking components used to secure and enable network traffic between the Amazon Web Services resources for your environment.
-        --plugins-s3-object-version=: The version of the plugins.zip file on your Amazon S3 bucket.
-        --plugins-s3-path=: The relative path to the `plugins.zip` file on your Amazon S3 bucket.
-        --requirements-s3-object-version=: The version of the requirements.txt file on your Amazon S3 bucket.
-        --requirements-s3-path=: The relative path to the `requirements.txt` file on your Amazon S3 bucket.
-        --schedulers=: The number of Apache Airflow schedulers to run in your Amazon MWAA environment.
-        --source-bucket-arn=: The Amazon Resource Name (ARN) of the Amazon S3 bucket where your DAG code and supporting files are stored.
-        --startup-script-s3-object-version=: The version of the startup shell script in your Amazon S3 bucket.
-        --startup-script-s3-path=: The relative path to the startup shell script in your Amazon S3 bucket.
-        --webserver-access-mode=: The Apache Airflow *Web server* access mode.
-        --weekly-maintenance-window-start=: 'The day and time of the week in Coordinated Universal Time (UTC) 24-hour standard time to start weekly maintenance updates of your environment in the following format: `DAY:HH:MM`.'
-        --worker-replacement-strategy=: The worker replacement strategy to use when updating the environment.
-      completion:
-        flag:
-            webserver-access-mode:
-                - PRIVATE_ONLY
-                - PUBLIC_ONLY
-            worker-replacement-strategy:
-                - FORCED
-                - GRACEFUL

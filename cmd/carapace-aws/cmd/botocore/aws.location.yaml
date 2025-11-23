@@ -1,355 +1,31 @@
 name: location
 description: Amazon Location Service
 commands:
-    - name: batch-evaluate-geofences
-      description: Evaluates device positions against the geofence geometries from a given geofence collection.
+    - name: create-geofence-collection
+      description: Creates a geofence collection, which manages and stores geofences.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collection-name=!: The geofence collection used in evaluating the position of devices against its geofences.
-        --device-position-updates=!: Contains device details for each device to be evaluated against the given geofence collection.
+        --collection-name=!: A custom name for the geofence collection.
+        --description=: An optional description for the geofence collection.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: batch-update-device-position
-      description: Uploads position update data for one or more devices to a tracker resource (up to 10 devices per batch).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tracker-name=!: The name of the tracker resource to update.
-        --updates=!: Contains the position update details for each device, up to 10 devices.
-    - name: get-device-position
-      description: Retrieves a device's most recent position according to its sample time.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --device-id=!: The device whose position you want to retrieve.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tracker-name=!: The tracker resource receiving the position update.
-    - name: list-maps
-      description: This operation is no longer current and may be deprecated in the future.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: An optional limit for the number of resources returned in a single call.
-        --next-token=: The pagination token specifying which page of results to return in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-map
-      description: This operation is no longer current and may be deprecated in the future.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration-update=: Updates the parts of the map configuration that can be updated, including the political view.
-        --description=: Updates the description for the map resource.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --map-name=!: The name of the map resource to update.
-        --pricing-plan=: No longer used.
-      completion:
-        flag:
-            pricing-plan:
-                - RequestBasedUsage
-                - MobileAssetTracking
-                - MobileAssetManagement
-    - name: update-route-calculator
-      description: This operation is no longer current and may be deprecated in the future.
-      flags:
-        --calculator-name=!: The name of the route calculator resource to update.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: Updates the description for the route calculator resource.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --pricing-plan=: No longer used.
-      completion:
-        flag:
-            pricing-plan:
-                - RequestBasedUsage
-                - MobileAssetTracking
-                - MobileAssetManagement
-    - name: get-map-sprites
-      description: This operation is no longer current and may be deprecated in the future.
-      flags:
-        --file-name=!: The name of the sprite ﬁle.
-        --key=: The optional [API key](https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html) to authorize the request.
-        --map-name=!: The map resource associated with the sprite ﬁle.
-      completion:
-        positional:
-            - - $files
-    - name: get-place
-      description: This operation is no longer current and may be deprecated in the future.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-name=!: The name of the place index resource that you want to use for the search.
-        --key=: The optional [API key](https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html) to authorize the request.
-        --language=: The preferred language used to return results.
-        --place-id=!: The identifier of the place to find.
-    - name: list-geofences
-      description: Lists geofences stored in a given geofence collection.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collection-name=!: The name of the geofence collection storing the list of geofences.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: An optional limit for the number of geofences returned in a single call.
-        --next-token=: The pagination token specifying which page of results to return in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: put-geofence
-      description: Stores a geofence geometry in a given geofence collection, or updates the geometry of an existing geofence if a geofence ID is included in the request.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collection-name=!: The geofence collection to store the geofence in.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --geofence-id=!: An identifier for the geofence.
-        --geofence-properties=: Associates one of more properties with the geofence.
-        --geometry=!: Contains the details to specify the position of the geofence.
-    - name: tag-resource
-      description: Assigns one or more tags (key-value pairs) to the specified Amazon Location Service resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource whose tags you want to update.
-        --tags=!: Applies one or more tags to specific resource.
-    - name: verify-device-position
-      description: Verifies the integrity of the device's position by determining if it was reported behind a proxy, and by comparing it to an inferred position estimated based on the device's state.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --device-state=!: The device's state, including position, IP address, cell signals and Wi-Fi access points.
-        --distance-unit=: The distance unit for the verification request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tracker-name=!: The name of the tracker resource to be associated with verification request.
-      completion:
-        flag:
-            distance-unit:
-                - Kilometers
-                - Miles
-    - name: calculate-route-matrix
-      description: This operation is no longer current and may be deprecated in the future.
-      flags:
-        --calculator-name=!: The name of the route calculator resource that you want to use to calculate the route matrix.
-        --car-mode-options=: Specifies route preferences when traveling by `Car`, such as avoiding routes that use ferries or tolls.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --depart-now: Sets the time of departure as the current time.
-        --departure-positions=!: The list of departure (origin) positions for the route matrix.
-        --departure-time=: Specifies the desired time of departure.
-        --destination-positions=!: The list of destination positions for the route matrix.
-        --distance-unit=: Set the unit system to specify the distance.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key=: The optional [API key](https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html) to authorize the request.
-        --no-depart-now: Sets the time of departure as the current time.
-        --travel-mode=: Specifies the mode of transport when calculating a route.
-        --truck-mode-options=: Specifies route preferences when traveling by `Truck`, such as avoiding routes that use ferries or tolls, and truck specifications to consider when choosing an optimal road.
-      completion:
-        flag:
-            distance-unit:
-                - Kilometers
-                - Miles
-            travel-mode:
-                - Car
-                - Truck
-                - Walking
-                - Bicycle
-                - Motorcycle
-    - name: get-device-position-history
-      description: Retrieves the device position history from a tracker resource within a specified range of time.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --device-id=!: The device whose position history you want to retrieve.
-        --end-time-exclusive=: 'Specify the end time for the position history in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format: `YYYY-MM-DDThh:mm:ss.sssZ`.'
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: An optional limit for the number of device positions returned in a single call.
-        --next-token=: The pagination token specifying which page of results to return in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --start-time-inclusive=: 'Specify the start time for the position history in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format: `YYYY-MM-DDThh:mm:ss.sssZ`.'
-        --starting-token=: A token to specify where to start paginating.
-        --tracker-name=!: The tracker resource receiving the request for the device position history.
-    - name: describe-route-calculator
-      description: This operation is no longer current and may be deprecated in the future.
-      flags:
-        --calculator-name=!: The name of the route calculator resource.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-route-calculators
-      description: This operation is no longer current and may be deprecated in the future.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: An optional maximum number of results returned in a single call.
-        --next-token=: The pagination token specifying which page of results to return in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: search-place-index-for-position
-      description: This operation is no longer current and may be deprecated in the future.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-name=!: The name of the place index resource you want to use for the search.
-        --key=: The optional [API key](https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html) to authorize the request.
-        --language=: The preferred language used to return results.
-        --max-results=: An optional parameter.
-        --position=!: Specifies the longitude and latitude of the position to query.
-    - name: untag-resource
-      description: Removes one or more tags from the specified Amazon Location resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource from which you want to remove tags.
-        --tag-keys=!: The list of tag keys to remove from the specified resource.
-    - name: update-geofence-collection
-      description: Updates the specified properties of a given geofence collection.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collection-name=!: The name of the geofence collection to update.
-        --description=: Updates the description for the geofence collection.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --pricing-plan-data-source=: This parameter is no longer used.
-        --pricing-plan=: No longer used.
-      completion:
-        flag:
-            pricing-plan:
-                - RequestBasedUsage
-                - MobileAssetTracking
-                - MobileAssetManagement
-    - name: delete-key
-      description: Deletes the specified API key.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --force-delete: ForceDelete bypasses an API key's expiry conditions and deletes the key.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-name=!: The name of the API key to delete.
-        --no-force-delete: ForceDelete bypasses an API key's expiry conditions and deletes the key.
-    - name: disassociate-tracker-consumer
-      description: Removes the association between a tracker resource and a geofence collection.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --consumer-arn=!: The Amazon Resource Name (ARN) for the geofence collection to be disassociated from the tracker resource.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tracker-name=!: The name of the tracker resource to be dissociated from the consumer.
-    - name: list-place-indexes
-      description: This operation is no longer current and may be deprecated in the future.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: An optional limit for the maximum number of results returned in a single call.
-        --next-token=: The pagination token specifying which page of results to return in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: get-map-tile
-      description: This operation is no longer current and may be deprecated in the future.
-      flags:
-        --key=: The optional [API key](https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html) to authorize the request.
-        --map-name=!: The map resource to retrieve the map tiles from.
-        --x=!: The X axis value for the map tile.
-        --y=!: The Y axis value for the map tile.
-        --z=!: The zoom value for the map tile.
-      completion:
-        positional:
-            - - $files
-    - name: list-device-positions
-      description: A batch request to retrieve all device positions.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter-geometry=: The geometry used to filter device positions.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: An optional limit for the number of entries returned in a single call.
-        --next-token=: The pagination token specifying which page of results to return in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --tracker-name=!: The tracker resource containing the requested devices.
-    - name: list-keys
-      description: Lists API key resources in your Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: Optionally filter the list to only `Active` or `Expired` API keys.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: An optional limit for the number of resources returned in a single call.
-        --next-token=: The pagination token specifying which page of results to return in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-trackers
-      description: Lists tracker resources in your Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: An optional limit for the number of resources returned in a single call.
-        --next-token=: The pagination token specifying which page of results to return in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: Returns a list of tags that are applied to the specified Amazon Location resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource whose tags you want to retrieve.
-    - name: search-place-index-for-text
-      description: This operation is no longer current and may be deprecated in the future.
-      flags:
-        --bias-position=: An optional parameter that indicates a preference for places that are closer to a specified position.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter-b-box=: An optional parameter that limits the search results by returning only places that are within the provided bounding box.
-        --filter-categories=: A list of one or more Amazon Location categories to filter the returned places.
-        --filter-countries=: An optional parameter that limits the search results by returning only places that are in a specified list of countries.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-name=!: The name of the place index resource you want to use for the search.
-        --key=: The optional [API key](https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html) to authorize the request.
-        --language=: The preferred language used to return results.
-        --max-results=: An optional parameter.
-        --text=!: The address, name, city, or region to be used in the search in free-form text format.
-    - name: create-tracker
-      description: Creates a tracker resource in your Amazon Web Services account, which lets you retrieve current and historical location of devices.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: An optional description for the tracker resource.
-        --event-bridge-enabled: Whether to enable position `UPDATE` events from this tracker to be sent to EventBridge.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kms-key-enable-geospatial-queries: Enables `GeospatialQueries` for a tracker that uses a [Amazon Web Services KMS customer managed key](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html).
         --kms-key-id=: A key identifier for an [Amazon Web Services KMS customer managed key](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html).
-        --no-event-bridge-enabled: Whether to enable position `UPDATE` events from this tracker to be sent to EventBridge.
-        --no-kms-key-enable-geospatial-queries: Enables `GeospatialQueries` for a tracker that uses a [Amazon Web Services KMS customer managed key](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html).
-        --position-filtering=: Specifies the position filtering for the tracker resource.
         --pricing-plan-data-source=: This parameter is no longer used.
         --pricing-plan=: No longer used.
-        --tags=: Applies one or more tags to the tracker resource.
-        --tracker-name=!: The name for the tracker resource.
+        --tags=: Applies one or more tags to the geofence collection.
       completion:
         flag:
-            position-filtering:
-                - TimeBased
-                - DistanceBased
-                - AccuracyBased
             pricing-plan:
                 - RequestBasedUsage
                 - MobileAssetTracking
                 - MobileAssetManagement
+    - name: delete-map
+      description: This operation is no longer current and may be deprecated in the future.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --map-name=!: The name of the map resource to be deleted.
     - name: delete-place-index
       description: This operation is no longer current and may be deprecated in the future.
       flags:
@@ -357,32 +33,16 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --index-name=!: The name of the place index resource to be deleted.
-    - name: forecast-geofence-events
-      description: This action forecasts future geofence events that are likely to occur within a specified time horizon if a device continues moving at its current speed.
+    - name: get-map-style-descriptor
+      description: This operation is no longer current and may be deprecated in the future.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collection-name=!: The name of the geofence collection.
-        --device-state=!: Represents the device's state, including its current position and speed.
-        --distance-unit=: The distance unit used for the `NearestDistance` property returned in a forecasted event.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: An optional limit for the number of resources returned in a single call.
-        --next-token=: The pagination token specifying which page of results to return in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --speed-unit=: The speed unit for the device captured by the device state.
-        --starting-token=: A token to specify where to start paginating.
-        --time-horizon-minutes=: The forward-looking time window for forecasting, specified in minutes.
+        --key=: The optional [API key](https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html) to authorize the request.
+        --map-name=!: The map resource to retrieve the style descriptor from.
       completion:
-        flag:
-            distance-unit:
-                - Kilometers
-                - Miles
-            speed-unit:
-                - KilometersPerHour
-                - MilesPerHour
-    - name: list-geofence-collections
-      description: Lists geofence collections in your Amazon Web Services account.
+        positional:
+            - - $files
+    - name: list-tracker-consumers
+      description: Lists geofence collections currently associated to the given tracker resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -392,14 +52,15 @@ commands:
         --next-token=: The pagination token specifying which page of results to return in the response.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: batch-delete-geofence
-      description: Deletes a batch of geofences from a geofence collection.
+        --tracker-name=!: The tracker resource whose associated geofence collections you want to list.
+    - name: batch-delete-device-position-history
+      description: Deletes the position history of one or more devices from a tracker resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collection-name=!: The geofence collection storing the geofences to be deleted.
+        --device-ids=!: Devices whose position history you want to delete.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --geofence-ids=!: The batch of geofences to be deleted.
+        --tracker-name=!: The name of the tracker resource to delete the device position history from.
     - name: create-key
       description: Creates an API key resource in your Amazon Web Services account, which lets you grant actions for Amazon Location resources to the API key bearer.
       flags:
@@ -413,53 +74,28 @@ commands:
         --no-no-expiry: Optionally set to `true` to set no expiration time for the API key.
         --restrictions=!: The API key restrictions for the API key resource.
         --tags=: Applies one or more tags to the map resource.
-    - name: create-map
+    - name: get-map-tile
       description: This operation is no longer current and may be deprecated in the future.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration=!: Specifies the `MapConfiguration`, including the map style, for the map resource that you create.
-        --description=: An optional description for the map resource.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --map-name=!: The name for the map resource.
-        --pricing-plan=: No longer used.
-        --tags=: Applies one or more tags to the map resource.
-      completion:
-        flag:
-            pricing-plan:
-                - RequestBasedUsage
-                - MobileAssetTracking
-                - MobileAssetManagement
-    - name: delete-geofence-collection
-      description: Deletes a geofence collection from your Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collection-name=!: The name of the geofence collection to be deleted.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: search-place-index-for-suggestions
-      description: This operation is no longer current and may be deprecated in the future.
-      flags:
-        --bias-position=: An optional parameter that indicates a preference for place suggestions that are closer to a specified position.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter-b-box=: An optional parameter that limits the search results by returning only suggestions within a specified bounding box.
-        --filter-categories=: A list of one or more Amazon Location categories to filter the returned places.
-        --filter-countries=: An optional parameter that limits the search results by returning only suggestions within the provided list of countries.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-name=!: The name of the place index resource you want to use for the search.
         --key=: The optional [API key](https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html) to authorize the request.
-        --language=: The preferred language used to return results.
-        --max-results=: An optional parameter.
-        --text=!: The free-form partial text to use to generate place suggestions.
-    - name: batch-delete-device-position-history
-      description: Deletes the position history of one or more devices from a tracker resource.
+        --map-name=!: The map resource to retrieve the map tiles from.
+        --x=!: The X axis value for the map tile.
+        --y=!: The Y axis value for the map tile.
+        --z=!: The zoom value for the map tile.
+      completion:
+        positional:
+            - - $files
+    - name: list-maps
+      description: This operation is no longer current and may be deprecated in the future.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --device-ids=!: Devices whose position history you want to delete.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tracker-name=!: The name of the tracker resource to delete the device position history from.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: An optional limit for the number of resources returned in a single call.
+        --next-token=: The pagination token specifying which page of results to return in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: calculate-route
       description: This operation is no longer current and may be deprecated in the future.
       flags:
@@ -496,18 +132,37 @@ commands:
                 - Walking
                 - Bicycle
                 - Motorcycle
-    - name: list-tracker-consumers
-      description: Lists geofence collections currently associated to the given tracker resource.
+    - name: get-geofence
+      description: Retrieves the geofence details from a geofence collection.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collection-name=!: The geofence collection storing the target geofence.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --geofence-id=!: The geofence you're retrieving details for.
+    - name: search-place-index-for-text
+      description: This operation is no longer current and may be deprecated in the future.
+      flags:
+        --bias-position=: An optional parameter that indicates a preference for places that are closer to a specified position.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-b-box=: An optional parameter that limits the search results by returning only places that are within the provided bounding box.
+        --filter-categories=: A list of one or more Amazon Location categories to filter the returned places.
+        --filter-countries=: An optional parameter that limits the search results by returning only places that are in a specified list of countries.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-name=!: The name of the place index resource you want to use for the search.
+        --key=: The optional [API key](https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html) to authorize the request.
+        --language=: The preferred language used to return results.
+        --max-results=: An optional parameter.
+        --text=!: The address, name, city, or region to be used in the search in free-form text format.
+    - name: untag-resource
+      description: Removes one or more tags from the specified Amazon Location resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: An optional limit for the number of resources returned in a single call.
-        --next-token=: The pagination token specifying which page of results to return in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --tracker-name=!: The tracker resource whose associated geofence collections you want to list.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource from which you want to remove tags.
+        --tag-keys=!: The list of tag keys to remove from the specified resource.
     - name: update-tracker
       description: Updates the specified properties of a given tracker resource.
       flags:
@@ -533,6 +188,288 @@ commands:
                 - RequestBasedUsage
                 - MobileAssetTracking
                 - MobileAssetManagement
+    - name: batch-evaluate-geofences
+      description: Evaluates device positions against the geofence geometries from a given geofence collection.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collection-name=!: The geofence collection used in evaluating the position of devices against its geofences.
+        --device-position-updates=!: Contains device details for each device to be evaluated against the given geofence collection.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: batch-get-device-position
+      description: Lists the latest device positions for requested devices.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --device-ids=!: Devices whose position you want to retrieve.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tracker-name=!: The tracker resource retrieving the device position.
+    - name: list-route-calculators
+      description: This operation is no longer current and may be deprecated in the future.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: An optional maximum number of results returned in a single call.
+        --next-token=: The pagination token specifying which page of results to return in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-key
+      description: Updates the specified properties of a given API key resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: Updates the description for the API key resource.
+        --expire-time=: 'Updates the timestamp for when the API key resource will expire in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format: `YYYY-MM-DDThh:mm:ss.sssZ`.'
+        --force-update: The boolean flag to be included for updating `ExpireTime` or `Restrictions` details.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-name=!: The name of the API key resource to update.
+        --no-expiry: Whether the API key should expire.
+        --no-force-update: The boolean flag to be included for updating `ExpireTime` or `Restrictions` details.
+        --no-no-expiry: Whether the API key should expire.
+        --restrictions=: Updates the API key restrictions for the API key resource.
+    - name: update-map
+      description: This operation is no longer current and may be deprecated in the future.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-update=: Updates the parts of the map configuration that can be updated, including the political view.
+        --description=: Updates the description for the map resource.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --map-name=!: The name of the map resource to update.
+        --pricing-plan=: No longer used.
+      completion:
+        flag:
+            pricing-plan:
+                - RequestBasedUsage
+                - MobileAssetTracking
+                - MobileAssetManagement
+    - name: calculate-route-matrix
+      description: This operation is no longer current and may be deprecated in the future.
+      flags:
+        --calculator-name=!: The name of the route calculator resource that you want to use to calculate the route matrix.
+        --car-mode-options=: Specifies route preferences when traveling by `Car`, such as avoiding routes that use ferries or tolls.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --depart-now: Sets the time of departure as the current time.
+        --departure-positions=!: The list of departure (origin) positions for the route matrix.
+        --departure-time=: Specifies the desired time of departure.
+        --destination-positions=!: The list of destination positions for the route matrix.
+        --distance-unit=: Set the unit system to specify the distance.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key=: The optional [API key](https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html) to authorize the request.
+        --no-depart-now: Sets the time of departure as the current time.
+        --travel-mode=: Specifies the mode of transport when calculating a route.
+        --truck-mode-options=: Specifies route preferences when traveling by `Truck`, such as avoiding routes that use ferries or tolls, and truck specifications to consider when choosing an optimal road.
+      completion:
+        flag:
+            distance-unit:
+                - Kilometers
+                - Miles
+            travel-mode:
+                - Car
+                - Truck
+                - Walking
+                - Bicycle
+                - Motorcycle
+    - name: update-route-calculator
+      description: This operation is no longer current and may be deprecated in the future.
+      flags:
+        --calculator-name=!: The name of the route calculator resource to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: Updates the description for the route calculator resource.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pricing-plan=: No longer used.
+      completion:
+        flag:
+            pricing-plan:
+                - RequestBasedUsage
+                - MobileAssetTracking
+                - MobileAssetManagement
+    - name: batch-delete-geofence
+      description: Deletes a batch of geofences from a geofence collection.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collection-name=!: The geofence collection storing the geofences to be deleted.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --geofence-ids=!: The batch of geofences to be deleted.
+    - name: delete-geofence-collection
+      description: Deletes a geofence collection from your Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collection-name=!: The name of the geofence collection to be deleted.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-tracker
+      description: Deletes a tracker resource from your Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tracker-name=!: The name of the tracker resource to be deleted.
+    - name: disassociate-tracker-consumer
+      description: Removes the association between a tracker resource and a geofence collection.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --consumer-arn=!: The Amazon Resource Name (ARN) for the geofence collection to be disassociated from the tracker resource.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tracker-name=!: The name of the tracker resource to be dissociated from the consumer.
+    - name: get-map-glyphs
+      description: This operation is no longer current and may be deprecated in the future.
+      flags:
+        --font-stack=!: A comma-separated list of fonts to load glyphs from in order of preference.
+        --font-unicode-range=!: A Unicode range of characters to download glyphs for.
+        --key=: The optional [API key](https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html) to authorize the request.
+        --map-name=!: The map resource associated with the glyph ﬁle.
+      completion:
+        positional:
+            - - $files
+    - name: batch-update-device-position
+      description: Uploads position update data for one or more devices to a tracker resource (up to 10 devices per batch).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tracker-name=!: The name of the tracker resource to update.
+        --updates=!: Contains the position update details for each device, up to 10 devices.
+    - name: search-place-index-for-suggestions
+      description: This operation is no longer current and may be deprecated in the future.
+      flags:
+        --bias-position=: An optional parameter that indicates a preference for place suggestions that are closer to a specified position.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-b-box=: An optional parameter that limits the search results by returning only suggestions within a specified bounding box.
+        --filter-categories=: A list of one or more Amazon Location categories to filter the returned places.
+        --filter-countries=: An optional parameter that limits the search results by returning only suggestions within the provided list of countries.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-name=!: The name of the place index resource you want to use for the search.
+        --key=: The optional [API key](https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html) to authorize the request.
+        --language=: The preferred language used to return results.
+        --max-results=: An optional parameter.
+        --text=!: The free-form partial text to use to generate place suggestions.
+    - name: create-route-calculator
+      description: This operation is no longer current and may be deprecated in the future.
+      flags:
+        --calculator-name=!: The name of the route calculator resource.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-source=!: Specifies the data provider of traffic and road network data.
+        --description=: The optional description for the route calculator resource.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pricing-plan=: No longer used.
+        --tags=: Applies one or more tags to the route calculator resource.
+      completion:
+        flag:
+            pricing-plan:
+                - RequestBasedUsage
+                - MobileAssetTracking
+                - MobileAssetManagement
+    - name: delete-route-calculator
+      description: This operation is no longer current and may be deprecated in the future.
+      flags:
+        --calculator-name=!: The name of the route calculator resource to be deleted.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-geofence-collection
+      description: Retrieves the geofence collection details.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collection-name=!: The name of the geofence collection.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-map
+      description: This operation is no longer current and may be deprecated in the future.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --map-name=!: The name of the map resource.
+    - name: forecast-geofence-events
+      description: This action forecasts future geofence events that are likely to occur within a specified time horizon if a device continues moving at its current speed.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collection-name=!: The name of the geofence collection.
+        --device-state=!: Represents the device's state, including its current position and speed.
+        --distance-unit=: The distance unit used for the `NearestDistance` property returned in a forecasted event.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: An optional limit for the number of resources returned in a single call.
+        --next-token=: The pagination token specifying which page of results to return in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --speed-unit=: The speed unit for the device captured by the device state.
+        --starting-token=: A token to specify where to start paginating.
+        --time-horizon-minutes=: The forward-looking time window for forecasting, specified in minutes.
+      completion:
+        flag:
+            distance-unit:
+                - Kilometers
+                - Miles
+            speed-unit:
+                - KilometersPerHour
+                - MilesPerHour
+    - name: describe-route-calculator
+      description: This operation is no longer current and may be deprecated in the future.
+      flags:
+        --calculator-name=!: The name of the route calculator resource.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-device-position-history
+      description: Retrieves the device position history from a tracker resource within a specified range of time.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --device-id=!: The device whose position history you want to retrieve.
+        --end-time-exclusive=: 'Specify the end time for the position history in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format: `YYYY-MM-DDThh:mm:ss.sssZ`.'
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: An optional limit for the number of device positions returned in a single call.
+        --next-token=: The pagination token specifying which page of results to return in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --start-time-inclusive=: 'Specify the start time for the position history in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format: `YYYY-MM-DDThh:mm:ss.sssZ`.'
+        --starting-token=: A token to specify where to start paginating.
+        --tracker-name=!: The tracker resource receiving the request for the device position history.
+    - name: list-device-positions
+      description: A batch request to retrieve all device positions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-geometry=: The geometry used to filter device positions.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: An optional limit for the number of entries returned in a single call.
+        --next-token=: The pagination token specifying which page of results to return in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --tracker-name=!: The tracker resource containing the requested devices.
+    - name: verify-device-position
+      description: Verifies the integrity of the device's position by determining if it was reported behind a proxy, and by comparing it to an inferred position estimated based on the device's state.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --device-state=!: The device's state, including position, IP address, cell signals and Wi-Fi access points.
+        --distance-unit=: The distance unit for the verification request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tracker-name=!: The name of the tracker resource to be associated with verification request.
+      completion:
+        flag:
+            distance-unit:
+                - Kilometers
+                - Miles
+    - name: associate-tracker-consumer
+      description: Creates an association between a geofence collection and a tracker resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --consumer-arn=!: The Amazon Resource Name (ARN) for the geofence collection to be associated to tracker resource.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tracker-name=!: The name of the tracker resource to be associated with a geofence collection.
     - name: batch-put-geofence
       description: A batch request for storing geofence geometries into a given geofence collection, or updates the geometry of an existing geofence if a geofence ID is included in the request.
       flags:
@@ -541,6 +478,74 @@ commands:
         --collection-name=!: The geofence collection storing the geofences.
         --entries=!: The batch of geofences to be stored in a geofence collection.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-map
+      description: This operation is no longer current and may be deprecated in the future.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration=!: Specifies the `MapConfiguration`, including the map style, for the map resource that you create.
+        --description=: An optional description for the map resource.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --map-name=!: The name for the map resource.
+        --pricing-plan=: No longer used.
+        --tags=: Applies one or more tags to the map resource.
+      completion:
+        flag:
+            pricing-plan:
+                - RequestBasedUsage
+                - MobileAssetTracking
+                - MobileAssetManagement
+    - name: delete-key
+      description: Deletes the specified API key.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --force-delete: ForceDelete bypasses an API key's expiry conditions and deletes the key.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-name=!: The name of the API key to delete.
+        --no-force-delete: ForceDelete bypasses an API key's expiry conditions and deletes the key.
+    - name: describe-tracker
+      description: Retrieves the tracker resource details.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tracker-name=!: The name of the tracker resource.
+    - name: get-device-position
+      description: Retrieves a device's most recent position according to its sample time.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --device-id=!: The device whose position you want to retrieve.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tracker-name=!: The tracker resource receiving the position update.
+    - name: list-trackers
+      description: Lists tracker resources in your Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: An optional limit for the number of resources returned in a single call.
+        --next-token=: The pagination token specifying which page of results to return in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-geofence-collection
+      description: Updates the specified properties of a given geofence collection.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collection-name=!: The name of the geofence collection to update.
+        --description=: Updates the description for the geofence collection.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pricing-plan-data-source=: This parameter is no longer used.
+        --pricing-plan=: No longer used.
+      completion:
+        flag:
+            pricing-plan:
+                - RequestBasedUsage
+                - MobileAssetTracking
+                - MobileAssetManagement
     - name: create-place-index
       description: This operation is no longer current and may be deprecated in the future.
       flags:
@@ -559,27 +564,46 @@ commands:
                 - RequestBasedUsage
                 - MobileAssetTracking
                 - MobileAssetManagement
-    - name: delete-map
+    - name: list-place-indexes
       description: This operation is no longer current and may be deprecated in the future.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --map-name=!: The name of the map resource to be deleted.
-    - name: delete-tracker
-      description: Deletes a tracker resource from your Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tracker-name=!: The name of the tracker resource to be deleted.
-    - name: delete-route-calculator
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: An optional limit for the maximum number of results returned in a single call.
+        --next-token=: The pagination token specifying which page of results to return in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-place-index
       description: This operation is no longer current and may be deprecated in the future.
       flags:
-        --calculator-name=!: The name of the route calculator resource to be deleted.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-name=!: The name of the place index resource.
+    - name: list-keys
+      description: Lists API key resources in your Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: Optionally filter the list to only `Active` or `Expired` API keys.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: An optional limit for the number of resources returned in a single call.
+        --next-token=: The pagination token specifying which page of results to return in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: put-geofence
+      description: Stores a geofence geometry in a given geofence collection, or updates the geometry of an existing geofence if a geofence ID is included in the request.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collection-name=!: The geofence collection to store the geofence in.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --geofence-id=!: An identifier for the geofence.
+        --geofence-properties=: Associates one of more properties with the geofence.
+        --geometry=!: Contains the details to specify the position of the geofence.
     - name: describe-key
       description: Retrieves the API key resource details.
       flags:
@@ -587,45 +611,101 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --key-name=!: The name of the API key resource.
-    - name: describe-tracker
-      description: Retrieves the tracker resource details.
+    - name: get-map-sprites
+      description: This operation is no longer current and may be deprecated in the future.
+      flags:
+        --file-name=!: The name of the sprite ﬁle.
+        --key=: The optional [API key](https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html) to authorize the request.
+        --map-name=!: The map resource associated with the sprite ﬁle.
+      completion:
+        positional:
+            - - $files
+    - name: list-geofences
+      description: Lists geofences stored in a given geofence collection.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collection-name=!: The name of the geofence collection storing the list of geofences.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: An optional limit for the number of geofences returned in a single call.
+        --next-token=: The pagination token specifying which page of results to return in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: search-place-index-for-position
+      description: This operation is no longer current and may be deprecated in the future.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tracker-name=!: The name of the tracker resource.
-    - name: get-map-glyphs
-      description: This operation is no longer current and may be deprecated in the future.
-      flags:
-        --font-stack=!: A comma-separated list of fonts to load glyphs from in order of preference.
-        --font-unicode-range=!: A Unicode range of characters to download glyphs for.
+        --index-name=!: The name of the place index resource you want to use for the search.
         --key=: The optional [API key](https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html) to authorize the request.
-        --map-name=!: The map resource associated with the glyph ﬁle.
-      completion:
-        positional:
-            - - $files
-    - name: get-map-style-descriptor
-      description: This operation is no longer current and may be deprecated in the future.
-      flags:
-        --key=: The optional [API key](https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html) to authorize the request.
-        --map-name=!: The map resource to retrieve the style descriptor from.
-      completion:
-        positional:
-            - - $files
-    - name: update-key
-      description: Updates the specified properties of a given API key resource.
+        --language=: The preferred language used to return results.
+        --max-results=: An optional parameter.
+        --position=!: Specifies the longitude and latitude of the position to query.
+    - name: create-tracker
+      description: Creates a tracker resource in your Amazon Web Services account, which lets you retrieve current and historical location of devices.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: Updates the description for the API key resource.
-        --expire-time=: 'Updates the timestamp for when the API key resource will expire in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format: `YYYY-MM-DDThh:mm:ss.sssZ`.'
-        --force-update: The boolean flag to be included for updating `ExpireTime` or `Restrictions` details.
+        --description=: An optional description for the tracker resource.
+        --event-bridge-enabled: Whether to enable position `UPDATE` events from this tracker to be sent to EventBridge.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-name=!: The name of the API key resource to update.
-        --no-expiry: Whether the API key should expire.
-        --no-force-update: The boolean flag to be included for updating `ExpireTime` or `Restrictions` details.
-        --no-no-expiry: Whether the API key should expire.
-        --restrictions=: Updates the API key restrictions for the API key resource.
+        --kms-key-enable-geospatial-queries: Enables `GeospatialQueries` for a tracker that uses a [Amazon Web Services KMS customer managed key](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html).
+        --kms-key-id=: A key identifier for an [Amazon Web Services KMS customer managed key](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html).
+        --no-event-bridge-enabled: Whether to enable position `UPDATE` events from this tracker to be sent to EventBridge.
+        --no-kms-key-enable-geospatial-queries: Enables `GeospatialQueries` for a tracker that uses a [Amazon Web Services KMS customer managed key](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html).
+        --position-filtering=: Specifies the position filtering for the tracker resource.
+        --pricing-plan-data-source=: This parameter is no longer used.
+        --pricing-plan=: No longer used.
+        --tags=: Applies one or more tags to the tracker resource.
+        --tracker-name=!: The name for the tracker resource.
+      completion:
+        flag:
+            position-filtering:
+                - TimeBased
+                - DistanceBased
+                - AccuracyBased
+            pricing-plan:
+                - RequestBasedUsage
+                - MobileAssetTracking
+                - MobileAssetManagement
+    - name: get-place
+      description: This operation is no longer current and may be deprecated in the future.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-name=!: The name of the place index resource that you want to use for the search.
+        --key=: The optional [API key](https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html) to authorize the request.
+        --language=: The preferred language used to return results.
+        --place-id=!: The identifier of the place to find.
+    - name: list-geofence-collections
+      description: Lists geofence collections in your Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: An optional limit for the number of resources returned in a single call.
+        --next-token=: The pagination token specifying which page of results to return in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: Returns a list of tags that are applied to the specified Amazon Location resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource whose tags you want to retrieve.
+    - name: tag-resource
+      description: Assigns one or more tags (key-value pairs) to the specified Amazon Location Service resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource whose tags you want to update.
+        --tags=!: Applies one or more tags to specific resource.
     - name: update-place-index
       description: This operation is no longer current and may be deprecated in the future.
       flags:
@@ -642,83 +722,3 @@ commands:
                 - RequestBasedUsage
                 - MobileAssetTracking
                 - MobileAssetManagement
-    - name: batch-get-device-position
-      description: Lists the latest device positions for requested devices.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --device-ids=!: Devices whose position you want to retrieve.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tracker-name=!: The tracker resource retrieving the device position.
-    - name: describe-place-index
-      description: This operation is no longer current and may be deprecated in the future.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-name=!: The name of the place index resource.
-    - name: create-geofence-collection
-      description: Creates a geofence collection, which manages and stores geofences.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collection-name=!: A custom name for the geofence collection.
-        --description=: An optional description for the geofence collection.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kms-key-id=: A key identifier for an [Amazon Web Services KMS customer managed key](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html).
-        --pricing-plan-data-source=: This parameter is no longer used.
-        --pricing-plan=: No longer used.
-        --tags=: Applies one or more tags to the geofence collection.
-      completion:
-        flag:
-            pricing-plan:
-                - RequestBasedUsage
-                - MobileAssetTracking
-                - MobileAssetManagement
-    - name: describe-geofence-collection
-      description: Retrieves the geofence collection details.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collection-name=!: The name of the geofence collection.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-map
-      description: This operation is no longer current and may be deprecated in the future.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --map-name=!: The name of the map resource.
-    - name: associate-tracker-consumer
-      description: Creates an association between a geofence collection and a tracker resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --consumer-arn=!: The Amazon Resource Name (ARN) for the geofence collection to be associated to tracker resource.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tracker-name=!: The name of the tracker resource to be associated with a geofence collection.
-    - name: create-route-calculator
-      description: This operation is no longer current and may be deprecated in the future.
-      flags:
-        --calculator-name=!: The name of the route calculator resource.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source=!: Specifies the data provider of traffic and road network data.
-        --description=: The optional description for the route calculator resource.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --pricing-plan=: No longer used.
-        --tags=: Applies one or more tags to the route calculator resource.
-      completion:
-        flag:
-            pricing-plan:
-                - RequestBasedUsage
-                - MobileAssetTracking
-                - MobileAssetManagement
-    - name: get-geofence
-      description: Retrieves the geofence details from a geofence collection.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collection-name=!: The geofence collection storing the target geofence.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --geofence-id=!: The geofence you're retrieving details for.

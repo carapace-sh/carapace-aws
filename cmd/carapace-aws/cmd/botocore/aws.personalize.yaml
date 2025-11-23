@@ -1,84 +1,29 @@
 name: personalize
 description: Amazon Personalize
 commands:
-    - name: delete-solution
-      description: Deletes all versions of a solution and the `Solution` object itself.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --solution-arn=!: The ARN of the solution to delete.
-    - name: describe-dataset-group
-      description: Describes the given dataset group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-group-arn=!: The Amazon Resource Name (ARN) of the dataset group to describe.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-event-trackers
-      description: Returns the list of event trackers associated with the account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-group-arn=: The ARN of a dataset group used to filter the response.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of event trackers to return.
-        --next-token=: A token returned from the previous call to `ListEventTrackers` for getting the next set of event trackers (if they exist).
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-schemas
-      description: Returns the list of schemas associated with the account.
+    - name: list-dataset-groups
+      description: Returns a list of dataset groups.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of schemas to return.
-        --next-token=: A token returned from the previous call to `ListSchemas` for getting the next set of schemas (if they exist).
+        --max-results=: The maximum number of dataset groups to return.
+        --next-token=: A token returned from the previous call to `ListDatasetGroups` for getting the next set of dataset groups (if they exist).
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: tag-resource
-      description: Add a list of tags to a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The resource's Amazon Resource Name (ARN).
-        --tags=!: Tags to apply to the resource.
-    - name: list-batch-segment-jobs
-      description: Gets a list of the batch segment jobs that have been performed off of a solution version that you specify.
+    - name: list-metric-attribution-metrics
+      description: Lists the metrics for the metric attribution.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of batch segment job results to return in each page.
-        --next-token=: The token to request the next page of results.
+        --max-results=: The maximum number of metrics to return in one page of results.
+        --metric-attribution-arn=: The Amazon Resource Name (ARN) of the metric attribution to retrieve attributes for.
+        --next-token=: Specify the pagination token from a previous request to retrieve the next page of results.
         --page-size=: The size of each page to get in the AWS service call.
-        --solution-version-arn=: The Amazon Resource Name (ARN) of the solution version that the batch segment jobs used to generate batch segments.
         --starting-token=: A token to specify where to start paginating.
-    - name: describe-batch-inference-job
-      description: Gets the properties of a batch inference job including name, Amazon Resource Name (ARN), status, input and output configurations, and the ARN of the solution version used to generate the recommendations.
-      flags:
-        --batch-inference-job-arn=!: The ARN of the batch inference job to describe.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-algorithm
-      description: Describes the given algorithm.
-      flags:
-        --algorithm-arn=!: The Amazon Resource Name (ARN) of the algorithm to describe.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-dataset
-      description: Describes the given dataset.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-arn=!: The Amazon Resource Name (ARN) of the dataset to describe.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-recipes
       description: Returns a list of available recipes.
       flags:
@@ -99,523 +44,6 @@ commands:
                 - VIDEO_ON_DEMAND
             recipe-provider:
                 - SERVICE
-    - name: list-solution-versions
-      description: Returns a list of solution versions for the given solution.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of solution versions to return.
-        --next-token=: A token returned from the previous call to `ListSolutionVersions` for getting the next set of solution versions (if they exist).
-        --page-size=: The size of each page to get in the AWS service call.
-        --solution-arn=: The Amazon Resource Name (ARN) of the solution.
-        --starting-token=: A token to specify where to start paginating.
-    - name: stop-solution-version-creation
-      description: Stops creating a solution version that is in a state of CREATE\_PENDING or CREATE IN\_PROGRESS.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --solution-version-arn=!: The Amazon Resource Name (ARN) of the solution version you want to stop creating.
-    - name: update-dataset
-      description: Update a dataset to replace its schema with a new or existing one.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-arn=!: The Amazon Resource Name (ARN) of the dataset that you want to update.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --schema-arn=!: The Amazon Resource Name (ARN) of the new schema you want use.
-    - name: create-metric-attribution
-      description: Creates a metric attribution.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-group-arn=!: The Amazon Resource Name (ARN) of the destination dataset group for the metric attribution.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --metrics-output-config=!: The output configuration details for the metric attribution.
-        --metrics=!: A list of metric attributes for the metric attribution.
-        --name=!: A name for the metric attribution.
-    - name: start-recommender
-      description: Starts a recommender that is INACTIVE.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recommender-arn=!: The Amazon Resource Name (ARN) of the recommender to start.
-    - name: update-campaign
-      description: Updates a campaign to deploy a retrained solution version with an existing campaign, change your campaign's `minProvisionedTPS`, or modify your campaign's configuration.
-      flags:
-        --campaign-arn=!: The Amazon Resource Name (ARN) of the campaign.
-        --campaign-config=: The configuration details of a campaign.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --min-provisioned-tps=: Specifies the requested minimum provisioned transactions (recommendations) per second that Amazon Personalize will support.
-        --solution-version-arn=: The Amazon Resource Name (ARN) of a new model to deploy.
-    - name: delete-event-tracker
-      description: Deletes the event tracker.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --event-tracker-arn=!: The Amazon Resource Name (ARN) of the event tracker to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-campaign
-      description: Describes the given campaign, including its status.
-      flags:
-        --campaign-arn=!: The Amazon Resource Name (ARN) of the campaign.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-data-deletion-job
-      description: Describes the data deletion job created by [CreateDataDeletionJob](https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataDeletionJob.html), including the job status.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-deletion-job-arn=!: The Amazon Resource Name (ARN) of the data deletion job.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-batch-inference-jobs
-      description: Gets a list of the batch inference jobs that have been performed off of a solution version.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of batch inference job results to return in each page.
-        --next-token=: The token to request the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --solution-version-arn=: The Amazon Resource Name (ARN) of the solution version from which the batch inference jobs were created.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-metric-attribution-metrics
-      description: Lists the metrics for the metric attribution.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of metrics to return in one page of results.
-        --metric-attribution-arn=: The Amazon Resource Name (ARN) of the metric attribution to retrieve attributes for.
-        --next-token=: Specify the pagination token from a previous request to retrieve the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: stop-recommender
-      description: Stops a recommender that is ACTIVE.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recommender-arn=!: The Amazon Resource Name (ARN) of the recommender to stop.
-    - name: create-solution
-      description: By default, all new solutions use automatic training.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-group-arn=!: The Amazon Resource Name (ARN) of the dataset group that provides the training data.
-        --event-type=: When your have multiple event types (using an `EVENT_TYPE` schema field), this parameter specifies which event type (for example, 'click' or 'like') is used for training the model.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name for the solution.
-        --no-perform-auto-ml: We don't recommend enabling automated machine learning.
-        --no-perform-auto-training: Whether the solution uses automatic training to create new solution versions (trained models).
-        --no-perform-hpo: Whether to perform hyperparameter optimization (HPO) on the specified or selected recipe.
-        --perform-auto-ml: We don't recommend enabling automated machine learning.
-        --perform-auto-training: Whether the solution uses automatic training to create new solution versions (trained models).
-        --perform-hpo: Whether to perform hyperparameter optimization (HPO) on the specified or selected recipe.
-        --recipe-arn=: The Amazon Resource Name (ARN) of the recipe to use for model training.
-        --solution-config=: The configuration properties for the solution.
-        --tags=: A list of [tags](https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html) to apply to the solution.
-    - name: create-campaign
-      description: You incur campaign costs while it is active.
-      flags:
-        --campaign-config=: The configuration details of a campaign.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --min-provisioned-tps=: Specifies the requested minimum provisioned transactions (recommendations) per second that Amazon Personalize will support.
-        --name=!: A name for the new campaign.
-        --solution-version-arn=!: The Amazon Resource Name (ARN) of the trained model to deploy with the campaign.
-        --tags=: A list of [tags](https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html) to apply to the campaign.
-    - name: delete-filter
-      description: Deletes a filter.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter-arn=!: The ARN of the filter to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-metric-attribution
-      description: Deletes a metric attribution.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --metric-attribution-arn=!: The metric attribution's Amazon Resource Name (ARN).
-    - name: describe-dataset-import-job
-      description: Describes the dataset import job created by [CreateDatasetImportJob](https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetImportJob.html), including the import job status.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-import-job-arn=!: The Amazon Resource Name (ARN) of the dataset import job to describe.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-metric-attribution
-      description: Describes a metric attribution.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --metric-attribution-arn=!: The metric attribution's Amazon Resource Name (ARN).
-    - name: get-solution-metrics
-      description: Gets the metrics for the specified solution version.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --solution-version-arn=!: The Amazon Resource Name (ARN) of the solution version for which to get metrics.
-    - name: list-datasets
-      description: Returns the list of datasets contained in the given dataset group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-group-arn=: The Amazon Resource Name (ARN) of the dataset group that contains the datasets to list.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of datasets to return.
-        --next-token=: A token returned from the previous call to `ListDatasets` for getting the next set of dataset import jobs (if they exist).
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: create-data-deletion-job
-      description: Creates a batch job that deletes all references to specific users from an Amazon Personalize dataset group in batches.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source=!: The Amazon S3 bucket that contains the list of userIds of the users to delete.
-        --dataset-group-arn=!: The Amazon Resource Name (ARN) of the dataset group that has the datasets you want to delete records from.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-name=!: The name for the data deletion job.
-        --role-arn=!: The Amazon Resource Name (ARN) of the IAM role that has permissions to read from the Amazon S3 data source.
-        --tags=: A list of [tags](https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html) to apply to the data deletion job.
-    - name: create-solution-version
-      description: Trains or retrains an active solution in a Custom dataset group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: The name of the solution version.
-        --solution-arn=!: The Amazon Resource Name (ARN) of the solution containing the training configuration information.
-        --tags=: A list of [tags](https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html) to apply to the solution version.
-        --training-mode=: The scope of training to be performed when creating the solution version.
-      completion:
-        flag:
-            training-mode:
-                - FULL
-                - UPDATE
-                - AUTOTRAIN
-    - name: describe-solution
-      description: Describes a solution.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --solution-arn=!: The Amazon Resource Name (ARN) of the solution to describe.
-    - name: list-solutions
-      description: Returns a list of solutions in a given dataset group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-group-arn=: The Amazon Resource Name (ARN) of the dataset group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of solutions to return.
-        --next-token=: A token returned from the previous call to `ListSolutions` for getting the next set of solutions (if they exist).
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: Get a list of [tags](https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html) attached to a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The resource's Amazon Resource Name (ARN).
-    - name: delete-campaign
-      description: Removes a campaign by deleting the solution deployment.
-      flags:
-        --campaign-arn=!: The Amazon Resource Name (ARN) of the campaign to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-dataset-export-job
-      description: Describes the dataset export job created by [CreateDatasetExportJob](https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetExportJob.html), including the export job status.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-export-job-arn=!: The Amazon Resource Name (ARN) of the dataset export job to describe.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-data-deletion-jobs
-      description: Returns a list of data deletion jobs for a dataset group ordered by creation time, with the most recent first.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-group-arn=: The Amazon Resource Name (ARN) of the dataset group to list data deletion jobs for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of data deletion jobs to return.
-        --next-token=: A token returned from the previous call to `ListDataDeletionJobs` for getting the next set of jobs (if they exist).
-    - name: list-metric-attributions
-      description: Lists metric attributions.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-group-arn=: The metric attributions' dataset group Amazon Resource Name (ARN).
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of metric attributions to return in one page of results.
-        --next-token=: Specify the pagination token from a previous request to retrieve the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: create-dataset-import-job
-      description: Creates a job that imports training data from your data source (an Amazon S3 bucket) to an Amazon Personalize dataset.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source=!: The Amazon S3 bucket that contains the training data to import.
-        --dataset-arn=!: The ARN of the dataset that receives the imported data.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --import-mode=: Specify how to add the new records to an existing dataset.
-        --job-name=!: The name for the dataset import job.
-        --no-publish-attribution-metrics-to-s3: If you created a metric attribution, specify whether to publish metrics for this import job to Amazon S3
-        --publish-attribution-metrics-to-s3: If you created a metric attribution, specify whether to publish metrics for this import job to Amazon S3
-        --role-arn=!: The ARN of the IAM role that has permissions to read from the Amazon S3 data source.
-        --tags=: A list of [tags](https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html) to apply to the dataset import job.
-      completion:
-        flag:
-            import-mode:
-                - FULL
-                - INCREMENTAL
-    - name: describe-filter
-      description: Describes a filter's properties.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter-arn=!: The ARN of the filter to describe.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-campaigns
-      description: Returns a list of campaigns that use the given solution.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of campaigns to return.
-        --next-token=: A token returned from the previous call to [ListCampaigns](https://docs.aws.amazon.com/personalize/latest/dg/API_ListCampaigns.html) for getting the next set of campaigns (if they exist).
-        --page-size=: The size of each page to get in the AWS service call.
-        --solution-arn=: The Amazon Resource Name (ARN) of the solution to list the campaigns for.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-metric-attribution
-      description: Updates a metric attribution.
-      flags:
-        --add-metrics=: Add new metric attributes to the metric attribution.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --metric-attribution-arn=: The Amazon Resource Name (ARN) for the metric attribution to update.
-        --metrics-output-config=: An output config for the metric attribution.
-        --remove-metrics=: Remove metric attributes from the metric attribution.
-    - name: create-dataset
-      description: Creates an empty dataset and adds it to the specified dataset group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-group-arn=!: The Amazon Resource Name (ARN) of the dataset group to add the dataset to.
-        --dataset-type=!: The type of dataset.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name for the dataset.
-        --schema-arn=!: The ARN of the schema to associate with the dataset.
-        --tags=: A list of [tags](https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html) to apply to the dataset.
-    - name: create-dataset-export-job
-      description: Creates a job that exports data from your dataset to an Amazon S3 bucket.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-arn=!: The Amazon Resource Name (ARN) of the dataset that contains the data to export.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ingestion-mode=: The data to export, based on how you imported the data.
-        --job-name=!: The name for the dataset export job.
-        --job-output=!: The path to the Amazon S3 bucket where the job's output is stored.
-        --role-arn=!: The Amazon Resource Name (ARN) of the IAM service role that has permissions to add data to your output Amazon S3 bucket.
-        --tags=: A list of [tags](https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html) to apply to the dataset export job.
-      completion:
-        flag:
-            ingestion-mode:
-                - BULK
-                - PUT
-                - ALL
-    - name: create-event-tracker
-      description: Creates an event tracker that you use when adding event data to a specified dataset group using the [PutEvents](https://docs.aws.amazon.com/personalize/latest/dg/API_UBS_PutEvents.html) API.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-group-arn=!: The Amazon Resource Name (ARN) of the dataset group that receives the event data.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name for the event tracker.
-        --tags=: A list of [tags](https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html) to apply to the event tracker.
-    - name: create-filter
-      description: Creates a recommendation filter.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-group-arn=!: The ARN of the dataset group that the filter will belong to.
-        --filter-expression=!: The filter expression defines which items are included or excluded from recommendations.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the filter to create.
-        --tags=: A list of [tags](https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html) to apply to the filter.
-    - name: untag-resource
-      description: Removes the specified tags that are attached to a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The resource's Amazon Resource Name (ARN).
-        --tag-keys=!: The keys of the tags to be removed.
-    - name: create-schema
-      description: Creates an Amazon Personalize schema from the specified schema string.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain=: The domain for the schema.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name for the schema.
-        --schema=!: A schema in Avro JSON format.
-      completion:
-        flag:
-            domain:
-                - ECOMMERCE
-                - VIDEO_ON_DEMAND
-    - name: create-dataset-group
-      description: Creates an empty dataset group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain=: The domain of the dataset group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kms-key-arn=: The Amazon Resource Name (ARN) of a Key Management Service (KMS) key used to encrypt the datasets.
-        --name=!: The name for the new dataset group.
-        --role-arn=: The ARN of the Identity and Access Management (IAM) role that has permissions to access the Key Management Service (KMS) key.
-        --tags=: A list of [tags](https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html) to apply to the dataset group.
-      completion:
-        flag:
-            domain:
-                - ECOMMERCE
-                - VIDEO_ON_DEMAND
-    - name: delete-dataset-group
-      description: Deletes a dataset group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-group-arn=!: The ARN of the dataset group to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-feature-transformation
-      description: Describes the given feature transformation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --feature-transformation-arn=!: The Amazon Resource Name (ARN) of the feature transformation to describe.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-schema
-      description: Describes a schema.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --schema-arn=!: The Amazon Resource Name (ARN) of the schema to retrieve.
-    - name: list-dataset-groups
-      description: Returns a list of dataset groups.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of dataset groups to return.
-        --next-token=: A token returned from the previous call to `ListDatasetGroups` for getting the next set of dataset groups (if they exist).
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: create-batch-segment-job
-      description: Creates a batch segment job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter-arn=: The ARN of the filter to apply to the batch segment job.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-input=!: The Amazon S3 path for the input data used to generate the batch segment job.
-        --job-name=!: The name of the batch segment job to create.
-        --job-output=!: The Amazon S3 path for the bucket where the job's output will be stored.
-        --num-results=: The number of predicted users generated by the batch segment job for each line of input data.
-        --role-arn=!: The ARN of the Amazon Identity and Access Management role that has permissions to read and write to your input and output Amazon S3 buckets respectively.
-        --solution-version-arn=!: The Amazon Resource Name (ARN) of the solution version you want the batch segment job to use to generate batch segments.
-        --tags=: A list of [tags](https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html) to apply to the batch segment job.
-    - name: delete-dataset
-      description: Deletes a dataset.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-arn=!: The Amazon Resource Name (ARN) of the dataset to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-recipe
-      description: Describes a recipe.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recipe-arn=!: The Amazon Resource Name (ARN) of the recipe to describe.
-    - name: list-dataset-import-jobs
-      description: Returns a list of dataset import jobs that use the given dataset.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-arn=: The Amazon Resource Name (ARN) of the dataset to list the dataset import jobs for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of dataset import jobs to return.
-        --next-token=: A token returned from the previous call to `ListDatasetImportJobs` for getting the next set of dataset import jobs (if they exist).
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-filters
-      description: Lists all filters that belong to a given dataset group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-group-arn=: The ARN of the dataset group that contains the filters.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of filters to return.
-        --next-token=: A token returned from the previous call to `ListFilters` for getting the next set of filters (if they exist).
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-recommenders
-      description: Returns a list of recommenders in a given Domain dataset group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-group-arn=: The Amazon Resource Name (ARN) of the Domain dataset group to list the recommenders for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of recommenders to return.
-        --next-token=: A token returned from the previous call to `ListRecommenders` for getting the next set of recommenders (if they exist).
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-solution
-      description: Updates an Amazon Personalize solution to use a different automatic training configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-perform-auto-training: Whether the solution uses automatic training to create new solution versions (trained models).
-        --perform-auto-training: Whether the solution uses automatic training to create new solution versions (trained models).
-        --solution-arn=!: The Amazon Resource Name (ARN) of the solution to update.
-        --solution-update-config=: The new configuration details of the solution.
-    - name: describe-batch-segment-job
-      description: Gets the properties of a batch segment job including name, Amazon Resource Name (ARN), status, input and output configurations, and the ARN of the solution version used to generate segments.
-      flags:
-        --batch-segment-job-arn=!: The ARN of the batch segment job to describe.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: create-batch-inference-job
       description: Generates batch recommendations based on a list of items or users stored in Amazon S3 and exports the recommendations to an Amazon S3 bucket.
       flags:
@@ -638,17 +66,51 @@ commands:
             batch-inference-job-mode:
                 - BATCH_INFERENCE
                 - THEME_GENERATION
-    - name: create-recommender
-      description: Creates a recommender with the recipe (a Domain dataset group use case) you specify.
+    - name: delete-dataset
+      description: Deletes a dataset.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-group-arn=!: The Amazon Resource Name (ARN) of the destination domain dataset group for the recommender.
+        --dataset-arn=!: The Amazon Resource Name (ARN) of the dataset to delete.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the recommender.
-        --recipe-arn=!: The Amazon Resource Name (ARN) of the recipe that the recommender will use.
-        --recommender-config=: The configuration details of the recommender.
-        --tags=: A list of [tags](https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html) to apply to the recommender.
+    - name: describe-batch-segment-job
+      description: Gets the properties of a batch segment job including name, Amazon Resource Name (ARN), status, input and output configurations, and the ARN of the solution version used to generate segments.
+      flags:
+        --batch-segment-job-arn=!: The ARN of the batch segment job to describe.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-batch-segment-jobs
+      description: Gets a list of the batch segment jobs that have been performed off of a solution version that you specify.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of batch segment job results to return in each page.
+        --next-token=: The token to request the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --solution-version-arn=: The Amazon Resource Name (ARN) of the solution version that the batch segment jobs used to generate batch segments.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-solution-versions
+      description: Returns a list of solution versions for the given solution.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of solution versions to return.
+        --next-token=: A token returned from the previous call to `ListSolutionVersions` for getting the next set of solution versions (if they exist).
+        --page-size=: The size of each page to get in the AWS service call.
+        --solution-arn=: The Amazon Resource Name (ARN) of the solution.
+        --starting-token=: A token to specify where to start paginating.
+    - name: stop-solution-version-creation
+      description: Stops creating a solution version that is in a state of CREATE\_PENDING or CREATE IN\_PROGRESS.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --solution-version-arn=!: The Amazon Resource Name (ARN) of the solution version you want to stop creating.
     - name: delete-recommender
       description: Deactivates and removes a recommender.
       flags:
@@ -656,6 +118,494 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --recommender-arn=!: The Amazon Resource Name (ARN) of the recommender to delete.
+    - name: describe-metric-attribution
+      description: Describes a metric attribution.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --metric-attribution-arn=!: The metric attribution's Amazon Resource Name (ARN).
+    - name: describe-schema
+      description: Describes a schema.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --schema-arn=!: The Amazon Resource Name (ARN) of the schema to retrieve.
+    - name: create-event-tracker
+      description: Creates an event tracker that you use when adding event data to a specified dataset group using the [PutEvents](https://docs.aws.amazon.com/personalize/latest/dg/API_UBS_PutEvents.html) API.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-group-arn=!: The Amazon Resource Name (ARN) of the dataset group that receives the event data.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name for the event tracker.
+        --tags=: A list of [tags](https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html) to apply to the event tracker.
+    - name: describe-dataset
+      description: Describes the given dataset.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-arn=!: The Amazon Resource Name (ARN) of the dataset to describe.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-recipe
+      description: Describes a recipe.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recipe-arn=!: The Amazon Resource Name (ARN) of the recipe to describe.
+    - name: describe-recommender
+      description: Describes the given recommender, including its status.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recommender-arn=!: The Amazon Resource Name (ARN) of the recommender to describe.
+    - name: list-datasets
+      description: Returns the list of datasets contained in the given dataset group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-group-arn=: The Amazon Resource Name (ARN) of the dataset group that contains the datasets to list.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of datasets to return.
+        --next-token=: A token returned from the previous call to `ListDatasets` for getting the next set of dataset import jobs (if they exist).
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-solutions
+      description: Returns a list of solutions in a given dataset group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-group-arn=: The Amazon Resource Name (ARN) of the dataset group.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of solutions to return.
+        --next-token=: A token returned from the previous call to `ListSolutions` for getting the next set of solutions (if they exist).
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-dataset
+      description: Update a dataset to replace its schema with a new or existing one.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-arn=!: The Amazon Resource Name (ARN) of the dataset that you want to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --schema-arn=!: The Amazon Resource Name (ARN) of the new schema you want use.
+    - name: create-solution-version
+      description: Trains or retrains an active solution in a Custom dataset group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The name of the solution version.
+        --solution-arn=!: The Amazon Resource Name (ARN) of the solution containing the training configuration information.
+        --tags=: A list of [tags](https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html) to apply to the solution version.
+        --training-mode=: The scope of training to be performed when creating the solution version.
+      completion:
+        flag:
+            training-mode:
+                - FULL
+                - UPDATE
+                - AUTOTRAIN
+    - name: delete-schema
+      description: Deletes a schema.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --schema-arn=!: The Amazon Resource Name (ARN) of the schema to delete.
+    - name: list-data-deletion-jobs
+      description: Returns a list of data deletion jobs for a dataset group ordered by creation time, with the most recent first.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-group-arn=: The Amazon Resource Name (ARN) of the dataset group to list data deletion jobs for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of data deletion jobs to return.
+        --next-token=: A token returned from the previous call to `ListDataDeletionJobs` for getting the next set of jobs (if they exist).
+    - name: create-data-deletion-job
+      description: Creates a batch job that deletes all references to specific users from an Amazon Personalize dataset group in batches.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-source=!: The Amazon S3 bucket that contains the list of userIds of the users to delete.
+        --dataset-group-arn=!: The Amazon Resource Name (ARN) of the dataset group that has the datasets you want to delete records from.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-name=!: The name for the data deletion job.
+        --role-arn=!: The Amazon Resource Name (ARN) of the IAM role that has permissions to read from the Amazon S3 data source.
+        --tags=: A list of [tags](https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html) to apply to the data deletion job.
+    - name: create-filter
+      description: Creates a recommendation filter.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-group-arn=!: The ARN of the dataset group that the filter will belong to.
+        --filter-expression=!: The filter expression defines which items are included or excluded from recommendations.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the filter to create.
+        --tags=: A list of [tags](https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html) to apply to the filter.
+    - name: describe-feature-transformation
+      description: Describes the given feature transformation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --feature-transformation-arn=!: The Amazon Resource Name (ARN) of the feature transformation to describe.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: stop-recommender
+      description: Stops a recommender that is ACTIVE.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recommender-arn=!: The Amazon Resource Name (ARN) of the recommender to stop.
+    - name: update-metric-attribution
+      description: Updates a metric attribution.
+      flags:
+        --add-metrics=: Add new metric attributes to the metric attribution.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --metric-attribution-arn=: The Amazon Resource Name (ARN) for the metric attribution to update.
+        --metrics-output-config=: An output config for the metric attribution.
+        --remove-metrics=: Remove metric attributes from the metric attribution.
+    - name: get-solution-metrics
+      description: Gets the metrics for the specified solution version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --solution-version-arn=!: The Amazon Resource Name (ARN) of the solution version for which to get metrics.
+    - name: list-filters
+      description: Lists all filters that belong to a given dataset group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-group-arn=: The ARN of the dataset group that contains the filters.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of filters to return.
+        --next-token=: A token returned from the previous call to `ListFilters` for getting the next set of filters (if they exist).
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: create-campaign
+      description: You incur campaign costs while it is active.
+      flags:
+        --campaign-config=: The configuration details of a campaign.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --min-provisioned-tps=: Specifies the requested minimum provisioned transactions (recommendations) per second that Amazon Personalize will support.
+        --name=!: A name for the new campaign.
+        --solution-version-arn=!: The Amazon Resource Name (ARN) of the trained model to deploy with the campaign.
+        --tags=: A list of [tags](https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html) to apply to the campaign.
+    - name: create-dataset-export-job
+      description: Creates a job that exports data from your dataset to an Amazon S3 bucket.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-arn=!: The Amazon Resource Name (ARN) of the dataset that contains the data to export.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ingestion-mode=: The data to export, based on how you imported the data.
+        --job-name=!: The name for the dataset export job.
+        --job-output=!: The path to the Amazon S3 bucket where the job's output is stored.
+        --role-arn=!: The Amazon Resource Name (ARN) of the IAM service role that has permissions to add data to your output Amazon S3 bucket.
+        --tags=: A list of [tags](https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html) to apply to the dataset export job.
+      completion:
+        flag:
+            ingestion-mode:
+                - BULK
+                - PUT
+                - ALL
+    - name: delete-event-tracker
+      description: Deletes the event tracker.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --event-tracker-arn=!: The Amazon Resource Name (ARN) of the event tracker to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-dataset-import-job
+      description: Describes the dataset import job created by [CreateDatasetImportJob](https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetImportJob.html), including the import job status.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-import-job-arn=!: The Amazon Resource Name (ARN) of the dataset import job to describe.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-recommender
+      description: Updates the recommender to modify the recommender configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recommender-arn=!: The Amazon Resource Name (ARN) of the recommender to modify.
+        --recommender-config=!: The configuration details of the recommender.
+    - name: create-schema
+      description: Creates an Amazon Personalize schema from the specified schema string.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain=: The domain for the schema.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name for the schema.
+        --schema=!: A schema in Avro JSON format.
+      completion:
+        flag:
+            domain:
+                - ECOMMERCE
+                - VIDEO_ON_DEMAND
+    - name: list-event-trackers
+      description: Returns the list of event trackers associated with the account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-group-arn=: The ARN of a dataset group used to filter the response.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of event trackers to return.
+        --next-token=: A token returned from the previous call to `ListEventTrackers` for getting the next set of event trackers (if they exist).
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: delete-dataset-group
+      description: Deletes a dataset group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-group-arn=!: The ARN of the dataset group to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-campaign
+      description: Updates a campaign to deploy a retrained solution version with an existing campaign, change your campaign's `minProvisionedTPS`, or modify your campaign's configuration.
+      flags:
+        --campaign-arn=!: The Amazon Resource Name (ARN) of the campaign.
+        --campaign-config=: The configuration details of a campaign.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --min-provisioned-tps=: Specifies the requested minimum provisioned transactions (recommendations) per second that Amazon Personalize will support.
+        --solution-version-arn=: The Amazon Resource Name (ARN) of a new model to deploy.
+    - name: describe-algorithm
+      description: Describes the given algorithm.
+      flags:
+        --algorithm-arn=!: The Amazon Resource Name (ARN) of the algorithm to describe.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-batch-inference-job
+      description: Gets the properties of a batch inference job including name, Amazon Resource Name (ARN), status, input and output configurations, and the ARN of the solution version used to generate the recommendations.
+      flags:
+        --batch-inference-job-arn=!: The ARN of the batch inference job to describe.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-campaigns
+      description: Returns a list of campaigns that use the given solution.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of campaigns to return.
+        --next-token=: A token returned from the previous call to [ListCampaigns](https://docs.aws.amazon.com/personalize/latest/dg/API_ListCampaigns.html) for getting the next set of campaigns (if they exist).
+        --page-size=: The size of each page to get in the AWS service call.
+        --solution-arn=: The Amazon Resource Name (ARN) of the solution to list the campaigns for.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-schemas
+      description: Returns the list of schemas associated with the account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of schemas to return.
+        --next-token=: A token returned from the previous call to `ListSchemas` for getting the next set of schemas (if they exist).
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: untag-resource
+      description: Removes the specified tags that are attached to a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The resource's Amazon Resource Name (ARN).
+        --tag-keys=!: The keys of the tags to be removed.
+    - name: create-dataset-import-job
+      description: Creates a job that imports training data from your data source (an Amazon S3 bucket) to an Amazon Personalize dataset.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-source=!: The Amazon S3 bucket that contains the training data to import.
+        --dataset-arn=!: The ARN of the dataset that receives the imported data.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --import-mode=: Specify how to add the new records to an existing dataset.
+        --job-name=!: The name for the dataset import job.
+        --no-publish-attribution-metrics-to-s3: If you created a metric attribution, specify whether to publish metrics for this import job to Amazon S3
+        --publish-attribution-metrics-to-s3: If you created a metric attribution, specify whether to publish metrics for this import job to Amazon S3
+        --role-arn=!: The ARN of the IAM role that has permissions to read from the Amazon S3 data source.
+        --tags=: A list of [tags](https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html) to apply to the dataset import job.
+      completion:
+        flag:
+            import-mode:
+                - FULL
+                - INCREMENTAL
+    - name: delete-metric-attribution
+      description: Deletes a metric attribution.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --metric-attribution-arn=!: The metric attribution's Amazon Resource Name (ARN).
+    - name: describe-data-deletion-job
+      description: Describes the data deletion job created by [CreateDataDeletionJob](https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataDeletionJob.html), including the job status.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-deletion-job-arn=!: The Amazon Resource Name (ARN) of the data deletion job.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-dataset-group
+      description: Describes the given dataset group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-group-arn=!: The Amazon Resource Name (ARN) of the dataset group to describe.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-recommenders
+      description: Returns a list of recommenders in a given Domain dataset group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-group-arn=: The Amazon Resource Name (ARN) of the Domain dataset group to list the recommenders for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of recommenders to return.
+        --next-token=: A token returned from the previous call to `ListRecommenders` for getting the next set of recommenders (if they exist).
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: create-batch-segment-job
+      description: Creates a batch segment job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-arn=: The ARN of the filter to apply to the batch segment job.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-input=!: The Amazon S3 path for the input data used to generate the batch segment job.
+        --job-name=!: The name of the batch segment job to create.
+        --job-output=!: The Amazon S3 path for the bucket where the job's output will be stored.
+        --num-results=: The number of predicted users generated by the batch segment job for each line of input data.
+        --role-arn=!: The ARN of the Amazon Identity and Access Management role that has permissions to read and write to your input and output Amazon S3 buckets respectively.
+        --solution-version-arn=!: The Amazon Resource Name (ARN) of the solution version you want the batch segment job to use to generate batch segments.
+        --tags=: A list of [tags](https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html) to apply to the batch segment job.
+    - name: delete-solution
+      description: Deletes all versions of a solution and the `Solution` object itself.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --solution-arn=!: The ARN of the solution to delete.
+    - name: describe-filter
+      description: Describes a filter's properties.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-arn=!: The ARN of the filter to describe.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-solution
+      description: Describes a solution.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --solution-arn=!: The Amazon Resource Name (ARN) of the solution to describe.
+    - name: list-batch-inference-jobs
+      description: Gets a list of the batch inference jobs that have been performed off of a solution version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of batch inference job results to return in each page.
+        --next-token=: The token to request the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --solution-version-arn=: The Amazon Resource Name (ARN) of the solution version from which the batch inference jobs were created.
+        --starting-token=: A token to specify where to start paginating.
+    - name: create-dataset-group
+      description: Creates an empty dataset group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain=: The domain of the dataset group.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-arn=: The Amazon Resource Name (ARN) of a Key Management Service (KMS) key used to encrypt the datasets.
+        --name=!: The name for the new dataset group.
+        --role-arn=: The ARN of the Identity and Access Management (IAM) role that has permissions to access the Key Management Service (KMS) key.
+        --tags=: A list of [tags](https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html) to apply to the dataset group.
+      completion:
+        flag:
+            domain:
+                - ECOMMERCE
+                - VIDEO_ON_DEMAND
+    - name: create-solution
+      description: By default, all new solutions use automatic training.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-group-arn=!: The Amazon Resource Name (ARN) of the dataset group that provides the training data.
+        --event-type=: When your have multiple event types (using an `EVENT_TYPE` schema field), this parameter specifies which event type (for example, 'click' or 'like') is used for training the model.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name for the solution.
+        --no-perform-auto-ml: We don't recommend enabling automated machine learning.
+        --no-perform-auto-training: Whether the solution uses automatic training to create new solution versions (trained models).
+        --no-perform-hpo: Whether to perform hyperparameter optimization (HPO) on the specified or selected recipe.
+        --perform-auto-ml: We don't recommend enabling automated machine learning.
+        --perform-auto-training: Whether the solution uses automatic training to create new solution versions (trained models).
+        --perform-hpo: Whether to perform hyperparameter optimization (HPO) on the specified or selected recipe.
+        --recipe-arn=: The Amazon Resource Name (ARN) of the recipe to use for model training.
+        --solution-config=: The configuration properties for the solution.
+        --tags=: A list of [tags](https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html) to apply to the solution.
+    - name: list-dataset-import-jobs
+      description: Returns a list of dataset import jobs that use the given dataset.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-arn=: The Amazon Resource Name (ARN) of the dataset to list the dataset import jobs for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of dataset import jobs to return.
+        --next-token=: A token returned from the previous call to `ListDatasetImportJobs` for getting the next set of dataset import jobs (if they exist).
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: Get a list of [tags](https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html) attached to a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The resource's Amazon Resource Name (ARN).
+    - name: tag-resource
+      description: Add a list of tags to a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The resource's Amazon Resource Name (ARN).
+        --tags=!: Tags to apply to the resource.
+    - name: update-solution
+      description: Updates an Amazon Personalize solution to use a different automatic training configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-perform-auto-training: Whether the solution uses automatic training to create new solution versions (trained models).
+        --perform-auto-training: Whether the solution uses automatic training to create new solution versions (trained models).
+        --solution-arn=!: The Amazon Resource Name (ARN) of the solution to update.
+        --solution-update-config=: The new configuration details of the solution.
+    - name: describe-solution-version
+      description: Describes a specific version of a solution.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --solution-version-arn=!: The Amazon Resource Name (ARN) of the solution version.
     - name: list-dataset-export-jobs
       description: Returns a list of dataset export jobs that use the given dataset.
       flags:
@@ -668,21 +618,39 @@ commands:
         --next-token=: A token returned from the previous call to `ListDatasetExportJobs` for getting the next set of dataset export jobs (if they exist).
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: update-recommender
-      description: Updates the recommender to modify the recommender configuration.
+    - name: list-metric-attributions
+      description: Lists metric attributions.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-group-arn=: The metric attributions' dataset group Amazon Resource Name (ARN).
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recommender-arn=!: The Amazon Resource Name (ARN) of the recommender to modify.
-        --recommender-config=!: The configuration details of the recommender.
-    - name: delete-schema
-      description: Deletes a schema.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of metric attributions to return in one page of results.
+        --next-token=: Specify the pagination token from a previous request to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: delete-campaign
+      description: Removes a campaign by deleting the solution deployment.
       flags:
+        --campaign-arn=!: The Amazon Resource Name (ARN) of the campaign to delete.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --schema-arn=!: The Amazon Resource Name (ARN) of the schema to delete.
+    - name: delete-filter
+      description: Deletes a filter.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-arn=!: The ARN of the filter to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-dataset-export-job
+      description: Describes the dataset export job created by [CreateDatasetExportJob](https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetExportJob.html), including the export job status.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-export-job-arn=!: The Amazon Resource Name (ARN) of the dataset export job to describe.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: describe-event-tracker
       description: Describes an event tracker.
       flags:
@@ -690,17 +658,49 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --event-tracker-arn=!: The Amazon Resource Name (ARN) of the event tracker to describe.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-recommender
-      description: Describes the given recommender, including its status.
+    - name: start-recommender
+      description: Starts a recommender that is INACTIVE.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recommender-arn=!: The Amazon Resource Name (ARN) of the recommender to describe.
-    - name: describe-solution-version
-      description: Describes a specific version of a solution.
+        --recommender-arn=!: The Amazon Resource Name (ARN) of the recommender to start.
+    - name: create-dataset
+      description: Creates an empty dataset and adds it to the specified dataset group.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-group-arn=!: The Amazon Resource Name (ARN) of the dataset group to add the dataset to.
+        --dataset-type=!: The type of dataset.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --solution-version-arn=!: The Amazon Resource Name (ARN) of the solution version.
+        --name=!: The name for the dataset.
+        --schema-arn=!: The ARN of the schema to associate with the dataset.
+        --tags=: A list of [tags](https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html) to apply to the dataset.
+    - name: create-metric-attribution
+      description: Creates a metric attribution.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-group-arn=!: The Amazon Resource Name (ARN) of the destination dataset group for the metric attribution.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --metrics-output-config=!: The output configuration details for the metric attribution.
+        --metrics=!: A list of metric attributes for the metric attribution.
+        --name=!: A name for the metric attribution.
+    - name: create-recommender
+      description: Creates a recommender with the recipe (a Domain dataset group use case) you specify.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-group-arn=!: The Amazon Resource Name (ARN) of the destination domain dataset group for the recommender.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the recommender.
+        --recipe-arn=!: The Amazon Resource Name (ARN) of the recipe that the recommender will use.
+        --recommender-config=: The configuration details of the recommender.
+        --tags=: A list of [tags](https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html) to apply to the recommender.
+    - name: describe-campaign
+      description: Describes the given campaign, including its status.
+      flags:
+        --campaign-arn=!: The Amazon Resource Name (ARN) of the campaign.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.

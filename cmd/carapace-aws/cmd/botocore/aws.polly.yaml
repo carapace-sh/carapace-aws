@@ -1,6 +1,25 @@
 name: polly
 description: Amazon Polly
 commands:
+    - name: list-speech-synthesis-tasks
+      description: Returns a list of SpeechSynthesisTask objects ordered by their creation date.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of speech synthesis tasks returned in a List operation.
+        --next-token=: The pagination token to use in the next request to continue the listing of speech synthesis tasks.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: Status of the speech synthesis tasks returned in a List operation
+      completion:
+        flag:
+            status:
+                - scheduled
+                - inProgress
+                - completed
+                - failed
     - name: describe-voices
       description: Returns the list of voices that are available for use when requesting speech synthesis.
       flags:
@@ -80,25 +99,192 @@ commands:
         --max-items=: The  total number of items to return in the command's output.
         --next-token=: An opaque pagination token returned from previous `ListLexicons` operation.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-speech-synthesis-tasks
-      description: Returns a list of SpeechSynthesisTask objects ordered by their creation date.
+    - name: put-lexicon
+      description: Stores a pronunciation lexicon in an Amazon Web Services Region.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content=!: Content of the PLS lexicon as string data.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Maximum number of speech synthesis tasks returned in a List operation.
-        --next-token=: The pagination token to use in the next request to continue the listing of speech synthesis tasks.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --status=: Status of the speech synthesis tasks returned in a List operation
+        --name=!: Name of the lexicon.
+    - name: start-speech-synthesis-task
+      description: Allows the creation of an asynchronous synthesis task, by starting a new `SpeechSynthesisTask`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --engine=: Specifies the engine (`standard`, `neural`, `long-form` or `generative`) for Amazon Polly to use when processing input text for speech synthesis.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --language-code=: Optional language code for the Speech Synthesis request.
+        --lexicon-names=: List of one or more pronunciation lexicon names you want the service to apply during synthesis.
+        --output-format=!: The format in which the returned output will be encoded.
+        --output-s3-bucket-name=!: Amazon S3 bucket name to which the output file will be saved.
+        --output-s3-key-prefix=: The Amazon S3 key prefix for the output speech file.
+        --sample-rate=: The audio frequency specified in Hz.
+        --sns-topic-arn=: ARN for the SNS topic optionally used for providing status notification for a speech synthesis task.
+        --speech-mark-types=: The type of speech marks returned for the input text.
+        --text-type=: Specifies whether the input text is plain text or SSML.
+        --text=!: The input text to synthesize.
+        --voice-id=!: Voice ID to use for the synthesis.
       completion:
         flag:
-            status:
-                - scheduled
-                - inProgress
-                - completed
-                - failed
+            engine:
+                - standard
+                - neural
+                - long-form
+                - generative
+            language-code:
+                - arb
+                - cmn-CN
+                - cy-GB
+                - da-DK
+                - de-DE
+                - en-AU
+                - en-GB
+                - en-GB-WLS
+                - en-IN
+                - en-US
+                - es-ES
+                - es-MX
+                - es-US
+                - fr-CA
+                - fr-FR
+                - is-IS
+                - it-IT
+                - ja-JP
+                - hi-IN
+                - ko-KR
+                - nb-NO
+                - nl-NL
+                - pl-PL
+                - pt-BR
+                - pt-PT
+                - ro-RO
+                - ru-RU
+                - sv-SE
+                - tr-TR
+                - en-NZ
+                - en-ZA
+                - ca-ES
+                - de-AT
+                - yue-CN
+                - ar-AE
+                - fi-FI
+                - en-IE
+                - nl-BE
+                - fr-BE
+                - cs-CZ
+                - de-CH
+                - en-SG
+            output-format:
+                - json
+                - mp3
+                - ogg_opus
+                - ogg_vorbis
+                - pcm
+            text-type:
+                - ssml
+                - text
+            voice-id:
+                - Aditi
+                - Amy
+                - Astrid
+                - Bianca
+                - Brian
+                - Camila
+                - Carla
+                - Carmen
+                - Celine
+                - Chantal
+                - Conchita
+                - Cristiano
+                - Dora
+                - Emma
+                - Enrique
+                - Ewa
+                - Filiz
+                - Gabrielle
+                - Geraint
+                - Giorgio
+                - Gwyneth
+                - Hans
+                - Ines
+                - Ivy
+                - Jacek
+                - Jan
+                - Joanna
+                - Joey
+                - Justin
+                - Karl
+                - Kendra
+                - Kevin
+                - Kimberly
+                - Lea
+                - Liv
+                - Lotte
+                - Lucia
+                - Lupe
+                - Mads
+                - Maja
+                - Marlene
+                - Mathieu
+                - Matthew
+                - Maxim
+                - Mia
+                - Miguel
+                - Mizuki
+                - Naja
+                - Nicole
+                - Olivia
+                - Penelope
+                - Raveena
+                - Ricardo
+                - Ruben
+                - Russell
+                - Salli
+                - Seoyeon
+                - Takumi
+                - Tatyana
+                - Vicki
+                - Vitoria
+                - Zeina
+                - Zhiyu
+                - Aria
+                - Ayanda
+                - Arlet
+                - Hannah
+                - Arthur
+                - Daniel
+                - Liam
+                - Pedro
+                - Kajal
+                - Hiujin
+                - Laura
+                - Elin
+                - Ida
+                - Suvi
+                - Ola
+                - Hala
+                - Andres
+                - Sergio
+                - Remi
+                - Adriano
+                - Thiago
+                - Ruth
+                - Stephen
+                - Kazuha
+                - Tomoko
+                - Niamh
+                - Sofie
+                - Lisa
+                - Isabelle
+                - Zayd
+                - Danielle
+                - Gregory
+                - Burcu
+                - Jitka
+                - Sabrina
+                - Jasmine
+                - Jihye
     - name: synthesize-speech
       description: Synthesizes UTF-8 input, plain text or SSML, to a stream of bytes.
       flags:
@@ -287,189 +473,3 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: Name of the lexicon.
-    - name: put-lexicon
-      description: Stores a pronunciation lexicon in an Amazon Web Services Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content=!: Content of the PLS lexicon as string data.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: Name of the lexicon.
-    - name: start-speech-synthesis-task
-      description: Allows the creation of an asynchronous synthesis task, by starting a new `SpeechSynthesisTask`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --engine=: Specifies the engine (`standard`, `neural`, `long-form` or `generative`) for Amazon Polly to use when processing input text for speech synthesis.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --language-code=: Optional language code for the Speech Synthesis request.
-        --lexicon-names=: List of one or more pronunciation lexicon names you want the service to apply during synthesis.
-        --output-format=!: The format in which the returned output will be encoded.
-        --output-s3-bucket-name=!: Amazon S3 bucket name to which the output file will be saved.
-        --output-s3-key-prefix=: The Amazon S3 key prefix for the output speech file.
-        --sample-rate=: The audio frequency specified in Hz.
-        --sns-topic-arn=: ARN for the SNS topic optionally used for providing status notification for a speech synthesis task.
-        --speech-mark-types=: The type of speech marks returned for the input text.
-        --text-type=: Specifies whether the input text is plain text or SSML.
-        --text=!: The input text to synthesize.
-        --voice-id=!: Voice ID to use for the synthesis.
-      completion:
-        flag:
-            engine:
-                - standard
-                - neural
-                - long-form
-                - generative
-            language-code:
-                - arb
-                - cmn-CN
-                - cy-GB
-                - da-DK
-                - de-DE
-                - en-AU
-                - en-GB
-                - en-GB-WLS
-                - en-IN
-                - en-US
-                - es-ES
-                - es-MX
-                - es-US
-                - fr-CA
-                - fr-FR
-                - is-IS
-                - it-IT
-                - ja-JP
-                - hi-IN
-                - ko-KR
-                - nb-NO
-                - nl-NL
-                - pl-PL
-                - pt-BR
-                - pt-PT
-                - ro-RO
-                - ru-RU
-                - sv-SE
-                - tr-TR
-                - en-NZ
-                - en-ZA
-                - ca-ES
-                - de-AT
-                - yue-CN
-                - ar-AE
-                - fi-FI
-                - en-IE
-                - nl-BE
-                - fr-BE
-                - cs-CZ
-                - de-CH
-                - en-SG
-            output-format:
-                - json
-                - mp3
-                - ogg_opus
-                - ogg_vorbis
-                - pcm
-            text-type:
-                - ssml
-                - text
-            voice-id:
-                - Aditi
-                - Amy
-                - Astrid
-                - Bianca
-                - Brian
-                - Camila
-                - Carla
-                - Carmen
-                - Celine
-                - Chantal
-                - Conchita
-                - Cristiano
-                - Dora
-                - Emma
-                - Enrique
-                - Ewa
-                - Filiz
-                - Gabrielle
-                - Geraint
-                - Giorgio
-                - Gwyneth
-                - Hans
-                - Ines
-                - Ivy
-                - Jacek
-                - Jan
-                - Joanna
-                - Joey
-                - Justin
-                - Karl
-                - Kendra
-                - Kevin
-                - Kimberly
-                - Lea
-                - Liv
-                - Lotte
-                - Lucia
-                - Lupe
-                - Mads
-                - Maja
-                - Marlene
-                - Mathieu
-                - Matthew
-                - Maxim
-                - Mia
-                - Miguel
-                - Mizuki
-                - Naja
-                - Nicole
-                - Olivia
-                - Penelope
-                - Raveena
-                - Ricardo
-                - Ruben
-                - Russell
-                - Salli
-                - Seoyeon
-                - Takumi
-                - Tatyana
-                - Vicki
-                - Vitoria
-                - Zeina
-                - Zhiyu
-                - Aria
-                - Ayanda
-                - Arlet
-                - Hannah
-                - Arthur
-                - Daniel
-                - Liam
-                - Pedro
-                - Kajal
-                - Hiujin
-                - Laura
-                - Elin
-                - Ida
-                - Suvi
-                - Ola
-                - Hala
-                - Andres
-                - Sergio
-                - Remi
-                - Adriano
-                - Thiago
-                - Ruth
-                - Stephen
-                - Kazuha
-                - Tomoko
-                - Niamh
-                - Sofie
-                - Lisa
-                - Isabelle
-                - Zayd
-                - Danielle
-                - Gregory
-                - Burcu
-                - Jitka
-                - Sabrina
-                - Jasmine
-                - Jihye

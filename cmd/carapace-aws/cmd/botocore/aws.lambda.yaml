@@ -1,12 +1,289 @@
 name: lambda
 description: AWS Lambda
 commands:
-    - name: get-function-recursion-config
-      description: Returns your function's [recursive loop detection](https://docs.aws.amazon.com/lambda/latest/dg/invocation-recursion.html) configuration.
+    - name: update-function-code
+      description: Updates a Lambda function's code.
+      flags:
+        --architectures=: The instruction set architecture that the function supports.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dry-run: Set to true to validate the request parameters and access permissions without modifying the function code.
+        --function-name=!: The name or ARN of the Lambda function.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-uri=: URI of a container image in the Amazon ECR registry.
+        --no-dry-run: Set to true to validate the request parameters and access permissions without modifying the function code.
+        --no-publish: Set to true to publish a new version of the function after updating the code.
+        --publish: Set to true to publish a new version of the function after updating the code.
+        --revision-id=: Update the function only if the revision ID matches the ID that's specified.
+        --s3-bucket=: An Amazon S3 bucket in the same Amazon Web Services Region as your function.
+        --s3-key=: The Amazon S3 key of the deployment package.
+        --s3-object-version=: For versioned objects, the version of the deployment package object to use.
+        --source-kms-key-arn=: The ARN of the Key Management Service (KMS) customer managed key that's used to encrypt your function's .zip deployment package.
+        --zip-file=: The base64-encoded contents of the deployment package.
+    - name: get-alias
+      description: Returns details about a Lambda function [alias](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html).
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --function-name=!: ""
+        --function-name=!: The name or ARN of the Lambda function.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the alias.
+    - name: list-tags
+      description: Returns a function, event source mapping, or code signing configuration's [tags](https://docs.aws.amazon.com/lambda/latest/dg/tagging.html). You can also view function tags with [GetFunction]().
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource=!: The resource's Amazon Resource Name (ARN).
+    - name: put-runtime-management-config
+      description: Sets the runtime management configuration for a function's version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --function-name=!: The name or ARN of the Lambda function.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --qualifier=: Specify a version of the function.
+        --runtime-version-arn=: The ARN of the runtime version you want the function to use.
+        --update-runtime-on=!: Specify the runtime update mode.
+      completion:
+        flag:
+            update-runtime-on:
+                - Auto
+                - Manual
+                - FunctionUpdate
+    - name: delete-alias
+      description: Deletes a Lambda function [alias](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --function-name=!: The name or ARN of the Lambda function.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the alias.
+    - name: delete-event-source-mapping
+      description: Deletes an [event source mapping](https://docs.aws.amazon.com/lambda/latest/dg/intro-invocation-modes.html). You can get the identifier of a mapping from the output of [ListEventSourceMappings]().
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --uuid=!: The identifier of the event source mapping.
+    - name: update-function-event-invoke-config
+      description: Updates the configuration for asynchronous invocation for a function, version, or alias.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --destination-config=: A destination for events after they have been sent to a function for processing.
+        --function-name=!: The name or ARN of the Lambda function, version, or alias.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --maximum-event-age-in-seconds=: The maximum age of a request that Lambda sends to a function for processing.
+        --maximum-retry-attempts=: The maximum number of times to retry when the function returns an error.
+        --qualifier=: A version number or alias name.
+    - name: delete-function
+      description: Deletes a Lambda function.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --function-name=!: The name or ARN of the Lambda function or version.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --qualifier=: Specify a version to delete.
+    - name: delete-function-concurrency
+      description: Removes a concurrent execution limit from a function.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --function-name=!: The name or ARN of the Lambda function.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-account-settings
+      description: Retrieves details about your account's [limits](https://docs.aws.amazon.com/lambda/latest/dg/limits.html) and usage in an Amazon Web Services Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-provisioned-concurrency-configs
+      description: Retrieves a list of provisioned concurrency configurations for a function.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --function-name=!: The name or ARN of the Lambda function.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: Specify the pagination token that's returned by a previous request to retrieve the next page of results.
+        --max-items=: Specify a number to limit the number of configurations returned.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-function-event-invoke-config
+      description: Retrieves the configuration for asynchronous invocation for a function, version, or alias.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --function-name=!: The name or ARN of the Lambda function, version, or alias.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --qualifier=: A version number or alias name.
+    - name: get-runtime-management-config
+      description: Retrieves the runtime management configuration for a function's version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --function-name=!: The name or ARN of the Lambda function.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --qualifier=: Specify a version of the function.
+    - name: list-layers
+      description: Lists [Lambda layers](https://docs.aws.amazon.com/lambda/latest/dg/invocation-layers.html) and shows information about the latest version of each.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --compatible-architecture=: The compatible [instruction set architecture](https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html).
+        --compatible-runtime=: A runtime identifier.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: A pagination token returned by a previous call.
+        --max-items=: The maximum number of layers to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            compatible-architecture:
+                - x86_64
+                - arm64
+            compatible-runtime:
+                - nodejs
+                - nodejs4.3
+                - nodejs6.10
+                - nodejs8.10
+                - nodejs10.x
+                - nodejs12.x
+                - nodejs14.x
+                - nodejs16.x
+                - java8
+                - java8.al2
+                - java11
+                - python2.7
+                - python3.6
+                - python3.7
+                - python3.8
+                - python3.9
+                - dotnetcore1.0
+                - dotnetcore2.0
+                - dotnetcore2.1
+                - dotnetcore3.1
+                - dotnet6
+                - dotnet8
+                - nodejs4.3-edge
+                - go1.x
+                - ruby2.5
+                - ruby2.7
+                - provided
+                - provided.al2
+                - nodejs18.x
+                - python3.10
+                - java17
+                - ruby3.2
+                - ruby3.3
+                - ruby3.4
+                - python3.11
+                - nodejs20.x
+                - provided.al2023
+                - python3.12
+                - java21
+                - python3.13
+                - nodejs22.x
+                - nodejs24.x
+                - python3.14
+                - java25
+    - name: delete-provisioned-concurrency-config
+      description: Deletes the provisioned concurrency configuration for a function.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --function-name=!: The name or ARN of the Lambda function.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --qualifier=!: The version number or alias name.
+    - name: list-function-url-configs
+      description: Returns a list of Lambda function URLs for the specified function.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --function-name=!: The name or ARN of the Lambda function.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: Specify the pagination token that's returned by a previous request to retrieve the next page of results.
+        --max-items=: The maximum number of function URLs to return in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-layer-versions
+      description: Lists the versions of an [Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --compatible-architecture=: The compatible [instruction set architecture](https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html).
+        --compatible-runtime=: A runtime identifier.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --layer-name=!: The name or Amazon Resource Name (ARN) of the layer.
+        --marker=: A pagination token returned by a previous call.
+        --max-items=: The maximum number of versions to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            compatible-architecture:
+                - x86_64
+                - arm64
+            compatible-runtime:
+                - nodejs
+                - nodejs4.3
+                - nodejs6.10
+                - nodejs8.10
+                - nodejs10.x
+                - nodejs12.x
+                - nodejs14.x
+                - nodejs16.x
+                - java8
+                - java8.al2
+                - java11
+                - python2.7
+                - python3.6
+                - python3.7
+                - python3.8
+                - python3.9
+                - dotnetcore1.0
+                - dotnetcore2.0
+                - dotnetcore2.1
+                - dotnetcore3.1
+                - dotnet6
+                - dotnet8
+                - nodejs4.3-edge
+                - go1.x
+                - ruby2.5
+                - ruby2.7
+                - provided
+                - provided.al2
+                - nodejs18.x
+                - python3.10
+                - java17
+                - ruby3.2
+                - ruby3.3
+                - ruby3.4
+                - python3.11
+                - nodejs20.x
+                - provided.al2023
+                - python3.12
+                - java21
+                - python3.13
+                - nodejs22.x
+                - nodejs24.x
+                - python3.14
+                - java25
+    - name: put-provisioned-concurrency-config
+      description: Adds a provisioned concurrency configuration to a function's alias or version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --function-name=!: The name or ARN of the Lambda function.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --provisioned-concurrent-executions=!: The amount of provisioned concurrency to allocate for the version or alias.
+        --qualifier=!: The version number or alias name.
+    - name: delete-code-signing-config
+      description: Deletes the code signing configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --code-signing-config-arn=!: The The Amazon Resource Name (ARN) of the code signing configuration.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-provisioned-concurrency-config
       description: Retrieves the provisioned concurrency configuration for a function's alias or version.
@@ -16,46 +293,85 @@ commands:
         --function-name=!: The name or ARN of the Lambda function.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --qualifier=!: The version number or alias name.
-    - name: get-runtime-management-config
-      description: Retrieves the runtime management configuration for a function's version.
+    - name: update-event-source-mapping
+      description: Updates an event source mapping.
+      flags:
+        --amazon-managed-kafka-event-source-config=: ""
+        --batch-size=: The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function.
+        --bisect-batch-on-function-error: (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka) If the function returns an error, split the batch in two and retry.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --destination-config=: (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka) A configuration object that specifies the destination of an event after Lambda processes it.
+        --document-db-event-source-config=: Specific configuration settings for a DocumentDB event source.
+        --enabled: When true, the event source mapping is active.
+        --filter-criteria=: An object that defines the filter criteria that determine whether Lambda should process an event.
+        --function-name=: The name or ARN of the Lambda function.
+        --function-response-types=: (Kinesis, DynamoDB Streams, Amazon MSK, self-managed Apache Kafka, and Amazon SQS) A list of current response type enums applied to the event source mapping.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-arn=: The ARN of the Key Management Service (KMS) customer managed key that Lambda uses to encrypt your function's [filter criteria](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html#filtering-basics). By default, Lambda does not encrypt your filter criteria object.
+        --maximum-batching-window-in-seconds=: The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function.
+        --maximum-record-age-in-seconds=: (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka) Discard records older than the specified age.
+        --maximum-retry-attempts=: (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka) Discard records after the specified number of retries.
+        --metrics-config=: The metrics configuration for your event source.
+        --no-bisect-batch-on-function-error: (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka) If the function returns an error, split the batch in two and retry.
+        --no-enabled: When true, the event source mapping is active.
+        --parallelization-factor=: (Kinesis and DynamoDB Streams only) The number of batches to process from each shard concurrently.
+        --provisioned-poller-config=: (Amazon SQS, Amazon MSK, and self-managed Apache Kafka only) The provisioned mode configuration for the event source.
+        --scaling-config=: (Amazon SQS only) The scaling configuration for the event source.
+        --self-managed-kafka-event-source-config=: ""
+        --source-access-configurations=: An array of authentication protocols or VPC components required to secure your event source.
+        --tumbling-window-in-seconds=: (Kinesis and DynamoDB Streams only) The duration in seconds of a processing window for DynamoDB and Kinesis Streams event sources.
+        --uuid=!: The identifier of the event source mapping.
+    - name: get-function-code-signing-config
+      description: Returns the code signing configuration for the specified function.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --qualifier=: Specify a version of the function.
-    - name: list-event-source-mappings
-      description: Lists event source mappings.
+    - name: get-function-configuration
+      description: Returns the version-specific settings of a Lambda function or version.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --event-source-arn=: The Amazon Resource Name (ARN) of the event source.
-        --function-name=: The name or ARN of the Lambda function.
+        --function-name=!: The name or ARN of the Lambda function, version, or alias.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: A pagination token returned by a previous call.
-        --max-items=: The maximum number of event source mappings to return.
+        --qualifier=: Specify a version or alias to get details about a published version of the function.
+    - name: list-aliases
+      description: Returns a list of [aliases](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html) for a Lambda function.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --function-name=!: The name or ARN of the Lambda function.
+        --function-version=: Specify a function version to only list aliases that invoke that version.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: Specify the pagination token that's returned by a previous request to retrieve the next page of results.
+        --max-items=: Limit the number of aliases returned.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-tags
-      description: Returns a function, event source mapping, or code signing configuration's [tags](https://docs.aws.amazon.com/lambda/latest/dg/tagging.html). You can also view function tags with [GetFunction]().
+    - name: put-function-recursion-config
+      description: Sets your function's [recursive loop detection](https://docs.aws.amazon.com/lambda/latest/dg/invocation-recursion.html) configuration.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --function-name=!: The name or ARN of the Lambda function.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource=!: The resource's Amazon Resource Name (ARN).
-    - name: add-layer-version-permission
-      description: Adds permissions to the resource-based policy of a version of an [Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html). Use this action to grant layer usage permission to other accounts.
+        --recursive-loop=!: If you set your function's recursive loop detection configuration to `Allow`, Lambda doesn't take any action when it detects your function being invoked as part of a recursive loop.
+      completion:
+        flag:
+            recursive-loop:
+                - Allow
+                - Terminate
+    - name: remove-permission
+      description: Revokes function-use permission from an Amazon Web Services service or another Amazon Web Services account.
       flags:
-        --action=!: The API action that grants access to the layer.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --function-name=!: The name or ARN of the Lambda function, version, or alias.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --layer-name=!: The name or Amazon Resource Name (ARN) of the layer.
-        --organization-id=: With the principal set to `*`, grant permission to all accounts in the specified organization.
-        --principal=!: An account ID, or `*` to grant layer usage permission to all accounts in an organization, or all Amazon Web Services accounts (if `organizationId` is not specified).
-        --revision-id=: Only update the policy if the revision ID matches the ID specified.
-        --statement-id=!: An identifier that distinguishes the policy from others on the same layer version.
-        --version-number=!: The version number.
+        --qualifier=: Specify a version or alias to remove permissions from a published version of the function.
+        --revision-id=: Update the policy only if the revision ID matches the ID that's specified.
+        --statement-id=!: Statement ID of the permission to remove.
     - name: create-alias
       description: Creates an [alias](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html) for a Lambda function version.
       flags:
@@ -67,14 +383,43 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the alias.
         --routing-config=: The [routing configuration](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html#configuring-alias-routing) of the alias.
-    - name: delete-provisioned-concurrency-config
-      description: Deletes the provisioned concurrency configuration for a function.
+    - name: invoke
+      description: Invokes a Lambda function.
+      flags:
+        --client-context=: Up to 3,583 bytes of base64-encoded data about the invoking client to pass to the function in the context object.
+        --function-name=!: The name or ARN of the Lambda function, version, or alias.
+        --invocation-type=: Choose from the following options.
+        --log-type=: Set to `Tail` to include the execution log in the response.
+        --payload=: The JSON that you want to provide to your Lambda function as input.
+        --qualifier=: Specify a version or alias to invoke a published version of the function.
+        --tenant-id=: The identifier of the tenant in a multi-tenant Lambda function.
+      completion:
+        flag:
+            invocation-type:
+                - Event
+                - RequestResponse
+                - DryRun
+            log-type:
+                - None
+                - Tail
+        positional:
+            - - $files
+    - name: invoke-async
+      description: For asynchronous function invocation, use [Invoke]().
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --qualifier=!: The version number or alias name.
+        --invoke-args=!: The JSON that you want to provide to your Lambda function as input.
+    - name: delete-function-event-invoke-config
+      description: Deletes the configuration for asynchronous invocation for a function, version, or alias.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --function-name=!: The name or ARN of the Lambda function, version, or alias.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --qualifier=: A version number or alias name.
     - name: get-event-source-mapping
       description: Returns details about an event source mapping.
       flags:
@@ -82,69 +427,34 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --uuid=!: The identifier of the event source mapping.
-    - name: get-function-event-invoke-config
-      description: Retrieves the configuration for asynchronous invocation for a function, version, or alias.
+    - name: get-function
+      description: Returns information about the function or function version, with a link to download the deployment package that's valid for 10 minutes.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function, version, or alias.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --qualifier=: A version number or alias name.
-    - name: get-layer-version-by-arn
-      description: Returns information about a version of an [Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html), with a link to download the layer archive that's valid for 10 minutes.
-      flags:
-        --arn=!: The ARN of the layer version.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-function-event-invoke-configs
-      description: Retrieves a list of configurations for asynchronous invocation for a function.
+        --qualifier=: Specify a version or alias to get details about a published version of the function.
+    - name: list-code-signing-configs
+      description: Returns a list of [code signing configurations](https://docs.aws.amazon.com/lambda/latest/dg/configuring-codesigning.html). A request returns up to 10,000 configurations per call.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --function-name=!: The name or ARN of the Lambda function.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: Specify the pagination token that's returned by a previous request to retrieve the next page of results.
-        --max-items=: The maximum number of configurations to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-functions-by-code-signing-config
-      description: List the functions that use the specified code signing configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --code-signing-config-arn=!: The The Amazon Resource Name (ARN) of the code signing configuration.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: Specify the pagination token that's returned by a previous request to retrieve the next page of results.
         --max-items=: Maximum number of items to return.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: publish-version
-      description: Creates a [version](https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html) from the current code and configuration of a function.
+    - name: create-code-signing-config
+      description: Creates a code signing configuration.
       flags:
+        --allowed-publishers=!: Signing profiles for this code signing configuration.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --code-sha256=: Only publish a version if the hash value matches the value that's specified.
-        --description=: A description for the version to override the description in the function configuration.
-        --function-name=!: The name or ARN of the Lambda function.
+        --code-signing-policies=: The code signing policies define the actions to take if the validation checks fail.
+        --description=: Descriptive name for this code signing configuration.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --revision-id=: Only update the function if the revision ID matches the ID that's specified.
-    - name: tag-resource
-      description: Adds [tags](https://docs.aws.amazon.com/lambda/latest/dg/tagging.html) to a function, event source mapping, or code signing configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource=!: The resource's Amazon Resource Name (ARN).
-        --tags=!: A list of tags to apply to the resource.
-    - name: get-function-url-config
-      description: Returns details about a Lambda function URL.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --function-name=!: The name or ARN of the Lambda function.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --qualifier=: The alias name.
+        --tags=: A list of tags to add to the code signing configuration.
     - name: create-event-source-mapping
       description: Creates a mapping between an event source and an Lambda function.
       flags:
@@ -186,49 +496,6 @@ commands:
                 - TRIM_HORIZON
                 - LATEST
                 - AT_TIMESTAMP
-    - name: get-policy
-      description: Returns the [resource-based IAM policy](https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html) for a function, version, or alias.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --function-name=!: The name or ARN of the Lambda function, version, or alias.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --qualifier=: Specify a version or alias to get the policy for that resource.
-    - name: update-event-source-mapping
-      description: Updates an event source mapping.
-      flags:
-        --amazon-managed-kafka-event-source-config=: ""
-        --batch-size=: The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function.
-        --bisect-batch-on-function-error: (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka) If the function returns an error, split the batch in two and retry.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --destination-config=: (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka) A configuration object that specifies the destination of an event after Lambda processes it.
-        --document-db-event-source-config=: Specific configuration settings for a DocumentDB event source.
-        --enabled: When true, the event source mapping is active.
-        --filter-criteria=: An object that defines the filter criteria that determine whether Lambda should process an event.
-        --function-name=: The name or ARN of the Lambda function.
-        --function-response-types=: (Kinesis, DynamoDB Streams, Amazon MSK, self-managed Apache Kafka, and Amazon SQS) A list of current response type enums applied to the event source mapping.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kms-key-arn=: The ARN of the Key Management Service (KMS) customer managed key that Lambda uses to encrypt your function's [filter criteria](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html#filtering-basics). By default, Lambda does not encrypt your filter criteria object.
-        --maximum-batching-window-in-seconds=: The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function.
-        --maximum-record-age-in-seconds=: (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka) Discard records older than the specified age.
-        --maximum-retry-attempts=: (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka) Discard records after the specified number of retries.
-        --metrics-config=: The metrics configuration for your event source.
-        --no-bisect-batch-on-function-error: (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka) If the function returns an error, split the batch in two and retry.
-        --no-enabled: When true, the event source mapping is active.
-        --parallelization-factor=: (Kinesis and DynamoDB Streams only) The number of batches to process from each shard concurrently.
-        --provisioned-poller-config=: (Amazon SQS, Amazon MSK, and self-managed Apache Kafka only) The provisioned mode configuration for the event source.
-        --scaling-config=: (Amazon SQS only) The scaling configuration for the event source.
-        --self-managed-kafka-event-source-config=: ""
-        --source-access-configurations=: An array of authentication protocols or VPC components required to secure your event source.
-        --tumbling-window-in-seconds=: (Kinesis and DynamoDB Streams only) The duration in seconds of a processing window for DynamoDB and Kinesis Streams event sources.
-        --uuid=!: The identifier of the event source mapping.
-    - name: get-account-settings
-      description: Retrieves details about your account's [limits](https://docs.aws.amazon.com/lambda/latest/dg/limits.html) and usage in an Amazon Web Services Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-code-signing-config
       description: Returns information about the specified code signing configuration.
       flags:
@@ -236,71 +503,137 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --code-signing-config-arn=!: The The Amazon Resource Name (ARN) of the code signing configuration.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-function-url-configs
-      description: Returns a list of Lambda function URLs for the specified function.
+    - name: get-function-concurrency
+      description: Returns details about the reserved concurrency configuration for a function.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: Specify the pagination token that's returned by a previous request to retrieve the next page of results.
-        --max-items=: The maximum number of function URLs to return in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-functions
-      description: Returns a list of Lambda functions, with the version-specific configuration of each.
+    - name: get-function-url-config
+      description: Returns details about a Lambda function URL.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --function-version=: Set to `ALL` to include entries for all published versions of each function.
+        --function-name=!: The name or ARN of the Lambda function.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: Specify the pagination token that's returned by a previous request to retrieve the next page of results.
-        --master-region=: For Lambda@Edge functions, the Amazon Web Services Region of the master function.
-        --max-items=: The maximum number of functions to return in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+        --qualifier=: The alias name.
+    - name: create-function-url-config
+      description: Creates a Lambda function URL with the specified configuration parameters.
+      flags:
+        --auth-type=!: The type of authentication that your function URL uses.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cors=: The [cross-origin resource sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) settings for your function URL.
+        --function-name=!: The name or ARN of the Lambda function.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --invoke-mode=: 'Use one of the following options:'
+        --qualifier=: The alias name.
       completion:
         flag:
-            function-version:
-                - ALL
-    - name: remove-permission
-      description: Revokes function-use permission from an Amazon Web Services service or another Amazon Web Services account.
+            auth-type:
+                - NONE
+                - AWS_IAM
+            invoke-mode:
+                - BUFFERED
+                - RESPONSE_STREAM
+    - name: list-functions-by-code-signing-config
+      description: List the functions that use the specified code signing configuration.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --function-name=!: The name or ARN of the Lambda function, version, or alias.
+        --code-signing-config-arn=!: The The Amazon Resource Name (ARN) of the code signing configuration.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --qualifier=: Specify a version or alias to remove permissions from a published version of the function.
+        --marker=: Specify the pagination token that's returned by a previous request to retrieve the next page of results.
+        --max-items=: Maximum number of items to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: put-function-concurrency
+      description: Sets the maximum number of simultaneous executions for a function, and reserves capacity for that concurrency level.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --function-name=!: The name or ARN of the Lambda function.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --reserved-concurrent-executions=!: The number of simultaneous executions to reserve for the function.
+    - name: add-layer-version-permission
+      description: Adds permissions to the resource-based policy of a version of an [Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html). Use this action to grant layer usage permission to other accounts.
+      flags:
+        --action=!: The API action that grants access to the layer.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --layer-name=!: The name or Amazon Resource Name (ARN) of the layer.
+        --organization-id=: With the principal set to `*`, grant permission to all accounts in the specified organization.
+        --principal=!: An account ID, or `*` to grant layer usage permission to all accounts in an organization, or all Amazon Web Services accounts (if `organizationId` is not specified).
+        --revision-id=: Only update the policy if the revision ID matches the ID specified.
+        --statement-id=!: An identifier that distinguishes the policy from others on the same layer version.
+        --version-number=!: The version number.
+    - name: add-permission
+      description: Grants a [principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying) permission to use a function.
+      flags:
+        --action=!: The action that the principal can use on the function.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --event-source-token=: For Alexa Smart Home functions, a token that the invoker must supply.
+        --function-name=!: The name or ARN of the Lambda function, version, or alias.
+        --function-url-auth-type=: The type of authentication that your function URL uses.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --invoked-via-function-url: Restricts the `lambda:InvokeFunction` action to function URL calls.
+        --no-invoked-via-function-url: Restricts the `lambda:InvokeFunction` action to function URL calls.
+        --principal-org-id=: The identifier for your organization in Organizations.
+        --principal=!: The Amazon Web Services service, Amazon Web Services account, IAM user, or IAM role that invokes the function.
+        --qualifier=: Specify a version or alias to add permissions to a published version of the function.
         --revision-id=: Update the policy only if the revision ID matches the ID that's specified.
-        --statement-id=!: Statement ID of the permission to remove.
-    - name: delete-function-concurrency
-      description: Removes a concurrent execution limit from a function.
+        --source-account=: For Amazon Web Services service, the ID of the Amazon Web Services account that owns the resource.
+        --source-arn=: For Amazon Web Services services, the ARN of the Amazon Web Services resource that invokes the function.
+        --statement-id=!: A statement identifier that differentiates the statement from others in the same policy.
+      completion:
+        flag:
+            function-url-auth-type:
+                - NONE
+                - AWS_IAM
+    - name: delete-function-code-signing-config
+      description: Removes the code signing configuration from the function.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: invoke
-      description: Invokes a Lambda function.
+    - name: delete-layer-version
+      description: Deletes a version of an [Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
       flags:
-        --client-context=: Up to 3,583 bytes of base64-encoded data about the invoking client to pass to the function in the context object.
-        --function-name=!: The name or ARN of the Lambda function, version, or alias.
-        --invocation-type=: Choose from the following options.
-        --log-type=: Set to `Tail` to include the execution log in the response.
-        --payload=: The JSON that you want to provide to your Lambda function as input.
-        --qualifier=: Specify a version or alias to invoke a published version of the function.
-        --tenant-id=: The identifier of the tenant in a multi-tenant Lambda function.
-      completion:
-        flag:
-            invocation-type:
-                - Event
-                - RequestResponse
-                - DryRun
-            log-type:
-                - None
-                - Tail
-        positional:
-            - - $files
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --layer-name=!: The name or Amazon Resource Name (ARN) of the layer.
+        --version-number=!: The version number.
+    - name: get-function-recursion-config
+      description: Returns your function's [recursive loop detection](https://docs.aws.amazon.com/lambda/latest/dg/invocation-recursion.html) configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --function-name=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-layer-version
+      description: Returns information about a version of an [Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html), with a link to download the layer archive that's valid for 10 minutes.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --layer-name=!: The name or Amazon Resource Name (ARN) of the layer.
+        --version-number=!: The version number.
+    - name: list-versions-by-function
+      description: Returns a list of [versions](https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html), with the version-specific configuration of each.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --function-name=!: The name or ARN of the Lambda function.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: Specify the pagination token that's returned by a previous request to retrieve the next page of results.
+        --max-items=: The maximum number of versions to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: create-function
       description: Creates a Lambda function.
       flags:
@@ -383,215 +716,68 @@ commands:
                 - nodejs24.x
                 - python3.14
                 - java25
-    - name: delete-event-source-mapping
-      description: Deletes an [event source mapping](https://docs.aws.amazon.com/lambda/latest/dg/intro-invocation-modes.html). You can get the identifier of a mapping from the output of [ListEventSourceMappings]().
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --uuid=!: The identifier of the event source mapping.
-    - name: get-function-code-signing-config
-      description: Returns the code signing configuration for the specified function.
+    - name: delete-function-url-config
+      description: Deletes a Lambda function URL.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: remove-layer-version-permission
-      description: Removes a statement from the permissions policy for a version of an [Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html). For more information, see [AddLayerVersionPermission]().
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --layer-name=!: The name or Amazon Resource Name (ARN) of the layer.
-        --revision-id=: Only update the policy if the revision ID matches the ID specified.
-        --statement-id=!: The identifier that was specified when the statement was added.
-        --version-number=!: The version number.
-    - name: create-code-signing-config
-      description: Creates a code signing configuration.
-      flags:
-        --allowed-publishers=!: Signing profiles for this code signing configuration.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --code-signing-policies=: The code signing policies define the actions to take if the validation checks fail.
-        --description=: Descriptive name for this code signing configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: A list of tags to add to the code signing configuration.
-    - name: create-function-url-config
-      description: Creates a Lambda function URL with the specified configuration parameters.
-      flags:
-        --auth-type=!: The type of authentication that your function URL uses.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cors=: The [cross-origin resource sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) settings for your function URL.
-        --function-name=!: The name or ARN of the Lambda function.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --invoke-mode=: 'Use one of the following options:'
         --qualifier=: The alias name.
-      completion:
-        flag:
-            auth-type:
-                - NONE
-                - AWS_IAM
-            invoke-mode:
-                - BUFFERED
-                - RESPONSE_STREAM
-    - name: get-function-configuration
-      description: Returns the version-specific settings of a Lambda function or version.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --function-name=!: The name or ARN of the Lambda function, version, or alias.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --qualifier=: Specify a version or alias to get details about a published version of the function.
-    - name: get-layer-version
+    - name: get-layer-version-by-arn
       description: Returns information about a version of an [Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html), with a link to download the layer archive that's valid for 10 minutes.
       flags:
+        --arn=!: The ARN of the layer version.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-event-source-mappings
+      description: Lists event source mappings.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --event-source-arn=: The Amazon Resource Name (ARN) of the event source.
+        --function-name=: The name or ARN of the Lambda function.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: A pagination token returned by a previous call.
+        --max-items=: The maximum number of event source mappings to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-functions
+      description: Returns a list of Lambda functions, with the version-specific configuration of each.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --function-version=: Set to `ALL` to include entries for all published versions of each function.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: Specify the pagination token that's returned by a previous request to retrieve the next page of results.
+        --master-region=: For Lambda@Edge functions, the Amazon Web Services Region of the master function.
+        --max-items=: The maximum number of functions to return in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            function-version:
+                - ALL
+    - name: get-layer-version-policy
+      description: Returns the permission policy for a version of an [Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html). For more information, see [AddLayerVersionPermission]().
+      flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --layer-name=!: The name or Amazon Resource Name (ARN) of the layer.
         --version-number=!: The version number.
-    - name: list-code-signing-configs
-      description: Returns a list of [code signing configurations](https://docs.aws.amazon.com/lambda/latest/dg/configuring-codesigning.html). A request returns up to 10,000 configurations per call.
+    - name: list-function-event-invoke-configs
+      description: Retrieves a list of configurations for asynchronous invocation for a function.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --function-name=!: The name or ARN of the Lambda function.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: Specify the pagination token that's returned by a previous request to retrieve the next page of results.
-        --max-items=: Maximum number of items to return.
+        --max-items=: The maximum number of configurations to return.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: put-function-code-signing-config
-      description: Update the code signing configuration for the function.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --code-signing-config-arn=!: The The Amazon Resource Name (ARN) of the code signing configuration.
-        --function-name=!: The name or ARN of the Lambda function.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-code-signing-config
-      description: Update the code signing configuration.
-      flags:
-        --allowed-publishers=: Signing profiles for this code signing configuration.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --code-signing-config-arn=!: The The Amazon Resource Name (ARN) of the code signing configuration.
-        --code-signing-policies=: The code signing policy.
-        --description=: Descriptive name for this code signing configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-function-concurrency
-      description: Returns details about the reserved concurrency configuration for a function.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --function-name=!: The name or ARN of the Lambda function.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-function-url-config
-      description: Updates the configuration for a Lambda function URL.
-      flags:
-        --auth-type=: The type of authentication that your function URL uses.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cors=: The [cross-origin resource sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) settings for your function URL.
-        --function-name=!: The name or ARN of the Lambda function.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --invoke-mode=: 'Use one of the following options:'
-        --qualifier=: The alias name.
-      completion:
-        flag:
-            auth-type:
-                - NONE
-                - AWS_IAM
-            invoke-mode:
-                - BUFFERED
-                - RESPONSE_STREAM
-    - name: add-permission
-      description: Grants a [principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying) permission to use a function.
-      flags:
-        --action=!: The action that the principal can use on the function.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --event-source-token=: For Alexa Smart Home functions, a token that the invoker must supply.
-        --function-name=!: The name or ARN of the Lambda function, version, or alias.
-        --function-url-auth-type=: The type of authentication that your function URL uses.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --invoked-via-function-url: Restricts the `lambda:InvokeFunction` action to function URL calls.
-        --no-invoked-via-function-url: Restricts the `lambda:InvokeFunction` action to function URL calls.
-        --principal-org-id=: The identifier for your organization in Organizations.
-        --principal=!: The Amazon Web Services service, Amazon Web Services account, IAM user, or IAM role that invokes the function.
-        --qualifier=: Specify a version or alias to add permissions to a published version of the function.
-        --revision-id=: Update the policy only if the revision ID matches the ID that's specified.
-        --source-account=: For Amazon Web Services service, the ID of the Amazon Web Services account that owns the resource.
-        --source-arn=: For Amazon Web Services services, the ARN of the Amazon Web Services resource that invokes the function.
-        --statement-id=!: A statement identifier that differentiates the statement from others in the same policy.
-      completion:
-        flag:
-            function-url-auth-type:
-                - NONE
-                - AWS_IAM
-    - name: list-layers
-      description: Lists [Lambda layers](https://docs.aws.amazon.com/lambda/latest/dg/invocation-layers.html) and shows information about the latest version of each.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --compatible-architecture=: The compatible [instruction set architecture](https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html).
-        --compatible-runtime=: A runtime identifier.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: A pagination token returned by a previous call.
-        --max-items=: The maximum number of layers to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            compatible-architecture:
-                - x86_64
-                - arm64
-            compatible-runtime:
-                - nodejs
-                - nodejs4.3
-                - nodejs6.10
-                - nodejs8.10
-                - nodejs10.x
-                - nodejs12.x
-                - nodejs14.x
-                - nodejs16.x
-                - java8
-                - java8.al2
-                - java11
-                - python2.7
-                - python3.6
-                - python3.7
-                - python3.8
-                - python3.9
-                - dotnetcore1.0
-                - dotnetcore2.0
-                - dotnetcore2.1
-                - dotnetcore3.1
-                - dotnet6
-                - dotnet8
-                - nodejs4.3-edge
-                - go1.x
-                - ruby2.5
-                - ruby2.7
-                - provided
-                - provided.al2
-                - nodejs18.x
-                - python3.10
-                - java17
-                - ruby3.2
-                - ruby3.3
-                - ruby3.4
-                - python3.11
-                - nodejs20.x
-                - provided.al2023
-                - python3.12
-                - java21
-                - python3.13
-                - nodejs22.x
-                - nodejs24.x
-                - python3.14
-                - java25
     - name: publish-layer-version
       description: Creates an [Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) from a ZIP archive.
       flags:
@@ -604,116 +790,38 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --layer-name=!: The name or Amazon Resource Name (ARN) of the layer.
         --license-info=: The layer's software license.
-    - name: put-function-event-invoke-config
-      description: Configures options for [asynchronous invocation](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html) on a function, version, or alias.
+    - name: untag-resource
+      description: Removes [tags](https://docs.aws.amazon.com/lambda/latest/dg/tagging.html) from a function, event source mapping, or code signing configuration.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --destination-config=: A destination for events after they have been sent to a function for processing.
-        --function-name=!: The name or ARN of the Lambda function, version, or alias.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --maximum-event-age-in-seconds=: The maximum age of a request that Lambda sends to a function for processing.
-        --maximum-retry-attempts=: The maximum number of times to retry when the function returns an error.
-        --qualifier=: A version number or alias name.
-    - name: list-layer-versions
-      description: Lists the versions of an [Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --compatible-architecture=: The compatible [instruction set architecture](https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html).
-        --compatible-runtime=: A runtime identifier.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --layer-name=!: The name or Amazon Resource Name (ARN) of the layer.
-        --marker=: A pagination token returned by a previous call.
-        --max-items=: The maximum number of versions to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            compatible-architecture:
-                - x86_64
-                - arm64
-            compatible-runtime:
-                - nodejs
-                - nodejs4.3
-                - nodejs6.10
-                - nodejs8.10
-                - nodejs10.x
-                - nodejs12.x
-                - nodejs14.x
-                - nodejs16.x
-                - java8
-                - java8.al2
-                - java11
-                - python2.7
-                - python3.6
-                - python3.7
-                - python3.8
-                - python3.9
-                - dotnetcore1.0
-                - dotnetcore2.0
-                - dotnetcore2.1
-                - dotnetcore3.1
-                - dotnet6
-                - dotnet8
-                - nodejs4.3-edge
-                - go1.x
-                - ruby2.5
-                - ruby2.7
-                - provided
-                - provided.al2
-                - nodejs18.x
-                - python3.10
-                - java17
-                - ruby3.2
-                - ruby3.3
-                - ruby3.4
-                - python3.11
-                - nodejs20.x
-                - provided.al2023
-                - python3.12
-                - java21
-                - python3.13
-                - nodejs22.x
-                - nodejs24.x
-                - python3.14
-                - java25
-    - name: put-provisioned-concurrency-config
-      description: Adds a provisioned concurrency configuration to a function's alias or version.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --function-name=!: The name or ARN of the Lambda function.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --provisioned-concurrent-executions=!: The amount of provisioned concurrency to allocate for the version or alias.
-        --qualifier=!: The version number or alias name.
-    - name: delete-function
-      description: Deletes a Lambda function.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --function-name=!: The name or ARN of the Lambda function or version.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --qualifier=: Specify a version to delete.
-    - name: get-function
-      description: Returns information about the function or function version, with a link to download the deployment package that's valid for 10 minutes.
+        --resource=!: The resource's Amazon Resource Name (ARN).
+        --tag-keys=!: A list of tag keys to remove from the resource.
+    - name: get-policy
+      description: Returns the [resource-based IAM policy](https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html) for a function, version, or alias.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function, version, or alias.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --qualifier=: Specify a version or alias to get details about a published version of the function.
-    - name: list-provisioned-concurrency-configs
-      description: Retrieves a list of provisioned concurrency configurations for a function.
+        --qualifier=: Specify a version or alias to get the policy for that resource.
+    - name: put-function-code-signing-config
+      description: Update the code signing configuration for the function.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --code-signing-config-arn=!: The The Amazon Resource Name (ARN) of the code signing configuration.
         --function-name=!: The name or ARN of the Lambda function.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: Specify the pagination token that's returned by a previous request to retrieve the next page of results.
-        --max-items=: Specify a number to limit the number of configurations returned.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+    - name: tag-resource
+      description: Adds [tags](https://docs.aws.amazon.com/lambda/latest/dg/tagging.html) to a function, event source mapping, or code signing configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource=!: The resource's Amazon Resource Name (ARN).
+        --tags=!: A list of tags to apply to the resource.
     - name: update-alias
       description: Updates the configuration of a Lambda function [alias](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html).
       flags:
@@ -726,71 +834,16 @@ commands:
         --name=!: The name of the alias.
         --revision-id=: Only update the alias if the revision ID matches the ID that's specified.
         --routing-config=: The [routing configuration](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html#configuring-alias-routing) of the alias.
-    - name: update-function-code
-      description: Updates a Lambda function's code.
+    - name: update-code-signing-config
+      description: Update the code signing configuration.
       flags:
-        --architectures=: The instruction set architecture that the function supports.
+        --allowed-publishers=: Signing profiles for this code signing configuration.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dry-run: Set to true to validate the request parameters and access permissions without modifying the function code.
-        --function-name=!: The name or ARN of the Lambda function.
+        --code-signing-config-arn=!: The The Amazon Resource Name (ARN) of the code signing configuration.
+        --code-signing-policies=: The code signing policy.
+        --description=: Descriptive name for this code signing configuration.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-uri=: URI of a container image in the Amazon ECR registry.
-        --no-dry-run: Set to true to validate the request parameters and access permissions without modifying the function code.
-        --no-publish: Set to true to publish a new version of the function after updating the code.
-        --publish: Set to true to publish a new version of the function after updating the code.
-        --revision-id=: Update the function only if the revision ID matches the ID that's specified.
-        --s3-bucket=: An Amazon S3 bucket in the same Amazon Web Services Region as your function.
-        --s3-key=: The Amazon S3 key of the deployment package.
-        --s3-object-version=: For versioned objects, the version of the deployment package object to use.
-        --source-kms-key-arn=: The ARN of the Key Management Service (KMS) customer managed key that's used to encrypt your function's .zip deployment package.
-        --zip-file=: The base64-encoded contents of the deployment package.
-    - name: delete-function-code-signing-config
-      description: Removes the code signing configuration from the function.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --function-name=!: The name or ARN of the Lambda function.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-layer-version-policy
-      description: Returns the permission policy for a version of an [Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html). For more information, see [AddLayerVersionPermission]().
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --layer-name=!: The name or Amazon Resource Name (ARN) of the layer.
-        --version-number=!: The version number.
-    - name: list-aliases
-      description: Returns a list of [aliases](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html) for a Lambda function.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --function-name=!: The name or ARN of the Lambda function.
-        --function-version=: Specify a function version to only list aliases that invoke that version.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: Specify the pagination token that's returned by a previous request to retrieve the next page of results.
-        --max-items=: Limit the number of aliases returned.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-versions-by-function
-      description: Returns a list of [versions](https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html), with the version-specific configuration of each.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --function-name=!: The name or ARN of the Lambda function.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: Specify the pagination token that's returned by a previous request to retrieve the next page of results.
-        --max-items=: The maximum number of versions to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: put-function-concurrency
-      description: Sets the maximum number of simultaneous executions for a function, and reserves capacity for that concurrency level.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --function-name=!: The name or ARN of the Lambda function.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --reserved-concurrent-executions=!: The number of simultaneous executions to reserve for the function.
     - name: update-function-configuration
       description: Modify the version-specific settings of a Lambda function.
       flags:
@@ -863,40 +916,37 @@ commands:
                 - nodejs24.x
                 - python3.14
                 - java25
-    - name: delete-function-url-config
-      description: Deletes a Lambda function URL.
+    - name: update-function-url-config
+      description: Updates the configuration for a Lambda function URL.
       flags:
+        --auth-type=: The type of authentication that your function URL uses.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cors=: The [cross-origin resource sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) settings for your function URL.
         --function-name=!: The name or ARN of the Lambda function.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --invoke-mode=: 'Use one of the following options:'
         --qualifier=: The alias name.
-    - name: delete-layer-version
-      description: Deletes a version of an [Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
+      completion:
+        flag:
+            auth-type:
+                - NONE
+                - AWS_IAM
+            invoke-mode:
+                - BUFFERED
+                - RESPONSE_STREAM
+    - name: publish-version
+      description: Creates a [version](https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html) from the current code and configuration of a function.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --layer-name=!: The name or Amazon Resource Name (ARN) of the layer.
-        --version-number=!: The version number.
-    - name: invoke-async
-      description: For asynchronous function invocation, use [Invoke]().
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --code-sha256=: Only publish a version if the hash value matches the value that's specified.
+        --description=: A description for the version to override the description in the function configuration.
         --function-name=!: The name or ARN of the Lambda function.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --invoke-args=!: The JSON that you want to provide to your Lambda function as input.
-    - name: untag-resource
-      description: Removes [tags](https://docs.aws.amazon.com/lambda/latest/dg/tagging.html) from a function, event source mapping, or code signing configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource=!: The resource's Amazon Resource Name (ARN).
-        --tag-keys=!: A list of tag keys to remove from the resource.
-    - name: update-function-event-invoke-config
-      description: Updates the configuration for asynchronous invocation for a function, version, or alias.
+        --revision-id=: Only update the function if the revision ID matches the ID that's specified.
+    - name: put-function-event-invoke-config
+      description: Configures options for [asynchronous invocation](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html) on a function, version, or alias.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -906,77 +956,19 @@ commands:
         --maximum-event-age-in-seconds=: The maximum age of a request that Lambda sends to a function for processing.
         --maximum-retry-attempts=: The maximum number of times to retry when the function returns an error.
         --qualifier=: A version number or alias name.
-    - name: delete-code-signing-config
-      description: Deletes the code signing configuration.
+    - name: remove-layer-version-permission
+      description: Removes a statement from the permissions policy for a version of an [Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html). For more information, see [AddLayerVersionPermission]().
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --code-signing-config-arn=!: The The Amazon Resource Name (ARN) of the code signing configuration.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-alias
-      description: Returns details about a Lambda function [alias](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --function-name=!: The name or ARN of the Lambda function.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the alias.
-    - name: put-function-recursion-config
-      description: Sets your function's [recursive loop detection](https://docs.aws.amazon.com/lambda/latest/dg/invocation-recursion.html) configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --function-name=!: The name or ARN of the Lambda function.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recursive-loop=!: If you set your function's recursive loop detection configuration to `Allow`, Lambda doesn't take any action when it detects your function being invoked as part of a recursive loop.
-      completion:
-        flag:
-            recursive-loop:
-                - Allow
-                - Terminate
-    - name: put-runtime-management-config
-      description: Sets the runtime management configuration for a function's version.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --function-name=!: The name or ARN of the Lambda function.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --qualifier=: Specify a version of the function.
-        --runtime-version-arn=: The ARN of the runtime version you want the function to use.
-        --update-runtime-on=!: Specify the runtime update mode.
-      completion:
-        flag:
-            update-runtime-on:
-                - Auto
-                - Manual
-                - FunctionUpdate
-    - name: delete-alias
-      description: Deletes a Lambda function [alias](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --function-name=!: The name or ARN of the Lambda function.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the alias.
-    - name: delete-function-event-invoke-config
-      description: Deletes the configuration for asynchronous invocation for a function, version, or alias.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --function-name=!: The name or ARN of the Lambda function, version, or alias.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --qualifier=: A version number or alias name.
+        --layer-name=!: The name or Amazon Resource Name (ARN) of the layer.
+        --revision-id=: Only update the policy if the revision ID matches the ID specified.
+        --statement-id=!: The identifier that was specified when the statement was added.
+        --version-number=!: The version number.
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:
-        - name: published-version-active
-          description: Returns the version-specific settings of a Lambda function or version.
-          flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --function-name=!: The name or ARN of the Lambda function, version, or alias.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-            --qualifier=: Specify a version or alias to get details about a published version of the function.
         - name: function-active
           description: Returns the version-specific settings of a Lambda function or version.
           flags:
@@ -1011,6 +1003,14 @@ commands:
             --qualifier=: Specify a version or alias to get details about a published version of the function.
         - name: function-updated-v2
           description: Returns information about the function or function version, with a link to download the deployment package that's valid for 10 minutes.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --function-name=!: The name or ARN of the Lambda function, version, or alias.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --qualifier=: Specify a version or alias to get details about a published version of the function.
+        - name: published-version-active
+          description: Returns the version-specific settings of a Lambda function or version.
           flags:
             --cli-input-json=: Read arguments from the JSON string provided.
             --cli-input-yaml=: Read arguments from the YAML string provided.

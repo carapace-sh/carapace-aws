@@ -1,91 +1,22 @@
 name: forecast
 description: Amazon Forecast Service
 commands:
-    - name: delete-dataset-import-job
-      description: Deletes a dataset import job created using the [CreateDatasetImportJob](https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetImportJob.html) operation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-import-job-arn=!: The Amazon Resource Name (ARN) of the dataset import job to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-forecast-export-job
-      description: Deletes a forecast export job created using the [CreateForecastExportJob]() operation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --forecast-export-job-arn=!: The Amazon Resource Name (ARN) of the forecast export job to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-forecast
-      description: Describes a forecast created using the [CreateForecast]() operation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --forecast-arn=!: The Amazon Resource Name (ARN) of the forecast.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-predictor
-      description: This operation is only valid for legacy predictors created with CreatePredictor.
+    - name: stop-resource
+      description: Stops a resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --predictor-arn=!: The Amazon Resource Name (ARN) of the predictor that you want information about.
-    - name: delete-dataset-group
-      description: Deletes a dataset group created using the [CreateDatasetGroup](https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetGroup.html) operation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-group-arn=!: The Amazon Resource Name (ARN) of the dataset group to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-dataset-import-job
-      description: Describes a dataset import job created using the [CreateDatasetImportJob](https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetImportJob.html) operation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-import-job-arn=!: The Amazon Resource Name (ARN) of the dataset import job.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-what-if-forecast
-      description: Describes the what-if forecast created using the [CreateWhatIfForecast]() operation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --what-if-forecast-arn=!: The Amazon Resource Name (ARN) of the what-if forecast that you are interested in.
-    - name: list-datasets
-      description: Returns a list of datasets created using the [CreateDataset](https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDataset.html) operation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The number of items to return in the response.
-        --next-token=: If the result of the previous request was truncated, the response includes a `NextToken`.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: untag-resource
-      description: Deletes the specified tags from a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) that identifies the resource for which to list the tags.
-        --tag-keys=!: The keys of the tags to be removed.
-    - name: update-dataset-group
-      description: Replaces the datasets in a dataset group with the specified datasets.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-arns=!: An array of the Amazon Resource Names (ARNs) of the datasets to add to the dataset group.
-        --dataset-group-arn=!: The ARN of the dataset group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-what-if-forecasts
-      description: Returns a list of what-if forecasts created using the [CreateWhatIfForecast]() operation.
+        --resource-arn=!: The Amazon Resource Name (ARN) that identifies the resource to stop.
+    - name: list-monitors
+      description: Returns a list of monitors created with the [CreateMonitor]() operation and [CreateAutoPredictor]() operation.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --filters=: An array of filters.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The number of items to return in the response.
+        --max-results=: The maximum number of monitors to include in the response.
         --next-token=: If the result of the previous request was truncated, the response includes a `NextToken`.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
@@ -111,6 +42,121 @@ commands:
             import-mode:
                 - FULL
                 - INCREMENTAL
+    - name: create-explainability-export
+      description: Exports an Explainability resource created by the [CreateExplainability]() operation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --destination=!: ""
+        --explainability-arn=!: The Amazon Resource Name (ARN) of the Explainability to export.
+        --explainability-export-name=!: A unique name for the Explainability export.
+        --format=: The format of the exported data, CSV or PARQUET.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: Optional metadata to help you categorize and organize your resources.
+    - name: get-accuracy-metrics
+      description: Provides metrics on the accuracy of the models that were trained by the [CreatePredictor]() operation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --predictor-arn=!: The Amazon Resource Name (ARN) of the predictor to get metrics for.
+    - name: delete-dataset
+      description: Deletes an Amazon Forecast dataset that was created using the [CreateDataset](https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDataset.html) operation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-arn=!: The Amazon Resource Name (ARN) of the dataset to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-predictor
+      description: Deletes a predictor created using the [DescribePredictor]() or [CreatePredictor]() operations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --predictor-arn=!: The Amazon Resource Name (ARN) of the predictor to delete.
+    - name: delete-what-if-analysis
+      description: Deletes a what-if analysis created using the [CreateWhatIfAnalysis]() operation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --what-if-analysis-arn=!: The Amazon Resource Name (ARN) of the what-if analysis that you want to delete.
+    - name: create-forecast-export-job
+      description: Exports a forecast created by the [CreateForecast]() operation to your Amazon Simple Storage Service (Amazon S3) bucket.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --destination=!: The location where you want to save the forecast and an Identity and Access Management (IAM) role that Amazon Forecast can assume to access the location.
+        --forecast-arn=!: The Amazon Resource Name (ARN) of the forecast that you want to export.
+        --forecast-export-job-name=!: The name for the forecast export job.
+        --format=: The format of the exported data, CSV or PARQUET.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: The optional metadata that you apply to the forecast export job to help you categorize and organize them.
+    - name: create-what-if-forecast
+      description: A what-if forecast is a forecast that is created from a modified version of the baseline forecast.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: A list of [tags](https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html) to apply to the what if forecast.
+        --time-series-replacements-data-source=: The replacement time series dataset, which contains the rows that you want to change in the related time series dataset.
+        --time-series-transformations=: The transformations that are applied to the baseline time series.
+        --what-if-analysis-arn=!: The Amazon Resource Name (ARN) of the what-if analysis.
+        --what-if-forecast-name=!: The name of the what-if forecast.
+    - name: describe-forecast-export-job
+      description: Describes a forecast export job created using the [CreateForecastExportJob]() operation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --forecast-export-job-arn=!: The Amazon Resource Name (ARN) of the forecast export job.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-forecast-export-job
+      description: Deletes a forecast export job created using the [CreateForecastExportJob]() operation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --forecast-export-job-arn=!: The Amazon Resource Name (ARN) of the forecast export job to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-explainability
+      description: Explainability is only available for Forecasts and Predictors generated from an AutoPredictor ([CreateAutoPredictor]())
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-source=: ""
+        --enable-visualization: Create an Explainability visualization that is viewable within the Amazon Web Services console.
+        --end-date-time=: If `TimePointGranularity` is set to `SPECIFIC`, define the last time point for the Explainability.
+        --explainability-config=!: The configuration settings that define the granularity of time series and time points for the Explainability.
+        --explainability-name=!: A unique name for the Explainability.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-enable-visualization: Create an Explainability visualization that is viewable within the Amazon Web Services console.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the Predictor or Forecast used to create the Explainability.
+        --schema=: ""
+        --start-date-time=: If `TimePointGranularity` is set to `SPECIFIC`, define the first point for the Explainability.
+        --tags=: Optional metadata to help you categorize and organize your resources.
+    - name: create-what-if-analysis
+      description: What-if analysis is a scenario modeling technique where you make a hypothetical change to a time series and compare the forecasts generated by these changes against the baseline, unchanged time series.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --forecast-arn=!: The Amazon Resource Name (ARN) of the baseline forecast.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: A list of [tags](https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html) to apply to the what if forecast.
+        --time-series-selector=: Defines the set of time series that are used in the what-if analysis with a `TimeSeriesIdentifiers` object.
+        --what-if-analysis-name=!: The name of the what-if analysis.
+    - name: describe-predictor-backtest-export-job
+      description: Describes a predictor backtest export job created using the [CreatePredictorBacktestExportJob]() operation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --predictor-backtest-export-job-arn=!: The Amazon Resource Name (ARN) of the predictor backtest export job.
+    - name: describe-what-if-analysis
+      description: Describes the what-if analysis created using the [CreateWhatIfAnalysis]() operation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --what-if-analysis-arn=!: The Amazon Resource Name (ARN) of the what-if analysis that you are interested in.
     - name: list-dataset-groups
       description: Returns a list of dataset groups created using the [CreateDatasetGroup](https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetGroup.html) operation.
       flags:
@@ -134,34 +180,18 @@ commands:
         --next-token=: If the result of the previous request was truncated, the response includes a `NextToken`.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: delete-what-if-analysis
-      description: Deletes a what-if analysis created using the [CreateWhatIfAnalysis]() operation.
+    - name: list-predictors
+      description: Returns a list of predictors created using the [CreateAutoPredictor]() or [CreatePredictor]() operations.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: An array of filters.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --what-if-analysis-arn=!: The Amazon Resource Name (ARN) of the what-if analysis that you want to delete.
-    - name: describe-monitor
-      description: Describes a monitor resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --monitor-arn=!: The Amazon Resource Name (ARN) of the monitor resource to describe.
-    - name: describe-what-if-analysis
-      description: Describes the what-if analysis created using the [CreateWhatIfAnalysis]() operation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --what-if-analysis-arn=!: The Amazon Resource Name (ARN) of the what-if analysis that you are interested in.
-    - name: describe-what-if-forecast-export
-      description: Describes the what-if forecast export created using the [CreateWhatIfForecastExport]() operation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --what-if-forecast-export-arn=!: The Amazon Resource Name (ARN) of the what-if forecast export that you are interested in.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The number of items to return in the response.
+        --next-token=: If the result of the previous request was truncated, the response includes a `NextToken`.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: tag-resource
       description: Associates the specified tags to a resource with the specified `resourceArn`.
       flags:
@@ -170,295 +200,6 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) that identifies the resource for which to list the tags.
         --tags=!: The tags to add to the resource.
-    - name: create-dataset-group
-      description: Creates a dataset group, which holds a collection of related datasets.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-arns=: An array of Amazon Resource Names (ARNs) of the datasets that you want to include in the dataset group.
-        --dataset-group-name=!: A name for the dataset group.
-        --domain=!: The domain associated with the dataset group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: The optional metadata that you apply to the dataset group to help you categorize and organize them.
-      completion:
-        flag:
-            domain:
-                - RETAIL
-                - CUSTOM
-                - INVENTORY_PLANNING
-                - EC2_CAPACITY
-                - WORK_FORCE
-                - WEB_TRAFFIC
-                - METRICS
-    - name: create-predictor
-      description: This operation creates a legacy predictor that does not include all the predictor functionalities provided by Amazon Forecast.
-      flags:
-        --algorithm-arn=: The Amazon Resource Name (ARN) of the algorithm to use for model training.
-        --auto-ml-override-strategy=: The `LatencyOptimized` AutoML override strategy is only available in private beta.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --encryption-config=: An Key Management Service (KMS) key and the Identity and Access Management (IAM) role that Amazon Forecast can assume to access the key.
-        --evaluation-parameters=: Used to override the default evaluation parameters of the specified algorithm.
-        --featurization-config=!: The featurization configuration.
-        --forecast-horizon=!: Specifies the number of time-steps that the model is trained to predict.
-        --forecast-types=: Specifies the forecast types used to train a predictor.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hpo-config=: Provides hyperparameter override values for the algorithm.
-        --input-data-config=!: Describes the dataset group that contains the data to use to train the predictor.
-        --no-perform-auto-ml: Whether to perform AutoML.
-        --no-perform-hpo: Whether to perform hyperparameter optimization (HPO).
-        --optimization-metric=: The accuracy metric used to optimize the predictor.
-        --perform-auto-ml: Whether to perform AutoML.
-        --perform-hpo: Whether to perform hyperparameter optimization (HPO).
-        --predictor-name=!: A name for the predictor.
-        --tags=: The optional metadata that you apply to the predictor to help you categorize and organize them.
-        --training-parameters=: The hyperparameters to override for model training.
-      completion:
-        flag:
-            auto-ml-override-strategy:
-                - LatencyOptimized
-                - AccuracyOptimized
-            optimization-metric:
-                - WAPE
-                - RMSE
-                - AverageWeightedQuantileLoss
-                - MASE
-                - MAPE
-    - name: delete-resource-tree
-      description: Deletes an entire resource tree.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the parent resource to delete.
-    - name: describe-dataset-group
-      description: Describes a dataset group created using the [CreateDatasetGroup](https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetGroup.html) operation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-group-arn=!: The Amazon Resource Name (ARN) of the dataset group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: resume-resource
-      description: Resumes a stopped monitor resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the monitor resource to resume.
-    - name: create-explainability
-      description: Explainability is only available for Forecasts and Predictors generated from an AutoPredictor ([CreateAutoPredictor]())
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source=: ""
-        --enable-visualization: Create an Explainability visualization that is viewable within the Amazon Web Services console.
-        --end-date-time=: If `TimePointGranularity` is set to `SPECIFIC`, define the last time point for the Explainability.
-        --explainability-config=!: The configuration settings that define the granularity of time series and time points for the Explainability.
-        --explainability-name=!: A unique name for the Explainability.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-enable-visualization: Create an Explainability visualization that is viewable within the Amazon Web Services console.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the Predictor or Forecast used to create the Explainability.
-        --schema=: ""
-        --start-date-time=: If `TimePointGranularity` is set to `SPECIFIC`, define the first point for the Explainability.
-        --tags=: Optional metadata to help you categorize and organize your resources.
-    - name: create-predictor-backtest-export-job
-      description: Exports backtest forecasts and accuracy metrics generated by the [CreateAutoPredictor]() or [CreatePredictor]() operations.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --destination=!: ""
-        --format=: The format of the exported data, CSV or PARQUET.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --predictor-arn=!: The Amazon Resource Name (ARN) of the predictor that you want to export.
-        --predictor-backtest-export-job-name=!: The name for the backtest export job.
-        --tags=: Optional metadata to help you categorize and organize your backtests.
-    - name: list-monitor-evaluations
-      description: Returns a list of the monitoring evaluation results and predictor events collected by the monitor resource during different windows of time.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: An array of filters.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of monitoring results to return.
-        --monitor-arn=!: The Amazon Resource Name (ARN) of the monitor resource to get results from.
-        --next-token=: If the result of the previous request was truncated, the response includes a `NextToken`.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-what-if-forecast-exports
-      description: Returns a list of what-if forecast exports created using the [CreateWhatIfForecastExport]() operation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: An array of filters.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The number of items to return in the response.
-        --next-token=: If the result of the previous request was truncated, the response includes a `NextToken`.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: create-explainability-export
-      description: Exports an Explainability resource created by the [CreateExplainability]() operation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --destination=!: ""
-        --explainability-arn=!: The Amazon Resource Name (ARN) of the Explainability to export.
-        --explainability-export-name=!: A unique name for the Explainability export.
-        --format=: The format of the exported data, CSV or PARQUET.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: Optional metadata to help you categorize and organize your resources.
-    - name: delete-predictor-backtest-export-job
-      description: Deletes a predictor backtest export job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --predictor-backtest-export-job-arn=!: The Amazon Resource Name (ARN) of the predictor backtest export job to delete.
-    - name: list-dataset-import-jobs
-      description: Returns a list of dataset import jobs created using the [CreateDatasetImportJob](https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetImportJob.html) operation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: An array of filters.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The number of items to return in the response.
-        --next-token=: If the result of the previous request was truncated, the response includes a `NextToken`.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: delete-explainability-export
-      description: Deletes an Explainability export.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --explainability-export-arn=!: The Amazon Resource Name (ARN) of the Explainability export to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-forecast
-      description: Deletes a forecast created using the [CreateForecast]() operation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --forecast-arn=!: The Amazon Resource Name (ARN) of the forecast to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-explainabilities
-      description: Returns a list of Explainability resources created using the [CreateExplainability]() operation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: An array of filters.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The number of items returned in the response.
-        --next-token=: If the result of the previous request was truncated, the response includes a NextToken.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: stop-resource
-      description: Stops a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) that identifies the resource to stop.
-    - name: describe-explainability-export
-      description: Describes an Explainability export created using the [CreateExplainabilityExport]() operation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --explainability-export-arn=!: The Amazon Resource Name (ARN) of the Explainability export.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-forecast-export-job
-      description: Describes a forecast export job created using the [CreateForecastExportJob]() operation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --forecast-export-job-arn=!: The Amazon Resource Name (ARN) of the forecast export job.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-what-if-forecast-export
-      description: Exports a forecast created by the [CreateWhatIfForecast]() operation to your Amazon Simple Storage Service (Amazon S3) bucket.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --destination=!: The location where you want to save the forecast and an Identity and Access Management (IAM) role that Amazon Forecast can assume to access the location.
-        --format=: The format of the exported data, CSV or PARQUET.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: A list of [tags](https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html) to apply to the what if forecast.
-        --what-if-forecast-arns=!: The list of what-if forecast Amazon Resource Names (ARNs) to export.
-        --what-if-forecast-export-name=!: The name of the what-if forecast to export.
-    - name: delete-what-if-forecast
-      description: Deletes a what-if forecast created using the [CreateWhatIfForecast]() operation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --what-if-forecast-arn=!: The Amazon Resource Name (ARN) of the what-if forecast that you want to delete.
-    - name: describe-explainability
-      description: Describes an Explainability resource created using the [CreateExplainability]() operation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --explainability-arn=!: The Amazon Resource Name (ARN) of the Explaianability to describe.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-predictor-backtest-export-job
-      description: Describes a predictor backtest export job created using the [CreatePredictorBacktestExportJob]() operation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --predictor-backtest-export-job-arn=!: The Amazon Resource Name (ARN) of the predictor backtest export job.
-    - name: create-what-if-forecast
-      description: A what-if forecast is a forecast that is created from a modified version of the baseline forecast.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: A list of [tags](https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html) to apply to the what if forecast.
-        --time-series-replacements-data-source=: The replacement time series dataset, which contains the rows that you want to change in the related time series dataset.
-        --time-series-transformations=: The transformations that are applied to the baseline time series.
-        --what-if-analysis-arn=!: The Amazon Resource Name (ARN) of the what-if analysis.
-        --what-if-forecast-name=!: The name of the what-if forecast.
-    - name: get-accuracy-metrics
-      description: Provides metrics on the accuracy of the models that were trained by the [CreatePredictor]() operation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --predictor-arn=!: The Amazon Resource Name (ARN) of the predictor to get metrics for.
-    - name: delete-explainability
-      description: Deletes an Explainability resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --explainability-arn=!: The Amazon Resource Name (ARN) of the Explainability resource to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-monitor
-      description: Deletes a monitor resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --monitor-arn=!: The Amazon Resource Name (ARN) of the monitor resource to delete.
-    - name: delete-predictor
-      description: Deletes a predictor created using the [DescribePredictor]() or [CreatePredictor]() operations.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --predictor-arn=!: The Amazon Resource Name (ARN) of the predictor to delete.
-    - name: describe-auto-predictor
-      description: Describes a predictor created using the CreateAutoPredictor operation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --predictor-arn=!: The Amazon Resource Name (ARN) of the predictor.
-    - name: delete-what-if-forecast-export
-      description: Deletes a what-if forecast export created using the [CreateWhatIfForecastExport]() operation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --what-if-forecast-export-arn=!: The Amazon Resource Name (ARN) of the what-if forecast export that you want to delete.
     - name: create-dataset
       description: Creates an Amazon Forecast dataset.
       flags:
@@ -486,24 +227,72 @@ commands:
                 - WORK_FORCE
                 - WEB_TRAFFIC
                 - METRICS
-    - name: create-monitor
-      description: Creates a predictor monitor resource for an existing auto predictor.
+    - name: delete-explainability
+      description: Deletes an Explainability resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --explainability-arn=!: The Amazon Resource Name (ARN) of the Explainability resource to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-what-if-forecast-export
+      description: Exports a forecast created by the [CreateWhatIfForecast]() operation to your Amazon Simple Storage Service (Amazon S3) bucket.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --destination=!: The location where you want to save the forecast and an Identity and Access Management (IAM) role that Amazon Forecast can assume to access the location.
+        --format=: The format of the exported data, CSV or PARQUET.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: A list of [tags](https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html) to apply to the what if forecast.
+        --what-if-forecast-arns=!: The list of what-if forecast Amazon Resource Names (ARNs) to export.
+        --what-if-forecast-export-name=!: The name of the what-if forecast to export.
+    - name: delete-dataset-group
+      description: Deletes a dataset group created using the [CreateDatasetGroup](https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetGroup.html) operation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-group-arn=!: The Amazon Resource Name (ARN) of the dataset group to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-monitor
+      description: Deletes a monitor resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --monitor-name=!: The name of the monitor resource.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the predictor to monitor.
-        --tags=: A list of [tags](https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html) to apply to the monitor resource.
-    - name: describe-dataset
-      description: Describes an Amazon Forecast dataset created using the [CreateDataset](https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDataset.html) operation.
+        --monitor-arn=!: The Amazon Resource Name (ARN) of the monitor resource to delete.
+    - name: delete-what-if-forecast
+      description: Deletes a what-if forecast created using the [CreateWhatIfForecast]() operation.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-arn=!: The Amazon Resource Name (ARN) of the dataset.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-forecasts
-      description: Returns a list of forecasts created using the [CreateForecast]() operation.
+        --what-if-forecast-arn=!: The Amazon Resource Name (ARN) of the what-if forecast that you want to delete.
+    - name: delete-what-if-forecast-export
+      description: Deletes a what-if forecast export created using the [CreateWhatIfForecastExport]() operation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --what-if-forecast-export-arn=!: The Amazon Resource Name (ARN) of the what-if forecast export that you want to delete.
+    - name: describe-dataset-import-job
+      description: Describes a dataset import job created using the [CreateDatasetImportJob](https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetImportJob.html) operation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-import-job-arn=!: The Amazon Resource Name (ARN) of the dataset import job.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-predictor-backtest-export-job
+      description: Exports backtest forecasts and accuracy metrics generated by the [CreateAutoPredictor]() or [CreatePredictor]() operations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --destination=!: ""
+        --format=: The format of the exported data, CSV or PARQUET.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --predictor-arn=!: The Amazon Resource Name (ARN) of the predictor that you want to export.
+        --predictor-backtest-export-job-name=!: The name for the backtest export job.
+        --tags=: Optional metadata to help you categorize and organize your backtests.
+    - name: list-dataset-import-jobs
+      description: Returns a list of dataset import jobs created using the [CreateDatasetImportJob](https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetImportJob.html) operation.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -514,8 +303,65 @@ commands:
         --next-token=: If the result of the previous request was truncated, the response includes a `NextToken`.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-predictor-backtest-export-jobs
-      description: Returns a list of predictor backtest export jobs created using the [CreatePredictorBacktestExportJob]() operation.
+    - name: list-what-if-forecast-exports
+      description: Returns a list of what-if forecast exports created using the [CreateWhatIfForecastExport]() operation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: An array of filters.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The number of items to return in the response.
+        --next-token=: If the result of the previous request was truncated, the response includes a `NextToken`.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-monitor-evaluations
+      description: Returns a list of the monitoring evaluation results and predictor events collected by the monitor resource during different windows of time.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: An array of filters.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of monitoring results to return.
+        --monitor-arn=!: The Amazon Resource Name (ARN) of the monitor resource to get results from.
+        --next-token=: If the result of the previous request was truncated, the response includes a `NextToken`.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: delete-predictor-backtest-export-job
+      description: Deletes a predictor backtest export job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --predictor-backtest-export-job-arn=!: The Amazon Resource Name (ARN) of the predictor backtest export job to delete.
+    - name: describe-auto-predictor
+      description: Describes a predictor created using the CreateAutoPredictor operation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --predictor-arn=!: The Amazon Resource Name (ARN) of the predictor.
+    - name: describe-explainability
+      description: Describes an Explainability resource created using the [CreateExplainability]() operation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --explainability-arn=!: The Amazon Resource Name (ARN) of the Explaianability to describe.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-datasets
+      description: Returns a list of datasets created using the [CreateDataset](https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDataset.html) operation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The number of items to return in the response.
+        --next-token=: If the result of the previous request was truncated, the response includes a `NextToken`.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-explainability-exports
+      description: Returns a list of Explainability exports created using the [CreateExplainabilityExport]() operation.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -526,8 +372,30 @@ commands:
         --next-token=: If the result of the previous request was truncated, the response includes a NextToken.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-predictors
-      description: Returns a list of predictors created using the [CreateAutoPredictor]() or [CreatePredictor]() operations.
+    - name: describe-monitor
+      description: Describes a monitor resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --monitor-arn=!: The Amazon Resource Name (ARN) of the monitor resource to describe.
+    - name: update-dataset-group
+      description: Replaces the datasets in a dataset group with the specified datasets.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-arns=!: An array of the Amazon Resource Names (ARNs) of the datasets to add to the dataset group.
+        --dataset-group-arn=!: The ARN of the dataset group.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-forecast
+      description: Deletes a forecast created using the [CreateForecast]() operation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --forecast-arn=!: The Amazon Resource Name (ARN) of the forecast to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-what-if-forecasts
+      description: Returns a list of what-if forecasts created using the [CreateWhatIfForecast]() operation.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -566,25 +434,75 @@ commands:
                 - AverageWeightedQuantileLoss
                 - MASE
                 - MAPE
-    - name: create-what-if-analysis
-      description: What-if analysis is a scenario modeling technique where you make a hypothetical change to a time series and compare the forecasts generated by these changes against the baseline, unchanged time series.
+    - name: create-predictor
+      description: This operation creates a legacy predictor that does not include all the predictor functionalities provided by Amazon Forecast.
+      flags:
+        --algorithm-arn=: The Amazon Resource Name (ARN) of the algorithm to use for model training.
+        --auto-ml-override-strategy=: The `LatencyOptimized` AutoML override strategy is only available in private beta.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --encryption-config=: An Key Management Service (KMS) key and the Identity and Access Management (IAM) role that Amazon Forecast can assume to access the key.
+        --evaluation-parameters=: Used to override the default evaluation parameters of the specified algorithm.
+        --featurization-config=!: The featurization configuration.
+        --forecast-horizon=!: Specifies the number of time-steps that the model is trained to predict.
+        --forecast-types=: Specifies the forecast types used to train a predictor.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --hpo-config=: Provides hyperparameter override values for the algorithm.
+        --input-data-config=!: Describes the dataset group that contains the data to use to train the predictor.
+        --no-perform-auto-ml: Whether to perform AutoML.
+        --no-perform-hpo: Whether to perform hyperparameter optimization (HPO).
+        --optimization-metric=: The accuracy metric used to optimize the predictor.
+        --perform-auto-ml: Whether to perform AutoML.
+        --perform-hpo: Whether to perform hyperparameter optimization (HPO).
+        --predictor-name=!: A name for the predictor.
+        --tags=: The optional metadata that you apply to the predictor to help you categorize and organize them.
+        --training-parameters=: The hyperparameters to override for model training.
+      completion:
+        flag:
+            auto-ml-override-strategy:
+                - LatencyOptimized
+                - AccuracyOptimized
+            optimization-metric:
+                - WAPE
+                - RMSE
+                - AverageWeightedQuantileLoss
+                - MASE
+                - MAPE
+    - name: describe-dataset
+      description: Describes an Amazon Forecast dataset created using the [CreateDataset](https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDataset.html) operation.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --forecast-arn=!: The Amazon Resource Name (ARN) of the baseline forecast.
+        --dataset-arn=!: The Amazon Resource Name (ARN) of the dataset.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: A list of [tags](https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html) to apply to the what if forecast.
-        --time-series-selector=: Defines the set of time series that are used in the what-if analysis with a `TimeSeriesIdentifiers` object.
-        --what-if-analysis-name=!: The name of the what-if analysis.
-    - name: list-tags-for-resource
-      description: Lists the tags for an Amazon Forecast resource.
+    - name: describe-dataset-group
+      description: Describes a dataset group created using the [CreateDatasetGroup](https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetGroup.html) operation.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-group-arn=!: The Amazon Resource Name (ARN) of the dataset group.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) that identifies the resource for which to list the tags.
-    - name: list-explainability-exports
-      description: Returns a list of Explainability exports created using the [CreateExplainabilityExport]() operation.
+    - name: describe-explainability-export
+      description: Describes an Explainability export created using the [CreateExplainabilityExport]() operation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --explainability-export-arn=!: The Amazon Resource Name (ARN) of the Explainability export.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-explainabilities
+      description: Returns a list of Explainability resources created using the [CreateExplainability]() operation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: An array of filters.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The number of items returned in the response.
+        --next-token=: If the result of the previous request was truncated, the response includes a NextToken.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-predictor-backtest-export-jobs
+      description: Returns a list of predictor backtest export jobs created using the [CreatePredictorBacktestExportJob]() operation.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -593,6 +511,43 @@ commands:
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The number of items to return in the response.
         --next-token=: If the result of the previous request was truncated, the response includes a NextToken.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: create-forecast
+      description: Creates a forecast for each item in the `TARGET_TIME_SERIES` dataset that was used to train the predictor.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --forecast-name=!: A name for the forecast.
+        --forecast-types=: The quantiles at which probabilistic forecasts are generated.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --predictor-arn=!: The Amazon Resource Name (ARN) of the predictor to use to generate the forecast.
+        --tags=: The optional metadata that you apply to the forecast to help you categorize and organize them.
+        --time-series-selector=: Defines the set of time series that are used to create the forecasts in a `TimeSeriesIdentifiers` object.
+    - name: delete-dataset-import-job
+      description: Deletes a dataset import job created using the [CreateDatasetImportJob](https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetImportJob.html) operation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-import-job-arn=!: The Amazon Resource Name (ARN) of the dataset import job to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-resource-tree
+      description: Deletes an entire resource tree.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the parent resource to delete.
+    - name: list-forecasts
+      description: Returns a list of forecasts created using the [CreateForecast]() operation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: An array of filters.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The number of items to return in the response.
+        --next-token=: If the result of the previous request was truncated, the response includes a `NextToken`.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
     - name: list-what-if-analyses
@@ -607,44 +562,89 @@ commands:
         --next-token=: If the result of the previous request was truncated, the response includes a `NextToken`.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-monitors
-      description: Returns a list of monitors created with the [CreateMonitor]() operation and [CreateAutoPredictor]() operation.
+    - name: untag-resource
+      description: Deletes the specified tags from a resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: An array of filters.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of monitors to include in the response.
-        --next-token=: If the result of the previous request was truncated, the response includes a `NextToken`.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: create-forecast
-      description: Creates a forecast for each item in the `TARGET_TIME_SERIES` dataset that was used to train the predictor.
+        --resource-arn=!: The Amazon Resource Name (ARN) that identifies the resource for which to list the tags.
+        --tag-keys=!: The keys of the tags to be removed.
+    - name: create-monitor
+      description: Creates a predictor monitor resource for an existing auto predictor.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --forecast-name=!: A name for the forecast.
-        --forecast-types=: The quantiles at which probabilistic forecasts are generated.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --predictor-arn=!: The Amazon Resource Name (ARN) of the predictor to use to generate the forecast.
-        --tags=: The optional metadata that you apply to the forecast to help you categorize and organize them.
-        --time-series-selector=: Defines the set of time series that are used to create the forecasts in a `TimeSeriesIdentifiers` object.
-    - name: create-forecast-export-job
-      description: Exports a forecast created by the [CreateForecast]() operation to your Amazon Simple Storage Service (Amazon S3) bucket.
+        --monitor-name=!: The name of the monitor resource.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the predictor to monitor.
+        --tags=: A list of [tags](https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html) to apply to the monitor resource.
+    - name: describe-predictor
+      description: This operation is only valid for legacy predictors created with CreatePredictor.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --destination=!: The location where you want to save the forecast and an Identity and Access Management (IAM) role that Amazon Forecast can assume to access the location.
-        --forecast-arn=!: The Amazon Resource Name (ARN) of the forecast that you want to export.
-        --forecast-export-job-name=!: The name for the forecast export job.
-        --format=: The format of the exported data, CSV or PARQUET.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: The optional metadata that you apply to the forecast export job to help you categorize and organize them.
-    - name: delete-dataset
-      description: Deletes an Amazon Forecast dataset that was created using the [CreateDataset](https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDataset.html) operation.
+        --predictor-arn=!: The Amazon Resource Name (ARN) of the predictor that you want information about.
+    - name: describe-what-if-forecast
+      description: Describes the what-if forecast created using the [CreateWhatIfForecast]() operation.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-arn=!: The Amazon Resource Name (ARN) of the dataset to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --what-if-forecast-arn=!: The Amazon Resource Name (ARN) of the what-if forecast that you are interested in.
+    - name: describe-what-if-forecast-export
+      description: Describes the what-if forecast export created using the [CreateWhatIfForecastExport]() operation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --what-if-forecast-export-arn=!: The Amazon Resource Name (ARN) of the what-if forecast export that you are interested in.
+    - name: list-tags-for-resource
+      description: Lists the tags for an Amazon Forecast resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) that identifies the resource for which to list the tags.
+    - name: resume-resource
+      description: Resumes a stopped monitor resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the monitor resource to resume.
+    - name: create-dataset-group
+      description: Creates a dataset group, which holds a collection of related datasets.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-arns=: An array of Amazon Resource Names (ARNs) of the datasets that you want to include in the dataset group.
+        --dataset-group-name=!: A name for the dataset group.
+        --domain=!: The domain associated with the dataset group.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: The optional metadata that you apply to the dataset group to help you categorize and organize them.
+      completion:
+        flag:
+            domain:
+                - RETAIL
+                - CUSTOM
+                - INVENTORY_PLANNING
+                - EC2_CAPACITY
+                - WORK_FORCE
+                - WEB_TRAFFIC
+                - METRICS
+    - name: delete-explainability-export
+      description: Deletes an Explainability export.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --explainability-export-arn=!: The Amazon Resource Name (ARN) of the Explainability export to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-forecast
+      description: Describes a forecast created using the [CreateForecast]() operation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --forecast-arn=!: The Amazon Resource Name (ARN) of the forecast.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.

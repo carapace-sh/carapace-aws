@@ -1,99 +1,21 @@
 name: codedeploy
 description: AWS CodeDeploy
 commands:
-    - name: list-deployment-targets
-      description: Returns an array of target IDs that are associated a deployment.
+    - name: batch-get-deployments
+      description: Gets information about one or more deployments.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deployment-id=!: The unique ID of a deployment.
+        --deployment-ids=!: A list of deployment IDs, separated by spaces.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: A token identifier returned from the previous `ListDeploymentTargets` call.
-        --starting-token=: A token to specify where to start paginating.
-        --target-filters=: A key used to filter the returned targets.
-    - name: register-on-premises-instance
-      description: Registers an on-premises instance.
+    - name: list-tags-for-resource
+      description: Returns a list of tags for the resource identified by a specified Amazon Resource Name (ARN).
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --iam-session-arn=: The ARN of the IAM session to associate with the on-premises instance.
-        --iam-user-arn=: The ARN of the user to associate with the on-premises instance.
-        --instance-name=!: The name of the on-premises instance to register.
-    - name: batch-get-deployment-instances
-      description: This method works, but is deprecated.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deployment-id=!: The unique ID of a deployment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-ids=!: The unique IDs of instances used in the deployment.
-    - name: delete-deployment-group
-      description: Deletes a deployment group.
-      flags:
-        --application-name=!: The name of an CodeDeploy application associated with the user or Amazon Web Services account.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deployment-group-name=!: The name of a deployment group for the specified application.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: put-lifecycle-event-hook-execution-status
-      description: Sets the result of a Lambda validation function.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deployment-id=: The unique ID of a deployment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lifecycle-event-hook-execution-id=: The execution ID of a deployment's lifecycle hook.
-        --status=: The result of a Lambda function that validates a deployment lifecycle event.
-      completion:
-        flag:
-            status:
-                - Pending
-                - InProgress
-                - Succeeded
-                - Failed
-                - Skipped
-                - Unknown
-    - name: remove-tags-from-on-premises-instances
-      description: Removes one or more tags from one or more on-premises instances.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-names=!: The names of the on-premises instances from which to remove tags.
-        --tags=!: The tag key-value pairs to remove from the on-premises instances.
-    - name: update-application
-      description: Changes the name of an application.
-      flags:
-        --application-name=: The current name of the application you want to change.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --new-application-name=: The new name to give the application.
-    - name: batch-get-application-revisions
-      description: Gets information about one or more application revisions.
-      flags:
-        --application-name=!: The name of an CodeDeploy application about which to get revision information.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --revisions=!: An array of `RevisionLocation` objects that specify information to get about the application revisions, including type and location.
-    - name: batch-get-deployment-groups
-      description: Gets information about one or more deployment groups.
-      flags:
-        --application-name=!: The name of an CodeDeploy application associated with the applicable user or Amazon Web Services account.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deployment-group-names=!: The names of the deployment groups.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: batch-get-on-premises-instances
-      description: Gets information about one or more on-premises instances.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-names=!: The names of the on-premises instances about which to get information.
+        --next-token=: An identifier returned from the previous `ListTagsForResource` call.
+        --resource-arn=!: The ARN of a CodeDeploy resource.
     - name: create-application
       description: Creates an application.
       flags:
@@ -109,54 +31,37 @@ commands:
                 - Server
                 - Lambda
                 - ECS
-    - name: list-applications
-      description: Lists the applications registered with the user or Amazon Web Services account.
+    - name: delete-deployment-config
+      description: Deletes a deployment configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --deployment-config-name=!: The name of a deployment configuration associated with the user or Amazon Web Services account.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-deployment-group
+      description: Deletes a deployment group.
+      flags:
+        --application-name=!: The name of an CodeDeploy application associated with the user or Amazon Web Services account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --deployment-group-name=!: The name of a deployment group for the specified application.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-application-revision
+      description: Gets information about an application revision.
+      flags:
+        --application-name=!: The name of the application that corresponds to the revision.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --revision=!: Information about the application revision to get, including type and location.
+    - name: list-git-hub-account-token-names
+      description: Lists the names of stored connections to GitHub accounts.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
-        --next-token=: An identifier returned from the previous list applications call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: register-application-revision
-      description: Registers with CodeDeploy a revision for the specified application.
-      flags:
-        --application-name=!: The name of an CodeDeploy application associated with the user or Amazon Web Services account.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A comment about the revision.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --revision=!: Information about the application revision to register, including type and location.
-    - name: delete-application
-      description: Deletes an application.
-      flags:
-        --application-name=!: The name of an CodeDeploy application associated with the user or Amazon Web Services account.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-deployment-groups
-      description: Lists the deployment groups for an application registered with the Amazon Web Services user or Amazon Web Services account.
-      flags:
-        --application-name=!: The name of an CodeDeploy application associated with the user or Amazon Web Services account.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: An identifier returned from the previous list deployment groups call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-deployments
-      description: Lists the deployments in a deployment group for an application registered with the user or Amazon Web Services account.
-      flags:
-        --application-name=: The name of an CodeDeploy application associated with the user or Amazon Web Services account.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --create-time-range=: A time range (start and end) for returning a subset of the list of deployments.
-        --deployment-group-name=: The name of a deployment group for the specified application.
-        --external-id=: The unique ID of an external resource for returning deployments linked to the external resource.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --include-only-statuses=: 'A subset of deployments to list by status:'
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: An identifier returned from the previous list deployments call.
+        --next-token=: An identifier returned from the previous `ListGitHubAccountTokenNames` call.
         --starting-token=: A token to specify where to start paginating.
     - name: list-on-premises-instances
       description: Gets a list of names for one or more on-premises instances.
@@ -174,22 +79,211 @@ commands:
             registration-status:
                 - Registered
                 - Deregistered
-    - name: get-application-revision
-      description: Gets information about an application revision.
+    - name: batch-get-deployment-groups
+      description: Gets information about one or more deployment groups.
       flags:
-        --application-name=!: The name of the application that corresponds to the revision.
+        --application-name=!: The name of an CodeDeploy application associated with the applicable user or Amazon Web Services account.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --deployment-group-names=!: The names of the deployment groups.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --revision=!: Information about the application revision to get, including type and location.
-    - name: get-deployment-instance
-      description: Gets information about an instance as part of a deployment.
+    - name: batch-get-deployment-instances
+      description: This method works, but is deprecated.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --deployment-id=!: The unique ID of a deployment.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-id=!: The unique ID of an instance in the deployment group.
+        --instance-ids=!: The unique IDs of instances used in the deployment.
+    - name: batch-get-on-premises-instances
+      description: Gets information about one or more on-premises instances.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-names=!: The names of the on-premises instances about which to get information.
+    - name: delete-application
+      description: Deletes an application.
+      flags:
+        --application-name=!: The name of an CodeDeploy application associated with the user or Amazon Web Services account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-deployment-groups
+      description: Lists the deployment groups for an application registered with the Amazon Web Services user or Amazon Web Services account.
+      flags:
+        --application-name=!: The name of an CodeDeploy application associated with the user or Amazon Web Services account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: An identifier returned from the previous list deployment groups call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: skip-wait-time-for-instance-termination
+      description: In a blue/green deployment, overrides any specified wait time and starts terminating instances immediately after the traffic routing is complete.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --deployment-id=: The unique ID of a blue/green deployment for which you want to skip the instance termination wait time.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: untag-resource
+      description: Disassociates a resource from a list of tags.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) that specifies from which resource to disassociate the tags with the keys in the `TagKeys` input parameter.
+        --tag-keys=!: A list of keys of `Tag` objects.
+    - name: update-application
+      description: Changes the name of an application.
+      flags:
+        --application-name=: The current name of the application you want to change.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --new-application-name=: The new name to give the application.
+    - name: add-tags-to-on-premises-instances
+      description: Adds tags to on-premises instances.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-names=!: The names of the on-premises instances to which to add tags.
+        --tags=!: The tag key-value pairs to add to the on-premises instances.
+    - name: get-application
+      description: Gets information about an application.
+      flags:
+        --application-name=!: The name of an CodeDeploy application associated with the user or Amazon Web Services account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-application-revisions
+      description: Lists information about revisions for an application.
+      flags:
+        --application-name=!: The name of an CodeDeploy application associated with the user or Amazon Web Services account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --deployed=: 'Whether to list revisions based on whether the revision is the target revision of a deployment group:'
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: An identifier returned from the previous `ListApplicationRevisions` call.
+        --s3-bucket=: An Amazon S3 bucket name to limit the search for revisions.
+        --s3-key-prefix=: A key prefix for the set of Amazon S3 objects to limit the search for revisions.
+        --sort-by=: 'The column name to use to sort the list results:'
+        --sort-order=: 'The order in which to sort the list results:'
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            deployed:
+                - include
+                - exclude
+                - ignore
+            sort-by:
+                - registerTime
+                - firstUsedTime
+                - lastUsedTime
+            sort-order:
+                - ascending
+                - descending
+    - name: tag-resource
+      description: Associates the list of tags in the input `Tags` parameter with the resource identified by the `ResourceArn` input parameter.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of a resource, such as a CodeDeploy application or deployment group.
+        --tags=!: A list of tags that `TagResource` associates with a resource.
+    - name: delete-git-hub-account-token
+      description: Deletes a GitHub account connection.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --token-name=: The name of the GitHub account connection to delete.
+    - name: delete-resources-by-external-id
+      description: Deletes resources linked to an external ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --external-id=: The unique ID of an external resource (for example, a CloudFormation stack ID) that is linked to one or more CodeDeploy resources.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: deregister-on-premises-instance
+      description: Deregisters an on-premises instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-name=!: The name of the on-premises instance to deregister.
+    - name: get-on-premises-instance
+      description: Gets information about an on-premises instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-name=!: The name of the on-premises instance about which to get information.
+    - name: list-deployment-targets
+      description: Returns an array of target IDs that are associated a deployment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --deployment-id=!: The unique ID of a deployment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: A token identifier returned from the previous `ListDeploymentTargets` call.
+        --starting-token=: A token to specify where to start paginating.
+        --target-filters=: A key used to filter the returned targets.
+    - name: register-application-revision
+      description: Registers with CodeDeploy a revision for the specified application.
+      flags:
+        --application-name=!: The name of an CodeDeploy application associated with the user or Amazon Web Services account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A comment about the revision.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --revision=!: Information about the application revision to register, including type and location.
+    - name: register-on-premises-instance
+      description: Registers an on-premises instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --iam-session-arn=: The ARN of the IAM session to associate with the on-premises instance.
+        --iam-user-arn=: The ARN of the user to associate with the on-premises instance.
+        --instance-name=!: The name of the on-premises instance to register.
+    - name: stop-deployment
+      description: Attempts to stop an ongoing deployment.
+      flags:
+        --auto-rollback-enabled: Indicates, when a deployment is stopped, whether instances that have been updated should be rolled back to the previous version of the application revision.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --deployment-id=!: The unique ID of a deployment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-auto-rollback-enabled: Indicates, when a deployment is stopped, whether instances that have been updated should be rolled back to the previous version of the application revision.
+    - name: create-deployment-config
+      description: Creates a deployment configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --compute-platform=: The destination platform type for the deployment (`Lambda`, `Server`, or `ECS`).
+        --deployment-config-name=!: The name of the deployment configuration to create.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --minimum-healthy-hosts=: The minimum number of healthy instances that should be available at any time during the deployment.
+        --traffic-routing-config=: The configuration that specifies how the deployment traffic is routed.
+        --zonal-config=: Configure the `ZonalConfig` object if you want CodeDeploy to deploy your application to one [Availability Zone](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-availability-zones) at a time, within an Amazon Web Services Region.
+      completion:
+        flag:
+            compute-platform:
+                - Server
+                - Lambda
+                - ECS
+    - name: get-deployment-target
+      description: Returns information about a deployment target.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --deployment-id=!: The unique ID of a deployment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --target-id=!: The unique ID of a deployment target.
     - name: list-deployment-instances
       description: The newer `BatchGetDeploymentTargets` should be used instead because it works with all compute types.
       flags:
@@ -202,112 +296,45 @@ commands:
         --max-items=: The  total number of items to return in the command's output.
         --next-token=: An identifier returned from the previous list deployment instances call.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: Returns a list of tags for the resource identified by a specified Amazon Resource Name (ARN).
+    - name: remove-tags-from-on-premises-instances
+      description: Removes one or more tags from one or more on-premises instances.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --next-token=: An identifier returned from the previous `ListTagsForResource` call.
-        --resource-arn=!: The ARN of a CodeDeploy resource.
-    - name: tag-resource
-      description: Associates the list of tags in the input `Tags` parameter with the resource identified by the `ResourceArn` input parameter.
+        --instance-names=!: The names of the on-premises instances from which to remove tags.
+        --tags=!: The tag key-value pairs to remove from the on-premises instances.
+    - name: update-deployment-group
+      description: Changes information about a deployment group.
       flags:
+        --alarm-configuration=: Information to add or change about Amazon CloudWatch alarms when the deployment group is updated.
+        --application-name=!: The application name that corresponds to the deployment group to update.
+        --auto-rollback-configuration=: Information for an automatic rollback configuration that is added or changed when a deployment group is updated.
+        --auto-scaling-groups=: The replacement list of Auto Scaling groups to be included in the deployment group, if you want to change them.
+        --blue-green-deployment-configuration=: Information about blue/green deployment options for a deployment group.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --current-deployment-group-name=!: The current name of the deployment group.
+        --deployment-config-name=: The replacement deployment configuration name to use, if you want to change it.
+        --deployment-style=: Information about the type of deployment, either in-place or blue/green, you want to run and whether to route deployment traffic behind a load balancer.
+        --ec2-tag-filters=: The replacement set of Amazon EC2 tags on which to filter, if you want to change them.
+        --ec2-tag-set=: Information about groups of tags applied to on-premises instances.
+        --ecs-services=: The target Amazon ECS services in the deployment group.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of a resource, such as a CodeDeploy application or deployment group.
-        --tags=!: A list of tags that `TagResource` associates with a resource.
-    - name: untag-resource
-      description: Disassociates a resource from a list of tags.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) that specifies from which resource to disassociate the tags with the keys in the `TagKeys` input parameter.
-        --tag-keys=!: A list of keys of `Tag` objects.
-    - name: delete-git-hub-account-token
-      description: Deletes a GitHub account connection.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --token-name=: The name of the GitHub account connection to delete.
-    - name: get-application
-      description: Gets information about an application.
-      flags:
-        --application-name=!: The name of an CodeDeploy application associated with the user or Amazon Web Services account.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-on-premises-instance
-      description: Gets information about an on-premises instance.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-name=!: The name of the on-premises instance about which to get information.
-    - name: batch-get-deployment-targets
-      description: Returns an array of one or more targets associated with a deployment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deployment-id=!: The unique ID of a deployment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --target-ids=!: The unique IDs of the deployment targets.
-    - name: delete-deployment-config
-      description: Deletes a deployment configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deployment-config-name=!: The name of a deployment configuration associated with the user or Amazon Web Services account.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: deregister-on-premises-instance
-      description: Deregisters an on-premises instance.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-name=!: The name of the on-premises instance to deregister.
-    - name: get-deployment
-      description: Gets information about a deployment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deployment-id=!: The unique ID of a deployment associated with the user or Amazon Web Services account.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-deployment-group
-      description: Gets information about a deployment group.
-      flags:
-        --application-name=!: The name of an CodeDeploy application associated with the user or Amazon Web Services account.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deployment-group-name=!: The name of a deployment group for the specified application.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-git-hub-account-token-names
-      description: Lists the names of stored connections to GitHub accounts.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: An identifier returned from the previous `ListGitHubAccountTokenNames` call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: skip-wait-time-for-instance-termination
-      description: In a blue/green deployment, overrides any specified wait time and starts terminating instances immediately after the traffic routing is complete.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deployment-id=: The unique ID of a blue/green deployment for which you want to skip the instance termination wait time.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: add-tags-to-on-premises-instances
-      description: Adds tags to on-premises instances.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-names=!: The names of the on-premises instances to which to add tags.
-        --tags=!: The tag key-value pairs to add to the on-premises instances.
+        --load-balancer-info=: Information about the load balancer used in a deployment.
+        --new-deployment-group-name=: The new name of the deployment group, if you want to change it.
+        --no-termination-hook-enabled: This parameter only applies if you are using CodeDeploy with Amazon EC2 Auto Scaling.
+        --on-premises-instance-tag-filters=: The replacement set of on-premises instance tags on which to filter, if you want to change them.
+        --on-premises-tag-set=: Information about an on-premises instance tag set.
+        --outdated-instances-strategy=: Indicates what happens when new Amazon EC2 instances are launched mid-deployment and do not receive the deployed application revision.
+        --service-role-arn=: A replacement ARN for the service role, if you want to change it.
+        --termination-hook-enabled: This parameter only applies if you are using CodeDeploy with Amazon EC2 Auto Scaling.
+        --trigger-configurations=: Information about triggers to change when the deployment group is updated.
+      completion:
+        flag:
+            outdated-instances-strategy:
+                - UPDATE
+                - IGNORE
     - name: batch-get-applications
       description: Gets information about one or more applications.
       flags:
@@ -346,95 +373,71 @@ commands:
             outdated-instances-strategy:
                 - UPDATE
                 - IGNORE
-    - name: delete-resources-by-external-id
-      description: Deletes resources linked to an external ID.
+    - name: get-deployment-instance
+      description: Gets information about an instance as part of a deployment.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --external-id=: The unique ID of an external resource (for example, a CloudFormation stack ID) that is linked to one or more CodeDeploy resources.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-deployment-config
-      description: Gets information about a deployment configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deployment-config-name=!: The name of a deployment configuration associated with the user or Amazon Web Services account.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-application-revisions
-      description: Lists information about revisions for an application.
-      flags:
-        --application-name=!: The name of an CodeDeploy application associated with the user or Amazon Web Services account.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deployed=: 'Whether to list revisions based on whether the revision is the target revision of a deployment group:'
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: An identifier returned from the previous `ListApplicationRevisions` call.
-        --s3-bucket=: An Amazon S3 bucket name to limit the search for revisions.
-        --s3-key-prefix=: A key prefix for the set of Amazon S3 objects to limit the search for revisions.
-        --sort-by=: 'The column name to use to sort the list results:'
-        --sort-order=: 'The order in which to sort the list results:'
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            deployed:
-                - include
-                - exclude
-                - ignore
-            sort-by:
-                - registerTime
-                - firstUsedTime
-                - lastUsedTime
-            sort-order:
-                - ascending
-                - descending
-    - name: stop-deployment
-      description: Attempts to stop an ongoing deployment.
-      flags:
-        --auto-rollback-enabled: Indicates, when a deployment is stopped, whether instances that have been updated should be rolled back to the previous version of the application revision.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --deployment-id=!: The unique ID of a deployment.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-auto-rollback-enabled: Indicates, when a deployment is stopped, whether instances that have been updated should be rolled back to the previous version of the application revision.
-    - name: update-deployment-group
-      description: Changes information about a deployment group.
+        --instance-id=!: The unique ID of an instance in the deployment group.
+    - name: list-deployment-configs
+      description: Lists the deployment configurations with the user or Amazon Web Services account.
       flags:
-        --alarm-configuration=: Information to add or change about Amazon CloudWatch alarms when the deployment group is updated.
-        --application-name=!: The application name that corresponds to the deployment group to update.
-        --auto-rollback-configuration=: Information for an automatic rollback configuration that is added or changed when a deployment group is updated.
-        --auto-scaling-groups=: The replacement list of Auto Scaling groups to be included in the deployment group, if you want to change them.
-        --blue-green-deployment-configuration=: Information about blue/green deployment options for a deployment group.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --current-deployment-group-name=!: The current name of the deployment group.
-        --deployment-config-name=: The replacement deployment configuration name to use, if you want to change it.
-        --deployment-style=: Information about the type of deployment, either in-place or blue/green, you want to run and whether to route deployment traffic behind a load balancer.
-        --ec2-tag-filters=: The replacement set of Amazon EC2 tags on which to filter, if you want to change them.
-        --ec2-tag-set=: Information about groups of tags applied to on-premises instances.
-        --ecs-services=: The target Amazon ECS services in the deployment group.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --load-balancer-info=: Information about the load balancer used in a deployment.
-        --new-deployment-group-name=: The new name of the deployment group, if you want to change it.
-        --no-termination-hook-enabled: This parameter only applies if you are using CodeDeploy with Amazon EC2 Auto Scaling.
-        --on-premises-instance-tag-filters=: The replacement set of on-premises instance tags on which to filter, if you want to change them.
-        --on-premises-tag-set=: Information about an on-premises instance tag set.
-        --outdated-instances-strategy=: Indicates what happens when new Amazon EC2 instances are launched mid-deployment and do not receive the deployed application revision.
-        --service-role-arn=: A replacement ARN for the service role, if you want to change it.
-        --termination-hook-enabled: This parameter only applies if you are using CodeDeploy with Amazon EC2 Auto Scaling.
-        --trigger-configurations=: Information about triggers to change when the deployment group is updated.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: An identifier returned from the previous `ListDeploymentConfigs` call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-deployments
+      description: Lists the deployments in a deployment group for an application registered with the user or Amazon Web Services account.
+      flags:
+        --application-name=: The name of an CodeDeploy application associated with the user or Amazon Web Services account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --create-time-range=: A time range (start and end) for returning a subset of the list of deployments.
+        --deployment-group-name=: The name of a deployment group for the specified application.
+        --external-id=: The unique ID of an external resource for returning deployments linked to the external resource.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-only-statuses=: 'A subset of deployments to list by status:'
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: An identifier returned from the previous list deployments call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: put-lifecycle-event-hook-execution-status
+      description: Sets the result of a Lambda validation function.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --deployment-id=: The unique ID of a deployment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lifecycle-event-hook-execution-id=: The execution ID of a deployment's lifecycle hook.
+        --status=: The result of a Lambda function that validates a deployment lifecycle event.
       completion:
         flag:
-            outdated-instances-strategy:
-                - UPDATE
-                - IGNORE
-    - name: batch-get-deployments
-      description: Gets information about one or more deployments.
+            status:
+                - Pending
+                - InProgress
+                - Succeeded
+                - Failed
+                - Skipped
+                - Unknown
+    - name: batch-get-application-revisions
+      description: Gets information about one or more application revisions.
+      flags:
+        --application-name=!: The name of an CodeDeploy application about which to get revision information.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --revisions=!: An array of `RevisionLocation` objects that specify information to get about the application revisions, including type and location.
+    - name: batch-get-deployment-targets
+      description: Returns an array of one or more targets associated with a deployment.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deployment-ids=!: A list of deployment IDs, separated by spaces.
+        --deployment-id=!: The unique ID of a deployment.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --target-ids=!: The unique IDs of the deployment targets.
     - name: continue-deployment
       description: For a blue/green deployment, starts the process of rerouting traffic from instances in the original environment to instances in the replacement environment without waiting for a specified wait time to elapse.
       flags:
@@ -473,39 +476,36 @@ commands:
                 - DISALLOW
                 - OVERWRITE
                 - RETAIN
-    - name: create-deployment-config
-      description: Creates a deployment configuration.
+    - name: get-deployment
+      description: Gets information about a deployment.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --compute-platform=: The destination platform type for the deployment (`Lambda`, `Server`, or `ECS`).
-        --deployment-config-name=!: The name of the deployment configuration to create.
+        --deployment-id=!: The unique ID of a deployment associated with the user or Amazon Web Services account.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --minimum-healthy-hosts=: The minimum number of healthy instances that should be available at any time during the deployment.
-        --traffic-routing-config=: The configuration that specifies how the deployment traffic is routed.
-        --zonal-config=: Configure the `ZonalConfig` object if you want CodeDeploy to deploy your application to one [Availability Zone](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-availability-zones) at a time, within an Amazon Web Services Region.
-      completion:
-        flag:
-            compute-platform:
-                - Server
-                - Lambda
-                - ECS
-    - name: get-deployment-target
-      description: Returns information about a deployment target.
+    - name: get-deployment-config
+      description: Gets information about a deployment configuration.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deployment-id=!: The unique ID of a deployment.
+        --deployment-config-name=!: The name of a deployment configuration associated with the user or Amazon Web Services account.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --target-id=!: The unique ID of a deployment target.
-    - name: list-deployment-configs
-      description: Lists the deployment configurations with the user or Amazon Web Services account.
+    - name: get-deployment-group
+      description: Gets information about a deployment group.
+      flags:
+        --application-name=!: The name of an CodeDeploy application associated with the user or Amazon Web Services account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --deployment-group-name=!: The name of a deployment group for the specified application.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-applications
+      description: Lists the applications registered with the user or Amazon Web Services account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
-        --next-token=: An identifier returned from the previous `ListDeploymentConfigs` call.
+        --next-token=: An identifier returned from the previous list applications call.
         --starting-token=: A token to specify where to start paginating.
     - name: wait
       description: Wait  until  a particular condition is satisfied.

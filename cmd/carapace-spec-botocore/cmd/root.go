@@ -87,6 +87,7 @@ func CamelCaseToDash(s string) string {
 		"asset-sh-a256":                            "asset-sha256",
 		"autonomous-data-storage-size-in-t-bs":     "autonomous-data-storage-size-in-tbs",
 		"callback-ur-ls":                           "callback-urls",
+		"create-environment-e-c2":                  "create-environment-ec2",
 		"data-storage-size-in-t-bs":                "data-storage-size-in-tbs",
 		"db-node-storage-size-in-g-bs":             "db-node-storage-size-in-gbs",
 		"e-c2-family-filter":                       "ec2-family-filter",

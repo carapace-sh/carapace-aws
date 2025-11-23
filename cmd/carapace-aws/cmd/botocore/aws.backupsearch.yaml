@@ -1,13 +1,6 @@
 name: backupsearch
 description: AWS Backup Search
 commands:
-    - name: get-search-job
-      description: This operation retrieves metadata of a search job, including its progress.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --search-job-identifier=!: Required unique string that specifies the search job.
     - name: get-search-result-export-job
       description: This operation retrieves the metadata of an export job.
       flags:
@@ -15,18 +8,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --export-job-identifier=!: This is the unique string that identifies a specific export job.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-search-job-backups
-      description: This operation returns a list of all backups (recovery points) in a paginated format that were included in the search job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of resource list items to be returned.
-        --next-token=: The next item following a partial list of returned backups included in a search job.
-        --page-size=: The size of each page to get in the AWS service call.
-        --search-job-identifier=!: The unique string that specifies the search job.
-        --starting-token=: A token to specify where to start paginating.
     - name: list-search-job-results
       description: This operation returns a list of a specified search job.
       flags:
@@ -59,25 +40,6 @@ commands:
                 - STOPPING
                 - STOPPED
                 - FAILED
-    - name: list-tags-for-resource
-      description: This operation returns the tags for a resource type.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the resource.&gt;
-    - name: start-search-job
-      description: This operation creates a search job which returns recovery points filtered by SearchScope and items filtered by ItemFilters.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: Include this parameter to allow multiple identical calls for idempotency.
-        --encryption-key-arn=: The encryption key for the specified search job.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --item-filters=: Item Filters represent all input item properties specified when the search was created.
-        --name=: Include alphanumeric characters to create a name for this search job.
-        --search-scope=!: This object can contain BackupResourceTypes, BackupResourceArns, BackupResourceCreationTime, BackupResourceTags, and SourceResourceArns to filter the recovery points returned by the search job.
-        --tags=: List of tags returned by the operation.
     - name: stop-search-job
       description: This operations ends a search job.
       flags:
@@ -85,6 +47,33 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --search-job-identifier=!: The unique string that specifies the search job.
+    - name: tag-resource
+      description: This operation puts tags on the resource you indicate.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the resource.
+        --tags=!: Required tags to include.
+    - name: get-search-job
+      description: This operation retrieves metadata of a search job, including its progress.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --search-job-identifier=!: Required unique string that specifies the search job.
+    - name: list-search-job-backups
+      description: This operation returns a list of all backups (recovery points) in a paginated format that were included in the search job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of resource list items to be returned.
+        --next-token=: The next item following a partial list of returned backups included in a search job.
+        --page-size=: The size of each page to get in the AWS service call.
+        --search-job-identifier=!: The unique string that specifies the search job.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-search-result-export-jobs
       description: This operation exports search results of a search job to a specified destination S3 bucket.
       flags:
@@ -104,6 +93,25 @@ commands:
                 - RUNNING
                 - FAILED
                 - COMPLETED
+    - name: list-tags-for-resource
+      description: This operation returns the tags for a resource type.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the resource.&gt;
+    - name: start-search-job
+      description: This operation creates a search job which returns recovery points filtered by SearchScope and items filtered by ItemFilters.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Include this parameter to allow multiple identical calls for idempotency.
+        --encryption-key-arn=: The encryption key for the specified search job.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --item-filters=: Item Filters represent all input item properties specified when the search was created.
+        --name=: Include alphanumeric characters to create a name for this search job.
+        --search-scope=!: This object can contain BackupResourceTypes, BackupResourceArns, BackupResourceCreationTime, BackupResourceTags, and SourceResourceArns to filter the recovery points returned by the search job.
+        --tags=: List of tags returned by the operation.
     - name: start-search-result-export-job
       description: This operations starts a job to export the results of search job to a designated S3 bucket.
       flags:
@@ -115,14 +123,6 @@ commands:
         --role-arn=: This parameter specifies the role ARN used to start the search results export jobs.
         --search-job-identifier=!: The unique string that specifies the search job.
         --tags=: Optional tags to include.
-    - name: tag-resource
-      description: This operation puts tags on the resource you indicate.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the resource.
-        --tags=!: Required tags to include.
     - name: untag-resource
       description: This operation removes tags from the specified resource.
       flags:

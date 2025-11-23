@@ -1,22 +1,68 @@
 name: ecr
 description: Amazon Elastic Container Registry
 commands:
-    - name: put-image-scanning-configuration
-      description: The `PutImageScanningConfiguration` API is being deprecated, in favor of specifying the image scanning configuration at the registry level.
+    - name: describe-images
+      description: Returns metadata about the images in a repository.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: The filter key and value with which to filter your `DescribeImages` results.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-ids=: The list of image IDs for the requested repository.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of repository results returned by `DescribeImages` in paginated output.
+        --next-token=: The `nextToken` value returned from a previous paginated `DescribeImages` request where `maxResults` was used and the results exceeded the value of that parameter.
+        --page-size=: The size of each page to get in the AWS service call.
+        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the repository in which to describe images.
+        --repository-name=!: The repository that contains the images to describe.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-repository-creation-templates
+      description: Returns details about the repository creation templates in a registry.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-scanning-configuration=!: The image scanning configuration for the repository.
-        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the repository in which to update the image scanning configuration setting.
-        --repository-name=!: The name of the repository in which to update the image scanning configuration setting.
-    - name: put-registry-policy
-      description: Creates or updates the permissions policy for your registry.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of repository results returned by `DescribeRepositoryCreationTemplatesRequest` in paginated output.
+        --next-token=: The `nextToken` value returned from a previous paginated `DescribeRepositoryCreationTemplates` request where `maxResults` was used and the results exceeded the value of that parameter.
+        --page-size=: The size of each page to get in the AWS service call.
+        --prefixes=: The repository namespace prefixes associated with the repository creation templates to describe.
+        --starting-token=: A token to specify where to start paginating.
+    - name: put-registry-scanning-configuration
+      description: Creates or updates the scanning configuration for your private registry.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-text=!: The JSON policy text to apply to your registry.
+        --rules=: The scanning rules to use for the registry.
+        --scan-type=: The scanning type to set for the registry.
+      completion:
+        flag:
+            scan-type:
+                - BASIC
+                - ENHANCED
+    - name: put-replication-configuration
+      description: Creates or updates the replication configuration for a registry.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --replication-configuration=!: An object representing the replication configuration for a registry.
+    - name: update-image-storage-class
+      description: Transitions an image between storage classes.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-id=!: ""
+        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the image to transition.
+        --repository-name=!: The name of the repository that contains the image to transition.
+        --target-storage-class=!: The target storage class for the image.
+      completion:
+        flag:
+            target-storage-class:
+                - STANDARD
+                - ARCHIVE
     - name: create-repository-creation-template
       description: Creates a repository creation template.
       flags:
@@ -40,18 +86,20 @@ commands:
                 - IMMUTABLE
                 - IMMUTABLE_WITH_EXCLUSION
                 - MUTABLE_WITH_EXCLUSION
-    - name: describe-repository-creation-templates
-      description: Returns details about the repository creation templates in a registry.
+    - name: get-account-setting
+      description: Retrieves the account setting value for the specified setting name.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of repository results returned by `DescribeRepositoryCreationTemplatesRequest` in paginated output.
-        --next-token=: The `nextToken` value returned from a previous paginated `DescribeRepositoryCreationTemplates` request where `maxResults` was used and the results exceeded the value of that parameter.
-        --page-size=: The size of each page to get in the AWS service call.
-        --prefixes=: The repository namespace prefixes associated with the repository creation templates to describe.
-        --starting-token=: A token to specify where to start paginating.
+        --name=!: The name of the account setting, such as `BASIC_SCAN_TYPE_VERSION` or `REGISTRY_POLICY_SCOPE`.
+    - name: get-authorization-token
+      description: Retrieves an authorization token.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --registry-ids=: A list of Amazon Web Services account IDs that are associated with the registries for which to get AuthorizationData objects.
     - name: get-lifecycle-policy
       description: Retrieves the lifecycle policy for the specified repository.
       flags:
@@ -60,13 +108,57 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --registry-id=: The Amazon Web Services account ID associated with the registry that contains the repository.
         --repository-name=!: The name of the repository.
-    - name: list-tags-for-resource
-      description: List the tags for an Amazon ECR resource.
+    - name: put-image-tag-mutability
+      description: Updates the image tag mutability settings for the specified repository.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) that identifies the resource for which to list the tags.
+        --image-tag-mutability-exclusion-filters=: A list of filters that specify which image tags should be excluded from the image tag mutability setting being applied.
+        --image-tag-mutability=!: The tag mutability setting for the repository.
+        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the repository in which to update the image tag mutability settings.
+        --repository-name=!: The name of the repository in which to update the image tag mutability settings.
+      completion:
+        flag:
+            image-tag-mutability:
+                - MUTABLE
+                - IMMUTABLE
+                - IMMUTABLE_WITH_EXCLUSION
+                - MUTABLE_WITH_EXCLUSION
+    - name: deregister-pull-time-update-exclusion
+      description: Removes a principal from the pull time update exclusion list for a registry.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --principal-arn=!: The ARN of the IAM principal to remove from the pull time update exclusion list.
+    - name: batch-delete-image
+      description: Deletes a list of specified images within a repository.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-ids=!: A list of image ID references that correspond to images to delete.
+        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the image to delete.
+        --repository-name=!: The repository that contains the image to delete.
+    - name: get-signing-configuration
+      description: Retrieves the registry's signing configuration, which defines rules for automatically signing images using Amazon Web Services Signer.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: put-image
+      description: Creates or updates the image manifest and tags associated with an image.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-digest=: The image digest of the image manifest corresponding to the image.
+        --image-manifest-media-type=: The media type of the image manifest.
+        --image-manifest=!: The image manifest corresponding to the image to be uploaded.
+        --image-tag=: The tag to associate with the image.
+        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the repository in which to put the image.
+        --repository-name=!: The name of the repository in which to put the image.
     - name: untag-resource
       description: Deletes specified tags from a resource.
       flags:
@@ -75,57 +167,37 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the resource from which to remove tags.
         --tag-keys=!: The keys of the tags to be removed.
-    - name: delete-signing-configuration
-      description: Deletes the registry's signing configuration.
+    - name: batch-get-repository-scanning-configuration
+      description: Gets the scanning configuration for one or more repositories.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: start-image-scan
-      description: Starts a basic image vulnerability scan.
+        --repository-names=!: One or more repository names to get the scanning configuration for.
+    - name: get-lifecycle-policy-preview
+      description: Retrieves the results of the lifecycle policy preview request for the specified repository.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: An optional parameter that filters results based on image tag status and all tags, if tagged.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-id=!: ""
-        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the repository in which to start an image scan request.
-        --repository-name=!: The name of the repository that contains the images to scan.
-    - name: describe-image-signing-status
-      description: Returns the signing status for a specified image.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-id=!: An object containing identifying information for an image.
+        --image-ids=: The list of imageIDs to be included.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: "The maximum number of repository results returned by `GetLifecyclePolicyPreviewRequest` in\L paginated output."
+        --next-token=: "The `nextToken` value returned from a previous paginated\L `GetLifecyclePolicyPreviewRequest` request where `maxResults` was used and the\L results exceeded the value of that parameter."
+        --page-size=: The size of each page to get in the AWS service call.
         --registry-id=: The Amazon Web Services account ID associated with the registry that contains the repository.
-        --repository-name=!: The name of the repository that contains the image.
-    - name: list-image-referrers
-      description: Lists the artifacts associated with a specified subject image.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: The filter key and value with which to filter your `ListImageReferrers` results.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of image referrer results returned by `ListImageReferrers` in paginated output.
-        --next-token=: The `nextToken` value returned from a previous paginated `ListImageReferrers` request where `maxResults` was used and the results exceeded the value of that parameter.
-        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the repository in which to list image referrers.
-        --repository-name=!: The name of the repository that contains the subject image.
-        --subject-id=!: An object containing the image digest of the subject image for which to retrieve associated artifacts.
-    - name: list-pull-time-update-exclusions
-      description: Lists the IAM principals that are excluded from having their image pull times recorded.
+        --repository-name=!: The name of the repository.
+        --starting-token=: A token to specify where to start paginating.
+    - name: put-lifecycle-policy
+      description: Creates or updates the lifecycle policy for the specified repository.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of pull time update exclusion results returned by `ListPullTimeUpdateExclusions` in paginated output.
-        --next-token=: The `nextToken` value returned from a previous paginated `ListPullTimeUpdateExclusions` request where `maxResults` was used and the results exceeded the value of that parameter.
-    - name: put-signing-configuration
-      description: Creates or updates the registry's signing configuration, which defines rules for automatically signing images with Amazon Web Services Signer.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --signing-configuration=!: The signing configuration to assign to the registry.
+        --lifecycle-policy-text=!: The JSON repository policy text to apply to the repository.
+        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the repository.
+        --repository-name=!: The name of the repository to receive the policy.
     - name: register-pull-time-update-exclusion
       description: Adds an IAM principal to the pull time update exclusion list for a registry.
       flags:
@@ -133,38 +205,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --principal-arn=!: The ARN of the IAM principal to exclude from having image pull times recorded.
-    - name: start-lifecycle-policy-preview
-      description: Starts a preview of a lifecycle policy for the specified repository.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lifecycle-policy-text=: The policy to be evaluated against.
-        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the repository.
-        --repository-name=!: The name of the repository to be evaluated.
-    - name: describe-images
-      description: Returns metadata about the images in a repository.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: The filter key and value with which to filter your `DescribeImages` results.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-ids=: The list of image IDs for the requested repository.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of repository results returned by `DescribeImages` in paginated output.
-        --next-token=: The `nextToken` value returned from a previous paginated `DescribeImages` request where `maxResults` was used and the results exceeded the value of that parameter.
-        --page-size=: The size of each page to get in the AWS service call.
-        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the repository in which to describe images.
-        --repository-name=!: The repository that contains the images to describe.
-        --starting-token=: A token to specify where to start paginating.
-    - name: delete-pull-through-cache-rule
-      description: Deletes a pull through cache rule.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --ecr-repository-prefix=!: The Amazon ECR repository prefix associated with the pull through cache rule to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the pull through cache rule.
     - name: initiate-layer-upload
       description: Notifies Amazon ECR that you intend to upload an image layer.
       flags:
@@ -173,19 +213,6 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --registry-id=: The Amazon Web Services account ID associated with the registry to which you intend to upload layers.
         --repository-name=!: The name of the repository to which you intend to upload layers.
-    - name: put-registry-scanning-configuration
-      description: Creates or updates the scanning configuration for your private registry.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --rules=: The scanning rules to use for the registry.
-        --scan-type=: The scanning type to set for the registry.
-      completion:
-        flag:
-            scan-type:
-                - BASIC
-                - ENHANCED
     - name: upload-layer-part
       description: Uploads an image layer part to Amazon ECR.
       flags:
@@ -198,22 +225,94 @@ commands:
         --registry-id=: The Amazon Web Services account ID associated with the registry to which you are uploading layer parts.
         --repository-name=!: The name of the repository to which you are uploading layer parts.
         --upload-id=!: The upload ID from a previous [InitiateLayerUpload]() operation to associate with the layer part upload.
-    - name: complete-layer-upload
-      description: Informs Amazon ECR that the image layer upload has completed for a specified registry, repository name, and upload ID.
+    - name: batch-get-image
+      description: Gets detailed information for an image.
+      flags:
+        --accepted-media-types=: The accepted media types for the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-ids=!: A list of image ID references that correspond to images to describe.
+        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the images to describe.
+        --repository-name=!: The repository that contains the images to describe.
+    - name: describe-pull-through-cache-rules
+      description: Returns the pull through cache rules for a registry.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --ecr-repository-prefixes=: The Amazon ECR repository prefixes associated with the pull through cache rules to return.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of pull through cache rules returned by `DescribePullThroughCacheRulesRequest` in paginated output.
+        --next-token=: The `nextToken` value returned from a previous paginated `DescribePullThroughCacheRulesRequest` request where `maxResults` was used and the results exceeded the value of that parameter.
+        --page-size=: The size of each page to get in the AWS service call.
+        --registry-id=: The Amazon Web Services account ID associated with the registry to return the pull through cache rules for.
+        --starting-token=: A token to specify where to start paginating.
+    - name: put-account-setting
+      description: Allows you to change the basic scan type version or registry policy scope.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --layer-digests=!: The `sha256` digest of the image layer.
-        --registry-id=: The Amazon Web Services account ID associated with the registry to which to upload layers.
-        --repository-name=!: The name of the repository to associate with the image layer.
-        --upload-id=!: The upload ID from a previous [InitiateLayerUpload]() operation to associate with the image layer.
-    - name: describe-registry
-      description: Describes the settings for a registry.
+        --name=!: The name of the account setting, such as `BASIC_SCAN_TYPE_VERSION` or `REGISTRY_POLICY_SCOPE`.
+        --value=!: Setting value that is specified.
+    - name: start-image-scan
+      description: Starts a basic image vulnerability scan.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-id=!: ""
+        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the repository in which to start an image scan request.
+        --repository-name=!: The name of the repository that contains the images to scan.
+    - name: start-lifecycle-policy-preview
+      description: Starts a preview of a lifecycle policy for the specified repository.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lifecycle-policy-text=: The policy to be evaluated against.
+        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the repository.
+        --repository-name=!: The name of the repository to be evaluated.
+    - name: delete-repository
+      description: Deletes a repository.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --force: If true, deleting the repository force deletes the contents of the repository.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-force: If true, deleting the repository force deletes the contents of the repository.
+        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the repository to delete.
+        --repository-name=!: The name of the repository to delete.
+    - name: get-registry-policy
+      description: Retrieves the permissions policy for a registry.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-pull-through-cache-rule
+      description: Deletes a pull through cache rule.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --ecr-repository-prefix=!: The Amazon ECR repository prefix associated with the pull through cache rule to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the pull through cache rule.
+    - name: delete-signing-configuration
+      description: Deletes the registry's signing configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-image-replication-status
+      description: Returns the replication status for a specified image.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-id=!: ""
+        --registry-id=: The Amazon Web Services account ID associated with the registry.
+        --repository-name=!: The name of the repository that the image is in.
     - name: describe-repositories
       description: Describes image repositories in a registry.
       flags:
@@ -227,35 +326,72 @@ commands:
         --registry-id=: The Amazon Web Services account ID associated with the registry that contains the repositories to be described.
         --repository-names=: A list of repositories to describe.
         --starting-token=: A token to specify where to start paginating.
-    - name: batch-delete-image
-      description: Deletes a list of specified images within a repository.
+    - name: get-registry-scanning-configuration
+      description: Retrieves the scanning configuration for a registry.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-ids=!: A list of image ID references that correspond to images to delete.
-        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the image to delete.
-        --repository-name=!: The repository that contains the image to delete.
-    - name: delete-lifecycle-policy
-      description: Deletes the lifecycle policy associated with the specified repository.
+    - name: list-pull-time-update-exclusions
+      description: Lists the IAM principals that are excluded from having their image pull times recorded.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of pull time update exclusion results returned by `ListPullTimeUpdateExclusions` in paginated output.
+        --next-token=: The `nextToken` value returned from a previous paginated `ListPullTimeUpdateExclusions` request where `maxResults` was used and the results exceeded the value of that parameter.
+    - name: list-image-referrers
+      description: Lists the artifacts associated with a specified subject image.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: The filter key and value with which to filter your `ListImageReferrers` results.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of image referrer results returned by `ListImageReferrers` in paginated output.
+        --next-token=: The `nextToken` value returned from a previous paginated `ListImageReferrers` request where `maxResults` was used and the results exceeded the value of that parameter.
+        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the repository in which to list image referrers.
+        --repository-name=!: The name of the repository that contains the subject image.
+        --subject-id=!: An object containing the image digest of the subject image for which to retrieve associated artifacts.
+    - name: put-signing-configuration
+      description: Creates or updates the registry's signing configuration, which defines rules for automatically signing images with Amazon Web Services Signer.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --signing-configuration=!: The signing configuration to assign to the registry.
+    - name: get-download-url-for-layer
+      description: Retrieves the pre-signed Amazon S3 download URL corresponding to an image layer.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --layer-digest=!: The digest of the image layer to download.
+        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the image layer to download.
+        --repository-name=!: The name of the repository that is associated with the image layer to download.
+    - name: get-repository-policy
+      description: Retrieves the repository policy for the specified repository.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --registry-id=: The Amazon Web Services account ID associated with the registry that contains the repository.
-        --repository-name=!: The name of the repository.
-    - name: put-image
-      description: Creates or updates the image manifest and tags associated with an image.
+        --repository-name=!: The name of the repository with the policy to retrieve.
+    - name: put-image-scanning-configuration
+      description: The `PutImageScanningConfiguration` API is being deprecated, in favor of specifying the image scanning configuration at the registry level.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-digest=: The image digest of the image manifest corresponding to the image.
-        --image-manifest-media-type=: The media type of the image manifest.
-        --image-manifest=!: The image manifest corresponding to the image to be uploaded.
-        --image-tag=: The tag to associate with the image.
-        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the repository in which to put the image.
-        --repository-name=!: The name of the repository in which to put the image.
+        --image-scanning-configuration=!: The image scanning configuration for the repository.
+        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the repository in which to update the image scanning configuration setting.
+        --repository-name=!: The name of the repository in which to update the image scanning configuration setting.
+    - name: put-registry-policy
+      description: Creates or updates the permissions policy for your registry.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-text=!: The JSON policy text to apply to your registry.
     - name: update-repository-creation-template
       description: Updates an existing repository creation template.
       flags:
@@ -279,61 +415,14 @@ commands:
                 - IMMUTABLE
                 - IMMUTABLE_WITH_EXCLUSION
                 - MUTABLE_WITH_EXCLUSION
-    - name: update-image-storage-class
-      description: Transitions an image between storage classes.
+    - name: delete-lifecycle-policy
+      description: Deletes the lifecycle policy associated with the specified repository.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-id=!: ""
-        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the image to transition.
-        --repository-name=!: The name of the repository that contains the image to transition.
-        --target-storage-class=!: The target storage class for the image.
-      completion:
-        flag:
-            target-storage-class:
-                - STANDARD
-                - ARCHIVE
-    - name: get-authorization-token
-      description: Retrieves an authorization token.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --registry-ids=: A list of Amazon Web Services account IDs that are associated with the registries for which to get AuthorizationData objects.
-    - name: list-images
-      description: Lists all the image IDs for the specified repository.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: The filter key and value with which to filter your `ListImages` results.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of image results returned by `ListImages` in paginated output.
-        --next-token=: The `nextToken` value returned from a previous paginated `ListImages` request where `maxResults` was used and the results exceeded the value of that parameter.
-        --page-size=: The size of each page to get in the AWS service call.
-        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the repository in which to list images.
-        --repository-name=!: The repository with image IDs to be listed.
-        --starting-token=: A token to specify where to start paginating.
-    - name: batch-check-layer-availability
-      description: Checks the availability of one or more image layers in a repository.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --layer-digests=!: The digests of the image layers to check.
-        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the image layers to check.
-        --repository-name=!: The name of the repository that is associated with the image layers to check.
-    - name: delete-repository
-      description: Deletes a repository.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --force: If true, deleting the repository force deletes the contents of the repository.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-force: If true, deleting the repository force deletes the contents of the repository.
-        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the repository to delete.
-        --repository-name=!: The name of the repository to delete.
+        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the repository.
+        --repository-name=!: The name of the repository.
     - name: describe-image-scan-findings
       description: Returns the scan findings for the specified image.
       flags:
@@ -348,68 +437,6 @@ commands:
         --registry-id=: The Amazon Web Services account ID associated with the registry that contains the repository in which to describe the image scan findings for.
         --repository-name=!: The repository for the image for which to describe the scan findings.
         --starting-token=: A token to specify where to start paginating.
-    - name: describe-pull-through-cache-rules
-      description: Returns the pull through cache rules for a registry.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --ecr-repository-prefixes=: The Amazon ECR repository prefixes associated with the pull through cache rules to return.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of pull through cache rules returned by `DescribePullThroughCacheRulesRequest` in paginated output.
-        --next-token=: The `nextToken` value returned from a previous paginated `DescribePullThroughCacheRulesRequest` request where `maxResults` was used and the results exceeded the value of that parameter.
-        --page-size=: The size of each page to get in the AWS service call.
-        --registry-id=: The Amazon Web Services account ID associated with the registry to return the pull through cache rules for.
-        --starting-token=: A token to specify where to start paginating.
-    - name: put-replication-configuration
-      description: Creates or updates the replication configuration for a registry.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --replication-configuration=!: An object representing the replication configuration for a registry.
-    - name: update-pull-through-cache-rule
-      description: Updates an existing pull through cache rule.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --credential-arn=: The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that identifies the credentials to authenticate to the upstream registry.
-        --custom-role-arn=: Amazon Resource Name (ARN) of the IAM role to be assumed by Amazon ECR to authenticate to the ECR upstream registry.
-        --ecr-repository-prefix=!: The repository name prefix to use when caching images from the source registry.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --registry-id=: The Amazon Web Services account ID associated with the registry associated with the pull through cache rule.
-    - name: get-repository-policy
-      description: Retrieves the repository policy for the specified repository.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the repository.
-        --repository-name=!: The name of the repository with the policy to retrieve.
-    - name: tag-resource
-      description: Adds specified tags to a resource with the specified ARN.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the the resource to which to add tags.
-        --tags=!: The tags to add to the resource.
-    - name: get-download-url-for-layer
-      description: Retrieves the pre-signed Amazon S3 download URL corresponding to an image layer.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --layer-digest=!: The digest of the image layer to download.
-        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the image layer to download.
-        --repository-name=!: The name of the repository that is associated with the image layer to download.
-    - name: batch-get-repository-scanning-configuration
-      description: Gets the scanning configuration for one or more repositories.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --repository-names=!: One or more repository names to get the scanning configuration for.
     - name: create-pull-through-cache-rule
       description: Creates a pull through cache rule.
       flags:
@@ -434,85 +461,24 @@ commands:
                 - github-container-registry
                 - azure-container-registry
                 - gitlab-container-registry
-    - name: delete-repository-creation-template
-      description: Deletes a repository creation template.
+    - name: tag-resource
+      description: Adds specified tags to a resource with the specified ARN.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --prefix=!: The repository namespace prefix associated with the repository creation template.
-    - name: deregister-pull-time-update-exclusion
-      description: Removes a principal from the pull time update exclusion list for a registry.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the the resource to which to add tags.
+        --tags=!: The tags to add to the resource.
+    - name: update-pull-through-cache-rule
+      description: Updates an existing pull through cache rule.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --credential-arn=: The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that identifies the credentials to authenticate to the upstream registry.
+        --custom-role-arn=: Amazon Resource Name (ARN) of the IAM role to be assumed by Amazon ECR to authenticate to the ECR upstream registry.
+        --ecr-repository-prefix=!: The repository name prefix to use when caching images from the source registry.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --principal-arn=!: The ARN of the IAM principal to remove from the pull time update exclusion list.
-    - name: describe-image-replication-status
-      description: Returns the replication status for a specified image.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-id=!: ""
-        --registry-id=: The Amazon Web Services account ID associated with the registry.
-        --repository-name=!: The name of the repository that the image is in.
-    - name: batch-get-image
-      description: Gets detailed information for an image.
-      flags:
-        --accepted-media-types=: The accepted media types for the request.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-ids=!: A list of image ID references that correspond to images to describe.
-        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the images to describe.
-        --repository-name=!: The repository that contains the images to describe.
-    - name: delete-repository-policy
-      description: Deletes the repository policy associated with the specified repository.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the repository policy to delete.
-        --repository-name=!: The name of the repository that is associated with the repository policy to delete.
-    - name: get-account-setting
-      description: Retrieves the account setting value for the specified setting name.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the account setting, such as `BASIC_SCAN_TYPE_VERSION` or `REGISTRY_POLICY_SCOPE`.
-    - name: get-signing-configuration
-      description: Retrieves the registry's signing configuration, which defines rules for automatically signing images using Amazon Web Services Signer.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: put-image-tag-mutability
-      description: Updates the image tag mutability settings for the specified repository.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-tag-mutability-exclusion-filters=: A list of filters that specify which image tags should be excluded from the image tag mutability setting being applied.
-        --image-tag-mutability=!: The tag mutability setting for the repository.
-        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the repository in which to update the image tag mutability settings.
-        --repository-name=!: The name of the repository in which to update the image tag mutability settings.
-      completion:
-        flag:
-            image-tag-mutability:
-                - MUTABLE
-                - IMMUTABLE
-                - IMMUTABLE_WITH_EXCLUSION
-                - MUTABLE_WITH_EXCLUSION
-    - name: put-account-setting
-      description: Allows you to change the basic scan type version or registry policy scope.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the account setting, such as `BASIC_SCAN_TYPE_VERSION` or `REGISTRY_POLICY_SCOPE`.
-        --value=!: Setting value that is specified.
+        --registry-id=: The Amazon Web Services account ID associated with the registry associated with the pull through cache rule.
     - name: create-repository
       description: Creates a repository.
       flags:
@@ -533,49 +499,8 @@ commands:
                 - IMMUTABLE
                 - IMMUTABLE_WITH_EXCLUSION
                 - MUTABLE_WITH_EXCLUSION
-    - name: get-lifecycle-policy-preview
-      description: Retrieves the results of the lifecycle policy preview request for the specified repository.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: An optional parameter that filters results based on image tag status and all tags, if tagged.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-ids=: The list of imageIDs to be included.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: "The maximum number of repository results returned by `GetLifecyclePolicyPreviewRequest` in\L paginated output."
-        --next-token=: "The `nextToken` value returned from a previous paginated\L `GetLifecyclePolicyPreviewRequest` request where `maxResults` was used and the\L results exceeded the value of that parameter."
-        --page-size=: The size of each page to get in the AWS service call.
-        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the repository.
-        --repository-name=!: The name of the repository.
-        --starting-token=: A token to specify where to start paginating.
-    - name: get-registry-policy
-      description: Retrieves the permissions policy for a registry.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: put-lifecycle-policy
-      description: Creates or updates the lifecycle policy for the specified repository.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lifecycle-policy-text=!: The JSON repository policy text to apply to the repository.
-        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the repository.
-        --repository-name=!: The name of the repository to receive the policy.
-    - name: set-repository-policy
-      description: Applies a repository policy to the specified repository to control access permissions.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --force: If the policy you are attempting to set on a repository policy would prevent you from setting another policy in the future, you must force the [SetRepositoryPolicy]() operation.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-force: If the policy you are attempting to set on a repository policy would prevent you from setting another policy in the future, you must force the [SetRepositoryPolicy]() operation.
-        --policy-text=!: The JSON repository policy text to apply to the repository.
-        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the repository.
-        --repository-name=!: The name of the repository to receive the policy.
-    - name: delete-registry-policy
-      description: Deletes the registry permissions policy.
+    - name: describe-registry
+      description: Describes the settings for a registry.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -588,12 +513,87 @@ commands:
         --ecr-repository-prefix=!: The repository name prefix associated with the pull through cache rule.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --registry-id=: The registry ID associated with the pull through cache rule.
-    - name: get-registry-scanning-configuration
-      description: Retrieves the scanning configuration for a registry.
+    - name: set-repository-policy
+      description: Applies a repository policy to the specified repository to control access permissions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --force: If the policy you are attempting to set on a repository policy would prevent you from setting another policy in the future, you must force the [SetRepositoryPolicy]() operation.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-force: If the policy you are attempting to set on a repository policy would prevent you from setting another policy in the future, you must force the [SetRepositoryPolicy]() operation.
+        --policy-text=!: The JSON repository policy text to apply to the repository.
+        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the repository.
+        --repository-name=!: The name of the repository to receive the policy.
+    - name: batch-check-layer-availability
+      description: Checks the availability of one or more image layers in a repository.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --layer-digests=!: The digests of the image layers to check.
+        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the image layers to check.
+        --repository-name=!: The name of the repository that is associated with the image layers to check.
+    - name: complete-layer-upload
+      description: Informs Amazon ECR that the image layer upload has completed for a specified registry, repository name, and upload ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --layer-digests=!: The `sha256` digest of the image layer.
+        --registry-id=: The Amazon Web Services account ID associated with the registry to which to upload layers.
+        --repository-name=!: The name of the repository to associate with the image layer.
+        --upload-id=!: The upload ID from a previous [InitiateLayerUpload]() operation to associate with the image layer.
+    - name: delete-repository-policy
+      description: Deletes the repository policy associated with the specified repository.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the repository policy to delete.
+        --repository-name=!: The name of the repository that is associated with the repository policy to delete.
+    - name: describe-image-signing-status
+      description: Returns the signing status for a specified image.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-id=!: An object containing identifying information for an image.
+        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the repository.
+        --repository-name=!: The name of the repository that contains the image.
+    - name: list-images
+      description: Lists all the image IDs for the specified repository.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: The filter key and value with which to filter your `ListImages` results.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of image results returned by `ListImages` in paginated output.
+        --next-token=: The `nextToken` value returned from a previous paginated `ListImages` request where `maxResults` was used and the results exceeded the value of that parameter.
+        --page-size=: The size of each page to get in the AWS service call.
+        --registry-id=: The Amazon Web Services account ID associated with the registry that contains the repository in which to list images.
+        --repository-name=!: The repository with image IDs to be listed.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: List the tags for an Amazon ECR resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) that identifies the resource for which to list the tags.
+    - name: delete-registry-policy
+      description: Deletes the registry permissions policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-repository-creation-template
+      description: Deletes a repository creation template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --prefix=!: The repository namespace prefix associated with the repository creation template.
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:

@@ -1,105 +1,98 @@
 name: gamelift
 description: Amazon GameLift
 commands:
-    - name: list-container-fleets
-      description: '**This API works with the following fleet types:** Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --container-group-definition-name=: The container group definition to filter the list on.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of results to return.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: A token that indicates the start of the next sequential page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: accept-match
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
-      flags:
-        --acceptance-type=!: Player response to the proposed match.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --player-ids=!: A unique identifier for a player delivering the response.
-        --ticket-id=!: A unique identifier for a matchmaking ticket.
-      completion:
-        flag:
-            acceptance-type:
-                - ACCEPT
-                - REJECT
-    - name: delete-container-group-definition
-      description: '**This API works with the following fleet types:** Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The unique identifier for the container group definition to delete.
-        --version-count-to-retain=: The number of most recent versions to keep while deleting all older versions.
-        --version-number=: The specific version to delete.
-    - name: deregister-game-server
-      description: '**This API works with the following fleet types:** EC2 (FleetIQ)'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --game-server-group-name=!: A unique identifier for the game server group where the game server is running.
-        --game-server-id=!: A custom string that uniquely identifies the game server to deregister.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-fleet-location-capacity
+    - name: create-fleet-locations
       description: '**This API works with the following fleet types:** EC2, Container'
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --fleet-id=!: A unique identifier for the fleet to request location capacity for.
+        --fleet-id=!: A unique identifier for the fleet to add locations to.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location=!: The fleet location to retrieve capacity information for.
-    - name: describe-runtime-configuration
-      description: '**This API works with the following fleet types:** EC2'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --fleet-id=!: A unique identifier for the fleet to get the runtime configuration for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-alias
+        --locations=!: A list of locations to deploy additional instances to and manage as part of the fleet.
+    - name: delete-fleet
       description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A human-readable description of the alias.
+        --fleet-id=!: A unique identifier for the fleet to be deleted.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: A descriptive label that is associated with an alias.
-        --routing-strategy=!: The routing configuration, including routing type and fleet target, for the alias.
-        --tags=: A list of labels to assign to the new alias resource.
-    - name: describe-game-session-queues
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of results to return.
-        --max-items=: The  total number of items to return in the command's output.
-        --names=: A list of queue names to retrieve information for.
-        --next-token=: A token that indicates the start of the next sequential page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-fleet-deployments
+    - name: describe-container-group-definition
       description: '**This API works with the following fleet types:** Container'
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --fleet-id=: A unique identifier for the container fleet.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The unique identifier for the container group definition to retrieve properties for.
+        --version-number=: The specific version to retrieve.
+    - name: describe-fleet-attributes
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fleet-ids=: A list of unique fleet identifiers to retrieve attributes for.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --limit=: The maximum number of results to return.
         --max-items=: The  total number of items to return in the command's output.
         --next-token=: A token that indicates the start of the next sequential page of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: validate-matchmaking-rule-set
+    - name: create-game-server-group
+      description: '**This API works with the following fleet types:** EC2 (FleetIQ)'
+      flags:
+        --auto-scaling-policy=: Configuration settings to define a scaling policy for the Auto Scaling group that is optimized for game hosting.
+        --balancing-strategy=: Indicates how Amazon GameLift Servers FleetIQ balances the use of Spot Instances and On-Demand Instances in the game server group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --game-server-group-name=!: An identifier for the new game server group.
+        --game-server-protection-policy=: A flag that indicates whether instances in the game server group are protected from early termination.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-definitions=!: The Amazon EC2 instance types and sizes to use in the Auto Scaling group.
+        --launch-template=!: The Amazon EC2 launch template that contains configuration settings and game server code to be deployed to all instances in the game server group.
+        --max-size=!: The maximum number of instances allowed in the Amazon EC2 Auto Scaling group.
+        --min-size=!: The minimum number of instances allowed in the Amazon EC2 Auto Scaling group.
+        --role-arn=!: The Amazon Resource Name ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) for an IAM role that allows Amazon GameLift Servers to access your Amazon EC2 Auto Scaling groups.
+        --tags=: A list of labels to assign to the new game server group resource.
+        --vpc-subnets=: A list of virtual private cloud (VPC) subnets to use with instances in the game server group.
+      completion:
+        flag:
+            balancing-strategy:
+                - SPOT_ONLY
+                - SPOT_PREFERRED
+                - ON_DEMAND_ONLY
+            game-server-protection-policy:
+                - NO_PROTECTION
+                - FULL_PROTECTION
+    - name: delete-game-session-queue
       description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --rule-set-body=!: A collection of matchmaking rules to validate, formatted as a JSON string.
+        --name=!: A descriptive label that is associated with game session queue.
+    - name: describe-vpc-peering-connections
+      description: '**This API works with the following fleet types:** EC2'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fleet-id=: A unique identifier for the fleet.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-container-group-definitions
+      description: '**This API works with the following fleet types:** Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --container-group-type=: The type of container group to retrieve.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of results to return.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: A token that indicates the start of the next sequential page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            container-group-type:
+                - GAME_SERVER
+                - PER_INSTANCE
     - name: update-container-group-definition
       description: '**This API works with the following fleet types:** Container'
       flags:
@@ -118,175 +111,30 @@ commands:
         flag:
             operating-system:
                 - AMAZON_LINUX_2023
-    - name: get-instance-access
+    - name: delete-scaling-policy
       description: '**This API works with the following fleet types:** EC2'
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --fleet-id=!: A unique identifier for the fleet that contains the instance you want to access.
+        --fleet-id=!: A unique identifier for the fleet to be deleted.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-id=!: A unique identifier for the instance you want to access.
-    - name: stop-game-session-placement
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --placement-id=!: A unique identifier for a game session placement to stop.
-    - name: update-alias
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
-      flags:
-        --alias-id=!: A unique identifier for the alias that you want to update.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A human-readable description of the alias.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: A descriptive label that is associated with an alias.
-        --routing-strategy=: The routing configuration, including routing type and fleet target, for the alias.
-    - name: update-fleet-port-settings
-      description: '**This API works with the following fleet types:** EC2, Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --fleet-id=!: A unique identifier for the fleet to update port settings for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --inbound-permission-authorizations=: A collection of port settings to be added to the fleet resource.
-        --inbound-permission-revocations=: A collection of port settings to be removed from the fleet resource.
-    - name: describe-fleet-capacity
-      description: '**This API works with the following fleet types:** EC2, Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --fleet-ids=: A unique identifier for the fleet to retrieve capacity information for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of results to return.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: A token that indicates the start of the next sequential page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-builds
-      description: '**This API works with the following fleet types:** EC2'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of results to return.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: A token that indicates the start of the next sequential page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --status=: Build status to filter results by.
-      completion:
-        flag:
-            status:
-                - INITIALIZED
-                - READY
-                - FAILED
-    - name: resume-game-server-group
-      description: '**This API works with the following fleet types:** EC2 (FleetIQ)'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --game-server-group-name=!: A unique identifier for the game server group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resume-actions=!: The activity to resume for this game server group.
-    - name: update-game-server-group
-      description: '**This API works with the following fleet types:** EC2 (FleetIQ)'
-      flags:
-        --balancing-strategy=: Indicates how Amazon GameLift Servers FleetIQ balances the use of Spot Instances and On-Demand Instances in the game server group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --game-server-group-name=!: A unique identifier for the game server group.
-        --game-server-protection-policy=: A flag that indicates whether instances in the game server group are protected from early termination.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-definitions=: An updated list of Amazon EC2 instance types to use in the Auto Scaling group.
-        --role-arn=: The Amazon Resource Name ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) for an IAM role that allows Amazon GameLift Servers to access your Amazon EC2 Auto Scaling groups.
-      completion:
-        flag:
-            balancing-strategy:
-                - SPOT_ONLY
-                - SPOT_PREFERRED
-                - ON_DEMAND_ONLY
-            game-server-protection-policy:
-                - NO_PROTECTION
-                - FULL_PROTECTION
-    - name: update-script
-      description: '**This API works with the following fleet types:** EC2'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: A descriptive label that is associated with a script.
-        --script-id=!: A unique identifier for the Realtime script to update.
-        --script-version=: Version information that is associated with a build or script.
-        --storage-location=: The location of the Amazon S3 bucket where a zipped file containing your Realtime scripts is stored.
-        --zip-file=: A data object containing your Realtime scripts and dependencies as a zip file.
-    - name: create-player-session
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --game-session-id=!: A unique identifier for the game session to add a player to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --player-data=: Developer-defined information related to a player.
-        --player-id=!: A unique identifier for a player.
-    - name: put-scaling-policy
-      description: '**This API works with the following fleet types:** EC2'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --comparison-operator=: Comparison operator to use when measuring the metric against the threshold value.
-        --evaluation-periods=: Length of time (in minutes) the metric must be at or beyond the threshold before a scaling event is triggered.
-        --fleet-id=!: A unique identifier for the fleet to apply this policy to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --metric-name=!: Name of the Amazon GameLift Servers-defined metric that is used to trigger a scaling adjustment.
         --name=!: A descriptive label that is associated with a fleet's scaling policy.
-        --policy-type=: The type of scaling policy to create.
-        --scaling-adjustment-type=: 'The type of adjustment to make to a fleet''s instance count:'
-        --scaling-adjustment=: Amount of adjustment to make, based on the scaling adjustment type.
-        --target-configuration=: An object that contains settings for a target-based scaling policy.
-        --threshold=: Metric value used to trigger a scaling event.
-      completion:
-        flag:
-            comparison-operator:
-                - GreaterThanOrEqualToThreshold
-                - GreaterThanThreshold
-                - LessThanThreshold
-                - LessThanOrEqualToThreshold
-            metric-name:
-                - ActivatingGameSessions
-                - ActiveGameSessions
-                - ActiveInstances
-                - AvailableGameSessions
-                - AvailablePlayerSessions
-                - CurrentPlayerSessions
-                - IdleInstances
-                - PercentAvailableGameSessions
-                - PercentIdleInstances
-                - QueueDepth
-                - WaitTime
-                - ConcurrentActivatableGameSessions
-            policy-type:
-                - RuleBased
-                - TargetBased
-            scaling-adjustment-type:
-                - ChangeInCapacity
-                - ExactCapacity
-                - PercentChangeInCapacity
-    - name: update-game-session-queue
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+    - name: delete-vpc-peering-connection
+      description: '**This API works with the following fleet types:** EC2'
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --custom-event-data=: Information to be added to all events that are related to this game session queue.
-        --destinations=: A list of fleets and/or fleet aliases that can be used to fulfill game session placement requests in the queue.
-        --filter-configuration=: A list of locations where a queue is allowed to place new game sessions.
+        --fleet-id=!: A unique identifier for the fleet.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: A descriptive label that is associated with game session queue.
-        --notification-target=: An SNS topic ARN that is set up to receive game session placement notifications.
-        --player-latency-policies=: A set of policies that enforce a sliding cap on player latency when processing game sessions placement requests.
-        --priority-configuration=: Custom settings to use when prioritizing destinations and locations for game session placements.
-        --timeout-in-seconds=: The maximum time, in seconds, that a new game session placement request remains in the queue.
+        --vpc-peering-connection-id=!: A unique identifier for a VPC peering connection.
+    - name: describe-game-server
+      description: '**This API works with the following fleet types:** EC2 (FleetIQ)'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --game-server-group-name=!: A unique identifier for the game server group where the game server is running.
+        --game-server-id=!: A custom string that uniquely identifies the game server information to be retrieved.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: describe-game-sessions
       description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
       flags:
@@ -303,34 +151,99 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
         --status-filter=: Game session status to filter results on.
-    - name: list-container-group-definitions
+    - name: validate-matchmaking-rule-set
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --rule-set-body=!: A collection of matchmaking rules to validate, formatted as a JSON string.
+    - name: create-container-group-definition
       description: '**This API works with the following fleet types:** Container'
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --container-group-type=: The type of container group to retrieve.
+        --container-group-type=: The type of container group being defined.
+        --game-server-container-definition=: The definition for the game server container in this group.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of results to return.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: A token that indicates the start of the next sequential page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+        --name=!: A descriptive identifier for the container group definition.
+        --operating-system=!: The platform that all containers in the group use.
+        --support-container-definitions=: One or more definition for support containers in this group.
+        --tags=: A list of labels to assign to the container group definition resource.
+        --total-memory-limit-mebibytes=!: The maximum amount of memory (in MiB) to allocate to the container group.
+        --total-vcpu-limit=!: The maximum amount of vCPU units to allocate to the container group (1 vCPU is equal to 1024 CPU units).
+        --version-description=: A description for the initial version of this container group definition.
       completion:
         flag:
             container-group-type:
                 - GAME_SERVER
                 - PER_INSTANCE
-    - name: register-game-server
-      description: '**This API works with the following fleet types:** EC2 (FleetIQ)'
+            operating-system:
+                - AMAZON_LINUX_2023
+    - name: create-location
+      description: '**This API works with the following fleet types:** Anywhere'
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connection-info=: Information that is needed to make inbound client connections to the game server.
-        --game-server-data=: A set of custom game server properties, formatted as a single string value.
-        --game-server-group-name=!: A unique identifier for the game server group where the game server is running.
-        --game-server-id=!: A custom string that uniquely identifies the game server to register.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-id=!: The unique identifier for the instance where the game server is running.
+        --location-name=!: A descriptive name for the custom location.
+        --tags=: A list of labels to assign to the new resource.
+    - name: get-compute-access
+      description: '**This API works with the following fleet types:** EC2, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --compute-name=!: A unique identifier for the compute resource that you want to connect to.
+        --fleet-id=!: A unique identifier for the fleet that holds the compute resource that you want to connect to.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: search-game-sessions
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --alias-id=: A unique identifier for the alias associated with the fleet to search for active game sessions.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-expression=: String containing the search criteria for the session search.
+        --fleet-id=: A unique identifier for the fleet to search for active game sessions.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of results to return.
+        --location=: A fleet location to search for game sessions.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: A token that indicates the start of the next sequential page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort-expression=: Instructions on how to sort the search results.
+        --starting-token=: A token to specify where to start paginating.
+    - name: start-matchmaking
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-name=!: Name of the matchmaking configuration to use for this request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --players=!: Information on each player to be matched.
+        --ticket-id=: A unique identifier for a matchmaking ticket.
+    - name: create-game-session-queue
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --custom-event-data=: Information to be added to all events that are related to this game session queue.
+        --destinations=: A list of fleets and/or fleet aliases that can be used to fulfill game session placement requests in the queue.
+        --filter-configuration=: A list of locations where a queue is allowed to place new game sessions.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: A descriptive label that is associated with game session queue.
+        --notification-target=: An SNS topic ARN that is set up to receive game session placement notifications.
+        --player-latency-policies=: A set of policies that enforce a sliding cap on player latency when processing game sessions placement requests.
+        --priority-configuration=: Custom settings to use when prioritizing destinations and locations for game session placements.
+        --tags=: A list of labels to assign to the new game session queue resource.
+        --timeout-in-seconds=: The maximum time, in seconds, that a new game session placement request remains in the queue.
+    - name: delete-fleet-locations
+      description: '**This API works with the following fleet types:** EC2, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fleet-id=!: A unique identifier for the fleet to delete locations for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --locations=!: The list of fleet locations to delete.
     - name: untag-resource
       description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
       flags:
@@ -339,6 +252,26 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) that uniquely identifies the Amazon GameLift Servers resource that you want to remove tags from.
         --tag-keys=!: A list of one or more tag keys to remove from the specified Amazon GameLift Servers resource.
+    - name: update-game-session
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --game-properties=: A set of key-value pairs that can store custom data in a game session.
+        --game-session-id=!: A unique identifier for the game session to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --maximum-player-session-count=: The maximum number of players that can be connected simultaneously to the game session.
+        --name=: A descriptive label that is associated with a game session.
+        --player-session-creation-policy=: A policy that determines whether the game session is accepting new players.
+        --protection-policy=: Game session protection policy to apply to this game session only.
+      completion:
+        flag:
+            player-session-creation-policy:
+                - ACCEPT_ALL
+                - DENY_ALL
+            protection-policy:
+                - NoProtection
+                - FullProtection
     - name: create-fleet
       description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
       flags:
@@ -887,95 +820,13 @@ commands:
             new-game-session-protection-policy:
                 - NoProtection
                 - FullProtection
-    - name: delete-scaling-policy
-      description: '**This API works with the following fleet types:** EC2'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --fleet-id=!: A unique identifier for the fleet to be deleted.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: A descriptive label that is associated with a fleet's scaling policy.
-    - name: list-game-servers
+    - name: deregister-game-server
       description: '**This API works with the following fleet types:** EC2 (FleetIQ)'
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --game-server-group-name=!: An identifier for the game server group to retrieve a list of game servers from.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of results to return.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: A token that indicates the start of the next sequential page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --sort-order=: Indicates how to sort the returned data based on game server registration timestamp.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            sort-order:
-                - ASCENDING
-                - DESCENDING
-    - name: create-vpc-peering-authorization
-      description: '**This API works with the following fleet types:** EC2'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --game-lift-aws-account-id=!: A unique identifier for the Amazon Web Services account that you use to manage your Amazon GameLift Servers fleet.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --peer-vpc-id=!: A unique identifier for a VPC with resources to be accessed by your Amazon GameLift Servers fleet.
-    - name: describe-game-server-group
-      description: '**This API works with the following fleet types:** EC2 (FleetIQ)'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --game-server-group-name=!: A unique identifier for the game server group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-instances
-      description: '**This API works with the following fleet types:** EC2'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --fleet-id=!: A unique identifier for the fleet to retrieve instance information for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-id=: A unique identifier for an instance to retrieve.
-        --limit=: The maximum number of results to return.
-        --location=: The name of a location to retrieve instance information for, in the form of an Amazon Web Services Region code such as `us-west-2`.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: A token that indicates the start of the next sequential page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: describe-build
-      description: '**This API works with the following fleet types:** EC2'
-      flags:
-        --build-id=!: A unique identifier for the build to retrieve properties for.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-game-session-placement
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --placement-id=!: A unique identifier for a game session placement to retrieve.
-    - name: delete-fleet
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --fleet-id=!: A unique identifier for the fleet to be deleted.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-location
-      description: '**This API works with the following fleet types:** Anywhere'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location-name=!: The location name of the custom location to be deleted.
-    - name: describe-container-fleet
-      description: '**This API works with the following fleet types:** Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --fleet-id=!: A unique identifier for the container fleet to retrieve.
+        --game-server-group-name=!: A unique identifier for the game server group where the game server is running.
+        --game-server-id=!: A custom string that uniquely identifies the game server to deregister.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: describe-game-session-details
       description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
@@ -993,52 +844,14 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
         --status-filter=: Game session status to filter results on.
-    - name: describe-vpc-peering-authorizations
-      description: '**This API works with the following fleet types:** EC2'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-tags-for-resource
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) that uniquely identifies the Amazon GameLift Servers resource that you want to retrieve tags for.
-    - name: suspend-game-server-group
+    - name: resume-game-server-group
       description: '**This API works with the following fleet types:** EC2 (FleetIQ)'
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --game-server-group-name=!: A unique identifier for the game server group.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --suspend-actions=!: The activity to suspend for this game server group.
-    - name: create-matchmaking-rule-set
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: A unique identifier for the matchmaking rule set.
-        --rule-set-body=!: A collection of matchmaking rules, formatted as a JSON string.
-        --tags=: A list of labels to assign to the new matchmaking rule set resource.
-    - name: describe-game-server
-      description: '**This API works with the following fleet types:** EC2 (FleetIQ)'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --game-server-group-name=!: A unique identifier for the game server group where the game server is running.
-        --game-server-id=!: A custom string that uniquely identifies the game server information to be retrieved.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-runtime-configuration
-      description: '**This API works with the following fleet types:** EC2'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --fleet-id=!: A unique identifier for the fleet to update runtime configuration for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --runtime-configuration=!: Instructions for launching server processes on fleet computes.
+        --resume-actions=!: The activity to resume for this game server group.
     - name: create-game-session
       description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
       flags:
@@ -1055,37 +868,50 @@ commands:
         --location=: A fleet's remote location to place the new game session in.
         --maximum-player-session-count=!: The maximum number of players that can be connected simultaneously to the game session.
         --name=: A descriptive label that is associated with a game session.
-    - name: create-script
-      description: '**This API works with the following fleet types:** EC2, Anywhere'
+    - name: delete-location
+      description: '**This API works with the following fleet types:** Anywhere'
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: A descriptive label that is associated with a script.
-        --script-version=: Version information that is associated with a build or script.
-        --storage-location=: The location of the Amazon S3 bucket where a zipped file containing your Realtime scripts is stored.
-        --tags=: A list of labels to assign to the new script resource.
-        --zip-file=: A data object containing your Realtime scripts and dependencies as a zip file.
-    - name: describe-compute
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+        --location-name=!: The location name of the custom location to be deleted.
+    - name: list-container-fleets
+      description: '**This API works with the following fleet types:** Container'
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --compute-name=!: The unique identifier of the compute resource to retrieve properties for.
-        --fleet-id=!: A unique identifier for the fleet that the compute belongs to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-fleet-utilization
-      description: '**This API works with the following fleet types:** EC2, Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --fleet-ids=: A unique identifier for the fleet to retrieve utilization data for.
+        --container-group-definition-name=: The container group definition to filter the list on.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --limit=: The maximum number of results to return.
         --max-items=: The  total number of items to return in the command's output.
         --next-token=: A token that indicates the start of the next sequential page of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: register-game-server
+      description: '**This API works with the following fleet types:** EC2 (FleetIQ)'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connection-info=: Information that is needed to make inbound client connections to the game server.
+        --game-server-data=: A set of custom game server properties, formatted as a single string value.
+        --game-server-group-name=!: A unique identifier for the game server group where the game server is running.
+        --game-server-id=!: A custom string that uniquely identifies the game server to register.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The unique identifier for the instance where the game server is running.
+    - name: accept-match
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --acceptance-type=!: Player response to the proposed match.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --player-ids=!: A unique identifier for a player delivering the response.
+        --ticket-id=!: A unique identifier for a matchmaking ticket.
+      completion:
+        flag:
+            acceptance-type:
+                - ACCEPT
+                - REJECT
     - name: describe-scaling-policies
       description: '**This API works with the following fleet types:** EC2'
       flags:
@@ -1110,6 +936,23 @@ commands:
                 - DELETING
                 - DELETED
                 - ERROR
+    - name: start-fleet-actions
+      description: '**This API works with the following fleet types:** EC2, Container'
+      flags:
+        --actions=!: List of actions to restart on the fleet.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fleet-id=!: A unique identifier for the fleet to restart actions on.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --location=: The fleet location to restart fleet actions for.
+    - name: create-vpc-peering-authorization
+      description: '**This API works with the following fleet types:** EC2'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --game-lift-aws-account-id=!: A unique identifier for the Amazon Web Services account that you use to manage your Amazon GameLift Servers fleet.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --peer-vpc-id=!: A unique identifier for a VPC with resources to be accessed by your Amazon GameLift Servers fleet.
     - name: list-container-group-definition-versions
       description: '**This API works with the following fleet types:** Container'
       flags:
@@ -1122,598 +965,22 @@ commands:
         --next-token=: A token that indicates the start of the next sequential page of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-locations
-      description: '**This API works with the following fleet types:** Anywhere'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters the list for `AWS` or `CUSTOM` locations.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of results to return.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: A token that indicates the start of the next sequential page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: start-match-backfill
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration-name=!: Name of the matchmaker to use for this request.
-        --game-session-arn=: A unique identifier for the game session.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --players=!: Match information on all players that are currently assigned to the game session.
-        --ticket-id=: A unique identifier for a matchmaking ticket.
-    - name: create-fleet-locations
-      description: '**This API works with the following fleet types:** EC2, Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --fleet-id=!: A unique identifier for the fleet to add locations to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --locations=!: A list of locations to deploy additional instances to and manage as part of the fleet.
-    - name: create-matchmaking-configuration
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
-      flags:
-        --acceptance-required!: A flag that determines whether a match that was created with this configuration must be accepted by the matched players.
-        --acceptance-timeout-seconds=: The length of time (in seconds) to wait for players to accept a proposed match, if acceptance is required.
-        --additional-player-count=: The number of player slots in a match to keep open for future players.
-        --backfill-mode=: The method used to backfill game sessions that are created with this matchmaking configuration.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --custom-event-data=: Information to be added to all events related to this matchmaking configuration.
-        --description=: A human-readable description of the matchmaking configuration.
-        --flex-match-mode=: Indicates whether this matchmaking configuration is being used with Amazon GameLift Servers hosting or as a standalone matchmaking solution.
-        --game-properties=: A set of key-value pairs that can store custom data in a game session.
-        --game-session-data=: A set of custom game session properties, formatted as a single string value.
-        --game-session-queue-arns=: The Amazon Resource Name ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) that is assigned to a Amazon GameLift Servers game session queue resource and uniquely identifies it.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: A unique identifier for the matchmaking configuration.
-        --no-acceptance-required!: A flag that determines whether a match that was created with this configuration must be accepted by the matched players.
-        --notification-target=: An SNS topic ARN that is set up to receive matchmaking notifications.
-        --request-timeout-seconds=!: The maximum duration, in seconds, that a matchmaking ticket can remain in process before timing out.
-        --rule-set-name=!: A unique identifier for the matchmaking rule set to use with this configuration.
-        --tags=: A list of labels to assign to the new matchmaking configuration resource.
-      completion:
-        flag:
-            backfill-mode:
-                - AUTOMATIC
-                - MANUAL
-            flex-match-mode:
-                - STANDALONE
-                - WITH_QUEUE
-    - name: describe-container-group-definition
-      description: '**This API works with the following fleet types:** Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The unique identifier for the container group definition to retrieve properties for.
-        --version-number=: The specific version to retrieve.
-    - name: describe-fleet-deployment
-      description: '**This API works with the following fleet types:** Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deployment-id=: A unique identifier for the deployment to return information for.
-        --fleet-id=!: A unique identifier for the container fleet.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-game-server-instances
+    - name: suspend-game-server-group
       description: '**This API works with the following fleet types:** EC2 (FleetIQ)'
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --game-server-group-name=!: A unique identifier for the game server group.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-ids=: The Amazon EC2 instance IDs that you want to retrieve status on.
-        --limit=: The maximum number of results to return.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: A token that indicates the start of the next sequential page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-game-server-groups
-      description: '**This API works with the following fleet types:** EC2 (FleetIQ)'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The game server groups' limit.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: Specify the pagination token from a previous request to retrieve the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: stop-matchmaking
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ticket-id=!: A unique identifier for a matchmaking ticket.
-    - name: search-game-sessions
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
-      flags:
-        --alias-id=: A unique identifier for the alias associated with the fleet to search for active game sessions.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter-expression=: String containing the search criteria for the session search.
-        --fleet-id=: A unique identifier for the fleet to search for active game sessions.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of results to return.
-        --location=: A fleet location to search for game sessions.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: A token that indicates the start of the next sequential page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --sort-expression=: Instructions on how to sort the search results.
-        --starting-token=: A token to specify where to start paginating.
-    - name: claim-game-server
-      description: '**This API works with the following fleet types:** EC2 (FleetIQ)'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter-option=: Object that restricts how a claimed game server is chosen.
-        --game-server-data=: A set of custom game server properties, formatted as a single string value.
-        --game-server-group-name=!: A unique identifier for the game server group where the game server is running.
-        --game-server-id=: A custom string that uniquely identifies the game server to claim.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-matchmaking-configuration
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: A unique identifier for the matchmaking configuration.
-    - name: update-game-server
-      description: '**This API works with the following fleet types:** EC2 (FleetIQ)'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --game-server-data=: A set of custom game server properties, formatted as a single string value.
-        --game-server-group-name=!: A unique identifier for the game server group where the game server is running.
-        --game-server-id=!: A custom string that uniquely identifies the game server to update.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --health-check=: Indicates health status of the game server.
-        --utilization-status=: Indicates if the game server is available or is currently hosting gameplay.
-      completion:
-        flag:
-            health-check:
-                - HEALTHY
-            utilization-status:
-                - AVAILABLE
-                - UTILIZED
-    - name: update-fleet-capacity
-      description: '**This API works with the following fleet types:** EC2, Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --desired-instances=: The number of Amazon EC2 instances you want to maintain in the specified fleet location.
-        --fleet-id=!: A unique identifier for the fleet to update capacity settings for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location=: The name of a remote location to update fleet capacity settings for, in the form of an Amazon Web Services Region code such as `us-west-2`.
-        --max-size=: The maximum number of instances that are allowed in the specified fleet location.
-        --min-size=: The minimum number of instances that are allowed in the specified fleet location.
-    - name: update-matchmaking-configuration
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
-      flags:
-        --acceptance-required: A flag that indicates whether a match that was created with this configuration must be accepted by the matched players.
-        --acceptance-timeout-seconds=: The length of time (in seconds) to wait for players to accept a proposed match, if acceptance is required.
-        --additional-player-count=: The number of player slots in a match to keep open for future players.
-        --backfill-mode=: The method that is used to backfill game sessions created with this matchmaking configuration.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --custom-event-data=: Information to add to all events related to the matchmaking configuration.
-        --description=: A description for the matchmaking configuration.
-        --flex-match-mode=: Indicates whether this matchmaking configuration is being used with Amazon GameLift Servers hosting or as a standalone matchmaking solution.
-        --game-properties=: A set of key-value pairs that can store custom data in a game session.
-        --game-session-data=: A set of custom game session properties, formatted as a single string value.
-        --game-session-queue-arns=: The Amazon Resource Name ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) that is assigned to a Amazon GameLift Servers game session queue resource and uniquely identifies it.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: A unique identifier for the matchmaking configuration to update.
-        --no-acceptance-required: A flag that indicates whether a match that was created with this configuration must be accepted by the matched players.
-        --notification-target=: An SNS topic ARN that is set up to receive matchmaking notifications.
-        --request-timeout-seconds=: The maximum duration, in seconds, that a matchmaking ticket can remain in process before timing out.
-        --rule-set-name=: A unique identifier for the matchmaking rule set to use with this configuration.
-      completion:
-        flag:
-            backfill-mode:
-                - AUTOMATIC
-                - MANUAL
-            flex-match-mode:
-                - STANDALONE
-                - WITH_QUEUE
-    - name: describe-fleet-attributes
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --fleet-ids=: A list of unique fleet identifiers to retrieve attributes for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of results to return.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: A token that indicates the start of the next sequential page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: start-fleet-actions
-      description: '**This API works with the following fleet types:** EC2, Container'
-      flags:
-        --actions=!: List of actions to restart on the fleet.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --fleet-id=!: A unique identifier for the fleet to restart actions on.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location=: The fleet location to restart fleet actions for.
-    - name: register-compute
-      description: '**This API works with the following fleet types:** Anywhere, Container'
-      flags:
-        --certificate-path=: The path to a TLS certificate on your compute resource.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --compute-name=!: A descriptive label for the compute resource.
-        --dns-name=: The DNS name of the compute resource.
-        --fleet-id=!: A unique identifier for the fleet to register the compute to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ip-address=: The IP address of the compute resource.
-        --location=: The name of a custom location to associate with the compute resource being registered.
-    - name: delete-alias
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
-      flags:
-        --alias-id=!: A unique identifier of the alias that you want to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-fleet-location-utilization
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --fleet-id=!: A unique identifier for the fleet to request location utilization for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location=!: The fleet location to retrieve utilization information for.
-    - name: describe-fleet-location-attributes
-      description: '**This API works with the following fleet types:** EC2, Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --fleet-id=!: A unique identifier for the fleet to retrieve remote locations for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of results to return.
-        --locations=: A list of fleet locations to retrieve information for.
-        --next-token=: A token that indicates the start of the next sequential page of results.
-    - name: list-fleets
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
-      flags:
-        --build-id=: A unique identifier for the build to request fleets for.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of results to return.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: A token that indicates the start of the next sequential page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --script-id=: A unique identifier for the Realtime script to request fleets for.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-scripts
+        --suspend-actions=!: The activity to suspend for this game server group.
+    - name: delete-vpc-peering-authorization
       description: '**This API works with the following fleet types:** EC2'
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --game-lift-aws-account-id=!: A unique identifier for the Amazon Web Services account that you use to manage your Amazon GameLift Servers fleet.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of results to return.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: A token that indicates the start of the next sequential page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: tag-resource
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) that uniquely identifies the Amazon GameLift Servers resource that you want to assign tags to.
-        --tags=!: A list of one or more tags to assign to the specified Amazon GameLift Servers resource.
-    - name: update-build
-      description: '**This API works with the following fleet types:** EC2'
-      flags:
-        --build-id=!: A unique identifier for the build to update.
-        --build-version=: Version information that is associated with a build or script.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: A descriptive label that is associated with a build.
-    - name: create-container-group-definition
-      description: '**This API works with the following fleet types:** Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --container-group-type=: The type of container group being defined.
-        --game-server-container-definition=: The definition for the game server container in this group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: A descriptive identifier for the container group definition.
-        --operating-system=!: The platform that all containers in the group use.
-        --support-container-definitions=: One or more definition for support containers in this group.
-        --tags=: A list of labels to assign to the container group definition resource.
-        --total-memory-limit-mebibytes=!: The maximum amount of memory (in MiB) to allocate to the container group.
-        --total-vcpu-limit=!: The maximum amount of vCPU units to allocate to the container group (1 vCPU is equal to 1024 CPU units).
-        --version-description=: A description for the initial version of this container group definition.
-      completion:
-        flag:
-            container-group-type:
-                - GAME_SERVER
-                - PER_INSTANCE
-            operating-system:
-                - AMAZON_LINUX_2023
-    - name: create-location
-      description: '**This API works with the following fleet types:** Anywhere'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location-name=!: A descriptive name for the custom location.
-        --tags=: A list of labels to assign to the new resource.
-    - name: delete-game-session-queue
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: A descriptive label that is associated with game session queue.
-    - name: describe-fleet-events
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --end-time=: The most recent date to retrieve event logs for.
-        --fleet-id=!: A unique identifier for the fleet to get event logs for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of results to return.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: A token that indicates the start of the next sequential page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --start-time=: The earliest date to retrieve event logs for.
-        --starting-token=: A token to specify where to start paginating.
-    - name: get-compute-auth-token
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --compute-name=!: The name of the compute resource you are requesting the authentication token for.
-        --fleet-id=!: A unique identifier for the fleet that the compute is registered to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-game-session-log-url
-      description: '**This API works with the following fleet types:** EC2'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --game-session-id=!: A unique identifier for the game session to get logs for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-compute
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --compute-status=: The status of computes in a managed container fleet, based on the success of the latest update deployment.
-        --container-group-definition-name=: For computes in a managed container fleet, the name of the deployed container group definition.
-        --fleet-id=!: A unique identifier for the fleet to retrieve compute resources for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of results to return.
-        --location=: The name of a location to retrieve compute resources for.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: A token that indicates the start of the next sequential page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            compute-status:
-                - ACTIVE
-                - IMPAIRED
-    - name: terminate-game-session
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --game-session-id=!: A unique identifier for the game session to be terminated.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --termination-mode=!: The method to use to terminate the game session.
-      completion:
-        flag:
-            termination-mode:
-                - TRIGGER_ON_PROCESS_TERMINATE
-                - FORCE_TERMINATE
-    - name: create-container-fleet
-      description: '**This API works with the following fleet types:** Container'
-      flags:
-        --billing-type=: Indicates whether to use On-Demand or Spot instances for this fleet.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A meaningful description of the container fleet.
-        --fleet-role-arn=!: The unique identifier for an Identity and Access Management (IAM) role with permissions to run your containers on resources that are managed by Amazon GameLift Servers.
-        --game-server-container-group-definition-name=: A container group definition resource that describes how to deploy containers with your game server build and support software onto each fleet instance.
-        --game-server-container-groups-per-instance=: The number of times to replicate the game server container group on each fleet instance.
-        --game-session-creation-limit-policy=: A policy that limits the number of game sessions that each individual player can create on instances in this fleet.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-connection-port-range=: The set of port numbers to open on each fleet instance.
-        --instance-inbound-permissions=: The IP address ranges and port settings that allow inbound traffic to access game server processes and other processes on this fleet.
-        --instance-type=: The Amazon EC2 instance type to use for all instances in the fleet.
-        --locations=: A set of locations to deploy container fleet instances to.
-        --log-configuration=: A method for collecting container logs for the fleet.
-        --metric-groups=: The name of an Amazon Web Services CloudWatch metric group to add this fleet to.
-        --new-game-session-protection-policy=: Determines whether Amazon GameLift Servers can shut down game sessions on the fleet that are actively running and hosting players.
-        --per-instance-container-group-definition-name=: The name of a container group definition resource that describes a set of axillary software.
-        --tags=: A list of labels to assign to the new fleet resource.
-      completion:
-        flag:
-            billing-type:
-                - ON_DEMAND
-                - SPOT
-            new-game-session-protection-policy:
-                - NoProtection
-                - FullProtection
-    - name: get-compute-access
-      description: '**This API works with the following fleet types:** EC2, Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --compute-name=!: A unique identifier for the compute resource that you want to connect to.
-        --fleet-id=!: A unique identifier for the fleet that holds the compute resource that you want to connect to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: resolve-alias
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
-      flags:
-        --alias-id=!: The unique identifier of the alias that you want to retrieve a fleet ID for.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-fleet-locations
-      description: '**This API works with the following fleet types:** EC2, Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --fleet-id=!: A unique identifier for the fleet to delete locations for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --locations=!: The list of fleet locations to delete.
-    - name: describe-matchmaking-configurations
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of results to return.
-        --max-items=: The  total number of items to return in the command's output.
-        --names=: A unique identifier for the matchmaking configuration(s) to retrieve.
-        --next-token=: A token that indicates the start of the next sequential page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --rule-set-name=: A unique identifier for the matchmaking rule set.
-        --starting-token=: A token to specify where to start paginating.
-    - name: describe-matchmaking-rule-sets
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of results to return.
-        --max-items=: The  total number of items to return in the command's output.
-        --names=: A list of one or more matchmaking rule set names to retrieve details for.
-        --next-token=: A token that indicates the start of the next sequential page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: describe-script
-      description: '**This API works with the following fleet types:** EC2'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --script-id=!: A unique identifier for the Realtime script to retrieve properties for.
-    - name: request-upload-credentials
-      description: '**This API works with the following fleet types:** EC2'
-      flags:
-        --build-id=!: A unique identifier for the build to get credentials for.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: start-matchmaking
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration-name=!: Name of the matchmaking configuration to use for this request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --players=!: Information on each player to be matched.
-        --ticket-id=: A unique identifier for a matchmaking ticket.
-    - name: delete-script
-      description: '**This API works with the following fleet types:** EC2'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --script-id=!: A unique identifier for the Realtime script to delete.
-    - name: describe-player-sessions
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --game-session-id=: A unique identifier for the game session to retrieve player sessions for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of results to return.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: A token that indicates the start of the next sequential page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --player-id=: A unique identifier for a player to retrieve player sessions for.
-        --player-session-id=: A unique identifier for a player session to retrieve.
-        --player-session-status-filter=: Player session status to filter results on.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-container-fleet
-      description: '**This API works with the following fleet types:** Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deployment-configuration=: Instructions for how to deploy updates to a container fleet, if the fleet update initiates a deployment.
-        --description=: A meaningful description of the container fleet.
-        --fleet-id=!: A unique identifier for the container fleet to update.
-        --game-server-container-group-definition-name=: The name or ARN value of a new game server container group definition to deploy on the fleet.
-        --game-server-container-groups-per-instance=: The number of times to replicate the game server container group on each fleet instance.
-        --game-session-creation-limit-policy=: A policy that limits the number of game sessions that each individual player can create on instances in this fleet.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-connection-port-range=: A revised set of port numbers to open on each fleet instance.
-        --instance-inbound-permission-authorizations=: A set of ports to add to the container fleet's inbound permissions.
-        --instance-inbound-permission-revocations=: A set of ports to remove from the container fleet's inbound permissions.
-        --log-configuration=: The method for collecting container logs for the fleet.
-        --metric-groups=: The name of an Amazon Web Services CloudWatch metric group to add this fleet to.
-        --new-game-session-protection-policy=: The game session protection policy to apply to all new game sessions that are started in this fleet.
-        --per-instance-container-group-definition-name=: The name or ARN value of a new per-instance container group definition to deploy on the fleet.
-        --remove-attributes=: If set, this update removes a fleet's per-instance container group definition.
-      completion:
-        flag:
-            new-game-session-protection-policy:
-                - NoProtection
-                - FullProtection
-    - name: update-fleet-attributes
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
-      flags:
-        --anywhere-configuration=: Amazon GameLift Servers Anywhere configuration options.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A human-readable description of a fleet.
-        --fleet-id=!: A unique identifier for the fleet to update attribute metadata for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --metric-groups=: The name of a metric group to add this fleet to.
-        --name=: A descriptive label that is associated with a fleet.
-        --new-game-session-protection-policy=: The game session protection policy to apply to all new game sessions created in this fleet.
-        --resource-creation-limit-policy=: Policy settings that limit the number of game sessions an individual player can create over a span of time.
-      completion:
-        flag:
-            new-game-session-protection-policy:
-                - NoProtection
-                - FullProtection
-    - name: describe-fleet-port-settings
-      description: '**This API works with the following fleet types:** EC2, Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --fleet-id=!: A unique identifier for the fleet to retrieve port settings for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location=: A remote location to check for status of port setting updates.
-    - name: create-player-sessions
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --game-session-id=!: A unique identifier for the game session to add players to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --player-data-map=: Map of string pairs, each specifying a player ID and a set of developer-defined information related to the player.
-        --player-ids=!: List of unique identifiers for the players to be added.
-    - name: delete-game-server-group
-      description: '**This API works with the following fleet types:** EC2 (FleetIQ)'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --delete-option=: The type of delete to perform.
-        --game-server-group-name=!: A unique identifier for the game server group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      completion:
-        flag:
-            delete-option:
-                - SAFE_DELETE
-                - FORCE_DELETE
-                - RETAIN
+        --peer-vpc-id=!: A unique identifier for a VPC with resources to be accessed by your Amazon GameLift Servers fleet.
     - name: describe-e-c2-instance-limits
       description: '**This API works with the following fleet types:** EC2'
       flags:
@@ -2230,48 +1497,201 @@ commands:
                 - r7a.24xlarge
                 - r7a.32xlarge
                 - r7a.48xlarge
-    - name: list-aliases
+    - name: describe-game-session-placement
       description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --placement-id=!: A unique identifier for a game session placement to retrieve.
+    - name: update-game-server-group
+      description: '**This API works with the following fleet types:** EC2 (FleetIQ)'
+      flags:
+        --balancing-strategy=: Indicates how Amazon GameLift Servers FleetIQ balances the use of Spot Instances and On-Demand Instances in the game server group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --game-server-group-name=!: A unique identifier for the game server group.
+        --game-server-protection-policy=: A flag that indicates whether instances in the game server group are protected from early termination.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-definitions=: An updated list of Amazon EC2 instance types to use in the Auto Scaling group.
+        --role-arn=: The Amazon Resource Name ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) for an IAM role that allows Amazon GameLift Servers to access your Amazon EC2 Auto Scaling groups.
+      completion:
+        flag:
+            balancing-strategy:
+                - SPOT_ONLY
+                - SPOT_PREFERRED
+                - ON_DEMAND_ONLY
+            game-server-protection-policy:
+                - NO_PROTECTION
+                - FULL_PROTECTION
+    - name: describe-game-server-group
+      description: '**This API works with the following fleet types:** EC2 (FleetIQ)'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --game-server-group-name=!: A unique identifier for the game server group.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-compute-auth-token
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --compute-name=!: The name of the compute resource you are requesting the authentication token for.
+        --fleet-id=!: A unique identifier for the fleet that the compute is registered to.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-game-session-log-url
+      description: '**This API works with the following fleet types:** EC2'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --game-session-id=!: A unique identifier for the game session to get logs for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-scripts
+      description: '**This API works with the following fleet types:** EC2'
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --limit=: The maximum number of results to return.
         --max-items=: The  total number of items to return in the command's output.
-        --name=: A descriptive label that is associated with an alias.
         --next-token=: A token that indicates the start of the next sequential page of results.
         --page-size=: The size of each page to get in the AWS service call.
-        --routing-strategy-type=: The routing type to filter results on.
         --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            routing-strategy-type:
-                - SIMPLE
-                - TERMINAL
-    - name: start-game-session-placement
+    - name: tag-resource
       description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --desired-player-sessions=: Set of information on each player to create a player session for.
-        --game-properties=: A set of key-value pairs that can store custom data in a game session.
-        --game-session-data=: A set of custom game session properties, formatted as a single string value.
-        --game-session-name=: A descriptive label that is associated with a game session.
-        --game-session-queue-name=!: Name of the queue to use to place the new game session.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --maximum-player-session-count=!: The maximum number of players that can be connected simultaneously to the game session.
-        --placement-id=!: A unique identifier to assign to the new game session placement.
-        --player-latencies=: A set of values, expressed in milliseconds, that indicates the amount of latency that a player experiences when connected to Amazon Web Services Regions.
-        --priority-configuration-override=: A prioritized list of locations to use for the game session placement and instructions on how to use it.
-    - name: stop-fleet-actions
-      description: '**This API works with the following fleet types:** EC2, Container'
+        --resource-arn=!: The Amazon Resource Name ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) that uniquely identifies the Amazon GameLift Servers resource that you want to assign tags to.
+        --tags=!: A list of one or more tags to assign to the specified Amazon GameLift Servers resource.
+    - name: update-alias
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
       flags:
-        --actions=!: List of actions to suspend on the fleet.
+        --alias-id=!: A unique identifier for the alias that you want to update.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --fleet-id=!: A unique identifier for the fleet to stop actions on.
+        --description=: A human-readable description of the alias.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location=: The fleet location to stop fleet actions for.
+        --name=: A descriptive label that is associated with an alias.
+        --routing-strategy=: The routing configuration, including routing type and fleet target, for the alias.
+    - name: update-fleet-attributes
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --anywhere-configuration=: Amazon GameLift Servers Anywhere configuration options.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A human-readable description of a fleet.
+        --fleet-id=!: A unique identifier for the fleet to update attribute metadata for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --metric-groups=: The name of a metric group to add this fleet to.
+        --name=: A descriptive label that is associated with a fleet.
+        --new-game-session-protection-policy=: The game session protection policy to apply to all new game sessions created in this fleet.
+        --resource-creation-limit-policy=: Policy settings that limit the number of game sessions an individual player can create over a span of time.
+      completion:
+        flag:
+            new-game-session-protection-policy:
+                - NoProtection
+                - FullProtection
+    - name: delete-container-group-definition
+      description: '**This API works with the following fleet types:** Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The unique identifier for the container group definition to delete.
+        --version-count-to-retain=: The number of most recent versions to keep while deleting all older versions.
+        --version-number=: The specific version to delete.
+    - name: describe-alias
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --alias-id=!: The unique identifier for the fleet alias that you want to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-compute
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --compute-status=: The status of computes in a managed container fleet, based on the success of the latest update deployment.
+        --container-group-definition-name=: For computes in a managed container fleet, the name of the deployed container group definition.
+        --fleet-id=!: A unique identifier for the fleet to retrieve compute resources for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of results to return.
+        --location=: The name of a location to retrieve compute resources for.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: A token that indicates the start of the next sequential page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            compute-status:
+                - ACTIVE
+                - IMPAIRED
+    - name: update-fleet-capacity
+      description: '**This API works with the following fleet types:** EC2, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --desired-instances=: The number of Amazon EC2 instances you want to maintain in the specified fleet location.
+        --fleet-id=!: A unique identifier for the fleet to update capacity settings for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --location=: The name of a remote location to update fleet capacity settings for, in the form of an Amazon Web Services Region code such as `us-west-2`.
+        --max-size=: The maximum number of instances that are allowed in the specified fleet location.
+        --min-size=: The minimum number of instances that are allowed in the specified fleet location.
+    - name: update-game-session-queue
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --custom-event-data=: Information to be added to all events that are related to this game session queue.
+        --destinations=: A list of fleets and/or fleet aliases that can be used to fulfill game session placement requests in the queue.
+        --filter-configuration=: A list of locations where a queue is allowed to place new game sessions.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: A descriptive label that is associated with game session queue.
+        --notification-target=: An SNS topic ARN that is set up to receive game session placement notifications.
+        --player-latency-policies=: A set of policies that enforce a sliding cap on player latency when processing game sessions placement requests.
+        --priority-configuration=: Custom settings to use when prioritizing destinations and locations for game session placements.
+        --timeout-in-seconds=: The maximum time, in seconds, that a new game session placement request remains in the queue.
+    - name: deregister-compute
+      description: '**This API works with the following fleet types:** Anywhere'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --compute-name=!: The unique identifier of the compute resource to deregister.
+        --fleet-id=!: A unique identifier for the fleet the compute resource is currently registered to.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-builds
+      description: '**This API works with the following fleet types:** EC2'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of results to return.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: A token that indicates the start of the next sequential page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: Build status to filter results by.
+      completion:
+        flag:
+            status:
+                - INITIALIZED
+                - READY
+                - FAILED
+    - name: list-locations
+      description: '**This API works with the following fleet types:** Anywhere'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters the list for `AWS` or `CUSTOM` locations.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of results to return.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: A token that indicates the start of the next sequential page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: create-build
       description: '**This API works with the following fleet types:** EC2, Anywhere'
       flags:
@@ -2293,13 +1713,66 @@ commands:
                 - WINDOWS_2016
                 - AMAZON_LINUX_2023
                 - WINDOWS_2022
-    - name: delete-build
-      description: '**This API works with the following fleet types:** EC2'
+    - name: create-container-fleet
+      description: '**This API works with the following fleet types:** Container'
       flags:
-        --build-id=!: A unique identifier for the build to delete.
+        --billing-type=: Indicates whether to use On-Demand or Spot instances for this fleet.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A meaningful description of the container fleet.
+        --fleet-role-arn=!: The unique identifier for an Identity and Access Management (IAM) role with permissions to run your containers on resources that are managed by Amazon GameLift Servers.
+        --game-server-container-group-definition-name=: A container group definition resource that describes how to deploy containers with your game server build and support software onto each fleet instance.
+        --game-server-container-groups-per-instance=: The number of times to replicate the game server container group on each fleet instance.
+        --game-session-creation-limit-policy=: A policy that limits the number of game sessions that each individual player can create on instances in this fleet.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-connection-port-range=: The set of port numbers to open on each fleet instance.
+        --instance-inbound-permissions=: The IP address ranges and port settings that allow inbound traffic to access game server processes and other processes on this fleet.
+        --instance-type=: The Amazon EC2 instance type to use for all instances in the fleet.
+        --locations=: A set of locations to deploy container fleet instances to.
+        --log-configuration=: A method for collecting container logs for the fleet.
+        --metric-groups=: The name of an Amazon Web Services CloudWatch metric group to add this fleet to.
+        --new-game-session-protection-policy=: Determines whether Amazon GameLift Servers can shut down game sessions on the fleet that are actively running and hosting players.
+        --per-instance-container-group-definition-name=: The name of a container group definition resource that describes a set of axillary software.
+        --tags=: A list of labels to assign to the new fleet resource.
+      completion:
+        flag:
+            billing-type:
+                - ON_DEMAND
+                - SPOT
+            new-game-session-protection-policy:
+                - NoProtection
+                - FullProtection
+    - name: describe-matchmaking-rule-sets
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of results to return.
+        --max-items=: The  total number of items to return in the command's output.
+        --names=: A list of one or more matchmaking rule set names to retrieve details for.
+        --next-token=: A token that indicates the start of the next sequential page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-script
+      description: '**This API works with the following fleet types:** EC2'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --script-id=!: A unique identifier for the Realtime script to retrieve properties for.
+    - name: list-fleet-deployments
+      description: '**This API works with the following fleet types:** Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fleet-id=: A unique identifier for the container fleet.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of results to return.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: A token that indicates the start of the next sequential page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: delete-container-fleet
       description: '**This API works with the following fleet types:** Container'
       flags:
@@ -2307,114 +1780,110 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --fleet-id=!: A unique identifier for the container fleet to delete.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-vpc-peering-authorization
-      description: '**This API works with the following fleet types:** EC2'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --game-lift-aws-account-id=!: A unique identifier for the Amazon Web Services account that you use to manage your Amazon GameLift Servers fleet.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --peer-vpc-id=!: A unique identifier for a VPC with resources to be accessed by your Amazon GameLift Servers fleet.
-    - name: delete-vpc-peering-connection
-      description: '**This API works with the following fleet types:** EC2'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --fleet-id=!: A unique identifier for the fleet.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --vpc-peering-connection-id=!: A unique identifier for a VPC peering connection.
-    - name: deregister-compute
-      description: '**This API works with the following fleet types:** Anywhere'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --compute-name=!: The unique identifier of the compute resource to deregister.
-        --fleet-id=!: A unique identifier for the fleet the compute resource is currently registered to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-game-session-queue
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --custom-event-data=: Information to be added to all events that are related to this game session queue.
-        --destinations=: A list of fleets and/or fleet aliases that can be used to fulfill game session placement requests in the queue.
-        --filter-configuration=: A list of locations where a queue is allowed to place new game sessions.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: A descriptive label that is associated with game session queue.
-        --notification-target=: An SNS topic ARN that is set up to receive game session placement notifications.
-        --player-latency-policies=: A set of policies that enforce a sliding cap on player latency when processing game sessions placement requests.
-        --priority-configuration=: Custom settings to use when prioritizing destinations and locations for game session placements.
-        --tags=: A list of labels to assign to the new game session queue resource.
-        --timeout-in-seconds=: The maximum time, in seconds, that a new game session placement request remains in the queue.
-    - name: describe-alias
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
-      flags:
-        --alias-id=!: The unique identifier for the fleet alias that you want to retrieve.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-vpc-peering-connections
-      description: '**This API works with the following fleet types:** EC2'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --fleet-id=: A unique identifier for the fleet.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-game-session
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --game-properties=: A set of key-value pairs that can store custom data in a game session.
-        --game-session-id=!: A unique identifier for the game session to update.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --maximum-player-session-count=: The maximum number of players that can be connected simultaneously to the game session.
-        --name=: A descriptive label that is associated with a game session.
-        --player-session-creation-policy=: A policy that determines whether the game session is accepting new players.
-        --protection-policy=: Game session protection policy to apply to this game session only.
-      completion:
-        flag:
-            player-session-creation-policy:
-                - ACCEPT_ALL
-                - DENY_ALL
-            protection-policy:
-                - NoProtection
-                - FullProtection
-    - name: create-game-server-group
+    - name: describe-game-server-instances
       description: '**This API works with the following fleet types:** EC2 (FleetIQ)'
       flags:
-        --auto-scaling-policy=: Configuration settings to define a scaling policy for the Auto Scaling group that is optimized for game hosting.
-        --balancing-strategy=: Indicates how Amazon GameLift Servers FleetIQ balances the use of Spot Instances and On-Demand Instances in the game server group.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --game-server-group-name=!: An identifier for the new game server group.
-        --game-server-protection-policy=: A flag that indicates whether instances in the game server group are protected from early termination.
+        --game-server-group-name=!: A unique identifier for the game server group.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-definitions=!: The Amazon EC2 instance types and sizes to use in the Auto Scaling group.
-        --launch-template=!: The Amazon EC2 launch template that contains configuration settings and game server code to be deployed to all instances in the game server group.
-        --max-size=!: The maximum number of instances allowed in the Amazon EC2 Auto Scaling group.
-        --min-size=!: The minimum number of instances allowed in the Amazon EC2 Auto Scaling group.
-        --role-arn=!: The Amazon Resource Name ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) for an IAM role that allows Amazon GameLift Servers to access your Amazon EC2 Auto Scaling groups.
-        --tags=: A list of labels to assign to the new game server group resource.
-        --vpc-subnets=: A list of virtual private cloud (VPC) subnets to use with instances in the game server group.
+        --instance-ids=: The Amazon EC2 instance IDs that you want to retrieve status on.
+        --limit=: The maximum number of results to return.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: A token that indicates the start of the next sequential page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: stop-matchmaking
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ticket-id=!: A unique identifier for a matchmaking ticket.
+    - name: terminate-game-session
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --game-session-id=!: A unique identifier for the game session to be terminated.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --termination-mode=!: The method to use to terminate the game session.
       completion:
         flag:
-            balancing-strategy:
-                - SPOT_ONLY
-                - SPOT_PREFERRED
-                - ON_DEMAND_ONLY
-            game-server-protection-policy:
-                - NO_PROTECTION
-                - FULL_PROTECTION
-    - name: create-vpc-peering-connection
+            termination-mode:
+                - TRIGGER_ON_PROCESS_TERMINATE
+                - FORCE_TERMINATE
+    - name: delete-matchmaking-configuration
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: A unique identifier for the matchmaking configuration.
+    - name: describe-instances
       description: '**This API works with the following fleet types:** EC2'
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --fleet-id=!: A unique identifier for the fleet.
+        --fleet-id=!: A unique identifier for the fleet to retrieve instance information for.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --peer-vpc-aws-account-id=!: A unique identifier for the Amazon Web Services account with the VPC that you want to peer your Amazon GameLift Servers fleet with.
-        --peer-vpc-id=!: A unique identifier for a VPC with resources to be accessed by your Amazon GameLift Servers fleet.
+        --instance-id=: A unique identifier for an instance to retrieve.
+        --limit=: The maximum number of results to return.
+        --location=: The name of a location to retrieve instance information for, in the form of an Amazon Web Services Region code such as `us-west-2`.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: A token that indicates the start of the next sequential page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: put-scaling-policy
+      description: '**This API works with the following fleet types:** EC2'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --comparison-operator=: Comparison operator to use when measuring the metric against the threshold value.
+        --evaluation-periods=: Length of time (in minutes) the metric must be at or beyond the threshold before a scaling event is triggered.
+        --fleet-id=!: A unique identifier for the fleet to apply this policy to.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --metric-name=!: Name of the Amazon GameLift Servers-defined metric that is used to trigger a scaling adjustment.
+        --name=!: A descriptive label that is associated with a fleet's scaling policy.
+        --policy-type=: The type of scaling policy to create.
+        --scaling-adjustment-type=: 'The type of adjustment to make to a fleet''s instance count:'
+        --scaling-adjustment=: Amount of adjustment to make, based on the scaling adjustment type.
+        --target-configuration=: An object that contains settings for a target-based scaling policy.
+        --threshold=: Metric value used to trigger a scaling event.
+      completion:
+        flag:
+            comparison-operator:
+                - GreaterThanOrEqualToThreshold
+                - GreaterThanThreshold
+                - LessThanThreshold
+                - LessThanOrEqualToThreshold
+            metric-name:
+                - ActivatingGameSessions
+                - ActiveGameSessions
+                - ActiveInstances
+                - AvailableGameSessions
+                - AvailablePlayerSessions
+                - CurrentPlayerSessions
+                - IdleInstances
+                - PercentAvailableGameSessions
+                - PercentIdleInstances
+                - QueueDepth
+                - WaitTime
+                - ConcurrentActivatableGameSessions
+            policy-type:
+                - RuleBased
+                - TargetBased
+            scaling-adjustment-type:
+                - ChangeInCapacity
+                - ExactCapacity
+                - PercentChangeInCapacity
+    - name: stop-game-session-placement
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --placement-id=!: A unique identifier for a game session placement to stop.
     - name: delete-matchmaking-rule-set
       description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
       flags:
@@ -2429,3 +1898,534 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --ticket-ids=!: A unique identifier for a matchmaking ticket.
+    - name: update-game-server
+      description: '**This API works with the following fleet types:** EC2 (FleetIQ)'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --game-server-data=: A set of custom game server properties, formatted as a single string value.
+        --game-server-group-name=!: A unique identifier for the game server group where the game server is running.
+        --game-server-id=!: A custom string that uniquely identifies the game server to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --health-check=: Indicates health status of the game server.
+        --utilization-status=: Indicates if the game server is available or is currently hosting gameplay.
+      completion:
+        flag:
+            health-check:
+                - HEALTHY
+            utilization-status:
+                - AVAILABLE
+                - UTILIZED
+    - name: update-script
+      description: '**This API works with the following fleet types:** EC2'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: A descriptive label that is associated with a script.
+        --script-id=!: A unique identifier for the Realtime script to update.
+        --script-version=: Version information that is associated with a build or script.
+        --storage-location=: The location of the Amazon S3 bucket where a zipped file containing your Realtime scripts is stored.
+        --zip-file=: A data object containing your Realtime scripts and dependencies as a zip file.
+    - name: describe-fleet-port-settings
+      description: '**This API works with the following fleet types:** EC2, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fleet-id=!: A unique identifier for the fleet to retrieve port settings for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --location=: A remote location to check for status of port setting updates.
+    - name: update-runtime-configuration
+      description: '**This API works with the following fleet types:** EC2'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fleet-id=!: A unique identifier for the fleet to update runtime configuration for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --runtime-configuration=!: Instructions for launching server processes on fleet computes.
+    - name: describe-fleet-location-attributes
+      description: '**This API works with the following fleet types:** EC2, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fleet-id=!: A unique identifier for the fleet to retrieve remote locations for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of results to return.
+        --locations=: A list of fleet locations to retrieve information for.
+        --next-token=: A token that indicates the start of the next sequential page of results.
+    - name: list-fleets
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --build-id=: A unique identifier for the build to request fleets for.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of results to return.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: A token that indicates the start of the next sequential page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --script-id=: A unique identifier for the Realtime script to request fleets for.
+        --starting-token=: A token to specify where to start paginating.
+    - name: request-upload-credentials
+      description: '**This API works with the following fleet types:** EC2'
+      flags:
+        --build-id=!: A unique identifier for the build to get credentials for.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-matchmaking-configuration
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --acceptance-required!: A flag that determines whether a match that was created with this configuration must be accepted by the matched players.
+        --acceptance-timeout-seconds=: The length of time (in seconds) to wait for players to accept a proposed match, if acceptance is required.
+        --additional-player-count=: The number of player slots in a match to keep open for future players.
+        --backfill-mode=: The method used to backfill game sessions that are created with this matchmaking configuration.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --custom-event-data=: Information to be added to all events related to this matchmaking configuration.
+        --description=: A human-readable description of the matchmaking configuration.
+        --flex-match-mode=: Indicates whether this matchmaking configuration is being used with Amazon GameLift Servers hosting or as a standalone matchmaking solution.
+        --game-properties=: A set of key-value pairs that can store custom data in a game session.
+        --game-session-data=: A set of custom game session properties, formatted as a single string value.
+        --game-session-queue-arns=: The Amazon Resource Name ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) that is assigned to a Amazon GameLift Servers game session queue resource and uniquely identifies it.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: A unique identifier for the matchmaking configuration.
+        --no-acceptance-required!: A flag that determines whether a match that was created with this configuration must be accepted by the matched players.
+        --notification-target=: An SNS topic ARN that is set up to receive matchmaking notifications.
+        --request-timeout-seconds=!: The maximum duration, in seconds, that a matchmaking ticket can remain in process before timing out.
+        --rule-set-name=!: A unique identifier for the matchmaking rule set to use with this configuration.
+        --tags=: A list of labels to assign to the new matchmaking configuration resource.
+      completion:
+        flag:
+            backfill-mode:
+                - AUTOMATIC
+                - MANUAL
+            flex-match-mode:
+                - STANDALONE
+                - WITH_QUEUE
+    - name: create-player-sessions
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --game-session-id=!: A unique identifier for the game session to add players to.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --player-data-map=: Map of string pairs, each specifying a player ID and a set of developer-defined information related to the player.
+        --player-ids=!: List of unique identifiers for the players to be added.
+    - name: describe-compute
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --compute-name=!: The unique identifier of the compute resource to retrieve properties for.
+        --fleet-id=!: A unique identifier for the fleet that the compute belongs to.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-fleet-capacity
+      description: '**This API works with the following fleet types:** EC2, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fleet-ids=: A unique identifier for the fleet to retrieve capacity information for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of results to return.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: A token that indicates the start of the next sequential page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: start-game-session-placement
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --desired-player-sessions=: Set of information on each player to create a player session for.
+        --game-properties=: A set of key-value pairs that can store custom data in a game session.
+        --game-session-data=: A set of custom game session properties, formatted as a single string value.
+        --game-session-name=: A descriptive label that is associated with a game session.
+        --game-session-queue-name=!: Name of the queue to use to place the new game session.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --maximum-player-session-count=!: The maximum number of players that can be connected simultaneously to the game session.
+        --placement-id=!: A unique identifier to assign to the new game session placement.
+        --player-latencies=: A set of values, expressed in milliseconds, that indicates the amount of latency that a player experiences when connected to Amazon Web Services Regions.
+        --priority-configuration-override=: A prioritized list of locations to use for the game session placement and instructions on how to use it.
+    - name: update-fleet-port-settings
+      description: '**This API works with the following fleet types:** EC2, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fleet-id=!: A unique identifier for the fleet to update port settings for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --inbound-permission-authorizations=: A collection of port settings to be added to the fleet resource.
+        --inbound-permission-revocations=: A collection of port settings to be removed from the fleet resource.
+    - name: delete-build
+      description: '**This API works with the following fleet types:** EC2'
+      flags:
+        --build-id=!: A unique identifier for the build to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: resolve-alias
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --alias-id=!: The unique identifier of the alias that you want to retrieve a fleet ID for.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-player-sessions
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --game-session-id=: A unique identifier for the game session to retrieve player sessions for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of results to return.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: A token that indicates the start of the next sequential page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --player-id=: A unique identifier for a player to retrieve player sessions for.
+        --player-session-id=: A unique identifier for a player session to retrieve.
+        --player-session-status-filter=: Player session status to filter results on.
+        --starting-token=: A token to specify where to start paginating.
+    - name: register-compute
+      description: '**This API works with the following fleet types:** Anywhere, Container'
+      flags:
+        --certificate-path=: The path to a TLS certificate on your compute resource.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --compute-name=!: A descriptive label for the compute resource.
+        --dns-name=: The DNS name of the compute resource.
+        --fleet-id=!: A unique identifier for the fleet to register the compute to.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ip-address=: The IP address of the compute resource.
+        --location=: The name of a custom location to associate with the compute resource being registered.
+    - name: create-alias
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A human-readable description of the alias.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: A descriptive label that is associated with an alias.
+        --routing-strategy=!: The routing configuration, including routing type and fleet target, for the alias.
+        --tags=: A list of labels to assign to the new alias resource.
+    - name: create-matchmaking-rule-set
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: A unique identifier for the matchmaking rule set.
+        --rule-set-body=!: A collection of matchmaking rules, formatted as a JSON string.
+        --tags=: A list of labels to assign to the new matchmaking rule set resource.
+    - name: create-player-session
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --game-session-id=!: A unique identifier for the game session to add a player to.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --player-data=: Developer-defined information related to a player.
+        --player-id=!: A unique identifier for a player.
+    - name: create-vpc-peering-connection
+      description: '**This API works with the following fleet types:** EC2'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fleet-id=!: A unique identifier for the fleet.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --peer-vpc-aws-account-id=!: A unique identifier for the Amazon Web Services account with the VPC that you want to peer your Amazon GameLift Servers fleet with.
+        --peer-vpc-id=!: A unique identifier for a VPC with resources to be accessed by your Amazon GameLift Servers fleet.
+    - name: describe-container-fleet
+      description: '**This API works with the following fleet types:** Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fleet-id=!: A unique identifier for the container fleet to retrieve.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-runtime-configuration
+      description: '**This API works with the following fleet types:** EC2'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fleet-id=!: A unique identifier for the fleet to get the runtime configuration for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-game-server-groups
+      description: '**This API works with the following fleet types:** EC2 (FleetIQ)'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The game server groups' limit.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: Specify the pagination token from a previous request to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-fleet-deployment
+      description: '**This API works with the following fleet types:** Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --deployment-id=: A unique identifier for the deployment to return information for.
+        --fleet-id=!: A unique identifier for the container fleet.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-matchmaking-configurations
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of results to return.
+        --max-items=: The  total number of items to return in the command's output.
+        --names=: A unique identifier for the matchmaking configuration(s) to retrieve.
+        --next-token=: A token that indicates the start of the next sequential page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --rule-set-name=: A unique identifier for the matchmaking rule set.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-fleet-events
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=: The most recent date to retrieve event logs for.
+        --fleet-id=!: A unique identifier for the fleet to get event logs for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of results to return.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: A token that indicates the start of the next sequential page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --start-time=: The earliest date to retrieve event logs for.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-fleet-location-capacity
+      description: '**This API works with the following fleet types:** EC2, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fleet-id=!: A unique identifier for the fleet to request location capacity for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --location=!: The fleet location to retrieve capacity information for.
+    - name: describe-game-session-queues
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of results to return.
+        --max-items=: The  total number of items to return in the command's output.
+        --names=: A list of queue names to retrieve information for.
+        --next-token=: A token that indicates the start of the next sequential page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-vpc-peering-authorizations
+      description: '**This API works with the following fleet types:** EC2'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-game-servers
+      description: '**This API works with the following fleet types:** EC2 (FleetIQ)'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --game-server-group-name=!: An identifier for the game server group to retrieve a list of game servers from.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of results to return.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: A token that indicates the start of the next sequential page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort-order=: Indicates how to sort the returned data based on game server registration timestamp.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            sort-order:
+                - ASCENDING
+                - DESCENDING
+    - name: update-matchmaking-configuration
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --acceptance-required: A flag that indicates whether a match that was created with this configuration must be accepted by the matched players.
+        --acceptance-timeout-seconds=: The length of time (in seconds) to wait for players to accept a proposed match, if acceptance is required.
+        --additional-player-count=: The number of player slots in a match to keep open for future players.
+        --backfill-mode=: The method that is used to backfill game sessions created with this matchmaking configuration.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --custom-event-data=: Information to add to all events related to the matchmaking configuration.
+        --description=: A description for the matchmaking configuration.
+        --flex-match-mode=: Indicates whether this matchmaking configuration is being used with Amazon GameLift Servers hosting or as a standalone matchmaking solution.
+        --game-properties=: A set of key-value pairs that can store custom data in a game session.
+        --game-session-data=: A set of custom game session properties, formatted as a single string value.
+        --game-session-queue-arns=: The Amazon Resource Name ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) that is assigned to a Amazon GameLift Servers game session queue resource and uniquely identifies it.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: A unique identifier for the matchmaking configuration to update.
+        --no-acceptance-required: A flag that indicates whether a match that was created with this configuration must be accepted by the matched players.
+        --notification-target=: An SNS topic ARN that is set up to receive matchmaking notifications.
+        --request-timeout-seconds=: The maximum duration, in seconds, that a matchmaking ticket can remain in process before timing out.
+        --rule-set-name=: A unique identifier for the matchmaking rule set to use with this configuration.
+      completion:
+        flag:
+            backfill-mode:
+                - AUTOMATIC
+                - MANUAL
+            flex-match-mode:
+                - STANDALONE
+                - WITH_QUEUE
+    - name: delete-game-server-group
+      description: '**This API works with the following fleet types:** EC2 (FleetIQ)'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delete-option=: The type of delete to perform.
+        --game-server-group-name=!: A unique identifier for the game server group.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            delete-option:
+                - SAFE_DELETE
+                - FORCE_DELETE
+                - RETAIN
+    - name: describe-fleet-location-utilization
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fleet-id=!: A unique identifier for the fleet to request location utilization for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --location=!: The fleet location to retrieve utilization information for.
+    - name: update-container-fleet
+      description: '**This API works with the following fleet types:** Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --deployment-configuration=: Instructions for how to deploy updates to a container fleet, if the fleet update initiates a deployment.
+        --description=: A meaningful description of the container fleet.
+        --fleet-id=!: A unique identifier for the container fleet to update.
+        --game-server-container-group-definition-name=: The name or ARN value of a new game server container group definition to deploy on the fleet.
+        --game-server-container-groups-per-instance=: The number of times to replicate the game server container group on each fleet instance.
+        --game-session-creation-limit-policy=: A policy that limits the number of game sessions that each individual player can create on instances in this fleet.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-connection-port-range=: A revised set of port numbers to open on each fleet instance.
+        --instance-inbound-permission-authorizations=: A set of ports to add to the container fleet's inbound permissions.
+        --instance-inbound-permission-revocations=: A set of ports to remove from the container fleet's inbound permissions.
+        --log-configuration=: The method for collecting container logs for the fleet.
+        --metric-groups=: The name of an Amazon Web Services CloudWatch metric group to add this fleet to.
+        --new-game-session-protection-policy=: The game session protection policy to apply to all new game sessions that are started in this fleet.
+        --per-instance-container-group-definition-name=: The name or ARN value of a new per-instance container group definition to deploy on the fleet.
+        --remove-attributes=: If set, this update removes a fleet's per-instance container group definition.
+      completion:
+        flag:
+            new-game-session-protection-policy:
+                - NoProtection
+                - FullProtection
+    - name: create-script
+      description: '**This API works with the following fleet types:** EC2, Anywhere'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: A descriptive label that is associated with a script.
+        --script-version=: Version information that is associated with a build or script.
+        --storage-location=: The location of the Amazon S3 bucket where a zipped file containing your Realtime scripts is stored.
+        --tags=: A list of labels to assign to the new script resource.
+        --zip-file=: A data object containing your Realtime scripts and dependencies as a zip file.
+    - name: describe-fleet-utilization
+      description: '**This API works with the following fleet types:** EC2, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fleet-ids=: A unique identifier for the fleet to retrieve utilization data for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of results to return.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: A token that indicates the start of the next sequential page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: start-match-backfill
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-name=!: Name of the matchmaker to use for this request.
+        --game-session-arn=: A unique identifier for the game session.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --players=!: Match information on all players that are currently assigned to the game session.
+        --ticket-id=: A unique identifier for a matchmaking ticket.
+    - name: stop-fleet-actions
+      description: '**This API works with the following fleet types:** EC2, Container'
+      flags:
+        --actions=!: List of actions to suspend on the fleet.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fleet-id=!: A unique identifier for the fleet to stop actions on.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --location=: The fleet location to stop fleet actions for.
+    - name: update-build
+      description: '**This API works with the following fleet types:** EC2'
+      flags:
+        --build-id=!: A unique identifier for the build to update.
+        --build-version=: Version information that is associated with a build or script.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: A descriptive label that is associated with a build.
+    - name: describe-build
+      description: '**This API works with the following fleet types:** EC2'
+      flags:
+        --build-id=!: A unique identifier for the build to retrieve properties for.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-instance-access
+      description: '**This API works with the following fleet types:** EC2'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fleet-id=!: A unique identifier for the fleet that contains the instance you want to access.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: A unique identifier for the instance you want to access.
+    - name: list-aliases
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of results to return.
+        --max-items=: The  total number of items to return in the command's output.
+        --name=: A descriptive label that is associated with an alias.
+        --next-token=: A token that indicates the start of the next sequential page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --routing-strategy-type=: The routing type to filter results on.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            routing-strategy-type:
+                - SIMPLE
+                - TERMINAL
+    - name: claim-game-server
+      description: '**This API works with the following fleet types:** EC2 (FleetIQ)'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-option=: Object that restricts how a claimed game server is chosen.
+        --game-server-data=: A set of custom game server properties, formatted as a single string value.
+        --game-server-group-name=!: A unique identifier for the game server group where the game server is running.
+        --game-server-id=: A custom string that uniquely identifies the game server to claim.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-alias
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --alias-id=!: A unique identifier of the alias that you want to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-script
+      description: '**This API works with the following fleet types:** EC2'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --script-id=!: A unique identifier for the Realtime script to delete.
+    - name: list-tags-for-resource
+      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) that uniquely identifies the Amazon GameLift Servers resource that you want to retrieve tags for.

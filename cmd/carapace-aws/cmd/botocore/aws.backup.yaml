@@ -1,226 +1,29 @@
 name: backup
 description: AWS Backup
 commands:
-    - name: get-restore-testing-inferred-metadata
-      description: This request returns the minimal required set of metadata needed to start a restore job with secure default settings.
+    - name: associate-backup-vault-mpa-approval-team
+      description: Associates an MPA approval team with a backup vault.
       flags:
-        --backup-vault-account-id=: The account ID of the specified backup vault.
-        --backup-vault-name=!: The name of a logical container where backups are stored.
+        --backup-vault-name=!: The name of the backup vault to associate with the MPA approval team.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recovery-point-arn=!: An Amazon Resource Name (ARN) that uniquely identifies a recovery point; for example, `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
-    - name: list-copy-job-summaries
-      description: This request obtains a list of copy jobs created or running within the the most recent 30 days.
+        --mpa-approval-team-arn=!: The Amazon Resource Name (ARN) of the MPA approval team to associate with the backup vault.
+        --requester-comment=: A comment provided by the requester explaining the association request.
+    - name: delete-restore-testing-plan
+      description: This request deletes the specified restore testing plan.
       flags:
-        --account-id=: Returns the job count for the specified account.
-        --aggregation-period=: The period for the returned results.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: This parameter sets the maximum number of items to be returned.
-        --message-category=: This parameter returns the job count for the specified message category.
-        --next-token=: The next item following a partial list of returned resources.
-        --resource-type=: Returns the job count for the specified resource type.
-        --state=: This parameter returns the job count for jobs with the specified state.
-      completion:
-        flag:
-            aggregation-period:
-                - ONE_DAY
-                - SEVEN_DAYS
-                - FOURTEEN_DAYS
-            state:
-                - CREATED
-                - RUNNING
-                - ABORTING
-                - ABORTED
-                - COMPLETING
-                - COMPLETED
-                - FAILING
-                - FAILED
-                - PARTIAL
-                - AGGREGATE_ALL
-                - ANY
-    - name: list-protected-resources-by-backup-vault
-      description: This request lists the protected resources corresponding to each backup vault.
-      flags:
-        --backup-vault-account-id=: The list of protected resources by backup vault within the vault(s) you specify by account ID.
-        --backup-vault-name=!: The list of protected resources by backup vault within the vault(s) you specify by name.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to be returned.
-        --next-token=: The next item following a partial list of returned items.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-restore-access-backup-vaults
-      description: Returns a list of restore access backup vaults associated with a specified backup vault.
-      flags:
-        --backup-vault-name=!: The name of the backup vault for which to list associated restore access backup vaults.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to return in the response.
-        --next-token=: The pagination token from a previous request to retrieve the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-restore-jobs-by-protected-resource
-      description: This returns restore jobs that contain the specified protected resource.
-      flags:
-        --by-recovery-point-creation-date-after=: Returns only restore jobs of recovery points that were created after the specified date.
-        --by-recovery-point-creation-date-before=: Returns only restore jobs of recovery points that were created before the specified date.
-        --by-status=: Returns only restore jobs associated with the specified job status.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to be returned.
-        --next-token=: The next item following a partial list of returned items.
-        --page-size=: The size of each page to get in the AWS service call.
-        --resource-arn=!: Returns only restore jobs that match the specified resource Amazon Resource Name (ARN).
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            by-status:
-                - PENDING
-                - RUNNING
-                - COMPLETED
-                - ABORTED
-                - FAILED
-    - name: delete-backup-vault
-      description: Deletes the backup vault identified by its name.
+        --restore-testing-plan-name=!: Required unique name of the restore testing plan you wish to delete.
+    - name: get-backup-vault-notifications
+      description: Returns event notifications for the specified backup vault.
       flags:
         --backup-vault-name=!: The name of a logical container where backups are stored.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-tiering-configuration
-      description: Deletes the tiering configuration specified by a tiering configuration name.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tiering-configuration-name=!: The unique name of a tiering configuration.
-    - name: describe-report-job
-      description: Returns the details associated with creating a report as specified by its `ReportJobId`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --report-job-id=!: The identifier of the report job.
-    - name: get-backup-plan
-      description: Returns `BackupPlan` details for the specified `BackupPlanId`.
-      flags:
-        --backup-plan-id=!: Uniquely identifies a backup plan.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-scheduled-runs-preview=: Number of future scheduled backup runs to preview.
-        --version-id=: Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most 1,024 bytes long.
-    - name: list-backup-plans
-      description: Lists the active backup plans for the account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --include-deleted: A Boolean value with a default value of `FALSE` that returns deleted backup plans when set to `TRUE`.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to be returned.
-        --next-token=: The next item following a partial list of returned items.
-        --no-include-deleted: A Boolean value with a default value of `FALSE` that returns deleted backup plans when set to `TRUE`.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: put-backup-vault-access-policy
-      description: Sets a resource-based policy that is used to manage access permissions on the target backup vault.
-      flags:
-        --backup-vault-name=!: The name of a logical container where backups are stored.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy=: The backup vault access policy document in JSON format.
-    - name: update-framework
-      description: Updates the specified framework.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --framework-controls=: The controls that make up the framework.
-        --framework-description=: An optional description of the framework with a maximum 1,024 characters.
-        --framework-name=!: The unique name of a framework.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --idempotency-token=: A customer-chosen string that you can use to distinguish between otherwise identical calls to `UpdateFrameworkInput`.
-    - name: update-restore-testing-plan
-      description: This request will send changes to your specified restore testing plan.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --restore-testing-plan-name=!: The name of the restore testing plan name.
-        --restore-testing-plan=!: Specifies the body of a restore testing plan.
-    - name: create-restore-testing-plan
-      description: Creates a restore testing plan.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --creator-request-id=: This is a unique string that identifies the request and allows failed requests to be retriedwithout the risk of running the operation twice.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --restore-testing-plan=!: A restore testing plan must contain a unique `RestoreTestingPlanName` string you create and must contain a `ScheduleExpression` cron.
-        --tags=: The tags to assign to the restore testing plan.
-    - name: list-restore-testing-selections
-      description: Returns a list of restore testing selections.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to be returned.
-        --next-token=: The next item following a partial list of returned items.
-        --page-size=: The size of each page to get in the AWS service call.
-        --restore-testing-plan-name=!: Returns restore testing selections by the specified restore testing plan name.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-recovery-point-lifecycle
-      description: Sets the transition lifecycle of a recovery point.
-      flags:
-        --backup-vault-name=!: The name of a logical container where backups are stored.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lifecycle=: The lifecycle defines when a protected resource is transitioned to cold storage and when it expires.
-        --recovery-point-arn=!: An Amazon Resource Name (ARN) that uniquely identifies a recovery point; for example, `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
-    - name: update-restore-testing-selection
-      description: Updates the specified restore testing selection.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --restore-testing-plan-name=!: The restore testing plan name is required to update the indicated testing plan.
-        --restore-testing-selection-name=!: The required restore testing selection name of the restore testing selection you wish to update.
-        --restore-testing-selection=!: To update your restore testing selection, you can use either protected resource ARNs or conditions, but not both.
-    - name: describe-recovery-point
-      description: Returns metadata associated with a recovery point, including ID, status, encryption, and lifecycle.
-      flags:
-        --backup-vault-account-id=: The account ID of the specified backup vault.
-        --backup-vault-name=!: The name of a logical container where backups are stored.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recovery-point-arn=!: An Amazon Resource Name (ARN) that uniquely identifies a recovery point; for example, `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
-    - name: disassociate-recovery-point
-      description: Deletes the specified continuous backup recovery point from Backup and releases control of that continuous backup to the source service, such as Amazon RDS.
-      flags:
-        --backup-vault-name=!: The unique name of an Backup vault.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recovery-point-arn=!: An Amazon Resource Name (ARN) that uniquely identifies an Backup recovery point.
-    - name: get-restore-testing-plan
-      description: Returns `RestoreTestingPlan` details for the specified `RestoreTestingPlanName`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --restore-testing-plan-name=!: Required unique name of the restore testing plan.
     - name: list-backup-jobs
       description: Returns a list of existing backup jobs for an authenticated account for the last 30 days.
       flags:
@@ -255,6 +58,196 @@ commands:
                 - FAILED
                 - EXPIRED
                 - PARTIAL
+    - name: put-backup-vault-lock-configuration
+      description: Applies Backup Vault Lock to a backup vault, preventing attempts to delete any recovery point stored in or created in a backup vault.
+      flags:
+        --backup-vault-name=!: The Backup Vault Lock configuration that specifies the name of the backup vault it protects.
+        --changeable-for-days=: The Backup Vault Lock configuration that specifies the number of days before the lock date.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-retention-days=: The Backup Vault Lock configuration that specifies the maximum retention period that the vault retains its recovery points.
+        --min-retention-days=: The Backup Vault Lock configuration that specifies the minimum retention period that the vault retains its recovery points.
+    - name: start-copy-job
+      description: Starts a job to create a one-time copy of the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --destination-backup-vault-arn=!: An Amazon Resource Name (ARN) that uniquely identifies a destination backup vault to copy to; for example, `arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --iam-role-arn=!: Specifies the IAM role ARN used to copy the target recovery point; for example, `arn:aws:iam::123456789012:role/S3Access`.
+        --idempotency-token=: A customer-chosen string that you can use to distinguish between otherwise identical calls to `StartCopyJob`.
+        --lifecycle=: ""
+        --recovery-point-arn=!: An ARN that uniquely identifies a recovery point to use for the copy job; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
+        --source-backup-vault-name=!: The name of a logical source container where backups are stored.
+    - name: untag-resource
+      description: Removes a set of key-value pairs from a recovery point, backup plan, or backup vault identified by an Amazon Resource Name (ARN)
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: An ARN that uniquely identifies a resource.
+        --tag-key-list=!: The keys to identify which key-value tags to remove from a resource.
+    - name: create-backup-selection
+      description: Creates a JSON document that specifies a set of resources to assign to a backup plan.
+      flags:
+        --backup-plan-id=!: The ID of the backup plan.
+        --backup-selection=!: The body of a request to assign a set of resources to a backup plan.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --creator-request-id=: A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-backup-vault-notifications
+      description: Deletes event notifications for the specified backup vault.
+      flags:
+        --backup-vault-name=!: The name of a logical container where backups are stored.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-backup-job
+      description: Returns backup job details for the specified `BackupJobId`.
+      flags:
+        --backup-job-id=!: Uniquely identifies a request to Backup to back up a resource.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-restore-job-metadata
+      description: This request returns the metadata for the specified restore job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --restore-job-id=!: This is a unique identifier of a restore job within Backup.
+    - name: get-supported-resource-types
+      description: Returns the Amazon Web Services resource types supported by Backup.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-restore-job-summaries
+      description: This request obtains a summary of restore jobs created or running within the the most recent 30 days.
+      flags:
+        --account-id=: Returns the job count for the specified account.
+        --aggregation-period=: The period for the returned results.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: This parameter sets the maximum number of items to be returned.
+        --next-token=: The next item following a partial list of returned resources.
+        --resource-type=: Returns the job count for the specified resource type.
+        --state=: This parameter returns the job count for jobs with the specified state.
+      completion:
+        flag:
+            aggregation-period:
+                - ONE_DAY
+                - SEVEN_DAYS
+                - FOURTEEN_DAYS
+            state:
+                - CREATED
+                - PENDING
+                - RUNNING
+                - ABORTED
+                - COMPLETED
+                - FAILED
+                - AGGREGATE_ALL
+                - ANY
+    - name: start-report-job
+      description: Starts an on-demand report job for the specified report plan.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --idempotency-token=: A customer-chosen string that you can use to distinguish between otherwise identical calls to `StartReportJobInput`.
+        --report-plan-name=!: The unique name of a report plan.
+    - name: update-tiering-configuration
+      description: This request will send changes to your specified tiering configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tiering-configuration-name=!: The name of a tiering configuration to update.
+        --tiering-configuration=!: Specifies the body of a tiering configuration.
+    - name: create-backup-plan
+      description: Creates a backup plan using a backup plan name and backup rules.
+      flags:
+        --backup-plan-tags=: The tags to assign to the backup plan.
+        --backup-plan=!: The body of a backup plan.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --creator-request-id=: Identifies the request and allows failed requests to be retried without the risk of running the operation twice.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-backup-vault
+      description: Returns metadata about a backup vault specified by its name.
+      flags:
+        --backup-vault-account-id=: The account ID of the specified backup vault.
+        --backup-vault-name=!: The name of a logical container where backups are stored.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-report-job
+      description: Returns the details associated with creating a report as specified by its `ReportJobId`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --report-job-id=!: The identifier of the report job.
+    - name: list-backup-plan-templates
+      description: Lists the backup plan templates.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return.
+        --next-token=: The next item following a partial list of returned items.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-restore-testing-selections
+      description: Returns a list of restore testing selections.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to be returned.
+        --next-token=: The next item following a partial list of returned items.
+        --page-size=: The size of each page to get in the AWS service call.
+        --restore-testing-plan-name=!: Returns restore testing selections by the specified restore testing plan name.
+        --starting-token=: A token to specify where to start paginating.
+    - name: put-backup-vault-notifications
+      description: Turns on notifications on a backup vault for the specified topic and events.
+      flags:
+        --backup-vault-events=!: An array of events that indicate the status of jobs to back up resources to the backup vault.
+        --backup-vault-name=!: The name of a logical container where backups are stored.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --sns-topic-arn=!: The Amazon Resource Name (ARN) that specifies the topic for a backup vault’s events; for example, `arn:aws:sns:us-west-2:111122223333:MyVaultTopic`.
+    - name: update-recovery-point-lifecycle
+      description: Sets the transition lifecycle of a recovery point.
+      flags:
+        --backup-vault-name=!: The name of a logical container where backups are stored.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lifecycle=: The lifecycle defines when a protected resource is transitioned to cold storage and when it expires.
+        --recovery-point-arn=!: An Amazon Resource Name (ARN) that uniquely identifies a recovery point; for example, `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
+    - name: update-region-settings
+      description: Updates the current service opt-in settings for the Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-type-management-preference=: Enables or disables full Backup management of backups for a resource type.
+        --resource-type-opt-in-preference=: Updates the list of services along with the opt-in preferences for the Region.
+    - name: get-recovery-point-index-details
+      description: This operation returns the metadata and details specific to the backup index associated with the specified recovery point.
+      flags:
+        --backup-vault-name=!: The name of a logical container where backups are stored.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recovery-point-arn=!: An ARN that uniquely identifies a recovery point; for example, `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
     - name: list-scan-jobs
       description: Returns a list of existing scan jobs for an authenticated account for the last 30 days.
       flags:
@@ -294,6 +287,141 @@ commands:
                 - CREATED
                 - FAILED
                 - RUNNING
+    - name: update-report-plan
+      description: Updates the specified report plan.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --idempotency-token=: A customer-chosen string that you can use to distinguish between otherwise identical calls to `UpdateReportPlanInput`.
+        --report-delivery-channel=: The information about where to deliver your reports, specifically your Amazon S3 bucket name, S3 key prefix, and the formats of your reports.
+        --report-plan-description=: An optional description of the report plan with a maximum 1,024 characters.
+        --report-plan-name=!: The unique name of the report plan.
+        --report-setting=: The report template for the report.
+    - name: disassociate-recovery-point-from-parent
+      description: This action to a specific child (nested) recovery point removes the relationship between the specified recovery point and its parent (composite) recovery point.
+      flags:
+        --backup-vault-name=!: The name of a logical container where the child (nested) recovery point is stored.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recovery-point-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the child (nested) recovery point; for example, `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.`
+    - name: get-backup-plan-from-json
+      description: Returns a valid JSON document specifying a backup plan or an error.
+      flags:
+        --backup-plan-template-json=!: A customer-supplied backup plan document in JSON format.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-restore-testing-inferred-metadata
+      description: This request returns the minimal required set of metadata needed to start a restore job with secure default settings.
+      flags:
+        --backup-vault-account-id=: The account ID of the specified backup vault.
+        --backup-vault-name=!: The name of a logical container where backups are stored.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recovery-point-arn=!: An Amazon Resource Name (ARN) that uniquely identifies a recovery point; for example, `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
+    - name: list-recovery-points-by-legal-hold
+      description: This action returns recovery point ARNs (Amazon Resource Names) of the specified legal hold.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --legal-hold-id=!: The ID of the legal hold.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of resource list items to be returned.
+        --next-token=: The next item following a partial list of returned resources.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: delete-restore-testing-selection
+      description: Input the Restore Testing Plan name and Restore Testing Selection name.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --restore-testing-plan-name=!: Required unique name of the restore testing plan that contains the restore testing selection you wish to delete.
+        --restore-testing-selection-name=!: Required unique name of the restore testing selection you wish to delete.
+    - name: export-backup-plan-template
+      description: Returns the backup plan that is specified by the plan ID as a backup template.
+      flags:
+        --backup-plan-id=!: Uniquely identifies a backup plan.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-backup-plan
+      description: Returns `BackupPlan` details for the specified `BackupPlanId`.
+      flags:
+        --backup-plan-id=!: Uniquely identifies a backup plan.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-scheduled-runs-preview=: Number of future scheduled backup runs to preview.
+        --version-id=: Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most 1,024 bytes long.
+    - name: list-copy-job-summaries
+      description: This request obtains a list of copy jobs created or running within the the most recent 30 days.
+      flags:
+        --account-id=: Returns the job count for the specified account.
+        --aggregation-period=: The period for the returned results.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: This parameter sets the maximum number of items to be returned.
+        --message-category=: This parameter returns the job count for the specified message category.
+        --next-token=: The next item following a partial list of returned resources.
+        --resource-type=: Returns the job count for the specified resource type.
+        --state=: This parameter returns the job count for jobs with the specified state.
+      completion:
+        flag:
+            aggregation-period:
+                - ONE_DAY
+                - SEVEN_DAYS
+                - FOURTEEN_DAYS
+            state:
+                - CREATED
+                - RUNNING
+                - ABORTING
+                - ABORTED
+                - COMPLETING
+                - COMPLETED
+                - FAILING
+                - FAILED
+                - PARTIAL
+                - AGGREGATE_ALL
+                - ANY
+    - name: list-tiering-configurations
+      description: Returns a list of tiering configurations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to be returned.
+        --next-token=: The next item following a partial list of returned items.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-backup-plan
+      description: Updates the specified backup plan.
+      flags:
+        --backup-plan-id=!: The ID of the backup plan.
+        --backup-plan=!: The body of a backup plan.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-backup-vault
+      description: Deletes the backup vault identified by its name.
+      flags:
+        --backup-vault-name=!: The name of a logical container where backups are stored.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-restore-testing-plan
+      description: Returns `RestoreTestingPlan` details for the specified `RestoreTestingPlanName`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --restore-testing-plan-name=!: Required unique name of the restore testing plan.
     - name: put-restore-validation-result
       description: This request allows you to send your independent self-run restore test validation results.
       flags:
@@ -310,42 +438,157 @@ commands:
                 - SUCCESSFUL
                 - TIMED_OUT
                 - VALIDATING
-    - name: update-tiering-configuration
-      description: This request will send changes to your specified tiering configuration.
+    - name: tag-resource
+      description: Assigns a set of key-value pairs to a resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tiering-configuration-name=!: The name of a tiering configuration to update.
-        --tiering-configuration=!: Specifies the body of a tiering configuration.
-    - name: cancel-legal-hold
-      description: Removes the specified legal hold on a recovery point.
+        --resource-arn=!: The ARN that uniquely identifies the resource.
+        --tags=!: Key-value pairs that are used to help organize your resources.
+    - name: update-restore-testing-selection
+      description: Updates the specified restore testing selection.
       flags:
-        --cancel-description=!: A string the describes the reason for removing the legal hold.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --restore-testing-plan-name=!: The restore testing plan name is required to update the indicated testing plan.
+        --restore-testing-selection-name=!: The required restore testing selection name of the restore testing selection you wish to update.
+        --restore-testing-selection=!: To update your restore testing selection, you can use either protected resource ARNs or conditions, but not both.
+    - name: create-framework
+      description: Creates a framework with one or more controls.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --framework-controls=!: The controls that make up the framework.
+        --framework-description=: An optional description of the framework with a maximum of 1,024 characters.
+        --framework-name=!: The unique name of the framework.
+        --framework-tags=: The tags to assign to the framework.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --idempotency-token=: A customer-chosen string that you can use to distinguish between otherwise identical calls to `CreateFrameworkInput`.
+    - name: delete-backup-vault-access-policy
+      description: Deletes the policy document that manages permissions on a backup vault.
+      flags:
+        --backup-vault-name=!: The name of a logical container where backups are stored.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-region-settings
+      description: Returns the current service opt-in settings for the Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-recovery-points-by-resource
+      description: The information about the recovery points of the type specified by a resource Amazon Resource Name (ARN).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --managed-by-aws-backup-only: This attribute filters recovery points based on ownership.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to be returned.
+        --next-token=: The next item following a partial list of returned items.
+        --no-managed-by-aws-backup-only: This attribute filters recovery points based on ownership.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-arn=!: An ARN that uniquely identifies a resource.
+        --starting-token=: A token to specify where to start paginating.
+    - name: revoke-restore-access-backup-vault
+      description: Revokes access to a restore access backup vault, removing the ability to restore from its recovery points and permanently deleting the vault.
+      flags:
+        --backup-vault-name=!: The name of the source backup vault associated with the restore access backup vault to be revoked.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --requester-comment=: A comment explaining the reason for revoking access to the restore access backup vault.
+        --restore-access-backup-vault-arn=!: The ARN of the restore access backup vault to revoke.
+    - name: start-restore-job
+      description: Recovers the saved resource identified by an Amazon Resource Name (ARN).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --copy-source-tags-to-restored-resource: This is an optional parameter.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --iam-role-arn=: 'The Amazon Resource Name (ARN) of the IAM role that Backup uses to create the target resource; for example: `arn:aws:iam::123456789012:role/S3Access`.'
+        --idempotency-token=: A customer-chosen string that you can use to distinguish between otherwise identical calls to `StartRestoreJob`.
+        --metadata=!: A set of metadata key-value pairs.
+        --no-copy-source-tags-to-restored-resource: This is an optional parameter.
+        --recovery-point-arn=!: An ARN that uniquely identifies a recovery point; for example, `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
+        --resource-type=: 'Starts a job to restore a recovery point for one of the following resources:'
+    - name: update-restore-testing-plan
+      description: This request will send changes to your specified restore testing plan.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --restore-testing-plan-name=!: The name of the restore testing plan name.
+        --restore-testing-plan=!: Specifies the body of a restore testing plan.
+    - name: create-tiering-configuration
+      description: Creates a tiering configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --creator-request-id=: This is a unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tiering-configuration-tags=: The tags to assign to the tiering configuration.
+        --tiering-configuration=!: A tiering configuration must contain a unique `TieringConfigurationName` string you create and must contain a `BackupVaultName` and `ResourceSelection`.
+    - name: delete-report-plan
+      description: Deletes the report plan specified by a report plan name.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --report-plan-name=!: The unique name of a report plan.
+    - name: delete-tiering-configuration
+      description: Deletes the tiering configuration specified by a tiering configuration name.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tiering-configuration-name=!: The unique name of a tiering configuration.
+    - name: describe-framework
+      description: Returns the framework details for the specified `FrameworkName`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --framework-name=!: The unique name of a framework.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: disassociate-recovery-point
+      description: Deletes the specified continuous backup recovery point from Backup and releases control of that continuous backup to the source service, such as Amazon RDS.
+      flags:
+        --backup-vault-name=!: The unique name of an Backup vault.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recovery-point-arn=!: An Amazon Resource Name (ARN) that uniquely identifies an Backup recovery point.
+    - name: get-legal-hold
+      description: This action returns details for a specified legal hold.
+      flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --legal-hold-id=!: The ID of the legal hold.
-        --retain-record-in-days=: The integer amount, in days, after which to remove legal hold.
-    - name: create-backup-plan
-      description: Creates a backup plan using a backup plan name and backup rules.
+    - name: create-report-plan
+      description: Creates a report plan.
       flags:
-        --backup-plan-tags=: The tags to assign to the backup plan.
-        --backup-plan=!: The body of a backup plan.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --creator-request-id=: Identifies the request and allows failed requests to be retried without the risk of running the operation twice.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-backup-vault
-      description: Creates a logical container where backups are stored.
+        --idempotency-token=: A customer-chosen string that you can use to distinguish between otherwise identical calls to `CreateReportPlanInput`.
+        --report-delivery-channel=!: A structure that contains information about where and how to deliver your reports, specifically your Amazon S3 bucket name, S3 key prefix, and the formats of your reports.
+        --report-plan-description=: An optional description of the report plan with a maximum of 1,024 characters.
+        --report-plan-name=!: The unique name of the report plan.
+        --report-plan-tags=: The tags to assign to the report plan.
+        --report-setting=!: Identifies the report template for the report.
+    - name: create-restore-testing-plan
+      description: Creates a restore testing plan.
       flags:
-        --backup-vault-name=!: The name of a logical container where backups are stored.
-        --backup-vault-tags=: The tags to assign to the backup vault.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --creator-request-id=: A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
-        --encryption-key-arn=: The server-side encryption key that is used to protect your backups; for example, `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`.
+        --creator-request-id=: This is a unique string that identifies the request and allows failed requests to be retriedwithout the risk of running the operation twice.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --restore-testing-plan=!: A restore testing plan must contain a unique `RestoreTestingPlanName` string you create and must contain a `ScheduleExpression` cron.
+        --tags=: The tags to assign to the restore testing plan.
     - name: create-restore-testing-selection
       description: This request can be sent after CreateRestoreTestingPlan request returns successfully.
       flags:
@@ -355,33 +598,42 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --restore-testing-plan-name=!: Input the restore testing plan name that was returned from the related CreateRestoreTestingPlan request.
         --restore-testing-selection=!: 'This consists of `RestoreTestingSelectionName`, `ProtectedResourceType`, and one of the following:'
-    - name: describe-backup-job
-      description: Returns backup job details for the specified `BackupJobId`.
+    - name: delete-recovery-point
+      description: Deletes the recovery point specified by a recovery point ID.
       flags:
-        --backup-job-id=!: Uniquely identifies a request to Backup to back up a resource.
+        --backup-vault-name=!: The name of a logical container where backups are stored.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-backup-plan-from-template
-      description: Returns the template specified by its `templateId` as a backup plan.
-      flags:
-        --backup-plan-template-id=!: Uniquely identifies a stored backup plan template.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-legal-hold
-      description: This action returns details for a specified legal hold.
+        --recovery-point-arn=!: An Amazon Resource Name (ARN) that uniquely identifies a recovery point; for example, `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
+    - name: describe-scan-job
+      description: Returns scan job details for the specified ScanJobID.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --legal-hold-id=!: The ID of the legal hold.
-    - name: get-supported-resource-types
-      description: Returns the Amazon Web Services resource types supported by Backup.
+        --scan-job-id=!: Uniquely identifies a request to Backup to scan a resource.
+    - name: start-scan-job
+      description: Starts scanning jobs for specific resources.
       flags:
+        --backup-vault-name=!: The name of a logical container where backups are stored.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --iam-role-arn=!: Specifies the IAM role ARN used to create the target recovery point; for example, `arn:aws:iam::123456789012:role/S3Access`.
+        --idempotency-token=: A customer-chosen string that you can use to distinguish between otherwise identical calls to `StartScanJob`.
+        --malware-scanner=!: Specifies the malware scanner used during the scan job.
+        --recovery-point-arn=!: An Amazon Resource Name (ARN) that uniquely identifies a recovery point.
+        --scan-base-recovery-point-arn=: An ARN that uniquely identifies the base recovery point to be used for incremental scanning.
+        --scan-mode=!: Specifies the scan type use for the scan job.
+        --scanner-role-arn=!: Specified the IAM scanner role ARN.
+      completion:
+        flag:
+            malware-scanner:
+                - GUARDDUTY
+            scan-mode:
+                - FULL_SCAN
+                - INCREMENTAL_SCAN
     - name: create-logically-air-gapped-backup-vault
       description: Creates a logical container to where backups may be copied.
       flags:
@@ -394,24 +646,30 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-retention-days=!: The maximum retention period that the vault retains its recovery points.
         --min-retention-days=!: This setting specifies the minimum retention period that the vault retains its recovery points.
-    - name: delete-backup-vault-access-policy
-      description: Deletes the policy document that manages permissions on a backup vault.
+    - name: describe-global-settings
+      description: Describes whether the Amazon Web Services account is opted in to cross-account backup.
       flags:
-        --backup-vault-name=!: The name of a logical container where backups are stored.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-recovery-points-by-backup-vault
-      description: Returns detailed information about the recovery points stored in a backup vault.
+    - name: describe-protected-resource
+      description: Returns information about a saved resource, including the last time it was backed up, its Amazon Resource Name (ARN), and the Amazon Web Services service type of the saved resource.
       flags:
-        --backup-vault-account-id=: This parameter will sort the list of recovery points by account ID.
-        --backup-vault-name=!: The name of a logical container where backups are stored.
-        --by-backup-plan-id=: Returns only recovery points that match the specified backup plan ID.
-        --by-created-after=: Returns only recovery points that were created after the specified timestamp.
-        --by-created-before=: Returns only recovery points that were created before the specified timestamp.
-        --by-parent-recovery-point-arn=: This returns only recovery points that match the specified parent (composite) recovery point Amazon Resource Name (ARN).
-        --by-resource-arn=: Returns only recovery points that match the specified resource Amazon Resource Name (ARN).
-        --by-resource-type=: 'Returns only recovery points that match the specified resource type(s):'
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: An Amazon Resource Name (ARN) that uniquely identifies a resource.
+    - name: get-backup-plan-from-template
+      description: Returns the template specified by its `templateId` as a backup plan.
+      flags:
+        --backup-plan-template-id=!: Uniquely identifies a stored backup plan template.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-backup-plan-versions
+      description: Returns version metadata of your backup plans, including Amazon Resource Names (ARNs), backup plan IDs, creation and deletion dates, plan names, and version IDs.
+      flags:
+        --backup-plan-id=!: Uniquely identifies a backup plan.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -420,21 +678,325 @@ commands:
         --next-token=: The next item following a partial list of returned items.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-recovery-points-by-legal-hold
-      description: This action returns recovery point ARNs (Amazon Resource Names) of the specified legal hold.
+    - name: list-indexed-recovery-points
+      description: This operation returns a list of recovery points that have an associated index, belonging to the specified account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --created-after=: Returns only indexed recovery points that were created after the specified date.
+        --created-before=: Returns only indexed recovery points that were created before the specified date.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-status=: Include this parameter to filter the returned list by the indicated statuses.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of resource list items to be returned.
+        --next-token=: The next item following a partial list of returned recovery points.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-type=: Returns a list of indexed recovery points for the specified resource type(s).
+        --source-resource-arn=: A string of the Amazon Resource Name (ARN) that uniquely identifies the source resource.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            index-status:
+                - PENDING
+                - ACTIVE
+                - FAILED
+                - DELETING
+    - name: list-protected-resources
+      description: Returns an array of resources successfully backed up by Backup, including the time the resource was saved, an Amazon Resource Name (ARN) of the resource, and a resource type.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to be returned.
+        --next-token=: The next item following a partial list of returned items.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-protected-resources-by-backup-vault
+      description: This request lists the protected resources corresponding to each backup vault.
+      flags:
+        --backup-vault-account-id=: The list of protected resources by backup vault within the vault(s) you specify by account ID.
+        --backup-vault-name=!: The list of protected resources by backup vault within the vault(s) you specify by name.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to be returned.
+        --next-token=: The next item following a partial list of returned items.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: create-backup-vault
+      description: Creates a logical container where backups are stored.
+      flags:
+        --backup-vault-name=!: The name of a logical container where backups are stored.
+        --backup-vault-tags=: The tags to assign to the backup vault.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --creator-request-id=: A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
+        --encryption-key-arn=: The server-side encryption key that is used to protect your backups; for example, `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-restore-job
+      description: Returns metadata associated with a restore job that is specified by a job ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --restore-job-id=!: Uniquely identifies the job that restores a recovery point.
+    - name: get-recovery-point-restore-metadata
+      description: Returns a set of metadata key-value pairs that were used to create the backup.
+      flags:
+        --backup-vault-account-id=: The account ID of the specified backup vault.
+        --backup-vault-name=!: The name of a logical container where backups are stored.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recovery-point-arn=!: An Amazon Resource Name (ARN) that uniquely identifies a recovery point; for example, `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
+    - name: list-frameworks
+      description: Returns a list of all frameworks for an Amazon Web Services account and Amazon Web Services Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The number of desired results from 1 to 1000. Optional.
+        --next-token=: An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
+    - name: list-report-plans
+      description: Returns a list of your report plans.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The number of desired results from 1 to 1000. Optional.
+        --next-token=: An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
+    - name: list-restore-access-backup-vaults
+      description: Returns a list of restore access backup vaults associated with a specified backup vault.
+      flags:
+        --backup-vault-name=!: The name of the backup vault for which to list associated restore access backup vaults.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return in the response.
+        --next-token=: The pagination token from a previous request to retrieve the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-restore-testing-plans
+      description: Returns a list of restore testing plans.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to be returned.
+        --next-token=: The next item following a partial list of returned items.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: put-backup-vault-access-policy
+      description: Sets a resource-based policy that is used to manage access permissions on the target backup vault.
+      flags:
+        --backup-vault-name=!: The name of a logical container where backups are stored.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy=: The backup vault access policy document in JSON format.
+    - name: get-tiering-configuration
+      description: Returns `TieringConfiguration` details for the specified `TieringConfigurationName`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tiering-configuration-name=!: The unique name of a tiering configuration.
+    - name: cancel-legal-hold
+      description: Removes the specified legal hold on a recovery point.
+      flags:
+        --cancel-description=!: A string the describes the reason for removing the legal hold.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --legal-hold-id=!: The ID of the legal hold.
+        --retain-record-in-days=: The integer amount, in days, after which to remove legal hold.
+    - name: describe-copy-job
+      description: Returns metadata associated with creating a copy of a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --copy-job-id=!: Uniquely identifies a copy job.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-backup-selection
+      description: Returns selection metadata and a document in JSON format that specifies a list of resources that are associated with a backup plan.
+      flags:
+        --backup-plan-id=!: Uniquely identifies a backup plan.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --selection-id=!: Uniquely identifies the body of a request to assign a set of resources to a backup plan.
+    - name: get-backup-vault-access-policy
+      description: Returns the access policy document that is associated with the named backup vault.
+      flags:
+        --backup-vault-name=!: The name of a logical container where backups are stored.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-backup-job-summaries
+      description: This is a request for a summary of backup jobs created or running within the most recent 30 days.
+      flags:
+        --account-id=: Returns the job count for the specified account.
+        --aggregation-period=: The period for the returned results.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of items to be returned.
+        --message-category=: This parameter returns the job count for the specified message category.
+        --next-token=: The next item following a partial list of returned resources.
+        --resource-type=: Returns the job count for the specified resource type.
+        --state=: This parameter returns the job count for jobs with the specified state.
+      completion:
+        flag:
+            aggregation-period:
+                - ONE_DAY
+                - SEVEN_DAYS
+                - FOURTEEN_DAYS
+            state:
+                - CREATED
+                - PENDING
+                - RUNNING
+                - ABORTING
+                - ABORTED
+                - COMPLETED
+                - FAILED
+                - EXPIRED
+                - PARTIAL
+                - AGGREGATE_ALL
+                - ANY
+    - name: list-backup-vaults
+      description: Returns a list of recovery point storage containers along with information about them.
+      flags:
+        --by-shared: This parameter will sort the list of vaults by shared vaults.
+        --by-vault-type=: This parameter will sort the list of vaults by vault type.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to be returned.
+        --next-token=: The next item following a partial list of returned items.
+        --no-by-shared: This parameter will sort the list of vaults by shared vaults.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            by-vault-type:
+                - BACKUP_VAULT
+                - LOGICALLY_AIR_GAPPED_BACKUP_VAULT
+                - RESTORE_ACCESS_BACKUP_VAULT
+    - name: start-backup-job
+      description: Starts an on-demand backup job for the specified resource.
+      flags:
+        --backup-options=: The backup option for a selected resource.
+        --backup-vault-name=!: The name of a logical container where backups are stored.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --complete-window-minutes=: A value in minutes during which a successfully started backup must complete, or else Backup will cancel the job.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --iam-role-arn=!: Specifies the IAM role ARN used to create the target recovery point; for example, `arn:aws:iam::123456789012:role/S3Access`.
+        --idempotency-token=: A customer-chosen string that you can use to distinguish between otherwise identical calls to `StartBackupJob`.
+        --index=: Include this parameter to enable index creation if your backup job has a resource type that supports backup indexes.
+        --lifecycle=: The lifecycle defines when a protected resource is transitioned to cold storage and when it expires.
+        --logically-air-gapped-backup-vault-arn=: The ARN of a logically air-gapped vault.
+        --recovery-point-tags=: The tags to assign to the resources.
+        --resource-arn=!: An Amazon Resource Name (ARN) that uniquely identifies a resource.
+        --start-window-minutes=: A value in minutes after a backup is scheduled before a job will be canceled if it doesn't start successfully.
+      completion:
+        flag:
+            index:
+                - ENABLED
+                - DISABLED
+    - name: create-legal-hold
+      description: Creates a legal hold on a recovery point (backup).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=!: The description of the legal hold.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --idempotency-token=: This is a user-chosen string used to distinguish between otherwise identical calls.
+        --recovery-point-selection=: The criteria to assign a set of resources, such as resource types or backup vaults.
+        --tags=: Optional tags to include.
+        --title=!: The title of the legal hold.
+    - name: delete-backup-selection
+      description: Deletes the resource selection associated with a backup plan that is specified by the `SelectionId`.
+      flags:
+        --backup-plan-id=!: Uniquely identifies a backup plan.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --selection-id=!: Uniquely identifies the body of a request to assign a set of resources to a backup plan.
+    - name: delete-backup-vault-lock-configuration
+      description: Deletes Backup Vault Lock from a backup vault specified by a backup vault name.
+      flags:
+        --backup-vault-name=!: The name of the backup vault from which to delete Backup Vault Lock.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-framework
+      description: Deletes the framework specified by a framework name.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --framework-name=!: The unique name of a framework.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-recovery-point
+      description: Returns metadata associated with a recovery point, including ID, status, encryption, and lifecycle.
+      flags:
+        --backup-vault-account-id=: The account ID of the specified backup vault.
+        --backup-vault-name=!: The name of a logical container where backups are stored.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recovery-point-arn=!: An Amazon Resource Name (ARN) that uniquely identifies a recovery point; for example, `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
+    - name: disassociate-backup-vault-mpa-approval-team
+      description: Removes the association between an MPA approval team and a backup vault, disabling the MPA approval workflow for restore operations.
+      flags:
+        --backup-vault-name=!: The name of the backup vault from which to disassociate the MPA approval team.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --requester-comment=: An optional comment explaining the reason for disassociating the MPA approval team from the backup vault.
+    - name: get-restore-testing-selection
+      description: Returns RestoreTestingSelection, which displays resources and elements of the restore testing plan.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --restore-testing-plan-name=!: Required unique name of the restore testing plan.
+        --restore-testing-selection-name=!: Required unique name of the restore testing selection.
+    - name: list-legal-holds
+      description: This action returns metadata about active and previous legal holds.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of resource list items to be returned.
         --next-token=: The next item following a partial list of returned resources.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-tiering-configurations
-      description: Returns a list of tiering configurations.
+    - name: list-backup-plans
+      description: Lists the active backup plans for the account.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-deleted: A Boolean value with a default value of `FALSE` that returns deleted backup plans when set to `TRUE`.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to be returned.
+        --next-token=: The next item following a partial list of returned items.
+        --no-include-deleted: A Boolean value with a default value of `FALSE` that returns deleted backup plans when set to `TRUE`.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-restore-jobs-by-protected-resource
+      description: This returns restore jobs that contain the specified protected resource.
+      flags:
+        --by-recovery-point-creation-date-after=: Returns only restore jobs of recovery points that were created after the specified date.
+        --by-recovery-point-creation-date-before=: Returns only restore jobs of recovery points that were created before the specified date.
+        --by-status=: Returns only restore jobs associated with the specified job status.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -442,45 +1004,112 @@ commands:
         --max-results=: The maximum number of items to be returned.
         --next-token=: The next item following a partial list of returned items.
         --page-size=: The size of each page to get in the AWS service call.
+        --resource-arn=!: Returns only restore jobs that match the specified resource Amazon Resource Name (ARN).
         --starting-token=: A token to specify where to start paginating.
-    - name: revoke-restore-access-backup-vault
-      description: Revokes access to a restore access backup vault, removing the ability to restore from its recovery points and permanently deleting the vault.
+      completion:
+        flag:
+            by-status:
+                - PENDING
+                - RUNNING
+                - COMPLETED
+                - ABORTED
+                - FAILED
+    - name: list-scan-job-summaries
+      description: This is a request for a summary of scan jobs created or running within the most recent 30 days.
       flags:
-        --backup-vault-name=!: The name of the source backup vault associated with the restore access backup vault to be revoked.
+        --account-id=: Returns the job count for the specified account.
+        --aggregation-period=: The period for the returned results.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --requester-comment=: A comment explaining the reason for revoking access to the restore access backup vault.
-        --restore-access-backup-vault-arn=!: The ARN of the restore access backup vault to revoke.
-    - name: start-copy-job
-      description: Starts a job to create a one-time copy of the specified resource.
+        --malware-scanner=: Returns only the scan jobs for the specified malware scanner.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to be returned.
+        --next-token=: The next item following a partial list of returned items.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-type=: Returns the job count for the specified resource type.
+        --scan-result-status=: Returns only the scan jobs for the specified scan results.
+        --starting-token=: A token to specify where to start paginating.
+        --state=: Returns only the scan jobs for the specified scanning job state.
+      completion:
+        flag:
+            aggregation-period:
+                - ONE_DAY
+                - SEVEN_DAYS
+                - FOURTEEN_DAYS
+            malware-scanner:
+                - GUARDDUTY
+            scan-result-status:
+                - NO_THREATS_FOUND
+                - THREATS_FOUND
+            state:
+                - CREATED
+                - COMPLETED
+                - COMPLETED_WITH_ISSUES
+                - RUNNING
+                - FAILED
+                - CANCELED
+                - AGGREGATE_ALL
+                - ANY
+    - name: list-tags
+      description: Returns the tags assigned to the resource, such as a target recovery point, backup plan, or backup vault.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --destination-backup-vault-arn=!: An Amazon Resource Name (ARN) that uniquely identifies a destination backup vault to copy to; for example, `arn:aws:backup:us-east-1:123456789012:backup-vault:aBackupVault`.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --iam-role-arn=!: Specifies the IAM role ARN used to copy the target recovery point; for example, `arn:aws:iam::123456789012:role/S3Access`.
-        --idempotency-token=: A customer-chosen string that you can use to distinguish between otherwise identical calls to `StartCopyJob`.
-        --lifecycle=: ""
-        --recovery-point-arn=!: An ARN that uniquely identifies a recovery point to use for the copy job; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
-        --source-backup-vault-name=!: The name of a logical source container where backups are stored.
-    - name: start-report-job
-      description: Starts an on-demand report job for the specified report plan.
+        --max-results=: The maximum number of items to be returned.
+        --next-token=: The next item following a partial list of returned items.
+        --resource-arn=!: An Amazon Resource Name (ARN) that uniquely identifies a resource.
+    - name: stop-backup-job
+      description: Attempts to cancel a job to create a one-time backup of a resource.
+      flags:
+        --backup-job-id=!: Uniquely identifies a request to Backup to back up a resource.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-framework
+      description: Updates the specified framework.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --framework-controls=: The controls that make up the framework.
+        --framework-description=: An optional description of the framework with a maximum 1,024 characters.
+        --framework-name=!: The unique name of a framework.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --idempotency-token=: A customer-chosen string that you can use to distinguish between otherwise identical calls to `UpdateFrameworkInput`.
+    - name: update-global-settings
+      description: Updates whether the Amazon Web Services account is opted in to cross-account backup.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --idempotency-token=: A customer-chosen string that you can use to distinguish between otherwise identical calls to `StartReportJobInput`.
-        --report-plan-name=!: The unique name of a report plan.
-    - name: create-tiering-configuration
-      description: Creates a tiering configuration.
+        --global-settings=: 'Inputs can include:'
+    - name: update-recovery-point-index-settings
+      description: This operation updates the settings of a recovery point index.
       flags:
+        --backup-vault-name=!: The name of a logical container where backups are stored.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --creator-request-id=: This is a unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tiering-configuration-tags=: The tags to assign to the tiering configuration.
-        --tiering-configuration=!: A tiering configuration must contain a unique `TieringConfigurationName` string you create and must contain a `BackupVaultName` and `ResourceSelection`.
+        --iam-role-arn=: This specifies the IAM role ARN used for this operation.
+        --index=!: Index can have 1 of 2 possible values, either `ENABLED` or `DISABLED`.
+        --recovery-point-arn=!: An ARN that uniquely identifies a recovery point; for example, `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
+      completion:
+        flag:
+            index:
+                - ENABLED
+                - DISABLED
+    - name: create-restore-access-backup-vault
+      description: Creates a restore access backup vault that provides temporary access to recovery points in a logically air-gapped backup vault, subject to MPA approval.
+      flags:
+        --backup-vault-name=: The name of the backup vault to associate with an MPA approval team.
+        --backup-vault-tags=: Optional tags to assign to the restore access backup vault.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --creator-request-id=: A unique string that identifies the request and allows failed requests to be retried without the risk of executing the operation twice.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --requester-comment=: A comment explaining the reason for requesting restore access to the backup vault.
+        --source-backup-vault-arn=!: The ARN of the source backup vault containing the recovery points to which temporary access is requested.
     - name: delete-backup-plan
       description: Deletes a backup plan.
       flags:
@@ -488,8 +1117,15 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-backup-plan-versions
-      description: Returns version metadata of your backup plans, including Amazon Resource Names (ARNs), backup plan IDs, creation and deletion dates, plan names, and version IDs.
+    - name: describe-report-plan
+      description: Returns a list of all report plans for an Amazon Web Services account and Amazon Web Services Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --report-plan-name=!: The unique name of a report plan.
+    - name: list-backup-selections
+      description: Returns an array containing metadata of the resources associated with the target backup plan.
       flags:
         --backup-plan-id=!: Uniquely identifies a backup plan.
         --cli-input-json=: Read arguments from the JSON string provided.
@@ -531,207 +1167,17 @@ commands:
                 - COMPLETED
                 - FAILED
                 - PARTIAL
-    - name: list-scan-job-summaries
-      description: This is a request for a summary of scan jobs created or running within the most recent 30 days.
+    - name: list-recovery-points-by-backup-vault
+      description: Returns detailed information about the recovery points stored in a backup vault.
       flags:
-        --account-id=: Returns the job count for the specified account.
-        --aggregation-period=: The period for the returned results.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --malware-scanner=: Returns only the scan jobs for the specified malware scanner.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to be returned.
-        --next-token=: The next item following a partial list of returned items.
-        --page-size=: The size of each page to get in the AWS service call.
-        --resource-type=: Returns the job count for the specified resource type.
-        --scan-result-status=: Returns only the scan jobs for the specified scan results.
-        --starting-token=: A token to specify where to start paginating.
-        --state=: Returns only the scan jobs for the specified scanning job state.
-      completion:
-        flag:
-            aggregation-period:
-                - ONE_DAY
-                - SEVEN_DAYS
-                - FOURTEEN_DAYS
-            malware-scanner:
-                - GUARDDUTY
-            scan-result-status:
-                - NO_THREATS_FOUND
-                - THREATS_FOUND
-            state:
-                - CREATED
-                - COMPLETED
-                - COMPLETED_WITH_ISSUES
-                - RUNNING
-                - FAILED
-                - CANCELED
-                - AGGREGATE_ALL
-                - ANY
-    - name: start-restore-job
-      description: Recovers the saved resource identified by an Amazon Resource Name (ARN).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --copy-source-tags-to-restored-resource: This is an optional parameter.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --iam-role-arn=: 'The Amazon Resource Name (ARN) of the IAM role that Backup uses to create the target resource; for example: `arn:aws:iam::123456789012:role/S3Access`.'
-        --idempotency-token=: A customer-chosen string that you can use to distinguish between otherwise identical calls to `StartRestoreJob`.
-        --metadata=!: A set of metadata key-value pairs.
-        --no-copy-source-tags-to-restored-resource: This is an optional parameter.
-        --recovery-point-arn=!: An ARN that uniquely identifies a recovery point; for example, `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
-        --resource-type=: 'Starts a job to restore a recovery point for one of the following resources:'
-    - name: get-recovery-point-restore-metadata
-      description: Returns a set of metadata key-value pairs that were used to create the backup.
-      flags:
-        --backup-vault-account-id=: The account ID of the specified backup vault.
+        --backup-vault-account-id=: This parameter will sort the list of recovery points by account ID.
         --backup-vault-name=!: The name of a logical container where backups are stored.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recovery-point-arn=!: An Amazon Resource Name (ARN) that uniquely identifies a recovery point; for example, `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
-    - name: get-restore-job-metadata
-      description: This request returns the metadata for the specified restore job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --restore-job-id=!: This is a unique identifier of a restore job within Backup.
-    - name: delete-restore-testing-plan
-      description: This request deletes the specified restore testing plan.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --restore-testing-plan-name=!: Required unique name of the restore testing plan you wish to delete.
-    - name: disassociate-backup-vault-mpa-approval-team
-      description: Removes the association between an MPA approval team and a backup vault, disabling the MPA approval workflow for restore operations.
-      flags:
-        --backup-vault-name=!: The name of the backup vault from which to disassociate the MPA approval team.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --requester-comment=: An optional comment explaining the reason for disassociating the MPA approval team from the backup vault.
-    - name: list-legal-holds
-      description: This action returns metadata about active and previous legal holds.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of resource list items to be returned.
-        --next-token=: The next item following a partial list of returned resources.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: start-backup-job
-      description: Starts an on-demand backup job for the specified resource.
-      flags:
-        --backup-options=: The backup option for a selected resource.
-        --backup-vault-name=!: The name of a logical container where backups are stored.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --complete-window-minutes=: A value in minutes during which a successfully started backup must complete, or else Backup will cancel the job.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --iam-role-arn=!: Specifies the IAM role ARN used to create the target recovery point; for example, `arn:aws:iam::123456789012:role/S3Access`.
-        --idempotency-token=: A customer-chosen string that you can use to distinguish between otherwise identical calls to `StartBackupJob`.
-        --index=: Include this parameter to enable index creation if your backup job has a resource type that supports backup indexes.
-        --lifecycle=: The lifecycle defines when a protected resource is transitioned to cold storage and when it expires.
-        --logically-air-gapped-backup-vault-arn=: The ARN of a logically air-gapped vault.
-        --recovery-point-tags=: The tags to assign to the resources.
-        --resource-arn=!: An Amazon Resource Name (ARN) that uniquely identifies a resource.
-        --start-window-minutes=: A value in minutes after a backup is scheduled before a job will be canceled if it doesn't start successfully.
-      completion:
-        flag:
-            index:
-                - ENABLED
-                - DISABLED
-    - name: stop-backup-job
-      description: Attempts to cancel a job to create a one-time backup of a resource.
-      flags:
-        --backup-job-id=!: Uniquely identifies a request to Backup to back up a resource.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-backup-plan
-      description: Updates the specified backup plan.
-      flags:
-        --backup-plan-id=!: The ID of the backup plan.
-        --backup-plan=!: The body of a backup plan.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-backup-selection
-      description: Deletes the resource selection associated with a backup plan that is specified by the `SelectionId`.
-      flags:
-        --backup-plan-id=!: Uniquely identifies a backup plan.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --selection-id=!: Uniquely identifies the body of a request to assign a set of resources to a backup plan.
-    - name: describe-scan-job
-      description: Returns scan job details for the specified ScanJobID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --scan-job-id=!: Uniquely identifies a request to Backup to scan a resource.
-    - name: get-tiering-configuration
-      description: Returns `TieringConfiguration` details for the specified `TieringConfigurationName`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tiering-configuration-name=!: The unique name of a tiering configuration.
-    - name: list-indexed-recovery-points
-      description: This operation returns a list of recovery points that have an associated index, belonging to the specified account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --created-after=: Returns only indexed recovery points that were created after the specified date.
-        --created-before=: Returns only indexed recovery points that were created before the specified date.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-status=: Include this parameter to filter the returned list by the indicated statuses.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of resource list items to be returned.
-        --next-token=: The next item following a partial list of returned recovery points.
-        --page-size=: The size of each page to get in the AWS service call.
-        --resource-type=: Returns a list of indexed recovery points for the specified resource type(s).
-        --source-resource-arn=: A string of the Amazon Resource Name (ARN) that uniquely identifies the source resource.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            index-status:
-                - PENDING
-                - ACTIVE
-                - FAILED
-                - DELETING
-    - name: list-tags
-      description: Returns the tags assigned to the resource, such as a target recovery point, backup plan, or backup vault.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of items to be returned.
-        --next-token=: The next item following a partial list of returned items.
-        --resource-arn=!: An Amazon Resource Name (ARN) that uniquely identifies a resource.
-    - name: describe-protected-resource
-      description: Returns information about a saved resource, including the last time it was backed up, its Amazon Resource Name (ARN), and the Amazon Web Services service type of the saved resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: An Amazon Resource Name (ARN) that uniquely identifies a resource.
-    - name: list-frameworks
-      description: Returns a list of all frameworks for an Amazon Web Services account and Amazon Web Services Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The number of desired results from 1 to 1000. Optional.
-        --next-token=: An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
-    - name: list-protected-resources
-      description: Returns an array of resources successfully backed up by Backup, including the time the resource was saved, an Amazon Resource Name (ARN) of the resource, and a resource type.
-      flags:
+        --by-backup-plan-id=: Returns only recovery points that match the specified backup plan ID.
+        --by-created-after=: Returns only recovery points that were created after the specified timestamp.
+        --by-created-before=: Returns only recovery points that were created before the specified timestamp.
+        --by-parent-recovery-point-arn=: This returns only recovery points that match the specified parent (composite) recovery point Amazon Resource Name (ARN).
+        --by-resource-arn=: Returns only recovery points that match the specified resource Amazon Resource Name (ARN).
+        --by-resource-type=: 'Returns only recovery points that match the specified resource type(s):'
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -740,277 +1186,6 @@ commands:
         --next-token=: The next item following a partial list of returned items.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: put-backup-vault-lock-configuration
-      description: Applies Backup Vault Lock to a backup vault, preventing attempts to delete any recovery point stored in or created in a backup vault.
-      flags:
-        --backup-vault-name=!: The Backup Vault Lock configuration that specifies the name of the backup vault it protects.
-        --changeable-for-days=: The Backup Vault Lock configuration that specifies the number of days before the lock date.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-retention-days=: The Backup Vault Lock configuration that specifies the maximum retention period that the vault retains its recovery points.
-        --min-retention-days=: The Backup Vault Lock configuration that specifies the minimum retention period that the vault retains its recovery points.
-    - name: put-backup-vault-notifications
-      description: Turns on notifications on a backup vault for the specified topic and events.
-      flags:
-        --backup-vault-events=!: An array of events that indicate the status of jobs to back up resources to the backup vault.
-        --backup-vault-name=!: The name of a logical container where backups are stored.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --sns-topic-arn=!: The Amazon Resource Name (ARN) that specifies the topic for a backup vault’s events; for example, `arn:aws:sns:us-west-2:111122223333:MyVaultTopic`.
-    - name: start-scan-job
-      description: Starts scanning jobs for specific resources.
-      flags:
-        --backup-vault-name=!: The name of a logical container where backups are stored.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --iam-role-arn=!: Specifies the IAM role ARN used to create the target recovery point; for example, `arn:aws:iam::123456789012:role/S3Access`.
-        --idempotency-token=: A customer-chosen string that you can use to distinguish between otherwise identical calls to `StartScanJob`.
-        --malware-scanner=!: Specifies the malware scanner used during the scan job.
-        --recovery-point-arn=!: An Amazon Resource Name (ARN) that uniquely identifies a recovery point.
-        --scan-base-recovery-point-arn=: An ARN that uniquely identifies the base recovery point to be used for incremental scanning.
-        --scan-mode=!: Specifies the scan type use for the scan job.
-        --scanner-role-arn=!: Specified the IAM scanner role ARN.
-      completion:
-        flag:
-            malware-scanner:
-                - GUARDDUTY
-            scan-mode:
-                - FULL_SCAN
-                - INCREMENTAL_SCAN
-    - name: untag-resource
-      description: Removes a set of key-value pairs from a recovery point, backup plan, or backup vault identified by an Amazon Resource Name (ARN)
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: An ARN that uniquely identifies a resource.
-        --tag-key-list=!: The keys to identify which key-value tags to remove from a resource.
-    - name: create-backup-selection
-      description: Creates a JSON document that specifies a set of resources to assign to a backup plan.
-      flags:
-        --backup-plan-id=!: The ID of the backup plan.
-        --backup-selection=!: The body of a request to assign a set of resources to a backup plan.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --creator-request-id=: A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-backup-vault-lock-configuration
-      description: Deletes Backup Vault Lock from a backup vault specified by a backup vault name.
-      flags:
-        --backup-vault-name=!: The name of the backup vault from which to delete Backup Vault Lock.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-framework
-      description: Deletes the framework specified by a framework name.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --framework-name=!: The unique name of a framework.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-copy-job
-      description: Returns metadata associated with creating a copy of a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --copy-job-id=!: Uniquely identifies a copy job.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-global-settings
-      description: Describes whether the Amazon Web Services account is opted in to cross-account backup.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: export-backup-plan-template
-      description: Returns the backup plan that is specified by the plan ID as a backup template.
-      flags:
-        --backup-plan-id=!: Uniquely identifies a backup plan.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-recovery-point-index-details
-      description: This operation returns the metadata and details specific to the backup index associated with the specified recovery point.
-      flags:
-        --backup-vault-name=!: The name of a logical container where backups are stored.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recovery-point-arn=!: An ARN that uniquely identifies a recovery point; for example, `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
-    - name: list-recovery-points-by-resource
-      description: The information about the recovery points of the type specified by a resource Amazon Resource Name (ARN).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --managed-by-aws-backup-only: This attribute filters recovery points based on ownership.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to be returned.
-        --next-token=: The next item following a partial list of returned items.
-        --no-managed-by-aws-backup-only: This attribute filters recovery points based on ownership.
-        --page-size=: The size of each page to get in the AWS service call.
-        --resource-arn=!: An ARN that uniquely identifies a resource.
-        --starting-token=: A token to specify where to start paginating.
-    - name: delete-restore-testing-selection
-      description: Input the Restore Testing Plan name and Restore Testing Selection name.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --restore-testing-plan-name=!: Required unique name of the restore testing plan that contains the restore testing selection you wish to delete.
-        --restore-testing-selection-name=!: Required unique name of the restore testing selection you wish to delete.
-    - name: list-backup-vaults
-      description: Returns a list of recovery point storage containers along with information about them.
-      flags:
-        --by-shared: This parameter will sort the list of vaults by shared vaults.
-        --by-vault-type=: This parameter will sort the list of vaults by vault type.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to be returned.
-        --next-token=: The next item following a partial list of returned items.
-        --no-by-shared: This parameter will sort the list of vaults by shared vaults.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            by-vault-type:
-                - BACKUP_VAULT
-                - LOGICALLY_AIR_GAPPED_BACKUP_VAULT
-                - RESTORE_ACCESS_BACKUP_VAULT
-    - name: list-report-plans
-      description: Returns a list of your report plans.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The number of desired results from 1 to 1000. Optional.
-        --next-token=: An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
-    - name: list-restore-job-summaries
-      description: This request obtains a summary of restore jobs created or running within the the most recent 30 days.
-      flags:
-        --account-id=: Returns the job count for the specified account.
-        --aggregation-period=: The period for the returned results.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: This parameter sets the maximum number of items to be returned.
-        --next-token=: The next item following a partial list of returned resources.
-        --resource-type=: Returns the job count for the specified resource type.
-        --state=: This parameter returns the job count for jobs with the specified state.
-      completion:
-        flag:
-            aggregation-period:
-                - ONE_DAY
-                - SEVEN_DAYS
-                - FOURTEEN_DAYS
-            state:
-                - CREATED
-                - PENDING
-                - RUNNING
-                - ABORTED
-                - COMPLETED
-                - FAILED
-                - AGGREGATE_ALL
-                - ANY
-    - name: list-restore-testing-plans
-      description: Returns a list of restore testing plans.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to be returned.
-        --next-token=: The next item following a partial list of returned items.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: tag-resource
-      description: Assigns a set of key-value pairs to a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN that uniquely identifies the resource.
-        --tags=!: Key-value pairs that are used to help organize your resources.
-    - name: update-region-settings
-      description: Updates the current service opt-in settings for the Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-type-management-preference=: Enables or disables full Backup management of backups for a resource type.
-        --resource-type-opt-in-preference=: Updates the list of services along with the opt-in preferences for the Region.
-    - name: list-backup-job-summaries
-      description: This is a request for a summary of backup jobs created or running within the most recent 30 days.
-      flags:
-        --account-id=: Returns the job count for the specified account.
-        --aggregation-period=: The period for the returned results.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of items to be returned.
-        --message-category=: This parameter returns the job count for the specified message category.
-        --next-token=: The next item following a partial list of returned resources.
-        --resource-type=: Returns the job count for the specified resource type.
-        --state=: This parameter returns the job count for jobs with the specified state.
-      completion:
-        flag:
-            aggregation-period:
-                - ONE_DAY
-                - SEVEN_DAYS
-                - FOURTEEN_DAYS
-            state:
-                - CREATED
-                - PENDING
-                - RUNNING
-                - ABORTING
-                - ABORTED
-                - COMPLETED
-                - FAILED
-                - EXPIRED
-                - PARTIAL
-                - AGGREGATE_ALL
-                - ANY
-    - name: list-backup-plan-templates
-      description: Lists the backup plan templates.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to return.
-        --next-token=: The next item following a partial list of returned items.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: create-legal-hold
-      description: Creates a legal hold on a recovery point (backup).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=!: The description of the legal hold.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --idempotency-token=: This is a user-chosen string used to distinguish between otherwise identical calls.
-        --recovery-point-selection=: The criteria to assign a set of resources, such as resource types or backup vaults.
-        --tags=: Optional tags to include.
-        --title=!: The title of the legal hold.
-    - name: get-backup-selection
-      description: Returns selection metadata and a document in JSON format that specifies a list of resources that are associated with a backup plan.
-      flags:
-        --backup-plan-id=!: Uniquely identifies a backup plan.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --selection-id=!: Uniquely identifies the body of a request to assign a set of resources to a backup plan.
-    - name: get-backup-vault-notifications
-      description: Returns event notifications for the specified backup vault.
-      flags:
-        --backup-vault-name=!: The name of a logical container where backups are stored.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-report-jobs
       description: Returns details about your report jobs.
       flags:
@@ -1051,178 +1226,3 @@ commands:
                 - COMPLETED
                 - ABORTED
                 - FAILED
-    - name: update-report-plan
-      description: Updates the specified report plan.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --idempotency-token=: A customer-chosen string that you can use to distinguish between otherwise identical calls to `UpdateReportPlanInput`.
-        --report-delivery-channel=: The information about where to deliver your reports, specifically your Amazon S3 bucket name, S3 key prefix, and the formats of your reports.
-        --report-plan-description=: An optional description of the report plan with a maximum 1,024 characters.
-        --report-plan-name=!: The unique name of the report plan.
-        --report-setting=: The report template for the report.
-    - name: associate-backup-vault-mpa-approval-team
-      description: Associates an MPA approval team with a backup vault.
-      flags:
-        --backup-vault-name=!: The name of the backup vault to associate with the MPA approval team.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mpa-approval-team-arn=!: The Amazon Resource Name (ARN) of the MPA approval team to associate with the backup vault.
-        --requester-comment=: A comment provided by the requester explaining the association request.
-    - name: describe-backup-vault
-      description: Returns metadata about a backup vault specified by its name.
-      flags:
-        --backup-vault-account-id=: The account ID of the specified backup vault.
-        --backup-vault-name=!: The name of a logical container where backups are stored.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-framework
-      description: Returns the framework details for the specified `FrameworkName`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --framework-name=!: The unique name of a framework.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-report-plan
-      description: Returns a list of all report plans for an Amazon Web Services account and Amazon Web Services Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --report-plan-name=!: The unique name of a report plan.
-    - name: disassociate-recovery-point-from-parent
-      description: This action to a specific child (nested) recovery point removes the relationship between the specified recovery point and its parent (composite) recovery point.
-      flags:
-        --backup-vault-name=!: The name of a logical container where the child (nested) recovery point is stored.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recovery-point-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the child (nested) recovery point; for example, `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.`
-    - name: get-backup-vault-access-policy
-      description: Returns the access policy document that is associated with the named backup vault.
-      flags:
-        --backup-vault-name=!: The name of a logical container where backups are stored.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-global-settings
-      description: Updates whether the Amazon Web Services account is opted in to cross-account backup.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-settings=: 'Inputs can include:'
-    - name: update-recovery-point-index-settings
-      description: This operation updates the settings of a recovery point index.
-      flags:
-        --backup-vault-name=!: The name of a logical container where backups are stored.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --iam-role-arn=: This specifies the IAM role ARN used for this operation.
-        --index=!: Index can have 1 of 2 possible values, either `ENABLED` or `DISABLED`.
-        --recovery-point-arn=!: An ARN that uniquely identifies a recovery point; for example, `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
-      completion:
-        flag:
-            index:
-                - ENABLED
-                - DISABLED
-    - name: get-restore-testing-selection
-      description: Returns RestoreTestingSelection, which displays resources and elements of the restore testing plan.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --restore-testing-plan-name=!: Required unique name of the restore testing plan.
-        --restore-testing-selection-name=!: Required unique name of the restore testing selection.
-    - name: create-framework
-      description: Creates a framework with one or more controls.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --framework-controls=!: The controls that make up the framework.
-        --framework-description=: An optional description of the framework with a maximum of 1,024 characters.
-        --framework-name=!: The unique name of the framework.
-        --framework-tags=: The tags to assign to the framework.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --idempotency-token=: A customer-chosen string that you can use to distinguish between otherwise identical calls to `CreateFrameworkInput`.
-    - name: create-report-plan
-      description: Creates a report plan.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --idempotency-token=: A customer-chosen string that you can use to distinguish between otherwise identical calls to `CreateReportPlanInput`.
-        --report-delivery-channel=!: A structure that contains information about where and how to deliver your reports, specifically your Amazon S3 bucket name, S3 key prefix, and the formats of your reports.
-        --report-plan-description=: An optional description of the report plan with a maximum of 1,024 characters.
-        --report-plan-name=!: The unique name of the report plan.
-        --report-plan-tags=: The tags to assign to the report plan.
-        --report-setting=!: Identifies the report template for the report.
-    - name: create-restore-access-backup-vault
-      description: Creates a restore access backup vault that provides temporary access to recovery points in a logically air-gapped backup vault, subject to MPA approval.
-      flags:
-        --backup-vault-name=: The name of the backup vault to associate with an MPA approval team.
-        --backup-vault-tags=: Optional tags to assign to the restore access backup vault.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --creator-request-id=: A unique string that identifies the request and allows failed requests to be retried without the risk of executing the operation twice.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --requester-comment=: A comment explaining the reason for requesting restore access to the backup vault.
-        --source-backup-vault-arn=!: The ARN of the source backup vault containing the recovery points to which temporary access is requested.
-    - name: delete-backup-vault-notifications
-      description: Deletes event notifications for the specified backup vault.
-      flags:
-        --backup-vault-name=!: The name of a logical container where backups are stored.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-report-plan
-      description: Deletes the report plan specified by a report plan name.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --report-plan-name=!: The unique name of a report plan.
-    - name: get-backup-plan-from-json
-      description: Returns a valid JSON document specifying a backup plan or an error.
-      flags:
-        --backup-plan-template-json=!: A customer-supplied backup plan document in JSON format.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-backup-selections
-      description: Returns an array containing metadata of the resources associated with the target backup plan.
-      flags:
-        --backup-plan-id=!: Uniquely identifies a backup plan.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to be returned.
-        --next-token=: The next item following a partial list of returned items.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: delete-recovery-point
-      description: Deletes the recovery point specified by a recovery point ID.
-      flags:
-        --backup-vault-name=!: The name of a logical container where backups are stored.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recovery-point-arn=!: An Amazon Resource Name (ARN) that uniquely identifies a recovery point; for example, `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
-    - name: describe-region-settings
-      description: Returns the current service opt-in settings for the Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-restore-job
-      description: Returns metadata associated with a restore job that is specified by a job ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --restore-job-id=!: Uniquely identifies the job that restores a recovery point.

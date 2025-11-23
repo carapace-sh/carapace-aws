@@ -1,47 +1,85 @@
 name: controltower
 description: AWS Control Tower
 commands:
-    - name: get-control-operation
-      description: Returns the status of a particular `EnableControl` or `DisableControl` operation.
+    - name: create-landing-zone
+      description: Creates a new landing zone.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --operation-identifier=!: The ID of the asynchronous operation, which is used to track status.
-    - name: get-landing-zone-operation
-      description: Returns the status of the specified landing zone operation.
+        --landing-zone-version=!: The landing zone version, for example, 3.0.
+        --manifest=: The manifest JSON file is a text file that describes your Amazon Web Services resources.
+        --remediation-types=: Specifies the types of remediation actions to apply when creating the landing zone, such as automatic drift correction or compliance enforcement.
+        --tags=: Tags to be applied to the landing zone.
+    - name: disable-control
+      description: This API call turns off a control.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --control-identifier=: The ARN of the control.
+        --enabled-control-identifier=: The ARN of the enabled control to be disabled, which uniquely identifies the control instance on the target organizational unit.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --operation-identifier=!: A unique identifier assigned to a landing zone operation.
-    - name: reset-enabled-baseline
-      description: Re-enables an `EnabledBaseline` resource.
+        --target-identifier=: The ARN of the organizational unit.
+    - name: get-baseline
+      description: Retrieve details about an existing `Baseline` resource by specifying its identifier.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --enabled-baseline-identifier=!: Specifies the ID of the `EnabledBaseline` resource to be re-enabled, in ARN format.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: tag-resource
-      description: Applies tags to a resource.
-      flags:
+        --baseline-identifier=!: The ARN of the `Baseline` resource to be retrieved.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource to be tagged.
-        --tags=!: Tags to be applied to the resource.
-    - name: update-landing-zone
-      description: This API call updates the landing zone.
+    - name: get-landing-zone
+      description: Returns details about the landing zone.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --landing-zone-identifier=!: The unique identifier of the landing zone.
-        --landing-zone-version=!: The landing zone version, for example, 3.2.
-        --manifest=: The manifest file (JSON) is a text file that describes your Amazon Web Services resources.
-        --remediation-types=: Specifies the types of remediation actions to apply when updating the landing zone configuration.
-    - name: get-landing-zone
-      description: Returns details about the landing zone.
+    - name: list-baselines
+      description: Returns a summary list of all available baselines.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to be shown.
+        --next-token=: A pagination token.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-enabled-baselines
+      description: Returns a list of summaries describing `EnabledBaseline` resources.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: A filter applied on the `ListEnabledBaseline` operation.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-children: A value that can be set to include the child enabled baselines in responses.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to be shown.
+        --next-token=: A pagination token.
+        --no-include-children: A value that can be set to include the child enabled baselines in responses.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-landing-zone-operations
+      description: Lists all landing zone operations from the past 90 days.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: An input filter for the `ListLandingZoneOperations` API that lets you select the types of landing zone operations to view.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: How many results to return per API call.
+        --next-token=: The token to continue the list from a previous API call with the same parameters.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: Returns a list of tags associated with the resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource.
+    - name: delete-landing-zone
+      description: Decommissions a landing zone.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -58,6 +96,108 @@ commands:
         --parameters=: A list of `key-value` objects that specify enablement parameters, where `key` is a string and `value` is a document of any type.
         --tags=: Tags associated with input to `EnableBaseline`.
         --target-identifier=!: The ARN of the target on which the baseline will be enabled.
+    - name: get-control-operation
+      description: Returns the status of a particular `EnableControl` or `DisableControl` operation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --operation-identifier=!: The ID of the asynchronous operation, which is used to track status.
+    - name: list-enabled-controls
+      description: Lists the controls enabled by Amazon Web Services Control Tower on the specified organizational unit and the accounts it contains.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: An input filter for the `ListEnabledControls` API that lets you select the types of control operations to view.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-children: A boolean value that determines whether to include enabled controls from child organizational units in the response.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: How many results to return per API call.
+        --next-token=: The token to continue the list from a previous API call with the same parameters.
+        --no-include-children: A boolean value that determines whether to include enabled controls from child organizational units in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --target-identifier=: The ARN of the organizational unit.
+    - name: reset-enabled-baseline
+      description: Re-enables an `EnabledBaseline` resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --enabled-baseline-identifier=!: Specifies the ID of the `EnabledBaseline` resource to be re-enabled, in ARN format.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: reset-landing-zone
+      description: This API call resets a landing zone.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --landing-zone-identifier=!: The unique identifier of the landing zone.
+    - name: tag-resource
+      description: Applies tags to a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource to be tagged.
+        --tags=!: Tags to be applied to the resource.
+    - name: update-enabled-baseline
+      description: Updates an `EnabledBaseline` resource's applied parameters or version.
+      flags:
+        --baseline-version=!: Specifies the new `Baseline` version, to which the `EnabledBaseline` should be updated.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --enabled-baseline-identifier=!: Specifies the `EnabledBaseline` resource to be updated.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --parameters=: Parameters to apply when making an update.
+    - name: get-baseline-operation
+      description: 'Returns the details of an asynchronous baseline operation, as initiated by any of these APIs: `EnableBaseline`, `DisableBaseline`, `UpdateEnabledBaseline`, `ResetEnabledBaseline`.'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --operation-identifier=!: The operation ID returned from mutating asynchronous APIs (Enable, Disable, Update, Reset).
+    - name: get-enabled-control
+      description: Retrieves details about an enabled control.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --enabled-control-identifier=!: The `controlIdentifier` of the enabled control.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-control-operations
+      description: Provides a list of operations in progress or queued.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: An input filter for the `ListControlOperations` API that lets you select the types of control operations to view.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to be shown.
+        --next-token=: A pagination token.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: untag-resource
+      description: Removes tags from a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource.
+        --tag-keys=!: Tag keys to be removed from the resource.
+    - name: update-enabled-control
+      description: Updates the configuration of an already enabled control.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --enabled-control-identifier=!: The ARN of the enabled control that will be updated.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --parameters=!: A key/value pair, where `Key` is of type `String` and `Value` is of type `Document`.
+    - name: disable-baseline
+      description: Disable an `EnabledBaseline` resource on the specified Target.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --enabled-baseline-identifier=!: Identifier of the `EnabledBaseline` resource to be deactivated, in ARN format.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: enable-control
       description: This API call activates a control.
       flags:
@@ -75,65 +215,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --enabled-baseline-identifier=!: Identifier of the `EnabledBaseline` resource to be retrieved, in ARN format.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-control-operations
-      description: Provides a list of operations in progress or queued.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: An input filter for the `ListControlOperations` API that lets you select the types of control operations to view.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to be shown.
-        --next-token=: A pagination token.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-landing-zone-operations
-      description: Lists all landing zone operations from the past 90 days.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: An input filter for the `ListLandingZoneOperations` API that lets you select the types of landing zone operations to view.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: How many results to return per API call.
-        --next-token=: The token to continue the list from a previous API call with the same parameters.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: reset-enabled-control
-      description: Resets an enabled control.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --enabled-control-identifier=!: The ARN of the enabled control to be reset.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: reset-landing-zone
-      description: This API call resets a landing zone.
+    - name: get-landing-zone-operation
+      description: Returns the status of the specified landing zone operation.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --landing-zone-identifier=!: The unique identifier of the landing zone.
-    - name: get-baseline-operation
-      description: 'Returns the details of an asynchronous baseline operation, as initiated by any of these APIs: `EnableBaseline`, `DisableBaseline`, `UpdateEnabledBaseline`, `ResetEnabledBaseline`.'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --operation-identifier=!: The operation ID returned from mutating asynchronous APIs (Enable, Disable, Update, Reset).
-    - name: list-enabled-baselines
-      description: Returns a list of summaries describing `EnabledBaseline` resources.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: A filter applied on the `ListEnabledBaseline` operation.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --include-children: A value that can be set to include the child enabled baselines in responses.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to be shown.
-        --next-token=: A pagination token.
-        --no-include-children: A value that can be set to include the child enabled baselines in responses.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+        --operation-identifier=!: A unique identifier assigned to a landing zone operation.
     - name: list-landing-zones
       description: Returns the landing zone ARN for the landing zone deployed in your managed account.
       flags:
@@ -145,108 +233,20 @@ commands:
         --next-token=: The token to continue the list from a previous API call with the same parameters.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: Returns a list of tags associated with the resource.
+    - name: reset-enabled-control
+      description: Resets an enabled control.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --enabled-control-identifier=!: The ARN of the enabled control to be reset.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource.
-    - name: update-enabled-baseline
-      description: Updates an `EnabledBaseline` resource's applied parameters or version.
-      flags:
-        --baseline-version=!: Specifies the new `Baseline` version, to which the `EnabledBaseline` should be updated.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --enabled-baseline-identifier=!: Specifies the `EnabledBaseline` resource to be updated.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --parameters=: Parameters to apply when making an update.
-    - name: update-enabled-control
-      description: Updates the configuration of an already enabled control.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --enabled-control-identifier=!: The ARN of the enabled control that will be updated.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --parameters=!: A key/value pair, where `Key` is of type `String` and `Value` is of type `Document`.
-    - name: list-baselines
-      description: Returns a summary list of all available baselines.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to be shown.
-        --next-token=: A pagination token.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: create-landing-zone
-      description: Creates a new landing zone.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --landing-zone-version=!: The landing zone version, for example, 3.0.
-        --manifest=: The manifest JSON file is a text file that describes your Amazon Web Services resources.
-        --remediation-types=: Specifies the types of remediation actions to apply when creating the landing zone, such as automatic drift correction or compliance enforcement.
-        --tags=: Tags to be applied to the landing zone.
-    - name: delete-landing-zone
-      description: Decommissions a landing zone.
+    - name: update-landing-zone
+      description: This API call updates the landing zone.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --landing-zone-identifier=!: The unique identifier of the landing zone.
-    - name: disable-baseline
-      description: Disable an `EnabledBaseline` resource on the specified Target.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --enabled-baseline-identifier=!: Identifier of the `EnabledBaseline` resource to be deactivated, in ARN format.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: disable-control
-      description: This API call turns off a control.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --control-identifier=: The ARN of the control.
-        --enabled-control-identifier=: The ARN of the enabled control to be disabled, which uniquely identifies the control instance on the target organizational unit.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --target-identifier=: The ARN of the organizational unit.
-    - name: get-enabled-control
-      description: Retrieves details about an enabled control.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --enabled-control-identifier=!: The `controlIdentifier` of the enabled control.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-enabled-controls
-      description: Lists the controls enabled by Amazon Web Services Control Tower on the specified organizational unit and the accounts it contains.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: An input filter for the `ListEnabledControls` API that lets you select the types of control operations to view.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --include-children: A boolean value that determines whether to include enabled controls from child organizational units in the response.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: How many results to return per API call.
-        --next-token=: The token to continue the list from a previous API call with the same parameters.
-        --no-include-children: A boolean value that determines whether to include enabled controls from child organizational units in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --target-identifier=: The ARN of the organizational unit.
-    - name: untag-resource
-      description: Removes tags from a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource.
-        --tag-keys=!: Tag keys to be removed from the resource.
-    - name: get-baseline
-      description: Retrieve details about an existing `Baseline` resource by specifying its identifier.
-      flags:
-        --baseline-identifier=!: The ARN of the `Baseline` resource to be retrieved.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --landing-zone-version=!: The landing zone version, for example, 3.2.
+        --manifest=: The manifest file (JSON) is a text file that describes your Amazon Web Services resources.
+        --remediation-types=: Specifies the types of remediation actions to apply when updating the landing zone configuration.

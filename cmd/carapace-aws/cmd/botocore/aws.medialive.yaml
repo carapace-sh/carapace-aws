@@ -1,6 +1,95 @@
 name: medialive
 description: AWS Elemental MediaLive
 commands:
+    - name: create-tags
+      description: Create tags for a resource
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: ""
+        --tags=: ""
+    - name: list-inputs
+      description: Produces list of inputs that have been created
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-multiplex-programs
+      description: List the programs that currently exist for a specific multiplex.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return.
+        --multiplex-id=!: The ID of the multiplex that the programs belong to.
+        --next-token=: The token to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-input-security-group
+      description: Update an Input Security Group's Whilelists.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-security-group-id=!: The id of the Input Security Group to update.
+        --tags=: A collection of key-value pairs.
+        --whitelist-rules=: List of IPv4 CIDR addresses to whitelist
+    - name: list-event-bridge-rule-template-groups
+      description: Lists eventbridge rule template groups.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: A token used to retrieve the next set of results in paginated list responses.
+        --page-size=: The size of each page to get in the AWS service call.
+        --signal-map-identifier=: A signal map's identifier.
+        --starting-token=: A token to specify where to start paginating.
+    - name: start-update-signal-map
+      description: Initiates an update for the specified signal map.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cloud-watch-alarm-template-group-identifiers=: ""
+        --description=: A resource's optional description.
+        --discovery-entry-point-arn=: A top-level supported AWS resource ARN to discovery a signal map from.
+        --event-bridge-rule-template-group-identifiers=: ""
+        --force-rediscovery: If true, will force a rediscovery of a signal map if an unchanged discoveryEntryPointArn is provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: A signal map's identifier.
+        --name=: A resource's name.
+        --no-force-rediscovery: If true, will force a rediscovery of a signal map if an unchanged discoveryEntryPointArn is provided.
+    - name: create-cluster
+      description: Create a new Cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-type=: Specify a type.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-role-arn=: The ARN of the IAM role for the Node in this Cluster.
+        --name=: Specify a name that is unique in the AWS account.
+        --network-settings=: Network settings that connect the Nodes in the Cluster to one or more of the Networks that the Cluster is associated with.
+        --request-id=: The unique ID of the request.
+        --tags=: A collection of key-value pairs.
+      completion:
+        flag:
+            cluster-type:
+                - ON_PREMISES
+    - name: describe-network
+      description: Get details about a Network.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --network-id=!: The ID of the network.
     - name: describe-input-device
       description: Gets the details for the input device
       flags:
@@ -8,6 +97,79 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --input-device-id=!: The unique ID of this input device.
+    - name: get-cloud-watch-alarm-template
+      description: Retrieves the specified cloudwatch alarm template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: A cloudwatch alarm template's identifier.
+    - name: get-cloud-watch-alarm-template-group
+      description: Retrieves the specified cloudwatch alarm template group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: A cloudwatch alarm template group's identifier.
+    - name: delete-cluster
+      description: Delete a Cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-id=!: The ID of the cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-clusters
+      description: Retrieve the list of Clusters.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return.
+        --next-token=: The token to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: cancel-input-device-transfer
+      description: Cancel an input device transfer that you have requested.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-device-id=!: The unique ID of the input device to cancel.
+    - name: delete-input-security-group
+      description: Deletes an Input Security Group
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-security-group-id=!: The Input Security Group to delete
+    - name: describe-account-configuration
+      description: Describe account configuration
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-multiplex
+      description: Updates a multiplex.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --multiplex-id=!: ID of the multiplex to update.
+        --multiplex-settings=: The new settings for a multiplex.
+        --name=: Name of the multiplex.
+        --packet-identifiers-mapping=: ""
+    - name: list-networks
+      description: Retrieve the list of Networks.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return.
+        --next-token=: The token to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: start-multiplex
       description: Start (run) the multiplex.
       flags:
@@ -15,37 +177,214 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --multiplex-id=!: The ID of the multiplex.
-    - name: delete-cloud-watch-alarm-template-group
-      description: Deletes a cloudwatch alarm template group.
+    - name: update-multiplex-program
+      description: Update a program in a multiplex.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: A cloudwatch alarm template group's identifier.
-    - name: create-node-registration-script
-      description: Create the Register Node script for all the nodes intended for a specific Cluster.
+        --multiplex-id=!: The ID of the multiplex of the program to update.
+        --multiplex-program-settings=: The new settings for a multiplex program.
+        --program-name=!: The name of the program to update.
+    - name: restart-channel-pipelines
+      description: Restart pipelines in one channel that is currently running.
+      flags:
+        --channel-id=!: ID of channel
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pipeline-ids=: An array of pipelines to restart in this channel.
+    - name: create-cloud-watch-alarm-template-group
+      description: Creates a cloudwatch alarm template group to group your cloudwatch alarm templates and to attach to signal maps for dynamically creating alarms.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A resource's optional description.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: A resource's name.
+        --request-id=: An ID that you assign to a create request.
+        --tags=: ""
+    - name: delete-cloud-watch-alarm-template
+      description: Deletes a cloudwatch alarm template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: A cloudwatch alarm template's identifier.
+    - name: list-channel-placement-groups
+      description: Retrieve the list of ChannelPlacementGroups in the specified Cluster.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --cluster-id=!: The ID of the cluster
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=: If you're generating a re-registration script for an already existing node, this is where you provide the id.
-        --name=: Specify a pattern for MediaLive Anywhere to use to assign a name to each Node in the Cluster.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return.
+        --next-token=: The token to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-sdi-sources
+      description: List all the SdiSources in the AWS account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return.
+        --next-token=: The token to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: delete-channel
+      description: Starts deletion of channel.
+      flags:
+        --channel-id=!: Unique ID of the channel.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-tags-for-resource
+      description: Produces list of tags that have been created for a resource
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: ""
+    - name: delete-multiplex
+      description: Delete a multiplex.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --multiplex-id=!: The ID of the multiplex.
+    - name: delete-multiplex-program
+      description: Delete a program from a multiplex.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --multiplex-id=!: The ID of the multiplex that the program belongs to.
+        --program-name=!: The multiplex program name.
+    - name: get-event-bridge-rule-template-group
+      description: Retrieves the specified eventbridge rule template group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: An eventbridge rule template group's identifier.
+    - name: create-node
+      description: Create a Node in the specified Cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-id=!: The ID of the cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The user-specified name of the Node to be created.
         --node-interface-mappings=: Documentation update needed
         --request-id=: An ID that you assign to a create request.
         --role=: The initial role of the Node in the Cluster.
+        --tags=: A collection of key-value pairs.
       completion:
         flag:
             role:
                 - BACKUP
                 - ACTIVE
-    - name: describe-reservation
-      description: Get details for a reservation.
+    - name: list-offerings
+      description: List offerings available for purchase.
+      flags:
+        --channel-class=: Filter by channel class, 'STANDARD' or 'SINGLE\_PIPELINE'
+        --channel-configuration=: Filter to offerings that match the configuration of an existing channel, e.g. '2345678' (a channel ID)
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --codec=: Filter by codec, 'AVC', 'HEVC', 'MPEG2', 'AUDIO', 'LINK', or 'AV1'
+        --duration=: Filter by offering duration, e.g. '12'
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --maximum-bitrate=: Filter by bitrate, 'MAX\_10\_MBPS', 'MAX\_20\_MBPS', or 'MAX\_50\_MBPS'
+        --maximum-framerate=: Filter by framerate, 'MAX\_30\_FPS' or 'MAX\_60\_FPS'
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --resolution=: Filter by resolution, 'SD', 'HD', 'FHD', or 'UHD'
+        --resource-type=: Filter by resource type, 'INPUT', 'OUTPUT', 'MULTIPLEX', or 'CHANNEL'
+        --special-feature=: Filter by special feature, 'ADVANCED\_AUDIO' or 'AUDIO\_NORMALIZATION'
+        --starting-token=: A token to specify where to start paginating.
+        --video-quality=: Filter by video quality, 'STANDARD', 'ENHANCED', or 'PREMIUM'
+    - name: stop-multiplex
+      description: Stops a running multiplex.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --reservation-id=!: Unique reservation ID, e.g. '1234567'
+        --multiplex-id=!: The ID of the multiplex.
+    - name: create-event-bridge-rule-template-group
+      description: Creates an eventbridge rule template group to group your eventbridge rule templates and to attach to signal maps for dynamically creating notification rules.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A resource's optional description.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: A resource's name.
+        --request-id=: An ID that you assign to a create request.
+        --tags=: ""
+    - name: create-channel-placement-group
+      description: Create a ChannelPlacementGroup in the specified Cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-id=!: The ID of the cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: Specify a name that is unique in the Cluster.
+        --nodes=: An array of one ID for the Node that you want to associate with the ChannelPlacementGroup.
+        --request-id=: An ID that you assign to a create request.
+        --tags=: A collection of key-value pairs.
+    - name: update-account-configuration
+      description: Update account configuration
+      flags:
+        --account-configuration=: ""
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-schedule
+      description: Get a channel schedule
+      flags:
+        --channel-id=!: Id of the channel whose schedule is being updated.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-cluster-alerts
+      description: List the alerts for a cluster with optional filtering based on alert state.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-id=!: The unique ID of the cluster
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return
+        --next-token=: The next pagination token
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --state-filter=: Specifies the set of alerts to return based on their state.
+    - name: create-multiplex-program
+      description: Create a new program in the multiplex.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --multiplex-id=!: ID of the multiplex where the program is to be created.
+        --multiplex-program-settings=!: The settings for this multiplex program.
+        --program-name=!: Name of multiplex program.
+        --request-id=!: Unique request ID.
+    - name: start-channel
+      description: Starts an existing channel
+      flags:
+        --channel-id=!: A request to start a channel
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: update-channel
       description: Updates a channel.
       flags:
@@ -74,6 +413,117 @@ commands:
                 - INFO
                 - DEBUG
                 - DISABLED
+    - name: claim-device
+      description: Send a request to claim an AWS Elemental device that you have purchased from a third-party vendor.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=: The id of the device you want to claim.
+    - name: list-cloud-watch-alarm-template-groups
+      description: Lists cloudwatch alarm template groups.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: A token used to retrieve the next set of results in paginated list responses.
+        --page-size=: The size of each page to get in the AWS service call.
+        --scope=: Represents the scope of a resource, with options for all scopes, AWS provided resources, or local resources.
+        --signal-map-identifier=: A signal map's identifier.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-network
+      description: Change the settings for a Network.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ip-pools=: Include this parameter only if you want to change the pool of IP addresses in the network.
+        --name=: Include this parameter only if you want to change the name of the Network.
+        --network-id=!: The ID of the network
+        --routes=: Include this parameter only if you want to change or add routes in the Network.
+    - name: update-node-state
+      description: Update the state of a node.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-id=!: The ID of the cluster
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --node-id=!: The ID of the node.
+        --state=: The state to apply to the Node.
+      completion:
+        flag:
+            state:
+                - ACTIVE
+                - DRAINING
+    - name: accept-input-device-transfer
+      description: Accept an incoming input device transfer.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-device-id=!: The unique ID of the input device to accept.
+    - name: batch-update-schedule
+      description: Update a channel schedule
+      flags:
+        --channel-id=!: Id of the channel whose schedule is being updated.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --creates=: Schedule actions to create in the schedule.
+        --deletes=: Schedule actions to delete from the schedule.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-input
+      description: Create an input
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --destinations=: Destination settings for PUSH type inputs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-devices=: Settings for the devices.
+        --input-network-location=: The location of this input.
+        --input-security-groups=: A list of security groups referenced by IDs to attach to the input.
+        --media-connect-flows=: A list of the MediaConnect Flows that you want to use in this input.
+        --multicast-settings=: Multicast Input settings.
+        --name=: Name of the input.
+        --request-id=: Unique identifier of the request to ensure the request is handled exactly once in case of retries.
+        --role-arn=: The Amazon Resource Name (ARN) of the role this input assumes during and after creation.
+        --router-settings=: ""
+        --sdi-sources=: ""
+        --smpte2110-receiver-group-settings=: Include this parameter if the input is a SMPTE 2110 input, to identify the stream sources for this input.
+        --sources=: The source URLs for a PULL-type input.
+        --srt-settings=: The settings associated with an SRT input.
+        --tags=: A collection of key-value pairs.
+        --type=: ""
+        --vpc=: ""
+      completion:
+        flag:
+            input-network-location:
+                - AWS
+                - ON_PREMISES
+            type:
+                - UDP_PUSH
+                - RTP_PUSH
+                - RTMP_PUSH
+                - RTMP_PULL
+                - URL_PULL
+                - MP4_FILE
+                - MEDIACONNECT
+                - INPUT_DEVICE
+                - AWS_CDI
+                - TS_FILE
+                - SRT_CALLER
+                - MULTICAST
+                - SMPTE_2110_RECEIVER_GROUP
+                - SDI
+                - MEDIACONNECT_ROUTER
+    - name: describe-input
+      description: Produces details about an input
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-id=!: Unique ID of the input
     - name: create-cloud-watch-alarm-template
       description: Creates a cloudwatch alarm template to dynamically generate cloudwatch metric alarms on targeted resource types.
       flags:
@@ -122,64 +572,25 @@ commands:
                 - breaching
                 - ignore
                 - missing
-    - name: delete-input
-      description: Deletes the input end point
+    - name: delete-event-bridge-rule-template-group
+      description: Deletes an eventbridge rule template group.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input-id=!: Unique ID of the input
-    - name: delete-multiplex
-      description: Delete a multiplex.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --multiplex-id=!: The ID of the multiplex.
-    - name: list-channels
-      description: Produces list of channels that have been created
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: ""
-        --next-token=: ""
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: reboot-input-device
-      description: Send a reboot command to the specified input device.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --force=: Force a reboot of an input device.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input-device-id=!: The unique ID of the input device to reboot.
-      completion:
-        flag:
-            force:
-                - "NO"
-                - "YES"
-    - name: stop-input-device
-      description: Stop an input device that is attached to a MediaConnect flow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input-device-id=!: The unique ID of the input device to stop.
-    - name: create-event-bridge-rule-template
-      description: Creates an eventbridge rule template to monitor events and send notifications to your targeted resources.
+        --identifier=!: An eventbridge rule template group's identifier.
+    - name: update-event-bridge-rule-template
+      description: Updates the specified eventbridge rule template.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: A resource's optional description.
         --event-targets=: ""
-        --event-type=!: ""
+        --event-type=: ""
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-identifier=!: An eventbridge rule template group's identifier.
-        --name=!: A resource's name.
-        --request-id=: An ID that you assign to a create request.
-        --tags=: ""
+        --group-identifier=: An eventbridge rule template group's identifier.
+        --identifier=!: An eventbridge rule template's identifier.
+        --name=: A resource's name.
       completion:
         flag:
             event-type:
@@ -196,6 +607,319 @@ commands:
                 - MEDIACONNECT_SOURCE_HEALTH
                 - MEDIACONNECT_OUTPUT_HEALTH
                 - MEDIACONNECT_FLOW_STATUS_CHANGE
+    - name: create-sdi-source
+      description: Create an SdiSource for each video source that uses the SDI protocol.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mode=: Applies only if the type is QUAD.
+        --name=: Specify a name that is unique in the AWS account.
+        --request-id=: An ID that you assign to a create request.
+        --tags=: A collection of key-value pairs.
+        --type=: 'Specify the type of the SDI source: SINGLE: The source is a single-link source.'
+      completion:
+        flag:
+            mode:
+                - QUADRANT
+                - INTERLEAVE
+            type:
+                - SINGLE
+                - QUAD
+    - name: reboot-input-device
+      description: Send a reboot command to the specified input device.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --force=: Force a reboot of an input device.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-device-id=!: The unique ID of the input device to reboot.
+      completion:
+        flag:
+            force:
+                - "NO"
+                - "YES"
+    - name: update-channel-class
+      description: Changes the class of the channel.
+      flags:
+        --channel-class=!: The channel class that you wish to update this channel to use.
+        --channel-id=!: Channel Id of the channel whose class should be updated.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --destinations=: A list of output destinations for this channel.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            channel-class:
+                - STANDARD
+                - SINGLE_PIPELINE
+    - name: list-event-bridge-rule-templates
+      description: Lists eventbridge rule templates.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-identifier=: An eventbridge rule template group's identifier.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: A token used to retrieve the next set of results in paginated list responses.
+        --page-size=: The size of each page to get in the AWS service call.
+        --signal-map-identifier=: A signal map's identifier.
+        --starting-token=: A token to specify where to start paginating.
+    - name: create-network
+      description: Create as many Networks as you need.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ip-pools=: An array of IpPoolCreateRequests that identify a collection of IP addresses in your network that you want to reserve for use in MediaLive Anywhere.
+        --name=: Specify a name that is unique in the AWS account.
+        --request-id=: An ID that you assign to a create request.
+        --routes=: An array of routes that MediaLive Anywhere needs to know about in order to route encoding traffic.
+        --tags=: A collection of key-value pairs.
+    - name: list-multiplex-alerts
+      description: List the alerts for a multiplex with optional filtering based on alert state.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return
+        --multiplex-id=!: The unique ID of the multiplex
+        --next-token=: The next pagination token
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --state-filter=: Specifies the set of alerts to return based on their state.
+    - name: delete-reservation
+      description: Delete an expired reservation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --reservation-id=!: Unique reservation ID, e.g. '1234567'
+    - name: list-reservations
+      description: List purchased reservations.
+      flags:
+        --channel-class=: Filter by channel class, 'STANDARD' or 'SINGLE\_PIPELINE'
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --codec=: Filter by codec, 'AVC', 'HEVC', 'MPEG2', 'AUDIO', 'LINK', or 'AV1'
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --maximum-bitrate=: Filter by bitrate, 'MAX\_10\_MBPS', 'MAX\_20\_MBPS', or 'MAX\_50\_MBPS'
+        --maximum-framerate=: Filter by framerate, 'MAX\_30\_FPS' or 'MAX\_60\_FPS'
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --resolution=: Filter by resolution, 'SD', 'HD', 'FHD', or 'UHD'
+        --resource-type=: Filter by resource type, 'INPUT', 'OUTPUT', 'MULTIPLEX', or 'CHANNEL'
+        --special-feature=: Filter by special feature, 'ADVANCED\_AUDIO' or 'AUDIO\_NORMALIZATION'
+        --starting-token=: A token to specify where to start paginating.
+        --video-quality=: Filter by video quality, 'STANDARD', 'ENHANCED', or 'PREMIUM'
+    - name: purchase-offering
+      description: Purchase an offering and create a reservation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --count=!: Number of resources
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: Name for the new reservation
+        --offering-id=!: Offering to purchase, e.g. '87654321'
+        --renewal-settings=: Renewal settings for the reservation
+        --request-id=: Unique request ID to be specified.
+        --start=: Requested reservation start time (UTC) in ISO-8601 format.
+        --tags=: A collection of key-value pairs
+    - name: delete-event-bridge-rule-template
+      description: Deletes an eventbridge rule template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: An eventbridge rule template's identifier.
+    - name: describe-cluster
+      description: Get details about a Cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-id=!: The ID of the cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: batch-stop
+      description: Stops running resources
+      flags:
+        --channel-ids=: List of channel IDs
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --multiplex-ids=: List of multiplex IDs
+    - name: create-multiplex
+      description: Create a new multiplex.
+      flags:
+        --availability-zones=!: A list of availability zones for the multiplex.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --multiplex-settings=!: Configuration for a multiplex event.
+        --name=!: Name of multiplex.
+        --request-id=!: Unique request ID.
+        --tags=: A collection of key-value pairs.
+    - name: delete-channel-placement-group
+      description: Delete the specified ChannelPlacementGroup that exists in the specified Cluster.
+      flags:
+        --channel-placement-group-id=!: The ID of the channel placement group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-id=!: The ID of the cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-versions
+      description: Retrieves an array of all the encoder engine versions that are available in this AWS account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-input
+      description: Deletes the input end point
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-id=!: Unique ID of the input
+    - name: create-node-registration-script
+      description: Create the Register Node script for all the nodes intended for a specific Cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-id=!: The ID of the cluster
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=: If you're generating a re-registration script for an already existing node, this is where you provide the id.
+        --name=: Specify a pattern for MediaLive Anywhere to use to assign a name to each Node in the Cluster.
+        --node-interface-mappings=: Documentation update needed
+        --request-id=: An ID that you assign to a create request.
+        --role=: The initial role of the Node in the Cluster.
+      completion:
+        flag:
+            role:
+                - BACKUP
+                - ACTIVE
+    - name: describe-sdi-source
+      description: Gets details about a SdiSource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --sdi-source-id=!: Get details about an SdiSource.
+    - name: batch-start
+      description: Starts existing resources
+      flags:
+        --channel-ids=: List of channel IDs
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --multiplex-ids=: List of multiplex IDs
+    - name: create-channel
+      description: Creates a new channel
+      flags:
+        --anywhere-settings=: The Elemental Anywhere settings for this channel.
+        --cdi-input-specification=: Specification of CDI inputs for this channel
+        --channel-class=: The class for this channel.
+        --channel-engine-version=: The desired engine version for this channel.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --destinations=: ""
+        --dry-run: ""
+        --encoder-settings=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-attachments=: List of input attachments for channel.
+        --input-specification=: Specification of network and file inputs for this channel
+        --log-level=: The log level to write to CloudWatch Logs.
+        --maintenance=: Maintenance settings for this channel.
+        --name=: Name of channel.
+        --no-dry-run: ""
+        --request-id=: Unique request ID to be specified.
+        --reserved=: Deprecated field that's only usable by whitelisted customers.
+        --role-arn=: An optional Amazon Resource Name (ARN) of the role to assume when running the Channel.
+        --tags=: A collection of key-value pairs.
+        --vpc=: Settings for the VPC outputs
+      completion:
+        flag:
+            channel-class:
+                - STANDARD
+                - SINGLE_PIPELINE
+            log-level:
+                - ERROR
+                - WARNING
+                - INFO
+                - DEBUG
+                - DISABLED
+    - name: get-signal-map
+      description: Retrieves the specified signal map.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: A signal map's identifier.
+    - name: describe-multiplex-program
+      description: Get the details for a program in a multiplex.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --multiplex-id=!: The ID of the multiplex that the program belongs to.
+        --program-name=!: The name of the program.
+    - name: list-nodes
+      description: Retrieve the list of Nodes.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-id=!: The ID of the cluster
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return.
+        --next-token=: The token to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-node
+      description: Change the settings for a Node.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-id=!: The ID of the cluster
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: Include this parameter only if you want to change the current name of the Node.
+        --node-id=!: The ID of the node.
+        --role=: The initial role of the Node in the Cluster.
+        --sdi-source-mappings=: The mappings of a SDI capture card port to a logical SDI data stream
+      completion:
+        flag:
+            role:
+                - BACKUP
+                - ACTIVE
+    - name: delete-schedule
+      description: Delete all schedule actions on a channel.
+      flags:
+        --channel-id=!: Id of the channel whose schedule is being deleted.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-input-device-transfers
+      description: List input devices that are currently being transferred.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --transfer-type=!: ""
+    - name: update-cloud-watch-alarm-template-group
+      description: Updates the specified cloudwatch alarm template group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A resource's optional description.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: A cloudwatch alarm template group's identifier.
     - name: update-cloud-watch-alarm-template
       description: Updates the specified cloudwatch alarm template.
       flags:
@@ -243,80 +967,6 @@ commands:
                 - breaching
                 - ignore
                 - missing
-    - name: delete-cluster
-      description: Delete a Cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-id=!: The ID of the cluster.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-channel-class
-      description: Changes the class of the channel.
-      flags:
-        --channel-class=!: The channel class that you wish to update this channel to use.
-        --channel-id=!: Channel Id of the channel whose class should be updated.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --destinations=: A list of output destinations for this channel.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      completion:
-        flag:
-            channel-class:
-                - STANDARD
-                - SINGLE_PIPELINE
-    - name: delete-event-bridge-rule-template-group
-      description: Deletes an eventbridge rule template group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: An eventbridge rule template group's identifier.
-    - name: update-cluster
-      description: Change the settings for a Cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-id=!: The ID of the cluster
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: Include this parameter only if you want to change the current name of the Cluster.
-        --network-settings=: Include this property only if you want to change the current connections between the Nodes in the Cluster and the Networks the Cluster is associated with.
-    - name: describe-node
-      description: Get details about a Node in the specified Cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-id=!: The ID of the cluster
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --node-id=!: The ID of the node.
-    - name: update-channel-placement-group
-      description: Change the settings for a ChannelPlacementGroup.
-      flags:
-        --channel-placement-group-id=!: The ID of the channel placement group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-id=!: The ID of the cluster.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: Include this parameter only if you want to change the current name of the ChannelPlacementGroup.
-        --nodes=: Include this parameter only if you want to change the list of Nodes that are associated with the ChannelPlacementGroup.
-    - name: create-sdi-source
-      description: Create an SdiSource for each video source that uses the SDI protocol.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mode=: Applies only if the type is QUAD.
-        --name=: Specify a name that is unique in the AWS account.
-        --request-id=: An ID that you assign to a create request.
-        --tags=: A collection of key-value pairs.
-        --type=: 'Specify the type of the SDI source: SINGLE: The source is a single-link source.'
-      completion:
-        flag:
-            mode:
-                - QUADRANT
-                - INTERLEAVE
-            type:
-                - SINGLE
-                - QUAD
     - name: batch-delete
       description: Starts delete of resources.
       flags:
@@ -334,180 +984,142 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --multiplex-id=!: The ID of the multiplex.
-    - name: get-signal-map
-      description: Retrieves the specified signal map.
+    - name: describe-offering
+      description: Get details for an offering.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --offering-id=!: Unique offering ID, e.g. '87654321'
+    - name: stop-input-device
+      description: Stop an input device that is attached to a MediaConnect flow.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-device-id=!: The unique ID of the input device to stop.
+    - name: get-event-bridge-rule-template
+      description: Retrieves the specified eventbridge rule template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: An eventbridge rule template's identifier.
+    - name: update-cluster
+      description: Change the settings for a Cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-id=!: The ID of the cluster
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: Include this parameter only if you want to change the current name of the Cluster.
+        --network-settings=: Include this property only if you want to change the current connections between the Nodes in the Cluster and the Networks the Cluster is associated with.
+    - name: describe-input-device-thumbnail
+      description: Get the latest thumbnail data for the input device.
+      flags:
+        --accept=!: The HTTP Accept header.
+        --input-device-id=!: The unique ID of this input device.
+      completion:
+        flag:
+            accept:
+                - image/jpeg
+        positional:
+            - - $files
+    - name: list-input-devices
+      description: List input devices
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: start-input-device
+      description: Start an input device that is attached to a MediaConnect flow.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-device-id=!: The unique ID of the input device to start.
+    - name: start-delete-monitor-deployment
+      description: Initiates a deployment to delete the monitor of the specified signal map.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identifier=!: A signal map's identifier.
-    - name: list-multiplex-alerts
-      description: List the alerts for a multiplex with optional filtering based on alert state.
+    - name: delete-network
+      description: Delete a Network.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to return
-        --multiplex-id=!: The unique ID of the multiplex
-        --next-token=: The next pagination token
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --state-filter=: Specifies the set of alerts to return based on their state.
-    - name: batch-stop
-      description: Stops running resources
-      flags:
-        --channel-ids=: List of channel IDs
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --multiplex-ids=: List of multiplex IDs
-    - name: reject-input-device-transfer
-      description: Reject the transfer of the specified input device to your AWS account.
+        --network-id=!: The ID of the network.
+    - name: delete-sdi-source
+      description: Delete an SdiSource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input-device-id=!: The unique ID of the input device to reject.
-    - name: create-cluster
-      description: Create a new Cluster.
+        --sdi-source-id=!: The ID of the SdiSource.
+    - name: create-signal-map
+      description: Initiates the creation of a new signal map.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-type=: Specify a type.
+        --cloud-watch-alarm-template-group-identifiers=: ""
+        --description=: A resource's optional description.
+        --discovery-entry-point-arn=!: A top-level supported AWS resource ARN to discovery a signal map from.
+        --event-bridge-rule-template-group-identifiers=: ""
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-role-arn=: The ARN of the IAM role for the Node in this Cluster.
-        --name=: Specify a name that is unique in the AWS account.
-        --network-settings=: Network settings that connect the Nodes in the Cluster to one or more of the Networks that the Cluster is associated with.
-        --request-id=: The unique ID of the request.
-        --tags=: A collection of key-value pairs.
-      completion:
-        flag:
-            cluster-type:
-                - ON_PREMISES
-    - name: purchase-offering
-      description: Purchase an offering and create a reservation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --count=!: Number of resources
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: Name for the new reservation
-        --offering-id=!: Offering to purchase, e.g. '87654321'
-        --renewal-settings=: Renewal settings for the reservation
-        --request-id=: Unique request ID to be specified.
-        --start=: Requested reservation start time (UTC) in ISO-8601 format.
-        --tags=: A collection of key-value pairs
-    - name: create-network
-      description: Create as many Networks as you need.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ip-pools=: An array of IpPoolCreateRequests that identify a collection of IP addresses in your network that you want to reserve for use in MediaLive Anywhere.
-        --name=: Specify a name that is unique in the AWS account.
+        --name=!: A resource's name.
         --request-id=: An ID that you assign to a create request.
-        --routes=: An array of routes that MediaLive Anywhere needs to know about in order to route encoding traffic.
-        --tags=: A collection of key-value pairs.
-    - name: list-versions
-      description: Retrieves an array of all the encoder engine versions that are available in this AWS account.
+        --tags=: ""
+    - name: list-cloud-watch-alarm-templates
+      description: Lists cloudwatch alarm templates.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: batch-update-schedule
-      description: Update a channel schedule
-      flags:
-        --channel-id=!: Id of the channel whose schedule is being updated.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --creates=: Schedule actions to create in the schedule.
-        --deletes=: Schedule actions to delete from the schedule.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-input-security-group
-      description: Creates a Input Security Group
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: A collection of key-value pairs.
-        --whitelist-rules=: List of IPv4 CIDR addresses to whitelist
-    - name: list-multiplexes
-      description: Retrieve a list of the existing multiplexes.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-identifier=: A cloudwatch alarm template group's identifier.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to return.
-        --next-token=: The token to retrieve the next page of results.
+        --max-results=: ""
+        --next-token=: A token used to retrieve the next set of results in paginated list responses.
         --page-size=: The size of each page to get in the AWS service call.
+        --scope=: Represents the scope of a resource, with options for all scopes, AWS provided resources, or local resources.
+        --signal-map-identifier=: A signal map's identifier.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-offerings
-      description: List offerings available for purchase.
+    - name: list-signal-maps
+      description: Lists signal maps.
       flags:
-        --channel-class=: Filter by channel class, 'STANDARD' or 'SINGLE\_PIPELINE'
-        --channel-configuration=: Filter to offerings that match the configuration of an existing channel, e.g. '2345678' (a channel ID)
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --codec=: Filter by codec, 'AVC', 'HEVC', 'MPEG2', 'AUDIO', 'LINK', or 'AV1'
-        --duration=: Filter by offering duration, e.g. '12'
+        --cloud-watch-alarm-template-group-identifier=: A cloudwatch alarm template group's identifier.
+        --event-bridge-rule-template-group-identifier=: An eventbridge rule template group's identifier.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: ""
-        --maximum-bitrate=: Filter by bitrate, 'MAX\_10\_MBPS', 'MAX\_20\_MBPS', or 'MAX\_50\_MBPS'
-        --maximum-framerate=: Filter by framerate, 'MAX\_30\_FPS' or 'MAX\_60\_FPS'
-        --next-token=: ""
+        --next-token=: A token used to retrieve the next set of results in paginated list responses.
         --page-size=: The size of each page to get in the AWS service call.
-        --resolution=: Filter by resolution, 'SD', 'HD', 'FHD', or 'UHD'
-        --resource-type=: Filter by resource type, 'INPUT', 'OUTPUT', 'MULTIPLEX', or 'CHANNEL'
-        --special-feature=: Filter by special feature, 'ADVANCED\_AUDIO' or 'AUDIO\_NORMALIZATION'
         --starting-token=: A token to specify where to start paginating.
-        --video-quality=: Filter by video quality, 'STANDARD', 'ENHANCED', or 'PREMIUM'
-    - name: create-input
-      description: Create an input
+    - name: update-event-bridge-rule-template-group
+      description: Updates the specified eventbridge rule template group.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --destinations=: Destination settings for PUSH type inputs.
+        --description=: A resource's optional description.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input-devices=: Settings for the devices.
-        --input-network-location=: The location of this input.
-        --input-security-groups=: A list of security groups referenced by IDs to attach to the input.
-        --media-connect-flows=: A list of the MediaConnect Flows that you want to use in this input.
-        --multicast-settings=: Multicast Input settings.
-        --name=: Name of the input.
-        --request-id=: Unique identifier of the request to ensure the request is handled exactly once in case of retries.
-        --role-arn=: The Amazon Resource Name (ARN) of the role this input assumes during and after creation.
-        --router-settings=: ""
-        --sdi-sources=: ""
-        --smpte2110-receiver-group-settings=: Include this parameter if the input is a SMPTE 2110 input, to identify the stream sources for this input.
-        --sources=: The source URLs for a PULL-type input.
-        --srt-settings=: The settings associated with an SRT input.
-        --tags=: A collection of key-value pairs.
-        --type=: ""
-        --vpc=: ""
-      completion:
-        flag:
-            input-network-location:
-                - AWS
-                - ON_PREMISES
-            type:
-                - UDP_PUSH
-                - RTP_PUSH
-                - RTMP_PUSH
-                - RTMP_PULL
-                - URL_PULL
-                - MP4_FILE
-                - MEDIACONNECT
-                - INPUT_DEVICE
-                - AWS_CDI
-                - TS_FILE
-                - SRT_CALLER
-                - MULTICAST
-                - SMPTE_2110_RECEIVER_GROUP
-                - SDI
-                - MEDIACONNECT_ROUTER
+        --identifier=!: An eventbridge rule template group's identifier.
+    - name: describe-channel-placement-group
+      description: Get details about a ChannelPlacementGroup.
+      flags:
+        --channel-placement-group-id=!: The ID of the channel placement group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-id=!: The ID of the cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: update-sdi-source
       description: Change some of the settings in an SdiSource.
       flags:
@@ -526,36 +1138,75 @@ commands:
             type:
                 - SINGLE
                 - QUAD
-    - name: describe-schedule
-      description: Get a channel schedule
+    - name: describe-thumbnails
+      description: Describe the latest thumbnails data.
       flags:
-        --channel-id=!: Id of the channel whose schedule is being updated.
+        --channel-id=!: Unique ID of the channel
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pipeline-id=!: Pipeline ID ("0" or "1")
+        --thumbnail-type=!: thumbnail type
+    - name: create-partner-input
+      description: Create a partner input
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-id=!: Unique ID of the input.
+        --request-id=: Unique identifier of the request to ensure the request is handled exactly once in case of retries.
+        --tags=: A collection of key-value pairs.
+    - name: delete-cloud-watch-alarm-template-group
+      description: Deletes a cloudwatch alarm template group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: A cloudwatch alarm template group's identifier.
+    - name: list-alerts
+      description: List the alerts for a channel with optional filtering based on alert state.
+      flags:
+        --channel-id=!: The unique ID of the channel
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: ""
-        --next-token=: ""
+        --max-results=: The maximum number of items to return
+        --next-token=: The next pagination token
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: update-multiplex-program
-      description: Update a program in a multiplex.
+        --state-filter=: Specifies the set of alerts to return based on their state.
+    - name: start-input-device-maintenance-window
+      description: Start a maintenance window for the specified input device.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --multiplex-id=!: The ID of the multiplex of the program to update.
-        --multiplex-program-settings=: The new settings for a multiplex program.
-        --program-name=!: The name of the program to update.
-    - name: describe-cluster
-      description: Get details about a Cluster.
+        --input-device-id=!: The unique ID of the input device to start a maintenance window for.
+    - name: describe-node
+      description: Get details about a Node in the specified Cluster.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-id=!: The ID of the cluster.
+        --cluster-id=!: The ID of the cluster
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-sdi-sources
-      description: List all the SdiSources in the AWS account.
+        --node-id=!: The ID of the node.
+    - name: describe-input-security-group
+      description: Produces a summary of an Input Security Group
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-security-group-id=!: The id of the Input Security Group to describe
+    - name: describe-reservation
+      description: Get details for a reservation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --reservation-id=!: Unique reservation ID, e.g. '1234567'
+    - name: list-multiplexes
+      description: Retrieve a list of the existing multiplexes.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -565,6 +1216,49 @@ commands:
         --next-token=: The token to retrieve the next page of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: reject-input-device-transfer
+      description: Reject the transfer of the specified input device to your AWS account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-device-id=!: The unique ID of the input device to reject.
+    - name: create-event-bridge-rule-template
+      description: Creates an eventbridge rule template to monitor events and send notifications to your targeted resources.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A resource's optional description.
+        --event-targets=: ""
+        --event-type=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-identifier=!: An eventbridge rule template group's identifier.
+        --name=!: A resource's name.
+        --request-id=: An ID that you assign to a create request.
+        --tags=: ""
+      completion:
+        flag:
+            event-type:
+                - MEDIALIVE_MULTIPLEX_ALERT
+                - MEDIALIVE_MULTIPLEX_STATE_CHANGE
+                - MEDIALIVE_CHANNEL_ALERT
+                - MEDIALIVE_CHANNEL_INPUT_CHANGE
+                - MEDIALIVE_CHANNEL_STATE_CHANGE
+                - MEDIAPACKAGE_INPUT_NOTIFICATION
+                - MEDIAPACKAGE_KEY_PROVIDER_NOTIFICATION
+                - MEDIAPACKAGE_HARVEST_JOB_NOTIFICATION
+                - SIGNAL_MAP_ACTIVE_ALARM
+                - MEDIACONNECT_ALERT
+                - MEDIACONNECT_SOURCE_HEALTH
+                - MEDIACONNECT_OUTPUT_HEALTH
+                - MEDIACONNECT_FLOW_STATUS_CHANGE
+    - name: delete-signal-map
+      description: Deletes the specified signal map.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: A signal map's identifier.
     - name: transfer-input-device
       description: Start an input device transfer to another AWS account.
       flags:
@@ -575,246 +1269,68 @@ commands:
         --target-customer-id=: The AWS account ID (12 digits) for the recipient of the device transfer.
         --target-region=: The target AWS region to transfer the device.
         --transfer-message=: An optional message for the recipient.
-    - name: update-node-state
-      description: Update the state of a node.
+    - name: delete-tags
+      description: Removes tags for a resource
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: ""
+        --tag-keys=!: An array of tag keys to delete
+    - name: describe-channel
+      description: Gets details about a channel
+      flags:
+        --channel-id=!: channel ID
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-input-security-groups
+      description: Produces a list of Input Security Groups for an account
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: start-monitor-deployment
+      description: Initiates a deployment to deploy the latest monitor of the specified signal map.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dry-run: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: A signal map's identifier.
+        --no-dry-run: ""
+    - name: create-input-security-group
+      description: Creates a Input Security Group
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: A collection of key-value pairs.
+        --whitelist-rules=: List of IPv4 CIDR addresses to whitelist
+    - name: list-channels
+      description: Produces list of channels that have been created
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: delete-node
+      description: Delete a Node.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --cluster-id=!: The ID of the cluster
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --node-id=!: The ID of the node.
-        --state=: The state to apply to the Node.
-      completion:
-        flag:
-            state:
-                - ACTIVE
-                - DRAINING
-    - name: update-input-device
-      description: Updates the parameters for the input device.
-      flags:
-        --availability-zone=: The Availability Zone you want associated with this input device.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hd-device-settings=: The settings that you want to apply to the HD input device.
-        --input-device-id=!: The unique ID of the input device.
-        --name=: The name that you assigned to this input device (not the unique ID).
-        --uhd-device-settings=: The settings that you want to apply to the UHD input device.
-    - name: delete-signal-map
-      description: Deletes the specified signal map.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: A signal map's identifier.
-    - name: list-event-bridge-rule-template-groups
-      description: Lists eventbridge rule template groups.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: ""
-        --next-token=: A token used to retrieve the next set of results in paginated list responses.
-        --page-size=: The size of each page to get in the AWS service call.
-        --signal-map-identifier=: A signal map's identifier.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-event-bridge-rule-templates
-      description: Lists eventbridge rule templates.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-identifier=: An eventbridge rule template group's identifier.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: ""
-        --next-token=: A token used to retrieve the next set of results in paginated list responses.
-        --page-size=: The size of each page to get in the AWS service call.
-        --signal-map-identifier=: A signal map's identifier.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-cloud-watch-alarm-template-group
-      description: Updates the specified cloudwatch alarm template group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A resource's optional description.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: A cloudwatch alarm template group's identifier.
-    - name: delete-network
-      description: Delete a Network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --network-id=!: The ID of the network.
-    - name: delete-input-security-group
-      description: Deletes an Input Security Group
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input-security-group-id=!: The Input Security Group to delete
-    - name: delete-multiplex-program
-      description: Delete a program from a multiplex.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --multiplex-id=!: The ID of the multiplex that the program belongs to.
-        --program-name=!: The multiplex program name.
-    - name: describe-offering
-      description: Get details for an offering.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --offering-id=!: Unique offering ID, e.g. '87654321'
-    - name: create-node
-      description: Create a Node in the specified Cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-id=!: The ID of the cluster.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: The user-specified name of the Node to be created.
-        --node-interface-mappings=: Documentation update needed
-        --request-id=: An ID that you assign to a create request.
-        --role=: The initial role of the Node in the Cluster.
-        --tags=: A collection of key-value pairs.
-      completion:
-        flag:
-            role:
-                - BACKUP
-                - ACTIVE
-    - name: cancel-input-device-transfer
-      description: Cancel an input device transfer that you have requested.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input-device-id=!: The unique ID of the input device to cancel.
-    - name: create-channel
-      description: Creates a new channel
-      flags:
-        --anywhere-settings=: The Elemental Anywhere settings for this channel.
-        --cdi-input-specification=: Specification of CDI inputs for this channel
-        --channel-class=: The class for this channel.
-        --channel-engine-version=: The desired engine version for this channel.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --destinations=: ""
-        --dry-run: ""
-        --encoder-settings=: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input-attachments=: List of input attachments for channel.
-        --input-specification=: Specification of network and file inputs for this channel
-        --log-level=: The log level to write to CloudWatch Logs.
-        --maintenance=: Maintenance settings for this channel.
-        --name=: Name of channel.
-        --no-dry-run: ""
-        --request-id=: Unique request ID to be specified.
-        --reserved=: Deprecated field that's only usable by whitelisted customers.
-        --role-arn=: An optional Amazon Resource Name (ARN) of the role to assume when running the Channel.
-        --tags=: A collection of key-value pairs.
-        --vpc=: Settings for the VPC outputs
-      completion:
-        flag:
-            channel-class:
-                - STANDARD
-                - SINGLE_PIPELINE
-            log-level:
-                - ERROR
-                - WARNING
-                - INFO
-                - DEBUG
-                - DISABLED
-    - name: create-tags
-      description: Create tags for a resource
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: ""
-        --tags=: ""
-    - name: update-multiplex
-      description: Updates a multiplex.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --multiplex-id=!: ID of the multiplex to update.
-        --multiplex-settings=: The new settings for a multiplex.
-        --name=: Name of the multiplex.
-        --packet-identifiers-mapping=: ""
-    - name: create-multiplex
-      description: Create a new multiplex.
-      flags:
-        --availability-zones=!: A list of availability zones for the multiplex.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --multiplex-settings=!: Configuration for a multiplex event.
-        --name=!: Name of multiplex.
-        --request-id=!: Unique request ID.
-        --tags=: A collection of key-value pairs.
-    - name: delete-reservation
-      description: Delete an expired reservation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --reservation-id=!: Unique reservation ID, e.g. '1234567'
-    - name: list-reservations
-      description: List purchased reservations.
-      flags:
-        --channel-class=: Filter by channel class, 'STANDARD' or 'SINGLE\_PIPELINE'
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --codec=: Filter by codec, 'AVC', 'HEVC', 'MPEG2', 'AUDIO', 'LINK', or 'AV1'
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: ""
-        --maximum-bitrate=: Filter by bitrate, 'MAX\_10\_MBPS', 'MAX\_20\_MBPS', or 'MAX\_50\_MBPS'
-        --maximum-framerate=: Filter by framerate, 'MAX\_30\_FPS' or 'MAX\_60\_FPS'
-        --next-token=: ""
-        --page-size=: The size of each page to get in the AWS service call.
-        --resolution=: Filter by resolution, 'SD', 'HD', 'FHD', or 'UHD'
-        --resource-type=: Filter by resource type, 'INPUT', 'OUTPUT', 'MULTIPLEX', or 'CHANNEL'
-        --special-feature=: Filter by special feature, 'ADVANCED\_AUDIO' or 'AUDIO\_NORMALIZATION'
-        --starting-token=: A token to specify where to start paginating.
-        --video-quality=: Filter by video quality, 'STANDARD', 'ENHANCED', or 'PREMIUM'
-    - name: get-cloud-watch-alarm-template-group
-      description: Retrieves the specified cloudwatch alarm template group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: A cloudwatch alarm template group's identifier.
-    - name: delete-schedule
-      description: Delete all schedule actions on a channel.
-      flags:
-        --channel-id=!: Id of the channel whose schedule is being deleted.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-inputs
-      description: Produces list of inputs that have been created
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: ""
-        --next-token=: ""
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: stop-channel
-      description: Stops a running channel
-      flags:
-        --channel-id=!: A request to stop a running channel
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: update-input
       description: Updates an input.
       flags:
@@ -834,414 +1350,34 @@ commands:
         --sources=: The source URLs for a PULL-type input.
         --special-router-settings=: When using MediaConnect Router as the source of a MediaLive input there's a special handoff that occurs when a router output is created.
         --srt-settings=: The settings associated with an SRT input.
-    - name: get-event-bridge-rule-template
-      description: Retrieves the specified eventbridge rule template.
+    - name: update-input-device
+      description: Updates the parameters for the input device.
       flags:
+        --availability-zone=: The Availability Zone you want associated with this input device.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: An eventbridge rule template's identifier.
-    - name: list-cloud-watch-alarm-template-groups
-      description: Lists cloudwatch alarm template groups.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: ""
-        --next-token=: A token used to retrieve the next set of results in paginated list responses.
-        --page-size=: The size of each page to get in the AWS service call.
-        --scope=: Represents the scope of a resource, with options for all scopes, AWS provided resources, or local resources.
-        --signal-map-identifier=: A signal map's identifier.
-        --starting-token=: A token to specify where to start paginating.
-    - name: start-monitor-deployment
-      description: Initiates a deployment to deploy the latest monitor of the specified signal map.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dry-run: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: A signal map's identifier.
-        --no-dry-run: ""
-    - name: describe-account-configuration
-      description: Describe account configuration
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-channel
-      description: Gets details about a channel
-      flags:
-        --channel-id=!: channel ID
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: start-channel
-      description: Starts an existing channel
-      flags:
-        --channel-id=!: A request to start a channel
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-event-bridge-rule-template
-      description: Deletes an eventbridge rule template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: An eventbridge rule template's identifier.
-    - name: list-signal-maps
-      description: Lists signal maps.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cloud-watch-alarm-template-group-identifier=: A cloudwatch alarm template group's identifier.
-        --event-bridge-rule-template-group-identifier=: An eventbridge rule template group's identifier.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: ""
-        --next-token=: A token used to retrieve the next set of results in paginated list responses.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-networks
-      description: Retrieve the list of Networks.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to return.
-        --next-token=: The token to retrieve the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-input-devices
-      description: List input devices
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: ""
-        --next-token=: ""
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-input-security-groups
-      description: Produces a list of Input Security Groups for an account
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: ""
-        --next-token=: ""
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: start-input-device-maintenance-window
-      description: Start a maintenance window for the specified input device.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input-device-id=!: The unique ID of the input device to start a maintenance window for.
-    - name: restart-channel-pipelines
-      description: Restart pipelines in one channel that is currently running.
-      flags:
-        --channel-id=!: ID of channel
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --pipeline-ids=: An array of pipelines to restart in this channel.
-    - name: list-nodes
-      description: Retrieve the list of Nodes.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-id=!: The ID of the cluster
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to return.
-        --next-token=: The token to retrieve the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-node
-      description: Change the settings for a Node.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-id=!: The ID of the cluster
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: Include this parameter only if you want to change the current name of the Node.
-        --node-id=!: The ID of the node.
-        --role=: The initial role of the Node in the Cluster.
-        --sdi-source-mappings=: The mappings of a SDI capture card port to a logical SDI data stream
-      completion:
-        flag:
-            role:
-                - BACKUP
-                - ACTIVE
-    - name: claim-device
-      description: Send a request to claim an AWS Elemental device that you have purchased from a third-party vendor.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=: The id of the device you want to claim.
-    - name: start-delete-monitor-deployment
-      description: Initiates a deployment to delete the monitor of the specified signal map.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: A signal map's identifier.
-    - name: describe-network
-      description: Get details about a Network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --network-id=!: The ID of the network.
-    - name: delete-tags
-      description: Removes tags for a resource
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: ""
-        --tag-keys=!: An array of tag keys to delete
-    - name: describe-thumbnails
-      description: Describe the latest thumbnails data.
-      flags:
-        --channel-id=!: Unique ID of the channel
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --pipeline-id=!: Pipeline ID ("0" or "1")
-        --thumbnail-type=!: thumbnail type
-    - name: list-multiplex-programs
-      description: List the programs that currently exist for a specific multiplex.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to return.
-        --multiplex-id=!: The ID of the multiplex that the programs belong to.
-        --next-token=: The token to retrieve the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: start-input-device
-      description: Start an input device that is attached to a MediaConnect flow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input-device-id=!: The unique ID of the input device to start.
-    - name: update-account-configuration
-      description: Update account configuration
-      flags:
-        --account-configuration=: ""
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-node
-      description: Delete a Node.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-id=!: The ID of the cluster
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --node-id=!: The ID of the node.
-    - name: list-cluster-alerts
-      description: List the alerts for a cluster with optional filtering based on alert state.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-id=!: The unique ID of the cluster
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to return
-        --next-token=: The next pagination token
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --state-filter=: Specifies the set of alerts to return based on their state.
-    - name: create-multiplex-program
-      description: Create a new program in the multiplex.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --multiplex-id=!: ID of the multiplex where the program is to be created.
-        --multiplex-program-settings=!: The settings for this multiplex program.
-        --program-name=!: Name of multiplex program.
-        --request-id=!: Unique request ID.
-    - name: create-event-bridge-rule-template-group
-      description: Creates an eventbridge rule template group to group your eventbridge rule templates and to attach to signal maps for dynamically creating notification rules.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A resource's optional description.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: A resource's name.
-        --request-id=: An ID that you assign to a create request.
-        --tags=: ""
-    - name: list-clusters
-      description: Retrieve the list of Clusters.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to return.
-        --next-token=: The token to retrieve the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-network
-      description: Change the settings for a Network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ip-pools=: Include this parameter only if you want to change the pool of IP addresses in the network.
-        --name=: Include this parameter only if you want to change the name of the Network.
-        --network-id=!: The ID of the network
-        --routes=: Include this parameter only if you want to change or add routes in the Network.
-    - name: describe-input-device-thumbnail
-      description: Get the latest thumbnail data for the input device.
-      flags:
-        --accept=!: The HTTP Accept header.
-        --input-device-id=!: The unique ID of this input device.
-      completion:
-        flag:
-            accept:
-                - image/jpeg
-        positional:
-            - - $files
-    - name: create-cloud-watch-alarm-template-group
-      description: Creates a cloudwatch alarm template group to group your cloudwatch alarm templates and to attach to signal maps for dynamically creating alarms.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A resource's optional description.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: A resource's name.
-        --request-id=: An ID that you assign to a create request.
-        --tags=: ""
-    - name: get-cloud-watch-alarm-template
-      description: Retrieves the specified cloudwatch alarm template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: A cloudwatch alarm template's identifier.
-    - name: describe-input-security-group
-      description: Produces a summary of an Input Security Group
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input-security-group-id=!: The id of the Input Security Group to describe
-    - name: describe-multiplex-program
-      description: Get the details for a program in a multiplex.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --multiplex-id=!: The ID of the multiplex that the program belongs to.
-        --program-name=!: The name of the program.
-    - name: create-channel-placement-group
-      description: Create a ChannelPlacementGroup in the specified Cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-id=!: The ID of the cluster.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: Specify a name that is unique in the Cluster.
-        --nodes=: An array of one ID for the Node that you want to associate with the ChannelPlacementGroup.
-        --request-id=: An ID that you assign to a create request.
-        --tags=: A collection of key-value pairs.
-    - name: describe-sdi-source
-      description: Gets details about a SdiSource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --sdi-source-id=!: Get details about an SdiSource.
-    - name: accept-input-device-transfer
-      description: Accept an incoming input device transfer.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input-device-id=!: The unique ID of the input device to accept.
-    - name: batch-start
-      description: Starts existing resources
-      flags:
-        --channel-ids=: List of channel IDs
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --multiplex-ids=: List of multiplex IDs
-    - name: stop-multiplex
-      description: Stops a running multiplex.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --multiplex-id=!: The ID of the multiplex.
-    - name: delete-channel-placement-group
-      description: Delete the specified ChannelPlacementGroup that exists in the specified Cluster.
+        --hd-device-settings=: The settings that you want to apply to the HD input device.
+        --input-device-id=!: The unique ID of the input device.
+        --name=: The name that you assigned to this input device (not the unique ID).
+        --uhd-device-settings=: The settings that you want to apply to the UHD input device.
+    - name: update-channel-placement-group
+      description: Change the settings for a ChannelPlacementGroup.
       flags:
         --channel-placement-group-id=!: The ID of the channel placement group.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --cluster-id=!: The ID of the cluster.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-partner-input
-      description: Create a partner input
+        --name=: Include this parameter only if you want to change the current name of the ChannelPlacementGroup.
+        --nodes=: Include this parameter only if you want to change the list of Nodes that are associated with the ChannelPlacementGroup.
+    - name: stop-channel
+      description: Stops a running channel
       flags:
+        --channel-id=!: A request to stop a running channel
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input-id=!: Unique ID of the input.
-        --request-id=: Unique identifier of the request to ensure the request is handled exactly once in case of retries.
-        --tags=: A collection of key-value pairs.
-    - name: delete-channel
-      description: Starts deletion of channel.
-      flags:
-        --channel-id=!: Unique ID of the channel.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-input
-      description: Produces details about an input
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input-id=!: Unique ID of the input
-    - name: list-cloud-watch-alarm-templates
-      description: Lists cloudwatch alarm templates.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-identifier=: A cloudwatch alarm template group's identifier.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: ""
-        --next-token=: A token used to retrieve the next set of results in paginated list responses.
-        --page-size=: The size of each page to get in the AWS service call.
-        --scope=: Represents the scope of a resource, with options for all scopes, AWS provided resources, or local resources.
-        --signal-map-identifier=: A signal map's identifier.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-input-security-group
-      description: Update an Input Security Group's Whilelists.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input-security-group-id=!: The id of the Input Security Group to update.
-        --tags=: A collection of key-value pairs.
-        --whitelist-rules=: List of IPv4 CIDR addresses to whitelist
     - name: update-reservation
       description: Update reservation.
       flags:
@@ -1251,168 +1387,9 @@ commands:
         --name=: Name of the reservation
         --renewal-settings=: Renewal settings for the reservation
         --reservation-id=!: Unique reservation ID, e.g. '1234567'
-    - name: create-signal-map
-      description: Initiates the creation of a new signal map.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cloud-watch-alarm-template-group-identifiers=: ""
-        --description=: A resource's optional description.
-        --discovery-entry-point-arn=!: A top-level supported AWS resource ARN to discovery a signal map from.
-        --event-bridge-rule-template-group-identifiers=: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: A resource's name.
-        --request-id=: An ID that you assign to a create request.
-        --tags=: ""
-    - name: delete-cloud-watch-alarm-template
-      description: Deletes a cloudwatch alarm template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: A cloudwatch alarm template's identifier.
-    - name: describe-channel-placement-group
-      description: Get details about a ChannelPlacementGroup.
-      flags:
-        --channel-placement-group-id=!: The ID of the channel placement group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-id=!: The ID of the cluster.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-sdi-source
-      description: Delete an SdiSource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --sdi-source-id=!: The ID of the SdiSource.
-    - name: list-tags-for-resource
-      description: Produces list of tags that have been created for a resource
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: ""
-    - name: update-event-bridge-rule-template-group
-      description: Updates the specified eventbridge rule template group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A resource's optional description.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: An eventbridge rule template group's identifier.
-    - name: list-channel-placement-groups
-      description: Retrieve the list of ChannelPlacementGroups in the specified Cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-id=!: The ID of the cluster
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to return.
-        --next-token=: The token to retrieve the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-alerts
-      description: List the alerts for a channel with optional filtering based on alert state.
-      flags:
-        --channel-id=!: The unique ID of the channel
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to return
-        --next-token=: The next pagination token
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --state-filter=: Specifies the set of alerts to return based on their state.
-    - name: list-input-device-transfers
-      description: List input devices that are currently being transferred.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: ""
-        --next-token=: ""
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --transfer-type=!: ""
-    - name: get-event-bridge-rule-template-group
-      description: Retrieves the specified eventbridge rule template group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: An eventbridge rule template group's identifier.
-    - name: start-update-signal-map
-      description: Initiates an update for the specified signal map.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cloud-watch-alarm-template-group-identifiers=: ""
-        --description=: A resource's optional description.
-        --discovery-entry-point-arn=: A top-level supported AWS resource ARN to discovery a signal map from.
-        --event-bridge-rule-template-group-identifiers=: ""
-        --force-rediscovery: If true, will force a rediscovery of a signal map if an unchanged discoveryEntryPointArn is provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: A signal map's identifier.
-        --name=: A resource's name.
-        --no-force-rediscovery: If true, will force a rediscovery of a signal map if an unchanged discoveryEntryPointArn is provided.
-    - name: update-event-bridge-rule-template
-      description: Updates the specified eventbridge rule template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A resource's optional description.
-        --event-targets=: ""
-        --event-type=: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-identifier=: An eventbridge rule template group's identifier.
-        --identifier=!: An eventbridge rule template's identifier.
-        --name=: A resource's name.
-      completion:
-        flag:
-            event-type:
-                - MEDIALIVE_MULTIPLEX_ALERT
-                - MEDIALIVE_MULTIPLEX_STATE_CHANGE
-                - MEDIALIVE_CHANNEL_ALERT
-                - MEDIALIVE_CHANNEL_INPUT_CHANGE
-                - MEDIALIVE_CHANNEL_STATE_CHANGE
-                - MEDIAPACKAGE_INPUT_NOTIFICATION
-                - MEDIAPACKAGE_KEY_PROVIDER_NOTIFICATION
-                - MEDIAPACKAGE_HARVEST_JOB_NOTIFICATION
-                - SIGNAL_MAP_ACTIVE_ALARM
-                - MEDIACONNECT_ALERT
-                - MEDIACONNECT_SOURCE_HEALTH
-                - MEDIACONNECT_OUTPUT_HEALTH
-                - MEDIACONNECT_FLOW_STATUS_CHANGE
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:
-        - name: node-registered
-          description: Get details about a Node in the specified Cluster.
-          flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --cluster-id=!: The ID of the cluster
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-            --node-id=!: The ID of the node.
-        - name: channel-placement-group-deleted
-          description: Get details about a ChannelPlacementGroup.
-          flags:
-            --channel-placement-group-id=!: The ID of the channel placement group.
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --cluster-id=!: The ID of the cluster.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        - name: channel-deleted
-          description: Gets details about a channel
-          flags:
-            --channel-id=!: channel ID
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         - name: multiplex-created
           description: Gets details about a multiplex.
           flags:
@@ -1420,35 +1397,7 @@ commands:
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --multiplex-id=!: The ID of the multiplex.
-        - name: signal-map-monitor-deleted
-          description: Retrieves the specified signal map.
-          flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-            --identifier=!: A signal map's identifier.
-        - name: signal-map-updated
-          description: Retrieves the specified signal map.
-          flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-            --identifier=!: A signal map's identifier.
-        - name: channel-stopped
-          description: Gets details about a channel
-          flags:
-            --channel-id=!: channel ID
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        - name: multiplex-stopped
-          description: Gets details about a multiplex.
-          flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-            --multiplex-id=!: The ID of the multiplex.
-        - name: multiplex-deleted
+        - name: multiplex-running
           description: Gets details about a multiplex.
           flags:
             --cli-input-json=: Read arguments from the JSON string provided.
@@ -1469,6 +1418,14 @@ commands:
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --cluster-id=!: The ID of the cluster.
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        - name: channel-placement-group-assigned
+          description: Get details about a ChannelPlacementGroup.
+          flags:
+            --channel-placement-group-id=!: The ID of the channel placement group.
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --cluster-id=!: The ID of the cluster.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         - name: channel-placement-group-unassigned
           description: Get details about a ChannelPlacementGroup.
           flags:
@@ -1477,20 +1434,6 @@ commands:
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --cluster-id=!: The ID of the cluster.
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        - name: input-attached
-          description: Produces details about an input
-          flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-            --input-id=!: Unique ID of the input
-        - name: input-detached
-          description: Produces details about an input
-          flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-            --input-id=!: Unique ID of the input
         - name: input-deleted
           description: Produces details about an input
           flags:
@@ -1505,7 +1448,51 @@ commands:
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --identifier=!: A signal map's identifier.
+        - name: node-registered
+          description: Get details about a Node in the specified Cluster.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --cluster-id=!: The ID of the cluster
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --node-id=!: The ID of the node.
+        - name: channel-placement-group-deleted
+          description: Get details about a ChannelPlacementGroup.
+          flags:
+            --channel-placement-group-id=!: The ID of the channel placement group.
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --cluster-id=!: The ID of the cluster.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         - name: signal-map-monitor-deployed
+          description: Retrieves the specified signal map.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --identifier=!: A signal map's identifier.
+        - name: input-detached
+          description: Produces details about an input
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --input-id=!: Unique ID of the input
+        - name: multiplex-stopped
+          description: Gets details about a multiplex.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --multiplex-id=!: The ID of the multiplex.
+        - name: multiplex-deleted
+          description: Gets details about a multiplex.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --multiplex-id=!: The ID of the multiplex.
+        - name: signal-map-monitor-deleted
           description: Retrieves the specified signal map.
           flags:
             --cli-input-json=: Read arguments from the JSON string provided.
@@ -1520,14 +1507,34 @@ commands:
             --cluster-id=!: The ID of the cluster
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --node-id=!: The ID of the node.
-        - name: channel-placement-group-assigned
-          description: Get details about a ChannelPlacementGroup.
+        - name: channel-stopped
+          description: Gets details about a channel
           flags:
-            --channel-placement-group-id=!: The ID of the channel placement group.
+            --channel-id=!: channel ID
             --cli-input-json=: Read arguments from the JSON string provided.
             --cli-input-yaml=: Read arguments from the YAML string provided.
-            --cluster-id=!: The ID of the cluster.
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        - name: channel-deleted
+          description: Gets details about a channel
+          flags:
+            --channel-id=!: channel ID
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        - name: input-attached
+          description: Produces details about an input
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --input-id=!: Unique ID of the input
+        - name: signal-map-updated
+          description: Retrieves the specified signal map.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --identifier=!: A signal map's identifier.
         - name: channel-created
           description: Gets details about a channel
           flags:
@@ -1542,10 +1549,3 @@ commands:
             --cli-input-json=: Read arguments from the JSON string provided.
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        - name: multiplex-running
-          description: Gets details about a multiplex.
-          flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-            --multiplex-id=!: The ID of the multiplex.

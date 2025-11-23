@@ -1,44 +1,22 @@
 name: inspector2
 description: Inspector2
 commands:
-    - name: batch-get-code-snippet
-      description: Retrieves code snippets from findings that Amazon Inspector detected code vulnerabilities in.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --finding-arns=!: An array of finding ARNs for the findings you want to retrieve code snippets from.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-delegated-admin-account
-      description: Retrieves information about the Amazon Inspector delegated administrator for your organization.
+    - name: get-code-security-scan
+      description: Retrieves information about a specific code security scan.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-member
-      description: Gets member information for your organization.
-      flags:
-        --account-id=!: The Amazon Web Services account ID of the member account to retrieve information on.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: send-cis-session-telemetry
-      description: Sends a CIS session telemetry.
+        --resource=!: The resource identifier for the code repository that was scanned.
+        --scan-id=!: The unique identifier of the scan to retrieve.
+    - name: get-encryption-key
+      description: Gets an encryption key.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --messages=!: The CIS session telemetry messages.
-        --scan-job-id=!: A unique identifier for the scan job.
-        --session-token=!: The unique token that identifies the CIS session.
-    - name: update-encryption-key
-      description: Updates an encryption key.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kms-key-id=!: A KMS key ID for the encryption key.
-        --resource-type=!: The resource type for the encryption key.
-        --scan-type=!: The scan type for the encryption key.
+        --resource-type=!: The resource type the key encrypts.
+        --scan-type=!: The scan type the key encrypts.
       completion:
         flag:
             resource-type:
@@ -51,41 +29,441 @@ commands:
                 - NETWORK
                 - PACKAGE
                 - CODE
-    - name: enable
-      description: Enables Amazon Inspector scans for one or more Amazon Web Services accounts.
-      flags:
-        --account-ids=: A list of account IDs you want to enable Amazon Inspector scans for.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: The idempotency token for the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-types=!: The resource scan types you want to enable.
-    - name: get-configuration
-      description: Retrieves setting configurations for Inspector scans.
+    - name: get-findings-report-status
+      description: Gets the status of a findings report.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-members
-      description: List members associated with the Amazon Inspector delegated administrator for your organization.
+        --report-id=: The ID of the report to retrieve the status of.
+    - name: get-clusters-for-image
+      description: Returns a list of clusters and metadata associated with an image.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=!: The resource Id for the Amazon ECR image.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to be returned in a single page of results.
+        --next-token=: The pagination token from a previous request used to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-cis-scans
+      description: Returns a CIS scan list.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detail-level=: The detail applied to the CIS scan.
+        --filter-criteria=: The CIS scan filter criteria.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to be returned.
+        --next-token=: The pagination token from a previous request that's used to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort-by=: The CIS scans sort by order.
+        --sort-order=: The CIS scans sort order.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            detail-level:
+                - ORGANIZATION
+                - MEMBER
+            sort-by:
+                - STATUS
+                - SCHEDULED_BY
+                - SCAN_START_DATE
+                - FAILED_CHECKS
+            sort-order:
+                - ASC
+                - DESC
+    - name: list-usage-totals
+      description: Lists the Amazon Inspector usage totals over the last 30 days.
+      flags:
+        --account-ids=: The Amazon Web Services account IDs to retrieve usage totals for.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results the response can return.
         --next-token=: A token to use for paginating results that are returned in the response.
-        --no-only-associated: Specifies whether to list only currently associated members if `True` or to list all members within the organization if `False`.
-        --only-associated: Specifies whether to list only currently associated members if `True` or to list all members within the organization if `False`.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: delete-code-security-scan-configuration
-      description: Deletes a code security scan configuration.
+    - name: send-cis-session-telemetry
+      description: Sends a CIS session telemetry.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --scan-configuration-arn=!: The Amazon Resource Name (ARN) of the scan configuration to delete.
+        --messages=!: The CIS session telemetry messages.
+        --scan-job-id=!: A unique identifier for the scan job.
+        --session-token=!: The unique token that identifies the CIS session.
+    - name: stop-cis-session
+      description: Stops a CIS session.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --message=!: The stop CIS session message.
+        --scan-job-id=!: A unique identifier for the scan job.
+        --session-token=!: The unique token that identifies the CIS session.
+    - name: cancel-findings-report
+      description: Cancels the given findings report.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --report-id=!: The ID of the report to be canceled.
+    - name: get-cis-scan-report
+      description: Retrieves a CIS scan report.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --report-format=: The format of the report.
+        --scan-arn=!: The scan ARN.
+        --target-accounts=: The target accounts.
+      completion:
+        flag:
+            report-format:
+                - PDF
+                - CSV
+    - name: list-code-security-scan-configuration-associations
+      description: Lists the associations between code repositories and Amazon Inspector code security scan configurations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: A token to use for paginating results that are returned in the response.
+        --scan-configuration-arn=!: The Amazon Resource Name (ARN) of the scan configuration to list associations for.
+    - name: list-code-security-scan-configurations
+      description: Lists all code security scan configurations in your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: A token to use for paginating results that are returned in the response.
+    - name: update-code-security-integration
+      description: Updates an existing code security integration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --details=!: The updated integration details specific to the repository provider type.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --integration-arn=!: The Amazon Resource Name (ARN) of the code security integration to update.
+    - name: describe-organization-configuration
+      description: Describe Amazon Inspector configuration settings for an Amazon Web Services organization.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: batch-disassociate-code-security-scan-configuration
+      description: Disassociates multiple code repositories from an Amazon Inspector code security scan configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --disassociate-configuration-requests=!: A list of code repositories to disassociate from the specified scan configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: batch-get-code-snippet
+      description: Retrieves code snippets from findings that Amazon Inspector detected code vulnerabilities in.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --finding-arns=!: An array of finding ARNs for the findings you want to retrieve code snippets from.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: cancel-sbom-export
+      description: Cancels a software bill of materials (SBOM) report.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --report-id=!: The report ID of the SBOM export to cancel.
+    - name: get-member
+      description: Gets member information for your organization.
+      flags:
+        --account-id=!: The Amazon Web Services account ID of the member account to retrieve information on.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: search-vulnerabilities
+      description: Lists Amazon Inspector coverage details for a specific vulnerability.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-criteria=!: The criteria used to filter the results of a vulnerability search.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: A token to use for paginating results that are returned in the response.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-filter
+      description: Specifies the action that is to be applied to the findings that match the filter.
+      flags:
+        --action=: Specifies the action that is to be applied to the findings that match the filter.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the filter.
+        --filter-arn=!: The Amazon Resource Number (ARN) of the filter to update.
+        --filter-criteria=: Defines the criteria to be update in the filter.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The name of the filter.
+        --reason=: The reason the filter was updated.
+      completion:
+        flag:
+            action:
+                - NONE
+                - SUPPRESS
+    - name: create-filter
+      description: Creates a filter resource using specified filter criteria.
+      flags:
+        --action=!: Defines the action that is to be applied to the findings that match the filter.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the filter.
+        --filter-criteria=!: Defines the criteria to be used in the filter for querying findings.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the filter.
+        --reason=: The reason for creating the filter.
+        --tags=: A list of tags for the filter.
+      completion:
+        flag:
+            action:
+                - NONE
+                - SUPPRESS
+    - name: create-sbom-export
+      description: Creates a software bill of materials (SBOM) report.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --report-format=!: The output format for the software bill of materials (SBOM) report.
+        --resource-filter-criteria=: The resource filter criteria for the software bill of materials (SBOM) report.
+        --s3-destination=!: Contains details of the Amazon S3 bucket and KMS key used to export findings.
+      completion:
+        flag:
+            report-format:
+                - CYCLONEDX_1_4
+                - SPDX_2_3
+    - name: delete-cis-scan-configuration
+      description: Deletes a CIS scan configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scan-configuration-arn=!: The ARN of the CIS scan configuration.
+    - name: disable-delegated-admin-account
+      description: Disables the Amazon Inspector delegated administrator for your organization.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delegated-admin-account-id=!: The Amazon Web Services account ID of the current Amazon Inspector delegated administrator.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-code-security-integration
+      description: Retrieves information about a code security integration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --integration-arn=!: The Amazon Resource Name (ARN) of the code security integration to retrieve.
+        --tags=: The tags associated with the code security integration.
+    - name: get-delegated-admin-account
+      description: Retrieves information about the Amazon Inspector delegated administrator for your organization.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-tags-for-resource
+      description: Lists all tags attached to a given resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon resource number (ARN) of the resource to list tags of.
+    - name: update-cis-scan-configuration
+      description: Updates a CIS scan configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scan-configuration-arn=!: The CIS scan configuration ARN.
+        --scan-name=: The scan name for the CIS scan configuration.
+        --schedule=: The schedule for the CIS scan configuration.
+        --security-level=: The security level for the CIS scan configuration.
+        --targets=: The targets for the CIS scan configuration.
+      completion:
+        flag:
+            security-level:
+                - LEVEL_1
+                - LEVEL_2
+    - name: enable-delegated-admin-account
+      description: Enables the Amazon Inspector delegated administrator for your Organizations organization.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: The idempotency token for the request.
+        --delegated-admin-account-id=!: The Amazon Web Services account ID of the Amazon Inspector delegated administrator.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: batch-associate-code-security-scan-configuration
+      description: Associates multiple code repositories with an Amazon Inspector code security scan configuration.
+      flags:
+        --associate-configuration-requests=!: A list of code repositories to associate with the specified scan configuration.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: batch-update-member-ec2-deep-inspection-status
+      description: Activates or deactivates Amazon Inspector deep inspection for the provided member accounts in your organization.
+      flags:
+        --account-ids=!: The unique identifiers for the Amazon Web Services accounts to change Amazon Inspector deep inspection status for.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-cis-scan-configurations
+      description: Lists CIS scan configurations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-criteria=: The CIS scan configuration filter criteria.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of CIS scan configurations to be returned in a single page of results.
+        --next-token=: The pagination token from a previous request that's used to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort-by=: The CIS scan configuration sort by order.
+        --sort-order=: The CIS scan configuration sort order order.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            sort-by:
+                - SCAN_NAME
+                - SCAN_CONFIGURATION_ARN
+            sort-order:
+                - ASC
+                - DESC
+    - name: tag-resource
+      description: Adds tags to a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to apply a tag to.
+        --tags=!: The tags to be added to a resource.
+    - name: update-org-ec2-deep-inspection-configuration
+      description: Updates the Amazon Inspector deep inspection custom paths for your organization.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --org-package-paths=!: The Amazon Inspector deep inspection custom paths you are adding for your organization.
+    - name: batch-get-account-status
+      description: Retrieves the Amazon Inspector status of multiple Amazon Web Services accounts within your environment.
+      flags:
+        --account-ids=: The 12-digit Amazon Web Services account IDs of the accounts to retrieve Amazon Inspector status for.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-code-security-integration
+      description: Creates a code security integration with a source code repository provider.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --details=: The integration details specific to the repository provider type.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the code security integration.
+        --tags=: The tags to apply to the code security integration.
+        --type=!: The type of repository provider for the integration.
+      completion:
+        flag:
+            type:
+                - GITLAB_SELF_MANAGED
+                - GITHUB
+    - name: list-cis-scan-results-aggregated-by-target-resource
+      description: Lists scan results aggregated by a target resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-criteria=: The filter criteria.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of scan results aggregated by a target resource to be returned in a single page of results.
+        --next-token=: The pagination token from a previous request that's used to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --scan-arn=!: The scan ARN.
+        --sort-by=: The sort by order.
+        --sort-order=: The sort order.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            sort-by:
+                - RESOURCE_ID
+                - FAILED_COUNTS
+                - ACCOUNT_ID
+                - PLATFORM
+                - TARGET_STATUS
+                - TARGET_STATUS_REASON
+            sort-order:
+                - ASC
+                - DESC
+    - name: untag-resource
+      description: Removes tags from a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) for the resource to remove tags from.
+        --tag-keys=!: The tag keys to remove from the resource.
+    - name: create-findings-report
+      description: Creates a finding report.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-criteria=: The filter criteria to apply to the results of the finding report.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --report-format=!: The format to generate the report in.
+        --s3-destination=!: The Amazon S3 export destination for the report.
+      completion:
+        flag:
+            report-format:
+                - CSV
+                - JSON
+    - name: get-code-security-scan-configuration
+      description: Retrieves information about a code security scan configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scan-configuration-arn=!: The Amazon Resource Name (ARN) of the scan configuration to retrieve.
+    - name: get-configuration
+      description: Retrieves setting configurations for Inspector scans.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-sbom-export
+      description: Gets details of a software bill of materials (SBOM) report.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --report-id=!: The report ID of the SBOM export to get details for.
+    - name: list-coverage-statistics
+      description: Lists Amazon Inspector coverage statistics for your environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-criteria=: An object that contains details on the filters to apply to the coverage data for your environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-by=: The value to group the results by.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: A token to use for paginating results that are returned in the response.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            group-by:
+                - SCAN_STATUS_CODE
+                - SCAN_STATUS_REASON
+                - ACCOUNT_ID
+                - RESOURCE_TYPE
+                - ECR_REPOSITORY_NAME
     - name: list-finding-aggregations
       description: Lists aggregated finding data for your environment based on specific criteria.
       flags:
@@ -115,13 +493,23 @@ commands:
                 - AWS_LAMBDA_FUNCTION
                 - LAMBDA_LAYER
                 - CODE_REPOSITORY
-    - name: update-organization-configuration
-      description: Updates the configurations for your Amazon Inspector organization.
+    - name: start-code-security-scan
+      description: Initiates a code security scan on a specified repository.
       flags:
-        --auto-enable=!: Defines which scan types are enabled automatically for new members of your Amazon Inspector organization.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource=!: The resource identifier for the code repository to scan.
+    - name: update-ec2-deep-inspection-configuration
+      description: Activates, deactivates Amazon Inspector deep inspection, or updates custom paths for your account.
+      flags:
+        --activate-deep-inspection: Specify `TRUE` to activate Amazon Inspector deep inspection in your account, or `FALSE` to deactivate.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-activate-deep-inspection: Specify `TRUE` to activate Amazon Inspector deep inspection in your account, or `FALSE` to deactivate.
+        --package-paths=: The Amazon Inspector deep inspection custom paths you are adding for your account.
     - name: create-cis-scan-configuration
       description: Creates a CIS scan configuration.
       flags:
@@ -138,209 +526,18 @@ commands:
             security-level:
                 - LEVEL_1
                 - LEVEL_2
-    - name: create-findings-report
-      description: Creates a finding report.
+    - name: enable
+      description: Enables Amazon Inspector scans for one or more Amazon Web Services accounts.
       flags:
+        --account-ids=: A list of account IDs you want to enable Amazon Inspector scans for.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter-criteria=: The filter criteria to apply to the results of the finding report.
+        --client-token=: The idempotency token for the request.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --report-format=!: The format to generate the report in.
-        --s3-destination=!: The Amazon S3 export destination for the report.
-      completion:
-        flag:
-            report-format:
-                - CSV
-                - JSON
-    - name: disable
-      description: Disables Amazon Inspector scans for one or more Amazon Web Services accounts.
+        --resource-types=!: The resource scan types you want to enable.
+    - name: list-delegated-admin-accounts
+      description: Lists information about the Amazon Inspector delegated administrator of your organization.
       flags:
-        --account-ids=: An array of account IDs you want to disable Amazon Inspector scans for.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-types=: The resource scan types you want to disable.
-    - name: get-sbom-export
-      description: Gets details of a software bill of materials (SBOM) report.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --report-id=!: The report ID of the SBOM export to get details for.
-    - name: list-cis-scans
-      description: Returns a CIS scan list.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detail-level=: The detail applied to the CIS scan.
-        --filter-criteria=: The CIS scan filter criteria.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to be returned.
-        --next-token=: The pagination token from a previous request that's used to retrieve the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --sort-by=: The CIS scans sort by order.
-        --sort-order=: The CIS scans sort order.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            detail-level:
-                - ORGANIZATION
-                - MEMBER
-            sort-by:
-                - STATUS
-                - SCHEDULED_BY
-                - SCAN_START_DATE
-                - FAILED_CHECKS
-            sort-order:
-                - ASC
-                - DESC
-    - name: list-coverage
-      description: Lists coverage details for your environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter-criteria=: An object that contains details on the filters to apply to the coverage data for your environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results the response can return.
-        --next-token=: A token to use for paginating results that are returned in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-findings
-      description: Lists findings for your environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter-criteria=: Details on the filters to apply to your finding results.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results the response can return.
-        --next-token=: A token to use for paginating results that are returned in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --sort-criteria=: Details on the sort criteria to apply to your finding results.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: Lists all tags attached to a given resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon resource number (ARN) of the resource to list tags of.
-    - name: batch-get-finding-details
-      description: Gets vulnerability details for findings.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --finding-arns=!: A list of finding ARNs.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: cancel-sbom-export
-      description: Cancels a software bill of materials (SBOM) report.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --report-id=!: The report ID of the SBOM export to cancel.
-    - name: get-code-security-scan-configuration
-      description: Retrieves information about a code security scan configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --scan-configuration-arn=!: The Amazon Resource Name (ARN) of the scan configuration to retrieve.
-    - name: update-cis-scan-configuration
-      description: Updates a CIS scan configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --scan-configuration-arn=!: The CIS scan configuration ARN.
-        --scan-name=: The scan name for the CIS scan configuration.
-        --schedule=: The schedule for the CIS scan configuration.
-        --security-level=: The security level for the CIS scan configuration.
-        --targets=: The targets for the CIS scan configuration.
-      completion:
-        flag:
-            security-level:
-                - LEVEL_1
-                - LEVEL_2
-    - name: update-org-ec2-deep-inspection-configuration
-      description: Updates the Amazon Inspector deep inspection custom paths for your organization.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --org-package-paths=!: The Amazon Inspector deep inspection custom paths you are adding for your organization.
-    - name: batch-associate-code-security-scan-configuration
-      description: Associates multiple code repositories with an Amazon Inspector code security scan configuration.
-      flags:
-        --associate-configuration-requests=!: A list of code repositories to associate with the specified scan configuration.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-cis-scan-results-aggregated-by-target-resource
-      description: Lists scan results aggregated by a target resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter-criteria=: The filter criteria.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of scan results aggregated by a target resource to be returned in a single page of results.
-        --next-token=: The pagination token from a previous request that's used to retrieve the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --scan-arn=!: The scan ARN.
-        --sort-by=: The sort by order.
-        --sort-order=: The sort order.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            sort-by:
-                - RESOURCE_ID
-                - FAILED_COUNTS
-                - ACCOUNT_ID
-                - PLATFORM
-                - TARGET_STATUS
-                - TARGET_STATUS_REASON
-            sort-order:
-                - ASC
-                - DESC
-    - name: start-code-security-scan
-      description: Initiates a code security scan on a specified repository.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource=!: The resource identifier for the code repository to scan.
-    - name: update-code-security-integration
-      description: Updates an existing code security integration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --details=!: The updated integration details specific to the repository provider type.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --integration-arn=!: The Amazon Resource Name (ARN) of the code security integration to update.
-    - name: update-code-security-scan-configuration
-      description: Updates an existing code security scan configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration=!: The updated configuration settings for the code security scan.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --scan-configuration-arn=!: The Amazon Resource Name (ARN) of the scan configuration to update.
-    - name: get-code-security-integration
-      description: Retrieves information about a code security integration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --integration-arn=!: The Amazon Resource Name (ARN) of the code security integration to retrieve.
-        --tags=: The tags associated with the code security integration.
-    - name: list-usage-totals
-      description: Lists the Amazon Inspector usage totals over the last 30 days.
-      flags:
-        --account-ids=: The Amazon Web Services account IDs to retrieve usage totals for.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -349,17 +546,23 @@ commands:
         --next-token=: A token to use for paginating results that are returned in the response.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: batch-disassociate-code-security-scan-configuration
-      description: Disassociates multiple code repositories from an Amazon Inspector code security scan configuration.
+    - name: list-members
+      description: List members associated with the Amazon Inspector delegated administrator for your organization.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --disassociate-configuration-requests=!: A list of code repositories to disassociate from the specified scan configuration.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: batch-get-free-trial-info
-      description: Gets free trial status for multiple Amazon Web Services accounts.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results the response can return.
+        --next-token=: A token to use for paginating results that are returned in the response.
+        --no-only-associated: Specifies whether to list only currently associated members if `True` or to list all members within the organization if `False`.
+        --only-associated: Specifies whether to list only currently associated members if `True` or to list all members within the organization if `False`.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: disassociate-member
+      description: Disassociates a member account from an Amazon Inspector delegated administrator.
       flags:
-        --account-ids=!: The account IDs to get free trial status for.
+        --account-id=!: The Amazon Web Services account ID of the member account to disassociate.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -379,25 +582,13 @@ commands:
             level:
                 - ORGANIZATION
                 - ACCOUNT
-    - name: list-coverage-statistics
-      description: Lists Amazon Inspector coverage statistics for your environment.
+    - name: associate-member
+      description: Associates an Amazon Web Services account with an Amazon Inspector delegated administrator.
       flags:
+        --account-id=!: The Amazon Web Services account ID of the member account to be associated.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter-criteria=: An object that contains details on the filters to apply to the coverage data for your environment.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-by=: The value to group the results by.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: A token to use for paginating results that are returned in the response.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            group-by:
-                - SCAN_STATUS_CODE
-                - SCAN_STATUS_REASON
-                - ACCOUNT_ID
-                - RESOURCE_TYPE
-                - ECR_REPOSITORY_NAME
     - name: list-filters
       description: Lists the filters associated with your account.
       flags:
@@ -416,201 +607,21 @@ commands:
             action:
                 - NONE
                 - SUPPRESS
-    - name: start-cis-session
-      description: Starts a CIS session.
+    - name: list-findings
+      description: Lists findings for your environment.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --message=!: The start CIS session message.
-        --scan-job-id=!: A unique identifier for the scan job.
-    - name: update-filter
-      description: Specifies the action that is to be applied to the findings that match the filter.
-      flags:
-        --action=: Specifies the action that is to be applied to the findings that match the filter.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description of the filter.
-        --filter-arn=!: The Amazon Resource Number (ARN) of the filter to update.
-        --filter-criteria=: Defines the criteria to be update in the filter.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: The name of the filter.
-        --reason=: The reason the filter was updated.
-      completion:
-        flag:
-            action:
-                - NONE
-                - SUPPRESS
-    - name: create-code-security-integration
-      description: Creates a code security integration with a source code repository provider.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --details=: The integration details specific to the repository provider type.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the code security integration.
-        --tags=: The tags to apply to the code security integration.
-        --type=!: The type of repository provider for the integration.
-      completion:
-        flag:
-            type:
-                - GITLAB_SELF_MANAGED
-                - GITHUB
-    - name: create-filter
-      description: Creates a filter resource using specified filter criteria.
-      flags:
-        --action=!: Defines the action that is to be applied to the findings that match the filter.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description of the filter.
-        --filter-criteria=!: Defines the criteria to be used in the filter for querying findings.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the filter.
-        --reason=: The reason for creating the filter.
-        --tags=: A list of tags for the filter.
-      completion:
-        flag:
-            action:
-                - NONE
-                - SUPPRESS
-    - name: get-clusters-for-image
-      description: Returns a list of clusters and metadata associated with an image.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=!: The resource Id for the Amazon ECR image.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to be returned in a single page of results.
-        --next-token=: The pagination token from a previous request used to retrieve the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-code-security-scan-configurations
-      description: Lists all code security scan configurations in your account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in a single call.
-        --next-token=: A token to use for paginating results that are returned in the response.
-    - name: delete-cis-scan-configuration
-      description: Deletes a CIS scan configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --scan-configuration-arn=!: The ARN of the CIS scan configuration.
-    - name: list-delegated-admin-accounts
-      description: Lists information about the Amazon Inspector delegated administrator of your organization.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-criteria=: Details on the filters to apply to your finding results.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results the response can return.
         --next-token=: A token to use for paginating results that are returned in the response.
         --page-size=: The size of each page to get in the AWS service call.
+        --sort-criteria=: Details on the sort criteria to apply to your finding results.
         --starting-token=: A token to specify where to start paginating.
-    - name: create-sbom-export
-      description: Creates a software bill of materials (SBOM) report.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --report-format=!: The output format for the software bill of materials (SBOM) report.
-        --resource-filter-criteria=: The resource filter criteria for the software bill of materials (SBOM) report.
-        --s3-destination=!: Contains details of the Amazon S3 bucket and KMS key used to export findings.
-      completion:
-        flag:
-            report-format:
-                - CYCLONEDX_1_4
-                - SPDX_2_3
-    - name: disable-delegated-admin-account
-      description: Disables the Amazon Inspector delegated administrator for your organization.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --delegated-admin-account-id=!: The Amazon Web Services account ID of the current Amazon Inspector delegated administrator.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-code-security-scan
-      description: Retrieves information about a specific code security scan.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource=!: The resource identifier for the code repository that was scanned.
-        --scan-id=!: The unique identifier of the scan to retrieve.
-    - name: get-ec2-deep-inspection-configuration
-      description: Retrieves the activation status of Amazon Inspector deep inspection and custom paths associated with your account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-findings-report-status
-      description: Gets the status of a findings report.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --report-id=: The ID of the report to retrieve the status of.
-    - name: list-account-permissions
-      description: Lists the permissions an account has to configure Amazon Inspector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results the response can return.
-        --next-token=: A token to use for paginating results that are returned in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --service=: The service scan type to check permissions for.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            service:
-                - EC2
-                - ECR
-                - LAMBDA
-    - name: send-cis-session-health
-      description: Sends a CIS session health.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --scan-job-id=!: A unique identifier for the scan job.
-        --session-token=!: The unique token that identifies the CIS session.
-    - name: update-ec2-deep-inspection-configuration
-      description: Activates, deactivates Amazon Inspector deep inspection, or updates custom paths for your account.
-      flags:
-        --activate-deep-inspection: Specify `TRUE` to activate Amazon Inspector deep inspection in your account, or `FALSE` to deactivate.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-activate-deep-inspection: Specify `TRUE` to activate Amazon Inspector deep inspection in your account, or `FALSE` to deactivate.
-        --package-paths=: The Amazon Inspector deep inspection custom paths you are adding for your account.
-    - name: delete-code-security-integration
-      description: Deletes a code security integration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --integration-arn=!: The Amazon Resource Name (ARN) of the code security integration to delete.
-    - name: delete-filter
-      description: Deletes a filter resource.
-      flags:
-        --arn=!: The Amazon Resource Number (ARN) of the filter to be deleted.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: disassociate-member
-      description: Disassociates a member account from an Amazon Inspector delegated administrator.
-      flags:
-        --account-id=!: The Amazon Web Services account ID of the member account to disassociate.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-encryption-key
-      description: Gets an encryption key.
+    - name: reset-encryption-key
+      description: Resets an encryption key.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -629,53 +640,39 @@ commands:
                 - NETWORK
                 - PACKAGE
                 - CODE
-    - name: list-cis-scan-configurations
-      description: Lists CIS scan configurations.
+    - name: update-code-security-scan-configuration
+      description: Updates an existing code security scan configuration.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter-criteria=: The CIS scan configuration filter criteria.
+        --configuration=!: The updated configuration settings for the code security scan.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scan-configuration-arn=!: The Amazon Resource Name (ARN) of the scan configuration to update.
+    - name: get-cis-scan-result-details
+      description: Retrieves CIS scan result details.
+      flags:
+        --account-id=!: The account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-criteria=: The filter criteria.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of CIS scan configurations to be returned in a single page of results.
+        --max-results=: The maximum number of CIS scan result details to be returned in a single page of results.
         --next-token=: The pagination token from a previous request that's used to retrieve the next page of results.
         --page-size=: The size of each page to get in the AWS service call.
-        --sort-by=: The CIS scan configuration sort by order.
-        --sort-order=: The CIS scan configuration sort order order.
+        --scan-arn=!: The scan ARN.
+        --sort-by=: The sort by order.
+        --sort-order=: The sort order.
         --starting-token=: A token to specify where to start paginating.
+        --target-resource-id=!: The target resource ID.
       completion:
         flag:
             sort-by:
-                - SCAN_NAME
-                - SCAN_CONFIGURATION_ARN
+                - CHECK_ID
+                - STATUS
             sort-order:
                 - ASC
                 - DESC
-    - name: search-vulnerabilities
-      description: Lists Amazon Inspector coverage details for a specific vulnerability.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter-criteria=!: The criteria used to filter the results of a vulnerability search.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: A token to use for paginating results that are returned in the response.
-        --starting-token=: A token to specify where to start paginating.
-    - name: tag-resource
-      description: Adds tags to a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to apply a tag to.
-        --tags=!: The tags to be added to a resource.
-    - name: batch-update-member-ec2-deep-inspection-status
-      description: Activates or deactivates Amazon Inspector deep inspection for the provided member accounts in your organization.
-      flags:
-        --account-ids=!: The unique identifiers for the Amazon Web Services accounts to change Amazon Inspector deep inspection status for.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-cis-scan-results-aggregated-by-checks
       description: Lists scan results aggregated by checks.
       flags:
@@ -702,14 +699,31 @@ commands:
             sort-order:
                 - ASC
                 - DESC
-    - name: reset-encryption-key
-      description: Resets an encryption key.
+    - name: list-code-security-integrations
+      description: Lists all code security integrations in your account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-type=!: The resource type the key encrypts.
-        --scan-type=!: The scan type the key encrypts.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: A token to use for paginating results that are returned in the response.
+    - name: start-cis-session
+      description: Starts a CIS session.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --message=!: The start CIS session message.
+        --scan-job-id=!: A unique identifier for the scan job.
+    - name: update-encryption-key
+      description: Updates an encryption key.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-id=!: A KMS key ID for the encryption key.
+        --resource-type=!: The resource type for the encryption key.
+        --scan-type=!: The scan type for the encryption key.
       completion:
         flag:
             resource-type:
@@ -722,121 +736,36 @@ commands:
                 - NETWORK
                 - PACKAGE
                 - CODE
-    - name: stop-cis-session
-      description: Stops a CIS session.
+    - name: batch-get-free-trial-info
+      description: Gets free trial status for multiple Amazon Web Services accounts.
+      flags:
+        --account-ids=!: The account IDs to get free trial status for.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-code-security-integration
+      description: Deletes a code security integration.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --message=!: The stop CIS session message.
+        --integration-arn=!: The Amazon Resource Name (ARN) of the code security integration to delete.
+    - name: disable
+      description: Disables Amazon Inspector scans for one or more Amazon Web Services accounts.
+      flags:
+        --account-ids=: An array of account IDs you want to disable Amazon Inspector scans for.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-types=: The resource scan types you want to disable.
+    - name: send-cis-session-health
+      description: Sends a CIS session health.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --scan-job-id=!: A unique identifier for the scan job.
         --session-token=!: The unique token that identifies the CIS session.
-    - name: untag-resource
-      description: Removes tags from a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) for the resource to remove tags from.
-        --tag-keys=!: The tag keys to remove from the resource.
-    - name: associate-member
-      description: Associates an Amazon Web Services account with an Amazon Inspector delegated administrator.
-      flags:
-        --account-id=!: The Amazon Web Services account ID of the member account to be associated.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: batch-get-account-status
-      description: Retrieves the Amazon Inspector status of multiple Amazon Web Services accounts within your environment.
-      flags:
-        --account-ids=: The 12-digit Amazon Web Services account IDs of the accounts to retrieve Amazon Inspector status for.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: batch-get-member-ec2-deep-inspection-status
-      description: Retrieves Amazon Inspector deep inspection activation status of multiple member accounts within your organization.
-      flags:
-        --account-ids=: The unique identifiers for the Amazon Web Services accounts to retrieve Amazon Inspector deep inspection activation status for.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: cancel-findings-report
-      description: Cancels the given findings report.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --report-id=!: The ID of the report to be canceled.
-    - name: describe-organization-configuration
-      description: Describe Amazon Inspector configuration settings for an Amazon Web Services organization.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: enable-delegated-admin-account
-      description: Enables the Amazon Inspector delegated administrator for your Organizations organization.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: The idempotency token for the request.
-        --delegated-admin-account-id=!: The Amazon Web Services account ID of the Amazon Inspector delegated administrator.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-cis-scan-report
-      description: Retrieves a CIS scan report.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --report-format=: The format of the report.
-        --scan-arn=!: The scan ARN.
-        --target-accounts=: The target accounts.
-      completion:
-        flag:
-            report-format:
-                - PDF
-                - CSV
-    - name: get-cis-scan-result-details
-      description: Retrieves CIS scan result details.
-      flags:
-        --account-id=!: The account ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter-criteria=: The filter criteria.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of CIS scan result details to be returned in a single page of results.
-        --next-token=: The pagination token from a previous request that's used to retrieve the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --scan-arn=!: The scan ARN.
-        --sort-by=: The sort by order.
-        --sort-order=: The sort order.
-        --starting-token=: A token to specify where to start paginating.
-        --target-resource-id=!: The target resource ID.
-      completion:
-        flag:
-            sort-by:
-                - CHECK_ID
-                - STATUS
-            sort-order:
-                - ASC
-                - DESC
-    - name: list-code-security-integrations
-      description: Lists all code security integrations in your account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in a single call.
-        --next-token=: A token to use for paginating results that are returned in the response.
-    - name: list-code-security-scan-configuration-associations
-      description: Lists the associations between code repositories and Amazon Inspector code security scan configurations.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in the response.
-        --next-token=: A token to use for paginating results that are returned in the response.
-        --scan-configuration-arn=!: The Amazon Resource Name (ARN) of the scan configuration to list associations for.
     - name: update-configuration
       description: Updates setting configurations for your Amazon Inspector account.
       flags:
@@ -845,3 +774,74 @@ commands:
         --ec2-configuration=: Specifies how the Amazon EC2 automated scan will be updated for your environment.
         --ecr-configuration=: Specifies how the ECR automated re-scan will be updated for your environment.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-organization-configuration
+      description: Updates the configurations for your Amazon Inspector organization.
+      flags:
+        --auto-enable=!: Defines which scan types are enabled automatically for new members of your Amazon Inspector organization.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: batch-get-finding-details
+      description: Gets vulnerability details for findings.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --finding-arns=!: A list of finding ARNs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-code-security-scan-configuration
+      description: Deletes a code security scan configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scan-configuration-arn=!: The Amazon Resource Name (ARN) of the scan configuration to delete.
+    - name: delete-filter
+      description: Deletes a filter resource.
+      flags:
+        --arn=!: The Amazon Resource Number (ARN) of the filter to be deleted.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-account-permissions
+      description: Lists the permissions an account has to configure Amazon Inspector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results the response can return.
+        --next-token=: A token to use for paginating results that are returned in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --service=: The service scan type to check permissions for.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            service:
+                - EC2
+                - ECR
+                - LAMBDA
+    - name: batch-get-member-ec2-deep-inspection-status
+      description: Retrieves Amazon Inspector deep inspection activation status of multiple member accounts within your organization.
+      flags:
+        --account-ids=: The unique identifiers for the Amazon Web Services accounts to retrieve Amazon Inspector deep inspection activation status for.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-ec2-deep-inspection-configuration
+      description: Retrieves the activation status of Amazon Inspector deep inspection and custom paths associated with your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-coverage
+      description: Lists coverage details for your environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-criteria=: An object that contains details on the filters to apply to the coverage data for your environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results the response can return.
+        --next-token=: A token to use for paginating results that are returned in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
