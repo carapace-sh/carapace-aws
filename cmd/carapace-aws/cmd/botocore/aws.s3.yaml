@@ -1,60 +1,29 @@
 name: s3
 description: Amazon Simple Storage Service
 commands:
-    - name: complete-multipart-upload
-      description: Completes a multipart upload by assembling previously uploaded parts.
-      flags:
-        --bucket=!: Name of the bucket to which the multipart upload was initiated.
-        --checksum-cr-c32-c=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
-        --checksum-cr-c32=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
-        --checksum-cr-c64-nvme=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
-        --checksum-sh-a1=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
-        --checksum-sh-a256=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
-        --checksum-type=: This header specifies the checksum type of the object, which determines how part-level checksums are combined to create an object-level checksum for multipart objects.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --if-match=: Uploads the object only if the ETag (entity tag) value provided during the WRITE operation matches the ETag of the object in S3.
-        --if-none-match=: Uploads the object only if the object key name does not already exist in the bucket specified.
-        --key=!: Object key for which the multipart upload was initiated.
-        --mpu-object-size=: The expected total object size of the multipart upload request.
-        --multipart-upload=: The container for the multipart upload request information.
-        --request-payer=: ""
-        --sse-customer-algorithm=: The server-side encryption (SSE) algorithm used to encrypt the object.
-        --sse-customer-key-m-d5=: The MD5 server-side encryption (SSE) customer managed key.
-        --sse-customer-key=: The server-side encryption (SSE) customer managed key.
-        --upload-id=!: ID for the initiated multipart upload.
-      completion:
-        flag:
-            checksum-type:
-                - COMPOSITE
-                - FULL_OBJECT
-            request-payer:
-                - requester
-    - name: delete-bucket
-      description: Deletes the S3 bucket.
-      flags:
-        --bucket=!: Specifies the bucket being deleted.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-bucket-ownership-controls
+    - name: delete-bucket-cors
       description: This operation is not supported for directory buckets.
       flags:
-        --bucket=!: The Amazon S3 bucket whose `OwnershipControls` you want to delete.
+        --bucket=!: Specifies the bucket whose `cors` configuration is being deleted.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-bucket-policy-status
-      description: This operation is not supported for directory buckets.
+    - name: delete-bucket-metadata-configuration
+      description: Deletes an S3 Metadata configuration from a general purpose bucket.
       flags:
-        --bucket=!: The name of the Amazon S3 bucket whose policy status you want to retrieve.
+        --bucket=!: The general purpose bucket that you want to remove the metadata configuration from.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --expected-bucket-owner=: The expected bucket owner of the general purpose bucket that you want to remove the metadata table configuration from.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-bucket-metadata-configuration
+      description: Retrieves the S3 Metadata configuration for a general purpose bucket.
+      flags:
+        --bucket=!: The general purpose bucket that corresponds to the metadata configuration that you want to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The expected owner of the general purpose bucket that you want to retrieve the metadata table configuration for.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-buckets
       description: 'End of support notice: Beginning November 21, 2025, Amazon S3 will stop returning `DisplayName`.'
@@ -69,30 +38,45 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --prefix=: Limits the response to bucket names that begin with the specified bucket name prefix.
         --starting-token=: A token to specify where to start paginating.
-    - name: upload-part
-      description: Uploads a part in a multipart upload.
+    - name: list-object-versions
+      description: 'End of support notice: Beginning November 21, 2025, Amazon S3 will stop returning `DisplayName`.'
       flags:
-        --body=: Object data.
-        --bucket=!: The name of the bucket to which the multipart upload was initiated.
-        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the object when you use the SDK.
-        --checksum-cr-c32-c=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
-        --checksum-cr-c32=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
-        --checksum-cr-c64-nvme=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
-        --checksum-sh-a1=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
-        --checksum-sh-a256=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --bucket=!: The bucket name that contains the objects.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-length=: Size of the body in bytes.
-        --content-m-d5=: The Base64 encoded 128-bit MD5 digest of the part data.
+        --delimiter=: A delimiter is a character that you specify to group keys.
+        --encoding-type=: ""
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key=!: Object key for which the multipart upload was initiated.
-        --part-number=!: Part number of part being uploaded.
+        --key-marker=: Specifies the key to start with when listing objects in a bucket.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-keys=: Sets the maximum number of keys returned in the response.
+        --optional-object-attributes=: Specifies the optional fields that you want returned in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --prefix=: Use this parameter to select only those keys that begin with the specified prefix.
         --request-payer=: ""
-        --sse-customer-algorithm=: Specifies the algorithm to use when encrypting the object (for example, AES256).
-        --sse-customer-key-m-d5=: Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
-        --sse-customer-key=: Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data.
-        --upload-id=!: Upload ID identifying the multipart upload whose part is being uploaded.
+        --starting-token=: A token to specify where to start paginating.
+        --version-id-marker=: Specifies the object version you want to start listing from.
+      completion:
+        flag:
+            encoding-type:
+                - url
+            request-payer:
+                - requester
+    - name: put-object-legal-hold
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The bucket name containing the object that you want to place a legal hold on.
+        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the object when you use the SDK.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content-m-d5=: The MD5 hash for the request body.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key=!: The key name for the object that you want to place a legal hold on.
+        --legal-hold=: Container element for the legal hold configuration you want to apply to the specified object.
+        --request-payer=: ""
+        --version-id=: The version ID of the object that you want to place a legal hold on.
       completion:
         flag:
             checksum-algorithm:
@@ -103,51 +87,6 @@ commands:
                 - CRC64NVME
             request-payer:
                 - requester
-    - name: delete-object-tagging
-      description: This operation is not supported for directory buckets.
-      flags:
-        --bucket=!: The bucket name containing the objects from which to remove the tags.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key=!: The key that identifies the object in the bucket from which to remove all tags.
-        --version-id=: The versionId of the object that the tag-set will be removed from.
-    - name: get-bucket-acl
-      description: 'End of support notice: Beginning November 21, 2025, Amazon S3 will stop returning `DisplayName`.'
-      flags:
-        --bucket=!: Specifies the S3 bucket whose ACL is being requested.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-bucket-encryption
-      description: Returns the default encryption configuration for an Amazon S3 bucket.
-      flags:
-        --bucket=!: The name of the bucket from which the server-side encryption configuration is retrieved.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-bucket-tagging
-      description: This operation is not supported for directory buckets.
-      flags:
-        --bucket=!: The name of the bucket for which to get the tagging information.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: put-bucket-notification-configuration
-      description: This operation is not supported for directory buckets.
-      flags:
-        --bucket=!: The name of the bucket.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-skip-destination-validation: Skips validation of Amazon SQS, Amazon SNS, and Lambda destinations.
-        --notification-configuration=!: ""
-        --skip-destination-validation: Skips validation of Amazon SQS, Amazon SNS, and Lambda destinations.
     - name: rename-object
       description: Renames an existing object in a directory bucket that uses the S3 Express One Zone storage class.
       flags:
@@ -166,166 +105,6 @@ commands:
         --source-if-modified-since=: Renames the object if the source exists and if it has been modified since the specified time.
         --source-if-none-match=: Renames the object if the source exists and if its entity tag (ETag) is different than the specified ETag.
         --source-if-unmodified-since=: Renames the object if the source exists and hasn't been modified since the specified time.
-    - name: select-object-content
-      description: This operation is not supported for directory buckets.
-      flags:
-        --bucket=!: The S3 bucket.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --expression-type=!: The type of the provided expression (for example, SQL).
-        --expression=!: The expression that is used to query the object.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input-serialization=!: Describes the format of the data in the object that is being queried.
-        --key=!: The object key.
-        --output-serialization=!: Describes the format of the data that you want Amazon S3 to return in response.
-        --request-progress=: Specifies if periodic request progress information should be enabled.
-        --scan-range=: Specifies the byte range of the object to get the records from.
-        --sse-customer-algorithm=: The server-side encryption (SSE) algorithm used to encrypt the object.
-        --sse-customer-key-m-d5=: The MD5 server-side encryption (SSE) customer managed key.
-        --sse-customer-key=: The server-side encryption (SSE) customer managed key.
-      completion:
-        flag:
-            expression-type:
-                - SQL
-    - name: update-bucket-metadata-inventory-table-configuration
-      description: Enables or disables a live inventory table for an S3 Metadata configuration on a general purpose bucket.
-      flags:
-        --bucket=!: The general purpose bucket that corresponds to the metadata configuration that you want to enable or disable an inventory table for.
-        --checksum-algorithm=: The checksum algorithm to use with your inventory table configuration.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The `Content-MD5` header for the inventory table configuration.
-        --expected-bucket-owner=: The expected owner of the general purpose bucket that corresponds to the metadata table configuration that you want to enable or disable an inventory table for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --inventory-table-configuration=!: The contents of your inventory table configuration.
-      completion:
-        flag:
-            checksum-algorithm:
-                - CRC32
-                - CRC32C
-                - SHA1
-                - SHA256
-                - CRC64NVME
-    - name: create-multipart-upload
-      description: 'End of support notice: As of October 1, 2025, Amazon S3 has discontinued support for Email Grantee Access Control Lists (ACLs).'
-      flags:
-        --acl=: The canned ACL to apply to the object.
-        --bucket-key-enabled: Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption with server-side encryption using Key Management Service (KMS) keys (SSE-KMS).
-        --bucket=!: The name of the bucket where the multipart upload is initiated and where the object is uploaded.
-        --cache-control=: Specifies caching behavior along the request/reply chain.
-        --checksum-algorithm=: Indicates the algorithm that you want Amazon S3 to use to create the checksum for the object.
-        --checksum-type=: Indicates the checksum type that you want Amazon S3 to use to calculate the object’s checksum value.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-disposition=: Specifies presentational information for the object.
-        --content-encoding=: Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.
-        --content-language=: The language that the content is in.
-        --content-type=: A standard MIME type describing the format of the object data.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --expires=: The date and time at which the object is no longer cacheable.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --grant-full-control=: Specify access permissions explicitly to give the grantee READ, READ\_ACP, and WRITE\_ACP permissions on the object.
-        --grant-read-acp=: Specify access permissions explicitly to allows grantee to read the object ACL.
-        --grant-read=: Specify access permissions explicitly to allow grantee to read the object data and its metadata.
-        --grant-write-acp=: Specify access permissions explicitly to allows grantee to allow grantee to write the ACL for the applicable object.
-        --key=!: Object key for which the multipart upload is to be initiated.
-        --metadata=: A map of metadata to store with the object in S3.
-        --no-bucket-key-enabled: Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption with server-side encryption using Key Management Service (KMS) keys (SSE-KMS).
-        --object-lock-legal-hold-status=: Specifies whether you want to apply a legal hold to the uploaded object.
-        --object-lock-mode=: Specifies the Object Lock mode that you want to apply to the uploaded object.
-        --object-lock-retain-until-date=: Specifies the date and time when you want the Object Lock to expire.
-        --request-payer=: ""
-        --server-side-encryption=: The server-side encryption algorithm used when you store this object in Amazon S3 or Amazon FSx.
-        --sse-customer-algorithm=: Specifies the algorithm to use when encrypting the object (for example, AES256).
-        --sse-customer-key-m-d5=: Specifies the 128-bit MD5 digest of the customer-provided encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
-        --sse-customer-key=: Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data.
-        --ssekms-encryption-context=: Specifies the Amazon Web Services KMS Encryption Context to use for object encryption.
-        --ssekms-key-id=: Specifies the KMS key ID (Key ID, Key ARN, or Key Alias) to use for object encryption.
-        --storage-class=: By default, Amazon S3 uses the STANDARD Storage Class to store newly created objects.
-        --tagging=: The tag-set for the object.
-        --website-redirect-location=: If the bucket is configured as a website, redirects requests for this object to another object in the same bucket or to an external URL.
-      completion:
-        flag:
-            acl:
-                - private
-                - public-read
-                - public-read-write
-                - authenticated-read
-                - aws-exec-read
-                - bucket-owner-read
-                - bucket-owner-full-control
-            checksum-algorithm:
-                - CRC32
-                - CRC32C
-                - SHA1
-                - SHA256
-                - CRC64NVME
-            checksum-type:
-                - COMPOSITE
-                - FULL_OBJECT
-            object-lock-legal-hold-status:
-                - "ON"
-                - "OFF"
-            object-lock-mode:
-                - GOVERNANCE
-                - COMPLIANCE
-            request-payer:
-                - requester
-            server-side-encryption:
-                - AES256
-                - aws:fsx
-                - aws:kms
-                - aws:kms:dsse
-            storage-class:
-                - STANDARD
-                - REDUCED_REDUNDANCY
-                - STANDARD_IA
-                - ONEZONE_IA
-                - INTELLIGENT_TIERING
-                - GLACIER
-                - DEEP_ARCHIVE
-                - OUTPOSTS
-                - GLACIER_IR
-                - SNOW
-                - EXPRESS_ONEZONE
-                - FSX_OPENZFS
-    - name: delete-bucket-analytics-configuration
-      description: This operation is not supported for directory buckets.
-      flags:
-        --bucket=!: The name of the bucket from which an analytics configuration is deleted.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID that identifies the analytics configuration.
-    - name: get-bucket-lifecycle-configuration
-      description: Returns the lifecycle configuration information set on the bucket.
-      flags:
-        --bucket=!: The name of the bucket for which to get the lifecycle information.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: put-bucket-notification
-      description: This operation is not supported for directory buckets.
-      flags:
-        --bucket=!: The name of the bucket.
-        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the request when you use the SDK.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The MD5 hash of the `PutPublicAccessBlock` request body.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --notification-configuration=!: The container for the configuration.
-      completion:
-        flag:
-            checksum-algorithm:
-                - CRC32
-                - CRC32C
-                - SHA1
-                - SHA256
-                - CRC64NVME
     - name: write-get-object-response
       description: This operation is not supported for directory buckets.
       flags:
@@ -409,250 +188,103 @@ commands:
                 - SNOW
                 - EXPRESS_ONEZONE
                 - FSX_OPENZFS
-    - name: create-bucket-metadata-table-configuration
-      description: We recommend that you create your S3 Metadata configurations by using the V2 [CreateBucketMetadataConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html) API operation.
+    - name: complete-multipart-upload
+      description: Completes a multipart upload by assembling previously uploaded parts.
       flags:
-        --bucket=!: The general purpose bucket that you want to create the metadata table configuration for.
-        --checksum-algorithm=: The checksum algorithm to use with your metadata table configuration.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The `Content-MD5` header for the metadata table configuration.
-        --expected-bucket-owner=: The expected owner of the general purpose bucket that corresponds to your metadata table configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --metadata-table-configuration=!: The contents of your metadata table configuration.
-      completion:
-        flag:
-            checksum-algorithm:
-                - CRC32
-                - CRC32C
-                - SHA1
-                - SHA256
-                - CRC64NVME
-    - name: delete-bucket-inventory-configuration
-      description: This operation is not supported for directory buckets.
-      flags:
-        --bucket=!: The name of the bucket containing the inventory configuration to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID used to identify the inventory configuration.
-    - name: delete-bucket-metadata-configuration
-      description: Deletes an S3 Metadata configuration from a general purpose bucket.
-      flags:
-        --bucket=!: The general purpose bucket that you want to remove the metadata configuration from.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The expected bucket owner of the general purpose bucket that you want to remove the metadata table configuration from.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-bucket-policy
-      description: Deletes the policy of a specified bucket.
-      flags:
-        --bucket=!: The bucket name.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-object
-      description: Removes an object from a bucket.
-      flags:
-        --bucket=!: The bucket name of the bucket containing the object.
-        --bypass-governance-retention: Indicates whether S3 Object Lock should bypass Governance-mode restrictions to process this operation.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --if-match-last-modified-time=: If present, the object is deleted only if its modification times matches the provided `Timestamp`.
-        --if-match-size=: If present, the object is deleted only if its size matches the provided size in bytes.
-        --if-match=: Deletes the object if the ETag (entity tag) value provided during the delete operation matches the ETag of the object in S3.
-        --key=!: Key name of the object to delete.
-        --mfa=: The concatenation of the authentication device's serial number, a space, and the value that is displayed on your authentication device.
-        --no-bypass-governance-retention: Indicates whether S3 Object Lock should bypass Governance-mode restrictions to process this operation.
-        --request-payer=: ""
-        --version-id=: Version ID used to reference a specific version of the object.
-      completion:
-        flag:
-            request-payer:
-                - requester
-    - name: delete-public-access-block
-      description: This operation is not supported for directory buckets.
-      flags:
-        --bucket=!: The Amazon S3 bucket whose `PublicAccessBlock` configuration you want to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-bucket-analytics-configuration
-      description: This operation is not supported for directory buckets.
-      flags:
-        --bucket=!: The name of the bucket from which an analytics configuration is retrieved.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID that identifies the analytics configuration.
-    - name: get-bucket-metadata-configuration
-      description: Retrieves the S3 Metadata configuration for a general purpose bucket.
-      flags:
-        --bucket=!: The general purpose bucket that corresponds to the metadata configuration that you want to retrieve.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The expected owner of the general purpose bucket that you want to retrieve the metadata table configuration for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-bucket-metadata-table-configuration
-      description: We recommend that you retrieve your S3 Metadata configurations by using the V2 [GetBucketMetadataTableConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetadataTableConfiguration.html) API operation.
-      flags:
-        --bucket=!: The general purpose bucket that corresponds to the metadata table configuration that you want to retrieve.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The expected owner of the general purpose bucket that you want to retrieve the metadata table configuration for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-bucket-ownership-controls
-      description: This operation is not supported for directory buckets.
-      flags:
-        --bucket=!: The name of the Amazon S3 bucket whose `OwnershipControls` you want to retrieve.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-object
-      description: Retrieves an object from Amazon S3.
-      flags:
-        --bucket=!: The bucket name containing the object.
-        --checksum-mode=: To retrieve the checksum, this mode must be enabled.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --if-match=: Return the object only if its entity tag (ETag) is the same as the one specified in this header; otherwise, return a `412 Precondition Failed` error.
-        --if-modified-since=: Return the object only if it has been modified since the specified time; otherwise, return a `304 Not Modified` error.
-        --if-none-match=: Return the object only if its entity tag (ETag) is different from the one specified in this header; otherwise, return a `304 Not Modified` error.
-        --if-unmodified-since=: Return the object only if it has not been modified since the specified time; otherwise, return a `412 Precondition Failed` error.
-        --key=!: Key of the object to get.
-        --part-number=: Part number of the object being read.
-        --range=: Downloads the specified byte range of an object.
-        --request-payer=: ""
-        --response-cache-control=: Sets the `Cache-Control` header of the response.
-        --response-content-disposition=: Sets the `Content-Disposition` header of the response.
-        --response-content-encoding=: Sets the `Content-Encoding` header of the response.
-        --response-content-language=: Sets the `Content-Language` header of the response.
-        --response-content-type=: Sets the `Content-Type` header of the response.
-        --response-expires=: Sets the `Expires` header of the response.
-        --sse-customer-algorithm=: Specifies the algorithm to use when decrypting the object (for example, `AES256`).
-        --sse-customer-key-m-d5=: Specifies the 128-bit MD5 digest of the customer-provided encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
-        --sse-customer-key=: Specifies the customer-provided encryption key that you originally provided for Amazon S3 to encrypt the data before storing it.
-        --version-id=: Version ID used to reference a specific version of the object.
-      completion:
-        flag:
-            checksum-mode:
-                - ENABLED
-            request-payer:
-                - requester
-        positional:
-            - - $files
-    - name: get-object-acl
-      description: 'End of support notice: Beginning November 21, 2025, Amazon S3 will stop returning `DisplayName`.'
-      flags:
-        --bucket=!: The bucket name that contains the object for which to get the ACL information.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key=!: The key of the object for which to get the ACL information.
-        --request-payer=: ""
-        --version-id=: Version ID used to reference a specific version of the object.
-      completion:
-        flag:
-            request-payer:
-                - requester
-    - name: list-parts
-      description: 'End of support notice: Beginning November 21, 2025, Amazon S3 will stop returning `DisplayName`.'
-      flags:
-        --bucket=!: The name of the bucket to which the parts are being uploaded.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key=!: Object key for which the multipart upload was initiated.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-parts=: Sets the maximum number of parts to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --part-number-marker=: Specifies the part after which listing should begin.
-        --request-payer=: ""
-        --sse-customer-algorithm=: The server-side encryption (SSE) algorithm used to encrypt the object.
-        --sse-customer-key-m-d5=: The MD5 server-side encryption (SSE) customer managed key.
-        --sse-customer-key=: The server-side encryption (SSE) customer managed key.
-        --starting-token=: A token to specify where to start paginating.
-        --upload-id=!: Upload ID identifying the multipart upload whose parts are being listed.
-      completion:
-        flag:
-            request-payer:
-                - requester
-    - name: put-bucket-analytics-configuration
-      description: This operation is not supported for directory buckets.
-      flags:
-        --analytics-configuration=!: The configuration and any analyses for the analytics filter.
-        --bucket=!: The name of the bucket to which an analytics configuration is stored.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID that identifies the analytics configuration.
-    - name: put-bucket-inventory-configuration
-      description: This operation is not supported for directory buckets.
-      flags:
-        --bucket=!: The name of the bucket where the inventory configuration will be stored.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID used to identify the inventory configuration.
-        --inventory-configuration=!: Specifies the inventory configuration.
-    - name: put-object
-      description: 'End of support notice: As of October 1, 2025, Amazon S3 has discontinued support for Email Grantee Access Control Lists (ACLs).'
-      flags:
-        --acl=: The canned ACL to apply to the object.
-        --body=: Object data.
-        --bucket-key-enabled: Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption with server-side encryption using Key Management Service (KMS) keys (SSE-KMS).
-        --bucket=!: The bucket name to which the PUT action was initiated.
-        --cache-control=: Can be used to specify caching behavior along the request/reply chain.
-        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the object when you use the SDK.
+        --bucket=!: Name of the bucket to which the multipart upload was initiated.
         --checksum-cr-c32-c=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
         --checksum-cr-c32=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
         --checksum-cr-c64-nvme=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
         --checksum-sh-a1=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
         --checksum-sh-a256=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-type=: This header specifies the checksum type of the object, which determines how part-level checksums are combined to create an object-level checksum for multipart objects.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --if-match=: Uploads the object only if the ETag (entity tag) value provided during the WRITE operation matches the ETag of the object in S3.
+        --if-none-match=: Uploads the object only if the object key name does not already exist in the bucket specified.
+        --key=!: Object key for which the multipart upload was initiated.
+        --mpu-object-size=: The expected total object size of the multipart upload request.
+        --multipart-upload=: The container for the multipart upload request information.
+        --request-payer=: ""
+        --sse-customer-algorithm=: The server-side encryption (SSE) algorithm used to encrypt the object.
+        --sse-customer-key-m-d5=: The MD5 server-side encryption (SSE) customer managed key.
+        --sse-customer-key=: The server-side encryption (SSE) customer managed key.
+        --upload-id=!: ID for the initiated multipart upload.
+      completion:
+        flag:
+            checksum-type:
+                - COMPOSITE
+                - FULL_OBJECT
+            request-payer:
+                - requester
+    - name: create-bucket
+      description: 'End of support notice: As of October 1, 2025, Amazon S3 has discontinued support for Email Grantee Access Control Lists (ACLs).'
+      flags:
+        --acl=: The canned ACL to apply to the bucket.
+        --bucket=!: The name of the bucket to create.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --create-bucket-configuration=: The configuration information for the bucket.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --grant-full-control=: Allows grantee the read, write, read ACP, and write ACP permissions on the bucket.
+        --grant-read-acp=: Allows grantee to read the bucket ACL.
+        --grant-read=: Allows grantee to list the objects in the bucket.
+        --grant-write-acp=: Allows grantee to write the ACL for the applicable bucket.
+        --grant-write=: Allows grantee to create new objects in the bucket.
+        --no-object-lock-enabled-for-bucket: Specifies whether you want S3 Object Lock to be enabled for the new bucket.
+        --object-lock-enabled-for-bucket: Specifies whether you want S3 Object Lock to be enabled for the new bucket.
+        --object-ownership=: ""
+      completion:
+        flag:
+            acl:
+                - private
+                - public-read
+                - public-read-write
+                - authenticated-read
+            object-ownership:
+                - BucketOwnerPreferred
+                - ObjectWriter
+                - BucketOwnerEnforced
+    - name: create-multipart-upload
+      description: 'End of support notice: As of October 1, 2025, Amazon S3 has discontinued support for Email Grantee Access Control Lists (ACLs).'
+      flags:
+        --acl=: The canned ACL to apply to the object.
+        --bucket-key-enabled: Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption with server-side encryption using Key Management Service (KMS) keys (SSE-KMS).
+        --bucket=!: The name of the bucket where the multipart upload is initiated and where the object is uploaded.
+        --cache-control=: Specifies caching behavior along the request/reply chain.
+        --checksum-algorithm=: Indicates the algorithm that you want Amazon S3 to use to create the checksum for the object.
+        --checksum-type=: Indicates the checksum type that you want Amazon S3 to use to calculate the object’s checksum value.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --content-disposition=: Specifies presentational information for the object.
         --content-encoding=: Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.
-        --content-language=: The language the content is in.
-        --content-length=: Size of the body in bytes.
-        --content-m-d5=: The Base64 encoded 128-bit `MD5` digest of the message (without the headers) according to RFC 1864. This header can be used as a message integrity check to verify that the data is the same data that was originally sent.
-        --content-type=: A standard MIME type describing the format of the contents.
+        --content-language=: The language that the content is in.
+        --content-type=: A standard MIME type describing the format of the object data.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --expires=: The date and time at which the object is no longer cacheable.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --grant-full-control=: Gives the grantee READ, READ\_ACP, and WRITE\_ACP permissions on the object.
-        --grant-read-acp=: Allows grantee to read the object ACL.
-        --grant-read=: Allows grantee to read the object data and its metadata.
-        --grant-write-acp=: Allows grantee to write the ACL for the applicable object.
-        --if-match=: Uploads the object only if the ETag (entity tag) value provided during the WRITE operation matches the ETag of the object in S3.
-        --if-none-match=: Uploads the object only if the object key name does not already exist in the bucket specified.
-        --key=!: Object key for which the PUT action was initiated.
+        --grant-full-control=: Specify access permissions explicitly to give the grantee READ, READ\_ACP, and WRITE\_ACP permissions on the object.
+        --grant-read-acp=: Specify access permissions explicitly to allows grantee to read the object ACL.
+        --grant-read=: Specify access permissions explicitly to allow grantee to read the object data and its metadata.
+        --grant-write-acp=: Specify access permissions explicitly to allows grantee to allow grantee to write the ACL for the applicable object.
+        --key=!: Object key for which the multipart upload is to be initiated.
         --metadata=: A map of metadata to store with the object in S3.
         --no-bucket-key-enabled: Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption with server-side encryption using Key Management Service (KMS) keys (SSE-KMS).
-        --object-lock-legal-hold-status=: Specifies whether a legal hold will be applied to this object.
-        --object-lock-mode=: The Object Lock mode that you want to apply to this object.
-        --object-lock-retain-until-date=: The date and time when you want this object's Object Lock to expire.
+        --object-lock-legal-hold-status=: Specifies whether you want to apply a legal hold to the uploaded object.
+        --object-lock-mode=: Specifies the Object Lock mode that you want to apply to the uploaded object.
+        --object-lock-retain-until-date=: Specifies the date and time when you want the Object Lock to expire.
         --request-payer=: ""
-        --server-side-encryption=: The server-side encryption algorithm that was used when you store this object in Amazon S3 or Amazon FSx.
-        --sse-customer-algorithm=: Specifies the algorithm to use when encrypting the object (for example, `AES256`).
-        --sse-customer-key-m-d5=: Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
+        --server-side-encryption=: The server-side encryption algorithm used when you store this object in Amazon S3 or Amazon FSx.
+        --sse-customer-algorithm=: Specifies the algorithm to use when encrypting the object (for example, AES256).
+        --sse-customer-key-m-d5=: Specifies the 128-bit MD5 digest of the customer-provided encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
         --sse-customer-key=: Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data.
-        --ssekms-encryption-context=: Specifies the Amazon Web Services KMS Encryption Context as an additional encryption context to use for object encryption.
+        --ssekms-encryption-context=: Specifies the Amazon Web Services KMS Encryption Context to use for object encryption.
         --ssekms-key-id=: Specifies the KMS key ID (Key ID, Key ARN, or Key Alias) to use for object encryption.
         --storage-class=: By default, Amazon S3 uses the STANDARD Storage Class to store newly created objects.
         --tagging=: The tag-set for the object.
         --website-redirect-location=: If the bucket is configured as a website, redirects requests for this object to another object in the same bucket or to an external URL.
-        --write-offset-bytes=: Specifies the offset for appending data to existing objects in bytes.
       completion:
         flag:
             acl:
@@ -669,6 +301,9 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+            checksum-type:
+                - COMPOSITE
+                - FULL_OBJECT
             object-lock-legal-hold-status:
                 - "ON"
                 - "OFF"
@@ -695,45 +330,19 @@ commands:
                 - SNOW
                 - EXPRESS_ONEZONE
                 - FSX_OPENZFS
-    - name: delete-bucket-lifecycle
-      description: Deletes the lifecycle configuration from the specified bucket.
-      flags:
-        --bucket=!: The bucket name of the lifecycle to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-bucket-metadata-table-configuration
-      description: We recommend that you delete your S3 Metadata configurations by using the V2 [DeleteBucketMetadataTableConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetadataTableConfiguration.html) API operation.
-      flags:
-        --bucket=!: The general purpose bucket that you want to remove the metadata table configuration from.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The expected bucket owner of the general purpose bucket that you want to remove the metadata table configuration from.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-bucket-cors
+    - name: get-object-torrent
       description: This operation is not supported for directory buckets.
       flags:
-        --bucket=!: The bucket name for which to get the cors configuration.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --bucket=!: The name of the bucket containing the object for which to get the torrent files.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-object-retention
-      description: This operation is not supported for directory buckets.
-      flags:
-        --bucket=!: The bucket name containing the object whose retention settings you want to retrieve.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key=!: The key name for the object whose retention settings you want to retrieve.
+        --key=!: The object key for which to get the information.
         --request-payer=: ""
-        --version-id=: The version ID for the object whose retention settings you want to retrieve.
       completion:
         flag:
             request-payer:
                 - requester
+        positional:
+            - - $files
     - name: head-object
       description: The `HEAD` operation retrieves metadata from an object without returning the object itself.
       flags:
@@ -767,6 +376,79 @@ commands:
                 - ENABLED
             request-payer:
                 - requester
+    - name: list-objects-v2
+      description: 'End of support notice: Beginning November 21, 2025, Amazon S3 will stop returning `DisplayName`.'
+      flags:
+        --bucket=!: '**Directory buckets** - When you use this operation with a directory bucket, you must use virtual-hosted-style requests in the format `Bucket-name.s3express-zone-id.region-code.amazonaws.com`. Path-style requests are not supported.'
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --continuation-token=: '`ContinuationToken` indicates to Amazon S3 that the list is being continued on this bucket with a token.'
+        --delimiter=: A delimiter is a character that you use to group keys.
+        --encoding-type=: Encoding type used by Amazon S3 to encode the [object keys](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html) in the response.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --fetch-owner: The owner field is not present in `ListObjectsV2` by default.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-keys=: Sets the maximum number of keys returned in the response.
+        --no-fetch-owner: The owner field is not present in `ListObjectsV2` by default.
+        --optional-object-attributes=: Specifies the optional fields that you want returned in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --prefix=: Limits the response to keys that begin with the specified prefix.
+        --request-payer=: Confirms that the requester knows that she or he will be charged for the list objects request in V2 style.
+        --start-after=: StartAfter is where you want Amazon S3 to start listing from.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            encoding-type:
+                - url
+            request-payer:
+                - requester
+    - name: put-bucket-inventory-configuration
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The name of the bucket where the inventory configuration will be stored.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID used to identify the inventory configuration.
+        --inventory-configuration=!: Specifies the inventory configuration.
+    - name: put-bucket-ownership-controls
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The name of the Amazon S3 bucket whose `OwnershipControls` you want to set.
+        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the object when you use the SDK.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content-m-d5=: The MD5 hash of the `OwnershipControls` request body.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ownership-controls=!: The `OwnershipControls` (BucketOwnerEnforced, BucketOwnerPreferred, or ObjectWriter) that you want to apply to this Amazon S3 bucket.
+      completion:
+        flag:
+            checksum-algorithm:
+                - CRC32
+                - CRC32C
+                - SHA1
+                - SHA256
+                - CRC64NVME
+    - name: delete-bucket-intelligent-tiering-configuration
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The name of the Amazon S3 bucket whose configuration you want to modify or retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID used to identify the S3 Intelligent-Tiering configuration.
+    - name: delete-bucket-tagging
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The bucket that has the tag set to be removed.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-bucket-metrics-configurations
       description: This operation is not supported for directory buckets.
       flags:
@@ -776,57 +458,17 @@ commands:
         --continuation-token=: The marker that is used to continue a metrics configuration listing that has been truncated.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: put-object-acl
-      description: 'End of support notice: As of October 1, 2025, Amazon S3 has discontinued support for Email Grantee Access Control Lists (ACLs).'
+    - name: put-bucket-abac
+      description: Sets the attribute-based access control (ABAC) property of the general purpose bucket.
       flags:
-        --access-control-policy=: Contains the elements that set the ACL permissions for an object per grantee.
-        --acl=: The canned ACL to apply to the object.
-        --bucket=!: The bucket name that contains the object to which you want to attach the ACL.
-        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the object when you use the SDK.
+        --abac-status=!: The ABAC status of the general purpose bucket.
+        --bucket=!: The name of the general purpose bucket.
+        --checksum-algorithm=: Indicates the algorithm that you want Amazon S3 to use to create the checksum.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The Base64 encoded 128-bit `MD5` digest of the data.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --content-m-d5=: The MD5 hash of the `PutBucketAbac` request body.
+        --expected-bucket-owner=: The Amazon Web Services account ID of the general purpose bucket's owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --grant-full-control=: Allows grantee the read, write, read ACP, and write ACP permissions on the bucket.
-        --grant-read-acp=: Allows grantee to read the bucket ACL.
-        --grant-read=: Allows grantee to list the objects in the bucket.
-        --grant-write-acp=: Allows grantee to write the ACL for the applicable bucket.
-        --grant-write=: Allows grantee to create new objects in the bucket.
-        --key=!: Key for which the PUT action was initiated.
-        --request-payer=: ""
-        --version-id=: Version ID used to reference a specific version of the object.
-      completion:
-        flag:
-            acl:
-                - private
-                - public-read
-                - public-read-write
-                - authenticated-read
-                - aws-exec-read
-                - bucket-owner-read
-                - bucket-owner-full-control
-            checksum-algorithm:
-                - CRC32
-                - CRC32C
-                - SHA1
-                - SHA256
-                - CRC64NVME
-            request-payer:
-                - requester
-    - name: restore-object
-      description: This operation is not supported for directory buckets.
-      flags:
-        --bucket=!: The bucket name containing the object to restore.
-        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the object when you use the SDK.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key=!: Object key for which the action was initiated.
-        --request-payer=: ""
-        --restore-request=: ""
-        --version-id=: VersionId used to reference a specific version of the object.
       completion:
         flag:
             checksum-algorithm:
@@ -835,54 +477,6 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
-            request-payer:
-                - requester
-    - name: get-bucket-accelerate-configuration
-      description: This operation is not supported for directory buckets.
-      flags:
-        --bucket=!: The name of the bucket for which the accelerate configuration is retrieved.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --request-payer=: ""
-      completion:
-        flag:
-            request-payer:
-                - requester
-    - name: get-object-lock-configuration
-      description: This operation is not supported for directory buckets.
-      flags:
-        --bucket=!: The bucket whose Object Lock configuration you want to retrieve.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-object-versions
-      description: 'End of support notice: Beginning November 21, 2025, Amazon S3 will stop returning `DisplayName`.'
-      flags:
-        --bucket=!: The bucket name that contains the objects.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --delimiter=: A delimiter is a character that you specify to group keys.
-        --encoding-type=: ""
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-marker=: Specifies the key to start with when listing objects in a bucket.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-keys=: Sets the maximum number of keys returned in the response.
-        --optional-object-attributes=: Specifies the optional fields that you want returned in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --prefix=: Use this parameter to select only those keys that begin with the specified prefix.
-        --request-payer=: ""
-        --starting-token=: A token to specify where to start paginating.
-        --version-id-marker=: Specifies the object version you want to start listing from.
-      completion:
-        flag:
-            encoding-type:
-                - url
-            request-payer:
-                - requester
     - name: put-bucket-intelligent-tiering-configuration
       description: This operation is not supported for directory buckets.
       flags:
@@ -893,40 +487,30 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The ID used to identify the S3 Intelligent-Tiering configuration.
         --intelligent-tiering-configuration=!: Container for S3 Intelligent-Tiering configuration.
-    - name: put-bucket-versioning
-      description: This operation is not supported for directory buckets.
+    - name: upload-part
+      description: Uploads a part in a multipart upload.
       flags:
-        --bucket=!: The bucket name.
-        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the request when you use the SDK.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: '&gt;The Base64 encoded 128-bit `MD5` digest of the data.'
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mfa=: The concatenation of the authentication device's serial number, a space, and the value that is displayed on your authentication device.
-        --versioning-configuration=!: Container for setting the versioning state.
-      completion:
-        flag:
-            checksum-algorithm:
-                - CRC32
-                - CRC32C
-                - SHA1
-                - SHA256
-                - CRC64NVME
-    - name: put-object-legal-hold
-      description: This operation is not supported for directory buckets.
-      flags:
-        --bucket=!: The bucket name containing the object that you want to place a legal hold on.
+        --body=: Object data.
+        --bucket=!: The name of the bucket to which the multipart upload was initiated.
         --checksum-algorithm=: Indicates the algorithm used to create the checksum for the object when you use the SDK.
+        --checksum-cr-c32-c=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-cr-c32=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-cr-c64-nvme=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-sh-a1=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-sh-a256=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The MD5 hash for the request body.
+        --content-length=: Size of the body in bytes.
+        --content-m-d5=: The Base64 encoded 128-bit MD5 digest of the part data.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key=!: The key name for the object that you want to place a legal hold on.
-        --legal-hold=: Container element for the legal hold configuration you want to apply to the specified object.
+        --key=!: Object key for which the multipart upload was initiated.
+        --part-number=!: Part number of part being uploaded.
         --request-payer=: ""
-        --version-id=: The version ID of the object that you want to place a legal hold on.
+        --sse-customer-algorithm=: Specifies the algorithm to use when encrypting the object (for example, AES256).
+        --sse-customer-key-m-d5=: Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
+        --sse-customer-key=: Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data.
+        --upload-id=!: Upload ID identifying the multipart upload whose part is being uploaded.
       completion:
         flag:
             checksum-algorithm:
@@ -937,50 +521,30 @@ commands:
                 - CRC64NVME
             request-payer:
                 - requester
-    - name: create-bucket-metadata-configuration
-      description: Creates an S3 Metadata V2 metadata configuration for a general purpose bucket.
-      flags:
-        --bucket=!: The general purpose bucket that you want to create the metadata configuration for.
-        --checksum-algorithm=: The checksum algorithm to use with your metadata configuration.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The `Content-MD5` header for the metadata configuration.
-        --expected-bucket-owner=: The expected owner of the general purpose bucket that corresponds to your metadata configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --metadata-configuration=!: The contents of your metadata configuration.
-      completion:
-        flag:
-            checksum-algorithm:
-                - CRC32
-                - CRC32C
-                - SHA1
-                - SHA256
-                - CRC64NVME
-    - name: delete-bucket-encryption
-      description: This implementation of the DELETE action resets the default encryption for the bucket as server-side encryption with Amazon S3 managed keys (SSE-S3).
-      flags:
-        --bucket=!: The name of the bucket containing the server-side encryption configuration to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-bucket-website
-      description: This operation is not supported for directory buckets.
-      flags:
-        --bucket=!: The bucket name for which to get the website configuration.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-bucket-intelligent-tiering-configurations
+    - name: get-bucket-intelligent-tiering-configuration
       description: This operation is not supported for directory buckets.
       flags:
         --bucket=!: The name of the Amazon S3 bucket whose configuration you want to modify or retrieve.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --continuation-token=: The `ContinuationToken` that represents a placeholder from where this request should begin.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID used to identify the S3 Intelligent-Tiering configuration.
+    - name: get-object-tagging
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The bucket name containing the object for which to get the tagging information.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key=!: Object key for which to get the tagging information.
+        --request-payer=: ""
+        --version-id=: The versionId of the object for which to get the tagging information.
+      completion:
+        flag:
+            request-payer:
+                - requester
     - name: list-objects
       description: 'End of support notice: Beginning November 21, 2025, Amazon S3 will stop returning `DisplayName`.'
       flags:
@@ -1005,128 +569,27 @@ commands:
                 - url
             request-payer:
                 - requester
-    - name: put-bucket-ownership-controls
+    - name: put-bucket-analytics-configuration
       description: This operation is not supported for directory buckets.
       flags:
-        --bucket=!: The name of the Amazon S3 bucket whose `OwnershipControls` you want to set.
-        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the object when you use the SDK.
+        --analytics-configuration=!: The configuration and any analyses for the analytics filter.
+        --bucket=!: The name of the bucket to which an analytics configuration is stored.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The MD5 hash of the `OwnershipControls` request body.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ownership-controls=!: The `OwnershipControls` (BucketOwnerEnforced, BucketOwnerPreferred, or ObjectWriter) that you want to apply to this Amazon S3 bucket.
-      completion:
-        flag:
-            checksum-algorithm:
-                - CRC32
-                - CRC32C
-                - SHA1
-                - SHA256
-                - CRC64NVME
-    - name: update-bucket-metadata-journal-table-configuration
-      description: Enables or disables journal table record expiration for an S3 Metadata configuration on a general purpose bucket.
-      flags:
-        --bucket=!: The general purpose bucket that corresponds to the metadata configuration that you want to enable or disable journal table record expiration for.
-        --checksum-algorithm=: The checksum algorithm to use with your journal table configuration.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The `Content-MD5` header for the journal table configuration.
-        --expected-bucket-owner=: The expected owner of the general purpose bucket that corresponds to the metadata table configuration that you want to enable or disable journal table record expiration for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --journal-table-configuration=!: The contents of your journal table configuration.
-      completion:
-        flag:
-            checksum-algorithm:
-                - CRC32
-                - CRC32C
-                - SHA1
-                - SHA256
-                - CRC64NVME
-    - name: create-session
-      description: Creates a session that establishes temporary security credentials to support fast authentication and authorization for the Zonal endpoint API operations on directory buckets.
-      flags:
-        --bucket-key-enabled: Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption with server-side encryption using KMS keys (SSE-KMS).
-        --bucket=!: The name of the bucket that you create a session for.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-bucket-key-enabled: Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption with server-side encryption using KMS keys (SSE-KMS).
-        --server-side-encryption=: The server-side encryption algorithm to use when you store objects in the directory bucket.
-        --session-mode=: Specifies the mode of the session that will be created, either `ReadWrite` or `ReadOnly`.
-        --ssekms-encryption-context=: Specifies the Amazon Web Services KMS Encryption Context as an additional encryption context to use for object encryption.
-        --ssekms-key-id=: If you specify `x-amz-server-side-encryption` with `aws:kms`, you must specify the `x-amz-server-side-encryption-aws-kms-key-id` header with the ID (Key ID or Key ARN) of the KMS symmetric encryption customer managed key to use.
-      completion:
-        flag:
-            server-side-encryption:
-                - AES256
-                - aws:fsx
-                - aws:kms
-                - aws:kms:dsse
-            session-mode:
-                - ReadOnly
-                - ReadWrite
-    - name: delete-bucket-replication
+        --id=!: The ID that identifies the analytics configuration.
+    - name: put-bucket-lifecycle
       description: This operation is not supported for directory buckets.
       flags:
-        --bucket=!: The bucket name.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-bucket-intelligent-tiering-configuration
-      description: This operation is not supported for directory buckets.
-      flags:
-        --bucket=!: The name of the Amazon S3 bucket whose configuration you want to modify or retrieve.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID used to identify the S3 Intelligent-Tiering configuration.
-    - name: get-bucket-logging
-      description: 'End of support notice: Beginning November 21, 2025, Amazon S3 will stop returning `DisplayName`.'
-      flags:
-        --bucket=!: The bucket name for which to get the logging information.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-bucket-notification
-      description: This operation is not supported for directory buckets.
-      flags:
-        --bucket=!: The name of the bucket for which to get the notification configuration.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-bucket-versioning
-      description: This operation is not supported for directory buckets.
-      flags:
-        --bucket=!: The name of the bucket for which to get the versioning information.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-bucket-inventory-configurations
-      description: This operation is not supported for directory buckets.
-      flags:
-        --bucket=!: The name of the bucket containing the inventory configurations to retrieve.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --continuation-token=: The marker used to continue an inventory configuration listing that has been truncated.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: put-bucket-lifecycle-configuration
-      description: Creates a new lifecycle configuration for the bucket or replaces an existing lifecycle configuration.
-      flags:
-        --bucket=!: The name of the bucket for which to set the configuration.
+        --bucket=!: ""
         --checksum-algorithm=: Indicates the algorithm used to create the checksum for the request when you use the SDK.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content-m-d5=: For requests made using the Amazon Web Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is calculated automatically.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lifecycle-configuration=: Container for lifecycle rules.
-        --transition-default-minimum-object-size=: Indicates which default minimum object size behavior is applied to the lifecycle configuration.
+        --lifecycle-configuration=: ""
       completion:
         flag:
             checksum-algorithm:
@@ -1135,9 +598,33 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
-            transition-default-minimum-object-size:
-                - varies_by_storage_class
-                - all_storage_classes_128K
+    - name: put-bucket-notification-configuration
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The name of the bucket.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-skip-destination-validation: Skips validation of Amazon SQS, Amazon SNS, and Lambda destinations.
+        --notification-configuration=!: ""
+        --skip-destination-validation: Skips validation of Amazon SQS, Amazon SNS, and Lambda destinations.
+    - name: abort-multipart-upload
+      description: This operation aborts a multipart upload.
+      flags:
+        --bucket=!: The bucket name to which the upload was taking place.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --if-match-initiated-time=: If present, this header aborts an in progress multipart upload only if it was initiated on the provided timestamp.
+        --key=!: Key of the object for which the multipart upload was initiated.
+        --request-payer=: ""
+        --upload-id=!: Upload ID that identifies the multipart upload.
+      completion:
+        flag:
+            request-payer:
+                - requester
     - name: copy-object
       description: Creates a copy of an object that is already stored in Amazon S3.
       flags:
@@ -1236,157 +723,15 @@ commands:
             tagging-directive:
                 - COPY
                 - REPLACE
-    - name: create-bucket
-      description: 'End of support notice: As of October 1, 2025, Amazon S3 has discontinued support for Email Grantee Access Control Lists (ACLs).'
-      flags:
-        --acl=: The canned ACL to apply to the bucket.
-        --bucket=!: The name of the bucket to create.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --create-bucket-configuration=: The configuration information for the bucket.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --grant-full-control=: Allows grantee the read, write, read ACP, and write ACP permissions on the bucket.
-        --grant-read-acp=: Allows grantee to read the bucket ACL.
-        --grant-read=: Allows grantee to list the objects in the bucket.
-        --grant-write-acp=: Allows grantee to write the ACL for the applicable bucket.
-        --grant-write=: Allows grantee to create new objects in the bucket.
-        --no-object-lock-enabled-for-bucket: Specifies whether you want S3 Object Lock to be enabled for the new bucket.
-        --object-lock-enabled-for-bucket: Specifies whether you want S3 Object Lock to be enabled for the new bucket.
-        --object-ownership=: ""
-      completion:
-        flag:
-            acl:
-                - private
-                - public-read
-                - public-read-write
-                - authenticated-read
-            object-ownership:
-                - BucketOwnerPreferred
-                - ObjectWriter
-                - BucketOwnerEnforced
-    - name: delete-bucket-intelligent-tiering-configuration
+    - name: delete-bucket-analytics-configuration
       description: This operation is not supported for directory buckets.
       flags:
-        --bucket=!: The name of the Amazon S3 bucket whose configuration you want to modify or retrieve.
+        --bucket=!: The name of the bucket from which an analytics configuration is deleted.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID used to identify the S3 Intelligent-Tiering configuration.
-    - name: put-bucket-cors
-      description: This operation is not supported for directory buckets.
-      flags:
-        --bucket=!: Specifies the bucket impacted by the `cors`configuration.
-        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the request when you use the SDK.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The Base64 encoded 128-bit `MD5` digest of the data.
-        --cors-configuration=!: Describes the cross-origin access configuration for objects in an Amazon S3 bucket.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      completion:
-        flag:
-            checksum-algorithm:
-                - CRC32
-                - CRC32C
-                - SHA1
-                - SHA256
-                - CRC64NVME
-    - name: put-bucket-logging
-      description: 'End of support notice: As of October 1, 2025, Amazon S3 has discontinued support for Email Grantee Access Control Lists (ACLs).'
-      flags:
-        --bucket-logging-status=!: Container for logging status information.
-        --bucket=!: The name of the bucket for which to set the logging parameters.
-        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the request when you use the SDK.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The MD5 hash of the `PutBucketLogging` request body.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      completion:
-        flag:
-            checksum-algorithm:
-                - CRC32
-                - CRC32C
-                - SHA1
-                - SHA256
-                - CRC64NVME
-    - name: put-bucket-policy
-      description: Applies an Amazon S3 bucket policy to an Amazon S3 bucket.
-      flags:
-        --bucket=!: The name of the bucket.
-        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the request when you use the SDK.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --confirm-remove-self-bucket-access: Set this parameter to true to confirm that you want to remove your permissions to change this bucket policy in the future.
-        --content-m-d5=: The MD5 hash of the request body.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-confirm-remove-self-bucket-access: Set this parameter to true to confirm that you want to remove your permissions to change this bucket policy in the future.
-        --policy=!: The bucket policy as a JSON document.
-      completion:
-        flag:
-            checksum-algorithm:
-                - CRC32
-                - CRC32C
-                - SHA1
-                - SHA256
-                - CRC64NVME
-    - name: delete-bucket-cors
-      description: This operation is not supported for directory buckets.
-      flags:
-        --bucket=!: Specifies the bucket whose `cors` configuration is being deleted.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-bucket-request-payment
-      description: This operation is not supported for directory buckets.
-      flags:
-        --bucket=!: The name of the bucket for which to get the payment request configuration
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-public-access-block
-      description: This operation is not supported for directory buckets.
-      flags:
-        --bucket=!: The name of the Amazon S3 bucket whose `PublicAccessBlock` configuration you want to retrieve.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: head-bucket
-      description: You can use this operation to determine if a bucket exists and if you have permission to access it.
-      flags:
-        --bucket=!: The bucket name.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: put-object-lock-configuration
-      description: This operation is not supported for directory buckets.
-      flags:
-        --bucket=!: The bucket whose Object Lock configuration you want to create or replace.
-        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the object when you use the SDK.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The MD5 hash for the request body.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --object-lock-configuration=: The Object Lock configuration that you want to apply to the specified bucket.
-        --request-payer=: ""
-        --token=: A token to allow Object Lock to be enabled for an existing bucket.
-      completion:
-        flag:
-            checksum-algorithm:
-                - CRC32
-                - CRC32C
-                - SHA1
-                - SHA256
-                - CRC64NVME
-            request-payer:
-                - requester
+        --id=!: The ID that identifies the analytics configuration.
     - name: get-object-attributes
       description: Retrieves all of the metadata from an object without returning the object itself.
       flags:
@@ -1408,41 +753,36 @@ commands:
         flag:
             request-payer:
                 - requester
-    - name: get-object-tagging
-      description: This operation is not supported for directory buckets.
+    - name: head-bucket
+      description: You can use this operation to determine if a bucket exists and if you have permission to access it.
       flags:
-        --bucket=!: The bucket name containing the object for which to get the tagging information.
+        --bucket=!: The bucket name.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key=!: Object key for which to get the tagging information.
-        --request-payer=: ""
-        --version-id=: The versionId of the object for which to get the tagging information.
-      completion:
-        flag:
-            request-payer:
-                - requester
-    - name: list-bucket-analytics-configurations
+    - name: list-bucket-intelligent-tiering-configurations
       description: This operation is not supported for directory buckets.
       flags:
-        --bucket=!: The name of the bucket from which analytics configurations are retrieved.
+        --bucket=!: The name of the Amazon S3 bucket whose configuration you want to modify or retrieve.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --continuation-token=: The `ContinuationToken` that represents a placeholder from where this request should begin.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: put-bucket-lifecycle
-      description: This operation is not supported for directory buckets.
+    - name: put-bucket-policy
+      description: Applies an Amazon S3 bucket policy to an Amazon S3 bucket.
       flags:
-        --bucket=!: ""
+        --bucket=!: The name of the bucket.
         --checksum-algorithm=: Indicates the algorithm used to create the checksum for the request when you use the SDK.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: For requests made using the Amazon Web Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is calculated automatically.
+        --confirm-remove-self-bucket-access: Set this parameter to true to confirm that you want to remove your permissions to change this bucket policy in the future.
+        --content-m-d5=: The MD5 hash of the request body.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lifecycle-configuration=: ""
+        --no-confirm-remove-self-bucket-access: Set this parameter to true to confirm that you want to remove your permissions to change this bucket policy in the future.
+        --policy=!: The bucket policy as a JSON document.
       completion:
         flag:
             checksum-algorithm:
@@ -1451,6 +791,343 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+    - name: update-bucket-metadata-journal-table-configuration
+      description: Enables or disables journal table record expiration for an S3 Metadata configuration on a general purpose bucket.
+      flags:
+        --bucket=!: The general purpose bucket that corresponds to the metadata configuration that you want to enable or disable journal table record expiration for.
+        --checksum-algorithm=: The checksum algorithm to use with your journal table configuration.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content-m-d5=: The `Content-MD5` header for the journal table configuration.
+        --expected-bucket-owner=: The expected owner of the general purpose bucket that corresponds to the metadata table configuration that you want to enable or disable journal table record expiration for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --journal-table-configuration=!: The contents of your journal table configuration.
+      completion:
+        flag:
+            checksum-algorithm:
+                - CRC32
+                - CRC32C
+                - SHA1
+                - SHA256
+                - CRC64NVME
+    - name: delete-bucket-replication
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The bucket name.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-object-tagging
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The bucket name containing the objects from which to remove the tags.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key=!: The key that identifies the object in the bucket from which to remove all tags.
+        --version-id=: The versionId of the object that the tag-set will be removed from.
+    - name: get-bucket-location
+      description: Using the `GetBucketLocation` operation is no longer a best practice.
+      flags:
+        --bucket=!: The name of the bucket for which to get the location.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-bucket-ownership-controls
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The name of the Amazon S3 bucket whose `OwnershipControls` you want to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-public-access-block
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The name of the Amazon S3 bucket whose `PublicAccessBlock` configuration you want to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: put-bucket-accelerate-configuration
+      description: This operation is not supported for directory buckets.
+      flags:
+        --accelerate-configuration=!: Container for setting the transfer acceleration state.
+        --bucket=!: The name of the bucket for which the accelerate configuration is set.
+        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the request when you use the SDK.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            checksum-algorithm:
+                - CRC32
+                - CRC32C
+                - SHA1
+                - SHA256
+                - CRC64NVME
+    - name: put-bucket-acl
+      description: 'End of support notice: As of October 1, 2025, Amazon S3 has discontinued support for Email Grantee Access Control Lists (ACLs).'
+      flags:
+        --access-control-policy=: Contains the elements that set the ACL permissions for an object per grantee.
+        --acl=: The canned ACL to apply to the bucket.
+        --bucket=!: The bucket to which to apply the ACL.
+        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the request when you use the SDK.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content-m-d5=: The Base64 encoded 128-bit `MD5` digest of the data.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --grant-full-control=: Allows grantee the read, write, read ACP, and write ACP permissions on the bucket.
+        --grant-read-acp=: Allows grantee to read the bucket ACL.
+        --grant-read=: Allows grantee to list the objects in the bucket.
+        --grant-write-acp=: Allows grantee to write the ACL for the applicable bucket.
+        --grant-write=: Allows grantee to create new objects in the bucket.
+      completion:
+        flag:
+            acl:
+                - private
+                - public-read
+                - public-read-write
+                - authenticated-read
+            checksum-algorithm:
+                - CRC32
+                - CRC32C
+                - SHA1
+                - SHA256
+                - CRC64NVME
+    - name: put-bucket-lifecycle-configuration
+      description: Creates a new lifecycle configuration for the bucket or replaces an existing lifecycle configuration.
+      flags:
+        --bucket=!: The name of the bucket for which to set the configuration.
+        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the request when you use the SDK.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lifecycle-configuration=: Container for lifecycle rules.
+        --transition-default-minimum-object-size=: Indicates which default minimum object size behavior is applied to the lifecycle configuration.
+      completion:
+        flag:
+            checksum-algorithm:
+                - CRC32
+                - CRC32C
+                - SHA1
+                - SHA256
+                - CRC64NVME
+            transition-default-minimum-object-size:
+                - varies_by_storage_class
+                - all_storage_classes_128K
+    - name: get-bucket-acl
+      description: 'End of support notice: Beginning November 21, 2025, Amazon S3 will stop returning `DisplayName`.'
+      flags:
+        --bucket=!: Specifies the S3 bucket whose ACL is being requested.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-bucket-metadata-table-configuration
+      description: We recommend that you retrieve your S3 Metadata configurations by using the V2 [GetBucketMetadataTableConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetadataTableConfiguration.html) API operation.
+      flags:
+        --bucket=!: The general purpose bucket that corresponds to the metadata table configuration that you want to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The expected owner of the general purpose bucket that you want to retrieve the metadata table configuration for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-directory-buckets
+      description: Returns a list of all Amazon S3 directory buckets owned by the authenticated sender of the request.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --continuation-token=: '`ContinuationToken` indicates to Amazon S3 that the list is being continued on buckets in this account with a token.'
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-directory-buckets=: Maximum number of buckets to be returned in response.
+        --max-items=: The  total number of items to return in the command's output.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: put-object-acl
+      description: 'End of support notice: As of October 1, 2025, Amazon S3 has discontinued support for Email Grantee Access Control Lists (ACLs).'
+      flags:
+        --access-control-policy=: Contains the elements that set the ACL permissions for an object per grantee.
+        --acl=: The canned ACL to apply to the object.
+        --bucket=!: The bucket name that contains the object to which you want to attach the ACL.
+        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the object when you use the SDK.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content-m-d5=: The Base64 encoded 128-bit `MD5` digest of the data.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --grant-full-control=: Allows grantee the read, write, read ACP, and write ACP permissions on the bucket.
+        --grant-read-acp=: Allows grantee to read the bucket ACL.
+        --grant-read=: Allows grantee to list the objects in the bucket.
+        --grant-write-acp=: Allows grantee to write the ACL for the applicable bucket.
+        --grant-write=: Allows grantee to create new objects in the bucket.
+        --key=!: Key for which the PUT action was initiated.
+        --request-payer=: ""
+        --version-id=: Version ID used to reference a specific version of the object.
+      completion:
+        flag:
+            acl:
+                - private
+                - public-read
+                - public-read-write
+                - authenticated-read
+                - aws-exec-read
+                - bucket-owner-read
+                - bucket-owner-full-control
+            checksum-algorithm:
+                - CRC32
+                - CRC32C
+                - SHA1
+                - SHA256
+                - CRC64NVME
+            request-payer:
+                - requester
+    - name: delete-bucket-policy
+      description: Deletes the policy of a specified bucket.
+      flags:
+        --bucket=!: The bucket name.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-bucket-abac
+      description: Returns the attribute-based access control (ABAC) property of the general purpose bucket.
+      flags:
+        --bucket=!: The name of the general purpose bucket.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The Amazon Web Services account ID of the general purpose bucket's owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-bucket-accelerate-configuration
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The name of the bucket for which the accelerate configuration is retrieved.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --request-payer=: ""
+      completion:
+        flag:
+            request-payer:
+                - requester
+    - name: get-bucket-cors
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The bucket name for which to get the cors configuration.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-bucket-inventory-configuration
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The name of the bucket containing the inventory configuration to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID used to identify the inventory configuration.
+    - name: get-object-lock-configuration
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The bucket whose Object Lock configuration you want to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: put-bucket-versioning
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The bucket name.
+        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the request when you use the SDK.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content-m-d5=: '&gt;The Base64 encoded 128-bit `MD5` digest of the data.'
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mfa=: The concatenation of the authentication device's serial number, a space, and the value that is displayed on your authentication device.
+        --versioning-configuration=!: Container for setting the versioning state.
+      completion:
+        flag:
+            checksum-algorithm:
+                - CRC32
+                - CRC32C
+                - SHA1
+                - SHA256
+                - CRC64NVME
+    - name: put-bucket-website
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The bucket name.
+        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the request when you use the SDK.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content-m-d5=: The Base64 encoded 128-bit `MD5` digest of the data.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --website-configuration=!: Container for the request.
+      completion:
+        flag:
+            checksum-algorithm:
+                - CRC32
+                - CRC32C
+                - SHA1
+                - SHA256
+                - CRC64NVME
+    - name: create-bucket-metadata-configuration
+      description: Creates an S3 Metadata V2 metadata configuration for a general purpose bucket.
+      flags:
+        --bucket=!: The general purpose bucket that you want to create the metadata configuration for.
+        --checksum-algorithm=: The checksum algorithm to use with your metadata configuration.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content-m-d5=: The `Content-MD5` header for the metadata configuration.
+        --expected-bucket-owner=: The expected owner of the general purpose bucket that corresponds to your metadata configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --metadata-configuration=!: The contents of your metadata configuration.
+      completion:
+        flag:
+            checksum-algorithm:
+                - CRC32
+                - CRC32C
+                - SHA1
+                - SHA256
+                - CRC64NVME
+    - name: delete-bucket-metadata-table-configuration
+      description: We recommend that you delete your S3 Metadata configurations by using the V2 [DeleteBucketMetadataTableConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetadataTableConfiguration.html) API operation.
+      flags:
+        --bucket=!: The general purpose bucket that you want to remove the metadata table configuration from.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The expected bucket owner of the general purpose bucket that you want to remove the metadata table configuration from.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-object
+      description: Removes an object from a bucket.
+      flags:
+        --bucket=!: The bucket name of the bucket containing the object.
+        --bypass-governance-retention: Indicates whether S3 Object Lock should bypass Governance-mode restrictions to process this operation.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --if-match-last-modified-time=: If present, the object is deleted only if its modification times matches the provided `Timestamp`.
+        --if-match-size=: If present, the object is deleted only if its size matches the provided size in bytes.
+        --if-match=: Deletes the object if the ETag (entity tag) value provided during the delete operation matches the ETag of the object in S3.
+        --key=!: Key name of the object to delete.
+        --mfa=: The concatenation of the authentication device's serial number, a space, and the value that is displayed on your authentication device.
+        --no-bypass-governance-retention: Indicates whether S3 Object Lock should bypass Governance-mode restrictions to process this operation.
+        --request-payer=: ""
+        --version-id=: Version ID used to reference a specific version of the object.
+      completion:
+        flag:
+            request-payer:
+                - requester
     - name: put-bucket-tagging
       description: This operation is not supported for directory buckets.
       flags:
@@ -1470,14 +1147,25 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
-    - name: delete-bucket-tagging
-      description: This operation is not supported for directory buckets.
+    - name: update-bucket-metadata-inventory-table-configuration
+      description: Enables or disables a live inventory table for an S3 Metadata configuration on a general purpose bucket.
       flags:
-        --bucket=!: The bucket that has the tag set to be removed.
+        --bucket=!: The general purpose bucket that corresponds to the metadata configuration that you want to enable or disable an inventory table for.
+        --checksum-algorithm=: The checksum algorithm to use with your inventory table configuration.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --content-m-d5=: The `Content-MD5` header for the inventory table configuration.
+        --expected-bucket-owner=: The expected owner of the general purpose bucket that corresponds to the metadata table configuration that you want to enable or disable an inventory table for.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --inventory-table-configuration=!: The contents of your inventory table configuration.
+      completion:
+        flag:
+            checksum-algorithm:
+                - CRC32
+                - CRC32C
+                - SHA1
+                - SHA256
+                - CRC64NVME
     - name: delete-bucket-website
       description: This operation is not supported for directory buckets.
       flags:
@@ -1486,33 +1174,259 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-bucket-abac
-      description: Returns the attribute-based access control (ABAC) property of the general purpose bucket.
+    - name: get-bucket-analytics-configuration
+      description: This operation is not supported for directory buckets.
       flags:
-        --bucket=!: The name of the general purpose bucket.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The Amazon Web Services account ID of the general purpose bucket's owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-bucket-lifecycle
-      description: For an updated version of this API, see [GetBucketLifecycleConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycleConfiguration.html).
-      flags:
-        --bucket=!: The name of the bucket for which to get the lifecycle information.
+        --bucket=!: The name of the bucket from which an analytics configuration is retrieved.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-directory-buckets
-      description: Returns a list of all Amazon S3 directory buckets owned by the authenticated sender of the request.
+        --id=!: The ID that identifies the analytics configuration.
+    - name: get-bucket-notification-configuration
+      description: This operation is not supported for directory buckets.
       flags:
+        --bucket=!: The name of the bucket for which to get the notification configuration.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --continuation-token=: '`ContinuationToken` indicates to Amazon S3 that the list is being continued on buckets in this account with a token.'
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-directory-buckets=: Maximum number of buckets to be returned in response.
+    - name: get-bucket-tagging
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The name of the bucket for which to get the tagging information.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-object-acl
+      description: 'End of support notice: Beginning November 21, 2025, Amazon S3 will stop returning `DisplayName`.'
+      flags:
+        --bucket=!: The bucket name that contains the object for which to get the ACL information.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key=!: The key of the object for which to get the ACL information.
+        --request-payer=: ""
+        --version-id=: Version ID used to reference a specific version of the object.
+      completion:
+        flag:
+            request-payer:
+                - requester
+    - name: list-parts
+      description: 'End of support notice: Beginning November 21, 2025, Amazon S3 will stop returning `DisplayName`.'
+      flags:
+        --bucket=!: The name of the bucket to which the parts are being uploaded.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key=!: Object key for which the multipart upload was initiated.
         --max-items=: The  total number of items to return in the command's output.
+        --max-parts=: Sets the maximum number of parts to return.
         --page-size=: The size of each page to get in the AWS service call.
+        --part-number-marker=: Specifies the part after which listing should begin.
+        --request-payer=: ""
+        --sse-customer-algorithm=: The server-side encryption (SSE) algorithm used to encrypt the object.
+        --sse-customer-key-m-d5=: The MD5 server-side encryption (SSE) customer managed key.
+        --sse-customer-key=: The server-side encryption (SSE) customer managed key.
         --starting-token=: A token to specify where to start paginating.
+        --upload-id=!: Upload ID identifying the multipart upload whose parts are being listed.
+      completion:
+        flag:
+            request-payer:
+                - requester
+    - name: put-bucket-encryption
+      description: This operation configures default encryption and Amazon S3 Bucket Keys for an existing bucket.
+      flags:
+        --bucket=!: Specifies default encryption for a bucket using server-side encryption with different key options.
+        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the request when you use the SDK.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content-m-d5=: The Base64 encoded 128-bit `MD5` digest of the server-side encryption configuration.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --server-side-encryption-configuration=!: ""
+      completion:
+        flag:
+            checksum-algorithm:
+                - CRC32
+                - CRC32C
+                - SHA1
+                - SHA256
+                - CRC64NVME
+    - name: upload-part-copy
+      description: Uploads a part by copying data from an existing object as data source.
+      flags:
+        --bucket=!: The bucket name.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --copy-source-if-match=: Copies the object if its entity tag (ETag) matches the specified tag.
+        --copy-source-if-modified-since=: Copies the object if it has been modified since the specified time.
+        --copy-source-if-none-match=: Copies the object if its entity tag (ETag) is different than the specified ETag.
+        --copy-source-if-unmodified-since=: Copies the object if it hasn't been modified since the specified time.
+        --copy-source-range=: The range of bytes to copy from the source object.
+        --copy-source-sse-customer-algorithm=: Specifies the algorithm to use when decrypting the source object (for example, `AES256`).
+        --copy-source-sse-customer-key-m-d5=: Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
+        --copy-source-sse-customer-key=: Specifies the customer-provided encryption key for Amazon S3 to use to decrypt the source object.
+        --copy-source=!: Specifies the source object for the copy operation.
+        --expected-bucket-owner=: The account ID of the expected destination bucket owner.
+        --expected-source-bucket-owner=: The account ID of the expected source bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key=!: Object key for which the multipart upload was initiated.
+        --part-number=!: Part number of part being copied.
+        --request-payer=: ""
+        --sse-customer-algorithm=: Specifies the algorithm to use when encrypting the object (for example, AES256).
+        --sse-customer-key-m-d5=: Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
+        --sse-customer-key=: Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data.
+        --upload-id=!: Upload ID identifying the multipart upload whose part is being copied.
+      completion:
+        flag:
+            request-payer:
+                - requester
+    - name: delete-bucket
+      description: Deletes the S3 bucket.
+      flags:
+        --bucket=!: Specifies the bucket being deleted.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-bucket-ownership-controls
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The Amazon S3 bucket whose `OwnershipControls` you want to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-bucket-metrics-configuration
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The name of the bucket containing the metrics configuration to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID used to identify the metrics configuration.
+    - name: get-bucket-policy
+      description: Returns the policy of a specified bucket.
+      flags:
+        --bucket=!: The bucket name to get the bucket policy for.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-bucket-request-payment
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The name of the bucket for which to get the payment request configuration
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-bucket-analytics-configurations
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The name of the bucket from which analytics configurations are retrieved.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --continuation-token=: The `ContinuationToken` that represents a placeholder from where this request should begin.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: put-bucket-metrics-configuration
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The name of the bucket for which the metrics configuration is set.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID used to identify the metrics configuration.
+        --metrics-configuration=!: Specifies the metrics configuration.
+    - name: put-bucket-notification
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The name of the bucket.
+        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the request when you use the SDK.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content-m-d5=: The MD5 hash of the `PutPublicAccessBlock` request body.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --notification-configuration=!: The container for the configuration.
+      completion:
+        flag:
+            checksum-algorithm:
+                - CRC32
+                - CRC32C
+                - SHA1
+                - SHA256
+                - CRC64NVME
+    - name: get-bucket-encryption
+      description: Returns the default encryption configuration for an Amazon S3 bucket.
+      flags:
+        --bucket=!: The name of the bucket from which the server-side encryption configuration is retrieved.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-bucket-logging
+      description: 'End of support notice: Beginning November 21, 2025, Amazon S3 will stop returning `DisplayName`.'
+      flags:
+        --bucket=!: The bucket name for which to get the logging information.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-object
+      description: Retrieves an object from Amazon S3.
+      flags:
+        --bucket=!: The bucket name containing the object.
+        --checksum-mode=: To retrieve the checksum, this mode must be enabled.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --if-match=: Return the object only if its entity tag (ETag) is the same as the one specified in this header; otherwise, return a `412 Precondition Failed` error.
+        --if-modified-since=: Return the object only if it has been modified since the specified time; otherwise, return a `304 Not Modified` error.
+        --if-none-match=: Return the object only if its entity tag (ETag) is different from the one specified in this header; otherwise, return a `304 Not Modified` error.
+        --if-unmodified-since=: Return the object only if it has not been modified since the specified time; otherwise, return a `412 Precondition Failed` error.
+        --key=!: Key of the object to get.
+        --part-number=: Part number of the object being read.
+        --range=: Downloads the specified byte range of an object.
+        --request-payer=: ""
+        --response-cache-control=: Sets the `Cache-Control` header of the response.
+        --response-content-disposition=: Sets the `Content-Disposition` header of the response.
+        --response-content-encoding=: Sets the `Content-Encoding` header of the response.
+        --response-content-language=: Sets the `Content-Language` header of the response.
+        --response-content-type=: Sets the `Content-Type` header of the response.
+        --response-expires=: Sets the `Expires` header of the response.
+        --sse-customer-algorithm=: Specifies the algorithm to use when decrypting the object (for example, `AES256`).
+        --sse-customer-key-m-d5=: Specifies the 128-bit MD5 digest of the customer-provided encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
+        --sse-customer-key=: Specifies the customer-provided encryption key that you originally provided for Amazon S3 to encrypt the data before storing it.
+        --version-id=: Version ID used to reference a specific version of the object.
+      completion:
+        flag:
+            checksum-mode:
+                - ENABLED
+            request-payer:
+                - requester
+        positional:
+            - - $files
+    - name: get-object-retention
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The bucket name containing the object whose retention settings you want to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key=!: The key name for the object whose retention settings you want to retrieve.
+        --request-payer=: ""
+        --version-id=: The version ID for the object whose retention settings you want to retrieve.
+      completion:
+        flag:
+            request-payer:
+                - requester
     - name: list-multipart-uploads
       description: 'End of support notice: Beginning November 21, 2025, Amazon S3 will stop returning `DisplayName`.'
       flags:
@@ -1537,92 +1451,6 @@ commands:
                 - url
             request-payer:
                 - requester
-    - name: put-bucket-abac
-      description: Sets the attribute-based access control (ABAC) property of the general purpose bucket.
-      flags:
-        --abac-status=!: The ABAC status of the general purpose bucket.
-        --bucket=!: The name of the general purpose bucket.
-        --checksum-algorithm=: Indicates the algorithm that you want Amazon S3 to use to create the checksum.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The MD5 hash of the `PutBucketAbac` request body.
-        --expected-bucket-owner=: The Amazon Web Services account ID of the general purpose bucket's owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      completion:
-        flag:
-            checksum-algorithm:
-                - CRC32
-                - CRC32C
-                - SHA1
-                - SHA256
-                - CRC64NVME
-    - name: delete-bucket-metrics-configuration
-      description: This operation is not supported for directory buckets.
-      flags:
-        --bucket=!: The name of the bucket containing the metrics configuration to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID used to identify the metrics configuration.
-    - name: get-bucket-location
-      description: Using the `GetBucketLocation` operation is no longer a best practice.
-      flags:
-        --bucket=!: The name of the bucket for which to get the location.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-object-torrent
-      description: This operation is not supported for directory buckets.
-      flags:
-        --bucket=!: The name of the bucket containing the object for which to get the torrent files.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --key=!: The object key for which to get the information.
-        --request-payer=: ""
-      completion:
-        flag:
-            request-payer:
-                - requester
-        positional:
-            - - $files
-    - name: put-bucket-accelerate-configuration
-      description: This operation is not supported for directory buckets.
-      flags:
-        --accelerate-configuration=!: Container for setting the transfer acceleration state.
-        --bucket=!: The name of the bucket for which the accelerate configuration is set.
-        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the request when you use the SDK.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      completion:
-        flag:
-            checksum-algorithm:
-                - CRC32
-                - CRC32C
-                - SHA1
-                - SHA256
-                - CRC64NVME
-    - name: put-bucket-encryption
-      description: This operation configures default encryption and Amazon S3 Bucket Keys for an existing bucket.
-      flags:
-        --bucket=!: Specifies default encryption for a bucket using server-side encryption with different key options.
-        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the request when you use the SDK.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The Base64 encoded 128-bit `MD5` digest of the server-side encryption configuration.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --server-side-encryption-configuration=!: ""
-      completion:
-        flag:
-            checksum-algorithm:
-                - CRC32
-                - CRC32C
-                - SHA1
-                - SHA256
-                - CRC64NVME
     - name: put-bucket-replication
       description: This operation is not supported for directory buckets.
       flags:
@@ -1635,6 +1463,286 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --replication-configuration=!: ""
         --token=: A token to allow Object Lock to be enabled for an existing bucket.
+      completion:
+        flag:
+            checksum-algorithm:
+                - CRC32
+                - CRC32C
+                - SHA1
+                - SHA256
+                - CRC64NVME
+    - name: put-object
+      description: 'End of support notice: As of October 1, 2025, Amazon S3 has discontinued support for Email Grantee Access Control Lists (ACLs).'
+      flags:
+        --acl=: The canned ACL to apply to the object.
+        --body=: Object data.
+        --bucket-key-enabled: Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption with server-side encryption using Key Management Service (KMS) keys (SSE-KMS).
+        --bucket=!: The bucket name to which the PUT action was initiated.
+        --cache-control=: Can be used to specify caching behavior along the request/reply chain.
+        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the object when you use the SDK.
+        --checksum-cr-c32-c=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-cr-c32=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-cr-c64-nvme=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-sh-a1=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-sh-a256=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content-disposition=: Specifies presentational information for the object.
+        --content-encoding=: Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.
+        --content-language=: The language the content is in.
+        --content-length=: Size of the body in bytes.
+        --content-m-d5=: The Base64 encoded 128-bit `MD5` digest of the message (without the headers) according to RFC 1864. This header can be used as a message integrity check to verify that the data is the same data that was originally sent.
+        --content-type=: A standard MIME type describing the format of the contents.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --expires=: The date and time at which the object is no longer cacheable.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --grant-full-control=: Gives the grantee READ, READ\_ACP, and WRITE\_ACP permissions on the object.
+        --grant-read-acp=: Allows grantee to read the object ACL.
+        --grant-read=: Allows grantee to read the object data and its metadata.
+        --grant-write-acp=: Allows grantee to write the ACL for the applicable object.
+        --if-match=: Uploads the object only if the ETag (entity tag) value provided during the WRITE operation matches the ETag of the object in S3.
+        --if-none-match=: Uploads the object only if the object key name does not already exist in the bucket specified.
+        --key=!: Object key for which the PUT action was initiated.
+        --metadata=: A map of metadata to store with the object in S3.
+        --no-bucket-key-enabled: Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption with server-side encryption using Key Management Service (KMS) keys (SSE-KMS).
+        --object-lock-legal-hold-status=: Specifies whether a legal hold will be applied to this object.
+        --object-lock-mode=: The Object Lock mode that you want to apply to this object.
+        --object-lock-retain-until-date=: The date and time when you want this object's Object Lock to expire.
+        --request-payer=: ""
+        --server-side-encryption=: The server-side encryption algorithm that was used when you store this object in Amazon S3 or Amazon FSx.
+        --sse-customer-algorithm=: Specifies the algorithm to use when encrypting the object (for example, `AES256`).
+        --sse-customer-key-m-d5=: Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
+        --sse-customer-key=: Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data.
+        --ssekms-encryption-context=: Specifies the Amazon Web Services KMS Encryption Context as an additional encryption context to use for object encryption.
+        --ssekms-key-id=: Specifies the KMS key ID (Key ID, Key ARN, or Key Alias) to use for object encryption.
+        --storage-class=: By default, Amazon S3 uses the STANDARD Storage Class to store newly created objects.
+        --tagging=: The tag-set for the object.
+        --website-redirect-location=: If the bucket is configured as a website, redirects requests for this object to another object in the same bucket or to an external URL.
+        --write-offset-bytes=: Specifies the offset for appending data to existing objects in bytes.
+      completion:
+        flag:
+            acl:
+                - private
+                - public-read
+                - public-read-write
+                - authenticated-read
+                - aws-exec-read
+                - bucket-owner-read
+                - bucket-owner-full-control
+            checksum-algorithm:
+                - CRC32
+                - CRC32C
+                - SHA1
+                - SHA256
+                - CRC64NVME
+            object-lock-legal-hold-status:
+                - "ON"
+                - "OFF"
+            object-lock-mode:
+                - GOVERNANCE
+                - COMPLIANCE
+            request-payer:
+                - requester
+            server-side-encryption:
+                - AES256
+                - aws:fsx
+                - aws:kms
+                - aws:kms:dsse
+            storage-class:
+                - STANDARD
+                - REDUCED_REDUNDANCY
+                - STANDARD_IA
+                - ONEZONE_IA
+                - INTELLIGENT_TIERING
+                - GLACIER
+                - DEEP_ARCHIVE
+                - OUTPOSTS
+                - GLACIER_IR
+                - SNOW
+                - EXPRESS_ONEZONE
+                - FSX_OPENZFS
+    - name: delete-bucket-lifecycle
+      description: Deletes the lifecycle configuration from the specified bucket.
+      flags:
+        --bucket=!: The bucket name of the lifecycle to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-bucket-notification
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The name of the bucket for which to get the notification configuration.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-bucket-policy-status
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The name of the Amazon S3 bucket whose policy status you want to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-object-legal-hold
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The bucket name containing the object whose legal hold status you want to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key=!: The key name for the object whose legal hold status you want to retrieve.
+        --request-payer=: ""
+        --version-id=: The version ID of the object whose legal hold status you want to retrieve.
+      completion:
+        flag:
+            request-payer:
+                - requester
+    - name: put-bucket-logging
+      description: 'End of support notice: As of October 1, 2025, Amazon S3 has discontinued support for Email Grantee Access Control Lists (ACLs).'
+      flags:
+        --bucket-logging-status=!: Container for logging status information.
+        --bucket=!: The name of the bucket for which to set the logging parameters.
+        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the request when you use the SDK.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content-m-d5=: The MD5 hash of the `PutBucketLogging` request body.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            checksum-algorithm:
+                - CRC32
+                - CRC32C
+                - SHA1
+                - SHA256
+                - CRC64NVME
+    - name: put-object-lock-configuration
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The bucket whose Object Lock configuration you want to create or replace.
+        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the object when you use the SDK.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content-m-d5=: The MD5 hash for the request body.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --object-lock-configuration=: The Object Lock configuration that you want to apply to the specified bucket.
+        --request-payer=: ""
+        --token=: A token to allow Object Lock to be enabled for an existing bucket.
+      completion:
+        flag:
+            checksum-algorithm:
+                - CRC32
+                - CRC32C
+                - SHA1
+                - SHA256
+                - CRC64NVME
+            request-payer:
+                - requester
+    - name: restore-object
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The bucket name containing the object to restore.
+        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the object when you use the SDK.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key=!: Object key for which the action was initiated.
+        --request-payer=: ""
+        --restore-request=: ""
+        --version-id=: VersionId used to reference a specific version of the object.
+      completion:
+        flag:
+            checksum-algorithm:
+                - CRC32
+                - CRC32C
+                - SHA1
+                - SHA256
+                - CRC64NVME
+            request-payer:
+                - requester
+    - name: create-session
+      description: Creates a session that establishes temporary security credentials to support fast authentication and authorization for the Zonal endpoint API operations on directory buckets.
+      flags:
+        --bucket-key-enabled: Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption with server-side encryption using KMS keys (SSE-KMS).
+        --bucket=!: The name of the bucket that you create a session for.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-bucket-key-enabled: Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption with server-side encryption using KMS keys (SSE-KMS).
+        --server-side-encryption=: The server-side encryption algorithm to use when you store objects in the directory bucket.
+        --session-mode=: Specifies the mode of the session that will be created, either `ReadWrite` or `ReadOnly`.
+        --ssekms-encryption-context=: Specifies the Amazon Web Services KMS Encryption Context as an additional encryption context to use for object encryption.
+        --ssekms-key-id=: If you specify `x-amz-server-side-encryption` with `aws:kms`, you must specify the `x-amz-server-side-encryption-aws-kms-key-id` header with the ID (Key ID or Key ARN) of the KMS symmetric encryption customer managed key to use.
+      completion:
+        flag:
+            server-side-encryption:
+                - AES256
+                - aws:fsx
+                - aws:kms
+                - aws:kms:dsse
+            session-mode:
+                - ReadOnly
+                - ReadWrite
+    - name: get-bucket-replication
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The bucket name for which to get the replication information.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-bucket-website
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The bucket name for which to get the website configuration.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-bucket-inventory-configurations
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The name of the bucket containing the inventory configurations to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --continuation-token=: The marker used to continue an inventory configuration listing that has been truncated.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: put-bucket-cors
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: Specifies the bucket impacted by the `cors`configuration.
+        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the request when you use the SDK.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content-m-d5=: The Base64 encoded 128-bit `MD5` digest of the data.
+        --cors-configuration=!: Describes the cross-origin access configuration for objects in an Amazon S3 bucket.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            checksum-algorithm:
+                - CRC32
+                - CRC32C
+                - SHA1
+                - SHA256
+                - CRC64NVME
+    - name: put-bucket-request-payment
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The bucket name.
+        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the request when you use the SDK.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content-m-d5=: The Base64 encoded 128-bit `MD5` digest of the data.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --request-payment-configuration=!: Container for Payer.
       completion:
         flag:
             checksum-algorithm:
@@ -1669,6 +1777,70 @@ commands:
                 - CRC64NVME
             request-payer:
                 - requester
+    - name: select-object-content
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The S3 bucket.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --expression-type=!: The type of the provided expression (for example, SQL).
+        --expression=!: The expression that is used to query the object.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-serialization=!: Describes the format of the data in the object that is being queried.
+        --key=!: The object key.
+        --output-serialization=!: Describes the format of the data that you want Amazon S3 to return in response.
+        --request-progress=: Specifies if periodic request progress information should be enabled.
+        --scan-range=: Specifies the byte range of the object to get the records from.
+        --sse-customer-algorithm=: The server-side encryption (SSE) algorithm used to encrypt the object.
+        --sse-customer-key-m-d5=: The MD5 server-side encryption (SSE) customer managed key.
+        --sse-customer-key=: The server-side encryption (SSE) customer managed key.
+      completion:
+        flag:
+            expression-type:
+                - SQL
+    - name: delete-bucket-inventory-configuration
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The name of the bucket containing the inventory configuration to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID used to identify the inventory configuration.
+    - name: delete-bucket-metrics-configuration
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The name of the bucket containing the metrics configuration to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID used to identify the metrics configuration.
+    - name: delete-public-access-block
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The Amazon S3 bucket whose `PublicAccessBlock` configuration you want to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-bucket-lifecycle
+      description: For an updated version of this API, see [GetBucketLifecycleConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycleConfiguration.html).
+      flags:
+        --bucket=!: The name of the bucket for which to get the lifecycle information.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-bucket-versioning
+      description: This operation is not supported for directory buckets.
+      flags:
+        --bucket=!: The name of the bucket for which to get the versioning information.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: put-public-access-block
       description: This operation is not supported for directory buckets.
       flags:
@@ -1688,51 +1860,25 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
-    - name: get-bucket-inventory-configuration
-      description: This operation is not supported for directory buckets.
+    - name: get-bucket-lifecycle-configuration
+      description: Returns the lifecycle configuration information set on the bucket.
       flags:
-        --bucket=!: The name of the bucket containing the inventory configuration to retrieve.
+        --bucket=!: The name of the bucket for which to get the lifecycle information.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID used to identify the inventory configuration.
-    - name: get-bucket-metrics-configuration
-      description: This operation is not supported for directory buckets.
+    - name: create-bucket-metadata-table-configuration
+      description: We recommend that you create your S3 Metadata configurations by using the V2 [CreateBucketMetadataConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html) API operation.
       flags:
-        --bucket=!: The name of the bucket containing the metrics configuration to retrieve.
+        --bucket=!: The general purpose bucket that you want to create the metadata table configuration for.
+        --checksum-algorithm=: The checksum algorithm to use with your metadata table configuration.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
+        --content-m-d5=: The `Content-MD5` header for the metadata table configuration.
+        --expected-bucket-owner=: The expected owner of the general purpose bucket that corresponds to your metadata table configuration.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID used to identify the metrics configuration.
-    - name: get-bucket-notification-configuration
-      description: This operation is not supported for directory buckets.
-      flags:
-        --bucket=!: The name of the bucket for which to get the notification configuration.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-bucket-replication
-      description: This operation is not supported for directory buckets.
-      flags:
-        --bucket=!: The bucket name for which to get the replication information.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: put-bucket-website
-      description: This operation is not supported for directory buckets.
-      flags:
-        --bucket=!: The bucket name.
-        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the request when you use the SDK.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The Base64 encoded 128-bit `MD5` digest of the data.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --website-configuration=!: Container for the request.
+        --metadata-table-configuration=!: The contents of your metadata table configuration.
       completion:
         flag:
             checksum-algorithm:
@@ -1741,75 +1887,14 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
-    - name: put-object-tagging
-      description: This operation is not supported for directory buckets.
+    - name: delete-bucket-encryption
+      description: This implementation of the DELETE action resets the default encryption for the bucket as server-side encryption with Amazon S3 managed keys (SSE-S3).
       flags:
-        --bucket=!: The bucket name containing the object.
-        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the object when you use the SDK.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The MD5 hash for the request body.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key=!: Name of the object key.
-        --request-payer=: Confirms that the requester knows that she or he will be charged for the tagging object request.
-        --tagging=!: Container for the `TagSet` and `Tag` elements
-        --version-id=: The versionId of the object that the tag-set will be added to.
-      completion:
-        flag:
-            checksum-algorithm:
-                - CRC32
-                - CRC32C
-                - SHA1
-                - SHA256
-                - CRC64NVME
-            request-payer:
-                - requester
-    - name: upload-part-copy
-      description: Uploads a part by copying data from an existing object as data source.
-      flags:
-        --bucket=!: The bucket name.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --copy-source-if-match=: Copies the object if its entity tag (ETag) matches the specified tag.
-        --copy-source-if-modified-since=: Copies the object if it has been modified since the specified time.
-        --copy-source-if-none-match=: Copies the object if its entity tag (ETag) is different than the specified ETag.
-        --copy-source-if-unmodified-since=: Copies the object if it hasn't been modified since the specified time.
-        --copy-source-range=: The range of bytes to copy from the source object.
-        --copy-source-sse-customer-algorithm=: Specifies the algorithm to use when decrypting the source object (for example, `AES256`).
-        --copy-source-sse-customer-key-m-d5=: Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
-        --copy-source-sse-customer-key=: Specifies the customer-provided encryption key for Amazon S3 to use to decrypt the source object.
-        --copy-source=!: Specifies the source object for the copy operation.
-        --expected-bucket-owner=: The account ID of the expected destination bucket owner.
-        --expected-source-bucket-owner=: The account ID of the expected source bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key=!: Object key for which the multipart upload was initiated.
-        --part-number=!: Part number of part being copied.
-        --request-payer=: ""
-        --sse-customer-algorithm=: Specifies the algorithm to use when encrypting the object (for example, AES256).
-        --sse-customer-key-m-d5=: Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
-        --sse-customer-key=: Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data.
-        --upload-id=!: Upload ID identifying the multipart upload whose part is being copied.
-      completion:
-        flag:
-            request-payer:
-                - requester
-    - name: abort-multipart-upload
-      description: This operation aborts a multipart upload.
-      flags:
-        --bucket=!: The bucket name to which the upload was taking place.
+        --bucket=!: The name of the bucket containing the server-side encryption configuration to delete.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --if-match-initiated-time=: If present, this header aborts an in progress multipart upload only if it was initiated on the provided timestamp.
-        --key=!: Key of the object for which the multipart upload was initiated.
-        --request-payer=: ""
-        --upload-id=!: Upload ID that identifies the multipart upload.
-      completion:
-        flag:
-            request-payer:
-                - requester
     - name: delete-objects
       description: This operation enables you to delete multiple objects from a bucket using a single HTTP request.
       flags:
@@ -1834,107 +1919,20 @@ commands:
                 - CRC64NVME
             request-payer:
                 - requester
-    - name: get-bucket-policy
-      description: Returns the policy of a specified bucket.
-      flags:
-        --bucket=!: The bucket name to get the bucket policy for.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-object-legal-hold
+    - name: put-object-tagging
       description: This operation is not supported for directory buckets.
       flags:
-        --bucket=!: The bucket name containing the object whose legal hold status you want to retrieve.
+        --bucket=!: The bucket name containing the object.
+        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the object when you use the SDK.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content-m-d5=: The MD5 hash for the request body.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key=!: The key name for the object whose legal hold status you want to retrieve.
-        --request-payer=: ""
-        --version-id=: The version ID of the object whose legal hold status you want to retrieve.
-      completion:
-        flag:
-            request-payer:
-                - requester
-    - name: list-objects-v2
-      description: 'End of support notice: Beginning November 21, 2025, Amazon S3 will stop returning `DisplayName`.'
-      flags:
-        --bucket=!: '**Directory buckets** - When you use this operation with a directory bucket, you must use virtual-hosted-style requests in the format `Bucket-name.s3express-zone-id.region-code.amazonaws.com`. Path-style requests are not supported.'
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --continuation-token=: '`ContinuationToken` indicates to Amazon S3 that the list is being continued on this bucket with a token.'
-        --delimiter=: A delimiter is a character that you use to group keys.
-        --encoding-type=: Encoding type used by Amazon S3 to encode the [object keys](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html) in the response.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --fetch-owner: The owner field is not present in `ListObjectsV2` by default.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-keys=: Sets the maximum number of keys returned in the response.
-        --no-fetch-owner: The owner field is not present in `ListObjectsV2` by default.
-        --optional-object-attributes=: Specifies the optional fields that you want returned in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --prefix=: Limits the response to keys that begin with the specified prefix.
-        --request-payer=: Confirms that the requester knows that she or he will be charged for the list objects request in V2 style.
-        --start-after=: StartAfter is where you want Amazon S3 to start listing from.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            encoding-type:
-                - url
-            request-payer:
-                - requester
-    - name: put-bucket-acl
-      description: 'End of support notice: As of October 1, 2025, Amazon S3 has discontinued support for Email Grantee Access Control Lists (ACLs).'
-      flags:
-        --access-control-policy=: Contains the elements that set the ACL permissions for an object per grantee.
-        --acl=: The canned ACL to apply to the bucket.
-        --bucket=!: The bucket to which to apply the ACL.
-        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the request when you use the SDK.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The Base64 encoded 128-bit `MD5` digest of the data.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --grant-full-control=: Allows grantee the read, write, read ACP, and write ACP permissions on the bucket.
-        --grant-read-acp=: Allows grantee to read the bucket ACL.
-        --grant-read=: Allows grantee to list the objects in the bucket.
-        --grant-write-acp=: Allows grantee to write the ACL for the applicable bucket.
-        --grant-write=: Allows grantee to create new objects in the bucket.
-      completion:
-        flag:
-            acl:
-                - private
-                - public-read
-                - public-read-write
-                - authenticated-read
-            checksum-algorithm:
-                - CRC32
-                - CRC32C
-                - SHA1
-                - SHA256
-                - CRC64NVME
-    - name: put-bucket-metrics-configuration
-      description: This operation is not supported for directory buckets.
-      flags:
-        --bucket=!: The name of the bucket for which the metrics configuration is set.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID used to identify the metrics configuration.
-        --metrics-configuration=!: Specifies the metrics configuration.
-    - name: put-bucket-request-payment
-      description: This operation is not supported for directory buckets.
-      flags:
-        --bucket=!: The bucket name.
-        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the request when you use the SDK.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The Base64 encoded 128-bit `MD5` digest of the data.
-        --expected-bucket-owner=: The account ID of the expected bucket owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --request-payment-configuration=!: Container for Payer.
+        --key=!: Name of the object key.
+        --request-payer=: Confirms that the requester knows that she or he will be charged for the tagging object request.
+        --tagging=!: Container for the `TagSet` and `Tag` elements
+        --version-id=: The versionId of the object that the tag-set will be added to.
       completion:
         flag:
             checksum-algorithm:
@@ -1943,6 +1941,8 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+            request-payer:
+                - requester
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:

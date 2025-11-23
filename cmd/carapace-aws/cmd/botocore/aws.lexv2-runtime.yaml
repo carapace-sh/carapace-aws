@@ -1,6 +1,21 @@
 name: lexv2-runtime
 description: Amazon Lex Runtime V2
 commands:
+    - name: recognize-utterance
+      description: Sends user input to Amazon Lex V2.
+      flags:
+        --bot-alias-id=!: The alias identifier in use for the bot that should receive the request.
+        --bot-id=!: The identifier of the bot that should receive the request.
+        --input-stream=: User input in PCM or Opus audio format or text format as described in the `requestContentType` parameter.
+        --locale-id=!: The locale where the session is in use.
+        --request-attributes=: Request-specific information passed between the client application and Amazon Lex V2
+        --request-content-type=!: Indicates the format for audio input or that the content is text.
+        --response-content-type=: The message that Amazon Lex V2 returns in the response can be either text or speech based on the `responseContentType` value.
+        --session-id=!: The identifier of the session in use.
+        --session-state=: Sets the state of the session with the user.
+      completion:
+        positional:
+            - - $files
     - name: delete-session
       description: Removes session information for a specified bot, alias, and user ID.
       flags:
@@ -48,18 +63,3 @@ commands:
         --session-id=!: The identifier of the user session that is having the conversation.
         --session-state=: The current state of the dialog between the user and the bot.
         --text=!: The text that the user entered.
-    - name: recognize-utterance
-      description: Sends user input to Amazon Lex V2.
-      flags:
-        --bot-alias-id=!: The alias identifier in use for the bot that should receive the request.
-        --bot-id=!: The identifier of the bot that should receive the request.
-        --input-stream=: User input in PCM or Opus audio format or text format as described in the `requestContentType` parameter.
-        --locale-id=!: The locale where the session is in use.
-        --request-attributes=: Request-specific information passed between the client application and Amazon Lex V2
-        --request-content-type=!: Indicates the format for audio input or that the content is text.
-        --response-content-type=: The message that Amazon Lex V2 returns in the response can be either text or speech based on the `responseContentType` value.
-        --session-id=!: The identifier of the session in use.
-        --session-state=: Sets the state of the session with the user.
-      completion:
-        positional:
-            - - $files

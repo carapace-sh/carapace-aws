@@ -1,6 +1,43 @@
 name: discovery
 description: AWS Application Discovery Service
 commands:
+    - name: start-export-task
+      description: Begins the export of a discovered data report to an Amazon S3 bucket managed by Amazon Web Services.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=: The end timestamp for exported data from the single Application Discovery Agent selected in the filters.
+        --export-data-format=: The file format for the returned export data.
+        --filters=: If a filter is present, it selects the single `agentId` of the Application Discovery Agent for which data is exported.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --preferences=: Indicates the type of data that needs to be exported.
+        --start-time=: The start timestamp for exported data from the single Application Discovery Agent selected in the filters.
+    - name: start-import-task
+      description: Starts an import task, which allows you to import details of your on-premises environment directly into Amazon Web Services Migration Hub without having to use the Amazon Web Services Application Discovery Service (Application Discovery Service) tools such as the Amazon Web Services Application Discovery Service Agentless Collector or Application Discovery Agent.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: Optional.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --import-url=!: The URL for your import file that you've uploaded to Amazon S3.
+        --name=!: A descriptive name for this request.
+    - name: associate-configuration-items-to-application
+      description: Associates one or more configuration items with an application.
+      flags:
+        --application-configuration-id=!: The configuration ID of an application with which items are to be associated.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-ids=!: The ID of each configuration item to be associated with an application.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: batch-delete-import-data
+      description: Deletes one or more import tasks, each identified by their import ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delete-history: Set to `true` to remove the deleted import task from [DescribeImportTasks]().
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --import-task-ids=!: The IDs for the import tasks that you want to delete.
+        --no-delete-history: Set to `true` to remove the deleted import task from [DescribeImportTasks]().
     - name: list-configurations
       description: Retrieves a list of configuration items as specified by the value passed to the required parameter `configurationType`.
       flags:
@@ -22,10 +59,73 @@ commands:
                 - PROCESS
                 - CONNECTION
                 - APPLICATION
+    - name: list-server-neighbors
+      description: Retrieves a list of servers that are one network hop away from a specified server.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-id=!: Configuration ID of the server for which neighbors are being listed.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Maximum number of results to return in a single page of output.
+        --neighbor-configuration-ids=: List of configuration IDs to test for one-hop-away.
+        --next-token=: Token to retrieve the next set of results.
+        --no-port-information-needed: Flag to indicate if port and protocol information is needed as part of the response.
+        --port-information-needed: Flag to indicate if port and protocol information is needed as part of the response.
+    - name: start-continuous-export
+      description: Start the continuous flow of agent's discovered data into Amazon Athena.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: stop-continuous-export
+      description: Stop the continuous flow of agent's discovered data into Amazon Athena.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --export-id=!: The unique ID assigned to this export.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-application
+      description: Updates metadata about an application.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-id=!: Configuration ID of the application to be updated.
+        --description=: New description of the application to be updated.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: New name of the application to be updated.
+        --wave=: The new migration wave of the application that you want to update.
+    - name: batch-delete-agents
+      description: Deletes one or more agents or collectors as specified by ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delete-agents=!: The list of agents to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: disassociate-configuration-items-from-application
+      description: Disassociates one or more configuration items from an application.
+      flags:
+        --application-configuration-id=!: Configuration ID of an application from which each item is disassociated.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-ids=!: Configuration ID of each item to be disassociated from an application.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: export-configurations
+      description: Deprecated.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: start-data-collection-by-agent-ids
       description: Instructs the specified agents to start collecting data.
       flags:
         --agent-ids=!: The IDs of the agents from which to start collecting data.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: stop-data-collection-by-agent-ids
+      description: Instructs the specified agents to stop collecting data.
+      flags:
+        --agent-ids=!: The IDs of the agents from which to stop collecting data.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -46,6 +146,64 @@ commands:
         --configuration-ids=!: A list of configuration items that you want to tag.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --tags=!: Tags that you want to associate with one or more configuration items.
+    - name: delete-tags
+      description: Deletes the association between configuration items and one or more tags.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-ids=!: A list of configuration items with tags that you want to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: Tags that you want to delete from one or more configuration items.
+    - name: describe-batch-delete-configuration-task
+      description: Takes a unique deletion task identifier as input and returns metadata about a configuration deletion task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --task-id=!: The ID of the task to delete.
+    - name: describe-configurations
+      description: Retrieves attributes for a list of configuration item IDs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-ids=!: One or more configuration IDs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-export-configurations
+      description: '`DescribeExportConfigurations` is deprecated.'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --export-ids=: A list of continuous export IDs to search for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: A number between 1 and 100 specifying the maximum number of continuous export descriptions returned.
+        --next-token=: The token from the previous call to describe-export-tasks.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-import-tasks
+      description: Returns an array of import tasks for your account, including status information, times, IDs, the Amazon S3 Object URL for the import file, and more.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: An array of name-value pairs that you provide to filter the results for the `DescribeImportTask` request to a specific subset of results.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that you want this request to return, up to 100.
+        --next-token=: The token to request a specific page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-tags
+      description: Retrieves a list of configuration items that have tags as specified by the key-value pairs, name and value, passed to the optional parameter `filters`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: You can filter the list using a *key*-*value* format.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The total number of items to return in a single page of output.
+        --next-token=: A token to start the list.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: delete-applications
       description: Deletes a list of applications and their associations with configuration items.
       flags:
@@ -66,137 +224,6 @@ commands:
         --next-token=: Token to retrieve the next set of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: describe-import-tasks
-      description: Returns an array of import tasks for your account, including status information, times, IDs, the Amazon S3 Object URL for the import file, and more.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: An array of name-value pairs that you provide to filter the results for the `DescribeImportTask` request to a specific subset of results.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that you want this request to return, up to 100.
-        --next-token=: The token to request a specific page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: disassociate-configuration-items-from-application
-      description: Disassociates one or more configuration items from an application.
-      flags:
-        --application-configuration-id=!: Configuration ID of an application from which each item is disassociated.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration-ids=!: Configuration ID of each item to be disassociated from an application.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-server-neighbors
-      description: Retrieves a list of servers that are one network hop away from a specified server.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration-id=!: Configuration ID of the server for which neighbors are being listed.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: Maximum number of results to return in a single page of output.
-        --neighbor-configuration-ids=: List of configuration IDs to test for one-hop-away.
-        --next-token=: Token to retrieve the next set of results.
-        --no-port-information-needed: Flag to indicate if port and protocol information is needed as part of the response.
-        --port-information-needed: Flag to indicate if port and protocol information is needed as part of the response.
-    - name: start-batch-delete-configuration-task
-      description: Takes a list of configurationId as input and starts an asynchronous deletion task to remove the configurationItems.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration-ids=!: The list of configuration IDs that will be deleted by the task.
-        --configuration-type=!: The type of configuration item to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      completion:
-        flag:
-            configuration-type:
-                - SERVER
-    - name: batch-delete-agents
-      description: Deletes one or more agents or collectors as specified by ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --delete-agents=!: The list of agents to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-export-configurations
-      description: '`DescribeExportConfigurations` is deprecated.'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --export-ids=: A list of continuous export IDs to search for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: A number between 1 and 100 specifying the maximum number of continuous export descriptions returned.
-        --next-token=: The token from the previous call to describe-export-tasks.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: get-discovery-summary
-      description: Retrieves a short summary of discovered assets.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: start-continuous-export
-      description: Start the continuous flow of agent's discovered data into Amazon Athena.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: start-import-task
-      description: Starts an import task, which allows you to import details of your on-premises environment directly into Amazon Web Services Migration Hub without having to use the Amazon Web Services Application Discovery Service (Application Discovery Service) tools such as the Amazon Web Services Application Discovery Service Agentless Collector or Application Discovery Agent.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: Optional.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --import-url=!: The URL for your import file that you've uploaded to Amazon S3.
-        --name=!: A descriptive name for this request.
-    - name: stop-continuous-export
-      description: Stop the continuous flow of agent's discovered data into Amazon Athena.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --export-id=!: The unique ID assigned to this export.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: stop-data-collection-by-agent-ids
-      description: Instructs the specified agents to stop collecting data.
-      flags:
-        --agent-ids=!: The IDs of the agents from which to stop collecting data.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-application
-      description: Updates metadata about an application.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration-id=!: Configuration ID of the application to be updated.
-        --description=: New description of the application to be updated.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: New name of the application to be updated.
-        --wave=: The new migration wave of the application that you want to update.
-    - name: batch-delete-import-data
-      description: Deletes one or more import tasks, each identified by their import ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --delete-history: Set to `true` to remove the deleted import task from [DescribeImportTasks]().
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --import-task-ids=!: The IDs for the import tasks that you want to delete.
-        --no-delete-history: Set to `true` to remove the deleted import task from [DescribeImportTasks]().
-    - name: describe-batch-delete-configuration-task
-      description: Takes a unique deletion task identifier as input and returns metadata about a configuration deletion task.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --task-id=!: The ID of the task to delete.
-    - name: describe-configurations
-      description: Retrieves attributes for a list of configuration item IDs.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration-ids=!: One or more configuration IDs.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: describe-continuous-exports
       description: Lists exports as specified by ID.
       flags:
@@ -222,48 +249,21 @@ commands:
         --next-token=: The `nextToken` value returned from a previous paginated `DescribeExportTasks` request where `maxResults` was used and the results exceeded the value of that parameter.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: start-export-task
-      description: Begins the export of a discovered data report to an Amazon S3 bucket managed by Amazon Web Services.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --end-time=: The end timestamp for exported data from the single Application Discovery Agent selected in the filters.
-        --export-data-format=: The file format for the returned export data.
-        --filters=: If a filter is present, it selects the single `agentId` of the Application Discovery Agent for which data is exported.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --preferences=: Indicates the type of data that needs to be exported.
-        --start-time=: The start timestamp for exported data from the single Application Discovery Agent selected in the filters.
-    - name: associate-configuration-items-to-application
-      description: Associates one or more configuration items with an application.
-      flags:
-        --application-configuration-id=!: The configuration ID of an application with which items are to be associated.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration-ids=!: The ID of each configuration item to be associated with an application.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-tags
-      description: Deletes the association between configuration items and one or more tags.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration-ids=!: A list of configuration items with tags that you want to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: Tags that you want to delete from one or more configuration items.
-    - name: describe-tags
-      description: Retrieves a list of configuration items that have tags as specified by the key-value pairs, name and value, passed to the optional parameter `filters`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: You can filter the list using a *key*-*value* format.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The total number of items to return in a single page of output.
-        --next-token=: A token to start the list.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: export-configurations
-      description: Deprecated.
+    - name: get-discovery-summary
+      description: Retrieves a short summary of discovered assets.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: start-batch-delete-configuration-task
+      description: Takes a list of configurationId as input and starts an asynchronous deletion task to remove the configurationItems.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-ids=!: The list of configuration IDs that will be deleted by the task.
+        --configuration-type=!: The type of configuration item to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            configuration-type:
+                - SERVER

@@ -1,6 +1,138 @@
 name: databrew
 description: AWS Glue DataBrew
 commands:
+    - name: create-profile-job
+      description: Creates a new job to analyze a dataset and create its data profile.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration=: Configuration for profile jobs.
+        --dataset-name=!: The name of the dataset that this job is to act upon.
+        --encryption-key-arn=: The Amazon Resource Name (ARN) of an encryption key that is used to protect the job.
+        --encryption-mode=: 'The encryption mode for the job, which can be one of the following:'
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-sample=: Sample configuration for profile jobs only.
+        --log-subscription=: Enables or disables Amazon CloudWatch logging for the job.
+        --max-capacity=: The maximum number of nodes that DataBrew can use when the job processes data.
+        --max-retries=: The maximum number of times to retry the job after a job run fails.
+        --name=!: The name of the job to be created.
+        --output-location=!: ""
+        --role-arn=!: The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
+        --tags=: Metadata tags to apply to this job.
+        --timeout=: The job's timeout in minutes.
+        --validation-configurations=: List of validation configurations that are applied to the profile job.
+      completion:
+        flag:
+            encryption-mode:
+                - SSE-KMS
+                - SSE-S3
+            log-subscription:
+                - ENABLE
+                - DISABLE
+    - name: create-schedule
+      description: Creates a new schedule for one or more DataBrew jobs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cron-expression=!: The date or dates and time or times when the jobs are to be run.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-names=: The name or names of one or more jobs to be run.
+        --name=!: A unique name for the schedule.
+        --tags=: Metadata tags to apply to this schedule.
+    - name: delete-project
+      description: Deletes an existing DataBrew project.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the project to be deleted.
+    - name: describe-recipe
+      description: Returns the definition of a specific DataBrew recipe corresponding to a particular version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the recipe to be described.
+        --recipe-version=: The recipe version identifier.
+    - name: describe-ruleset
+      description: Retrieves detailed information about the ruleset.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the ruleset to be described.
+    - name: describe-schedule
+      description: Returns the definition of a specific DataBrew schedule.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the schedule to be described.
+    - name: list-datasets
+      description: Lists all of the DataBrew datasets.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in this request.
+        --next-token=: The token returned by a previous call to retrieve the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: delete-job
+      description: Deletes the specified DataBrew job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the job to be deleted.
+    - name: list-recipe-versions
+      description: Lists the versions of a particular DataBrew recipe, except for `LATEST_WORKING`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in this request.
+        --name=!: The name of the recipe for which to return version information.
+        --next-token=: The token returned by a previous call to retrieve the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: Lists all the tags for a DataBrew resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) string that uniquely identifies the DataBrew resource.
+    - name: update-dataset
+      description: Modifies the definition of an existing DataBrew dataset.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --format-options=: ""
+        --format=: The file format of a dataset that is created from an Amazon S3 file or folder.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input=!: ""
+        --name=!: The name of the dataset to be updated.
+        --path-options=: A set of options that defines how DataBrew interprets an Amazon S3 path of the dataset.
+      completion:
+        flag:
+            format:
+                - CSV
+                - JSON
+                - PARQUET
+                - EXCEL
+                - ORC
+    - name: update-recipe
+      description: Modifies the definition of the `LATEST_WORKING` version of a DataBrew recipe.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the recipe.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the recipe to be updated.
+        --steps=: One or more steps to be performed by the recipe.
     - name: batch-delete-recipe-version
       description: Deletes one or more versions of a recipe at a time.
       flags:
@@ -9,6 +141,146 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the recipe whose versions are to be deleted.
         --recipe-versions=!: An array of version identifiers, for the recipe versions to be deleted.
+    - name: describe-job
+      description: Returns the definition of a specific DataBrew job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the job to be described.
+    - name: describe-job-run
+      description: Represents one run of a DataBrew job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the job being processed during this run.
+        --run-id=!: The unique identifier of the job run.
+    - name: send-project-session-action
+      description: Performs a recipe step within an interactive DataBrew session that's currently open.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-session-id=: A unique identifier for an interactive session that's currently open and ready for work.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the project to apply the action to.
+        --no-preview: If true, the result of the recipe step will be returned, but not applied.
+        --preview: If true, the result of the recipe step will be returned, but not applied.
+        --recipe-step=: ""
+        --step-index=: The index from which to preview a step.
+        --view-frame=: ""
+    - name: update-project
+      description: Modifies the definition of an existing DataBrew project.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the project to be updated.
+        --role-arn=!: The Amazon Resource Name (ARN) of the IAM role to be assumed for this request.
+        --sample=: ""
+    - name: create-project
+      description: Creates a new DataBrew project.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-name=!: The name of an existing dataset to associate this project with.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: A unique name for the new project.
+        --recipe-name=!: The name of an existing recipe to associate with the project.
+        --role-arn=!: The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to be assumed for this request.
+        --sample=: ""
+        --tags=: Metadata tags to apply to this project.
+    - name: describe-dataset
+      description: Returns the definition of a specific DataBrew dataset.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the dataset to be described.
+    - name: list-recipes
+      description: Lists all of the DataBrew recipes that are defined.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in this request.
+        --next-token=: The token returned by a previous call to retrieve the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --recipe-version=: Return only those recipes with a version identifier of `LATEST_WORKING` or `LATEST_PUBLISHED`.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-schedules
+      description: Lists the DataBrew schedules that are defined.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-name=: The name of the job that these schedules apply to.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in this request.
+        --next-token=: The token returned by a previous call to retrieve the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: start-project-session
+      description: Creates an interactive session, enabling you to manipulate data in a DataBrew project.
+      flags:
+        --assume-control: A value that, if true, enables you to take control of a session, even if a different client is currently accessing the project.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the project to act upon.
+        --no-assume-control: A value that, if true, enables you to take control of a session, even if a different client is currently accessing the project.
+    - name: update-schedule
+      description: Modifies the definition of an existing DataBrew schedule.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cron-expression=!: The date or dates and time or times when the jobs are to be run.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-names=: The name or names of one or more jobs to be run for this schedule.
+        --name=!: The name of the schedule to update.
+    - name: publish-recipe
+      description: Publishes a new version of a DataBrew recipe.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the recipe to be published, for this version of the recipe.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the recipe to be published.
+    - name: start-job-run
+      description: Runs a DataBrew job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the job to be run.
+    - name: untag-resource
+      description: Removes metadata tags from a DataBrew resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: A DataBrew resource from which you want to remove a tag or tags.
+        --tag-keys=!: The tag keys (names) of one or more tags to be removed.
+    - name: update-ruleset
+      description: Updates specified ruleset.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description of the ruleset.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the ruleset to be updated.
+        --rules=!: A list of rules that are defined with the ruleset.
+    - name: create-recipe
+      description: Creates a new DataBrew recipe.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description for the recipe.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: A unique name for the recipe.
+        --steps=!: An array containing the steps to be performed by the recipe.
+        --tags=: Metadata tags to apply to this recipe.
     - name: create-recipe-job
       description: Creates a new job to transform input data, using steps defined in an existing Glue DataBrew recipe
       flags:
@@ -38,43 +310,6 @@ commands:
             log-subscription:
                 - ENABLE
                 - DISABLE
-    - name: describe-job-run
-      description: Represents one run of a DataBrew job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the job being processed during this run.
-        --run-id=!: The unique identifier of the job run.
-    - name: describe-recipe
-      description: Returns the definition of a specific DataBrew recipe corresponding to a particular version.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the recipe to be described.
-        --recipe-version=: The recipe version identifier.
-    - name: send-project-session-action
-      description: Performs a recipe step within an interactive DataBrew session that's currently open.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-session-id=: A unique identifier for an interactive session that's currently open and ready for work.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the project to apply the action to.
-        --no-preview: If true, the result of the recipe step will be returned, but not applied.
-        --preview: If true, the result of the recipe step will be returned, but not applied.
-        --recipe-step=: ""
-        --step-index=: The index from which to preview a step.
-        --view-frame=: ""
-    - name: untag-resource
-      description: Removes metadata tags from a DataBrew resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: A DataBrew resource from which you want to remove a tag or tags.
-        --tag-keys=!: The tag keys (names) of one or more tags to be removed.
     - name: create-ruleset
       description: Creates a new ruleset that can be used in a profile job to validate the data quality of a dataset.
       flags:
@@ -86,20 +321,28 @@ commands:
         --rules=!: A list of rules that are defined with the ruleset.
         --tags=: Metadata tags to apply to the ruleset.
         --target-arn=!: The Amazon Resource Name (ARN) of a resource (dataset) that the ruleset is associated with.
-    - name: describe-ruleset
-      description: Retrieves detailed information about the ruleset.
+    - name: delete-dataset
+      description: Deletes a dataset from DataBrew.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the ruleset to be described.
-    - name: describe-schedule
-      description: Returns the definition of a specific DataBrew schedule.
+        --name=!: The name of the dataset to be deleted.
+    - name: delete-recipe-version
+      description: Deletes a single version of a DataBrew recipe.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the schedule to be described.
+        --name=!: The name of the recipe.
+        --recipe-version=!: The version of the recipe to be deleted.
+    - name: describe-project
+      description: Returns the definition of a specific DataBrew project.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the project to be described.
     - name: list-job-runs
       description: Lists all of the previous runs of a particular DataBrew job.
       flags:
@@ -125,6 +368,33 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --project-name=: The name of a project.
         --starting-token=: A token to specify where to start paginating.
+    - name: create-dataset
+      description: Creates a new DataBrew dataset.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --format-options=: ""
+        --format=: The file format of a dataset that is created from an Amazon S3 file or folder.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input=!: ""
+        --name=!: The name of the dataset to be created.
+        --path-options=: A set of options that defines how DataBrew interprets an Amazon S3 path of the dataset.
+        --tags=: Metadata tags to apply to this dataset.
+      completion:
+        flag:
+            format:
+                - CSV
+                - JSON
+                - PARQUET
+                - EXCEL
+                - ORC
+    - name: delete-schedule
+      description: Deletes the specified DataBrew schedule.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the schedule to be deleted.
     - name: list-rulesets
       description: List all rulesets available in the current account or rulesets associated with a specific resource (dataset).
       flags:
@@ -145,168 +415,6 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the job to be stopped.
         --run-id=!: The ID of the job run to be stopped.
-    - name: delete-recipe-version
-      description: Deletes a single version of a DataBrew recipe.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the recipe.
-        --recipe-version=!: The version of the recipe to be deleted.
-    - name: delete-job
-      description: Deletes the specified DataBrew job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the job to be deleted.
-    - name: list-datasets
-      description: Lists all of the DataBrew datasets.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in this request.
-        --next-token=: The token returned by a previous call to retrieve the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-projects
-      description: Lists all of the DataBrew projects that are defined.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in this request.
-        --next-token=: The token returned by a previous call to retrieve the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-dataset
-      description: Modifies the definition of an existing DataBrew dataset.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --format-options=: ""
-        --format=: The file format of a dataset that is created from an Amazon S3 file or folder.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input=!: ""
-        --name=!: The name of the dataset to be updated.
-        --path-options=: A set of options that defines how DataBrew interprets an Amazon S3 path of the dataset.
-      completion:
-        flag:
-            format:
-                - CSV
-                - JSON
-                - PARQUET
-                - EXCEL
-                - ORC
-    - name: update-profile-job
-      description: Modifies the definition of an existing profile job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration=: Configuration for profile jobs.
-        --encryption-key-arn=: The Amazon Resource Name (ARN) of an encryption key that is used to protect the job.
-        --encryption-mode=: 'The encryption mode for the job, which can be one of the following:'
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-sample=: Sample configuration for Profile Jobs only.
-        --log-subscription=: Enables or disables Amazon CloudWatch logging for the job.
-        --max-capacity=: The maximum number of compute nodes that DataBrew can use when the job processes data.
-        --max-retries=: The maximum number of times to retry the job after a job run fails.
-        --name=!: The name of the job to be updated.
-        --output-location=!: ""
-        --role-arn=!: The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
-        --timeout=: The job's timeout in minutes.
-        --validation-configurations=: List of validation configurations that are applied to the profile job.
-      completion:
-        flag:
-            encryption-mode:
-                - SSE-KMS
-                - SSE-S3
-            log-subscription:
-                - ENABLE
-                - DISABLE
-    - name: create-schedule
-      description: Creates a new schedule for one or more DataBrew jobs.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cron-expression=!: The date or dates and time or times when the jobs are to be run.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-names=: The name or names of one or more jobs to be run.
-        --name=!: A unique name for the schedule.
-        --tags=: Metadata tags to apply to this schedule.
-    - name: describe-dataset
-      description: Returns the definition of a specific DataBrew dataset.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the dataset to be described.
-    - name: start-job-run
-      description: Runs a DataBrew job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the job to be run.
-    - name: update-project
-      description: Modifies the definition of an existing DataBrew project.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the project to be updated.
-        --role-arn=!: The Amazon Resource Name (ARN) of the IAM role to be assumed for this request.
-        --sample=: ""
-    - name: update-schedule
-      description: Modifies the definition of an existing DataBrew schedule.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cron-expression=!: The date or dates and time or times when the jobs are to be run.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-names=: The name or names of one or more jobs to be run for this schedule.
-        --name=!: The name of the schedule to update.
-    - name: create-project
-      description: Creates a new DataBrew project.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-name=!: The name of an existing dataset to associate this project with.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: A unique name for the new project.
-        --recipe-name=!: The name of an existing recipe to associate with the project.
-        --role-arn=!: The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to be assumed for this request.
-        --sample=: ""
-        --tags=: Metadata tags to apply to this project.
-    - name: delete-project
-      description: Deletes an existing DataBrew project.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the project to be deleted.
-    - name: list-recipes
-      description: Lists all of the DataBrew recipes that are defined.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in this request.
-        --next-token=: The token returned by a previous call to retrieve the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --recipe-version=: Return only those recipes with a version identifier of `LATEST_WORKING` or `LATEST_PUBLISHED`.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: Lists all the tags for a DataBrew resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) string that uniquely identifies the DataBrew resource.
     - name: tag-resource
       description: Adds metadata tags to a DataBrew resource, such as a dataset, project, recipe, job, or schedule.
       flags:
@@ -315,15 +423,6 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The DataBrew resource to which tags should be added.
         --tags=!: One or more tags to be assigned to the resource.
-    - name: update-recipe
-      description: Modifies the definition of the `LATEST_WORKING` version of a DataBrew recipe.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description of the recipe.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the recipe to be updated.
-        --steps=: One or more steps to be performed by the recipe.
     - name: update-recipe-job
       description: Modifies the definition of an existing DataBrew recipe job.
       flags:
@@ -356,99 +455,33 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the ruleset to be deleted.
-    - name: delete-schedule
-      description: Deletes the specified DataBrew schedule.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the schedule to be deleted.
-    - name: create-dataset
-      description: Creates a new DataBrew dataset.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --format-options=: ""
-        --format=: The file format of a dataset that is created from an Amazon S3 file or folder.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input=!: ""
-        --name=!: The name of the dataset to be created.
-        --path-options=: A set of options that defines how DataBrew interprets an Amazon S3 path of the dataset.
-        --tags=: Metadata tags to apply to this dataset.
-      completion:
-        flag:
-            format:
-                - CSV
-                - JSON
-                - PARQUET
-                - EXCEL
-                - ORC
-    - name: create-recipe
-      description: Creates a new DataBrew recipe.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description for the recipe.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: A unique name for the recipe.
-        --steps=!: An array containing the steps to be performed by the recipe.
-        --tags=: Metadata tags to apply to this recipe.
-    - name: delete-dataset
-      description: Deletes a dataset from DataBrew.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the dataset to be deleted.
-    - name: describe-job
-      description: Returns the definition of a specific DataBrew job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the job to be described.
-    - name: list-recipe-versions
-      description: Lists the versions of a particular DataBrew recipe, except for `LATEST_WORKING`.
+    - name: list-projects
+      description: Lists all of the DataBrew projects that are defined.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return in this request.
-        --name=!: The name of the recipe for which to return version information.
         --next-token=: The token returned by a previous call to retrieve the next set of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-schedules
-      description: Lists the DataBrew schedules that are defined.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-name=: The name of the job that these schedules apply to.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in this request.
-        --next-token=: The token returned by a previous call to retrieve the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: create-profile-job
-      description: Creates a new job to analyze a dataset and create its data profile.
+    - name: update-profile-job
+      description: Modifies the definition of an existing profile job.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --configuration=: Configuration for profile jobs.
-        --dataset-name=!: The name of the dataset that this job is to act upon.
         --encryption-key-arn=: The Amazon Resource Name (ARN) of an encryption key that is used to protect the job.
         --encryption-mode=: 'The encryption mode for the job, which can be one of the following:'
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-sample=: Sample configuration for profile jobs only.
+        --job-sample=: Sample configuration for Profile Jobs only.
         --log-subscription=: Enables or disables Amazon CloudWatch logging for the job.
-        --max-capacity=: The maximum number of nodes that DataBrew can use when the job processes data.
+        --max-capacity=: The maximum number of compute nodes that DataBrew can use when the job processes data.
         --max-retries=: The maximum number of times to retry the job after a job run fails.
-        --name=!: The name of the job to be created.
+        --name=!: The name of the job to be updated.
         --output-location=!: ""
         --role-arn=!: The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
-        --tags=: Metadata tags to apply to this job.
         --timeout=: The job's timeout in minutes.
         --validation-configurations=: List of validation configurations that are applied to the profile job.
       completion:
@@ -459,36 +492,3 @@ commands:
             log-subscription:
                 - ENABLE
                 - DISABLE
-    - name: describe-project
-      description: Returns the definition of a specific DataBrew project.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the project to be described.
-    - name: publish-recipe
-      description: Publishes a new version of a DataBrew recipe.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description of the recipe to be published, for this version of the recipe.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the recipe to be published.
-    - name: start-project-session
-      description: Creates an interactive session, enabling you to manipulate data in a DataBrew project.
-      flags:
-        --assume-control: A value that, if true, enables you to take control of a session, even if a different client is currently accessing the project.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the project to act upon.
-        --no-assume-control: A value that, if true, enables you to take control of a session, even if a different client is currently accessing the project.
-    - name: update-ruleset
-      description: Updates specified ruleset.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The description of the ruleset.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the ruleset to be updated.
-        --rules=!: A list of rules that are defined with the ruleset.

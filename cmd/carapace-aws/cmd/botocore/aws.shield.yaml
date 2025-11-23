@@ -1,47 +1,87 @@
 name: shield
 description: AWS Shield
 commands:
-    - name: list-protection-groups
-      description: Retrieves [ProtectionGroup]() objects for the account.
+    - name: list-protections
+      description: Retrieves [Protection]() objects for the account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --inclusion-filters=: Narrows the set of protection groups that the call retrieves.
+        --inclusion-filters=: Narrows the set of protections that the call retrieves.
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The greatest number of objects that you want Shield Advanced to return to the list request.
         --next-token=: When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects, Shield Advanced includes a `NextToken` value in the response.
-    - name: delete-protection-group
-      description: Removes the specified protection group.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: enable-proactive-engagement
+      description: Authorizes the Shield Response Team (SRT) to use email and phone to notify contacts about escalations to the SRT and to initiate proactive customer support.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --protection-group-id=!: The name of the protection group.
+    - name: list-attacks
+      description: Returns all ongoing DDoS attacks or all DDoS attacks during a specified time period.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=: The end of the time period for the attacks.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The greatest number of objects that you want Shield Advanced to return to the list request.
+        --next-token=: When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects, Shield Advanced includes a `NextToken` value in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-arns=: The ARNs (Amazon Resource Names) of the resources that were attacked.
+        --start-time=: The start of the time period for the attacks.
+        --starting-token=: A token to specify where to start paginating.
+    - name: associate-proactive-engagement-details
+      description: Initializes proactive engagement and sets the list of contacts for the Shield Response Team (SRT) to use.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --emergency-contact-list=!: A list of email addresses and phone numbers that the Shield Response Team (SRT) can use to contact you for escalations to the SRT and to initiate proactive customer support.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-subscription
+      description: Removes Shield Advanced from an account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: describe-attack-statistics
       description: Provides information about the number and type of attacks Shield has detected in the last year for all resources that belong to your account, regardless of whether you've defined Shield protections for them.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: disassociate-drt-log-bucket
-      description: Removes the Shield Response Team's (SRT) access to the specified Amazon S3 bucket containing the logs that you shared previously.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --log-bucket=!: The Amazon S3 bucket that contains the logs that you want to share.
     - name: disassociate-drt-role
       description: Removes the Shield Response Team's (SRT) access to your Amazon Web Services account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-subscription-state
-      description: Returns the `SubscriptionState`, either `Active` or `Inactive`.
+    - name: enable-application-layer-automatic-response
+      description: Enable the Shield Advanced automatic application layer DDoS mitigation for the protected resource.
+      flags:
+        --action=!: Specifies the action setting that Shield Advanced should use in the WAF rules that it creates on behalf of the protected resource in response to DDoS attacks.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN (Amazon Resource Name) of the protected resource.
+    - name: update-application-layer-automatic-response
+      description: Updates an existing Shield Advanced automatic application layer DDoS mitigation configuration for the specified resource.
+      flags:
+        --action=!: Specifies the action setting that Shield Advanced should use in the WAF rules that it creates on behalf of the protected resource in response to DDoS attacks.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN (Amazon Resource Name) of the resource.
+    - name: associate-health-check
+      description: Adds health-based detection to the Shield Advanced protection for a resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --health-check-arn=!: The Amazon Resource Name (ARN) of the health check to associate with the protection.
+        --protection-id=!: The unique identifier (ID) for the [Protection]() object to add the health check association to.
     - name: create-protection-group
       description: Creates a grouping of protected resources so they can be handled as a collective.
       flags:
@@ -77,20 +117,14 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-tags-for-resource
-      description: Gets information about Amazon Web Services tags for a specified Amazon Resource Name (ARN) in Shield.
+    - name: describe-protection
+      description: Lists the details of a [Protection]() object.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to get tags for.
-    - name: delete-protection
-      description: Deletes an Shield Advanced [Protection]().
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --protection-id=!: The unique identifier (ID) for the [Protection]() object to be deleted.
+        --protection-id=: The unique identifier (ID) for the [Protection]() object to describe.
+        --resource-arn=: The ARN (Amazon Resource Name) of the protected Amazon Web Services resource.
     - name: update-emergency-contact-settings
       description: Updates the details of the list of email addresses and phone numbers that the Shield Response Team (SRT) can use to contact you if you have proactive engagement enabled, for escalations to the SRT and to initiate proactive customer support.
       flags:
@@ -98,94 +132,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --emergency-contact-list=: A list of email addresses and phone numbers that the Shield Response Team (SRT) can use to contact you if you have proactive engagement enabled, for escalations to the SRT and to initiate proactive customer support.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: disable-application-layer-automatic-response
-      description: Disable the Shield Advanced automatic application layer DDoS mitigation feature for the protected resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN (Amazon Resource Name) of the protected resource.
-    - name: list-resources-in-protection-group
-      description: Retrieves the resources that are included in the protection group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The greatest number of objects that you want Shield Advanced to return to the list request.
-        --next-token=: When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects, Shield Advanced includes a `NextToken` value in the response.
-        --protection-group-id=!: The name of the protection group.
-    - name: untag-resource
-      description: Removes tags from a resource in Shield.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource that you want to remove tags from.
-        --tag-keys=!: The tag key for each tag that you want to remove from the resource.
-    - name: create-subscription
-      description: Activates Shield Advanced for an account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: enable-application-layer-automatic-response
-      description: Enable the Shield Advanced automatic application layer DDoS mitigation for the protected resource.
-      flags:
-        --action=!: Specifies the action setting that Shield Advanced should use in the WAF rules that it creates on behalf of the protected resource in response to DDoS attacks.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN (Amazon Resource Name) of the protected resource.
-    - name: enable-proactive-engagement
-      description: Authorizes the Shield Response Team (SRT) to use email and phone to notify contacts about escalations to the SRT and to initiate proactive customer support.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: associate-proactive-engagement-details
-      description: Initializes proactive engagement and sets the list of contacts for the Shield Response Team (SRT) to use.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --emergency-contact-list=!: A list of email addresses and phone numbers that the Shield Response Team (SRT) can use to contact you for escalations to the SRT and to initiate proactive customer support.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-protection
-      description: Enables Shield Advanced for a specific Amazon Web Services resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: Friendly name for the `Protection` you are creating.
-        --resource-arn=!: The ARN (Amazon Resource Name) of the resource to be protected.
-        --tags=: One or more tag key-value pairs for the [Protection]() object that is created.
-    - name: delete-subscription
-      description: Removes Shield Advanced from an account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-attack
-      description: Describes the details of a DDoS attack.
-      flags:
-        --attack-id=!: The unique identifier (ID) for the attack.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-protection-group
-      description: Returns the specification for the specified protection group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --protection-group-id=!: The name of the protection group.
-    - name: disassociate-health-check
-      description: Removes health-based detection from the Shield Advanced protection for a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --health-check-arn=!: The Amazon Resource Name (ARN) of the health check that is associated with the protection.
-        --protection-id=!: The unique identifier (ID) for the [Protection]() object to remove the health check association from.
     - name: update-protection-group
       description: Updates an existing protection group.
       flags:
@@ -214,34 +160,6 @@ commands:
                 - CLASSIC_LOAD_BALANCER
                 - APPLICATION_LOAD_BALANCER
                 - GLOBAL_ACCELERATOR
-    - name: associate-drt-log-bucket
-      description: Authorizes the Shield Response Team (SRT) to access the specified Amazon S3 bucket containing log data such as Application Load Balancer access logs, CloudFront logs, or logs from third party sources.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --log-bucket=!: The Amazon S3 bucket that contains the logs that you want to share.
-    - name: associate-drt-role
-      description: Authorizes the Shield Response Team (SRT) using the specified role, to access your Amazon Web Services account to assist with DDoS attack mitigation during potential attacks.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --role-arn=!: The Amazon Resource Name (ARN) of the role the SRT will use to access your Amazon Web Services account.
-    - name: describe-protection
-      description: Lists the details of a [Protection]() object.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --protection-id=: The unique identifier (ID) for the [Protection]() object to describe.
-        --resource-arn=: The ARN (Amazon Resource Name) of the protected Amazon Web Services resource.
-    - name: disable-proactive-engagement
-      description: Removes authorization from the Shield Response Team (SRT) to notify contacts about escalations to the SRT and to initiate proactive customer support.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: update-subscription
       description: Updates the details of an existing subscription.
       flags:
@@ -254,38 +172,99 @@ commands:
             auto-renew:
                 - ENABLED
                 - DISABLED
-    - name: associate-health-check
-      description: Adds health-based detection to the Shield Advanced protection for a resource.
+    - name: create-subscription
+      description: Activates Shield Advanced for an account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --health-check-arn=!: The Amazon Resource Name (ARN) of the health check to associate with the protection.
-        --protection-id=!: The unique identifier (ID) for the [Protection]() object to add the health check association to.
-    - name: describe-emergency-contact-settings
-      description: A list of email addresses and phone numbers that the Shield Response Team (SRT) can use to contact you if you have proactive engagement enabled, for escalations to the SRT and to initiate proactive customer support.
+    - name: associate-drt-role
+      description: Authorizes the Shield Response Team (SRT) using the specified role, to access your Amazon Web Services account to assist with DDoS attack mitigation during potential attacks.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-subscription
-      description: Provides details about the Shield Advanced subscription for an account.
+        --role-arn=!: The Amazon Resource Name (ARN) of the role the SRT will use to access your Amazon Web Services account.
+    - name: delete-protection
+      description: Deletes an Shield Advanced [Protection]().
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-protections
-      description: Retrieves [Protection]() objects for the account.
+        --protection-id=!: The unique identifier (ID) for the [Protection]() object to be deleted.
+    - name: delete-protection-group
+      description: Removes the specified protection group.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --inclusion-filters=: Narrows the set of protections that the call retrieves.
-        --max-items=: The  total number of items to return in the command's output.
+        --protection-group-id=!: The name of the protection group.
+    - name: describe-attack
+      description: Describes the details of a DDoS attack.
+      flags:
+        --attack-id=!: The unique identifier (ID) for the attack.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: disable-application-layer-automatic-response
+      description: Disable the Shield Advanced automatic application layer DDoS mitigation feature for the protected resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN (Amazon Resource Name) of the protected resource.
+    - name: disassociate-health-check
+      description: Removes health-based detection from the Shield Advanced protection for a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --health-check-arn=!: The Amazon Resource Name (ARN) of the health check that is associated with the protection.
+        --protection-id=!: The unique identifier (ID) for the [Protection]() object to remove the health check association from.
+    - name: list-resources-in-protection-group
+      description: Retrieves the resources that are included in the protection group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The greatest number of objects that you want Shield Advanced to return to the list request.
         --next-token=: When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects, Shield Advanced includes a `NextToken` value in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+        --protection-group-id=!: The name of the protection group.
+    - name: associate-drt-log-bucket
+      description: Authorizes the Shield Response Team (SRT) to access the specified Amazon S3 bucket containing log data such as Application Load Balancer access logs, CloudFront logs, or logs from third party sources.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-bucket=!: The Amazon S3 bucket that contains the logs that you want to share.
+    - name: describe-protection-group
+      description: Returns the specification for the specified protection group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --protection-group-id=!: The name of the protection group.
+    - name: disable-proactive-engagement
+      description: Removes authorization from the Shield Response Team (SRT) to notify contacts about escalations to the SRT and to initiate proactive customer support.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-subscription-state
+      description: Returns the `SubscriptionState`, either `Active` or `Inactive`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-protection-groups
+      description: Retrieves [ProtectionGroup]() objects for the account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --inclusion-filters=: Narrows the set of protection groups that the call retrieves.
+        --max-results=: The greatest number of objects that you want Shield Advanced to return to the list request.
+        --next-token=: When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects, Shield Advanced includes a `NextToken` value in the response.
     - name: tag-resource
       description: Adds or updates tags for a resource in Shield.
       flags:
@@ -294,25 +273,46 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the resource that you want to add or update tags for.
         --tags=!: The tags that you want to modify or add to the resource.
-    - name: update-application-layer-automatic-response
-      description: Updates an existing Shield Advanced automatic application layer DDoS mitigation configuration for the specified resource.
-      flags:
-        --action=!: Specifies the action setting that Shield Advanced should use in the WAF rules that it creates on behalf of the protected resource in response to DDoS attacks.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN (Amazon Resource Name) of the resource.
-    - name: list-attacks
-      description: Returns all ongoing DDoS attacks or all DDoS attacks during a specified time period.
+    - name: untag-resource
+      description: Removes tags from a resource in Shield.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --end-time=: The end of the time period for the attacks.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The greatest number of objects that you want Shield Advanced to return to the list request.
-        --next-token=: When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects, Shield Advanced includes a `NextToken` value in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --resource-arns=: The ARNs (Amazon Resource Names) of the resources that were attacked.
-        --start-time=: The start of the time period for the attacks.
-        --starting-token=: A token to specify where to start paginating.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource that you want to remove tags from.
+        --tag-keys=!: The tag key for each tag that you want to remove from the resource.
+    - name: create-protection
+      description: Enables Shield Advanced for a specific Amazon Web Services resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: Friendly name for the `Protection` you are creating.
+        --resource-arn=!: The ARN (Amazon Resource Name) of the resource to be protected.
+        --tags=: One or more tag key-value pairs for the [Protection]() object that is created.
+    - name: describe-subscription
+      description: Provides details about the Shield Advanced subscription for an account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: disassociate-drt-log-bucket
+      description: Removes the Shield Response Team's (SRT) access to the specified Amazon S3 bucket containing the logs that you shared previously.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-bucket=!: The Amazon S3 bucket that contains the logs that you want to share.
+    - name: list-tags-for-resource
+      description: Gets information about Amazon Web Services tags for a specified Amazon Resource Name (ARN) in Shield.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to get tags for.
+    - name: describe-emergency-contact-settings
+      description: A list of email addresses and phone numbers that the Shield Response Team (SRT) can use to contact you if you have proactive engagement enabled, for escalations to the SRT and to initiate proactive customer support.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.

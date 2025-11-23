@@ -1,117 +1,6 @@
 name: docdb-elastic
 description: Amazon DocumentDB Elastic Clusters
 commands:
-    - name: get-cluster
-      description: Returns information about a specific elastic cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-arn=!: The ARN identifier of the elastic cluster.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-cluster-snapshots
-      description: Returns information about snapshots for a specified elastic cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-arn=: The ARN identifier of the elastic cluster.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of elastic cluster snapshot results to receive in the response.
-        --next-token=: A pagination token provided by a previous request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --snapshot-type=: The type of cluster snapshots to be returned.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-clusters
-      description: Returns information about provisioned Amazon DocumentDB elastic clusters.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of elastic cluster snapshot results to receive in the response.
-        --next-token=: A pagination token provided by a previous request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: untag-resource
-      description: Removes metadata tags from an elastic cluster resource
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN identifier of the elastic cluster resource.
-        --tag-keys=!: The tag keys to be removed from the elastic cluster resource.
-    - name: create-cluster-snapshot
-      description: Creates a snapshot of an elastic cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-arn=!: The ARN identifier of the elastic cluster of which you want to create a snapshot.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --snapshot-name=!: The name of the new elastic cluster snapshot.
-        --tags=: The tags to be assigned to the new elastic cluster snapshot.
-    - name: delete-cluster
-      description: Delete an elastic cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-arn=!: The ARN identifier of the elastic cluster that is to be deleted.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-cluster-snapshot
-      description: Delete an elastic cluster snapshot.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --snapshot-arn=!: The ARN identifier of the elastic cluster snapshot that is to be deleted.
-    - name: restore-cluster-from-snapshot
-      description: Restores an elastic cluster from a snapshot.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-name=!: The name of the elastic cluster.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kms-key-id=: The KMS key identifier to use to encrypt the new Amazon DocumentDB elastic clusters cluster.
-        --shard-capacity=: The capacity of each shard in the new restored elastic cluster.
-        --shard-instance-count=: The number of replica instances applying to all shards in the elastic cluster.
-        --snapshot-arn=!: The ARN identifier of the elastic cluster snapshot.
-        --subnet-ids=: The Amazon EC2 subnet IDs for the elastic cluster.
-        --tags=: A list of the tag names to be assigned to the restored elastic cluster, in the form of an array of key-value pairs in which the key is the tag name and the value is the key value.
-        --vpc-security-group-ids=: A list of EC2 VPC security groups to associate with the elastic cluster.
-    - name: update-cluster
-      description: Modifies an elastic cluster.
-      flags:
-        --admin-user-password=: The password associated with the elastic cluster administrator.
-        --auth-type=: The authentication type used to determine where to fetch the password used for accessing the elastic cluster.
-        --backup-retention-period=: The number of days for which automatic snapshots are retained.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: The client token for the elastic cluster.
-        --cluster-arn=!: The ARN identifier of the elastic cluster.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --preferred-backup-window=: The daily time range during which automated backups are created if automated backups are enabled, as determined by the `backupRetentionPeriod`.
-        --preferred-maintenance-window=: The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).
-        --shard-capacity=: The number of vCPUs assigned to each elastic cluster shard.
-        --shard-count=: The number of shards assigned to the elastic cluster.
-        --shard-instance-count=: The number of replica instances applying to all shards in the elastic cluster.
-        --subnet-ids=: The Amazon EC2 subnet IDs for the elastic cluster.
-        --vpc-security-group-ids=: A list of EC2 VPC security groups to associate with the elastic cluster.
-      completion:
-        flag:
-            auth-type:
-                - PLAIN_TEXT
-                - SECRET_ARN
-    - name: copy-cluster-snapshot
-      description: Copies a snapshot of an elastic cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --copy-tags: Set to `true` to copy all tags from the source cluster snapshot to the target elastic cluster snapshot.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kms-key-id=: The Amazon Web Services KMS key ID for an encrypted elastic cluster snapshot.
-        --no-copy-tags: Set to `true` to copy all tags from the source cluster snapshot to the target elastic cluster snapshot.
-        --snapshot-arn=!: The Amazon Resource Name (ARN) identifier of the elastic cluster snapshot.
-        --tags=: The tags to be assigned to the elastic cluster snapshot.
-        --target-snapshot-name=!: The identifier of the new elastic cluster snapshot to create from the source cluster snapshot.
     - name: get-cluster-snapshot
       description: Returns information about a specific elastic cluster snapshot
       flags:
@@ -126,30 +15,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The ARN identifier of the elastic cluster resource.
-    - name: stop-cluster
-      description: Stops the running elastic cluster that is specified by `clusterArn`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-arn=!: The ARN identifier of the elastic cluster.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: apply-pending-maintenance-action
-      description: The type of pending maintenance action to be applied to the resource.
-      flags:
-        --apply-action=!: The pending maintenance action to apply to the resource.
-        --apply-on=: A specific date to apply the pending maintenance action.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --opt-in-type=!: A value that specifies the type of opt-in request, or undoes an opt-in request.
-        --resource-arn=!: The Amazon DocumentDB Amazon Resource Name (ARN) of the resource to which the pending maintenance action applies.
-      completion:
-        flag:
-            opt-in-type:
-                - IMMEDIATE
-                - NEXT_MAINTENANCE
-                - APPLY_ON
-                - UNDO_OPT_IN
     - name: create-cluster
       description: Creates a new Amazon DocumentDB elastic cluster and returns its cluster structure.
       flags:
@@ -176,13 +41,46 @@ commands:
             auth-type:
                 - PLAIN_TEXT
                 - SECRET_ARN
-    - name: get-pending-maintenance-action
-      description: Retrieves all maintenance actions that are pending.
+    - name: create-cluster-snapshot
+      description: Creates a snapshot of an elastic cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The ARN identifier of the elastic cluster of which you want to create a snapshot.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --snapshot-name=!: The name of the new elastic cluster snapshot.
+        --tags=: The tags to be assigned to the new elastic cluster snapshot.
+    - name: delete-cluster-snapshot
+      description: Delete an elastic cluster snapshot.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: Retrieves pending maintenance actions for a specific Amazon Resource Name (ARN).
+        --snapshot-arn=!: The ARN identifier of the elastic cluster snapshot that is to be deleted.
+    - name: list-cluster-snapshots
+      description: Returns information about snapshots for a specified elastic cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=: The ARN identifier of the elastic cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of elastic cluster snapshot results to receive in the response.
+        --next-token=: A pagination token provided by a previous request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --snapshot-type=: The type of cluster snapshots to be returned.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-clusters
+      description: Returns information about provisioned Amazon DocumentDB elastic clusters.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of elastic cluster snapshot results to receive in the response.
+        --next-token=: A pagination token provided by a previous request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-pending-maintenance-actions
       description: Retrieves a list of all maintenance actions that are pending.
       flags:
@@ -194,13 +92,6 @@ commands:
         --next-token=: An optional pagination token provided by a previous request.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: start-cluster
-      description: Restarts the stopped elastic cluster that is specified by `clusterARN`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-arn=!: The ARN identifier of the elastic cluster.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: tag-resource
       description: Adds metadata tags to an elastic cluster resource
       flags:
@@ -209,3 +100,112 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The ARN identifier of the elastic cluster resource.
         --tags=!: The tags that are assigned to the elastic cluster resource.
+    - name: untag-resource
+      description: Removes metadata tags from an elastic cluster resource
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN identifier of the elastic cluster resource.
+        --tag-keys=!: The tag keys to be removed from the elastic cluster resource.
+    - name: delete-cluster
+      description: Delete an elastic cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The ARN identifier of the elastic cluster that is to be deleted.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-pending-maintenance-action
+      description: Retrieves all maintenance actions that are pending.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: Retrieves pending maintenance actions for a specific Amazon Resource Name (ARN).
+    - name: start-cluster
+      description: Restarts the stopped elastic cluster that is specified by `clusterARN`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The ARN identifier of the elastic cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: stop-cluster
+      description: Stops the running elastic cluster that is specified by `clusterArn`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The ARN identifier of the elastic cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-cluster
+      description: Modifies an elastic cluster.
+      flags:
+        --admin-user-password=: The password associated with the elastic cluster administrator.
+        --auth-type=: The authentication type used to determine where to fetch the password used for accessing the elastic cluster.
+        --backup-retention-period=: The number of days for which automatic snapshots are retained.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: The client token for the elastic cluster.
+        --cluster-arn=!: The ARN identifier of the elastic cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --preferred-backup-window=: The daily time range during which automated backups are created if automated backups are enabled, as determined by the `backupRetentionPeriod`.
+        --preferred-maintenance-window=: The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).
+        --shard-capacity=: The number of vCPUs assigned to each elastic cluster shard.
+        --shard-count=: The number of shards assigned to the elastic cluster.
+        --shard-instance-count=: The number of replica instances applying to all shards in the elastic cluster.
+        --subnet-ids=: The Amazon EC2 subnet IDs for the elastic cluster.
+        --vpc-security-group-ids=: A list of EC2 VPC security groups to associate with the elastic cluster.
+      completion:
+        flag:
+            auth-type:
+                - PLAIN_TEXT
+                - SECRET_ARN
+    - name: apply-pending-maintenance-action
+      description: The type of pending maintenance action to be applied to the resource.
+      flags:
+        --apply-action=!: The pending maintenance action to apply to the resource.
+        --apply-on=: A specific date to apply the pending maintenance action.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --opt-in-type=!: A value that specifies the type of opt-in request, or undoes an opt-in request.
+        --resource-arn=!: The Amazon DocumentDB Amazon Resource Name (ARN) of the resource to which the pending maintenance action applies.
+      completion:
+        flag:
+            opt-in-type:
+                - IMMEDIATE
+                - NEXT_MAINTENANCE
+                - APPLY_ON
+                - UNDO_OPT_IN
+    - name: copy-cluster-snapshot
+      description: Copies a snapshot of an elastic cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --copy-tags: Set to `true` to copy all tags from the source cluster snapshot to the target elastic cluster snapshot.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-id=: The Amazon Web Services KMS key ID for an encrypted elastic cluster snapshot.
+        --no-copy-tags: Set to `true` to copy all tags from the source cluster snapshot to the target elastic cluster snapshot.
+        --snapshot-arn=!: The Amazon Resource Name (ARN) identifier of the elastic cluster snapshot.
+        --tags=: The tags to be assigned to the elastic cluster snapshot.
+        --target-snapshot-name=!: The identifier of the new elastic cluster snapshot to create from the source cluster snapshot.
+    - name: restore-cluster-from-snapshot
+      description: Restores an elastic cluster from a snapshot.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-name=!: The name of the elastic cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-id=: The KMS key identifier to use to encrypt the new Amazon DocumentDB elastic clusters cluster.
+        --shard-capacity=: The capacity of each shard in the new restored elastic cluster.
+        --shard-instance-count=: The number of replica instances applying to all shards in the elastic cluster.
+        --snapshot-arn=!: The ARN identifier of the elastic cluster snapshot.
+        --subnet-ids=: The Amazon EC2 subnet IDs for the elastic cluster.
+        --tags=: A list of the tag names to be assigned to the restored elastic cluster, in the form of an array of key-value pairs in which the key is the tag name and the value is the key value.
+        --vpc-security-group-ids=: A list of EC2 VPC security groups to associate with the elastic cluster.
+    - name: get-cluster
+      description: Returns information about a specific elastic cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The ARN identifier of the elastic cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.

@@ -1,13 +1,252 @@
 name: vpc-lattice
 description: Amazon VPC Lattice
 commands:
-    - name: get-resource-configuration
-      description: Retrieves information about the specified resource configuration.
+    - name: create-access-log-subscription
+      description: Enables access logs to be sent to Amazon CloudWatch, Amazon S3, and Amazon Kinesis Data Firehose.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --destination-arn=!: The Amazon Resource Name (ARN) of the destination.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-identifier=!: The ID or ARN of the service network or service.
+        --service-network-log-type=: The type of log that monitors your Amazon VPC Lattice service networks.
+        --tags=: The tags for the access log subscription.
+      completion:
+        flag:
+            service-network-log-type:
+                - SERVICE
+                - RESOURCE
+    - name: delete-rule
+      description: Deletes a listener rule.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-configuration-identifier=!: The ID of the resource configuration.
+        --listener-identifier=!: The ID or ARN of the listener.
+        --rule-identifier=!: The ID or ARN of the rule.
+        --service-identifier=!: The ID or ARN of the service.
+    - name: get-access-log-subscription
+      description: Retrieves information about the specified access log subscription.
+      flags:
+        --access-log-subscription-identifier=!: The ID or ARN of the access log subscription.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-rule
+      description: Retrieves information about the specified listener rules.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --listener-identifier=!: The ID or ARN of the listener.
+        --rule-identifier=!: The ID or ARN of the listener rule.
+        --service-identifier=!: The ID or ARN of the service.
+    - name: get-service
+      description: Retrieves information about the specified service.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-identifier=!: The ID or ARN of the service.
+    - name: list-service-network-vpc-associations
+      description: Lists the associations between a service network and a VPC.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: A pagination token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --service-network-identifier=: The ID or ARN of the service network.
+        --starting-token=: A token to specify where to start paginating.
+        --vpc-identifier=: The ID or ARN of the VPC.
+    - name: list-targets
+      description: Lists the targets for the target group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: A pagination token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --target-group-identifier=!: The ID or ARN of the target group.
+        --targets=: The targets.
+    - name: update-service-network
+      description: Updates the specified service network.
+      flags:
+        --auth-type=!: The type of IAM policy.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-network-identifier=!: The ID or ARN of the service network.
+      completion:
+        flag:
+            auth-type:
+                - NONE
+                - AWS_IAM
+    - name: get-target-group
+      description: Retrieves information about the specified target group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --target-group-identifier=!: The ID or ARN of the target group.
+    - name: list-target-groups
+      description: Lists your target groups.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: A pagination token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --target-group-type=: The target group type.
+        --vpc-identifier=: The ID or ARN of the VPC.
+      completion:
+        flag:
+            target-group-type:
+                - IP
+                - LAMBDA
+                - INSTANCE
+                - ALB
+    - name: put-resource-policy
+      description: Attaches a resource-based permission policy to a service or service network.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy=!: An IAM policy.
+        --resource-arn=!: The ID or ARN of the service network or service for which the policy is created.
+    - name: update-service-network-vpc-association
+      description: Updates the service network and VPC association.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --security-group-ids=!: The IDs of the security groups.
+        --service-network-vpc-association-identifier=!: The ID or ARN of the association.
+    - name: create-service-network
+      description: Creates a service network.
+      flags:
+        --auth-type=: The type of IAM policy.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the service network.
+        --sharing-config=: Specify if the service network should be enabled for sharing.
+        --tags=: The tags for the service network.
+      completion:
+        flag:
+            auth-type:
+                - NONE
+                - AWS_IAM
+    - name: delete-resource-configuration
+      description: Deletes the specified resource configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-configuration-identifier=!: The ID or ARN of the resource configuration.
+    - name: delete-service-network-resource-association
+      description: Deletes the association between a service network and a resource configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-network-resource-association-identifier=!: The ID of the association.
+    - name: update-rule
+      description: Updates a specified rule for the listener.
+      flags:
+        --action=: Information about the action for the specified listener rule.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --listener-identifier=!: The ID or ARN of the listener.
+        --match=: The rule match.
+        --priority=: The rule priority.
+        --rule-identifier=!: The ID or ARN of the rule.
+        --service-identifier=!: The ID or ARN of the service.
+    - name: get-domain-verification
+      description: Retrieves information about a domain verification.ß
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-verification-identifier=!: The ID or ARN of the domain verification to retrieve.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-service-network
+      description: Retrieves information about the specified service network.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-network-identifier=!: The ID or ARN of the service network.
+    - name: list-resource-gateways
+      description: Lists the resource gateways that you own or that were shared with you.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum page size.
+        --next-token=: If there are additional results, a pagination token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-rules
+      description: Lists the rules for the specified listener.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --listener-identifier=!: The ID or ARN of the listener.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: A pagination token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --service-identifier=!: The ID or ARN of the service.
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-resource-policy
+      description: Retrieves information about the specified resource policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the service network or service.
+    - name: list-service-network-service-associations
+      description: Lists the associations between a service network and a service.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: A pagination token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --service-identifier=: The ID or ARN of the service.
+        --service-network-identifier=: The ID or ARN of the service network.
+        --starting-token=: A token to specify where to start paginating.
+    - name: start-domain-verification
+      description: Starts the domain verification process for a custom domain name.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --domain-name=!: The domain name to verify ownership for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: The tags for the domain verification.
+    - name: list-tags-for-resource
+      description: Lists the tags for the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
     - name: list-domain-verifications
       description: Lists the domain verifications.
       flags:
@@ -19,43 +258,15 @@ commands:
         --next-token=: A pagination token for the next page of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: create-rule
-      description: Creates a listener rule.
-      flags:
-        --action=!: The action for the default rule.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --listener-identifier=!: The ID or ARN of the listener.
-        --match=!: The rule match.
-        --name=!: The name of the rule.
-        --priority=!: The priority assigned to the rule.
-        --service-identifier=!: The ID or ARN of the service.
-        --tags=: The tags for the rule.
-    - name: list-resource-configurations
-      description: Lists the resource configurations owned by or shared with this account.
+    - name: list-service-networks
+      description: Lists the service networks owned by or shared with this account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-verification-identifier=: The domain verification ID.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum page size.
+        --max-results=: The maximum number of results to return.
         --next-token=: A pagination token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --resource-configuration-group-identifier=: The ID of the resource configuration of type `Group`.
-        --resource-gateway-identifier=: The ID of the resource gateway for the resource configuration.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-resource-gateways
-      description: Lists the resource gateways that you own or that were shared with you.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum page size.
-        --next-token=: If there are additional results, a pagination token for the next page of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
     - name: list-services
@@ -77,18 +288,374 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --destination-arn=!: The Amazon Resource Name (ARN) of the access log destination.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-rule
-      description: Updates a specified rule for the listener.
+    - name: create-resource-gateway
+      description: A resource gateway is a point of ingress into the VPC where a resource resides.
       flags:
-        --action=: Information about the action for the specified listener rule.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ip-address-type=: A resource gateway can have IPv4, IPv6 or dualstack addresses.
+        --ipv4-addresses-per-eni=: The number of IPv4 addresses in each ENI for the resource gateway.
+        --name=!: The name of the resource gateway.
+        --security-group-ids=: The IDs of the security groups to apply to the resource gateway.
+        --subnet-ids=: The IDs of the VPC subnets in which to create the resource gateway.
+        --tags=: The tags for the resource gateway.
+        --vpc-identifier=: The ID of the VPC for the resource gateway.
+      completion:
+        flag:
+            ip-address-type:
+                - IPV4
+                - IPV6
+                - DUALSTACK
+    - name: create-target-group
+      description: Creates a target group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --config=: The target group configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the target group.
+        --tags=: The tags for the target group.
+        --type=!: The type of target group.
+      completion:
+        flag:
+            type:
+                - IP
+                - LAMBDA
+                - INSTANCE
+                - ALB
+    - name: delete-domain-verification
+      description: Deletes the specified domain verification.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-verification-identifier=!: The ID of the domain verification to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-service-network
+      description: Deletes a service network.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-network-identifier=!: The ID or ARN of the service network.
+    - name: update-listener
+      description: Updates the specified listener for the specified service.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --default-action=!: The action for the default rule.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --listener-identifier=!: The ID or ARN of the listener.
+        --service-identifier=!: The ID or ARN of the service.
+    - name: update-resource-gateway
+      description: Updates the specified resource gateway.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-gateway-identifier=!: The ID or ARN of the resource gateway.
+        --security-group-ids=: The IDs of the security groups associated with the resource gateway.
+    - name: delete-auth-policy
+      description: Deletes the specified auth policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-identifier=!: The ID or ARN of the resource.
+    - name: get-service-network-resource-association
+      description: Retrieves information about the specified association between a service network and a resource configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-network-resource-association-identifier=!: The ID of the association.
+    - name: list-listeners
+      description: Lists the listeners for the specified service.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: A pagination token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --service-identifier=!: The ID or ARN of the service.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-resource-endpoint-associations
+      description: Lists the associations for the specified VPC endpoint.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum page size.
+        --next-token=: A pagination token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-configuration-identifier=!: The ID for the resource configuration associated with the VPC endpoint.
+        --resource-endpoint-association-identifier=: The ID of the association.
+        --starting-token=: A token to specify where to start paginating.
+        --vpc-endpoint-id=: The ID of the VPC endpoint in the association.
+        --vpc-endpoint-owner=: The owner of the VPC endpoint in the association.
+    - name: create-listener
+      description: Creates a listener for a service.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --default-action=!: The action for the default rule.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the listener.
+        --port=: The listener port.
+        --protocol=!: The listener protocol.
+        --service-identifier=!: The ID or ARN of the service.
+        --tags=: The tags for the listener.
+      completion:
+        flag:
+            protocol:
+                - HTTP
+                - HTTPS
+                - TLS_PASSTHROUGH
+    - name: create-rule
+      description: Creates a listener rule.
+      flags:
+        --action=!: The action for the default rule.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --listener-identifier=!: The ID or ARN of the listener.
+        --match=!: The rule match.
+        --name=!: The name of the rule.
+        --priority=!: The priority assigned to the rule.
+        --service-identifier=!: The ID or ARN of the service.
+        --tags=: The tags for the rule.
+    - name: get-service-network-vpc-association
+      description: Retrieves information about the specified association between a service network and a VPC.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-network-vpc-association-identifier=!: The ID or ARN of the association.
+    - name: list-resource-configurations
+      description: Lists the resource configurations owned by or shared with this account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-verification-identifier=: The domain verification ID.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum page size.
+        --next-token=: A pagination token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-configuration-group-identifier=: The ID of the resource configuration of type `Group`.
+        --resource-gateway-identifier=: The ID of the resource gateway for the resource configuration.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-service
+      description: Updates the specified service.
+      flags:
+        --auth-type=: The type of IAM policy.
+        --certificate-arn=: The Amazon Resource Name (ARN) of the certificate.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-identifier=!: The ID or ARN of the service.
+      completion:
+        flag:
+            auth-type:
+                - NONE
+                - AWS_IAM
+    - name: delete-access-log-subscription
+      description: Deletes the specified access log subscription.
+      flags:
+        --access-log-subscription-identifier=!: The ID or ARN of the access log subscription.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-target-group
+      description: Deletes a target group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --target-group-identifier=!: The ID or ARN of the target group.
+    - name: list-access-log-subscriptions
+      description: Lists the access log subscriptions for the specified service network or service.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: A pagination token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-identifier=!: The ID or ARN of the service network or service.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-target-group
+      description: Updates the specified target group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --health-check=!: The health check configuration.
+        --target-group-identifier=!: The ID or ARN of the target group.
+    - name: create-service
+      description: Creates a service.
+      flags:
+        --auth-type=: The type of IAM policy.
+        --certificate-arn=: The Amazon Resource Name (ARN) of the certificate.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --custom-domain-name=: The custom domain name of the service.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the service.
+        --tags=: The tags for the service.
+      completion:
+        flag:
+            auth-type:
+                - NONE
+                - AWS_IAM
+    - name: create-service-network-vpc-association
+      description: Associates a VPC with a service network.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --dns-options=: DNS options for the service network VPC association.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-private-dns-enabled: Indicates if private DNS is enabled for the VPC association.
+        --private-dns-enabled: Indicates if private DNS is enabled for the VPC association.
+        --security-group-ids=: The IDs of the security groups.
+        --service-network-identifier=!: The ID or ARN of the service network.
+        --tags=: The tags for the association.
+        --vpc-identifier=!: The ID of the VPC.
+    - name: delete-service-network-service-association
+      description: Deletes the association between a service and a service network.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-network-service-association-identifier=!: The ID or ARN of the association.
+    - name: delete-service-network-vpc-association
+      description: Disassociates the VPC from the service network.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-network-vpc-association-identifier=!: The ID or ARN of the association.
+    - name: get-service-network-service-association
+      description: Retrieves information about the specified association between a service network and a service.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-network-service-association-identifier=!: The ID or ARN of the association.
+    - name: list-service-network-resource-associations
+      description: Lists the associations between a service network and a resource configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-children: Include service network resource associations of the child resource configuration with the grouped resource configuration.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum page size.
+        --next-token=: If there are additional results, a pagination token for the next page of results.
+        --no-include-children: Include service network resource associations of the child resource configuration with the grouped resource configuration.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-configuration-identifier=: The ID of the resource configuration.
+        --service-network-identifier=: The ID of the service network.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-service-network-vpc-endpoint-associations
+      description: Lists the associations between a service network and a VPC endpoint.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum page size.
+        --next-token=: If there are additional results, a pagination token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --service-network-identifier=!: The ID of the service network associated with the VPC endpoint.
+        --starting-token=: A token to specify where to start paginating.
+    - name: delete-listener
+      description: Deletes the specified listener.
+      flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --listener-identifier=!: The ID or ARN of the listener.
-        --match=: The rule match.
-        --priority=: The rule priority.
-        --rule-identifier=!: The ID or ARN of the rule.
         --service-identifier=!: The ID or ARN of the service.
+    - name: delete-service
+      description: Deletes a service.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-identifier=!: The ID or ARN of the service.
+    - name: get-auth-policy
+      description: Retrieves information about the auth policy for the specified service or service network.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-identifier=!: The ID or ARN of the service network or service.
+    - name: get-resource-gateway
+      description: Retrieves information about the specified resource gateway.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-gateway-identifier=!: The ID of the resource gateway.
+    - name: put-auth-policy
+      description: Creates or updates the auth policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy=!: The auth policy.
+        --resource-identifier=!: The ID or ARN of the service network or service for which the policy is created.
+    - name: register-targets
+      description: Registers the targets with the target group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --target-group-identifier=!: The ID or ARN of the target group.
+        --targets=!: The targets.
+    - name: create-service-network-service-association
+      description: Associates the specified service with the specified service network.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-identifier=!: The ID or ARN of the service.
+        --service-network-identifier=!: The ID or ARN of the service network.
+        --tags=: The tags for the association.
+    - name: delete-resource-gateway
+      description: Deletes the specified resource gateway.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-gateway-identifier=!: The ID or ARN of the resource gateway.
+    - name: delete-resource-policy
+      description: Deletes the specified resource policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+    - name: untag-resource
+      description: Removes the specified tags from the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+        --tag-keys=!: The tag keys of the tags to remove.
     - name: create-resource-configuration
       description: Creates a resource configuration.
       flags:
@@ -118,191 +685,30 @@ commands:
                 - CHILD
                 - SINGLE
                 - ARN
-    - name: delete-access-log-subscription
-      description: Deletes the specified access log subscription.
-      flags:
-        --access-log-subscription-identifier=!: The ID or ARN of the access log subscription.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-service-network-service-association
-      description: Deletes the association between a service and a service network.
+    - name: get-listener
+      description: Retrieves information about the specified listener for the specified service.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --service-network-service-association-identifier=!: The ID or ARN of the association.
-    - name: put-resource-policy
-      description: Attaches a resource-based permission policy to a service or service network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy=!: An IAM policy.
-        --resource-arn=!: The ID or ARN of the service network or service for which the policy is created.
-    - name: start-domain-verification
-      description: Starts the domain verification process for a custom domain name.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --domain-name=!: The domain name to verify ownership for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: The tags for the domain verification.
-    - name: update-service-network-vpc-association
-      description: Updates the service network and VPC association.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --security-group-ids=!: The IDs of the security groups.
-        --service-network-vpc-association-identifier=!: The ID or ARN of the association.
-    - name: update-target-group
-      description: Updates the specified target group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --health-check=!: The health check configuration.
-        --target-group-identifier=!: The ID or ARN of the target group.
-    - name: list-service-network-vpc-endpoint-associations
-      description: Lists the associations between a service network and a VPC endpoint.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum page size.
-        --next-token=: If there are additional results, a pagination token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --service-network-identifier=!: The ID of the service network associated with the VPC endpoint.
-        --starting-token=: A token to specify where to start paginating.
-    - name: deregister-targets
-      description: Deregisters the specified targets from the specified target group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --target-group-identifier=!: The ID or ARN of the target group.
-        --targets=!: The targets to deregister.
-    - name: delete-service-network-resource-association
-      description: Deletes the association between a service network and a resource configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --service-network-resource-association-identifier=!: The ID of the association.
-    - name: list-resource-endpoint-associations
-      description: Lists the associations for the specified VPC endpoint.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum page size.
-        --next-token=: A pagination token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --resource-configuration-identifier=!: The ID for the resource configuration associated with the VPC endpoint.
-        --resource-endpoint-association-identifier=: The ID of the association.
-        --starting-token=: A token to specify where to start paginating.
-        --vpc-endpoint-id=: The ID of the VPC endpoint in the association.
-        --vpc-endpoint-owner=: The owner of the VPC endpoint in the association.
-    - name: list-targets
-      description: Lists the targets for the target group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return.
-        --next-token=: A pagination token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --target-group-identifier=!: The ID or ARN of the target group.
-        --targets=: The targets.
-    - name: update-service
-      description: Updates the specified service.
-      flags:
-        --auth-type=: The type of IAM policy.
-        --certificate-arn=: The Amazon Resource Name (ARN) of the certificate.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --listener-identifier=!: The ID or ARN of the listener.
         --service-identifier=!: The ID or ARN of the service.
-      completion:
-        flag:
-            auth-type:
-                - NONE
-                - AWS_IAM
-    - name: get-resource-gateway
-      description: Retrieves information about the specified resource gateway.
+    - name: get-resource-configuration
+      description: Retrieves information about the specified resource configuration.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-gateway-identifier=!: The ID of the resource gateway.
-    - name: list-service-network-service-associations
-      description: Lists the associations between a service network and a service.
+        --resource-configuration-identifier=!: The ID of the resource configuration.
+    - name: batch-update-rule
+      description: Updates the listener rules in a batch.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return.
-        --next-token=: A pagination token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --service-identifier=: The ID or ARN of the service.
-        --service-network-identifier=: The ID or ARN of the service network.
-        --starting-token=: A token to specify where to start paginating.
-    - name: put-auth-policy
-      description: Creates or updates the auth policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy=!: The auth policy.
-        --resource-identifier=!: The ID or ARN of the service network or service for which the policy is created.
-    - name: register-targets
-      description: Registers the targets with the target group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --target-group-identifier=!: The ID or ARN of the target group.
-        --targets=!: The targets.
-    - name: delete-resource-policy
-      description: Deletes the specified resource policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-    - name: get-service-network
-      description: Retrieves information about the specified service network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --service-network-identifier=!: The ID or ARN of the service network.
-    - name: list-service-networks
-      description: Lists the service networks owned by or shared with this account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return.
-        --next-token=: A pagination token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-resource-gateway
-      description: Updates the specified resource gateway.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-gateway-identifier=!: The ID or ARN of the resource gateway.
-        --security-group-ids=: The IDs of the security groups associated with the resource gateway.
+        --listener-identifier=!: The ID or ARN of the listener.
+        --rules=!: The rules for the specified listener.
+        --service-identifier=!: The ID or ARN of the service.
     - name: create-service-network-resource-association
       description: Associates the specified service network with the specified resource configuration.
       flags:
@@ -315,16 +721,6 @@ commands:
         --resource-configuration-identifier=!: The ID of the resource configuration to associate with the service network.
         --service-network-identifier=!: The ID of the service network to associate with the resource configuration.
         --tags=: A key-value pair to associate with a resource.
-    - name: create-service-network-service-association
-      description: Associates the specified service with the specified service network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --service-identifier=!: The ID or ARN of the service.
-        --service-network-identifier=!: The ID or ARN of the service network.
-        --tags=: The tags for the association.
     - name: delete-resource-endpoint-association
       description: Disassociates the resource configuration from the resource VPC endpoint.
       flags:
@@ -332,258 +728,22 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-endpoint-association-identifier=!: The ID or ARN of the association.
-    - name: delete-rule
-      description: Deletes a listener rule.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --listener-identifier=!: The ID or ARN of the listener.
-        --rule-identifier=!: The ID or ARN of the rule.
-        --service-identifier=!: The ID or ARN of the service.
-    - name: delete-service
-      description: Deletes a service.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --service-identifier=!: The ID or ARN of the service.
-    - name: delete-service-network-vpc-association
-      description: Disassociates the VPC from the service network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --service-network-vpc-association-identifier=!: The ID or ARN of the association.
-    - name: untag-resource
-      description: Removes the specified tags from the specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-        --tag-keys=!: The tag keys of the tags to remove.
-    - name: delete-domain-verification
-      description: Deletes the specified domain verification.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-verification-identifier=!: The ID of the domain verification to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-domain-verification
-      description: Retrieves information about a domain verification.ß
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-verification-identifier=!: The ID or ARN of the domain verification to retrieve.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-resource-gateway
-      description: A resource gateway is a point of ingress into the VPC where a resource resides.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ip-address-type=: A resource gateway can have IPv4, IPv6 or dualstack addresses.
-        --ipv4-addresses-per-eni=: The number of IPv4 addresses in each ENI for the resource gateway.
-        --name=!: The name of the resource gateway.
-        --security-group-ids=: The IDs of the security groups to apply to the resource gateway.
-        --subnet-ids=: The IDs of the VPC subnets in which to create the resource gateway.
-        --tags=: The tags for the resource gateway.
-        --vpc-identifier=: The ID of the VPC for the resource gateway.
-      completion:
-        flag:
-            ip-address-type:
-                - IPV4
-                - IPV6
-                - DUALSTACK
-    - name: update-listener
-      description: Updates the specified listener for the specified service.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --default-action=!: The action for the default rule.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --listener-identifier=!: The ID or ARN of the listener.
-        --service-identifier=!: The ID or ARN of the service.
-    - name: get-resource-policy
-      description: Retrieves information about the specified resource policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the service network or service.
-    - name: list-access-log-subscriptions
-      description: Lists the access log subscriptions for the specified service network or service.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return.
-        --next-token=: A pagination token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --resource-identifier=!: The ID or ARN of the service network or service.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: Lists the tags for the specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-    - name: delete-listener
-      description: Deletes the specified listener.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --listener-identifier=!: The ID or ARN of the listener.
-        --service-identifier=!: The ID or ARN of the service.
-    - name: get-service
-      description: Retrieves information about the specified service.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --service-identifier=!: The ID or ARN of the service.
-    - name: list-listeners
-      description: Lists the listeners for the specified service.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return.
-        --next-token=: A pagination token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --service-identifier=!: The ID or ARN of the service.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-rules
-      description: Lists the rules for the specified listener.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --listener-identifier=!: The ID or ARN of the listener.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return.
-        --next-token=: A pagination token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --service-identifier=!: The ID or ARN of the service.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-service-network-resource-associations
-      description: Lists the associations between a service network and a resource configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --include-children: Include service network resource associations of the child resource configuration with the grouped resource configuration.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum page size.
-        --next-token=: If there are additional results, a pagination token for the next page of results.
-        --no-include-children: Include service network resource associations of the child resource configuration with the grouped resource configuration.
-        --page-size=: The size of each page to get in the AWS service call.
-        --resource-configuration-identifier=: The ID of the resource configuration.
-        --service-network-identifier=: The ID of the service network.
-        --starting-token=: A token to specify where to start paginating.
-    - name: batch-update-rule
-      description: Updates the listener rules in a batch.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --listener-identifier=!: The ID or ARN of the listener.
-        --rules=!: The rules for the specified listener.
-        --service-identifier=!: The ID or ARN of the service.
-    - name: create-access-log-subscription
-      description: Enables access logs to be sent to Amazon CloudWatch, Amazon S3, and Amazon Kinesis Data Firehose.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --destination-arn=!: The Amazon Resource Name (ARN) of the destination.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-identifier=!: The ID or ARN of the service network or service.
-        --service-network-log-type=: The type of log that monitors your Amazon VPC Lattice service networks.
-        --tags=: The tags for the access log subscription.
-      completion:
-        flag:
-            service-network-log-type:
-                - SERVICE
-                - RESOURCE
-    - name: delete-target-group
-      description: Deletes a target group.
+    - name: deregister-targets
+      description: Deregisters the specified targets from the specified target group.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --target-group-identifier=!: The ID or ARN of the target group.
-    - name: get-service-network-resource-association
-      description: Retrieves information about the specified association between a service network and a resource configuration.
+        --targets=!: The targets to deregister.
+    - name: tag-resource
+      description: Adds the specified tags to the specified resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --service-network-resource-association-identifier=!: The ID of the association.
-    - name: get-service-network-service-association
-      description: Retrieves information about the specified association between a service network and a service.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --service-network-service-association-identifier=!: The ID or ARN of the association.
-    - name: get-service-network-vpc-association
-      description: Retrieves information about the specified association between a service network and a VPC.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --service-network-vpc-association-identifier=!: The ID or ARN of the association.
-    - name: get-target-group
-      description: Retrieves information about the specified target group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --target-group-identifier=!: The ID or ARN of the target group.
-    - name: create-service
-      description: Creates a service.
-      flags:
-        --auth-type=: The type of IAM policy.
-        --certificate-arn=: The Amazon Resource Name (ARN) of the certificate.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --custom-domain-name=: The custom domain name of the service.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the service.
-        --tags=: The tags for the service.
-      completion:
-        flag:
-            auth-type:
-                - NONE
-                - AWS_IAM
-    - name: delete-auth-policy
-      description: Deletes the specified auth policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-identifier=!: The ID or ARN of the resource.
-    - name: list-service-network-vpc-associations
-      description: Lists the associations between a service network and a VPC.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return.
-        --next-token=: A pagination token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --service-network-identifier=: The ID or ARN of the service network.
-        --starting-token=: A token to specify where to start paginating.
-        --vpc-identifier=: The ID or ARN of the VPC.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+        --tags=!: The tags for the resource.
     - name: update-resource-configuration
       description: Updates the specified resource configuration.
       flags:
@@ -595,163 +755,3 @@ commands:
         --port-ranges=: The TCP port ranges that a consumer can use to access a resource configuration.
         --resource-configuration-definition=: 'Identifies the resource configuration in one of the following ways:'
         --resource-configuration-identifier=!: The ID of the resource configuration.
-    - name: create-listener
-      description: Creates a listener for a service.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --default-action=!: The action for the default rule.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the listener.
-        --port=: The listener port.
-        --protocol=!: The listener protocol.
-        --service-identifier=!: The ID or ARN of the service.
-        --tags=: The tags for the listener.
-      completion:
-        flag:
-            protocol:
-                - HTTP
-                - HTTPS
-                - TLS_PASSTHROUGH
-    - name: delete-resource-gateway
-      description: Deletes the specified resource gateway.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-gateway-identifier=!: The ID or ARN of the resource gateway.
-    - name: get-access-log-subscription
-      description: Retrieves information about the specified access log subscription.
-      flags:
-        --access-log-subscription-identifier=!: The ID or ARN of the access log subscription.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-listener
-      description: Retrieves information about the specified listener for the specified service.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --listener-identifier=!: The ID or ARN of the listener.
-        --service-identifier=!: The ID or ARN of the service.
-    - name: create-target-group
-      description: Creates a target group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --config=: The target group configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the target group.
-        --tags=: The tags for the target group.
-        --type=!: The type of target group.
-      completion:
-        flag:
-            type:
-                - IP
-                - LAMBDA
-                - INSTANCE
-                - ALB
-    - name: delete-service-network
-      description: Deletes a service network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --service-network-identifier=!: The ID or ARN of the service network.
-    - name: get-auth-policy
-      description: Retrieves information about the auth policy for the specified service or service network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-identifier=!: The ID or ARN of the service network or service.
-    - name: get-rule
-      description: Retrieves information about the specified listener rules.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --listener-identifier=!: The ID or ARN of the listener.
-        --rule-identifier=!: The ID or ARN of the listener rule.
-        --service-identifier=!: The ID or ARN of the service.
-    - name: list-target-groups
-      description: Lists your target groups.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return.
-        --next-token=: A pagination token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --target-group-type=: The target group type.
-        --vpc-identifier=: The ID or ARN of the VPC.
-      completion:
-        flag:
-            target-group-type:
-                - IP
-                - LAMBDA
-                - INSTANCE
-                - ALB
-    - name: tag-resource
-      description: Adds the specified tags to the specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-        --tags=!: The tags for the resource.
-    - name: update-service-network
-      description: Updates the specified service network.
-      flags:
-        --auth-type=!: The type of IAM policy.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --service-network-identifier=!: The ID or ARN of the service network.
-      completion:
-        flag:
-            auth-type:
-                - NONE
-                - AWS_IAM
-    - name: create-service-network
-      description: Creates a service network.
-      flags:
-        --auth-type=: The type of IAM policy.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the service network.
-        --sharing-config=: Specify if the service network should be enabled for sharing.
-        --tags=: The tags for the service network.
-      completion:
-        flag:
-            auth-type:
-                - NONE
-                - AWS_IAM
-    - name: create-service-network-vpc-association
-      description: Associates a VPC with a service network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --dns-options=: DNS options for the service network VPC association.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-private-dns-enabled: Indicates if private DNS is enabled for the VPC association.
-        --private-dns-enabled: Indicates if private DNS is enabled for the VPC association.
-        --security-group-ids=: The IDs of the security groups.
-        --service-network-identifier=!: The ID or ARN of the service network.
-        --tags=: The tags for the association.
-        --vpc-identifier=!: The ID of the VPC.
-    - name: delete-resource-configuration
-      description: Deletes the specified resource configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-configuration-identifier=!: The ID or ARN of the resource configuration.

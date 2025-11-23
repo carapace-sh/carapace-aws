@@ -1,6 +1,103 @@
 name: bedrock-agent-runtime
 description: Agents for Amazon Bedrock Runtime
 commands:
+    - name: retrieve
+      description: Queries a knowledge base and retrieves information from it.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --guardrail-configuration=: Guardrail settings.
+        --knowledge-base-id=!: The unique identifier of the knowledge base to query.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: If there are more results than can fit in the response, the response returns a `nextToken`.
+        --retrieval-configuration=: Contains configurations for the knowledge base query and retrieval process.
+        --retrieval-query=!: Contains the query to send the knowledge base.
+        --starting-token=: A token to specify where to start paginating.
+    - name: retrieve-and-generate
+      description: Queries a knowledge base and generates responses based on the retrieved results and using the specified foundation model or [inference profile](https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input=!: Contains the query to be made to the knowledge base.
+        --retrieve-and-generate-configuration=: Contains configurations for the knowledge base query and retrieval process.
+        --session-configuration=: Contains details about the session with the knowledge base.
+        --session-id=: The unique identifier of the session.
+    - name: start-flow-execution
+      description: Starts an execution of an Amazon Bedrock flow.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --flow-alias-identifier=!: The unique identifier of the flow alias to use for the flow execution.
+        --flow-execution-name=: The unique name for the flow execution.
+        --flow-identifier=!: The unique identifier of the flow to execute.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --inputs=!: The input data required for the flow execution.
+        --model-performance-configuration=: The performance settings for the foundation model used in the flow execution.
+    - name: create-session
+      description: Creates a session to temporarily store conversations for generative AI (GenAI) applications built with open-source frameworks such as LangGraph and LlamaIndex.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --encryption-key-arn=: The Amazon Resource Name (ARN) of the KMS key to use to encrypt the session data.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --session-metadata=: A map of key-value pairs containing attributes to be persisted across the session.
+        --tags=: Specify the key-value pairs for the tags that you want to attach to the session.
+    - name: delete-session
+      description: Deletes a session that you ended.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --session-identifier=!: The unique identifier for the session to be deleted.
+    - name: get-agent-memory
+      description: Gets the sessions stored in the memory of the agent.
+      flags:
+        --agent-alias-id=!: The unique identifier of an alias of an agent.
+        --agent-id=!: The unique identifier of the agent to which the alias belongs.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The maximum number of items to return in the response.
+        --memory-id=!: The unique identifier of the memory.
+        --memory-type=!: The type of memory.
+        --next-token=: If the total number of results is greater than the maxItems value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            memory-type:
+                - SESSION_SUMMARY
+    - name: get-invocation-step
+      description: Retrieves the details of a specific invocation step within an invocation in a session.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --invocation-identifier=!: The unique identifier for the invocation in UUID format.
+        --invocation-step-id=!: The unique identifier (in UUID format) for the specific invocation step to retrieve.
+        --session-identifier=!: The unique identifier for the invocation step's associated session.
+    - name: list-flow-executions
+      description: Lists all executions of a flow.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --flow-alias-identifier=: The unique identifier of the flow alias to list executions for.
+        --flow-identifier=!: The unique identifier of the flow to list executions for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of flow executions to return in a single response.
+        --next-token=: A token to retrieve the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: List all the tags for the resource you specify.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource for which to list tags.
     - name: end-session
       description: Ends the session.
       flags:
@@ -17,6 +114,44 @@ commands:
         --flow-alias-identifier=!: The unique identifier of the flow alias used for the flow execution.
         --flow-identifier=!: The unique identifier of the flow.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: untag-resource
+      description: Remove tags from a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource from which to remove tags.
+        --tag-keys=!: A list of keys of the tags to remove from the resource.
+    - name: update-session
+      description: Updates the metadata or encryption settings of a session.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --session-identifier=!: The unique identifier of the session to modify.
+        --session-metadata=: A map of key-value pairs containing attributes to be persisted across the session.
+    - name: stop-flow-execution
+      description: Stops an Amazon Bedrock flow's execution.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --execution-identifier=!: The unique identifier of the flow execution to stop.
+        --flow-alias-identifier=!: The unique identifier of the flow alias used for the execution.
+        --flow-identifier=!: The unique identifier of the flow.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-invocation-steps
+      description: Lists all invocation steps associated with a session and optionally, an invocation within the session.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --invocation-identifier=: The unique identifier (in UUID format) for the invocation to list invocation steps for.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --session-identifier=!: The unique identifier for the session associated with the invocation steps.
+        --starting-token=: A token to specify where to start paginating.
     - name: tag-resource
       description: Associate tags with a resource.
       flags:
@@ -25,25 +160,17 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the resource to tag.
         --tags=!: An object containing key-value pairs that define the tags to attach to the resource.
-    - name: retrieve-and-generate
-      description: Queries a knowledge base and generates responses based on the retrieved results and using the specified foundation model or [inference profile](https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html).
+    - name: put-invocation-step
+      description: Add an invocation step to an invocation in a session.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input=!: Contains the query to be made to the knowledge base.
-        --retrieve-and-generate-configuration=: Contains configurations for the knowledge base query and retrieval process.
-        --session-configuration=: Contains details about the session with the knowledge base.
-        --session-id=: The unique identifier of the session.
-    - name: create-invocation
-      description: Creates a new invocation within a session.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description for the interactions in the invocation.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --invocation-id=: A unique identifier for the invocation in UUID format.
-        --session-identifier=!: The unique identifier for the associated session for the invocation.
+        --invocation-identifier=!: The unique identifier (in UUID format) of the invocation to add the invocation step to.
+        --invocation-step-id=: The unique identifier of the invocation step in UUID format.
+        --invocation-step-time=!: The timestamp for when the invocation step occurred.
+        --payload=!: The payload for the invocation step, including text and images for the interaction.
+        --session-identifier=!: The unique identifier for the session to add the invocation step to.
     - name: get-flow-execution
       description: Retrieves details about a specific flow execution, including its status, start and end times, and any errors that occurred during execution.
       flags:
@@ -53,6 +180,21 @@ commands:
         --flow-alias-identifier=!: The unique identifier of the flow alias used for the execution.
         --flow-identifier=!: The unique identifier of the flow.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-session
+      description: Retrieves details about a specific session.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --session-identifier=!: A unique identifier for the session to retrieve.
+    - name: generate-query
+      description: Generates an SQL query from a natural language query.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --query-generation-input=!: Specifies information about a natural language query to transform into SQL.
+        --transformation-configuration=!: Specifies configurations for transforming the natural language query into SQL.
     - name: list-flow-execution-events
       description: Lists events that occurred during a flow execution.
       flags:
@@ -73,153 +215,6 @@ commands:
             event-type:
                 - Node
                 - Flow
-    - name: list-tags-for-resource
-      description: List all the tags for the resource you specify.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource for which to list tags.
-    - name: get-invocation-step
-      description: Retrieves the details of a specific invocation step within an invocation in a session.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --invocation-identifier=!: The unique identifier for the invocation in UUID format.
-        --invocation-step-id=!: The unique identifier (in UUID format) for the specific invocation step to retrieve.
-        --session-identifier=!: The unique identifier for the invocation step's associated session.
-    - name: list-invocation-steps
-      description: Lists all invocation steps associated with a session and optionally, an invocation within the session.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --invocation-identifier=: The unique identifier (in UUID format) for the invocation to list invocation steps for.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in the response.
-        --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --session-identifier=!: The unique identifier for the session associated with the invocation steps.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-sessions
-      description: Lists all sessions in your Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in the response.
-        --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: create-session
-      description: Creates a session to temporarily store conversations for generative AI (GenAI) applications built with open-source frameworks such as LangGraph and LlamaIndex.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --encryption-key-arn=: The Amazon Resource Name (ARN) of the KMS key to use to encrypt the session data.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --session-metadata=: A map of key-value pairs containing attributes to be persisted across the session.
-        --tags=: Specify the key-value pairs for the tags that you want to attach to the session.
-    - name: retrieve
-      description: Queries a knowledge base and retrieves information from it.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --guardrail-configuration=: Guardrail settings.
-        --knowledge-base-id=!: The unique identifier of the knowledge base to query.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: If there are more results than can fit in the response, the response returns a `nextToken`.
-        --retrieval-configuration=: Contains configurations for the knowledge base query and retrieval process.
-        --retrieval-query=!: Contains the query to send the knowledge base.
-        --starting-token=: A token to specify where to start paginating.
-    - name: delete-agent-memory
-      description: Deletes memory from the specified memory identifier.
-      flags:
-        --agent-alias-id=!: The unique identifier of an alias of an agent.
-        --agent-id=!: The unique identifier of the agent to which the alias belongs.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --memory-id=: The unique identifier of the memory.
-        --session-id=: The unique session identifier of the memory.
-    - name: generate-query
-      description: Generates an SQL query from a natural language query.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --query-generation-input=!: Specifies information about a natural language query to transform into SQL.
-        --transformation-configuration=!: Specifies configurations for transforming the natural language query into SQL.
-    - name: put-invocation-step
-      description: Add an invocation step to an invocation in a session.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --invocation-identifier=!: The unique identifier (in UUID format) of the invocation to add the invocation step to.
-        --invocation-step-id=: The unique identifier of the invocation step in UUID format.
-        --invocation-step-time=!: The timestamp for when the invocation step occurred.
-        --payload=!: The payload for the invocation step, including text and images for the interaction.
-        --session-identifier=!: The unique identifier for the session to add the invocation step to.
-    - name: untag-resource
-      description: Remove tags from a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource from which to remove tags.
-        --tag-keys=!: A list of keys of the tags to remove from the resource.
-    - name: rerank
-      description: Reranks the relevance of sources based on queries.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: If the total number of results was greater than could fit in a response, a token is returned in the `nextToken` field.
-        --queries=!: An array of objects, each of which contains information about a query to submit to the reranker model.
-        --reranking-configuration=!: Contains configurations for reranking.
-        --sources=!: An array of objects, each of which contains information about the sources to rerank.
-        --starting-token=: A token to specify where to start paginating.
-    - name: stop-flow-execution
-      description: Stops an Amazon Bedrock flow's execution.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --execution-identifier=!: The unique identifier of the flow execution to stop.
-        --flow-alias-identifier=!: The unique identifier of the flow alias used for the execution.
-        --flow-identifier=!: The unique identifier of the flow.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-session
-      description: Deletes a session that you ended.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --session-identifier=!: The unique identifier for the session to be deleted.
-    - name: get-session
-      description: Retrieves details about a specific session.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --session-identifier=!: A unique identifier for the session to retrieve.
-    - name: list-flow-executions
-      description: Lists all executions of a flow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --flow-alias-identifier=: The unique identifier of the flow alias to list executions for.
-        --flow-identifier=!: The unique identifier of the flow to list executions for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of flow executions to return in a single response.
-        --next-token=: A token to retrieve the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
     - name: list-invocations
       description: Lists all invocations associated with a specific session.
       flags:
@@ -232,40 +227,45 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --session-identifier=!: The unique identifier for the session to list invocations for.
         --starting-token=: A token to specify where to start paginating.
-    - name: update-session
-      description: Updates the metadata or encryption settings of a session.
+    - name: rerank
+      description: Reranks the relevance of sources based on queries.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --session-identifier=!: The unique identifier of the session to modify.
-        --session-metadata=: A map of key-value pairs containing attributes to be persisted across the session.
-    - name: get-agent-memory
-      description: Gets the sessions stored in the memory of the agent.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: If the total number of results was greater than could fit in a response, a token is returned in the `nextToken` field.
+        --queries=!: An array of objects, each of which contains information about a query to submit to the reranker model.
+        --reranking-configuration=!: Contains configurations for reranking.
+        --sources=!: An array of objects, each of which contains information about the sources to rerank.
+        --starting-token=: A token to specify where to start paginating.
+    - name: create-invocation
+      description: Creates a new invocation within a session.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description for the interactions in the invocation.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --invocation-id=: A unique identifier for the invocation in UUID format.
+        --session-identifier=!: The unique identifier for the associated session for the invocation.
+    - name: delete-agent-memory
+      description: Deletes memory from the specified memory identifier.
       flags:
         --agent-alias-id=!: The unique identifier of an alias of an agent.
         --agent-id=!: The unique identifier of the agent to which the alias belongs.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The maximum number of items to return in the response.
-        --memory-id=!: The unique identifier of the memory.
-        --memory-type=!: The type of memory.
-        --next-token=: If the total number of results is greater than the maxItems value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            memory-type:
-                - SESSION_SUMMARY
-    - name: start-flow-execution
-      description: Starts an execution of an Amazon Bedrock flow.
+        --memory-id=: The unique identifier of the memory.
+        --session-id=: The unique session identifier of the memory.
+    - name: list-sessions
+      description: Lists all sessions in your Amazon Web Services account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --flow-alias-identifier=!: The unique identifier of the flow alias to use for the flow execution.
-        --flow-execution-name=: The unique name for the flow execution.
-        --flow-identifier=!: The unique identifier of the flow to execute.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --inputs=!: The input data required for the flow execution.
-        --model-performance-configuration=: The performance settings for the foundation model used in the flow execution.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.

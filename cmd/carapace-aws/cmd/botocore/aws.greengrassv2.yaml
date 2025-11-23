@@ -1,42 +1,16 @@
 name: greengrassv2
 description: AWS IoT Greengrass V2
 commands:
-    - name: tag-resource
-      description: Adds tags to an IoT Greengrass resource.
+    - name: create-component-version
+      description: Creates a component.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you can provide to ensure that the request is idempotent.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource to tag.
-        --tags=!: A list of key-value pairs that contain metadata for the resource.
-    - name: associate-service-role-to-account
-      description: Associates a Greengrass service role with IoT Greengrass for your Amazon Web Services account in this Amazon Web Services Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --role-arn=!: The Amazon Resource Name (ARN) of the service role to associate with IoT Greengrass for your Amazon Web Services account in this Amazon Web Services Region.
-    - name: batch-associate-client-device-with-core-device
-      description: Associates a list of client devices with a core device.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --core-device-thing-name=!: The name of the core device.
-        --entries=: The list of client devices to associate.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-component
-      description: Deletes a version of a component from IoT Greengrass.
-      flags:
-        --arn=!: The [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the component version.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-service-role-for-account
-      description: Gets the service role associated with IoT Greengrass for your Amazon Web Services account in this Amazon Web Services Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --inline-recipe=: The recipe to use to create the component.
+        --lambda-function=: The parameters to create a component from a Lambda function.
+        --tags=: A list of key-value pairs that contain metadata for the resource.
     - name: list-client-devices-associated-with-core-device
       description: Retrieves a paginated list of client devices that are associated with a core device.
       flags:
@@ -49,6 +23,47 @@ commands:
         --next-token=: The token to be used for the next set of paginated results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-effective-deployments
+      description: Retrieves a paginated list of deployment jobs that IoT Greengrass sends to Greengrass core devices.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --core-device-thing-name=!: The name of the core device.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to be returned per paginated request.
+        --next-token=: The token to be used for the next set of paginated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: batch-disassociate-client-device-from-core-device
+      description: Disassociates a list of client devices from a core device.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --core-device-thing-name=!: The name of the core device.
+        --entries=: The list of client devices to disassociate.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-deployment
+      description: Creates a continuous deployment for a target, which is a Greengrass core device or group of core devices.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you can provide to ensure that the request is idempotent.
+        --components=: The components to deploy.
+        --deployment-name=: The name of the deployment.
+        --deployment-policies=: The deployment policies for the deployment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --iot-job-configuration=: The job configuration for the deployment configuration.
+        --parent-target-arn=: The parent deployment's target [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) within a subdeployment.
+        --tags=: A list of key-value pairs that contain metadata for the resource.
+        --target-arn=!: The [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the target IoT thing or thing group.
+    - name: get-deployment
+      description: Gets a deployment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --deployment-id=!: The ID of the deployment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-components
       description: Retrieves a paginated list of component summaries.
       flags:
@@ -66,91 +81,6 @@ commands:
             scope:
                 - PRIVATE
                 - PUBLIC
-    - name: batch-disassociate-client-device-from-core-device
-      description: Disassociates a list of client devices from a core device.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --core-device-thing-name=!: The name of the core device.
-        --entries=: The list of client devices to disassociate.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: cancel-deployment
-      description: Cancels a deployment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deployment-id=!: The ID of the deployment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-component-version
-      description: Creates a component.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier that you can provide to ensure that the request is idempotent.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --inline-recipe=: The recipe to use to create the component.
-        --lambda-function=: The parameters to create a component from a Lambda function.
-        --tags=: A list of key-value pairs that contain metadata for the resource.
-    - name: get-component
-      description: Gets the recipe for a version of a component.
-      flags:
-        --arn=!: The [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the component version.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recipe-output-format=: The format of the recipe.
-      completion:
-        flag:
-            recipe-output-format:
-                - JSON
-                - YAML
-    - name: get-component-version-artifact
-      description: Gets the pre-signed URL to download a public or a Lambda component artifact.
-      flags:
-        --arn=!: The [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the component version.
-        --artifact-name=!: The name of the artifact.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --iot-endpoint-type=: Determines if the Amazon S3 URL returned is a FIPS pre-signed URL endpoint.
-        --s3-endpoint-type=: Specifies the endpoint to use when getting Amazon S3 pre-signed URLs.
-      completion:
-        flag:
-            iot-endpoint-type:
-                - fips
-                - standard
-            s3-endpoint-type:
-                - REGIONAL
-                - GLOBAL
-    - name: resolve-component-candidates
-      description: Retrieves a list of components that meet the component, version, and platform requirements of a deployment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --component-candidates=: The list of components to resolve.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --platform=: The platform to use to resolve compatible components.
-    - name: delete-deployment
-      description: Deletes a deployment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deployment-id=!: The ID of the deployment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-core-device
-      description: Retrieves metadata for a Greengrass core device.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --core-device-thing-name=!: The name of the core device.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-deployment
-      description: Gets a deployment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deployment-id=!: The ID of the deployment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-core-devices
       description: Retrieves a paginated list of Greengrass core devices.
       flags:
@@ -170,25 +100,19 @@ commands:
             status:
                 - HEALTHY
                 - UNHEALTHY
-    - name: list-tags-for-resource
-      description: Retrieves the list of tags for an IoT Greengrass resource.
+    - name: cancel-deployment
+      description: Cancels a deployment.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --deployment-id=!: The ID of the deployment.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource.
-    - name: describe-component
-      description: Retrieves metadata for a version of a component.
-      flags:
-        --arn=!: The [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the component version.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: disassociate-service-role-from-account
-      description: Disassociates the Greengrass service role from IoT Greengrass for your Amazon Web Services account in this Amazon Web Services Region.
+    - name: delete-deployment
+      description: Deletes a deployment.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --deployment-id=!: The ID of the deployment.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-connectivity-info
       description: Retrieves connectivity information for a Greengrass core device.
@@ -197,6 +121,106 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --thing-name=!: The name of the core device.
+    - name: list-tags-for-resource
+      description: Retrieves the list of tags for an IoT Greengrass resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource.
+    - name: resolve-component-candidates
+      description: Retrieves a list of components that meet the component, version, and platform requirements of a deployment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --component-candidates=: The list of components to resolve.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --platform=: The platform to use to resolve compatible components.
+    - name: tag-resource
+      description: Adds tags to an IoT Greengrass resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource to tag.
+        --tags=!: A list of key-value pairs that contain metadata for the resource.
+    - name: update-connectivity-info
+      description: Updates connectivity information for a Greengrass core device.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connectivity-info=!: The connectivity information for the core device.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --thing-name=!: The name of the core device.
+    - name: delete-component
+      description: Deletes a version of a component from IoT Greengrass.
+      flags:
+        --arn=!: The [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the component version.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-component
+      description: Retrieves metadata for a version of a component.
+      flags:
+        --arn=!: The [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the component version.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-component-version-artifact
+      description: Gets the pre-signed URL to download a public or a Lambda component artifact.
+      flags:
+        --arn=!: The [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the component version.
+        --artifact-name=!: The name of the artifact.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --iot-endpoint-type=: Determines if the Amazon S3 URL returned is a FIPS pre-signed URL endpoint.
+        --s3-endpoint-type=: Specifies the endpoint to use when getting Amazon S3 pre-signed URLs.
+      completion:
+        flag:
+            iot-endpoint-type:
+                - fips
+                - standard
+            s3-endpoint-type:
+                - REGIONAL
+                - GLOBAL
+    - name: get-component
+      description: Gets the recipe for a version of a component.
+      flags:
+        --arn=!: The [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the component version.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recipe-output-format=: The format of the recipe.
+      completion:
+        flag:
+            recipe-output-format:
+                - JSON
+                - YAML
+    - name: list-installed-components
+      description: Retrieves a paginated list of the components that a Greengrass core device runs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --core-device-thing-name=!: The name of the core device.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to be returned per paginated request.
+        --next-token=: The token to be used for the next set of paginated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --topology-filter=: The filter for the list of components.
+      completion:
+        flag:
+            topology-filter:
+                - ALL
+                - ROOT
+    - name: disassociate-service-role-from-account
+      description: Disassociates the Greengrass service role from IoT Greengrass for your Amazon Web Services account in this Amazon Web Services Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-deployments
       description: Retrieves a paginated list of deployments.
       flags:
@@ -216,36 +240,33 @@ commands:
             history-filter:
                 - ALL
                 - LATEST_ONLY
-    - name: list-effective-deployments
-      description: Retrieves a paginated list of deployment jobs that IoT Greengrass sends to Greengrass core devices.
+    - name: get-core-device
+      description: Retrieves metadata for a Greengrass core device.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --core-device-thing-name=!: The name of the core device.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to be returned per paginated request.
-        --next-token=: The token to be used for the next set of paginated results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-installed-components
-      description: Retrieves a paginated list of the components that a Greengrass core device runs.
+    - name: associate-service-role-to-account
+      description: Associates a Greengrass service role with IoT Greengrass for your Amazon Web Services account in this Amazon Web Services Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --role-arn=!: The Amazon Resource Name (ARN) of the service role to associate with IoT Greengrass for your Amazon Web Services account in this Amazon Web Services Region.
+    - name: delete-core-device
+      description: Deletes a Greengrass core device, which is an IoT thing.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --core-device-thing-name=!: The name of the core device.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to be returned per paginated request.
-        --next-token=: The token to be used for the next set of paginated results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --topology-filter=: The filter for the list of components.
-      completion:
-        flag:
-            topology-filter:
-                - ALL
-                - ROOT
+    - name: get-service-role-for-account
+      description: Gets the service role associated with IoT Greengrass for your Amazon Web Services account in this Amazon Web Services Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-component-versions
       description: Retrieves a paginated list of all versions for a component.
       flags:
@@ -258,27 +279,6 @@ commands:
         --next-token=: The token to be used for the next set of paginated results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: create-deployment
-      description: Creates a continuous deployment for a target, which is a Greengrass core device or group of core devices.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier that you can provide to ensure that the request is idempotent.
-        --components=: The components to deploy.
-        --deployment-name=: The name of the deployment.
-        --deployment-policies=: The deployment policies for the deployment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --iot-job-configuration=: The job configuration for the deployment configuration.
-        --parent-target-arn=: The parent deployment's target [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) within a subdeployment.
-        --tags=: A list of key-value pairs that contain metadata for the resource.
-        --target-arn=!: The [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the target IoT thing or thing group.
-    - name: delete-core-device
-      description: Deletes a Greengrass core device, which is an IoT thing.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --core-device-thing-name=!: The name of the core device.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: untag-resource
       description: Removes a tag from an IoT Greengrass resource.
       flags:
@@ -287,11 +287,11 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource to untag.
         --tag-keys=!: A list of keys for tags to remove from the resource.
-    - name: update-connectivity-info
-      description: Updates connectivity information for a Greengrass core device.
+    - name: batch-associate-client-device-with-core-device
+      description: Associates a list of client devices with a core device.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connectivity-info=!: The connectivity information for the core device.
+        --core-device-thing-name=!: The name of the core device.
+        --entries=: The list of client devices to associate.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --thing-name=!: The name of the core device.

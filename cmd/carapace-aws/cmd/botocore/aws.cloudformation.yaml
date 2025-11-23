@@ -1,153 +1,6 @@
 name: cloudformation
 description: AWS CloudFormation
 commands:
-    - name: describe-account-limits
-      description: Retrieves your account's CloudFormation limits, such as the maximum number of stacks that you can create in your account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: The token for the next set of items to return.
-        --starting-token=: A token to specify where to start paginating.
-    - name: execute-change-set
-      description: Updates a stack using the input information that was provided when the specified change set was created.
-      flags:
-        --change-set-name=!: The name or Amazon Resource Name (ARN) of the change set that you want use to update the specified stack.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique identifier for this `ExecuteChangeSet` request.
-        --disable-rollback: Preserves the state of previously provisioned resources when an operation fails.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-disable-rollback: Preserves the state of previously provisioned resources when an operation fails.
-        --no-retain-except-on-create: When set to `true`, newly created resources are deleted when the operation rolls back.
-        --retain-except-on-create: When set to `true`, newly created resources are deleted when the operation rolls back.
-        --stack-name=: If you specified the name of a change set, specify the stack name or Amazon Resource Name (ARN) that's associated with the change set you want to execute.
-    - name: publish-type
-      description: Publishes the specified extension to the CloudFormation registry as a public extension in this Region.
-      flags:
-        --arn=: The Amazon Resource Name (ARN) of the extension.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --public-version-number=: The version number to assign to this version of the extension.
-        --type-name=: The name of the extension.
-        --type=: The type of the extension.
-      completion:
-        flag:
-            type:
-                - RESOURCE
-                - MODULE
-                - HOOK
-    - name: rollback-stack
-      description: When specifying `RollbackStack`, you preserve the state of previously provisioned resources when an operation fails.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique identifier for this `RollbackStack` request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-retain-except-on-create: When set to `true`, newly created resources are deleted when the operation rolls back.
-        --retain-except-on-create: When set to `true`, newly created resources are deleted when the operation rolls back.
-        --role-arn=: The Amazon Resource Name (ARN) of an IAM role that CloudFormation assumes to rollback the stack.
-        --stack-name=!: The name that's associated with the stack.
-    - name: cancel-update-stack
-      description: Cancels an update on the specified stack.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique identifier for this `CancelUpdateStack` request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --stack-name=!: If you don't pass a parameter to `StackName`, the API returns a response that describes all resources in the account.
-    - name: deactivate-type
-      description: Deactivates a public third-party extension, such as a resource or module, or a CloudFormation Hook when you no longer use it.
-      flags:
-        --arn=: The Amazon Resource Name (ARN) for the extension in this account and Region.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --type-name=: The type name of the extension in this account and Region.
-        --type=: The extension type.
-      completion:
-        flag:
-            type:
-                - RESOURCE
-                - MODULE
-                - HOOK
-    - name: describe-stack-refactor
-      description: Describes the stack refactor status.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --stack-refactor-id=!: The ID associated with the stack refactor created from the [CreateStackRefactor]() action.
-    - name: describe-stack-set
-      description: Returns the description of the specified StackSet.
-      flags:
-        --call-as=: \[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --stack-set-name=!: The name or unique ID of the StackSet whose description you want.
-      completion:
-        flag:
-            call-as:
-                - SELF
-                - DELEGATED_ADMIN
-    - name: describe-stack-set-operation
-      description: Returns the description of the specified StackSet operation.
-      flags:
-        --call-as=: \[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --operation-id=!: The unique ID of the StackSet operation.
-        --stack-set-name=!: The name or the unique stack ID of the StackSet for the stack operation.
-      completion:
-        flag:
-            call-as:
-                - SELF
-                - DELEGATED_ADMIN
-    - name: detect-stack-set-drift
-      description: Detect drift on a StackSet.
-      flags:
-        --call-as=: \[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --operation-id=: '*The ID of the StackSet operation.*'
-        --operation-preferences=: The user-specified preferences for how CloudFormation performs a StackSet operation.
-        --stack-set-name=!: The name of the StackSet on which to perform the drift detection operation.
-      completion:
-        flag:
-            call-as:
-                - SELF
-                - DELEGATED_ADMIN
-    - name: list-exports
-      description: Lists all exported output values in the account and Region in which you call this action.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: The token for the next set of items to return.
-        --starting-token=: A token to specify where to start paginating.
-    - name: test-type
-      description: Tests a registered extension to make sure it meets all necessary requirements for being published in the CloudFormation registry.
-      flags:
-        --arn=: The Amazon Resource Name (ARN) of the extension.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --log-delivery-bucket=: The S3 bucket to which CloudFormation delivers the contract test execution logs.
-        --type-name=: The name of the extension to test.
-        --type=: The type of the extension to test.
-        --version-id=: The version of the extension to test.
-      completion:
-        flag:
-            type:
-                - RESOURCE
-                - MODULE
-                - HOOK
     - name: create-change-set
       description: Creates a list of changes that will be applied to a stack so that you can review the changes before executing them.
       flags:
@@ -189,56 +42,90 @@ commands:
                 - DO_NOTHING
                 - ROLLBACK
                 - DELETE
-    - name: create-stack-set
-      description: Creates a StackSet.
+    - name: describe-account-limits
+      description: Retrieves your account's CloudFormation limits, such as the maximum number of stacks that you can create in your account.
       flags:
-        --administration-role-arn=: The Amazon Resource Name (ARN) of the IAM role to use to create this StackSet.
-        --auto-deployment=: Describes whether StackSets automatically deploys to Organizations accounts that are added to the target organization or organizational unit (OU).
-        --call-as=: Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.
-        --capabilities=: In some cases, you must explicitly acknowledge that your StackSet template contains certain capabilities in order for CloudFormation to create the StackSet and related stack instances.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique identifier for this `CreateStackSet` request.
-        --description=: A description of the StackSet.
-        --execution-role-name=: The name of the IAM execution role to use to create the StackSet.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --managed-execution=: Describes whether CloudFormation performs non-conflicting operations concurrently and queues conflicting operations.
-        --parameters=: The input parameters for the StackSet template.
-        --permission-model=: Describes how the IAM roles required for StackSet operations are created.
-        --stack-id=: The stack ID you are importing into a new StackSet.
-        --stack-set-name=!: The name to associate with the StackSet.
-        --tags=: The key-value pairs to associate with this StackSet and the stacks created from it.
-        --template-body=: The structure that contains the template body, with a minimum length of 1 byte and a maximum length of 51,200 bytes.
-        --template-url=: The URL of a file that contains the template body.
-      completion:
-        flag:
-            call-as:
-                - SELF
-                - DELEGATED_ADMIN
-            permission-model:
-                - SERVICE_MANAGED
-                - SELF_MANAGED
-    - name: delete-stack-set
-      description: Deletes a StackSet.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The token for the next set of items to return.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-resource-scan-resources
+      description: Lists the resources from a resource scan.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: If the number of available results exceeds this maximum, the response includes a `NextToken` value that you can use for the `NextToken` parameter to get the next set of results.
+        --next-token=: The token for the next set of items to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-identifier=: If specified, the returned resources will have the specified resource identifier (or one of them in the case where the resource has multiple identifiers).
+        --resource-scan-id=!: The Amazon Resource Name (ARN) of the resource scan.
+        --resource-type-prefix=: If specified, the returned resources will be of any of the resource types with the specified prefix.
+        --starting-token=: A token to specify where to start paginating.
+        --tag-key=: If specified, the returned resources will have a matching tag key.
+        --tag-value=: If specified, the returned resources will have a matching tag value.
+    - name: list-stack-instance-resource-drifts
+      description: Returns drift information for resources in a stack instance.
       flags:
         --call-as=: \[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --stack-set-name=!: The name or unique ID of the StackSet that you're deleting.
+        --max-results=: The maximum number of results to be returned with a single call.
+        --next-token=: The token for the next set of items to return.
+        --operation-id=!: The unique ID of the drift operation.
+        --stack-instance-account=!: The name of the Amazon Web Services account that you want to list resource drifts for.
+        --stack-instance-region=!: The name of the Region where you want to list resource drifts.
+        --stack-instance-resource-drift-statuses=: The resource drift status of the stack instance.
+        --stack-set-name=!: The name or unique ID of the StackSet that you want to list drifted resources for.
       completion:
         flag:
             call-as:
                 - SELF
                 - DELEGATED_ADMIN
-    - name: detect-stack-resource-drift
-      description: Returns information about whether a resource's actual configuration differs, or has *drifted*, from its expected configuration, as defined in the stack template and any values specified as template parameters.
+    - name: list-stack-set-operations
+      description: Returns summary information about operations performed on a StackSet.
+      flags:
+        --call-as=: \[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to be returned with a single call.
+        --next-token=: The token for the next set of items to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --stack-set-name=!: The name or unique ID of the StackSet that you want to get operation summaries for.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            call-as:
+                - SELF
+                - DELEGATED_ADMIN
+    - name: list-type-registrations
+      description: Returns a list of registration tokens for the specified extension(s).
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --logical-resource-id=!: The logical name of the resource for which to return drift information.
-        --stack-name=!: The name of the stack to which the resource belongs.
+        --max-results=: The maximum number of results to be returned with a single call.
+        --next-token=: The token for the next set of items to return.
+        --registration-status-filter=: The current status of the extension registration request.
+        --type-arn=: The Amazon Resource Name (ARN) of the extension.
+        --type-name=: The name of the extension.
+        --type=: The kind of extension.
+      completion:
+        flag:
+            registration-status-filter:
+                - COMPLETE
+                - IN_PROGRESS
+                - FAILED
+            type:
+                - RESOURCE
+                - MODULE
+                - HOOK
     - name: list-types
       description: Returns summary information about all extensions, including your private resource types, modules, and Hooks as well as all public extensions from Amazon Web Services and third-party publishers.
       flags:
@@ -271,164 +158,15 @@ commands:
             visibility:
                 - PUBLIC
                 - PRIVATE
-    - name: update-stack-instances
-      description: Updates the parameter values for stack instances for the specified accounts, within the specified Amazon Web Services Regions.
-      flags:
-        --accounts=: \[Self-managed permissions] The account IDs of one or more Amazon Web Services accounts in which you want to update parameter values for stack instances.
-        --call-as=: \[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deployment-targets=: \[Service-managed permissions] The Organizations accounts in which you want to update parameter values for stack instances.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --operation-id=: The unique identifier for this StackSet operation.
-        --operation-preferences=: Preferences for how CloudFormation performs this StackSet operation.
-        --parameter-overrides=: A list of input parameters whose values you want to update for the specified stack instances.
-        --regions=!: The names of one or more Amazon Web Services Regions in which you want to update parameter values for stack instances.
-        --stack-set-name=!: The name or unique ID of the StackSet associated with the stack instances.
-      completion:
-        flag:
-            call-as:
-                - SELF
-                - DELEGATED_ADMIN
-    - name: validate-template
-      description: Validates a specified template.
+    - name: set-stack-policy
+      description: Sets a stack policy for a specified stack.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --template-body=: Structure that contains the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes.
-        --template-url=: The URL of a file that contains the template body.
-    - name: create-stack-refactor
-      description: Creates a refactor across multiple stacks, with the list of stacks and resources that are affected.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description to help you identify the stack refactor.
-        --enable-stack-creation: Determines if a new stack is created with the refactor.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-enable-stack-creation: Determines if a new stack is created with the refactor.
-        --resource-mappings=: The mappings for the stack resource `Source` and stack resource `Destination`.
-        --stack-definitions=!: The stacks being refactored.
-    - name: describe-generated-template
-      description: Describes a generated template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --generated-template-name=!: The name or Amazon Resource Name (ARN) of a generated template.
-    - name: describe-resource-scan
-      description: Describes details of a resource scan.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-scan-id=!: The Amazon Resource Name (ARN) of the resource scan.
-    - name: detect-stack-drift
-      description: Detects whether a stack's actual configuration differs, or has *drifted*, from its expected configuration, as defined in the stack template and any values specified as template parameters.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --logical-resource-ids=: The logical names of any resources you want to use as filters.
-        --stack-name=!: The name of the stack for which you want to detect drift.
-    - name: get-hook-result
-      description: Retrieves detailed information and remediation guidance for a Hook invocation result.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hook-result-id=: The unique identifier (ID) of the Hook invocation result that you want details about.
-    - name: get-stack-policy
-      description: Returns the stack policy for a specified stack.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --stack-name=!: The name or unique stack ID that's associated with the stack whose policy you want to get.
-    - name: import-stacks-to-stack-set
-      description: Import existing stacks into a new StackSets.
-      flags:
-        --call-as=: By default, `SELF` is specified.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --operation-id=: A unique, user defined, identifier for the StackSet operation.
-        --operation-preferences=: The user-specified preferences for how CloudFormation performs a StackSet operation.
-        --organizational-unit-ids=: The list of OU ID's to which the imported stacks must be mapped as deployment targets.
-        --stack-ids-url=: The Amazon S3 URL which contains list of stack ids to be inputted.
-        --stack-ids=: The IDs of the stacks you are importing into a StackSet.
-        --stack-set-name=!: The name of the StackSet.
-      completion:
-        flag:
-            call-as:
-                - SELF
-                - DELEGATED_ADMIN
-    - name: start-resource-scan
-      description: Starts a scan of the resources in this account in this Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique identifier for this `StartResourceScan` request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --scan-filters=: The scan filters to use.
-    - name: activate-organizations-access
-      description: Activate trusted access with Organizations.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-stack-instances
-      description: Creates stack instances for the specified accounts, within the specified Amazon Web Services Regions.
-      flags:
-        --accounts=: \[Self-managed permissions] The account IDs of one or more Amazon Web Services accounts that you want to create stack instances in the specified Region(s) for.
-        --call-as=: \[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deployment-targets=: \[Service-managed permissions] The Organizations accounts in which to create stack instances in the specified Amazon Web Services Regions.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --operation-id=: The unique identifier for this StackSet operation.
-        --operation-preferences=: Preferences for how CloudFormation performs this StackSet operation.
-        --parameter-overrides=: A list of StackSet parameters whose values you want to override in the selected stack instances.
-        --regions=!: The names of one or more Amazon Web Services Regions where you want to create stack instances using the specified Amazon Web Services accounts.
-        --stack-set-name=!: The name or unique ID of the StackSet that you want to create stack instances from.
-      completion:
-        flag:
-            call-as:
-                - SELF
-                - DELEGATED_ADMIN
-    - name: estimate-template-cost
-      description: Returns the estimated monthly cost of a template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --parameters=: A list of `Parameter` structures that specify input parameters.
-        --template-body=: Structure that contains the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes.
-        --template-url=: The URL of a file that contains the template body.
-    - name: signal-resource
-      description: Sends a signal to the specified resource with a success or failure status.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --logical-resource-id=!: The logical ID of the resource that you want to signal.
-        --stack-name=!: The stack name or unique stack ID that includes the resource that you want to signal.
-        --status=!: The status of the signal, which is either success or failure.
-        --unique-id=!: A unique ID of the signal.
-      completion:
-        flag:
-            status:
-                - SUCCESS
-                - FAILURE
-    - name: update-termination-protection
-      description: Updates termination protection for the specified stack.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --enable-termination-protection!: Whether to enable termination protection on the specified stack.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-enable-termination-protection!: Whether to enable termination protection on the specified stack.
-        --stack-name=!: The name or unique ID of the stack for which you want to set termination protection.
+        --stack-name=!: The name or unique stack ID that you want to associate a policy with.
+        --stack-policy-body=: Structure that contains the stack policy body.
+        --stack-policy-url=: Location of a file that contains the stack policy.
     - name: batch-describe-type-configurations
       description: Returns configuration data for the specified CloudFormation extensions, from the CloudFormation registry in your current account and Region.
       flags:
@@ -436,126 +174,27 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --type-configuration-identifiers=!: The list of identifiers for the desired extension configurations.
-    - name: deactivate-organizations-access
-      description: Deactivates trusted access with Organizations.
+    - name: cancel-update-stack
+      description: Cancels an update on the specified stack.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique identifier for this `CancelUpdateStack` request.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-generated-template
-      description: Retrieves a generated template.
+        --stack-name=!: If you don't pass a parameter to `StackName`, the API returns a response that describes all resources in the account.
+    - name: describe-events
+      description: Returns CloudFormation events based on flexible query criteria.
       flags:
+        --change-set-name=: The name or Amazon Resource Name (ARN) of the change set for which you want to retrieve events.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --format=: The language to use to retrieve for the generated template.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --generated-template-name=!: The name or Amazon Resource Name (ARN) of the generated template.
-      completion:
-        flag:
-            format:
-                - JSON
-                - YAML
-    - name: list-generated-templates
-      description: Lists your generated templates in this Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: If the number of available results exceeds this maximum, the response includes a `NextToken` value that you can use for the `NextToken` parameter to get the next set of results.
-        --next-token=: The token for the next set of items to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-hook-results
-      description: Returns summaries of invoked Hooks.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --next-token=: The token for the next set of items to return.
-        --status=: Filters results by the status of Hook invocations.
-        --target-id=: Filters results by the unique identifier of the target the Hook was invoked against.
-        --target-type=: Filters results by target type.
-        --type-arn=: Filters results by the ARN of the Hook.
-      completion:
-        flag:
-            status:
-                - HOOK_IN_PROGRESS
-                - HOOK_COMPLETE_SUCCEEDED
-                - HOOK_COMPLETE_FAILED
-                - HOOK_FAILED
-            target-type:
-                - CHANGE_SET
-                - STACK
-                - RESOURCE
-                - CLOUD_CONTROL
-    - name: list-resource-scan-resources
-      description: Lists the resources from a resource scan.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: If the number of available results exceeds this maximum, the response includes a `NextToken` value that you can use for the `NextToken` parameter to get the next set of results.
-        --next-token=: The token for the next set of items to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --resource-identifier=: If specified, the returned resources will have the specified resource identifier (or one of them in the case where the resource has multiple identifiers).
-        --resource-scan-id=!: The Amazon Resource Name (ARN) of the resource scan.
-        --resource-type-prefix=: If specified, the returned resources will be of any of the resource types with the specified prefix.
-        --starting-token=: A token to specify where to start paginating.
-        --tag-key=: If specified, the returned resources will have a matching tag key.
-        --tag-value=: If specified, the returned resources will have a matching tag value.
-    - name: list-stack-resources
-      description: Returns descriptions of all resources of the specified stack.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters to apply when retrieving events.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --next-token=: The token for the next set of items to return.
-        --stack-name=!: 'The name or the unique stack ID that is associated with the stack, which aren''t always interchangeable:'
+        --operation-id=: The unique identifier of the operation for which you want to retrieve events.
+        --stack-name=: The name or unique stack ID for which you want to retrieve events.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-stack-set-auto-deployment-targets
-      description: Returns summary information about deployment targets for a StackSet.
-      flags:
-        --call-as=: Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to be returned with a single call.
-        --next-token=: The token for the next set of items to return.
-        --stack-set-name=!: The name or unique ID of the StackSet that you want to get automatic deployment targets for.
-      completion:
-        flag:
-            call-as:
-                - SELF
-                - DELEGATED_ADMIN
-    - name: create-generated-template
-      description: Creates a template from existing resources that are not already managed with CloudFormation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --generated-template-name=!: The name assigned to the generated template.
-        --resources=: An optional list of resources to be included in the generated template.
-        --stack-name=: An optional name or ARN of a stack to use as the base stack for the generated template.
-        --template-configuration=: The configuration details of the generated template, including the `DeletionPolicy` and `UpdateReplacePolicy`.
-    - name: delete-change-set
-      description: Deletes the specified change set.
-      flags:
-        --change-set-name=!: The name or Amazon Resource Name (ARN) of the change set that you want to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --stack-name=: If you specified the name of a change set to delete, specify the stack name or Amazon Resource Name (ARN) that's associated with it.
-    - name: describe-stack-resource
-      description: Returns a description of the specified resource in the specified stack.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --logical-resource-id=!: The logical name of the resource as specified in the template.
-        --stack-name=!: 'The name or the unique stack ID that''s associated with the stack, which aren''t always interchangeable:'
     - name: describe-stack-resources
       description: Returns Amazon Web Services resource descriptions for running and deleted stacks.
       flags:
@@ -565,20 +204,82 @@ commands:
         --logical-resource-id=: The logical name of the resource as specified in the template.
         --physical-resource-id=: The name or unique identifier that corresponds to a physical instance ID of a resource supported by CloudFormation.
         --stack-name=: 'The name or the unique stack ID that is associated with the stack, which aren''t always interchangeable:'
-    - name: get-template
-      description: Returns the template body for a specified stack.
+    - name: register-type
+      description: Registers an extension with the CloudFormation service.
       flags:
-        --change-set-name=: The name or Amazon Resource Name (ARN) of a change set for which CloudFormation returns the associated template.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique identifier that acts as an idempotency key for this registration request.
+        --execution-role-arn=: The Amazon Resource Name (ARN) of the IAM role for CloudFormation to assume when invoking the extension.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --logging-config=: Specifies logging configuration information for an extension.
+        --schema-handler-package=!: A URL to the S3 bucket that contains the extension project package that contains the necessary files for the extension you want to register.
+        --type-name=!: The name of the extension being registered.
+        --type=: The kind of extension.
+      completion:
+        flag:
+            type:
+                - RESOURCE
+                - MODULE
+                - HOOK
+    - name: delete-stack
+      description: Deletes a specified stack.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique identifier for this `DeleteStack` request.
+        --deletion-mode=: Specifies the deletion mode for the stack.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --retain-resources=: For stacks in the `DELETE_FAILED` state, a list of resource logical IDs that are associated with the resources you want to retain.
+        --role-arn=: The Amazon Resource Name (ARN) of an IAM role that CloudFormation assumes to delete the stack.
+        --stack-name=!: The name or the unique stack ID that's associated with the stack.
+      completion:
+        flag:
+            deletion-mode:
+                - STANDARD
+                - FORCE_DELETE_STACK
+    - name: describe-generated-template
+      description: Describes a generated template.
+      flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --stack-name=: 'The name or the unique stack ID that''s associated with the stack, which aren''t always interchangeable:'
-        --template-stage=: For templates that include transforms, the stage of the template that CloudFormation returns.
+        --generated-template-name=!: The name or Amazon Resource Name (ARN) of a generated template.
+    - name: describe-stack-drift-detection-status
+      description: Returns information about a stack drift detection operation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --stack-drift-detection-id=!: The ID of the drift detection results of this operation.
+    - name: describe-stack-resource
+      description: Returns a description of the specified resource in the specified stack.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --logical-resource-id=!: The logical name of the resource as specified in the template.
+        --stack-name=!: 'The name or the unique stack ID that''s associated with the stack, which aren''t always interchangeable:'
+    - name: describe-stack-set
+      description: Returns the description of the specified StackSet.
+      flags:
+        --call-as=: \[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --stack-set-name=!: The name or unique ID of the StackSet whose description you want.
       completion:
         flag:
-            template-stage:
-                - Original
-                - Processed
+            call-as:
+                - SELF
+                - DELEGATED_ADMIN
+    - name: get-stack-policy
+      description: Returns the stack policy for a specified stack.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --stack-name=!: The name or unique stack ID that's associated with the stack whose policy you want to get.
     - name: list-stack-set-operation-results
       description: Returns summary information about the results of a StackSet operation.
       flags:
@@ -599,87 +300,38 @@ commands:
             call-as:
                 - SELF
                 - DELEGATED_ADMIN
-    - name: list-type-registrations
-      description: Returns a list of registration tokens for the specified extension(s).
+    - name: create-stack-instances
+      description: Creates stack instances for the specified accounts, within the specified Amazon Web Services Regions.
       flags:
+        --accounts=: \[Self-managed permissions] The account IDs of one or more Amazon Web Services accounts that you want to create stack instances in the specified Region(s) for.
+        --call-as=: \[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --deployment-targets=: \[Service-managed permissions] The Organizations accounts in which to create stack instances in the specified Amazon Web Services Regions.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to be returned with a single call.
-        --next-token=: The token for the next set of items to return.
-        --registration-status-filter=: The current status of the extension registration request.
-        --type-arn=: The Amazon Resource Name (ARN) of the extension.
-        --type-name=: The name of the extension.
-        --type=: The kind of extension.
+        --operation-id=: The unique identifier for this StackSet operation.
+        --operation-preferences=: Preferences for how CloudFormation performs this StackSet operation.
+        --parameter-overrides=: A list of StackSet parameters whose values you want to override in the selected stack instances.
+        --regions=!: The names of one or more Amazon Web Services Regions where you want to create stack instances using the specified Amazon Web Services accounts.
+        --stack-set-name=!: The name or unique ID of the StackSet that you want to create stack instances from.
       completion:
         flag:
-            registration-status-filter:
-                - COMPLETE
-                - IN_PROGRESS
-                - FAILED
-            type:
-                - RESOURCE
-                - MODULE
-                - HOOK
-    - name: update-generated-template
-      description: Updates a generated template.
+            call-as:
+                - SELF
+                - DELEGATED_ADMIN
+    - name: delete-stack-set
+      description: Deletes a StackSet.
       flags:
-        --add-resources=: An optional list of resources to be added to the generated template.
+        --call-as=: \[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --generated-template-name=!: The name or Amazon Resource Name (ARN) of a generated template.
-        --new-generated-template-name=: An optional new name to assign to the generated template.
-        --no-refresh-all-resources: If `true`, update the resource properties in the generated template with their current live state.
-        --refresh-all-resources: If `true`, update the resource properties in the generated template with their current live state.
-        --remove-resources=: A list of logical ids for resources to remove from the generated template.
-        --template-configuration=: The configuration details of the generated template, including the `DeletionPolicy` and `UpdateReplacePolicy`.
-    - name: describe-change-set-hooks
-      description: Returns Hook-related information for the change set and a list of changes that CloudFormation makes when you run the change set.
-      flags:
-        --change-set-name=!: The name or Amazon Resource Name (ARN) of the change set that you want to describe.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --logical-resource-id=: If specified, lists only the Hooks related to the specified `LogicalResourceId`.
-        --next-token=: The token for the next set of items to return.
-        --stack-name=: If you specified the name of a change set, specify the stack name or stack ID (ARN) of the change set you want to describe.
-    - name: list-stacks
-      description: Returns the summary information for stacks whose status matches the specified `StackStatusFilter`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: The token for the next set of items to return.
-        --stack-status-filter=: Stack status to use as a filter.
-        --starting-token=: A token to specify where to start paginating.
-    - name: activate-type
-      description: Activates a public third-party extension, such as a resource or module, to make it available for use in stack templates in your current account and Region.
-      flags:
-        --auto-update: Whether to automatically update the extension in this account and Region when a new *minor* version is published by the extension publisher.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --execution-role-arn=: The name of the IAM execution role to use to activate the extension.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --logging-config=: Contains logging configuration information for an extension.
-        --major-version=: The major version of this extension you want to activate, if multiple major versions are available.
-        --no-auto-update: Whether to automatically update the extension in this account and Region when a new *minor* version is published by the extension publisher.
-        --public-type-arn=: The Amazon Resource Name (ARN) of the public extension.
-        --publisher-id=: The ID of the extension publisher.
-        --type-name-alias=: An alias to assign to the public extension in this account and Region.
-        --type-name=: The name of the extension.
-        --type=: The extension type.
-        --version-bump=: Manually updates a previously-activated type to a new major or minor version, if available.
+        --stack-set-name=!: The name or unique ID of the StackSet that you're deleting.
       completion:
         flag:
-            type:
-                - RESOURCE
-                - MODULE
-                - HOOK
-            version-bump:
-                - MAJOR
-                - MINOR
+            call-as:
+                - SELF
+                - DELEGATED_ADMIN
     - name: describe-stacks
       description: Returns the description for the specified stack; if no stack name was specified, then it returns the description for all the stacks created.
       flags:
@@ -690,281 +342,58 @@ commands:
         --next-token=: The token for the next set of items to return.
         --stack-name=: If you don't pass a parameter to `StackName`, the API returns a response that describes all resources in the account, which can impact performance.
         --starting-token=: A token to specify where to start paginating.
-    - name: execute-stack-refactor
-      description: Executes the stack refactor operation.
+    - name: describe-type-registration
+      description: Returns information about an extension's registration, including its current status and type and version identifiers.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --stack-refactor-id=!: The ID associated with the stack refactor created from the [CreateStackRefactor]() action.
-    - name: list-resource-scan-related-resources
-      description: Lists the related resources for a list of resources from a resource scan.
+        --registration-token=!: The identifier for this registration request.
+    - name: signal-resource
+      description: Sends a signal to the specified resource with a success or failure status.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: If the number of available results exceeds this maximum, the response includes a `NextToken` value that you can use for the `NextToken` parameter to get the next set of results.
-        --next-token=: The token for the next set of items to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --resource-scan-id=!: The Amazon Resource Name (ARN) of the resource scan.
-        --resources=!: The list of resources for which you want to get the related resources.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-stack-instance-resource-drifts
-      description: Returns drift information for resources in a stack instance.
+        --logical-resource-id=!: The logical ID of the resource that you want to signal.
+        --stack-name=!: The stack name or unique stack ID that includes the resource that you want to signal.
+        --status=!: The status of the signal, which is either success or failure.
+        --unique-id=!: A unique ID of the signal.
+      completion:
+        flag:
+            status:
+                - SUCCESS
+                - FAILURE
+    - name: stop-stack-set-operation
+      description: Stops an in-progress operation on a StackSet and its associated stack instances.
       flags:
-        --call-as=: \[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.
+        --call-as=: Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to be returned with a single call.
-        --next-token=: The token for the next set of items to return.
-        --operation-id=!: The unique ID of the drift operation.
-        --stack-instance-account=!: The name of the Amazon Web Services account that you want to list resource drifts for.
-        --stack-instance-region=!: The name of the Region where you want to list resource drifts.
-        --stack-instance-resource-drift-statuses=: The resource drift status of the stack instance.
-        --stack-set-name=!: The name or unique ID of the StackSet that you want to list drifted resources for.
+        --operation-id=!: The ID of the stack operation.
+        --stack-set-name=!: The name or unique ID of the StackSet that you want to stop the operation for.
       completion:
         flag:
             call-as:
                 - SELF
                 - DELEGATED_ADMIN
-    - name: describe-events
-      description: Returns CloudFormation events based on flexible query criteria.
-      flags:
-        --change-set-name=: The name or Amazon Resource Name (ARN) of the change set for which you want to retrieve events.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters to apply when retrieving events.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: The token for the next set of items to return.
-        --operation-id=: The unique identifier of the operation for which you want to retrieve events.
-        --stack-name=: The name or unique stack ID for which you want to retrieve events.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-change-sets
-      description: Returns the ID and status of each active change set for a stack.
+    - name: validate-template
+      description: Validates a specified template.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: The token for the next set of items to return.
-        --stack-name=!: The name or the Amazon Resource Name (ARN) of the stack for which you want to list change sets.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-stack-instances
-      description: Returns summary information about stack instances that are associated with the specified StackSet.
-      flags:
-        --call-as=: \[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: The filter to apply to stack instances
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to be returned with a single call.
-        --next-token=: The token for the next set of items to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --stack-instance-account=: The name of the Amazon Web Services account that you want to list stack instances for.
-        --stack-instance-region=: The name of the Region where you want to list stack instances.
-        --stack-set-name=!: The name or unique ID of the StackSet that you want to list stack instances for.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            call-as:
-                - SELF
-                - DELEGATED_ADMIN
-    - name: register-publisher
-      description: Registers your account as a publisher of public extensions in the CloudFormation registry.
-      flags:
-        --accept-terms-and-conditions: Whether you accept the [Terms and Conditions](https://cloudformation-registry-documents.s3.amazonaws.com/Terms_and_Conditions_for_AWS_CloudFormation_Registry_Publishers.pdf) for publishing extensions in the CloudFormation registry.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connection-arn=: If you are using a Bitbucket or GitHub account for identity verification, the Amazon Resource Name (ARN) for your connection to that account.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-accept-terms-and-conditions: Whether you accept the [Terms and Conditions](https://cloudformation-registry-documents.s3.amazonaws.com/Terms_and_Conditions_for_AWS_CloudFormation_Registry_Publishers.pdf) for publishing extensions in the CloudFormation registry.
-    - name: register-type
-      description: Registers an extension with the CloudFormation service.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique identifier that acts as an idempotency key for this registration request.
-        --execution-role-arn=: The Amazon Resource Name (ARN) of the IAM role for CloudFormation to assume when invoking the extension.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --logging-config=: Specifies logging configuration information for an extension.
-        --schema-handler-package=!: A URL to the S3 bucket that contains the extension project package that contains the necessary files for the extension you want to register.
-        --type-name=!: The name of the extension being registered.
-        --type=: The kind of extension.
-      completion:
-        flag:
-            type:
-                - RESOURCE
-                - MODULE
-                - HOOK
-    - name: describe-stack-instance
-      description: Returns the stack instance that's associated with the specified StackSet, Amazon Web Services account, and Amazon Web Services Region.
-      flags:
-        --call-as=: \[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --stack-instance-account=!: The ID of an Amazon Web Services account that's associated with this stack instance.
-        --stack-instance-region=!: The name of a Region that's associated with this stack instance.
-        --stack-set-name=!: The name or the unique stack ID of the StackSet that you want to get stack instance information for.
-      completion:
-        flag:
-            call-as:
-                - SELF
-                - DELEGATED_ADMIN
-    - name: list-stack-refactors
-      description: Lists all account stack refactor operations and their statuses.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --execution-status-filter=: Execution status to use as a filter.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to be returned with a single call.
-        --next-token=: The token for the next set of items to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-type-versions
-      description: Returns summary information about the versions of an extension.
-      flags:
-        --arn=: The Amazon Resource Name (ARN) of the extension for which you want version summary information.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deprecated-status=: The deprecation status of the extension versions that you want to get summary information about.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to be returned with a single call.
-        --next-token=: The token for the next set of items to return.
-        --publisher-id=: The publisher ID of the extension publisher.
-        --type-name=: The name of the extension for which you want version summary information.
-        --type=: The kind of the extension.
-      completion:
-        flag:
-            deprecated-status:
-                - LIVE
-                - DEPRECATED
-            type:
-                - RESOURCE
-                - MODULE
-                - HOOK
-    - name: set-type-configuration
-      description: Specifies the configuration data for a CloudFormation extension, such as a resource or Hook, in the given account and Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration-alias=: An alias by which to refer to this extension configuration data.
-        --configuration=!: The configuration data for the extension in this account and Region.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --type-arn=: The Amazon Resource Name (ARN) for the extension in this account and Region.
-        --type-name=: The name of the extension.
-        --type=: The type of extension.
-      completion:
-        flag:
-            type:
-                - RESOURCE
-                - MODULE
-                - HOOK
-    - name: update-stack
-      description: Updates a stack as specified in the template.
-      flags:
-        --capabilities=: In some cases, you must explicitly acknowledge that your stack template contains certain capabilities in order for CloudFormation to update the stack.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique identifier for this `UpdateStack` request.
-        --disable-rollback: Preserve the state of previously provisioned resources when an operation fails.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-disable-rollback: Preserve the state of previously provisioned resources when an operation fails.
-        --no-retain-except-on-create: When set to `true`, newly created resources are deleted when the operation rolls back.
-        --no-use-previous-template: Reuse the existing template that is associated with the stack that you are updating.
-        --notification-arns=: Amazon Simple Notification Service topic Amazon Resource Names (ARNs) that CloudFormation associates with the stack.
-        --parameters=: A list of `Parameter` structures that specify input parameters for the stack.
-        --resource-types=: Specifies which resource types you can work with, such as `AWS::EC2::Instance` or `Custom::MyCustomInstance`.
-        --retain-except-on-create: When set to `true`, newly created resources are deleted when the operation rolls back.
-        --role-arn=: The Amazon Resource Name (ARN) of an IAM role that CloudFormation assumes to update the stack.
-        --rollback-configuration=: The rollback triggers for CloudFormation to monitor during stack creation and updating operations, and for the specified monitoring period afterwards.
-        --stack-name=!: The name or unique stack ID of the stack to update.
-        --stack-policy-body=: Structure that contains a new stack policy body.
-        --stack-policy-during-update-body=: Structure that contains the temporary overriding stack policy body.
-        --stack-policy-during-update-url=: Location of a file that contains the temporary overriding stack policy.
-        --stack-policy-url=: Location of a file that contains the updated stack policy.
-        --tags=: Key-value pairs to associate with this stack.
         --template-body=: Structure that contains the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes.
         --template-url=: The URL of a file that contains the template body.
-        --use-previous-template: Reuse the existing template that is associated with the stack that you are updating.
-    - name: delete-stack
-      description: Deletes a specified stack.
+    - name: delete-change-set
+      description: Deletes the specified change set.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique identifier for this `DeleteStack` request.
-        --deletion-mode=: Specifies the deletion mode for the stack.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --retain-resources=: For stacks in the `DELETE_FAILED` state, a list of resource logical IDs that are associated with the resources you want to retain.
-        --role-arn=: The Amazon Resource Name (ARN) of an IAM role that CloudFormation assumes to delete the stack.
-        --stack-name=!: The name or the unique stack ID that's associated with the stack.
-      completion:
-        flag:
-            deletion-mode:
-                - STANDARD
-                - FORCE_DELETE_STACK
-    - name: describe-stack-events
-      description: Returns all stack related events for a specified stack in reverse chronological order.
-      flags:
+        --change-set-name=!: The name or Amazon Resource Name (ARN) of the change set that you want to delete.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: The token for the next set of items to return.
-        --stack-name=!: 'The name or the unique stack ID that''s associated with the stack, which aren''t always interchangeable:'
-        --starting-token=: A token to specify where to start paginating.
-    - name: describe-stack-resource-drifts
-      description: Returns drift information for the resources that have been checked for drift in the specified stack.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to be returned with a single call.
-        --next-token=: The token for the next set of items to return.
-        --stack-name=!: The name of the stack for which you want drift information.
-        --stack-resource-drift-status-filters=: The resource drift status values to use as filters for the resource drift results returned.
-    - name: set-type-default-version
-      description: Specify the default version of an extension.
-      flags:
-        --arn=: The Amazon Resource Name (ARN) of the extension for which you want version summary information.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --type-name=: The name of the extension.
-        --type=: The kind of extension.
-        --version-id=: The ID of a specific version of the extension.
-      completion:
-        flag:
-            type:
-                - RESOURCE
-                - MODULE
-                - HOOK
-    - name: delete-stack-instances
-      description: Deletes stack instances for the specified accounts, in the specified Amazon Web Services Regions.
-      flags:
-        --accounts=: \[Self-managed permissions] The account IDs of the Amazon Web Services accounts that you want to delete stack instances for.
-        --call-as=: \[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deployment-targets=: \[Service-managed permissions] The Organizations accounts from which to delete stack instances.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-retain-stacks!: Removes the stack instances from the specified StackSet, but doesn't delete the stacks.
-        --operation-id=: The unique identifier for this StackSet operation.
-        --operation-preferences=: Preferences for how CloudFormation performs this StackSet operation.
-        --regions=!: The Amazon Web Services Regions where you want to delete StackSet instances.
-        --retain-stacks!: Removes the stack instances from the specified StackSet, but doesn't delete the stacks.
-        --stack-set-name=!: The name or unique ID of the StackSet that you want to delete stack instances for.
-      completion:
-        flag:
-            call-as:
-                - SELF
-                - DELEGATED_ADMIN
+        --stack-name=: If you specified the name of a change set to delete, specify the stack name or Amazon Resource Name (ARN) that's associated with it.
     - name: describe-change-set
       description: Returns the inputs for the change set and a list of changes that CloudFormation will make if you execute the change set.
       flags:
@@ -996,75 +425,160 @@ commands:
                 - RESOURCE
                 - MODULE
                 - HOOK
-    - name: list-resource-scans
-      description: List the resource scans from newest to oldest.
+    - name: list-stack-instances
+      description: Returns summary information about stack instances that are associated with the specified StackSet.
       flags:
+        --call-as=: \[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: If the number of available results exceeds this maximum, the response includes a `NextToken` value that you can use for the `NextToken` parameter to get the next set of results.
-        --next-token=: The token for the next set of items to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --scan-type-filter=: The scan type that you want to get summary information about.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            scan-type-filter:
-                - FULL
-                - PARTIAL
-    - name: list-stack-refactor-actions
-      description: Lists the stack refactor actions that will be taken after calling the [ExecuteStackRefactor]() action.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: The filter to apply to stack instances
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to be returned with a single call.
         --next-token=: The token for the next set of items to return.
         --page-size=: The size of each page to get in the AWS service call.
-        --stack-refactor-id=!: The ID associated with the stack refactor created from the [CreateStackRefactor]() action.
+        --stack-instance-account=: The name of the Amazon Web Services account that you want to list stack instances for.
+        --stack-instance-region=: The name of the Region where you want to list stack instances.
+        --stack-set-name=!: The name or unique ID of the StackSet that you want to list stack instances for.
         --starting-token=: A token to specify where to start paginating.
-    - name: create-stack
-      description: Creates a stack as specified in the template.
-      flags:
-        --capabilities=: In some cases, you must explicitly acknowledge that your stack template contains certain capabilities in order for CloudFormation to create the stack.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique identifier for this `CreateStack` request.
-        --disable-rollback: Set to `true` to disable rollback of the stack if stack creation failed.
-        --enable-termination-protection: Whether to enable termination protection on the specified stack.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-disable-rollback: Set to `true` to disable rollback of the stack if stack creation failed.
-        --no-enable-termination-protection: Whether to enable termination protection on the specified stack.
-        --no-retain-except-on-create: When set to `true`, newly created resources are deleted when the operation rolls back.
-        --notification-arns=: The Amazon SNS topic ARNs to publish stack related events.
-        --on-failure=: Determines what action will be taken if stack creation fails.
-        --parameters=: A list of `Parameter` structures that specify input parameters for the stack.
-        --resource-types=: Specifies which resource types you can work with, such as `AWS::EC2::Instance` or `Custom::MyCustomInstance`.
-        --retain-except-on-create: When set to `true`, newly created resources are deleted when the operation rolls back.
-        --role-arn=: The Amazon Resource Name (ARN) of an IAM role that CloudFormation assumes to create the stack.
-        --rollback-configuration=: The rollback triggers for CloudFormation to monitor during stack creation and updating operations, and for the specified monitoring period afterwards.
-        --stack-name=!: The name that's associated with the stack.
-        --stack-policy-body=: Structure that contains the stack policy body.
-        --stack-policy-url=: Location of a file that contains the stack policy.
-        --tags=: Key-value pairs to associate with this stack.
-        --template-body=: Structure that contains the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes.
-        --template-url=: The URL of a file that contains the template body.
-        --timeout-in-minutes=: The amount of time that can pass before the stack status becomes `CREATE_FAILED`; if `DisableRollback` is not set or is set to `false`, the stack will be rolled back.
       completion:
         flag:
-            on-failure:
-                - DO_NOTHING
-                - ROLLBACK
-                - DELETE
-    - name: describe-type-registration
-      description: Returns information about an extension's registration, including its current status and type and version identifiers.
+            call-as:
+                - SELF
+                - DELEGATED_ADMIN
+    - name: list-type-versions
+      description: Returns summary information about the versions of an extension.
       flags:
+        --arn=: The Amazon Resource Name (ARN) of the extension for which you want version summary information.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --deprecated-status=: The deprecation status of the extension versions that you want to get summary information about.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to be returned with a single call.
+        --next-token=: The token for the next set of items to return.
+        --publisher-id=: The publisher ID of the extension publisher.
+        --type-name=: The name of the extension for which you want version summary information.
+        --type=: The kind of the extension.
+      completion:
+        flag:
+            deprecated-status:
+                - LIVE
+                - DEPRECATED
+            type:
+                - RESOURCE
+                - MODULE
+                - HOOK
+    - name: publish-type
+      description: Publishes the specified extension to the CloudFormation registry as a public extension in this Region.
+      flags:
+        --arn=: The Amazon Resource Name (ARN) of the extension.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --registration-token=!: The identifier for this registration request.
+        --public-version-number=: The version number to assign to this version of the extension.
+        --type-name=: The name of the extension.
+        --type=: The type of the extension.
+      completion:
+        flag:
+            type:
+                - RESOURCE
+                - MODULE
+                - HOOK
+    - name: update-stack-set
+      description: Updates the StackSet and associated stack instances in the specified accounts and Amazon Web Services Regions.
+      flags:
+        --accounts=: \[Self-managed permissions] The accounts in which to update associated stack instances.
+        --administration-role-arn=: \[Self-managed permissions] The Amazon Resource Name (ARN) of the IAM role to use to update this StackSet.
+        --auto-deployment=: \[Service-managed permissions] Describes whether StackSets automatically deploys to Organizations accounts that are added to a target organization or organizational unit (OU).
+        --call-as=: \[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.
+        --capabilities=: In some cases, you must explicitly acknowledge that your stack template contains certain capabilities in order for CloudFormation to update the StackSet and its associated stack instances.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --deployment-targets=: \[Service-managed permissions] The Organizations accounts in which to update associated stack instances.
+        --description=: A brief description of updates that you are making.
+        --execution-role-name=: \[Self-managed permissions] The name of the IAM execution role to use to update the stack set.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --managed-execution=: Describes whether CloudFormation performs non-conflicting operations concurrently and queues conflicting operations.
+        --no-use-previous-template: Use the existing template that's associated with the StackSet that you're updating.
+        --operation-id=: The unique ID for this StackSet operation.
+        --operation-preferences=: Preferences for how CloudFormation performs this StackSet operation.
+        --parameters=: A list of input parameters for the StackSet template.
+        --permission-model=: Describes how the IAM roles required for StackSet operations are created.
+        --regions=: The Amazon Web Services Regions in which to update associated stack instances.
+        --stack-set-name=!: The name or unique ID of the StackSet that you want to update.
+        --tags=: The key-value pairs to associate with this StackSet and the stacks created from it.
+        --template-body=: The structure that contains the template body, with a minimum length of 1 byte and a maximum length of 51,200 bytes.
+        --template-url=: The URL of a file that contains the template body.
+        --use-previous-template: Use the existing template that's associated with the StackSet that you're updating.
+      completion:
+        flag:
+            call-as:
+                - SELF
+                - DELEGATED_ADMIN
+            permission-model:
+                - SERVICE_MANAGED
+                - SELF_MANAGED
+    - name: get-template
+      description: Returns the template body for a specified stack.
+      flags:
+        --change-set-name=: The name or Amazon Resource Name (ARN) of a change set for which CloudFormation returns the associated template.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --stack-name=: 'The name or the unique stack ID that''s associated with the stack, which aren''t always interchangeable:'
+        --template-stage=: For templates that include transforms, the stage of the template that CloudFormation returns.
+      completion:
+        flag:
+            template-stage:
+                - Original
+                - Processed
+    - name: list-imports
+      description: Lists all stacks that are importing an exported output value.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --export-name=!: The name of the exported output value.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The token for the next set of items to return.
+        --starting-token=: A token to specify where to start paginating.
+    - name: activate-type
+      description: Activates a public third-party extension, such as a resource or module, to make it available for use in stack templates in your current account and Region.
+      flags:
+        --auto-update: Whether to automatically update the extension in this account and Region when a new *minor* version is published by the extension publisher.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --execution-role-arn=: The name of the IAM execution role to use to activate the extension.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --logging-config=: Contains logging configuration information for an extension.
+        --major-version=: The major version of this extension you want to activate, if multiple major versions are available.
+        --no-auto-update: Whether to automatically update the extension in this account and Region when a new *minor* version is published by the extension publisher.
+        --public-type-arn=: The Amazon Resource Name (ARN) of the public extension.
+        --publisher-id=: The ID of the extension publisher.
+        --type-name-alias=: An alias to assign to the public extension in this account and Region.
+        --type-name=: The name of the extension.
+        --type=: The extension type.
+        --version-bump=: Manually updates a previously-activated type to a new major or minor version, if available.
+      completion:
+        flag:
+            type:
+                - RESOURCE
+                - MODULE
+                - HOOK
+            version-bump:
+                - MAJOR
+                - MINOR
+    - name: create-stack-refactor
+      description: Creates a refactor across multiple stacks, with the list of stacks and resources that are affected.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description to help you identify the stack refactor.
+        --enable-stack-creation: Determines if a new stack is created with the refactor.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-enable-stack-creation: Determines if a new stack is created with the refactor.
+        --resource-mappings=: The mappings for the stack resource `Source` and stack resource `Destination`.
+        --stack-definitions=!: The stacks being refactored.
     - name: record-handler-progress
       description: Reports progress of a resource handler to CloudFormation.
       flags:
@@ -1110,6 +624,220 @@ commands:
                 - IN_PROGRESS
                 - SUCCESS
                 - FAILED
+    - name: rollback-stack
+      description: When specifying `RollbackStack`, you preserve the state of previously provisioned resources when an operation fails.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique identifier for this `RollbackStack` request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-retain-except-on-create: When set to `true`, newly created resources are deleted when the operation rolls back.
+        --retain-except-on-create: When set to `true`, newly created resources are deleted when the operation rolls back.
+        --role-arn=: The Amazon Resource Name (ARN) of an IAM role that CloudFormation assumes to rollback the stack.
+        --stack-name=!: The name that's associated with the stack.
+    - name: set-type-configuration
+      description: Specifies the configuration data for a CloudFormation extension, such as a resource or Hook, in the given account and Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-alias=: An alias by which to refer to this extension configuration data.
+        --configuration=!: The configuration data for the extension in this account and Region.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --type-arn=: The Amazon Resource Name (ARN) for the extension in this account and Region.
+        --type-name=: The name of the extension.
+        --type=: The type of extension.
+      completion:
+        flag:
+            type:
+                - RESOURCE
+                - MODULE
+                - HOOK
+    - name: update-generated-template
+      description: Updates a generated template.
+      flags:
+        --add-resources=: An optional list of resources to be added to the generated template.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --generated-template-name=!: The name or Amazon Resource Name (ARN) of a generated template.
+        --new-generated-template-name=: An optional new name to assign to the generated template.
+        --no-refresh-all-resources: If `true`, update the resource properties in the generated template with their current live state.
+        --refresh-all-resources: If `true`, update the resource properties in the generated template with their current live state.
+        --remove-resources=: A list of logical ids for resources to remove from the generated template.
+        --template-configuration=: The configuration details of the generated template, including the `DeletionPolicy` and `UpdateReplacePolicy`.
+    - name: deregister-type
+      description: Marks an extension or extension version as `DEPRECATED` in the CloudFormation registry, removing it from active use.
+      flags:
+        --arn=: The Amazon Resource Name (ARN) of the extension.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --type-name=: The name of the extension.
+        --type=: The kind of extension.
+        --version-id=: The ID of a specific version of the extension.
+      completion:
+        flag:
+            type:
+                - RESOURCE
+                - MODULE
+                - HOOK
+    - name: describe-stack-resource-drifts
+      description: Returns drift information for the resources that have been checked for drift in the specified stack.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to be returned with a single call.
+        --next-token=: The token for the next set of items to return.
+        --stack-name=!: The name of the stack for which you want drift information.
+        --stack-resource-drift-status-filters=: The resource drift status values to use as filters for the resource drift results returned.
+    - name: get-generated-template
+      description: Retrieves a generated template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --format=: The language to use to retrieve for the generated template.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --generated-template-name=!: The name or Amazon Resource Name (ARN) of the generated template.
+      completion:
+        flag:
+            format:
+                - JSON
+                - YAML
+    - name: continue-update-rollback
+      description: Continues rolling back a stack from `UPDATE_ROLLBACK_FAILED` to `UPDATE_ROLLBACK_COMPLETE` state.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique identifier for this `ContinueUpdateRollback` request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resources-to-skip=: A list of the logical IDs of the resources that CloudFormation skips during the continue update rollback operation.
+        --role-arn=: The Amazon Resource Name (ARN) of an IAM role that CloudFormation assumes to roll back the stack.
+        --stack-name=!: The name or the unique ID of the stack that you want to continue rolling back.
+    - name: deactivate-type
+      description: Deactivates a public third-party extension, such as a resource or module, or a CloudFormation Hook when you no longer use it.
+      flags:
+        --arn=: The Amazon Resource Name (ARN) for the extension in this account and Region.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --type-name=: The type name of the extension in this account and Region.
+        --type=: The extension type.
+      completion:
+        flag:
+            type:
+                - RESOURCE
+                - MODULE
+                - HOOK
+    - name: delete-stack-instances
+      description: Deletes stack instances for the specified accounts, in the specified Amazon Web Services Regions.
+      flags:
+        --accounts=: \[Self-managed permissions] The account IDs of the Amazon Web Services accounts that you want to delete stack instances for.
+        --call-as=: \[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --deployment-targets=: \[Service-managed permissions] The Organizations accounts from which to delete stack instances.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-retain-stacks!: Removes the stack instances from the specified StackSet, but doesn't delete the stacks.
+        --operation-id=: The unique identifier for this StackSet operation.
+        --operation-preferences=: Preferences for how CloudFormation performs this StackSet operation.
+        --regions=!: The Amazon Web Services Regions where you want to delete StackSet instances.
+        --retain-stacks!: Removes the stack instances from the specified StackSet, but doesn't delete the stacks.
+        --stack-set-name=!: The name or unique ID of the StackSet that you want to delete stack instances for.
+      completion:
+        flag:
+            call-as:
+                - SELF
+                - DELEGATED_ADMIN
+    - name: describe-stack-instance
+      description: Returns the stack instance that's associated with the specified StackSet, Amazon Web Services account, and Amazon Web Services Region.
+      flags:
+        --call-as=: \[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --stack-instance-account=!: The ID of an Amazon Web Services account that's associated with this stack instance.
+        --stack-instance-region=!: The name of a Region that's associated with this stack instance.
+        --stack-set-name=!: The name or the unique stack ID of the StackSet that you want to get stack instance information for.
+      completion:
+        flag:
+            call-as:
+                - SELF
+                - DELEGATED_ADMIN
+    - name: detect-stack-resource-drift
+      description: Returns information about whether a resource's actual configuration differs, or has *drifted*, from its expected configuration, as defined in the stack template and any values specified as template parameters.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --logical-resource-id=!: The logical name of the resource for which to return drift information.
+        --stack-name=!: The name of the stack to which the resource belongs.
+    - name: get-template-summary
+      description: Returns information about a new or existing template.
+      flags:
+        --call-as=: \[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --stack-name=: The name or the stack ID that's associated with the stack, which aren't always interchangeable.
+        --stack-set-name=: The name or unique ID of the StackSet from which the stack was created.
+        --template-body=: Structure that contains the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes.
+        --template-summary-config=: Specifies options for the `GetTemplateSummary` API action.
+        --template-url=: The URL of a file that contains the template body.
+      completion:
+        flag:
+            call-as:
+                - SELF
+                - DELEGATED_ADMIN
+    - name: list-stack-refactors
+      description: Lists all account stack refactor operations and their statuses.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --execution-status-filter=: Execution status to use as a filter.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to be returned with a single call.
+        --next-token=: The token for the next set of items to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-stack
+      description: Updates a stack as specified in the template.
+      flags:
+        --capabilities=: In some cases, you must explicitly acknowledge that your stack template contains certain capabilities in order for CloudFormation to update the stack.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique identifier for this `UpdateStack` request.
+        --disable-rollback: Preserve the state of previously provisioned resources when an operation fails.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-disable-rollback: Preserve the state of previously provisioned resources when an operation fails.
+        --no-retain-except-on-create: When set to `true`, newly created resources are deleted when the operation rolls back.
+        --no-use-previous-template: Reuse the existing template that is associated with the stack that you are updating.
+        --notification-arns=: Amazon Simple Notification Service topic Amazon Resource Names (ARNs) that CloudFormation associates with the stack.
+        --parameters=: A list of `Parameter` structures that specify input parameters for the stack.
+        --resource-types=: Specifies which resource types you can work with, such as `AWS::EC2::Instance` or `Custom::MyCustomInstance`.
+        --retain-except-on-create: When set to `true`, newly created resources are deleted when the operation rolls back.
+        --role-arn=: The Amazon Resource Name (ARN) of an IAM role that CloudFormation assumes to update the stack.
+        --rollback-configuration=: The rollback triggers for CloudFormation to monitor during stack creation and updating operations, and for the specified monitoring period afterwards.
+        --stack-name=!: The name or unique stack ID of the stack to update.
+        --stack-policy-body=: Structure that contains a new stack policy body.
+        --stack-policy-during-update-body=: Structure that contains the temporary overriding stack policy body.
+        --stack-policy-during-update-url=: Location of a file that contains the temporary overriding stack policy.
+        --stack-policy-url=: Location of a file that contains the updated stack policy.
+        --tags=: Key-value pairs to associate with this stack.
+        --template-body=: Structure that contains the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes.
+        --template-url=: The URL of a file that contains the template body.
+        --use-previous-template: Reuse the existing template that is associated with the stack that you are updating.
+    - name: create-generated-template
+      description: Creates a template from existing resources that are not already managed with CloudFormation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --generated-template-name=!: The name assigned to the generated template.
+        --resources=: An optional list of resources to be included in the generated template.
+        --stack-name=: An optional name or ARN of a stack to use as the base stack for the generated template.
+        --template-configuration=: The configuration details of the generated template, including the `DeletionPolicy` and `UpdateReplacePolicy`.
     - name: delete-generated-template
       description: Deleted a generated template.
       flags:
@@ -1117,65 +845,34 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --generated-template-name=!: The name or Amazon Resource Name (ARN) of a generated template.
-    - name: list-imports
-      description: Lists all stacks that are importing an exported output value.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --export-name=!: The name of the exported output value.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: The token for the next set of items to return.
-        --starting-token=: A token to specify where to start paginating.
-    - name: set-stack-policy
-      description: Sets a stack policy for a specified stack.
+    - name: get-hook-result
+      description: Retrieves detailed information and remediation guidance for a Hook invocation result.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --stack-name=!: The name or unique stack ID that you want to associate a policy with.
-        --stack-policy-body=: Structure that contains the stack policy body.
-        --stack-policy-url=: Location of a file that contains the stack policy.
-    - name: stop-stack-set-operation
-      description: Stops an in-progress operation on a StackSet and its associated stack instances.
+        --hook-result-id=: The unique identifier (ID) of the Hook invocation result that you want details about.
+    - name: create-stack-set
+      description: Creates a StackSet.
       flags:
+        --administration-role-arn=: The Amazon Resource Name (ARN) of the IAM role to use to create this StackSet.
+        --auto-deployment=: Describes whether StackSets automatically deploys to Organizations accounts that are added to the target organization or organizational unit (OU).
         --call-as=: Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.
+        --capabilities=: In some cases, you must explicitly acknowledge that your StackSet template contains certain capabilities in order for CloudFormation to create the StackSet and related stack instances.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --operation-id=!: The ID of the stack operation.
-        --stack-set-name=!: The name or unique ID of the StackSet that you want to stop the operation for.
-      completion:
-        flag:
-            call-as:
-                - SELF
-                - DELEGATED_ADMIN
-    - name: update-stack-set
-      description: Updates the StackSet and associated stack instances in the specified accounts and Amazon Web Services Regions.
-      flags:
-        --accounts=: \[Self-managed permissions] The accounts in which to update associated stack instances.
-        --administration-role-arn=: \[Self-managed permissions] The Amazon Resource Name (ARN) of the IAM role to use to update this StackSet.
-        --auto-deployment=: \[Service-managed permissions] Describes whether StackSets automatically deploys to Organizations accounts that are added to a target organization or organizational unit (OU).
-        --call-as=: \[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.
-        --capabilities=: In some cases, you must explicitly acknowledge that your stack template contains certain capabilities in order for CloudFormation to update the StackSet and its associated stack instances.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deployment-targets=: \[Service-managed permissions] The Organizations accounts in which to update associated stack instances.
-        --description=: A brief description of updates that you are making.
-        --execution-role-name=: \[Self-managed permissions] The name of the IAM execution role to use to update the stack set.
+        --client-request-token=: A unique identifier for this `CreateStackSet` request.
+        --description=: A description of the StackSet.
+        --execution-role-name=: The name of the IAM execution role to use to create the StackSet.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --managed-execution=: Describes whether CloudFormation performs non-conflicting operations concurrently and queues conflicting operations.
-        --no-use-previous-template: Use the existing template that's associated with the StackSet that you're updating.
-        --operation-id=: The unique ID for this StackSet operation.
-        --operation-preferences=: Preferences for how CloudFormation performs this StackSet operation.
-        --parameters=: A list of input parameters for the StackSet template.
+        --parameters=: The input parameters for the StackSet template.
         --permission-model=: Describes how the IAM roles required for StackSet operations are created.
-        --regions=: The Amazon Web Services Regions in which to update associated stack instances.
-        --stack-set-name=!: The name or unique ID of the StackSet that you want to update.
+        --stack-id=: The stack ID you are importing into a new StackSet.
+        --stack-set-name=!: The name to associate with the StackSet.
         --tags=: The key-value pairs to associate with this StackSet and the stacks created from it.
         --template-body=: The structure that contains the template body, with a minimum length of 1 byte and a maximum length of 51,200 bytes.
         --template-url=: The URL of a file that contains the template body.
-        --use-previous-template: Use the existing template that's associated with the StackSet that you're updating.
       completion:
         flag:
             call-as:
@@ -1184,6 +881,101 @@ commands:
             permission-model:
                 - SERVICE_MANAGED
                 - SELF_MANAGED
+    - name: execute-stack-refactor
+      description: Executes the stack refactor operation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --stack-refactor-id=!: The ID associated with the stack refactor created from the [CreateStackRefactor]() action.
+    - name: list-stack-resources
+      description: Returns descriptions of all resources of the specified stack.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The token for the next set of items to return.
+        --stack-name=!: 'The name or the unique stack ID that is associated with the stack, which aren''t always interchangeable:'
+        --starting-token=: A token to specify where to start paginating.
+    - name: register-publisher
+      description: Registers your account as a publisher of public extensions in the CloudFormation registry.
+      flags:
+        --accept-terms-and-conditions: Whether you accept the [Terms and Conditions](https://cloudformation-registry-documents.s3.amazonaws.com/Terms_and_Conditions_for_AWS_CloudFormation_Registry_Publishers.pdf) for publishing extensions in the CloudFormation registry.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connection-arn=: If you are using a Bitbucket or GitHub account for identity verification, the Amazon Resource Name (ARN) for your connection to that account.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-accept-terms-and-conditions: Whether you accept the [Terms and Conditions](https://cloudformation-registry-documents.s3.amazonaws.com/Terms_and_Conditions_for_AWS_CloudFormation_Registry_Publishers.pdf) for publishing extensions in the CloudFormation registry.
+    - name: test-type
+      description: Tests a registered extension to make sure it meets all necessary requirements for being published in the CloudFormation registry.
+      flags:
+        --arn=: The Amazon Resource Name (ARN) of the extension.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-delivery-bucket=: The S3 bucket to which CloudFormation delivers the contract test execution logs.
+        --type-name=: The name of the extension to test.
+        --type=: The type of the extension to test.
+        --version-id=: The version of the extension to test.
+      completion:
+        flag:
+            type:
+                - RESOURCE
+                - MODULE
+                - HOOK
+    - name: update-stack-instances
+      description: Updates the parameter values for stack instances for the specified accounts, within the specified Amazon Web Services Regions.
+      flags:
+        --accounts=: \[Self-managed permissions] The account IDs of one or more Amazon Web Services accounts in which you want to update parameter values for stack instances.
+        --call-as=: \[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --deployment-targets=: \[Service-managed permissions] The Organizations accounts in which you want to update parameter values for stack instances.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --operation-id=: The unique identifier for this StackSet operation.
+        --operation-preferences=: Preferences for how CloudFormation performs this StackSet operation.
+        --parameter-overrides=: A list of input parameters whose values you want to update for the specified stack instances.
+        --regions=!: The names of one or more Amazon Web Services Regions in which you want to update parameter values for stack instances.
+        --stack-set-name=!: The name or unique ID of the StackSet associated with the stack instances.
+      completion:
+        flag:
+            call-as:
+                - SELF
+                - DELEGATED_ADMIN
+    - name: create-stack
+      description: Creates a stack as specified in the template.
+      flags:
+        --capabilities=: In some cases, you must explicitly acknowledge that your stack template contains certain capabilities in order for CloudFormation to create the stack.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique identifier for this `CreateStack` request.
+        --disable-rollback: Set to `true` to disable rollback of the stack if stack creation failed.
+        --enable-termination-protection: Whether to enable termination protection on the specified stack.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-disable-rollback: Set to `true` to disable rollback of the stack if stack creation failed.
+        --no-enable-termination-protection: Whether to enable termination protection on the specified stack.
+        --no-retain-except-on-create: When set to `true`, newly created resources are deleted when the operation rolls back.
+        --notification-arns=: The Amazon SNS topic ARNs to publish stack related events.
+        --on-failure=: Determines what action will be taken if stack creation fails.
+        --parameters=: A list of `Parameter` structures that specify input parameters for the stack.
+        --resource-types=: Specifies which resource types you can work with, such as `AWS::EC2::Instance` or `Custom::MyCustomInstance`.
+        --retain-except-on-create: When set to `true`, newly created resources are deleted when the operation rolls back.
+        --role-arn=: The Amazon Resource Name (ARN) of an IAM role that CloudFormation assumes to create the stack.
+        --rollback-configuration=: The rollback triggers for CloudFormation to monitor during stack creation and updating operations, and for the specified monitoring period afterwards.
+        --stack-name=!: The name that's associated with the stack.
+        --stack-policy-body=: Structure that contains the stack policy body.
+        --stack-policy-url=: Location of a file that contains the stack policy.
+        --tags=: Key-value pairs to associate with this stack.
+        --template-body=: Structure that contains the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes.
+        --template-url=: The URL of a file that contains the template body.
+        --timeout-in-minutes=: The amount of time that can pass before the stack status becomes `CREATE_FAILED`; if `DisableRollback` is not set or is set to `false`, the stack will be rolled back.
+      completion:
+        flag:
+            on-failure:
+                - DO_NOTHING
+                - ROLLBACK
+                - DELETE
     - name: describe-publisher
       description: Returns information about a CloudFormation extension publisher.
       flags:
@@ -1191,31 +983,47 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --publisher-id=: The ID of the extension publisher.
-    - name: describe-stack-drift-detection-status
-      description: Returns information about a stack drift detection operation.
+    - name: execute-change-set
+      description: Updates a stack using the input information that was provided when the specified change set was created.
       flags:
+        --change-set-name=!: The name or Amazon Resource Name (ARN) of the change set that you want use to update the specified stack.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique identifier for this `ExecuteChangeSet` request.
+        --disable-rollback: Preserves the state of previously provisioned resources when an operation fails.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-disable-rollback: Preserves the state of previously provisioned resources when an operation fails.
+        --no-retain-except-on-create: When set to `true`, newly created resources are deleted when the operation rolls back.
+        --retain-except-on-create: When set to `true`, newly created resources are deleted when the operation rolls back.
+        --stack-name=: If you specified the name of a change set, specify the stack name or Amazon Resource Name (ARN) that's associated with the change set you want to execute.
+    - name: import-stacks-to-stack-set
+      description: Import existing stacks into a new StackSets.
+      flags:
+        --call-as=: By default, `SELF` is specified.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --stack-drift-detection-id=!: The ID of the drift detection results of this operation.
-    - name: list-stack-set-operations
-      description: Returns summary information about operations performed on a StackSet.
-      flags:
-        --call-as=: \[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to be returned with a single call.
-        --next-token=: The token for the next set of items to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --stack-set-name=!: The name or unique ID of the StackSet that you want to get operation summaries for.
-        --starting-token=: A token to specify where to start paginating.
+        --operation-id=: A unique, user defined, identifier for the StackSet operation.
+        --operation-preferences=: The user-specified preferences for how CloudFormation performs a StackSet operation.
+        --organizational-unit-ids=: The list of OU ID's to which the imported stacks must be mapped as deployment targets.
+        --stack-ids-url=: The Amazon S3 URL which contains list of stack ids to be inputted.
+        --stack-ids=: The IDs of the stacks you are importing into a StackSet.
+        --stack-set-name=!: The name of the StackSet.
       completion:
         flag:
             call-as:
                 - SELF
                 - DELEGATED_ADMIN
+    - name: list-change-sets
+      description: Returns the ID and status of each active change set for a stack.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The token for the next set of items to return.
+        --stack-name=!: The name or the Amazon Resource Name (ARN) of the stack for which you want to list change sets.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-stack-sets
       description: Returns summary information about StackSets that are associated with the user.
       flags:
@@ -1237,23 +1045,133 @@ commands:
             status:
                 - ACTIVE
                 - DELETED
-    - name: get-template-summary
-      description: Returns information about a new or existing template.
+    - name: activate-organizations-access
+      description: Activate trusted access with Organizations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-change-set-hooks
+      description: Returns Hook-related information for the change set and a list of changes that CloudFormation makes when you run the change set.
+      flags:
+        --change-set-name=!: The name or Amazon Resource Name (ARN) of the change set that you want to describe.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --logical-resource-id=: If specified, lists only the Hooks related to the specified `LogicalResourceId`.
+        --next-token=: The token for the next set of items to return.
+        --stack-name=: If you specified the name of a change set, specify the stack name or stack ID (ARN) of the change set you want to describe.
+    - name: describe-stack-set-operation
+      description: Returns the description of the specified StackSet operation.
       flags:
         --call-as=: \[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --stack-name=: The name or the stack ID that's associated with the stack, which aren't always interchangeable.
-        --stack-set-name=: The name or unique ID of the StackSet from which the stack was created.
-        --template-body=: Structure that contains the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes.
-        --template-summary-config=: Specifies options for the `GetTemplateSummary` API action.
-        --template-url=: The URL of a file that contains the template body.
+        --operation-id=!: The unique ID of the StackSet operation.
+        --stack-set-name=!: The name or the unique stack ID of the StackSet for the stack operation.
       completion:
         flag:
             call-as:
                 - SELF
                 - DELEGATED_ADMIN
+    - name: list-hook-results
+      description: Returns summaries of invoked Hooks.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --next-token=: The token for the next set of items to return.
+        --status=: Filters results by the status of Hook invocations.
+        --target-id=: Filters results by the unique identifier of the target the Hook was invoked against.
+        --target-type=: Filters results by target type.
+        --type-arn=: Filters results by the ARN of the Hook.
+      completion:
+        flag:
+            status:
+                - HOOK_IN_PROGRESS
+                - HOOK_COMPLETE_SUCCEEDED
+                - HOOK_COMPLETE_FAILED
+                - HOOK_FAILED
+            target-type:
+                - CHANGE_SET
+                - STACK
+                - RESOURCE
+                - CLOUD_CONTROL
+    - name: describe-resource-scan
+      description: Describes details of a resource scan.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-scan-id=!: The Amazon Resource Name (ARN) of the resource scan.
+    - name: describe-stack-refactor
+      description: Describes the stack refactor status.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --stack-refactor-id=!: The ID associated with the stack refactor created from the [CreateStackRefactor]() action.
+    - name: detect-stack-set-drift
+      description: Detect drift on a StackSet.
+      flags:
+        --call-as=: \[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --operation-id=: '*The ID of the StackSet operation.*'
+        --operation-preferences=: The user-specified preferences for how CloudFormation performs a StackSet operation.
+        --stack-set-name=!: The name of the StackSet on which to perform the drift detection operation.
+      completion:
+        flag:
+            call-as:
+                - SELF
+                - DELEGATED_ADMIN
+    - name: list-exports
+      description: Lists all exported output values in the account and Region in which you call this action.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The token for the next set of items to return.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-stack-refactor-actions
+      description: Lists the stack refactor actions that will be taken after calling the [ExecuteStackRefactor]() action.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to be returned with a single call.
+        --next-token=: The token for the next set of items to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --stack-refactor-id=!: The ID associated with the stack refactor created from the [CreateStackRefactor]() action.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-stack-set-auto-deployment-targets
+      description: Returns summary information about deployment targets for a StackSet.
+      flags:
+        --call-as=: Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to be returned with a single call.
+        --next-token=: The token for the next set of items to return.
+        --stack-set-name=!: The name or unique ID of the StackSet that you want to get automatic deployment targets for.
+      completion:
+        flag:
+            call-as:
+                - SELF
+                - DELEGATED_ADMIN
+    - name: update-termination-protection
+      description: Updates termination protection for the specified stack.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --enable-termination-protection!: Whether to enable termination protection on the specified stack.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-enable-termination-protection!: Whether to enable termination protection on the specified stack.
+        --stack-name=!: The name or unique ID of the stack for which you want to set termination protection.
     - name: describe-organizations-access
       description: Retrieves information about the account's `OrganizationAccess` status.
       flags:
@@ -1266,20 +1184,52 @@ commands:
             call-as:
                 - SELF
                 - DELEGATED_ADMIN
-    - name: continue-update-rollback
-      description: Continues rolling back a stack from `UPDATE_ROLLBACK_FAILED` to `UPDATE_ROLLBACK_COMPLETE` state.
+    - name: describe-stack-events
+      description: Returns all stack related events for a specified stack in reverse chronological order.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique identifier for this `ContinueUpdateRollback` request.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resources-to-skip=: A list of the logical IDs of the resources that CloudFormation skips during the continue update rollback operation.
-        --role-arn=: The Amazon Resource Name (ARN) of an IAM role that CloudFormation assumes to roll back the stack.
-        --stack-name=!: The name or the unique ID of the stack that you want to continue rolling back.
-    - name: deregister-type
-      description: Marks an extension or extension version as `DEPRECATED` in the CloudFormation registry, removing it from active use.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The token for the next set of items to return.
+        --stack-name=!: 'The name or the unique stack ID that''s associated with the stack, which aren''t always interchangeable:'
+        --starting-token=: A token to specify where to start paginating.
+    - name: detect-stack-drift
+      description: Detects whether a stack's actual configuration differs, or has *drifted*, from its expected configuration, as defined in the stack template and any values specified as template parameters.
       flags:
-        --arn=: The Amazon Resource Name (ARN) of the extension.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --logical-resource-ids=: The logical names of any resources you want to use as filters.
+        --stack-name=!: The name of the stack for which you want to detect drift.
+    - name: list-generated-templates
+      description: Lists your generated templates in this Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: If the number of available results exceeds this maximum, the response includes a `NextToken` value that you can use for the `NextToken` parameter to get the next set of results.
+        --next-token=: The token for the next set of items to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-resource-scan-related-resources
+      description: Lists the related resources for a list of resources from a resource scan.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: If the number of available results exceeds this maximum, the response includes a `NextToken` value that you can use for the `NextToken` parameter to get the next set of results.
+        --next-token=: The token for the next set of items to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-scan-id=!: The Amazon Resource Name (ARN) of the resource scan.
+        --resources=!: The list of resources for which you want to get the related resources.
+        --starting-token=: A token to specify where to start paginating.
+    - name: set-type-default-version
+      description: Specify the default version of an extension.
+      flags:
+        --arn=: The Amazon Resource Name (ARN) of the extension for which you want version summary information.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -1292,9 +1242,93 @@ commands:
                 - RESOURCE
                 - MODULE
                 - HOOK
+    - name: start-resource-scan
+      description: Starts a scan of the resources in this account in this Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique identifier for this `StartResourceScan` request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scan-filters=: The scan filters to use.
+    - name: deactivate-organizations-access
+      description: Deactivates trusted access with Organizations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: estimate-template-cost
+      description: Returns the estimated monthly cost of a template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --parameters=: A list of `Parameter` structures that specify input parameters.
+        --template-body=: Structure that contains the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes.
+        --template-url=: The URL of a file that contains the template body.
+    - name: list-resource-scans
+      description: List the resource scans from newest to oldest.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: If the number of available results exceeds this maximum, the response includes a `NextToken` value that you can use for the `NextToken` parameter to get the next set of results.
+        --next-token=: The token for the next set of items to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --scan-type-filter=: The scan type that you want to get summary information about.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            scan-type-filter:
+                - FULL
+                - PARTIAL
+    - name: list-stacks
+      description: Returns the summary information for stacks whose status matches the specified `StackStatusFilter`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The token for the next set of items to return.
+        --stack-status-filter=: Stack status to use as a filter.
+        --starting-token=: A token to specify where to start paginating.
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:
+        - name: stack-refactor-execute-complete
+          description: Describes the stack refactor status.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --stack-refactor-id=!: The ID associated with the stack refactor created from the [CreateStackRefactor]() action.
+        - name: stack-exists
+          description: Returns the description for the specified stack; if no stack name was specified, then it returns the description for all the stacks created.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --max-items=: The  total number of items to return in the command's output.
+            --next-token=: The token for the next set of items to return.
+            --stack-name=: If you don't pass a parameter to `StackName`, the API returns a response that describes all resources in the account, which can impact performance.
+            --starting-token=: A token to specify where to start paginating.
+        - name: stack-import-complete
+          description: Returns the description for the specified stack; if no stack name was specified, then it returns the description for all the stacks created.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --max-items=: The  total number of items to return in the command's output.
+            --next-token=: The token for the next set of items to return.
+            --stack-name=: If you don't pass a parameter to `StackName`, the API returns a response that describes all resources in the account, which can impact performance.
+            --starting-token=: A token to specify where to start paginating.
+        - name: type-registration-complete
+          description: Returns information about an extension's registration, including its current status and type and version identifiers.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --registration-token=!: The identifier for this registration request.
         - name: stack-create-complete
           description: Returns the description for the specified stack; if no stack name was specified, then it returns the description for all the stacks created.
           flags:
@@ -1325,7 +1359,7 @@ commands:
             --next-token=: The token for the next set of items to return.
             --stack-name=: If you don't pass a parameter to `StackName`, the API returns a response that describes all resources in the account, which can impact performance.
             --starting-token=: A token to specify where to start paginating.
-        - name: stack-import-complete
+        - name: stack-rollback-complete
           description: Returns the description for the specified stack; if no stack name was specified, then it returns the description for all the stacks created.
           flags:
             --cli-input-json=: Read arguments from the JSON string provided.
@@ -1348,41 +1382,7 @@ commands:
             --no-include-property-values: If `true`, the returned changes include detailed changes in the property values.
             --stack-name=: If you specified the name of a change set, specify the stack name or ID (ARN) of the change set you want to describe.
             --starting-token=: A token to specify where to start paginating.
-        - name: type-registration-complete
-          description: Returns information about an extension's registration, including its current status and type and version identifiers.
-          flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-            --registration-token=!: The identifier for this registration request.
-        - name: stack-exists
-          description: Returns the description for the specified stack; if no stack name was specified, then it returns the description for all the stacks created.
-          flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-            --max-items=: The  total number of items to return in the command's output.
-            --next-token=: The token for the next set of items to return.
-            --stack-name=: If you don't pass a parameter to `StackName`, the API returns a response that describes all resources in the account, which can impact performance.
-            --starting-token=: A token to specify where to start paginating.
-        - name: stack-rollback-complete
-          description: Returns the description for the specified stack; if no stack name was specified, then it returns the description for all the stacks created.
-          flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-            --max-items=: The  total number of items to return in the command's output.
-            --next-token=: The token for the next set of items to return.
-            --stack-name=: If you don't pass a parameter to `StackName`, the API returns a response that describes all resources in the account, which can impact performance.
-            --starting-token=: A token to specify where to start paginating.
         - name: stack-refactor-create-complete
-          description: Describes the stack refactor status.
-          flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-            --stack-refactor-id=!: The ID associated with the stack refactor created from the [CreateStackRefactor]() action.
-        - name: stack-refactor-execute-complete
           description: Describes the stack refactor status.
           flags:
             --cli-input-json=: Read arguments from the JSON string provided.

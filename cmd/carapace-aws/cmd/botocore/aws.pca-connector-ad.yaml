@@ -1,19 +1,16 @@
 name: pca-connector-ad
 description: PcaConnectorAd
 commands:
-    - name: delete-directory-registration
-      description: Deletes a directory registration.
+    - name: create-template-group-access-control-entry
+      description: Create a group access control entry.
       flags:
+        --access-rights=!: Allow or deny permissions for an Active Directory group to enroll or autoenroll certificates for a template.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --directory-registration-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateDirectoryRegistration](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration.html).
+        --client-token=: Idempotency token.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-template
-      description: Deletes a template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-display-name=!: Name of the Active Directory group.
+        --group-security-identifier=!: Security identifier (SID) of the group object from Active Directory.
         --template-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateTemplate](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplate.html).
     - name: get-directory-registration
       description: A structure that contains information about your directory registration.
@@ -21,6 +18,89 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --directory-registration-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateDirectoryRegistration](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration.html).
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-template
+      description: Retrieves a certificate template that the connector uses to issue certificates from a private CA.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --template-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateTemplate](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplate.html).
+    - name: get-template-group-access-control-entry
+      description: Retrieves the group access control entries for a template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-security-identifier=!: Security identifier (SID) of the group object from Active Directory.
+        --template-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateTemplate](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplate.html).
+    - name: list-directory-registrations
+      description: Lists the directory registrations that you created by using the [https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API\_CreateDirectoryRegistration](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration) action.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Use this parameter when paginating results to specify the maximum number of items to return in the response on each page.
+        --next-token=: Use this parameter when paginating results in a subsequent request after you receive a response with truncated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-service-principal-names
+      description: Lists the service principal names that the connector uses to authenticate with Active Directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-registration-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateDirectoryRegistration](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration.html).
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Use this parameter when paginating results to specify the maximum number of items to return in the response on each page.
+        --next-token=: Use this parameter when paginating results in a subsequent request after you receive a response with truncated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: tag-resource
+      description: Adds one or more tags to your resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) that was returned when you created the resource.
+        --tags=!: Metadata assigned to a directory registration consisting of a key-value pair.
+    - name: create-connector
+      description: Creates a connector between Amazon Web Services Private CA and an Active Directory.
+      flags:
+        --certificate-authority-arn=!: The Amazon Resource Name (ARN) of the certificate authority being used.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Idempotency token.
+        --directory-id=!: The identifier of the Active Directory.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: Metadata assigned to a connector consisting of a key-value pair.
+        --vpc-information=!: Information about your VPC and security groups used with the connector.
+    - name: create-template
+      description: Creates an Active Directory compatible certificate template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Idempotency token.
+        --connector-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateConnector](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html).
+        --definition=!: Template configuration to define the information included in certificates.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: Name of the template.
+        --tags=: Metadata assigned to a template consisting of a key-value pair.
+    - name: delete-service-principal-name
+      description: Deletes the service principal name (SPN) used by a connector to authenticate with your Active Directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connector-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateConnector](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html).
+        --directory-registration-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateDirectoryRegistration](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration.html).
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-connector
+      description: Lists information about your connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connector-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateConnector](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html).
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-service-principal-name
       description: Lists the service principal name that the connector uses to authenticate with Active Directory.
@@ -41,6 +121,52 @@ commands:
         --next-token=: Use this parameter when paginating results in a subsequent request after you receive a response with truncated results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: Lists the tags, if any, that are associated with your resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) that was returned when you created the resource.
+    - name: untag-resource
+      description: Removes one or more tags from your resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) that was returned when you created the resource.
+        --tag-keys=!: Specifies a list of tag keys that you want to remove from the specified resources.
+    - name: create-service-principal-name
+      description: Creates a service principal name (SPN) for the service account in Active Directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Idempotency token.
+        --connector-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateConnector](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html).
+        --directory-registration-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateDirectoryRegistration](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration.html).
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-connector
+      description: Deletes a connector for Active Directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connector-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateConnector](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html).
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-directory-registration
+      description: Deletes a directory registration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-registration-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateDirectoryRegistration](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration.html).
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-template-group-access-control-entry
+      description: Deletes a group access control entry.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-security-identifier=!: Security identifier (SID) of the group object from Active Directory.
+        --template-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateTemplate](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplate.html).
     - name: list-template-group-access-control-entries
       description: Lists group access control entries you created.
       flags:
@@ -65,158 +191,6 @@ commands:
         --next-token=: Use this parameter when paginating results in a subsequent request after you receive a response with truncated results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: create-connector
-      description: Creates a connector between Amazon Web Services Private CA and an Active Directory.
-      flags:
-        --certificate-authority-arn=!: The Amazon Resource Name (ARN) of the certificate authority being used.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: Idempotency token.
-        --directory-id=!: The identifier of the Active Directory.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: Metadata assigned to a connector consisting of a key-value pair.
-        --vpc-information=!: Information about your VPC and security groups used with the connector.
-    - name: create-directory-registration
-      description: Creates a directory registration that authorizes communication between Amazon Web Services Private CA and an Active Directory
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: Idempotency token.
-        --directory-id=!: The identifier of the Active Directory.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: Metadata assigned to a directory registration consisting of a key-value pair.
-    - name: create-service-principal-name
-      description: Creates a service principal name (SPN) for the service account in Active Directory.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: Idempotency token.
-        --connector-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateConnector](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html).
-        --directory-registration-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateDirectoryRegistration](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration.html).
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-template
-      description: Creates an Active Directory compatible certificate template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: Idempotency token.
-        --connector-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateConnector](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html).
-        --definition=!: Template configuration to define the information included in certificates.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: Name of the template.
-        --tags=: Metadata assigned to a template consisting of a key-value pair.
-    - name: get-template
-      description: Retrieves a certificate template that the connector uses to issue certificates from a private CA.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --template-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateTemplate](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplate.html).
-    - name: list-directory-registrations
-      description: Lists the directory registrations that you created by using the [https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API\_CreateDirectoryRegistration](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration) action.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Use this parameter when paginating results to specify the maximum number of items to return in the response on each page.
-        --next-token=: Use this parameter when paginating results in a subsequent request after you receive a response with truncated results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: Lists the tags, if any, that are associated with your resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) that was returned when you created the resource.
-    - name: tag-resource
-      description: Adds one or more tags to your resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) that was returned when you created the resource.
-        --tags=!: Metadata assigned to a directory registration consisting of a key-value pair.
-    - name: delete-connector
-      description: Deletes a connector for Active Directory.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connector-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateConnector](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html).
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-template-group-access-control-entry
-      description: Deletes a group access control entry.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-security-identifier=!: Security identifier (SID) of the group object from Active Directory.
-        --template-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateTemplate](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplate.html).
-    - name: get-connector
-      description: Lists information about your connector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connector-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateConnector](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html).
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-service-principal-names
-      description: Lists the service principal names that the connector uses to authenticate with Active Directory.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --directory-registration-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateDirectoryRegistration](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration.html).
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Use this parameter when paginating results to specify the maximum number of items to return in the response on each page.
-        --next-token=: Use this parameter when paginating results in a subsequent request after you receive a response with truncated results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: untag-resource
-      description: Removes one or more tags from your resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) that was returned when you created the resource.
-        --tag-keys=!: Specifies a list of tag keys that you want to remove from the specified resources.
-    - name: update-template
-      description: Update template configuration to define the information included in certificates.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --definition=: Template configuration to define the information included in certificates.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-reenroll-all-certificate-holders: This setting allows the major version of a template to be increased automatically.
-        --reenroll-all-certificate-holders: This setting allows the major version of a template to be increased automatically.
-        --template-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateTemplate](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplate.html).
-    - name: create-template-group-access-control-entry
-      description: Create a group access control entry.
-      flags:
-        --access-rights=!: Allow or deny permissions for an Active Directory group to enroll or autoenroll certificates for a template.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: Idempotency token.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-display-name=!: Name of the Active Directory group.
-        --group-security-identifier=!: Security identifier (SID) of the group object from Active Directory.
-        --template-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateTemplate](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplate.html).
-    - name: delete-service-principal-name
-      description: Deletes the service principal name (SPN) used by a connector to authenticate with your Active Directory.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connector-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateConnector](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html).
-        --directory-registration-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateDirectoryRegistration](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration.html).
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-template-group-access-control-entry
-      description: Retrieves the group access control entries for a template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-security-identifier=!: Security identifier (SID) of the group object from Active Directory.
-        --template-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateTemplate](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplate.html).
     - name: update-template-group-access-control-entry
       description: Update a group access control entry you created using [CreateTemplateGroupAccessControlEntry](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplateGroupAccessControlEntry.html).
       flags:
@@ -227,3 +201,29 @@ commands:
         --group-display-name=: Name of the Active Directory group.
         --group-security-identifier=!: Security identifier (SID) of the group object from Active Directory.
         --template-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateTemplate](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplate.html).
+    - name: delete-template
+      description: Deletes a template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --template-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateTemplate](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplate.html).
+    - name: update-template
+      description: Update template configuration to define the information included in certificates.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --definition=: Template configuration to define the information included in certificates.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-reenroll-all-certificate-holders: This setting allows the major version of a template to be increased automatically.
+        --reenroll-all-certificate-holders: This setting allows the major version of a template to be increased automatically.
+        --template-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateTemplate](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplate.html).
+    - name: create-directory-registration
+      description: Creates a directory registration that authorizes communication between Amazon Web Services Private CA and an Active Directory
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Idempotency token.
+        --directory-id=!: The identifier of the Active Directory.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: Metadata assigned to a directory registration consisting of a key-value pair.

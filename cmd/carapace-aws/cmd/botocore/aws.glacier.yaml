@@ -1,121 +1,13 @@
 name: glacier
 description: Amazon Glacier
 commands:
-    - name: abort-multipart-upload
-      description: This operation aborts a multipart upload identified by the upload ID.
+    - name: purchase-provisioned-capacity
+      description: This operation purchases a provisioned capacity unit for an AWS account.
       flags:
-        --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
+        --account-id=!: The AWS account ID of the account that owns the vault.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --upload-id=!: The upload ID of the multipart upload to delete.
-        --vault-name=!: The name of the vault.
-    - name: complete-vault-lock
-      description: This operation completes the vault locking process by transitioning the vault lock from the `InProgress` state to the `Locked` state, which causes the vault lock policy to become unchangeable.
-      flags:
-        --account-id=!: The `AccountId` value is the AWS account ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lock-id=!: The `lockId` value is the lock ID obtained from a [InitiateVaultLock]() request.
-        --vault-name=!: The name of the vault.
-    - name: get-vault-access-policy
-      description: This operation retrieves the `access-policy` subresource set on the vault; for more information on setting this subresource, see [Set Vault Access Policy (PUT access-policy)](https://docs.aws.amazon.com/amazonglacier/latest/dev/api-SetVaultAccessPolicy.html).
-      flags:
-        --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --vault-name=!: The name of the vault.
-    - name: delete-vault
-      description: This operation deletes a vault.
-      flags:
-        --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --vault-name=!: The name of the vault.
-    - name: list-parts
-      description: This operation lists the parts of an archive that have been uploaded in a specific multipart upload.
-      flags:
-        --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of parts to be returned.
-        --marker=: An opaque string used for pagination.
-        --max-items=: The  total number of items to return in the command's output.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --upload-id=!: The upload ID of the multipart upload.
-        --vault-name=!: The name of the vault.
-    - name: list-tags-for-vault
-      description: This operation lists all the tags attached to a vault.
-      flags:
-        --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --vault-name=!: The name of the vault.
-    - name: get-job-output
-      description: This operation downloads the output of the job you initiated using [InitiateJob]().
-      flags:
-        --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
-        --job-id=!: The job ID whose data is downloaded.
-        --range=: The range of bytes to retrieve from the output.
-        --vault-name=!: The name of the vault.
-      completion:
-        positional:
-            - - $files
-    - name: add-tags-to-vault
-      description: This operation adds the specified tags to a vault.
-      flags:
-        --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: The tags to add to the vault.
-        --vault-name=!: The name of the vault.
-    - name: create-vault
-      description: This operation creates a new vault with the specified name.
-      flags:
-        --account-id=!: The `AccountId` value is the AWS account ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --vault-name=!: The name of the vault.
-    - name: delete-vault-notifications
-      description: This operation deletes the notification configuration set for a vault.
-      flags:
-        --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --vault-name=!: The name of the vault.
-    - name: describe-vault
-      description: This operation returns information about a vault, including the vault's Amazon Resource Name (ARN), the date the vault was created, the number of archives it contains, and the total size of all the archives in the vault.
-      flags:
-        --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --vault-name=!: The name of the vault.
-    - name: get-data-retrieval-policy
-      description: This operation returns the current data retrieval policy for the account and region specified in the GET request.
-      flags:
-        --account-id=!: The `AccountId` value is the AWS account ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-archive
-      description: This operation deletes an archive from a vault.
-      flags:
-        --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
-        --archive-id=!: The ID of the archive to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --vault-name=!: The name of the vault.
     - name: remove-tags-from-vault
       description: This operation removes one or more tags from the set of tags attached to a vault.
       flags:
@@ -125,20 +17,34 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --tag-keys=: A list of tag keys.
         --vault-name=!: The name of the vault.
-    - name: upload-multipart-part
-      description: This operation uploads a part of an archive.
+    - name: add-tags-to-vault
+      description: This operation adds the specified tags to a vault.
       flags:
         --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
-        --body=: The data to upload.
-        --checksum=: The SHA256 tree hash of the data being uploaded.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --range=: Identifies the range of bytes in the assembled archive that will be uploaded in this part.
-        --upload-id=!: The upload ID of the multipart upload.
+        --tags=: The tags to add to the vault.
         --vault-name=!: The name of the vault.
-    - name: get-vault-lock
-      description: 'This operation retrieves the following attributes from the `lock-policy` subresource set on the specified vault:'
+    - name: describe-job
+      description: This operation returns information about a job you previously initiated, including the job initiation date, the user who initiated the job, the job status code/message and the Amazon SNS topic to notify after Amazon S3 Glacier (Glacier) completes the job.
+      flags:
+        --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The ID of the job to describe.
+        --vault-name=!: The name of the vault.
+    - name: get-vault-access-policy
+      description: This operation retrieves the `access-policy` subresource set on the vault; for more information on setting this subresource, see [Set Vault Access Policy (PUT access-policy)](https://docs.aws.amazon.com/amazonglacier/latest/dev/api-SetVaultAccessPolicy.html).
+      flags:
+        --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --vault-name=!: The name of the vault.
+    - name: get-vault-notifications
+      description: This operation retrieves the `notification-configuration` subresource of the specified vault.
       flags:
         --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
         --cli-input-json=: Read arguments from the JSON string provided.
@@ -154,6 +60,81 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --job-parameters=: Provides options for specifying job information.
         --vault-name=!: The name of the vault.
+    - name: list-multipart-uploads
+      description: This operation lists in-progress multipart uploads for the specified vault.
+      flags:
+        --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: Specifies the maximum number of uploads returned in the response body.
+        --marker=: An opaque string used for pagination.
+        --max-items=: The  total number of items to return in the command's output.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --vault-name=!: The name of the vault.
+    - name: get-job-output
+      description: This operation downloads the output of the job you initiated using [InitiateJob]().
+      flags:
+        --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
+        --job-id=!: The job ID whose data is downloaded.
+        --range=: The range of bytes to retrieve from the output.
+        --vault-name=!: The name of the vault.
+      completion:
+        positional:
+            - - $files
+    - name: get-vault-lock
+      description: 'This operation retrieves the following attributes from the `lock-policy` subresource set on the specified vault:'
+      flags:
+        --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --vault-name=!: The name of the vault.
+    - name: create-vault
+      description: This operation creates a new vault with the specified name.
+      flags:
+        --account-id=!: The `AccountId` value is the AWS account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --vault-name=!: The name of the vault.
+    - name: delete-archive
+      description: This operation deletes an archive from a vault.
+      flags:
+        --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
+        --archive-id=!: The ID of the archive to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --vault-name=!: The name of the vault.
+    - name: describe-vault
+      description: This operation returns information about a vault, including the vault's Amazon Resource Name (ARN), the date the vault was created, the number of archives it contains, and the total size of all the archives in the vault.
+      flags:
+        --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --vault-name=!: The name of the vault.
+    - name: upload-archive
+      description: This operation adds an archive to a vault.
+      flags:
+        --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
+        --archive-description=: The optional description of the archive you are uploading.
+        --body=: The data to upload.
+        --checksum=: The SHA256 tree hash of the data being uploaded.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --vault-name=!: The name of the vault.
+    - name: abort-vault-lock
+      description: This operation aborts the vault locking process if the vault lock is not in the `Locked` state.
+      flags:
+        --account-id=!: The `AccountId` value is the AWS account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --vault-name=!: The name of the vault.
     - name: initiate-vault-lock
       description: 'This operation initiates the vault locking process by doing the following:'
       flags:
@@ -163,6 +144,131 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --policy=: The vault lock policy as a JSON string, which uses "\\" as an escape character.
         --vault-name=!: The name of the vault.
+    - name: set-vault-notifications
+      description: This operation configures notifications that will be sent when specific events happen to a vault.
+      flags:
+        --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --vault-name=!: The name of the vault.
+        --vault-notification-config=: Provides options for specifying notification configuration.
+    - name: upload-multipart-part
+      description: This operation uploads a part of an archive.
+      flags:
+        --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
+        --body=: The data to upload.
+        --checksum=: The SHA256 tree hash of the data being uploaded.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --range=: Identifies the range of bytes in the assembled archive that will be uploaded in this part.
+        --upload-id=!: The upload ID of the multipart upload.
+        --vault-name=!: The name of the vault.
+    - name: list-tags-for-vault
+      description: This operation lists all the tags attached to a vault.
+      flags:
+        --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --vault-name=!: The name of the vault.
+    - name: list-vaults
+      description: This operation lists all vaults owned by the calling user's account.
+      flags:
+        --account-id=!: The `AccountId` value is the AWS account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of vaults to be returned.
+        --marker=: A string used for pagination.
+        --max-items=: The  total number of items to return in the command's output.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: abort-multipart-upload
+      description: This operation aborts a multipart upload identified by the upload ID.
+      flags:
+        --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --upload-id=!: The upload ID of the multipart upload to delete.
+        --vault-name=!: The name of the vault.
+    - name: delete-vault-access-policy
+      description: This operation deletes the access policy associated with the specified vault.
+      flags:
+        --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --vault-name=!: The name of the vault.
+    - name: list-provisioned-capacity
+      description: This operation lists the provisioned capacity units for the specified AWS account.
+      flags:
+        --account-id=!: The AWS account ID of the account that owns the vault.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: set-data-retrieval-policy
+      description: This operation sets and then enacts a data retrieval policy in the region specified in the PUT request.
+      flags:
+        --account-id=!: The `AccountId` value is the AWS account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy=: The data retrieval policy in JSON format.
+    - name: set-vault-access-policy
+      description: This operation configures an access policy for a vault and will overwrite an existing policy.
+      flags:
+        --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy=: The vault access policy as a JSON string.
+        --vault-name=!: The name of the vault.
+    - name: complete-multipart-upload
+      description: You call this operation to inform Amazon S3 Glacier (Glacier) that all the archive parts have been uploaded and that Glacier can now assemble the archive from the uploaded parts.
+      flags:
+        --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
+        --archive-size=: The total size, in bytes, of the entire archive.
+        --checksum=: The SHA256 tree hash of the entire archive.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --upload-id=!: The upload ID of the multipart upload.
+        --vault-name=!: The name of the vault.
+    - name: complete-vault-lock
+      description: This operation completes the vault locking process by transitioning the vault lock from the `InProgress` state to the `Locked` state, which causes the vault lock policy to become unchangeable.
+      flags:
+        --account-id=!: The `AccountId` value is the AWS account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lock-id=!: The `lockId` value is the lock ID obtained from a [InitiateVaultLock]() request.
+        --vault-name=!: The name of the vault.
+    - name: delete-vault
+      description: This operation deletes a vault.
+      flags:
+        --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --vault-name=!: The name of the vault.
+    - name: delete-vault-notifications
+      description: This operation deletes the notification configuration set for a vault.
+      flags:
+        --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --vault-name=!: The name of the vault.
+    - name: get-data-retrieval-policy
+      description: This operation returns the current data retrieval policy for the account and region specified in the GET request.
+      flags:
+        --account-id=!: The `AccountId` value is the AWS account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-jobs
       description: This operation lists jobs for a vault, including jobs that are in-progress and jobs that have recently finished.
       flags:
@@ -178,57 +284,6 @@ commands:
         --starting-token=: A token to specify where to start paginating.
         --statuscode=: The type of job status to return.
         --vault-name=!: The name of the vault.
-    - name: set-data-retrieval-policy
-      description: This operation sets and then enacts a data retrieval policy in the region specified in the PUT request.
-      flags:
-        --account-id=!: The `AccountId` value is the AWS account ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy=: The data retrieval policy in JSON format.
-    - name: purchase-provisioned-capacity
-      description: This operation purchases a provisioned capacity unit for an AWS account.
-      flags:
-        --account-id=!: The AWS account ID of the account that owns the vault.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: complete-multipart-upload
-      description: You call this operation to inform Amazon S3 Glacier (Glacier) that all the archive parts have been uploaded and that Glacier can now assemble the archive from the uploaded parts.
-      flags:
-        --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
-        --archive-size=: The total size, in bytes, of the entire archive.
-        --checksum=: The SHA256 tree hash of the entire archive.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --upload-id=!: The upload ID of the multipart upload.
-        --vault-name=!: The name of the vault.
-    - name: delete-vault-access-policy
-      description: This operation deletes the access policy associated with the specified vault.
-      flags:
-        --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --vault-name=!: The name of the vault.
-    - name: describe-job
-      description: This operation returns information about a job you previously initiated, including the job initiation date, the user who initiated the job, the job status code/message and the Amazon SNS topic to notify after Amazon S3 Glacier (Glacier) completes the job.
-      flags:
-        --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The ID of the job to describe.
-        --vault-name=!: The name of the vault.
-    - name: get-vault-notifications
-      description: This operation retrieves the `notification-configuration` subresource of the specified vault.
-      flags:
-        --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --vault-name=!: The name of the vault.
     - name: initiate-multipart-upload
       description: This operation initiates a multipart upload.
       flags:
@@ -239,74 +294,19 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --part-size=: The size of each part except the last, in bytes.
         --vault-name=!: The name of the vault.
-    - name: list-vaults
-      description: This operation lists all vaults owned by the calling user's account.
-      flags:
-        --account-id=!: The `AccountId` value is the AWS account ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of vaults to be returned.
-        --marker=: A string used for pagination.
-        --max-items=: The  total number of items to return in the command's output.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: set-vault-notifications
-      description: This operation configures notifications that will be sent when specific events happen to a vault.
+    - name: list-parts
+      description: This operation lists the parts of an archive that have been uploaded in a specific multipart upload.
       flags:
         --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --vault-name=!: The name of the vault.
-        --vault-notification-config=: Provides options for specifying notification configuration.
-    - name: abort-vault-lock
-      description: This operation aborts the vault locking process if the vault lock is not in the `Locked` state.
-      flags:
-        --account-id=!: The `AccountId` value is the AWS account ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --vault-name=!: The name of the vault.
-    - name: list-multipart-uploads
-      description: This operation lists in-progress multipart uploads for the specified vault.
-      flags:
-        --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: Specifies the maximum number of uploads returned in the response body.
+        --limit=: The maximum number of parts to be returned.
         --marker=: An opaque string used for pagination.
         --max-items=: The  total number of items to return in the command's output.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-        --vault-name=!: The name of the vault.
-    - name: upload-archive
-      description: This operation adds an archive to a vault.
-      flags:
-        --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
-        --archive-description=: The optional description of the archive you are uploading.
-        --body=: The data to upload.
-        --checksum=: The SHA256 tree hash of the data being uploaded.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --vault-name=!: The name of the vault.
-    - name: list-provisioned-capacity
-      description: This operation lists the provisioned capacity units for the specified AWS account.
-      flags:
-        --account-id=!: The AWS account ID of the account that owns the vault.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: set-vault-access-policy
-      description: This operation configures an access policy for a vault and will overwrite an existing policy.
-      flags:
-        --account-id=!: The `AccountId` value is the AWS account ID of the account that owns the vault.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy=: The vault access policy as a JSON string.
+        --upload-id=!: The upload ID of the multipart upload.
         --vault-name=!: The name of the vault.
     - name: wait
       description: Wait  until  a particular condition is satisfied.

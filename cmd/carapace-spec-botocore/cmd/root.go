@@ -100,6 +100,7 @@ func CamelCaseToDash(s string) string {
 		"edn-s0-client-subnet-ip":                  "edn-s0-client-subnet-mask",
 		"edns0-client-subnet-ip":                   "edns0-client-subnet-mask",
 		"launch-configuration-template-i-ds":       "launch-configuration-template-ids",
+		"list-web-ac-ls":                           "list-web-acls",
 		"logout-ur-ls":                             "logout-urls",
 		"memory-per-oracle-compute-unit-in-g-bs":   "memory-per-oracle-compute-unit-in-gbs",
 		"memory-size-in-g-bs":                      "memory-size-in-gbs",

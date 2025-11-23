@@ -1,34 +1,49 @@
 name: cognito-identity
 description: Amazon Cognito Identity
 commands:
-    - name: delete-identities
-      description: Deletes identities from an identity pool.
+    - name: lookup-developer-identity
+      description: Retrieves the `IdentityID` associated with a `DeveloperUserIdentifier` or the list of `DeveloperUserIdentifier` values associated with an `IdentityId` for an existing identity.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --developer-user-identifier=: A unique ID used by your backend authentication process to identify a user.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-ids-to-delete=!: A list of 1-60 identities that you want to delete.
-    - name: delete-identity-pool
-      description: Deletes an identity pool.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-id=: A unique identifier in the format REGION:GUID.
         --identity-pool-id=!: An identity pool ID in the format REGION:GUID.
-    - name: describe-identity
-      description: Returns metadata related to the given identity, including when the identity was created and any associated linked logins.
+        --max-results=: The maximum number of identities to return.
+        --next-token=: A pagination token.
+    - name: untag-resource
+      description: Removes the specified tags from the specified Amazon Cognito identity pool.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-id=!: A unique identifier in the format REGION:GUID.
-    - name: describe-identity-pool
-      description: Gets details about a particular identity pool, including the pool name, ID description, creation date, and current number of users.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the identity pool.
+        --tag-keys=!: The keys of the tags to remove from the user pool.
+    - name: list-tags-for-resource
+      description: Lists the tags that are assigned to an Amazon Cognito identity pool.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-pool-id=!: An identity pool ID in the format REGION:GUID.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the identity pool that the tags are assigned to.
+    - name: create-identity-pool
+      description: Creates a new identity pool.
+      flags:
+        --allow-classic-flow: Enables or disables the Basic (Classic) authentication flow.
+        --allow-unauthenticated-identities!: TRUE if the identity pool supports unauthenticated logins.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cognito-identity-providers=: An array of Amazon Cognito user pools and their client IDs.
+        --developer-provider-name=: The "domain" by which Cognito will refer to your users.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-pool-name=!: A string that you provide.
+        --identity-pool-tags=: Tags to assign to the identity pool.
+        --no-allow-classic-flow: Enables or disables the Basic (Classic) authentication flow.
+        --no-allow-unauthenticated-identities!: TRUE if the identity pool supports unauthenticated logins.
+        --open-id-connect-provider-arns=: The Amazon Resource Names (ARN) of the OpenID Connect providers.
+        --saml-provider-arns=: An array of Amazon Resource Names (ARNs) of the SAML provider for your identity pool.
+        --supported-login-providers=: Optional key:value pairs mapping provider names to provider app IDs.
     - name: get-credentials-for-identity
       description: Returns credentials for the provided identity ID.
       flags:
@@ -38,105 +53,6 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identity-id=!: A unique identifier in the format REGION:GUID.
         --logins=: A set of optional name-value pairs that map provider names to provider tokens.
-    - name: get-identity-pool-roles
-      description: Gets the roles for an identity pool.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-pool-id=!: An identity pool ID in the format REGION:GUID.
-    - name: get-open-id-token
-      description: Gets an OpenID token, using a known Cognito ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-id=!: A unique identifier in the format REGION:GUID.
-        --logins=: A set of optional name-value pairs that map provider names to provider tokens.
-    - name: merge-developer-identities
-      description: Merges two users having different `IdentityId`s, existing in the same identity pool, and identified by the same developer provider.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --destination-user-identifier=!: User identifier for the destination user.
-        --developer-provider-name=!: The "domain" by which Cognito will refer to your users.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-pool-id=!: An identity pool ID in the format REGION:GUID.
-        --source-user-identifier=!: User identifier for the source user.
-    - name: get-id
-      description: Generates (or retrieves) IdentityID.
-      flags:
-        --account-id=: A standard Amazon Web Services account ID (9+ digits).
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-pool-id=!: An identity pool ID in the format REGION:GUID.
-        --logins=: A set of optional name-value pairs that map provider names to provider tokens.
-    - name: list-identities
-      description: Lists the identities in an identity pool.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hide-disabled: An optional boolean parameter that allows you to hide disabled identities.
-        --identity-pool-id=!: An identity pool ID in the format REGION:GUID.
-        --max-results=!: The maximum number of identities to return.
-        --next-token=: A pagination token.
-        --no-hide-disabled: An optional boolean parameter that allows you to hide disabled identities.
-    - name: set-identity-pool-roles
-      description: Sets the roles for an identity pool.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-pool-id=!: An identity pool ID in the format REGION:GUID.
-        --role-mappings=: How users for a specific identity provider are to mapped to roles.
-        --roles=!: The map of roles associated with this pool.
-    - name: set-principal-tag-attribute-map
-      description: You can use this operation to use default (username and clientID) attribute or custom attribute mappings.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-pool-id=!: The ID of the Identity Pool you want to set attribute mappings for.
-        --identity-provider-name=!: The provider name you want to use for attribute mappings.
-        --no-use-defaults: You can use this operation to use default (username and clientID) attribute mappings.
-        --principal-tags=: You can use this operation to add principal tags.
-        --use-defaults: You can use this operation to use default (username and clientID) attribute mappings.
-    - name: tag-resource
-      description: Assigns a set of tags to the specified Amazon Cognito identity pool.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the identity pool.
-        --tags=!: The tags to assign to the identity pool.
-    - name: untag-resource
-      description: Removes the specified tags from the specified Amazon Cognito identity pool.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the identity pool.
-        --tag-keys=!: The keys of the tags to remove from the user pool.
-    - name: update-identity-pool
-      description: Updates the configuration of an identity pool.
-      flags:
-        --allow-classic-flow: Enables or disables the Basic (Classic) authentication flow.
-        --allow-unauthenticated-identities!: TRUE if the identity pool supports unauthenticated logins.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cognito-identity-providers=: A list representing an Amazon Cognito user pool and its client ID.
-        --developer-provider-name=: The "domain" by which Cognito will refer to your users.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-pool-id=!: An identity pool ID in the format REGION:GUID.
-        --identity-pool-name=!: A string that you provide.
-        --identity-pool-tags=: The tags that are assigned to the identity pool.
-        --no-allow-classic-flow: Enables or disables the Basic (Classic) authentication flow.
-        --no-allow-unauthenticated-identities!: TRUE if the identity pool supports unauthenticated logins.
-        --open-id-connect-provider-arns=: The ARNs of the OpenID Connect providers.
-        --saml-provider-arns=: An array of Amazon Resource Names (ARNs) of the SAML provider for your identity pool.
-        --supported-login-providers=: Optional key:value pairs mapping provider names to provider app IDs.
     - name: get-principal-tag-attribute-map
       description: Use `GetPrincipalTagAttributeMap` to list all mappings between `PrincipalTags` and user attributes.
       flags:
@@ -156,41 +72,95 @@ commands:
         --next-token=: A pagination token.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: Lists the tags that are assigned to an Amazon Cognito identity pool.
+    - name: merge-developer-identities
+      description: Merges two users having different `IdentityId`s, existing in the same identity pool, and identified by the same developer provider.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --destination-user-identifier=!: User identifier for the destination user.
+        --developer-provider-name=!: The "domain" by which Cognito will refer to your users.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the identity pool that the tags are assigned to.
-    - name: lookup-developer-identity
-      description: Retrieves the `IdentityID` associated with a `DeveloperUserIdentifier` or the list of `DeveloperUserIdentifier` values associated with an `IdentityId` for an existing identity.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --developer-user-identifier=: A unique ID used by your backend authentication process to identify a user.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-id=: A unique identifier in the format REGION:GUID.
         --identity-pool-id=!: An identity pool ID in the format REGION:GUID.
-        --max-results=: The maximum number of identities to return.
-        --next-token=: A pagination token.
-    - name: create-identity-pool
-      description: Creates a new identity pool.
+        --source-user-identifier=!: User identifier for the source user.
+    - name: delete-identity-pool
+      description: Deletes an identity pool.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-pool-id=!: An identity pool ID in the format REGION:GUID.
+    - name: describe-identity-pool
+      description: Gets details about a particular identity pool, including the pool name, ID description, creation date, and current number of users.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-pool-id=!: An identity pool ID in the format REGION:GUID.
+    - name: get-identity-pool-roles
+      description: Gets the roles for an identity pool.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-pool-id=!: An identity pool ID in the format REGION:GUID.
+    - name: set-identity-pool-roles
+      description: Sets the roles for an identity pool.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-pool-id=!: An identity pool ID in the format REGION:GUID.
+        --role-mappings=: How users for a specific identity provider are to mapped to roles.
+        --roles=!: The map of roles associated with this pool.
+    - name: tag-resource
+      description: Assigns a set of tags to the specified Amazon Cognito identity pool.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the identity pool.
+        --tags=!: The tags to assign to the identity pool.
+    - name: unlink-identity
+      description: Unlinks a federated identity from an existing account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-id=!: A unique identifier in the format REGION:GUID.
+        --logins-to-remove=!: Provider names to unlink from this identity.
+        --logins=!: A set of optional name-value pairs that map provider names to provider tokens.
+    - name: update-identity-pool
+      description: Updates the configuration of an identity pool.
       flags:
         --allow-classic-flow: Enables or disables the Basic (Classic) authentication flow.
         --allow-unauthenticated-identities!: TRUE if the identity pool supports unauthenticated logins.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cognito-identity-providers=: An array of Amazon Cognito user pools and their client IDs.
+        --cognito-identity-providers=: A list representing an Amazon Cognito user pool and its client ID.
         --developer-provider-name=: The "domain" by which Cognito will refer to your users.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-pool-id=!: An identity pool ID in the format REGION:GUID.
         --identity-pool-name=!: A string that you provide.
-        --identity-pool-tags=: Tags to assign to the identity pool.
+        --identity-pool-tags=: The tags that are assigned to the identity pool.
         --no-allow-classic-flow: Enables or disables the Basic (Classic) authentication flow.
         --no-allow-unauthenticated-identities!: TRUE if the identity pool supports unauthenticated logins.
-        --open-id-connect-provider-arns=: The Amazon Resource Names (ARN) of the OpenID Connect providers.
+        --open-id-connect-provider-arns=: The ARNs of the OpenID Connect providers.
         --saml-provider-arns=: An array of Amazon Resource Names (ARNs) of the SAML provider for your identity pool.
         --supported-login-providers=: Optional key:value pairs mapping provider names to provider app IDs.
+    - name: delete-identities
+      description: Deletes identities from an identity pool.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-ids-to-delete=!: A list of 1-60 identities that you want to delete.
+    - name: describe-identity
+      description: Returns metadata related to the given identity, including when the identity was created and any associated linked logins.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-id=!: A unique identifier in the format REGION:GUID.
     - name: get-open-id-token-for-developer-identity
       description: Registers (or retrieves) a Cognito `IdentityId` and an OpenID Connect token for a user authenticated by your backend authentication process.
       flags:
@@ -202,6 +172,28 @@ commands:
         --logins=!: A set of optional name-value pairs that map provider names to provider tokens.
         --principal-tags=: Use this operation to configure attribute mappings for custom providers.
         --token-duration=: The expiration time of the token, in seconds.
+    - name: list-identities
+      description: Lists the identities in an identity pool.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --hide-disabled: An optional boolean parameter that allows you to hide disabled identities.
+        --identity-pool-id=!: An identity pool ID in the format REGION:GUID.
+        --max-results=!: The maximum number of identities to return.
+        --next-token=: A pagination token.
+        --no-hide-disabled: An optional boolean parameter that allows you to hide disabled identities.
+    - name: set-principal-tag-attribute-map
+      description: You can use this operation to use default (username and clientID) attribute or custom attribute mappings.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-pool-id=!: The ID of the Identity Pool you want to set attribute mappings for.
+        --identity-provider-name=!: The provider name you want to use for attribute mappings.
+        --no-use-defaults: You can use this operation to use default (username and clientID) attribute mappings.
+        --principal-tags=: You can use this operation to add principal tags.
+        --use-defaults: You can use this operation to use default (username and clientID) attribute mappings.
     - name: unlink-developer-identity
       description: Unlinks a `DeveloperUserIdentifier` from an existing identity.
       flags:
@@ -212,12 +204,20 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identity-id=!: A unique identifier in the format REGION:GUID.
         --identity-pool-id=!: An identity pool ID in the format REGION:GUID.
-    - name: unlink-identity
-      description: Unlinks a federated identity from an existing account.
+    - name: get-id
+      description: Generates (or retrieves) IdentityID.
+      flags:
+        --account-id=: A standard Amazon Web Services account ID (9+ digits).
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-pool-id=!: An identity pool ID in the format REGION:GUID.
+        --logins=: A set of optional name-value pairs that map provider names to provider tokens.
+    - name: get-open-id-token
+      description: Gets an OpenID token, using a known Cognito ID.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identity-id=!: A unique identifier in the format REGION:GUID.
-        --logins-to-remove=!: Provider names to unlink from this identity.
-        --logins=!: A set of optional name-value pairs that map provider names to provider tokens.
+        --logins=: A set of optional name-value pairs that map provider names to provider tokens.
