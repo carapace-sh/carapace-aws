@@ -1,2 +1,297 @@
 name: rds-data
 description: AWS RDS DataService
+commands:
+    - name: begin-transaction
+      description: Starts a SQL transaction.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --database=: The name of the database.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
+        --schema=: The name of the database schema.
+        --secret-arn=!: The name or ARN of the secret that enables access to the DB cluster.
+      documentation:
+        command: |-
+            Starts a SQL transaction.
+
+            A transaction can run for a maximum of 24 hours. A transaction is terminated and rolled back automatically after 24 hours.
+
+            A transaction times out if no calls use its transaction ID in three minutes. If a transaction times out before it's committed, it's rolled back automatically.
+
+            For Aurora MySQL, DDL statements inside a transaction cause an implicit commit. We recommend that you run each MySQL DDL statement in a separate `ExecuteStatement` call with `continueAfterTimeout` enabled.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            database: The name of the database.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            resource-arn: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
+            schema: The name of the database schema.
+            secret-arn: The name or ARN of the secret that enables access to the DB cluster.
+    - name: commit-transaction
+      description: Ends a SQL transaction started with the `BeginTransaction` operation and commits the changes.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
+        --secret-arn=!: The name or ARN of the secret that enables access to the DB cluster.
+        --transaction-id=!: The identifier of the transaction to end and commit.
+      documentation:
+        command: Ends a SQL transaction started with the `BeginTransaction` operation and commits the changes.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            resource-arn: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
+            secret-arn: The name or ARN of the secret that enables access to the DB cluster.
+            transaction-id: The identifier of the transaction to end and commit.
+    - name: execute-sql
+      description: Runs one or more SQL statements.
+      flags:
+        --aws-secret-store-arn=!: The Amazon Resource Name (ARN) of the secret that enables access to the DB cluster.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --database=: The name of the database.
+        --db-cluster-or-instance-arn=!: The ARN of the Aurora Serverless DB cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --schema=: The name of the database schema.
+        --sql-statements=!: One or more SQL statements to run on the DB cluster.
+      documentation:
+        command: |-
+            Runs one or more SQL statements.
+
+            This operation isn't supported for Aurora Serverless v2 and provisioned DB clusters. For Aurora Serverless v1 DB clusters, the operation is deprecated. Use the `BatchExecuteStatement` or `ExecuteStatement` operation.
+        flag:
+            aws-secret-store-arn: |-
+                The Amazon Resource Name (ARN) of the secret that enables access to the DB cluster. Enter the database user name and password for the credentials in the secret.
+
+                For information about creating the secret, see [Create a database secret](https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html).
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            database: The name of the database.
+            db-cluster-or-instance-arn: The ARN of the Aurora Serverless DB cluster.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            schema: The name of the database schema.
+            sql-statements: |-
+                One or more SQL statements to run on the DB cluster.
+
+                You can separate SQL statements from each other with a semicolon (;). Any valid SQL statement is permitted, including data definition, data manipulation, and commit statements.
+    - name: execute-statement
+      description: Runs a SQL statement against a database.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --continue-after-timeout: A value that indicates whether to continue running the statement after the call times out.
+        --database=: The name of the database.
+        --format-records-as=: A value that indicates whether to format the result set as a single JSON string.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-result-metadata: A value that indicates whether to include metadata in the results.
+        --no-continue-after-timeout: A value that indicates whether to continue running the statement after the call times out.
+        --no-include-result-metadata: A value that indicates whether to include metadata in the results.
+        --parameters=: The parameters for the SQL statement.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
+        --result-set-options=: Options that control how the result set is returned.
+        --schema=: The name of the database schema.
+        --secret-arn=!: The ARN of the secret that enables access to the DB cluster.
+        --sql=!: The SQL statement to run.
+        --transaction-id=: The identifier of a transaction that was started by using the `BeginTransaction` operation.
+      completion:
+        flag:
+            format-records-as:
+                - NONE
+                - JSON
+      documentation:
+        command: |-
+            Runs a SQL statement against a database.
+
+            If a call isn't part of a transaction because it doesn't include the `transactionID` parameter, changes that result from the call are committed automatically.
+
+            If the binary response data from the database is more than 1 MB, the call is terminated.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            continue-after-timeout: |-
+                A value that indicates whether to continue running the statement after the call times out. By default, the statement stops running when the call times out.
+
+                For DDL statements, we recommend continuing to run the statement after the call times out. When a DDL statement terminates before it is finished running, it can result in errors and possibly corrupted data structures.
+            database: The name of the database.
+            format-records-as: |-
+                A value that indicates whether to format the result set as a single JSON string. This parameter only applies to `SELECT` statements and is ignored for other types of statements. Allowed values are `NONE` and `JSON`. The default value is `NONE`. The result is returned in the `formattedRecords` field.
+
+                For usage information about the JSON format for result sets, see [Using the Data API](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html) in the *Amazon Aurora User Guide*.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            include-result-metadata: A value that indicates whether to include metadata in the results.
+            parameters: |-
+                The parameters for the SQL statement.
+
+                Array parameters are not supported.
+            resource-arn: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
+            result-set-options: Options that control how the result set is returned.
+            schema: |-
+                The name of the database schema.
+
+                Currently, the `schema` parameter isn't supported.
+            secret-arn: |-
+                The ARN of the secret that enables access to the DB cluster. Enter the database user name and password for the credentials in the secret.
+
+                For information about creating the secret, see [Create a database secret](https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html).
+            sql: The SQL statement to run.
+            transaction-id: |-
+                The identifier of a transaction that was started by using the `BeginTransaction` operation. Specify the transaction ID of the transaction that you want to include the SQL statement in.
+
+                If the SQL statement is not part of a transaction, don't set this parameter.
+    - name: rollback-transaction
+      description: Performs a rollback of a transaction.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
+        --secret-arn=!: The name or ARN of the secret that enables access to the DB cluster.
+        --transaction-id=!: The identifier of the transaction to roll back.
+      documentation:
+        command: Performs a rollback of a transaction. Rolling back a transaction cancels its changes.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            resource-arn: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
+            secret-arn: The name or ARN of the secret that enables access to the DB cluster.
+            transaction-id: The identifier of the transaction to roll back.
+    - name: batch-execute-statement
+      description: Runs a batch SQL statement over an array of data.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --database=: The name of the database.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --parameter-sets=: The parameter set for the batch operation.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
+        --schema=: The name of the database schema.
+        --secret-arn=!: The ARN of the secret that enables access to the DB cluster.
+        --sql=!: The SQL statement to run.
+        --transaction-id=: The identifier of a transaction that was started by using the `BeginTransaction` operation.
+      documentation:
+        command: |-
+            Runs a batch SQL statement over an array of data.
+
+            You can run bulk update and insert operations for multiple records using a DML statement with different parameter sets. Bulk operations can provide a significant performance improvement over individual insert and update operations.
+
+            If a call isn't part of a transaction because it doesn't include the `transactionID` parameter, changes that result from the call are committed automatically.
+
+            There isn't a fixed upper limit on the number of parameter sets. However, the maximum size of the HTTP request submitted through the Data API is 4 MiB. If the request exceeds this limit, the Data API returns an error and doesn't process the request. This 4-MiB limit includes the size of the HTTP headers and the JSON notation in the request. Thus, the number of parameter sets that you can include depends on a combination of factors, such as the size of the SQL statement and the size of each parameter set.
+
+            The response size limit is 1 MiB. If the call returns more than 1 MiB of response data, the call is terminated.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            database: The name of the database.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            parameter-sets: |-
+                The parameter set for the batch operation.
+
+                The SQL statement is executed as many times as the number of parameter sets provided. To execute a SQL statement with no parameters, use one of the following options:
+
+                - Specify one or more empty parameter sets.
+                - Use the `ExecuteStatement` operation instead of the `BatchExecuteStatement` operation.
+
+                Array parameters are not supported.
+            resource-arn: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
+            schema: |-
+                The name of the database schema.
+
+                Currently, the `schema` parameter isn't supported.
+            secret-arn: |-
+                The ARN of the secret that enables access to the DB cluster. Enter the database user name and password for the credentials in the secret.
+
+                For information about creating the secret, see [Create a database secret](https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html).
+            sql: The SQL statement to run. Don't include a semicolon (;) at the end of the SQL statement.
+            transaction-id: |-
+                The identifier of a transaction that was started by using the `BeginTransaction` operation. Specify the transaction ID of the transaction that you want to include the SQL statement in.
+
+                If the SQL statement is not part of a transaction, don't set this parameter.
+documentation:
+    command: |-
+        RDS Data API
+
+        Amazon RDS provides an HTTP endpoint to run SQL statements on an Amazon Aurora DB cluster. To run these statements, you use the RDS Data API (Data API).
+
+        Data API is available with the following types of Aurora databases:
+
+        - Aurora PostgreSQL - Serverless v2, provisioned, and Serverless v1
+        - Aurora MySQL - Serverless v2, provisioned, and Serverless v1
+
+        For more information about the Data API, see [Using RDS Data API](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html) in the *Amazon Aurora User Guide*.

@@ -1,2 +1,1077 @@
 name: application-signals
 description: Amazon CloudWatch Application Signals
+commands:
+    - name: batch-update-exclusion-windows
+      description: Add or remove time window exclusions for one or more Service Level Objectives (SLOs).
+      flags:
+        --add-exclusion-windows=: A list of exclusion windows to add to the specified SLOs.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --remove-exclusion-windows=: A list of exclusion windows to remove from the specified SLOs.
+        --slo-ids=!: The list of SLO IDs to add or remove exclusion windows from.
+      documentation:
+        command: Add or remove time window exclusions for one or more Service Level Objectives (SLOs).
+        flag:
+            add-exclusion-windows: A list of exclusion windows to add to the specified SLOs. You can add up to 10 exclusion windows per SLO.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            remove-exclusion-windows: A list of exclusion windows to remove from the specified SLOs. The window configuration must match an existing exclusion window.
+            slo-ids: The list of SLO IDs to add or remove exclusion windows from.
+    - name: delete-grouping-configuration
+      description: Deletes the grouping configuration for this account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      documentation:
+        command: Deletes the grouping configuration for this account. This removes all custom grouping attribute definitions that were previously configured.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+    - name: get-service
+      description: Returns information about a service discovered by Application Signals.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=!: The end of the time period to retrieve information about.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-attributes=!: Use this field to specify which service you want to retrieve information for.
+        --start-time=!: The start of the time period to retrieve information about.
+      documentation:
+        command: Returns information about a service discovered by Application Signals.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            end-time: |-
+                The end of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: `1698778057`
+
+                Your requested start time will be rounded to the nearest hour.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            key-attributes: |-
+                Use this field to specify which service you want to retrieve information for. You must specify at least the `Type`, `Name`, and `Environment` attributes.
+
+                This is a string-to-string map. It can include the following fields.
+
+                - `Type` designates the type of object this is.
+                - `ResourceType` specifies the type of the resource. This field is used only when the value of the `Type` field is `Resource` or `AWS::Resource`.
+                - `Name` specifies the name of the object. This is used only if the value of the `Type` field is `Service`, `RemoteService`, or `AWS::Service`.
+                - `Identifier` identifies the resource objects of this resource. This is used only if the value of the `Type` field is `Resource` or `AWS::Resource`.
+                - `Environment` specifies the location where this object is hosted, or what it belongs to.
+            start-time: |-
+                The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: `1698778057`
+
+                Your requested start time will be rounded to the nearest hour.
+    - name: list-service-dependencies
+      description: Returns a list of service dependencies of the service that you specify.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=!: The end of the time period to retrieve information about.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-attributes=!: Use this field to specify which service you want to retrieve information for.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in one operation.
+        --next-token=: Include this value, if it was returned by the previous operation, to get the next set of service dependencies.
+        --page-size=: The size of each page to get in the AWS service call.
+        --start-time=!: The start of the time period to retrieve information about.
+        --starting-token=: A token to specify where to start paginating.
+      documentation:
+        command: Returns a list of service dependencies of the service that you specify. A dependency is an infrastructure component that an operation of this service connects with. Dependencies can include Amazon Web Services services, Amazon Web Services resources, and third-party services.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            end-time: |-
+                The end of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: `1698778057`
+
+                Your requested end time will be rounded to the nearest hour.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            key-attributes: |-
+                Use this field to specify which service you want to retrieve information for. You must specify at least the `Type`, `Name`, and `Environment` attributes.
+
+                This is a string-to-string map. It can include the following fields.
+
+                - `Type` designates the type of object this is.
+                - `ResourceType` specifies the type of the resource. This field is used only when the value of the `Type` field is `Resource` or `AWS::Resource`.
+                - `Name` specifies the name of the object. This is used only if the value of the `Type` field is `Service`, `RemoteService`, or `AWS::Service`.
+                - `Identifier` identifies the resource objects of this resource. This is used only if the value of the `Type` field is `Resource` or `AWS::Resource`.
+                - `Environment` specifies the location where this object is hosted, or what it belongs to.
+            max-items: |-
+                The total number of items to return in the command's output.
+                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+                Do not use the NextToken response element directly outside of the AWS CLI.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            max-results: The maximum number of results to return in one operation. If you omit this parameter, the default of 50 is used.
+            next-token: Include this value, if it was returned by the previous operation, to get the next set of service dependencies.
+            page-size: |-
+                The size of each page to get in the AWS service call.
+                This does not affect the number of items returned in the command's output.
+                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+                This can help prevent the AWS service calls from timing out.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            start-time: |-
+                The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: `1698778057`
+
+                Your requested start time will be rounded to the nearest hour.
+            starting-token: |-
+                A token to specify where to start paginating.
+                This is the NextToken from a previously truncated response.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+    - name: list-service-states
+      description: Returns information about the last deployment and other change states of services.
+      flags:
+        --attribute-filters=: A list of attribute filters to narrow down the services.
+        --aws-account-id=: The Amazon Web Services account ID to filter service states by.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=!: The end of the time period to retrieve service state information for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-linked-accounts: If you are using this operation in a monitoring account, specify `true` to include service states from source accounts in the returned data.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of service states to return in one operation.
+        --next-token=: Include this value, if it was returned by the previous operation, to get the next set of service states.
+        --no-include-linked-accounts: If you are using this operation in a monitoring account, specify `true` to include service states from source accounts in the returned data.
+        --page-size=: The size of each page to get in the AWS service call.
+        --start-time=!: The start of the time period to retrieve service state information for.
+        --starting-token=: A token to specify where to start paginating.
+      documentation:
+        command: Returns information about the last deployment and other change states of services. This API provides visibility into recent changes that may have affected service performance, helping with troubleshooting and change correlation.
+        flag:
+            attribute-filters: A list of attribute filters to narrow down the services. You can filter by platform, environment, or other service attributes.
+            aws-account-id: The Amazon Web Services account ID to filter service states by. Use this to limit results to services from a specific account.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            end-time: The end of the time period to retrieve service state information for. When used in a raw HTTP Query API, it is formatted as epoch time in seconds. For example, `1698778057`.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            include-linked-accounts: If you are using this operation in a monitoring account, specify `true` to include service states from source accounts in the returned data.
+            max-items: |-
+                The total number of items to return in the command's output.
+                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+                Do not use the NextToken response element directly outside of the AWS CLI.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            max-results: The maximum number of service states to return in one operation. If you omit this parameter, the default of 20 is used.
+            next-token: Include this value, if it was returned by the previous operation, to get the next set of service states.
+            page-size: |-
+                The size of each page to get in the AWS service call.
+                This does not affect the number of items returned in the command's output.
+                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+                This can help prevent the AWS service calls from timing out.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            start-time: The start of the time period to retrieve service state information for. When used in a raw HTTP Query API, it is formatted as epoch time in seconds. For example, `1698778057`.
+            starting-token: |-
+                A token to specify where to start paginating.
+                This is the NextToken from a previously truncated response.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+    - name: list-tags-for-resource
+      description: Displays the tags associated with a CloudWatch resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the CloudWatch resource that you want to view tags for.
+      documentation:
+        command: Displays the tags associated with a CloudWatch resource. Tags can be assigned to service level objectives.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            resource-arn: |-
+                The Amazon Resource Name (ARN) of the CloudWatch resource that you want to view tags for.
+
+                The ARN format of an Application Signals SLO is `arn:aws:cloudwatch:Region:account-id:slo:slo-name`
+
+                For more information about ARN format, see [Resource Types Defined by Amazon CloudWatch](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies) in the *Amazon Web Services General Reference*.
+    - name: tag-resource
+      description: Assigns one or more tags (key-value pairs) to the specified CloudWatch resource, such as a service level objective.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the CloudWatch resource that you want to set tags for.
+        --tags=!: The list of key-value pairs to associate with the alarm.
+      documentation:
+        command: |-
+            Assigns one or more tags (key-value pairs) to the specified CloudWatch resource, such as a service level objective.
+
+            Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values.
+
+            Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.
+
+            You can use the `TagResource` action with an alarm that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag.
+
+            You can associate as many as 50 tags with a CloudWatch resource.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            resource-arn: |-
+                The Amazon Resource Name (ARN) of the CloudWatch resource that you want to set tags for.
+
+                The ARN format of an Application Signals SLO is `arn:aws:cloudwatch:Region:account-id:slo:slo-name`
+
+                For more information about ARN format, see [Resource Types Defined by Amazon CloudWatch](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies) in the *Amazon Web Services General Reference*.
+            tags: The list of key-value pairs to associate with the alarm.
+    - name: create-service-level-objective
+      description: Creates a service level objective (SLO), which can help you ensure that your critical business operations are meeting customer expectations.
+      flags:
+        --burn-rate-configurations=: Use this array to create *burn rates* for this SLO.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: An optional description for this SLO.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --goal=: This structure contains the attributes that determine the goal of the SLO.
+        --name=!: A name for this SLO.
+        --request-based-sli-config=: If this SLO is a request-based SLO, this structure defines the information about what performance metric this SLO will monitor.
+        --sli-config=: If this SLO is a period-based SLO, this structure defines the information about what performance metric this SLO will monitor.
+        --tags=: A list of key-value pairs to associate with the SLO.
+      documentation:
+        command: "Creates a service level objective (SLO), which can help you ensure that your critical business operations are meeting customer expectations. Use SLOs to set and track specific target levels for the reliability and availability of your applications and services. SLOs use service level indicators (SLIs) to calculate whether the application is performing at the level that you want.\n\nCreate an SLO to set a target for a service or operation’s availability or latency. CloudWatch measures this target frequently you can find whether it has been breached.\n\nThe target performance quality that is defined for an SLO is the *attainment goal*.\n\nYou can set SLO targets for your applications that are discovered by Application Signals, using critical metrics such as latency and availability. You can also set SLOs against any CloudWatch metric or math expression that produces a time series.\n\nYou can't create an SLO for a service operation that was discovered by Application Signals until after that operation has reported standard metrics to Application Signals.\n\nWhen you create an SLO, you specify whether it is a *period-based SLO* or a *request-based SLO*. Each type of SLO has a different way of evaluating your application's performance against its attainment goal.\n\n- A *period-based SLO* uses defined *periods* of time within a specified total time interval. For each period of time, Application Signals determines whether the application met its goal. The attainment rate is calculated as the `number of good periods/number of total periods`.\n  \n  For example, for a period-based SLO, meeting an attainment goal of 99.9% means that within your interval, your application must meet its performance goal during at least 99.9% of the time periods.\n- A *request-based SLO* doesn't use pre-defined periods of time. Instead, the SLO measures `number of good requests/number of total requests` during the interval. At any time, you can find the ratio of good requests to total requests for the interval up to the time stamp that you specify, and measure that ratio against the goal set in your SLO.\n\nAfter you have created an SLO, you can retrieve error budget reports for it. An *error budget* is the amount of time or amount of requests that your application can be non-compliant with the SLO's goal, and still have your application meet the goal.\n\n- For a period-based SLO, the error budget starts at a number defined by the highest number of periods that can fail to meet the threshold, while still meeting the overall goal. The *remaining error budget* decreases with every failed period that is recorded. The error budget within one interval can never increase.\n  \n  For example, an SLO with a threshold that 99.95% of requests must be completed under 2000ms every month translates to an error budget of 21.9 minutes of downtime per month.\n- For a request-based SLO, the remaining error budget is dynamic and can increase or decrease, depending on the ratio of good requests to total requests.\n\nFor more information about SLOs, see [Service level objectives (SLOs)](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-ServiceLevelObjectives.html).\n\nWhen you perform a `CreateServiceLevelObjective` operation, Application Signals creates the *AWSServiceRoleForCloudWatchApplicationSignals* service-linked role, if it doesn't already exist in your account. This service- linked role has the following permissions:\n\n- `xray:GetServiceGraph`\n- `logs:StartQuery`\n- `logs:GetQueryResults`\n- `cloudwatch:GetMetricData`\n- `cloudwatch:ListMetrics`\n- `tag:GetResources`\n- `autoscaling:DescribeAutoScalingGroups`"
+        flag:
+            burn-rate-configurations: Use this array to create *burn rates* for this SLO. Each burn rate is a metric that indicates how fast the service is consuming the error budget, relative to the attainment goal of the SLO.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            description: An optional description for this SLO.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            goal: This structure contains the attributes that determine the goal of the SLO.
+            name: A name for this SLO.
+            request-based-sli-config: |-
+                If this SLO is a request-based SLO, this structure defines the information about what performance metric this SLO will monitor.
+
+                You can't specify both `RequestBasedSliConfig` and `SliConfig` in the same operation.
+            sli-config: |-
+                If this SLO is a period-based SLO, this structure defines the information about what performance metric this SLO will monitor.
+
+                You can't specify both `RequestBasedSliConfig` and `SliConfig` in the same operation.
+            tags: |-
+                A list of key-value pairs to associate with the SLO. You can associate as many as 50 tags with an SLO. To be able to associate tags with the SLO when you create the SLO, you must have the `cloudwatch:TagResource` permission.
+
+                Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values.
+    - name: get-service-level-objective
+      description: Returns information about one SLO created in the account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ARN or name of the SLO that you want to retrieve information about.
+      documentation:
+        command: Returns information about one SLO created in the account.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            id: The ARN or name of the SLO that you want to retrieve information about. You can find the ARNs of SLOs by using the [ListServiceLevelObjectives](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListServiceLevelObjectives.html) operation.
+    - name: list-audit-findings
+      description: Returns a list of audit findings that provide automated analysis of service behavior and root cause analysis.
+      flags:
+        --audit-targets=!: A list of audit targets to filter the findings by.
+        --auditors=: A list of auditor names to filter the findings by.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detail-level=: The level of details of the audit findings.
+        --end-time=!: The end of the time period to retrieve audit findings for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of audit findings to return in one operation.
+        --next-token=: Include this value, if it was returned by the previous operation, to get the next set of audit findings.
+        --start-time=!: The start of the time period to retrieve audit findings for.
+      completion:
+        flag:
+            detail-level:
+                - BRIEF
+                - DETAILED
+      documentation:
+        command: Returns a list of audit findings that provide automated analysis of service behavior and root cause analysis. These findings help identify the most significant observations about your services, including performance issues, anomalies, and potential problems. The findings are generated using heuristic algorithms based on established troubleshooting patterns.
+        flag:
+            audit-targets: A list of audit targets to filter the findings by. You can specify services, SLOs, or service operations to limit the audit findings to specific entities.
+            auditors: "A list of auditor names to filter the findings by. Only findings generated by the specified auditors will be returned.\n\nThe following auditors are available for configuration:\n\n- `slo` - SloAuditor: Identifies SLO violations and detects breached thresholds during the Assessment phase.\n- `operation_metric` - OperationMetricAuditor: Detects anomalies in service operation metrics from Application Signals RED metrics during the Assessment phase\n  \n  Anomaly detection is not supported for sparse metrics (those missing more than 80% of datapoints within the given time period).\n- `service_quota` - ServiceQuotaAuditor: Monitors resource utilization against service quotas during the Assessment phase\n- `trace` - TraceAuditor: Performs deep-dive analysis of distributed traces, correlating traces with breached SLOs or abnormal RED metrics during the Analysis phase\n- `dependency_metric` - CriticalPathAuditor: Analyzes service dependency impacts and maps dependency relationships from Application Signals RED metrics during the Analysis phase\n- `top_contributor` - TopContributorAuditor: Identifies infrastructure-level contributors to issues by analyzing EMF logs of Application Signals RED metrics during the Analysis phase\n- `log` - LogAuditor: Extracts insights from application logs, categorizing error types and ranking severity by frequency during the Analysis phase\n\n`InitAuditor` and `Summarizer` auditors are not configurable as they are automatically triggered during the audit process."
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            detail-level: 'The level of details of the audit findings. Supported values: `BRIEF`, `DETAILED`.'
+            end-time: The end of the time period to retrieve audit findings for. When used in a raw HTTP Query API, it is formatted as epoch time in seconds. For example, `1698778057`
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            max-results: The maximum number of audit findings to return in one operation. If you omit this parameter, the default of 10 is used.
+            next-token: Include this value, if it was returned by the previous operation, to get the next set of audit findings.
+            start-time: The start of the time period to retrieve audit findings for. When used in a raw HTTP Query API, it is formatted as epoch time in seconds. For example, `1698778057`
+    - name: list-entity-events
+      description: Returns a list of change events for a specific entity, such as deployments, configuration changes, or other state-changing activities.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=!: The end of the time period to retrieve change events for.
+        --entity=!: The entity for which to retrieve change events.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of change events to return in one operation.
+        --next-token=: Include this value, if it was returned by the previous operation, to get the next set of change events.
+        --page-size=: The size of each page to get in the AWS service call.
+        --start-time=!: The start of the time period to retrieve change events for.
+        --starting-token=: A token to specify where to start paginating.
+      documentation:
+        command: Returns a list of change events for a specific entity, such as deployments, configuration changes, or other state-changing activities. This operation helps track the history of changes that may have affected service performance.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            end-time: 'The end of the time period to retrieve change events for. When used in a raw HTTP Query API, it is formatted as epoch time in seconds. For example: `1698778057`'
+            entity: |-
+                The entity for which to retrieve change events. This specifies the service, resource, or other entity whose event history you want to examine.
+
+                This is a string-to-string map. It can include the following fields.
+
+                - `Type` designates the type of object this is.
+                - `ResourceType` specifies the type of the resource. This field is used only when the value of the `Type` field is `Resource` or `AWS::Resource`.
+                - `Name` specifies the name of the object. This is used only if the value of the `Type` field is `Service`, `RemoteService`, or `AWS::Service`.
+                - `Identifier` identifies the resource objects of this resource. This is used only if the value of the `Type` field is `Resource` or `AWS::Resource`.
+                - `Environment` specifies the location where this object is hosted, or what it belongs to.
+                - `AwsAccountId` specifies the account where this object is in.
+
+                Below is an example of a service.
+
+                `{ "Type": "Service", "Name": "visits-service", "Environment": "petclinic-test" }`
+
+                Below is an example of a resource.
+
+                `{ "Type": "AWS::Resource", "ResourceType": "AWS::DynamoDB::Table", "Identifier": "Customers" }`
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            max-items: |-
+                The total number of items to return in the command's output.
+                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+                Do not use the NextToken response element directly outside of the AWS CLI.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            max-results: The maximum number of change events to return in one operation. If you omit this parameter, the default of 50 is used.
+            next-token: Include this value, if it was returned by the previous operation, to get the next set of change events.
+            page-size: |-
+                The size of each page to get in the AWS service call.
+                This does not affect the number of items returned in the command's output.
+                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+                This can help prevent the AWS service calls from timing out.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            start-time: 'The start of the time period to retrieve change events for. When used in a raw HTTP Query API, it is formatted as epoch time in seconds. For example: `1698778057`'
+            starting-token: |-
+                A token to specify where to start paginating.
+                This is the NextToken from a previously truncated response.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+    - name: list-grouping-attribute-definitions
+      description: Returns the current grouping configuration for this account, including all custom grouping attribute definitions that have been configured.
+      flags:
+        --aws-account-id=: The Amazon Web Services account ID to retrieve grouping attribute definitions for.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-linked-accounts: If you are using this operation in a monitoring account, specify `true` to include grouping attributes from source accounts in the returned data.
+        --next-token=: Include this value, if it was returned by the previous operation, to get the next set of grouping attribute definitions.
+        --no-include-linked-accounts: If you are using this operation in a monitoring account, specify `true` to include grouping attributes from source accounts in the returned data.
+      documentation:
+        command: Returns the current grouping configuration for this account, including all custom grouping attribute definitions that have been configured. These definitions determine how services are logically grouped based on telemetry attributes, Amazon Web Services tags, or predefined mappings.
+        flag:
+            aws-account-id: The Amazon Web Services account ID to retrieve grouping attribute definitions for. Use this when accessing grouping configurations from a different account in cross-account monitoring scenarios.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            include-linked-accounts: If you are using this operation in a monitoring account, specify `true` to include grouping attributes from source accounts in the returned data.
+            next-token: Include this value, if it was returned by the previous operation, to get the next set of grouping attribute definitions.
+    - name: list-service-operations
+      description: Returns a list of the *operations* of this service that have been discovered by Application Signals.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=!: The end of the time period to retrieve information about.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-attributes=!: Use this field to specify which service you want to retrieve information for.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in one operation.
+        --next-token=: Include this value, if it was returned by the previous operation, to get the next set of service operations.
+        --page-size=: The size of each page to get in the AWS service call.
+        --start-time=!: The start of the time period to retrieve information about.
+        --starting-token=: A token to specify where to start paginating.
+      documentation:
+        command: Returns a list of the *operations* of this service that have been discovered by Application Signals. Only the operations that were invoked during the specified time range are returned.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            end-time: |-
+                The end of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: `1698778057`
+
+                Your requested end time will be rounded to the nearest hour.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            key-attributes: |-
+                Use this field to specify which service you want to retrieve information for. You must specify at least the `Type`, `Name`, and `Environment` attributes.
+
+                This is a string-to-string map. It can include the following fields.
+
+                - `Type` designates the type of object this is.
+                - `ResourceType` specifies the type of the resource. This field is used only when the value of the `Type` field is `Resource` or `AWS::Resource`.
+                - `Name` specifies the name of the object. This is used only if the value of the `Type` field is `Service`, `RemoteService`, or `AWS::Service`.
+                - `Identifier` identifies the resource objects of this resource. This is used only if the value of the `Type` field is `Resource` or `AWS::Resource`.
+                - `Environment` specifies the location where this object is hosted, or what it belongs to.
+            max-items: |-
+                The total number of items to return in the command's output.
+                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+                Do not use the NextToken response element directly outside of the AWS CLI.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            max-results: The maximum number of results to return in one operation. If you omit this parameter, the default of 50 is used.
+            next-token: Include this value, if it was returned by the previous operation, to get the next set of service operations.
+            page-size: |-
+                The size of each page to get in the AWS service call.
+                This does not affect the number of items returned in the command's output.
+                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+                This can help prevent the AWS service calls from timing out.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            start-time: |-
+                The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: `1698778057`
+
+                Your requested start time will be rounded to the nearest hour.
+            starting-token: |-
+                A token to specify where to start paginating.
+                This is the NextToken from a previously truncated response.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+    - name: put-grouping-configuration
+      description: Creates or updates the grouping configuration for this account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --grouping-attribute-definitions=!: An array of grouping attribute definitions that specify how services should be grouped.
+      documentation:
+        command: Creates or updates the grouping configuration for this account. This operation allows you to define custom grouping attributes that determine how services are logically grouped based on telemetry attributes, Amazon Web Services tags, or predefined mappings. These grouping attributes can then be used to organize and filter services in the Application Signals console and APIs.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            grouping-attribute-definitions: An array of grouping attribute definitions that specify how services should be grouped. Each definition includes a friendly name, source keys to derive the grouping value from, and an optional default value.
+    - name: update-service-level-objective
+      description: Updates an existing service level objective (SLO).
+      flags:
+        --burn-rate-configurations=: Use this array to create *burn rates* for this SLO.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: An optional description for the SLO.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --goal=: A structure that contains the attributes that determine the goal of the SLO.
+        --id=!: The Amazon Resource Name (ARN) or name of the service level objective that you want to update.
+        --request-based-sli-config=: If this SLO is a request-based SLO, this structure defines the information about what performance metric this SLO will monitor.
+        --sli-config=: If this SLO is a period-based SLO, this structure defines the information about what performance metric this SLO will monitor.
+      documentation:
+        command: |-
+            Updates an existing service level objective (SLO). If you omit parameters, the previous values of those parameters are retained.
+
+            You cannot change from a period-based SLO to a request-based SLO, or change from a request-based SLO to a period-based SLO.
+        flag:
+            burn-rate-configurations: Use this array to create *burn rates* for this SLO. Each burn rate is a metric that indicates how fast the service is consuming the error budget, relative to the attainment goal of the SLO.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            description: An optional description for the SLO.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            goal: A structure that contains the attributes that determine the goal of the SLO. This includes the time period for evaluation and the attainment threshold.
+            id: The Amazon Resource Name (ARN) or name of the service level objective that you want to update.
+            request-based-sli-config: |-
+                If this SLO is a request-based SLO, this structure defines the information about what performance metric this SLO will monitor.
+
+                You can't specify both `SliConfig` and `RequestBasedSliConfig` in the same operation.
+            sli-config: If this SLO is a period-based SLO, this structure defines the information about what performance metric this SLO will monitor.
+    - name: delete-service-level-objective
+      description: Deletes the specified service level objective.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ARN or name of the service level objective to delete.
+      documentation:
+        command: Deletes the specified service level objective.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            id: The ARN or name of the service level objective to delete.
+    - name: list-service-dependents
+      description: Returns the list of dependents that invoked the specified service during the provided time range.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=!: The end of the time period to retrieve information about.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-attributes=!: Use this field to specify which service you want to retrieve information for.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in one operation.
+        --next-token=: Include this value, if it was returned by the previous operation, to get the next set of service dependents.
+        --page-size=: The size of each page to get in the AWS service call.
+        --start-time=!: The start of the time period to retrieve information about.
+        --starting-token=: A token to specify where to start paginating.
+      documentation:
+        command: Returns the list of dependents that invoked the specified service during the provided time range. Dependents include other services, CloudWatch Synthetics canaries, and clients that are instrumented with CloudWatch RUM app monitors.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            end-time: |-
+                The end of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: `1698778057`
+
+                Your requested start time will be rounded to the nearest hour.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            key-attributes: |-
+                Use this field to specify which service you want to retrieve information for. You must specify at least the `Type`, `Name`, and `Environment` attributes.
+
+                This is a string-to-string map. It can include the following fields.
+
+                - `Type` designates the type of object this is.
+                - `ResourceType` specifies the type of the resource. This field is used only when the value of the `Type` field is `Resource` or `AWS::Resource`.
+                - `Name` specifies the name of the object. This is used only if the value of the `Type` field is `Service`, `RemoteService`, or `AWS::Service`.
+                - `Identifier` identifies the resource objects of this resource. This is used only if the value of the `Type` field is `Resource` or `AWS::Resource`.
+                - `Environment` specifies the location where this object is hosted, or what it belongs to.
+            max-items: |-
+                The total number of items to return in the command's output.
+                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+                Do not use the NextToken response element directly outside of the AWS CLI.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            max-results: The maximum number of results to return in one operation. If you omit this parameter, the default of 50 is used.
+            next-token: Include this value, if it was returned by the previous operation, to get the next set of service dependents.
+            page-size: |-
+                The size of each page to get in the AWS service call.
+                This does not affect the number of items returned in the command's output.
+                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+                This can help prevent the AWS service calls from timing out.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            start-time: |-
+                The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: `1698778057`
+
+                Your requested start time will be rounded to the nearest hour.
+            starting-token: |-
+                A token to specify where to start paginating.
+                This is the NextToken from a previously truncated response.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+    - name: list-service-level-objective-exclusion-windows
+      description: Retrieves all exclusion windows configured for a specific SLO.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the SLO to list exclusion windows for.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in one operation.
+        --next-token=: Include this value, if it was returned by the previous operation, to get the next set of service level objectives.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      documentation:
+        command: Retrieves all exclusion windows configured for a specific SLO.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            id: The ID of the SLO to list exclusion windows for.
+            max-items: |-
+                The total number of items to return in the command's output.
+                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+                Do not use the NextToken response element directly outside of the AWS CLI.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            max-results: The maximum number of results to return in one operation. If you omit this parameter, the default of 50 is used.
+            next-token: Include this value, if it was returned by the previous operation, to get the next set of service level objectives.
+            page-size: |-
+                The size of each page to get in the AWS service call.
+                This does not affect the number of items returned in the command's output.
+                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+                This can help prevent the AWS service calls from timing out.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            starting-token: |-
+                A token to specify where to start paginating.
+                This is the NextToken from a previously truncated response.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+    - name: start-discovery
+      description: Enables this Amazon Web Services account to be able to use CloudWatch Application Signals by creating the *AWSServiceRoleForCloudWatchApplicationSignals* service-linked role.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      documentation:
+        command: |-
+            Enables this Amazon Web Services account to be able to use CloudWatch Application Signals by creating the *AWSServiceRoleForCloudWatchApplicationSignals* service-linked role. This service- linked role has the following permissions:
+
+            - `xray:GetServiceGraph`
+            - `logs:StartQuery`
+            - `logs:GetQueryResults`
+            - `cloudwatch:GetMetricData`
+            - `cloudwatch:ListMetrics`
+            - `tag:GetResources`
+            - `autoscaling:DescribeAutoScalingGroups`
+
+            A service-linked CloudTrail event channel is created to process CloudTrail events and return change event information. This includes last deployment time, userName, eventName, and other event metadata.
+
+            After completing this step, you still need to instrument your Java and Python applications to send data to Application Signals. For more information, see [Enabling Application Signals](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Application-Signals-Enable.html).
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+    - name: batch-get-service-level-objective-budget-report
+      description: Use this operation to retrieve one or more *service level objective (SLO) budget reports*.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --slo-ids=!: An array containing the IDs of the service level objectives that you want to include in the report.
+        --timestamp=!: The date and time that you want the report to be for.
+      documentation:
+        command: |-
+            Use this operation to retrieve one or more *service level objective (SLO) budget reports*.
+
+            An *error budget* is the amount of time or requests in an unhealthy state that your service can accumulate during an interval before your overall SLO budget health is breached and the SLO is considered to be unmet. For example, an SLO with a threshold of 99.95% and a monthly interval translates to an error budget of 21.9 minutes of downtime in a 30-day month.
+
+            Budget reports include a health indicator, the attainment value, and remaining budget.
+
+            For more information about SLO error budgets, see [SLO concepts](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-ServiceLevelObjectives.html#CloudWatch-ServiceLevelObjectives-concepts).
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            slo-ids: An array containing the IDs of the service level objectives that you want to include in the report.
+            timestamp: The date and time that you want the report to be for. It is expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
+    - name: list-service-level-objectives
+      description: Returns a list of SLOs created in this account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dependency-config=: Identifies the dependency using the `DependencyKeyAttributes` and `DependencyOperationName`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-linked-accounts: If you are using this operation in a monitoring account, specify `true` to include SLO from source accounts in the returned data.
+        --key-attributes=: You can use this optional field to specify which services you want to retrieve SLO information for.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in one operation.
+        --metric-source-types=: Use this optional field to only include SLOs with the specified metric source types in the output.
+        --next-token=: Include this value, if it was returned by the previous operation, to get the next set of service level objectives.
+        --no-include-linked-accounts: If you are using this operation in a monitoring account, specify `true` to include SLO from source accounts in the returned data.
+        --operation-name=: The name of the operation that this SLO is associated with.
+        --page-size=: The size of each page to get in the AWS service call.
+        --slo-owner-aws-account-id=: SLO's Amazon Web Services account ID.
+        --starting-token=: A token to specify where to start paginating.
+      documentation:
+        command: Returns a list of SLOs created in this account.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            dependency-config: Identifies the dependency using the `DependencyKeyAttributes` and `DependencyOperationName`.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            include-linked-accounts: |-
+                If you are using this operation in a monitoring account, specify `true` to include SLO from source accounts in the returned data.
+
+                When you are monitoring an account, you can use Amazon Web Services account ID in `KeyAttribute` filter for service source account and `SloOwnerawsaccountID` for SLO source account with `IncludeLinkedAccounts` to filter the returned data to only a single source account.
+            key-attributes: |-
+                You can use this optional field to specify which services you want to retrieve SLO information for.
+
+                This is a string-to-string map. It can include the following fields.
+
+                - `Type` designates the type of object this is.
+                - `ResourceType` specifies the type of the resource. This field is used only when the value of the `Type` field is `Resource` or `AWS::Resource`.
+                - `Name` specifies the name of the object. This is used only if the value of the `Type` field is `Service`, `RemoteService`, or `AWS::Service`.
+                - `Identifier` identifies the resource objects of this resource. This is used only if the value of the `Type` field is `Resource` or `AWS::Resource`.
+                - `Environment` specifies the location where this object is hosted, or what it belongs to.
+            max-items: |-
+                The total number of items to return in the command's output.
+                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+                Do not use the NextToken response element directly outside of the AWS CLI.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            max-results: The maximum number of results to return in one operation. If you omit this parameter, the default of 50 is used.
+            metric-source-types: |-
+                Use this optional field to only include SLOs with the specified metric source types in the output. Supported types are:
+
+                - Service operation
+                - Service dependency
+                - CloudWatch metric
+            next-token: Include this value, if it was returned by the previous operation, to get the next set of service level objectives.
+            operation-name: The name of the operation that this SLO is associated with.
+            page-size: |-
+                The size of each page to get in the AWS service call.
+                This does not affect the number of items returned in the command's output.
+                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+                This can help prevent the AWS service calls from timing out.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            slo-owner-aws-account-id: SLO's Amazon Web Services account ID.
+            starting-token: |-
+                A token to specify where to start paginating.
+                This is the NextToken from a previously truncated response.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+    - name: list-services
+      description: Returns a list of services that have been discovered by Application Signals.
+      flags:
+        --aws-account-id=: Amazon Web Services Account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=!: The end of the time period to retrieve information about.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-linked-accounts: If you are using this operation in a monitoring account, specify `true` to include services from source accounts in the returned data.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in one operation.
+        --next-token=: Include this value, if it was returned by the previous operation, to get the next set of services.
+        --no-include-linked-accounts: If you are using this operation in a monitoring account, specify `true` to include services from source accounts in the returned data.
+        --page-size=: The size of each page to get in the AWS service call.
+        --start-time=!: The start of the time period to retrieve information about.
+        --starting-token=: A token to specify where to start paginating.
+      documentation:
+        command: Returns a list of services that have been discovered by Application Signals. A service represents a minimum logical and transactional unit that completes a business function. Services are discovered through Application Signals instrumentation.
+        flag:
+            aws-account-id: Amazon Web Services Account ID.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            end-time: |-
+                The end of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: `1698778057`
+
+                Your requested start time will be rounded to the nearest hour.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            include-linked-accounts: If you are using this operation in a monitoring account, specify `true` to include services from source accounts in the returned data.
+            max-items: |-
+                The total number of items to return in the command's output.
+                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+                Do not use the NextToken response element directly outside of the AWS CLI.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            max-results: The maximum number of results to return in one operation. If you omit this parameter, the default of 50 is used.
+            next-token: Include this value, if it was returned by the previous operation, to get the next set of services.
+            page-size: |-
+                The size of each page to get in the AWS service call.
+                This does not affect the number of items returned in the command's output.
+                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+                This can help prevent the AWS service calls from timing out.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            start-time: |-
+                The start of the time period to retrieve information about. When used in a raw HTTP Query API, it is formatted as be epoch time in seconds. For example: `1698778057`
+
+                Your requested start time will be rounded to the nearest hour.
+            starting-token: |-
+                A token to specify where to start paginating.
+                This is the NextToken from a previously truncated response.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+    - name: untag-resource
+      description: Removes one or more tags from the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the CloudWatch resource that you want to delete tags from.
+        --tag-keys=!: The list of tag keys to remove from the resource.
+      documentation:
+        command: Removes one or more tags from the specified resource.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            resource-arn: |-
+                The Amazon Resource Name (ARN) of the CloudWatch resource that you want to delete tags from.
+
+                The ARN format of an Application Signals SLO is `arn:aws:cloudwatch:Region:account-id:slo:slo-name`
+
+                For more information about ARN format, see [Resource Types Defined by Amazon CloudWatch](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies) in the *Amazon Web Services General Reference*.
+            tag-keys: The list of tag keys to remove from the resource.
+documentation:
+    command: |-
+        Use CloudWatch Application Signals for comprehensive observability of your cloud-based applications. It enables real-time service health dashboards and helps you track long-term performance trends against your business goals. The application-centric view provides you with unified visibility across your applications, services, and dependencies, so you can proactively monitor and efficiently triage any issues that may arise, ensuring optimal customer experience.
+
+        Application Signals provides the following benefits:
+
+        - Automatically collect metrics and traces from your applications, and display key metrics such as call volume, availability, latency, faults, and errors.
+        - Create and monitor service level objectives (SLOs).
+        - See a map of your application topology that Application Signals automatically discovers, that gives you a visual representation of your applications, dependencies, and their connectivity.
+
+        Application Signals works with CloudWatch RUM, CloudWatch Synthetics canaries, and Amazon Web Services Service Catalog AppRegistry, to display your client pages, Synthetics canaries, and application names within dashboards and maps.

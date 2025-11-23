@@ -1,2 +1,608 @@
 name: chime-sdk-meetings
 description: Amazon Chime SDK Meetings
+commands:
+    - name: create-attendee
+      description: Creates a new attendee for an active Amazon Chime SDK meeting.
+      flags:
+        --capabilities=: The capabilities (`audio`, `video`, or `content`) that you want to grant an attendee.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --external-user-id=!: The Amazon Chime SDK external user ID.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --meeting-id=!: The unique ID of the meeting.
+      documentation:
+        command: Creates a new attendee for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see [Using the Amazon Chime SDK](https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html) in the *Amazon Chime Developer Guide*.
+        flag:
+            capabilities: |-
+                The capabilities (`audio`, `video`, or `content`) that you want to grant an attendee. If you don't specify capabilities, all users have send and receive capabilities on all media channels by default.
+
+                You use the capabilities with a set of values that control what the capabilities can do, such as `SendReceive` data. For more information about those values, see .
+
+                When using capabilities, be aware of these corner cases:
+
+                - If you specify `MeetingFeatures:Video:MaxResolution:None` when you create a meeting, all API requests that include `SendReceive`, `Send`, or `Receive` for `AttendeeCapabilities:Video` will be rejected with `ValidationError 400`.
+                - If you specify `MeetingFeatures:Content:MaxResolution:None` when you create a meeting, all API requests that include `SendReceive`, `Send`, or `Receive` for `AttendeeCapabilities:Content` will be rejected with `ValidationError 400`.
+                - You can't set `content` capabilities to `SendReceive` or `Receive` unless you also set `video` capabilities to `SendReceive` or `Receive`. If you don't set the `video` capability to receive, the response will contain an HTTP 400 Bad Request status code. However, you can set your `video` capability to receive and you set your `content` capability to not receive.
+                - If meeting features is defined as `Video:MaxResolution:None` but `Content:MaxResolution` is defined as something other than `None` and attendee capabilities are not defined in the API request, then the default attendee video capability is set to `Receive` and attendee content capability is set to `SendReceive`. This is because content `SendReceive` requires video to be at least `Receive`.
+                - When you change an `audio` capability from `None` or `Receive` to `Send` or `SendReceive` , and if the attendee left their microphone unmuted, audio will flow from the attendee to the other meeting participants.
+                - When you change a `video` or `content` capability from `None` or `Receive` to `Send` or `SendReceive` , and if the attendee turned on their video or content streams, remote attendees can receive those streams, but only after media renegotiation between the client and the Amazon Chime back-end server.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            external-user-id: |-
+                The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application.
+
+                Pattern: `[-_&@+=,(){}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]*`
+
+                Values that begin with `aws:` are reserved. You can't configure a value that uses this prefix.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            meeting-id: The unique ID of the meeting.
+    - name: get-attendee
+      description: Gets the Amazon Chime SDK attendee details for a specified meeting ID and attendee ID.
+      flags:
+        --attendee-id=!: The Amazon Chime SDK attendee ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --meeting-id=!: The Amazon Chime SDK meeting ID.
+      documentation:
+        command: Gets the Amazon Chime SDK attendee details for a specified meeting ID and attendee ID. For more information about the Amazon Chime SDK, see [Using the Amazon Chime SDK](https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html) in the *Amazon Chime Developer Guide*.
+        flag:
+            attendee-id: The Amazon Chime SDK attendee ID.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            meeting-id: The Amazon Chime SDK meeting ID.
+    - name: list-attendees
+      description: Lists the attendees for the specified Amazon Chime SDK meeting.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in a single call.
+        --meeting-id=!: The Amazon Chime SDK meeting ID.
+        --next-token=: The token to use to retrieve the next page of results.
+      documentation:
+        command: Lists the attendees for the specified Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see [Using the Amazon Chime SDK](https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html) in the *Amazon Chime Developer Guide*.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            max-results: The maximum number of results to return in a single call.
+            meeting-id: The Amazon Chime SDK meeting ID.
+            next-token: The token to use to retrieve the next page of results.
+    - name: start-meeting-transcription
+      description: Starts transcription for the specified `meetingId`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --meeting-id=!: The unique ID of the meeting being transcribed.
+        --transcription-configuration=!: The configuration for the current transcription operation.
+      documentation:
+        command: |-
+            Starts transcription for the specified `meetingId`. For more information, refer to [Using Amazon Chime SDK live transcription](https://docs.aws.amazon.com/chime-sdk/latest/dg/meeting-transcription.html) in the *Amazon Chime SDK Developer Guide*.
+
+            If you specify an invalid configuration, a `TranscriptFailed` event will be sent with the contents of the `BadRequestException` generated by Amazon Transcribe. For more information on each parameter and which combinations are valid, refer to the [StartStreamTranscription](https://docs.aws.amazon.com/transcribe/latest/APIReference/API_streaming_StartStreamTranscription.html) API in the *Amazon Transcribe Developer Guide*.
+
+            By default, Amazon Transcribe may use and store audio content processed by the service to develop and improve Amazon Web Services AI/ML services as further described in section 50 of the [Amazon Web Services Service Terms](https://aws.amazon.com/service-terms/). Using Amazon Transcribe may be subject to federal and state laws or regulations regarding the recording or interception of electronic communications. It is your and your end users’ responsibility to comply with all applicable laws regarding the recording, including properly notifying all participants in a recorded session or communication that the session or communication is being recorded, and obtaining all necessary consents. You can opt out from Amazon Web Services using audio content to develop and improve AWS AI/ML services by configuring an AI services opt out policy using Amazon Web Services Organizations.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            meeting-id: The unique ID of the meeting being transcribed.
+            transcription-configuration: The configuration for the current transcription operation. Must contain `EngineTranscribeSettings` or `EngineTranscribeMedicalSettings`.
+    - name: batch-create-attendee
+      description: Creates up to 100 attendees for an active Amazon Chime SDK meeting.
+      flags:
+        --attendees=!: The attendee information, including attendees' IDs and join tokens.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --meeting-id=!: The Amazon Chime SDK ID of the meeting to which you're adding attendees.
+      documentation:
+        command: Creates up to 100 attendees for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see [Using the Amazon Chime SDK](https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html) in the *Amazon Chime Developer Guide*.
+        flag:
+            attendees: The attendee information, including attendees' IDs and join tokens.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            meeting-id: The Amazon Chime SDK ID of the meeting to which you're adding attendees.
+    - name: batch-update-attendee-capabilities-except
+      description: Updates `AttendeeCapabilities` except the capabilities listed in an `ExcludedAttendeeIds` table.
+      flags:
+        --capabilities=!: The capabilities (`audio`, `video`, or `content`) that you want to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --excluded-attendee-ids=!: The `AttendeeIDs` that you want to exclude from one or more capabilities.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --meeting-id=!: The ID of the meeting associated with the update request.
+      documentation:
+        command: |-
+            Updates `AttendeeCapabilities` except the capabilities listed in an `ExcludedAttendeeIds` table.
+
+            You use the capabilities with a set of values that control what the capabilities can do, such as `SendReceive` data. For more information about those values, see .
+
+            When using capabilities, be aware of these corner cases:
+
+            - If you specify `MeetingFeatures:Video:MaxResolution:None` when you create a meeting, all API requests that include `SendReceive`, `Send`, or `Receive` for `AttendeeCapabilities:Video` will be rejected with `ValidationError 400`.
+            - If you specify `MeetingFeatures:Content:MaxResolution:None` when you create a meeting, all API requests that include `SendReceive`, `Send`, or `Receive` for `AttendeeCapabilities:Content` will be rejected with `ValidationError 400`.
+            - You can't set `content` capabilities to `SendReceive` or `Receive` unless you also set `video` capabilities to `SendReceive` or `Receive`. If you don't set the `video` capability to receive, the response will contain an HTTP 400 Bad Request status code. However, you can set your `video` capability to receive and you set your `content` capability to not receive.
+            - If meeting features is defined as `Video:MaxResolution:None` but `Content:MaxResolution` is defined as something other than `None` and attendee capabilities are not defined in the API request, then the default attendee video capability is set to `Receive` and attendee content capability is set to `SendReceive`. This is because content `SendReceive` requires video to be at least `Receive`.
+            - When you change an `audio` capability from `None` or `Receive` to `Send` or `SendReceive` , and if the attendee left their microphone unmuted, audio will flow from the attendee to the other meeting participants.
+            - When you change a `video` or `content` capability from `None` or `Receive` to `Send` or `SendReceive` , and if the attendee turned on their video or content streams, remote attendees can receive those streams, but only after media renegotiation between the client and the Amazon Chime back-end server.
+        flag:
+            capabilities: The capabilities (`audio`, `video`, or `content`) that you want to update.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            excluded-attendee-ids: The `AttendeeIDs` that you want to exclude from one or more capabilities.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            meeting-id: The ID of the meeting associated with the update request.
+    - name: tag-resource
+      description: The resource that supports tags.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource.
+        --tags=!: Lists the requested tags.
+      documentation:
+        command: The resource that supports tags.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            resource-arn: The ARN of the resource.
+            tags: Lists the requested tags.
+    - name: update-attendee-capabilities
+      description: The capabilities that you want to update.
+      flags:
+        --attendee-id=!: The ID of the attendee associated with the update request.
+        --capabilities=!: The capabilities that you want to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --meeting-id=!: The ID of the meeting associated with the update request.
+      documentation:
+        command: |-
+            The capabilities that you want to update.
+
+            You use the capabilities with a set of values that control what the capabilities can do, such as `SendReceive` data. For more information about those values, see .
+
+            When using capabilities, be aware of these corner cases:
+
+            - If you specify `MeetingFeatures:Video:MaxResolution:None` when you create a meeting, all API requests that include `SendReceive`, `Send`, or `Receive` for `AttendeeCapabilities:Video` will be rejected with `ValidationError 400`.
+            - If you specify `MeetingFeatures:Content:MaxResolution:None` when you create a meeting, all API requests that include `SendReceive`, `Send`, or `Receive` for `AttendeeCapabilities:Content` will be rejected with `ValidationError 400`.
+            - You can't set `content` capabilities to `SendReceive` or `Receive` unless you also set `video` capabilities to `SendReceive` or `Receive`. If you don't set the `video` capability to receive, the response will contain an HTTP 400 Bad Request status code. However, you can set your `video` capability to receive and you set your `content` capability to not receive.
+            - If meeting features is defined as `Video:MaxResolution:None` but `Content:MaxResolution` is defined as something other than `None` and attendee capabilities are not defined in the API request, then the default attendee video capability is set to `Receive` and attendee content capability is set to `SendReceive`. This is because content `SendReceive` requires video to be at least `Receive`.
+            - When you change an `audio` capability from `None` or `Receive` to `Send` or `SendReceive` , and if the attendee left their microphone unmuted, audio will flow from the attendee to the other meeting participants.
+            - When you change a `video` or `content` capability from `None` or `Receive` to `Send` or `SendReceive` , and if the attendee turned on their video or content streams, remote attendees can receive those streams, but only after media renegotiation between the client and the Amazon Chime back-end server.
+        flag:
+            attendee-id: The ID of the attendee associated with the update request.
+            capabilities: The capabilities that you want to update.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            meeting-id: The ID of the meeting associated with the update request.
+    - name: create-meeting-with-attendees
+      description: Creates a new Amazon Chime SDK meeting in the specified media Region, with attendees.
+      flags:
+        --attendees=!: The attendee information, including attendees' IDs and join tokens.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=!: The unique identifier for the client request.
+        --external-meeting-id=!: The external meeting ID.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --media-placement-network-type=: The type of network for the media placement.
+        --media-region=!: The Region in which to create the meeting.
+        --meeting-features=: Lists the audio and video features enabled for a meeting, such as echo reduction.
+        --meeting-host-id=: Reserved.
+        --notifications-configuration=: The configuration for resource targets to receive notifications when meeting and attendee events occur.
+        --primary-meeting-id=: When specified, replicates the media from the primary meeting to the new meeting.
+        --tags=: The tags in the request.
+        --tenant-ids=: A consistent and opaque identifier, created and maintained by the builder to represent a segment of their users.
+      completion:
+        flag:
+            media-placement-network-type:
+                - Ipv4Only
+                - DualStack
+      documentation:
+        command: |-
+            Creates a new Amazon Chime SDK meeting in the specified media Region, with attendees. For more information about specifying media Regions, see [Available Regions](https://docs.aws.amazon.com/chime-sdk/latest/dg/sdk-available-regions) and [Using meeting Regions](https://docs.aws.amazon.com/chime-sdk/latest/dg/chime-sdk-meetings-regions.html), both in the *Amazon Chime SDK Developer Guide*. For more information about the Amazon Chime SDK, see [Using the Amazon Chime SDK](https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html) in the *Amazon Chime SDK Developer Guide*.
+
+            If you use this API in conjuction with the and APIs, and you don't specify the `MeetingFeatures.Content.MaxResolution` or `MeetingFeatures.Video.MaxResolution` parameters, the following defaults are used:
+
+            - Content.MaxResolution: FHD
+            - Video.MaxResolution: HD
+        flag:
+            attendees: The attendee information, including attendees' IDs and join tokens.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            client-request-token: The unique identifier for the client request. Use a different token for different meetings.
+            external-meeting-id: |-
+                The external meeting ID.
+
+                Pattern: `[-_&@+=,(){}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]*`
+
+                Values that begin with `aws:` are reserved. You can't configure a value that uses this prefix. Case insensitive.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            media-placement-network-type: The type of network for the media placement. Either IPv4 only or dual-stack (IPv4 and IPv6).
+            media-region: |-
+                The Region in which to create the meeting.
+
+                Available values: `af-south-1`, `ap-northeast-1`, `ap-northeast-2`, `ap-south-1`, `ap-southeast-1`, `ap-southeast-2`, `ca-central-1`, `eu-central-1`, `eu-north-1`, `eu-south-1`, `eu-west-1`, `eu-west-2`, `eu-west-3`, `sa-east-1`, `us-east-1`, `us-east-2`, `us-west-1`, `us-west-2`.
+
+                Available values in Amazon Web Services GovCloud (US) Regions: `us-gov-east-1`, `us-gov-west-1`.
+            meeting-features: Lists the audio and video features enabled for a meeting, such as echo reduction.
+            meeting-host-id: Reserved.
+            notifications-configuration: The configuration for resource targets to receive notifications when meeting and attendee events occur.
+            primary-meeting-id: When specified, replicates the media from the primary meeting to the new meeting.
+            tags: The tags in the request.
+            tenant-ids: A consistent and opaque identifier, created and maintained by the builder to represent a segment of their users.
+    - name: delete-attendee
+      description: Deletes an attendee from the specified Amazon Chime SDK meeting and deletes their `JoinToken`.
+      flags:
+        --attendee-id=!: The Amazon Chime SDK attendee ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --meeting-id=!: The Amazon Chime SDK meeting ID.
+      documentation:
+        command: Deletes an attendee from the specified Amazon Chime SDK meeting and deletes their `JoinToken`. Attendees are automatically deleted when a Amazon Chime SDK meeting is deleted. For more information about the Amazon Chime SDK, see [Using the Amazon Chime SDK](https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html) in the *Amazon Chime Developer Guide*.
+        flag:
+            attendee-id: The Amazon Chime SDK attendee ID.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            meeting-id: The Amazon Chime SDK meeting ID.
+    - name: stop-meeting-transcription
+      description: Stops transcription for the specified `meetingId`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --meeting-id=!: The unique ID of the meeting for which you stop transcription.
+      documentation:
+        command: |-
+            Stops transcription for the specified `meetingId`. For more information, refer to [Using Amazon Chime SDK live transcription](https://docs.aws.amazon.com/chime-sdk/latest/dg/meeting-transcription.html) in the *Amazon Chime SDK Developer Guide*.
+
+            By default, Amazon Transcribe may use and store audio content processed by the service to develop and improve Amazon Web Services AI/ML services as further described in section 50 of the [Amazon Web Services Service Terms](https://aws.amazon.com/service-terms/). Using Amazon Transcribe may be subject to federal and state laws or regulations regarding the recording or interception of electronic communications. It is your and your end users’ responsibility to comply with all applicable laws regarding the recording, including properly notifying all participants in a recorded session or communication that the session or communication is being recorded, and obtaining all necessary consents. You can opt out from Amazon Web Services using audio content to develop and improve Amazon Web Services AI/ML services by configuring an AI services opt out policy using Amazon Web Services Organizations.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            meeting-id: The unique ID of the meeting for which you stop transcription.
+    - name: untag-resource
+      description: Removes the specified tags from the specified resources.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource that you're removing tags from.
+        --tag-keys=!: The tag keys being removed from the resources.
+      documentation:
+        command: |-
+            Removes the specified tags from the specified resources. When you specify a tag key, the action removes both that key and its associated value. The operation succeeds even if you attempt to remove tags from a resource that were already removed. Note the following:
+
+            - To remove tags from a resource, you need the necessary permissions for the service that the resource belongs to as well as permissions for removing tags. For more information, see the documentation for the service whose resource you want to untag.
+            - You can only tag resources that are located in the specified Amazon Web Services Region for the calling Amazon Web Services account.
+
+            **Minimum permissions**
+
+            In addition to the `tag:UntagResources` permission required by this operation, you must also have the remove tags permission defined by the service that created the resource. For example, to remove the tags from an Amazon EC2 instance using the `UntagResources` operation, you must have both of the following permissions:
+
+            `tag:UntagResource`
+
+            `ChimeSDKMeetings:DeleteTags`
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            resource-arn: The ARN of the resource that you're removing tags from.
+            tag-keys: The tag keys being removed from the resources.
+    - name: create-meeting
+      description: Creates a new Amazon Chime SDK meeting in the specified media Region with no initial attendees.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=!: The unique identifier for the client request.
+        --external-meeting-id=!: The external meeting ID.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --media-placement-network-type=: The type of network for the media placement.
+        --media-region=!: The Region in which to create the meeting.
+        --meeting-features=: Lists the audio and video features enabled for a meeting, such as echo reduction.
+        --meeting-host-id=: Reserved.
+        --notifications-configuration=: The configuration for resource targets to receive notifications when meeting and attendee events occur.
+        --primary-meeting-id=: When specified, replicates the media from the primary meeting to the new meeting.
+        --tags=: Applies one or more tags to an Amazon Chime SDK meeting.
+        --tenant-ids=: A consistent and opaque identifier, created and maintained by the builder to represent a segment of their users.
+      completion:
+        flag:
+            media-placement-network-type:
+                - Ipv4Only
+                - DualStack
+      documentation:
+        command: |-
+            Creates a new Amazon Chime SDK meeting in the specified media Region with no initial attendees. For more information about specifying media Regions, see [Available Regions](https://docs.aws.amazon.com/chime-sdk/latest/dg/sdk-available-regions) and [Using meeting Regions](https://docs.aws.amazon.com/chime-sdk/latest/dg/chime-sdk-meetings-regions.html), both in the *Amazon Chime SDK Developer Guide*. For more information about the Amazon Chime SDK, see [Using the Amazon Chime SDK](https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html) in the *Amazon Chime SDK Developer Guide*.
+
+            If you use this API in conjuction with the and APIs, and you don't specify the `MeetingFeatures.Content.MaxResolution` or `MeetingFeatures.Video.MaxResolution` parameters, the following defaults are used:
+
+            - Content.MaxResolution: FHD
+            - Video.MaxResolution: HD
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            client-request-token: The unique identifier for the client request. Use a different token for different meetings.
+            external-meeting-id: |-
+                The external meeting ID.
+
+                Pattern: `[-_&@+=,(){}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]*`
+
+                Values that begin with `aws:` are reserved. You can't configure a value that uses this prefix. Case insensitive.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            media-placement-network-type: The type of network for the media placement. Either IPv4 only or dual-stack (IPv4 and IPv6).
+            media-region: |-
+                The Region in which to create the meeting.
+
+                Available values: `af-south-1`, `ap-northeast-1`, `ap-northeast-2`, `ap-south-1`, `ap-southeast-1`, `ap-southeast-2`, `ca-central-1`, `eu-central-1`, `eu-north-1`, `eu-south-1`, `eu-west-1`, `eu-west-2`, `eu-west-3`, `sa-east-1`, `us-east-1`, `us-east-2`, `us-west-1`, `us-west-2`.
+
+                Available values in Amazon Web Services GovCloud (US) Regions: `us-gov-east-1`, `us-gov-west-1`.
+            meeting-features: Lists the audio and video features enabled for a meeting, such as echo reduction.
+            meeting-host-id: Reserved.
+            notifications-configuration: The configuration for resource targets to receive notifications when meeting and attendee events occur.
+            primary-meeting-id: When specified, replicates the media from the primary meeting to the new meeting.
+            tags: |-
+                Applies one or more tags to an Amazon Chime SDK meeting. Note the following:
+
+                - Not all resources have tags. For a list of services with resources that support tagging using this operation, see [Services that support the Resource Groups Tagging API](https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/supported-services.html). If the resource doesn't yet support this operation, the resource's service might support tagging using its own API operations. For more information, refer to the documentation for that service.
+                - Each resource can have up to 50 tags. For other limits, see [Tag Naming and Usage Conventions](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html#tag-conventions) in the *AWS General Reference*.
+                - You can only tag resources that are located in the specified Amazon Web Services Region for the Amazon Web Services account.
+                - To add tags to a resource, you need the necessary permissions for the service that the resource belongs to as well as permissions for adding tags. For more information, see the documentation for each service.
+
+                Do not store personally identifiable information (PII) or other confidential or sensitive information in tags. We use tags to provide you with billing and administration services. Tags are not intended to be used for private or sensitive data.
+
+                **Minimum permissions**
+
+                In addition to the `tag:TagResources` permission required by this operation, you must also have the tagging permission defined by the service that created the resource. For example, to tag a `ChimeSDKMeetings` instance using the `TagResources` operation, you must have both of the following permissions:
+
+                `tag:TagResources`
+
+                `ChimeSDKMeetings:CreateTags`
+
+                Some services might have specific requirements for tagging some resources. For example, to tag an Amazon S3 bucket, you must also have the `s3:GetBucketTagging` permission. If the expected minimum permissions don't work, check the documentation for that service's tagging APIs for more information.
+            tenant-ids: A consistent and opaque identifier, created and maintained by the builder to represent a segment of their users.
+    - name: delete-meeting
+      description: Deletes the specified Amazon Chime SDK meeting.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --meeting-id=!: The Amazon Chime SDK meeting ID.
+      documentation:
+        command: Deletes the specified Amazon Chime SDK meeting. The operation deletes all attendees, disconnects all clients, and prevents new clients from joining the meeting. For more information about the Amazon Chime SDK, see [Using the Amazon Chime SDK](https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html) in the *Amazon Chime Developer Guide*.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            meeting-id: The Amazon Chime SDK meeting ID.
+    - name: get-meeting
+      description: Gets the Amazon Chime SDK meeting details for the specified meeting ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --meeting-id=!: The Amazon Chime SDK meeting ID.
+      documentation:
+        command: Gets the Amazon Chime SDK meeting details for the specified meeting ID. For more information about the Amazon Chime SDK, see [Using the Amazon Chime SDK](https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html) in the *Amazon Chime Developer Guide*.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            meeting-id: The Amazon Chime SDK meeting ID.
+    - name: list-tags-for-resource
+      description: Returns a list of the tags available for the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource.
+      documentation:
+        command: Returns a list of the tags available for the specified resource.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            resource-arn: The ARN of the resource.
+documentation:
+    command: The Amazon Chime SDK meetings APIs in this section allow software developers to create Amazon Chime SDK meetings, set the Amazon Web Services Regions for meetings, create and manage users, and send and receive meeting notifications. For more information about the meeting APIs, see [Amazon Chime SDK meetings](https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_Operations_Amazon_Chime_SDK_Meetings.html).

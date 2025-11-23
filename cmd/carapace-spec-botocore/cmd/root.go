@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"path"
 	"path/filepath"
 	"regexp"
 	"slices"
@@ -21,8 +22,40 @@ var rootCmd = &cobra.Command{
 	Use:   "carapace-spec-botocore",
 	Short: "",
 	Args:  cobra.ExactArgs(1),
-	Run: func(cmd *cobra.Command, args []string) {
-		parse(args[0])
+	RunE: func(cmd *cobra.Command, args []string) error {
+		command, err := parse(args[0])
+		if err != nil {
+			return err
+		}
+
+		dir, err := os.MkdirTemp("", "carapace-spec-botocore-*")
+		if err != nil {
+			return err
+		}
+
+		for _, subCommand := range command.Commands {
+			m, err := yaml.Marshal(subCommand)
+			if err != nil {
+				return err
+			}
+			path := path.Join(dir, fmt.Sprintf("aws.%s.yaml", subCommand.Name))
+			println(path)
+			if err := os.WriteFile(path, m, os.ModePerm); err != nil {
+				return err
+			}
+		}
+
+		command.Commands = nil
+		m, err := yaml.Marshal(command)
+		if err != nil {
+			return err
+		}
+		path := path.Join(dir, "aws.yaml")
+		println(path)
+		if err := os.WriteFile(path, m, os.ModePerm); err != nil {
+			return err
+		}
+		return nil
 	},
 }
 
@@ -132,13 +165,13 @@ type Operation struct {
 	Documentation string `json:"documentation"`
 }
 
-func parse(path string) {
+func parse(path string) (*command.Command, error) {
 	services, err := os.ReadDir(path)
 	if err != nil {
-		panic(err.Error())
+		return nil, err
 	}
 
-	cmd := command.Command{
+	cmd := &command.Command{
 		Name:        "aws",
 		Description: "The AWS Command Line Interface is a unified tool to manage your AWS services.",
 	}
@@ -150,19 +183,13 @@ func parse(path string) {
 		path := filepath.Join(os.Args[1], serviceDir.Name())
 		versions, err := os.ReadDir(path)
 		if err != nil {
-			panic(err.Error())
+			return nil, err
 		}
 		cmd.Commands = append(cmd.Commands,
 			parseService(serviceDir.Name(), filepath.Join(path, versions[len(versions)-1].Name())),
 		)
 	}
-
-	m, err := yaml.Marshal(cmd)
-	if err != nil {
-		panic(err.Error())
-	}
-	fmt.Println(string(m))
-
+	return cmd, nil
 }
 
 type Paginator struct {
@@ -317,9 +344,55 @@ For usage examples, see Pagination in the AWS Command Line Interface User Guide.
 		}
 		cmd.Commands = append(cmd.Commands, subCmd)
 	}
+
+	waiters, err := parseWaiters(folder)
+	if err != nil {
+		panic(err.Error())
+	}
+	if len(waiters) > 0 {
+		waitCmd := command.Command{
+			Name:        "wait",
+			Description: "Wait  until  a particular condition is satisfied.",
+		}
+
+		for name, waiter := range waiters {
+			operationName := CamelCaseToDash(waiter.Operation)
+			for _, command := range cmd.Commands {
+				if command.Name == operationName {
+					command.Name = CamelCaseToDash(name)
+					waitCmd.Commands = append(waitCmd.Commands, command)
+					break
+				}
+			}
+		}
+		cmd.Commands = append(cmd.Commands, waitCmd)
+	}
 	return cmd
 }
 
 func isBoolean(s string) bool {
 	return (strings.HasSuffix(strings.ToLower(s), "boolean") && !strings.HasPrefix(strings.ToLower(s), "map")) || strings.HasSuffix(s, "AttributeBooleanValue")
+}
+
+type Waiter struct {
+	Description string `json:"description"`
+	Operation   string `json:"operation"`
+}
+
+func parseWaiters(folder string) (map[string]Waiter, error) {
+	content, err := os.ReadFile(filepath.Join(folder, "waiters-2.json"))
+	if err != nil {
+		if os.IsNotExist(err) {
+			return make(map[string]Waiter), nil
+		}
+		return nil, err
+	}
+
+	var waiters struct {
+		Waiters map[string]Waiter `json:"waiters"`
+	}
+	if err := json.Unmarshal(content, &waiters); err != nil {
+		return nil, err
+	}
+	return waiters.Waiters, nil
 }

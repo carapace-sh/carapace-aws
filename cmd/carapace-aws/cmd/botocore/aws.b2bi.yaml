@@ -1,2 +1,1142 @@
 name: b2bi
 description: AWS B2B Data Interchange
+commands:
+    - name: get-transformer-job
+      description: Returns the details of the transformer run, based on the Transformer job ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --transformer-id=!: Specifies the system-assigned unique identifier for the transformer.
+        --transformer-job-id=!: Specifies the unique, system-generated identifier for a transformer run.
+      documentation:
+        command: |-
+            Returns the details of the transformer run, based on the Transformer job ID.
+
+            If 30 days have elapsed since your transformer job was started, the system deletes it. So, if you run `GetTransformerJob` and supply a `transformerId` and `transformerJobId` for a job that was started more than 30 days previously, you receive a 404 response.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            transformer-id: Specifies the system-assigned unique identifier for the transformer.
+            transformer-job-id: Specifies the unique, system-generated identifier for a transformer run.
+    - name: list-tags-for-resource
+      description: Lists all of the tags associated with the Amazon Resource Name (ARN) that you specify.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: Requests the tags associated with a particular Amazon Resource Name (ARN).
+      documentation:
+        command: Lists all of the tags associated with the Amazon Resource Name (ARN) that you specify. The resource can be a capability, partnership, profile, or transformer.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            resource-arn: Requests the tags associated with a particular Amazon Resource Name (ARN). An ARN is an identifier for a specific Amazon Web Services resource, such as a capability, partnership, profile, or transformer.
+    - name: test-conversion
+      description: This operation mimics the latter half of a typical Outbound EDI request.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source=!: Specify the source file for an outbound EDI request.
+        --target=!: Specify the format (X12 is the only currently supported format), and other details for the conversion target.
+      documentation:
+        command: This operation mimics the latter half of a typical Outbound EDI request. It takes an input JSON/XML in the B2Bi shape as input, converts it to an X12 EDI string, and return that string.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            source: Specify the source file for an outbound EDI request.
+            target: Specify the format (X12 is the only currently supported format), and other details for the conversion target.
+    - name: test-mapping
+      description: Maps the input file according to the provided template file.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --file-format=!: Specifies that the currently supported file formats for EDI transformations are `JSON` and `XML`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-file-content=!: Specify the contents of the EDI (electronic data interchange) XML or JSON file that is used as input for the transform.
+        --mapping-template=!: Specifies the mapping template for the transformer.
+      completion:
+        flag:
+            file-format:
+                - XML
+                - JSON
+                - NOT_USED
+      documentation:
+        command: Maps the input file according to the provided template file. The API call downloads the file contents from the Amazon S3 location, and passes the contents in as a string, to the `inputFileContent` parameter.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            file-format: Specifies that the currently supported file formats for EDI transformations are `JSON` and `XML`.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            input-file-content: Specify the contents of the EDI (electronic data interchange) XML or JSON file that is used as input for the transform.
+            mapping-template: |-
+                Specifies the mapping template for the transformer. This template is used to map the parsed EDI file using JSONata or XSLT.
+
+                This parameter is available for backwards compatibility. Use the [Mapping](https://docs.aws.amazon.com/b2bi/latest/APIReference/API_Mapping.html) data type instead.
+    - name: create-profile
+      description: Creates a customer profile.
+      flags:
+        --business-name=!: Specifies the name for the business associated with this profile.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Reserved for future use.
+        --email=: Specifies the email address associated with this customer profile.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --logging=!: Specifies whether or not logging is enabled for this profile.
+        --name=!: Specifies the name of the profile.
+        --phone=!: Specifies the phone number associated with the profile.
+        --tags=: Specifies the key-value pairs assigned to ARNs that you can use to group and search for resources by type.
+      completion:
+        flag:
+            logging:
+                - ENABLED
+                - DISABLED
+      documentation:
+        command: Creates a customer profile. You can have up to five customer profiles, each representing a distinct private network. A profile is the mechanism used to create the concept of a private network.
+        flag:
+            business-name: Specifies the name for the business associated with this profile.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            client-token: Reserved for future use.
+            email: Specifies the email address associated with this customer profile.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            logging: Specifies whether or not logging is enabled for this profile.
+            name: Specifies the name of the profile.
+            phone: Specifies the phone number associated with the profile.
+            tags: Specifies the key-value pairs assigned to ARNs that you can use to group and search for resources by type. You can attach this metadata to resources (capabilities, partnerships, and so on) for any purpose.
+    - name: delete-profile
+      description: Deletes the specified profile.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profile-id=!: Specifies the unique, system-generated identifier for the profile.
+      documentation:
+        command: Deletes the specified profile. A profile is the mechanism used to create the concept of a private network.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            profile-id: Specifies the unique, system-generated identifier for the profile.
+    - name: update-capability
+      description: Updates some of the parameters for a capability, based on the specified parameters.
+      flags:
+        --capability-id=!: Specifies a system-assigned unique identifier for the capability.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration=: Specifies a structure that contains the details for a capability.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instructions-documents=: Specifies one or more locations in Amazon S3, each specifying an EDI document that can be used with this capability.
+        --name=: Specifies a new name for the capability, to replace the existing name.
+      documentation:
+        command: Updates some of the parameters for a capability, based on the specified parameters. A trading capability contains the information required to transform incoming EDI documents into JSON or XML outputs.
+        flag:
+            capability-id: Specifies a system-assigned unique identifier for the capability.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            configuration: Specifies a structure that contains the details for a capability.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            instructions-documents: Specifies one or more locations in Amazon S3, each specifying an EDI document that can be used with this capability. Each item contains the name of the bucket and the key, to identify the document's location.
+            name: Specifies a new name for the capability, to replace the existing name.
+    - name: delete-capability
+      description: Deletes the specified capability.
+      flags:
+        --capability-id=!: Specifies a system-assigned unique identifier for the capability.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      documentation:
+        command: Deletes the specified capability. A trading capability contains the information required to transform incoming EDI documents into JSON or XML outputs.
+        flag:
+            capability-id: Specifies a system-assigned unique identifier for the capability.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+    - name: get-capability
+      description: Retrieves the details for the specified capability.
+      flags:
+        --capability-id=!: Specifies a system-assigned unique identifier for the capability.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      documentation:
+        command: Retrieves the details for the specified capability. A trading capability contains the information required to transform incoming EDI documents into JSON or XML outputs.
+        flag:
+            capability-id: Specifies a system-assigned unique identifier for the capability.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+    - name: delete-partnership
+      description: Deletes the specified partnership.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --partnership-id=!: Specifies the unique, system-generated identifier for a partnership.
+      documentation:
+        command: Deletes the specified partnership. A partnership represents the connection between you and your trading partner. It ties together a profile and one or more trading capabilities.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            partnership-id: Specifies the unique, system-generated identifier for a partnership.
+    - name: list-partnerships
+      description: Lists the partnerships associated with your Amazon Web Services account for your current or specified region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specifies the maximum number of capabilities to return.
+        --next-token=: When additional results are obtained from the command, a `NextToken` parameter is returned in the output.
+        --page-size=: The size of each page to get in the AWS service call.
+        --profile-id=: Specifies the unique, system-generated identifier for the profile connected to this partnership.
+        --starting-token=: A token to specify where to start paginating.
+      documentation:
+        command: Lists the partnerships associated with your Amazon Web Services account for your current or specified region. A partnership represents the connection between you and your trading partner. It ties together a profile and one or more trading capabilities.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            max-items: |-
+                The total number of items to return in the command's output.
+                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+                Do not use the NextToken response element directly outside of the AWS CLI.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            max-results: Specifies the maximum number of capabilities to return.
+            next-token: When additional results are obtained from the command, a `NextToken` parameter is returned in the output. You can then pass the `NextToken` parameter in a subsequent command to continue listing additional resources.
+            page-size: |-
+                The size of each page to get in the AWS service call.
+                This does not affect the number of items returned in the command's output.
+                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+                This can help prevent the AWS service calls from timing out.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            profile-id: Specifies the unique, system-generated identifier for the profile connected to this partnership.
+            starting-token: |-
+                A token to specify where to start paginating.
+                This is the NextToken from a previously truncated response.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+    - name: test-parsing
+      description: Parses the input EDI (electronic data interchange) file.
+      flags:
+        --advanced-options=: Specifies advanced options for parsing the input EDI file.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --edi-type=!: Specifies the details for the EDI standard that is being used for the transformer.
+        --file-format=!: Specifies that the currently supported file formats for EDI transformations are `JSON` and `XML`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-file=!: Specifies an `S3Location` object, which contains the Amazon S3 bucket and prefix for the location of the input file.
+      completion:
+        flag:
+            file-format:
+                - XML
+                - JSON
+                - NOT_USED
+      documentation:
+        command: Parses the input EDI (electronic data interchange) file. The input file has a file size limit of 250 KB.
+        flag:
+            advanced-options: Specifies advanced options for parsing the input EDI file. These options allow for more granular control over the parsing process, including split options for X12 files.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            edi-type: Specifies the details for the EDI standard that is being used for the transformer. Currently, only X12 is supported. X12 is a set of standards and corresponding messages that define specific business documents.
+            file-format: Specifies that the currently supported file formats for EDI transformations are `JSON` and `XML`.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            input-file: Specifies an `S3Location` object, which contains the Amazon S3 bucket and prefix for the location of the input file.
+    - name: update-partnership
+      description: Updates some of the parameters for a partnership between a customer and trading partner.
+      flags:
+        --capabilities=: List of the capabilities associated with this partnership.
+        --capability-options=: To update, specify the structure that contains the details for the associated capabilities.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The name of the partnership, used to identify it.
+        --partnership-id=!: Specifies the unique, system-generated identifier for a partnership.
+      documentation:
+        command: Updates some of the parameters for a partnership between a customer and trading partner. A partnership represents the connection between you and your trading partner. It ties together a profile and one or more trading capabilities.
+        flag:
+            capabilities: List of the capabilities associated with this partnership.
+            capability-options: To update, specify the structure that contains the details for the associated capabilities.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            name: The name of the partnership, used to identify it.
+            partnership-id: Specifies the unique, system-generated identifier for a partnership.
+    - name: update-profile
+      description: Updates the specified parameters for a profile.
+      flags:
+        --business-name=: Specifies the name for the business associated with this profile.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --email=: Specifies the email address associated with this customer profile.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The name of the profile, used to identify it.
+        --phone=: Specifies the phone number associated with the profile.
+        --profile-id=!: Specifies the unique, system-generated identifier for the profile.
+      documentation:
+        command: Updates the specified parameters for a profile. A profile is the mechanism used to create the concept of a private network.
+        flag:
+            business-name: Specifies the name for the business associated with this profile.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            email: Specifies the email address associated with this customer profile.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            name: The name of the profile, used to identify it.
+            phone: Specifies the phone number associated with the profile.
+            profile-id: Specifies the unique, system-generated identifier for the profile.
+    - name: update-transformer
+      description: Updates the specified parameters for a transformer.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --edi-type=: Specifies the details for the EDI standard that is being used for the transformer.
+        --file-format=: Specifies that the currently supported file formats for EDI transformations are `JSON` and `XML`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-conversion=: To update, specify the `InputConversion` object, which contains the format options for the inbound transformation.
+        --mapping-template=: Specifies the mapping template for the transformer.
+        --mapping=: Specify the structure that contains the mapping template and its language (either XSLT or JSONATA).
+        --name=: Specify a new name for the transformer, if you want to update it.
+        --output-conversion=: To update, specify the `OutputConversion` object, which contains the format options for the outbound transformation.
+        --sample-document=: Specifies a sample EDI document that is used by a transformer as a guide for processing the EDI data.
+        --sample-documents=: Specify a structure that contains the Amazon S3 bucket and an array of the corresponding keys used to identify the location for your sample documents.
+        --status=: Specifies the transformer's status.
+        --transformer-id=!: Specifies the system-assigned unique identifier for the transformer.
+      completion:
+        flag:
+            file-format:
+                - XML
+                - JSON
+                - NOT_USED
+            status:
+                - active
+                - inactive
+      documentation:
+        command: Updates the specified parameters for a transformer. A transformer can take an EDI file as input and transform it into a JSON-or XML-formatted document. Alternatively, a transformer can take a JSON-or XML-formatted document as input and transform it into an EDI file.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            edi-type: Specifies the details for the EDI standard that is being used for the transformer. Currently, only X12 is supported. X12 is a set of standards and corresponding messages that define specific business documents.
+            file-format: Specifies that the currently supported file formats for EDI transformations are `JSON` and `XML`.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            input-conversion: To update, specify the `InputConversion` object, which contains the format options for the inbound transformation.
+            mapping: Specify the structure that contains the mapping template and its language (either XSLT or JSONATA).
+            mapping-template: |-
+                Specifies the mapping template for the transformer. This template is used to map the parsed EDI file using JSONata or XSLT.
+
+                This parameter is available for backwards compatibility. Use the [Mapping](https://docs.aws.amazon.com/b2bi/latest/APIReference/API_Mapping.html) data type instead.
+            name: Specify a new name for the transformer, if you want to update it.
+            output-conversion: To update, specify the `OutputConversion` object, which contains the format options for the outbound transformation.
+            sample-document: Specifies a sample EDI document that is used by a transformer as a guide for processing the EDI data.
+            sample-documents: Specify a structure that contains the Amazon S3 bucket and an array of the corresponding keys used to identify the location for your sample documents.
+            status: Specifies the transformer's status. You can update the state of the transformer from `inactive` to `active`.
+            transformer-id: Specifies the system-assigned unique identifier for the transformer.
+    - name: list-profiles
+      description: Lists the profiles associated with your Amazon Web Services account for your current or specified region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specifies the maximum number of profiles to return.
+        --next-token=: When additional results are obtained from the command, a `NextToken` parameter is returned in the output.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      documentation:
+        command: Lists the profiles associated with your Amazon Web Services account for your current or specified region. A profile is the mechanism used to create the concept of a private network.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            max-items: |-
+                The total number of items to return in the command's output.
+                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+                Do not use the NextToken response element directly outside of the AWS CLI.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            max-results: Specifies the maximum number of profiles to return.
+            next-token: When additional results are obtained from the command, a `NextToken` parameter is returned in the output. You can then pass the `NextToken` parameter in a subsequent command to continue listing additional resources.
+            page-size: |-
+                The size of each page to get in the AWS service call.
+                This does not affect the number of items returned in the command's output.
+                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+                This can help prevent the AWS service calls from timing out.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            starting-token: |-
+                A token to specify where to start paginating.
+                This is the NextToken from a previously truncated response.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+    - name: list-transformers
+      description: Lists the available transformers.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specifies the number of items to return for the API response.
+        --next-token=: When additional results are obtained from the command, a `NextToken` parameter is returned in the output.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      documentation:
+        command: Lists the available transformers. A transformer can take an EDI file as input and transform it into a JSON-or XML-formatted document. Alternatively, a transformer can take a JSON-or XML-formatted document as input and transform it into an EDI file.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            max-items: |-
+                The total number of items to return in the command's output.
+                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+                Do not use the NextToken response element directly outside of the AWS CLI.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            max-results: Specifies the number of items to return for the API response.
+            next-token: When additional results are obtained from the command, a `NextToken` parameter is returned in the output. You can then pass the `NextToken` parameter in a subsequent command to continue listing additional resources.
+            page-size: |-
+                The size of each page to get in the AWS service call.
+                This does not affect the number of items returned in the command's output.
+                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+                This can help prevent the AWS service calls from timing out.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            starting-token: |-
+                A token to specify where to start paginating.
+                This is the NextToken from a previously truncated response.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+    - name: untag-resource
+      description: Detaches a key-value pair from the specified resource, as identified by its Amazon Resource Name (ARN).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: Specifies an Amazon Resource Name (ARN) for a specific Amazon Web Services resource, such as a capability, partnership, profile, or transformer.
+        --tag-keys=!: Specifies the key-value pairs assigned to ARNs that you can use to group and search for resources by type.
+      documentation:
+        command: Detaches a key-value pair from the specified resource, as identified by its Amazon Resource Name (ARN). Resources are capability, partnership, profile, transformers and other entities.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            resource-arn: Specifies an Amazon Resource Name (ARN) for a specific Amazon Web Services resource, such as a capability, partnership, profile, or transformer.
+            tag-keys: Specifies the key-value pairs assigned to ARNs that you can use to group and search for resources by type. You can attach this metadata to resources (capabilities, partnerships, and so on) for any purpose.
+    - name: create-capability
+      description: Instantiates a capability based on the specified parameters.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Reserved for future use.
+        --configuration=!: Specifies a structure that contains the details for a capability.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instructions-documents=: Specifies one or more locations in Amazon S3, each specifying an EDI document that can be used with this capability.
+        --name=!: Specifies the name of the capability, used to identify it.
+        --tags=: Specifies the key-value pairs assigned to ARNs that you can use to group and search for resources by type.
+        --type=!: Specifies the type of the capability.
+      completion:
+        flag:
+            type:
+                - edi
+      documentation:
+        command: Instantiates a capability based on the specified parameters. A trading capability contains the information required to transform incoming EDI documents into JSON or XML outputs.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            client-token: Reserved for future use.
+            configuration: Specifies a structure that contains the details for a capability.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            instructions-documents: Specifies one or more locations in Amazon S3, each specifying an EDI document that can be used with this capability. Each item contains the name of the bucket and the key, to identify the document's location.
+            name: Specifies the name of the capability, used to identify it.
+            tags: Specifies the key-value pairs assigned to ARNs that you can use to group and search for resources by type. You can attach this metadata to resources (capabilities, partnerships, and so on) for any purpose.
+            type: Specifies the type of the capability. Currently, only `edi` is supported.
+    - name: get-partnership
+      description: Retrieves the details for a partnership, based on the partner and profile IDs specified.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --partnership-id=!: Specifies the unique, system-generated identifier for a partnership.
+      documentation:
+        command: Retrieves the details for a partnership, based on the partner and profile IDs specified. A partnership represents the connection between you and your trading partner. It ties together a profile and one or more trading capabilities.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            partnership-id: Specifies the unique, system-generated identifier for a partnership.
+    - name: get-profile
+      description: Retrieves the details for the profile specified by the profile ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profile-id=!: Specifies the unique, system-generated identifier for the profile.
+      documentation:
+        command: Retrieves the details for the profile specified by the profile ID. A profile is the mechanism used to create the concept of a private network.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            profile-id: Specifies the unique, system-generated identifier for the profile.
+    - name: start-transformer-job
+      description: Runs a job, using a transformer, to parse input EDI (electronic data interchange) file into the output structures used by Amazon Web Services B2B Data Interchange.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Reserved for future use.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-file=!: Specifies the location of the input file for the transformation.
+        --output-location=!: Specifies the location of the output file for the transformation.
+        --transformer-id=!: Specifies the system-assigned unique identifier for the transformer.
+      documentation:
+        command: |-
+            Runs a job, using a transformer, to parse input EDI (electronic data interchange) file into the output structures used by Amazon Web Services B2B Data Interchange.
+
+            If you only want to transform EDI (electronic data interchange) documents, you don't need to create profiles, partnerships or capabilities. Just create and configure a transformer, and then run the `StartTransformerJob` API to process your files.
+
+            The system stores transformer jobs for 30 days. During that period, you can run [GetTransformerJob](https://docs.aws.amazon.com/b2bi/latest/APIReference/API_GetTransformerJob.html) and supply its `transformerId` and `transformerJobId` to return details of the job.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            client-token: Reserved for future use.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            input-file: Specifies the location of the input file for the transformation. The location consists of an Amazon S3 bucket and prefix.
+            output-location: Specifies the location of the output file for the transformation. The location consists of an Amazon S3 bucket and prefix.
+            transformer-id: Specifies the system-assigned unique identifier for the transformer.
+    - name: tag-resource
+      description: Attaches a key-value pair to a resource, as identified by its Amazon Resource Name (ARN).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: Specifies an Amazon Resource Name (ARN) for a specific Amazon Web Services resource, such as a capability, partnership, profile, or transformer.
+        --tags=!: Specifies the key-value pairs assigned to ARNs that you can use to group and search for resources by type.
+      documentation:
+        command: |-
+            Attaches a key-value pair to a resource, as identified by its Amazon Resource Name (ARN). Resources are capability, partnership, profile, transformers and other entities.
+
+            There is no response returned from this call.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            resource-arn: Specifies an Amazon Resource Name (ARN) for a specific Amazon Web Services resource, such as a capability, partnership, profile, or transformer.
+            tags: Specifies the key-value pairs assigned to ARNs that you can use to group and search for resources by type. You can attach this metadata to resources (capabilities, partnerships, and so on) for any purpose.
+    - name: create-partnership
+      description: Creates a partnership between a customer and a trading partner, based on the supplied parameters.
+      flags:
+        --capabilities=!: Specifies a list of the capabilities associated with this partnership.
+        --capability-options=: Specify the structure that contains the details for the associated capabilities.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Reserved for future use.
+        --email=!: Specifies the email address associated with this trading partner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: Specifies a descriptive name for the partnership.
+        --phone=: Specifies the phone number associated with the partnership.
+        --profile-id=!: Specifies the unique, system-generated identifier for the profile connected to this partnership.
+        --tags=: Specifies the key-value pairs assigned to ARNs that you can use to group and search for resources by type.
+      documentation:
+        command: Creates a partnership between a customer and a trading partner, based on the supplied parameters. A partnership represents the connection between you and your trading partner. It ties together a profile and one or more trading capabilities.
+        flag:
+            capabilities: Specifies a list of the capabilities associated with this partnership.
+            capability-options: Specify the structure that contains the details for the associated capabilities.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            client-token: Reserved for future use.
+            email: Specifies the email address associated with this trading partner.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            name: Specifies a descriptive name for the partnership.
+            phone: Specifies the phone number associated with the partnership.
+            profile-id: Specifies the unique, system-generated identifier for the profile connected to this partnership.
+            tags: Specifies the key-value pairs assigned to ARNs that you can use to group and search for resources by type. You can attach this metadata to resources (capabilities, partnerships, and so on) for any purpose.
+    - name: create-starter-mapping-template
+      description: Amazon Web Services B2B Data Interchange uses a mapping template in JSONata or XSLT format to transform a customer input file into a JSON or XML file that can be converted to EDI.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mapping-type=!: 'Specify the format for the mapping template: either JSONATA or XSLT.'
+        --output-sample-location=: Specify the location of the sample EDI file that is used to generate the mapping template.
+        --template-details=!: Describes the details needed for generating the template.
+      completion:
+        flag:
+            mapping-type:
+                - JSONATA
+                - XSLT
+      documentation:
+        command: |-
+            Amazon Web Services B2B Data Interchange uses a mapping template in JSONata or XSLT format to transform a customer input file into a JSON or XML file that can be converted to EDI.
+
+            If you provide a sample EDI file with the same structure as the EDI files that you wish to generate, then the service can generate a mapping template. The starter template contains placeholder values which you can replace with JSONata or XSLT expressions to take data from your input file and insert it into the JSON or XML file that is used to generate the EDI.
+
+            If you do not provide a sample EDI file, then the service can generate a mapping template based on the EDI settings in the `templateDetails` parameter.
+
+            Currently, we only support generating a template that can generate the input to produce an Outbound X12 EDI file.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            mapping-type: 'Specify the format for the mapping template: either JSONATA or XSLT.'
+            output-sample-location: Specify the location of the sample EDI file that is used to generate the mapping template.
+            template-details: 'Describes the details needed for generating the template. Specify the X12 transaction set and version for which the template is used: currently, we only support X12.'
+    - name: delete-transformer
+      description: Deletes the specified transformer.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --transformer-id=!: Specifies the system-assigned unique identifier for the transformer.
+      documentation:
+        command: Deletes the specified transformer. A transformer can take an EDI file as input and transform it into a JSON-or XML-formatted document. Alternatively, a transformer can take a JSON-or XML-formatted document as input and transform it into an EDI file.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            transformer-id: Specifies the system-assigned unique identifier for the transformer.
+    - name: get-transformer
+      description: Retrieves the details for the transformer specified by the transformer ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --transformer-id=!: Specifies the system-assigned unique identifier for the transformer.
+      documentation:
+        command: Retrieves the details for the transformer specified by the transformer ID. A transformer can take an EDI file as input and transform it into a JSON-or XML-formatted document. Alternatively, a transformer can take a JSON-or XML-formatted document as input and transform it into an EDI file.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            transformer-id: Specifies the system-assigned unique identifier for the transformer.
+    - name: list-capabilities
+      description: Lists the capabilities associated with your Amazon Web Services account for your current or specified region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specifies the maximum number of capabilities to return.
+        --next-token=: When additional results are obtained from the command, a `NextToken` parameter is returned in the output.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      documentation:
+        command: Lists the capabilities associated with your Amazon Web Services account for your current or specified region. A trading capability contains the information required to transform incoming EDI documents into JSON or XML outputs.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            max-items: |-
+                The total number of items to return in the command's output.
+                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+                Do not use the NextToken response element directly outside of the AWS CLI.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            max-results: Specifies the maximum number of capabilities to return.
+            next-token: When additional results are obtained from the command, a `NextToken` parameter is returned in the output. You can then pass the `NextToken` parameter in a subsequent command to continue listing additional resources.
+            page-size: |-
+                The size of each page to get in the AWS service call.
+                This does not affect the number of items returned in the command's output.
+                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+                This can help prevent the AWS service calls from timing out.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            starting-token: |-
+                A token to specify where to start paginating.
+                This is the NextToken from a previously truncated response.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+    - name: create-transformer
+      description: Creates a transformer.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Reserved for future use.
+        --edi-type=: Specifies the details for the EDI standard that is being used for the transformer.
+        --file-format=: Specifies that the currently supported file formats for EDI transformations are `JSON` and `XML`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-conversion=: Specify the `InputConversion` object, which contains the format options for the inbound transformation.
+        --mapping-template=: Specifies the mapping template for the transformer.
+        --mapping=: Specify the structure that contains the mapping template and its language (either XSLT or JSONATA).
+        --name=!: Specifies the name of the transformer, used to identify it.
+        --output-conversion=: A structure that contains the `OutputConversion` object, which contains the format options for the outbound transformation.
+        --sample-document=: Specifies a sample EDI document that is used by a transformer as a guide for processing the EDI data.
+        --sample-documents=: Specify a structure that contains the Amazon S3 bucket and an array of the corresponding keys used to identify the location for your sample documents.
+        --tags=: Specifies the key-value pairs assigned to ARNs that you can use to group and search for resources by type.
+      completion:
+        flag:
+            file-format:
+                - XML
+                - JSON
+                - NOT_USED
+      documentation:
+        command: |-
+            Creates a transformer. Amazon Web Services B2B Data Interchange currently supports two scenarios:
+
+            - *Inbound EDI*: the Amazon Web Services customer receives an EDI file from their trading partner. Amazon Web Services B2B Data Interchange converts this EDI file into a JSON or XML file with a service-defined structure. A mapping template provided by the customer, in JSONata or XSLT format, is optionally applied to this file to produce a JSON or XML file with the structure the customer requires.
+            - *Outbound EDI*: the Amazon Web Services customer has a JSON or XML file containing data that they wish to use in an EDI file. A mapping template, provided by the customer (in either JSONata or XSLT format) is applied to this file to generate a JSON or XML file in the service-defined structure. This file is then converted to an EDI file.
+
+            The following fields are provided for backwards compatibility only: `fileFormat`, `mappingTemplate`, `ediType`, and `sampleDocument`.
+
+            - Use the `mapping` data type in place of `mappingTemplate` and `fileFormat`
+            - Use the `sampleDocuments` data type in place of `sampleDocument`
+            - Use either the `inputConversion` or `outputConversion` in place of `ediType`
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            client-token: Reserved for future use.
+            edi-type: Specifies the details for the EDI standard that is being used for the transformer. Currently, only X12 is supported. X12 is a set of standards and corresponding messages that define specific business documents.
+            file-format: Specifies that the currently supported file formats for EDI transformations are `JSON` and `XML`.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            input-conversion: Specify the `InputConversion` object, which contains the format options for the inbound transformation.
+            mapping: Specify the structure that contains the mapping template and its language (either XSLT or JSONATA).
+            mapping-template: |-
+                Specifies the mapping template for the transformer. This template is used to map the parsed EDI file using JSONata or XSLT.
+
+                This parameter is available for backwards compatibility. Use the [Mapping](https://docs.aws.amazon.com/b2bi/latest/APIReference/API_Mapping.html) data type instead.
+            name: Specifies the name of the transformer, used to identify it.
+            output-conversion: A structure that contains the `OutputConversion` object, which contains the format options for the outbound transformation.
+            sample-document: Specifies a sample EDI document that is used by a transformer as a guide for processing the EDI data.
+            sample-documents: Specify a structure that contains the Amazon S3 bucket and an array of the corresponding keys used to identify the location for your sample documents.
+            tags: Specifies the key-value pairs assigned to ARNs that you can use to group and search for resources by type. You can attach this metadata to resources (capabilities, partnerships, and so on) for any purpose.
+    - name: generate-mapping
+      description: Takes sample input and output documents and uses Amazon Bedrock to generate a mapping automatically.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-file-content=!: Provide the contents of a sample X12 EDI file, either in JSON or XML format, to use as a starting point for the mapping.
+        --mapping-type=!: 'Specify the mapping type: either `JSONATA` or `XSLT.`'
+        --output-file-content=!: Provide the contents of a sample X12 EDI file, either in JSON or XML format, to use as a target for the mapping.
+      completion:
+        flag:
+            mapping-type:
+                - JSONATA
+                - XSLT
+      documentation:
+        command: |-
+            Takes sample input and output documents and uses Amazon Bedrock to generate a mapping automatically. Depending on the accuracy and other factors, you can then edit the mapping for your needs.
+
+            Before you can use the AI-assisted feature for Amazon Web Services B2B Data Interchange you must enable models in Amazon Bedrock. For details, see [AI-assisted template mapping prerequisites](https://docs.aws.amazon.com/b2bi/latest/userguide/ai-assisted-mapping.html#ai-assist-prereq) in the *Amazon Web Services B2B Data Interchange User guide*.
+
+            To generate a mapping, perform the following steps:
+
+            1. Start with an X12 EDI document to use as the input.
+            2. Call `TestMapping` using your EDI document.
+            3. Use the output from the `TestMapping` operation as either input or output for your GenerateMapping call, along with your sample file.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            input-file-content: Provide the contents of a sample X12 EDI file, either in JSON or XML format, to use as a starting point for the mapping.
+            mapping-type: 'Specify the mapping type: either `JSONATA` or `XSLT.`'
+            output-file-content: Provide the contents of a sample X12 EDI file, either in JSON or XML format, to use as a target for the mapping.
+    - name: wait
+      description: Wait  until  a particular condition is satisfied.
+      commands:
+        - name: transformer-job-succeeded
+          description: Returns the details of the transformer run, based on the Transformer job ID.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --transformer-id=!: Specifies the system-assigned unique identifier for the transformer.
+            --transformer-job-id=!: Specifies the unique, system-generated identifier for a transformer run.
+          documentation:
+            command: |-
+                Returns the details of the transformer run, based on the Transformer job ID.
+
+                If 30 days have elapsed since your transformer job was started, the system deletes it. So, if you run `GetTransformerJob` and supply a `transformerId` and `transformerJobId` for a job that was started more than 30 days previously, you receive a 404 response.
+            flag:
+                cli-input-json: |-
+                    Reads arguments from the JSON string provided.
+                    The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                    It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                    This may  not  be  specified  along with --cli-input-yaml.
+                cli-input-yaml: |-
+                    Reads arguments from the JSON string provided.
+                    The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                    It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                    This may  not  be  specified  along with --cli-input-yaml.
+                generate-cli-skeleton: |-
+                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                    This may  not  be  specified  along with --cli-input-yaml.
+                transformer-id: Specifies the system-assigned unique identifier for the transformer.
+                transformer-job-id: Specifies the unique, system-generated identifier for a transformer run.
+documentation:
+    command: |-
+        This is the *Amazon Web Services B2B Data Interchange API Reference*. It provides descriptions, API request parameters, and the XML response for each of the B2BI API actions.
+
+        B2BI enables automated exchange of EDI (electronic data interchange) based business-critical transactions at cloud scale, with elasticity and pay-as-you-go pricing. Businesses use EDI documents to exchange transactional data with trading partners, such as suppliers and end customers, using standardized formats such as X12.
+
+        Rather than actually running a command, you can use the `--generate-cli-skeleton` parameter with any API call to generate and display a parameter template. You can then use the generated template to customize and use as input on a later command. For details, see [Generate and use a parameter skeleton file](https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-skeleton.html#cli-usage-skeleton-generate).

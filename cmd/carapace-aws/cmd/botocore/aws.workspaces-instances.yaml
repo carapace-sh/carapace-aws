@@ -1,2 +1,469 @@
 name: workspaces-instances
 description: Amazon Workspaces Instances
+commands:
+    - name: create-volume
+      description: Creates a new volume for WorkSpace Instances.
+      flags:
+        --availability-zone=!: Availability zone for the volume.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique token to prevent duplicate volume creation.
+        --encrypted: Indicates if the volume should be encrypted.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --iops=: Input/output operations per second for the volume.
+        --kms-key-id=: KMS key for volume encryption.
+        --no-encrypted: Indicates if the volume should be encrypted.
+        --size-in-gb=: Volume size in gigabytes.
+        --snapshot-id=: Source snapshot for volume creation.
+        --tag-specifications=: Metadata tags for the volume.
+        --throughput=: Volume throughput performance.
+        --volume-type=: Type of EBS volume.
+      completion:
+        flag:
+            volume-type:
+                - standard
+                - io1
+                - io2
+                - gp2
+                - sc1
+                - st1
+                - gp3
+      documentation:
+        command: Creates a new volume for WorkSpace Instances.
+        flag:
+            availability-zone: Availability zone for the volume.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            client-token: Unique token to prevent duplicate volume creation.
+            encrypted: Indicates if the volume should be encrypted.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            iops: Input/output operations per second for the volume.
+            kms-key-id: KMS key for volume encryption.
+            size-in-gb: Volume size in gigabytes.
+            snapshot-id: Source snapshot for volume creation.
+            tag-specifications: Metadata tags for the volume.
+            throughput: Volume throughput performance.
+            volume-type: Type of EBS volume.
+    - name: delete-workspace-instance
+      description: Deletes the specified WorkSpace
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workspace-instance-id=!: Unique identifier of the WorkSpaces Instance targeted for deletion.
+      documentation:
+        command: Deletes the specified WorkSpace
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            workspace-instance-id: Unique identifier of the WorkSpaces Instance targeted for deletion.
+    - name: disassociate-volume
+      description: Detaches a volume from a WorkSpace Instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --device=: Device path of volume to detach.
+        --disassociate-mode=: Mode for volume detachment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --volume-id=!: Volume to be detached.
+        --workspace-instance-id=!: WorkSpace Instance to detach volume from.
+      completion:
+        flag:
+            disassociate-mode:
+                - FORCE
+                - NO_FORCE
+      documentation:
+        command: Detaches a volume from a WorkSpace Instance.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            device: Device path of volume to detach.
+            disassociate-mode: Mode for volume detachment.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            volume-id: Volume to be detached.
+            workspace-instance-id: WorkSpace Instance to detach volume from.
+    - name: list-instance-types
+      description: Retrieves a list of instance types supported by Amazon WorkSpaces Instances, enabling precise workspace infrastructure configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of instance types to return in a single API call.
+        --next-token=: Pagination token for retrieving subsequent pages of instance type results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      documentation:
+        command: Retrieves a list of instance types supported by Amazon WorkSpaces Instances, enabling precise workspace infrastructure configuration.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            max-items: |-
+                The total number of items to return in the command's output.
+                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+                Do not use the NextToken response element directly outside of the AWS CLI.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            max-results: Maximum number of instance types to return in a single API call. Enables pagination of instance type results.
+            next-token: Pagination token for retrieving subsequent pages of instance type results.
+            page-size: |-
+                The size of each page to get in the AWS service call.
+                This does not affect the number of items returned in the command's output.
+                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+                This can help prevent the AWS service calls from timing out.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            starting-token: |-
+                A token to specify where to start paginating.
+                This is the NextToken from a previously truncated response.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+    - name: list-workspace-instances
+      description: Retrieves a collection of WorkSpaces Instances based on specified filters.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of WorkSpaces Instances to return in a single response.
+        --next-token=: Pagination token for retrieving subsequent pages of WorkSpaces Instances.
+        --page-size=: The size of each page to get in the AWS service call.
+        --provision-states=: Filter WorkSpaces Instances by their current provisioning states.
+        --starting-token=: A token to specify where to start paginating.
+      documentation:
+        command: Retrieves a collection of WorkSpaces Instances based on specified filters.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            max-items: |-
+                The total number of items to return in the command's output.
+                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+                Do not use the NextToken response element directly outside of the AWS CLI.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            max-results: Maximum number of WorkSpaces Instances to return in a single response.
+            next-token: Pagination token for retrieving subsequent pages of WorkSpaces Instances.
+            page-size: |-
+                The size of each page to get in the AWS service call.
+                This does not affect the number of items returned in the command's output.
+                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+                This can help prevent the AWS service calls from timing out.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            provision-states: Filter WorkSpaces Instances by their current provisioning states.
+            starting-token: |-
+                A token to specify where to start paginating.
+                This is the NextToken from a previously truncated response.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+    - name: tag-resource
+      description: Adds tags to a WorkSpace Instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=!: Tags to be added to the WorkSpace Instance.
+        --workspace-instance-id=!: Unique identifier of the WorkSpace Instance to tag.
+      documentation:
+        command: Adds tags to a WorkSpace Instance.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            tags: Tags to be added to the WorkSpace Instance.
+            workspace-instance-id: Unique identifier of the WorkSpace Instance to tag.
+    - name: associate-volume
+      description: Attaches a volume to a WorkSpace Instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --device=!: Device path for volume attachment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --volume-id=!: Volume to be attached.
+        --workspace-instance-id=!: WorkSpace Instance to attach volume to.
+      documentation:
+        command: Attaches a volume to a WorkSpace Instance.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            device: Device path for volume attachment.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            volume-id: Volume to be attached.
+            workspace-instance-id: WorkSpace Instance to attach volume to.
+    - name: create-workspace-instance
+      description: Launches a new WorkSpace Instance with specified configuration parameters, enabling programmatic workspace deployment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique token to ensure idempotent instance creation, preventing duplicate workspace launches.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --managed-instance=!: Comprehensive configuration settings for the WorkSpaces Instance, including network, compute, and storage parameters.
+        --tags=: Optional metadata tags for categorizing and managing WorkSpaces Instances.
+      documentation:
+        command: Launches a new WorkSpace Instance with specified configuration parameters, enabling programmatic workspace deployment.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            client-token: Unique token to ensure idempotent instance creation, preventing duplicate workspace launches.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            managed-instance: Comprehensive configuration settings for the WorkSpaces Instance, including network, compute, and storage parameters.
+            tags: Optional metadata tags for categorizing and managing WorkSpaces Instances.
+    - name: delete-volume
+      description: Deletes a specified volume.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --volume-id=!: Identifier of the volume to delete.
+      documentation:
+        command: Deletes a specified volume.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            volume-id: Identifier of the volume to delete.
+    - name: get-workspace-instance
+      description: Retrieves detailed information about a specific WorkSpace Instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workspace-instance-id=!: Unique identifier of the WorkSpace Instance to retrieve.
+      documentation:
+        command: Retrieves detailed information about a specific WorkSpace Instance.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            workspace-instance-id: Unique identifier of the WorkSpace Instance to retrieve.
+    - name: list-regions
+      description: Retrieves a list of AWS regions supported by Amazon WorkSpaces Instances, enabling region discovery for workspace deployments.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of regions to return in a single API call.
+        --next-token=: Pagination token for retrieving subsequent pages of region results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      documentation:
+        command: Retrieves a list of AWS regions supported by Amazon WorkSpaces Instances, enabling region discovery for workspace deployments.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            max-items: |-
+                The total number of items to return in the command's output.
+                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+                Do not use the NextToken response element directly outside of the AWS CLI.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            max-results: Maximum number of regions to return in a single API call. Enables pagination of region results.
+            next-token: Pagination token for retrieving subsequent pages of region results.
+            page-size: |-
+                The size of each page to get in the AWS service call.
+                This does not affect the number of items returned in the command's output.
+                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+                This can help prevent the AWS service calls from timing out.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            starting-token: |-
+                A token to specify where to start paginating.
+                This is the NextToken from a previously truncated response.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+    - name: list-tags-for-resource
+      description: Retrieves tags for a WorkSpace Instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workspace-instance-id=!: Unique identifier of the WorkSpace Instance.
+      documentation:
+        command: Retrieves tags for a WorkSpace Instance.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            workspace-instance-id: Unique identifier of the WorkSpace Instance.
+    - name: untag-resource
+      description: Removes tags from a WorkSpace Instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tag-keys=!: Keys of tags to be removed.
+        --workspace-instance-id=!: Unique identifier of the WorkSpace Instance to untag.
+      documentation:
+        command: Removes tags from a WorkSpace Instance.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            tag-keys: Keys of tags to be removed.
+            workspace-instance-id: Unique identifier of the WorkSpace Instance to untag.
+documentation:
+    command: Amazon WorkSpaces Instances provides an API framework for managing virtual workspace environments across multiple AWS regions, enabling programmatic creation and configuration of desktop infrastructure.

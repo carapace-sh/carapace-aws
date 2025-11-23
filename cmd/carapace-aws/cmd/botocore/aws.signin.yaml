@@ -1,2 +1,60 @@
 name: signin
 description: AWS Sign-In Service
+commands:
+    - name: create-o-auth2-token
+      description: CreateOAuth2Token API
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --token-input=!: Flattened token operation inputs The specific operation is determined by grant\_type in the request body
+      documentation:
+        command: |-
+            CreateOAuth2Token API
+
+            Path: /v1/token Request Method: POST Content-Type: application/json or application/x-www-form-urlencoded
+
+            This API implements OAuth 2.0 flows for AWS Sign-In CLI clients, supporting both:
+
+            1. Authorization code redemption (grant\_type=authorization\_code) - NOT idempotent
+            2. Token refresh (grant\_type=refresh\_token) - Idempotent within token validity window
+
+            The operation behavior is determined by the grant\_type parameter in the request body:
+
+            **Authorization Code Flow (NOT Idempotent):**
+
+            - JSON or form-encoded body with client\_id, grant\_type=authorization\_code, code, redirect\_uri, code\_verifier
+            - Returns access\_token, token\_type, expires\_in, refresh\_token, and id\_token
+            - Each authorization code can only be used ONCE for security (prevents replay attacks)
+
+            **Token Refresh Flow (Idempotent):**
+
+            - JSON or form-encoded body with client\_id, grant\_type=refresh\_token, refresh\_token
+            - Returns access\_token, token\_type, expires\_in, and refresh\_token (no id\_token)
+            - Multiple calls with same refresh\_token return consistent results within validity window
+
+            Authentication and authorization:
+
+            - Confidential clients: sigv4 signing required with signin:ExchangeToken permissions
+            - CLI clients (public): authn/authz skipped based on client\_id &amp; grant\_type
+
+            Note: This operation cannot be marked as @idempotent because it handles both idempotent (token refresh) and non-idempotent (auth code redemption) flows in a single endpoint.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            token-input: Flattened token operation inputs The specific operation is determined by grant\_type in the request body
+documentation:
+    command: AWS Sign-In manages authentication for AWS services. This service provides secure authentication flows for accessing AWS resources from the console and developer tools.

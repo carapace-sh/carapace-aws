@@ -1,2 +1,1406 @@
 name: m2
 description: AWSMainframeModernization
+commands:
+    - name: create-deployment
+      description: Creates and starts a deployment to deploy an application into a runtime environment.
+      flags:
+        --application-id=!: The application identifier.
+        --application-version=!: The version of the application to deploy.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique, case-sensitive identifier you provide to ensure the idempotency of the request to create a deployment.
+        --environment-id=!: The identifier of the runtime environment where you want to deploy this application.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      documentation:
+        command: Creates and starts a deployment to deploy an application into a runtime environment.
+        flag:
+            application-id: The application identifier.
+            application-version: The version of the application to deploy.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            client-token: Unique, case-sensitive identifier you provide to ensure the idempotency of the request to create a deployment. The service generates the clientToken when the API call is triggered. The token expires after one hour, so if you retry the API within this timeframe with the same clientToken, you will get the same response. The service also handles deleting the clientToken after it expires.
+            environment-id: The identifier of the runtime environment where you want to deploy this application.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+    - name: list-batch-job-executions
+      description: Lists historical, current, and scheduled batch job executions for a specific application.
+      flags:
+        --application-id=!: The unique identifier of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --execution-ids=: The unique identifier of each batch job execution.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-name=: The name of each batch job execution.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of batch job executions to return.
+        --next-token=: A pagination token to control the number of batch job executions displayed in the list.
+        --page-size=: The size of each page to get in the AWS service call.
+        --started-after=: The time after which the batch job executions started.
+        --started-before=: The time before the batch job executions started.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: The status of the batch job executions.
+      completion:
+        flag:
+            status:
+                - Submitting
+                - Holding
+                - Dispatching
+                - Running
+                - Cancelling
+                - Cancelled
+                - Succeeded
+                - Failed
+                - Purged
+                - Succeeded With Warning
+      documentation:
+        command: Lists historical, current, and scheduled batch job executions for a specific application.
+        flag:
+            application-id: The unique identifier of the application.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            execution-ids: The unique identifier of each batch job execution.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            job-name: The name of each batch job execution.
+            max-items: |-
+                The total number of items to return in the command's output.
+                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+                Do not use the NextToken response element directly outside of the AWS CLI.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            max-results: The maximum number of batch job executions to return.
+            next-token: A pagination token to control the number of batch job executions displayed in the list.
+            page-size: |-
+                The size of each page to get in the AWS service call.
+                This does not affect the number of items returned in the command's output.
+                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+                This can help prevent the AWS service calls from timing out.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            started-after: The time after which the batch job executions started.
+            started-before: The time before the batch job executions started.
+            starting-token: |-
+                A token to specify where to start paginating.
+                This is the NextToken from a previously truncated response.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            status: The status of the batch job executions.
+    - name: create-environment
+      description: Creates a runtime environment for a given runtime engine.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique, case-sensitive identifier you provide to ensure the idempotency of the request to create an environment.
+        --description=: The description of the runtime environment.
+        --engine-type=!: The engine type for the runtime environment.
+        --engine-version=: The version of the engine type for the runtime environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --high-availability-config=: The details of a high availability configuration for this runtime environment.
+        --instance-type=!: The type of instance for the runtime environment.
+        --kms-key-id=: The identifier of a customer managed key.
+        --name=!: The name of the runtime environment.
+        --network-type=: The network type required for the runtime environment.
+        --no-publicly-accessible: Specifies whether the runtime environment is publicly accessible.
+        --preferred-maintenance-window=: Configures the maintenance window that you want for the runtime environment.
+        --publicly-accessible: Specifies whether the runtime environment is publicly accessible.
+        --security-group-ids=: The list of security groups for the VPC associated with this runtime environment.
+        --storage-configurations=: Optional.
+        --subnet-ids=: The list of subnets associated with the VPC for this runtime environment.
+        --tags=: The tags for the runtime environment.
+      completion:
+        flag:
+            engine-type:
+                - microfocus
+                - bluage
+            network-type:
+                - ipv4
+                - dual
+      documentation:
+        command: Creates a runtime environment for a given runtime engine.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            client-token: Unique, case-sensitive identifier you provide to ensure the idempotency of the request to create an environment. The service generates the clientToken when the API call is triggered. The token expires after one hour, so if you retry the API within this timeframe with the same clientToken, you will get the same response. The service also handles deleting the clientToken after it expires.
+            description: The description of the runtime environment.
+            engine-type: The engine type for the runtime environment.
+            engine-version: The version of the engine type for the runtime environment.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            high-availability-config: The details of a high availability configuration for this runtime environment.
+            instance-type: The type of instance for the runtime environment.
+            kms-key-id: The identifier of a customer managed key.
+            name: The name of the runtime environment. Must be unique within the account.
+            network-type: The network type required for the runtime environment.
+            preferred-maintenance-window: |-
+                Configures the maintenance window that you want for the runtime environment. The maintenance window must have the format `ddd:hh24:mi-ddd:hh24:mi` and must be less than 24 hours. The following two examples are valid maintenance windows: `sun:23:45-mon:00:15` or `sat:01:00-sat:03:00`.
+
+                If you do not provide a value, a random system-generated value will be assigned.
+            publicly-accessible: Specifies whether the runtime environment is publicly accessible.
+            security-group-ids: The list of security groups for the VPC associated with this runtime environment.
+            storage-configurations: Optional. The storage configurations for this runtime environment.
+            subnet-ids: The list of subnets associated with the VPC for this runtime environment.
+            tags: The tags for the runtime environment.
+    - name: get-application-version
+      description: Returns details about a specific version of a specific application.
+      flags:
+        --application-id=!: The unique identifier of the application.
+        --application-version=!: The specific version of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      documentation:
+        command: Returns details about a specific version of a specific application.
+        flag:
+            application-id: The unique identifier of the application.
+            application-version: The specific version of the application.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+    - name: get-deployment
+      description: Gets details of a specific deployment with a given deployment identifier.
+      flags:
+        --application-id=!: The unique identifier of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --deployment-id=!: The unique identifier for the deployment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      documentation:
+        command: Gets details of a specific deployment with a given deployment identifier.
+        flag:
+            application-id: The unique identifier of the application.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            deployment-id: The unique identifier for the deployment.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+    - name: list-data-sets
+      description: Lists the data sets imported for a specific application.
+      flags:
+        --application-id=!: The unique identifier of the application for which you want to list the associated data sets.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of objects to return.
+        --name-filter=: Filter dataset name matching the specified pattern.
+        --next-token=: A pagination token returned from a previous call to this operation.
+        --page-size=: The size of each page to get in the AWS service call.
+        --prefix=: The prefix of the data set name, which you can use to filter the list of data sets.
+        --starting-token=: A token to specify where to start paginating.
+      documentation:
+        command: Lists the data sets imported for a specific application. In Amazon Web Services Mainframe Modernization, data sets are associated with applications deployed on runtime environments. This is known as importing data sets. Currently, Amazon Web Services Mainframe Modernization can import data sets into catalogs using [CreateDataSetImportTask](https://docs.aws.amazon.com/m2/latest/APIReference/API_CreateDataSetImportTask.html).
+        flag:
+            application-id: The unique identifier of the application for which you want to list the associated data sets.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            max-items: |-
+                The total number of items to return in the command's output.
+                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+                Do not use the NextToken response element directly outside of the AWS CLI.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            max-results: The maximum number of objects to return.
+            name-filter: Filter dataset name matching the specified pattern. Can use * and % as wild cards.
+            next-token: A pagination token returned from a previous call to this operation. This specifies the next item to return. To return to the beginning of the list, exclude this parameter.
+            page-size: |-
+                The size of each page to get in the AWS service call.
+                This does not affect the number of items returned in the command's output.
+                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+                This can help prevent the AWS service calls from timing out.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            prefix: The prefix of the data set name, which you can use to filter the list of data sets.
+            starting-token: |-
+                A token to specify where to start paginating.
+                This is the NextToken from a previously truncated response.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+    - name: update-environment
+      description: Updates the configuration details for a specific runtime environment.
+      flags:
+        --apply-during-maintenance-window: Indicates whether to update the runtime environment during the maintenance window.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --desired-capacity=: The desired capacity for the runtime environment to update.
+        --engine-version=: The version of the runtime engine for the runtime environment.
+        --environment-id=!: The unique identifier of the runtime environment that you want to update.
+        --force-update: Forces the updates on the environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-type=: The instance type for the runtime environment to update.
+        --no-apply-during-maintenance-window: Indicates whether to update the runtime environment during the maintenance window.
+        --no-force-update: Forces the updates on the environment.
+        --preferred-maintenance-window=: Configures the maintenance window that you want for the runtime environment.
+      documentation:
+        command: Updates the configuration details for a specific runtime environment.
+        flag:
+            apply-during-maintenance-window: Indicates whether to update the runtime environment during the maintenance window. The default is false. Currently, Amazon Web Services Mainframe Modernization accepts the `engineVersion` parameter only if `applyDuringMaintenanceWindow` is true. If any parameter other than `engineVersion` is provided in `UpdateEnvironmentRequest`, it will fail if `applyDuringMaintenanceWindow` is set to true.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            desired-capacity: The desired capacity for the runtime environment to update. The minimum possible value is 0 and the maximum is 100.
+            engine-version: The version of the runtime engine for the runtime environment.
+            environment-id: The unique identifier of the runtime environment that you want to update.
+            force-update: |-
+                Forces the updates on the environment. This option is needed if the applications in the environment are not stopped or if there are ongoing application-related activities in the environment.
+
+                If you use this option, be aware that it could lead to data corruption in the applications, and that you might need to perform repair and recovery procedures for the applications.
+
+                This option is not needed if the attribute being updated is `preferredMaintenanceWindow`.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            instance-type: The instance type for the runtime environment to update.
+            preferred-maintenance-window: |-
+                Configures the maintenance window that you want for the runtime environment. The maintenance window must have the format `ddd:hh24:mi-ddd:hh24:mi` and must be less than 24 hours. The following two examples are valid maintenance windows: `sun:23:45-mon:00:15` or `sat:01:00-sat:03:00`.
+
+                If you do not provide a value, a random system-generated value will be assigned.
+    - name: cancel-batch-job-execution
+      description: Cancels the running of a specific batch job execution.
+      flags:
+        --application-id=!: The unique identifier of the application.
+        --auth-secrets-manager-arn=: The Amazon Web Services Secrets Manager containing user's credentials for authentication and authorization for Cancel Batch Job Execution operation.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --execution-id=!: The unique identifier of the batch job execution.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      documentation:
+        command: Cancels the running of a specific batch job execution.
+        flag:
+            application-id: The unique identifier of the application.
+            auth-secrets-manager-arn: The Amazon Web Services Secrets Manager containing user's credentials for authentication and authorization for Cancel Batch Job Execution operation.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            execution-id: The unique identifier of the batch job execution.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+    - name: delete-environment
+      description: Deletes a specific runtime environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=!: The unique identifier of the runtime environment you want to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      documentation:
+        command: Deletes a specific runtime environment. The environment cannot contain deployed applications. If it does, you must delete those applications before you delete the environment.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            environment-id: The unique identifier of the runtime environment you want to delete.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+    - name: get-data-set-export-task
+      description: Gets the status of a data set import task initiated with the [CreateDataSetExportTask]() operation.
+      flags:
+        --application-id=!: The application identifier.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --task-id=!: The task identifier returned by the [CreateDataSetExportTask]() operation.
+      documentation:
+        command: Gets the status of a data set import task initiated with the [CreateDataSetExportTask]() operation.
+        flag:
+            application-id: The application identifier.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            task-id: The task identifier returned by the [CreateDataSetExportTask]() operation.
+    - name: list-application-versions
+      description: Returns a list of the application versions for a specific application.
+      flags:
+        --application-id=!: The unique identifier of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of application versions to return.
+        --next-token=: A pagination token returned from a previous call to this operation.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      documentation:
+        command: Returns a list of the application versions for a specific application.
+        flag:
+            application-id: The unique identifier of the application.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            max-items: |-
+                The total number of items to return in the command's output.
+                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+                Do not use the NextToken response element directly outside of the AWS CLI.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            max-results: The maximum number of application versions to return.
+            next-token: A pagination token returned from a previous call to this operation. This specifies the next item to return. To return to the beginning of the list, exclude this parameter.
+            page-size: |-
+                The size of each page to get in the AWS service call.
+                This does not affect the number of items returned in the command's output.
+                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+                This can help prevent the AWS service calls from timing out.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            starting-token: |-
+                A token to specify where to start paginating.
+                This is the NextToken from a previously truncated response.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+    - name: untag-resource
+      description: Removes one or more tags from the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+        --tag-keys=!: The keys of the tags to remove.
+      documentation:
+        command: Removes one or more tags from the specified resource.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            resource-arn: The Amazon Resource Name (ARN) of the resource.
+            tag-keys: The keys of the tags to remove.
+    - name: create-data-set-export-task
+      description: Starts a data set export task for a specific application.
+      flags:
+        --application-id=!: The unique identifier of the application for which you want to export data sets.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique, case-sensitive identifier you provide to ensure the idempotency of the request to create a data set export.
+        --export-config=!: The data set export task configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-id=: The identifier of a customer managed key.
+      documentation:
+        command: Starts a data set export task for a specific application.
+        flag:
+            application-id: The unique identifier of the application for which you want to export data sets.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            client-token: Unique, case-sensitive identifier you provide to ensure the idempotency of the request to create a data set export. The service generates the clientToken when the API call is triggered. The token expires after one hour, so if you retry the API within this timeframe with the same clientToken, you will get the same response. The service also handles deleting the clientToken after it expires.
+            export-config: The data set export task configuration.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            kms-key-id: The identifier of a customer managed key.
+    - name: create-data-set-import-task
+      description: Starts a data set import task for a specific application.
+      flags:
+        --application-id=!: The unique identifier of the application for which you want to import data sets.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique, case-sensitive identifier you provide to ensure the idempotency of the request to create a data set import.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --import-config=!: The data set import task configuration.
+      documentation:
+        command: Starts a data set import task for a specific application.
+        flag:
+            application-id: The unique identifier of the application for which you want to import data sets.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            client-token: Unique, case-sensitive identifier you provide to ensure the idempotency of the request to create a data set import. The service generates the clientToken when the API call is triggered. The token expires after one hour, so if you retry the API within this timeframe with the same clientToken, you will get the same response. The service also handles deleting the clientToken after it expires.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            import-config: The data set import task configuration.
+    - name: delete-application
+      description: Deletes a specific application.
+      flags:
+        --application-id=!: The unique identifier of the application you want to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      documentation:
+        command: Deletes a specific application. You cannot delete a running application.
+        flag:
+            application-id: The unique identifier of the application you want to delete.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+    - name: get-data-set-details
+      description: Gets the details of a specific data set.
+      flags:
+        --application-id=!: The unique identifier of the application that this data set is associated with.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-set-name=!: The name of the data set.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      documentation:
+        command: Gets the details of a specific data set.
+        flag:
+            application-id: The unique identifier of the application that this data set is associated with.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            data-set-name: The name of the data set.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+    - name: list-batch-job-restart-points
+      description: Lists all the job steps for a JCL file to restart a batch job.
+      flags:
+        --application-id=!: The unique identifier of the application.
+        --auth-secrets-manager-arn=: The Amazon Web Services Secrets Manager containing user's credentials for authentication and authorization for List Batch Job Restart Points operation.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --execution-id=!: The unique identifier of the batch job execution.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      documentation:
+        command: Lists all the job steps for a JCL file to restart a batch job. This is only applicable for Micro Focus engine with versions 8.0.6 and above.
+        flag:
+            application-id: The unique identifier of the application.
+            auth-secrets-manager-arn: The Amazon Web Services Secrets Manager containing user's credentials for authentication and authorization for List Batch Job Restart Points operation.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            execution-id: The unique identifier of the batch job execution.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+    - name: list-environments
+      description: Lists the runtime environments.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --engine-type=: The engine type for the runtime environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of runtime environments to return.
+        --names=: The names of the runtime environments.
+        --next-token=: A pagination token to control the number of runtime environments displayed in the list.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            engine-type:
+                - microfocus
+                - bluage
+      documentation:
+        command: Lists the runtime environments.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            engine-type: The engine type for the runtime environment.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            max-items: |-
+                The total number of items to return in the command's output.
+                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+                Do not use the NextToken response element directly outside of the AWS CLI.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            max-results: The maximum number of runtime environments to return.
+            names: The names of the runtime environments. Must be unique within the account.
+            next-token: A pagination token to control the number of runtime environments displayed in the list.
+            page-size: |-
+                The size of each page to get in the AWS service call.
+                This does not affect the number of items returned in the command's output.
+                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+                This can help prevent the AWS service calls from timing out.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            starting-token: |-
+                A token to specify where to start paginating.
+                This is the NextToken from a previously truncated response.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+    - name: create-application
+      description: Creates a new application with given parameters.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A client token is a unique, case-sensitive string of up to 128 ASCII characters with ASCII values of 33-126 inclusive.
+        --definition=!: The application definition for this application.
+        --description=: The description of the application.
+        --engine-type=!: The type of the target platform for this application.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-id=: The identifier of a customer managed key.
+        --name=!: The unique identifier of the application.
+        --role-arn=: The Amazon Resource Name (ARN) that identifies a role that the application uses to access Amazon Web Services resources that are not part of the application or are in a different Amazon Web Services account.
+        --tags=: A list of tags to apply to the application.
+      completion:
+        flag:
+            engine-type:
+                - microfocus
+                - bluage
+      documentation:
+        command: Creates a new application with given parameters. Requires an existing runtime environment and application definition file.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            client-token: A client token is a unique, case-sensitive string of up to 128 ASCII characters with ASCII values of 33-126 inclusive. It's generated by the client to ensure idempotent operations, allowing for safe retries without unintended side effects.
+            definition: The application definition for this application. You can specify either inline JSON or an S3 bucket location.
+            description: The description of the application.
+            engine-type: The type of the target platform for this application.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            kms-key-id: The identifier of a customer managed key.
+            name: The unique identifier of the application.
+            role-arn: The Amazon Resource Name (ARN) that identifies a role that the application uses to access Amazon Web Services resources that are not part of the application or are in a different Amazon Web Services account.
+            tags: A list of tags to apply to the application.
+    - name: get-batch-job-execution
+      description: Gets the details of a specific batch job execution for a specific application.
+      flags:
+        --application-id=!: The identifier of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --execution-id=!: The unique identifier of the batch job execution.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      documentation:
+        command: Gets the details of a specific batch job execution for a specific application.
+        flag:
+            application-id: The identifier of the application.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            execution-id: The unique identifier of the batch job execution.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+    - name: list-batch-job-definitions
+      description: Lists all the available batch job definitions based on the batch job resources uploaded during the application creation.
+      flags:
+        --application-id=!: The identifier of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of batch job definitions to return.
+        --next-token=: A pagination token returned from a previous call to this operation.
+        --page-size=: The size of each page to get in the AWS service call.
+        --prefix=: If the batch job definition is a FileBatchJobDefinition, the prefix allows you to search on the file names of FileBatchJobDefinitions.
+        --starting-token=: A token to specify where to start paginating.
+      documentation:
+        command: Lists all the available batch job definitions based on the batch job resources uploaded during the application creation. You can use the batch job definitions in the list to start a batch job.
+        flag:
+            application-id: The identifier of the application.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            max-items: |-
+                The total number of items to return in the command's output.
+                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+                Do not use the NextToken response element directly outside of the AWS CLI.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            max-results: The maximum number of batch job definitions to return.
+            next-token: A pagination token returned from a previous call to this operation. This specifies the next item to return. To return to the beginning of the list, exclude this parameter.
+            page-size: |-
+                The size of each page to get in the AWS service call.
+                This does not affect the number of items returned in the command's output.
+                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+                This can help prevent the AWS service calls from timing out.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            prefix: If the batch job definition is a FileBatchJobDefinition, the prefix allows you to search on the file names of FileBatchJobDefinitions.
+            starting-token: |-
+                A token to specify where to start paginating.
+                This is the NextToken from a previously truncated response.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+    - name: list-engine-versions
+      description: Lists the available engine versions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --engine-type=: The type of target platform.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of objects to return.
+        --next-token=: A pagination token returned from a previous call to this operation.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            engine-type:
+                - microfocus
+                - bluage
+      documentation:
+        command: Lists the available engine versions.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            engine-type: The type of target platform.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            max-items: |-
+                The total number of items to return in the command's output.
+                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+                Do not use the NextToken response element directly outside of the AWS CLI.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            max-results: The maximum number of objects to return.
+            next-token: A pagination token returned from a previous call to this operation. This specifies the next item to return. To return to the beginning of the list, exclude this parameter.
+            page-size: |-
+                The size of each page to get in the AWS service call.
+                This does not affect the number of items returned in the command's output.
+                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+                This can help prevent the AWS service calls from timing out.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            starting-token: |-
+                A token to specify where to start paginating.
+                This is the NextToken from a previously truncated response.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+    - name: delete-application-from-environment
+      description: Deletes a specific application from the specific runtime environment where it was previously deployed.
+      flags:
+        --application-id=!: The unique identifier of the application you want to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=!: The unique identifier of the runtime environment where the application was previously deployed.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      documentation:
+        command: Deletes a specific application from the specific runtime environment where it was previously deployed. You cannot delete a runtime environment using DeleteEnvironment if any application has ever been deployed to it. This API removes the association of the application with the runtime environment so you can delete the environment smoothly.
+        flag:
+            application-id: The unique identifier of the application you want to delete.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            environment-id: The unique identifier of the runtime environment where the application was previously deployed.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+    - name: get-application
+      description: Describes the details of a specific application.
+      flags:
+        --application-id=!: The identifier of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      documentation:
+        command: Describes the details of a specific application.
+        flag:
+            application-id: The identifier of the application.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+    - name: get-environment
+      description: Describes a specific runtime environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=!: The unique identifier of the runtime environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      documentation:
+        command: Describes a specific runtime environment.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            environment-id: The unique identifier of the runtime environment.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+    - name: list-applications
+      description: Lists the applications associated with a specific Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=: The unique identifier of the runtime environment where the applications are deployed.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of applications to return.
+        --names=: The names of the applications.
+        --next-token=: A pagination token to control the number of applications displayed in the list.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      documentation:
+        command: Lists the applications associated with a specific Amazon Web Services account. You can provide the unique identifier of a specific runtime environment in a query parameter to see all applications associated with that environment.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            environment-id: The unique identifier of the runtime environment where the applications are deployed.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            max-items: |-
+                The total number of items to return in the command's output.
+                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+                Do not use the NextToken response element directly outside of the AWS CLI.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            max-results: The maximum number of applications to return.
+            names: The names of the applications.
+            next-token: A pagination token to control the number of applications displayed in the list.
+            page-size: |-
+                The size of each page to get in the AWS service call.
+                This does not affect the number of items returned in the command's output.
+                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+                This can help prevent the AWS service calls from timing out.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            starting-token: |-
+                A token to specify where to start paginating.
+                This is the NextToken from a previously truncated response.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+    - name: list-tags-for-resource
+      description: Lists the tags for the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+      documentation:
+        command: Lists the tags for the specified resource.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            resource-arn: The Amazon Resource Name (ARN) of the resource.
+    - name: update-application
+      description: Updates an application and creates a new version.
+      flags:
+        --application-id=!: The unique identifier of the application you want to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --current-application-version=!: The current version of the application to update.
+        --definition=: The application definition for this application.
+        --description=: The description of the application to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      documentation:
+        command: Updates an application and creates a new version.
+        flag:
+            application-id: The unique identifier of the application you want to update.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            current-application-version: The current version of the application to update.
+            definition: The application definition for this application. You can specify either inline JSON or an S3 bucket location.
+            description: The description of the application to update.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+    - name: get-data-set-import-task
+      description: Gets the status of a data set import task initiated with the [CreateDataSetImportTask]() operation.
+      flags:
+        --application-id=!: The application identifier.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --task-id=!: The task identifier returned by the [CreateDataSetImportTask]() operation.
+      documentation:
+        command: Gets the status of a data set import task initiated with the [CreateDataSetImportTask]() operation.
+        flag:
+            application-id: The application identifier.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            task-id: The task identifier returned by the [CreateDataSetImportTask]() operation.
+    - name: list-data-set-import-history
+      description: Lists the data set imports for the specified application.
+      flags:
+        --application-id=!: The unique identifier of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of objects to return.
+        --next-token=: A pagination token returned from a previous call to this operation.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      documentation:
+        command: Lists the data set imports for the specified application.
+        flag:
+            application-id: The unique identifier of the application.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            max-items: |-
+                The total number of items to return in the command's output.
+                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+                Do not use the NextToken response element directly outside of the AWS CLI.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            max-results: The maximum number of objects to return.
+            next-token: A pagination token returned from a previous call to this operation. This specifies the next item to return. To return to the beginning of the list, exclude this parameter.
+            page-size: |-
+                The size of each page to get in the AWS service call.
+                This does not affect the number of items returned in the command's output.
+                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+                This can help prevent the AWS service calls from timing out.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            starting-token: |-
+                A token to specify where to start paginating.
+                This is the NextToken from a previously truncated response.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+    - name: list-deployments
+      description: Returns a list of all deployments of a specific application.
+      flags:
+        --application-id=!: The application identifier.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of objects to return.
+        --next-token=: A pagination token returned from a previous call to this operation.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      documentation:
+        command: Returns a list of all deployments of a specific application. A deployment is a combination of a specific application and a specific version of that application. Each deployment is mapped to a particular application version.
+        flag:
+            application-id: The application identifier.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            max-items: |-
+                The total number of items to return in the command's output.
+                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+                Do not use the NextToken response element directly outside of the AWS CLI.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            max-results: The maximum number of objects to return.
+            next-token: A pagination token returned from a previous call to this operation. This specifies the next item to return. To return to the beginning of the list, exclude this parameter.
+            page-size: |-
+                The size of each page to get in the AWS service call.
+                This does not affect the number of items returned in the command's output.
+                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+                This can help prevent the AWS service calls from timing out.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            starting-token: |-
+                A token to specify where to start paginating.
+                This is the NextToken from a previously truncated response.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+    - name: tag-resource
+      description: Adds one or more tags to the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+        --tags=!: The tags to add to the resource.
+      documentation:
+        command: Adds one or more tags to the specified resource.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            resource-arn: The Amazon Resource Name (ARN) of the resource.
+            tags: The tags to add to the resource.
+    - name: get-signed-bluinsights-url
+      description: Gets a single sign-on URL that can be used to connect to AWS Blu Insights.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      documentation:
+        command: Gets a single sign-on URL that can be used to connect to AWS Blu Insights.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+    - name: list-data-set-export-history
+      description: Lists the data set exports for the specified application.
+      flags:
+        --application-id=!: The unique identifier of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of objects to return.
+        --next-token=: A pagination token returned from a previous call to this operation.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      documentation:
+        command: Lists the data set exports for the specified application.
+        flag:
+            application-id: The unique identifier of the application.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            max-items: |-
+                The total number of items to return in the command's output.
+                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+                Do not use the NextToken response element directly outside of the AWS CLI.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            max-results: The maximum number of objects to return.
+            next-token: A pagination token returned from a previous call to this operation. This specifies the next item to return. To return to the beginning of the list, exclude this parameter.
+            page-size: |-
+                The size of each page to get in the AWS service call.
+                This does not affect the number of items returned in the command's output.
+                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+                This can help prevent the AWS service calls from timing out.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            starting-token: |-
+                A token to specify where to start paginating.
+                This is the NextToken from a previously truncated response.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+    - name: start-application
+      description: Starts an application that is currently stopped.
+      flags:
+        --application-id=!: The unique identifier of the application you want to start.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      documentation:
+        command: Starts an application that is currently stopped.
+        flag:
+            application-id: The unique identifier of the application you want to start.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+    - name: start-batch-job
+      description: Starts a batch job and returns the unique identifier of this execution of the batch job.
+      flags:
+        --application-id=!: The unique identifier of the application associated with this batch job.
+        --auth-secrets-manager-arn=: The Amazon Web Services Secrets Manager containing user's credentials for authentication and authorization for Start Batch Job execution operation.
+        --batch-job-identifier=!: The unique identifier of the batch job.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-params=: The collection of batch job parameters.
+      documentation:
+        command: Starts a batch job and returns the unique identifier of this execution of the batch job. The associated application must be running in order to start the batch job.
+        flag:
+            application-id: The unique identifier of the application associated with this batch job.
+            auth-secrets-manager-arn: The Amazon Web Services Secrets Manager containing user's credentials for authentication and authorization for Start Batch Job execution operation.
+            batch-job-identifier: The unique identifier of the batch job.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            job-params: The collection of batch job parameters. For details about limits for keys and values, see [Coding variables in JCL](https://www.ibm.com/docs/en/workload-automation/9.3.0?topic=zos-coding-variables-in-jcl).
+    - name: stop-application
+      description: Stops a running application.
+      flags:
+        --application-id=!: The unique identifier of the application you want to stop.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --force-stop: Stopping an application process can take a long time.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-force-stop: Stopping an application process can take a long time.
+      documentation:
+        command: Stops a running application.
+        flag:
+            application-id: The unique identifier of the application you want to stop.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            force-stop: Stopping an application process can take a long time. Setting this parameter to true lets you force stop the application so you don't need to wait until the process finishes to apply another action on the application. The default value is false.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+documentation:
+    command: Amazon Web Services Mainframe Modernization provides tools and resources to help you plan and implement migration and modernization from mainframes to Amazon Web Services managed runtime environments. It provides tools for analyzing existing mainframe applications, developing or updating mainframe applications using COBOL or PL/I, and implementing an automated pipeline for continuous integration and continuous delivery (CI/CD) of the applications.
