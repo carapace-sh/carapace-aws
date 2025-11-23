@@ -1,39 +1,21 @@
 name: dynamodbstreams
 description: Amazon DynamoDB Streams
 commands:
-    - name: list-streams
-      description: Returns an array of stream ARNs associated with the current account and endpoint.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --exclusive-start-stream-arn=: The ARN (Amazon Resource Name) of the first item that this operation will evaluate.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of streams to return.
-        --table-name=: If this parameter is provided, then only the streams associated with this table name are returned.
     - name: describe-stream
       description: Returns information about a stream, including the current status of the stream, its Amazon Resource Name (ARN), the composition of its shards, and its corresponding DynamoDB table.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --exclusive-start-shard-id=: The shard ID of the first item that this operation will evaluate.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --limit=: The maximum number of shard objects to return.
         --shard-filter=: This optional field contains the filter definition for the `DescribeStream` API.
         --stream-arn=!: The Amazon Resource Name (ARN) for the stream.
     - name: get-records
       description: Retrieves the stream records from a given shard.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --limit=: The maximum number of records to return from the shard.
         --shard-iterator=!: A shard iterator that was retrieved from a previous GetShardIterator operation.
     - name: get-shard-iterator
       description: Returns a shard iterator.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --sequence-number=: The sequence number of a stream record in the shard from which to start reading.
         --shard-id=!: The identifier of the shard.
         --shard-iterator-type=!: 'Determines how the shard iterator is used to start reading stream records from the shard:'
@@ -45,3 +27,9 @@ commands:
                 - LATEST
                 - AT_SEQUENCE_NUMBER
                 - AFTER_SEQUENCE_NUMBER
+    - name: list-streams
+      description: Returns an array of stream ARNs associated with the current account and endpoint.
+      flags:
+        --exclusive-start-stream-arn=: The ARN (Amazon Resource Name) of the first item that this operation will evaluate.
+        --limit=: The maximum number of streams to return.
+        --table-name=: If this parameter is provided, then only the streams associated with this table name are returned.

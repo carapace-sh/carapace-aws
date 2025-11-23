@@ -1,56 +1,202 @@
 name: bedrock-agent
 description: Agents for Amazon Bedrock
 commands:
-    - name: create-prompt
-      description: Creates a prompt in your prompt library that you can add to a flow.
+    - name: delete-flow
+      description: Deletes a flow.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
-        --customer-encryption-key-arn=: The Amazon Resource Name (ARN) of the KMS key to encrypt the prompt.
-        --default-variant=: The name of the default variant for the prompt.
-        --description=: A description for the prompt.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: A name for the prompt.
-        --tags=: Any tags that you want to attach to the prompt.
-        --variants=: A list of objects, each containing details about a variant of the prompt.
+        --flow-identifier=!: The unique identifier of the flow.
+        --no-skip-resource-in-use-check: By default, this value is `false` and deletion is stopped if the resource is in use.
+        --skip-resource-in-use-check: By default, this value is `false` and deletion is stopped if the resource is in use.
+    - name: disassociate-agent-knowledge-base
+      description: Disassociates a knowledge base from an agent.
+      flags:
+        --agent-id=!: The unique identifier of the agent from which to disassociate the knowledge base.
+        --agent-version=!: The version of the agent from which to disassociate the knowledge base.
+        --knowledge-base-id=!: The unique identifier of the knowledge base to disassociate.
+    - name: prepare-flow
+      description: Prepares the `DRAFT` version of a flow so that it can be invoked.
+      flags:
+        --flow-identifier=!: The unique identifier of the flow.
+    - name: prepare-agent
+      description: Creates a `DRAFT` version of the agent that can be used for internal testing.
+      flags:
+        --agent-id=!: The unique identifier of the agent for which to create a `DRAFT` version.
+    - name: disassociate-agent-collaborator
+      description: Disassociates an agent collaborator.
+      flags:
+        --agent-id=!: An agent ID.
+        --agent-version=!: The agent's version.
+        --collaborator-id=!: The collaborator's ID.
+    - name: get-agent-knowledge-base
+      description: Gets information about a knowledge base associated with an agent.
+      flags:
+        --agent-id=!: The unique identifier of the agent with which the knowledge base is associated.
+        --agent-version=!: The version of the agent with which the knowledge base is associated.
+        --knowledge-base-id=!: The unique identifier of the knowledge base associated with the agent.
+    - name: get-flow
+      description: Retrieves information about a flow.
+      flags:
+        --flow-identifier=!: The unique identifier of the flow.
+    - name: get-knowledge-base-documents
+      description: Retrieves specific documents from a data source that is connected to a knowledge base.
+      flags:
+        --data-source-id=!: The unique identifier of the data source that contains the documents.
+        --document-identifiers=!: A list of objects, each of which contains information to identify a document for which to retrieve information.
+        --knowledge-base-id=!: The unique identifier of the knowledge base that is connected to the data source.
+    - name: list-agents
+      description: Lists the agents belonging to an account and information about each agent.
+      flags:
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
+    - name: list-data-sources
+      description: Lists the data sources in a knowledge base and information about each one.
+      flags:
+        --knowledge-base-id=!: The unique identifier of the knowledge base for which to return a list of information.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
+    - name: update-data-source
+      description: Updates the configurations for a data source connector.
+      flags:
+        --data-deletion-policy=: The data deletion policy for the data source that you want to update.
+        --data-source-configuration=!: The connection configuration for the data source that you want to update.
+        --data-source-id=!: The unique identifier of the data source.
+        --description=: Specifies a new description for the data source.
+        --knowledge-base-id=!: The unique identifier of the knowledge base for the data source.
+        --name=!: Specifies a new name for the data source.
+        --server-side-encryption-configuration=: Contains details about server-side encryption of the data source.
+        --vector-ingestion-configuration=: Contains details about how to ingest the documents in the data source.
+      completion:
+        flag:
+            data-deletion-policy:
+                - RETAIN
+                - DELETE
     - name: delete-data-source
       description: Deletes a data source from a knowledge base.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --data-source-id=!: The unique identifier of the data source to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --knowledge-base-id=!: The unique identifier of the knowledge base from which to delete the data source.
+    - name: delete-flow-alias
+      description: Deletes an alias of a flow.
+      flags:
+        --alias-identifier=!: The unique identifier of the alias to be deleted.
+        --flow-identifier=!: The unique identifier of the flow that the alias belongs to.
     - name: delete-knowledge-base
       description: Deletes a knowledge base.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --knowledge-base-id=!: The unique identifier of the knowledge base to delete.
-    - name: get-agent-collaborator
-      description: Retrieves information about an agent's collaborator.
+    - name: update-prompt
+      description: Modifies a prompt in your prompt library.
       flags:
-        --agent-id=!: The agent's ID.
-        --agent-version=!: The agent's version.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collaborator-id=!: The collaborator's ID.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-agent-action-groups
-      description: Lists the action groups for an agent and information about each one.
+        --customer-encryption-key-arn=: The Amazon Resource Name (ARN) of the KMS key to encrypt the prompt.
+        --default-variant=: The name of the default variant for the prompt.
+        --description=: A description for the prompt.
+        --name=!: A name for the prompt.
+        --prompt-identifier=!: The unique identifier of the prompt.
+        --variants=: A list of objects, each containing details about a variant of the prompt.
+    - name: get-flow-alias
+      description: Retrieves information about a flow.
       flags:
-        --agent-id=!: The unique identifier of the agent.
-        --agent-version=!: The version of the agent.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
+        --alias-identifier=!: The unique identifier of the alias for which to retrieve information.
+        --flow-identifier=!: The unique identifier of the flow that the alias belongs to.
+    - name: get-knowledge-base
+      description: Gets information about a knoweldge base.
+      flags:
+        --knowledge-base-id=!: The unique identifier of the knowledge base you want to get information on.
+    - name: list-flow-versions
+      description: Returns a list of information about each flow.
+      flags:
+        --flow-identifier=!: The unique identifier of the flow.
         --max-results=: The maximum number of results to return in the response.
         --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+    - name: update-agent-alias
+      description: Updates configurations for an alias of an agent.
+      flags:
+        --agent-alias-id=!: The unique identifier of the alias.
+        --agent-alias-name=!: Specifies a new name for the alias.
+        --agent-id=!: The unique identifier of the agent.
+        --alias-invocation-state=: The invocation state for the agent alias.
+        --description=: Specifies a new description for the alias.
+        --routing-configuration=: Contains details about the routing configuration of the alias.
+      completion:
+        flag:
+            alias-invocation-state:
+                - ACCEPT_INVOCATIONS
+                - REJECT_INVOCATIONS
+    - name: update-flow-alias
+      description: Modifies the alias of a flow.
+      flags:
+        --alias-identifier=!: The unique identifier of the alias.
+        --concurrency-configuration=: The configuration that specifies how nodes in the flow are executed in parallel.
+        --description=: A description for the alias.
+        --flow-identifier=!: The unique identifier of the flow.
+        --name=!: The name of the alias.
+        --routing-configuration=!: Contains information about the version to which to map the alias.
+    - name: create-data-source
+      description: Connects a knowledge base to a data source.
+      flags:
+        --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
+        --data-deletion-policy=: The data deletion policy for the data source.
+        --data-source-configuration=!: The connection configuration for the data source.
+        --description=: A description of the data source.
+        --knowledge-base-id=!: The unique identifier of the knowledge base to which to add the data source.
+        --name=!: The name of the data source.
+        --server-side-encryption-configuration=: Contains details about the server-side encryption for the data source.
+        --vector-ingestion-configuration=: Contains details about how to ingest the documents in the data source.
+      completion:
+        flag:
+            data-deletion-policy:
+                - RETAIN
+                - DELETE
+    - name: get-flow-version
+      description: Retrieves information about a version of a flow.
+      flags:
+        --flow-identifier=!: The unique identifier of the flow for which to get information.
+        --flow-version=!: The version of the flow for which to get information.
+    - name: list-agent-versions
+      description: Lists the versions of an agent and information about each version.
+      flags:
+        --agent-id=!: The unique identifier of the agent.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
+    - name: update-agent-knowledge-base
+      description: Updates the configuration for a knowledge base that has been associated with an agent.
+      flags:
+        --agent-id=!: The unique identifier of the agent associated with the knowledge base that you want to update.
+        --agent-version=!: The version of the agent associated with the knowledge base that you want to update.
+        --description=: Specifies a new description for the knowledge base associated with an agent.
+        --knowledge-base-id=!: The unique identifier of the knowledge base that has been associated with an agent.
+        --knowledge-base-state=: Specifies whether the agent uses the knowledge base or not when sending an [InvokeAgent](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html) request.
+      completion:
+        flag:
+            knowledge-base-state:
+                - ENABLED
+                - DISABLED
+    - name: get-agent-action-group
+      description: Gets information about an action group for an agent.
+      flags:
+        --action-group-id=!: The unique identifier of the action group for which to get information.
+        --agent-id=!: The unique identifier of the agent that the action group belongs to.
+        --agent-version=!: The version of the agent that the action group belongs to.
+    - name: list-agent-aliases
+      description: Lists the aliases of an agent and information about each one.
+      flags:
+        --agent-id=!: The unique identifier of the agent.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
+    - name: list-flows
+      description: Returns a list of flows and information about each flow.
+      flags:
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
+    - name: list-ingestion-jobs
+      description: Lists the data ingestion jobs for a data source.
+      flags:
+        --data-source-id=!: The unique identifier of the data source for the list of data ingestion jobs.
+        --filters=: Contains information about the filters for filtering the data.
+        --knowledge-base-id=!: The unique identifier of the knowledge base for the list of data ingestion jobs.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
+        --sort-by=: Contains details about how to sort the data.
     - name: update-agent-action-group
       description: Updates the configuration for an action group for an agent.
       flags:
@@ -61,11 +207,8 @@ commands:
         --agent-id=!: The unique identifier of the agent for which to update the action group.
         --agent-version=!: The unique identifier of the agent version for which to update the action group.
         --api-schema=: Contains either details about the S3 object containing the OpenAPI schema for the action group or the JSON or YAML-formatted payload defining the schema.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: Specifies a new name for the action group.
         --function-schema=: Contains details about the function schema for the action group or the JSON or YAML-formatted payload defining the schema.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --parent-action-group-signature-params=: The configuration settings for a computer use action.
         --parent-action-group-signature=: Update the built-in or computer use action for this action group.
       completion:
@@ -79,273 +222,145 @@ commands:
                 - ANTHROPIC.Computer
                 - ANTHROPIC.Bash
                 - ANTHROPIC.TextEditor
-    - name: list-ingestion-jobs
-      description: Lists the data ingestion jobs for a data source.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source-id=!: The unique identifier of the data source for the list of data ingestion jobs.
-        --filters=: Contains information about the filters for filtering the data.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --knowledge-base-id=!: The unique identifier of the knowledge base for the list of data ingestion jobs.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in the response.
-        --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --sort-by=: Contains details about how to sort the data.
-        --starting-token=: A token to specify where to start paginating.
-    - name: delete-prompt
-      description: Deletes a prompt or a version of it, depending on whether you include the `promptVersion` field or not.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --prompt-identifier=!: The unique identifier of the prompt.
-        --prompt-version=: The version of the prompt to delete.
-    - name: get-data-source
-      description: Gets information about a data source.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source-id=!: The unique identifier of the data source.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --knowledge-base-id=!: The unique identifier of the knowledge base for the data source.
-    - name: update-agent-knowledge-base
-      description: Updates the configuration for a knowledge base that has been associated with an agent.
-      flags:
-        --agent-id=!: The unique identifier of the agent associated with the knowledge base that you want to update.
-        --agent-version=!: The version of the agent associated with the knowledge base that you want to update.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: Specifies a new description for the knowledge base associated with an agent.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --knowledge-base-id=!: The unique identifier of the knowledge base that has been associated with an agent.
-        --knowledge-base-state=: Specifies whether the agent uses the knowledge base or not when sending an [InvokeAgent](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html) request.
-      completion:
-        flag:
-            knowledge-base-state:
-                - ENABLED
-                - DISABLED
-    - name: create-flow
-      description: Creates a prompt flow that you can use to send an input through various steps to yield an output.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
-        --customer-encryption-key-arn=: The Amazon Resource Name (ARN) of the KMS key to encrypt the flow.
-        --definition=: A definition of the nodes and connections between nodes in the flow.
-        --description=: A description for the flow.
-        --execution-role-arn=!: The Amazon Resource Name (ARN) of the service role with permissions to create and manage a flow.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: A name for the flow.
-        --tags=: Any tags that you want to attach to the flow.
     - name: create-flow-alias
       description: Creates an alias of a flow for deployment.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
         --concurrency-configuration=: The configuration that specifies how nodes in the flow are executed in parallel.
         --description=: A description for the alias.
         --flow-identifier=!: The unique identifier of the flow for which to create an alias.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: A name for the alias.
         --routing-configuration=!: Contains information about the version to which to map the alias.
         --tags=: Any tags that you want to attach to the alias of the flow.
-    - name: get-knowledge-base-documents
-      description: Retrieves specific documents from a data source that is connected to a knowledge base.
+    - name: create-flow-version
+      description: Creates a version of the flow that you can deploy.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source-id=!: The unique identifier of the data source that contains the documents.
-        --document-identifiers=!: A list of objects, each of which contains information to identify a document for which to retrieve information.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --knowledge-base-id=!: The unique identifier of the knowledge base that is connected to the data source.
-    - name: ingest-knowledge-base-documents
-      description: Ingests documents directly into the knowledge base that is connected to the data source.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
-        --data-source-id=!: The unique identifier of the data source connected to the knowledge base that you're adding documents to.
-        --documents=!: A list of objects, each of which contains information about the documents to add.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --knowledge-base-id=!: The unique identifier of the knowledge base to ingest the documents into.
-    - name: list-agent-collaborators
-      description: Retrieve a list of an agent's collaborators.
+        --description=: A description of the version of the flow.
+        --flow-identifier=!: The unique identifier of the flow that you want to create a version of.
+    - name: delete-agent
+      description: Deletes an agent.
       flags:
+        --agent-id=!: The unique identifier of the agent to delete.
+        --no-skip-resource-in-use-check: By default, this value is `false` and deletion is stopped if the resource is in use.
+        --skip-resource-in-use-check: By default, this value is `false` and deletion is stopped if the resource is in use.
+    - name: create-knowledge-base
+      description: Creates a knowledge base.
+      flags:
+        --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
+        --description=: A description of the knowledge base.
+        --knowledge-base-configuration=!: Contains details about the embeddings model used for the knowledge base.
+        --name=!: A name for the knowledge base.
+        --role-arn=!: The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API operations on the knowledge base.
+        --storage-configuration=: Contains details about the configuration of the vector database used for the knowledge base.
+        --tags=: Specify the key-value pairs for the tags that you want to attach to your knowledge base in this object.
+    - name: delete-flow-version
+      description: Deletes a version of a flow.
+      flags:
+        --flow-identifier=!: The unique identifier of the flow whose version that you want to delete
+        --flow-version=!: The version of the flow that you want to delete.
+        --no-skip-resource-in-use-check: By default, this value is `false` and deletion is stopped if the resource is in use.
+        --skip-resource-in-use-check: By default, this value is `false` and deletion is stopped if the resource is in use.
+    - name: list-tags-for-resource
+      description: List all the tags for the resource you specify.
+      flags:
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource for which to list tags.
+    - name: tag-resource
+      description: Associate tags with a resource.
+      flags:
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to tag.
+        --tags=!: An object containing key-value pairs that define the tags to attach to the resource.
+    - name: untag-resource
+      description: Remove tags from a resource.
+      flags:
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource from which to remove tags.
+        --tag-keys=!: A list of keys of the tags to remove from the resource.
+    - name: update-agent-collaborator
+      description: Updates an agent's collaborator.
+      flags:
+        --agent-descriptor=!: An agent descriptor for the agent collaborator.
         --agent-id=!: The agent's ID.
         --agent-version=!: The agent's version.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of agent collaborators to return in one page of results.
-        --next-token=: Specify the pagination token from a previous request to retrieve the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-flows
-      description: Returns a list of flows and information about each flow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in the response.
-        --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-knowledge-base-documents
-      description: Retrieves all the documents contained in a data source that is connected to a knowledge base.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source-id=!: The unique identifier of the data source that contains the documents.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --knowledge-base-id=!: The unique identifier of the knowledge base that is connected to the data source.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in the response.
-        --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: prepare-agent
-      description: Creates a `DRAFT` version of the agent that can be used for internal testing.
-      flags:
-        --agent-id=!: The unique identifier of the agent for which to create a `DRAFT` version.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: associate-agent-collaborator
-      description: Makes an agent a collaborator for another agent.
-      flags:
-        --agent-descriptor=!: The alias of the collaborator agent.
-        --agent-id=!: The agent's ID.
-        --agent-version=!: An agent version.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A client token.
         --collaboration-instruction=!: Instruction for the collaborator.
-        --collaborator-name=!: A name for the collaborator.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --collaborator-id=!: The collaborator's ID.
+        --collaborator-name=!: The collaborator's name.
         --relay-conversation-history=: A relay conversation history for the collaborator.
       completion:
         flag:
             relay-conversation-history:
                 - TO_COLLABORATOR
                 - DISABLED
-    - name: create-prompt-version
-      description: Creates a static snapshot of your prompt that can be deployed to production.
+    - name: update-flow
+      description: Modifies a flow.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
-        --description=: A description for the version of the prompt.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --prompt-identifier=!: The unique identifier of the prompt that you want to create a version of.
-        --tags=: Any tags that you want to attach to the version of the prompt.
-    - name: get-ingestion-job
-      description: Gets information about a data ingestion job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source-id=!: The unique identifier of the data source for the data ingestion job you want to get information on.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ingestion-job-id=!: The unique identifier of the data ingestion job you want to get information on.
-        --knowledge-base-id=!: The unique identifier of the knowledge base for the data ingestion job you want to get information on.
-    - name: create-flow-version
-      description: Creates a version of the flow that you can deploy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
-        --description=: A description of the version of the flow.
-        --flow-identifier=!: The unique identifier of the flow that you want to create a version of.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-agent-action-group
-      description: Deletes an action group in an agent.
-      flags:
-        --action-group-id=!: The unique identifier of the action group to delete.
-        --agent-id=!: The unique identifier of the agent that the action group belongs to.
-        --agent-version=!: The version of the agent that the action group belongs to.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-skip-resource-in-use-check: By default, this value is `false` and deletion is stopped if the resource is in use.
-        --skip-resource-in-use-check: By default, this value is `false` and deletion is stopped if the resource is in use.
-    - name: get-agent-knowledge-base
-      description: Gets information about a knowledge base associated with an agent.
-      flags:
-        --agent-id=!: The unique identifier of the agent with which the knowledge base is associated.
-        --agent-version=!: The version of the agent with which the knowledge base is associated.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --knowledge-base-id=!: The unique identifier of the knowledge base associated with the agent.
-    - name: get-flow
-      description: Retrieves information about a flow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --customer-encryption-key-arn=: The Amazon Resource Name (ARN) of the KMS key to encrypt the flow.
+        --definition=: A definition of the nodes and the connections between the nodes in the flow.
+        --description=: A description for the flow.
+        --execution-role-arn=!: The Amazon Resource Name (ARN) of the service role with permissions to create and manage a flow.
         --flow-identifier=!: The unique identifier of the flow.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-flow-alias
-      description: Retrieves information about a flow.
-      flags:
-        --alias-identifier=!: The unique identifier of the alias for which to retrieve information.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --flow-identifier=!: The unique identifier of the flow that the alias belongs to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-agent-versions
-      description: Lists the versions of an agent and information about each version.
-      flags:
-        --agent-id=!: The unique identifier of the agent.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in the response.
-        --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+        --name=!: A name for the flow.
     - name: update-knowledge-base
       description: Updates the configuration of a knowledge base with the fields that you specify.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: Specifies a new description for the knowledge base.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --knowledge-base-configuration=!: Specifies the configuration for the embeddings model used for the knowledge base.
         --knowledge-base-id=!: The unique identifier of the knowledge base to update.
         --name=!: Specifies a new name for the knowledge base.
         --role-arn=!: Specifies a different Amazon Resource Name (ARN) of the IAM role with permissions to invoke API operations on the knowledge base.
         --storage-configuration=: Specifies the configuration for the vector store used for the knowledge base.
-    - name: get-agent-action-group
-      description: Gets information about an action group for an agent.
+    - name: associate-agent-collaborator
+      description: Makes an agent a collaborator for another agent.
       flags:
-        --action-group-id=!: The unique identifier of the action group for which to get information.
-        --agent-id=!: The unique identifier of the agent that the action group belongs to.
-        --agent-version=!: The version of the agent that the action group belongs to.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-agent-alias
-      description: Gets information about an alias of an agent.
+        --agent-descriptor=!: The alias of the collaborator agent.
+        --agent-id=!: The agent's ID.
+        --agent-version=!: An agent version.
+        --client-token=: A client token.
+        --collaboration-instruction=!: Instruction for the collaborator.
+        --collaborator-name=!: A name for the collaborator.
+        --relay-conversation-history=: A relay conversation history for the collaborator.
+      completion:
+        flag:
+            relay-conversation-history:
+                - TO_COLLABORATOR
+                - DISABLED
+    - name: create-prompt
+      description: Creates a prompt in your prompt library that you can add to a flow.
       flags:
-        --agent-alias-id=!: The unique identifier of the alias for which to get information.
-        --agent-id=!: The unique identifier of the agent to which the alias to get information belongs.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
+        --customer-encryption-key-arn=: The Amazon Resource Name (ARN) of the KMS key to encrypt the prompt.
+        --default-variant=: The name of the default variant for the prompt.
+        --description=: A description for the prompt.
+        --name=!: A name for the prompt.
+        --tags=: Any tags that you want to attach to the prompt.
+        --variants=: A list of objects, each containing details about a variant of the prompt.
+    - name: get-agent
+      description: Gets information about an agent.
+      flags:
+        --agent-id=!: The unique identifier of the agent.
+    - name: get-data-source
+      description: Gets information about a data source.
+      flags:
+        --data-source-id=!: The unique identifier of the data source.
+        --knowledge-base-id=!: The unique identifier of the knowledge base for the data source.
+    - name: get-ingestion-job
+      description: Gets information about a data ingestion job.
+      flags:
+        --data-source-id=!: The unique identifier of the data source for the data ingestion job you want to get information on.
+        --ingestion-job-id=!: The unique identifier of the data ingestion job you want to get information on.
+        --knowledge-base-id=!: The unique identifier of the knowledge base for the data ingestion job you want to get information on.
+    - name: list-agent-collaborators
+      description: Retrieve a list of an agent's collaborators.
+      flags:
+        --agent-id=!: The agent's ID.
+        --agent-version=!: The agent's version.
+        --max-results=: The maximum number of agent collaborators to return in one page of results.
+        --next-token=: Specify the pagination token from a previous request to retrieve the next page of results.
     - name: start-ingestion-job
       description: Begins a data ingestion job.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
         --data-source-id=!: The unique identifier of the data source you want to ingest into your knowledge base.
         --description=: A description of the data ingestion job.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --knowledge-base-id=!: The unique identifier of the knowledge base for the data ingestion job.
     - name: update-agent
       description: Updates the configuration of an agent.
@@ -354,13 +369,10 @@ commands:
         --agent-id=!: The unique identifier of the agent.
         --agent-name=!: Specifies a new name for the agent.
         --agent-resource-role-arn=!: The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API operations on the agent.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --custom-orchestration=: Contains details of the custom orchestration configured for the agent.
         --customer-encryption-key-arn=: The Amazon Resource Name (ARN) of the KMS key with which to encrypt the agent.
         --description=: Specifies a new description of the agent.
         --foundation-model=!: The identifier for the model that you want to be used for orchestration by the agent you create.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --guardrail-configuration=: The unique Guardrail configuration assigned to the agent when it is updated.
         --idle-session-ttl-in-seconds=: The number of seconds for which Amazon Bedrock keeps information about a user's conversation with the agent.
         --instruction=: Specifies new instructions that tell the agent what it should do and how it should interact with users.
@@ -381,10 +393,7 @@ commands:
       flags:
         --agent-id=!: The unique identifier of the agent with which you want to associate the knowledge base.
         --agent-version=!: The version of the agent with which you want to associate the knowledge base.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=!: A description of what the agent should use the knowledge base for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --knowledge-base-id=!: The unique identifier of the knowledge base to associate with the agent.
         --knowledge-base-state=: Specifies whether to use the knowledge base or not when sending an [InvokeAgent](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html) request.
       completion:
@@ -392,167 +401,67 @@ commands:
             knowledge-base-state:
                 - ENABLED
                 - DISABLED
+    - name: create-prompt-version
+      description: Creates a static snapshot of your prompt that can be deployed to production.
+      flags:
+        --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
+        --description=: A description for the version of the prompt.
+        --prompt-identifier=!: The unique identifier of the prompt that you want to create a version of.
+        --tags=: Any tags that you want to attach to the version of the prompt.
+    - name: get-agent-version
+      description: Gets details about a version of an agent.
+      flags:
+        --agent-id=!: The unique identifier of the agent.
+        --agent-version=!: The version of the agent.
+    - name: ingest-knowledge-base-documents
+      description: Ingests documents directly into the knowledge base that is connected to the data source.
+      flags:
+        --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
+        --data-source-id=!: The unique identifier of the data source connected to the knowledge base that you're adding documents to.
+        --documents=!: A list of objects, each of which contains information about the documents to add.
+        --knowledge-base-id=!: The unique identifier of the knowledge base to ingest the documents into.
+    - name: list-knowledge-bases
+      description: Lists the knowledge bases in an account.
+      flags:
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
+    - name: validate-flow-definition
+      description: Validates the definition of a flow.
+      flags:
+        --definition=!: The definition of a flow to validate.
+    - name: delete-agent-alias
+      description: Deletes an alias of an agent.
+      flags:
+        --agent-alias-id=!: The unique identifier of the alias to delete.
+        --agent-id=!: The unique identifier of the agent that the alias belongs to.
     - name: delete-agent-version
       description: Deletes a version of an agent.
       flags:
         --agent-id=!: The unique identifier of the agent that the version belongs to.
         --agent-version=!: The version of the agent to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-skip-resource-in-use-check: By default, this value is `false` and deletion is stopped if the resource is in use.
         --skip-resource-in-use-check: By default, this value is `false` and deletion is stopped if the resource is in use.
-    - name: list-agents
-      description: Lists the agents belonging to an account and information about each agent.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in the response.
-        --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-data-sources
-      description: Lists the data sources in a knowledge base and information about each one.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --knowledge-base-id=!: The unique identifier of the knowledge base for which to return a list of information.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in the response.
-        --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: delete-flow-alias
-      description: Deletes an alias of a flow.
-      flags:
-        --alias-identifier=!: The unique identifier of the alias to be deleted.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --flow-identifier=!: The unique identifier of the flow that the alias belongs to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: tag-resource
-      description: Associate tags with a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to tag.
-        --tags=!: An object containing key-value pairs that define the tags to attach to the resource.
-    - name: update-agent-collaborator
-      description: Updates an agent's collaborator.
-      flags:
-        --agent-descriptor=!: An agent descriptor for the agent collaborator.
-        --agent-id=!: The agent's ID.
-        --agent-version=!: The agent's version.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collaboration-instruction=!: Instruction for the collaborator.
-        --collaborator-id=!: The collaborator's ID.
-        --collaborator-name=!: The collaborator's name.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --relay-conversation-history=: A relay conversation history for the collaborator.
-      completion:
-        flag:
-            relay-conversation-history:
-                - TO_COLLABORATOR
-                - DISABLED
-    - name: get-flow-version
-      description: Retrieves information about a version of a flow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --flow-identifier=!: The unique identifier of the flow for which to get information.
-        --flow-version=!: The version of the flow for which to get information.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-flow-aliases
-      description: Returns a list of aliases for a flow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --flow-identifier=!: The unique identifier of the flow for which aliases are being returned.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in the response.
-        --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: List all the tags for the resource you specify.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource for which to list tags.
-    - name: prepare-flow
-      description: Prepares the `DRAFT` version of a flow so that it can be invoked.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --flow-identifier=!: The unique identifier of the flow.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-flow
-      description: Modifies a flow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --customer-encryption-key-arn=: The Amazon Resource Name (ARN) of the KMS key to encrypt the flow.
-        --definition=: A definition of the nodes and the connections between the nodes in the flow.
-        --description=: A description for the flow.
-        --execution-role-arn=!: The Amazon Resource Name (ARN) of the service role with permissions to create and manage a flow.
-        --flow-identifier=!: The unique identifier of the flow.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: A name for the flow.
-    - name: create-data-source
-      description: Connects a knowledge base to a data source.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
-        --data-deletion-policy=: The data deletion policy for the data source.
-        --data-source-configuration=!: The connection configuration for the data source.
-        --description=: A description of the data source.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --knowledge-base-id=!: The unique identifier of the knowledge base to which to add the data source.
-        --name=!: The name of the data source.
-        --server-side-encryption-configuration=: Contains details about the server-side encryption for the data source.
-        --vector-ingestion-configuration=: Contains details about how to ingest the documents in the data source.
-      completion:
-        flag:
-            data-deletion-policy:
-                - RETAIN
-                - DELETE
-    - name: create-knowledge-base
-      description: Creates a knowledge base.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
-        --description=: A description of the knowledge base.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --knowledge-base-configuration=!: Contains details about the embeddings model used for the knowledge base.
-        --name=!: A name for the knowledge base.
-        --role-arn=!: The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API operations on the knowledge base.
-        --storage-configuration=: Contains details about the configuration of the vector database used for the knowledge base.
-        --tags=: Specify the key-value pairs for the tags that you want to attach to your knowledge base in this object.
     - name: delete-knowledge-base-documents
       description: Deletes documents from a data source and syncs the changes to the knowledge base that is connected to it.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
         --data-source-id=!: The unique identifier of the data source that contains the documents.
         --document-identifiers=!: A list of objects, each of which contains information to identify a document to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --knowledge-base-id=!: The unique identifier of the knowledge base that is connected to the data source.
+    - name: get-agent-alias
+      description: Gets information about an alias of an agent.
+      flags:
+        --agent-alias-id=!: The unique identifier of the alias for which to get information.
+        --agent-id=!: The unique identifier of the agent to which the alias to get information belongs.
+    - name: list-prompts
+      description: Returns either information about the working draft (`DRAFT` version) of each prompt in an account, or information about of all versions of a prompt, depending on whether you include the `promptIdentifier` field or not.
+      flags:
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
+        --prompt-identifier=: The unique identifier of the prompt for whose versions you want to return information.
     - name: get-prompt
       description: Retrieves information about the working draft (`DRAFT` version) of a prompt or a version of it, depending on whether you include the `promptVersion` field or not.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --prompt-identifier=!: The unique identifier of the prompt.
         --prompt-version=: The version of the prompt about which you want to retrieve information.
     - name: list-agent-knowledge-bases
@@ -560,40 +469,75 @@ commands:
       flags:
         --agent-id=!: The unique identifier of the agent for which to return information about knowledge bases associated with it.
         --agent-version=!: The version of the agent for which to return information about knowledge bases associated with it.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return in the response.
         --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-flow-versions
-      description: Returns a list of information about each flow.
+    - name: list-knowledge-base-documents
+      description: Retrieves all the documents contained in a data source that is connected to a knowledge base.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --flow-identifier=!: The unique identifier of the flow.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
+        --data-source-id=!: The unique identifier of the data source that contains the documents.
+        --knowledge-base-id=!: The unique identifier of the knowledge base that is connected to the data source.
         --max-results=: The maximum number of results to return in the response.
         --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+    - name: create-agent-action-group
+      description: Creates an action group for an agent.
+      flags:
+        --action-group-executor=: The Amazon Resource Name (ARN) of the Lambda function containing the business logic that is carried out upon invoking the action or the custom control method for handling the information elicited from the user.
+        --action-group-name=!: The name to give the action group.
+        --action-group-state=: Specifies whether the action group is available for the agent to invoke or not when sending an [InvokeAgent](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html) request.
+        --agent-id=!: The unique identifier of the agent for which to create the action group.
+        --agent-version=!: The version of the agent for which to create the action group.
+        --api-schema=: Contains either details about the S3 object containing the OpenAPI schema for the action group or the JSON or YAML-formatted payload defining the schema.
+        --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
+        --description=: A description of the action group.
+        --function-schema=: Contains details about the function schema for the action group or the JSON or YAML-formatted payload defining the schema.
+        --parent-action-group-signature-params=: The configuration settings for a computer use action.
+        --parent-action-group-signature=: Specify a built-in or computer use action for this action group.
+      completion:
+        flag:
+            action-group-state:
+                - ENABLED
+                - DISABLED
+            parent-action-group-signature:
+                - AMAZON.UserInput
+                - AMAZON.CodeInterpreter
+                - ANTHROPIC.Computer
+                - ANTHROPIC.Bash
+                - ANTHROPIC.TextEditor
+    - name: delete-prompt
+      description: Deletes a prompt or a version of it, depending on whether you include the `promptVersion` field or not.
+      flags:
+        --prompt-identifier=!: The unique identifier of the prompt.
+        --prompt-version=: The version of the prompt to delete.
+    - name: get-agent-collaborator
+      description: Retrieves information about an agent's collaborator.
+      flags:
+        --agent-id=!: The agent's ID.
+        --agent-version=!: The agent's version.
+        --collaborator-id=!: The collaborator's ID.
+    - name: list-agent-action-groups
+      description: Lists the action groups for an agent and information about each one.
+      flags:
+        --agent-id=!: The unique identifier of the agent.
+        --agent-version=!: The version of the agent.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
+    - name: stop-ingestion-job
+      description: Stops a currently running data ingestion job.
+      flags:
+        --data-source-id=!: The unique identifier of the data source for the data ingestion job you want to stop.
+        --ingestion-job-id=!: The unique identifier of the data ingestion job you want to stop.
+        --knowledge-base-id=!: The unique identifier of the knowledge base for the data ingestion job you want to stop.
     - name: create-agent
       description: Creates an agent that orchestrates interactions between foundation models, data sources, software applications, user conversations, and APIs to carry out tasks to help customers.
       flags:
         --agent-collaboration=: The agent's collaboration role.
         --agent-name=!: A name for the agent that you create.
         --agent-resource-role-arn=: The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API operations on the agent.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
         --custom-orchestration=: Contains details of the custom orchestration configured for the agent.
         --customer-encryption-key-arn=: The Amazon Resource Name (ARN) of the KMS key with which to encrypt the agent.
         --description=: A description of the agent.
         --foundation-model=: The identifier for the model that you want to be used for orchestration by the agent you create.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --guardrail-configuration=: The unique Guardrail configuration assigned to the agent when it is created.
         --idle-session-ttl-in-seconds=: The number of seconds for which Amazon Bedrock keeps information about a user's conversation with the agent.
         --instruction=: Instructions that tell the agent what it should do and how it should interact with users.
@@ -610,238 +554,36 @@ commands:
             orchestration-type:
                 - DEFAULT
                 - CUSTOM_ORCHESTRATION
-    - name: create-agent-action-group
-      description: Creates an action group for an agent.
+    - name: create-flow
+      description: Creates a prompt flow that you can use to send an input through various steps to yield an output.
       flags:
-        --action-group-executor=: The Amazon Resource Name (ARN) of the Lambda function containing the business logic that is carried out upon invoking the action or the custom control method for handling the information elicited from the user.
-        --action-group-name=!: The name to give the action group.
-        --action-group-state=: Specifies whether the action group is available for the agent to invoke or not when sending an [InvokeAgent](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html) request.
-        --agent-id=!: The unique identifier of the agent for which to create the action group.
-        --agent-version=!: The version of the agent for which to create the action group.
-        --api-schema=: Contains either details about the S3 object containing the OpenAPI schema for the action group or the JSON or YAML-formatted payload defining the schema.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
-        --description=: A description of the action group.
-        --function-schema=: Contains details about the function schema for the action group or the JSON or YAML-formatted payload defining the schema.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --parent-action-group-signature-params=: The configuration settings for a computer use action.
-        --parent-action-group-signature=: Specify a built-in or computer use action for this action group.
-      completion:
-        flag:
-            action-group-state:
-                - ENABLED
-                - DISABLED
-            parent-action-group-signature:
-                - AMAZON.UserInput
-                - AMAZON.CodeInterpreter
-                - ANTHROPIC.Computer
-                - ANTHROPIC.Bash
-                - ANTHROPIC.TextEditor
-    - name: get-agent
-      description: Gets information about an agent.
+        --customer-encryption-key-arn=: The Amazon Resource Name (ARN) of the KMS key to encrypt the flow.
+        --definition=: A definition of the nodes and connections between nodes in the flow.
+        --description=: A description for the flow.
+        --execution-role-arn=!: The Amazon Resource Name (ARN) of the service role with permissions to create and manage a flow.
+        --name=!: A name for the flow.
+        --tags=: Any tags that you want to attach to the flow.
+    - name: list-flow-aliases
+      description: Returns a list of aliases for a flow.
       flags:
-        --agent-id=!: The unique identifier of the agent.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-knowledge-base
-      description: Gets information about a knoweldge base.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --knowledge-base-id=!: The unique identifier of the knowledge base you want to get information on.
-    - name: untag-resource
-      description: Remove tags from a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource from which to remove tags.
-        --tag-keys=!: A list of keys of the tags to remove from the resource.
-    - name: update-prompt
-      description: Modifies a prompt in your prompt library.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --customer-encryption-key-arn=: The Amazon Resource Name (ARN) of the KMS key to encrypt the prompt.
-        --default-variant=: The name of the default variant for the prompt.
-        --description=: A description for the prompt.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: A name for the prompt.
-        --prompt-identifier=!: The unique identifier of the prompt.
-        --variants=: A list of objects, each containing details about a variant of the prompt.
-    - name: list-prompts
-      description: Returns either information about the working draft (`DRAFT` version) of each prompt in an account, or information about of all versions of a prompt, depending on whether you include the `promptIdentifier` field or not.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
+        --flow-identifier=!: The unique identifier of the flow for which aliases are being returned.
         --max-results=: The maximum number of results to return in the response.
         --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --prompt-identifier=: The unique identifier of the prompt for whose versions you want to return information.
-        --starting-token=: A token to specify where to start paginating.
-    - name: delete-agent
-      description: Deletes an agent.
-      flags:
-        --agent-id=!: The unique identifier of the agent to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-skip-resource-in-use-check: By default, this value is `false` and deletion is stopped if the resource is in use.
-        --skip-resource-in-use-check: By default, this value is `false` and deletion is stopped if the resource is in use.
-    - name: delete-flow
-      description: Deletes a flow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --flow-identifier=!: The unique identifier of the flow.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-skip-resource-in-use-check: By default, this value is `false` and deletion is stopped if the resource is in use.
-        --skip-resource-in-use-check: By default, this value is `false` and deletion is stopped if the resource is in use.
-    - name: get-agent-version
-      description: Gets details about a version of an agent.
-      flags:
-        --agent-id=!: The unique identifier of the agent.
-        --agent-version=!: The version of the agent.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-data-source
-      description: Updates the configurations for a data source connector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-deletion-policy=: The data deletion policy for the data source that you want to update.
-        --data-source-configuration=!: The connection configuration for the data source that you want to update.
-        --data-source-id=!: The unique identifier of the data source.
-        --description=: Specifies a new description for the data source.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --knowledge-base-id=!: The unique identifier of the knowledge base for the data source.
-        --name=!: Specifies a new name for the data source.
-        --server-side-encryption-configuration=: Contains details about server-side encryption of the data source.
-        --vector-ingestion-configuration=: Contains details about how to ingest the documents in the data source.
-      completion:
-        flag:
-            data-deletion-policy:
-                - RETAIN
-                - DELETE
-    - name: validate-flow-definition
-      description: Validates the definition of a flow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --definition=!: The definition of a flow to validate.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-agent-alias
-      description: Deletes an alias of an agent.
-      flags:
-        --agent-alias-id=!: The unique identifier of the alias to delete.
-        --agent-id=!: The unique identifier of the agent that the alias belongs to.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: disassociate-agent-collaborator
-      description: Disassociates an agent collaborator.
-      flags:
-        --agent-id=!: An agent ID.
-        --agent-version=!: The agent's version.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collaborator-id=!: The collaborator's ID.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-flow-alias
-      description: Modifies the alias of a flow.
-      flags:
-        --alias-identifier=!: The unique identifier of the alias.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --concurrency-configuration=: The configuration that specifies how nodes in the flow are executed in parallel.
-        --description=: A description for the alias.
-        --flow-identifier=!: The unique identifier of the flow.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the alias.
-        --routing-configuration=!: Contains information about the version to which to map the alias.
-    - name: list-agent-aliases
-      description: Lists the aliases of an agent and information about each one.
-      flags:
-        --agent-id=!: The unique identifier of the agent.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in the response.
-        --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: delete-flow-version
-      description: Deletes a version of a flow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --flow-identifier=!: The unique identifier of the flow whose version that you want to delete
-        --flow-version=!: The version of the flow that you want to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-skip-resource-in-use-check: By default, this value is `false` and deletion is stopped if the resource is in use.
-        --skip-resource-in-use-check: By default, this value is `false` and deletion is stopped if the resource is in use.
-    - name: list-knowledge-bases
-      description: Lists the knowledge bases in an account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in the response.
-        --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-agent-alias
-      description: Updates configurations for an alias of an agent.
-      flags:
-        --agent-alias-id=!: The unique identifier of the alias.
-        --agent-alias-name=!: Specifies a new name for the alias.
-        --agent-id=!: The unique identifier of the agent.
-        --alias-invocation-state=: The invocation state for the agent alias.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: Specifies a new description for the alias.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --routing-configuration=: Contains details about the routing configuration of the alias.
-      completion:
-        flag:
-            alias-invocation-state:
-                - ACCEPT_INVOCATIONS
-                - REJECT_INVOCATIONS
     - name: create-agent-alias
       description: Creates an alias of an agent that can be used to deploy the agent.
       flags:
         --agent-alias-name=!: The name of the alias.
         --agent-id=!: The unique identifier of the agent.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
         --description=: A description of the alias of the agent.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --routing-configuration=: Contains details about the routing configuration of the alias.
         --tags=: Any tags that you want to attach to the alias of the agent.
-    - name: disassociate-agent-knowledge-base
-      description: Disassociates a knowledge base from an agent.
+    - name: delete-agent-action-group
+      description: Deletes an action group in an agent.
       flags:
-        --agent-id=!: The unique identifier of the agent from which to disassociate the knowledge base.
-        --agent-version=!: The version of the agent from which to disassociate the knowledge base.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --knowledge-base-id=!: The unique identifier of the knowledge base to disassociate.
-    - name: stop-ingestion-job
-      description: Stops a currently running data ingestion job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source-id=!: The unique identifier of the data source for the data ingestion job you want to stop.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ingestion-job-id=!: The unique identifier of the data ingestion job you want to stop.
-        --knowledge-base-id=!: The unique identifier of the knowledge base for the data ingestion job you want to stop.
+        --action-group-id=!: The unique identifier of the action group to delete.
+        --agent-id=!: The unique identifier of the agent that the action group belongs to.
+        --agent-version=!: The version of the agent that the action group belongs to.
+        --no-skip-resource-in-use-check: By default, this value is `false` and deletion is stopped if the resource is in use.
+        --skip-resource-in-use-check: By default, this value is `false` and deletion is stopped if the resource is in use.

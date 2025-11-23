@@ -147,6 +147,7 @@ type Shape struct {
 	Member   Member            `json:"member"`
 	Members  map[string]Member `json:"members"`
 	Required []string          `json:"required,omitempty"`
+	Payload  string            `json:"payload,omitempty"`
 }
 
 type Member struct {
@@ -256,48 +257,11 @@ func parseService(name, folder string) command.Command {
 		subCmd.Documentation.Flag = make(map[string]string)
 
 		// custom flags added by awscli
-		subCmd.AddFlag(command.Flag{Longhand: "--cli-input-json", Usage: "Read arguments from the JSON string provided.", Value: true})
-		subCmd.AddFlag(command.Flag{Longhand: "--cli-input-yaml", Usage: "Read arguments from the YAML string provided.", Value: true})
-		subCmd.AddFlag(command.Flag{Longhand: "--generate-cli-skeleton", Usage: "Prints a JSON skeleton to standard output without sending an API request."})
-
-		subCmd.Documentation.Flag["cli-input-json"] = `Reads arguments from the JSON string provided.
-The JSON string follows the  format  provided  by --generate-cli-skeleton.
-If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-This may  not  be  specified  along with --cli-input-yaml.`
-		subCmd.Documentation.Flag["cli-input-yaml"] = `Reads arguments from the JSON string provided.
-The JSON string follows the  format  provided  by --generate-cli-skeleton.
-If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-This may  not  be  specified  along with --cli-input-yaml.`
-		subCmd.Documentation.Flag["generate-cli-skeleton"] = `If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-This may  not  be  specified  along with --cli-input-yaml.`
-
-		if paginator, ok := paginators[name]; ok {
-			subCmd.AddFlag(command.Flag{Longhand: "--max-items", Usage: "The  total number of items to return in the command's output.", Value: true})
-			subCmd.AddFlag(command.Flag{Longhand: "--starting-token", Usage: "A token to specify where to start paginating.", Value: true})
-
-			subCmd.Documentation.Flag["max-items"] = `The total number of items to return in the command's output.
-If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-Do not use the NextToken response element directly outside of the AWS CLI.
-
-For usage examples, see Pagination in the AWS Command Line Interface User Guide.`
-			subCmd.Documentation.Flag["starting-token"] = `A token to specify where to start paginating.
-This is the NextToken from a previously truncated response.
-
-For usage examples, see Pagination in the AWS Command Line Interface User Guide.`
-
-			if paginator.LimitKey != nil {
-				subCmd.AddFlag(command.Flag{Longhand: "--page-size", Usage: "The size of each page to get in the AWS service call.", Value: true})
-
-				subCmd.Documentation.Flag["page-size"] = `The size of each page to get in the AWS service call.
-This does not affect the number of items returned in the command's output.
-Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-This can help prevent the AWS service calls from timing out.
-
-For usage examples, see Pagination in the AWS Command Line Interface User Guide.`
-			}
+		switch {
+		case isStreaming(service, operation):
+			subCmd.Completion.Positional = [][]string{{"$files"}}
+		default:
+			addCustomFlags(subCmd, paginators, name)
 		}
 
 		if shape, ok := service.Shapes[operation.Input.Shape]; ok {
@@ -373,6 +337,63 @@ For usage examples, see Pagination in the AWS Command Line Interface User Guide.
 		cmd.Commands = append(cmd.Commands, waitCmd)
 	}
 	return cmd
+}
+
+func isStreaming(service Service, operation Operation) bool {
+	if shape, ok := service.Shapes[operation.Output.Shape]; ok {
+		if shape.Payload != "" {
+			if payloadShape, ok := shape.Members[shape.Payload]; ok {
+				return strings.ToLower(payloadShape.Shape) == "blob"
+			}
+		}
+	}
+	return false
+}
+
+func addCustomFlags(subCmd command.Command, paginators map[string]Paginator, name string) {
+	subCmd.AddFlag(command.Flag{Longhand: "--cli-input-json", Usage: "Read arguments from the JSON string provided.", Value: true})
+	subCmd.AddFlag(command.Flag{Longhand: "--cli-input-yaml", Usage: "Read arguments from the YAML string provided.", Value: true})
+	subCmd.AddFlag(command.Flag{Longhand: "--generate-cli-skeleton", Usage: "Prints a JSON skeleton to standard output without sending an API request."})
+
+	subCmd.Documentation.Flag["cli-input-json"] = `Reads arguments from the JSON string provided.
+The JSON string follows the  format  provided  by --generate-cli-skeleton.
+If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+This may  not  be  specified  along with --cli-input-yaml.`
+	subCmd.Documentation.Flag["cli-input-yaml"] = `Reads arguments from the JSON string provided.
+The JSON string follows the  format  provided  by --generate-cli-skeleton.
+If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+This may  not  be  specified  along with --cli-input-yaml.`
+	subCmd.Documentation.Flag["generate-cli-skeleton"] = `If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+This may  not  be  specified  along with --cli-input-yaml.`
+
+	if paginator, ok := paginators[name]; ok {
+		subCmd.AddFlag(command.Flag{Longhand: "--max-items", Usage: "The  total number of items to return in the command's output.", Value: true})
+		subCmd.AddFlag(command.Flag{Longhand: "--starting-token", Usage: "A token to specify where to start paginating.", Value: true})
+
+		subCmd.Documentation.Flag["max-items"] = `The total number of items to return in the command's output.
+If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+Do not use the NextToken response element directly outside of the AWS CLI.
+
+For usage examples, see Pagination in the AWS Command Line Interface User Guide.`
+		subCmd.Documentation.Flag["starting-token"] = `A token to specify where to start paginating.
+This is the NextToken from a previously truncated response.
+
+For usage examples, see Pagination in the AWS Command Line Interface User Guide.`
+
+		if paginator.LimitKey != nil {
+			subCmd.AddFlag(command.Flag{Longhand: "--page-size", Usage: "The size of each page to get in the AWS service call.", Value: true})
+
+			subCmd.Documentation.Flag["page-size"] = `The size of each page to get in the AWS service call.
+This does not affect the number of items returned in the command's output.
+Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+This can help prevent the AWS service calls from timing out.
+
+For usage examples, see Pagination in the AWS Command Line Interface User Guide.`
+		}
+	}
 }
 
 func isBoolean(s string) bool {

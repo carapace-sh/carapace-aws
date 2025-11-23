@@ -1,601 +1,31 @@
 name: codecommit
 description: AWS CodeCommit
 commands:
-    - name: list-approval-rule-templates
-      description: Lists all approval rule templates in the specified Amazon Web Services Region in your Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: A non-zero, non-negative integer used to limit the number of returned results.
-        --next-token=: An enumeration token that, when provided in a request, returns the next batch of the results.
-    - name: put-file
-      description: Adds or updates a file in a branch in an CodeCommit repository, and generates a commit for the addition in the specified branch.
-      flags:
-        --branch-name=!: The name of the branch where you want to add or update the file.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --commit-message=: A message about why this file was added or updated.
-        --email=: An email address for the person adding or updating the file.
-        --file-content=!: The content of the file, in binary object format.
-        --file-mode=: The file mode permissions of the blob.
-        --file-path=!: The name of the file you want to add or update, including the relative path to the file in the repository.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: The name of the person adding or updating the file.
-        --parent-commit-id=: The full commit ID of the head commit in the branch where you want to add or update the file.
-        --repository-name=!: The name of the repository where you want to add or update the file.
-      completion:
-        flag:
-            file-mode:
-                - EXECUTABLE
-                - NORMAL
-                - SYMLINK
-    - name: update-approval-rule-template-description
-      description: Updates the description for a specified approval rule template.
-      flags:
-        --approval-rule-template-description=!: The updated description of the approval rule template.
-        --approval-rule-template-name=!: The name of the template for which you want to update the description.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: disassociate-approval-rule-template-from-repository
-      description: Removes the association between a template and a repository so that approval rules based on the template are not automatically created when pull requests are created in the specified repository.
-      flags:
-        --approval-rule-template-name=!: The name of the approval rule template to disassociate from a specified repository.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --repository-name=!: The name of the repository you want to disassociate from the template.
-    - name: associate-approval-rule-template-with-repository
-      description: Creates an association between an approval rule template and a specified repository.
-      flags:
-        --approval-rule-template-name=!: The name for the approval rule template.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --repository-name=!: The name of the repository that you want to associate with the template.
-    - name: delete-repository
-      description: Deletes a repository.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --repository-name=!: The name of the repository to delete.
-    - name: get-pull-request-override-state
-      description: Returns information about whether approval rules have been set aside (overridden) for a pull request, and if so, the Amazon Resource Name (ARN) of the user or identity that overrode the rules and their requirements for the pull request.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --pull-request-id=!: The ID of the pull request for which you want to get information about whether approval rules have been set aside (overridden).
-        --revision-id=!: The system-generated ID of the revision for the pull request.
-    - name: get-pull-request
-      description: Gets information about a pull request in a specified repository.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --pull-request-id=!: The system-generated ID of the pull request.
-    - name: list-tags-for-resource
-      description: Gets information about Amazon Web Servicestags for a specified Amazon Resource Name (ARN) in CodeCommit.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --next-token=: An enumeration token that, when provided in a request, returns the next batch of the results.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource for which you want to get information about tags, if any.
-    - name: test-repository-triggers
-      description: Tests the functionality of repository triggers by sending information to the trigger target.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --repository-name=!: The name of the repository in which to test the triggers.
-        --triggers=!: The list of triggers to test.
-    - name: get-folder
-      description: Returns the contents of a specified folder in a repository.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --commit-specifier=: A fully qualified reference used to identify a commit that contains the version of the folder's content to return.
-        --folder-path=!: The fully qualified path to the folder whose contents are returned, including the folder name.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --repository-name=!: The name of the repository.
-    - name: post-comment-for-compared-commit
-      description: Posts a comment on the comparison between two commits.
-      flags:
-        --after-commit-id=!: To establish the directionality of the comparison, the full commit ID of the after commit.
-        --before-commit-id=: To establish the directionality of the comparison, the full commit ID of the before commit.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique, client-generated idempotency token that, when provided in a request, ensures the request cannot be repeated with a changed parameter.
-        --content=!: The content of the comment you want to make.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location=: The location of the comparison where you want to comment.
-        --repository-name=!: The name of the repository where you want to post a comment on the comparison between commits.
     - name: update-approval-rule-template-name
       description: Updates the name of a specified approval rule template.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --new-approval-rule-template-name=!: The new name you want to apply to the approval rule template.
         --old-approval-rule-template-name=!: The current name of the approval rule template.
-    - name: batch-disassociate-approval-rule-template-from-repositories
-      description: Removes the association between an approval rule template and one or more specified repositories.
-      flags:
-        --approval-rule-template-name=!: The name of the template that you want to disassociate from one or more repositories.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --repository-names=!: The repository names that you want to disassociate from the approval rule template.
-    - name: batch-get-repositories
-      description: Returns information about one or more repositories.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --repository-names=!: The names of the repositories to get information about.
-    - name: get-comment-reactions
-      description: Returns information about reactions to a specified comment ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --comment-id=!: The ID of the comment for which you want to get reactions information.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: A non-zero, non-negative integer used to limit the number of returned results.
-        --next-token=: An enumeration token that, when provided in a request, returns the next batch of the results.
-        --reaction-user-arn=: Optional.
-    - name: get-merge-options
-      description: Returns information about the merge options available for merging two specified branches.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --conflict-detail-level=: The level of conflict detail to use.
-        --conflict-resolution-strategy=: Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file.
-        --destination-commit-specifier=!: The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --repository-name=!: The name of the repository that contains the commits about which you want to get merge options.
-        --source-commit-specifier=!: The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
-      completion:
-        flag:
-            conflict-detail-level:
-                - FILE_LEVEL
-                - LINE_LEVEL
-            conflict-resolution-strategy:
-                - NONE
-                - ACCEPT_SOURCE
-                - ACCEPT_DESTINATION
-                - AUTOMERGE
-    - name: list-branches
-      description: Gets information about one or more branches in a repository.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: An enumeration token that allows the operation to batch the results.
-        --repository-name=!: The name of the repository that contains the branches.
-        --starting-token=: A token to specify where to start paginating.
-    - name: merge-branches-by-squash
-      description: Merges two branches using the squash merge strategy.
-      flags:
-        --author-name=: The name of the author who created the commit.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --commit-message=: The commit message for the merge.
-        --conflict-detail-level=: The level of conflict detail to use.
-        --conflict-resolution-strategy=: Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file.
-        --conflict-resolution=: If AUTOMERGE is the conflict resolution strategy, a list of inputs to use when resolving conflicts during a merge.
-        --destination-commit-specifier=!: The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
-        --email=: The email address of the person merging the branches.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --keep-empty-folders: If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty.
-        --no-keep-empty-folders: If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty.
-        --repository-name=!: The name of the repository where you want to merge two branches.
-        --source-commit-specifier=!: The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
-        --target-branch=: The branch where the merge is applied.
-      completion:
-        flag:
-            conflict-detail-level:
-                - FILE_LEVEL
-                - LINE_LEVEL
-            conflict-resolution-strategy:
-                - NONE
-                - ACCEPT_SOURCE
-                - ACCEPT_DESTINATION
-                - AUTOMERGE
-    - name: put-repository-triggers
-      description: Replaces all triggers for a repository.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --repository-name=!: The name of the repository where you want to create or update the trigger.
-        --triggers=!: The JSON block of configuration information for each trigger.
     - name: update-repository-encryption-key
       description: Updates the Key Management Service encryption key used to encrypt and decrypt a CodeCommit repository.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --kms-key-id=!: The ID of the encryption key.
         --repository-name=!: The name of the repository for which you want to update the KMS encryption key used to encrypt and decrypt the repository.
-    - name: get-approval-rule-template
-      description: Returns information about a specified approval rule template.
+    - name: get-pull-request-override-state
+      description: Returns information about whether approval rules have been set aside (overridden) for a pull request, and if so, the Amazon Resource Name (ARN) of the user or identity that overrode the rules and their requirements for the pull request.
       flags:
-        --approval-rule-template-name=!: The name of the approval rule template for which you want to get information.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: batch-get-commits
-      description: Returns information about the contents of one or more commits in a repository.
+        --pull-request-id=!: The ID of the pull request for which you want to get information about whether approval rules have been set aside (overridden).
+        --revision-id=!: The system-generated ID of the revision for the pull request.
+    - name: batch-get-repositories
+      description: Returns information about one or more repositories.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --commit-ids=!: The full commit IDs of the commits to get information about.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --repository-name=!: The name of the repository that contains the commits.
-    - name: create-commit
-      description: Creates a commit for a repository on the tip of a specified branch.
-      flags:
-        --author-name=: The name of the author who created the commit.
-        --branch-name=!: The name of the branch where you create the commit.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --commit-message=: The commit message you want to include in the commit.
-        --delete-files=: The files to delete in this commit.
-        --email=: The email address of the person who created the commit.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --keep-empty-folders: If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty.
-        --no-keep-empty-folders: If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty.
-        --parent-commit-id=: The ID of the commit that is the parent of the commit you create.
-        --put-files=: The files to add or update in this commit.
-        --repository-name=!: The name of the repository where you create the commit.
-        --set-file-modes=: The file modes to update for files in this commit.
-    - name: delete-comment-content
-      description: Deletes the content of a comment made on a change, file, or commit in a repository.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --comment-id=!: The unique, system-generated ID of the comment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-pull-request-approval-rule
-      description: Deletes an approval rule from a specified pull request.
-      flags:
-        --approval-rule-name=!: The name of the approval rule you want to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --pull-request-id=!: The system-generated ID of the pull request that contains the approval rule you want to delete.
-    - name: get-differences
-      description: Returns information about the differences in a valid commit specifier (such as a branch, tag, HEAD, commit ID, or other fully qualified reference).
-      flags:
-        --after-commit-specifier=!: The branch, tag, HEAD, or other fully qualified reference used to identify a commit.
-        --after-path=: The file path in which to check differences.
-        --before-commit-specifier=: The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, the full commit ID).
-        --before-path=: The file path in which to check for differences.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: A non-zero, non-negative integer used to limit the number of returned results.
-        --next-token=: An enumeration token that, when provided in a request, returns the next batch of the results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --repository-name=!: The name of the repository where you want to get differences.
-        --starting-token=: A token to specify where to start paginating.
-    - name: untag-resource
-      description: Removes tags for a resource in CodeCommit.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to which you want to remove tags.
-        --tag-keys=!: The tag key for each tag that you want to remove from the resource.
-    - name: update-comment
-      description: Replaces the contents of a comment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --comment-id=!: The system-generated ID of the comment you want to update.
-        --content=!: The updated content to replace the existing content of the comment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-merge-conflicts
-      description: Returns information about one or more merge conflicts in the attempted merge of two commit specifiers using the squash or three-way merge strategy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --conflict-detail-level=: The level of conflict detail to use.
-        --conflict-resolution-strategy=: Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file.
-        --destination-commit-specifier=!: The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
-        --file-path=!: The path of the target files used to describe the conflicts.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-merge-hunks=: The maximum number of merge hunks to include in the output.
-        --merge-option=!: The merge option or strategy you want to use to merge the code.
-        --next-token=: An enumeration token that, when provided in a request, returns the next batch of the results.
-        --repository-name=!: The name of the repository where you want to get information about a merge conflict.
-        --source-commit-specifier=!: The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
-      completion:
-        flag:
-            conflict-detail-level:
-                - FILE_LEVEL
-                - LINE_LEVEL
-            conflict-resolution-strategy:
-                - NONE
-                - ACCEPT_SOURCE
-                - ACCEPT_DESTINATION
-                - AUTOMERGE
-            merge-option:
-                - FAST_FORWARD_MERGE
-                - SQUASH_MERGE
-                - THREE_WAY_MERGE
-    - name: get-commit
-      description: Returns information about a commit, including commit message and committer information.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --commit-id=!: The commit ID.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --repository-name=!: The name of the repository to which the commit was made.
-    - name: update-pull-request-title
-      description: Replaces the title of a pull request.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --pull-request-id=!: The system-generated ID of the pull request.
-        --title=!: The updated title of the pull request.
-    - name: update-repository-name
-      description: Renames a repository.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --new-name=!: The new name for the repository.
-        --old-name=!: The current name of the repository.
-    - name: create-pull-request
-      description: Creates a pull request in the specified repository.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique, client-generated idempotency token that, when provided in a request, ensures the request cannot be repeated with a changed parameter.
-        --description=: A description of the pull request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --targets=!: The targets for the pull request, including the source of the code to be reviewed (the source branch) and the destination where the creator of the pull request intends the code to be merged after the pull request is closed (the destination branch).
-        --title=!: The title of the pull request.
-    - name: create-unreferenced-merge-commit
-      description: Creates an unreferenced commit that represents the result of merging two branches using a specified merge strategy.
-      flags:
-        --author-name=: The name of the author who created the unreferenced commit.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --commit-message=: The commit message for the unreferenced commit.
-        --conflict-detail-level=: The level of conflict detail to use.
-        --conflict-resolution-strategy=: Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file.
-        --conflict-resolution=: If AUTOMERGE is the conflict resolution strategy, a list of inputs to use when resolving conflicts during a merge.
-        --destination-commit-specifier=!: The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
-        --email=: The email address for the person who created the unreferenced commit.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --keep-empty-folders: If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty.
-        --merge-option=!: The merge option or strategy you want to use to merge the code.
-        --no-keep-empty-folders: If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty.
-        --repository-name=!: The name of the repository where you want to create the unreferenced merge commit.
-        --source-commit-specifier=!: The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
-      completion:
-        flag:
-            conflict-detail-level:
-                - FILE_LEVEL
-                - LINE_LEVEL
-            conflict-resolution-strategy:
-                - NONE
-                - ACCEPT_SOURCE
-                - ACCEPT_DESTINATION
-                - AUTOMERGE
-            merge-option:
-                - FAST_FORWARD_MERGE
-                - SQUASH_MERGE
-                - THREE_WAY_MERGE
-    - name: get-file
-      description: Returns the base-64 encoded contents of a specified file and its metadata.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --commit-specifier=: The fully quaified reference that identifies the commit that contains the file.
-        --file-path=!: The fully qualified path to the file, including the full name and extension of the file.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --repository-name=!: The name of the repository that contains the file.
-    - name: list-repositories-for-approval-rule-template
-      description: Lists all repositories associated with the specified approval rule template.
-      flags:
-        --approval-rule-template-name=!: The name of the approval rule template for which you want to list repositories that are associated with that template.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: A non-zero, non-negative integer used to limit the number of returned results.
-        --next-token=: An enumeration token that, when provided in a request, returns the next batch of the results.
-    - name: merge-pull-request-by-three-way
-      description: Attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the three-way merge strategy.
-      flags:
-        --author-name=: The name of the author who created the commit.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --commit-message=: The commit message to include in the commit information for the merge.
-        --conflict-detail-level=: The level of conflict detail to use.
-        --conflict-resolution-strategy=: Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file.
-        --conflict-resolution=: If AUTOMERGE is the conflict resolution strategy, a list of inputs to use when resolving conflicts during a merge.
-        --email=: The email address of the person merging the branches.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --keep-empty-folders: If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty.
-        --no-keep-empty-folders: If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty.
-        --pull-request-id=!: The system-generated ID of the pull request.
-        --repository-name=!: The name of the repository where the pull request was created.
-        --source-commit-id=: The full commit ID of the original or updated commit in the pull request source branch.
-      completion:
-        flag:
-            conflict-detail-level:
-                - FILE_LEVEL
-                - LINE_LEVEL
-            conflict-resolution-strategy:
-                - NONE
-                - ACCEPT_SOURCE
-                - ACCEPT_DESTINATION
-                - AUTOMERGE
-    - name: update-approval-rule-template-content
-      description: Updates the content of an approval rule template.
-      flags:
-        --approval-rule-template-name=!: The name of the approval rule template where you want to update the content of the rule.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --existing-rule-content-sha256=: The SHA-256 hash signature for the content of the approval rule.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --new-rule-content=!: The content that replaces the existing content of the rule.
-    - name: update-pull-request-status
-      description: Updates the status of a pull request.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --pull-request-id=!: The system-generated ID of the pull request.
-        --pull-request-status=!: The status of the pull request.
-      completion:
-        flag:
-            pull-request-status:
-                - OPEN
-                - CLOSED
-    - name: batch-associate-approval-rule-template-with-repositories
-      description: Creates an association between an approval rule template and one or more specified repositories.
-      flags:
-        --approval-rule-template-name=!: The name of the template you want to associate with one or more repositories.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --repository-names=!: The names of the repositories you want to associate with the template.
-    - name: get-blob
-      description: Returns the base-64 encoded content of an individual blob in a repository.
-      flags:
-        --blob-id=!: The ID of the blob, which is its SHA-1 pointer.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --repository-name=!: The name of the repository that contains the blob.
-    - name: get-branch
-      description: Returns information about a repository branch, including its name and the last commit ID.
-      flags:
-        --branch-name=: The name of the branch for which you want to retrieve information.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --repository-name=: The name of the repository that contains the branch for which you want to retrieve information.
-    - name: list-associated-approval-rule-templates-for-repository
-      description: Lists all approval rule templates that are associated with a specified repository.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: A non-zero, non-negative integer used to limit the number of returned results.
-        --next-token=: An enumeration token that, when provided in a request, returns the next batch of the results.
-        --repository-name=!: The name of the repository for which you want to list all associated approval rule templates.
-    - name: merge-branches-by-fast-forward
-      description: Merges two branches using the fast-forward merge strategy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --destination-commit-specifier=!: The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --repository-name=!: The name of the repository where you want to merge two branches.
-        --source-commit-specifier=!: The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
-        --target-branch=: The branch where the merge is applied.
-    - name: update-pull-request-approval-rule-content
-      description: Updates the structure of an approval rule created specifically for a pull request.
-      flags:
-        --approval-rule-name=!: The name of the approval rule you want to update.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --existing-rule-content-sha256=: The SHA-256 hash signature for the content of the approval rule.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --new-rule-content=!: The updated content for the approval rule.
-        --pull-request-id=!: The system-generated ID of the pull request.
-    - name: update-pull-request-description
-      description: Replaces the contents of the description of a pull request.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=!: The updated content of the description for the pull request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --pull-request-id=!: The system-generated ID of the pull request.
-    - name: list-pull-requests
-      description: Returns a list of pull requests for a specified repository.
-      flags:
-        --author-arn=: Optional.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: A non-zero, non-negative integer used to limit the number of returned results.
-        --next-token=: An enumeration token that, when provided in a request, returns the next batch of the results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --pull-request-status=: Optional.
-        --repository-name=!: The name of the repository for which you want to list pull requests.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            pull-request-status:
-                - OPEN
-                - CLOSED
-    - name: list-repositories
-      description: Gets information about one or more repositories.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: An enumeration token that allows the operation to batch the results of the operation.
-        --order=: The order in which to sort the results of a list repositories operation.
-        --sort-by=: The criteria used to sort the results of a list repositories operation.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            order:
-                - ascending
-                - descending
-            sort-by:
-                - repositoryName
-                - lastModifiedDate
-    - name: describe-pull-request-events
-      description: Returns information about one or more pull request events.
-      flags:
-        --actor-arn=: The Amazon Resource Name (ARN) of the user whose actions resulted in the event.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: A non-zero, non-negative integer used to limit the number of returned results.
-        --next-token=: An enumeration token that, when provided in a request, returns the next batch of the results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --pull-request-event-type=: Optional.
-        --pull-request-id=!: The system-generated ID of the pull request.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            pull-request-event-type:
-                - PULL_REQUEST_CREATED
-                - PULL_REQUEST_STATUS_CHANGED
-                - PULL_REQUEST_SOURCE_REFERENCE_UPDATED
-                - PULL_REQUEST_MERGE_STATE_CHANGED
-                - PULL_REQUEST_APPROVAL_RULE_CREATED
-                - PULL_REQUEST_APPROVAL_RULE_UPDATED
-                - PULL_REQUEST_APPROVAL_RULE_DELETED
-                - PULL_REQUEST_APPROVAL_RULE_OVERRIDDEN
-                - PULL_REQUEST_APPROVAL_STATE_CHANGED
+        --repository-names=!: The names of the repositories to get information about.
     - name: get-merge-conflicts
       description: Returns information about merge conflicts between the before and after commit IDs for a pull request in a repository.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --conflict-detail-level=: The level of conflict detail to use.
         --conflict-resolution-strategy=: Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file.
         --destination-commit-specifier=!: The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-conflict-files=: The maximum number of files to include in the output.
         --merge-option=!: The merge option or strategy you want to use to merge the code.
         --next-token=: An enumeration token that, when provided in a request, returns the next batch of the results.
@@ -615,40 +45,584 @@ commands:
                 - FAST_FORWARD_MERGE
                 - SQUASH_MERGE
                 - THREE_WAY_MERGE
-    - name: get-pull-request-approval-states
-      description: Gets information about the approval states for a specified pull request.
+    - name: merge-branches-by-squash
+      description: Merges two branches using the squash merge strategy.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --pull-request-id=!: The system-generated ID for the pull request.
-        --revision-id=!: The system-generated ID for the pull request revision.
+        --author-name=: The name of the author who created the commit.
+        --commit-message=: The commit message for the merge.
+        --conflict-detail-level=: The level of conflict detail to use.
+        --conflict-resolution-strategy=: Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file.
+        --conflict-resolution=: If AUTOMERGE is the conflict resolution strategy, a list of inputs to use when resolving conflicts during a merge.
+        --destination-commit-specifier=!: The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
+        --email=: The email address of the person merging the branches.
+        --keep-empty-folders: If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty.
+        --no-keep-empty-folders: If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty.
+        --repository-name=!: The name of the repository where you want to merge two branches.
+        --source-commit-specifier=!: The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
+        --target-branch=: The branch where the merge is applied.
+      completion:
+        flag:
+            conflict-detail-level:
+                - FILE_LEVEL
+                - LINE_LEVEL
+            conflict-resolution-strategy:
+                - NONE
+                - ACCEPT_SOURCE
+                - ACCEPT_DESTINATION
+                - AUTOMERGE
+    - name: post-comment-for-compared-commit
+      description: Posts a comment on the comparison between two commits.
+      flags:
+        --after-commit-id=!: To establish the directionality of the comparison, the full commit ID of the after commit.
+        --before-commit-id=: To establish the directionality of the comparison, the full commit ID of the before commit.
+        --client-request-token=: A unique, client-generated idempotency token that, when provided in a request, ensures the request cannot be repeated with a changed parameter.
+        --content=!: The content of the comment you want to make.
+        --location=: The location of the comparison where you want to comment.
+        --repository-name=!: The name of the repository where you want to post a comment on the comparison between commits.
+    - name: update-repository-description
+      description: Sets or changes the comment or description for a repository.
+      flags:
+        --repository-description=: The new comment or description for the specified repository.
+        --repository-name=!: The name of the repository to set or change the comment or description for.
+    - name: merge-branches-by-three-way
+      description: Merges two specified branches using the three-way merge strategy.
+      flags:
+        --author-name=: The name of the author who created the commit.
+        --commit-message=: The commit message to include in the commit information for the merge.
+        --conflict-detail-level=: The level of conflict detail to use.
+        --conflict-resolution-strategy=: Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file.
+        --conflict-resolution=: If AUTOMERGE is the conflict resolution strategy, a list of inputs to use when resolving conflicts during a merge.
+        --destination-commit-specifier=!: The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
+        --email=: The email address of the person merging the branches.
+        --keep-empty-folders: If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty.
+        --no-keep-empty-folders: If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty.
+        --repository-name=!: The name of the repository where you want to merge two branches.
+        --source-commit-specifier=!: The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
+        --target-branch=: The branch where the merge is applied.
+      completion:
+        flag:
+            conflict-detail-level:
+                - FILE_LEVEL
+                - LINE_LEVEL
+            conflict-resolution-strategy:
+                - NONE
+                - ACCEPT_SOURCE
+                - ACCEPT_DESTINATION
+                - AUTOMERGE
+    - name: create-pull-request
+      description: Creates a pull request in the specified repository.
+      flags:
+        --client-request-token=: A unique, client-generated idempotency token that, when provided in a request, ensures the request cannot be repeated with a changed parameter.
+        --description=: A description of the pull request.
+        --targets=!: The targets for the pull request, including the source of the code to be reviewed (the source branch) and the destination where the creator of the pull request intends the code to be merged after the pull request is closed (the destination branch).
+        --title=!: The title of the pull request.
+    - name: disassociate-approval-rule-template-from-repository
+      description: Removes the association between a template and a repository so that approval rules based on the template are not automatically created when pull requests are created in the specified repository.
+      flags:
+        --approval-rule-template-name=!: The name of the approval rule template to disassociate from a specified repository.
+        --repository-name=!: The name of the repository you want to disassociate from the template.
+    - name: get-folder
+      description: Returns the contents of a specified folder in a repository.
+      flags:
+        --commit-specifier=: A fully qualified reference used to identify a commit that contains the version of the folder's content to return.
+        --folder-path=!: The fully qualified path to the folder whose contents are returned, including the folder name.
+        --repository-name=!: The name of the repository.
     - name: get-repository
       description: Returns information about a repository.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --repository-name=!: The name of the repository to get information about.
+    - name: list-associated-approval-rule-templates-for-repository
+      description: Lists all approval rule templates that are associated with a specified repository.
+      flags:
+        --max-results=: A non-zero, non-negative integer used to limit the number of returned results.
+        --next-token=: An enumeration token that, when provided in a request, returns the next batch of the results.
+        --repository-name=!: The name of the repository for which you want to list all associated approval rule templates.
+    - name: list-file-commit-history
+      description: Retrieves a list of commits and changes to a specified file.
+      flags:
+        --commit-specifier=: The fully quaified reference that identifies the commit that contains the file.
+        --file-path=!: The full path of the file whose history you want to retrieve, including the name of the file.
+        --max-results=: A non-zero, non-negative integer used to limit the number of returned results.
+        --next-token=: An enumeration token that allows the operation to batch the results.
+        --repository-name=!: The name of the repository that contains the file.
+    - name: delete-repository
+      description: Deletes a repository.
+      flags:
+        --repository-name=!: The name of the repository to delete.
+    - name: evaluate-pull-request-approval-rules
+      description: Evaluates whether a pull request has met all the conditions specified in its associated approval rules.
+      flags:
+        --pull-request-id=!: The system-generated ID of the pull request you want to evaluate.
+        --revision-id=!: The system-generated ID for the pull request revision.
+    - name: get-file
+      description: Returns the base-64 encoded contents of a specified file and its metadata.
+      flags:
+        --commit-specifier=: The fully quaified reference that identifies the commit that contains the file.
+        --file-path=!: The fully qualified path to the file, including the full name and extension of the file.
+        --repository-name=!: The name of the repository that contains the file.
+    - name: update-pull-request-approval-rule-content
+      description: Updates the structure of an approval rule created specifically for a pull request.
+      flags:
+        --approval-rule-name=!: The name of the approval rule you want to update.
+        --existing-rule-content-sha256=: The SHA-256 hash signature for the content of the approval rule.
+        --new-rule-content=!: The updated content for the approval rule.
+        --pull-request-id=!: The system-generated ID of the pull request.
+    - name: get-comment-reactions
+      description: Returns information about reactions to a specified comment ID.
+      flags:
+        --comment-id=!: The ID of the comment for which you want to get reactions information.
+        --max-results=: A non-zero, non-negative integer used to limit the number of returned results.
+        --next-token=: An enumeration token that, when provided in a request, returns the next batch of the results.
+        --reaction-user-arn=: Optional.
+    - name: batch-disassociate-approval-rule-template-from-repositories
+      description: Removes the association between an approval rule template and one or more specified repositories.
+      flags:
+        --approval-rule-template-name=!: The name of the template that you want to disassociate from one or more repositories.
+        --repository-names=!: The repository names that you want to disassociate from the approval rule template.
+    - name: delete-file
+      description: Deletes a specified file from a specified branch.
+      flags:
+        --branch-name=!: The name of the branch where the commit that deletes the file is made.
+        --commit-message=: The commit message you want to include as part of deleting the file.
+        --email=: The email address for the commit that deletes the file.
+        --file-path=!: The fully qualified path to the file that to be deleted, including the full name and extension of that file.
+        --keep-empty-folders: If a file is the only object in the folder or directory, specifies whether to delete the folder or directory that contains the file.
+        --name=: The name of the author of the commit that deletes the file.
+        --no-keep-empty-folders: If a file is the only object in the folder or directory, specifies whether to delete the folder or directory that contains the file.
+        --parent-commit-id=!: The ID of the commit that is the tip of the branch where you want to create the commit that deletes the file.
+        --repository-name=!: The name of the repository that contains the file to delete.
+    - name: list-repositories
+      description: Gets information about one or more repositories.
+      flags:
+        --next-token=: An enumeration token that allows the operation to batch the results of the operation.
+        --order=: The order in which to sort the results of a list repositories operation.
+        --sort-by=: The criteria used to sort the results of a list repositories operation.
+      completion:
+        flag:
+            order:
+                - ascending
+                - descending
+            sort-by:
+                - repositoryName
+                - lastModifiedDate
+    - name: list-tags-for-resource
+      description: Gets information about Amazon Web Servicestags for a specified Amazon Resource Name (ARN) in CodeCommit.
+      flags:
+        --next-token=: An enumeration token that, when provided in a request, returns the next batch of the results.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource for which you want to get information about tags, if any.
+    - name: tag-resource
+      description: Adds or updates tags for a resource in CodeCommit.
+      flags:
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to which you want to add or update tags.
+        --tags=!: The key-value pair to use when tagging this repository.
+    - name: update-comment
+      description: Replaces the contents of a comment.
+      flags:
+        --comment-id=!: The system-generated ID of the comment you want to update.
+        --content=!: The updated content to replace the existing content of the comment.
+    - name: associate-approval-rule-template-with-repository
+      description: Creates an association between an approval rule template and a specified repository.
+      flags:
+        --approval-rule-template-name=!: The name for the approval rule template.
+        --repository-name=!: The name of the repository that you want to associate with the template.
+    - name: create-unreferenced-merge-commit
+      description: Creates an unreferenced commit that represents the result of merging two branches using a specified merge strategy.
+      flags:
+        --author-name=: The name of the author who created the unreferenced commit.
+        --commit-message=: The commit message for the unreferenced commit.
+        --conflict-detail-level=: The level of conflict detail to use.
+        --conflict-resolution-strategy=: Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file.
+        --conflict-resolution=: If AUTOMERGE is the conflict resolution strategy, a list of inputs to use when resolving conflicts during a merge.
+        --destination-commit-specifier=!: The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
+        --email=: The email address for the person who created the unreferenced commit.
+        --keep-empty-folders: If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty.
+        --merge-option=!: The merge option or strategy you want to use to merge the code.
+        --no-keep-empty-folders: If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty.
+        --repository-name=!: The name of the repository where you want to create the unreferenced merge commit.
+        --source-commit-specifier=!: The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
+      completion:
+        flag:
+            conflict-detail-level:
+                - FILE_LEVEL
+                - LINE_LEVEL
+            conflict-resolution-strategy:
+                - NONE
+                - ACCEPT_SOURCE
+                - ACCEPT_DESTINATION
+                - AUTOMERGE
+            merge-option:
+                - FAST_FORWARD_MERGE
+                - SQUASH_MERGE
+                - THREE_WAY_MERGE
+    - name: describe-merge-conflicts
+      description: Returns information about one or more merge conflicts in the attempted merge of two commit specifiers using the squash or three-way merge strategy.
+      flags:
+        --conflict-detail-level=: The level of conflict detail to use.
+        --conflict-resolution-strategy=: Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file.
+        --destination-commit-specifier=!: The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
+        --file-path=!: The path of the target files used to describe the conflicts.
+        --max-merge-hunks=: The maximum number of merge hunks to include in the output.
+        --merge-option=!: The merge option or strategy you want to use to merge the code.
+        --next-token=: An enumeration token that, when provided in a request, returns the next batch of the results.
+        --repository-name=!: The name of the repository where you want to get information about a merge conflict.
+        --source-commit-specifier=!: The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
+      completion:
+        flag:
+            conflict-detail-level:
+                - FILE_LEVEL
+                - LINE_LEVEL
+            conflict-resolution-strategy:
+                - NONE
+                - ACCEPT_SOURCE
+                - ACCEPT_DESTINATION
+                - AUTOMERGE
+            merge-option:
+                - FAST_FORWARD_MERGE
+                - SQUASH_MERGE
+                - THREE_WAY_MERGE
+    - name: get-pull-request-approval-states
+      description: Gets information about the approval states for a specified pull request.
+      flags:
+        --pull-request-id=!: The system-generated ID for the pull request.
+        --revision-id=!: The system-generated ID for the pull request revision.
+    - name: describe-pull-request-events
+      description: Returns information about one or more pull request events.
+      flags:
+        --actor-arn=: The Amazon Resource Name (ARN) of the user whose actions resulted in the event.
+        --max-results=: A non-zero, non-negative integer used to limit the number of returned results.
+        --next-token=: An enumeration token that, when provided in a request, returns the next batch of the results.
+        --pull-request-event-type=: Optional.
+        --pull-request-id=!: The system-generated ID of the pull request.
+      completion:
+        flag:
+            pull-request-event-type:
+                - PULL_REQUEST_CREATED
+                - PULL_REQUEST_STATUS_CHANGED
+                - PULL_REQUEST_SOURCE_REFERENCE_UPDATED
+                - PULL_REQUEST_MERGE_STATE_CHANGED
+                - PULL_REQUEST_APPROVAL_RULE_CREATED
+                - PULL_REQUEST_APPROVAL_RULE_UPDATED
+                - PULL_REQUEST_APPROVAL_RULE_DELETED
+                - PULL_REQUEST_APPROVAL_RULE_OVERRIDDEN
+                - PULL_REQUEST_APPROVAL_STATE_CHANGED
+    - name: get-comments-for-pull-request
+      description: Returns comments made on a pull request.
+      flags:
+        --after-commit-id=: The full commit ID of the commit in the source branch that was the tip of the branch at the time the comment was made.
+        --before-commit-id=: The full commit ID of the commit in the destination branch that was the tip of the branch at the time the pull request was created.
+        --max-results=: A non-zero, non-negative integer used to limit the number of returned results.
+        --next-token=: An enumeration token that, when provided in a request, returns the next batch of the results.
+        --pull-request-id=!: The system-generated ID of the pull request.
+        --repository-name=: The name of the repository that contains the pull request.
+    - name: get-commit
+      description: Returns information about a commit, including commit message and committer information.
+      flags:
+        --commit-id=!: The commit ID.
+        --repository-name=!: The name of the repository to which the commit was made.
     - name: post-comment-reply
       description: Posts a comment in reply to an existing comment on a comparison between commits or a pull request.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-request-token=: A unique, client-generated idempotency token that, when provided in a request, ensures the request cannot be repeated with a changed parameter.
         --content=!: The contents of your reply to a comment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --in-reply-to=!: The system-generated ID of the comment to which you want to reply.
+    - name: update-pull-request-status
+      description: Updates the status of a pull request.
+      flags:
+        --pull-request-id=!: The system-generated ID of the pull request.
+        --pull-request-status=!: The status of the pull request.
+      completion:
+        flag:
+            pull-request-status:
+                - OPEN
+                - CLOSED
+    - name: create-pull-request-approval-rule
+      description: Creates an approval rule for a pull request.
+      flags:
+        --approval-rule-content=!: The content of the approval rule, including the number of approvals needed and the structure of an approval pool defined for approvals, if any.
+        --approval-rule-name=!: The name for the approval rule.
+        --pull-request-id=!: The system-generated ID of the pull request for which you want to create the approval rule.
+    - name: get-differences
+      description: Returns information about the differences in a valid commit specifier (such as a branch, tag, HEAD, commit ID, or other fully qualified reference).
+      flags:
+        --after-commit-specifier=!: The branch, tag, HEAD, or other fully qualified reference used to identify a commit.
+        --after-path=: The file path in which to check differences.
+        --before-commit-specifier=: The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, the full commit ID).
+        --before-path=: The file path in which to check for differences.
+        --max-results=: A non-zero, non-negative integer used to limit the number of returned results.
+        --next-token=: An enumeration token that, when provided in a request, returns the next batch of the results.
+        --repository-name=!: The name of the repository where you want to get differences.
+    - name: get-merge-commit
+      description: Returns information about a specified merge commit.
+      flags:
+        --conflict-detail-level=: The level of conflict detail to use.
+        --conflict-resolution-strategy=: Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file.
+        --destination-commit-specifier=!: The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
+        --repository-name=!: The name of the repository that contains the merge commit about which you want to get information.
+        --source-commit-specifier=!: The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
+      completion:
+        flag:
+            conflict-detail-level:
+                - FILE_LEVEL
+                - LINE_LEVEL
+            conflict-resolution-strategy:
+                - NONE
+                - ACCEPT_SOURCE
+                - ACCEPT_DESTINATION
+                - AUTOMERGE
+    - name: merge-pull-request-by-fast-forward
+      description: Attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the fast-forward merge strategy.
+      flags:
+        --pull-request-id=!: The system-generated ID of the pull request.
+        --repository-name=!: The name of the repository where the pull request was created.
+        --source-commit-id=: The full commit ID of the original or updated commit in the pull request source branch.
+    - name: merge-pull-request-by-three-way
+      description: Attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the three-way merge strategy.
+      flags:
+        --author-name=: The name of the author who created the commit.
+        --commit-message=: The commit message to include in the commit information for the merge.
+        --conflict-detail-level=: The level of conflict detail to use.
+        --conflict-resolution-strategy=: Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file.
+        --conflict-resolution=: If AUTOMERGE is the conflict resolution strategy, a list of inputs to use when resolving conflicts during a merge.
+        --email=: The email address of the person merging the branches.
+        --keep-empty-folders: If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty.
+        --no-keep-empty-folders: If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty.
+        --pull-request-id=!: The system-generated ID of the pull request.
+        --repository-name=!: The name of the repository where the pull request was created.
+        --source-commit-id=: The full commit ID of the original or updated commit in the pull request source branch.
+      completion:
+        flag:
+            conflict-detail-level:
+                - FILE_LEVEL
+                - LINE_LEVEL
+            conflict-resolution-strategy:
+                - NONE
+                - ACCEPT_SOURCE
+                - ACCEPT_DESTINATION
+                - AUTOMERGE
+    - name: update-pull-request-approval-state
+      description: Updates the state of a user's approval on a pull request.
+      flags:
+        --approval-state=!: The approval state to associate with the user on the pull request.
+        --pull-request-id=!: The system-generated ID of the pull request.
+        --revision-id=!: The system-generated ID of the revision.
+      completion:
+        flag:
+            approval-state:
+                - APPROVE
+                - REVOKE
+    - name: update-pull-request-title
+      description: Replaces the title of a pull request.
+      flags:
+        --pull-request-id=!: The system-generated ID of the pull request.
+        --title=!: The updated title of the pull request.
+    - name: batch-associate-approval-rule-template-with-repositories
+      description: Creates an association between an approval rule template and one or more specified repositories.
+      flags:
+        --approval-rule-template-name=!: The name of the template you want to associate with one or more repositories.
+        --repository-names=!: The names of the repositories you want to associate with the template.
+    - name: batch-get-commits
+      description: Returns information about the contents of one or more commits in a repository.
+      flags:
+        --commit-ids=!: The full commit IDs of the commits to get information about.
+        --repository-name=!: The name of the repository that contains the commits.
+    - name: get-comment
+      description: Returns the content of a comment made on a change, file, or commit in a repository.
+      flags:
+        --comment-id=!: The unique, system-generated ID of the comment.
+    - name: get-merge-options
+      description: Returns information about the merge options available for merging two specified branches.
+      flags:
+        --conflict-detail-level=: The level of conflict detail to use.
+        --conflict-resolution-strategy=: Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file.
+        --destination-commit-specifier=!: The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
+        --repository-name=!: The name of the repository that contains the commits about which you want to get merge options.
+        --source-commit-specifier=!: The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
+      completion:
+        flag:
+            conflict-detail-level:
+                - FILE_LEVEL
+                - LINE_LEVEL
+            conflict-resolution-strategy:
+                - NONE
+                - ACCEPT_SOURCE
+                - ACCEPT_DESTINATION
+                - AUTOMERGE
+    - name: get-repository-triggers
+      description: Gets information about triggers configured for a repository.
+      flags:
+        --repository-name=!: The name of the repository for which the trigger is configured.
+    - name: post-comment-for-pull-request
+      description: Posts a comment on a pull request.
+      flags:
+        --after-commit-id=!: The full commit ID of the commit in the source branch that is the current tip of the branch for the pull request when you post the comment.
+        --before-commit-id=!: The full commit ID of the commit in the destination branch that was the tip of the branch at the time the pull request was created.
+        --client-request-token=: A unique, client-generated idempotency token that, when provided in a request, ensures the request cannot be repeated with a changed parameter.
+        --content=!: The content of your comment on the change.
+        --location=: The location of the change where you want to post your comment.
+        --pull-request-id=!: The system-generated ID of the pull request.
+        --repository-name=!: The name of the repository where you want to post a comment on a pull request.
+    - name: update-approval-rule-template-description
+      description: Updates the description for a specified approval rule template.
+      flags:
+        --approval-rule-template-description=!: The updated description of the approval rule template.
+        --approval-rule-template-name=!: The name of the template for which you want to update the description.
+    - name: delete-comment-content
+      description: Deletes the content of a comment made on a change, file, or commit in a repository.
+      flags:
+        --comment-id=!: The unique, system-generated ID of the comment.
+    - name: merge-pull-request-by-squash
+      description: Attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the squash merge strategy.
+      flags:
+        --author-name=: The name of the author who created the commit.
+        --commit-message=: The commit message to include in the commit information for the merge.
+        --conflict-detail-level=: The level of conflict detail to use.
+        --conflict-resolution-strategy=: Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file.
+        --conflict-resolution=: If AUTOMERGE is the conflict resolution strategy, a list of inputs to use when resolving conflicts during a merge.
+        --email=: The email address of the person merging the branches.
+        --keep-empty-folders: If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty.
+        --no-keep-empty-folders: If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty.
+        --pull-request-id=!: The system-generated ID of the pull request.
+        --repository-name=!: The name of the repository where the pull request was created.
+        --source-commit-id=: The full commit ID of the original or updated commit in the pull request source branch.
+      completion:
+        flag:
+            conflict-detail-level:
+                - FILE_LEVEL
+                - LINE_LEVEL
+            conflict-resolution-strategy:
+                - NONE
+                - ACCEPT_SOURCE
+                - ACCEPT_DESTINATION
+                - AUTOMERGE
+    - name: untag-resource
+      description: Removes tags for a resource in CodeCommit.
+      flags:
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to which you want to remove tags.
+        --tag-keys=!: The tag key for each tag that you want to remove from the resource.
+    - name: update-default-branch
+      description: Sets or changes the default branch name for the specified repository.
+      flags:
+        --default-branch-name=!: The name of the branch to set as the default branch.
+        --repository-name=!: The name of the repository for which you want to set or change the default branch.
+    - name: update-repository-name
+      description: Renames a repository.
+      flags:
+        --new-name=!: The new name for the repository.
+        --old-name=!: The current name of the repository.
+    - name: get-pull-request
+      description: Gets information about a pull request in a specified repository.
+      flags:
+        --pull-request-id=!: The system-generated ID of the pull request.
+    - name: merge-branches-by-fast-forward
+      description: Merges two branches using the fast-forward merge strategy.
+      flags:
+        --destination-commit-specifier=!: The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
+        --repository-name=!: The name of the repository where you want to merge two branches.
+        --source-commit-specifier=!: The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
+        --target-branch=: The branch where the merge is applied.
+    - name: delete-pull-request-approval-rule
+      description: Deletes an approval rule from a specified pull request.
+      flags:
+        --approval-rule-name=!: The name of the approval rule you want to delete.
+        --pull-request-id=!: The system-generated ID of the pull request that contains the approval rule you want to delete.
+    - name: get-comments-for-compared-commit
+      description: Returns information about comments made on the comparison between two commits.
+      flags:
+        --after-commit-id=!: To establish the directionality of the comparison, the full commit ID of the after commit.
+        --before-commit-id=: To establish the directionality of the comparison, the full commit ID of the before commit.
+        --max-results=: A non-zero, non-negative integer used to limit the number of returned results.
+        --next-token=: An enumeration token that when provided in a request, returns the next batch of the results.
+        --repository-name=!: The name of the repository where you want to compare commits.
+    - name: list-repositories-for-approval-rule-template
+      description: Lists all repositories associated with the specified approval rule template.
+      flags:
+        --approval-rule-template-name=!: The name of the approval rule template for which you want to list repositories that are associated with that template.
+        --max-results=: A non-zero, non-negative integer used to limit the number of returned results.
+        --next-token=: An enumeration token that, when provided in a request, returns the next batch of the results.
+    - name: put-comment-reaction
+      description: Adds or updates a reaction to a specified comment for the user whose identity is used to make the request.
+      flags:
+        --comment-id=!: The ID of the comment to which you want to add or update a reaction.
+        --reaction-value=!: The emoji reaction you want to add or update.
+    - name: put-repository-triggers
+      description: Replaces all triggers for a repository.
+      flags:
+        --repository-name=!: The name of the repository where you want to create or update the trigger.
+        --triggers=!: The JSON block of configuration information for each trigger.
+    - name: create-branch
+      description: Creates a branch in a repository and points the branch to a commit.
+      flags:
+        --branch-name=!: The name of the new branch to create.
+        --commit-id=!: The ID of the commit to point the new branch to.
+        --repository-name=!: The name of the repository in which you want to create the new branch.
+    - name: delete-branch
+      description: Deletes a branch from a repository, unless that branch is the default branch for the repository.
+      flags:
+        --branch-name=!: The name of the branch to delete.
+        --repository-name=!: The name of the repository that contains the branch to be deleted.
+    - name: get-branch
+      description: Returns information about a repository branch, including its name and the last commit ID.
+      flags:
+        --branch-name=: The name of the branch for which you want to retrieve information.
+        --repository-name=: The name of the repository that contains the branch for which you want to retrieve information.
+    - name: override-pull-request-approval-rules
+      description: Sets aside (overrides) all approval rule requirements for a specified pull request.
+      flags:
+        --override-status=!: Whether you want to set aside approval rule requirements for the pull request (OVERRIDE) or revoke a previous override and apply approval rule requirements (REVOKE).
+        --pull-request-id=!: The system-generated ID of the pull request for which you want to override all approval rule requirements.
+        --revision-id=!: The system-generated ID of the most recent revision of the pull request.
+      completion:
+        flag:
+            override-status:
+                - OVERRIDE
+                - REVOKE
+    - name: create-approval-rule-template
+      description: Creates a template for approval rules that can then be associated with one or more repositories in your Amazon Web Services account.
+      flags:
+        --approval-rule-template-content=!: The content of the approval rule that is created on pull requests in associated repositories.
+        --approval-rule-template-description=: The description of the approval rule template.
+        --approval-rule-template-name=!: The name of the approval rule template.
+    - name: create-repository
+      description: Creates a new, empty repository.
+      flags:
+        --kms-key-id=: The ID of the encryption key.
+        --repository-description=: A comment or description about the new repository.
+        --repository-name=!: The name of the new repository to be created.
+        --tags=: One or more tag key-value pairs to use when tagging this repository.
+    - name: get-approval-rule-template
+      description: Returns information about a specified approval rule template.
+      flags:
+        --approval-rule-template-name=!: The name of the approval rule template for which you want to get information.
+    - name: put-file
+      description: Adds or updates a file in a branch in an CodeCommit repository, and generates a commit for the addition in the specified branch.
+      flags:
+        --branch-name=!: The name of the branch where you want to add or update the file.
+        --commit-message=: A message about why this file was added or updated.
+        --email=: An email address for the person adding or updating the file.
+        --file-content=!: The content of the file, in binary object format.
+        --file-mode=: The file mode permissions of the blob.
+        --file-path=!: The name of the file you want to add or update, including the relative path to the file in the repository.
+        --name=: The name of the person adding or updating the file.
+        --parent-commit-id=: The full commit ID of the head commit in the branch where you want to add or update the file.
+        --repository-name=!: The name of the repository where you want to add or update the file.
+      completion:
+        flag:
+            file-mode:
+                - EXECUTABLE
+                - NORMAL
+                - SYMLINK
+    - name: test-repository-triggers
+      description: Tests the functionality of repository triggers by sending information to the trigger target.
+      flags:
+        --repository-name=!: The name of the repository in which to test the triggers.
+        --triggers=!: The list of triggers to test.
     - name: batch-describe-merge-conflicts
       description: Returns information about one or more merge conflicts in the attempted merge of two commit specifiers using the squash or three-way merge strategy.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --conflict-detail-level=: The level of conflict detail to use.
         --conflict-resolution-strategy=: Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file.
         --destination-commit-specifier=!: The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
         --file-paths=: The path of the target files used to describe the conflicts.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-conflict-files=: The maximum number of files to include in the output.
         --max-merge-hunks=: The maximum number of merge hunks to include in the output.
         --merge-option=!: The merge option or strategy you want to use to merge the code.
@@ -669,290 +643,60 @@ commands:
                 - FAST_FORWARD_MERGE
                 - SQUASH_MERGE
                 - THREE_WAY_MERGE
-    - name: create-branch
-      description: Creates a branch in a repository and points the branch to a commit.
-      flags:
-        --branch-name=!: The name of the new branch to create.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --commit-id=!: The ID of the commit to point the new branch to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --repository-name=!: The name of the repository in which you want to create the new branch.
-    - name: get-comments-for-compared-commit
-      description: Returns information about comments made on the comparison between two commits.
-      flags:
-        --after-commit-id=!: To establish the directionality of the comparison, the full commit ID of the after commit.
-        --before-commit-id=: To establish the directionality of the comparison, the full commit ID of the before commit.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: A non-zero, non-negative integer used to limit the number of returned results.
-        --next-token=: An enumeration token that when provided in a request, returns the next batch of the results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --repository-name=!: The name of the repository where you want to compare commits.
-        --starting-token=: A token to specify where to start paginating.
-    - name: post-comment-for-pull-request
-      description: Posts a comment on a pull request.
-      flags:
-        --after-commit-id=!: The full commit ID of the commit in the source branch that is the current tip of the branch for the pull request when you post the comment.
-        --before-commit-id=!: The full commit ID of the commit in the destination branch that was the tip of the branch at the time the pull request was created.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique, client-generated idempotency token that, when provided in a request, ensures the request cannot be repeated with a changed parameter.
-        --content=!: The content of your comment on the change.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location=: The location of the change where you want to post your comment.
-        --pull-request-id=!: The system-generated ID of the pull request.
-        --repository-name=!: The name of the repository where you want to post a comment on a pull request.
-    - name: create-pull-request-approval-rule
-      description: Creates an approval rule for a pull request.
-      flags:
-        --approval-rule-content=!: The content of the approval rule, including the number of approvals needed and the structure of an approval pool defined for approvals, if any.
-        --approval-rule-name=!: The name for the approval rule.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --pull-request-id=!: The system-generated ID of the pull request for which you want to create the approval rule.
-    - name: delete-branch
-      description: Deletes a branch from a repository, unless that branch is the default branch for the repository.
-      flags:
-        --branch-name=!: The name of the branch to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --repository-name=!: The name of the repository that contains the branch to be deleted.
-    - name: get-comment
-      description: Returns the content of a comment made on a change, file, or commit in a repository.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --comment-id=!: The unique, system-generated ID of the comment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-file-commit-history
-      description: Retrieves a list of commits and changes to a specified file.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --commit-specifier=: The fully quaified reference that identifies the commit that contains the file.
-        --file-path=!: The full path of the file whose history you want to retrieve, including the name of the file.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: A non-zero, non-negative integer used to limit the number of returned results.
-        --next-token=: An enumeration token that allows the operation to batch the results.
-        --repository-name=!: The name of the repository that contains the file.
-    - name: update-default-branch
-      description: Sets or changes the default branch name for the specified repository.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --default-branch-name=!: The name of the branch to set as the default branch.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --repository-name=!: The name of the repository for which you want to set or change the default branch.
-    - name: update-repository-description
-      description: Sets or changes the comment or description for a repository.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --repository-description=: The new comment or description for the specified repository.
-        --repository-name=!: The name of the repository to set or change the comment or description for.
-    - name: get-repository-triggers
-      description: Gets information about triggers configured for a repository.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --repository-name=!: The name of the repository for which the trigger is configured.
-    - name: merge-pull-request-by-fast-forward
-      description: Attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the fast-forward merge strategy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --pull-request-id=!: The system-generated ID of the pull request.
-        --repository-name=!: The name of the repository where the pull request was created.
-        --source-commit-id=: The full commit ID of the original or updated commit in the pull request source branch.
-    - name: merge-pull-request-by-squash
-      description: Attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the squash merge strategy.
-      flags:
-        --author-name=: The name of the author who created the commit.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --commit-message=: The commit message to include in the commit information for the merge.
-        --conflict-detail-level=: The level of conflict detail to use.
-        --conflict-resolution-strategy=: Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file.
-        --conflict-resolution=: If AUTOMERGE is the conflict resolution strategy, a list of inputs to use when resolving conflicts during a merge.
-        --email=: The email address of the person merging the branches.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --keep-empty-folders: If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty.
-        --no-keep-empty-folders: If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty.
-        --pull-request-id=!: The system-generated ID of the pull request.
-        --repository-name=!: The name of the repository where the pull request was created.
-        --source-commit-id=: The full commit ID of the original or updated commit in the pull request source branch.
-      completion:
-        flag:
-            conflict-detail-level:
-                - FILE_LEVEL
-                - LINE_LEVEL
-            conflict-resolution-strategy:
-                - NONE
-                - ACCEPT_SOURCE
-                - ACCEPT_DESTINATION
-                - AUTOMERGE
-    - name: override-pull-request-approval-rules
-      description: Sets aside (overrides) all approval rule requirements for a specified pull request.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --override-status=!: Whether you want to set aside approval rule requirements for the pull request (OVERRIDE) or revoke a previous override and apply approval rule requirements (REVOKE).
-        --pull-request-id=!: The system-generated ID of the pull request for which you want to override all approval rule requirements.
-        --revision-id=!: The system-generated ID of the most recent revision of the pull request.
-      completion:
-        flag:
-            override-status:
-                - OVERRIDE
-                - REVOKE
-    - name: put-comment-reaction
-      description: Adds or updates a reaction to a specified comment for the user whose identity is used to make the request.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --comment-id=!: The ID of the comment to which you want to add or update a reaction.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --reaction-value=!: The emoji reaction you want to add or update.
-    - name: tag-resource
-      description: Adds or updates tags for a resource in CodeCommit.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to which you want to add or update tags.
-        --tags=!: The key-value pair to use when tagging this repository.
-    - name: delete-file
-      description: Deletes a specified file from a specified branch.
-      flags:
-        --branch-name=!: The name of the branch where the commit that deletes the file is made.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --commit-message=: The commit message you want to include as part of deleting the file.
-        --email=: The email address for the commit that deletes the file.
-        --file-path=!: The fully qualified path to the file that to be deleted, including the full name and extension of that file.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --keep-empty-folders: If a file is the only object in the folder or directory, specifies whether to delete the folder or directory that contains the file.
-        --name=: The name of the author of the commit that deletes the file.
-        --no-keep-empty-folders: If a file is the only object in the folder or directory, specifies whether to delete the folder or directory that contains the file.
-        --parent-commit-id=!: The ID of the commit that is the tip of the branch where you want to create the commit that deletes the file.
-        --repository-name=!: The name of the repository that contains the file to delete.
-    - name: create-approval-rule-template
-      description: Creates a template for approval rules that can then be associated with one or more repositories in your Amazon Web Services account.
-      flags:
-        --approval-rule-template-content=!: The content of the approval rule that is created on pull requests in associated repositories.
-        --approval-rule-template-description=: The description of the approval rule template.
-        --approval-rule-template-name=!: The name of the approval rule template.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-repository
-      description: Creates a new, empty repository.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kms-key-id=: The ID of the encryption key.
-        --repository-description=: A comment or description about the new repository.
-        --repository-name=!: The name of the new repository to be created.
-        --tags=: One or more tag key-value pairs to use when tagging this repository.
     - name: delete-approval-rule-template
       description: Deletes a specified approval rule template.
       flags:
         --approval-rule-template-name=!: The name of the approval rule template to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-comments-for-pull-request
-      description: Returns comments made on a pull request.
+    - name: get-blob
+      description: Returns the base-64 encoded content of an individual blob in a repository.
       flags:
-        --after-commit-id=: The full commit ID of the commit in the source branch that was the tip of the branch at the time the comment was made.
-        --before-commit-id=: The full commit ID of the commit in the destination branch that was the tip of the branch at the time the pull request was created.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
+        --blob-id=!: The ID of the blob, which is its SHA-1 pointer.
+        --repository-name=!: The name of the repository that contains the blob.
+    - name: list-approval-rule-templates
+      description: Lists all approval rule templates in the specified Amazon Web Services Region in your Amazon Web Services account.
+      flags:
         --max-results=: A non-zero, non-negative integer used to limit the number of returned results.
         --next-token=: An enumeration token that, when provided in a request, returns the next batch of the results.
-        --page-size=: The size of each page to get in the AWS service call.
+    - name: update-pull-request-description
+      description: Replaces the contents of the description of a pull request.
+      flags:
+        --description=!: The updated content of the description for the pull request.
         --pull-request-id=!: The system-generated ID of the pull request.
-        --repository-name=: The name of the repository that contains the pull request.
-        --starting-token=: A token to specify where to start paginating.
-    - name: get-merge-commit
-      description: Returns information about a specified merge commit.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --conflict-detail-level=: The level of conflict detail to use.
-        --conflict-resolution-strategy=: Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file.
-        --destination-commit-specifier=!: The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --repository-name=!: The name of the repository that contains the merge commit about which you want to get information.
-        --source-commit-specifier=!: The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
-      completion:
-        flag:
-            conflict-detail-level:
-                - FILE_LEVEL
-                - LINE_LEVEL
-            conflict-resolution-strategy:
-                - NONE
-                - ACCEPT_SOURCE
-                - ACCEPT_DESTINATION
-                - AUTOMERGE
-    - name: evaluate-pull-request-approval-rules
-      description: Evaluates whether a pull request has met all the conditions specified in its associated approval rules.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --pull-request-id=!: The system-generated ID of the pull request you want to evaluate.
-        --revision-id=!: The system-generated ID for the pull request revision.
-    - name: merge-branches-by-three-way
-      description: Merges two specified branches using the three-way merge strategy.
+    - name: create-commit
+      description: Creates a commit for a repository on the tip of a specified branch.
       flags:
         --author-name=: The name of the author who created the commit.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --commit-message=: The commit message to include in the commit information for the merge.
-        --conflict-detail-level=: The level of conflict detail to use.
-        --conflict-resolution-strategy=: Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file.
-        --conflict-resolution=: If AUTOMERGE is the conflict resolution strategy, a list of inputs to use when resolving conflicts during a merge.
-        --destination-commit-specifier=!: The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
-        --email=: The email address of the person merging the branches.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --branch-name=!: The name of the branch where you create the commit.
+        --commit-message=: The commit message you want to include in the commit.
+        --delete-files=: The files to delete in this commit.
+        --email=: The email address of the person who created the commit.
         --keep-empty-folders: If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty.
         --no-keep-empty-folders: If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty.
-        --repository-name=!: The name of the repository where you want to merge two branches.
-        --source-commit-specifier=!: The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).
-        --target-branch=: The branch where the merge is applied.
-      completion:
-        flag:
-            conflict-detail-level:
-                - FILE_LEVEL
-                - LINE_LEVEL
-            conflict-resolution-strategy:
-                - NONE
-                - ACCEPT_SOURCE
-                - ACCEPT_DESTINATION
-                - AUTOMERGE
-    - name: update-pull-request-approval-state
-      description: Updates the state of a user's approval on a pull request.
+        --parent-commit-id=: The ID of the commit that is the parent of the commit you create.
+        --put-files=: The files to add or update in this commit.
+        --repository-name=!: The name of the repository where you create the commit.
+        --set-file-modes=: The file modes to update for files in this commit.
+    - name: list-branches
+      description: Gets information about one or more branches in a repository.
       flags:
-        --approval-state=!: The approval state to associate with the user on the pull request.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --pull-request-id=!: The system-generated ID of the pull request.
-        --revision-id=!: The system-generated ID of the revision.
+        --next-token=: An enumeration token that allows the operation to batch the results.
+        --repository-name=!: The name of the repository that contains the branches.
+    - name: list-pull-requests
+      description: Returns a list of pull requests for a specified repository.
+      flags:
+        --author-arn=: Optional.
+        --max-results=: A non-zero, non-negative integer used to limit the number of returned results.
+        --next-token=: An enumeration token that, when provided in a request, returns the next batch of the results.
+        --pull-request-status=: Optional.
+        --repository-name=!: The name of the repository for which you want to list pull requests.
       completion:
         flag:
-            approval-state:
-                - APPROVE
-                - REVOKE
+            pull-request-status:
+                - OPEN
+                - CLOSED
+    - name: update-approval-rule-template-content
+      description: Updates the content of an approval rule template.
+      flags:
+        --approval-rule-template-name=!: The name of the approval rule template where you want to update the content of the rule.
+        --existing-rule-content-sha256=: The SHA-256 hash signature for the content of the approval rule.
+        --new-rule-content=!: The content that replaces the existing content of the rule.

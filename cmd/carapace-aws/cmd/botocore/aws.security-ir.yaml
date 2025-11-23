@@ -1,47 +1,41 @@
 name: security-ir
 description: Security Incident Response
 commands:
-    - name: get-case-attachment-upload-url
-      description: Uploads an attachment to a case.
+    - name: create-case-comment
+      description: Adds a comment to an existing case.
       flags:
-        --case-id=!: Required element for GetCaseAttachmentUploadUrl to identify the case ID for uploading an attachment.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --body=!: Required element used in combination with CreateCaseComment to add content for the new comment.
+        --case-id=!: Required element used in combination with CreateCaseComment to specify a case ID.
         --client-token=: The `clientToken` field is an idempotency key used to ensure that repeated attempts for a single action will be ignored by the server during retries.
-        --content-length=!: Required element for GetCaseAttachmentUploadUrl to identify the size of the file attachment.
-        --file-name=!: Required element for GetCaseAttachmentUploadUrl to identify the file name of the attachment to upload.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-case-edits
-      description: Views the case history for edits made to a designated case.
+    - name: list-cases
+      description: Lists all cases the requester has access to.
       flags:
-        --case-id=!: Required element used with ListCaseEdits to identify the case to query.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Optional element to identify how many results to obtain.
-        --next-token=: An optional string that, if supplied, must be copied from the output of a previous call to ListCaseEdits.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: tag-resource
-      description: Adds a tag(s) to a designated resource.
+        --max-results=: Optional element for ListCases to limit the number of responses.
+        --next-token=: An optional string that, if supplied, must be copied from the output of a previous call to ListCases.
+    - name: list-tags-for-resource
+      description: Returns currently configured tags on a resource.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: Required element for TagResource to identify the ARN for the resource to add a tag to.
-        --tags=!: Required element for ListTagsForResource to provide the content for a tag.
+        --resource-arn=!: Required element for ListTagsForResource to provide the ARN to identify a specific resource.
+    - name: send-feedback
+      description: Send feedback based on response investigation action
+      flags:
+        --case-id=!: Send feedback based on request caseID
+        --comment=: Send feedback based on request comments
+        --result-id=!: Send feedback based on request result ID
+        --usefulness=!: Required enum value indicating user assessment of result q.....
+      completion:
+        flag:
+            usefulness:
+                - USEFUL
+                - NOT_USEFUL
     - name: update-case
       description: Updates an existing case.
       flags:
         --actual-incident-start-date=: Optional element for UpdateCase to provide content for the incident start date field.
         --case-id=!: Required element for UpdateCase to identify the case ID for updates.
         --case-metadata=: Update the case request with case metadata
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: Optional element for UpdateCase to provide content for the description field.
         --engagement-type=: Optional element for UpdateCase to provide content for the engagement type field.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --impacted-accounts-to-add=: Optional element for UpdateCase to provide content to add accounts impacted.
         --impacted-accounts-to-delete=: Optional element for UpdateCase to provide content to add accounts impacted.
         --impacted-aws-regions-to-add=: Optional element for UpdateCase to provide content to add regions impacted.
@@ -59,78 +53,18 @@ commands:
             engagement-type:
                 - Security Incident
                 - Investigation
-    - name: batch-get-member-account-details
-      description: Provides information on whether the supplied account IDs are associated with a membership.
+    - name: update-case-comment
+      description: Updates an existing case comment.
       flags:
-        --account-ids=!: Optional element to query the membership relationship status to a provided list of account IDs.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --membership-id=!: Required element used in combination with BatchGetMemberAccountDetails to identify the membership ID to query.
-    - name: create-case-comment
-      description: Adds a comment to an existing case.
-      flags:
-        --body=!: Required element used in combination with CreateCaseComment to add content for the new comment.
-        --case-id=!: Required element used in combination with CreateCaseComment to specify a case ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: The `clientToken` field is an idempotency key used to ensure that repeated attempts for a single action will be ignored by the server during retries.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-case-attachment-download-url
-      description: Returns a Pre-Signed URL for uploading attachments into a case.
-      flags:
-        --attachment-id=!: Required element for GetCaseAttachmentDownloadUrl to identify the attachment ID for downloading an attachment.
-        --case-id=!: Required element for GetCaseAttachmentDownloadUrl to identify the case ID for downloading an attachment from.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-investigations
-      description: Investigation performed by an agent for a security incident...
-      flags:
-        --case-id=!: Investigation performed by an agent for a security incident per caseID
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Investigation performed by an agent for a security incident request, returning max results
-        --next-token=: Investigation performed by an agent for a security incident request
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-membership
-      description: Updates membership configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --incident-response-team=: Optional element for UpdateMembership to update the membership name.
-        --membership-accounts-configurations-update=: The `membershipAccountsConfigurationsUpdate` field in the `UpdateMembershipRequest` structure allows you to update the configuration settings for accounts within a membership.
-        --membership-id=!: Required element for UpdateMembership to identify the membership to update.
-        --membership-name=: Optional element for UpdateMembership to update the membership name.
-        --no-undo-membership-cancellation: The `undoMembershipCancellation` parameter is a boolean flag that indicates whether to reverse a previously requested membership cancellation.
-        --opt-in-features=: Optional element for UpdateMembership to enable or disable opt-in features for the service.
-        --undo-membership-cancellation: The `undoMembershipCancellation` parameter is a boolean flag that indicates whether to reverse a previously requested membership cancellation.
-    - name: update-resolver-type
-      description: Updates the resolver type for a case.
-      flags:
-        --case-id=!: Required element for UpdateResolverType to identify the case to update.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resolver-type=!: Required element for UpdateResolverType to identify the new resolver.
-      completion:
-        flag:
-            resolver-type:
-                - AWS
-                - Self
+        --body=!: Required element for UpdateCaseComment to identify the content for the comment to be updated.
+        --case-id=!: Required element for UpdateCaseComment to identify the case ID containing the comment to be updated.
+        --comment-id=!: Required element for UpdateCaseComment to identify the case ID to be updated.
     - name: create-case
       description: Creates a new case.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: The `clientToken` field is an idempotency key used to ensure that repeated attempts for a single action will be ignored by the server during retries.
         --description=!: Required element used in combination with CreateCase
         --engagement-type=!: Required element used in combination with CreateCase to provide an engagement type for the new cases.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --impacted-accounts=!: Required element used in combination with CreateCase to provide a list of impacted accounts.
         --impacted-aws-regions=: An optional element used in combination with CreateCase to provide a list of impacted regions.
         --impacted-services=: An optional element used in combination with CreateCase to provide a list of services impacted.
@@ -148,128 +82,38 @@ commands:
             resolver-type:
                 - AWS
                 - Self
-    - name: create-membership
-      description: Creates a new membership.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: The `clientToken` field is an idempotency key used to ensure that repeated attempts for a single action will be ignored by the server during retries.
-        --cover-entire-organization: The `coverEntireOrganization` parameter is a boolean flag that determines whether the membership should be applied to the entire Amazon Web Services Organization.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --incident-response-team=!: Required element used in combination with CreateMembership to add customer incident response team members and trusted partners to the membership.
-        --membership-name=!: Required element used in combination with CreateMembership to create a name for the membership.
-        --no-cover-entire-organization: The `coverEntireOrganization` parameter is a boolean flag that determines whether the membership should be applied to the entire Amazon Web Services Organization.
-        --opt-in-features=: Optional element to enable the monitoring and investigation opt-in features for the service.
-        --tags=: Optional element for customer configured tags.
     - name: get-case
       description: Returns the attributes of a case.
       flags:
         --case-id=!: Required element for GetCase to identify the requested case ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-membership
-      description: Returns the attributes of a membership.
+    - name: get-case-attachment-download-url
+      description: Returns a Pre-Signed URL for uploading attachments into a case.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --membership-id=!: Required element for GetMembership to identify the membership ID to query.
-    - name: list-cases
-      description: Lists all cases the requester has access to.
+        --attachment-id=!: Required element for GetCaseAttachmentDownloadUrl to identify the attachment ID for downloading an attachment.
+        --case-id=!: Required element for GetCaseAttachmentDownloadUrl to identify the case ID for downloading an attachment from.
+    - name: get-case-attachment-upload-url
+      description: Uploads an attachment to a case.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Optional element for ListCases to limit the number of responses.
-        --next-token=: An optional string that, if supplied, must be copied from the output of a previous call to ListCases.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+        --case-id=!: Required element for GetCaseAttachmentUploadUrl to identify the case ID for uploading an attachment.
+        --client-token=: The `clientToken` field is an idempotency key used to ensure that repeated attempts for a single action will be ignored by the server during retries.
+        --content-length=!: Required element for GetCaseAttachmentUploadUrl to identify the size of the file attachment.
+        --file-name=!: Required element for GetCaseAttachmentUploadUrl to identify the file name of the attachment to upload.
     - name: list-comments
       description: Returns comments for a designated case.
       flags:
         --case-id=!: Required element for ListComments to designate the case to query.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
         --max-results=: Optional element for ListComments to limit the number of responses.
         --next-token=: An optional string that, if supplied, must be copied from the output of a previous call to ListComments.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-memberships
-      description: Returns the memberships that the calling principal can access.
+    - name: tag-resource
+      description: Adds a tag(s) to a designated resource.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Request element for ListMemberships to limit the number of responses.
-        --next-token=: An optional string that, if supplied, must be copied from the output of a previous call to ListMemberships.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: send-feedback
-      description: Send feedback based on response investigation action
-      flags:
-        --case-id=!: Send feedback based on request caseID
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --comment=: Send feedback based on request comments
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --result-id=!: Send feedback based on request result ID
-        --usefulness=!: Required enum value indicating user assessment of result q.....
-      completion:
-        flag:
-            usefulness:
-                - USEFUL
-                - NOT_USEFUL
-    - name: cancel-membership
-      description: Cancels an existing membership.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --membership-id=!: Required element used in combination with CancelMembershipRequest to identify the membership ID to cancel.
-    - name: close-case
-      description: Closes an existing case.
-      flags:
-        --case-id=!: Required element used in combination with CloseCase to identify the case ID to close.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-tags-for-resource
-      description: Returns currently configured tags on a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: Required element for ListTagsForResource to provide the ARN to identify a specific resource.
-    - name: untag-resource
-      description: Removes a tag(s) from a designate resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: Required element for UnTagResource to identify the ARN for the resource to remove a tag from.
-        --tag-keys=!: Required element for UnTagResource to identify tag to remove.
-    - name: update-case-comment
-      description: Updates an existing case comment.
-      flags:
-        --body=!: Required element for UpdateCaseComment to identify the content for the comment to be updated.
-        --case-id=!: Required element for UpdateCaseComment to identify the case ID containing the comment to be updated.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --comment-id=!: Required element for UpdateCaseComment to identify the case ID to be updated.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: Required element for TagResource to identify the ARN for the resource to add a tag to.
+        --tags=!: Required element for ListTagsForResource to provide the content for a tag.
     - name: update-case-status
       description: Updates the state transitions for a designated cases.
       flags:
         --case-id=!: Required element for UpdateCaseStatus to identify the case to update.
         --case-status=!: Required element for UpdateCaseStatus to identify the status for a case.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
       completion:
         flag:
             case-status:
@@ -277,3 +121,72 @@ commands:
                 - Detection and Analysis
                 - Containment, Eradication and Recovery
                 - Post-incident Activities
+    - name: update-membership
+      description: Updates membership configuration.
+      flags:
+        --incident-response-team=: Optional element for UpdateMembership to update the membership name.
+        --membership-accounts-configurations-update=: The `membershipAccountsConfigurationsUpdate` field in the `UpdateMembershipRequest` structure allows you to update the configuration settings for accounts within a membership.
+        --membership-id=!: Required element for UpdateMembership to identify the membership to update.
+        --membership-name=: Optional element for UpdateMembership to update the membership name.
+        --no-undo-membership-cancellation: The `undoMembershipCancellation` parameter is a boolean flag that indicates whether to reverse a previously requested membership cancellation.
+        --opt-in-features=: Optional element for UpdateMembership to enable or disable opt-in features for the service.
+        --undo-membership-cancellation: The `undoMembershipCancellation` parameter is a boolean flag that indicates whether to reverse a previously requested membership cancellation.
+    - name: batch-get-member-account-details
+      description: Provides information on whether the supplied account IDs are associated with a membership.
+      flags:
+        --account-ids=!: Optional element to query the membership relationship status to a provided list of account IDs.
+        --membership-id=!: Required element used in combination with BatchGetMemberAccountDetails to identify the membership ID to query.
+    - name: close-case
+      description: Closes an existing case.
+      flags:
+        --case-id=!: Required element used in combination with CloseCase to identify the case ID to close.
+    - name: create-membership
+      description: Creates a new membership.
+      flags:
+        --client-token=: The `clientToken` field is an idempotency key used to ensure that repeated attempts for a single action will be ignored by the server during retries.
+        --cover-entire-organization: The `coverEntireOrganization` parameter is a boolean flag that determines whether the membership should be applied to the entire Amazon Web Services Organization.
+        --incident-response-team=!: Required element used in combination with CreateMembership to add customer incident response team members and trusted partners to the membership.
+        --membership-name=!: Required element used in combination with CreateMembership to create a name for the membership.
+        --no-cover-entire-organization: The `coverEntireOrganization` parameter is a boolean flag that determines whether the membership should be applied to the entire Amazon Web Services Organization.
+        --opt-in-features=: Optional element to enable the monitoring and investigation opt-in features for the service.
+        --tags=: Optional element for customer configured tags.
+    - name: list-case-edits
+      description: Views the case history for edits made to a designated case.
+      flags:
+        --case-id=!: Required element used with ListCaseEdits to identify the case to query.
+        --max-results=: Optional element to identify how many results to obtain.
+        --next-token=: An optional string that, if supplied, must be copied from the output of a previous call to ListCaseEdits.
+    - name: list-memberships
+      description: Returns the memberships that the calling principal can access.
+      flags:
+        --max-results=: Request element for ListMemberships to limit the number of responses.
+        --next-token=: An optional string that, if supplied, must be copied from the output of a previous call to ListMemberships.
+    - name: untag-resource
+      description: Removes a tag(s) from a designate resource.
+      flags:
+        --resource-arn=!: Required element for UnTagResource to identify the ARN for the resource to remove a tag from.
+        --tag-keys=!: Required element for UnTagResource to identify tag to remove.
+    - name: update-resolver-type
+      description: Updates the resolver type for a case.
+      flags:
+        --case-id=!: Required element for UpdateResolverType to identify the case to update.
+        --resolver-type=!: Required element for UpdateResolverType to identify the new resolver.
+      completion:
+        flag:
+            resolver-type:
+                - AWS
+                - Self
+    - name: cancel-membership
+      description: Cancels an existing membership.
+      flags:
+        --membership-id=!: Required element used in combination with CancelMembershipRequest to identify the membership ID to cancel.
+    - name: get-membership
+      description: Returns the attributes of a membership.
+      flags:
+        --membership-id=!: Required element for GetMembership to identify the membership ID to query.
+    - name: list-investigations
+      description: Investigation performed by an agent for a security incident...
+      flags:
+        --case-id=!: Investigation performed by an agent for a security incident per caseID
+        --max-results=: Investigation performed by an agent for a security incident request, returning max results
+        --next-token=: Investigation performed by an agent for a security incident request

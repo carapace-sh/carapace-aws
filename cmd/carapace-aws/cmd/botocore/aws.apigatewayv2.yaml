@@ -1,86 +1,99 @@
 name: apigatewayv2
 description: AmazonApiGatewayV2
 commands:
+    - name: create-portal-product
+      description: Creates a new portal product.
+      flags:
+        --description=: A description of the portal product.
+        --display-name=!: The name of the portal product as it appears in a published portal.
+        --tags=: The collection of tags.
     - name: delete-portal-product-sharing-policy
       description: Deletes the sharing policy for a portal product.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --portal-product-id=!: The portal product identifier.
-    - name: delete-stage
-      description: Deletes a Stage.
+    - name: get-route-response
+      description: Gets a RouteResponse.
       flags:
         --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --route-id=!: The route ID.
+        --route-response-id=!: The route response ID.
+    - name: update-integration-response
+      description: Updates an IntegrationResponses.
+      flags:
+        --api-id=!: The API identifier.
+        --content-handling-strategy=: Supported only for WebSocket APIs.
+        --integration-id=!: The integration ID.
+        --integration-response-id=!: The integration response ID.
+        --integration-response-key=: The integration response key.
+        --response-parameters=: A key-value map specifying response parameters that are passed to the method response from the backend.
+        --response-templates=: The collection of response templates for the integration response as a string-to-string map of key-value pairs.
+        --template-selection-expression=: The template selection expression for the integration response.
+      completion:
+        flag:
+            content-handling-strategy:
+                - CONVERT_TO_BINARY
+                - CONVERT_TO_TEXT
+    - name: update-portal-product
+      description: Updates the portal product.
+      flags:
+        --description=: The description.
+        --display-name=: The displayName.
+        --display-order=: The display order.
+        --portal-product-id=!: The portal product identifier.
+    - name: update-product-rest-endpoint-page
+      description: Updates a product REST endpoint page.
+      flags:
+        --display-content=: The display content.
+        --portal-product-id=!: The portal product identifier.
+        --product-rest-endpoint-page-id=!: The product REST endpoint identifier.
+        --try-it-state=: The try it state of a product REST endpoint page.
+      completion:
+        flag:
+            try-it-state:
+                - ENABLED
+                - DISABLED
+    - name: create-route-response
+      description: Creates a RouteResponse for a Route.
+      flags:
+        --api-id=!: The API identifier.
+        --model-selection-expression=: The model selection expression for the route response.
+        --response-models=: The response models for the route response.
+        --response-parameters=: The route response parameters.
+        --route-id=!: The route ID.
+        --route-response-key=!: The route response key.
+    - name: delete-access-log-settings
+      description: Deletes the AccessLogSettings for a Stage.
+      flags:
+        --api-id=!: The API identifier.
         --stage-name=!: The stage name.
-    - name: update-vpc-link
-      description: Updates a VPC link.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: The name of the VPC link.
-        --vpc-link-id=!: The ID of the VPC link.
-    - name: create-api-mapping
-      description: Creates an API mapping.
+    - name: delete-route-response
+      description: Deletes a RouteResponse.
       flags:
         --api-id=!: The API identifier.
-        --api-mapping-key=: The API mapping key.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The domain name.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --stage=!: The API stage.
-    - name: delete-api
-      description: Deletes an Api resource.
+        --route-id=!: The route ID.
+        --route-response-id=!: The route response ID.
+    - name: get-deployment
+      description: Gets a Deployment.
       flags:
         --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-route-settings
-      description: Deletes the RouteSettings for a stage.
+        --deployment-id=!: The deployment ID.
+    - name: get-tags
+      description: Gets a collection of Tag resources.
+      flags:
+        --resource-arn=!: The resource ARN for the tag.
+    - name: import-api
+      description: Imports an API.
+      flags:
+        --basepath=: Specifies how to interpret the base path of the API during import.
+        --body=!: The OpenAPI definition.
+        --fail-on-warnings: Specifies whether to rollback the API creation when a warning is encountered.
+        --no-fail-on-warnings: Specifies whether to rollback the API creation when a warning is encountered.
+    - name: update-deployment
+      description: Updates a Deployment.
       flags:
         --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --route-key=!: The route key.
-        --stage-name=!: The stage name.
-    - name: get-vpc-links
-      description: Gets a collection of VPC links.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of elements to be returned for this resource.
-        --next-token=: The next page of elements from this collection.
-    - name: list-portals
-      description: Lists portals.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of elements to be returned for this resource.
-        --next-token=: The next page of elements from this collection.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: put-routing-rule
-      description: Updates a routing rule.
-      flags:
-        --actions=!: The routing rule action.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --conditions=!: The routing rule condition.
-        --domain-name-id=: The domain name ID.
-        --domain-name=!: The domain name.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --priority=!: The routing rule priority.
-        --routing-rule-id=!: The routing rule ID.
+        --deployment-id=!: The deployment ID.
+        --description=: The description for the deployment resource.
     - name: create-authorizer
       description: Creates an Authorizer for an API.
       flags:
@@ -90,10 +103,7 @@ commands:
         --authorizer-result-ttl-in-seconds=: The time to live (TTL) for cached authorizer results, in seconds.
         --authorizer-type=!: The authorizer type.
         --authorizer-uri=: The authorizer's Uniform Resource Identifier (URI).
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --enable-simple-responses: Specifies whether a Lambda authorizer returns a response in a simple format.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identity-source=!: The identity source for which authorization is requested.
         --identity-validation-expression=: This parameter is not used.
         --jwt-configuration=: Represents the configuration of a JWT authorizer.
@@ -104,531 +114,40 @@ commands:
             authorizer-type:
                 - REQUEST
                 - JWT
-    - name: create-integration-response
-      description: Creates an IntegrationResponses.
+    - name: create-model
+      description: Creates a Model for an API.
       flags:
         --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-handling-strategy=: Specifies how to handle response payload content type conversions.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --integration-id=!: The integration ID.
-        --integration-response-key=!: The integration response key.
-        --response-parameters=: A key-value map specifying response parameters that are passed to the method response from the backend.
-        --response-templates=: The collection of response templates for the integration response as a string-to-string map of key-value pairs.
-        --template-selection-expression=: The template selection expression for the integration response.
-      completion:
-        flag:
-            content-handling-strategy:
-                - CONVERT_TO_BINARY
-                - CONVERT_TO_TEXT
-    - name: create-route
-      description: Creates a Route for an API.
-      flags:
-        --api-id=!: The API identifier.
-        --api-key-required: Specifies whether an API key is required for the route.
-        --authorization-scopes=: The authorization scopes supported by this route.
-        --authorization-type=: The authorization type for the route.
-        --authorizer-id=: The identifier of the Authorizer resource to be associated with this route.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-selection-expression=: The model selection expression for the route.
-        --no-api-key-required: Specifies whether an API key is required for the route.
-        --operation-name=: The operation name for the route.
-        --request-models=: The request models for the route.
-        --request-parameters=: The request parameters for the route.
-        --route-key=!: The route key for the route.
-        --route-response-selection-expression=: The route response selection expression for the route.
-        --target=: The target for the route.
-      completion:
-        flag:
-            authorization-type:
-                - NONE
-                - AWS_IAM
-                - CUSTOM
-                - JWT
-    - name: get-api-mapping
-      description: Gets an API mapping.
-      flags:
-        --api-mapping-id=!: The API mapping identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The domain name.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-integration-responses
-      description: Gets the IntegrationResponses for an Integration.
-      flags:
-        --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --integration-id=!: The integration ID.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of elements to be returned for this resource.
-        --next-token=: The next page of elements from this collection.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: get-model
-      description: Gets a Model.
-      flags:
-        --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-id=!: The model ID.
-    - name: create-routing-rule
-      description: Creates a RoutingRule.
-      flags:
-        --actions=!: Represents a routing rule action.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --conditions=!: Represents a condition.
-        --domain-name-id=: The domain name ID.
-        --domain-name=!: The domain name.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --priority=!: Represents the priority of the routing rule.
-    - name: delete-model
-      description: Deletes a Model.
-      flags:
-        --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-id=!: The model ID.
-    - name: delete-route-response
-      description: Deletes a RouteResponse.
-      flags:
-        --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --route-id=!: The route ID.
-        --route-response-id=!: The route response ID.
-    - name: get-api-mappings
-      description: Gets API mappings.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The domain name.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of elements to be returned for this resource.
-        --next-token=: The next page of elements from this collection.
-    - name: get-routes
-      description: Gets the Routes for an API.
-      flags:
-        --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of elements to be returned for this resource.
-        --next-token=: The next page of elements from this collection.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-routing-rules
-      description: Lists routing rules.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name-id=: The domain name ID.
-        --domain-name=!: The domain name.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of elements to be returned for this resource.
-        --next-token=: The next page of elements from this collection.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-deployment
-      description: Updates a Deployment.
-      flags:
-        --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deployment-id=!: The deployment ID.
-        --description=: The description for the deployment resource.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-integration-response
-      description: Deletes an IntegrationResponses.
-      flags:
-        --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --integration-id=!: The integration ID.
-        --integration-response-id=!: The integration response ID.
-    - name: delete-product-rest-endpoint-page
-      description: Deletes a product REST endpoint page.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --portal-product-id=!: The portal product identifier.
-        --product-rest-endpoint-page-id=!: The product REST endpoint identifier.
-    - name: get-apis
-      description: Gets a collection of Api resources.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of elements to be returned for this resource.
-        --next-token=: The next page of elements from this collection.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: get-domain-name
-      description: Gets a domain name.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The domain name.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-tags
-      description: Gets a collection of Tag resources.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The resource ARN for the tag.
-    - name: preview-portal
-      description: Creates a portal preview.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --portal-id=!: The portal identifier.
-    - name: update-api-mapping
-      description: The API mapping.
-      flags:
-        --api-id=!: The API identifier.
-        --api-mapping-id=!: The API mapping identifier.
-        --api-mapping-key=: The API mapping key.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The domain name.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --stage=: The API stage.
-    - name: update-stage
-      description: Updates a Stage.
-      flags:
-        --access-log-settings=: Settings for logging access in this stage.
-        --api-id=!: The API identifier.
-        --auto-deploy: Specifies whether updates to an API automatically trigger a new deployment.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-certificate-id=: The identifier of a client certificate for a Stage.
-        --default-route-settings=: The default route settings for the stage.
-        --deployment-id=: The deployment identifier for the API stage.
-        --description=: The description for the API stage.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-auto-deploy: Specifies whether updates to an API automatically trigger a new deployment.
-        --route-settings=: Route settings for the stage.
-        --stage-name=!: The stage name.
-        --stage-variables=: A map that defines the stage variables for a Stage.
-    - name: create-portal-product
-      description: Creates a new portal product.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description of the portal product.
-        --display-name=!: The name of the portal product as it appears in a published portal.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: The collection of tags.
-    - name: create-vpc-link
-      description: Creates a VPC link.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the VPC link.
-        --security-group-ids=: A list of security group IDs for the VPC link.
-        --subnet-ids=!: A list of subnet IDs to include in the VPC link.
-        --tags=: A list of tags.
-    - name: delete-access-log-settings
-      description: Deletes the AccessLogSettings for a Stage.
-      flags:
-        --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --stage-name=!: The stage name.
-    - name: delete-portal
-      description: Deletes a portal.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --portal-id=!: The portal identifier.
-    - name: delete-product-page
-      description: Deletes a product page of a portal product.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --portal-product-id=!: The portal product identifier.
-        --product-page-id=!: The portal product identifier.
-    - name: get-integrations
-      description: Gets the Integrations for an API.
-      flags:
-        --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of elements to be returned for this resource.
-        --next-token=: The next page of elements from this collection.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: get-portal-product
-      description: Gets a portal product.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --portal-product-id=!: The portal product identifier.
-        --resource-owner-account-id=: The account ID of the resource owner of the portal product.
-    - name: get-routing-rule
-      description: Gets a routing rule.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name-id=: The domain name ID.
-        --domain-name=!: The domain name.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --routing-rule-id=!: The routing rule ID.
-    - name: get-product-rest-endpoint-page
-      description: Gets a product REST endpoint page.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --include-raw-display-content=: The query parameter to include raw display content.
-        --portal-product-id=!: The portal product identifier.
-        --product-rest-endpoint-page-id=!: The product REST endpoint identifier.
-        --resource-owner-account-id=: The account ID of the resource owner of the portal product.
-    - name: list-portal-products
-      description: Lists portal products.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of elements to be returned for this resource.
-        --next-token=: The next page of elements from this collection.
-        --page-size=: The size of each page to get in the AWS service call.
-        --resource-owner=: The resource owner of the portal product.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-product-pages
-      description: Lists the product pages for a portal product.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of elements to be returned for this resource.
-        --next-token=: The next page of elements from this collection.
-        --page-size=: The size of each page to get in the AWS service call.
-        --portal-product-id=!: The portal product identifier.
-        --resource-owner-account-id=: The account ID of the resource owner of the portal product.
-        --starting-token=: A token to specify where to start paginating.
-    - name: tag-resource
-      description: Creates a new Tag resource to represent a tag.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The resource ARN for the tag.
-        --tags=: The collection of tags.
-    - name: untag-resource
-      description: Deletes a Tag.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The resource ARN for the tag.
-        --tag-keys=!: The Tag keys to delete
-    - name: update-domain-name
-      description: Updates a domain name.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name-configurations=: The domain name configurations.
-        --domain-name=!: The domain name.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mutual-tls-authentication=: The mutual TLS authentication configuration for a custom domain name.
-        --routing-mode=: The routing mode.
-      completion:
-        flag:
-            routing-mode:
-                - API_MAPPING_ONLY
-                - ROUTING_RULE_ONLY
-                - ROUTING_RULE_THEN_API_MAPPING
-    - name: update-model
-      description: Updates a Model.
-      flags:
-        --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --content-type=: The content-type for the model, for example, "application/json".
         --description=: The description of the model.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-id=!: The model ID.
-        --name=: The name of the model.
-        --schema=: The schema for the model.
-    - name: update-portal
-      description: Updates a portal.
+        --name=!: The name of the model.
+        --schema=!: The schema for the model.
+    - name: delete-domain-name
+      description: Deletes a domain name.
       flags:
-        --authorization=: The authorization of the portal.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --endpoint-configuration=: Represents an endpoint configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --included-portal-product-arns=: The ARNs of the portal products included in the portal.
-        --logo-uri=: The logo URI.
-        --portal-content=: Contains the content that is visible to portal consumers including the themes, display names, and description.
-        --portal-id=!: The portal identifier.
-        --rum-app-monitor-name=: The CloudWatch RUM app monitor name.
-    - name: create-route-response
-      description: Creates a RouteResponse for a Route.
+        --domain-name=!: The domain name.
+    - name: get-authorizers
+      description: Gets the Authorizers for an API.
       flags:
         --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-selection-expression=: The model selection expression for the route response.
-        --response-models=: The response models for the route response.
-        --response-parameters=: The route response parameters.
-        --route-id=!: The route ID.
-        --route-response-key=!: The route response key.
-    - name: delete-authorizer
-      description: Deletes an Authorizer.
-      flags:
-        --api-id=!: The API identifier.
-        --authorizer-id=!: The authorizer identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-cors-configuration
-      description: Deletes a CORS configuration.
-      flags:
-        --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-authorizer
-      description: Gets an Authorizer.
-      flags:
-        --api-id=!: The API identifier.
-        --authorizer-id=!: The authorizer identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-stage
-      description: Gets a Stage.
-      flags:
-        --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --stage-name=!: The stage name.
-    - name: get-stages
-      description: Gets the Stages for an API.
-      flags:
-        --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of elements to be returned for this resource.
         --next-token=: The next page of elements from this collection.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-portal-product
-      description: Updates the portal product.
+    - name: list-portals
+      description: Lists portals.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The description.
-        --display-name=: The displayName.
-        --display-order=: The display order.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --portal-product-id=!: The portal product identifier.
-    - name: delete-deployment
-      description: Deletes a Deployment.
-      flags:
-        --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deployment-id=!: The deployment ID.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-portal-product
-      description: Deletes a portal product.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --portal-product-id=!: The portal product identifier.
-    - name: reset-authorizers-cache
-      description: Resets all authorizer cache entries on a stage.
-      flags:
-        --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --stage-name=!: The stage name.
-    - name: get-domain-names
-      description: Gets the domain names for an AWS account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of elements to be returned for this resource.
         --next-token=: The next page of elements from this collection.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: get-route-response
-      description: Gets a RouteResponse.
-      flags:
-        --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --route-id=!: The route ID.
-        --route-response-id=!: The route response ID.
-    - name: publish-portal
-      description: Publishes a portal.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The description of the portal.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --portal-id=!: The portal identifier.
-    - name: reimport-api
-      description: Puts an Api resource.
-      flags:
-        --api-id=!: The API identifier.
-        --basepath=: Specifies how to interpret the base path of the API during import.
-        --body=!: The OpenAPI definition.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --fail-on-warnings: Specifies whether to rollback the API creation when a warning is encountered.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-fail-on-warnings: Specifies whether to rollback the API creation when a warning is encountered.
     - name: update-api
       description: Updates an Api resource.
       flags:
         --api-id=!: The API identifier.
         --api-key-selection-expression=: An API key selection expression.
         --api-version=: A version identifier for the API.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --cors-configuration=: A CORS configuration.
         --credentials-arn=: This property is part of quick create.
         --description=: The description of the API.
         --disable-execute-api-endpoint: Specifies whether clients can invoke your API by using the default execute-api endpoint.
         --disable-schema-validation: Avoid validating models when creating a deployment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --ip-address-type=: The IP address types that can invoke your API or domain name.
         --name=: The name of the API.
         --no-disable-execute-api-endpoint: Specifies whether clients can invoke your API by using the default execute-api endpoint.
@@ -641,404 +160,15 @@ commands:
             ip-address-type:
                 - ipv4
                 - dualstack
-    - name: create-model
-      description: Creates a Model for an API.
-      flags:
-        --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-type=: The content-type for the model, for example, "application/json".
-        --description=: The description of the model.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the model.
-        --schema=!: The schema for the model.
-    - name: disable-portal
-      description: Deletes the publication of a portal portal.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --portal-id=!: The portal identifier.
-    - name: get-deployment
-      description: Gets a Deployment.
-      flags:
-        --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deployment-id=!: The deployment ID.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-route-responses
-      description: Gets the RouteResponses for a Route.
-      flags:
-        --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of elements to be returned for this resource.
-        --next-token=: The next page of elements from this collection.
-        --page-size=: The size of each page to get in the AWS service call.
-        --route-id=!: The route ID.
-        --starting-token=: A token to specify where to start paginating.
-    - name: get-vpc-link
-      description: Gets a VPC link.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --vpc-link-id=!: The ID of the VPC link.
-    - name: update-product-page
-      description: Updates a product page of a portal product.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --display-content=: The content of the product page.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --portal-product-id=!: The portal product identifier.
-        --product-page-id=!: The portal product identifier.
-    - name: update-route
-      description: Updates a Route.
-      flags:
-        --api-id=!: The API identifier.
-        --api-key-required: Specifies whether an API key is required for the route.
-        --authorization-scopes=: The authorization scopes supported by this route.
-        --authorization-type=: The authorization type for the route.
-        --authorizer-id=: The identifier of the Authorizer resource to be associated with this route.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-selection-expression=: The model selection expression for the route.
-        --no-api-key-required: Specifies whether an API key is required for the route.
-        --operation-name=: The operation name for the route.
-        --request-models=: The request models for the route.
-        --request-parameters=: The request parameters for the route.
-        --route-id=!: The route ID.
-        --route-key=: The route key for the route.
-        --route-response-selection-expression=: The route response selection expression for the route.
-        --target=: The target for the route.
-      completion:
-        flag:
-            authorization-type:
-                - NONE
-                - AWS_IAM
-                - CUSTOM
-                - JWT
-    - name: update-route-response
-      description: Updates a RouteResponse.
-      flags:
-        --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-selection-expression=: The model selection expression for the route response.
-        --response-models=: The response models for the route response.
-        --response-parameters=: The route response parameters.
-        --route-id=!: The route ID.
-        --route-response-id=!: The route response ID.
-        --route-response-key=: The route response key.
-    - name: delete-routing-rule
-      description: Deletes a routing rule.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name-id=: The domain name ID.
-        --domain-name=!: The domain name.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --routing-rule-id=!: The routing rule ID.
-    - name: delete-vpc-link
-      description: Deletes a VPC link.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --vpc-link-id=!: The ID of the VPC link.
-    - name: list-product-rest-endpoint-pages
-      description: Lists the product REST endpoint pages of a portal product.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of elements to be returned for this resource.
-        --next-token=: The next page of elements from this collection.
-        --page-size=: The size of each page to get in the AWS service call.
-        --portal-product-id=!: The portal product identifier.
-        --resource-owner-account-id=: The account ID of the resource owner of the portal product.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-product-rest-endpoint-page
-      description: Updates a product REST endpoint page.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --display-content=: The display content.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --portal-product-id=!: The portal product identifier.
-        --product-rest-endpoint-page-id=!: The product REST endpoint identifier.
-        --try-it-state=: The try it state of a product REST endpoint page.
-      completion:
-        flag:
-            try-it-state:
-                - ENABLED
-                - DISABLED
-    - name: create-api
-      description: Creates an Api resource.
-      flags:
-        --api-key-selection-expression=: An API key selection expression.
-        --api-version=: A version identifier for the API.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cors-configuration=: A CORS configuration.
-        --credentials-arn=: This property is part of quick create.
-        --description=: The description of the API.
-        --disable-execute-api-endpoint: Specifies whether clients can invoke your API by using the default execute-api endpoint.
-        --disable-schema-validation: Avoid validating models when creating a deployment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ip-address-type=: The IP address types that can invoke the API.
-        --name=!: The name of the API.
-        --no-disable-execute-api-endpoint: Specifies whether clients can invoke your API by using the default execute-api endpoint.
-        --no-disable-schema-validation: Avoid validating models when creating a deployment.
-        --protocol-type=!: The API protocol.
-        --route-key=: This property is part of quick create.
-        --route-selection-expression=: The route selection expression for the API.
-        --tags=: The collection of tags.
-        --target=: This property is part of quick create.
-      completion:
-        flag:
-            ip-address-type:
-                - ipv4
-                - dualstack
-            protocol-type:
-                - WEBSOCKET
-                - HTTP
-    - name: delete-domain-name
-      description: Deletes a domain name.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The domain name.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-route-request-parameter
-      description: Deletes a route request parameter.
-      flags:
-        --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --request-parameter-key=!: The route request parameter key.
-        --route-id=!: The route ID.
-    - name: get-integration
-      description: Gets an Integration.
-      flags:
-        --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --integration-id=!: The integration ID.
-    - name: get-product-page
-      description: Gets a product page of a portal product.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --portal-product-id=!: The portal product identifier.
-        --product-page-id=!: The portal product identifier.
-        --resource-owner-account-id=: The account ID of the resource owner of the portal product.
-    - name: update-integration-response
-      description: Updates an IntegrationResponses.
-      flags:
-        --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-handling-strategy=: Supported only for WebSocket APIs.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --integration-id=!: The integration ID.
-        --integration-response-id=!: The integration response ID.
-        --integration-response-key=: The integration response key.
-        --response-parameters=: A key-value map specifying response parameters that are passed to the method response from the backend.
-        --response-templates=: The collection of response templates for the integration response as a string-to-string map of key-value pairs.
-        --template-selection-expression=: The template selection expression for the integration response.
-      completion:
-        flag:
-            content-handling-strategy:
-                - CONVERT_TO_BINARY
-                - CONVERT_TO_TEXT
-    - name: create-product-rest-endpoint-page
-      description: Creates a product REST endpoint page for a portal product.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --display-content=: The content of the product REST endpoint page.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --portal-product-id=!: The portal product identifier.
-        --rest-endpoint-identifier=!: The REST endpoint identifier.
-        --try-it-state=: The try it state of the product REST endpoint page.
-      completion:
-        flag:
-            try-it-state:
-                - ENABLED
-                - DISABLED
-    - name: get-api
-      description: Gets an Api resource.
-      flags:
-        --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-models
-      description: Gets the Models for an API.
-      flags:
-        --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of elements to be returned for this resource.
-        --next-token=: The next page of elements from this collection.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: export-api
-      flags:
-        --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --export-version=: The version of the API Gateway export algorithm.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --include-extensions: Specifies whether to include [API Gateway extensions](https://docs.aws.amazon.com//apigateway/latest/developerguide/api-gateway-swagger-extensions.html) in the exported API definition.
-        --no-include-extensions: Specifies whether to include [API Gateway extensions](https://docs.aws.amazon.com//apigateway/latest/developerguide/api-gateway-swagger-extensions.html) in the exported API definition.
-        --output-type=!: The output type of the exported definition file.
-        --specification=!: The version of the API specification to use.
-        --stage-name=: The name of the API stage to export.
-    - name: get-portal-product-sharing-policy
-      description: Gets the sharing policy for a portal product.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --portal-product-id=!: The portal product identifier.
-    - name: get-route
-      description: Gets a Route.
-      flags:
-        --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --route-id=!: The route ID.
-    - name: put-portal-product-sharing-policy
-      description: Updates the sharing policy for a portal product.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-document=!: The product sharing policy.
-        --portal-product-id=!: The portal product identifier.
-    - name: update-authorizer
-      description: Updates an Authorizer.
-      flags:
-        --api-id=!: The API identifier.
-        --authorizer-credentials-arn=: Specifies the required credentials as an IAM role for API Gateway to invoke the authorizer.
-        --authorizer-id=!: The authorizer identifier.
-        --authorizer-payload-format-version=: Specifies the format of the payload sent to an HTTP API Lambda authorizer.
-        --authorizer-result-ttl-in-seconds=: The time to live (TTL) for cached authorizer results, in seconds.
-        --authorizer-type=: The authorizer type.
-        --authorizer-uri=: The authorizer's Uniform Resource Identifier (URI).
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --enable-simple-responses: Specifies whether a Lambda authorizer returns a response in a simple format.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-source=: The identity source for which authorization is requested.
-        --identity-validation-expression=: This parameter is not used.
-        --jwt-configuration=: Represents the configuration of a JWT authorizer.
-        --name=: The name of the authorizer.
-        --no-enable-simple-responses: Specifies whether a Lambda authorizer returns a response in a simple format.
-      completion:
-        flag:
-            authorizer-type:
-                - REQUEST
-                - JWT
-    - name: create-deployment
-      description: Creates a Deployment for an API.
-      flags:
-        --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The description for the deployment resource.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --stage-name=: The name of the Stage resource for the Deployment resource to create.
-    - name: create-stage
-      description: Creates a Stage for an API.
-      flags:
-        --access-log-settings=: Settings for logging access in this stage.
-        --api-id=!: The API identifier.
-        --auto-deploy: Specifies whether updates to an API automatically trigger a new deployment.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-certificate-id=: The identifier of a client certificate for a Stage.
-        --default-route-settings=: The default route settings for the stage.
-        --deployment-id=: The deployment identifier of the API stage.
-        --description=: The description for the API stage.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-auto-deploy: Specifies whether updates to an API automatically trigger a new deployment.
-        --route-settings=: Route settings for the stage, by routeKey.
-        --stage-name=!: The name of the stage.
-        --stage-variables=: A map that defines the stage variables for a Stage.
-        --tags=: The collection of tags.
-    - name: delete-api-mapping
-      description: Deletes an API mapping.
-      flags:
-        --api-mapping-id=!: The API mapping identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The domain name.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-route
-      description: Deletes a Route.
-      flags:
-        --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --route-id=!: The route ID.
-    - name: get-authorizers
-      description: Gets the Authorizers for an API.
-      flags:
-        --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of elements to be returned for this resource.
-        --next-token=: The next page of elements from this collection.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: get-integration-response
-      description: Gets an IntegrationResponses.
-      flags:
-        --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --integration-id=!: The integration ID.
-        --integration-response-id=!: The integration response ID.
-    - name: get-model-template
-      description: Gets a model template.
-      flags:
-        --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-id=!: The model ID.
     - name: update-integration
       description: Updates an Integration.
       flags:
         --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --connection-id=: The ID of the VPC link for a private integration.
         --connection-type=: The type of the network connection to the integration endpoint.
         --content-handling-strategy=: Supported only for WebSocket APIs.
         --credentials-arn=: Specifies the credentials required for the integration, if any.
         --description=: The description of the integration
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --integration-id=!: The integration ID.
         --integration-method=: Specifies the integration's HTTP method type.
         --integration-subtype=: Supported only for HTTP API AWS\_PROXY integrations.
@@ -1070,17 +200,258 @@ commands:
                 - WHEN_NO_MATCH
                 - NEVER
                 - WHEN_NO_TEMPLATES
-    - name: create-domain-name
-      description: Creates a domain name.
+    - name: create-routing-rule
+      description: Creates a RoutingRule.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --actions=!: Represents a routing rule action.
+        --conditions=!: Represents a condition.
+        --domain-name-id=: The domain name ID.
+        --domain-name=!: The domain name.
+        --priority=!: Represents the priority of the routing rule.
+    - name: delete-model
+      description: Deletes a Model.
+      flags:
+        --api-id=!: The API identifier.
+        --model-id=!: The model ID.
+    - name: get-product-rest-endpoint-page
+      description: Gets a product REST endpoint page.
+      flags:
+        --include-raw-display-content=: The query parameter to include raw display content.
+        --portal-product-id=!: The portal product identifier.
+        --product-rest-endpoint-page-id=!: The product REST endpoint identifier.
+        --resource-owner-account-id=: The account ID of the resource owner of the portal product.
+    - name: reimport-api
+      description: Puts an Api resource.
+      flags:
+        --api-id=!: The API identifier.
+        --basepath=: Specifies how to interpret the base path of the API during import.
+        --body=!: The OpenAPI definition.
+        --fail-on-warnings: Specifies whether to rollback the API creation when a warning is encountered.
+        --no-fail-on-warnings: Specifies whether to rollback the API creation when a warning is encountered.
+    - name: update-authorizer
+      description: Updates an Authorizer.
+      flags:
+        --api-id=!: The API identifier.
+        --authorizer-credentials-arn=: Specifies the required credentials as an IAM role for API Gateway to invoke the authorizer.
+        --authorizer-id=!: The authorizer identifier.
+        --authorizer-payload-format-version=: Specifies the format of the payload sent to an HTTP API Lambda authorizer.
+        --authorizer-result-ttl-in-seconds=: The time to live (TTL) for cached authorizer results, in seconds.
+        --authorizer-type=: The authorizer type.
+        --authorizer-uri=: The authorizer's Uniform Resource Identifier (URI).
+        --enable-simple-responses: Specifies whether a Lambda authorizer returns a response in a simple format.
+        --identity-source=: The identity source for which authorization is requested.
+        --identity-validation-expression=: This parameter is not used.
+        --jwt-configuration=: Represents the configuration of a JWT authorizer.
+        --name=: The name of the authorizer.
+        --no-enable-simple-responses: Specifies whether a Lambda authorizer returns a response in a simple format.
+      completion:
+        flag:
+            authorizer-type:
+                - REQUEST
+                - JWT
+    - name: create-vpc-link
+      description: Creates a VPC link.
+      flags:
+        --name=!: The name of the VPC link.
+        --security-group-ids=: A list of security group IDs for the VPC link.
+        --subnet-ids=!: A list of subnet IDs to include in the VPC link.
+        --tags=: A list of tags.
+    - name: delete-authorizer
+      description: Deletes an Authorizer.
+      flags:
+        --api-id=!: The API identifier.
+        --authorizer-id=!: The authorizer identifier.
+    - name: delete-integration
+      description: Deletes an Integration.
+      flags:
+        --api-id=!: The API identifier.
+        --integration-id=!: The integration ID.
+    - name: delete-product-page
+      description: Deletes a product page of a portal product.
+      flags:
+        --portal-product-id=!: The portal product identifier.
+        --product-page-id=!: The portal product identifier.
+    - name: delete-stage
+      description: Deletes a Stage.
+      flags:
+        --api-id=!: The API identifier.
+        --stage-name=!: The stage name.
+    - name: get-integration
+      description: Gets an Integration.
+      flags:
+        --api-id=!: The API identifier.
+        --integration-id=!: The integration ID.
+    - name: get-portal
+      description: Gets a portal.
+      flags:
+        --portal-id=!: The portal identifier.
+    - name: get-stages
+      description: Gets the Stages for an API.
+      flags:
+        --api-id=!: The API identifier.
+        --max-results=: The maximum number of elements to be returned for this resource.
+        --next-token=: The next page of elements from this collection.
+    - name: create-product-rest-endpoint-page
+      description: Creates a product REST endpoint page for a portal product.
+      flags:
+        --display-content=: The content of the product REST endpoint page.
+        --portal-product-id=!: The portal product identifier.
+        --rest-endpoint-identifier=!: The REST endpoint identifier.
+        --try-it-state=: The try it state of the product REST endpoint page.
+      completion:
+        flag:
+            try-it-state:
+                - ENABLED
+                - DISABLED
+    - name: delete-portal-product
+      description: Deletes a portal product.
+      flags:
+        --portal-product-id=!: The portal product identifier.
+    - name: reset-authorizers-cache
+      description: Resets all authorizer cache entries on a stage.
+      flags:
+        --api-id=!: The API identifier.
+        --stage-name=!: The stage name.
+    - name: get-route
+      description: Gets a Route.
+      flags:
+        --api-id=!: The API identifier.
+        --route-id=!: The route ID.
+    - name: get-route-responses
+      description: Gets the RouteResponses for a Route.
+      flags:
+        --api-id=!: The API identifier.
+        --max-results=: The maximum number of elements to be returned for this resource.
+        --next-token=: The next page of elements from this collection.
+        --route-id=!: The route ID.
+    - name: get-vpc-link
+      description: Gets a VPC link.
+      flags:
+        --vpc-link-id=!: The ID of the VPC link.
+    - name: update-vpc-link
+      description: Updates a VPC link.
+      flags:
+        --name=: The name of the VPC link.
+        --vpc-link-id=!: The ID of the VPC link.
+    - name: delete-product-rest-endpoint-page
+      description: Deletes a product REST endpoint page.
+      flags:
+        --portal-product-id=!: The portal product identifier.
+        --product-rest-endpoint-page-id=!: The product REST endpoint identifier.
+    - name: delete-vpc-link
+      description: Deletes a VPC link.
+      flags:
+        --vpc-link-id=!: The ID of the VPC link.
+    - name: get-routes
+      description: Gets the Routes for an API.
+      flags:
+        --api-id=!: The API identifier.
+        --max-results=: The maximum number of elements to be returned for this resource.
+        --next-token=: The next page of elements from this collection.
+    - name: publish-portal
+      description: Publishes a portal.
+      flags:
+        --description=: The description of the portal.
+        --portal-id=!: The portal identifier.
+    - name: put-routing-rule
+      description: Updates a routing rule.
+      flags:
+        --actions=!: The routing rule action.
+        --conditions=!: The routing rule condition.
+        --domain-name-id=: The domain name ID.
+        --domain-name=!: The domain name.
+        --priority=!: The routing rule priority.
+        --routing-rule-id=!: The routing rule ID.
+    - name: create-stage
+      description: Creates a Stage for an API.
+      flags:
+        --access-log-settings=: Settings for logging access in this stage.
+        --api-id=!: The API identifier.
+        --auto-deploy: Specifies whether updates to an API automatically trigger a new deployment.
+        --client-certificate-id=: The identifier of a client certificate for a Stage.
+        --default-route-settings=: The default route settings for the stage.
+        --deployment-id=: The deployment identifier of the API stage.
+        --description=: The description for the API stage.
+        --no-auto-deploy: Specifies whether updates to an API automatically trigger a new deployment.
+        --route-settings=: Route settings for the stage, by routeKey.
+        --stage-name=!: The name of the stage.
+        --stage-variables=: A map that defines the stage variables for a Stage.
+        --tags=: The collection of tags.
+    - name: delete-cors-configuration
+      description: Deletes a CORS configuration.
+      flags:
+        --api-id=!: The API identifier.
+    - name: delete-deployment
+      description: Deletes a Deployment.
+      flags:
+        --api-id=!: The API identifier.
+        --deployment-id=!: The deployment ID.
+    - name: put-portal-product-sharing-policy
+      description: Updates the sharing policy for a portal product.
+      flags:
+        --policy-document=!: The product sharing policy.
+        --portal-product-id=!: The portal product identifier.
+    - name: create-api-mapping
+      description: Creates an API mapping.
+      flags:
+        --api-id=!: The API identifier.
+        --api-mapping-key=: The API mapping key.
+        --domain-name=!: The domain name.
+        --stage=!: The API stage.
+    - name: list-product-rest-endpoint-pages
+      description: Lists the product REST endpoint pages of a portal product.
+      flags:
+        --max-results=: The maximum number of elements to be returned for this resource.
+        --next-token=: The next page of elements from this collection.
+        --portal-product-id=!: The portal product identifier.
+        --resource-owner-account-id=: The account ID of the resource owner of the portal product.
+    - name: preview-portal
+      description: Creates a portal preview.
+      flags:
+        --portal-id=!: The portal identifier.
+    - name: delete-route-request-parameter
+      description: Deletes a route request parameter.
+      flags:
+        --api-id=!: The API identifier.
+        --request-parameter-key=!: The route request parameter key.
+        --route-id=!: The route ID.
+    - name: delete-route-settings
+      description: Deletes the RouteSettings for a stage.
+      flags:
+        --api-id=!: The API identifier.
+        --route-key=!: The route key.
+        --stage-name=!: The stage name.
+    - name: export-api
+      flags:
+        --api-id=!: The API identifier.
+        --export-version=: The version of the API Gateway export algorithm.
+        --include-extensions: Specifies whether to include [API Gateway extensions](https://docs.aws.amazon.com//apigateway/latest/developerguide/api-gateway-swagger-extensions.html) in the exported API definition.
+        --no-include-extensions: Specifies whether to include [API Gateway extensions](https://docs.aws.amazon.com//apigateway/latest/developerguide/api-gateway-swagger-extensions.html) in the exported API definition.
+        --output-type=!: The output type of the exported definition file.
+        --specification=!: The version of the API specification to use.
+        --stage-name=: The name of the API stage to export.
+    - name: get-api
+      description: Gets an Api resource.
+      flags:
+        --api-id=!: The API identifier.
+    - name: get-portal-product
+      description: Gets a portal product.
+      flags:
+        --portal-product-id=!: The portal product identifier.
+        --resource-owner-account-id=: The account ID of the resource owner of the portal product.
+    - name: list-portal-products
+      description: Lists portal products.
+      flags:
+        --max-results=: The maximum number of elements to be returned for this resource.
+        --next-token=: The next page of elements from this collection.
+        --resource-owner=: The resource owner of the portal product.
+    - name: update-domain-name
+      description: Updates a domain name.
+      flags:
         --domain-name-configurations=: The domain name configurations.
         --domain-name=!: The domain name.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --mutual-tls-authentication=: The mutual TLS authentication configuration for a custom domain name.
         --routing-mode=: The routing mode.
-        --tags=: The collection of tags associated with a domain name.
       completion:
         flag:
             routing-mode:
@@ -1091,72 +462,218 @@ commands:
       description: Creates a portal.
       flags:
         --authorization=!: The authentication configuration for the portal.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --endpoint-configuration=!: The domain configuration for the portal.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --included-portal-product-arns=: The ARNs of the portal products included in the portal.
         --logo-uri=: The URI for the portal logo image that is displayed in the portal header.
         --portal-content=!: The content of the portal.
         --rum-app-monitor-name=: The name of the Amazon CloudWatch RUM app monitor for the portal.
         --tags=: The collection of tags.
-    - name: create-product-page
-      description: Creates a new product page for a portal product.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --display-content=!: The content of the product page.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --portal-product-id=!: The portal product identifier.
-    - name: delete-integration
-      description: Deletes an Integration.
+    - name: delete-api
+      description: Deletes an Api resource.
       flags:
         --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --integration-id=!: The integration ID.
+    - name: delete-api-mapping
+      description: Deletes an API mapping.
+      flags:
+        --api-mapping-id=!: The API mapping identifier.
+        --domain-name=!: The domain name.
+    - name: delete-portal
+      description: Deletes a portal.
+      flags:
+        --portal-id=!: The portal identifier.
+    - name: delete-route
+      description: Deletes a Route.
+      flags:
+        --api-id=!: The API identifier.
+        --route-id=!: The route ID.
+    - name: delete-routing-rule
+      description: Deletes a routing rule.
+      flags:
+        --domain-name-id=: The domain name ID.
+        --domain-name=!: The domain name.
+        --routing-rule-id=!: The routing rule ID.
+    - name: get-model
+      description: Gets a Model.
+      flags:
+        --api-id=!: The API identifier.
+        --model-id=!: The model ID.
+    - name: get-product-page
+      description: Gets a product page of a portal product.
+      flags:
+        --portal-product-id=!: The portal product identifier.
+        --product-page-id=!: The portal product identifier.
+        --resource-owner-account-id=: The account ID of the resource owner of the portal product.
+    - name: disable-portal
+      description: Deletes the publication of a portal portal.
+      flags:
+        --portal-id=!: The portal identifier.
     - name: get-deployments
       description: Gets the Deployments for an API.
       flags:
         --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of elements to be returned for this resource.
         --next-token=: The next page of elements from this collection.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: get-portal
-      description: Gets a portal.
+    - name: get-integration-responses
+      description: Gets the IntegrationResponses for an Integration.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --api-id=!: The API identifier.
+        --integration-id=!: The integration ID.
+        --max-results=: The maximum number of elements to be returned for this resource.
+        --next-token=: The next page of elements from this collection.
+    - name: list-product-pages
+      description: Lists the product pages for a portal product.
+      flags:
+        --max-results=: The maximum number of elements to be returned for this resource.
+        --next-token=: The next page of elements from this collection.
+        --portal-product-id=!: The portal product identifier.
+        --resource-owner-account-id=: The account ID of the resource owner of the portal product.
+    - name: update-model
+      description: Updates a Model.
+      flags:
+        --api-id=!: The API identifier.
+        --content-type=: The content-type for the model, for example, "application/json".
+        --description=: The description of the model.
+        --model-id=!: The model ID.
+        --name=: The name of the model.
+        --schema=: The schema for the model.
+    - name: update-portal
+      description: Updates a portal.
+      flags:
+        --authorization=: The authorization of the portal.
+        --endpoint-configuration=: Represents an endpoint configuration.
+        --included-portal-product-arns=: The ARNs of the portal products included in the portal.
+        --logo-uri=: The logo URI.
+        --portal-content=: Contains the content that is visible to portal consumers including the themes, display names, and description.
         --portal-id=!: The portal identifier.
-    - name: import-api
-      description: Imports an API.
+        --rum-app-monitor-name=: The CloudWatch RUM app monitor name.
+    - name: delete-integration-response
+      description: Deletes an IntegrationResponses.
       flags:
-        --basepath=: Specifies how to interpret the base path of the API during import.
-        --body=!: The OpenAPI definition.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --fail-on-warnings: Specifies whether to rollback the API creation when a warning is encountered.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-fail-on-warnings: Specifies whether to rollback the API creation when a warning is encountered.
+        --api-id=!: The API identifier.
+        --integration-id=!: The integration ID.
+        --integration-response-id=!: The integration response ID.
+    - name: get-models
+      description: Gets the Models for an API.
+      flags:
+        --api-id=!: The API identifier.
+        --max-results=: The maximum number of elements to be returned for this resource.
+        --next-token=: The next page of elements from this collection.
+    - name: get-routing-rule
+      description: Gets a routing rule.
+      flags:
+        --domain-name-id=: The domain name ID.
+        --domain-name=!: The domain name.
+        --routing-rule-id=!: The routing rule ID.
+    - name: list-routing-rules
+      description: Lists routing rules.
+      flags:
+        --domain-name-id=: The domain name ID.
+        --domain-name=!: The domain name.
+        --max-results=: The maximum number of elements to be returned for this resource.
+        --next-token=: The next page of elements from this collection.
+    - name: update-api-mapping
+      description: The API mapping.
+      flags:
+        --api-id=!: The API identifier.
+        --api-mapping-id=!: The API mapping identifier.
+        --api-mapping-key=: The API mapping key.
+        --domain-name=!: The domain name.
+        --stage=: The API stage.
+    - name: create-api
+      description: Creates an Api resource.
+      flags:
+        --api-key-selection-expression=: An API key selection expression.
+        --api-version=: A version identifier for the API.
+        --cors-configuration=: A CORS configuration.
+        --credentials-arn=: This property is part of quick create.
+        --description=: The description of the API.
+        --disable-execute-api-endpoint: Specifies whether clients can invoke your API by using the default execute-api endpoint.
+        --disable-schema-validation: Avoid validating models when creating a deployment.
+        --ip-address-type=: The IP address types that can invoke the API.
+        --name=!: The name of the API.
+        --no-disable-execute-api-endpoint: Specifies whether clients can invoke your API by using the default execute-api endpoint.
+        --no-disable-schema-validation: Avoid validating models when creating a deployment.
+        --protocol-type=!: The API protocol.
+        --route-key=: This property is part of quick create.
+        --route-selection-expression=: The route selection expression for the API.
+        --tags=: The collection of tags.
+        --target=: This property is part of quick create.
+      completion:
+        flag:
+            ip-address-type:
+                - ipv4
+                - dualstack
+            protocol-type:
+                - WEBSOCKET
+                - HTTP
+    - name: create-product-page
+      description: Creates a new product page for a portal product.
+      flags:
+        --display-content=!: The content of the product page.
+        --portal-product-id=!: The portal product identifier.
+    - name: create-route
+      description: Creates a Route for an API.
+      flags:
+        --api-id=!: The API identifier.
+        --api-key-required: Specifies whether an API key is required for the route.
+        --authorization-scopes=: The authorization scopes supported by this route.
+        --authorization-type=: The authorization type for the route.
+        --authorizer-id=: The identifier of the Authorizer resource to be associated with this route.
+        --model-selection-expression=: The model selection expression for the route.
+        --no-api-key-required: Specifies whether an API key is required for the route.
+        --operation-name=: The operation name for the route.
+        --request-models=: The request models for the route.
+        --request-parameters=: The request parameters for the route.
+        --route-key=!: The route key for the route.
+        --route-response-selection-expression=: The route response selection expression for the route.
+        --target=: The target for the route.
+      completion:
+        flag:
+            authorization-type:
+                - NONE
+                - AWS_IAM
+                - CUSTOM
+                - JWT
+    - name: get-authorizer
+      description: Gets an Authorizer.
+      flags:
+        --api-id=!: The API identifier.
+        --authorizer-id=!: The authorizer identifier.
+    - name: get-integration-response
+      description: Gets an IntegrationResponses.
+      flags:
+        --api-id=!: The API identifier.
+        --integration-id=!: The integration ID.
+        --integration-response-id=!: The integration response ID.
+    - name: get-portal-product-sharing-policy
+      description: Gets the sharing policy for a portal product.
+      flags:
+        --portal-product-id=!: The portal product identifier.
+    - name: get-stage
+      description: Gets a Stage.
+      flags:
+        --api-id=!: The API identifier.
+        --stage-name=!: The stage name.
+    - name: get-vpc-links
+      description: Gets a collection of VPC links.
+      flags:
+        --max-results=: The maximum number of elements to be returned for this resource.
+        --next-token=: The next page of elements from this collection.
+    - name: create-deployment
+      description: Creates a Deployment for an API.
+      flags:
+        --api-id=!: The API identifier.
+        --description=: The description for the deployment resource.
+        --stage-name=: The name of the Stage resource for the Deployment resource to create.
     - name: create-integration
       description: Creates an Integration.
       flags:
         --api-id=!: The API identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --connection-id=: The ID of the VPC link for a private integration.
         --connection-type=: The type of the network connection to the integration endpoint.
         --content-handling-strategy=: Supported only for WebSocket APIs.
         --credentials-arn=: Specifies the credentials required for the integration, if any.
         --description=: The description of the integration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --integration-method=: Specifies the integration's HTTP method type.
         --integration-subtype=: Supported only for HTTP API AWS\_PROXY integrations.
         --integration-type=!: The integration type of an integration.
@@ -1187,3 +704,132 @@ commands:
                 - WHEN_NO_MATCH
                 - NEVER
                 - WHEN_NO_TEMPLATES
+    - name: get-api-mappings
+      description: Gets API mappings.
+      flags:
+        --domain-name=!: The domain name.
+        --max-results=: The maximum number of elements to be returned for this resource.
+        --next-token=: The next page of elements from this collection.
+    - name: get-apis
+      description: Gets a collection of Api resources.
+      flags:
+        --max-results=: The maximum number of elements to be returned for this resource.
+        --next-token=: The next page of elements from this collection.
+    - name: get-domain-name
+      description: Gets a domain name.
+      flags:
+        --domain-name=!: The domain name.
+    - name: get-model-template
+      description: Gets a model template.
+      flags:
+        --api-id=!: The API identifier.
+        --model-id=!: The model ID.
+    - name: tag-resource
+      description: Creates a new Tag resource to represent a tag.
+      flags:
+        --resource-arn=!: The resource ARN for the tag.
+        --tags=: The collection of tags.
+    - name: update-product-page
+      description: Updates a product page of a portal product.
+      flags:
+        --display-content=: The content of the product page.
+        --portal-product-id=!: The portal product identifier.
+        --product-page-id=!: The portal product identifier.
+    - name: create-integration-response
+      description: Creates an IntegrationResponses.
+      flags:
+        --api-id=!: The API identifier.
+        --content-handling-strategy=: Specifies how to handle response payload content type conversions.
+        --integration-id=!: The integration ID.
+        --integration-response-key=!: The integration response key.
+        --response-parameters=: A key-value map specifying response parameters that are passed to the method response from the backend.
+        --response-templates=: The collection of response templates for the integration response as a string-to-string map of key-value pairs.
+        --template-selection-expression=: The template selection expression for the integration response.
+      completion:
+        flag:
+            content-handling-strategy:
+                - CONVERT_TO_BINARY
+                - CONVERT_TO_TEXT
+    - name: get-api-mapping
+      description: Gets an API mapping.
+      flags:
+        --api-mapping-id=!: The API mapping identifier.
+        --domain-name=!: The domain name.
+    - name: get-domain-names
+      description: Gets the domain names for an AWS account.
+      flags:
+        --max-results=: The maximum number of elements to be returned for this resource.
+        --next-token=: The next page of elements from this collection.
+    - name: get-integrations
+      description: Gets the Integrations for an API.
+      flags:
+        --api-id=!: The API identifier.
+        --max-results=: The maximum number of elements to be returned for this resource.
+        --next-token=: The next page of elements from this collection.
+    - name: untag-resource
+      description: Deletes a Tag.
+      flags:
+        --resource-arn=!: The resource ARN for the tag.
+        --tag-keys=!: The Tag keys to delete
+    - name: update-route
+      description: Updates a Route.
+      flags:
+        --api-id=!: The API identifier.
+        --api-key-required: Specifies whether an API key is required for the route.
+        --authorization-scopes=: The authorization scopes supported by this route.
+        --authorization-type=: The authorization type for the route.
+        --authorizer-id=: The identifier of the Authorizer resource to be associated with this route.
+        --model-selection-expression=: The model selection expression for the route.
+        --no-api-key-required: Specifies whether an API key is required for the route.
+        --operation-name=: The operation name for the route.
+        --request-models=: The request models for the route.
+        --request-parameters=: The request parameters for the route.
+        --route-id=!: The route ID.
+        --route-key=: The route key for the route.
+        --route-response-selection-expression=: The route response selection expression for the route.
+        --target=: The target for the route.
+      completion:
+        flag:
+            authorization-type:
+                - NONE
+                - AWS_IAM
+                - CUSTOM
+                - JWT
+    - name: update-route-response
+      description: Updates a RouteResponse.
+      flags:
+        --api-id=!: The API identifier.
+        --model-selection-expression=: The model selection expression for the route response.
+        --response-models=: The response models for the route response.
+        --response-parameters=: The route response parameters.
+        --route-id=!: The route ID.
+        --route-response-id=!: The route response ID.
+        --route-response-key=: The route response key.
+    - name: update-stage
+      description: Updates a Stage.
+      flags:
+        --access-log-settings=: Settings for logging access in this stage.
+        --api-id=!: The API identifier.
+        --auto-deploy: Specifies whether updates to an API automatically trigger a new deployment.
+        --client-certificate-id=: The identifier of a client certificate for a Stage.
+        --default-route-settings=: The default route settings for the stage.
+        --deployment-id=: The deployment identifier for the API stage.
+        --description=: The description for the API stage.
+        --no-auto-deploy: Specifies whether updates to an API automatically trigger a new deployment.
+        --route-settings=: Route settings for the stage.
+        --stage-name=!: The stage name.
+        --stage-variables=: A map that defines the stage variables for a Stage.
+    - name: create-domain-name
+      description: Creates a domain name.
+      flags:
+        --domain-name-configurations=: The domain name configurations.
+        --domain-name=!: The domain name.
+        --mutual-tls-authentication=: The mutual TLS authentication configuration for a custom domain name.
+        --routing-mode=: The routing mode.
+        --tags=: The collection of tags associated with a domain name.
+      completion:
+        flag:
+            routing-mode:
+                - API_MAPPING_ONLY
+                - ROUTING_RULE_ONLY
+                - ROUTING_RULE_THEN_API_MAPPING

@@ -1,70 +1,39 @@
 name: rbin
 description: Amazon Recycle Bin
 commands:
-    - name: lock-rule
-      description: Locks a Region-level retention rule.
+    - name: list-rules
+      description: Lists the Recycle Bin retention rules in the Region.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The unique ID of the retention rule.
-        --lock-configuration=!: Information about the retention rule lock configuration.
-    - name: tag-resource
-      description: Assigns tags to the specified retention rule.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the retention rule.
-        --tags=!: Information about the tags to assign to the retention rule.
-    - name: untag-resource
-      description: Unassigns a tag from a retention rule.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the retention rule.
-        --tag-keys=!: The tag keys of the tags to unassign.
-    - name: delete-rule
-      description: Deletes a Recycle Bin retention rule.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The unique ID of the retention rule.
-    - name: unlock-rule
-      description: Unlocks a retention rule.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The unique ID of the retention rule.
-    - name: update-rule
-      description: Updates an existing Recycle Bin retention rule.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The retention rule description.
-        --exclude-resource-tags=: \[Region-level retention rules only] Specifies the exclusion tags to use to identify resources that are to be excluded, or ignored, by a Region-level retention rule.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The unique ID of the retention rule.
-        --resource-tags=: \[Tag-level retention rules only] Specifies the resource tags to use to identify resources that are to be retained by a tag-level retention rule.
-        --resource-type=: This parameter is currently not supported.
-        --retention-period=: Information about the retention period for which the retention rule is to retain resources.
+        --exclude-resource-tags=: \[Region-level retention rules only] Information about the exclusion tags used to identify resources that are to be excluded, or ignored, by the retention rule.
+        --lock-state=: The lock state of the retention rules to list.
+        --max-results=: The maximum number of results to return with a single call.
+        --next-token=: The token for the next page of results.
+        --resource-tags=: \[Tag-level retention rules only] Information about the resource tags used to identify resources that are retained by the retention rule.
+        --resource-type=!: The resource type retained by the retention rule.
       completion:
         flag:
+            lock-state:
+                - locked
+                - pending_unlock
+                - unlocked
             resource-type:
                 - EBS_SNAPSHOT
                 - EC2_IMAGE
                 - EBS_VOLUME
+    - name: unlock-rule
+      description: Unlocks a retention rule.
+      flags:
+        --identifier=!: The unique ID of the retention rule.
+    - name: untag-resource
+      description: Unassigns a tag from a retention rule.
+      flags:
+        --resource-arn=!: The Amazon Resource Name (ARN) of the retention rule.
+        --tag-keys=!: The tag keys of the tags to unassign.
     - name: create-rule
       description: Creates a Recycle Bin retention rule.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: The retention rule description.
         --exclude-resource-tags=: \[Region-level retention rules only] Specifies the exclusion tags to use to identify resources that are to be excluded, or ignored, by a Region-level retention rule.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --lock-configuration=: Information about the retention rule lock configuration.
         --resource-tags=: \[Tag-level retention rules only] Specifies the resource tags to use to identify resources that are to be retained by a tag-level retention rule.
         --resource-type=!: The resource type to be retained by the retention rule.
@@ -76,42 +45,40 @@ commands:
                 - EBS_SNAPSHOT
                 - EC2_IMAGE
                 - EBS_VOLUME
-    - name: get-rule
-      description: Gets information about a Recycle Bin retention rule.
+    - name: delete-rule
+      description: Deletes a Recycle Bin retention rule.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identifier=!: The unique ID of the retention rule.
-    - name: list-rules
-      description: Lists the Recycle Bin retention rules in the Region.
+    - name: list-tags-for-resource
+      description: Lists the tags assigned to a retention rule.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --exclude-resource-tags=: \[Region-level retention rules only] Information about the exclusion tags used to identify resources that are to be excluded, or ignored, by the retention rule.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lock-state=: The lock state of the retention rules to list.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return with a single call.
-        --next-token=: The token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --resource-tags=: \[Tag-level retention rules only] Information about the resource tags used to identify resources that are retained by the retention rule.
-        --resource-type=!: The resource type retained by the retention rule.
-        --starting-token=: A token to specify where to start paginating.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the retention rule.
+    - name: lock-rule
+      description: Locks a Region-level retention rule.
+      flags:
+        --identifier=!: The unique ID of the retention rule.
+        --lock-configuration=!: Information about the retention rule lock configuration.
+    - name: tag-resource
+      description: Assigns tags to the specified retention rule.
+      flags:
+        --resource-arn=!: The Amazon Resource Name (ARN) of the retention rule.
+        --tags=!: Information about the tags to assign to the retention rule.
+    - name: update-rule
+      description: Updates an existing Recycle Bin retention rule.
+      flags:
+        --description=: The retention rule description.
+        --exclude-resource-tags=: \[Region-level retention rules only] Specifies the exclusion tags to use to identify resources that are to be excluded, or ignored, by a Region-level retention rule.
+        --identifier=!: The unique ID of the retention rule.
+        --resource-tags=: \[Tag-level retention rules only] Specifies the resource tags to use to identify resources that are to be retained by a tag-level retention rule.
+        --resource-type=: This parameter is currently not supported.
+        --retention-period=: Information about the retention period for which the retention rule is to retain resources.
       completion:
         flag:
-            lock-state:
-                - locked
-                - pending_unlock
-                - unlocked
             resource-type:
                 - EBS_SNAPSHOT
                 - EC2_IMAGE
                 - EBS_VOLUME
-    - name: list-tags-for-resource
-      description: Lists the tags assigned to a retention rule.
+    - name: get-rule
+      description: Gets information about a Recycle Bin retention rule.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the retention rule.
+        --identifier=!: The unique ID of the retention rule.

@@ -1,34 +1,39 @@
 name: connectcases
 description: Amazon Connect Cases
 commands:
-    - name: create-related-item
-      description: Creates a related item (comments, tasks, and contacts) and associates it with a case.
+    - name: untag-resource
+      description: Untags a resource.
       flags:
-        --case-id=!: A unique identifier of the case.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content=!: The content of a related item to be created.
+        --arn=!: The Amazon Resource Name (ARN)
+        --tag-keys=!: List of tag keys.
+    - name: update-layout
+      description: Updates the attributes of an existing layout.
+      flags:
+        --content=: Information about which fields will be present in the layout, the order of the fields.
         --domain-id=!: The unique identifier of the Cases domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --performed-by=: Represents the creator of the related item.
-        --type=!: The type of a related item.
+        --layout-id=!: The unique identifier of the layout.
+        --name=: The name of the layout.
+    - name: update-template
+      description: Updates the attributes of an existing template.
+      flags:
+        --description=: A brief description of the template.
+        --domain-id=!: The unique identifier of the Cases domain.
+        --layout-configuration=: Configuration of layouts associated to the template.
+        --name=: The name of the template.
+        --required-fields=: A list of fields that must contain a value for a case to be successfully created with this template.
+        --rules=: A list of case rules (also known as [case field conditions](https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html)) on a template.
+        --status=: The status of the template.
+        --template-id=!: A unique identifier for the template.
       completion:
         flag:
-            type:
-                - Contact
-                - Comment
-                - File
-                - Sla
-                - ConnectCase
-                - Custom
+            status:
+                - Active
+                - Inactive
     - name: create-template
       description: Creates a template in the Cases domain.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: A brief description of the template.
         --domain-id=!: The unique identifier of the Cases domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --layout-configuration=: Configuration of layouts associated to the template.
         --name=!: A name for the template.
         --required-fields=: A list of fields that must contain a value for a case to be successfully created with this template.
@@ -39,187 +44,195 @@ commands:
             status:
                 - Active
                 - Inactive
+    - name: batch-put-field-options
+      description: Creates and updates a set of field options for a single select field in a Cases domain.
+      flags:
+        --domain-id=!: The unique identifier of the Cases domain.
+        --field-id=!: The unique identifier of a field.
+        --options=!: A list of `FieldOption` objects.
+    - name: delete-layout
+      description: Deletes a layout from a cases template.
+      flags:
+        --domain-id=!: The unique identifier of the Cases domain.
+        --layout-id=!: The unique identifier of the layout.
+    - name: delete-template
+      description: Deletes a cases template.
+      flags:
+        --domain-id=!: The unique identifier of the Cases domain.
+        --template-id=!: A unique identifier of a template.
+    - name: get-case-event-configuration
+      description: Returns the case event publishing configuration.
+      flags:
+        --domain-id=!: The unique identifier of the Cases domain.
+    - name: list-domains
+      description: Lists all cases domains in the Amazon Web Services account.
+      flags:
+        --max-results=: The maximum number of results to return per page.
+        --next-token=: The token for the next set of results.
+    - name: put-case-event-configuration
+      description: Adds case event publishing configuration.
+      flags:
+        --domain-id=!: The unique identifier of the Cases domain.
+        --event-bridge=!: Configuration to enable EventBridge case event delivery and determine what data is delivered.
+    - name: tag-resource
+      description: Adds tags to a resource.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN)
+        --tags=!: A map of of key-value pairs that represent tags on a resource.
     - name: delete-case-rule
       description: Deletes a case rule.
       flags:
         --case-rule-id=!: Unique identifier of a case rule.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain-id=!: Unique identifier of a Cases domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-field
-      description: Deletes a field from a cases template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: The unique identifier of the Cases domain.
-        --field-id=!: Unique identifier of the field.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-related-item
-      description: Deletes the related item resource under a case.
-      flags:
-        --case-id=!: A unique identifier of the case.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: A unique identifier of the Cases domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --related-item-id=!: A unique identifier of a related item.
-    - name: update-layout
-      description: Updates the attributes of an existing layout.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content=: Information about which fields will be present in the layout, the order of the fields.
-        --domain-id=!: The unique identifier of the Cases domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --layout-id=!: The unique identifier of the layout.
-        --name=: The name of the layout.
-    - name: create-layout
-      description: Creates a layout in the Cases domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content=!: Information about which fields will be present in the layout, and information about the order of the fields.
-        --domain-id=!: The unique identifier of the Cases domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the layout.
-    - name: delete-domain
-      description: Deletes a Cases domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: The unique identifier of the Cases domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-field-options
-      description: Lists all of the field options for a field identifier in the domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: The unique identifier of the Cases domain.
-        --field-id=!: The unique identifier of a field.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return per page.
-        --next-token=: The token for the next set of results.
-        --values=: A list of `FieldOption` values to filter on for `ListFieldOptions`.
-    - name: list-layouts
-      description: Lists all layouts in the given cases domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: The unique identifier of the Cases domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return per page.
-        --next-token=: The token for the next set of results.
-    - name: search-cases
-      description: Searches for cases within their associated Cases domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: The unique identifier of the Cases domain.
-        --fields=: The list of field identifiers to be returned as part of the response.
-        --filter=: A list of filter objects.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of cases to return.
-        --next-token=: The token for the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --search-term=: A word or phrase used to perform a quick search.
-        --sorts=: A list of sorts where each sort specifies a field and their sort order to be applied to the results.
-        --starting-token=: A token to specify where to start paginating.
-    - name: search-related-items
-      description: Searches for related items that are associated with a case.
-      flags:
-        --case-id=!: A unique identifier of the case.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: The unique identifier of the Cases domain.
-        --filters=: The list of types of related items and their parameters to use for filtering.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return per page.
-        --next-token=: The token for the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-field
-      description: Updates the properties of an existing field.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The description of a field.
-        --domain-id=!: The unique identifier of the Cases domain.
-        --field-id=!: The unique identifier of a field.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: The name of the field.
-    - name: create-domain
-      description: Creates a domain, which is a container for all case data, such as cases, fields, templates and layouts.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name for your Cases domain.
-    - name: delete-case
-      description: The DeleteCase API permanently deletes a case and all its associated resources from the cases data store.
-      flags:
-        --case-id=!: A unique identifier of the case.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: A unique identifier of the Cases domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-cases-for-contact
       description: Lists cases for a given contact.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --contact-arn=!: A unique identifier of a contact in Amazon Connect.
         --domain-id=!: The unique identifier of the Cases domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The maximum number of results to return per page.
         --next-token=: The token for the next set of results.
-    - name: list-tags-for-resource
-      description: Lists tags for a resource.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN)
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: update-case-rule
       description: Updates a case rule.
       flags:
         --case-rule-id=!: Unique identifier of a case rule.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: Description of a case rule.
         --domain-id=!: Unique identifier of a Cases domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=: Name of the case rule.
         --rule=: Represents what rule type should take place, under what conditions.
+    - name: get-layout
+      description: Returns the details for the requested layout.
+      flags:
+        --domain-id=!: The unique identifier of the Cases domain.
+        --layout-id=!: The unique identifier of the layout.
+    - name: delete-field
+      description: Deletes a field from a cases template.
+      flags:
+        --domain-id=!: The unique identifier of the Cases domain.
+        --field-id=!: Unique identifier of the field.
+    - name: batch-get-case-rule
+      description: Gets a batch of case rules.
+      flags:
+        --case-rules=!: A list of case rule identifiers.
+        --domain-id=!: Unique identifier of a Cases domain.
     - name: batch-get-field
       description: Returns the description for the list of fields in the request parameters.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain-id=!: The unique identifier of the Cases domain.
         --fields=!: A list of unique field identifiers.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: search-all-related-items
+      description: Searches for related items across all cases within a domain.
+      flags:
+        --domain-id=!: The unique identifier of the Cases domain.
+        --filters=: The list of types of related items and their parameters to use for filtering.
+        --max-results=: The maximum number of results to return per page.
+        --next-token=: The token for the next set of results.
+        --sorts=: A structured set of sort terms to specify the order in which related items should be returned.
+    - name: update-case
+      description: If you provide a value for `PerformedBy.UserArn` you must also have [connect:DescribeUser](https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html) permission on the User ARN resource that you provide
+      flags:
+        --case-id=!: A unique identifier of the case.
+        --domain-id=!: The unique identifier of the Cases domain.
+        --fields=!: An array of objects with `fieldId` (matching ListFields/DescribeField) and value union data, structured identical to `CreateCase`.
+        --performed-by=: ""
+    - name: update-field
+      description: Updates the properties of an existing field.
+      flags:
+        --description=: The description of a field.
+        --domain-id=!: The unique identifier of the Cases domain.
+        --field-id=!: The unique identifier of a field.
+        --name=: The name of the field.
+    - name: get-case-audit-events
+      description: Returns the audit history about a specific case if it exists.
+      flags:
+        --case-id=!: A unique identifier of the case.
+        --domain-id=!: The unique identifier of the Cases domain.
+        --max-results=: The maximum number of audit events to return.
+        --next-token=: The token for the next set of results.
+    - name: list-fields
+      description: Lists all fields in a Cases domain.
+      flags:
+        --domain-id=!: The unique identifier of the Cases domain.
+        --max-results=: The maximum number of results to return per page.
+        --next-token=: The token for the next set of results.
+    - name: list-templates
+      description: Lists all of the templates in a Cases domain.
+      flags:
+        --domain-id=!: The unique identifier of the Cases domain.
+        --max-results=: The maximum number of results to return per page.
+        --next-token=: The token for the next set of results.
+        --status=: A list of status values to filter on.
+    - name: search-cases
+      description: Searches for cases within their associated Cases domain.
+      flags:
+        --domain-id=!: The unique identifier of the Cases domain.
+        --fields=: The list of field identifiers to be returned as part of the response.
+        --filter=: A list of filter objects.
+        --max-results=: The maximum number of cases to return.
+        --next-token=: The token for the next set of results.
+        --search-term=: A word or phrase used to perform a quick search.
+        --sorts=: A list of sorts where each sort specifies a field and their sort order to be applied to the results.
+    - name: search-related-items
+      description: Searches for related items that are associated with a case.
+      flags:
+        --case-id=!: A unique identifier of the case.
+        --domain-id=!: The unique identifier of the Cases domain.
+        --filters=: The list of types of related items and their parameters to use for filtering.
+        --max-results=: The maximum number of results to return per page.
+        --next-token=: The token for the next set of results.
     - name: create-case
       description: If you provide a value for `PerformedBy.UserArn` you must also have [connect:DescribeUser](https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html) permission on the User ARN resource that you provide
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
         --domain-id=!: The unique identifier of the Cases domain.
         --fields=!: An array of objects with field ID (matching ListFields/DescribeField) and value union data.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --performed-by=: ""
         --template-id=!: A unique identifier of a template.
+    - name: create-domain
+      description: Creates a domain, which is a container for all case data, such as cases, fields, templates and layouts.
+      flags:
+        --name=!: The name for your Cases domain.
+    - name: delete-related-item
+      description: Deletes the related item resource under a case.
+      flags:
+        --case-id=!: A unique identifier of the case.
+        --domain-id=!: A unique identifier of the Cases domain.
+        --related-item-id=!: A unique identifier of a related item.
+    - name: create-case-rule
+      description: Creates a new case rule.
+      flags:
+        --description=: The description of a case rule.
+        --domain-id=!: Unique identifier of a Cases domain.
+        --name=!: Name of the case rule.
+        --rule=!: Represents what rule type should take place, under what conditions.
+    - name: delete-domain
+      description: Deletes a Cases domain.
+      flags:
+        --domain-id=!: The unique identifier of the Cases domain.
+    - name: get-domain
+      description: Returns information about a specific domain if it exists.
+      flags:
+        --domain-id=!: The unique identifier of the Cases domain.
+    - name: get-template
+      description: Returns the details for the requested template.
+      flags:
+        --domain-id=!: The unique identifier of the Cases domain.
+        --template-id=!: A unique identifier of a template.
+    - name: list-case-rules
+      description: Lists all case rules in a Cases domain.
+      flags:
+        --domain-id=!: Unique identifier of a Cases domain.
+        --max-results=: The maximum number of results to return per page.
+        --next-token=: The token for the next set of results.
+    - name: delete-case
+      description: The DeleteCase API permanently deletes a case and all its associated resources from the cases data store.
+      flags:
+        --case-id=!: A unique identifier of the case.
+        --domain-id=!: A unique identifier of the Cases domain.
     - name: create-field
       description: Creates a field in the Cases domain.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: The description of the field.
         --domain-id=!: The unique identifier of the Cases domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the field.
         --type=!: Defines the data type, some system constraints, and default display of the field.
       completion:
@@ -232,202 +245,51 @@ commands:
                 - SingleSelect
                 - Url
                 - User
+    - name: create-layout
+      description: Creates a layout in the Cases domain.
+      flags:
+        --content=!: Information about which fields will be present in the layout, and information about the order of the fields.
+        --domain-id=!: The unique identifier of the Cases domain.
+        --name=!: The name of the layout.
+    - name: create-related-item
+      description: Creates a related item (comments, tasks, and contacts) and associates it with a case.
+      flags:
+        --case-id=!: A unique identifier of the case.
+        --content=!: The content of a related item to be created.
+        --domain-id=!: The unique identifier of the Cases domain.
+        --performed-by=: Represents the creator of the related item.
+        --type=!: The type of a related item.
+      completion:
+        flag:
+            type:
+                - Contact
+                - Comment
+                - File
+                - Sla
+                - ConnectCase
+                - Custom
     - name: get-case
       description: Returns information about a specific case if it exists.
       flags:
         --case-id=!: A unique identifier of the case.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain-id=!: The unique identifier of the Cases domain.
         --fields=!: A list of unique field identifiers.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --next-token=: The token for the next set of results.
-    - name: get-template
-      description: Returns the details for the requested template.
+    - name: list-layouts
+      description: Lists all layouts in the given cases domain.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain-id=!: The unique identifier of the Cases domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --template-id=!: A unique identifier of a template.
-    - name: list-case-rules
-      description: Lists all case rules in a Cases domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: Unique identifier of a Cases domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return per page.
         --next-token=: The token for the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-domains
-      description: Lists all cases domains in the Amazon Web Services account.
+    - name: list-field-options
+      description: Lists all of the field options for a field identifier in the domain.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return per page.
-        --next-token=: The token for the next set of results.
-    - name: list-fields
-      description: Lists all fields in a Cases domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: The unique identifier of the Cases domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return per page.
-        --next-token=: The token for the next set of results.
-    - name: create-case-rule
-      description: Creates a new case rule.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The description of a case rule.
-        --domain-id=!: Unique identifier of a Cases domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: Name of the case rule.
-        --rule=!: Represents what rule type should take place, under what conditions.
-    - name: delete-layout
-      description: Deletes a layout from a cases template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: The unique identifier of the Cases domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --layout-id=!: The unique identifier of the layout.
-    - name: get-case-audit-events
-      description: Returns the audit history about a specific case if it exists.
-      flags:
-        --case-id=!: A unique identifier of the case.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: The unique identifier of the Cases domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of audit events to return.
-        --next-token=: The token for the next set of results.
-    - name: get-layout
-      description: Returns the details for the requested layout.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: The unique identifier of the Cases domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --layout-id=!: The unique identifier of the layout.
-    - name: tag-resource
-      description: Adds tags to a resource.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN)
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=!: A map of of key-value pairs that represent tags on a resource.
-    - name: update-template
-      description: Updates the attributes of an existing template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A brief description of the template.
-        --domain-id=!: The unique identifier of the Cases domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --layout-configuration=: Configuration of layouts associated to the template.
-        --name=: The name of the template.
-        --required-fields=: A list of fields that must contain a value for a case to be successfully created with this template.
-        --rules=: A list of case rules (also known as [case field conditions](https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html)) on a template.
-        --status=: The status of the template.
-        --template-id=!: A unique identifier for the template.
-      completion:
-        flag:
-            status:
-                - Active
-                - Inactive
-    - name: batch-get-case-rule
-      description: Gets a batch of case rules.
-      flags:
-        --case-rules=!: A list of case rule identifiers.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: Unique identifier of a Cases domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: batch-put-field-options
-      description: Creates and updates a set of field options for a single select field in a Cases domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain-id=!: The unique identifier of the Cases domain.
         --field-id=!: The unique identifier of a field.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --options=!: A list of `FieldOption` objects.
-    - name: delete-template
-      description: Deletes a cases template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: The unique identifier of the Cases domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --template-id=!: A unique identifier of a template.
-    - name: get-case-event-configuration
-      description: Returns the case event publishing configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: The unique identifier of the Cases domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: search-all-related-items
-      description: Searches for related items across all cases within a domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: The unique identifier of the Cases domain.
-        --filters=: The list of types of related items and their parameters to use for filtering.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return per page.
         --next-token=: The token for the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --sorts=: A structured set of sort terms to specify the order in which related items should be returned.
-        --starting-token=: A token to specify where to start paginating.
-    - name: untag-resource
-      description: Untags a resource.
+        --values=: A list of `FieldOption` values to filter on for `ListFieldOptions`.
+    - name: list-tags-for-resource
+      description: Lists tags for a resource.
       flags:
         --arn=!: The Amazon Resource Name (ARN)
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tag-keys=!: List of tag keys.
-    - name: get-domain
-      description: Returns information about a specific domain if it exists.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: The unique identifier of the Cases domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-templates
-      description: Lists all of the templates in a Cases domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: The unique identifier of the Cases domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return per page.
-        --next-token=: The token for the next set of results.
-        --status=: A list of status values to filter on.
-    - name: put-case-event-configuration
-      description: Adds case event publishing configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: The unique identifier of the Cases domain.
-        --event-bridge=!: Configuration to enable EventBridge case event delivery and determine what data is delivered.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-case
-      description: If you provide a value for `PerformedBy.UserArn` you must also have [connect:DescribeUser](https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html) permission on the User ARN resource that you provide
-      flags:
-        --case-id=!: A unique identifier of the case.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: The unique identifier of the Cases domain.
-        --fields=!: An array of objects with `fieldId` (matching ListFields/DescribeField) and value union data, structured identical to `CreateCase`.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --performed-by=: ""

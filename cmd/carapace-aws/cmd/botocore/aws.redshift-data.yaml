@@ -1,39 +1,15 @@
 name: redshift-data
 description: Redshift Data API Service
 commands:
-    - name: list-schemas
-      description: Lists the schemas in a database.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-identifier=: The cluster identifier.
-        --connected-database=: A database name.
-        --database=!: The name of the database that contains the schemas to list.
-        --db-user=: The database user name.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of schemas to return in the response.
-        --next-token=: A value that indicates the starting point for the next set of response records in a subsequent request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --schema-pattern=: A pattern to filter results by schema name.
-        --secret-arn=: The name or ARN of the secret that enables access to the database.
-        --starting-token=: A token to specify where to start paginating.
-        --workgroup-name=: The serverless workgroup name or Amazon Resource Name (ARN).
     - name: list-statements
       description: List of SQL statements.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --cluster-identifier=: The cluster identifier.
         --database=: The name of the database when listing statements run against a `ClusterIdentifier` or `WorkgroupName`.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of SQL statements to return in the response.
         --next-token=: A value that indicates the starting point for the next set of response records in a subsequent request.
         --no-role-level: A value that filters which statements to return in the response.
-        --page-size=: The size of each page to get in the AWS service call.
         --role-level: A value that filters which statements to return in the response.
-        --starting-token=: A token to specify where to start paginating.
         --statement-name=: The name of the SQL statement specified as input to `BatchExecuteStatement` or `ExecuteStatement` to identify the query.
         --status=: The status of the SQL statement to list.
         --workgroup-name=: The serverless workgroup name or Amazon Resource Name (ARN).
@@ -47,16 +23,26 @@ commands:
                 - ABORTED
                 - FAILED
                 - ALL
+    - name: list-tables
+      description: List the tables in a database.
+      flags:
+        --cluster-identifier=: The cluster identifier.
+        --connected-database=: A database name.
+        --database=!: The name of the database that contains the tables to list.
+        --db-user=: The database user name.
+        --max-results=: The maximum number of tables to return in the response.
+        --next-token=: A value that indicates the starting point for the next set of response records in a subsequent request.
+        --schema-pattern=: A pattern to filter results by schema name.
+        --secret-arn=: The name or ARN of the secret that enables access to the database.
+        --table-pattern=: A pattern to filter results by table name.
+        --workgroup-name=: The serverless workgroup name or Amazon Resource Name (ARN).
     - name: batch-execute-statement
       description: Runs one or more SQL statements, which can be data manipulation language (DML) or data definition language (DDL).
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
         --cluster-identifier=: The cluster identifier.
         --database=: The name of the database.
         --db-user=: The database user name.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-with-event: A value that indicates whether to send an event to the Amazon EventBridge event bus after the SQL statements run.
         --result-format=: The data format of the result of the SQL statement.
         --secret-arn=: The name or ARN of the secret that enables access to the database.
@@ -74,75 +60,27 @@ commands:
     - name: cancel-statement
       description: Cancels a running query.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The identifier of the SQL statement to cancel.
-    - name: get-statement-result
-      description: Fetches the temporarily cached result of an SQL statement in JSON format.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The identifier of the SQL statement whose results are to be fetched.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: A value that indicates the starting point for the next set of response records in a subsequent request.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-tables
-      description: List the tables in a database.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-identifier=: The cluster identifier.
-        --connected-database=: A database name.
-        --database=!: The name of the database that contains the tables to list.
-        --db-user=: The database user name.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of tables to return in the response.
-        --next-token=: A value that indicates the starting point for the next set of response records in a subsequent request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --schema-pattern=: A pattern to filter results by schema name.
-        --secret-arn=: The name or ARN of the secret that enables access to the database.
-        --starting-token=: A token to specify where to start paginating.
-        --table-pattern=: A pattern to filter results by table name.
-        --workgroup-name=: The serverless workgroup name or Amazon Resource Name (ARN).
-    - name: describe-statement
-      description: Describes the details about a specific instance when a query was run by the Amazon Redshift Data API.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The identifier of the SQL statement to describe.
     - name: describe-table
       description: Describes the detailed information about a table from metadata in the cluster.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --cluster-identifier=: The cluster identifier.
         --connected-database=: A database name.
         --database=!: The name of the database that contains the tables to be described.
         --db-user=: The database user name.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of tables to return in the response.
         --next-token=: A value that indicates the starting point for the next set of response records in a subsequent request.
-        --page-size=: The size of each page to get in the AWS service call.
         --schema=: The schema that contains the table.
         --secret-arn=: The name or ARN of the secret that enables access to the database.
-        --starting-token=: A token to specify where to start paginating.
         --table=: The table name.
         --workgroup-name=: The serverless workgroup name or Amazon Resource Name (ARN).
     - name: execute-statement
       description: Runs an SQL statement, which can be data manipulation language (DML) or data definition language (DDL).
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
         --cluster-identifier=: The cluster identifier.
         --database=: The name of the database.
         --db-user=: The database user name.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-with-event: A value that indicates whether to send an event to the Amazon EventBridge event bus after the SQL statement runs.
         --parameters=: The parameters for the SQL statement.
         --result-format=: The data format of the result of the SQL statement.
@@ -158,29 +96,39 @@ commands:
             result-format:
                 - JSON
                 - CSV
-    - name: get-statement-result-v2
-      description: Fetches the temporarily cached result of an SQL statement in CSV format.
+    - name: get-statement-result
+      description: Fetches the temporarily cached result of an SQL statement in JSON format.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The identifier of the SQL statement whose results are to be fetched.
-        --max-items=: The  total number of items to return in the command's output.
         --next-token=: A value that indicates the starting point for the next set of response records in a subsequent request.
-        --starting-token=: A token to specify where to start paginating.
     - name: list-databases
       description: List the databases in a cluster.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --cluster-identifier=: The cluster identifier.
         --database=!: The name of the database.
         --db-user=: The database user name.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of databases to return in the response.
         --next-token=: A value that indicates the starting point for the next set of response records in a subsequent request.
-        --page-size=: The size of each page to get in the AWS service call.
         --secret-arn=: The name or ARN of the secret that enables access to the database.
-        --starting-token=: A token to specify where to start paginating.
         --workgroup-name=: The serverless workgroup name or Amazon Resource Name (ARN).
+    - name: list-schemas
+      description: Lists the schemas in a database.
+      flags:
+        --cluster-identifier=: The cluster identifier.
+        --connected-database=: A database name.
+        --database=!: The name of the database that contains the schemas to list.
+        --db-user=: The database user name.
+        --max-results=: The maximum number of schemas to return in the response.
+        --next-token=: A value that indicates the starting point for the next set of response records in a subsequent request.
+        --schema-pattern=: A pattern to filter results by schema name.
+        --secret-arn=: The name or ARN of the secret that enables access to the database.
+        --workgroup-name=: The serverless workgroup name or Amazon Resource Name (ARN).
+    - name: describe-statement
+      description: Describes the details about a specific instance when a query was run by the Amazon Redshift Data API.
+      flags:
+        --id=!: The identifier of the SQL statement to describe.
+    - name: get-statement-result-v2
+      description: Fetches the temporarily cached result of an SQL statement in CSV format.
+      flags:
+        --id=!: The identifier of the SQL statement whose results are to be fetched.
+        --next-token=: A value that indicates the starting point for the next set of response records in a subsequent request.

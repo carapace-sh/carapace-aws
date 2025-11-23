@@ -1,91 +1,55 @@
 name: ivschat
 description: Amazon Interactive Video Service Chat
 commands:
+    - name: disconnect-user
+      description: Disconnects all connections using a specified user ID from a room.
+      flags:
+        --reason=: Reason for disconnecting the user.
+        --room-identifier=!: Identifier of the room from which the user's clients should be disconnected.
+        --user-id=!: ID of the user (connection) to disconnect from the room.
     - name: get-logging-configuration
       description: Gets the specified logging configuration.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identifier=!: Identifier of the logging configuration to be retrieved.
-    - name: list-tags-for-resource
-      description: Gets information about AWS tags for the specified ARN.
+    - name: get-room
+      description: Gets the specified room.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource to be retrieved.
-    - name: update-room
-      description: Updates a room’s configuration.
+        --identifier=!: Identifier of the room for which the configuration is to be retrieved.
+    - name: untag-resource
+      description: Removes tags from the resource with the specified ARN.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: Identifier of the room to be updated.
-        --logging-configuration-identifiers=: Array of logging-configuration identifiers attached to the room.
-        --maximum-message-length=: The maximum number of characters in a single message.
-        --maximum-message-rate-per-second=: Maximum number of messages per second that can be sent to the room (by all clients).
-        --message-review-handler=: Configuration information for optional review of messages.
-        --name=: Room name.
+        --resource-arn=!: The ARN of the resource to be untagged.
+        --tag-keys=!: Array of tags to be removed.
+    - name: update-logging-configuration
+      description: Updates a specified logging configuration.
+      flags:
+        --destination-configuration=: A complex type that contains a destination configuration for where chat content will be logged.
+        --identifier=!: Identifier of the logging configuration to be updated.
+        --name=: Logging-configuration name.
+    - name: list-logging-configurations
+      description: Gets summary information about all your logging configurations in the AWS region where the API request is processed.
+      flags:
+        --max-results=: Maximum number of logging configurations to return.
+        --next-token=: The first logging configurations to retrieve.
     - name: create-chat-token
       description: Creates an encrypted token that is used by a chat participant to establish an individual WebSocket chat connection to a room.
       flags:
         --attributes=: Application-provided attributes to encode into the token and attach to a chat session.
         --capabilities=: Set of capabilities that the user is allowed to perform in the room.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --room-identifier=!: Identifier of the room that the client is trying to access.
         --session-duration-in-minutes=: Session duration (in minutes), after which the session expires.
         --user-id=!: Application-provided ID that uniquely identifies the user associated with this token.
-    - name: create-logging-configuration
-      description: Creates a logging configuration that allows clients to store and record sent messages.
+    - name: delete-logging-configuration
+      description: Deletes the specified logging configuration.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --destination-configuration=!: A complex type that contains a destination configuration for where chat content will be logged.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: Logging-configuration name.
-        --tags=: Tags to attach to the resource.
-    - name: delete-message
-      description: Sends an event to a specific room which directs clients to delete a specific message; that is, unrender it from view and delete it from the client’s chat history.
+        --identifier=!: Identifier of the logging configuration to be deleted.
+    - name: delete-room
+      description: Deletes the specified room.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: ID of the message to be deleted.
-        --reason=: Reason for deleting the message.
-        --room-identifier=!: Identifier of the room where the message should be deleted.
-    - name: untag-resource
-      description: Removes tags from the resource with the specified ARN.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource to be untagged.
-        --tag-keys=!: Array of tags to be removed.
-    - name: disconnect-user
-      description: Disconnects all connections using a specified user ID from a room.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --reason=: Reason for disconnecting the user.
-        --room-identifier=!: Identifier of the room from which the user's clients should be disconnected.
-        --user-id=!: ID of the user (connection) to disconnect from the room.
-    - name: get-room
-      description: Gets the specified room.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: Identifier of the room for which the configuration is to be retrieved.
+        --identifier=!: Identifier of the room to be deleted.
     - name: list-rooms
       description: Gets summary information about all your rooms in the AWS region where the API request is processed.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --logging-configuration-identifier=: Logging-configuration identifier.
         --max-results=: Maximum number of rooms to return.
         --message-review-handler-uri=: Filters the list to match the specified message review handler URI.
@@ -95,59 +59,44 @@ commands:
       description: Sends an event to a room.
       flags:
         --attributes=: Application-defined metadata to attach to the event sent to clients.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --event-name=!: Application-defined name of the event to send to clients.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --room-identifier=!: Identifier of the room to which the event will be sent.
     - name: tag-resource
       description: Adds or updates tags for the AWS resource with the specified ARN.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The ARN of the resource to be tagged.
         --tags=!: Array of tags to be added or updated.
-    - name: update-logging-configuration
-      description: Updates a specified logging configuration.
+    - name: update-room
+      description: Updates a room’s configuration.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --destination-configuration=: A complex type that contains a destination configuration for where chat content will be logged.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: Identifier of the logging configuration to be updated.
+        --identifier=!: Identifier of the room to be updated.
+        --logging-configuration-identifiers=: Array of logging-configuration identifiers attached to the room.
+        --maximum-message-length=: The maximum number of characters in a single message.
+        --maximum-message-rate-per-second=: Maximum number of messages per second that can be sent to the room (by all clients).
+        --message-review-handler=: Configuration information for optional review of messages.
+        --name=: Room name.
+    - name: create-logging-configuration
+      description: Creates a logging configuration that allows clients to store and record sent messages.
+      flags:
+        --destination-configuration=!: A complex type that contains a destination configuration for where chat content will be logged.
         --name=: Logging-configuration name.
+        --tags=: Tags to attach to the resource.
+    - name: list-tags-for-resource
+      description: Gets information about AWS tags for the specified ARN.
+      flags:
+        --resource-arn=!: The ARN of the resource to be retrieved.
     - name: create-room
       description: Creates a room that allows clients to connect and pass messages.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --logging-configuration-identifiers=: Array of logging-configuration identifiers attached to the room.
         --maximum-message-length=: Maximum number of characters in a single message.
         --maximum-message-rate-per-second=: Maximum number of messages per second that can be sent to the room (by all clients).
         --message-review-handler=: Configuration information for optional review of messages.
         --name=: Room name.
         --tags=: Tags to attach to the resource.
-    - name: delete-logging-configuration
-      description: Deletes the specified logging configuration.
+    - name: delete-message
+      description: Sends an event to a specific room which directs clients to delete a specific message; that is, unrender it from view and delete it from the client’s chat history.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: Identifier of the logging configuration to be deleted.
-    - name: delete-room
-      description: Deletes the specified room.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: Identifier of the room to be deleted.
-    - name: list-logging-configurations
-      description: Gets summary information about all your logging configurations in the AWS region where the API request is processed.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: Maximum number of logging configurations to return.
-        --next-token=: The first logging configurations to retrieve.
+        --id=!: ID of the message to be deleted.
+        --reason=: Reason for deleting the message.
+        --room-identifier=!: Identifier of the room where the message should be deleted.

@@ -1,70 +1,13 @@
 name: appintegrations
 description: Amazon AppIntegrations Service
 commands:
-    - name: tag-resource
-      description: Adds the specified tags to the specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-        --tags=!: The tags used to organize, track, or control access for this resource.
-    - name: untag-resource
-      description: Removes the specified tags from the specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-        --tag-keys=!: The tag keys.
-    - name: create-data-integration-association
-      description: Creates and persists a DataIntegrationAssociation resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-association-metadata=: The mapping of metadata to be extracted from the data.
-        --client-id=: The identifier for the client that is associated with the DataIntegration association.
-        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --data-integration-identifier=!: A unique identifier for the DataIntegration.
-        --destination-uri=: The URI of the data destination.
-        --execution-configuration=: The configuration for how the files should be pulled from the source.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --object-configuration=: ""
-    - name: get-data-integration
-      description: Returns information about the DataIntegration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: A unique identifier.
-    - name: get-event-integration
-      description: Returns information about the event integration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the event integration.
-    - name: list-data-integrations
-      description: Returns a paginated list of DataIntegrations in the account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return per page.
-        --next-token=: The token for the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
     - name: create-application
       description: Creates and persists an Application resource.
       flags:
         --application-config=: The configuration settings for the application.
         --application-source-config=!: The configuration for where the application should be loaded from.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
         --description=: The description of the application.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --iframe-config=: The iframe configuration for the application.
         --initialization-timeout=: The maximum time in milliseconds allowed to establish a connection with the workspace.
         --is-service: Indicates whether the application is a service.
@@ -75,84 +18,73 @@ commands:
         --publications=: The events that the application publishes.
         --subscriptions=: The events that the application subscribes.
         --tags=: The tags used to organize, track, or control access for this resource.
-    - name: create-event-integration
-      description: Creates an EventIntegration, given a specified name, description, and a reference to an Amazon EventBridge bus in your account and a partner event source that pushes events to that bus.
+    - name: delete-application
+      description: Deletes the Application.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --description=: The description of the event integration.
-        --event-bridge-bus=!: The EventBridge bus.
-        --event-filter=!: The event filter.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --arn=!: The Amazon Resource Name (ARN) of the Application.
+    - name: delete-data-integration
+      description: Deletes the DataIntegration.
+      flags:
+        --data-integration-identifier=!: A unique identifier for the DataIntegration.
+    - name: delete-event-integration
+      description: Deletes the specified existing event integration.
+      flags:
         --name=!: The name of the event integration.
-        --tags=: The tags used to organize, track, or control access for this resource.
+    - name: get-event-integration
+      description: Returns information about the event integration.
+      flags:
+        --name=!: The name of the event integration.
+    - name: list-applications
+      description: Lists applications in the account.
+      flags:
+        --max-results=: The maximum number of results to return per page.
+        --next-token=: The token for the next set of results.
     - name: list-event-integrations
       description: Returns a paginated list of event integrations in the account.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return per page.
         --next-token=: The token for the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-data-integration-association
-      description: Updates and persists a DataIntegrationAssociation resource.
+    - name: tag-resource
+      description: Adds the specified tags to the specified resource.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-integration-association-identifier=!: A unique identifier.
-        --data-integration-identifier=!: A unique identifier for the DataIntegration.
-        --execution-configuration=!: The configuration for how the files should be pulled from the source.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+        --tags=!: The tags used to organize, track, or control access for this resource.
     - name: create-data-integration
       description: Creates and persists a DataIntegration resource.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
         --description=: A description of the DataIntegration.
         --file-configuration=: The configuration for what files should be pulled from the source.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --kms-key=!: The KMS key ARN for the DataIntegration.
         --name=!: The name of the DataIntegration.
         --object-configuration=: The configuration for what data should be pulled from the source.
         --schedule-config=: The name of the data and how often it should be pulled from the source.
         --source-uri=: The URI of the data source.
         --tags=: The tags used to organize, track, or control access for this resource.
-    - name: delete-application
-      description: Deletes the Application.
+    - name: get-application
+      description: Get an Application resource.
       flags:
         --arn=!: The Amazon Resource Name (ARN) of the Application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-data-integration
-      description: Deletes the DataIntegration.
+    - name: get-data-integration
+      description: Returns information about the DataIntegration.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-integration-identifier=!: A unique identifier for the DataIntegration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-event-integration
-      description: Deletes the specified existing event integration.
+        --identifier=!: A unique identifier.
+    - name: list-tags-for-resource
+      description: Lists the tags for the specified resource.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the event integration.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+    - name: untag-resource
+      description: Removes the specified tags from the specified resource.
+      flags:
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+        --tag-keys=!: The tag keys.
     - name: update-application
       description: Updates and persists an Application resource.
       flags:
         --application-config=: The configuration settings for the application.
         --application-source-config=: The configuration for where the application should be loaded from.
         --arn=!: The Amazon Resource Name (ARN) of the Application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: The description of the application.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --iframe-config=: The iframe configuration for the application.
         --initialization-timeout=: The maximum time in milliseconds allowed to establish a connection with the workspace.
         --is-service: Indicates whether the application is a service.
@@ -161,81 +93,62 @@ commands:
         --permissions=: The configuration of events or requests that the application has access to.
         --publications=: The events that the application publishes.
         --subscriptions=: The events that the application subscribes.
+    - name: create-data-integration-association
+      description: Creates and persists a DataIntegrationAssociation resource.
+      flags:
+        --client-association-metadata=: The mapping of metadata to be extracted from the data.
+        --client-id=: The identifier for the client that is associated with the DataIntegration association.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --data-integration-identifier=!: A unique identifier for the DataIntegration.
+        --destination-uri=: The URI of the data destination.
+        --execution-configuration=: The configuration for how the files should be pulled from the source.
+        --object-configuration=: ""
+    - name: create-event-integration
+      description: Creates an EventIntegration, given a specified name, description, and a reference to an Amazon EventBridge bus in your account and a partner event source that pushes events to that bus.
+      flags:
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --description=: The description of the event integration.
+        --event-bridge-bus=!: The EventBridge bus.
+        --event-filter=!: The event filter.
+        --name=!: The name of the event integration.
+        --tags=: The tags used to organize, track, or control access for this resource.
+    - name: list-data-integration-associations
+      description: Returns a paginated list of DataIntegration associations in the account.
+      flags:
+        --data-integration-identifier=!: A unique identifier for the DataIntegration.
+        --max-results=: The maximum number of results to return per page.
+        --next-token=: The token for the next set of results.
+    - name: list-event-integration-associations
+      description: Returns a paginated list of event integration associations in the account.
+      flags:
+        --event-integration-name=!: The name of the event integration.
+        --max-results=: The maximum number of results to return per page.
+        --next-token=: The token for the next set of results.
     - name: update-data-integration
       description: Updates the description of a DataIntegration.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: A description of the DataIntegration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identifier=!: A unique identifier for the DataIntegration.
         --name=: The name of the DataIntegration.
-    - name: update-event-integration
-      description: Updates the description of an event integration.
+    - name: update-data-integration-association
+      description: Updates and persists a DataIntegrationAssociation resource.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The description of the event integration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the event integration.
-    - name: get-application
-      description: Get an Application resource.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the Application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --data-integration-association-identifier=!: A unique identifier.
+        --data-integration-identifier=!: A unique identifier for the DataIntegration.
+        --execution-configuration=!: The configuration for how the files should be pulled from the source.
     - name: list-application-associations
       description: Returns a paginated list of application associations for an application.
       flags:
         --application-id=!: A unique identifier for the Application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return per page.
         --next-token=: The token for the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-applications
-      description: Lists applications in the account.
+    - name: list-data-integrations
+      description: Returns a paginated list of DataIntegrations in the account.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return per page.
         --next-token=: The token for the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-data-integration-associations
-      description: Returns a paginated list of DataIntegration associations in the account.
+    - name: update-event-integration
+      description: Updates the description of an event integration.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-integration-identifier=!: A unique identifier for the DataIntegration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return per page.
-        --next-token=: The token for the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-event-integration-associations
-      description: Returns a paginated list of event integration associations in the account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --event-integration-name=!: The name of the event integration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return per page.
-        --next-token=: The token for the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: Lists the tags for the specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+        --description=: The description of the event integration.
+        --name=!: The name of the event integration.

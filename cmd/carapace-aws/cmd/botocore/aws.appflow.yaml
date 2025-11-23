@@ -1,16 +1,96 @@
 name: appflow
 description: Amazon Appflow
 commands:
+    - name: create-flow
+      description: Enables your application to create a new flow using Amazon AppFlow.
+      flags:
+        --client-token=: The `clientToken` parameter is an idempotency token.
+        --description=: A description of the flow you want to create.
+        --destination-flow-config-list=!: The configuration that controls how Amazon AppFlow places data in the destination connector.
+        --flow-name=!: The specified name of the flow.
+        --kms-arn=: The ARN (Amazon Resource Name) of the Key Management Service (KMS) key you provide for encryption.
+        --metadata-catalog-config=: Specifies the configuration that Amazon AppFlow uses when it catalogs the data that's transferred by the associated flow.
+        --source-flow-config=!: The configuration that controls how Amazon AppFlow retrieves data from the source connector.
+        --tags=: The tags used to organize, track, or control access for your flow.
+        --tasks=!: A list of tasks that Amazon AppFlow performs while transferring the data in the flow run.
+        --trigger-config=!: The trigger settings that determine how and when the flow runs.
+    - name: list-flows
+      description: Lists all of the flows associated with your account.
+      flags:
+        --max-results=: Specifies the maximum number of items that should be returned in the result set.
+        --next-token=: The pagination token for next page of data.
+    - name: reset-connector-metadata-cache
+      description: Resets metadata about your connector entities that Amazon AppFlow stored in its cache.
+      flags:
+        --api-version=: The API version that you specified in the connector profile that you’re resetting cached metadata for.
+        --connector-entity-name=: Use this parameter if you want to reset cached metadata about the details for an individual entity.
+        --connector-profile-name=: The name of the connector profile that you want to reset cached metadata for.
+        --connector-type=: The type of connector to reset cached metadata for.
+        --entities-path=: Use this parameter only if you’re resetting the cached metadata about a nested entity.
+      completion:
+        flag:
+            connector-type:
+                - Salesforce
+                - Singular
+                - Slack
+                - Redshift
+                - S3
+                - Marketo
+                - Googleanalytics
+                - Zendesk
+                - Servicenow
+                - Datadog
+                - Trendmicro
+                - Snowflake
+                - Dynatrace
+                - Infornexus
+                - Amplitude
+                - Veeva
+                - EventBridge
+                - LookoutMetrics
+                - Upsolver
+                - Honeycode
+                - CustomerProfiles
+                - SAPOData
+                - CustomConnector
+                - Pardot
+    - name: update-connector-profile
+      description: Updates a given connector profile associated with your account.
+      flags:
+        --client-token=: The `clientToken` parameter is an idempotency token.
+        --connection-mode=!: Indicates the connection mode and if it is public or private.
+        --connector-profile-config=!: Defines the connector-specific profile configuration and credentials.
+        --connector-profile-name=!: The name of the connector profile and is unique for each `ConnectorProfile` in the Amazon Web Services account.
+      completion:
+        flag:
+            connection-mode:
+                - Public
+                - Private
+    - name: update-connector-registration
+      description: Updates a custom connector that you've previously registered.
+      flags:
+        --client-token=: The `clientToken` parameter is an idempotency token.
+        --connector-label=!: The name of the connector.
+        --connector-provisioning-config=: ""
+        --description=: A description about the update that you're applying to the connector.
+    - name: update-flow
+      description: Updates an existing flow.
+      flags:
+        --client-token=: The `clientToken` parameter is an idempotency token.
+        --description=: A description of the flow.
+        --destination-flow-config-list=!: The configuration that controls how Amazon AppFlow transfers data to the destination connector.
+        --flow-name=!: The specified name of the flow.
+        --metadata-catalog-config=: Specifies the configuration that Amazon AppFlow uses when it catalogs the data that's transferred by the associated flow.
+        --source-flow-config=!: ""
+        --tasks=!: A list of tasks that Amazon AppFlow performs while transferring the data in the flow run.
+        --trigger-config=!: The trigger settings that determine how and when the flow runs.
     - name: list-connector-entities
       description: Returns the list of available connector entities supported by Amazon AppFlow.
       flags:
         --api-version=: The version of the API that's used by the connector.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --connector-profile-name=: The name of the connector profile.
         --connector-type=: The type of connector, such as Salesforce, Amplitude, and so on.
         --entities-path=: This optional parameter is specific to connector implementation.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The maximum number of items that the operation returns in the response.
         --next-token=: A token that was provided by your prior `ListConnectorEntities` operation if the response was too big for the page size.
       completion:
@@ -40,54 +120,58 @@ commands:
                 - SAPOData
                 - CustomConnector
                 - Pardot
-    - name: tag-resource
-      description: Applies a tag to the specified flow.
+    - name: cancel-flow-executions
+      description: Cancels active runs for a flow.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the flow that you want to tag.
-        --tags=!: The tags used to organize, track, or control access for your flow.
-    - name: update-flow
-      description: Updates an existing flow.
+        --execution-ids=: The ID of each active run to cancel.
+        --flow-name=!: The name of a flow with active runs that you want to cancel.
+    - name: create-connector-profile
+      description: Creates a new connector profile associated with your Amazon Web Services account.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: The `clientToken` parameter is an idempotency token.
-        --description=: A description of the flow.
-        --destination-flow-config-list=!: The configuration that controls how Amazon AppFlow transfers data to the destination connector.
-        --flow-name=!: The specified name of the flow.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --metadata-catalog-config=: Specifies the configuration that Amazon AppFlow uses when it catalogs the data that's transferred by the associated flow.
-        --source-flow-config=!: ""
-        --tasks=!: A list of tasks that Amazon AppFlow performs while transferring the data in the flow run.
-        --trigger-config=!: The trigger settings that determine how and when the flow runs.
-    - name: delete-connector-profile
-      description: Enables you to delete an existing connector profile.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connector-profile-name=!: The name of the connector profile.
-        --force-delete: Indicates whether Amazon AppFlow should delete the profile, even if it is currently in use in one or more flows.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-force-delete: Indicates whether Amazon AppFlow should delete the profile, even if it is currently in use in one or more flows.
-    - name: delete-flow
-      description: Enables your application to delete an existing flow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --flow-name=!: The specified name of the flow.
-        --force-delete: Indicates whether Amazon AppFlow should delete the flow, even if it is currently in use.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-force-delete: Indicates whether Amazon AppFlow should delete the flow, even if it is currently in use.
-    - name: describe-connector
-      description: Describes the given custom connector registered in your Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connection-mode=!: Indicates the connection mode and specifies whether it is public or private.
         --connector-label=: The label of the connector.
-        --connector-type=!: The connector type, such as CUSTOMCONNECTOR, Saleforce, Marketo.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --connector-profile-config=!: Defines the connector-specific configuration and credentials.
+        --connector-profile-name=!: The name of the connector profile.
+        --connector-type=!: The type of connector, such as Salesforce, Amplitude, and so on.
+        --kms-arn=: The ARN (Amazon Resource Name) of the Key Management Service (KMS) key you provide for encryption.
+      completion:
+        flag:
+            connection-mode:
+                - Public
+                - Private
+            connector-type:
+                - Salesforce
+                - Singular
+                - Slack
+                - Redshift
+                - S3
+                - Marketo
+                - Googleanalytics
+                - Zendesk
+                - Servicenow
+                - Datadog
+                - Trendmicro
+                - Snowflake
+                - Dynatrace
+                - Infornexus
+                - Amplitude
+                - Veeva
+                - EventBridge
+                - LookoutMetrics
+                - Upsolver
+                - Honeycode
+                - CustomerProfiles
+                - SAPOData
+                - CustomConnector
+                - Pardot
+    - name: describe-connector-entity
+      description: Provides details regarding the entity used with the connector, with a description of the data model for each field in that entity.
+      flags:
+        --api-version=: The version of the API that's used by the connector.
+        --connector-entity-name=!: The entity name for that connector.
+        --connector-profile-name=: The name of the connector profile.
+        --connector-type=: The type of connector application, such as Salesforce, Amplitude, and so on.
       completion:
         flag:
             connector-type:
@@ -118,12 +202,9 @@ commands:
     - name: describe-connector-profiles
       description: Returns a list of `connector-profile` details matching the provided `connector-profile` names and `connector-types`.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --connector-label=: The name of the connector.
         --connector-profile-names=: The name of the connector profile.
         --connector-type=: The type of connector, such as Salesforce, Amplitude, and so on.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: Specifies the maximum number of items that should be returned in the result set.
         --next-token=: The pagination token for the next page of data.
       completion:
@@ -153,85 +234,26 @@ commands:
                 - SAPOData
                 - CustomConnector
                 - Pardot
-    - name: describe-flow
-      description: Provides a description of the specified flow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --flow-name=!: The specified name of the flow.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-tags-for-resource
       description: Retrieves the tags that are associated with a specified flow.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the specified flow.
-    - name: reset-connector-metadata-cache
-      description: Resets metadata about your connector entities that Amazon AppFlow stored in its cache.
-      flags:
-        --api-version=: The API version that you specified in the connector profile that you’re resetting cached metadata for.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connector-entity-name=: Use this parameter if you want to reset cached metadata about the details for an individual entity.
-        --connector-profile-name=: The name of the connector profile that you want to reset cached metadata for.
-        --connector-type=: The type of connector to reset cached metadata for.
-        --entities-path=: Use this parameter only if you’re resetting the cached metadata about a nested entity.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      completion:
-        flag:
-            connector-type:
-                - Salesforce
-                - Singular
-                - Slack
-                - Redshift
-                - S3
-                - Marketo
-                - Googleanalytics
-                - Zendesk
-                - Servicenow
-                - Datadog
-                - Trendmicro
-                - Snowflake
-                - Dynatrace
-                - Infornexus
-                - Amplitude
-                - Veeva
-                - EventBridge
-                - LookoutMetrics
-                - Upsolver
-                - Honeycode
-                - CustomerProfiles
-                - SAPOData
-                - CustomConnector
-                - Pardot
     - name: unregister-connector
       description: Unregisters the custom connector registered in your account that matches the connector label provided in the request.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --connector-label=!: The label of the connector.
         --force-delete: Indicates whether Amazon AppFlow should unregister the connector, even if it is currently in use in one or more connector profiles.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-force-delete: Indicates whether Amazon AppFlow should unregister the connector, even if it is currently in use in one or more connector profiles.
-    - name: cancel-flow-executions
-      description: Cancels active runs for a flow.
+    - name: untag-resource
+      description: Removes a tag from the specified flow.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --execution-ids=: The ID of each active run to cancel.
-        --flow-name=!: The name of a flow with active runs that you want to cancel.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-connector-entity
-      description: Provides details regarding the entity used with the connector, with a description of the data model for each field in that entity.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the flow that you want to untag.
+        --tag-keys=!: The tag keys associated with the tag that you want to remove from your flow.
+    - name: describe-connector
+      description: Describes the given custom connector registered in your Amazon Web Services account.
       flags:
-        --api-version=: The version of the API that's used by the connector.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connector-entity-name=!: The entity name for that connector.
-        --connector-profile-name=: The name of the connector profile.
-        --connector-type=: The type of connector application, such as Salesforce, Amplitude, and so on.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --connector-label=: The label of the connector.
+        --connector-type=!: The connector type, such as CUSTOMCONNECTOR, Saleforce, Marketo.
       completion:
         flag:
             connector-type:
@@ -259,159 +281,62 @@ commands:
                 - SAPOData
                 - CustomConnector
                 - Pardot
-    - name: list-connectors
-      description: Returns the list of all registered custom connectors in your Amazon Web Services account.
+    - name: describe-flow-execution-records
+      description: Fetches the execution history of the flow.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --flow-name=!: The specified name of the flow.
         --max-results=: Specifies the maximum number of items that should be returned in the result set.
         --next-token=: The pagination token for the next page of data.
-    - name: list-flows
-      description: Lists all of the flows associated with your account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: Specifies the maximum number of items that should be returned in the result set.
-        --next-token=: The pagination token for next page of data.
     - name: register-connector
       description: Registers a new custom connector with your Amazon Web Services account.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: The `clientToken` parameter is an idempotency token.
         --connector-label=: The name of the connector.
         --connector-provisioning-config=: The provisioning type of the connector.
         --connector-provisioning-type=: The provisioning type of the connector.
         --description=: A description about the connector that's being registered.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
       completion:
         flag:
             connector-provisioning-type:
                 - LAMBDA
-    - name: untag-resource
-      description: Removes a tag from the specified flow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the flow that you want to untag.
-        --tag-keys=!: The tag keys associated with the tag that you want to remove from your flow.
-    - name: update-connector-registration
-      description: Updates a custom connector that you've previously registered.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: The `clientToken` parameter is an idempotency token.
-        --connector-label=!: The name of the connector.
-        --connector-provisioning-config=: ""
-        --description=: A description about the update that you're applying to the connector.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-connectors
-      description: Describes the connectors vended by Amazon AppFlow for specified connector types.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connector-types=: The type of connector, such as Salesforce, Amplitude, and so on.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of items that should be returned in the result set.
-        --next-token=: The pagination token for the next page of data.
-    - name: describe-flow-execution-records
-      description: Fetches the execution history of the flow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --flow-name=!: The specified name of the flow.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: Specifies the maximum number of items that should be returned in the result set.
-        --next-token=: The pagination token for the next page of data.
     - name: start-flow
       description: Activates an existing flow.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: The `clientToken` parameter is an idempotency token.
         --flow-name=!: The specified name of the flow.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: stop-flow
       description: Deactivates the existing flow.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --flow-name=!: The specified name of the flow.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-connector-profile
-      description: Updates a given connector profile associated with your account.
+    - name: list-connectors
+      description: Returns the list of all registered custom connectors in your Amazon Web Services account.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: The `clientToken` parameter is an idempotency token.
-        --connection-mode=!: Indicates the connection mode and if it is public or private.
-        --connector-profile-config=!: Defines the connector-specific profile configuration and credentials.
-        --connector-profile-name=!: The name of the connector profile and is unique for each `ConnectorProfile` in the Amazon Web Services account.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      completion:
-        flag:
-            connection-mode:
-                - Public
-                - Private
-    - name: create-connector-profile
-      description: Creates a new connector profile associated with your Amazon Web Services account.
+        --max-results=: Specifies the maximum number of items that should be returned in the result set.
+        --next-token=: The pagination token for the next page of data.
+    - name: delete-connector-profile
+      description: Enables you to delete an existing connector profile.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: The `clientToken` parameter is an idempotency token.
-        --connection-mode=!: Indicates the connection mode and specifies whether it is public or private.
-        --connector-label=: The label of the connector.
-        --connector-profile-config=!: Defines the connector-specific configuration and credentials.
         --connector-profile-name=!: The name of the connector profile.
-        --connector-type=!: The type of connector, such as Salesforce, Amplitude, and so on.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kms-arn=: The ARN (Amazon Resource Name) of the Key Management Service (KMS) key you provide for encryption.
-      completion:
-        flag:
-            connection-mode:
-                - Public
-                - Private
-            connector-type:
-                - Salesforce
-                - Singular
-                - Slack
-                - Redshift
-                - S3
-                - Marketo
-                - Googleanalytics
-                - Zendesk
-                - Servicenow
-                - Datadog
-                - Trendmicro
-                - Snowflake
-                - Dynatrace
-                - Infornexus
-                - Amplitude
-                - Veeva
-                - EventBridge
-                - LookoutMetrics
-                - Upsolver
-                - Honeycode
-                - CustomerProfiles
-                - SAPOData
-                - CustomConnector
-                - Pardot
-    - name: create-flow
-      description: Enables your application to create a new flow using Amazon AppFlow.
+        --force-delete: Indicates whether Amazon AppFlow should delete the profile, even if it is currently in use in one or more flows.
+        --no-force-delete: Indicates whether Amazon AppFlow should delete the profile, even if it is currently in use in one or more flows.
+    - name: delete-flow
+      description: Enables your application to delete an existing flow.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: The `clientToken` parameter is an idempotency token.
-        --description=: A description of the flow you want to create.
-        --destination-flow-config-list=!: The configuration that controls how Amazon AppFlow places data in the destination connector.
         --flow-name=!: The specified name of the flow.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kms-arn=: The ARN (Amazon Resource Name) of the Key Management Service (KMS) key you provide for encryption.
-        --metadata-catalog-config=: Specifies the configuration that Amazon AppFlow uses when it catalogs the data that's transferred by the associated flow.
-        --source-flow-config=!: The configuration that controls how Amazon AppFlow retrieves data from the source connector.
-        --tags=: The tags used to organize, track, or control access for your flow.
-        --tasks=!: A list of tasks that Amazon AppFlow performs while transferring the data in the flow run.
-        --trigger-config=!: The trigger settings that determine how and when the flow runs.
+        --force-delete: Indicates whether Amazon AppFlow should delete the flow, even if it is currently in use.
+        --no-force-delete: Indicates whether Amazon AppFlow should delete the flow, even if it is currently in use.
+    - name: describe-connectors
+      description: Describes the connectors vended by Amazon AppFlow for specified connector types.
+      flags:
+        --connector-types=: The type of connector, such as Salesforce, Amplitude, and so on.
+        --max-results=: The maximum number of items that should be returned in the result set.
+        --next-token=: The pagination token for the next page of data.
+    - name: describe-flow
+      description: Provides a description of the specified flow.
+      flags:
+        --flow-name=!: The specified name of the flow.
+    - name: tag-resource
+      description: Applies a tag to the specified flow.
+      flags:
+        --resource-arn=!: The Amazon Resource Name (ARN) of the flow that you want to tag.
+        --tags=!: The tags used to organize, track, or control access for your flow.

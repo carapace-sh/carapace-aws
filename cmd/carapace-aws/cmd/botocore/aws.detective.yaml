@@ -1,162 +1,149 @@
 name: detective
 description: Amazon Detective
 commands:
-    - name: describe-organization-configuration
-      description: Returns information about the configuration for the organization behavior graph.
+    - name: list-tags-for-resource
+      description: Returns the tag values that are assigned to a behavior graph.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --graph-arn=!: The ARN of the organization behavior graph.
-    - name: disable-organization-admin-account
-      description: Removes the Detective administrator account in the current Region.
+        --resource-arn=!: The ARN of the behavior graph for which to retrieve the tag values.
+    - name: batch-get-graph-member-datasources
+      description: Gets data source package information for the behavior graph.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-invitations
-      description: Retrieves the list of open and accepted behavior graph invitations for the member account.
+        --account-ids=!: The list of Amazon Web Services accounts to get data source package information on.
+        --graph-arn=!: The ARN of the behavior graph.
+    - name: list-organization-admin-accounts
+      description: Returns information about the Detective administrator account for an organization.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of behavior graph invitations to return in the response.
-        --next-token=: For requests to retrieve the next page of results, the pagination token that was returned with the previous page of results.
-    - name: reject-invitation
-      description: Rejects an invitation to contribute the account data to a behavior graph.
+        --max-results=: The maximum number of results to return.
+        --next-token=: For requests to get the next page of results, the pagination token that was returned with the previous set of results.
+    - name: update-investigation-state
+      description: Updates the state of an investigation.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --graph-arn=!: The ARN of the behavior graph to reject the invitation to.
-    - name: start-investigation
-      description: Detective investigations lets you investigate IAM users and IAM roles using indicators of compromise.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --entity-arn=!: The unique Amazon Resource Name (ARN) of the IAM user and IAM role.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --graph-arn=!: The Amazon Resource Name (ARN) of the behavior graph.
-        --scope-end-time=!: The data and time when the investigation ended.
-        --scope-start-time=!: The data and time when the investigation began.
+        --investigation-id=!: The investigation ID of the investigation report.
+        --state=!: The current state of the investigation.
+      completion:
+        flag:
+            state:
+                - ACTIVE
+                - ARCHIVED
+    - name: disassociate-membership
+      description: Removes the member account from the specified behavior graph.
+      flags:
+        --graph-arn=!: The ARN of the behavior graph to remove the member account from.
+    - name: list-datasource-packages
+      description: Lists data source packages in the behavior graph.
+      flags:
+        --graph-arn=!: The ARN of the behavior graph.
+        --max-results=: The maximum number of results to return.
+        --next-token=: For requests to get the next page of results, the pagination token that was returned with the previous set of results.
     - name: list-investigations
       description: Detective investigations lets you investigate IAM users and IAM roles using indicators of compromise.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --filter-criteria=: Filters the investigation results based on a criteria.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --graph-arn=!: The Amazon Resource Name (ARN) of the behavior graph.
         --max-results=: Lists the maximum number of investigations in a page.
         --next-token=: Lists if there are more results available.
         --sort-criteria=: Sorts the investigation results based on a criteria.
-    - name: untag-resource
-      description: Removes tags from a behavior graph.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the behavior graph to remove the tags from.
-        --tag-keys=!: The tag keys of the tags to remove from the behavior graph.
-    - name: batch-get-membership-datasources
-      description: Gets information on the data source package history for an account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --graph-arns=!: The ARN of the behavior graph.
-    - name: create-graph
-      description: Creates a new behavior graph for the calling account, and sets that account as the administrator account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: The tags to assign to the new behavior graph.
-    - name: delete-members
-      description: Removes the specified member accounts from the behavior graph.
-      flags:
-        --account-ids=!: The list of Amazon Web Services account identifiers for the member accounts to remove from the behavior graph.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --graph-arn=!: The ARN of the behavior graph to remove members from.
     - name: start-monitoring-member
       description: Sends a request to enable data ingest for a member account that has a status of `ACCEPTED_BUT_DISABLED`.
       flags:
         --account-id=!: The account ID of the member account to try to enable.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --graph-arn=!: The ARN of the behavior graph.
-    - name: list-tags-for-resource
-      description: Returns the tag values that are assigned to a behavior graph.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the behavior graph for which to retrieve the tag values.
-    - name: list-datasource-packages
-      description: Lists data source packages in the behavior graph.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --graph-arn=!: The ARN of the behavior graph.
-        --max-results=: The maximum number of results to return.
-        --next-token=: For requests to get the next page of results, the pagination token that was returned with the previous set of results.
-    - name: list-organization-admin-accounts
-      description: Returns information about the Detective administrator account for an organization.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return.
-        --next-token=: For requests to get the next page of results, the pagination token that was returned with the previous set of results.
-    - name: delete-graph
-      description: Disables the specified behavior graph and queues it to be deleted.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --graph-arn=!: The ARN of the behavior graph to disable.
-    - name: disassociate-membership
-      description: Removes the member account from the specified behavior graph.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --graph-arn=!: The ARN of the behavior graph to remove the member account from.
+    - name: disable-organization-admin-account
+      description: Removes the Detective administrator account in the current Region.
     - name: get-investigation
       description: Detective investigations lets you investigate IAM users and IAM roles using indicators of compromise.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --graph-arn=!: The Amazon Resource Name (ARN) of the behavior graph.
         --investigation-id=!: The investigation ID of the investigation report.
-    - name: list-graphs
-      description: Returns the list of behavior graphs that the calling account is an administrator account of.
+    - name: start-investigation
+      description: Detective investigations lets you investigate IAM users and IAM roles using indicators of compromise.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of graphs to return at a time.
-        --next-token=: For requests to get the next page of results, the pagination token that was returned with the previous set of results.
+        --entity-arn=!: The unique Amazon Resource Name (ARN) of the IAM user and IAM role.
+        --graph-arn=!: The Amazon Resource Name (ARN) of the behavior graph.
+        --scope-end-time=!: The data and time when the investigation ended.
+        --scope-start-time=!: The data and time when the investigation began.
+    - name: create-graph
+      description: Creates a new behavior graph for the calling account, and sets that account as the administrator account.
+      flags:
+        --tags=: The tags to assign to the new behavior graph.
+    - name: create-members
+      description: '`CreateMembers` is used to send invitations to accounts.'
+      flags:
+        --accounts=!: The list of Amazon Web Services accounts to invite or to enable.
+        --disable-email-notification: if set to `true`, then the invited accounts do not receive email notifications.
+        --graph-arn=!: The ARN of the behavior graph.
+        --message=: Customized message text to include in the invitation email message to the invited member accounts.
+        --no-disable-email-notification: if set to `true`, then the invited accounts do not receive email notifications.
+    - name: delete-graph
+      description: Disables the specified behavior graph and queues it to be deleted.
+      flags:
+        --graph-arn=!: The ARN of the behavior graph to disable.
+    - name: untag-resource
+      description: Removes tags from a behavior graph.
+      flags:
+        --resource-arn=!: The ARN of the behavior graph to remove the tags from.
+        --tag-keys=!: The tag keys of the tags to remove from the behavior graph.
     - name: update-organization-configuration
       description: Updates the configuration for the Organizations integration in the current Region.
       flags:
         --auto-enable: Indicates whether to automatically enable new organization accounts as member accounts in the organization behavior graph.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --graph-arn=!: The ARN of the organization behavior graph.
         --no-auto-enable: Indicates whether to automatically enable new organization accounts as member accounts in the organization behavior graph.
+    - name: batch-get-membership-datasources
+      description: Gets information on the data source package history for an account.
+      flags:
+        --graph-arns=!: The ARN of the behavior graph.
+    - name: delete-members
+      description: Removes the specified member accounts from the behavior graph.
+      flags:
+        --account-ids=!: The list of Amazon Web Services account identifiers for the member accounts to remove from the behavior graph.
+        --graph-arn=!: The ARN of the behavior graph to remove members from.
+    - name: get-members
+      description: Returns the membership details for specified member accounts for a behavior graph.
+      flags:
+        --account-ids=!: The list of Amazon Web Services account identifiers for the member account for which to return member details.
+        --graph-arn=!: The ARN of the behavior graph for which to request the member details.
+    - name: reject-invitation
+      description: Rejects an invitation to contribute the account data to a behavior graph.
+      flags:
+        --graph-arn=!: The ARN of the behavior graph to reject the invitation to.
+    - name: describe-organization-configuration
+      description: Returns information about the configuration for the organization behavior graph.
+      flags:
+        --graph-arn=!: The ARN of the organization behavior graph.
+    - name: update-datasource-packages
+      description: Starts a data source package for the Detective behavior graph.
+      flags:
+        --datasource-packages=!: The data source package to start for the behavior graph.
+        --graph-arn=!: The ARN of the behavior graph.
+    - name: accept-invitation
+      description: Accepts an invitation for the member account to contribute data to a behavior graph.
+      flags:
+        --graph-arn=!: The ARN of the behavior graph that the member account is accepting the invitation for.
+    - name: list-members
+      description: Retrieves the list of member accounts for a behavior graph.
+      flags:
+        --graph-arn=!: The ARN of the behavior graph for which to retrieve the list of member accounts.
+        --max-results=: The maximum number of member accounts to include in the response.
+        --next-token=: For requests to retrieve the next page of member account results, the pagination token that was returned with the previous page of results.
+    - name: tag-resource
+      description: Applies tag values to a behavior graph.
+      flags:
+        --resource-arn=!: The ARN of the behavior graph to assign the tags to.
+        --tags=!: The tags to assign to the behavior graph.
+    - name: enable-organization-admin-account
+      description: Designates the Detective administrator account for the organization in the current Region.
+      flags:
+        --account-id=!: The Amazon Web Services account identifier of the account to designate as the Detective administrator account for the organization.
+    - name: list-graphs
+      description: Returns the list of behavior graphs that the calling account is an administrator account of.
+      flags:
+        --max-results=: The maximum number of graphs to return at a time.
+        --next-token=: For requests to get the next page of results, the pagination token that was returned with the previous set of results.
     - name: list-indicators
       description: Gets the indicators from an investigation.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --graph-arn=!: The Amazon Resource Name (ARN) of the behavior graph.
         --indicator-type=: For the list of indicators of compromise that are generated by Detective investigations, see [Detective investigations](https://docs.aws.amazon.com/detective/latest/userguide/detective-investigation-about.html).
         --investigation-id=!: The investigation ID of the investigation report.
@@ -173,83 +160,8 @@ commands:
                 - NEW_USER_AGENT
                 - RELATED_FINDING
                 - RELATED_FINDING_GROUP
-    - name: list-members
-      description: Retrieves the list of member accounts for a behavior graph.
+    - name: list-invitations
+      description: Retrieves the list of open and accepted behavior graph invitations for the member account.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --graph-arn=!: The ARN of the behavior graph for which to retrieve the list of member accounts.
-        --max-results=: The maximum number of member accounts to include in the response.
-        --next-token=: For requests to retrieve the next page of member account results, the pagination token that was returned with the previous page of results.
-    - name: tag-resource
-      description: Applies tag values to a behavior graph.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the behavior graph to assign the tags to.
-        --tags=!: The tags to assign to the behavior graph.
-    - name: update-datasource-packages
-      description: Starts a data source package for the Detective behavior graph.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --datasource-packages=!: The data source package to start for the behavior graph.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --graph-arn=!: The ARN of the behavior graph.
-    - name: enable-organization-admin-account
-      description: Designates the Detective administrator account for the organization in the current Region.
-      flags:
-        --account-id=!: The Amazon Web Services account identifier of the account to designate as the Detective administrator account for the organization.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-members
-      description: Returns the membership details for specified member accounts for a behavior graph.
-      flags:
-        --account-ids=!: The list of Amazon Web Services account identifiers for the member account for which to return member details.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --graph-arn=!: The ARN of the behavior graph for which to request the member details.
-    - name: update-investigation-state
-      description: Updates the state of an investigation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --graph-arn=!: The Amazon Resource Name (ARN) of the behavior graph.
-        --investigation-id=!: The investigation ID of the investigation report.
-        --state=!: The current state of the investigation.
-      completion:
-        flag:
-            state:
-                - ACTIVE
-                - ARCHIVED
-    - name: accept-invitation
-      description: Accepts an invitation for the member account to contribute data to a behavior graph.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --graph-arn=!: The ARN of the behavior graph that the member account is accepting the invitation for.
-    - name: batch-get-graph-member-datasources
-      description: Gets data source package information for the behavior graph.
-      flags:
-        --account-ids=!: The list of Amazon Web Services accounts to get data source package information on.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --graph-arn=!: The ARN of the behavior graph.
-    - name: create-members
-      description: '`CreateMembers` is used to send invitations to accounts.'
-      flags:
-        --accounts=!: The list of Amazon Web Services accounts to invite or to enable.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --disable-email-notification: if set to `true`, then the invited accounts do not receive email notifications.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --graph-arn=!: The ARN of the behavior graph.
-        --message=: Customized message text to include in the invitation email message to the invited member accounts.
-        --no-disable-email-notification: if set to `true`, then the invited accounts do not receive email notifications.
+        --max-results=: The maximum number of behavior graph invitations to return in the response.
+        --next-token=: For requests to retrieve the next page of results, the pagination token that was returned with the previous page of results.

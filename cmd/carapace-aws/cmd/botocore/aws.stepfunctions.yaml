@@ -1,135 +1,174 @@
 name: stepfunctions
 description: AWS Step Functions
 commands:
-    - name: list-tags-for-resource
-      description: List tags for a given resource.
+    - name: list-map-runs
+      description: Lists all Map Runs that were started by a given state machine execution.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) for the Step Functions state machine or activity.
-    - name: untag-resource
-      description: Remove a tag from a Step Functions resource
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) for the Step Functions state machine or activity.
-        --tag-keys=!: The list of tags to remove from the resource.
-    - name: start-execution
-      description: Starts a state machine execution.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input=: 'The string that contains the JSON input data for the execution, for example:'
-        --name=: Optional name of the execution.
-        --state-machine-arn=!: The Amazon Resource Name (ARN) of the state machine to execute.
-        --trace-header=: Passes the X-Ray trace header.
-    - name: create-activity
-      description: Creates an activity.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --encryption-configuration=: Settings to configure server-side encryption.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the activity to create.
-        --tags=: The list of tags to add to a resource.
-    - name: delete-state-machine-alias
-      description: Deletes a state machine [alias](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --state-machine-alias-arn=!: The Amazon Resource Name (ARN) of the state machine alias to delete.
-    - name: describe-execution
-      description: Provides information about a state machine execution, such as the state machine associated with the execution, the execution input and output, and relevant execution metadata.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --execution-arn=!: The Amazon Resource Name (ARN) of the execution to describe.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --included-data=: If your state machine definition is encrypted with a KMS key, callers must have `kms:Decrypt` permission to decrypt the definition.
-      completion:
-        flag:
-            included-data:
-                - ALL_DATA
-                - METADATA_ONLY
+        --execution-arn=!: The Amazon Resource Name (ARN) of the execution for which the Map Runs must be listed.
+        --max-results=: The maximum number of results that are returned per call.
+        --next-token=: If `nextToken` is returned, there are more results available.
     - name: list-state-machine-versions
       description: Lists [versions](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html) for the specified state machine Amazon Resource Name (ARN).
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The maximum number of results that are returned per call.
         --next-token=: If `nextToken` is returned, there are more results available.
         --state-machine-arn=!: The Amazon Resource Name (ARN) of the state machine.
-    - name: send-task-failure
-      description: Used by activity workers, Task states using the [callback](https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token) pattern, and optionally Task states using the [job run](https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-sync) pattern to report that the task identified by the `taskToken` failed.
+    - name: tag-resource
+      description: Add a tag to a Step Functions resource.
       flags:
-        --cause=: A more detailed explanation of the cause of the failure.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --error=: The error code of the failure.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) for the Step Functions state machine or activity.
+        --tags=!: The list of tags to add to a resource.
+    - name: delete-state-machine
+      description: Deletes a state machine.
+      flags:
+        --state-machine-arn=!: The Amazon Resource Name (ARN) of the state machine to delete.
+    - name: delete-state-machine-alias
+      description: Deletes a state machine [alias](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html).
+      flags:
+        --state-machine-alias-arn=!: The Amazon Resource Name (ARN) of the state machine alias to delete.
+    - name: get-execution-history
+      description: Returns the history of the specified execution as a list of events.
+      flags:
+        --execution-arn=!: The Amazon Resource Name (ARN) of the execution.
+        --include-execution-data: You can select whether execution data (input or output of a history event) is returned.
+        --max-results=: The maximum number of results that are returned per call.
+        --next-token=: If `nextToken` is returned, there are more results available.
+        --no-include-execution-data: You can select whether execution data (input or output of a history event) is returned.
+        --no-reverse-order: Lists events in descending order of their `timeStamp`.
+        --reverse-order: Lists events in descending order of their `timeStamp`.
+    - name: send-task-success
+      description: Used by activity workers, Task states using the [callback](https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token) pattern, and optionally Task states using the [job run](https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-sync) pattern to report that the task identified by the `taskToken` completed successfully.
+      flags:
+        --task-output=!: The JSON output of the task.
         --task-token=!: The token that represents this task.
-    - name: start-sync-execution
-      description: Starts a Synchronous Express state machine execution.
+    - name: delete-activity
+      description: Deletes an activity.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --activity-arn=!: The Amazon Resource Name (ARN) of the activity to delete.
+    - name: describe-activity
+      description: Describes an activity.
+      flags:
+        --activity-arn=!: The Amazon Resource Name (ARN) of the activity to describe.
+    - name: delete-state-machine-version
+      description: Deletes a state machine [version](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html). After you delete a version, you can't call [StartExecution]() using that version's ARN or use the version with a state machine [alias](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html).
+      flags:
+        --state-machine-version-arn=!: The Amazon Resource Name (ARN) of the state machine version to delete.
+    - name: describe-state-machine-for-execution
+      description: Provides information about a state machine's definition, its execution role ARN, and configuration.
+      flags:
+        --execution-arn=!: The Amazon Resource Name (ARN) of the execution you want state machine information for.
         --included-data=: If your state machine definition is encrypted with a KMS key, callers must have `kms:Decrypt` permission to decrypt the definition.
-        --input=: 'The string that contains the JSON input data for the execution, for example:'
-        --name=: The name of the execution.
-        --state-machine-arn=!: The Amazon Resource Name (ARN) of the state machine to execute.
-        --trace-header=: Passes the X-Ray trace header.
       completion:
         flag:
             included-data:
                 - ALL_DATA
                 - METADATA_ONLY
-    - name: stop-execution
-      description: Stops an execution.
+    - name: send-task-heartbeat
+      description: Used by activity workers and Task states using the [callback](https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token) pattern, and optionally Task states using the [job run](https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-sync) pattern to report to Step Functions that the task represented by the specified `taskToken` is still making progress.
       flags:
-        --cause=: A more detailed explanation of the cause of the failure.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --error=: The error code of the failure.
-        --execution-arn=!: The Amazon Resource Name (ARN) of the execution to stop.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --task-token=!: The token that represents this task.
+    - name: create-activity
+      description: Creates an activity.
+      flags:
+        --encryption-configuration=: Settings to configure server-side encryption.
+        --name=!: The name of the activity to create.
+        --tags=: The list of tags to add to a resource.
+    - name: create-state-machine
+      description: Creates a state machine.
+      flags:
+        --definition=!: The Amazon States Language definition of the state machine.
+        --encryption-configuration=: Settings to configure server-side encryption.
+        --logging-configuration=: Defines what execution history events are logged and where they are logged.
+        --name=!: The name of the state machine.
+        --no-publish: Set to `true` to publish the first version of the state machine during creation.
+        --publish: Set to `true` to publish the first version of the state machine during creation.
+        --role-arn=!: The Amazon Resource Name (ARN) of the IAM role to use for this state machine.
+        --tags=: Tags to be added when creating a state machine.
+        --tracing-configuration=: Selects whether X-Ray tracing is enabled.
+        --type=: Determines whether a Standard or Express state machine is created.
+        --version-description=: Sets description about the state machine version.
+      completion:
+        flag:
+            type:
+                - STANDARD
+                - EXPRESS
+    - name: describe-map-run
+      description: Provides information about a Map Run's configuration, progress, and results.
+      flags:
+        --map-run-arn=!: The Amazon Resource Name (ARN) that identifies a Map Run.
+    - name: list-state-machine-aliases
+      description: Lists [aliases](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html) for a specified state machine ARN.
+      flags:
+        --max-results=: The maximum number of results that are returned per call.
+        --next-token=: If `nextToken` is returned, there are more results available.
+        --state-machine-arn=!: The Amazon Resource Name (ARN) of the state machine for which you want to list aliases.
+    - name: publish-state-machine-version
+      description: Creates a [version](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html) from the current revision of a state machine.
+      flags:
+        --description=: An optional description of the state machine version.
+        --revision-id=: Only publish the state machine version if the current state machine's revision ID matches the specified ID.
+        --state-machine-arn=!: The Amazon Resource Name (ARN) of the state machine.
+    - name: validate-state-machine-definition
+      description: Validates the syntax of a state machine definition specified in [Amazon States Language](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html) (ASL), a JSON-based, structured language.
+      flags:
+        --definition=!: The Amazon States Language definition of the state machine.
+        --max-results=: The maximum number of diagnostics that are returned per call.
+        --severity=: Minimum level of diagnostics to return.
+        --type=: The target type of state machine for this definition.
+      completion:
+        flag:
+            severity:
+                - ERROR
+                - WARNING
+            type:
+                - STANDARD
+                - EXPRESS
     - name: get-activity-task
       description: Used by workers to retrieve a task (with the specified activity ARN) which has been scheduled for execution by a running state machine.
       flags:
         --activity-arn=!: The Amazon Resource Name (ARN) of the activity to retrieve tasks from (assigned when you create the task using [CreateActivity]().)
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --worker-name=: You can provide an arbitrary name in order to identify the worker that the task is assigned to.
+    - name: list-executions
+      description: Lists all executions of a state machine or a Map Run.
+      flags:
+        --map-run-arn=: The Amazon Resource Name (ARN) of the Map Run that started the child workflow executions.
+        --max-results=: The maximum number of results that are returned per call.
+        --next-token=: If `nextToken` is returned, there are more results available.
+        --redrive-filter=: Sets a filter to list executions based on whether or not they have been redriven.
+        --state-machine-arn=: The Amazon Resource Name (ARN) of the state machine whose executions is listed.
+        --status-filter=: If specified, only list the executions whose current execution status matches the given filter.
+      completion:
+        flag:
+            redrive-filter:
+                - REDRIVEN
+                - NOT_REDRIVEN
+            status-filter:
+                - RUNNING
+                - SUCCEEDED
+                - FAILED
+                - TIMED_OUT
+                - ABORTED
+                - PENDING_REDRIVE
+    - name: list-tags-for-resource
+      description: List tags for a given resource.
+      flags:
+        --resource-arn=!: The Amazon Resource Name (ARN) for the Step Functions state machine or activity.
     - name: redrive-execution
       description: Restarts unsuccessful executions of Standard workflows that didn't complete successfully in the last 14 days.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
         --execution-arn=!: The Amazon Resource Name (ARN) of the execution to be redriven.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: tag-resource
-      description: Add a tag to a Step Functions resource.
+    - name: send-task-failure
+      description: Used by activity workers, Task states using the [callback](https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token) pattern, and optionally Task states using the [job run](https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-sync) pattern to report that the task identified by the `taskToken` failed.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) for the Step Functions state machine or activity.
-        --tags=!: The list of tags to add to a resource.
+        --cause=: A more detailed explanation of the cause of the failure.
+        --error=: The error code of the failure.
+        --task-token=!: The token that represents this task.
     - name: test-state
       description: Accepts the definition of a single state and executes it.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --context=: A JSON string representing a valid Context object for the state under test.
         --definition=!: The [Amazon States Language](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html) (ASL) definition of the state or state machine.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --input=: A string that contains the JSON input data for the state.
         --inspection-level=: Determines the values to return when a state is tested.
         --mock=: Defines a mocked result or error for the state under test.
@@ -148,203 +187,30 @@ commands:
     - name: update-map-run
       description: Updates an in-progress Map Run's configuration to include changes to the settings that control maximum concurrency and Map Run failure.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --map-run-arn=!: The Amazon Resource Name (ARN) of a Map Run.
         --max-concurrency=: The maximum number of child workflow executions that can be specified to run in parallel for the Map Run at the same time.
         --tolerated-failure-count=: The maximum number of failed items before the Map Run fails.
         --tolerated-failure-percentage=: The maximum percentage of failed items before the Map Run fails.
-    - name: describe-state-machine
-      description: Provides information about a state machine's definition, its IAM role Amazon Resource Name (ARN), and configuration.
+    - name: describe-execution
+      description: Provides information about a state machine execution, such as the state machine associated with the execution, the execution input and output, and relevant execution metadata.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --included-data=: If your state machine definition is encrypted with a KMS key, callers must have `kms:Decrypt` permission to decrypt the definition.
-        --state-machine-arn=!: The Amazon Resource Name (ARN) of the state machine for which you want the information.
-      completion:
-        flag:
-            included-data:
-                - ALL_DATA
-                - METADATA_ONLY
-    - name: describe-map-run
-      description: Provides information about a Map Run's configuration, progress, and results.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --map-run-arn=!: The Amazon Resource Name (ARN) that identifies a Map Run.
-    - name: list-executions
-      description: Lists all executions of a state machine or a Map Run.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --map-run-arn=: The Amazon Resource Name (ARN) of the Map Run that started the child workflow executions.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that are returned per call.
-        --next-token=: If `nextToken` is returned, there are more results available.
-        --page-size=: The size of each page to get in the AWS service call.
-        --redrive-filter=: Sets a filter to list executions based on whether or not they have been redriven.
-        --starting-token=: A token to specify where to start paginating.
-        --state-machine-arn=: The Amazon Resource Name (ARN) of the state machine whose executions is listed.
-        --status-filter=: If specified, only list the executions whose current execution status matches the given filter.
-      completion:
-        flag:
-            redrive-filter:
-                - REDRIVEN
-                - NOT_REDRIVEN
-            status-filter:
-                - RUNNING
-                - SUCCEEDED
-                - FAILED
-                - TIMED_OUT
-                - ABORTED
-                - PENDING_REDRIVE
-    - name: list-map-runs
-      description: Lists all Map Runs that were started by a given state machine execution.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --execution-arn=!: The Amazon Resource Name (ARN) of the execution for which the Map Runs must be listed.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that are returned per call.
-        --next-token=: If `nextToken` is returned, there are more results available.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: send-task-heartbeat
-      description: Used by activity workers and Task states using the [callback](https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token) pattern, and optionally Task states using the [job run](https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-sync) pattern to report to Step Functions that the task represented by the specified `taskToken` is still making progress.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --task-token=!: The token that represents this task.
-    - name: create-state-machine
-      description: Creates a state machine.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --definition=!: The Amazon States Language definition of the state machine.
-        --encryption-configuration=: Settings to configure server-side encryption.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --logging-configuration=: Defines what execution history events are logged and where they are logged.
-        --name=!: The name of the state machine.
-        --no-publish: Set to `true` to publish the first version of the state machine during creation.
-        --publish: Set to `true` to publish the first version of the state machine during creation.
-        --role-arn=!: The Amazon Resource Name (ARN) of the IAM role to use for this state machine.
-        --tags=: Tags to be added when creating a state machine.
-        --tracing-configuration=: Selects whether X-Ray tracing is enabled.
-        --type=: Determines whether a Standard or Express state machine is created.
-        --version-description=: Sets description about the state machine version.
-      completion:
-        flag:
-            type:
-                - STANDARD
-                - EXPRESS
-    - name: describe-state-machine-alias
-      description: Returns details about a state machine [alias](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --state-machine-alias-arn=!: The Amazon Resource Name (ARN) of the state machine alias.
-    - name: describe-state-machine-for-execution
-      description: Provides information about a state machine's definition, its execution role ARN, and configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --execution-arn=!: The Amazon Resource Name (ARN) of the execution you want state machine information for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --execution-arn=!: The Amazon Resource Name (ARN) of the execution to describe.
         --included-data=: If your state machine definition is encrypted with a KMS key, callers must have `kms:Decrypt` permission to decrypt the definition.
       completion:
         flag:
             included-data:
                 - ALL_DATA
                 - METADATA_ONLY
-    - name: delete-activity
-      description: Deletes an activity.
+    - name: untag-resource
+      description: Remove a tag from a Step Functions resource
       flags:
-        --activity-arn=!: The Amazon Resource Name (ARN) of the activity to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-state-machine
-      description: Deletes a state machine.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --state-machine-arn=!: The Amazon Resource Name (ARN) of the state machine to delete.
-    - name: delete-state-machine-version
-      description: Deletes a state machine [version](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html). After you delete a version, you can't call [StartExecution]() using that version's ARN or use the version with a state machine [alias](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --state-machine-version-arn=!: The Amazon Resource Name (ARN) of the state machine version to delete.
-    - name: send-task-success
-      description: Used by activity workers, Task states using the [callback](https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token) pattern, and optionally Task states using the [job run](https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-sync) pattern to report that the task identified by the `taskToken` completed successfully.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --task-output=!: The JSON output of the task.
-        --task-token=!: The token that represents this task.
-    - name: create-state-machine-alias
-      description: Creates an [alias](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html) for a state machine that points to one or two [versions](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html) of the same state machine.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description for the state machine alias.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the state machine alias.
-        --routing-configuration=!: The routing configuration of a state machine alias.
-    - name: get-execution-history
-      description: Returns the history of the specified execution as a list of events.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --execution-arn=!: The Amazon Resource Name (ARN) of the execution.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --include-execution-data: You can select whether execution data (input or output of a history event) is returned.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that are returned per call.
-        --next-token=: If `nextToken` is returned, there are more results available.
-        --no-include-execution-data: You can select whether execution data (input or output of a history event) is returned.
-        --no-reverse-order: Lists events in descending order of their `timeStamp`.
-        --page-size=: The size of each page to get in the AWS service call.
-        --reverse-order: Lists events in descending order of their `timeStamp`.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-activities
-      description: Lists the existing activities.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that are returned per call.
-        --next-token=: If `nextToken` is returned, there are more results available.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-state-machine-aliases
-      description: Lists [aliases](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html) for a specified state machine ARN.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results that are returned per call.
-        --next-token=: If `nextToken` is returned, there are more results available.
-        --state-machine-arn=!: The Amazon Resource Name (ARN) of the state machine for which you want to list aliases.
+        --resource-arn=!: The Amazon Resource Name (ARN) for the Step Functions state machine or activity.
+        --tag-keys=!: The list of tags to remove from the resource.
     - name: update-state-machine
       description: Updates an existing state machine by modifying its `definition`, `roleArn`, `loggingConfiguration`, or `EncryptionConfiguration`.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --definition=: The Amazon States Language definition of the state machine.
         --encryption-configuration=: Settings to configure server-side encryption.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --logging-configuration=: Use the `LoggingConfiguration` data type to set CloudWatch Logs options.
         --no-publish: Specifies whether the state machine version is published.
         --publish: Specifies whether the state machine version is published.
@@ -355,54 +221,62 @@ commands:
     - name: update-state-machine-alias
       description: Updates the configuration of an existing state machine [alias](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html) by modifying its `description` or `routingConfiguration`.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: A description of the state machine alias.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --routing-configuration=: The routing configuration of the state machine alias.
         --state-machine-alias-arn=!: The Amazon Resource Name (ARN) of the state machine alias.
-    - name: validate-state-machine-definition
-      description: Validates the syntax of a state machine definition specified in [Amazon States Language](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html) (ASL), a JSON-based, structured language.
+    - name: create-state-machine-alias
+      description: Creates an [alias](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html) for a state machine that points to one or two [versions](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html) of the same state machine.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --definition=!: The Amazon States Language definition of the state machine.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of diagnostics that are returned per call.
-        --severity=: Minimum level of diagnostics to return.
-        --type=: The target type of state machine for this definition.
+        --description=: A description for the state machine alias.
+        --name=!: The name of the state machine alias.
+        --routing-configuration=!: The routing configuration of a state machine alias.
+    - name: describe-state-machine
+      description: Provides information about a state machine's definition, its IAM role Amazon Resource Name (ARN), and configuration.
+      flags:
+        --included-data=: If your state machine definition is encrypted with a KMS key, callers must have `kms:Decrypt` permission to decrypt the definition.
+        --state-machine-arn=!: The Amazon Resource Name (ARN) of the state machine for which you want the information.
       completion:
         flag:
-            severity:
-                - ERROR
-                - WARNING
-            type:
-                - STANDARD
-                - EXPRESS
-    - name: describe-activity
-      description: Describes an activity.
+            included-data:
+                - ALL_DATA
+                - METADATA_ONLY
+    - name: list-activities
+      description: Lists the existing activities.
       flags:
-        --activity-arn=!: The Amazon Resource Name (ARN) of the activity to describe.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results that are returned per call.
+        --next-token=: If `nextToken` is returned, there are more results available.
     - name: list-state-machines
       description: Lists the existing state machines.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results that are returned per call.
         --next-token=: If `nextToken` is returned, there are more results available.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: publish-state-machine-version
-      description: Creates a [version](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html) from the current revision of a state machine.
+    - name: start-sync-execution
+      description: Starts a Synchronous Express state machine execution.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: An optional description of the state machine version.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --revision-id=: Only publish the state machine version if the current state machine's revision ID matches the specified ID.
-        --state-machine-arn=!: The Amazon Resource Name (ARN) of the state machine.
+        --included-data=: If your state machine definition is encrypted with a KMS key, callers must have `kms:Decrypt` permission to decrypt the definition.
+        --input=: 'The string that contains the JSON input data for the execution, for example:'
+        --name=: The name of the execution.
+        --state-machine-arn=!: The Amazon Resource Name (ARN) of the state machine to execute.
+        --trace-header=: Passes the X-Ray trace header.
+      completion:
+        flag:
+            included-data:
+                - ALL_DATA
+                - METADATA_ONLY
+    - name: stop-execution
+      description: Stops an execution.
+      flags:
+        --cause=: A more detailed explanation of the cause of the failure.
+        --error=: The error code of the failure.
+        --execution-arn=!: The Amazon Resource Name (ARN) of the execution to stop.
+    - name: start-execution
+      description: Starts a state machine execution.
+      flags:
+        --input=: 'The string that contains the JSON input data for the execution, for example:'
+        --name=: Optional name of the execution.
+        --state-machine-arn=!: The Amazon Resource Name (ARN) of the state machine to execute.
+        --trace-header=: Passes the X-Ray trace header.
+    - name: describe-state-machine-alias
+      description: Returns details about a state machine [alias](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html).
+      flags:
+        --state-machine-alias-arn=!: The Amazon Resource Name (ARN) of the state machine alias.

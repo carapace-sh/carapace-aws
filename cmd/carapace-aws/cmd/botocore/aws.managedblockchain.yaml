@@ -1,43 +1,84 @@
 name: managedblockchain
 description: Amazon Managed Blockchain
 commands:
-    - name: create-member
-      description: Creates a member within a Managed Blockchain network.
+    - name: list-tags-for-resource
+      description: Returns a list of tags for the specified resource.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=!: A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --invitation-id=!: The unique identifier of the invitation that is sent to the member to join the network.
-        --member-configuration=!: Member configuration parameters.
-        --network-id=!: The unique identifier of the network in which the member is created.
-    - name: list-accessors
-      description: Returns a list of the accessors and their properties.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+    - name: reject-invitation
+      description: Rejects an invitation to join a network.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of accessors to list.
-        --network-type=: The blockchain network that the `Accessor` token is created for.
-        --next-token=: The pagination token that indicates the next set of results to retrieve.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+        --invitation-id=!: The unique identifier of the invitation to reject.
+    - name: create-network
+      description: Creates a new blockchain network using Amazon Managed Blockchain.
+      flags:
+        --client-request-token=!: This is a unique, case-sensitive identifier that you provide to ensure the idempotency of the operation.
+        --description=: An optional description for the network.
+        --framework-configuration=: Configuration properties of the blockchain framework relevant to the network configuration.
+        --framework-version=!: The version of the blockchain framework that the network uses.
+        --framework=!: The blockchain framework that the network uses.
+        --member-configuration=!: Configuration properties for the first member within the network.
+        --name=!: The name of the network.
+        --tags=: Tags to assign to the network.
+        --voting-policy=!: The voting rules used by the network to determine if a proposal is approved.
       completion:
         flag:
-            network-type:
-                - ETHEREUM_GOERLI
-                - ETHEREUM_MAINNET
-                - ETHEREUM_MAINNET_AND_GOERLI
-                - POLYGON_MAINNET
-                - POLYGON_MUMBAI
+            framework:
+                - HYPERLEDGER_FABRIC
+                - ETHEREUM
+    - name: create-proposal
+      description: Creates a proposal for a change to the network that other members of the network can vote on, for example, a proposal to add a new member to the network.
+      flags:
+        --actions=!: The type of actions proposed, such as inviting a member or removing a member.
+        --client-request-token=!: A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation.
+        --description=: A description for the proposal that is visible to voting members, for example, "Proposal to add Example Corp. as member."
+        --member-id=!: The unique identifier of the member that is creating the proposal.
+        --network-id=!: The unique identifier of the network for which the proposal is made.
+        --tags=: Tags to assign to the proposal.
+    - name: delete-accessor
+      description: Deletes an accessor that your Amazon Web Services account owns.
+      flags:
+        --accessor-id=!: The unique identifier of the accessor.
+    - name: get-accessor
+      description: Returns detailed information about an accessor.
+      flags:
+        --accessor-id=!: The unique identifier of the accessor.
+    - name: get-network
+      description: Returns detailed information about a network.
+      flags:
+        --network-id=!: The unique identifier of the network to get information about.
+    - name: get-node
+      description: Returns detailed information about a node.
+      flags:
+        --member-id=: The unique identifier of the member that owns the node.
+        --network-id=!: The unique identifier of the network that the node is on.
+        --node-id=!: The unique identifier of the node.
+    - name: untag-resource
+      description: Removes the specified tags from the Amazon Managed Blockchain resource.
+      flags:
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+        --tag-keys=!: The tag keys.
+    - name: update-member
+      description: Updates a member configuration with new parameters.
+      flags:
+        --log-publishing-configuration=: Configuration properties for publishing to Amazon CloudWatch Logs.
+        --member-id=!: The unique identifier of the member.
+        --network-id=!: The unique identifier of the Managed Blockchain network to which the member belongs.
+    - name: delete-member
+      description: Deletes a member.
+      flags:
+        --member-id=!: The unique identifier of the member to remove.
+        --network-id=!: The unique identifier of the network from which the member is removed.
+    - name: delete-node
+      description: Deletes a node that your Amazon Web Services account owns.
+      flags:
+        --member-id=: The unique identifier of the member that owns this node.
+        --network-id=!: The unique identifier of the network that the node is on.
+        --node-id=!: The unique identifier of the node.
     - name: list-networks
       description: Returns information about the networks in which the current Amazon Web Services account participates.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --framework=: An optional framework specifier.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The maximum number of networks to list.
         --name=: The name of the network.
         --next-token=: The pagination token that indicates the next set of results to retrieve.
@@ -53,172 +94,9 @@ commands:
                 - CREATE_FAILED
                 - DELETING
                 - DELETED
-    - name: update-member
-      description: Updates a member configuration with new parameters.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --log-publishing-configuration=: Configuration properties for publishing to Amazon CloudWatch Logs.
-        --member-id=!: The unique identifier of the member.
-        --network-id=!: The unique identifier of the Managed Blockchain network to which the member belongs.
-    - name: update-node
-      description: Updates a node configuration with new parameters.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --log-publishing-configuration=: Configuration properties for publishing to Amazon CloudWatch Logs.
-        --member-id=: The unique identifier of the member that owns the node.
-        --network-id=!: The unique identifier of the network that the node is on.
-        --node-id=!: The unique identifier of the node.
-    - name: vote-on-proposal
-      description: Casts a vote for a specified `ProposalId` on behalf of a member.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --network-id=!: The unique identifier of the network.
-        --proposal-id=!: The unique identifier of the proposal.
-        --vote=!: The value of the vote.
-        --voter-member-id=!: The unique identifier of the member casting the vote.
-      completion:
-        flag:
-            vote:
-                - "YES"
-                - "NO"
-    - name: get-proposal
-      description: Returns detailed information about a proposal.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --network-id=!: The unique identifier of the network for which the proposal is made.
-        --proposal-id=!: The unique identifier of the proposal.
-    - name: create-network
-      description: Creates a new blockchain network using Amazon Managed Blockchain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=!: This is a unique, case-sensitive identifier that you provide to ensure the idempotency of the operation.
-        --description=: An optional description for the network.
-        --framework-configuration=: Configuration properties of the blockchain framework relevant to the network configuration.
-        --framework-version=!: The version of the blockchain framework that the network uses.
-        --framework=!: The blockchain framework that the network uses.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --member-configuration=!: Configuration properties for the first member within the network.
-        --name=!: The name of the network.
-        --tags=: Tags to assign to the network.
-        --voting-policy=!: The voting rules used by the network to determine if a proposal is approved.
-      completion:
-        flag:
-            framework:
-                - HYPERLEDGER_FABRIC
-                - ETHEREUM
-    - name: create-proposal
-      description: Creates a proposal for a change to the network that other members of the network can vote on, for example, a proposal to add a new member to the network.
-      flags:
-        --actions=!: The type of actions proposed, such as inviting a member or removing a member.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=!: A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation.
-        --description=: A description for the proposal that is visible to voting members, for example, "Proposal to add Example Corp. as member."
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --member-id=!: The unique identifier of the member that is creating the proposal.
-        --network-id=!: The unique identifier of the network for which the proposal is made.
-        --tags=: Tags to assign to the proposal.
-    - name: delete-accessor
-      description: Deletes an accessor that your Amazon Web Services account owns.
-      flags:
-        --accessor-id=!: The unique identifier of the accessor.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-accessor
-      description: Returns detailed information about an accessor.
-      flags:
-        --accessor-id=!: The unique identifier of the accessor.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-node
-      description: Returns detailed information about a node.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --member-id=: The unique identifier of the member that owns the node.
-        --network-id=!: The unique identifier of the network that the node is on.
-        --node-id=!: The unique identifier of the node.
-    - name: list-members
-      description: Returns a list of the members in a network and properties of their configurations.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --is-owned: An optional Boolean value.
-        --max-results=: The maximum number of members to return in the request.
-        --name=: The optional name of the member to list.
-        --network-id=!: The unique identifier of the network for which to list members.
-        --next-token=: The pagination token that indicates the next set of results to retrieve.
-        --no-is-owned: An optional Boolean value.
-        --status=: An optional status specifier.
-      completion:
-        flag:
-            status:
-                - CREATING
-                - AVAILABLE
-                - CREATE_FAILED
-                - UPDATING
-                - DELETING
-                - DELETED
-                - INACCESSIBLE_ENCRYPTION_KEY
-    - name: reject-invitation
-      description: Rejects an invitation to join a network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --invitation-id=!: The unique identifier of the invitation to reject.
-    - name: delete-member
-      description: Deletes a member.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --member-id=!: The unique identifier of the member to remove.
-        --network-id=!: The unique identifier of the network from which the member is removed.
-    - name: delete-node
-      description: Deletes a node that your Amazon Web Services account owns.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --member-id=: The unique identifier of the member that owns this node.
-        --network-id=!: The unique identifier of the network that the node is on.
-        --node-id=!: The unique identifier of the node.
-    - name: get-member
-      description: Returns detailed information about a member.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --member-id=!: The unique identifier of the member.
-        --network-id=!: The unique identifier of the network to which the member belongs.
-    - name: list-invitations
-      description: Returns a list of all invitations for the current Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of invitations to return.
-        --next-token=: The pagination token that indicates the next set of results to retrieve.
     - name: list-nodes
       description: Returns information about the nodes within a network.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The maximum number of nodes to list.
         --member-id=: The unique identifier of the member who owns the nodes to list.
         --network-id=!: The unique identifier of the network for which to list nodes.
@@ -239,37 +117,58 @@ commands:
     - name: list-proposal-votes
       description: Returns the list of votes for a specified proposal, including the value of each vote and the unique identifier of the member that cast the vote.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The maximum number of votes to return.
         --network-id=!: The unique identifier of the network.
         --next-token=: The pagination token that indicates the next set of results to retrieve.
         --proposal-id=!: The unique identifier of the proposal.
+    - name: tag-resource
+      description: Adds or overwrites the specified tags for the specified Amazon Managed Blockchain resource.
+      flags:
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+        --tags=!: The tags to assign to the specified resource.
+    - name: vote-on-proposal
+      description: Casts a vote for a specified `ProposalId` on behalf of a member.
+      flags:
+        --network-id=!: The unique identifier of the network.
+        --proposal-id=!: The unique identifier of the proposal.
+        --vote=!: The value of the vote.
+        --voter-member-id=!: The unique identifier of the member casting the vote.
+      completion:
+        flag:
+            vote:
+                - "YES"
+                - "NO"
+    - name: create-node
+      description: Creates a node on the specified blockchain network.
+      flags:
+        --client-request-token=!: A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation.
+        --member-id=: The unique identifier of the member that owns this node.
+        --network-id=!: The unique identifier of the network for the node.
+        --node-configuration=!: The properties of a node configuration.
+        --tags=: Tags to assign to the node.
+    - name: list-invitations
+      description: Returns a list of all invitations for the current Amazon Web Services account.
+      flags:
+        --max-results=: The maximum number of invitations to return.
+        --next-token=: The pagination token that indicates the next set of results to retrieve.
     - name: list-proposals
       description: Returns a list of proposals for the network.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The maximum number of proposals to return.
         --network-id=!: The unique identifier of the network.
         --next-token=: The pagination token that indicates the next set of results to retrieve.
-    - name: list-tags-for-resource
-      description: Returns a list of tags for the specified resource.
+    - name: update-node
+      description: Updates a node configuration with new parameters.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+        --log-publishing-configuration=: Configuration properties for publishing to Amazon CloudWatch Logs.
+        --member-id=: The unique identifier of the member that owns the node.
+        --network-id=!: The unique identifier of the network that the node is on.
+        --node-id=!: The unique identifier of the node.
     - name: create-accessor
       description: Creates a new accessor for use with Amazon Managed Blockchain service that supports token based access.
       flags:
         --accessor-type=!: The type of accessor.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-request-token=!: This is a unique, case-sensitive identifier that you provide to ensure the idempotency of the operation.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --network-type=: The blockchain network that the `Accessor` token is created for.
         --tags=: Tags to assign to the Accessor.
       completion:
@@ -282,37 +181,54 @@ commands:
                 - ETHEREUM_MAINNET_AND_GOERLI
                 - POLYGON_MAINNET
                 - POLYGON_MUMBAI
-    - name: create-node
-      description: Creates a node on the specified blockchain network.
+    - name: create-member
+      description: Creates a member within a Managed Blockchain network.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-request-token=!: A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --member-id=: The unique identifier of the member that owns this node.
-        --network-id=!: The unique identifier of the network for the node.
-        --node-configuration=!: The properties of a node configuration.
-        --tags=: Tags to assign to the node.
-    - name: get-network
-      description: Returns detailed information about a network.
+        --invitation-id=!: The unique identifier of the invitation that is sent to the member to join the network.
+        --member-configuration=!: Member configuration parameters.
+        --network-id=!: The unique identifier of the network in which the member is created.
+    - name: get-member
+      description: Returns detailed information about a member.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --network-id=!: The unique identifier of the network to get information about.
-    - name: tag-resource
-      description: Adds or overwrites the specified tags for the specified Amazon Managed Blockchain resource.
+        --member-id=!: The unique identifier of the member.
+        --network-id=!: The unique identifier of the network to which the member belongs.
+    - name: get-proposal
+      description: Returns detailed information about a proposal.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-        --tags=!: The tags to assign to the specified resource.
-    - name: untag-resource
-      description: Removes the specified tags from the Amazon Managed Blockchain resource.
+        --network-id=!: The unique identifier of the network for which the proposal is made.
+        --proposal-id=!: The unique identifier of the proposal.
+    - name: list-accessors
+      description: Returns a list of the accessors and their properties.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-        --tag-keys=!: The tag keys.
+        --max-results=: The maximum number of accessors to list.
+        --network-type=: The blockchain network that the `Accessor` token is created for.
+        --next-token=: The pagination token that indicates the next set of results to retrieve.
+      completion:
+        flag:
+            network-type:
+                - ETHEREUM_GOERLI
+                - ETHEREUM_MAINNET
+                - ETHEREUM_MAINNET_AND_GOERLI
+                - POLYGON_MAINNET
+                - POLYGON_MUMBAI
+    - name: list-members
+      description: Returns a list of the members in a network and properties of their configurations.
+      flags:
+        --is-owned: An optional Boolean value.
+        --max-results=: The maximum number of members to return in the request.
+        --name=: The optional name of the member to list.
+        --network-id=!: The unique identifier of the network for which to list members.
+        --next-token=: The pagination token that indicates the next set of results to retrieve.
+        --no-is-owned: An optional Boolean value.
+        --status=: An optional status specifier.
+      completion:
+        flag:
+            status:
+                - CREATING
+                - AVAILABLE
+                - CREATE_FAILED
+                - UPDATING
+                - DELETING
+                - DELETED
+                - INACCESSIBLE_ENCRYPTION_KEY

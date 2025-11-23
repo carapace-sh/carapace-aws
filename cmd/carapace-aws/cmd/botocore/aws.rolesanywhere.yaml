@@ -1,240 +1,101 @@
 name: rolesanywhere
 description: IAM Roles Anywhere
 commands:
-    - name: disable-profile
-      description: Disables a profile.
+    - name: delete-crl
+      description: Deletes a certificate revocation list (CRL).
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --profile-id=!: The unique identifier of the profile.
-    - name: list-crls
-      description: Lists all certificate revocation lists (CRL) in the authenticated account and Amazon Web Services Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: A token that indicates where the output should continue from, if a previous request did not show all results.
-        --page-size=: The number of resources in the paginated list.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-profile
-      description: Updates a *profile*, a list of the roles that IAM Roles Anywhere service is trusted to assume.
-      flags:
-        --accept-role-session-name: Used to determine if a custom role session name will be accepted in a temporary credential request.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --duration-seconds=: Used to determine how long sessions vended using this profile are valid for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --managed-policy-arns=: A list of managed policy ARNs that apply to the vended session credentials.
-        --name=: The name of the profile.
-        --no-accept-role-session-name: Used to determine if a custom role session name will be accepted in a temporary credential request.
-        --profile-id=!: The unique identifier of the profile.
-        --role-arns=: A list of IAM roles that this profile can assume in a temporary credential request.
-        --session-policy=: A session policy that applies to the trust boundary of the vended session credentials.
-    - name: enable-crl
-      description: Enables a certificate revocation list (CRL).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --crl-id=!: The unique identifier of the certificate revocation list (CRL).
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-trust-anchor
-      description: Gets a trust anchor.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --trust-anchor-id=!: The unique identifier of the trust anchor.
-    - name: list-trust-anchors
-      description: Lists the trust anchors in the authenticated account and Amazon Web Services Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: A token that indicates where the output should continue from, if a previous request did not show all results.
-        --page-size=: The number of resources in the paginated list.
-        --starting-token=: A token to specify where to start paginating.
-    - name: put-notification-settings
-      description: Attaches a list of *notification settings* to a trust anchor.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --notification-settings=!: A list of notification settings to be associated to the trust anchor.
-        --trust-anchor-id=!: The unique identifier of the trust anchor.
-    - name: enable-trust-anchor
-      description: Enables a trust anchor.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --trust-anchor-id=!: The unique identifier of the trust anchor.
-    - name: get-crl
-      description: Gets a certificate revocation list (CRL).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --crl-id=!: The unique identifier of the certificate revocation list (CRL).
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-profile
-      description: Gets a profile.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --profile-id=!: The unique identifier of the profile.
-    - name: delete-profile
-      description: Deletes a profile.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --profile-id=!: The unique identifier of the profile.
     - name: disable-trust-anchor
       description: Disables a trust anchor.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --trust-anchor-id=!: The unique identifier of the trust anchor.
+    - name: list-crls
+      description: Lists all certificate revocation lists (CRL) in the authenticated account and Amazon Web Services Region.
+      flags:
+        --next-token=: A token that indicates where the output should continue from, if a previous request did not show all results.
+        --page-size=: The number of resources in the paginated list.
     - name: create-trust-anchor
       description: Creates a trust anchor to establish trust between IAM Roles Anywhere and your certificate authority (CA).
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --enabled: Specifies whether the trust anchor is enabled.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the trust anchor.
         --no-enabled: Specifies whether the trust anchor is enabled.
         --notification-settings=: A list of notification settings to be associated to the trust anchor.
         --source=!: The trust anchor type and its related certificate data.
         --tags=: The tags to attach to the trust anchor.
-    - name: delete-crl
-      description: Deletes a certificate revocation list (CRL).
+    - name: delete-trust-anchor
+      description: Deletes a trust anchor.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --crl-id=!: The unique identifier of the certificate revocation list (CRL).
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --trust-anchor-id=!: The unique identifier of the trust anchor.
     - name: enable-profile
       description: Enables temporary credential requests for a profile.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --profile-id=!: The unique identifier of the profile.
-    - name: get-subject
-      description: Gets a *subject*, which associates a certificate identity with authentication attempts.
+    - name: update-trust-anchor
+      description: Updates a trust anchor.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --subject-id=!: The unique identifier of the subject.
-    - name: list-tags-for-resource
-      description: Lists the tags attached to the resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource.
-    - name: put-attribute-mapping
-      description: Put an entry in the attribute mapping rules that will be enforced by a given profile.
+        --name=: The name of the trust anchor.
+        --source=: The trust anchor type and its related certificate data.
+        --trust-anchor-id=!: The unique identifier of the trust anchor.
+    - name: delete-attribute-mapping
+      description: Delete an entry from the attribute mapping rules enforced by a given profile.
       flags:
         --certificate-field=!: Fields (x509Subject, x509Issuer and x509SAN) within X.509 certificates.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mapping-rules=!: A list of mapping entries for every supported specifier or sub-field.
         --profile-id=!: The unique identifier of the profile.
+        --specifiers=: A list of specifiers of a certificate field; for example, CN, OU, UID from a Subject.
       completion:
         flag:
             certificate-field:
                 - x509Subject
                 - x509Issuer
                 - x509SAN
+    - name: enable-crl
+      description: Enables a certificate revocation list (CRL).
+      flags:
+        --crl-id=!: The unique identifier of the certificate revocation list (CRL).
+    - name: get-subject
+      description: Gets a *subject*, which associates a certificate identity with authentication attempts.
+      flags:
+        --subject-id=!: The unique identifier of the subject.
+    - name: list-trust-anchors
+      description: Lists the trust anchors in the authenticated account and Amazon Web Services Region.
+      flags:
+        --next-token=: A token that indicates where the output should continue from, if a previous request did not show all results.
+        --page-size=: The number of resources in the paginated list.
+    - name: update-profile
+      description: Updates a *profile*, a list of the roles that IAM Roles Anywhere service is trusted to assume.
+      flags:
+        --accept-role-session-name: Used to determine if a custom role session name will be accepted in a temporary credential request.
+        --duration-seconds=: Used to determine how long sessions vended using this profile are valid for.
+        --managed-policy-arns=: A list of managed policy ARNs that apply to the vended session credentials.
+        --name=: The name of the profile.
+        --no-accept-role-session-name: Used to determine if a custom role session name will be accepted in a temporary credential request.
+        --profile-id=!: The unique identifier of the profile.
+        --role-arns=: A list of IAM roles that this profile can assume in a temporary credential request.
+        --session-policy=: A session policy that applies to the trust boundary of the vended session credentials.
+    - name: delete-profile
+      description: Deletes a profile.
+      flags:
+        --profile-id=!: The unique identifier of the profile.
+    - name: disable-profile
+      description: Disables a profile.
+      flags:
+        --profile-id=!: The unique identifier of the profile.
+    - name: list-tags-for-resource
+      description: Lists the tags attached to the resource.
+      flags:
+        --resource-arn=!: The ARN of the resource.
     - name: untag-resource
       description: Removes tags from the resource.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The ARN of the resource.
         --tag-keys=!: A list of keys.
-    - name: disable-crl
-      description: Disables a certificate revocation list (CRL).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --crl-id=!: The unique identifier of the certificate revocation list (CRL).
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: import-crl
-      description: Imports the certificate revocation list (CRL).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --crl-data=!: The x509 v3 specified certificate revocation list (CRL).
-        --enabled: Specifies whether the certificate revocation list (CRL) is enabled.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the certificate revocation list (CRL).
-        --no-enabled: Specifies whether the certificate revocation list (CRL) is enabled.
-        --tags=: A list of tags to attach to the certificate revocation list (CRL).
-        --trust-anchor-arn=!: The ARN of the TrustAnchor the certificate revocation list (CRL) will provide revocation for.
-    - name: reset-notification-settings
-      description: Resets the *custom notification setting* to IAM Roles Anywhere default setting.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --notification-setting-keys=!: A list of notification setting keys to reset.
-        --trust-anchor-id=!: The unique identifier of the trust anchor.
-    - name: tag-resource
-      description: Attaches tags to a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource.
-        --tags=!: The tags to attach to the resource.
-    - name: update-crl
-      description: Updates the certificate revocation list (CRL).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --crl-data=: The x509 v3 specified certificate revocation list (CRL).
-        --crl-id=!: The unique identifier of the certificate revocation list (CRL).
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: The name of the Crl.
-    - name: list-profiles
-      description: Lists all profiles in the authenticated account and Amazon Web Services Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: A token that indicates where the output should continue from, if a previous request did not show all results.
-        --page-size=: The number of resources in the paginated list.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-subjects
-      description: Lists the subjects in the authenticated account and Amazon Web Services Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: A token that indicates where the output should continue from, if a previous request did not show all results.
-        --page-size=: The number of resources in the paginated list.
-        --starting-token=: A token to specify where to start paginating.
     - name: create-profile
       description: Creates a *profile*, a list of the roles that Roles Anywhere service is trusted to assume.
       flags:
         --accept-role-session-name: Used to determine if a custom role session name will be accepted in a temporary credential request.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --duration-seconds=: Used to determine how long sessions vended using this profile are valid for.
         --enabled: Specifies whether the profile is enabled.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --managed-policy-arns=: A list of managed policy ARNs that apply to the vended session credentials.
         --name=!: The name of the profile.
         --no-accept-role-session-name: Used to determine if a custom role session name will be accepted in a temporary credential request.
@@ -244,34 +105,75 @@ commands:
         --role-arns=!: A list of IAM roles that this profile can assume in a temporary credential request.
         --session-policy=: A session policy that applies to the trust boundary of the vended session credentials.
         --tags=: The tags to attach to the profile.
-    - name: update-trust-anchor
-      description: Updates a trust anchor.
+    - name: enable-trust-anchor
+      description: Enables a trust anchor.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: The name of the trust anchor.
-        --source=: The trust anchor type and its related certificate data.
         --trust-anchor-id=!: The unique identifier of the trust anchor.
-    - name: delete-attribute-mapping
-      description: Delete an entry from the attribute mapping rules enforced by a given profile.
+    - name: list-profiles
+      description: Lists all profiles in the authenticated account and Amazon Web Services Region.
+      flags:
+        --next-token=: A token that indicates where the output should continue from, if a previous request did not show all results.
+        --page-size=: The number of resources in the paginated list.
+    - name: tag-resource
+      description: Attaches tags to a resource.
+      flags:
+        --resource-arn=!: The ARN of the resource.
+        --tags=!: The tags to attach to the resource.
+    - name: get-crl
+      description: Gets a certificate revocation list (CRL).
+      flags:
+        --crl-id=!: The unique identifier of the certificate revocation list (CRL).
+    - name: get-profile
+      description: Gets a profile.
+      flags:
+        --profile-id=!: The unique identifier of the profile.
+    - name: reset-notification-settings
+      description: Resets the *custom notification setting* to IAM Roles Anywhere default setting.
+      flags:
+        --notification-setting-keys=!: A list of notification setting keys to reset.
+        --trust-anchor-id=!: The unique identifier of the trust anchor.
+    - name: disable-crl
+      description: Disables a certificate revocation list (CRL).
+      flags:
+        --crl-id=!: The unique identifier of the certificate revocation list (CRL).
+    - name: get-trust-anchor
+      description: Gets a trust anchor.
+      flags:
+        --trust-anchor-id=!: The unique identifier of the trust anchor.
+    - name: import-crl
+      description: Imports the certificate revocation list (CRL).
+      flags:
+        --crl-data=!: The x509 v3 specified certificate revocation list (CRL).
+        --enabled: Specifies whether the certificate revocation list (CRL) is enabled.
+        --name=!: The name of the certificate revocation list (CRL).
+        --no-enabled: Specifies whether the certificate revocation list (CRL) is enabled.
+        --tags=: A list of tags to attach to the certificate revocation list (CRL).
+        --trust-anchor-arn=!: The ARN of the TrustAnchor the certificate revocation list (CRL) will provide revocation for.
+    - name: put-attribute-mapping
+      description: Put an entry in the attribute mapping rules that will be enforced by a given profile.
       flags:
         --certificate-field=!: Fields (x509Subject, x509Issuer and x509SAN) within X.509 certificates.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mapping-rules=!: A list of mapping entries for every supported specifier or sub-field.
         --profile-id=!: The unique identifier of the profile.
-        --specifiers=: A list of specifiers of a certificate field; for example, CN, OU, UID from a Subject.
       completion:
         flag:
             certificate-field:
                 - x509Subject
                 - x509Issuer
                 - x509SAN
-    - name: delete-trust-anchor
-      description: Deletes a trust anchor.
+    - name: put-notification-settings
+      description: Attaches a list of *notification settings* to a trust anchor.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --notification-settings=!: A list of notification settings to be associated to the trust anchor.
         --trust-anchor-id=!: The unique identifier of the trust anchor.
+    - name: update-crl
+      description: Updates the certificate revocation list (CRL).
+      flags:
+        --crl-data=: The x509 v3 specified certificate revocation list (CRL).
+        --crl-id=!: The unique identifier of the certificate revocation list (CRL).
+        --name=: The name of the Crl.
+    - name: list-subjects
+      description: Lists the subjects in the authenticated account and Amazon Web Services Region.
+      flags:
+        --next-token=: A token that indicates where the output should continue from, if a previous request did not show all results.
+        --page-size=: The number of resources in the paginated list.

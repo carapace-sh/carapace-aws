@@ -1,27 +1,271 @@
 name: networkmanager
 description: AWS Network Manager
 commands:
-    - name: get-connect-peer-associations
-      description: Returns information about a core network Connect peer associations.
+    - name: accept-attachment
+      description: Accepts a core network attachment request.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connect-peer-ids=: The IDs of the Connect peers.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of the global network.
-        --max-items=: The  total number of items to return in the command's output.
+        --attachment-id=!: The ID of the attachment.
+    - name: describe-global-networks
+      description: Describes one or more global networks.
+      flags:
+        --global-network-ids=: The IDs of one or more global networks.
         --max-results=: The maximum number of results to return.
         --next-token=: The token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+    - name: get-network-resource-relationships
+      description: Gets the network resource relationships for the specified global network.
+      flags:
+        --account-id=: The Amazon Web Services account ID.
+        --aws-region=: The Amazon Web Services Region.
+        --core-network-id=: The ID of a core network.
+        --global-network-id=!: The ID of the global network.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next page of results.
+        --registered-gateway-arn=: The ARN of the registered gateway.
+        --resource-arn=: The ARN of the gateway.
+        --resource-type=: The resource type.
+    - name: list-core-network-policy-versions
+      description: Returns a list of core network policy versions.
+      flags:
+        --core-network-id=!: The ID of a core network.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next page of results.
+    - name: list-core-networks
+      description: Returns a list of owned and shared core networks.
+      flags:
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next page of results.
+    - name: list-organization-service-access-status
+      description: Gets the status of the Service Linked Role (SLR) deployment for the accounts in a given Amazon Web Services Organization.
+      flags:
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next page of results.
+    - name: update-global-network
+      description: Updates an existing global network.
+      flags:
+        --description=: A description of the global network.
+        --global-network-id=!: The ID of your global network.
+    - name: update-network-resource-metadata
+      description: Updates the resource metadata for the specified global network.
+      flags:
+        --global-network-id=!: The ID of the global network.
+        --metadata=!: The resource metadata.
+        --resource-arn=!: The ARN of the resource.
+    - name: delete-core-network-policy-version
+      description: Deletes a policy version from a core network.
+      flags:
+        --core-network-id=!: The ID of a core network for the deleted policy.
+        --policy-version-id=!: The version ID of the deleted policy.
+    - name: delete-link
+      description: Deletes an existing link.
+      flags:
+        --global-network-id=!: The ID of the global network.
+        --link-id=!: The ID of the link.
+    - name: get-direct-connect-gateway-attachment
+      description: Returns information about a specific Amazon Web Services Direct Connect gateway attachment.
+      flags:
+        --attachment-id=!: The ID of the Direct Connect gateway attachment that you want to see details about.
+    - name: get-network-resources
+      description: Describes the network resources for the specified global network.
+      flags:
+        --account-id=: The Amazon Web Services account ID.
+        --aws-region=: The Amazon Web Services Region.
+        --core-network-id=: The ID of a core network.
+        --global-network-id=!: The ID of the global network.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next page of results.
+        --registered-gateway-arn=: The ARN of the gateway.
+        --resource-arn=: The ARN of the resource.
+        --resource-type=: The resource type.
+    - name: create-connect-peer
+      description: Creates a core network Connect peer for a specified core network connect attachment between a core network and an appliance.
+      flags:
+        --bgp-options=: The Connect peer BGP options.
+        --client-token=: The client token associated with the request.
+        --connect-attachment-id=!: The ID of the connection attachment.
+        --core-network-address=: A Connect peer core network address.
+        --inside-cidr-blocks=: The inside IP addresses used for BGP peering.
+        --peer-address=!: The Connect peer address.
+        --subnet-arn=: The subnet ARN for the Connect peer.
+        --tags=: The tags associated with the peer request.
+    - name: create-site-to-site-vpn-attachment
+      description: Creates an Amazon Web Services site-to-site VPN attachment on an edge location of a core network.
+      flags:
+        --client-token=: The client token associated with the request.
+        --core-network-id=!: The ID of a core network where you're creating a site-to-site VPN attachment.
+        --routing-policy-label=: The routing policy label to apply to the Site-to-Site VPN attachment for traffic routing decisions.
+        --tags=: The tags associated with the request.
+        --vpn-connection-arn=!: The ARN identifying the VPN attachment.
+    - name: delete-attachment
+      description: Deletes an attachment.
+      flags:
+        --attachment-id=!: The ID of the attachment to delete.
+    - name: delete-global-network
+      description: Deletes an existing global network.
+      flags:
+        --global-network-id=!: The ID of the global network.
+    - name: disassociate-customer-gateway
+      description: Disassociates a customer gateway from a device and a link.
+      flags:
+        --customer-gateway-arn=!: The Amazon Resource Name (ARN) of the customer gateway.
+        --global-network-id=!: The ID of the global network.
+    - name: list-core-network-prefix-list-associations
+      description: Lists the prefix list associations for a core network.
+      flags:
+        --core-network-id=!: The ID of the core network to list prefix list associations for.
+        --max-results=: The maximum number of results to return in a single page.
+        --next-token=: The token for the next page of results.
+        --prefix-list-arn=: The ARN of a specific prefix list to filter the associations.
+    - name: list-core-network-routing-information
+      description: Lists routing information for a core network, including routes and their attributes.
+      flags:
+        --community-matches=: BGP community values to match when filtering routing information.
+        --core-network-id=!: The ID of the core network to retrieve routing information for.
+        --edge-location=!: The edge location to filter routing information by.
+        --exact-as-path-matches=: Exact AS path values to match when filtering routing information.
+        --local-preference-matches=: Local preference values to match when filtering routing information.
+        --max-results=: The maximum number of routing information entries to return in a single page.
+        --med-matches=: Multi-Exit Discriminator (MED) values to match when filtering routing information.
+        --next-hop-filters=: Filters to apply based on next hop information.
+        --next-token=: The token for the next page of results.
+        --segment-name=!: The name of the segment to filter routing information by.
+    - name: start-organization-service-access-update
+      description: Enables the Network Manager service for an Amazon Web Services Organization.
+      flags:
+        --action=!: The action to take for the update request.
+    - name: associate-connect-peer
+      description: Associates a core network Connect peer with a device and optionally, with a link.
+      flags:
+        --connect-peer-id=!: The ID of the Connect peer.
+        --device-id=!: The ID of the device.
+        --global-network-id=!: The ID of your global network.
+        --link-id=: The ID of the link.
+    - name: create-transit-gateway-peering
+      description: Creates a transit gateway peering connection.
+      flags:
+        --client-token=: The client token associated with the request.
+        --core-network-id=!: The ID of a core network.
+        --tags=: The list of key-value tags associated with the request.
+        --transit-gateway-arn=!: The ARN of the transit gateway for the peering request.
+    - name: get-core-network-change-set
+      description: Returns a change set between the LIVE core network policy and a submitted policy.
+      flags:
+        --core-network-id=!: The ID of a core network.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next page of results.
+        --policy-version-id=!: The ID of the policy version.
+    - name: tag-resource
+      description: Tags a specified resource.
+      flags:
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+        --tags=!: The tags to apply to the specified resource.
+    - name: update-core-network
+      description: Updates the description of a core network.
+      flags:
+        --core-network-id=!: The ID of a core network.
+        --description=: The description of the update.
+    - name: update-link
+      description: Updates the details for an existing link.
+      flags:
+        --bandwidth=: The upload and download speed in Mbps.
+        --description=: A description of the link.
+        --global-network-id=!: The ID of the global network.
+        --link-id=!: The ID of the link.
+        --provider=: The provider of the link.
+        --type=: The type of the link.
+    - name: create-link
+      description: Creates a new link for a specified site.
+      flags:
+        --bandwidth=!: The upload speed and download speed in Mbps.
+        --description=: A description of the link.
+        --global-network-id=!: The ID of the global network.
+        --provider=: The provider of the link.
+        --site-id=!: The ID of the site.
+        --tags=: The tags to apply to the resource during creation.
+        --type=: The type of the link.
+    - name: deregister-transit-gateway
+      description: Deregisters a transit gateway from your global network.
+      flags:
+        --global-network-id=!: The ID of the global network.
+        --transit-gateway-arn=!: The Amazon Resource Name (ARN) of the transit gateway.
+    - name: disassociate-link
+      description: Disassociates an existing device from a link.
+      flags:
+        --device-id=!: The ID of the device.
+        --global-network-id=!: The ID of the global network.
+        --link-id=!: The ID of the link.
+    - name: get-core-network
+      description: Returns information about the LIVE policy for a core network.
+      flags:
+        --core-network-id=!: The ID of a core network.
+    - name: get-devices
+      description: Gets information about one or more of your devices in a global network.
+      flags:
+        --device-ids=: One or more device IDs.
+        --global-network-id=!: The ID of the global network.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next page of results.
+        --site-id=: The ID of the site.
+    - name: get-link-associations
+      description: Gets the link associations for a device or a link.
+      flags:
+        --device-id=: The ID of the device.
+        --global-network-id=!: The ID of the global network.
+        --link-id=: The ID of the link.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next page of results.
+    - name: get-sites
+      description: Gets information about one or more of your sites in a global network.
+      flags:
+        --global-network-id=!: The ID of the global network.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next page of results.
+        --site-ids=: One or more site IDs.
+    - name: update-connection
+      description: Updates the information for an existing connection.
+      flags:
+        --connected-link-id=: The ID of the link for the second device in the connection.
+        --connection-id=!: The ID of the connection.
+        --description=: A description of the connection.
+        --global-network-id=!: The ID of the global network.
+        --link-id=: The ID of the link for the first device in the connection.
+    - name: associate-customer-gateway
+      description: Associates a customer gateway with a device and optionally, with a link.
+      flags:
+        --customer-gateway-arn=!: The Amazon Resource Name (ARN) of the customer gateway.
+        --device-id=!: The ID of the device.
+        --global-network-id=!: The ID of the global network.
+        --link-id=: The ID of the link.
+    - name: associate-transit-gateway-connect-peer
+      description: Associates a transit gateway Connect peer with a device, and optionally, with a link.
+      flags:
+        --device-id=!: The ID of the device.
+        --global-network-id=!: The ID of the global network.
+        --link-id=: The ID of the link.
+        --transit-gateway-connect-peer-arn=!: The Amazon Resource Name (ARN) of the Connect peer.
+    - name: create-connect-attachment
+      description: Creates a core network Connect attachment from a specified core network attachment.
+      flags:
+        --client-token=: The client token associated with the request.
+        --core-network-id=!: The ID of a core network where you want to create the attachment.
+        --edge-location=!: The Region where the edge is located.
+        --options=!: Options for creating an attachment.
+        --routing-policy-label=: The routing policy label to apply to the Connect attachment for traffic routing decisions.
+        --tags=: The list of key-value tags associated with the request.
+        --transport-attachment-id=!: The ID of the attachment between the two connections.
+    - name: delete-connect-peer
+      description: Deletes a Connect peer.
+      flags:
+        --connect-peer-id=!: The ID of the deleted Connect peer.
+    - name: delete-core-network-prefix-list-association
+      description: Deletes an association between a core network and a prefix list.
+      flags:
+        --core-network-id=!: The ID of the core network from which to delete the prefix list association.
+        --prefix-list-arn=!: The ARN of the prefix list to disassociate from the core network.
     - name: get-network-routes
       description: Gets the network routes of the specified global network.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --destination-filters=: Filter by route table destination.
         --exact-cidr-matches=: An exact CIDR block.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --global-network-id=!: The ID of the global network.
         --longest-prefix-matches=: The most specific route that matches the traffic (longest prefix match).
         --prefix-list-ids=: The IDs of the prefix lists.
@@ -30,33 +274,111 @@ commands:
         --subnet-of-matches=: The routes with a subnet that match the specified CIDR filter.
         --supernet-of-matches=: The routes with a CIDR that encompasses the CIDR filter.
         --types=: The route types.
-    - name: get-resource-policy
-      description: Returns information about a resource policy.
+    - name: update-site
+      description: Updates the information for an existing site.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource.
-    - name: update-connection
-      description: Updates the information for an existing connection.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connected-link-id=: The ID of the link for the second device in the connection.
-        --connection-id=!: The ID of the connection.
-        --description=: A description of the connection.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --description=: A description of your site.
         --global-network-id=!: The ID of the global network.
-        --link-id=: The ID of the link for the first device in the connection.
+        --location=: 'The site location:'
+        --site-id=!: The ID of your site.
+    - name: delete-device
+      description: Deletes an existing device.
+      flags:
+        --device-id=!: The ID of the device.
+        --global-network-id=!: The ID of the global network.
+    - name: delete-site
+      description: Deletes an existing site.
+      flags:
+        --global-network-id=!: The ID of the global network.
+        --site-id=!: The ID of the site.
+    - name: get-connect-peer
+      description: Returns information about a core network Connect peer.
+      flags:
+        --connect-peer-id=!: The ID of the Connect peer.
+    - name: get-connect-peer-associations
+      description: Returns information about a core network Connect peer associations.
+      flags:
+        --connect-peer-ids=: The IDs of the Connect peers.
+        --global-network-id=!: The ID of the global network.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next page of results.
+    - name: get-network-telemetry
+      description: Gets the network telemetry of the specified global network.
+      flags:
+        --account-id=: The Amazon Web Services account ID.
+        --aws-region=: The Amazon Web Services Region.
+        --core-network-id=: The ID of a core network.
+        --global-network-id=!: The ID of the global network.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next page of results.
+        --registered-gateway-arn=: The ARN of the gateway.
+        --resource-arn=: The ARN of the resource.
+        --resource-type=: The resource type.
+    - name: list-peerings
+      description: Lists the peerings for a core network.
+      flags:
+        --core-network-id=: The ID of a core network.
+        --edge-location=: Returns a list edge locations for the
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next page of results.
+        --peering-type=: Returns a list of a peering requests.
+        --state=: Returns a list of the peering request states.
+      completion:
+        flag:
+            peering-type:
+                - TRANSIT_GATEWAY
+            state:
+                - CREATING
+                - FAILED
+                - AVAILABLE
+                - DELETING
+    - name: update-vpc-attachment
+      description: Updates a VPC attachment.
+      flags:
+        --add-subnet-arns=: Adds a subnet ARN to the VPC attachment.
+        --attachment-id=!: The ID of the attachment.
+        --options=: Additional options for updating the VPC attachment.
+        --remove-subnet-arns=: Removes a subnet ARN from the attachment.
+    - name: delete-resource-policy
+      description: Deletes a resource policy for the specified resource.
+      flags:
+        --resource-arn=!: The ARN of the policy to delete.
+    - name: disassociate-transit-gateway-connect-peer
+      description: Disassociates a transit gateway Connect peer from a device and link.
+      flags:
+        --global-network-id=!: The ID of the global network.
+        --transit-gateway-connect-peer-arn=!: The Amazon Resource Name (ARN) of the transit gateway Connect peer.
+    - name: get-route-analysis
+      description: Gets information about the specified route analysis.
+      flags:
+        --global-network-id=!: The ID of the global network.
+        --route-analysis-id=!: The ID of the route analysis.
+    - name: put-resource-policy
+      description: Creates or updates a resource policy.
+      flags:
+        --policy-document=!: The JSON resource policy document.
+        --resource-arn=!: The ARN of the resource policy.
+    - name: restore-core-network-policy-version
+      description: Restores a previous policy version as a new, immutable version of a core network policy.
+      flags:
+        --core-network-id=!: The ID of a core network.
+        --policy-version-id=!: The ID of the policy version to restore.
+    - name: start-route-analysis
+      description: Starts analyzing the routing path between the specified source and destination.
+      flags:
+        --destination=!: The destination.
+        --global-network-id=!: The ID of the global network.
+        --include-return-path: Indicates whether to analyze the return path.
+        --no-include-return-path: Indicates whether to analyze the return path.
+        --no-use-middleboxes: Indicates whether to include the location of middlebox appliances in the route analysis.
+        --source=!: The source from which traffic originates.
+        --use-middleboxes: Indicates whether to include the location of middlebox appliances in the route analysis.
     - name: update-device
       description: Updates the details for an existing device.
       flags:
         --aws-location=: The Amazon Web Services location of the device, if applicable.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: A description of the device.
         --device-id=!: The ID of the device.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --global-network-id=!: The ID of the global network.
         --location=: ""
         --model=: The model of the device.
@@ -64,484 +386,92 @@ commands:
         --site-id=: The ID of the site.
         --type=: The type of the device.
         --vendor=: The vendor of the device.
-    - name: update-direct-connect-gateway-attachment
-      description: Updates the edge locations associated with an Amazon Web Services Direct Connect gateway attachment.
+    - name: create-connection
+      description: Creates a connection between two devices.
       flags:
-        --attachment-id=!: The ID of the Direct Connect gateway attachment for the updated edge locations.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --edge-locations=: One or more edge locations to update for the Direct Connect gateway attachment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-connect-peer
-      description: Creates a core network Connect peer for a specified core network connect attachment between a core network and an appliance.
-      flags:
-        --bgp-options=: The Connect peer BGP options.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: The client token associated with the request.
-        --connect-attachment-id=!: The ID of the connection attachment.
-        --core-network-address=: A Connect peer core network address.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --inside-cidr-blocks=: The inside IP addresses used for BGP peering.
-        --peer-address=!: The Connect peer address.
-        --subnet-arn=: The subnet ARN for the Connect peer.
-        --tags=: The tags associated with the peer request.
-    - name: create-direct-connect-gateway-attachment
-      description: Creates an Amazon Web Services Direct Connect gateway attachment
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: client token
-        --core-network-id=!: The ID of the Cloud WAN core network that the Direct Connect gateway attachment should be attached to.
-        --direct-connect-gateway-arn=!: The ARN of the Direct Connect gateway attachment.
-        --edge-locations=!: One or more core network edge locations that the Direct Connect gateway attachment is associated with.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --routing-policy-label=: The routing policy label to apply to the Direct Connect Gateway attachment for traffic routing decisions.
-        --tags=: The key value tags to apply to the Direct Connect gateway attachment during creation.
-    - name: create-transit-gateway-route-table-attachment
-      description: Creates a transit gateway route table attachment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: The client token associated with the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --peering-id=!: The ID of the peer for the
-        --routing-policy-label=: The routing policy label to apply to the Transit Gateway route table attachment for traffic routing decisions.
-        --tags=: The list of key-value tags associated with the request.
-        --transit-gateway-route-table-arn=!: The ARN of the transit gateway route table for the attachment request.
-    - name: disassociate-connect-peer
-      description: Disassociates a core network Connect peer from a device and a link.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connect-peer-id=!: The ID of the Connect peer to disassociate from a device.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --connected-device-id=!: The ID of the second device in the connection.
+        --connected-link-id=: The ID of the link for the second device.
+        --description=: A description of the connection.
+        --device-id=!: The ID of the first device in the connection.
         --global-network-id=!: The ID of the global network.
-    - name: update-core-network
-      description: Updates the description of a core network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --core-network-id=!: The ID of a core network.
-        --description=: The description of the update.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-core-network-prefix-list-association
-      description: Deletes an association between a core network and a prefix list.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --core-network-id=!: The ID of the core network from which to delete the prefix list association.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --prefix-list-arn=!: The ARN of the prefix list to disassociate from the core network.
-    - name: put-resource-policy
-      description: Creates or updates a resource policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-document=!: The JSON resource policy document.
-        --resource-arn=!: The ARN of the resource policy.
-    - name: start-organization-service-access-update
-      description: Enables the Network Manager service for an Amazon Web Services Organization.
-      flags:
-        --action=!: The action to take for the update request.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: tag-resource
-      description: Tags a specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-        --tags=!: The tags to apply to the specified resource.
-    - name: accept-attachment
-      description: Accepts a core network attachment request.
-      flags:
-        --attachment-id=!: The ID of the attachment.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: associate-connect-peer
-      description: Associates a core network Connect peer with a device and optionally, with a link.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connect-peer-id=!: The ID of the Connect peer.
-        --device-id=!: The ID of the device.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of your global network.
-        --link-id=: The ID of the link.
-    - name: create-core-network-prefix-list-association
-      description: Creates an association between a core network and a prefix list for routing control.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --core-network-id=!: The ID of the core network to associate with the prefix list.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --prefix-list-alias=!: An optional alias for the prefix list association.
-        --prefix-list-arn=!: The ARN of the prefix list to associate with the core network.
+        --link-id=: The ID of the link for the first device.
+        --tags=: The tags to apply to the resource during creation.
     - name: delete-peering
       description: Deletes an existing peering connection.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --peering-id=!: The ID of the peering connection to delete.
+    - name: get-customer-gateway-associations
+      description: Gets the association information for customer gateways that are associated with devices and links in your global network.
+      flags:
+        --customer-gateway-arns=: One or more customer gateway Amazon Resource Names (ARNs).
+        --global-network-id=!: The ID of the global network.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next page of results.
+    - name: reject-attachment
+      description: Rejects a core network attachment request.
+      flags:
+        --attachment-id=!: The ID of the attachment.
+    - name: create-global-network
+      description: Creates a new, empty global network.
+      flags:
+        --description=: A description of the global network.
+        --tags=: The tags to apply to the resource during creation.
+    - name: disassociate-connect-peer
+      description: Disassociates a core network Connect peer from a device and a link.
+      flags:
+        --connect-peer-id=!: The ID of the Connect peer to disassociate from a device.
+        --global-network-id=!: The ID of the global network.
+    - name: get-links
+      description: Gets information about one or more links in a specified global network.
+      flags:
+        --global-network-id=!: The ID of the global network.
+        --link-ids=: One or more link IDs.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next page of results.
+        --provider=: The link provider.
+        --site-id=: The ID of the site.
+        --type=: The link type.
+    - name: create-device
+      description: Creates a new device in a global network.
+      flags:
+        --aws-location=: The Amazon Web Services location of the device, if applicable.
+        --description=: A description of the device.
+        --global-network-id=!: The ID of the global network.
+        --location=: The location of the device.
+        --model=: The model of the device.
+        --serial-number=: The serial number of the device.
+        --site-id=: The ID of the site.
+        --tags=: The tags to apply to the resource during creation.
+        --type=: The type of the device.
+        --vendor=: The vendor of the device.
+    - name: delete-connection
+      description: Deletes the specified connection in your global network.
+      flags:
+        --connection-id=!: The ID of the connection.
+        --global-network-id=!: The ID of the global network.
     - name: get-core-network-policy
       description: Returns details about a core network policy.
       flags:
         --alias=: The alias of a core network policy
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --core-network-id=!: The ID of a core network.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --policy-version-id=: The ID of a core network policy version.
       completion:
         flag:
             alias:
                 - LIVE
                 - LATEST
-    - name: get-link-associations
-      description: Gets the link associations for a device or a link.
+    - name: get-resource-policy
+      description: Returns information about a resource policy.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --device-id=: The ID of the device.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of the global network.
-        --link-id=: The ID of the link.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: get-transit-gateway-peering
-      description: Returns information about a transit gateway peer.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --peering-id=!: The ID of the peering request.
-    - name: get-network-resource-counts
-      description: Gets the count of network resources, by resource type, for the specified global network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of the global network.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --resource-type=: The resource type.
-        --starting-token=: A token to specify where to start paginating.
-    - name: associate-customer-gateway
-      description: Associates a customer gateway with a device and optionally, with a link.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --customer-gateway-arn=!: The Amazon Resource Name (ARN) of the customer gateway.
-        --device-id=!: The ID of the device.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of the global network.
-        --link-id=: The ID of the link.
-    - name: delete-connection
-      description: Deletes the specified connection in your global network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connection-id=!: The ID of the connection.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of the global network.
-    - name: deregister-transit-gateway
-      description: Deregisters a transit gateway from your global network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of the global network.
-        --transit-gateway-arn=!: The Amazon Resource Name (ARN) of the transit gateway.
-    - name: get-connect-peer
-      description: Returns information about a core network Connect peer.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connect-peer-id=!: The ID of the Connect peer.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-devices
-      description: Gets information about one or more of your devices in a global network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --device-ids=: One or more device IDs.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of the global network.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --site-id=: The ID of the site.
-        --starting-token=: A token to specify where to start paginating.
-    - name: put-attachment-routing-policy-label
-      description: Applies a routing policy label to an attachment for traffic routing decisions.
-      flags:
-        --attachment-id=!: The ID of the attachment to apply the routing policy label to.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --core-network-id=!: The ID of the core network containing the attachment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --routing-policy-label=!: The routing policy label to apply to the attachment.
-    - name: start-route-analysis
-      description: Starts analyzing the routing path between the specified source and destination.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --destination=!: The destination.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of the global network.
-        --include-return-path: Indicates whether to analyze the return path.
-        --no-include-return-path: Indicates whether to analyze the return path.
-        --no-use-middleboxes: Indicates whether to include the location of middlebox appliances in the route analysis.
-        --source=!: The source from which traffic originates.
-        --use-middleboxes: Indicates whether to include the location of middlebox appliances in the route analysis.
-    - name: delete-core-network
-      description: Deletes a core network along with all core network policies.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --core-network-id=!: The network ID of the deleted core network.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-site
-      description: Creates a new site in a global network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description of your site.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of the global network.
-        --location=: The site location.
-        --tags=: The tags to apply to the resource during creation.
-    - name: create-site-to-site-vpn-attachment
-      description: Creates an Amazon Web Services site-to-site VPN attachment on an edge location of a core network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: The client token associated with the request.
-        --core-network-id=!: The ID of a core network where you're creating a site-to-site VPN attachment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --routing-policy-label=: The routing policy label to apply to the Site-to-Site VPN attachment for traffic routing decisions.
-        --tags=: The tags associated with the request.
-        --vpn-connection-arn=!: The ARN identifying the VPN attachment.
-    - name: disassociate-transit-gateway-connect-peer
-      description: Disassociates a transit gateway Connect peer from a device and link.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of the global network.
-        --transit-gateway-connect-peer-arn=!: The Amazon Resource Name (ARN) of the transit gateway Connect peer.
-    - name: get-sites
-      description: Gets information about one or more of your sites in a global network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of the global network.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --site-ids=: One or more site IDs.
-        --starting-token=: A token to specify where to start paginating.
-    - name: get-vpc-attachment
-      description: Returns information about a VPC attachment.
-      flags:
-        --attachment-id=!: The ID of the attachment.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-organization-service-access-status
-      description: Gets the status of the Service Linked Role (SLR) deployment for the accounts in a given Amazon Web Services Organization.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next page of results.
-    - name: update-global-network
-      description: Updates an existing global network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description of the global network.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of your global network.
-    - name: create-transit-gateway-peering
-      description: Creates a transit gateway peering connection.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: The client token associated with the request.
-        --core-network-id=!: The ID of a core network.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: The list of key-value tags associated with the request.
-        --transit-gateway-arn=!: The ARN of the transit gateway for the peering request.
-    - name: delete-site
-      description: Deletes an existing site.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of the global network.
-        --site-id=!: The ID of the site.
-    - name: get-connect-attachment
-      description: Returns information about a core network Connect attachment.
-      flags:
-        --attachment-id=!: The ID of the attachment.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: register-transit-gateway
-      description: Registers a transit gateway in your global network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of the global network.
-        --transit-gateway-arn=!: The Amazon Resource Name (ARN) of the transit gateway.
-    - name: reject-attachment
-      description: Rejects a core network attachment request.
-      flags:
-        --attachment-id=!: The ID of the attachment.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-site
-      description: Updates the information for an existing site.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description of your site.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of the global network.
-        --location=: 'The site location:'
-        --site-id=!: The ID of your site.
-    - name: create-vpc-attachment
-      description: Creates a VPC attachment on an edge location of a core network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: The client token associated with the request.
-        --core-network-id=!: The ID of a core network for the VPC attachment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --options=: Options for the VPC attachment.
-        --routing-policy-label=: The routing policy label to apply to the VPC attachment for traffic routing decisions.
-        --subnet-arns=!: The subnet ARN of the VPC attachment.
-        --tags=: The key-value tags associated with the request.
-        --vpc-arn=!: The ARN of the VPC.
-    - name: delete-connect-peer
-      description: Deletes a Connect peer.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connect-peer-id=!: The ID of the deleted Connect peer.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-core-network
-      description: Returns information about the LIVE policy for a core network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --core-network-id=!: The ID of a core network.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-core-network-change-set
-      description: Returns a change set between the LIVE core network policy and a submitted policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --core-network-id=!: The ID of a core network.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --policy-version-id=!: The ID of the policy version.
-        --starting-token=: A token to specify where to start paginating.
-    - name: delete-resource-policy
-      description: Deletes a resource policy for the specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the policy to delete.
-    - name: get-transit-gateway-connect-peer-associations
-      description: Gets information about one or more of your transit gateway Connect peer associations in a global network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of the global network.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --transit-gateway-connect-peer-arns=: One or more transit gateway Connect peer Amazon Resource Names (ARNs).
-    - name: update-network-resource-metadata
-      description: Updates the resource metadata for the specified global network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of the global network.
-        --metadata=!: The resource metadata.
         --resource-arn=!: The ARN of the resource.
-    - name: create-global-network
-      description: Creates a new, empty global network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description of the global network.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: The tags to apply to the resource during creation.
-    - name: disassociate-customer-gateway
-      description: Disassociates a customer gateway from a device and a link.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --customer-gateway-arn=!: The Amazon Resource Name (ARN) of the customer gateway.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of the global network.
-    - name: list-attachment-routing-policy-associations
-      description: Lists the routing policy associations for attachments in a core network.
-      flags:
-        --attachment-id=: The ID of a specific attachment to filter the routing policy associations.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --core-network-id=!: The ID of the core network to list attachment routing policy associations for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in a single page.
-        --next-token=: The token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
     - name: list-attachments
       description: Returns a list of core network attachments.
       flags:
         --attachment-type=: The type of attachment.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --core-network-id=: The ID of a core network.
         --edge-location=: The Region where the edge is located.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return.
         --next-token=: The token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
         --state=: The state of the attachment.
       completion:
         flag:
@@ -561,463 +491,176 @@ commands:
                 - PENDING_NETWORK_UPDATE
                 - PENDING_TAG_ACCEPTANCE
                 - DELETING
-    - name: list-core-networks
-      description: Returns a list of owned and shared core networks.
+    - name: list-connect-peers
+      description: Returns a list of core network Connect peers.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: put-core-network-policy
-      description: Creates a new, immutable version of a core network policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: The client token associated with the request.
-        --core-network-id=!: The ID of a core network.
-        --description=: a core network policy description.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --latest-version-id=: The ID of a core network policy.
-        --policy-document=!: The policy document.
-    - name: remove-attachment-routing-policy-label
-      description: Removes a routing policy label from an attachment.
-      flags:
-        --attachment-id=!: The ID of the attachment to remove the routing policy label from.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --core-network-id=!: The ID of the core network containing the attachment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: untag-resource
-      description: Removes tags from a specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-        --tag-keys=!: The tag keys to remove from the specified resource.
-    - name: get-links
-      description: Gets information about one or more links in a specified global network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of the global network.
-        --link-ids=: One or more link IDs.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --provider=: The link provider.
-        --site-id=: The ID of the site.
-        --starting-token=: A token to specify where to start paginating.
-        --type=: The link type.
-    - name: list-core-network-routing-information
-      description: Lists routing information for a core network, including routes and their attributes.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --community-matches=: BGP community values to match when filtering routing information.
-        --core-network-id=!: The ID of the core network to retrieve routing information for.
-        --edge-location=!: The edge location to filter routing information by.
-        --exact-as-path-matches=: Exact AS path values to match when filtering routing information.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --local-preference-matches=: Local preference values to match when filtering routing information.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of routing information entries to return in a single page.
-        --med-matches=: Multi-Exit Discriminator (MED) values to match when filtering routing information.
-        --next-hop-filters=: Filters to apply based on next hop information.
-        --next-token=: The token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --segment-name=!: The name of the segment to filter routing information by.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-vpc-attachment
-      description: Updates a VPC attachment.
-      flags:
-        --add-subnet-arns=: Adds a subnet ARN to the VPC attachment.
-        --attachment-id=!: The ID of the attachment.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --options=: Additional options for updating the VPC attachment.
-        --remove-subnet-arns=: Removes a subnet ARN from the attachment.
-    - name: get-network-resource-relationships
-      description: Gets the network resource relationships for the specified global network.
-      flags:
-        --account-id=: The Amazon Web Services account ID.
-        --aws-region=: The Amazon Web Services Region.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connect-attachment-id=: The ID of the attachment.
         --core-network-id=: The ID of a core network.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of the global network.
-        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return.
         --next-token=: The token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --registered-gateway-arn=: The ARN of the registered gateway.
-        --resource-arn=: The ARN of the gateway.
-        --resource-type=: The resource type.
-        --starting-token=: A token to specify where to start paginating.
-    - name: create-link
-      description: Creates a new link for a specified site.
+    - name: create-core-network
+      description: Creates a core network as part of your global network, and optionally, with a core network policy.
       flags:
-        --bandwidth=!: The upload speed and download speed in Mbps.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description of the link.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of the global network.
-        --provider=: The provider of the link.
-        --site-id=!: The ID of the site.
-        --tags=: The tags to apply to the resource during creation.
-        --type=: The type of the link.
-    - name: delete-attachment
-      description: Deletes an attachment.
+        --client-token=: The client token associated with a core network request.
+        --description=: The description of a core network.
+        --global-network-id=!: The ID of the global network that a core network will be a part of.
+        --policy-document=: The policy document for creating a core network.
+        --tags=: Key-value tags associated with a core network request.
+    - name: create-core-network-prefix-list-association
+      description: Creates an association between a core network and a prefix list for routing control.
       flags:
-        --attachment-id=!: The ID of the attachment to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-link
-      description: Updates the details for an existing link.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --core-network-id=!: The ID of the core network to associate with the prefix list.
+        --prefix-list-alias=!: An optional alias for the prefix list association.
+        --prefix-list-arn=!: The ARN of the prefix list to associate with the core network.
+    - name: create-vpc-attachment
+      description: Creates a VPC attachment on an edge location of a core network.
       flags:
-        --bandwidth=: The upload and download speed in Mbps.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description of the link.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of the global network.
-        --link-id=!: The ID of the link.
-        --provider=: The provider of the link.
-        --type=: The type of the link.
-    - name: create-connect-attachment
-      description: Creates a core network Connect attachment from a specified core network attachment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: The client token associated with the request.
-        --core-network-id=!: The ID of a core network where you want to create the attachment.
-        --edge-location=!: The Region where the edge is located.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --options=!: Options for creating an attachment.
-        --routing-policy-label=: The routing policy label to apply to the Connect attachment for traffic routing decisions.
-        --tags=: The list of key-value tags associated with the request.
-        --transport-attachment-id=!: The ID of the attachment between the two connections.
-    - name: execute-core-network-change-set
-      description: Executes a change set on your core network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --core-network-id=!: The ID of a core network.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-version-id=!: The ID of the policy version.
-    - name: get-connections
-      description: Gets information about one or more of your connections in a global network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connection-ids=: One or more connection IDs.
-        --device-id=: The ID of the device.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of the global network.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: get-core-network-change-events
-      description: Returns information about a core network change event.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --core-network-id=!: The ID of a core network.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --policy-version-id=!: The ID of the policy version.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-core-network-prefix-list-associations
-      description: Lists the prefix list associations for a core network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --core-network-id=!: The ID of the core network to list prefix list associations for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in a single page.
-        --next-token=: The token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --prefix-list-arn=: The ARN of a specific prefix list to filter the associations.
-        --starting-token=: A token to specify where to start paginating.
+        --core-network-id=!: The ID of a core network for the VPC attachment.
+        --options=: Options for the VPC attachment.
+        --routing-policy-label=: The routing policy label to apply to the VPC attachment for traffic routing decisions.
+        --subnet-arns=!: The subnet ARN of the VPC attachment.
+        --tags=: The key-value tags associated with the request.
+        --vpc-arn=!: The ARN of the VPC.
     - name: list-tags-for-resource
       description: Lists the tags for a specified resource.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-    - name: get-direct-connect-gateway-attachment
-      description: Returns information about a specific Amazon Web Services Direct Connect gateway attachment.
+    - name: untag-resource
+      description: Removes tags from a specified resource.
       flags:
-        --attachment-id=!: The ID of the Direct Connect gateway attachment that you want to see details about.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-network-telemetry
-      description: Gets the network telemetry of the specified global network.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+        --tag-keys=!: The tag keys to remove from the specified resource.
+    - name: create-site
+      description: Creates a new site in a global network.
       flags:
-        --account-id=: The Amazon Web Services account ID.
-        --aws-region=: The Amazon Web Services Region.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --core-network-id=: The ID of a core network.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --description=: A description of your site.
         --global-network-id=!: The ID of the global network.
-        --max-items=: The  total number of items to return in the command's output.
+        --location=: The site location.
+        --tags=: The tags to apply to the resource during creation.
+    - name: get-network-resource-counts
+      description: Gets the count of network resources, by resource type, for the specified global network.
+      flags:
+        --global-network-id=!: The ID of the global network.
         --max-results=: The maximum number of results to return.
         --next-token=: The token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --registered-gateway-arn=: The ARN of the gateway.
-        --resource-arn=: The ARN of the resource.
         --resource-type=: The resource type.
-        --starting-token=: A token to specify where to start paginating.
-    - name: delete-link
-      description: Deletes an existing link.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of the global network.
-        --link-id=!: The ID of the link.
-    - name: associate-link
-      description: Associates a link to a device.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --device-id=!: The ID of the device.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of the global network.
-        --link-id=!: The ID of the link.
-    - name: create-device
-      description: Creates a new device in a global network.
-      flags:
-        --aws-location=: The Amazon Web Services location of the device, if applicable.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description of the device.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of the global network.
-        --location=: The location of the device.
-        --model=: The model of the device.
-        --serial-number=: The serial number of the device.
-        --site-id=: The ID of the site.
-        --tags=: The tags to apply to the resource during creation.
-        --type=: The type of the device.
-        --vendor=: The vendor of the device.
-    - name: get-route-analysis
-      description: Gets information about the specified route analysis.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of the global network.
-        --route-analysis-id=!: The ID of the route analysis.
     - name: get-site-to-site-vpn-attachment
       description: Returns information about a site-to-site VPN attachment.
       flags:
         --attachment-id=!: The ID of the attachment.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-transit-gateway-connect-peer-associations
+      description: Gets information about one or more of your transit gateway Connect peer associations in a global network.
+      flags:
+        --global-network-id=!: The ID of the global network.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next page of results.
+        --transit-gateway-connect-peer-arns=: One or more transit gateway Connect peer Amazon Resource Names (ARNs).
+    - name: get-transit-gateway-registrations
+      description: Gets information about the transit gateway registrations in a specified global network.
+      flags:
+        --global-network-id=!: The ID of the global network.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next page of results.
+        --transit-gateway-arns=: The Amazon Resource Names (ARNs) of one or more transit gateways.
+    - name: list-attachment-routing-policy-associations
+      description: Lists the routing policy associations for attachments in a core network.
+      flags:
+        --attachment-id=: The ID of a specific attachment to filter the routing policy associations.
+        --core-network-id=!: The ID of the core network to list attachment routing policy associations for.
+        --max-results=: The maximum number of results to return in a single page.
+        --next-token=: The token for the next page of results.
+    - name: put-attachment-routing-policy-label
+      description: Applies a routing policy label to an attachment for traffic routing decisions.
+      flags:
+        --attachment-id=!: The ID of the attachment to apply the routing policy label to.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --core-network-id=!: The ID of the core network containing the attachment.
+        --routing-policy-label=!: The routing policy label to apply to the attachment.
     - name: get-transit-gateway-route-table-attachment
       description: Returns information about a transit gateway route table attachment.
       flags:
         --attachment-id=!: The ID of the transit gateway route table attachment.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: associate-transit-gateway-connect-peer
-      description: Associates a transit gateway Connect peer with a device, and optionally, with a link.
+    - name: update-direct-connect-gateway-attachment
+      description: Updates the edge locations associated with an Amazon Web Services Direct Connect gateway attachment.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --attachment-id=!: The ID of the Direct Connect gateway attachment for the updated edge locations.
+        --edge-locations=: One or more edge locations to update for the Direct Connect gateway attachment.
+    - name: associate-link
+      description: Associates a link to a device.
+      flags:
         --device-id=!: The ID of the device.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of the global network.
-        --link-id=: The ID of the link.
-        --transit-gateway-connect-peer-arn=!: The Amazon Resource Name (ARN) of the Connect peer.
-    - name: create-core-network
-      description: Creates a core network as part of your global network, and optionally, with a core network policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: The client token associated with a core network request.
-        --description=: The description of a core network.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of the global network that a core network will be a part of.
-        --policy-document=: The policy document for creating a core network.
-        --tags=: Key-value tags associated with a core network request.
-    - name: delete-device
-      description: Deletes an existing device.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --device-id=!: The ID of the device.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of the global network.
-    - name: describe-global-networks
-      description: Describes one or more global networks.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-ids=: The IDs of one or more global networks.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: get-customer-gateway-associations
-      description: Gets the association information for customer gateways that are associated with devices and links in your global network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --customer-gateway-arns=: One or more customer gateway Amazon Resource Names (ARNs).
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of the global network.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: get-network-resources
-      description: Describes the network resources for the specified global network.
-      flags:
-        --account-id=: The Amazon Web Services account ID.
-        --aws-region=: The Amazon Web Services Region.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --core-network-id=: The ID of a core network.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of the global network.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --registered-gateway-arn=: The ARN of the gateway.
-        --resource-arn=: The ARN of the resource.
-        --resource-type=: The resource type.
-        --starting-token=: A token to specify where to start paginating.
-    - name: get-transit-gateway-registrations
-      description: Gets information about the transit gateway registrations in a specified global network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of the global network.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --transit-gateway-arns=: The Amazon Resource Names (ARNs) of one or more transit gateways.
-    - name: restore-core-network-policy-version
-      description: Restores a previous policy version as a new, immutable version of a core network policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --core-network-id=!: The ID of a core network.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-version-id=!: The ID of the policy version to restore.
-    - name: create-connection
-      description: Creates a connection between two devices.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connected-device-id=!: The ID of the second device in the connection.
-        --connected-link-id=: The ID of the link for the second device.
-        --description=: A description of the connection.
-        --device-id=!: The ID of the first device in the connection.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of the global network.
-        --link-id=: The ID of the link for the first device.
-        --tags=: The tags to apply to the resource during creation.
-    - name: delete-global-network
-      description: Deletes an existing global network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-network-id=!: The ID of the global network.
-    - name: list-connect-peers
-      description: Returns a list of core network Connect peers.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connect-attachment-id=: The ID of the attachment.
-        --core-network-id=: The ID of a core network.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-core-network-policy-versions
-      description: Returns a list of core network policy versions.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --core-network-id=!: The ID of a core network.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-peerings
-      description: Lists the peerings for a core network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --core-network-id=: The ID of a core network.
-        --edge-location=: Returns a list edge locations for the
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --peering-type=: Returns a list of a peering requests.
-        --starting-token=: A token to specify where to start paginating.
-        --state=: Returns a list of the peering request states.
-      completion:
-        flag:
-            peering-type:
-                - TRANSIT_GATEWAY
-            state:
-                - CREATING
-                - FAILED
-                - AVAILABLE
-                - DELETING
-    - name: delete-core-network-policy-version
-      description: Deletes a policy version from a core network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --core-network-id=!: The ID of a core network for the deleted policy.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-version-id=!: The version ID of the deleted policy.
-    - name: disassociate-link
-      description: Disassociates an existing device from a link.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --device-id=!: The ID of the device.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --global-network-id=!: The ID of the global network.
         --link-id=!: The ID of the link.
+    - name: create-direct-connect-gateway-attachment
+      description: Creates an Amazon Web Services Direct Connect gateway attachment
+      flags:
+        --client-token=: client token
+        --core-network-id=!: The ID of the Cloud WAN core network that the Direct Connect gateway attachment should be attached to.
+        --direct-connect-gateway-arn=!: The ARN of the Direct Connect gateway attachment.
+        --edge-locations=!: One or more core network edge locations that the Direct Connect gateway attachment is associated with.
+        --routing-policy-label=: The routing policy label to apply to the Direct Connect Gateway attachment for traffic routing decisions.
+        --tags=: The key value tags to apply to the Direct Connect gateway attachment during creation.
+    - name: delete-core-network
+      description: Deletes a core network along with all core network policies.
+      flags:
+        --core-network-id=!: The network ID of the deleted core network.
+    - name: get-connections
+      description: Gets information about one or more of your connections in a global network.
+      flags:
+        --connection-ids=: One or more connection IDs.
+        --device-id=: The ID of the device.
+        --global-network-id=!: The ID of the global network.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next page of results.
+    - name: get-core-network-change-events
+      description: Returns information about a core network change event.
+      flags:
+        --core-network-id=!: The ID of a core network.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next page of results.
+        --policy-version-id=!: The ID of the policy version.
+    - name: get-vpc-attachment
+      description: Returns information about a VPC attachment.
+      flags:
+        --attachment-id=!: The ID of the attachment.
+    - name: create-transit-gateway-route-table-attachment
+      description: Creates a transit gateway route table attachment.
+      flags:
+        --client-token=: The client token associated with the request.
+        --peering-id=!: The ID of the peer for the
+        --routing-policy-label=: The routing policy label to apply to the Transit Gateway route table attachment for traffic routing decisions.
+        --tags=: The list of key-value tags associated with the request.
+        --transit-gateway-route-table-arn=!: The ARN of the transit gateway route table for the attachment request.
+    - name: execute-core-network-change-set
+      description: Executes a change set on your core network.
+      flags:
+        --core-network-id=!: The ID of a core network.
+        --policy-version-id=!: The ID of the policy version.
+    - name: get-connect-attachment
+      description: Returns information about a core network Connect attachment.
+      flags:
+        --attachment-id=!: The ID of the attachment.
+    - name: get-transit-gateway-peering
+      description: Returns information about a transit gateway peer.
+      flags:
+        --peering-id=!: The ID of the peering request.
+    - name: put-core-network-policy
+      description: Creates a new, immutable version of a core network policy.
+      flags:
+        --client-token=: The client token associated with the request.
+        --core-network-id=!: The ID of a core network.
+        --description=: a core network policy description.
+        --latest-version-id=: The ID of a core network policy.
+        --policy-document=!: The policy document.
+    - name: register-transit-gateway
+      description: Registers a transit gateway in your global network.
+      flags:
+        --global-network-id=!: The ID of the global network.
+        --transit-gateway-arn=!: The Amazon Resource Name (ARN) of the transit gateway.
+    - name: remove-attachment-routing-policy-label
+      description: Removes a routing policy label from an attachment.
+      flags:
+        --attachment-id=!: The ID of the attachment to remove the routing policy label from.
+        --core-network-id=!: The ID of the core network containing the attachment.
