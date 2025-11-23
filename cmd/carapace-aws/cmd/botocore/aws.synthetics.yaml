@@ -1,78 +1,29 @@
 name: synthetics
 description: Synthetics
 commands:
-    - name: tag-resource
-      description: Assigns one or more tags (key-value pairs) to the specified canary or group.
+    - name: create-group
+      description: Creates a group which you can use to associate canaries with each other, including cross-Region canaries.
       flags:
-        --resource-arn=!: The ARN of the canary or group that you're adding tags to.
-        --tags=!: The list of key-value pairs to associate with the resource.
-    - name: get-canary
-      description: Retrieves complete information about one canary.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name for the group.
+        --tags=: A list of key-value pairs to associate with the group.
+    - name: describe-runtime-versions
+      description: Returns a list of Synthetics canary runtime versions.
       flags:
-        --dry-run-id=: The DryRunId associated with an existing canary’s dry run.
-        --name=!: The name of the canary that you want details for.
-    - name: create-canary
-      description: Creates a canary.
-      flags:
-        --artifact-config=: A structure that contains the configuration for canary artifacts, including the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.
-        --artifact-s3-location=!: The location in Amazon S3 where Synthetics stores artifacts from the test runs of this canary.
-        --browser-configs=: CloudWatch Synthetics now supports multibrowser canaries for `syn-nodejs-puppeteer-11.0` and `syn-nodejs-playwright-3.0` runtimes.
-        --code=!: A structure that includes the entry point from which the canary should start running your script.
-        --execution-role-arn=!: The ARN of the IAM role to be used to run the canary.
-        --failure-retention-period-in-days=: The number of days to retain data about failed runs of this canary.
-        --name=!: The name for this canary.
-        --provisioned-resource-cleanup=: Specifies whether to also delete the Lambda functions and layers used by this canary when the canary is deleted.
-        --resources-to-replicate-tags=: To have the tags that you apply to this canary also be applied to the Lambda function that the canary uses, specify this parameter with the value `lambda-function`.
-        --run-config=: A structure that contains the configuration for individual canary runs, such as timeout value and environment variables.
-        --runtime-version=!: Specifies the runtime version to use for the canary.
-        --schedule=!: A structure that contains information about how often the canary is to run and when these test runs are to stop.
-        --success-retention-period-in-days=: The number of days to retain data about successful runs of this canary.
-        --tags=: A list of key-value pairs to associate with the canary.
-        --vpc-config=: If this canary is to test an endpoint in a VPC, this structure contains information about the subnet and security groups of the VPC endpoint.
-      completion:
-        flag:
-            provisioned-resource-cleanup:
-                - AUTOMATIC
-                - "OFF"
-    - name: describe-canaries
-      description: This operation returns a list of the canaries in your account, along with full details about each canary.
-      flags:
-        --max-results=: Specify this parameter to limit how many canaries are returned each time you use the `DescribeCanaries` operation.
-        --names=: Use this parameter to return only canaries that match the names that you specify here.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Specify this parameter to limit how many runs are returned each time you use the `DescribeRuntimeVersions` operation.
         --next-token=: A token that indicates that there is more data available.
-    - name: describe-canaries-last-run
-      description: Use this operation to see information from the most recent run of each canary that you have created.
-      flags:
-        --browser-type=: The type of browser to use for the canary run.
-        --max-results=: Specify this parameter to limit how many runs are returned each time you use the `DescribeLastRun` operation.
-        --names=: Use this parameter to return only canaries that match the names that you specify here.
-        --next-token=: A token that indicates that there is more data available.
-      completion:
-        flag:
-            browser-type:
-                - CHROME
-                - FIREFOX
-    - name: list-groups
-      description: Returns a list of all groups in the account, displaying their names, unique IDs, and ARNs.
-      flags:
-        --max-results=: Specify this parameter to limit how many groups are returned each time you use the `ListGroups` operation.
-        --next-token=: A token that indicates that there is more data available.
-    - name: list-tags-for-resource
-      description: Displays the tags associated with a canary or group.
-      flags:
-        --resource-arn=!: The ARN of the canary or group that you want to view tags for.
-    - name: stop-canary
-      description: Stops the canary to prevent all future runs.
-      flags:
-        --name=!: The name of the canary that you want to stop.
-    - name: delete-group
-      description: Deletes a group.
-      flags:
-        --group-identifier=!: Specifies which group to delete.
     - name: get-canary-runs
       description: Retrieves a list of runs for a specified canary.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --dry-run-id=: The DryRunId associated with an existing canary’s dry run.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: Specify this parameter to limit how many runs are returned each time you use the `GetCanaryRuns` operation.
         --name=!: The name of the canary that you want to see runs for.
         --next-token=: A token that indicates that there is more data available.
@@ -82,73 +33,28 @@ commands:
             run-type:
                 - CANARY_RUN
                 - DRY_RUN
-    - name: get-group
-      description: Returns information about one group.
-      flags:
-        --group-identifier=!: Specifies the group to return information for.
-    - name: list-associated-groups
-      description: Returns a list of the groups that the specified canary is associated with.
-      flags:
-        --max-results=: Specify this parameter to limit how many groups are returned each time you use the `ListAssociatedGroups` operation.
-        --next-token=: A token that indicates that there is more data available.
-        --resource-arn=!: The ARN of the canary that you want to view groups for.
-    - name: start-canary-dry-run
-      description: Use this operation to start a dry run for a canary that has already been created
-      flags:
-        --artifact-config=: ""
-        --artifact-s3-location=: The location in Amazon S3 where Synthetics stores artifacts from the test runs of this canary.
-        --browser-configs=: A structure that specifies the browser type to use for a canary run.
-        --code=: ""
-        --execution-role-arn=: The ARN of the IAM role to be used to run the canary.
-        --failure-retention-period-in-days=: The number of days to retain data about failed runs of this canary.
-        --name=!: The name of the canary that you want to dry run.
-        --provisioned-resource-cleanup=: Specifies whether to also delete the Lambda functions and layers used by this canary when the canary is deleted.
-        --run-config=: ""
-        --runtime-version=: Specifies the runtime version to use for the canary.
-        --success-retention-period-in-days=: The number of days to retain data about successful runs of this canary.
-        --visual-reference=: ""
-        --visual-references=: A list of visual reference configurations for the canary, one for each browser type that the canary is configured to run on.
-        --vpc-config=: ""
-      completion:
-        flag:
-            provisioned-resource-cleanup:
-                - AUTOMATIC
-                - "OFF"
     - name: list-group-resources
       description: This operation returns a list of the ARNs of the canaries that are associated with the specified group.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --group-identifier=!: Specifies the group to return information for.
         --max-results=: Specify this parameter to limit how many canary ARNs are returned each time you use the `ListGroupResources` operation.
         --next-token=: A token that indicates that there is more data available.
-    - name: associate-resource
-      description: Associates a canary with a group.
+    - name: list-tags-for-resource
+      description: Displays the tags associated with a canary or group.
       flags:
-        --group-identifier=!: Specifies the group.
-        --resource-arn=!: The ARN of the canary that you want to associate with the specified group.
-    - name: create-group
-      description: Creates a group which you can use to associate canaries with each other, including cross-Region canaries.
-      flags:
-        --name=!: The name for the group.
-        --tags=: A list of key-value pairs to associate with the group.
-    - name: delete-canary
-      description: Permanently deletes the specified canary.
-      flags:
-        --delete-lambda: Specifies whether to also delete the Lambda functions and layers used by this canary.
-        --name=!: The name of the canary that you want to delete.
-        --no-delete-lambda: Specifies whether to also delete the Lambda functions and layers used by this canary.
-    - name: describe-runtime-versions
-      description: Returns a list of Synthetics canary runtime versions.
-      flags:
-        --max-results=: Specify this parameter to limit how many runs are returned each time you use the `DescribeRuntimeVersions` operation.
-        --next-token=: A token that indicates that there is more data available.
-    - name: disassociate-resource
-      description: Removes a canary from a group.
-      flags:
-        --group-identifier=!: Specifies the group.
-        --resource-arn=!: The ARN of the canary that you want to remove from the specified group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the canary or group that you want to view tags for.
     - name: untag-resource
       description: Removes one or more tags from the specified resource.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The ARN of the canary or group that you're removing tags from.
         --tag-keys=!: The list of tag keys to remove from the resource.
     - name: update-canary
@@ -157,10 +63,13 @@ commands:
         --artifact-config=: A structure that contains the configuration for canary artifacts, including the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.
         --artifact-s3-location=: The location in Amazon S3 where Synthetics stores artifacts from the test runs of this canary.
         --browser-configs=: A structure that specifies the browser type to use for a canary run.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --code=: A structure that includes the entry point from which the canary should start running your script.
         --dry-run-id=: Update the existing canary using the updated configurations from the DryRun associated with the DryRunId.
         --execution-role-arn=: The ARN of the IAM role to be used to run the canary.
         --failure-retention-period-in-days=: The number of days to retain data about failed runs of this canary.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the canary that you want to update.
         --provisioned-resource-cleanup=: Specifies whether to also delete the Lambda functions and layers used by this canary when the canary is deleted.
         --run-config=: A structure that contains the timeout value that is used for each individual run of the canary.
@@ -175,7 +84,164 @@ commands:
             provisioned-resource-cleanup:
                 - AUTOMATIC
                 - "OFF"
+    - name: create-canary
+      description: Creates a canary.
+      flags:
+        --artifact-config=: A structure that contains the configuration for canary artifacts, including the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.
+        --artifact-s3-location=!: The location in Amazon S3 where Synthetics stores artifacts from the test runs of this canary.
+        --browser-configs=: CloudWatch Synthetics now supports multibrowser canaries for `syn-nodejs-puppeteer-11.0` and `syn-nodejs-playwright-3.0` runtimes.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --code=!: A structure that includes the entry point from which the canary should start running your script.
+        --execution-role-arn=!: The ARN of the IAM role to be used to run the canary.
+        --failure-retention-period-in-days=: The number of days to retain data about failed runs of this canary.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name for this canary.
+        --provisioned-resource-cleanup=: Specifies whether to also delete the Lambda functions and layers used by this canary when the canary is deleted.
+        --resources-to-replicate-tags=: To have the tags that you apply to this canary also be applied to the Lambda function that the canary uses, specify this parameter with the value `lambda-function`.
+        --run-config=: A structure that contains the configuration for individual canary runs, such as timeout value and environment variables.
+        --runtime-version=!: Specifies the runtime version to use for the canary.
+        --schedule=!: A structure that contains information about how often the canary is to run and when these test runs are to stop.
+        --success-retention-period-in-days=: The number of days to retain data about successful runs of this canary.
+        --tags=: A list of key-value pairs to associate with the canary.
+        --vpc-config=: If this canary is to test an endpoint in a VPC, this structure contains information about the subnet and security groups of the VPC endpoint.
+      completion:
+        flag:
+            provisioned-resource-cleanup:
+                - AUTOMATIC
+                - "OFF"
+    - name: delete-group
+      description: Deletes a group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-identifier=!: Specifies which group to delete.
+    - name: describe-canaries-last-run
+      description: Use this operation to see information from the most recent run of each canary that you have created.
+      flags:
+        --browser-type=: The type of browser to use for the canary run.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Specify this parameter to limit how many runs are returned each time you use the `DescribeLastRun` operation.
+        --names=: Use this parameter to return only canaries that match the names that you specify here.
+        --next-token=: A token that indicates that there is more data available.
+      completion:
+        flag:
+            browser-type:
+                - CHROME
+                - FIREFOX
+    - name: get-group
+      description: Returns information about one group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-identifier=!: Specifies the group to return information for.
     - name: start-canary
       description: Use this operation to run a canary that has already been created.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the canary that you want to run.
+    - name: disassociate-resource
+      description: Removes a canary from a group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-identifier=!: Specifies the group.
+        --resource-arn=!: The ARN of the canary that you want to remove from the specified group.
+    - name: get-canary
+      description: Retrieves complete information about one canary.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dry-run-id=: The DryRunId associated with an existing canary’s dry run.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the canary that you want details for.
+    - name: list-groups
+      description: Returns a list of all groups in the account, displaying their names, unique IDs, and ARNs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Specify this parameter to limit how many groups are returned each time you use the `ListGroups` operation.
+        --next-token=: A token that indicates that there is more data available.
+    - name: start-canary-dry-run
+      description: Use this operation to start a dry run for a canary that has already been created
+      flags:
+        --artifact-config=: ""
+        --artifact-s3-location=: The location in Amazon S3 where Synthetics stores artifacts from the test runs of this canary.
+        --browser-configs=: A structure that specifies the browser type to use for a canary run.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --code=: ""
+        --execution-role-arn=: The ARN of the IAM role to be used to run the canary.
+        --failure-retention-period-in-days=: The number of days to retain data about failed runs of this canary.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the canary that you want to dry run.
+        --provisioned-resource-cleanup=: Specifies whether to also delete the Lambda functions and layers used by this canary when the canary is deleted.
+        --run-config=: ""
+        --runtime-version=: Specifies the runtime version to use for the canary.
+        --success-retention-period-in-days=: The number of days to retain data about successful runs of this canary.
+        --visual-reference=: ""
+        --visual-references=: A list of visual reference configurations for the canary, one for each browser type that the canary is configured to run on.
+        --vpc-config=: ""
+      completion:
+        flag:
+            provisioned-resource-cleanup:
+                - AUTOMATIC
+                - "OFF"
+    - name: stop-canary
+      description: Stops the canary to prevent all future runs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the canary that you want to stop.
+    - name: tag-resource
+      description: Assigns one or more tags (key-value pairs) to the specified canary or group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the canary or group that you're adding tags to.
+        --tags=!: The list of key-value pairs to associate with the resource.
+    - name: associate-resource
+      description: Associates a canary with a group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-identifier=!: Specifies the group.
+        --resource-arn=!: The ARN of the canary that you want to associate with the specified group.
+    - name: delete-canary
+      description: Permanently deletes the specified canary.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delete-lambda: Specifies whether to also delete the Lambda functions and layers used by this canary.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the canary that you want to delete.
+        --no-delete-lambda: Specifies whether to also delete the Lambda functions and layers used by this canary.
+    - name: describe-canaries
+      description: This operation returns a list of the canaries in your account, along with full details about each canary.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Specify this parameter to limit how many canaries are returned each time you use the `DescribeCanaries` operation.
+        --names=: Use this parameter to return only canaries that match the names that you specify here.
+        --next-token=: A token that indicates that there is more data available.
+    - name: list-associated-groups
+      description: Returns a list of the groups that the specified canary is associated with.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Specify this parameter to limit how many groups are returned each time you use the `ListAssociatedGroups` operation.
+        --next-token=: A token that indicates that there is more data available.
+        --resource-arn=!: The ARN of the canary that you want to view groups for.

@@ -1,132 +1,169 @@
 name: xray
 description: AWS X-Ray
 commands:
-    - name: cancel-trace-retrieval
-      description: Cancels an ongoing trace retrieval job initiated by `StartTraceRetrieval` using the provided `RetrievalToken`.
-      flags:
-        --retrieval-token=!: Retrieval token.
-    - name: get-groups
-      description: Retrieves all active group details.
-      flags:
-        --next-token=: Pagination token.
-    - name: get-trace-segment-destination
-      description: Retrieves the current destination of data sent to `PutTraceSegments` and *OpenTelemetry protocol (OTLP)* endpoint.
-    - name: put-trace-segments
-      description: Uploads segment documents to Amazon Web Services X-Ray.
-      flags:
-        --trace-segment-documents=!: A string containing a JSON document defining one or more segments or subsegments.
-    - name: get-encryption-config
-      description: Retrieves the current encryption configuration for X-Ray data.
-    - name: get-sampling-targets
-      description: Requests a sampling quota for rules that the service is using to sample requests.
-      flags:
-        --sampling-boost-statistics-documents=: Information about rules that the service is using to boost sampling rate.
-        --sampling-statistics-documents=!: Information about rules that the service is using to sample requests.
-    - name: list-tags-for-resource
-      description: Returns a list of tags that are applied to the specified Amazon Web Services X-Ray group or sampling rule.
-      flags:
-        --next-token=: A pagination token.
-        --resource-arn=!: The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
-    - name: start-trace-retrieval
-      description: Initiates a trace retrieval process using the specified time range and for the given trace IDs in the Transaction Search generated CloudWatch log group.
-      flags:
-        --end-time=!: The end of the time range to retrieve traces.
-        --start-time=!: The start of the time range to retrieve traces.
-        --trace-ids=!: Specify the trace IDs of the traces to be retrieved.
-    - name: tag-resource
-      description: Applies tags to an existing Amazon Web Services X-Ray group or sampling rule.
-      flags:
-        --resource-arn=!: The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
-        --tags=!: A map that contains one or more tag keys and tag values to attach to an X-Ray group or sampling rule.
-    - name: get-sampling-statistic-summaries
-      description: Retrieves information about recent sampling results for all sampling rules.
-      flags:
-        --next-token=: Pagination token.
-    - name: list-resource-policies
-      description: Returns the list of resource policies in the target Amazon Web Services account.
-      flags:
-        --next-token=: Not currently supported.
-    - name: create-group
-      description: Creates a group resource with a name and a filter expression.
-      flags:
-        --filter-expression=: The filter expression defining criteria by which to group traces.
-        --group-name=!: The case-sensitive name of the new group.
-        --insights-configuration=: The structure containing configurations related to insights.
-        --tags=: A map that contains one or more tag keys and tag values to attach to an X-Ray group.
-    - name: delete-resource-policy
-      description: Deletes a resource policy from the target Amazon Web Services account.
-      flags:
-        --policy-name=!: The name of the resource policy to delete.
-        --policy-revision-id=: Specifies a specific policy revision to delete.
-    - name: update-indexing-rule
-      description: Modifies an indexing rule’s configuration.
-      flags:
-        --name=!: Name of the indexing rule to be updated.
-        --rule=!: Rule configuration to be updated.
-    - name: batch-get-traces
-      description: You cannot find traces through this API if Transaction Search is enabled since trace is not indexed in X-Ray.
-      flags:
-        --next-token=: Pagination token.
-        --trace-ids=!: Specify the trace IDs of requests for which to retrieve segments.
     - name: get-indexing-rules
       description: Retrieves all indexing rules.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --next-token=: Specify the pagination token returned by a previous request to retrieve the next page of indexes.
-    - name: untag-resource
-      description: Removes tags from an Amazon Web Services X-Ray group or sampling rule.
-      flags:
-        --resource-arn=!: The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
-        --tag-keys=!: Keys for one or more tags that you want to remove from an X-Ray group or sampling rule.
-    - name: update-sampling-rule
-      description: Modifies a sampling rule's configuration.
-      flags:
-        --sampling-rule-update=!: The rule and fields to change.
-    - name: delete-group
-      description: Deletes a group resource.
-      flags:
-        --group-arn=: The ARN of the group that was generated on creation.
-        --group-name=: The case-sensitive name of the group.
     - name: get-service-graph
       description: Retrieves a document that describes services that process incoming requests, and downstream services that they call as a result.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --end-time=!: The end of the timeframe for which to generate a graph.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --group-arn=: The Amazon Resource Name (ARN) of a group based on which you want to generate a graph.
         --group-name=: The name of a group based on which you want to generate a graph.
+        --max-items=: The  total number of items to return in the command's output.
         --next-token=: Pagination token.
         --start-time=!: The start of the time frame for which to generate a graph.
-    - name: get-trace-summaries
-      description: Retrieves IDs and annotations for traces available for a specified time frame using an optional filter.
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-time-series-service-statistics
+      description: Get an aggregation of service statistics defined by a specific time range.
       flags:
-        --end-time=!: The end of the time frame for which to retrieve traces.
-        --filter-expression=: Specify a filter expression to retrieve trace summaries for services or requests that meet certain requirements.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=!: The end of the time frame for which to aggregate statistics.
+        --entity-selector-expression=: A filter expression defining entities that will be aggregated for statistics.
+        --forecast-statistics: The forecasted high and low fault count values.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-arn=: The Amazon Resource Name (ARN) of the group for which to pull statistics from.
+        --group-name=: The case-sensitive name of the group for which to pull statistics from.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: Pagination token.
+        --no-forecast-statistics: The forecasted high and low fault count values.
+        --period=: Aggregation period in seconds.
+        --start-time=!: The start of the time frame for which to aggregate statistics.
+        --starting-token=: A token to specify where to start paginating.
+    - name: put-telemetry-records
+      description: Used by the Amazon Web Services X-Ray daemon to upload telemetry.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --ec2-instance-id=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --hostname=: ""
+        --resource-arn=: ""
+        --telemetry-records=!: ""
+    - name: start-trace-retrieval
+      description: Initiates a trace retrieval process using the specified time range and for the given trace IDs in the Transaction Search generated CloudWatch log group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=!: The end of the time range to retrieve traces.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --start-time=!: The start of the time range to retrieve traces.
+        --trace-ids=!: Specify the trace IDs of the traces to be retrieved.
+    - name: delete-sampling-rule
+      description: Deletes a sampling rule.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --rule-arn=: The ARN of the sampling rule.
+        --rule-name=: The name of the sampling rule.
+    - name: update-group
+      description: Updates a group resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-expression=: The updated filter expression defining criteria by which to group traces.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-arn=: The ARN that was generated upon creation.
+        --group-name=: The case-sensitive name of the group.
+        --insights-configuration=: The structure containing configurations related to insights.
+    - name: update-indexing-rule
+      description: Modifies an indexing rule’s configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: Name of the indexing rule to be updated.
+        --rule=!: Rule configuration to be updated.
+    - name: get-insight
+      description: Retrieves the summary information of an insight.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --insight-id=!: The insight's unique identifier.
+    - name: get-insight-impact-graph
+      description: Retrieves a service graph structure filtered by the specified insight.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=!: The estimated end time of the insight, in Unix time seconds.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --insight-id=!: The insight's unique identifier.
         --next-token=: Specify the pagination token returned by a previous request to retrieve the next page of results.
-        --no-sampling: Set to `true` to get summaries for only a subset of available traces.
-        --sampling: Set to `true` to get summaries for only a subset of available traces.
-        --sampling-strategy=: A parameter to indicate whether to enable sampling on trace summaries.
-        --start-time=!: The start of the time frame for which to retrieve traces.
-        --time-range-type=: Query trace summaries by TraceId (trace start time), Event (trace update time), or Service (trace segment end time).
-      completion:
-        flag:
-            time-range-type:
-                - TraceId
-                - Event
-                - Service
-    - name: put-resource-policy
-      description: Sets the resource policy to grant one or more Amazon Web Services services and accounts permissions to access X-Ray.
+        --start-time=!: The estimated start time of the insight, in Unix time seconds.
+    - name: get-retrieved-traces-graph
+      description: Retrieves a service graph for traces based on the specified `RetrievalToken` from the CloudWatch log group generated by Transaction Search.
       flags:
-        --bypass-policy-lockout-check: A flag to indicate whether to bypass the resource policy lockout safety check.
-        --no-bypass-policy-lockout-check: A flag to indicate whether to bypass the resource policy lockout safety check.
-        --policy-document=!: The resource policy document, which can be up to 5kb in size.
-        --policy-name=!: The name of the resource policy.
-        --policy-revision-id=: Specifies a specific policy revision, to ensure an atomic create operation.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --next-token=: Specify the pagination token returned by a previous request to retrieve the next page of indexes.
+        --retrieval-token=!: Retrieval token.
+    - name: get-sampling-targets
+      description: Requests a sampling quota for rules that the service is using to sample requests.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --sampling-boost-statistics-documents=: Information about rules that the service is using to boost sampling rate.
+        --sampling-statistics-documents=!: Information about rules that the service is using to sample requests.
+    - name: update-sampling-rule
+      description: Modifies a sampling rule's configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --sampling-rule-update=!: The rule and fields to change.
     - name: get-group
       description: Retrieves group resource details.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --group-arn=: The ARN of the group that was generated on creation.
         --group-name=: The case-sensitive name of the group.
+    - name: batch-get-traces
+      description: You cannot find traces through this API if Transaction Search is enabled since trace is not indexed in X-Ray.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: Pagination token.
+        --starting-token=: A token to specify where to start paginating.
+        --trace-ids=!: Specify the trace IDs of requests for which to retrieve segments.
+    - name: delete-group
+      description: Deletes a group resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-arn=: The ARN of the group that was generated on creation.
+        --group-name=: The case-sensitive name of the group.
+    - name: get-sampling-rules
+      description: Retrieves all sampling rules.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: Pagination token.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-retrieved-traces
       description: Retrieves a list of traces for a given `RetrievalToken` from the CloudWatch log group generated by Transaction Search.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --next-token=: Specify the pagination token returned by a previous request to retrieve the next page of indexes.
         --retrieval-token=!: Retrieval token.
         --trace-format=: Format of the requested traces.
@@ -135,9 +172,98 @@ commands:
             trace-format:
                 - XRAY
                 - OTEL
+    - name: list-tags-for-resource
+      description: Returns a list of tags that are applied to the specified Amazon Web Services X-Ray group or sampling rule.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: A pagination token.
+        --resource-arn=!: The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
+        --starting-token=: A token to specify where to start paginating.
+    - name: put-resource-policy
+      description: Sets the resource policy to grant one or more Amazon Web Services services and accounts permissions to access X-Ray.
+      flags:
+        --bypass-policy-lockout-check: A flag to indicate whether to bypass the resource policy lockout safety check.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-bypass-policy-lockout-check: A flag to indicate whether to bypass the resource policy lockout safety check.
+        --policy-document=!: The resource policy document, which can be up to 5kb in size.
+        --policy-name=!: The name of the resource policy.
+        --policy-revision-id=: Specifies a specific policy revision, to ensure an atomic create operation.
+    - name: update-trace-segment-destination
+      description: Modifies the destination of data sent to `PutTraceSegments`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --destination=: The configured destination of trace segments.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            destination:
+                - XRay
+                - CloudWatchLogs
+    - name: get-groups
+      description: Retrieves all active group details.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: Pagination token.
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-insight-summaries
+      description: Retrieves the summaries of all insights in the specified group matching the provided filter values.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=!: The end of the time frame in which the insights ended.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-arn=: The Amazon Resource Name (ARN) of the group.
+        --group-name=: The name of the group.
+        --max-results=: The maximum number of results to display.
+        --next-token=: Pagination token.
+        --start-time=!: The beginning of the time frame in which the insights started.
+        --states=: The list of insight states.
+    - name: put-trace-segments
+      description: Uploads segment documents to Amazon Web Services X-Ray.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --trace-segment-documents=!: A string containing a JSON document defining one or more segments or subsegments.
+    - name: create-group
+      description: Creates a group resource with a name and a filter expression.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-expression=: The filter expression defining criteria by which to group traces.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-name=!: The case-sensitive name of the new group.
+        --insights-configuration=: The structure containing configurations related to insights.
+        --tags=: A map that contains one or more tag keys and tag values to attach to an X-Ray group.
+    - name: delete-resource-policy
+      description: Deletes a resource policy from the target Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-name=!: The name of the resource policy to delete.
+        --policy-revision-id=: Specifies a specific policy revision to delete.
+    - name: get-encryption-config
+      description: Retrieves the current encryption configuration for X-Ray data.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: put-encryption-config
       description: Updates the encryption configuration for X-Ray data.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --key-id=: 'An Amazon Web Services KMS key in one of the following formats:'
         --type=!: The type of encryption.
       completion:
@@ -145,89 +271,99 @@ commands:
             type:
                 - NONE
                 - KMS
-    - name: put-telemetry-records
-      description: Used by the Amazon Web Services X-Ray daemon to upload telemetry.
+    - name: tag-resource
+      description: Applies tags to an existing Amazon Web Services X-Ray group or sampling rule.
       flags:
-        --ec2-instance-id=: ""
-        --hostname=: ""
-        --resource-arn=: ""
-        --telemetry-records=!: ""
-    - name: update-group
-      description: Updates a group resource.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
+        --tags=!: A map that contains one or more tag keys and tag values to attach to an X-Ray group or sampling rule.
+    - name: get-sampling-statistic-summaries
+      description: Retrieves information about recent sampling results for all sampling rules.
       flags:
-        --filter-expression=: The updated filter expression defining criteria by which to group traces.
-        --group-arn=: The ARN that was generated upon creation.
-        --group-name=: The case-sensitive name of the group.
-        --insights-configuration=: The structure containing configurations related to insights.
-    - name: update-trace-segment-destination
-      description: Modifies the destination of data sent to `PutTraceSegments`.
-      flags:
-        --destination=: The configured destination of trace segments.
-      completion:
-        flag:
-            destination:
-                - XRay
-                - CloudWatchLogs
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: Pagination token.
+        --starting-token=: A token to specify where to start paginating.
     - name: get-trace-graph
       description: Retrieves a service graph for one or more specific trace IDs.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
         --next-token=: Pagination token.
+        --starting-token=: A token to specify where to start paginating.
         --trace-ids=!: Trace IDs of requests for which to generate a service graph.
-    - name: create-sampling-rule
-      description: Creates a rule to control sampling behavior for instrumented applications.
+    - name: get-trace-summaries
+      description: Retrieves IDs and annotations for traces available for a specified time frame using an optional filter.
       flags:
-        --sampling-rule=!: The rule definition.
-        --tags=: A map that contains one or more tag keys and tag values to attach to an X-Ray sampling rule.
-    - name: delete-sampling-rule
-      description: Deletes a sampling rule.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=!: The end of the time frame for which to retrieve traces.
+        --filter-expression=: Specify a filter expression to retrieve trace summaries for services or requests that meet certain requirements.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: Specify the pagination token returned by a previous request to retrieve the next page of results.
+        --no-sampling: Set to `true` to get summaries for only a subset of available traces.
+        --sampling: Set to `true` to get summaries for only a subset of available traces.
+        --sampling-strategy=: A parameter to indicate whether to enable sampling on trace summaries.
+        --start-time=!: The start of the time frame for which to retrieve traces.
+        --starting-token=: A token to specify where to start paginating.
+        --time-range-type=: Query trace summaries by TraceId (trace start time), Event (trace update time), or Service (trace segment end time).
+      completion:
+        flag:
+            time-range-type:
+                - TraceId
+                - Event
+                - Service
+    - name: untag-resource
+      description: Removes tags from an Amazon Web Services X-Ray group or sampling rule.
       flags:
-        --rule-arn=: The ARN of the sampling rule.
-        --rule-name=: The name of the sampling rule.
-    - name: get-insight
-      description: Retrieves the summary information of an insight.
-      flags:
-        --insight-id=!: The insight's unique identifier.
-    - name: get-insight-summaries
-      description: Retrieves the summaries of all insights in the specified group matching the provided filter values.
-      flags:
-        --end-time=!: The end of the time frame in which the insights ended.
-        --group-arn=: The Amazon Resource Name (ARN) of the group.
-        --group-name=: The name of the group.
-        --max-results=: The maximum number of results to display.
-        --next-token=: Pagination token.
-        --start-time=!: The beginning of the time frame in which the insights started.
-        --states=: The list of insight states.
-    - name: get-retrieved-traces-graph
-      description: Retrieves a service graph for traces based on the specified `RetrievalToken` from the CloudWatch log group generated by Transaction Search.
-      flags:
-        --next-token=: Specify the pagination token returned by a previous request to retrieve the next page of indexes.
-        --retrieval-token=!: Retrieval token.
-    - name: get-sampling-rules
-      description: Retrieves all sampling rules.
-      flags:
-        --next-token=: Pagination token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
+        --tag-keys=!: Keys for one or more tags that you want to remove from an X-Ray group or sampling rule.
     - name: get-insight-events
       description: X-Ray reevaluates insights periodically until they're resolved, and records each intermediate state as an event.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --insight-id=!: The insight's unique identifier.
         --max-results=: Used to retrieve at most the specified value of events.
         --next-token=: Specify the pagination token returned by a previous request to retrieve the next page of events.
-    - name: get-insight-impact-graph
-      description: Retrieves a service graph structure filtered by the specified insight.
+    - name: cancel-trace-retrieval
+      description: Cancels an ongoing trace retrieval job initiated by `StartTraceRetrieval` using the provided `RetrievalToken`.
       flags:
-        --end-time=!: The estimated end time of the insight, in Unix time seconds.
-        --insight-id=!: The insight's unique identifier.
-        --next-token=: Specify the pagination token returned by a previous request to retrieve the next page of results.
-        --start-time=!: The estimated start time of the insight, in Unix time seconds.
-    - name: get-time-series-service-statistics
-      description: Get an aggregation of service statistics defined by a specific time range.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --retrieval-token=!: Retrieval token.
+    - name: create-sampling-rule
+      description: Creates a rule to control sampling behavior for instrumented applications.
       flags:
-        --end-time=!: The end of the time frame for which to aggregate statistics.
-        --entity-selector-expression=: A filter expression defining entities that will be aggregated for statistics.
-        --forecast-statistics: The forecasted high and low fault count values.
-        --group-arn=: The Amazon Resource Name (ARN) of the group for which to pull statistics from.
-        --group-name=: The case-sensitive name of the group for which to pull statistics from.
-        --next-token=: Pagination token.
-        --no-forecast-statistics: The forecasted high and low fault count values.
-        --period=: Aggregation period in seconds.
-        --start-time=!: The start of the time frame for which to aggregate statistics.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --sampling-rule=!: The rule definition.
+        --tags=: A map that contains one or more tag keys and tag values to attach to an X-Ray sampling rule.
+    - name: get-trace-segment-destination
+      description: Retrieves the current destination of data sent to `PutTraceSegments` and *OpenTelemetry protocol (OTLP)* endpoint.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-resource-policies
+      description: Returns the list of resource policies in the target Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: Not currently supported.
+        --starting-token=: A token to specify where to start paginating.

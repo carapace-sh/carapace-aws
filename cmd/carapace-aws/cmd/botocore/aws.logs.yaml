@@ -1,108 +1,46 @@
 name: logs
 description: Amazon CloudWatch Logs
 commands:
-    - name: list-tags-log-group
-      description: The ListTagsLogGroup operation is on the path to deprecation.
+    - name: describe-deliveries
+      description: Retrieves a list of the deliveries that have been created in the account.
       flags:
-        --log-group-name=!: The name of the log group.
-    - name: put-destination-policy
-      description: Creates or updates an access policy associated with an existing destination.
-      flags:
-        --access-policy=!: An IAM policy document that authorizes cross-account users to deliver their log events to the associated destination.
-        --destination-name=!: A name for an existing destination.
-        --force-update: Specify true if you are updating an existing destination policy to grant permission to an organization ID instead of granting permission to individual Amazon Web Services accounts.
-        --no-force-update: Specify true if you are updating an existing destination policy to grant permission to an organization ID instead of granting permission to individual Amazon Web Services accounts.
-    - name: put-index-policy
-      description: Creates or updates a *field index policy* for the specified log group.
-      flags:
-        --log-group-identifier=!: Specify either the log group name or log group ARN to apply this field index policy to.
-        --policy-document=!: The index policy document, in JSON format.
-    - name: stop-query
-      description: Stops a CloudWatch Logs Insights query that is in progress.
-      flags:
-        --query-id=!: The ID number of the query to stop.
-    - name: delete-log-stream
-      description: Deletes the specified log stream and permanently deletes all the archived log events associated with the log stream.
-      flags:
-        --log-group-name=!: The name of the log group.
-        --log-stream-name=!: The name of the log stream.
-    - name: describe-delivery-destinations
-      description: Retrieves a list of the delivery destinations that have been created in the account.
-      flags:
-        --limit=: Optionally specify the maximum number of delivery destinations to return in the response.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: Optionally specify the maximum number of deliveries to return in the response.
+        --max-items=: The  total number of items to return in the command's output.
         --next-token=: ""
-    - name: filter-log-events
-      description: Lists log events from the specified log group.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-export-tasks
+      description: Lists the specified export tasks.
       flags:
-        --end-time=: The end of the time range, expressed as the number of milliseconds after `Jan 1, 1970 00:00:00 UTC`.
-        --filter-pattern=: The filter pattern to use.
-        --interleaved: If the value is true, the operation attempts to provide responses that contain events from multiple log streams within the log group, interleaved in a single response.
-        --limit=: The maximum number of events to return.
-        --log-group-identifier=: Specify either the name or ARN of the log group to view log events from.
-        --log-group-name=: The name of the log group to search.
-        --log-stream-name-prefix=: Filters the results to include only events from log streams that have names starting with this prefix.
-        --log-stream-names=: Filters the results to only logs from the log streams in this list.
-        --next-token=: The token for the next set of events to return.
-        --no-interleaved: If the value is true, the operation attempts to provide responses that contain events from multiple log streams within the log group, interleaved in a single response.
-        --no-unmask: Specify `true` to display the log event fields with all sensitive data unmasked and visible.
-        --start-time=: The start of the time range, expressed as the number of milliseconds after `Jan 1, 1970 00:00:00 UTC`.
-        --unmask: Specify `true` to display the log event fields with all sensitive data unmasked and visible.
-    - name: get-delivery-destination-policy
-      description: Retrieves the delivery destination policy assigned to the delivery destination that you specify.
-      flags:
-        --delivery-destination-name=!: The name of the delivery destination that you want to retrieve the policy of.
-    - name: get-log-record
-      description: Retrieves all of the fields and values of a single log event.
-      flags:
-        --log-record-pointer=!: The pointer corresponding to the log event record you want to retrieve.
-        --no-unmask: Specify `true` to display the log event fields with all sensitive data unmasked and visible.
-        --unmask: Specify `true` to display the log event fields with all sensitive data unmasked and visible.
-    - name: get-transformer
-      description: Returns the information about the log transformer associated with this log group.
-      flags:
-        --log-group-identifier=!: Specify either the name or ARN of the log group to return transformer information for.
-    - name: list-log-anomaly-detectors
-      description: Retrieves a list of the log anomaly detectors in the account.
-      flags:
-        --filter-log-group-arn=: Use this to optionally filter the results to only include anomaly detectors that are associated with the specified log group.
-        --limit=: The maximum number of items to return.
-        --next-token=: ""
-    - name: tag-log-group
-      description: The TagLogGroup operation is on the path to deprecation.
-      flags:
-        --log-group-name=!: The name of the log group.
-        --tags=!: The key-value pairs to use for the tags.
-    - name: create-log-group
-      description: Creates a log group with the specified name.
-      flags:
-        --kms-key-id=: The Amazon Resource Name (ARN) of the KMS key to use when encrypting log data.
-        --log-group-class=: Use this parameter to specify the log group class for this log group.
-        --log-group-name=!: A name for the log group.
-        --tags=: The key-value pairs to use for the tags.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of items returned.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The token for the next set of items to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --status-code=: The status code of the export task.
+        --task-id=: The ID of the export task.
       completion:
         flag:
-            log-group-class:
-                - STANDARD
-                - INFREQUENT_ACCESS
-                - DELIVERY
-    - name: delete-data-protection-policy
-      description: Deletes the data protection policy from the specified log group.
-      flags:
-        --log-group-identifier=!: The name or ARN of the log group that you want to delete the data protection policy for.
-    - name: describe-delivery-sources
-      description: Retrieves a list of the delivery sources that have been created in the account.
-      flags:
-        --limit=: Optionally specify the maximum number of delivery sources to return in the response.
-        --next-token=: ""
-    - name: describe-field-indexes
-      description: Returns a list of custom and default field indexes which are discovered in log data.
-      flags:
-        --log-group-identifiers=!: An array containing the names or ARNs of the log groups that you want to retrieve field indexes for.
-        --next-token=: ""
+            status-code:
+                - CANCELLED
+                - COMPLETED
+                - FAILED
+                - PENDING
+                - PENDING_CANCEL
+                - RUNNING
     - name: get-log-events
       description: Lists log events from the specified log stream.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --end-time=: The end of the time range, expressed as the number of milliseconds after `Jan 1, 1970 00:00:00 UTC`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --limit=: The maximum number of log events returned.
         --log-group-identifier=: Specify either the name or ARN of the log group to view events from.
         --log-group-name=: The name of the log group.
@@ -113,16 +51,238 @@ commands:
         --start-from-head: If the value is true, the earliest log events are returned first.
         --start-time=: The start of the time range, expressed as the number of milliseconds after `Jan 1, 1970 00:00:00 UTC`.
         --unmask: Specify `true` to display the log event fields with all sensitive data unmasked and visible.
-    - name: get-log-group-fields
-      description: Returns a list of the fields that are included in log events in the specified log group.
+    - name: list-scheduled-queries
+      description: Lists all scheduled queries in the current AWS account and region with optional filtering by state.
       flags:
-        --log-group-identifier=: Specify either the name or ARN of the log group to view.
-        --log-group-name=: The name of the log group to search.
-        --time=: The time to set as the center of the query.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of scheduled queries to return in a single call.
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --state=: Filter results by the state of scheduled queries (ENABLED or DISABLED).
+      completion:
+        flag:
+            state:
+                - ENABLED
+                - DISABLED
+    - name: put-delivery-source
+      description: Creates or updates a logical *delivery source*.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-type=!: Defines the type of log that the source is sending.
+        --name=!: A name for this delivery source.
+        --resource-arn=!: The ARN of the Amazon Web Services resource that is generating and sending logs.
+        --tags=: An optional list of key-value pairs to associate with the resource.
+    - name: put-destination-policy
+      description: Creates or updates an access policy associated with an existing destination.
+      flags:
+        --access-policy=!: An IAM policy document that authorizes cross-account users to deliver their log events to the associated destination.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --destination-name=!: A name for an existing destination.
+        --force-update: Specify true if you are updating an existing destination policy to grant permission to an organization ID instead of granting permission to individual Amazon Web Services accounts.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-force-update: Specify true if you are updating an existing destination policy to grant permission to an organization ID instead of granting permission to individual Amazon Web Services accounts.
+    - name: get-delivery
+      description: Returns complete information about one logical *delivery*.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the delivery that you want to retrieve.
+    - name: get-log-anomaly-detector
+      description: Retrieves information about the log anomaly detector that you specify.
+      flags:
+        --anomaly-detector-arn=!: The ARN of the anomaly detector to retrieve information about.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-log-anomaly-detector
+      description: Creates an *anomaly detector* that regularly scans one or more log groups and look for patterns and anomalies in the logs.
+      flags:
+        --anomaly-visibility-time=: The number of days to have visibility on an anomaly.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-name=: A name for this anomaly detector.
+        --evaluation-frequency=: Specifies how often the anomaly detector is to run and look for anomalies.
+        --filter-pattern=: You can use this parameter to limit the anomaly detection model to examine only log events that match the pattern you specify here.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-id=: Optionally assigns a KMS key to secure this anomaly detector and its findings.
+        --log-group-arn-list=!: An array containing the ARN of the log group that this anomaly detector will watch.
+        --tags=: An optional list of key-value pairs to associate with the resource.
+      completion:
+        flag:
+            evaluation-frequency:
+                - ONE_MIN
+                - FIVE_MIN
+                - TEN_MIN
+                - FIFTEEN_MIN
+                - THIRTY_MIN
+                - ONE_HOUR
+    - name: delete-index-policy
+      description: Deletes a log-group level field index policy that was applied to a single log group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-group-identifier=!: The log group to delete the index policy for.
+    - name: delete-log-anomaly-detector
+      description: Deletes the specified CloudWatch Logs anomaly detector.
+      flags:
+        --anomaly-detector-arn=!: The ARN of the anomaly detector to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-resource-policy
+      description: Deletes a resource policy from this account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-revision-id=: The expected revision ID of the resource policy.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-name=: The name of the policy to be revoked.
+        --resource-arn=: The ARN of the CloudWatch Logs resource for which the resource policy needs to be deleted
+    - name: delete-retention-policy
+      description: Deletes the specified retention policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-group-name=!: The name of the log group.
+    - name: describe-configuration-templates
+      description: Use this operation to return the valid and default values that are used when creating delivery sources, delivery destinations, and deliveries.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delivery-destination-types=: Use this parameter to filter the response to include only the configuration templates that apply to the delivery destination types that you specify here.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: Use this parameter to limit the number of configuration templates that are returned in the response.
+        --log-types=: Use this parameter to filter the response to include only the configuration templates that apply to the log types that you specify here.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-types=: Use this parameter to filter the response to include only the configuration templates that apply to the resource types that you specify here.
+        --service=: Use this parameter to filter the response to include only the configuration templates that apply to the Amazon Web Services service that you specify here.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-delivery-sources
+      description: Retrieves a list of the delivery sources that have been created in the account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: Optionally specify the maximum number of delivery sources to return in the response.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-account-policies
+      description: Returns a list of all CloudWatch Logs account policies in the account.
+      flags:
+        --account-identifiers=: If you are using an account that is set up as a monitoring account for CloudWatch unified cross-account observability, you can use this to specify the account ID of a source account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --next-token=: The token for the next set of items to return.
+        --policy-name=: Use this parameter to limit the returned policies to only the policy with the name that you specify.
+        --policy-type=!: Use this parameter to limit the returned policies to only the policies that match the policy type that you specify.
+      completion:
+        flag:
+            policy-type:
+                - DATA_PROTECTION_POLICY
+                - SUBSCRIPTION_FILTER_POLICY
+                - FIELD_INDEX_POLICY
+                - TRANSFORMER_POLICY
+                - METRIC_EXTRACTION_POLICY
+    - name: describe-index-policies
+      description: Returns the field index policies of the specified log group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-group-identifiers=!: An array containing the name or ARN of the log group that you want to retrieve field index policies for.
+        --next-token=: ""
+    - name: describe-query-definitions
+      description: This operation returns a paginated list of your saved CloudWatch Logs Insights query definitions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Limits the number of returned query definitions to the specified number.
+        --next-token=: ""
+        --query-definition-name-prefix=: Use this parameter to filter your results to only the query definitions that have names that start with the prefix you specify.
+        --query-language=: The query language used for this query.
+      completion:
+        flag:
+            query-language:
+                - CWLI
+                - SQL
+                - PPL
+    - name: list-log-groups-for-query
+      description: Returns a list of the log groups that were analyzed during a single CloudWatch Logs Insights query.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Limits the number of returned log groups to the specified number.
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --query-id=!: The ID of the query to use.
+        --starting-token=: A token to specify where to start paginating.
+    - name: put-destination
+      description: Creates or updates a destination.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --destination-name=!: A name for the destination.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --role-arn=!: The ARN of an IAM role that grants CloudWatch Logs permissions to call the Amazon Kinesis `PutRecord` operation on the destination stream.
+        --tags=: An optional list of key-value pairs to associate with the resource.
+        --target-arn=!: The ARN of an Amazon Kinesis stream to which to deliver matching log events.
+    - name: put-resource-policy
+      description: 'Creates or updates a resource policy allowing other Amazon Web Services services to put log events to this account, such as Amazon Route 53. This API has the following restrictions:'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-revision-id=: The expected revision ID of the resource policy.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-document=: Details of the new policy, including the identity of the principal that is enabled to put logs to this account.
+        --policy-name=: Name of the new policy.
+        --resource-arn=: The ARN of the CloudWatch Logs resource to which the resource policy needs to be added or attached.
+    - name: tag-resource
+      description: Assigns one or more tags (key-value pairs) to the specified CloudWatch Logs resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource that you're adding tags to.
+        --tags=!: The list of key-value pairs to associate with the resource.
+    - name: delete-data-protection-policy
+      description: Deletes the data protection policy from the specified log group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-group-identifier=!: The name or ARN of the log group that you want to delete the data protection policy for.
+    - name: delete-delivery-source
+      description: Deletes a *delivery source*.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the delivery source that you want to delete.
     - name: put-query-definition
       description: Creates or updates a query definition for CloudWatch Logs Insights.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: Used as an idempotency token, to avoid returning an exception if the service receives the same request twice because of a network error.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --log-group-names=: Use this parameter to include specific log groups as part of your query definition.
         --name=!: A name for the query definition.
         --query-definition-id=: If you are updating a query definition, use this parameter to specify the ID of the query definition that you want to update.
@@ -134,41 +294,23 @@ commands:
                 - CWLI
                 - SQL
                 - PPL
-    - name: put-subscription-filter
-      description: Creates or updates a subscription filter and associates it with the specified log group.
+    - name: start-live-tail
+      description: Starts a Live Tail streaming session for one or more log groups.
       flags:
-        --apply-on-transformed-logs: This parameter is valid only for log groups that have an active log transformer.
-        --destination-arn=!: The ARN of the destination to deliver matching log events to.
-        --distribution=: The method used to distribute log data to the destination.
-        --emit-system-fields=: A list of system fields to include in the log events sent to the subscription destination.
-        --field-selection-criteria=: A filter expression that specifies which log events should be processed by this subscription filter based on system fields such as source account and source region.
-        --filter-name=!: A name for the subscription filter.
-        --filter-pattern=!: A filter pattern for subscribing to a filtered stream of log events.
-        --log-group-name=!: The name of the log group.
-        --no-apply-on-transformed-logs: This parameter is valid only for log groups that have an active log transformer.
-        --role-arn=: The ARN of an IAM role that grants CloudWatch Logs permissions to deliver ingested log events to the destination stream.
-      completion:
-        flag:
-            distribution:
-                - Random
-                - ByLogStream
-    - name: list-log-groups-for-query
-      description: Returns a list of the log groups that were analyzed during a single CloudWatch Logs Insights query.
-      flags:
-        --max-results=: Limits the number of returned log groups to the specified number.
-        --next-token=: ""
-        --query-id=!: The ID of the query to use.
-    - name: put-resource-policy
-      description: 'Creates or updates a resource policy allowing other Amazon Web Services services to put log events to this account, such as Amazon Route 53. This API has the following restrictions:'
-      flags:
-        --expected-revision-id=: The expected revision ID of the resource policy.
-        --policy-document=: Details of the new policy, including the identity of the principal that is enabled to put logs to this account.
-        --policy-name=: Name of the new policy.
-        --resource-arn=: The ARN of the CloudWatch Logs resource to which the resource policy needs to be added or attached.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-event-filter-pattern=: An optional pattern to use to filter the results to include only log events that match the pattern.
+        --log-group-identifiers=!: An array where each item in the array is a log group to include in the Live Tail session.
+        --log-stream-name-prefixes=: If you specify this parameter, then only log events in the log streams that have names that start with the prefixes that you specify here are included in the Live Tail session.
+        --log-stream-names=: If you specify this parameter, then only log events in the log streams that you specify here are included in the Live Tail session.
     - name: start-query
       description: Starts a query of one or more log groups using CloudWatch Logs Insights.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --end-time=!: The end of the time range to query.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --limit=: The maximum number of log events to return in the query.
         --log-group-identifiers=: The list of log groups to query.
         --log-group-name=: The log group on which to perform the query.
@@ -182,368 +324,33 @@ commands:
                 - CWLI
                 - SQL
                 - PPL
+    - name: tag-log-group
+      description: The TagLogGroup operation is on the path to deprecation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-group-name=!: The name of the log group.
+        --tags=!: The key-value pairs to use for the tags.
     - name: update-delivery-configuration
       description: Use this operation to update the configuration of a [delivery](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_Delivery.html) to change either the S3 path pattern or the format of the delivered logs.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --field-delimiter=: The field delimiter to use between record fields when the final output format of a delivery is in `Plain`, `W3C`, or `Raw` format.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The ID of the delivery to be updated by this request.
         --record-fields=: The list of record fields to be delivered to the destination, in order.
         --s3-delivery-configuration=: This structure contains parameters that are valid only when the delivery's delivery destination is an S3 bucket.
-    - name: create-log-anomaly-detector
-      description: Creates an *anomaly detector* that regularly scans one or more log groups and look for patterns and anomalies in the logs.
-      flags:
-        --anomaly-visibility-time=: The number of days to have visibility on an anomaly.
-        --detector-name=: A name for this anomaly detector.
-        --evaluation-frequency=: Specifies how often the anomaly detector is to run and look for anomalies.
-        --filter-pattern=: You can use this parameter to limit the anomaly detection model to examine only log events that match the pattern you specify here.
-        --kms-key-id=: Optionally assigns a KMS key to secure this anomaly detector and its findings.
-        --log-group-arn-list=!: An array containing the ARN of the log group that this anomaly detector will watch.
-        --tags=: An optional list of key-value pairs to associate with the resource.
-      completion:
-        flag:
-            evaluation-frequency:
-                - ONE_MIN
-                - FIVE_MIN
-                - TEN_MIN
-                - FIFTEEN_MIN
-                - THIRTY_MIN
-                - ONE_HOUR
-    - name: create-log-stream
-      description: Creates a log stream for the specified log group.
-      flags:
-        --log-group-name=!: The name of the log group.
-        --log-stream-name=!: The name of the log stream.
-    - name: delete-integration
-      description: Deletes the integration between CloudWatch Logs and OpenSearch Service.
-      flags:
-        --force: Specify `true` to force the deletion of the integration even if vended logs dashboards currently exist.
-        --integration-name=!: The name of the integration to delete.
-        --no-force: Specify `true` to force the deletion of the integration even if vended logs dashboards currently exist.
-    - name: delete-metric-filter
-      description: Deletes the specified metric filter.
-      flags:
-        --filter-name=!: The name of the metric filter.
-        --log-group-name=!: The name of the log group.
-    - name: delete-resource-policy
-      description: Deletes a resource policy from this account.
-      flags:
-        --expected-revision-id=: The expected revision ID of the resource policy.
-        --policy-name=: The name of the policy to be revoked.
-        --resource-arn=: The ARN of the CloudWatch Logs resource for which the resource policy needs to be deleted
-    - name: get-scheduled-query-history
-      description: Retrieves the execution history of a scheduled query within a specified time range, including execution status and destination processing metadata.
-      flags:
-        --end-time=!: The end time for the history retrieval window in Unix epoch time.
-        --execution-statuses=: Filter results by execution status (Running, Complete, Failed, Timeout, or InvalidQuery).
-        --identifier=!: The name or ARN of the scheduled query to retrieve history for.
-        --max-results=: The maximum number of history records to return in a single call.
-        --next-token=: ""
-        --start-time=!: The start time for the history retrieval window in Unix epoch time.
-    - name: put-delivery-destination
-      description: Creates or updates a logical *delivery destination*.
-      flags:
-        --delivery-destination-configuration=: A structure that contains the ARN of the Amazon Web Services resource that will receive the logs.
-        --delivery-destination-type=: The type of delivery destination.
-        --name=!: A name for this delivery destination.
-        --output-format=: The format for the logs that this delivery destination will receive.
-        --tags=: An optional list of key-value pairs to associate with the resource.
-      completion:
-        flag:
-            delivery-destination-type:
-                - S3
-                - CWL
-                - FH
-                - XRAY
-            output-format:
-                - json
-                - plain
-                - w3c
-                - raw
-                - parquet
-    - name: tag-resource
-      description: Assigns one or more tags (key-value pairs) to the specified CloudWatch Logs resource.
-      flags:
-        --resource-arn=!: The ARN of the resource that you're adding tags to.
-        --tags=!: The list of key-value pairs to associate with the resource.
-    - name: delete-query-definition
-      description: Deletes a saved CloudWatch Logs Insights query definition.
-      flags:
-        --query-definition-id=!: The ID of the query definition that you want to delete.
-    - name: describe-account-policies
-      description: Returns a list of all CloudWatch Logs account policies in the account.
-      flags:
-        --account-identifiers=: If you are using an account that is set up as a monitoring account for CloudWatch unified cross-account observability, you can use this to specify the account ID of a source account.
-        --next-token=: The token for the next set of items to return.
-        --policy-name=: Use this parameter to limit the returned policies to only the policy with the name that you specify.
-        --policy-type=!: Use this parameter to limit the returned policies to only the policies that match the policy type that you specify.
-      completion:
-        flag:
-            policy-type:
-                - DATA_PROTECTION_POLICY
-                - SUBSCRIPTION_FILTER_POLICY
-                - FIELD_INDEX_POLICY
-                - TRANSFORMER_POLICY
-                - METRIC_EXTRACTION_POLICY
-    - name: describe-metric-filters
-      description: Lists the specified metric filters.
-      flags:
-        --filter-name-prefix=: The prefix to match.
-        --limit=: The maximum number of items returned.
-        --log-group-name=: The name of the log group.
-        --metric-name=: Filters results to include only those with the specified metric name.
-        --metric-namespace=: Filters results to include only those in the specified namespace.
-        --next-token=: The token for the next set of items to return.
-    - name: describe-query-definitions
-      description: This operation returns a paginated list of your saved CloudWatch Logs Insights query definitions.
-      flags:
-        --max-results=: Limits the number of returned query definitions to the specified number.
-        --next-token=: ""
-        --query-definition-name-prefix=: Use this parameter to filter your results to only the query definitions that have names that start with the prefix you specify.
-        --query-language=: The query language used for this query.
-      completion:
-        flag:
-            query-language:
-                - CWLI
-                - SQL
-                - PPL
-    - name: get-log-object
-      description: Retrieves a large logging object (LLO) and streams it back.
-      flags:
-        --log-object-pointer=!: A pointer to the specific log object to retrieve.
-        --no-unmask: A boolean flag that indicates whether to unmask sensitive log data.
-        --unmask: A boolean flag that indicates whether to unmask sensitive log data.
-    - name: list-log-groups
-      description: Returns a list of log groups in the Region in your account.
-      flags:
-        --account-identifiers=: When `includeLinkedAccounts` is set to `true`, use this parameter to specify the list of accounts to search.
-        --include-linked-accounts: If you are using a monitoring account, set this to `true` to have the operation return log groups in the accounts listed in `accountIdentifiers`.
-        --limit=: The maximum number of log groups to return.
-        --log-group-class=: Use this parameter to limit the results to only those log groups in the specified log group class.
-        --log-group-name-pattern=: Use this parameter to limit the returned log groups to only those with names that match the pattern that you specify.
-        --next-token=: ""
-        --no-include-linked-accounts: If you are using a monitoring account, set this to `true` to have the operation return log groups in the accounts listed in `accountIdentifiers`.
-      completion:
-        flag:
-            log-group-class:
-                - STANDARD
-                - INFREQUENT_ACCESS
-                - DELIVERY
-    - name: put-transformer
-      description: Creates or updates a *log transformer* for a single log group.
-      flags:
-        --log-group-identifier=!: Specify either the name or ARN of the log group to create the transformer for.
-        --transformer-config=!: This structure contains the configuration of this log transformer.
-    - name: delete-log-anomaly-detector
-      description: Deletes the specified CloudWatch Logs anomaly detector.
-      flags:
-        --anomaly-detector-arn=!: The ARN of the anomaly detector to delete.
-    - name: describe-log-streams
-      description: Lists the log streams for the specified log group.
-      flags:
-        --descending: If the value is true, results are returned in descending order.
-        --limit=: The maximum number of items returned.
-        --log-group-identifier=: Specify either the name or ARN of the log group to view.
-        --log-group-name=: The name of the log group.
-        --log-stream-name-prefix=: The prefix to match.
-        --next-token=: The token for the next set of items to return.
-        --no-descending: If the value is true, results are returned in descending order.
-        --order-by=: If the value is `LogStreamName`, the results are ordered by log stream name.
-      completion:
-        flag:
-            order-by:
-                - LogStreamName
-                - LastEventTime
-    - name: describe-resource-policies
-      description: Lists the resource policies in this account.
-      flags:
-        --limit=: The maximum number of resource policies to be displayed with one call of this API.
-        --next-token=: ""
-        --policy-scope=: Specifies the scope of the resource policy.
-        --resource-arn=: The ARN of the CloudWatch Logs resource for which to query the resource policy.
-      completion:
-        flag:
-            policy-scope:
-                - ACCOUNT
-                - RESOURCE
-    - name: put-log-events
-      description: Uploads a batch of log events to the specified log stream.
-      flags:
-        --entity=: The entity associated with the log events.
-        --log-events=!: The log events.
-        --log-group-name=!: The name of the log group.
-        --log-stream-name=!: The name of the log stream.
-        --sequence-token=: The sequence token obtained from the response of the previous `PutLogEvents` call.
-    - name: test-metric-filter
-      description: Tests the filter pattern of a metric filter against a sample of log event messages.
-      flags:
-        --filter-pattern=!: ""
-        --log-event-messages=!: The log event messages to test.
-    - name: cancel-export-task
-      description: Cancels the specified export task.
-      flags:
-        --task-id=!: The ID of the export task.
-    - name: delete-account-policy
-      description: Deletes a CloudWatch Logs account policy.
-      flags:
-        --policy-name=!: The name of the policy to delete.
-        --policy-type=!: The type of policy to delete.
-      completion:
-        flag:
-            policy-type:
-                - DATA_PROTECTION_POLICY
-                - SUBSCRIPTION_FILTER_POLICY
-                - FIELD_INDEX_POLICY
-                - TRANSFORMER_POLICY
-                - METRIC_EXTRACTION_POLICY
-    - name: delete-scheduled-query
-      description: Deletes an existing scheduled query and all its associated configurations.
-      flags:
-        --identifier=!: The name or ARN of the scheduled query to delete.
-    - name: get-data-protection-policy
-      description: Returns information about a log group data protection policy.
-      flags:
-        --log-group-identifier=!: The name or ARN of the log group that contains the data protection policy that you want to see.
-    - name: list-integrations
-      description: Returns a list of integrations between CloudWatch Logs and other services in this account.
-      flags:
-        --integration-name-prefix=: To limit the results to integrations that start with a certain name prefix, specify that name prefix here.
-        --integration-status=: To limit the results to integrations with a certain status, specify that status here.
-        --integration-type=: To limit the results to integrations of a certain type, specify that type here.
-      completion:
-        flag:
-            integration-status:
-                - PROVISIONING
-                - ACTIVE
-                - FAILED
-            integration-type:
-                - OPENSEARCH
-    - name: put-delivery-source
-      description: Creates or updates a logical *delivery source*.
-      flags:
-        --log-type=!: Defines the type of log that the source is sending.
-        --name=!: A name for this delivery source.
-        --resource-arn=!: The ARN of the Amazon Web Services resource that is generating and sending logs.
-        --tags=: An optional list of key-value pairs to associate with the resource.
-    - name: update-anomaly
-      description: Use this operation to *suppress* anomaly detection for a specified anomaly or pattern.
-      flags:
-        --anomaly-detector-arn=!: The ARN of the anomaly detector that this operation is to act on.
-        --anomaly-id=: If you are suppressing or unsuppressing an anomaly, specify its unique ID here.
-        --baseline: Set this to `true` to prevent CloudWatch Logs from displaying this behavior as an anomaly in the future.
-        --no-baseline: Set this to `true` to prevent CloudWatch Logs from displaying this behavior as an anomaly in the future.
-        --pattern-id=: If you are suppressing or unsuppressing an pattern, specify its unique ID here.
-        --suppression-period=: If you are temporarily suppressing an anomaly or pattern, use this structure to specify how long the suppression is to last.
-        --suppression-type=: Use this to specify whether the suppression to be temporary or infinite.
-      completion:
-        flag:
-            suppression-type:
-                - LIMITED
-                - INFINITE
-    - name: update-log-anomaly-detector
-      description: Updates an existing log anomaly detector.
-      flags:
-        --anomaly-detector-arn=!: The ARN of the anomaly detector that you want to update.
-        --anomaly-visibility-time=: The number of days to use as the life cycle of anomalies.
-        --enabled!: Use this parameter to pause or restart the anomaly detector.
-        --evaluation-frequency=: Specifies how often the anomaly detector runs and look for anomalies.
-        --filter-pattern=: ""
-        --no-enabled!: Use this parameter to pause or restart the anomaly detector.
-      completion:
-        flag:
-            evaluation-frequency:
-                - ONE_MIN
-                - FIVE_MIN
-                - TEN_MIN
-                - FIFTEEN_MIN
-                - THIRTY_MIN
-                - ONE_HOUR
-    - name: delete-delivery-destination
-      description: Deletes a *delivery destination*.
-      flags:
-        --name=!: The name of the delivery destination that you want to delete.
-    - name: delete-index-policy
-      description: Deletes a log-group level field index policy that was applied to a single log group.
-      flags:
-        --log-group-identifier=!: The log group to delete the index policy for.
-    - name: delete-retention-policy
-      description: Deletes the specified retention policy.
-      flags:
-        --log-group-name=!: The name of the log group.
-    - name: describe-export-tasks
-      description: Lists the specified export tasks.
-      flags:
-        --limit=: The maximum number of items returned.
-        --next-token=: The token for the next set of items to return.
-        --status-code=: The status code of the export task.
-        --task-id=: The ID of the export task.
-      completion:
-        flag:
-            status-code:
-                - CANCELLED
-                - COMPLETED
-                - FAILED
-                - PENDING
-                - PENDING_CANCEL
-                - RUNNING
-    - name: put-account-policy
-      description: Creates an account-level data protection policy, subscription filter policy, field index policy, transformer policy, or metric extraction policy that applies to all log groups or a subset of log groups in the account.
-      flags:
-        --policy-document=!: Specify the policy, in JSON.
-        --policy-name=!: A name for the policy.
-        --policy-type=!: The type of policy that you're creating or updating.
-        --scope=: Currently the only valid value for this parameter is `ALL`, which specifies that the data protection policy applies to all log groups in the account.
-        --selection-criteria=: Use this parameter to apply the new policy to a subset of log groups in the account.
-      completion:
-        flag:
-            policy-type:
-                - DATA_PROTECTION_POLICY
-                - SUBSCRIPTION_FILTER_POLICY
-                - FIELD_INDEX_POLICY
-                - TRANSFORMER_POLICY
-                - METRIC_EXTRACTION_POLICY
-            scope:
-                - ALL
-    - name: put-data-protection-policy
-      description: Creates a data protection policy for the specified log group.
-      flags:
-        --log-group-identifier=!: Specify either the log group name or log group ARN.
-        --policy-document=!: Specify the data protection policy, in JSON.
-    - name: start-live-tail
-      description: Starts a Live Tail streaming session for one or more log groups.
-      flags:
-        --log-event-filter-pattern=: An optional pattern to use to filter the results to include only log events that match the pattern.
-        --log-group-identifiers=!: An array where each item in the array is a log group to include in the Live Tail session.
-        --log-stream-name-prefixes=: If you specify this parameter, then only log events in the log streams that have names that start with the prefixes that you specify here are included in the Live Tail session.
-        --log-stream-names=: If you specify this parameter, then only log events in the log streams that you specify here are included in the Live Tail session.
-    - name: untag-log-group
-      description: The UntagLogGroup operation is on the path to deprecation.
-      flags:
-        --log-group-name=!: The name of the log group.
-        --tags=!: The tag keys.
-    - name: delete-delivery-destination-policy
-      description: Deletes a delivery destination policy.
-      flags:
-        --delivery-destination-name=!: The name of the delivery destination that you want to delete the policy for.
-    - name: delete-transformer
-      description: Deletes the log transformer for the specified log group.
-      flags:
-        --log-group-identifier=!: Specify either the name or ARN of the log group to delete the transformer for.
-    - name: describe-index-policies
-      description: Returns the field index policies of the specified log group.
-      flags:
-        --log-group-identifiers=!: An array containing the name or ARN of the log group that you want to retrieve field index policies for.
-        --next-token=: ""
-    - name: disassociate-kms-key
-      description: Disassociates the specified KMS key from the specified log group or from all CloudWatch Logs Insights query results in the account.
-      flags:
-        --log-group-name=: The name of the log group.
-        --resource-identifier=: Specifies the target for this operation.
     - name: update-scheduled-query
       description: Updates the configuration of an existing scheduled query.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: Updated description for the scheduled query.
         --destination-configuration=: Updated configuration for destinations where the query results will be delivered.
         --execution-role-arn=!: Updated ARN of the IAM role that CloudWatch Logs will assume to execute the scheduled query.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identifier=!: The name or ARN of the scheduled query to update.
         --log-group-identifiers=: Updated log group identifiers to query.
         --query-language=!: Updated query language to use (LogsQL, PPL, or SQL).
@@ -563,58 +370,230 @@ commands:
             state:
                 - ENABLED
                 - DISABLED
+    - name: delete-destination
+      description: Deletes the specified destination, and eventually disables all the subscription filters that publish to it.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --destination-name=!: The name of the destination.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-subscription-filter
+      description: Deletes the specified subscription filter.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-name=!: The name of the subscription filter.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-group-name=!: The name of the log group.
+    - name: describe-log-streams
+      description: Lists the log streams for the specified log group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --descending: If the value is true, results are returned in descending order.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of items returned.
+        --log-group-identifier=: Specify either the name or ARN of the log group to view.
+        --log-group-name=: The name of the log group.
+        --log-stream-name-prefix=: The prefix to match.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The token for the next set of items to return.
+        --no-descending: If the value is true, results are returned in descending order.
+        --order-by=: If the value is `LogStreamName`, the results are ordered by log stream name.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            order-by:
+                - LogStreamName
+                - LastEventTime
+    - name: put-index-policy
+      description: Creates or updates a *field index policy* for the specified log group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-group-identifier=!: Specify either the log group name or log group ARN to apply this field index policy to.
+        --policy-document=!: The index policy document, in JSON format.
+    - name: test-transformer
+      description: Use this operation to test a log transformer.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-event-messages=!: An array of the raw log events that you want to use to test this transformer.
+        --transformer-config=!: This structure contains the configuration of this log transformer that you want to test.
     - name: delete-delivery
       description: Deletes a *delivery*.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The unique ID of the delivery to delete.
-    - name: get-delivery
-      description: Returns complete information about one logical *delivery*.
+    - name: delete-integration
+      description: Deletes the integration between CloudWatch Logs and OpenSearch Service.
       flags:
-        --id=!: The ID of the delivery that you want to retrieve.
-    - name: get-integration
-      description: Returns information about one integration between CloudWatch Logs and OpenSearch Service.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --force: Specify `true` to force the deletion of the integration even if vended logs dashboards currently exist.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --integration-name=!: The name of the integration to delete.
+        --no-force: Specify `true` to force the deletion of the integration even if vended logs dashboards currently exist.
+    - name: delete-log-group
+      description: Deletes the specified log group and permanently deletes all the archived log events associated with the log group.
       flags:
-        --integration-name=!: The name of the integration that you want to find information about.
-    - name: get-log-anomaly-detector
-      description: Retrieves information about the log anomaly detector that you specify.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-group-name=!: The name of the log group.
+    - name: delete-log-stream
+      description: Deletes the specified log stream and permanently deletes all the archived log events associated with the log stream.
       flags:
-        --anomaly-detector-arn=!: The ARN of the anomaly detector to retrieve information about.
-    - name: get-scheduled-query
-      description: Returns detailed information about a specified scheduled query, including its configuration, current state, and execution history.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-group-name=!: The name of the log group.
+        --log-stream-name=!: The name of the log stream.
+    - name: describe-field-indexes
+      description: Returns a list of custom and default field indexes which are discovered in log data.
       flags:
-        --identifier=!: The name or ARN of the scheduled query to retrieve.
-    - name: list-scheduled-queries
-      description: Lists all scheduled queries in the current AWS account and region with optional filtering by state.
-      flags:
-        --max-results=: The maximum number of scheduled queries to return in a single call.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-group-identifiers=!: An array containing the names or ARNs of the log groups that you want to retrieve field indexes for.
         --next-token=: ""
-        --state=: Filter results by the state of scheduled queries (ENABLED or DISABLED).
-      completion:
-        flag:
-            state:
-                - ENABLED
-                - DISABLED
-    - name: put-integration
-      description: Creates an integration between CloudWatch Logs and another service in this account.
+    - name: get-delivery-source
+      description: Retrieves complete information about one delivery source.
       flags:
-        --integration-name=!: A name for the integration.
-        --integration-type=!: The type of integration.
-        --resource-config=!: A structure that contains configuration information for the integration that you are creating.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the delivery source that you want to retrieve.
+    - name: list-integrations
+      description: Returns a list of integrations between CloudWatch Logs and other services in this account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --integration-name-prefix=: To limit the results to integrations that start with a certain name prefix, specify that name prefix here.
+        --integration-status=: To limit the results to integrations with a certain status, specify that status here.
+        --integration-type=: To limit the results to integrations of a certain type, specify that type here.
       completion:
         flag:
+            integration-status:
+                - PROVISIONING
+                - ACTIVE
+                - FAILED
             integration-type:
                 - OPENSEARCH
-    - name: put-retention-policy
-      description: Sets the retention of the specified log group.
+    - name: associate-kms-key
+      description: Associates the specified KMS key with either one log group in the account, or with all stored CloudWatch Logs query insights results in the account.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-id=!: The Amazon Resource Name (ARN) of the KMS key to use when encrypting log data.
+        --log-group-name=: The name of the log group.
+        --resource-identifier=: Specifies the target for this operation.
+    - name: list-tags-log-group
+      description: The ListTagsLogGroup operation is on the path to deprecation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --log-group-name=!: The name of the log group.
-        --retention-in-days=!: ""
+    - name: cancel-export-task
+      description: Cancels the specified export task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --task-id=!: The ID of the export task.
+    - name: describe-resource-policies
+      description: Lists the resource policies in this account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of resource policies to be displayed with one call of this API.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --policy-scope=: Specifies the scope of the resource policy.
+        --resource-arn=: The ARN of the CloudWatch Logs resource for which to query the resource policy.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            policy-scope:
+                - ACCOUNT
+                - RESOURCE
+    - name: get-log-object
+      description: Retrieves a large logging object (LLO) and streams it back.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-object-pointer=!: A pointer to the specific log object to retrieve.
+        --no-unmask: A boolean flag that indicates whether to unmask sensitive log data.
+        --unmask: A boolean flag that indicates whether to unmask sensitive log data.
+    - name: list-log-anomaly-detectors
+      description: Retrieves a list of the log anomaly detectors in the account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-log-group-arn=: Use this to optionally filter the results to only include anomaly detectors that are associated with the specified log group.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of items to return.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-log-anomaly-detector
+      description: Updates an existing log anomaly detector.
+      flags:
+        --anomaly-detector-arn=!: The ARN of the anomaly detector that you want to update.
+        --anomaly-visibility-time=: The number of days to use as the life cycle of anomalies.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --enabled!: Use this parameter to pause or restart the anomaly detector.
+        --evaluation-frequency=: Specifies how often the anomaly detector runs and look for anomalies.
+        --filter-pattern=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-enabled!: Use this parameter to pause or restart the anomaly detector.
+      completion:
+        flag:
+            evaluation-frequency:
+                - ONE_MIN
+                - FIVE_MIN
+                - TEN_MIN
+                - FIFTEEN_MIN
+                - THIRTY_MIN
+                - ONE_HOUR
+    - name: create-log-group
+      description: Creates a log group with the specified name.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-id=: The Amazon Resource Name (ARN) of the KMS key to use when encrypting log data.
+        --log-group-class=: Use this parameter to specify the log group class for this log group.
+        --log-group-name=!: A name for the log group.
+        --tags=: The key-value pairs to use for the tags.
+      completion:
+        flag:
+            log-group-class:
+                - STANDARD
+                - INFREQUENT_ACCESS
+                - DELIVERY
     - name: create-scheduled-query
       description: Creates a new Scheduled Query that runs CloudWatch Logs Insights queries on a schedule and delivers results to specified destinations.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: An optional description for the scheduled query to help identify its purpose.
         --destination-configuration=: Configuration for destinations where the query results will be delivered after successful execution.
         --execution-role-arn=!: The Amazon Resource Name (ARN) of the IAM role that CloudWatch Logs will assume to execute the scheduled query and deliver results to the specified destinations.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --log-group-identifiers=: The log group identifiers to query.
         --name=!: A unique name for the scheduled query within the region for an AWS account.
         --query-language=!: The query language to use for the scheduled query.
@@ -635,33 +614,42 @@ commands:
             state:
                 - ENABLED
                 - DISABLED
-    - name: delete-subscription-filter
-      description: Deletes the specified subscription filter.
+    - name: delete-account-policy
+      description: Deletes a CloudWatch Logs account policy.
       flags:
-        --filter-name=!: The name of the subscription filter.
-        --log-group-name=!: The name of the log group.
-    - name: describe-destinations
-      description: Lists all your destinations.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-name=!: The name of the policy to delete.
+        --policy-type=!: The type of policy to delete.
+      completion:
+        flag:
+            policy-type:
+                - DATA_PROTECTION_POLICY
+                - SUBSCRIPTION_FILTER_POLICY
+                - FIELD_INDEX_POLICY
+                - TRANSFORMER_POLICY
+                - METRIC_EXTRACTION_POLICY
+    - name: delete-scheduled-query
+      description: Deletes an existing scheduled query and all its associated configurations.
       flags:
-        --destination-name-prefix=: The prefix to match.
-        --limit=: The maximum number of items returned.
-        --next-token=: The token for the next set of items to return.
-    - name: delete-delivery-source
-      description: Deletes a *delivery source*.
-      flags:
-        --name=!: The name of the delivery source that you want to delete.
-    - name: describe-deliveries
-      description: Retrieves a list of the deliveries that have been created in the account.
-      flags:
-        --limit=: Optionally specify the maximum number of deliveries to return in the response.
-        --next-token=: ""
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The name or ARN of the scheduled query to delete.
     - name: describe-queries
       description: Returns a list of CloudWatch Logs Insights queries that are scheduled, running, or have been run recently in this account.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --log-group-name=: Limits the returned queries to only those for the specified log group.
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: Limits the number of returned queries to the specified number.
         --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
         --query-language=: Limits the returned queries to only the queries that use the specified query language.
+        --starting-token=: A token to specify where to start paginating.
         --status=: Limits the returned queries to only those that have the specified status.
       completion:
         flag:
@@ -677,31 +665,412 @@ commands:
                 - Cancelled
                 - Timeout
                 - Unknown
-    - name: untag-resource
-      description: Removes one or more tags from the specified resource.
+    - name: get-data-protection-policy
+      description: Returns information about a log group data protection policy.
       flags:
-        --resource-arn=!: The ARN of the CloudWatch Logs resource that you're removing tags from.
-        --tag-keys=!: The list of tag keys to remove from the resource.
-    - name: create-delivery
-      description: Creates a *delivery*.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-group-identifier=!: The name or ARN of the log group that contains the data protection policy that you want to see.
+    - name: get-delivery-destination-policy
+      description: Retrieves the delivery destination policy assigned to the delivery destination that you specify.
       flags:
-        --delivery-destination-arn=!: The ARN of the delivery destination to use for this delivery.
-        --delivery-source-name=!: The name of the delivery source to use for this delivery.
-        --field-delimiter=: The field delimiter to use between record fields when the final output format of a delivery is in `Plain`, `W3C`, or `Raw` format.
-        --record-fields=: The list of record fields to be delivered to the destination, in order.
-        --s3-delivery-configuration=: This structure contains parameters that are valid only when the delivery's delivery destination is an S3 bucket.
-        --tags=: An optional list of key-value pairs to associate with the resource.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delivery-destination-name=!: The name of the delivery destination that you want to retrieve the policy of.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-scheduled-query-history
+      description: Retrieves the execution history of a scheduled query within a specified time range, including execution status and destination processing metadata.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=!: The end time for the history retrieval window in Unix epoch time.
+        --execution-statuses=: Filter results by execution status (Running, Complete, Failed, Timeout, or InvalidQuery).
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The name or ARN of the scheduled query to retrieve history for.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of history records to return in a single call.
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --start-time=!: The start time for the history retrieval window in Unix epoch time.
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-delivery-destination
+      description: Retrieves complete information about one delivery destination.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the delivery destination that you want to retrieve.
+    - name: describe-delivery-destinations
+      description: Retrieves a list of the delivery destinations that have been created in the account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: Optionally specify the maximum number of delivery destinations to return in the response.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: describe-log-groups
       description: Returns information about log groups.
       flags:
         --account-identifiers=: When `includeLinkedAccounts` is set to `true`, use this parameter to specify the list of accounts to search.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --include-linked-accounts: If you are using a monitoring account, set this to `true` to have the operation return log groups in the accounts listed in `accountIdentifiers`.
         --limit=: The maximum number of items returned.
         --log-group-class=: Use this parameter to limit the results to only those log groups in the specified log group class.
         --log-group-identifiers=: Use this array to filter the list of log groups returned.
         --log-group-name-pattern=: If you specify a string for this parameter, the operation returns only log groups that have names that match the string based on a case-sensitive substring search.
         --log-group-name-prefix=: The prefix to match.
+        --max-items=: The  total number of items to return in the command's output.
         --next-token=: The token for the next set of items to return.
+        --no-include-linked-accounts: If you are using a monitoring account, set this to `true` to have the operation return log groups in the accounts listed in `accountIdentifiers`.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            log-group-class:
+                - STANDARD
+                - INFREQUENT_ACCESS
+                - DELIVERY
+    - name: describe-metric-filters
+      description: Lists the specified metric filters.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-name-prefix=: The prefix to match.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of items returned.
+        --log-group-name=: The name of the log group.
+        --max-items=: The  total number of items to return in the command's output.
+        --metric-name=: Filters results to include only those with the specified metric name.
+        --metric-namespace=: Filters results to include only those in the specified namespace.
+        --next-token=: The token for the next set of items to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-query-results
+      description: Returns the results from the specified query.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --query-id=!: The ID number of the query.
+    - name: get-scheduled-query
+      description: Returns detailed information about a specified scheduled query, including its configuration, current state, and execution history.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The name or ARN of the scheduled query to retrieve.
+    - name: untag-log-group
+      description: The UntagLogGroup operation is on the path to deprecation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-group-name=!: The name of the log group.
+        --tags=!: The tag keys.
+    - name: delete-query-definition
+      description: Deletes a saved CloudWatch Logs Insights query definition.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --query-definition-id=!: The ID of the query definition that you want to delete.
+    - name: describe-destinations
+      description: Lists all your destinations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --destination-name-prefix=: The prefix to match.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of items returned.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The token for the next set of items to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: filter-log-events
+      description: Lists log events from the specified log group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=: The end of the time range, expressed as the number of milliseconds after `Jan 1, 1970 00:00:00 UTC`.
+        --filter-pattern=: The filter pattern to use.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --interleaved: If the value is true, the operation attempts to provide responses that contain events from multiple log streams within the log group, interleaved in a single response.
+        --limit=: The maximum number of events to return.
+        --log-group-identifier=: Specify either the name or ARN of the log group to view log events from.
+        --log-group-name=: The name of the log group to search.
+        --log-stream-name-prefix=: Filters the results to include only events from log streams that have names starting with this prefix.
+        --log-stream-names=: Filters the results to only logs from the log streams in this list.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The token for the next set of events to return.
+        --no-interleaved: If the value is true, the operation attempts to provide responses that contain events from multiple log streams within the log group, interleaved in a single response.
+        --no-unmask: Specify `true` to display the log event fields with all sensitive data unmasked and visible.
+        --page-size=: The size of each page to get in the AWS service call.
+        --start-time=: The start of the time range, expressed as the number of milliseconds after `Jan 1, 1970 00:00:00 UTC`.
+        --starting-token=: A token to specify where to start paginating.
+        --unmask: Specify `true` to display the log event fields with all sensitive data unmasked and visible.
+    - name: get-integration
+      description: Returns information about one integration between CloudWatch Logs and OpenSearch Service.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --integration-name=!: The name of the integration that you want to find information about.
+    - name: put-delivery-destination-policy
+      description: Creates and assigns an IAM policy that grants permissions to CloudWatch Logs to deliver logs cross-account to a specified destination in this account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delivery-destination-name=!: The name of the delivery destination to assign this policy to.
+        --delivery-destination-policy=!: The contents of the policy.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: put-log-events
+      description: Uploads a batch of log events to the specified log stream.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entity=: The entity associated with the log events.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-events=!: The log events.
+        --log-group-name=!: The name of the log group.
+        --log-stream-name=!: The name of the log stream.
+        --sequence-token=: The sequence token obtained from the response of the previous `PutLogEvents` call.
+    - name: put-transformer
+      description: Creates or updates a *log transformer* for a single log group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-group-identifier=!: Specify either the name or ARN of the log group to create the transformer for.
+        --transformer-config=!: This structure contains the configuration of this log transformer.
+    - name: stop-query
+      description: Stops a CloudWatch Logs Insights query that is in progress.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --query-id=!: The ID number of the query to stop.
+    - name: get-log-group-fields
+      description: Returns a list of the fields that are included in log events in the specified log group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-group-identifier=: Specify either the name or ARN of the log group to view.
+        --log-group-name=: The name of the log group to search.
+        --time=: The time to set as the center of the query.
+    - name: list-anomalies
+      description: Returns a list of anomalies that log anomaly detectors have found.
+      flags:
+        --anomaly-detector-arn=: Use this to optionally limit the results to only the anomalies found by a certain anomaly detector.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of items to return.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --suppression-state=: You can specify this parameter if you want to the operation to return only anomalies that are currently either suppressed or unsuppressed.
+      completion:
+        flag:
+            suppression-state:
+                - SUPPRESSED
+                - UNSUPPRESSED
+    - name: list-tags-for-resource
+      description: Displays the tags associated with a CloudWatch Logs resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource that you want to view tags for.
+    - name: put-retention-policy
+      description: Sets the retention of the specified log group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-group-name=!: The name of the log group.
+        --retention-in-days=!: ""
+    - name: create-export-task
+      description: Creates an export task so that you can efficiently export data from a log group to an Amazon S3 bucket.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --destination-prefix=: The prefix used as the start of the key for every object exported.
+        --destination=!: The name of S3 bucket for the exported log data.
+        --from=!: The start time of the range for the request, expressed as the number of milliseconds after `Jan 1, 1970 00:00:00 UTC`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-group-name=!: The name of the log group.
+        --log-stream-name-prefix=: Export only log streams that match the provided prefix.
+        --task-name=: The name of the export task.
+        --to=!: The end time of the range for the request, expressed as the number of milliseconds after `Jan 1, 1970 00:00:00 UTC`.
+    - name: delete-metric-filter
+      description: Deletes the specified metric filter.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-name=!: The name of the metric filter.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-group-name=!: The name of the log group.
+    - name: put-data-protection-policy
+      description: Creates a data protection policy for the specified log group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-group-identifier=!: Specify either the log group name or log group ARN.
+        --policy-document=!: Specify the data protection policy, in JSON.
+    - name: put-delivery-destination
+      description: Creates or updates a logical *delivery destination*.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delivery-destination-configuration=: A structure that contains the ARN of the Amazon Web Services resource that will receive the logs.
+        --delivery-destination-type=: The type of delivery destination.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: A name for this delivery destination.
+        --output-format=: The format for the logs that this delivery destination will receive.
+        --tags=: An optional list of key-value pairs to associate with the resource.
+      completion:
+        flag:
+            delivery-destination-type:
+                - S3
+                - CWL
+                - FH
+                - XRAY
+            output-format:
+                - json
+                - plain
+                - w3c
+                - raw
+                - parquet
+    - name: put-subscription-filter
+      description: Creates or updates a subscription filter and associates it with the specified log group.
+      flags:
+        --apply-on-transformed-logs: This parameter is valid only for log groups that have an active log transformer.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --destination-arn=!: The ARN of the destination to deliver matching log events to.
+        --distribution=: The method used to distribute log data to the destination.
+        --emit-system-fields=: A list of system fields to include in the log events sent to the subscription destination.
+        --field-selection-criteria=: A filter expression that specifies which log events should be processed by this subscription filter based on system fields such as source account and source region.
+        --filter-name=!: A name for the subscription filter.
+        --filter-pattern=!: A filter pattern for subscribing to a filtered stream of log events.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-group-name=!: The name of the log group.
+        --no-apply-on-transformed-logs: This parameter is valid only for log groups that have an active log transformer.
+        --role-arn=: The ARN of an IAM role that grants CloudWatch Logs permissions to deliver ingested log events to the destination stream.
+      completion:
+        flag:
+            distribution:
+                - Random
+                - ByLogStream
+    - name: test-metric-filter
+      description: Tests the filter pattern of a metric filter against a sample of log event messages.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-pattern=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-event-messages=!: The log event messages to test.
+    - name: untag-resource
+      description: Removes one or more tags from the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the CloudWatch Logs resource that you're removing tags from.
+        --tag-keys=!: The list of tag keys to remove from the resource.
+    - name: delete-delivery-destination
+      description: Deletes a *delivery destination*.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the delivery destination that you want to delete.
+    - name: delete-delivery-destination-policy
+      description: Deletes a delivery destination policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delivery-destination-name=!: The name of the delivery destination that you want to delete the policy for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-anomaly
+      description: Use this operation to *suppress* anomaly detection for a specified anomaly or pattern.
+      flags:
+        --anomaly-detector-arn=!: The ARN of the anomaly detector that this operation is to act on.
+        --anomaly-id=: If you are suppressing or unsuppressing an anomaly, specify its unique ID here.
+        --baseline: Set this to `true` to prevent CloudWatch Logs from displaying this behavior as an anomaly in the future.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-baseline: Set this to `true` to prevent CloudWatch Logs from displaying this behavior as an anomaly in the future.
+        --pattern-id=: If you are suppressing or unsuppressing an pattern, specify its unique ID here.
+        --suppression-period=: If you are temporarily suppressing an anomaly or pattern, use this structure to specify how long the suppression is to last.
+        --suppression-type=: Use this to specify whether the suppression to be temporary or infinite.
+      completion:
+        flag:
+            suppression-type:
+                - LIMITED
+                - INFINITE
+    - name: create-delivery
+      description: Creates a *delivery*.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delivery-destination-arn=!: The ARN of the delivery destination to use for this delivery.
+        --delivery-source-name=!: The name of the delivery source to use for this delivery.
+        --field-delimiter=: The field delimiter to use between record fields when the final output format of a delivery is in `Plain`, `W3C`, or `Raw` format.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --record-fields=: The list of record fields to be delivered to the destination, in order.
+        --s3-delivery-configuration=: This structure contains parameters that are valid only when the delivery's delivery destination is an S3 bucket.
+        --tags=: An optional list of key-value pairs to associate with the resource.
+    - name: describe-subscription-filters
+      description: Lists the subscription filters for the specified log group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-name-prefix=: The prefix to match.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of items returned.
+        --log-group-name=!: The name of the log group.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The token for the next set of items to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: disassociate-kms-key
+      description: Disassociates the specified KMS key from the specified log group or from all CloudWatch Logs Insights query results in the account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-group-name=: The name of the log group.
+        --resource-identifier=: Specifies the target for this operation.
+    - name: get-transformer
+      description: Returns the information about the log transformer associated with this log group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-group-identifier=!: Specify either the name or ARN of the log group to return transformer information for.
+    - name: list-log-groups
+      description: Returns a list of log groups in the Region in your account.
+      flags:
+        --account-identifiers=: When `includeLinkedAccounts` is set to `true`, use this parameter to specify the list of accounts to search.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-linked-accounts: If you are using a monitoring account, set this to `true` to have the operation return log groups in the accounts listed in `accountIdentifiers`.
+        --limit=: The maximum number of log groups to return.
+        --log-group-class=: Use this parameter to limit the results to only those log groups in the specified log group class.
+        --log-group-name-pattern=: Use this parameter to limit the returned log groups to only those with names that match the pattern that you specify.
+        --next-token=: ""
         --no-include-linked-accounts: If you are using a monitoring account, set this to `true` to have the operation return log groups in the accounts listed in `accountIdentifiers`.
       completion:
         flag:
@@ -709,99 +1078,75 @@ commands:
                 - STANDARD
                 - INFREQUENT_ACCESS
                 - DELIVERY
-    - name: list-anomalies
-      description: Returns a list of anomalies that log anomaly detectors have found.
+    - name: put-integration
+      description: Creates an integration between CloudWatch Logs and another service in this account.
       flags:
-        --anomaly-detector-arn=: Use this to optionally limit the results to only the anomalies found by a certain anomaly detector.
-        --limit=: The maximum number of items to return.
-        --next-token=: ""
-        --suppression-state=: You can specify this parameter if you want to the operation to return only anomalies that are currently either suppressed or unsuppressed.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --integration-name=!: A name for the integration.
+        --integration-type=!: The type of integration.
+        --resource-config=!: A structure that contains configuration information for the integration that you are creating.
       completion:
         flag:
-            suppression-state:
-                - SUPPRESSED
-                - UNSUPPRESSED
-    - name: put-destination
-      description: Creates or updates a destination.
-      flags:
-        --destination-name=!: A name for the destination.
-        --role-arn=!: The ARN of an IAM role that grants CloudWatch Logs permissions to call the Amazon Kinesis `PutRecord` operation on the destination stream.
-        --tags=: An optional list of key-value pairs to associate with the resource.
-        --target-arn=!: The ARN of an Amazon Kinesis stream to which to deliver matching log events.
-    - name: create-export-task
-      description: Creates an export task so that you can efficiently export data from a log group to an Amazon S3 bucket.
-      flags:
-        --destination-prefix=: The prefix used as the start of the key for every object exported.
-        --destination=!: The name of S3 bucket for the exported log data.
-        --from=!: The start time of the range for the request, expressed as the number of milliseconds after `Jan 1, 1970 00:00:00 UTC`.
-        --log-group-name=!: The name of the log group.
-        --log-stream-name-prefix=: Export only log streams that match the provided prefix.
-        --task-name=: The name of the export task.
-        --to=!: The end time of the range for the request, expressed as the number of milliseconds after `Jan 1, 1970 00:00:00 UTC`.
-    - name: delete-log-group
-      description: Deletes the specified log group and permanently deletes all the archived log events associated with the log group.
-      flags:
-        --log-group-name=!: The name of the log group.
-    - name: describe-subscription-filters
-      description: Lists the subscription filters for the specified log group.
-      flags:
-        --filter-name-prefix=: The prefix to match.
-        --limit=: The maximum number of items returned.
-        --log-group-name=!: The name of the log group.
-        --next-token=: The token for the next set of items to return.
-    - name: get-delivery-source
-      description: Retrieves complete information about one delivery source.
-      flags:
-        --name=!: The name of the delivery source that you want to retrieve.
-    - name: get-query-results
-      description: Returns the results from the specified query.
-      flags:
-        --query-id=!: The ID number of the query.
-    - name: put-delivery-destination-policy
-      description: Creates and assigns an IAM policy that grants permissions to CloudWatch Logs to deliver logs cross-account to a specified destination in this account.
-      flags:
-        --delivery-destination-name=!: The name of the delivery destination to assign this policy to.
-        --delivery-destination-policy=!: The contents of the policy.
+            integration-type:
+                - OPENSEARCH
     - name: put-metric-filter
       description: Creates or updates a metric filter and associates it with the specified log group.
       flags:
         --apply-on-transformed-logs: This parameter is valid only for log groups that have an active log transformer.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --emit-system-field-dimensions=: A list of system fields to emit as additional dimensions in the generated metrics.
         --field-selection-criteria=: A filter expression that specifies which log events should be processed by this metric filter based on system fields such as source account and source region.
         --filter-name=!: A name for the metric filter.
         --filter-pattern=!: A filter pattern for extracting metric data out of ingested log events.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --log-group-name=!: The name of the log group.
         --metric-transformations=!: A collection of information that defines how metric data gets emitted.
         --no-apply-on-transformed-logs: This parameter is valid only for log groups that have an active log transformer.
-    - name: test-transformer
-      description: Use this operation to test a log transformer.
+    - name: get-log-record
+      description: Retrieves all of the fields and values of a single log event.
       flags:
-        --log-event-messages=!: An array of the raw log events that you want to use to test this transformer.
-        --transformer-config=!: This structure contains the configuration of this log transformer that you want to test.
-    - name: associate-kms-key
-      description: Associates the specified KMS key with either one log group in the account, or with all stored CloudWatch Logs query insights results in the account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-record-pointer=!: The pointer corresponding to the log event record you want to retrieve.
+        --no-unmask: Specify `true` to display the log event fields with all sensitive data unmasked and visible.
+        --unmask: Specify `true` to display the log event fields with all sensitive data unmasked and visible.
+    - name: put-account-policy
+      description: Creates an account-level data protection policy, subscription filter policy, field index policy, transformer policy, or metric extraction policy that applies to all log groups or a subset of log groups in the account.
       flags:
-        --kms-key-id=!: The Amazon Resource Name (ARN) of the KMS key to use when encrypting log data.
-        --log-group-name=: The name of the log group.
-        --resource-identifier=: Specifies the target for this operation.
-    - name: delete-destination
-      description: Deletes the specified destination, and eventually disables all the subscription filters that publish to it.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-document=!: Specify the policy, in JSON.
+        --policy-name=!: A name for the policy.
+        --policy-type=!: The type of policy that you're creating or updating.
+        --scope=: Currently the only valid value for this parameter is `ALL`, which specifies that the data protection policy applies to all log groups in the account.
+        --selection-criteria=: Use this parameter to apply the new policy to a subset of log groups in the account.
+      completion:
+        flag:
+            policy-type:
+                - DATA_PROTECTION_POLICY
+                - SUBSCRIPTION_FILTER_POLICY
+                - FIELD_INDEX_POLICY
+                - TRANSFORMER_POLICY
+                - METRIC_EXTRACTION_POLICY
+            scope:
+                - ALL
+    - name: create-log-stream
+      description: Creates a log stream for the specified log group.
       flags:
-        --destination-name=!: The name of the destination.
-    - name: describe-configuration-templates
-      description: Use this operation to return the valid and default values that are used when creating delivery sources, delivery destinations, and deliveries.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-group-name=!: The name of the log group.
+        --log-stream-name=!: The name of the log stream.
+    - name: delete-transformer
+      description: Deletes the log transformer for the specified log group.
       flags:
-        --delivery-destination-types=: Use this parameter to filter the response to include only the configuration templates that apply to the delivery destination types that you specify here.
-        --limit=: Use this parameter to limit the number of configuration templates that are returned in the response.
-        --log-types=: Use this parameter to filter the response to include only the configuration templates that apply to the log types that you specify here.
-        --next-token=: ""
-        --resource-types=: Use this parameter to filter the response to include only the configuration templates that apply to the resource types that you specify here.
-        --service=: Use this parameter to filter the response to include only the configuration templates that apply to the Amazon Web Services service that you specify here.
-    - name: get-delivery-destination
-      description: Retrieves complete information about one delivery destination.
-      flags:
-        --name=!: The name of the delivery destination that you want to retrieve.
-    - name: list-tags-for-resource
-      description: Displays the tags associated with a CloudWatch Logs resource.
-      flags:
-        --resource-arn=!: The ARN of the resource that you want to view tags for.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-group-identifier=!: Specify either the name or ARN of the log group to delete the transformer for.

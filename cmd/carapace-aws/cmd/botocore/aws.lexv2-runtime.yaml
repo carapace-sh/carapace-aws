@@ -1,11 +1,48 @@
 name: lexv2-runtime
 description: Amazon Lex Runtime V2
 commands:
+    - name: delete-session
+      description: Removes session information for a specified bot, alias, and user ID.
+      flags:
+        --bot-alias-id=!: The alias identifier in use for the bot that contains the session data.
+        --bot-id=!: The identifier of the bot that contains the session data.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --locale-id=!: The locale where the session is in use.
+        --session-id=!: The identifier of the session to delete.
+    - name: get-session
+      description: Returns session information for a specified bot, alias, and user.
+      flags:
+        --bot-alias-id=!: The alias identifier in use for the bot that contains the session data.
+        --bot-id=!: The identifier of the bot that contains the session data.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --locale-id=!: The locale where the session is in use.
+        --session-id=!: The identifier of the session to return.
+    - name: put-session
+      description: Creates a new session or modifies an existing session with an Amazon Lex V2 bot.
+      flags:
+        --bot-alias-id=!: The alias identifier of the bot that receives the session data.
+        --bot-id=!: The identifier of the bot that receives the session data.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --locale-id=!: The locale where the session is in use.
+        --messages=: A list of messages to send to the user.
+        --request-attributes=: Request-specific information passed between Amazon Lex V2 and the client application.
+        --response-content-type=: The message that Amazon Lex V2 returns in the response can be either text or speech depending on the value of this parameter.
+        --session-id=!: The identifier of the session that receives the session data.
+        --session-state=!: Sets the state of the session with the user.
     - name: recognize-text
       description: Sends user input to Amazon Lex V2.
       flags:
         --bot-alias-id=!: The alias identifier in use for the bot that processes the request.
         --bot-id=!: The identifier of the bot that processes the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --locale-id=!: The locale where the session is in use.
         --request-attributes=: Request-specific information passed between the client application and Amazon Lex V2
         --session-id=!: The identifier of the user session that is having the conversation.
@@ -16,6 +53,9 @@ commands:
       flags:
         --bot-alias-id=!: The alias identifier in use for the bot that should receive the request.
         --bot-id=!: The identifier of the bot that should receive the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --input-stream=: User input in PCM or Opus audio format or text format as described in the `requestContentType` parameter.
         --locale-id=!: The locale where the session is in use.
         --request-attributes=: Request-specific information passed between the client application and Amazon Lex V2
@@ -28,7 +68,10 @@ commands:
       flags:
         --bot-alias-id=!: The alias identifier in use for the bot that processes the request.
         --bot-id=!: The identifier of the bot to process the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --conversation-mode=: The conversation type that you are using the Amazon Lex V2.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --locale-id=!: The locale where the session is in use.
         --request-event-stream=!: Represents the stream of events to Amazon Lex V2 from your application.
         --session-id=!: The identifier of the user session that is having the conversation.
@@ -37,28 +80,3 @@ commands:
             conversation-mode:
                 - AUDIO
                 - TEXT
-    - name: delete-session
-      description: Removes session information for a specified bot, alias, and user ID.
-      flags:
-        --bot-alias-id=!: The alias identifier in use for the bot that contains the session data.
-        --bot-id=!: The identifier of the bot that contains the session data.
-        --locale-id=!: The locale where the session is in use.
-        --session-id=!: The identifier of the session to delete.
-    - name: get-session
-      description: Returns session information for a specified bot, alias, and user.
-      flags:
-        --bot-alias-id=!: The alias identifier in use for the bot that contains the session data.
-        --bot-id=!: The identifier of the bot that contains the session data.
-        --locale-id=!: The locale where the session is in use.
-        --session-id=!: The identifier of the session to return.
-    - name: put-session
-      description: Creates a new session or modifies an existing session with an Amazon Lex V2 bot.
-      flags:
-        --bot-alias-id=!: The alias identifier of the bot that receives the session data.
-        --bot-id=!: The identifier of the bot that receives the session data.
-        --locale-id=!: The locale where the session is in use.
-        --messages=: A list of messages to send to the user.
-        --request-attributes=: Request-specific information passed between Amazon Lex V2 and the client application.
-        --response-content-type=: The message that Amazon Lex V2 returns in the response can be either text or speech depending on the value of this parameter.
-        --session-id=!: The identifier of the session that receives the session data.
-        --session-state=!: Sets the state of the session with the user.

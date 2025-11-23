@@ -1,45 +1,17 @@
 name: workdocs
 description: Amazon WorkDocs
 commands:
-    - name: describe-groups
-      description: Describes the groups specified by the query.
+    - name: update-folder
+      description: Updates the specified attributes of the specified folder.
       flags:
         --authentication-token=: Amazon WorkDocs authentication token.
-        --limit=: The maximum number of items to return with this call.
-        --marker=: The marker for the next set of results.
-        --organization-id=: The ID of the organization.
-        --search-query=!: A query to describe groups by group name.
-    - name: get-resources
-      description: Retrieves a collection of resources, including folders and documents.
-      flags:
-        --authentication-token=: The Amazon WorkDocs authentication token.
-        --collection-type=: The collection type.
-        --limit=: The maximum number of resources to return.
-        --marker=: The marker for the next set of results.
-        --user-id=: The user ID for the resource collection.
-      completion:
-        flag:
-            collection-type:
-                - SHARED_WITH_ME
-    - name: initiate-document-version-upload
-      description: Creates a new document object and version object.
-      flags:
-        --authentication-token=: Amazon WorkDocs authentication token.
-        --content-created-timestamp=: The timestamp when the content of the document was originally created.
-        --content-modified-timestamp=: The timestamp when the content of the document was modified.
-        --content-type=: The content type of the document.
-        --document-size-in-bytes=: The size of the document, in bytes.
-        --id=: The ID of the document.
-        --name=: The name of the document.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --folder-id=!: The ID of the folder.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The name of the folder.
         --parent-folder-id=: The ID of the parent folder.
-    - name: update-document
-      description: Updates the specified attributes of a document.
-      flags:
-        --authentication-token=: Amazon WorkDocs authentication token.
-        --document-id=!: The ID of the document.
-        --name=: The name of the document.
-        --parent-folder-id=: The ID of the parent folder.
-        --resource-state=: The resource state of the document.
+        --resource-state=: The resource state of the folder.
       completion:
         flag:
             resource-state:
@@ -47,156 +19,70 @@ commands:
                 - RESTORING
                 - RECYCLING
                 - RECYCLED
-    - name: delete-folder-contents
-      description: Deletes the contents of the specified folder.
-      flags:
-        --authentication-token=: Amazon WorkDocs authentication token.
-        --folder-id=!: The ID of the folder.
-    - name: delete-user
-      description: Deletes the specified user from a Simple AD or Microsoft AD directory.
-      flags:
-        --authentication-token=: Amazon WorkDocs authentication token.
-        --user-id=!: The ID of the user.
-    - name: describe-folder-contents
-      description: Describes the contents of the specified folder, including its documents and subfolders.
-      flags:
-        --authentication-token=: Amazon WorkDocs authentication token.
-        --folder-id=!: The ID of the folder.
-        --include=: The contents to include.
-        --limit=: The maximum number of items to return with this call.
-        --marker=: The marker for the next set of results.
-        --order=: The order for the contents of the folder.
-        --sort=: The sorting criteria.
-        --type=: The type of items.
-      completion:
-        flag:
-            order:
-                - ASCENDING
-                - DESCENDING
-            sort:
-                - DATE
-                - NAME
-            type:
-                - ALL
-                - DOCUMENT
-                - FOLDER
-    - name: describe-notification-subscriptions
-      description: Lists the specified notification subscriptions.
-      flags:
-        --limit=: The maximum number of items to return with this call.
-        --marker=: The marker for the next set of results.
-        --organization-id=!: The ID of the organization.
-    - name: add-resource-permissions
-      description: Creates a set of permissions for the specified folder or document.
-      flags:
-        --authentication-token=: Amazon WorkDocs authentication token.
-        --notification-options=: The notification options.
-        --principals=!: The users, groups, or organization being granted permission.
-        --resource-id=!: The ID of the resource.
-    - name: create-custom-metadata
-      description: Adds one or more custom properties to the specified resource (a folder, document, or version).
-      flags:
-        --authentication-token=: Amazon WorkDocs authentication token.
-        --custom-metadata=!: Custom metadata in the form of name-value pairs.
-        --resource-id=!: The ID of the resource.
-        --version-id=: The ID of the version, if the custom metadata is being added to a document version.
     - name: delete-comment
       description: Deletes the specified comment from the document version.
       flags:
         --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --comment-id=!: The ID of the comment.
         --document-id=!: The ID of the document.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --version-id=!: The ID of the document version.
-    - name: delete-document
-      description: Permanently deletes the specified document and its associated metadata.
+    - name: delete-document-version
+      description: Deletes a specific version of a document.
       flags:
         --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delete-prior-versions!: Deletes all versions of a document prior to the current version.
+        --document-id=!: The ID of the document associated with the version being deleted.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-delete-prior-versions!: Deletes all versions of a document prior to the current version.
+        --version-id=!: The ID of the version being deleted.
+    - name: describe-comments
+      description: List all the comments for the specified document version.
+      flags:
+        --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --document-id=!: The ID of the document.
-    - name: create-folder
-      description: Creates a folder with the specified name and parent folder.
-      flags:
-        --authentication-token=: Amazon WorkDocs authentication token.
-        --name=: The name of the new folder.
-        --parent-folder-id=!: The ID of the parent folder.
-    - name: create-labels
-      description: Adds the specified list of labels to the given resource (a document or folder)
-      flags:
-        --authentication-token=: Amazon WorkDocs authentication token.
-        --labels=!: List of labels to add to the resource.
-        --resource-id=!: The ID of the resource.
-    - name: delete-notification-subscription
-      description: Deletes the specified subscription from the specified organization.
-      flags:
-        --organization-id=!: The ID of the organization.
-        --subscription-id=!: The ID of the subscription.
-    - name: get-current-user
-      description: Retrieves details of the current user for whom the authentication token was generated.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of items to return.
+        --marker=: The marker for the next set of results.
+        --max-items=: The  total number of items to return in the command's output.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --version-id=!: The ID of the document version.
+    - name: describe-root-folders
+      description: Describes the current user's special folders; the `RootFolder` and the `RecycleBin`.
       flags:
         --authentication-token=!: Amazon WorkDocs authentication token.
-    - name: get-document
-      description: Retrieves details of a document.
-      flags:
-        --authentication-token=: Amazon WorkDocs authentication token.
-        --document-id=!: The ID of the document.
-        --include-custom-metadata: Set this to `TRUE` to include custom metadata in the response.
-        --no-include-custom-metadata: Set this to `TRUE` to include custom metadata in the response.
-    - name: get-document-path
-      description: Retrieves the path information (the hierarchy from the root folder) for the requested document.
-      flags:
-        --authentication-token=: Amazon WorkDocs authentication token.
-        --document-id=!: The ID of the document.
-        --fields=: A comma-separated list of values.
-        --limit=: The maximum number of levels in the hierarchy to return.
-        --marker=: This value is not supported.
-    - name: get-folder
-      description: Retrieves the metadata of the specified folder.
-      flags:
-        --authentication-token=: Amazon WorkDocs authentication token.
-        --folder-id=!: The ID of the folder.
-        --include-custom-metadata: Set to TRUE to include custom metadata in the response.
-        --no-include-custom-metadata: Set to TRUE to include custom metadata in the response.
-    - name: search-resources
-      description: Searches metadata and the content of folders, documents, document versions, and comments.
-      flags:
-        --additional-response-fields=: A list of attributes to include in the response.
-        --authentication-token=: Amazon WorkDocs authentication token.
-        --filters=: Filters results based on entity metadata.
-        --limit=: Max results count per page.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of items to return.
         --marker=: The marker for the next set of results.
-        --order-by=: Order by results in one or more categories.
-        --organization-id=: Filters based on the resource owner OrgId.
-        --query-scopes=: Filter based on the text field type.
-        --query-text=: The String to search for.
-    - name: get-folder-path
-      description: Retrieves the path information (the hierarchy from the root folder) for the specified folder.
-      flags:
-        --authentication-token=: Amazon WorkDocs authentication token.
-        --fields=: A comma-separated list of values.
-        --folder-id=!: The ID of the folder.
-        --limit=: The maximum number of levels in the hierarchy to return.
-        --marker=: This value is not supported.
-    - name: update-document-version
-      description: Changes the status of the document version to ACTIVE.
-      flags:
-        --authentication-token=: Amazon WorkDocs authentication token.
-        --document-id=!: The ID of the document.
-        --version-id=!: The version ID of the document.
-        --version-status=: The status of the version.
-      completion:
-        flag:
-            version-status:
-                - ACTIVE
+        --max-items=: The  total number of items to return in the command's output.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: describe-users
       description: Describes the specified users.
       flags:
         --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --fields=: A comma-separated list of values.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --include=: The state of the users.
         --limit=: The maximum number of items to return.
         --marker=: The marker for the next set of results.
+        --max-items=: The  total number of items to return in the command's output.
         --order=: The order for the results.
         --organization-id=: The ID of the organization.
+        --page-size=: The size of each page to get in the AWS service call.
         --sort=: The sorting criteria.
+        --starting-token=: A token to specify where to start paginating.
         --user-ids=: The IDs of the users.
         --user-query=: A query to filter users by user name.
       completion:
@@ -213,173 +99,35 @@ commands:
                 - STORAGE_LIMIT
                 - USER_STATUS
                 - STORAGE_USED
-    - name: create-notification-subscription
-      description: Configure Amazon WorkDocs to use Amazon SNS notifications.
-      flags:
-        --notification-endpoint=!: The endpoint to receive the notifications.
-        --organization-id=!: The ID of the organization.
-        --protocol=!: The protocol to use.
-        --subscription-type=!: The notification type.
-      completion:
-        flag:
-            protocol:
-                - HTTPS
-                - SQS
-            subscription-type:
-                - ALL
-    - name: deactivate-user
-      description: Deactivates the specified user, which revokes the user's access to Amazon WorkDocs.
-      flags:
-        --authentication-token=: Amazon WorkDocs authentication token.
-        --user-id=!: The ID of the user.
-    - name: get-document-version
-      description: Retrieves version metadata for the specified document.
-      flags:
-        --authentication-token=: Amazon WorkDocs authentication token.
-        --document-id=!: The ID of the document.
-        --fields=: A comma-separated list of values.
-        --include-custom-metadata: Set this to TRUE to include custom metadata in the response.
-        --no-include-custom-metadata: Set this to TRUE to include custom metadata in the response.
-        --version-id=!: The version ID of the document.
-    - name: restore-document-versions
-      description: Recovers a deleted version of an Amazon WorkDocs document.
-      flags:
-        --authentication-token=: Amazon WorkDocs authentication token.
-        --document-id=!: The ID of the document.
-    - name: delete-labels
-      description: Deletes the specified list of labels from a resource.
-      flags:
-        --authentication-token=: Amazon WorkDocs authentication token.
-        --delete-all: Flag to request removal of all labels from the specified resource.
-        --labels=: List of labels to delete from the resource.
-        --no-delete-all: Flag to request removal of all labels from the specified resource.
-        --resource-id=!: The ID of the resource.
-    - name: describe-activities
-      description: Describes the user activities in a specified time period.
-      flags:
-        --activity-types=: Specifies which activity types to include in the response.
-        --authentication-token=: Amazon WorkDocs authentication token.
-        --end-time=: The timestamp that determines the end time of the activities.
-        --include-indirect-activities: Includes indirect activities.
-        --limit=: The maximum number of items to return.
-        --marker=: The marker for the next set of results.
-        --no-include-indirect-activities: Includes indirect activities.
-        --organization-id=: The ID of the organization.
-        --resource-id=: The document or folder ID for which to describe activity types.
-        --start-time=: The timestamp that determines the starting time of the activities.
-        --user-id=: The ID of the user who performed the action.
-    - name: describe-root-folders
-      description: Describes the current user's special folders; the `RootFolder` and the `RecycleBin`.
-      flags:
-        --authentication-token=!: Amazon WorkDocs authentication token.
-        --limit=: The maximum number of items to return.
-        --marker=: The marker for the next set of results.
-    - name: describe-resource-permissions
-      description: Describes the permissions of a specified resource.
-      flags:
-        --authentication-token=: Amazon WorkDocs authentication token.
-        --limit=: The maximum number of items to return with this call.
-        --marker=: The marker for the next set of results.
-        --principal-id=: The ID of the principal to filter permissions by.
-        --resource-id=!: The ID of the resource.
-    - name: activate-user
-      description: Activates the specified user.
-      flags:
-        --authentication-token=: Amazon WorkDocs authentication token.
-        --user-id=!: The ID of the user.
-    - name: create-comment
-      description: Adds a new comment to the specified document version.
-      flags:
-        --authentication-token=: Amazon WorkDocs authentication token.
-        --document-id=!: The ID of the document.
-        --no-notify-collaborators: Set this parameter to TRUE to send an email out to the document collaborators after the comment is created.
-        --notify-collaborators: Set this parameter to TRUE to send an email out to the document collaborators after the comment is created.
-        --parent-id=: The ID of the parent comment.
-        --text=!: The text of the comment.
-        --thread-id=: The ID of the root comment in the thread.
-        --version-id=!: The ID of the document version.
-        --visibility=: The visibility of the comment.
-      completion:
-        flag:
-            visibility:
-                - PUBLIC
-                - PRIVATE
-    - name: delete-custom-metadata
-      description: Deletes custom metadata from the specified resource.
-      flags:
-        --authentication-token=: Amazon WorkDocs authentication token.
-        --delete-all: Flag to indicate removal of all custom metadata properties from the specified resource.
-        --keys=: List of properties to remove.
-        --no-delete-all: Flag to indicate removal of all custom metadata properties from the specified resource.
-        --resource-id=!: The ID of the resource, either a document or folder.
-        --version-id=: The ID of the version, if the custom metadata is being deleted from a document version.
-    - name: delete-document-version
-      description: Deletes a specific version of a document.
-      flags:
-        --authentication-token=: Amazon WorkDocs authentication token.
-        --delete-prior-versions!: Deletes all versions of a document prior to the current version.
-        --document-id=!: The ID of the document associated with the version being deleted.
-        --no-delete-prior-versions!: Deletes all versions of a document prior to the current version.
-        --version-id=!: The ID of the version being deleted.
-    - name: abort-document-version-upload
-      description: Aborts the upload of the specified document version that was previously initiated by [InitiateDocumentVersionUpload]().
-      flags:
-        --authentication-token=: Amazon WorkDocs authentication token.
-        --document-id=!: The ID of the document.
-        --version-id=!: The ID of the version.
-    - name: describe-document-versions
-      description: Retrieves the document versions for the specified document.
-      flags:
-        --authentication-token=: Amazon WorkDocs authentication token.
-        --document-id=!: The ID of the document.
-        --fields=: Specify "SOURCE" to include initialized versions and a URL for the source document.
-        --include=: A comma-separated list of values.
-        --limit=: The maximum number of versions to return with this call.
-        --marker=: The marker for the next set of results.
-    - name: remove-resource-permission
-      description: Removes the permission for the specified principal from the specified resource.
-      flags:
-        --authentication-token=: Amazon WorkDocs authentication token.
-        --principal-id=!: The principal ID of the resource.
-        --principal-type=: The principal type of the resource.
-        --resource-id=!: The ID of the resource.
-      completion:
-        flag:
-            principal-type:
-                - USER
-                - GROUP
-                - INVITE
-                - ANONYMOUS
-                - ORGANIZATION
-    - name: delete-folder
-      description: Permanently deletes the specified folder and its contents.
-      flags:
-        --authentication-token=: Amazon WorkDocs authentication token.
-        --folder-id=!: The ID of the folder.
     - name: remove-all-resource-permissions
       description: Removes all the permissions from the specified resource.
       flags:
         --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-id=!: The ID of the resource.
-    - name: update-folder
-      description: Updates the specified attributes of the specified folder.
+    - name: update-document-version
+      description: Changes the status of the document version to ACTIVE.
       flags:
         --authentication-token=: Amazon WorkDocs authentication token.
-        --folder-id=!: The ID of the folder.
-        --name=: The name of the folder.
-        --parent-folder-id=: The ID of the parent folder.
-        --resource-state=: The resource state of the folder.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --document-id=!: The ID of the document.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --version-id=!: The version ID of the document.
+        --version-status=: The status of the version.
       completion:
         flag:
-            resource-state:
+            version-status:
                 - ACTIVE
-                - RESTORING
-                - RECYCLING
-                - RECYCLED
     - name: update-user
       description: Updates the specified attributes of the specified user, and grants or revokes administrative privileges to the Amazon WorkDocs site.
       flags:
         --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --given-name=: The given name of the user.
         --grant-poweruser-privileges=: Boolean value to determine whether the user is granted Power user privileges.
         --locale=: The locale of the user.
@@ -411,11 +159,202 @@ commands:
                 - POWERUSER
                 - MINIMALUSER
                 - WORKSPACESUSER
+    - name: activate-user
+      description: Activates the specified user.
+      flags:
+        --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-id=!: The ID of the user.
+    - name: create-notification-subscription
+      description: Configure Amazon WorkDocs to use Amazon SNS notifications.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --notification-endpoint=!: The endpoint to receive the notifications.
+        --organization-id=!: The ID of the organization.
+        --protocol=!: The protocol to use.
+        --subscription-type=!: The notification type.
+      completion:
+        flag:
+            protocol:
+                - HTTPS
+                - SQS
+            subscription-type:
+                - ALL
+    - name: delete-user
+      description: Deletes the specified user from a Simple AD or Microsoft AD directory.
+      flags:
+        --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-id=!: The ID of the user.
+    - name: get-folder-path
+      description: Retrieves the path information (the hierarchy from the root folder) for the specified folder.
+      flags:
+        --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fields=: A comma-separated list of values.
+        --folder-id=!: The ID of the folder.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of levels in the hierarchy to return.
+        --marker=: This value is not supported.
+    - name: restore-document-versions
+      description: Recovers a deleted version of an Amazon WorkDocs document.
+      flags:
+        --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --document-id=!: The ID of the document.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: search-resources
+      description: Searches metadata and the content of folders, documents, document versions, and comments.
+      flags:
+        --additional-response-fields=: A list of attributes to include in the response.
+        --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters results based on entity metadata.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: Max results count per page.
+        --marker=: The marker for the next set of results.
+        --max-items=: The  total number of items to return in the command's output.
+        --order-by=: Order by results in one or more categories.
+        --organization-id=: Filters based on the resource owner OrgId.
+        --page-size=: The size of each page to get in the AWS service call.
+        --query-scopes=: Filter based on the text field type.
+        --query-text=: The String to search for.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-notification-subscriptions
+      description: Lists the specified notification subscriptions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of items to return with this call.
+        --marker=: The marker for the next set of results.
+        --max-items=: The  total number of items to return in the command's output.
+        --organization-id=!: The ID of the organization.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-activities
+      description: Describes the user activities in a specified time period.
+      flags:
+        --activity-types=: Specifies which activity types to include in the response.
+        --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=: The timestamp that determines the end time of the activities.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-indirect-activities: Includes indirect activities.
+        --limit=: The maximum number of items to return.
+        --marker=: The marker for the next set of results.
+        --max-items=: The  total number of items to return in the command's output.
+        --no-include-indirect-activities: Includes indirect activities.
+        --organization-id=: The ID of the organization.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-id=: The document or folder ID for which to describe activity types.
+        --start-time=: The timestamp that determines the starting time of the activities.
+        --starting-token=: A token to specify where to start paginating.
+        --user-id=: The ID of the user who performed the action.
+    - name: describe-document-versions
+      description: Retrieves the document versions for the specified document.
+      flags:
+        --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --document-id=!: The ID of the document.
+        --fields=: Specify "SOURCE" to include initialized versions and a URL for the source document.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include=: A comma-separated list of values.
+        --limit=: The maximum number of versions to return with this call.
+        --marker=: The marker for the next set of results.
+        --max-items=: The  total number of items to return in the command's output.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-folder-contents
+      description: Describes the contents of the specified folder, including its documents and subfolders.
+      flags:
+        --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --folder-id=!: The ID of the folder.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include=: The contents to include.
+        --limit=: The maximum number of items to return with this call.
+        --marker=: The marker for the next set of results.
+        --max-items=: The  total number of items to return in the command's output.
+        --order=: The order for the contents of the folder.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort=: The sorting criteria.
+        --starting-token=: A token to specify where to start paginating.
+        --type=: The type of items.
+      completion:
+        flag:
+            order:
+                - ASCENDING
+                - DESCENDING
+            sort:
+                - DATE
+                - NAME
+            type:
+                - ALL
+                - DOCUMENT
+                - FOLDER
+    - name: get-resources
+      description: Retrieves a collection of resources, including folders and documents.
+      flags:
+        --authentication-token=: The Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collection-type=: The collection type.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of resources to return.
+        --marker=: The marker for the next set of results.
+        --user-id=: The user ID for the resource collection.
+      completion:
+        flag:
+            collection-type:
+                - SHARED_WITH_ME
+    - name: update-document
+      description: Updates the specified attributes of a document.
+      flags:
+        --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --document-id=!: The ID of the document.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The name of the document.
+        --parent-folder-id=: The ID of the parent folder.
+        --resource-state=: The resource state of the document.
+      completion:
+        flag:
+            resource-state:
+                - ACTIVE
+                - RESTORING
+                - RECYCLING
+                - RECYCLED
+    - name: create-folder
+      description: Creates a folder with the specified name and parent folder.
+      flags:
+        --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The name of the new folder.
+        --parent-folder-id=!: The ID of the parent folder.
     - name: create-user
       description: Creates a user in a Simple AD or Microsoft AD directory.
       flags:
         --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --email-address=: The email address of the user.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --given-name=!: The given name of the user.
         --organization-id=: The ID of the organization.
         --password=!: The password of the user.
@@ -423,11 +362,234 @@ commands:
         --surname=!: The surname of the user.
         --time-zone-id=: The time zone ID of the user.
         --username=!: The login name of the user.
-    - name: describe-comments
-      description: List all the comments for the specified document version.
+    - name: deactivate-user
+      description: Deactivates the specified user, which revokes the user's access to Amazon WorkDocs.
       flags:
         --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-id=!: The ID of the user.
+    - name: get-folder
+      description: Retrieves the metadata of the specified folder.
+      flags:
+        --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --folder-id=!: The ID of the folder.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-custom-metadata: Set to TRUE to include custom metadata in the response.
+        --no-include-custom-metadata: Set to TRUE to include custom metadata in the response.
+    - name: initiate-document-version-upload
+      description: Creates a new document object and version object.
+      flags:
+        --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content-created-timestamp=: The timestamp when the content of the document was originally created.
+        --content-modified-timestamp=: The timestamp when the content of the document was modified.
+        --content-type=: The content type of the document.
+        --document-size-in-bytes=: The size of the document, in bytes.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=: The ID of the document.
+        --name=: The name of the document.
+        --parent-folder-id=: The ID of the parent folder.
+    - name: delete-labels
+      description: Deletes the specified list of labels from a resource.
+      flags:
+        --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delete-all: Flag to request removal of all labels from the specified resource.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --labels=: List of labels to delete from the resource.
+        --no-delete-all: Flag to request removal of all labels from the specified resource.
+        --resource-id=!: The ID of the resource.
+    - name: delete-notification-subscription
+      description: Deletes the specified subscription from the specified organization.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --organization-id=!: The ID of the organization.
+        --subscription-id=!: The ID of the subscription.
+    - name: get-current-user
+      description: Retrieves details of the current user for whom the authentication token was generated.
+      flags:
+        --authentication-token=!: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-document-path
+      description: Retrieves the path information (the hierarchy from the root folder) for the requested document.
+      flags:
+        --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --document-id=!: The ID of the document.
-        --limit=: The maximum number of items to return.
+        --fields=: A comma-separated list of values.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of levels in the hierarchy to return.
+        --marker=: This value is not supported.
+    - name: delete-folder
+      description: Permanently deletes the specified folder and its contents.
+      flags:
+        --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --folder-id=!: The ID of the folder.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-document
+      description: Retrieves details of a document.
+      flags:
+        --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --document-id=!: The ID of the document.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-custom-metadata: Set this to `TRUE` to include custom metadata in the response.
+        --no-include-custom-metadata: Set this to `TRUE` to include custom metadata in the response.
+    - name: describe-resource-permissions
+      description: Describes the permissions of a specified resource.
+      flags:
+        --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of items to return with this call.
         --marker=: The marker for the next set of results.
+        --max-items=: The  total number of items to return in the command's output.
+        --page-size=: The size of each page to get in the AWS service call.
+        --principal-id=: The ID of the principal to filter permissions by.
+        --resource-id=!: The ID of the resource.
+        --starting-token=: A token to specify where to start paginating.
+    - name: add-resource-permissions
+      description: Creates a set of permissions for the specified folder or document.
+      flags:
+        --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --notification-options=: The notification options.
+        --principals=!: The users, groups, or organization being granted permission.
+        --resource-id=!: The ID of the resource.
+    - name: create-custom-metadata
+      description: Adds one or more custom properties to the specified resource (a folder, document, or version).
+      flags:
+        --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --custom-metadata=!: Custom metadata in the form of name-value pairs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-id=!: The ID of the resource.
+        --version-id=: The ID of the version, if the custom metadata is being added to a document version.
+    - name: delete-document
+      description: Permanently deletes the specified document and its associated metadata.
+      flags:
+        --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --document-id=!: The ID of the document.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-folder-contents
+      description: Deletes the contents of the specified folder.
+      flags:
+        --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --folder-id=!: The ID of the folder.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-groups
+      description: Describes the groups specified by the query.
+      flags:
+        --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of items to return with this call.
+        --marker=: The marker for the next set of results.
+        --max-items=: The  total number of items to return in the command's output.
+        --organization-id=: The ID of the organization.
+        --page-size=: The size of each page to get in the AWS service call.
+        --search-query=!: A query to describe groups by group name.
+        --starting-token=: A token to specify where to start paginating.
+    - name: remove-resource-permission
+      description: Removes the permission for the specified principal from the specified resource.
+      flags:
+        --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --principal-id=!: The principal ID of the resource.
+        --principal-type=: The principal type of the resource.
+        --resource-id=!: The ID of the resource.
+      completion:
+        flag:
+            principal-type:
+                - USER
+                - GROUP
+                - INVITE
+                - ANONYMOUS
+                - ORGANIZATION
+    - name: abort-document-version-upload
+      description: Aborts the upload of the specified document version that was previously initiated by [InitiateDocumentVersionUpload]().
+      flags:
+        --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --document-id=!: The ID of the document.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --version-id=!: The ID of the version.
+    - name: create-comment
+      description: Adds a new comment to the specified document version.
+      flags:
+        --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --document-id=!: The ID of the document.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-notify-collaborators: Set this parameter to TRUE to send an email out to the document collaborators after the comment is created.
+        --notify-collaborators: Set this parameter to TRUE to send an email out to the document collaborators after the comment is created.
+        --parent-id=: The ID of the parent comment.
+        --text=!: The text of the comment.
+        --thread-id=: The ID of the root comment in the thread.
         --version-id=!: The ID of the document version.
+        --visibility=: The visibility of the comment.
+      completion:
+        flag:
+            visibility:
+                - PUBLIC
+                - PRIVATE
+    - name: create-labels
+      description: Adds the specified list of labels to the given resource (a document or folder)
+      flags:
+        --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --labels=!: List of labels to add to the resource.
+        --resource-id=!: The ID of the resource.
+    - name: delete-custom-metadata
+      description: Deletes custom metadata from the specified resource.
+      flags:
+        --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delete-all: Flag to indicate removal of all custom metadata properties from the specified resource.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --keys=: List of properties to remove.
+        --no-delete-all: Flag to indicate removal of all custom metadata properties from the specified resource.
+        --resource-id=!: The ID of the resource, either a document or folder.
+        --version-id=: The ID of the version, if the custom metadata is being deleted from a document version.
+    - name: get-document-version
+      description: Retrieves version metadata for the specified document.
+      flags:
+        --authentication-token=: Amazon WorkDocs authentication token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --document-id=!: The ID of the document.
+        --fields=: A comma-separated list of values.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-custom-metadata: Set this to TRUE to include custom metadata in the response.
+        --no-include-custom-metadata: Set this to TRUE to include custom metadata in the response.
+        --version-id=!: The version ID of the document.

@@ -1,68 +1,204 @@
 name: iottwinmaker
 description: AWS IoT TwinMaker
 commands:
-    - name: list-components
-      description: This API lists the components of an entity.
-      flags:
-        --component-path=: This string specifies the path to the composite component, starting from the top-level component.
-        --entity-id=!: The ID for the entity whose metadata (component/properties) is returned by the operation.
-        --max-results=: The maximum number of results returned at one time.
-        --next-token=: The string that specifies the next page of results.
-        --workspace-id=!: The workspace ID.
-    - name: list-sync-resources
-      description: Lists the sync resources.
-      flags:
-        --filters=: A list of objects that filter the request.
-        --max-results=: The maximum number of results to return at one time.
-        --next-token=: The string that specifies the next page of results.
-        --sync-source=!: The sync source.
-        --workspace-id=!: The ID of the workspace that contains the sync job.
-    - name: get-pricing-plan
-      description: Gets the pricing plan.
-    - name: untag-resource
-      description: Removes tags from a resource.
-      flags:
-        --resource-arn=!: The ARN of the resource.
-        --tag-keys=!: A list of tag key names to remove from the resource.
     - name: update-component-type
       description: Updates information in a component type.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --component-type-id=!: The ID of the component type.
         --component-type-name=: The component type name.
         --composite-component-types=: This is an object that maps strings to `compositeComponentTypes` of the `componentType`.
         --description=: The description of the component type.
         --extends-from=: Specifies the component type that this component type extends.
         --functions=: An object that maps strings to the functions in the component type.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --is-singleton: A Boolean value that specifies whether an entity can have more than one component of this type.
         --no-is-singleton: A Boolean value that specifies whether an entity can have more than one component of this type.
         --property-definitions=: An object that maps strings to the property definitions in the component type.
         --property-groups=: The property groups.
         --workspace-id=!: The ID of the workspace.
+    - name: execute-query
+      description: Run queries to access information from your knowledge graph of entities within individual workspaces.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return at one time.
+        --next-token=: The string that specifies the next page of results.
+        --query-statement=!: The query statement.
+        --workspace-id=!: The ID of the workspace.
+    - name: create-scene
+      description: Creates a scene.
+      flags:
+        --capabilities=: A list of capabilities that the scene uses to render itself.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content-location=!: The relative path that specifies the location of the content definition file.
+        --description=: The description for this scene.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scene-id=!: The ID of the scene.
+        --scene-metadata=: The request metadata.
+        --tags=: Metadata that you can use to manage the scene.
+        --workspace-id=!: The ID of the workspace that contains the scene.
+    - name: get-entity
+      description: Retrieves information about an entity.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entity-id=!: The ID of the entity.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workspace-id=!: The ID of the workspace.
+    - name: get-metadata-transfer-job
+      description: Gets a nmetadata transfer job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --metadata-transfer-job-id=!: The metadata transfer job Id.
+    - name: get-property-value
+      description: Gets the property values for a component, component type, entity, or workspace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --component-name=: The name of the component whose property values the operation returns.
+        --component-path=: This string specifies the path to the composite component, starting from the top-level component.
+        --component-type-id=: The ID of the component type whose property values the operation returns.
+        --entity-id=: The ID of the entity whose property values the operation returns.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return at one time.
+        --next-token=: The string that specifies the next page of results.
+        --property-group-name=: The property group name.
+        --selected-properties=!: The properties whose values the operation returns.
+        --tabular-conditions=: The tabular conditions.
+        --workspace-id=!: The ID of the workspace whose values the operation returns.
+    - name: list-component-types
+      description: Lists all component types in a workspace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: A list of objects that filter the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return at one time.
+        --next-token=: The string that specifies the next page of results.
+        --workspace-id=!: The ID of the workspace.
+    - name: tag-resource
+      description: Adds tags to a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource.
+        --tags=!: Metadata to add to this resource.
+    - name: update-entity
+      description: Updates an entity.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --component-updates=: An object that maps strings to the component updates in the request.
+        --composite-component-updates=: This is an object that maps strings to `compositeComponent` updates in the request.
+        --description=: The description of the entity.
+        --entity-id=!: The ID of the entity.
+        --entity-name=: The name of the entity.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --parent-entity-update=: An object that describes the update request for a parent entity.
+        --workspace-id=!: The ID of the workspace that contains the entity.
+    - name: create-entity
+      description: Creates an entity.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --components=: An object that maps strings to the components in the entity.
+        --composite-components=: This is an object that maps strings to `compositeComponent` updates in the request.
+        --description=: The description of the entity.
+        --entity-id=: The ID of the entity.
+        --entity-name=!: The name of the entity.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --parent-entity-id=: The ID of the entity's parent entity.
+        --tags=: Metadata that you can use to manage the entity.
+        --workspace-id=!: The ID of the workspace that contains the entity.
+    - name: list-components
+      description: This API lists the components of an entity.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --component-path=: This string specifies the path to the composite component, starting from the top-level component.
+        --entity-id=!: The ID for the entity whose metadata (component/properties) is returned by the operation.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results returned at one time.
+        --next-token=: The string that specifies the next page of results.
+        --workspace-id=!: The workspace ID.
+    - name: list-tags-for-resource
+      description: Lists all tags associated with a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return at one time.
+        --next-token=: The string that specifies the next page of results.
+        --resource-arn=!: The ARN of the resource.
+    - name: list-workspaces
+      description: Retrieves information about workspaces in the current account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return at one time.
+        --next-token=: The string that specifies the next page of results.
     - name: update-workspace
       description: Updates a workspace.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: The description of the workspace.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --role=: The ARN of the execution role associated with the workspace.
         --s3-location=: The ARN of the S3 bucket where resources associated with the workspace are stored.
         --workspace-id=!: The ID of the workspace.
-    - name: cancel-metadata-transfer-job
-      description: Cancels the metadata transfer job.
+    - name: list-scenes
+      description: Lists all scenes in a workspace.
       flags:
-        --metadata-transfer-job-id=!: The metadata transfer job Id.
-    - name: delete-scene
-      description: Deletes a scene.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Specifies the maximum number of results to display.
+        --next-token=: The string that specifies the next page of results.
+        --workspace-id=!: The ID of the workspace that contains the scenes.
+    - name: list-sync-resources
+      description: Lists the sync resources.
       flags:
-        --scene-id=!: The ID of the scene to delete.
-        --workspace-id=!: The ID of the workspace.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: A list of objects that filter the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return at one time.
+        --next-token=: The string that specifies the next page of results.
+        --sync-source=!: The sync source.
+        --workspace-id=!: The ID of the workspace that contains the sync job.
+    - name: update-scene
+      description: Updates a scene.
+      flags:
+        --capabilities=: A list of capabilities that the scene uses to render.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content-location=: The relative path that specifies the location of the content definition file.
+        --description=: The description of this scene.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scene-id=!: The ID of the scene.
+        --scene-metadata=: The scene metadata.
+        --workspace-id=!: The ID of the workspace that contains the scene.
     - name: get-property-value-history
       description: Retrieves information about the history of a time series property value for a component, component type, entity, or workspace.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --component-name=: The name of the component.
         --component-path=: This string specifies the path to the composite component, starting from the top-level component.
         --component-type-id=: The ID of the component type.
         --end-date-time=: The date and time of the latest property value to return.
         --end-time=: The ISO8601 DateTime of the latest property value to return.
         --entity-id=: The ID of the entity.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --interpolation=: An object that specifies the interpolation type and the interval over which to interpolate data.
         --max-results=: The maximum number of results to return at one time.
         --next-token=: The string that specifies the next page of results.
@@ -77,188 +213,14 @@ commands:
             order-by-time:
                 - ASCENDING
                 - DESCENDING
-    - name: list-tags-for-resource
-      description: Lists all tags associated with a resource.
-      flags:
-        --max-results=: The maximum number of results to return at one time.
-        --next-token=: The string that specifies the next page of results.
-        --resource-arn=!: The ARN of the resource.
-    - name: update-pricing-plan
-      description: Update the pricing plan.
-      flags:
-        --bundle-names=: The bundle names.
-        --pricing-mode=!: The pricing mode.
-      completion:
-        flag:
-            pricing-mode:
-                - BASIC
-                - STANDARD
-                - TIERED_BUNDLE
-    - name: create-entity
-      description: Creates an entity.
-      flags:
-        --components=: An object that maps strings to the components in the entity.
-        --composite-components=: This is an object that maps strings to `compositeComponent` updates in the request.
-        --description=: The description of the entity.
-        --entity-id=: The ID of the entity.
-        --entity-name=!: The name of the entity.
-        --parent-entity-id=: The ID of the entity's parent entity.
-        --tags=: Metadata that you can use to manage the entity.
-        --workspace-id=!: The ID of the workspace that contains the entity.
-    - name: create-metadata-transfer-job
-      description: Creates a new metadata transfer job.
-      flags:
-        --description=: The metadata transfer job description.
-        --destination=!: The metadata transfer job destination.
-        --metadata-transfer-job-id=: The metadata transfer job Id.
-        --sources=!: The metadata transfer job sources.
-    - name: delete-sync-job
-      description: Delete the SyncJob.
-      flags:
-        --sync-source=!: The sync source.
-        --workspace-id=!: The workspace ID.
-    - name: list-sync-jobs
-      description: List all SyncJobs.
-      flags:
-        --max-results=: The maximum number of results to return at one time.
-        --next-token=: The string that specifies the next page of results.
-        --workspace-id=!: The ID of the workspace that contains the sync job.
-    - name: list-workspaces
-      description: Retrieves information about workspaces in the current account.
-      flags:
-        --max-results=: The maximum number of results to return at one time.
-        --next-token=: The string that specifies the next page of results.
-    - name: create-workspace
-      description: Creates a workplace.
-      flags:
-        --description=: The description of the workspace.
-        --role=: The ARN of the execution role associated with the workspace.
-        --s3-location=: The ARN of the S3 bucket where resources associated with the workspace are stored.
-        --tags=: Metadata that you can use to manage the workspace
-        --workspace-id=!: The ID of the workspace.
-    - name: list-scenes
-      description: Lists all scenes in a workspace.
-      flags:
-        --max-results=: Specifies the maximum number of results to display.
-        --next-token=: The string that specifies the next page of results.
-        --workspace-id=!: The ID of the workspace that contains the scenes.
-    - name: tag-resource
-      description: Adds tags to a resource.
-      flags:
-        --resource-arn=!: The ARN of the resource.
-        --tags=!: Metadata to add to this resource.
-    - name: update-entity
-      description: Updates an entity.
-      flags:
-        --component-updates=: An object that maps strings to the component updates in the request.
-        --composite-component-updates=: This is an object that maps strings to `compositeComponent` updates in the request.
-        --description=: The description of the entity.
-        --entity-id=!: The ID of the entity.
-        --entity-name=: The name of the entity.
-        --parent-entity-update=: An object that describes the update request for a parent entity.
-        --workspace-id=!: The ID of the workspace that contains the entity.
-    - name: update-scene
-      description: Updates a scene.
-      flags:
-        --capabilities=: A list of capabilities that the scene uses to render.
-        --content-location=: The relative path that specifies the location of the content definition file.
-        --description=: The description of this scene.
-        --scene-id=!: The ID of the scene.
-        --scene-metadata=: The scene metadata.
-        --workspace-id=!: The ID of the workspace that contains the scene.
-    - name: create-component-type
-      description: Creates a component type.
-      flags:
-        --component-type-id=!: The ID of the component type.
-        --component-type-name=: A friendly name for the component type.
-        --composite-component-types=: This is an object that maps strings to `compositeComponentTypes` of the `componentType`.
-        --description=: The description of the component type.
-        --extends-from=: Specifies the parent component type to extend.
-        --functions=: An object that maps strings to the functions in the component type.
-        --is-singleton: A Boolean value that specifies whether an entity can have more than one component of this type.
-        --no-is-singleton: A Boolean value that specifies whether an entity can have more than one component of this type.
-        --property-definitions=: An object that maps strings to the property definitions in the component type.
-        --property-groups=: ""
-        --tags=: Metadata that you can use to manage the component type.
-        --workspace-id=!: The ID of the workspace that contains the component type.
-    - name: get-component-type
-      description: Retrieves information about a component type.
-      flags:
-        --component-type-id=!: The ID of the component type.
-        --workspace-id=!: The ID of the workspace that contains the component type.
-    - name: get-property-value
-      description: Gets the property values for a component, component type, entity, or workspace.
-      flags:
-        --component-name=: The name of the component whose property values the operation returns.
-        --component-path=: This string specifies the path to the composite component, starting from the top-level component.
-        --component-type-id=: The ID of the component type whose property values the operation returns.
-        --entity-id=: The ID of the entity whose property values the operation returns.
-        --max-results=: The maximum number of results to return at one time.
-        --next-token=: The string that specifies the next page of results.
-        --property-group-name=: The property group name.
-        --selected-properties=!: The properties whose values the operation returns.
-        --tabular-conditions=: The tabular conditions.
-        --workspace-id=!: The ID of the workspace whose values the operation returns.
-    - name: get-sync-job
-      description: Gets the SyncJob.
-      flags:
-        --sync-source=!: The sync source.
-        --workspace-id=: The workspace ID.
-    - name: list-entities
-      description: Lists all entities in a workspace.
-      flags:
-        --filters=: A list of objects that filter the request.
-        --max-results=: The maximum number of results to return at one time.
-        --next-token=: The string that specifies the next page of results.
-        --workspace-id=!: The ID of the workspace.
-    - name: list-properties
-      description: This API lists the properties of a component.
-      flags:
-        --component-name=: The name of the component whose properties are returned by the operation.
-        --component-path=: This string specifies the path to the composite component, starting from the top-level component.
-        --entity-id=!: The ID for the entity whose metadata (component/properties) is returned by the operation.
-        --max-results=: The maximum number of results returned at one time.
-        --next-token=: The string that specifies the next page of results.
-        --workspace-id=!: The workspace ID.
-    - name: batch-put-property-values
-      description: Sets values for multiple time series properties.
-      flags:
-        --entries=!: An object that maps strings to the property value entries to set.
-        --workspace-id=!: The ID of the workspace that contains the properties to set.
-    - name: get-entity
-      description: Retrieves information about an entity.
-      flags:
-        --entity-id=!: The ID of the entity.
-        --workspace-id=!: The ID of the workspace.
-    - name: get-scene
-      description: Retrieves information about a scene.
-      flags:
-        --scene-id=!: The ID of the scene.
-        --workspace-id=!: The ID of the workspace that contains the scene.
-    - name: create-scene
-      description: Creates a scene.
-      flags:
-        --capabilities=: A list of capabilities that the scene uses to render itself.
-        --content-location=!: The relative path that specifies the location of the content definition file.
-        --description=: The description for this scene.
-        --scene-id=!: The ID of the scene.
-        --scene-metadata=: The request metadata.
-        --tags=: Metadata that you can use to manage the scene.
-        --workspace-id=!: The ID of the workspace that contains the scene.
-    - name: delete-component-type
-      description: Deletes a component type.
-      flags:
-        --component-type-id=!: The ID of the component type to delete.
-        --workspace-id=!: The ID of the workspace that contains the component type.
-    - name: get-metadata-transfer-job
-      description: Gets a nmetadata transfer job.
-      flags:
-        --metadata-transfer-job-id=!: The metadata transfer job Id.
     - name: list-metadata-transfer-jobs
       description: Lists the metadata transfer jobs.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --destination-type=!: The metadata transfer job's destination type.
         --filters=: An object that filters metadata transfer jobs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The maximum number of results to return at one time.
         --next-token=: The string that specifies the next page of results.
         --source-type=!: The metadata transfer job's source type.
@@ -272,39 +234,198 @@ commands:
                 - s3
                 - iotsitewise
                 - iottwinmaker
+    - name: cancel-metadata-transfer-job
+      description: Cancels the metadata transfer job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --metadata-transfer-job-id=!: The metadata transfer job Id.
+    - name: create-component-type
+      description: Creates a component type.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --component-type-id=!: The ID of the component type.
+        --component-type-name=: A friendly name for the component type.
+        --composite-component-types=: This is an object that maps strings to `compositeComponentTypes` of the `componentType`.
+        --description=: The description of the component type.
+        --extends-from=: Specifies the parent component type to extend.
+        --functions=: An object that maps strings to the functions in the component type.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --is-singleton: A Boolean value that specifies whether an entity can have more than one component of this type.
+        --no-is-singleton: A Boolean value that specifies whether an entity can have more than one component of this type.
+        --property-definitions=: An object that maps strings to the property definitions in the component type.
+        --property-groups=: ""
+        --tags=: Metadata that you can use to manage the component type.
+        --workspace-id=!: The ID of the workspace that contains the component type.
+    - name: delete-component-type
+      description: Deletes a component type.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --component-type-id=!: The ID of the component type to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workspace-id=!: The ID of the workspace that contains the component type.
+    - name: delete-entity
+      description: Deletes an entity.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entity-id=!: The ID of the entity to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --is-recursive: A Boolean value that specifies whether the operation deletes child entities.
+        --no-is-recursive: A Boolean value that specifies whether the operation deletes child entities.
+        --workspace-id=!: The ID of the workspace that contains the entity to delete.
+    - name: list-sync-jobs
+      description: List all SyncJobs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return at one time.
+        --next-token=: The string that specifies the next page of results.
+        --workspace-id=!: The ID of the workspace that contains the sync job.
+    - name: update-pricing-plan
+      description: Update the pricing plan.
+      flags:
+        --bundle-names=: The bundle names.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pricing-mode=!: The pricing mode.
+      completion:
+        flag:
+            pricing-mode:
+                - BASIC
+                - STANDARD
+                - TIERED_BUNDLE
     - name: create-sync-job
       description: This action creates a SyncJob.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --sync-role=!: The SyncJob IAM role.
         --sync-source=!: The sync source.
         --tags=: The SyncJob tags.
         --workspace-id=!: The workspace ID.
-    - name: delete-entity
-      description: Deletes an entity.
+    - name: create-workspace
+      description: Creates a workplace.
       flags:
-        --entity-id=!: The ID of the entity to delete.
-        --is-recursive: A Boolean value that specifies whether the operation deletes child entities.
-        --no-is-recursive: A Boolean value that specifies whether the operation deletes child entities.
-        --workspace-id=!: The ID of the workspace that contains the entity to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description of the workspace.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --role=: The ARN of the execution role associated with the workspace.
+        --s3-location=: The ARN of the S3 bucket where resources associated with the workspace are stored.
+        --tags=: Metadata that you can use to manage the workspace
+        --workspace-id=!: The ID of the workspace.
     - name: delete-workspace
       description: Deletes a workspace.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --workspace-id=!: The ID of the workspace to delete.
-    - name: execute-query
-      description: Run queries to access information from your knowledge graph of entities within individual workspaces.
+    - name: get-pricing-plan
+      description: Gets the pricing plan.
       flags:
-        --max-results=: The maximum number of results to return at one time.
-        --next-token=: The string that specifies the next page of results.
-        --query-statement=!: The query statement.
-        --workspace-id=!: The ID of the workspace.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-sync-job
+      description: Gets the SyncJob.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --sync-source=!: The sync source.
+        --workspace-id=: The workspace ID.
     - name: get-workspace
       description: Retrieves information about a workspace.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --workspace-id=!: The ID of the workspace.
-    - name: list-component-types
-      description: Lists all component types in a workspace.
+    - name: delete-sync-job
+      description: Delete the SyncJob.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --sync-source=!: The sync source.
+        --workspace-id=!: The workspace ID.
+    - name: batch-put-property-values
+      description: Sets values for multiple time series properties.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entries=!: An object that maps strings to the property value entries to set.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workspace-id=!: The ID of the workspace that contains the properties to set.
+    - name: create-metadata-transfer-job
+      description: Creates a new metadata transfer job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The metadata transfer job description.
+        --destination=!: The metadata transfer job destination.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --metadata-transfer-job-id=: The metadata transfer job Id.
+        --sources=!: The metadata transfer job sources.
+    - name: get-component-type
+      description: Retrieves information about a component type.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --component-type-id=!: The ID of the component type.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workspace-id=!: The ID of the workspace that contains the component type.
+    - name: get-scene
+      description: Retrieves information about a scene.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scene-id=!: The ID of the scene.
+        --workspace-id=!: The ID of the workspace that contains the scene.
+    - name: list-entities
+      description: Lists all entities in a workspace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --filters=: A list of objects that filter the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The maximum number of results to return at one time.
         --next-token=: The string that specifies the next page of results.
         --workspace-id=!: The ID of the workspace.
+    - name: delete-scene
+      description: Deletes a scene.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scene-id=!: The ID of the scene to delete.
+        --workspace-id=!: The ID of the workspace.
+    - name: list-properties
+      description: This API lists the properties of a component.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --component-name=: The name of the component whose properties are returned by the operation.
+        --component-path=: This string specifies the path to the composite component, starting from the top-level component.
+        --entity-id=!: The ID for the entity whose metadata (component/properties) is returned by the operation.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results returned at one time.
+        --next-token=: The string that specifies the next page of results.
+        --workspace-id=!: The workspace ID.
+    - name: untag-resource
+      description: Removes tags from a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource.
+        --tag-keys=!: A list of tag key names to remove from the resource.

@@ -1,19 +1,217 @@
 name: application-signals
 description: Amazon CloudWatch Application Signals
 commands:
+    - name: list-entity-events
+      description: Returns a list of change events for a specific entity, such as deployments, configuration changes, or other state-changing activities.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=!: The end of the time period to retrieve change events for.
+        --entity=!: The entity for which to retrieve change events.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of change events to return in one operation.
+        --next-token=: Include this value, if it was returned by the previous operation, to get the next set of change events.
+        --page-size=: The size of each page to get in the AWS service call.
+        --start-time=!: The start of the time period to retrieve change events for.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-service-dependencies
+      description: Returns a list of service dependencies of the service that you specify.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=!: The end of the time period to retrieve information about.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-attributes=!: Use this field to specify which service you want to retrieve information for.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in one operation.
+        --next-token=: Include this value, if it was returned by the previous operation, to get the next set of service dependencies.
+        --page-size=: The size of each page to get in the AWS service call.
+        --start-time=!: The start of the time period to retrieve information about.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-service-dependents
+      description: Returns the list of dependents that invoked the specified service during the provided time range.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=!: The end of the time period to retrieve information about.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-attributes=!: Use this field to specify which service you want to retrieve information for.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in one operation.
+        --next-token=: Include this value, if it was returned by the previous operation, to get the next set of service dependents.
+        --page-size=: The size of each page to get in the AWS service call.
+        --start-time=!: The start of the time period to retrieve information about.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-service-level-objective-exclusion-windows
+      description: Retrieves all exclusion windows configured for a specific SLO.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the SLO to list exclusion windows for.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in one operation.
+        --next-token=: Include this value, if it was returned by the previous operation, to get the next set of service level objectives.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: batch-get-service-level-objective-budget-report
+      description: Use this operation to retrieve one or more *service level objective (SLO) budget reports*.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --slo-ids=!: An array containing the IDs of the service level objectives that you want to include in the report.
+        --timestamp=!: The date and time that you want the report to be for.
+    - name: delete-service-level-objective
+      description: Deletes the specified service level objective.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ARN or name of the service level objective to delete.
+    - name: list-grouping-attribute-definitions
+      description: Returns the current grouping configuration for this account, including all custom grouping attribute definitions that have been configured.
+      flags:
+        --aws-account-id=: The Amazon Web Services account ID to retrieve grouping attribute definitions for.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-linked-accounts: If you are using this operation in a monitoring account, specify `true` to include grouping attributes from source accounts in the returned data.
+        --next-token=: Include this value, if it was returned by the previous operation, to get the next set of grouping attribute definitions.
+        --no-include-linked-accounts: If you are using this operation in a monitoring account, specify `true` to include grouping attributes from source accounts in the returned data.
+    - name: list-tags-for-resource
+      description: Displays the tags associated with a CloudWatch resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the CloudWatch resource that you want to view tags for.
+    - name: put-grouping-configuration
+      description: Creates or updates the grouping configuration for this account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --grouping-attribute-definitions=!: An array of grouping attribute definitions that specify how services should be grouped.
+    - name: start-discovery
+      description: Enables this Amazon Web Services account to be able to use CloudWatch Application Signals by creating the *AWSServiceRoleForCloudWatchApplicationSignals* service-linked role.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: tag-resource
+      description: Assigns one or more tags (key-value pairs) to the specified CloudWatch resource, such as a service level objective.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the CloudWatch resource that you want to set tags for.
+        --tags=!: The list of key-value pairs to associate with the alarm.
+    - name: batch-update-exclusion-windows
+      description: Add or remove time window exclusions for one or more Service Level Objectives (SLOs).
+      flags:
+        --add-exclusion-windows=: A list of exclusion windows to add to the specified SLOs.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --remove-exclusion-windows=: A list of exclusion windows to remove from the specified SLOs.
+        --slo-ids=!: The list of SLO IDs to add or remove exclusion windows from.
+    - name: create-service-level-objective
+      description: Creates a service level objective (SLO), which can help you ensure that your critical business operations are meeting customer expectations.
+      flags:
+        --burn-rate-configurations=: Use this array to create *burn rates* for this SLO.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: An optional description for this SLO.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --goal=: This structure contains the attributes that determine the goal of the SLO.
+        --name=!: A name for this SLO.
+        --request-based-sli-config=: If this SLO is a request-based SLO, this structure defines the information about what performance metric this SLO will monitor.
+        --sli-config=: If this SLO is a period-based SLO, this structure defines the information about what performance metric this SLO will monitor.
+        --tags=: A list of key-value pairs to associate with the SLO.
+    - name: delete-grouping-configuration
+      description: Deletes the grouping configuration for this account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-service-operations
+      description: Returns a list of the *operations* of this service that have been discovered by Application Signals.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=!: The end of the time period to retrieve information about.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-attributes=!: Use this field to specify which service you want to retrieve information for.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in one operation.
+        --next-token=: Include this value, if it was returned by the previous operation, to get the next set of service operations.
+        --page-size=: The size of each page to get in the AWS service call.
+        --start-time=!: The start of the time period to retrieve information about.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-services
+      description: Returns a list of services that have been discovered by Application Signals.
+      flags:
+        --aws-account-id=: Amazon Web Services Account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=!: The end of the time period to retrieve information about.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-linked-accounts: If you are using this operation in a monitoring account, specify `true` to include services from source accounts in the returned data.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in one operation.
+        --next-token=: Include this value, if it was returned by the previous operation, to get the next set of services.
+        --no-include-linked-accounts: If you are using this operation in a monitoring account, specify `true` to include services from source accounts in the returned data.
+        --page-size=: The size of each page to get in the AWS service call.
+        --start-time=!: The start of the time period to retrieve information about.
+        --starting-token=: A token to specify where to start paginating.
+    - name: untag-resource
+      description: Removes one or more tags from the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the CloudWatch resource that you want to delete tags from.
+        --tag-keys=!: The list of tag keys to remove from the resource.
+    - name: update-service-level-objective
+      description: Updates an existing service level objective (SLO).
+      flags:
+        --burn-rate-configurations=: Use this array to create *burn rates* for this SLO.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: An optional description for the SLO.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --goal=: A structure that contains the attributes that determine the goal of the SLO.
+        --id=!: The Amazon Resource Name (ARN) or name of the service level objective that you want to update.
+        --request-based-sli-config=: If this SLO is a request-based SLO, this structure defines the information about what performance metric this SLO will monitor.
+        --sli-config=: If this SLO is a period-based SLO, this structure defines the information about what performance metric this SLO will monitor.
     - name: get-service
       description: Returns information about a service discovered by Application Signals.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --end-time=!: The end of the time period to retrieve information about.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --key-attributes=!: Use this field to specify which service you want to retrieve information for.
         --start-time=!: The start of the time period to retrieve information about.
+    - name: get-service-level-objective
+      description: Returns information about one SLO created in the account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ARN or name of the SLO that you want to retrieve information about.
     - name: list-audit-findings
       description: Returns a list of audit findings that provide automated analysis of service behavior and root cause analysis.
       flags:
         --audit-targets=!: A list of audit targets to filter the findings by.
         --auditors=: A list of auditor names to filter the findings by.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --detail-level=: The level of details of the audit findings.
         --end-time=!: The end of the time period to retrieve audit findings for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The maximum number of audit findings to return in one operation.
         --next-token=: Include this value, if it was returned by the previous operation, to get the next set of audit findings.
         --start-time=!: The start of the time period to retrieve audit findings for.
@@ -22,141 +220,38 @@ commands:
             detail-level:
                 - BRIEF
                 - DETAILED
-    - name: list-service-level-objective-exclusion-windows
-      description: Retrieves all exclusion windows configured for a specific SLO.
-      flags:
-        --id=!: The ID of the SLO to list exclusion windows for.
-        --max-results=: The maximum number of results to return in one operation.
-        --next-token=: Include this value, if it was returned by the previous operation, to get the next set of service level objectives.
     - name: list-service-level-objectives
       description: Returns a list of SLOs created in this account.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --dependency-config=: Identifies the dependency using the `DependencyKeyAttributes` and `DependencyOperationName`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --include-linked-accounts: If you are using this operation in a monitoring account, specify `true` to include SLO from source accounts in the returned data.
         --key-attributes=: You can use this optional field to specify which services you want to retrieve SLO information for.
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return in one operation.
         --metric-source-types=: Use this optional field to only include SLOs with the specified metric source types in the output.
         --next-token=: Include this value, if it was returned by the previous operation, to get the next set of service level objectives.
         --no-include-linked-accounts: If you are using this operation in a monitoring account, specify `true` to include SLO from source accounts in the returned data.
         --operation-name=: The name of the operation that this SLO is associated with.
+        --page-size=: The size of each page to get in the AWS service call.
         --slo-owner-aws-account-id=: SLO's Amazon Web Services account ID.
-    - name: list-service-operations
-      description: Returns a list of the *operations* of this service that have been discovered by Application Signals.
-      flags:
-        --end-time=!: The end of the time period to retrieve information about.
-        --key-attributes=!: Use this field to specify which service you want to retrieve information for.
-        --max-results=: The maximum number of results to return in one operation.
-        --next-token=: Include this value, if it was returned by the previous operation, to get the next set of service operations.
-        --start-time=!: The start of the time period to retrieve information about.
-    - name: untag-resource
-      description: Removes one or more tags from the specified resource.
-      flags:
-        --resource-arn=!: The Amazon Resource Name (ARN) of the CloudWatch resource that you want to delete tags from.
-        --tag-keys=!: The list of tag keys to remove from the resource.
-    - name: batch-get-service-level-objective-budget-report
-      description: Use this operation to retrieve one or more *service level objective (SLO) budget reports*.
-      flags:
-        --slo-ids=!: An array containing the IDs of the service level objectives that you want to include in the report.
-        --timestamp=!: The date and time that you want the report to be for.
-    - name: batch-update-exclusion-windows
-      description: Add or remove time window exclusions for one or more Service Level Objectives (SLOs).
-      flags:
-        --add-exclusion-windows=: A list of exclusion windows to add to the specified SLOs.
-        --remove-exclusion-windows=: A list of exclusion windows to remove from the specified SLOs.
-        --slo-ids=!: The list of SLO IDs to add or remove exclusion windows from.
-    - name: delete-grouping-configuration
-      description: Deletes the grouping configuration for this account.
-    - name: delete-service-level-objective
-      description: Deletes the specified service level objective.
-      flags:
-        --id=!: The ARN or name of the service level objective to delete.
-    - name: list-tags-for-resource
-      description: Displays the tags associated with a CloudWatch resource.
-      flags:
-        --resource-arn=!: The Amazon Resource Name (ARN) of the CloudWatch resource that you want to view tags for.
-    - name: create-service-level-objective
-      description: Creates a service level objective (SLO), which can help you ensure that your critical business operations are meeting customer expectations.
-      flags:
-        --burn-rate-configurations=: Use this array to create *burn rates* for this SLO.
-        --description=: An optional description for this SLO.
-        --goal=: This structure contains the attributes that determine the goal of the SLO.
-        --name=!: A name for this SLO.
-        --request-based-sli-config=: If this SLO is a request-based SLO, this structure defines the information about what performance metric this SLO will monitor.
-        --sli-config=: If this SLO is a period-based SLO, this structure defines the information about what performance metric this SLO will monitor.
-        --tags=: A list of key-value pairs to associate with the SLO.
-    - name: list-grouping-attribute-definitions
-      description: Returns the current grouping configuration for this account, including all custom grouping attribute definitions that have been configured.
-      flags:
-        --aws-account-id=: The Amazon Web Services account ID to retrieve grouping attribute definitions for.
-        --include-linked-accounts: If you are using this operation in a monitoring account, specify `true` to include grouping attributes from source accounts in the returned data.
-        --next-token=: Include this value, if it was returned by the previous operation, to get the next set of grouping attribute definitions.
-        --no-include-linked-accounts: If you are using this operation in a monitoring account, specify `true` to include grouping attributes from source accounts in the returned data.
-    - name: list-service-dependents
-      description: Returns the list of dependents that invoked the specified service during the provided time range.
-      flags:
-        --end-time=!: The end of the time period to retrieve information about.
-        --key-attributes=!: Use this field to specify which service you want to retrieve information for.
-        --max-results=: The maximum number of results to return in one operation.
-        --next-token=: Include this value, if it was returned by the previous operation, to get the next set of service dependents.
-        --start-time=!: The start of the time period to retrieve information about.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-service-states
       description: Returns information about the last deployment and other change states of services.
       flags:
         --attribute-filters=: A list of attribute filters to narrow down the services.
         --aws-account-id=: The Amazon Web Services account ID to filter service states by.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --end-time=!: The end of the time period to retrieve service state information for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --include-linked-accounts: If you are using this operation in a monitoring account, specify `true` to include service states from source accounts in the returned data.
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of service states to return in one operation.
         --next-token=: Include this value, if it was returned by the previous operation, to get the next set of service states.
         --no-include-linked-accounts: If you are using this operation in a monitoring account, specify `true` to include service states from source accounts in the returned data.
+        --page-size=: The size of each page to get in the AWS service call.
         --start-time=!: The start of the time period to retrieve service state information for.
-    - name: list-services
-      description: Returns a list of services that have been discovered by Application Signals.
-      flags:
-        --aws-account-id=: Amazon Web Services Account ID.
-        --end-time=!: The end of the time period to retrieve information about.
-        --include-linked-accounts: If you are using this operation in a monitoring account, specify `true` to include services from source accounts in the returned data.
-        --max-results=: The maximum number of results to return in one operation.
-        --next-token=: Include this value, if it was returned by the previous operation, to get the next set of services.
-        --no-include-linked-accounts: If you are using this operation in a monitoring account, specify `true` to include services from source accounts in the returned data.
-        --start-time=!: The start of the time period to retrieve information about.
-    - name: start-discovery
-      description: Enables this Amazon Web Services account to be able to use CloudWatch Application Signals by creating the *AWSServiceRoleForCloudWatchApplicationSignals* service-linked role.
-    - name: tag-resource
-      description: Assigns one or more tags (key-value pairs) to the specified CloudWatch resource, such as a service level objective.
-      flags:
-        --resource-arn=!: The Amazon Resource Name (ARN) of the CloudWatch resource that you want to set tags for.
-        --tags=!: The list of key-value pairs to associate with the alarm.
-    - name: update-service-level-objective
-      description: Updates an existing service level objective (SLO).
-      flags:
-        --burn-rate-configurations=: Use this array to create *burn rates* for this SLO.
-        --description=: An optional description for the SLO.
-        --goal=: A structure that contains the attributes that determine the goal of the SLO.
-        --id=!: The Amazon Resource Name (ARN) or name of the service level objective that you want to update.
-        --request-based-sli-config=: If this SLO is a request-based SLO, this structure defines the information about what performance metric this SLO will monitor.
-        --sli-config=: If this SLO is a period-based SLO, this structure defines the information about what performance metric this SLO will monitor.
-    - name: get-service-level-objective
-      description: Returns information about one SLO created in the account.
-      flags:
-        --id=!: The ARN or name of the SLO that you want to retrieve information about.
-    - name: list-entity-events
-      description: Returns a list of change events for a specific entity, such as deployments, configuration changes, or other state-changing activities.
-      flags:
-        --end-time=!: The end of the time period to retrieve change events for.
-        --entity=!: The entity for which to retrieve change events.
-        --max-results=: The maximum number of change events to return in one operation.
-        --next-token=: Include this value, if it was returned by the previous operation, to get the next set of change events.
-        --start-time=!: The start of the time period to retrieve change events for.
-    - name: list-service-dependencies
-      description: Returns a list of service dependencies of the service that you specify.
-      flags:
-        --end-time=!: The end of the time period to retrieve information about.
-        --key-attributes=!: Use this field to specify which service you want to retrieve information for.
-        --max-results=: The maximum number of results to return in one operation.
-        --next-token=: Include this value, if it was returned by the previous operation, to get the next set of service dependencies.
-        --start-time=!: The start of the time period to retrieve information about.
-    - name: put-grouping-configuration
-      description: Creates or updates the grouping configuration for this account.
-      flags:
-        --grouping-attribute-definitions=!: An array of grouping attribute definitions that specify how services should be grouped.
+        --starting-token=: A token to specify where to start paginating.

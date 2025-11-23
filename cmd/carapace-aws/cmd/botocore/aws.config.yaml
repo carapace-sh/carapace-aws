@@ -1,108 +1,357 @@
 name: config
 description: AWS Config
 commands:
-    - name: batch-get-aggregate-resource-config
-      description: Returns the current configuration items for resources that are present in your Config aggregator.
-      flags:
-        --configuration-aggregator-name=!: The name of the configuration aggregator.
-        --resource-identifiers=!: A list of aggregate ResourceIdentifiers objects.
-    - name: delete-configuration-aggregator
-      description: Deletes the specified configuration aggregator and the aggregated data associated with the aggregator.
-      flags:
-        --configuration-aggregator-name=!: The name of the configuration aggregator.
-    - name: delete-delivery-channel
-      description: Deletes the delivery channel.
-      flags:
-        --delivery-channel-name=!: The name of the delivery channel that you want to delete.
-    - name: delete-evaluation-results
-      description: Deletes the evaluation results for the specified Config rule.
-      flags:
-        --config-rule-name=!: The name of the Config rule for which you want to delete the evaluation results.
-    - name: delete-organization-conformance-pack
-      description: Deletes the specified organization conformance pack and all of the Config rules and remediation actions from all member accounts in that organization.
-      flags:
-        --organization-conformance-pack-name=!: The name of organization conformance pack that you want to delete.
-    - name: describe-configuration-aggregators
-      description: Returns the details of one or more configuration aggregators.
-      flags:
-        --configuration-aggregator-names=: The name of the configuration aggregators.
-        --limit=: The maximum number of configuration aggregators returned on each page.
-        --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
-    - name: describe-remediation-exceptions
-      description: Returns the details of one or more remediation exceptions.
-      flags:
-        --config-rule-name=!: The name of the Config rule.
-        --limit=: The maximum number of RemediationExceptionResourceKey returned on each page.
-        --next-token=: The `nextToken` string returned in a previous request that you use to request the next page of results in a paginated response.
-        --resource-keys=: An exception list of resource exception keys to be processed with the current request.
-    - name: list-resource-evaluations
-      description: Returns a list of proactive resource evaluations.
-      flags:
-        --filters=: Returns a `ResourceEvaluationFilters` object.
-        --limit=: The maximum number of evaluations returned on each page.
-        --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
-    - name: describe-retention-configurations
-      description: Returns the details of one or more retention configurations.
-      flags:
-        --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
-        --retention-configuration-names=: A list of names of retention configurations for which you want details.
-    - name: select-resource-config
-      description: Accepts a structured query language (SQL) `SELECT` command, performs the corresponding search, and returns resource configurations matching the properties.
-      flags:
-        --expression=!: The SQL query `SELECT` command.
-        --limit=: The maximum number of query results returned on each page.
-        --next-token=: The `nextToken` string returned in a previous request that you use to request the next page of results in a paginated response.
-    - name: delete-aggregation-authorization
-      description: Deletes the authorization granted to the specified configuration aggregator account in a specified region.
-      flags:
-        --authorized-account-id=!: The 12-digit account ID of the account authorized to aggregate data.
-        --authorized-aws-region=!: The region authorized to collect aggregated data.
-    - name: delete-organization-config-rule
-      description: Deletes the specified organization Config rule and all of its evaluation results from all member accounts in that organization.
-      flags:
-        --organization-config-rule-name=!: The name of organization Config rule that you want to delete.
-    - name: delete-pending-aggregation-request
-      description: Deletes pending authorization requests for a specified aggregator account in a specified region.
-      flags:
-        --requester-account-id=!: The 12-digit account ID of the account requesting to aggregate data.
-        --requester-aws-region=!: The region requesting to aggregate data.
-    - name: delete-service-linked-configuration-recorder
-      description: Deletes an existing service-linked configuration recorder.
-      flags:
-        --service-principal=!: The service principal of the Amazon Web Services service for the service-linked configuration recorder that you want to delete.
-    - name: get-resource-evaluation-summary
-      description: Returns a summary of resource evaluation for the specified resource evaluation ID from the proactive rules that were run.
-      flags:
-        --resource-evaluation-id=!: The unique `ResourceEvaluationId` of Amazon Web Services resource execution for which you want to retrieve the evaluation summary.
     - name: select-aggregate-resource-config
       description: Accepts a structured query language (SQL) SELECT command and an aggregator to query configuration state of Amazon Web Services resources across multiple accounts and regions, performs the corresponding search, and returns resource configurations matching the properties.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --configuration-aggregator-name=!: The name of the configuration aggregator.
         --expression=!: The SQL query SELECT command.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --limit=: The maximum number of query results returned on each page.
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of query results returned on each page.
         --next-token=: The nextToken string returned in a previous request that you use to request the next page of results in a paginated response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: batch-get-resource-config
+      description: Returns the `BaseConfigurationItem` for one or more requested resources.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-keys=!: A list of resource keys to be processed with the current request.
+    - name: describe-aggregate-compliance-by-config-rules
+      description: Returns a list of compliant and noncompliant rules with the number of resources for compliant and noncompliant rules.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-aggregator-name=!: The name of the configuration aggregator.
+        --filters=: Filters the results by ConfigRuleComplianceFilters object.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of evaluation results returned on each page.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-pending-aggregation-requests
+      description: Returns a list of all pending aggregation requests.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of evaluation results returned on each page.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-organization-config-rule-detailed-status
+      description: Returns detailed status for each member account within an organization for a given organization Config rule.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: A `StatusDetailFilters` object.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of `OrganizationConfigRuleDetailedStatus` returned on each page.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
+        --organization-config-rule-name=!: The name of your organization Config rule for which you want status details for member accounts.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: associate-resource-types
+      description: Adds all resource types specified in the `ResourceTypes` list to the [RecordingGroup](https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html) of specified configuration recorder and includes those resource types when recording.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-recorder-arn=!: The Amazon Resource Name (ARN) of the specified configuration recorder.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-types=!: The list of resource types you want to add to the recording group of the specified configuration recorder.
+    - name: delete-conformance-pack
+      description: Deletes the specified conformance pack and all the Config rules, remediation actions, and all evaluation results within that conformance pack.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --conformance-pack-name=!: Name of the conformance pack you want to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-organization-conformance-pack-statuses
+      description: Provides organization conformance pack deployment status for an organization.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of OrganizationConformancePackStatuses returned on each page.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+        --organization-conformance-pack-names=: The names of organization conformance packs for which you want status details.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-remediation-configurations
+      description: Returns the details of one or more remediation configurations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --config-rule-names=!: A list of Config rule names of remediation configurations for which you want details.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-remediation-exceptions
+      description: Returns the details of one or more remediation exceptions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --config-rule-name=!: The name of the Config rule.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of RemediationExceptionResourceKey returned on each page.
+        --next-token=: The `nextToken` string returned in a previous request that you use to request the next page of results in a paginated response.
+        --resource-keys=: An exception list of resource exception keys to be processed with the current request.
+    - name: put-remediation-configurations
+      description: Adds or updates the remediation configuration with a specific Config rule with the selected target or action.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --remediation-configurations=!: A list of remediation configuration objects.
+    - name: delete-config-rule
+      description: Deletes the specified Config rule and all of its evaluation results.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --config-rule-name=!: The name of the Config rule that you want to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-remediation-configuration
+      description: Deletes the remediation configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --config-rule-name=!: The name of the Config rule for which you want to delete remediation configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-type=: The type of a resource.
+    - name: delete-resource-config
+      description: Records the configuration state for a custom resource that has been deleted.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-id=!: Unique identifier of the resource.
+        --resource-type=!: The type of the resource.
+    - name: delete-retention-configuration
+      description: Deletes the retention configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --retention-configuration-name=!: The name of the retention configuration to delete.
+    - name: describe-remediation-execution-status
+      description: Provides a detailed view of a Remediation Execution for a set of resources including state, timestamps for when steps for the remediation execution occur, and any error messages for steps that have failed.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --config-rule-name=!: The name of the Config rule.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of RemediationExecutionStatuses returned on each page.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-keys=: A list of resource keys to be processed with the current request.
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-conformance-pack-compliance-details
+      description: Returns compliance details of a conformance pack for all Amazon Web Services resources that are monitered by conformance pack.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --conformance-pack-name=!: Name of the conformance pack.
+        --filters=: A `ConformancePackEvaluationFilters` object.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of evaluation results returned on each page.
+        --next-token=: The `nextToken` string returned in a previous request that you use to request the next page of results in a paginated response.
+    - name: put-delivery-channel
+      description: Creates or updates a delivery channel to deliver configuration information and other compliance information.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delivery-channel=!: An object for the delivery channel.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: put-stored-query
+      description: Saves a new query or updates an existing saved query.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --stored-query=!: A list of `StoredQuery` objects.
+        --tags=: A list of `Tags` object.
+    - name: delete-remediation-exceptions
+      description: Deletes one or more remediation exceptions mentioned in the resource keys.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --config-rule-name=!: The name of the Config rule for which you want to delete remediation exception configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-keys=!: An exception list of resource exception keys to be processed with the current request.
+    - name: describe-configuration-aggregator-sources-status
+      description: Returns status information for sources within an aggregator.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-aggregator-name=!: The name of the configuration aggregator.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of AggregatorSourceStatus returned on each page.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --update-status=: Filters the status type.
+    - name: describe-organization-config-rules
+      description: Returns a list of organization Config rules.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of organization Config rules returned on each page.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
+        --organization-config-rule-names=: The names of organization Config rules for which you want details.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: start-config-rules-evaluation
+      description: Runs an on-demand evaluation for the specified Config rules against the last known configuration state of the resources.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --config-rule-names=: The list of names of Config rules that you want to run evaluations for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: start-configuration-recorder
+      description: Starts the customer managed configuration recorder.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-recorder-name=!: The name of the customer managed configuration recorder that you want to start.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: start-remediation-execution
       description: Runs an on-demand remediation for the specified Config rules against the last known remediation configuration.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --config-rule-name=!: The list of names of Config rules that you want to run remediation execution for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-keys=!: A list of resource keys to be processed with the current request.
-    - name: describe-config-rules
-      description: Returns details about your Config rules.
+    - name: get-aggregate-config-rule-compliance-summary
+      description: Returns the number of compliant and noncompliant rules for one or more accounts and regions in an aggregator.
       flags:
-        --config-rule-names=: The names of the Config rules for which you want details.
-        --filters=: Returns a list of Detective or Proactive Config rules.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-aggregator-name=!: The name of the configuration aggregator.
+        --filters=: Filters the results based on the ConfigRuleComplianceSummaryFilters object.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-by-key=: Groups the result based on ACCOUNT\_ID or AWS\_REGION.
+        --limit=: The maximum number of evaluation results returned on each page.
         --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
+      completion:
+        flag:
+            group-by-key:
+                - ACCOUNT_ID
+                - AWS_REGION
+    - name: get-compliance-details-by-config-rule
+      description: Returns the evaluation results for the specified Config rule.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --compliance-types=: Filters the results by compliance.
+        --config-rule-name=!: The name of the Config rule for which you want compliance information.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of evaluation results returned on each page.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: delete-organization-conformance-pack
+      description: Deletes the specified organization conformance pack and all of the Config rules and remediation actions from all member accounts in that organization.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --organization-conformance-pack-name=!: The name of organization conformance pack that you want to delete.
+    - name: delete-service-linked-configuration-recorder
+      description: Deletes an existing service-linked configuration recorder.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-principal=!: The service principal of the Amazon Web Services service for the service-linked configuration recorder that you want to delete.
+    - name: describe-configuration-recorder-status
+      description: Returns the current status of the configuration recorder you specify as well as the status of the last recording event for the configuration recorders.
+      flags:
+        --arn=: The Amazon Resource Name (ARN) of the configuration recorder that you want to specify.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-recorder-names=: The name of the configuration recorder.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-principal=: For service-linked configuration recorders, you can use the service principal of the linked Amazon Web Services service to specify the configuration recorder.
+    - name: describe-conformance-packs
+      description: Returns a list of one or more conformance packs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --conformance-pack-names=: Comma-separated list of conformance pack names for which you want details.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of conformance packs returned on each page.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The `nextToken` string returned in a previous request that you use to request the next page of results in a paginated response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-stored-queries
+      description: Lists the stored queries for a single Amazon Web Services account and a single Amazon Web Services Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to be returned with a single call.
+        --next-token=: The nextToken string returned in a previous request that you use to request the next page of results in a paginated response.
+    - name: put-conformance-pack
+      description: Creates or updates a conformance pack.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --conformance-pack-input-parameters=: A list of `ConformancePackInputParameter` objects.
+        --conformance-pack-name=!: The unique name of the conformance pack you want to deploy.
+        --delivery-s3-bucket=: The name of the Amazon S3 bucket where Config stores conformance pack templates.
+        --delivery-s3-key-prefix=: The prefix for the Amazon S3 bucket.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --template-body=: A string that contains the full conformance pack template body.
+        --template-s3-uri=: The location of the file containing the template body (`s3://bucketname/prefix`).
+        --template-ssm-document-details=: An object of type `TemplateSSMDocumentDetails`, which contains the name or the Amazon Resource Name (ARN) of the Amazon Web Services Systems Manager document (SSM document) and the version of the SSM document that is used to create a conformance pack.
+    - name: delete-stored-query
+      description: Deletes the stored query for a single Amazon Web Services account and a single Amazon Web Services Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --query-name=!: The name of the query that you want to delete.
+    - name: describe-compliance-by-config-rule
+      description: Indicates whether the specified Config rules are compliant.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --compliance-types=: Filters the results by compliance.
+        --config-rule-names=: Specify one or more Config rule names to filter the results by rule.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-discovered-resources
       description: Returns a list of resource resource identifiers for the specified resource types for the resources of that type.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --include-deleted-resources: Specifies whether Config includes deleted resources in the results.
         --limit=: The maximum number of resource identifiers returned on each page.
+        --max-items=: The  total number of items to return in the command's output.
         --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
         --no-include-deleted-resources: Specifies whether Config includes deleted resources in the results.
+        --page-size=: The size of each page to get in the AWS service call.
         --resource-ids=: The IDs of only those resources that you want Config to list in the response.
         --resource-name=: The custom name of only those resources that you want Config to list in the response.
         --resource-type=!: The type of resources that you want Config to list in the response.
+        --starting-token=: A token to specify where to start paginating.
       completion:
         flag:
             resource-type:
@@ -548,125 +797,642 @@ commands:
                 - AWS::SageMaker::InferenceExperiment
                 - AWS::SecurityHub::Standard
                 - AWS::Transfer::Profile
-    - name: list-stored-queries
-      description: Lists the stored queries for a single Amazon Web Services account and a single Amazon Web Services Region.
+    - name: put-evaluations
+      description: Used by an Lambda function to deliver evaluation results to Config.
       flags:
-        --max-results=: The maximum number of results to be returned with a single call.
-        --next-token=: The nextToken string returned in a previous request that you use to request the next page of results in a paginated response.
-    - name: put-configuration-recorder
-      description: Creates or updates the customer managed configuration recorder.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --evaluations=: The assessments that the Lambda function performs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-test-mode: Use this parameter to specify a test run for `PutEvaluations`.
+        --result-token=!: An encrypted token that associates an evaluation with an Config rule.
+        --test-mode: Use this parameter to specify a test run for `PutEvaluations`.
+    - name: start-resource-evaluation
+      description: Runs an on-demand evaluation for the specified resource to determine whether the resource details will comply with configured Config rules.
       flags:
-        --configuration-recorder=!: An object for the configuration recorder.
-        --tags=: The tags for the customer managed configuration recorder.
-    - name: stop-configuration-recorder
-      description: Stops the customer managed configuration recorder.
-      flags:
-        --configuration-recorder-name=!: The name of the customer managed configuration recorder that you want to stop.
-    - name: delete-remediation-exceptions
-      description: Deletes one or more remediation exceptions mentioned in the resource keys.
-      flags:
-        --config-rule-name=!: The name of the Config rule for which you want to delete remediation exception configuration.
-        --resource-keys=!: An exception list of resource exception keys to be processed with the current request.
-    - name: delete-resource-config
-      description: Records the configuration state for a custom resource that has been deleted.
-      flags:
-        --resource-id=!: Unique identifier of the resource.
-        --resource-type=!: The type of the resource.
-    - name: describe-conformance-packs
-      description: Returns a list of one or more conformance packs.
-      flags:
-        --conformance-pack-names=: Comma-separated list of conformance pack names for which you want details.
-        --limit=: The maximum number of conformance packs returned on each page.
-        --next-token=: The `nextToken` string returned in a previous request that you use to request the next page of results in a paginated response.
-    - name: list-conformance-pack-compliance-scores
-      description: Returns a list of conformance pack compliance scores.
-      flags:
-        --filters=: Filters the results based on the `ConformancePackComplianceScoresFilters`.
-        --limit=: The maximum number of conformance pack compliance scores returned on each page.
-        --next-token=: The `nextToken` string in a prior request that you can use to get the paginated response for the next set of conformance pack compliance scores.
-        --sort-by=: Sorts your conformance pack compliance scores in either ascending or descending order, depending on `SortOrder`.
-        --sort-order=: Determines the order in which conformance pack compliance scores are sorted.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A client token is a unique, case-sensitive string of up to 64 ASCII characters.
+        --evaluation-context=: Returns an `EvaluationContext` object.
+        --evaluation-mode=!: The mode of an evaluation.
+        --evaluation-timeout=: The timeout for an evaluation.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-details=!: Returns a `ResourceDetails` object.
       completion:
         flag:
-            sort-by:
-                - SCORE
-            sort-order:
-                - ASCENDING
-                - DESCENDING
-    - name: put-conformance-pack
-      description: Creates or updates a conformance pack.
+            evaluation-mode:
+                - DETECTIVE
+                - PROACTIVE
+    - name: describe-aggregation-authorizations
+      description: Returns a list of authorizations granted to various aggregator accounts and regions.
       flags:
-        --conformance-pack-input-parameters=: A list of `ConformancePackInputParameter` objects.
-        --conformance-pack-name=!: The unique name of the conformance pack you want to deploy.
-        --delivery-s3-bucket=: The name of the Amazon S3 bucket where Config stores conformance pack templates.
-        --delivery-s3-key-prefix=: The prefix for the Amazon S3 bucket.
-        --template-body=: A string that contains the full conformance pack template body.
-        --template-s3-uri=: The location of the file containing the template body (`s3://bucketname/prefix`).
-        --template-ssm-document-details=: An object of type `TemplateSSMDocumentDetails`, which contains the name or the Amazon Resource Name (ARN) of the Amazon Web Services Systems Manager document (SSM document) and the version of the SSM document that is used to create a conformance pack.
-    - name: start-config-rules-evaluation
-      description: Runs an on-demand evaluation for the specified Config rules against the last known configuration state of the resources.
-      flags:
-        --config-rule-names=: The list of names of Config rules that you want to run evaluations for.
-    - name: start-configuration-recorder
-      description: Starts the customer managed configuration recorder.
-      flags:
-        --configuration-recorder-name=!: The name of the customer managed configuration recorder that you want to start.
-    - name: delete-stored-query
-      description: Deletes the stored query for a single Amazon Web Services account and a single Amazon Web Services Region.
-      flags:
-        --query-name=!: The name of the query that you want to delete.
-    - name: describe-organization-conformance-pack-statuses
-      description: Provides organization conformance pack deployment status for an organization.
-      flags:
-        --limit=: The maximum number of OrganizationConformancePackStatuses returned on each page.
-        --next-token=: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
-        --organization-conformance-pack-names=: The names of organization conformance packs for which you want status details.
-    - name: get-conformance-pack-compliance-details
-      description: Returns compliance details of a conformance pack for all Amazon Web Services resources that are monitered by conformance pack.
-      flags:
-        --conformance-pack-name=!: Name of the conformance pack.
-        --filters=: A `ConformancePackEvaluationFilters` object.
-        --limit=: The maximum number of evaluation results returned on each page.
-        --next-token=: The `nextToken` string returned in a previous request that you use to request the next page of results in a paginated response.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of AggregationAuthorizations returned on each page.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-configuration-recorders
       description: Returns a list of configuration recorders depending on the filters you specify.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --filters=: Filters the results based on a list of `ConfigurationRecorderFilter` objects that you specify.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to include in the response.
         --next-token=: The `NextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
-    - name: put-remediation-exceptions
-      description: A remediation exception is when a specified resource is no longer considered for auto-remediation.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: put-organization-config-rule
+      description: Adds or updates an Config rule for your entire organization to evaluate if your Amazon Web Services resources comply with your desired configurations.
       flags:
-        --config-rule-name=!: The name of the Config rule for which you want to create remediation exception.
-        --expiration-time=: The exception is automatically deleted after the expiration date.
-        --message=: The message contains an explanation of the exception.
-        --resource-keys=!: An exception list of resource exception keys to be processed with the current request.
-    - name: describe-delivery-channel-status
-      description: Returns the current status of the specified delivery channel.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --excluded-accounts=: A comma-separated list of accounts that you want to exclude from an organization Config rule.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --organization-config-rule-name=!: The name that you assign to an organization Config rule.
+        --organization-custom-policy-rule-metadata=: An `OrganizationCustomPolicyRuleMetadata` object.
+        --organization-custom-rule-metadata=: An `OrganizationCustomRuleMetadata` object.
+        --organization-managed-rule-metadata=: An `OrganizationManagedRuleMetadata` object.
+    - name: delete-delivery-channel
+      description: Deletes the delivery channel.
       flags:
-        --delivery-channel-names=: A list of delivery channel names.
-    - name: disassociate-resource-types
-      description: Removes all resource types specified in the `ResourceTypes` list from the [RecordingGroup](https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html) of configuration recorder and excludes these resource types when recording.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delivery-channel-name=!: The name of the delivery channel that you want to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-pending-aggregation-request
+      description: Deletes pending authorization requests for a specified aggregator account in a specified region.
       flags:
-        --configuration-recorder-arn=!: The Amazon Resource Name (ARN) of the specified configuration recorder.
-        --resource-types=!: The list of resource types you want to remove from the recording group of the specified configuration recorder.
-    - name: get-organization-config-rule-detailed-status
-      description: Returns detailed status for each member account within an organization for a given organization Config rule.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --requester-account-id=!: The 12-digit account ID of the account requesting to aggregate data.
+        --requester-aws-region=!: The region requesting to aggregate data.
+    - name: describe-aggregate-compliance-by-conformance-packs
+      description: Returns a list of the existing and deleted conformance packs and their associated compliance status with the count of compliant and noncompliant Config rules within each conformance pack.
       flags:
-        --filters=: A `StatusDetailFilters` object.
-        --limit=: The maximum number of `OrganizationConfigRuleDetailedStatus` returned on each page.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-aggregator-name=!: The name of the configuration aggregator.
+        --filters=: Filters the result by `AggregateConformancePackComplianceFilters` object.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of conformance packs compliance details returned on each page.
+        --max-items=: The  total number of items to return in the command's output.
         --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
-        --organization-config-rule-name=!: The name of your organization Config rule for which you want status details for member accounts.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-config-rules
+      description: Returns details about your Config rules.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --config-rule-names=: The names of the Config rules for which you want details.
+        --filters=: Returns a list of Detective or Proactive Config rules.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-aggregate-resource-config
+      description: Returns configuration item that is aggregated for your specific resource in a specific source account and region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-aggregator-name=!: The name of the configuration aggregator.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-identifier=!: An object that identifies aggregate resource.
+    - name: get-compliance-summary-by-config-rule
+      description: Returns the number of Config rules that are compliant and noncompliant, up to a maximum of 25 for each.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-organization-custom-rule-policy
+      description: Returns the policy definition containing the logic for your organization Config Custom Policy rule.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --organization-config-rule-name=!: The name of your organization Config Custom Policy rule.
+    - name: list-aggregate-discovered-resources
+      description: Accepts a resource type and returns a list of resource identifiers that are aggregated for a specific resource type across accounts and regions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-aggregator-name=!: The name of the configuration aggregator.
+        --filters=: Filters the results based on the `ResourceFilters` object.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of resource identifiers returned on each page.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-type=!: The type of resources that you want Config to list in the response.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            resource-type:
+                - AWS::EC2::CustomerGateway
+                - AWS::EC2::EIP
+                - AWS::EC2::Host
+                - AWS::EC2::Instance
+                - AWS::EC2::InternetGateway
+                - AWS::EC2::NetworkAcl
+                - AWS::EC2::NetworkInterface
+                - AWS::EC2::RouteTable
+                - AWS::EC2::SecurityGroup
+                - AWS::EC2::Subnet
+                - AWS::CloudTrail::Trail
+                - AWS::EC2::Volume
+                - AWS::EC2::VPC
+                - AWS::EC2::VPNConnection
+                - AWS::EC2::VPNGateway
+                - AWS::EC2::RegisteredHAInstance
+                - AWS::EC2::NatGateway
+                - AWS::EC2::EgressOnlyInternetGateway
+                - AWS::EC2::VPCEndpoint
+                - AWS::EC2::VPCEndpointService
+                - AWS::EC2::FlowLog
+                - AWS::EC2::VPCPeeringConnection
+                - AWS::Elasticsearch::Domain
+                - AWS::IAM::Group
+                - AWS::IAM::Policy
+                - AWS::IAM::Role
+                - AWS::IAM::User
+                - AWS::ElasticLoadBalancingV2::LoadBalancer
+                - AWS::ACM::Certificate
+                - AWS::RDS::DBInstance
+                - AWS::RDS::DBSubnetGroup
+                - AWS::RDS::DBSecurityGroup
+                - AWS::RDS::DBSnapshot
+                - AWS::RDS::DBCluster
+                - AWS::RDS::DBClusterSnapshot
+                - AWS::RDS::EventSubscription
+                - AWS::S3::Bucket
+                - AWS::S3::AccountPublicAccessBlock
+                - AWS::Redshift::Cluster
+                - AWS::Redshift::ClusterSnapshot
+                - AWS::Redshift::ClusterParameterGroup
+                - AWS::Redshift::ClusterSecurityGroup
+                - AWS::Redshift::ClusterSubnetGroup
+                - AWS::Redshift::EventSubscription
+                - AWS::SSM::ManagedInstanceInventory
+                - AWS::CloudWatch::Alarm
+                - AWS::CloudFormation::Stack
+                - AWS::ElasticLoadBalancing::LoadBalancer
+                - AWS::AutoScaling::AutoScalingGroup
+                - AWS::AutoScaling::LaunchConfiguration
+                - AWS::AutoScaling::ScalingPolicy
+                - AWS::AutoScaling::ScheduledAction
+                - AWS::DynamoDB::Table
+                - AWS::CodeBuild::Project
+                - AWS::WAF::RateBasedRule
+                - AWS::WAF::Rule
+                - AWS::WAF::RuleGroup
+                - AWS::WAF::WebACL
+                - AWS::WAFRegional::RateBasedRule
+                - AWS::WAFRegional::Rule
+                - AWS::WAFRegional::RuleGroup
+                - AWS::WAFRegional::WebACL
+                - AWS::CloudFront::Distribution
+                - AWS::CloudFront::StreamingDistribution
+                - AWS::Lambda::Function
+                - AWS::NetworkFirewall::Firewall
+                - AWS::NetworkFirewall::FirewallPolicy
+                - AWS::NetworkFirewall::RuleGroup
+                - AWS::ElasticBeanstalk::Application
+                - AWS::ElasticBeanstalk::ApplicationVersion
+                - AWS::ElasticBeanstalk::Environment
+                - AWS::WAFv2::WebACL
+                - AWS::WAFv2::RuleGroup
+                - AWS::WAFv2::IPSet
+                - AWS::WAFv2::RegexPatternSet
+                - AWS::WAFv2::ManagedRuleSet
+                - AWS::XRay::EncryptionConfig
+                - AWS::SSM::AssociationCompliance
+                - AWS::SSM::PatchCompliance
+                - AWS::Shield::Protection
+                - AWS::ShieldRegional::Protection
+                - AWS::Config::ConformancePackCompliance
+                - AWS::Config::ResourceCompliance
+                - AWS::ApiGateway::Stage
+                - AWS::ApiGateway::RestApi
+                - AWS::ApiGatewayV2::Stage
+                - AWS::ApiGatewayV2::Api
+                - AWS::CodePipeline::Pipeline
+                - AWS::ServiceCatalog::CloudFormationProvisionedProduct
+                - AWS::ServiceCatalog::CloudFormationProduct
+                - AWS::ServiceCatalog::Portfolio
+                - AWS::SQS::Queue
+                - AWS::KMS::Key
+                - AWS::QLDB::Ledger
+                - AWS::SecretsManager::Secret
+                - AWS::SNS::Topic
+                - AWS::SSM::FileData
+                - AWS::Backup::BackupPlan
+                - AWS::Backup::BackupSelection
+                - AWS::Backup::BackupVault
+                - AWS::Backup::RecoveryPoint
+                - AWS::ECR::Repository
+                - AWS::ECS::Cluster
+                - AWS::ECS::Service
+                - AWS::ECS::TaskDefinition
+                - AWS::EFS::AccessPoint
+                - AWS::EFS::FileSystem
+                - AWS::EKS::Cluster
+                - AWS::OpenSearch::Domain
+                - AWS::EC2::TransitGateway
+                - AWS::Kinesis::Stream
+                - AWS::Kinesis::StreamConsumer
+                - AWS::CodeDeploy::Application
+                - AWS::CodeDeploy::DeploymentConfig
+                - AWS::CodeDeploy::DeploymentGroup
+                - AWS::EC2::LaunchTemplate
+                - AWS::ECR::PublicRepository
+                - AWS::GuardDuty::Detector
+                - AWS::EMR::SecurityConfiguration
+                - AWS::SageMaker::CodeRepository
+                - AWS::Route53Resolver::ResolverEndpoint
+                - AWS::Route53Resolver::ResolverRule
+                - AWS::Route53Resolver::ResolverRuleAssociation
+                - AWS::DMS::ReplicationSubnetGroup
+                - AWS::DMS::EventSubscription
+                - AWS::MSK::Cluster
+                - AWS::StepFunctions::Activity
+                - AWS::WorkSpaces::Workspace
+                - AWS::WorkSpaces::ConnectionAlias
+                - AWS::SageMaker::Model
+                - AWS::ElasticLoadBalancingV2::Listener
+                - AWS::StepFunctions::StateMachine
+                - AWS::Batch::JobQueue
+                - AWS::Batch::ComputeEnvironment
+                - AWS::AccessAnalyzer::Analyzer
+                - AWS::Athena::WorkGroup
+                - AWS::Athena::DataCatalog
+                - AWS::Detective::Graph
+                - AWS::GlobalAccelerator::Accelerator
+                - AWS::GlobalAccelerator::EndpointGroup
+                - AWS::GlobalAccelerator::Listener
+                - AWS::EC2::TransitGatewayAttachment
+                - AWS::EC2::TransitGatewayRouteTable
+                - AWS::DMS::Certificate
+                - AWS::AppConfig::Application
+                - AWS::AppSync::GraphQLApi
+                - AWS::DataSync::LocationSMB
+                - AWS::DataSync::LocationFSxLustre
+                - AWS::DataSync::LocationS3
+                - AWS::DataSync::LocationEFS
+                - AWS::DataSync::Task
+                - AWS::DataSync::LocationNFS
+                - AWS::EC2::NetworkInsightsAccessScopeAnalysis
+                - AWS::EKS::FargateProfile
+                - AWS::Glue::Job
+                - AWS::GuardDuty::ThreatIntelSet
+                - AWS::GuardDuty::IPSet
+                - AWS::SageMaker::Workteam
+                - AWS::SageMaker::NotebookInstanceLifecycleConfig
+                - AWS::ServiceDiscovery::Service
+                - AWS::ServiceDiscovery::PublicDnsNamespace
+                - AWS::SES::ContactList
+                - AWS::SES::ConfigurationSet
+                - AWS::Route53::HostedZone
+                - AWS::IoTEvents::Input
+                - AWS::IoTEvents::DetectorModel
+                - AWS::IoTEvents::AlarmModel
+                - AWS::ServiceDiscovery::HttpNamespace
+                - AWS::Events::EventBus
+                - AWS::ImageBuilder::ContainerRecipe
+                - AWS::ImageBuilder::DistributionConfiguration
+                - AWS::ImageBuilder::InfrastructureConfiguration
+                - AWS::DataSync::LocationObjectStorage
+                - AWS::DataSync::LocationHDFS
+                - AWS::Glue::Classifier
+                - AWS::Route53RecoveryReadiness::Cell
+                - AWS::Route53RecoveryReadiness::ReadinessCheck
+                - AWS::ECR::RegistryPolicy
+                - AWS::Backup::ReportPlan
+                - AWS::Lightsail::Certificate
+                - AWS::RUM::AppMonitor
+                - AWS::Events::Endpoint
+                - AWS::SES::ReceiptRuleSet
+                - AWS::Events::Archive
+                - AWS::Events::ApiDestination
+                - AWS::Lightsail::Disk
+                - AWS::FIS::ExperimentTemplate
+                - AWS::DataSync::LocationFSxWindows
+                - AWS::SES::ReceiptFilter
+                - AWS::GuardDuty::Filter
+                - AWS::SES::Template
+                - AWS::AmazonMQ::Broker
+                - AWS::AppConfig::Environment
+                - AWS::AppConfig::ConfigurationProfile
+                - AWS::Cloud9::EnvironmentEC2
+                - AWS::EventSchemas::Registry
+                - AWS::EventSchemas::RegistryPolicy
+                - AWS::EventSchemas::Discoverer
+                - AWS::FraudDetector::Label
+                - AWS::FraudDetector::EntityType
+                - AWS::FraudDetector::Variable
+                - AWS::FraudDetector::Outcome
+                - AWS::IoT::Authorizer
+                - AWS::IoT::SecurityProfile
+                - AWS::IoT::RoleAlias
+                - AWS::IoT::Dimension
+                - AWS::IoTAnalytics::Datastore
+                - AWS::Lightsail::Bucket
+                - AWS::Lightsail::StaticIp
+                - AWS::MediaPackage::PackagingGroup
+                - AWS::Route53RecoveryReadiness::RecoveryGroup
+                - AWS::ResilienceHub::ResiliencyPolicy
+                - AWS::Transfer::Workflow
+                - AWS::EKS::IdentityProviderConfig
+                - AWS::EKS::Addon
+                - AWS::Glue::MLTransform
+                - AWS::IoT::Policy
+                - AWS::IoT::MitigationAction
+                - AWS::IoTTwinMaker::Workspace
+                - AWS::IoTTwinMaker::Entity
+                - AWS::IoTAnalytics::Dataset
+                - AWS::IoTAnalytics::Pipeline
+                - AWS::IoTAnalytics::Channel
+                - AWS::IoTSiteWise::Dashboard
+                - AWS::IoTSiteWise::Project
+                - AWS::IoTSiteWise::Portal
+                - AWS::IoTSiteWise::AssetModel
+                - AWS::IVS::Channel
+                - AWS::IVS::RecordingConfiguration
+                - AWS::IVS::PlaybackKeyPair
+                - AWS::KinesisAnalyticsV2::Application
+                - AWS::RDS::GlobalCluster
+                - AWS::S3::MultiRegionAccessPoint
+                - AWS::DeviceFarm::TestGridProject
+                - AWS::Budgets::BudgetsAction
+                - AWS::Lex::Bot
+                - AWS::CodeGuruReviewer::RepositoryAssociation
+                - AWS::IoT::CustomMetric
+                - AWS::Route53Resolver::FirewallDomainList
+                - AWS::RoboMaker::RobotApplicationVersion
+                - AWS::EC2::TrafficMirrorSession
+                - AWS::IoTSiteWise::Gateway
+                - AWS::Lex::BotAlias
+                - AWS::LookoutMetrics::Alert
+                - AWS::IoT::AccountAuditConfiguration
+                - AWS::EC2::TrafficMirrorTarget
+                - AWS::S3::StorageLens
+                - AWS::IoT::ScheduledAudit
+                - AWS::Events::Connection
+                - AWS::EventSchemas::Schema
+                - AWS::MediaPackage::PackagingConfiguration
+                - AWS::KinesisVideo::SignalingChannel
+                - AWS::AppStream::DirectoryConfig
+                - AWS::LookoutVision::Project
+                - AWS::Route53RecoveryControl::Cluster
+                - AWS::Route53RecoveryControl::SafetyRule
+                - AWS::Route53RecoveryControl::ControlPanel
+                - AWS::Route53RecoveryControl::RoutingControl
+                - AWS::Route53RecoveryReadiness::ResourceSet
+                - AWS::RoboMaker::SimulationApplication
+                - AWS::RoboMaker::RobotApplication
+                - AWS::HealthLake::FHIRDatastore
+                - AWS::Pinpoint::Segment
+                - AWS::Pinpoint::ApplicationSettings
+                - AWS::Events::Rule
+                - AWS::EC2::DHCPOptions
+                - AWS::EC2::NetworkInsightsPath
+                - AWS::EC2::TrafficMirrorFilter
+                - AWS::EC2::IPAM
+                - AWS::IoTTwinMaker::Scene
+                - AWS::NetworkManager::TransitGatewayRegistration
+                - AWS::CustomerProfiles::Domain
+                - AWS::AutoScaling::WarmPool
+                - AWS::Connect::PhoneNumber
+                - AWS::AppConfig::DeploymentStrategy
+                - AWS::AppFlow::Flow
+                - AWS::AuditManager::Assessment
+                - AWS::CloudWatch::MetricStream
+                - AWS::DeviceFarm::InstanceProfile
+                - AWS::DeviceFarm::Project
+                - AWS::EC2::EC2Fleet
+                - AWS::EC2::SubnetRouteTableAssociation
+                - AWS::ECR::PullThroughCacheRule
+                - AWS::GroundStation::Config
+                - AWS::ImageBuilder::ImagePipeline
+                - AWS::IoT::FleetMetric
+                - AWS::IoTWireless::ServiceProfile
+                - AWS::NetworkManager::Device
+                - AWS::NetworkManager::GlobalNetwork
+                - AWS::NetworkManager::Link
+                - AWS::NetworkManager::Site
+                - AWS::Panorama::Package
+                - AWS::Pinpoint::App
+                - AWS::Redshift::ScheduledAction
+                - AWS::Route53Resolver::FirewallRuleGroupAssociation
+                - AWS::SageMaker::AppImageConfig
+                - AWS::SageMaker::Image
+                - AWS::ECS::TaskSet
+                - AWS::Cassandra::Keyspace
+                - AWS::Signer::SigningProfile
+                - AWS::Amplify::App
+                - AWS::AppMesh::VirtualNode
+                - AWS::AppMesh::VirtualService
+                - AWS::AppRunner::VpcConnector
+                - AWS::AppStream::Application
+                - AWS::CodeArtifact::Repository
+                - AWS::EC2::PrefixList
+                - AWS::EC2::SpotFleet
+                - AWS::Evidently::Project
+                - AWS::Forecast::Dataset
+                - AWS::IAM::SAMLProvider
+                - AWS::IAM::ServerCertificate
+                - AWS::Pinpoint::Campaign
+                - AWS::Pinpoint::InAppTemplate
+                - AWS::SageMaker::Domain
+                - AWS::Transfer::Agreement
+                - AWS::Transfer::Connector
+                - AWS::KinesisFirehose::DeliveryStream
+                - AWS::Amplify::Branch
+                - AWS::AppIntegrations::EventIntegration
+                - AWS::AppMesh::Route
+                - AWS::Athena::PreparedStatement
+                - AWS::EC2::IPAMScope
+                - AWS::Evidently::Launch
+                - AWS::Forecast::DatasetGroup
+                - AWS::GreengrassV2::ComponentVersion
+                - AWS::GroundStation::MissionProfile
+                - AWS::MediaConnect::FlowEntitlement
+                - AWS::MediaConnect::FlowVpcInterface
+                - AWS::MediaTailor::PlaybackConfiguration
+                - AWS::MSK::Configuration
+                - AWS::Personalize::Dataset
+                - AWS::Personalize::Schema
+                - AWS::Personalize::Solution
+                - AWS::Pinpoint::EmailTemplate
+                - AWS::Pinpoint::EventStream
+                - AWS::ResilienceHub::App
+                - AWS::ACMPCA::CertificateAuthority
+                - AWS::AppConfig::HostedConfigurationVersion
+                - AWS::AppMesh::VirtualGateway
+                - AWS::AppMesh::VirtualRouter
+                - AWS::AppRunner::Service
+                - AWS::CustomerProfiles::ObjectType
+                - AWS::DMS::Endpoint
+                - AWS::EC2::CapacityReservation
+                - AWS::EC2::ClientVpnEndpoint
+                - AWS::Kendra::Index
+                - AWS::KinesisVideo::Stream
+                - AWS::Logs::Destination
+                - AWS::Pinpoint::EmailChannel
+                - AWS::S3::AccessPoint
+                - AWS::NetworkManager::CustomerGatewayAssociation
+                - AWS::NetworkManager::LinkAssociation
+                - AWS::IoTWireless::MulticastGroup
+                - AWS::Personalize::DatasetGroup
+                - AWS::IoTTwinMaker::ComponentType
+                - AWS::CodeBuild::ReportGroup
+                - AWS::SageMaker::FeatureGroup
+                - AWS::MSK::BatchScramSecret
+                - AWS::AppStream::Stack
+                - AWS::IoT::JobTemplate
+                - AWS::IoTWireless::FuotaTask
+                - AWS::IoT::ProvisioningTemplate
+                - AWS::InspectorV2::Filter
+                - AWS::Route53Resolver::ResolverQueryLoggingConfigAssociation
+                - AWS::ServiceDiscovery::Instance
+                - AWS::Transfer::Certificate
+                - AWS::MediaConnect::FlowSource
+                - AWS::APS::RuleGroupsNamespace
+                - AWS::CodeGuruProfiler::ProfilingGroup
+                - AWS::Route53Resolver::ResolverQueryLoggingConfig
+                - AWS::Batch::SchedulingPolicy
+                - AWS::ACMPCA::CertificateAuthorityActivation
+                - AWS::AppMesh::GatewayRoute
+                - AWS::AppMesh::Mesh
+                - AWS::Connect::Instance
+                - AWS::Connect::QuickConnect
+                - AWS::EC2::CarrierGateway
+                - AWS::EC2::IPAMPool
+                - AWS::EC2::TransitGatewayConnect
+                - AWS::EC2::TransitGatewayMulticastDomain
+                - AWS::ECS::CapacityProvider
+                - AWS::IAM::InstanceProfile
+                - AWS::IoT::CACertificate
+                - AWS::IoTTwinMaker::SyncJob
+                - AWS::KafkaConnect::Connector
+                - AWS::Lambda::CodeSigningConfig
+                - AWS::NetworkManager::ConnectPeer
+                - AWS::ResourceExplorer2::Index
+                - AWS::AppStream::Fleet
+                - AWS::Cognito::UserPool
+                - AWS::Cognito::UserPoolClient
+                - AWS::Cognito::UserPoolGroup
+                - AWS::EC2::NetworkInsightsAccessScope
+                - AWS::EC2::NetworkInsightsAnalysis
+                - AWS::Grafana::Workspace
+                - AWS::GroundStation::DataflowEndpointGroup
+                - AWS::ImageBuilder::ImageRecipe
+                - AWS::KMS::Alias
+                - AWS::M2::Environment
+                - AWS::QuickSight::DataSource
+                - AWS::QuickSight::Template
+                - AWS::QuickSight::Theme
+                - AWS::RDS::OptionGroup
+                - AWS::Redshift::EndpointAccess
+                - AWS::Route53Resolver::FirewallRuleGroup
+                - AWS::SSM::Document
+                - AWS::AppConfig::ExtensionAssociation
+                - AWS::AppIntegrations::Application
+                - AWS::AppSync::ApiCache
+                - AWS::Bedrock::Guardrail
+                - AWS::Bedrock::KnowledgeBase
+                - AWS::Cognito::IdentityPool
+                - AWS::Connect::Rule
+                - AWS::Connect::User
+                - AWS::EC2::ClientVpnTargetNetworkAssociation
+                - AWS::EC2::EIPAssociation
+                - AWS::EC2::IPAMResourceDiscovery
+                - AWS::EC2::IPAMResourceDiscoveryAssociation
+                - AWS::EC2::InstanceConnectEndpoint
+                - AWS::EC2::SnapshotBlockPublicAccess
+                - AWS::EC2::VPCBlockPublicAccessExclusion
+                - AWS::EC2::VPCBlockPublicAccessOptions
+                - AWS::EC2::VPCEndpointConnectionNotification
+                - AWS::EC2::VPNConnectionRoute
+                - AWS::Evidently::Segment
+                - AWS::IAM::OIDCProvider
+                - AWS::InspectorV2::Activation
+                - AWS::MSK::ClusterPolicy
+                - AWS::MSK::VpcConnection
+                - AWS::MediaConnect::Gateway
+                - AWS::MemoryDB::SubnetGroup
+                - AWS::OpenSearchServerless::Collection
+                - AWS::OpenSearchServerless::VpcEndpoint
+                - AWS::Redshift::EndpointAuthorization
+                - AWS::Route53Profiles::Profile
+                - AWS::S3::StorageLensGroup
+                - AWS::S3Express::BucketPolicy
+                - AWS::S3Express::DirectoryBucket
+                - AWS::SageMaker::InferenceExperiment
+                - AWS::SecurityHub::Standard
+                - AWS::Transfer::Profile
+    - name: describe-organization-config-rule-statuses
+      description: Provides organization Config rule deployment status for an organization.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of `OrganizationConfigRuleStatuses` returned on each page.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
+        --organization-config-rule-names=: The names of organization Config rules for which you want status details.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-aggregate-conformance-pack-compliance-summary
+      description: Returns the count of compliant and noncompliant conformance packs across all Amazon Web Services accounts and Amazon Web Services Regions in an aggregator.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-aggregator-name=!: The name of the configuration aggregator.
+        --filters=: Filters the results based on the `AggregateConformancePackComplianceSummaryFilters` object.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-by-key=: Groups the result based on Amazon Web Services account ID or Amazon Web Services Region.
+        --limit=: The maximum number of results returned on each page.
+        --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
+      completion:
+        flag:
+            group-by-key:
+                - ACCOUNT_ID
+                - AWS_REGION
+    - name: get-compliance-details-by-resource
+      description: Returns the evaluation results for the specified Amazon Web Services resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --compliance-types=: Filters the results by compliance.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
+        --resource-evaluation-id=: The unique ID of Amazon Web Services resource execution for which you want to retrieve evaluation results.
+        --resource-id=: The ID of the Amazon Web Services resource for which you want compliance information.
+        --resource-type=: The type of the Amazon Web Services resource for which you want compliance information.
+        --starting-token=: A token to specify where to start paginating.
     - name: get-resource-config-history
       description: For accurate reporting on the compliance status, you must record the `AWS::Config::ResourceCompliance` resource type.
       flags:
         --chronological-order=: The chronological order for configuration items listed.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --earlier-time=: The chronologically earliest time in the time range for which the history requested.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --later-time=: The chronologically latest time in the time range for which the history requested.
         --limit=: The maximum number of configuration items returned on each page.
+        --max-items=: The  total number of items to return in the command's output.
         --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
+        --page-size=: The size of each page to get in the AWS service call.
         --resource-id=!: The ID of the resource (for example., `sg-xxxxxx`).
         --resource-type=!: The resource type.
+        --starting-token=: A token to specify where to start paginating.
       completion:
         flag:
             chronological-order:
@@ -1115,151 +1881,162 @@ commands:
                 - AWS::SageMaker::InferenceExperiment
                 - AWS::SecurityHub::Standard
                 - AWS::Transfer::Profile
-    - name: describe-pending-aggregation-requests
-      description: Returns a list of all pending aggregation requests.
+    - name: list-tags-for-resource
+      description: List the tags for Config resource.
       flags:
-        --limit=: The maximum number of evaluation results returned on each page.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of tags returned on each page.
+        --max-items=: The  total number of items to return in the command's output.
         --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
-    - name: batch-get-resource-config
-      description: Returns the `BaseConfigurationItem` for one or more requested resources.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-arn=!: The Amazon Resource Name (ARN) that identifies the resource for which to list the tags.
+        --starting-token=: A token to specify where to start paginating.
+    - name: put-aggregation-authorization
+      description: Authorizes the aggregator account and region to collect data from the source account and region.
       flags:
-        --resource-keys=!: A list of resource keys to be processed with the current request.
-    - name: describe-conformance-pack-compliance
-      description: Returns compliance details for each rule in that conformance pack.
+        --authorized-account-id=!: The 12-digit account ID of the account authorized to aggregate data.
+        --authorized-aws-region=!: The region authorized to collect aggregated data.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: An array of tag object.
+    - name: put-configuration-aggregator
+      description: Creates and updates the configuration aggregator with the selected source accounts and regions.
       flags:
-        --conformance-pack-name=!: Name of the conformance pack.
-        --filters=: A `ConformancePackComplianceFilters` object.
-        --limit=: The maximum number of Config rules within a conformance pack are returned on each page.
-        --next-token=: The `nextToken` string returned in a previous request that you use to request the next page of results in a paginated response.
-    - name: describe-conformance-pack-status
-      description: Provides one or more conformance packs deployment status.
+        --account-aggregation-sources=: A list of AccountAggregationSource object.
+        --aggregator-filters=: An object to filter configuration recorders in an aggregator.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-aggregator-name=!: The name of the configuration aggregator.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --organization-aggregation-source=: An OrganizationAggregationSource object.
+        --tags=: An array of tag object.
+    - name: put-organization-conformance-pack
+      description: Deploys conformance packs across member accounts in an Amazon Web Services Organization.
       flags:
-        --conformance-pack-names=: Comma-separated list of conformance pack names.
-        --limit=: The maximum number of conformance packs status returned on each page.
-        --next-token=: The `nextToken` string returned in a previous request that you use to request the next page of results in a paginated response.
-    - name: describe-organization-config-rule-statuses
-      description: Provides organization Config rule deployment status for an organization.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --conformance-pack-input-parameters=: A list of `ConformancePackInputParameter` objects.
+        --delivery-s3-bucket=: The name of the Amazon S3 bucket where Config stores conformance pack templates.
+        --delivery-s3-key-prefix=: The prefix for the Amazon S3 bucket.
+        --excluded-accounts=: A list of Amazon Web Services accounts to be excluded from an organization conformance pack while deploying a conformance pack.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --organization-conformance-pack-name=!: Name of the organization conformance pack you want to create.
+        --template-body=: A string that contains the full conformance pack template body.
+        --template-s3-uri=: Location of file containing the template body.
+    - name: describe-config-rule-evaluation-status
+      description: Returns status information for each of your Config managed rules.
       flags:
-        --limit=: The maximum number of `OrganizationConfigRuleStatuses` returned on each page.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --config-rule-names=: The name of the Config managed rules for which you want status information.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The number of rule evaluation results that you want returned.
+        --max-items=: The  total number of items to return in the command's output.
         --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
-        --organization-config-rule-names=: The names of organization Config rules for which you want status details.
-    - name: put-delivery-channel
-      description: Creates or updates a delivery channel to deliver configuration information and other compliance information.
-      flags:
-        --delivery-channel=!: An object for the delivery channel.
-    - name: put-remediation-configurations
-      description: Adds or updates the remediation configuration with a specific Config rule with the selected target or action.
-      flags:
-        --remediation-configurations=!: A list of remediation configuration objects.
-    - name: start-resource-evaluation
-      description: Runs an on-demand evaluation for the specified resource to determine whether the resource details will comply with configured Config rules.
-      flags:
-        --client-token=: A client token is a unique, case-sensitive string of up to 64 ASCII characters.
-        --evaluation-context=: Returns an `EvaluationContext` object.
-        --evaluation-mode=!: The mode of an evaluation.
-        --evaluation-timeout=: The timeout for an evaluation.
-        --resource-details=!: Returns a `ResourceDetails` object.
-      completion:
-        flag:
-            evaluation-mode:
-                - DETECTIVE
-                - PROACTIVE
-    - name: delete-configuration-recorder
-      description: Deletes the customer managed configuration recorder.
-      flags:
-        --configuration-recorder-name=!: The name of the customer managed configuration recorder that you want to delete.
-    - name: deliver-config-snapshot
-      description: Schedules delivery of a configuration snapshot to the Amazon S3 bucket in the specified delivery channel.
-      flags:
-        --delivery-channel-name=!: The name of the delivery channel through which the snapshot is delivered.
-    - name: describe-compliance-by-resource
-      description: Indicates whether the specified Amazon Web Services resources are compliant.
-      flags:
-        --compliance-types=: Filters the results by compliance.
-        --limit=: The maximum number of evaluation results returned on each page.
-        --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
-        --resource-id=: The ID of the Amazon Web Services resource for which you want compliance information.
-        --resource-type=: The types of Amazon Web Services resources for which you want compliance information (for example, `AWS::EC2::Instance`).
-    - name: describe-delivery-channels
-      description: Returns details about the specified delivery channel.
-      flags:
-        --delivery-channel-names=: A list of delivery channel names.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: get-compliance-summary-by-resource-type
       description: Returns the number of resources that are compliant and the number that are noncompliant.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-types=: Specify one or more resource types to get the number of resources that are compliant and the number that are noncompliant for each resource type.
-    - name: put-evaluations
-      description: Used by an Lambda function to deliver evaluation results to Config.
+    - name: list-conformance-pack-compliance-scores
+      description: Returns a list of conformance pack compliance scores.
       flags:
-        --evaluations=: The assessments that the Lambda function performs.
-        --no-test-mode: Use this parameter to specify a test run for `PutEvaluations`.
-        --result-token=!: An encrypted token that associates an evaluation with an Config rule.
-        --test-mode: Use this parameter to specify a test run for `PutEvaluations`.
-    - name: put-service-linked-configuration-recorder
-      description: Creates a service-linked configuration recorder that is linked to a specific Amazon Web Services service based on the `ServicePrincipal` you specify.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters the results based on the `ConformancePackComplianceScoresFilters`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of conformance pack compliance scores returned on each page.
+        --next-token=: The `nextToken` string in a prior request that you can use to get the paginated response for the next set of conformance pack compliance scores.
+        --sort-by=: Sorts your conformance pack compliance scores in either ascending or descending order, depending on `SortOrder`.
+        --sort-order=: Determines the order in which conformance pack compliance scores are sorted.
+      completion:
+        flag:
+            sort-by:
+                - SCORE
+            sort-order:
+                - ASCENDING
+                - DESCENDING
+    - name: put-config-rule
+      description: Adds or updates an Config rule to evaluate if your Amazon Web Services resources comply with your desired configurations.
       flags:
-        --service-principal=!: The service principal of the Amazon Web Services service for the service-linked configuration recorder that you want to create.
-        --tags=: The tags for a service-linked configuration recorder.
-    - name: tag-resource
-      description: Associates the specified tags to a resource with the specified `ResourceArn`.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --config-rule=!: The rule that you want to add to your account.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: An array of tag object.
+    - name: put-remediation-exceptions
+      description: A remediation exception is when a specified resource is no longer considered for auto-remediation.
       flags:
-        --resource-arn=!: The Amazon Resource Name (ARN) that identifies the resource for which to list the tags.
-        --tags=!: An array of tag object.
-    - name: associate-resource-types
-      description: Adds all resource types specified in the `ResourceTypes` list to the [RecordingGroup](https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html) of specified configuration recorder and includes those resource types when recording.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --config-rule-name=!: The name of the Config rule for which you want to create remediation exception.
+        --expiration-time=: The exception is automatically deleted after the expiration date.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --message=: The message contains an explanation of the exception.
+        --resource-keys=!: An exception list of resource exception keys to be processed with the current request.
+    - name: put-retention-configuration
+      description: Creates and updates the retention configuration with details about retention period (number of days) that Config stores your historical information.
       flags:
-        --configuration-recorder-arn=!: The Amazon Resource Name (ARN) of the specified configuration recorder.
-        --resource-types=!: The list of resource types you want to add to the recording group of the specified configuration recorder.
-    - name: delete-config-rule
-      description: Deletes the specified Config rule and all of its evaluation results.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --retention-period-in-days=!: Number of days Config stores your historical information.
+    - name: deliver-config-snapshot
+      description: Schedules delivery of a configuration snapshot to the Amazon S3 bucket in the specified delivery channel.
       flags:
-        --config-rule-name=!: The name of the Config rule that you want to delete.
-    - name: describe-aggregate-compliance-by-config-rules
-      description: Returns a list of compliant and noncompliant rules with the number of resources for compliant and noncompliant rules.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delivery-channel-name=!: The name of the delivery channel through which the snapshot is delivered.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-retention-configurations
+      description: Returns the details of one or more retention configurations.
       flags:
-        --configuration-aggregator-name=!: The name of the configuration aggregator.
-        --filters=: Filters the results by ConfigRuleComplianceFilters object.
-        --limit=: The maximum number of evaluation results returned on each page.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
         --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
+        --retention-configuration-names=: A list of names of retention configurations for which you want details.
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-custom-rule-policy
+      description: Returns the policy definition containing the logic for your Config Custom Policy rule.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --config-rule-name=: The name of your Config Custom Policy rule.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-discovered-resource-counts
       description: Returns the resource types, the number of each resource type, and the total number of resources that Config is recording in this region for your Amazon Web Services account.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --limit=: The maximum number of [ResourceCount]() objects returned on each page.
         --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
         --resource-types=: The comma-separated list that specifies the resource types that you want Config to return (for example, `"AWS::EC2::Instance"`, `"AWS::IAM::User"`).
-    - name: get-stored-query
-      description: Returns the details of a specific stored query.
-      flags:
-        --query-name=!: The name of the query.
-    - name: put-resource-config
-      description: Records the configuration state for the resource provided in the request.
-      flags:
-        --configuration=!: The configuration object of the resource in valid JSON format.
-        --resource-id=!: Unique identifier of the resource.
-        --resource-name=: Name of the resource.
-        --resource-type=!: The type of the resource.
-        --schema-version-id=!: Version of the schema registered for the ResourceType in CloudFormation.
-        --tags=: Tags associated with the resource.
-    - name: put-stored-query
-      description: Saves a new query or updates an existing saved query.
-      flags:
-        --stored-query=!: A list of `StoredQuery` objects.
-        --tags=: A list of `Tags` object.
-    - name: untag-resource
-      description: Deletes specified tags from a resource.
-      flags:
-        --resource-arn=!: The Amazon Resource Name (ARN) that identifies the resource for which to list the tags.
-        --tag-keys=!: The keys of the tags to be removed.
     - name: get-aggregate-compliance-details-by-config-rule
       description: Returns the evaluation results for the specified Config rule for a specific resource in a rule.
       flags:
         --account-id=!: The 12-digit account ID of the source account.
         --aws-region=!: The source region from where the data is aggregated.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --compliance-type=: The resource compliance status.
         --config-rule-name=!: The name of the Config rule for which you want compliance information.
         --configuration-aggregator-name=!: The name of the configuration aggregator.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --limit=: The maximum number of evaluation results returned on each page.
+        --max-items=: The  total number of items to return in the command's output.
         --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
       completion:
         flag:
             compliance-type:
@@ -1267,54 +2044,14 @@ commands:
                 - NON_COMPLIANT
                 - NOT_APPLICABLE
                 - INSUFFICIENT_DATA
-    - name: get-aggregate-resource-config
-      description: Returns configuration item that is aggregated for your specific resource in a specific source account and region.
-      flags:
-        --configuration-aggregator-name=!: The name of the configuration aggregator.
-        --resource-identifier=!: An object that identifies aggregate resource.
-    - name: get-conformance-pack-compliance-summary
-      description: Returns compliance details for the conformance pack based on the cumulative compliance results of all the rules in that conformance pack.
-      flags:
-        --conformance-pack-names=!: Names of conformance packs.
-        --limit=: The maximum number of conformance packs returned on each page.
-        --next-token=: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
-    - name: get-custom-rule-policy
-      description: Returns the policy definition containing the logic for your Config Custom Policy rule.
-      flags:
-        --config-rule-name=: The name of your Config Custom Policy rule.
-    - name: put-aggregation-authorization
-      description: Authorizes the aggregator account and region to collect data from the source account and region.
-      flags:
-        --authorized-account-id=!: The 12-digit account ID of the account authorized to aggregate data.
-        --authorized-aws-region=!: The region authorized to collect aggregated data.
-        --tags=: An array of tag object.
-    - name: delete-retention-configuration
-      description: Deletes the retention configuration.
-      flags:
-        --retention-configuration-name=!: The name of the retention configuration to delete.
-    - name: describe-aggregation-authorizations
-      description: Returns a list of authorizations granted to various aggregator accounts and regions.
-      flags:
-        --limit=: The maximum number of AggregationAuthorizations returned on each page.
-        --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
-    - name: get-aggregate-config-rule-compliance-summary
-      description: Returns the number of compliant and noncompliant rules for one or more accounts and regions in an aggregator.
-      flags:
-        --configuration-aggregator-name=!: The name of the configuration aggregator.
-        --filters=: Filters the results based on the ConfigRuleComplianceSummaryFilters object.
-        --group-by-key=: Groups the result based on ACCOUNT\_ID or AWS\_REGION.
-        --limit=: The maximum number of evaluation results returned on each page.
-        --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
-      completion:
-        flag:
-            group-by-key:
-                - ACCOUNT_ID
-                - AWS_REGION
     - name: get-aggregate-discovered-resource-counts
       description: Returns the resource counts across accounts and regions that are present in your Config aggregator.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --configuration-aggregator-name=!: The name of the configuration aggregator.
         --filters=: Filters the results based on the `ResourceCountFilters` object.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --group-by-key=: The key to group the resource counts.
         --limit=: The maximum number of [GroupedResourceCount]() objects returned on each page.
         --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
@@ -1324,613 +2061,260 @@ commands:
                 - RESOURCE_TYPE
                 - ACCOUNT_ID
                 - AWS_REGION
-    - name: get-compliance-summary-by-config-rule
-      description: Returns the number of Config rules that are compliant and noncompliant, up to a maximum of 25 for each.
-    - name: put-organization-conformance-pack
-      description: Deploys conformance packs across member accounts in an Amazon Web Services Organization.
+    - name: delete-configuration-aggregator
+      description: Deletes the specified configuration aggregator and the aggregated data associated with the aggregator.
       flags:
-        --conformance-pack-input-parameters=: A list of `ConformancePackInputParameter` objects.
-        --delivery-s3-bucket=: The name of the Amazon S3 bucket where Config stores conformance pack templates.
-        --delivery-s3-key-prefix=: The prefix for the Amazon S3 bucket.
-        --excluded-accounts=: A list of Amazon Web Services accounts to be excluded from an organization conformance pack while deploying a conformance pack.
-        --organization-conformance-pack-name=!: Name of the organization conformance pack you want to create.
-        --template-body=: A string that contains the full conformance pack template body.
-        --template-s3-uri=: Location of file containing the template body.
-    - name: delete-remediation-configuration
-      description: Deletes the remediation configuration.
-      flags:
-        --config-rule-name=!: The name of the Config rule for which you want to delete remediation configuration.
-        --resource-type=: The type of a resource.
-    - name: describe-compliance-by-config-rule
-      description: Indicates whether the specified Config rules are compliant.
-      flags:
-        --compliance-types=: Filters the results by compliance.
-        --config-rule-names=: Specify one or more Config rule names to filter the results by rule.
-        --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
-    - name: describe-config-rule-evaluation-status
-      description: Returns status information for each of your Config managed rules.
-      flags:
-        --config-rule-names=: The name of the Config managed rules for which you want status information.
-        --limit=: The number of rule evaluation results that you want returned.
-        --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
-    - name: get-compliance-details-by-config-rule
-      description: Returns the evaluation results for the specified Config rule.
-      flags:
-        --compliance-types=: Filters the results by compliance.
-        --config-rule-name=!: The name of the Config rule for which you want compliance information.
-        --limit=: The maximum number of evaluation results returned on each page.
-        --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
-    - name: put-external-evaluation
-      description: Add or updates the evaluations for process checks.
-      flags:
-        --config-rule-name=!: The name of the Config rule.
-        --external-evaluation=!: An `ExternalEvaluation` object that provides details about compliance.
-    - name: describe-configuration-recorder-status
-      description: Returns the current status of the configuration recorder you specify as well as the status of the last recording event for the configuration recorders.
-      flags:
-        --arn=: The Amazon Resource Name (ARN) of the configuration recorder that you want to specify.
-        --configuration-recorder-names=: The name of the configuration recorder.
-        --service-principal=: For service-linked configuration recorders, you can use the service principal of the linked Amazon Web Services service to specify the configuration recorder.
-    - name: describe-remediation-execution-status
-      description: Provides a detailed view of a Remediation Execution for a set of resources including state, timestamps for when steps for the remediation execution occur, and any error messages for steps that have failed.
-      flags:
-        --config-rule-name=!: The name of the Config rule.
-        --limit=: The maximum number of RemediationExecutionStatuses returned on each page.
-        --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
-        --resource-keys=: A list of resource keys to be processed with the current request.
-    - name: get-compliance-details-by-resource
-      description: Returns the evaluation results for the specified Amazon Web Services resource.
-      flags:
-        --compliance-types=: Filters the results by compliance.
-        --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
-        --resource-evaluation-id=: The unique ID of Amazon Web Services resource execution for which you want to retrieve evaluation results.
-        --resource-id=: The ID of the Amazon Web Services resource for which you want compliance information.
-        --resource-type=: The type of the Amazon Web Services resource for which you want compliance information.
-    - name: get-organization-conformance-pack-detailed-status
-      description: Returns detailed status for each member account within an organization for a given organization conformance pack.
-      flags:
-        --filters=: An `OrganizationResourceDetailedStatusFilters` object.
-        --limit=: The maximum number of `OrganizationConformancePackDetailedStatuses` returned on each page.
-        --next-token=: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
-        --organization-conformance-pack-name=!: The name of organization conformance pack for which you want status details for member accounts.
-    - name: get-organization-custom-rule-policy
-      description: Returns the policy definition containing the logic for your organization Config Custom Policy rule.
-      flags:
-        --organization-config-rule-name=!: The name of your organization Config Custom Policy rule.
-    - name: put-configuration-aggregator
-      description: Creates and updates the configuration aggregator with the selected source accounts and regions.
-      flags:
-        --account-aggregation-sources=: A list of AccountAggregationSource object.
-        --aggregator-filters=: An object to filter configuration recorders in an aggregator.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --configuration-aggregator-name=!: The name of the configuration aggregator.
-        --organization-aggregation-source=: An OrganizationAggregationSource object.
-        --tags=: An array of tag object.
-    - name: put-organization-config-rule
-      description: Adds or updates an Config rule for your entire organization to evaluate if your Amazon Web Services resources comply with your desired configurations.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-configuration-recorder
+      description: Deletes the customer managed configuration recorder.
       flags:
-        --excluded-accounts=: A comma-separated list of accounts that you want to exclude from an organization Config rule.
-        --organization-config-rule-name=!: The name that you assign to an organization Config rule.
-        --organization-custom-policy-rule-metadata=: An `OrganizationCustomPolicyRuleMetadata` object.
-        --organization-custom-rule-metadata=: An `OrganizationCustomRuleMetadata` object.
-        --organization-managed-rule-metadata=: An `OrganizationManagedRuleMetadata` object.
-    - name: describe-aggregate-compliance-by-conformance-packs
-      description: Returns a list of the existing and deleted conformance packs and their associated compliance status with the count of compliant and noncompliant Config rules within each conformance pack.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-recorder-name=!: The name of the customer managed configuration recorder that you want to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-evaluation-results
+      description: Deletes the evaluation results for the specified Config rule.
       flags:
-        --configuration-aggregator-name=!: The name of the configuration aggregator.
-        --filters=: Filters the result by `AggregateConformancePackComplianceFilters` object.
-        --limit=: The maximum number of conformance packs compliance details returned on each page.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --config-rule-name=!: The name of the Config rule for which you want to delete the evaluation results.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-configuration-aggregators
+      description: Returns the details of one or more configuration aggregators.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-aggregator-names=: The name of the configuration aggregators.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of configuration aggregators returned on each page.
+        --max-items=: The  total number of items to return in the command's output.
         --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
-    - name: describe-remediation-configurations
-      description: Returns the details of one or more remediation configurations.
-      flags:
-        --config-rule-names=!: A list of Config rule names of remediation configurations for which you want details.
-    - name: get-aggregate-conformance-pack-compliance-summary
-      description: Returns the count of compliant and noncompliant conformance packs across all Amazon Web Services accounts and Amazon Web Services Regions in an aggregator.
-      flags:
-        --configuration-aggregator-name=!: The name of the configuration aggregator.
-        --filters=: Filters the results based on the `AggregateConformancePackComplianceSummaryFilters` object.
-        --group-by-key=: Groups the result based on Amazon Web Services account ID or Amazon Web Services Region.
-        --limit=: The maximum number of results returned on each page.
-        --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
-      completion:
-        flag:
-            group-by-key:
-                - ACCOUNT_ID
-                - AWS_REGION
-    - name: put-config-rule
-      description: Adds or updates an Config rule to evaluate if your Amazon Web Services resources comply with your desired configurations.
-      flags:
-        --config-rule=!: The rule that you want to add to your account.
-        --tags=: An array of tag object.
-    - name: put-retention-configuration
-      description: Creates and updates the retention configuration with details about retention period (number of days) that Config stores your historical information.
-      flags:
-        --retention-period-in-days=!: Number of days Config stores your historical information.
-    - name: describe-organization-conformance-packs
-      description: Returns a list of organization conformance packs.
-      flags:
-        --limit=: The maximum number of organization config packs returned on each page.
-        --next-token=: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
-        --organization-conformance-pack-names=: The name that you assign to an organization conformance pack.
-    - name: delete-conformance-pack
-      description: Deletes the specified conformance pack and all the Config rules, remediation actions, and all evaluation results within that conformance pack.
-      flags:
-        --conformance-pack-name=!: Name of the conformance pack you want to delete.
-    - name: describe-configuration-aggregator-sources-status
-      description: Returns status information for sources within an aggregator.
-      flags:
-        --configuration-aggregator-name=!: The name of the configuration aggregator.
-        --limit=: The maximum number of AggregatorSourceStatus returned on each page.
-        --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
-        --update-status=: Filters the status type.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: describe-configuration-recorders
       description: Returns details for the configuration recorder you specify.
       flags:
         --arn=: The Amazon Resource Name (ARN) of the configuration recorder that you want to specify.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --configuration-recorder-names=: A list of names of the configuration recorders that you want to specify.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --service-principal=: For service-linked configuration recorders, you can use the service principal of the linked Amazon Web Services service to specify the configuration recorder.
-    - name: describe-organization-config-rules
-      description: Returns a list of organization Config rules.
+    - name: describe-conformance-pack-compliance
+      description: Returns compliance details for each rule in that conformance pack.
       flags:
-        --limit=: The maximum number of organization Config rules returned on each page.
-        --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
-        --organization-config-rule-names=: The names of organization Config rules for which you want details.
-    - name: list-aggregate-discovered-resources
-      description: Accepts a resource type and returns a list of resource identifiers that are aggregated for a specific resource type across accounts and regions.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --conformance-pack-name=!: Name of the conformance pack.
+        --filters=: A `ConformancePackComplianceFilters` object.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of Config rules within a conformance pack are returned on each page.
+        --next-token=: The `nextToken` string returned in a previous request that you use to request the next page of results in a paginated response.
+    - name: describe-organization-conformance-packs
+      description: Returns a list of organization conformance packs.
       flags:
-        --configuration-aggregator-name=!: The name of the configuration aggregator.
-        --filters=: Filters the results based on the `ResourceFilters` object.
-        --limit=: The maximum number of resource identifiers returned on each page.
-        --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
-        --resource-type=!: The type of resources that you want Config to list in the response.
-      completion:
-        flag:
-            resource-type:
-                - AWS::EC2::CustomerGateway
-                - AWS::EC2::EIP
-                - AWS::EC2::Host
-                - AWS::EC2::Instance
-                - AWS::EC2::InternetGateway
-                - AWS::EC2::NetworkAcl
-                - AWS::EC2::NetworkInterface
-                - AWS::EC2::RouteTable
-                - AWS::EC2::SecurityGroup
-                - AWS::EC2::Subnet
-                - AWS::CloudTrail::Trail
-                - AWS::EC2::Volume
-                - AWS::EC2::VPC
-                - AWS::EC2::VPNConnection
-                - AWS::EC2::VPNGateway
-                - AWS::EC2::RegisteredHAInstance
-                - AWS::EC2::NatGateway
-                - AWS::EC2::EgressOnlyInternetGateway
-                - AWS::EC2::VPCEndpoint
-                - AWS::EC2::VPCEndpointService
-                - AWS::EC2::FlowLog
-                - AWS::EC2::VPCPeeringConnection
-                - AWS::Elasticsearch::Domain
-                - AWS::IAM::Group
-                - AWS::IAM::Policy
-                - AWS::IAM::Role
-                - AWS::IAM::User
-                - AWS::ElasticLoadBalancingV2::LoadBalancer
-                - AWS::ACM::Certificate
-                - AWS::RDS::DBInstance
-                - AWS::RDS::DBSubnetGroup
-                - AWS::RDS::DBSecurityGroup
-                - AWS::RDS::DBSnapshot
-                - AWS::RDS::DBCluster
-                - AWS::RDS::DBClusterSnapshot
-                - AWS::RDS::EventSubscription
-                - AWS::S3::Bucket
-                - AWS::S3::AccountPublicAccessBlock
-                - AWS::Redshift::Cluster
-                - AWS::Redshift::ClusterSnapshot
-                - AWS::Redshift::ClusterParameterGroup
-                - AWS::Redshift::ClusterSecurityGroup
-                - AWS::Redshift::ClusterSubnetGroup
-                - AWS::Redshift::EventSubscription
-                - AWS::SSM::ManagedInstanceInventory
-                - AWS::CloudWatch::Alarm
-                - AWS::CloudFormation::Stack
-                - AWS::ElasticLoadBalancing::LoadBalancer
-                - AWS::AutoScaling::AutoScalingGroup
-                - AWS::AutoScaling::LaunchConfiguration
-                - AWS::AutoScaling::ScalingPolicy
-                - AWS::AutoScaling::ScheduledAction
-                - AWS::DynamoDB::Table
-                - AWS::CodeBuild::Project
-                - AWS::WAF::RateBasedRule
-                - AWS::WAF::Rule
-                - AWS::WAF::RuleGroup
-                - AWS::WAF::WebACL
-                - AWS::WAFRegional::RateBasedRule
-                - AWS::WAFRegional::Rule
-                - AWS::WAFRegional::RuleGroup
-                - AWS::WAFRegional::WebACL
-                - AWS::CloudFront::Distribution
-                - AWS::CloudFront::StreamingDistribution
-                - AWS::Lambda::Function
-                - AWS::NetworkFirewall::Firewall
-                - AWS::NetworkFirewall::FirewallPolicy
-                - AWS::NetworkFirewall::RuleGroup
-                - AWS::ElasticBeanstalk::Application
-                - AWS::ElasticBeanstalk::ApplicationVersion
-                - AWS::ElasticBeanstalk::Environment
-                - AWS::WAFv2::WebACL
-                - AWS::WAFv2::RuleGroup
-                - AWS::WAFv2::IPSet
-                - AWS::WAFv2::RegexPatternSet
-                - AWS::WAFv2::ManagedRuleSet
-                - AWS::XRay::EncryptionConfig
-                - AWS::SSM::AssociationCompliance
-                - AWS::SSM::PatchCompliance
-                - AWS::Shield::Protection
-                - AWS::ShieldRegional::Protection
-                - AWS::Config::ConformancePackCompliance
-                - AWS::Config::ResourceCompliance
-                - AWS::ApiGateway::Stage
-                - AWS::ApiGateway::RestApi
-                - AWS::ApiGatewayV2::Stage
-                - AWS::ApiGatewayV2::Api
-                - AWS::CodePipeline::Pipeline
-                - AWS::ServiceCatalog::CloudFormationProvisionedProduct
-                - AWS::ServiceCatalog::CloudFormationProduct
-                - AWS::ServiceCatalog::Portfolio
-                - AWS::SQS::Queue
-                - AWS::KMS::Key
-                - AWS::QLDB::Ledger
-                - AWS::SecretsManager::Secret
-                - AWS::SNS::Topic
-                - AWS::SSM::FileData
-                - AWS::Backup::BackupPlan
-                - AWS::Backup::BackupSelection
-                - AWS::Backup::BackupVault
-                - AWS::Backup::RecoveryPoint
-                - AWS::ECR::Repository
-                - AWS::ECS::Cluster
-                - AWS::ECS::Service
-                - AWS::ECS::TaskDefinition
-                - AWS::EFS::AccessPoint
-                - AWS::EFS::FileSystem
-                - AWS::EKS::Cluster
-                - AWS::OpenSearch::Domain
-                - AWS::EC2::TransitGateway
-                - AWS::Kinesis::Stream
-                - AWS::Kinesis::StreamConsumer
-                - AWS::CodeDeploy::Application
-                - AWS::CodeDeploy::DeploymentConfig
-                - AWS::CodeDeploy::DeploymentGroup
-                - AWS::EC2::LaunchTemplate
-                - AWS::ECR::PublicRepository
-                - AWS::GuardDuty::Detector
-                - AWS::EMR::SecurityConfiguration
-                - AWS::SageMaker::CodeRepository
-                - AWS::Route53Resolver::ResolverEndpoint
-                - AWS::Route53Resolver::ResolverRule
-                - AWS::Route53Resolver::ResolverRuleAssociation
-                - AWS::DMS::ReplicationSubnetGroup
-                - AWS::DMS::EventSubscription
-                - AWS::MSK::Cluster
-                - AWS::StepFunctions::Activity
-                - AWS::WorkSpaces::Workspace
-                - AWS::WorkSpaces::ConnectionAlias
-                - AWS::SageMaker::Model
-                - AWS::ElasticLoadBalancingV2::Listener
-                - AWS::StepFunctions::StateMachine
-                - AWS::Batch::JobQueue
-                - AWS::Batch::ComputeEnvironment
-                - AWS::AccessAnalyzer::Analyzer
-                - AWS::Athena::WorkGroup
-                - AWS::Athena::DataCatalog
-                - AWS::Detective::Graph
-                - AWS::GlobalAccelerator::Accelerator
-                - AWS::GlobalAccelerator::EndpointGroup
-                - AWS::GlobalAccelerator::Listener
-                - AWS::EC2::TransitGatewayAttachment
-                - AWS::EC2::TransitGatewayRouteTable
-                - AWS::DMS::Certificate
-                - AWS::AppConfig::Application
-                - AWS::AppSync::GraphQLApi
-                - AWS::DataSync::LocationSMB
-                - AWS::DataSync::LocationFSxLustre
-                - AWS::DataSync::LocationS3
-                - AWS::DataSync::LocationEFS
-                - AWS::DataSync::Task
-                - AWS::DataSync::LocationNFS
-                - AWS::EC2::NetworkInsightsAccessScopeAnalysis
-                - AWS::EKS::FargateProfile
-                - AWS::Glue::Job
-                - AWS::GuardDuty::ThreatIntelSet
-                - AWS::GuardDuty::IPSet
-                - AWS::SageMaker::Workteam
-                - AWS::SageMaker::NotebookInstanceLifecycleConfig
-                - AWS::ServiceDiscovery::Service
-                - AWS::ServiceDiscovery::PublicDnsNamespace
-                - AWS::SES::ContactList
-                - AWS::SES::ConfigurationSet
-                - AWS::Route53::HostedZone
-                - AWS::IoTEvents::Input
-                - AWS::IoTEvents::DetectorModel
-                - AWS::IoTEvents::AlarmModel
-                - AWS::ServiceDiscovery::HttpNamespace
-                - AWS::Events::EventBus
-                - AWS::ImageBuilder::ContainerRecipe
-                - AWS::ImageBuilder::DistributionConfiguration
-                - AWS::ImageBuilder::InfrastructureConfiguration
-                - AWS::DataSync::LocationObjectStorage
-                - AWS::DataSync::LocationHDFS
-                - AWS::Glue::Classifier
-                - AWS::Route53RecoveryReadiness::Cell
-                - AWS::Route53RecoveryReadiness::ReadinessCheck
-                - AWS::ECR::RegistryPolicy
-                - AWS::Backup::ReportPlan
-                - AWS::Lightsail::Certificate
-                - AWS::RUM::AppMonitor
-                - AWS::Events::Endpoint
-                - AWS::SES::ReceiptRuleSet
-                - AWS::Events::Archive
-                - AWS::Events::ApiDestination
-                - AWS::Lightsail::Disk
-                - AWS::FIS::ExperimentTemplate
-                - AWS::DataSync::LocationFSxWindows
-                - AWS::SES::ReceiptFilter
-                - AWS::GuardDuty::Filter
-                - AWS::SES::Template
-                - AWS::AmazonMQ::Broker
-                - AWS::AppConfig::Environment
-                - AWS::AppConfig::ConfigurationProfile
-                - AWS::Cloud9::EnvironmentEC2
-                - AWS::EventSchemas::Registry
-                - AWS::EventSchemas::RegistryPolicy
-                - AWS::EventSchemas::Discoverer
-                - AWS::FraudDetector::Label
-                - AWS::FraudDetector::EntityType
-                - AWS::FraudDetector::Variable
-                - AWS::FraudDetector::Outcome
-                - AWS::IoT::Authorizer
-                - AWS::IoT::SecurityProfile
-                - AWS::IoT::RoleAlias
-                - AWS::IoT::Dimension
-                - AWS::IoTAnalytics::Datastore
-                - AWS::Lightsail::Bucket
-                - AWS::Lightsail::StaticIp
-                - AWS::MediaPackage::PackagingGroup
-                - AWS::Route53RecoveryReadiness::RecoveryGroup
-                - AWS::ResilienceHub::ResiliencyPolicy
-                - AWS::Transfer::Workflow
-                - AWS::EKS::IdentityProviderConfig
-                - AWS::EKS::Addon
-                - AWS::Glue::MLTransform
-                - AWS::IoT::Policy
-                - AWS::IoT::MitigationAction
-                - AWS::IoTTwinMaker::Workspace
-                - AWS::IoTTwinMaker::Entity
-                - AWS::IoTAnalytics::Dataset
-                - AWS::IoTAnalytics::Pipeline
-                - AWS::IoTAnalytics::Channel
-                - AWS::IoTSiteWise::Dashboard
-                - AWS::IoTSiteWise::Project
-                - AWS::IoTSiteWise::Portal
-                - AWS::IoTSiteWise::AssetModel
-                - AWS::IVS::Channel
-                - AWS::IVS::RecordingConfiguration
-                - AWS::IVS::PlaybackKeyPair
-                - AWS::KinesisAnalyticsV2::Application
-                - AWS::RDS::GlobalCluster
-                - AWS::S3::MultiRegionAccessPoint
-                - AWS::DeviceFarm::TestGridProject
-                - AWS::Budgets::BudgetsAction
-                - AWS::Lex::Bot
-                - AWS::CodeGuruReviewer::RepositoryAssociation
-                - AWS::IoT::CustomMetric
-                - AWS::Route53Resolver::FirewallDomainList
-                - AWS::RoboMaker::RobotApplicationVersion
-                - AWS::EC2::TrafficMirrorSession
-                - AWS::IoTSiteWise::Gateway
-                - AWS::Lex::BotAlias
-                - AWS::LookoutMetrics::Alert
-                - AWS::IoT::AccountAuditConfiguration
-                - AWS::EC2::TrafficMirrorTarget
-                - AWS::S3::StorageLens
-                - AWS::IoT::ScheduledAudit
-                - AWS::Events::Connection
-                - AWS::EventSchemas::Schema
-                - AWS::MediaPackage::PackagingConfiguration
-                - AWS::KinesisVideo::SignalingChannel
-                - AWS::AppStream::DirectoryConfig
-                - AWS::LookoutVision::Project
-                - AWS::Route53RecoveryControl::Cluster
-                - AWS::Route53RecoveryControl::SafetyRule
-                - AWS::Route53RecoveryControl::ControlPanel
-                - AWS::Route53RecoveryControl::RoutingControl
-                - AWS::Route53RecoveryReadiness::ResourceSet
-                - AWS::RoboMaker::SimulationApplication
-                - AWS::RoboMaker::RobotApplication
-                - AWS::HealthLake::FHIRDatastore
-                - AWS::Pinpoint::Segment
-                - AWS::Pinpoint::ApplicationSettings
-                - AWS::Events::Rule
-                - AWS::EC2::DHCPOptions
-                - AWS::EC2::NetworkInsightsPath
-                - AWS::EC2::TrafficMirrorFilter
-                - AWS::EC2::IPAM
-                - AWS::IoTTwinMaker::Scene
-                - AWS::NetworkManager::TransitGatewayRegistration
-                - AWS::CustomerProfiles::Domain
-                - AWS::AutoScaling::WarmPool
-                - AWS::Connect::PhoneNumber
-                - AWS::AppConfig::DeploymentStrategy
-                - AWS::AppFlow::Flow
-                - AWS::AuditManager::Assessment
-                - AWS::CloudWatch::MetricStream
-                - AWS::DeviceFarm::InstanceProfile
-                - AWS::DeviceFarm::Project
-                - AWS::EC2::EC2Fleet
-                - AWS::EC2::SubnetRouteTableAssociation
-                - AWS::ECR::PullThroughCacheRule
-                - AWS::GroundStation::Config
-                - AWS::ImageBuilder::ImagePipeline
-                - AWS::IoT::FleetMetric
-                - AWS::IoTWireless::ServiceProfile
-                - AWS::NetworkManager::Device
-                - AWS::NetworkManager::GlobalNetwork
-                - AWS::NetworkManager::Link
-                - AWS::NetworkManager::Site
-                - AWS::Panorama::Package
-                - AWS::Pinpoint::App
-                - AWS::Redshift::ScheduledAction
-                - AWS::Route53Resolver::FirewallRuleGroupAssociation
-                - AWS::SageMaker::AppImageConfig
-                - AWS::SageMaker::Image
-                - AWS::ECS::TaskSet
-                - AWS::Cassandra::Keyspace
-                - AWS::Signer::SigningProfile
-                - AWS::Amplify::App
-                - AWS::AppMesh::VirtualNode
-                - AWS::AppMesh::VirtualService
-                - AWS::AppRunner::VpcConnector
-                - AWS::AppStream::Application
-                - AWS::CodeArtifact::Repository
-                - AWS::EC2::PrefixList
-                - AWS::EC2::SpotFleet
-                - AWS::Evidently::Project
-                - AWS::Forecast::Dataset
-                - AWS::IAM::SAMLProvider
-                - AWS::IAM::ServerCertificate
-                - AWS::Pinpoint::Campaign
-                - AWS::Pinpoint::InAppTemplate
-                - AWS::SageMaker::Domain
-                - AWS::Transfer::Agreement
-                - AWS::Transfer::Connector
-                - AWS::KinesisFirehose::DeliveryStream
-                - AWS::Amplify::Branch
-                - AWS::AppIntegrations::EventIntegration
-                - AWS::AppMesh::Route
-                - AWS::Athena::PreparedStatement
-                - AWS::EC2::IPAMScope
-                - AWS::Evidently::Launch
-                - AWS::Forecast::DatasetGroup
-                - AWS::GreengrassV2::ComponentVersion
-                - AWS::GroundStation::MissionProfile
-                - AWS::MediaConnect::FlowEntitlement
-                - AWS::MediaConnect::FlowVpcInterface
-                - AWS::MediaTailor::PlaybackConfiguration
-                - AWS::MSK::Configuration
-                - AWS::Personalize::Dataset
-                - AWS::Personalize::Schema
-                - AWS::Personalize::Solution
-                - AWS::Pinpoint::EmailTemplate
-                - AWS::Pinpoint::EventStream
-                - AWS::ResilienceHub::App
-                - AWS::ACMPCA::CertificateAuthority
-                - AWS::AppConfig::HostedConfigurationVersion
-                - AWS::AppMesh::VirtualGateway
-                - AWS::AppMesh::VirtualRouter
-                - AWS::AppRunner::Service
-                - AWS::CustomerProfiles::ObjectType
-                - AWS::DMS::Endpoint
-                - AWS::EC2::CapacityReservation
-                - AWS::EC2::ClientVpnEndpoint
-                - AWS::Kendra::Index
-                - AWS::KinesisVideo::Stream
-                - AWS::Logs::Destination
-                - AWS::Pinpoint::EmailChannel
-                - AWS::S3::AccessPoint
-                - AWS::NetworkManager::CustomerGatewayAssociation
-                - AWS::NetworkManager::LinkAssociation
-                - AWS::IoTWireless::MulticastGroup
-                - AWS::Personalize::DatasetGroup
-                - AWS::IoTTwinMaker::ComponentType
-                - AWS::CodeBuild::ReportGroup
-                - AWS::SageMaker::FeatureGroup
-                - AWS::MSK::BatchScramSecret
-                - AWS::AppStream::Stack
-                - AWS::IoT::JobTemplate
-                - AWS::IoTWireless::FuotaTask
-                - AWS::IoT::ProvisioningTemplate
-                - AWS::InspectorV2::Filter
-                - AWS::Route53Resolver::ResolverQueryLoggingConfigAssociation
-                - AWS::ServiceDiscovery::Instance
-                - AWS::Transfer::Certificate
-                - AWS::MediaConnect::FlowSource
-                - AWS::APS::RuleGroupsNamespace
-                - AWS::CodeGuruProfiler::ProfilingGroup
-                - AWS::Route53Resolver::ResolverQueryLoggingConfig
-                - AWS::Batch::SchedulingPolicy
-                - AWS::ACMPCA::CertificateAuthorityActivation
-                - AWS::AppMesh::GatewayRoute
-                - AWS::AppMesh::Mesh
-                - AWS::Connect::Instance
-                - AWS::Connect::QuickConnect
-                - AWS::EC2::CarrierGateway
-                - AWS::EC2::IPAMPool
-                - AWS::EC2::TransitGatewayConnect
-                - AWS::EC2::TransitGatewayMulticastDomain
-                - AWS::ECS::CapacityProvider
-                - AWS::IAM::InstanceProfile
-                - AWS::IoT::CACertificate
-                - AWS::IoTTwinMaker::SyncJob
-                - AWS::KafkaConnect::Connector
-                - AWS::Lambda::CodeSigningConfig
-                - AWS::NetworkManager::ConnectPeer
-                - AWS::ResourceExplorer2::Index
-                - AWS::AppStream::Fleet
-                - AWS::Cognito::UserPool
-                - AWS::Cognito::UserPoolClient
-                - AWS::Cognito::UserPoolGroup
-                - AWS::EC2::NetworkInsightsAccessScope
-                - AWS::EC2::NetworkInsightsAnalysis
-                - AWS::Grafana::Workspace
-                - AWS::GroundStation::DataflowEndpointGroup
-                - AWS::ImageBuilder::ImageRecipe
-                - AWS::KMS::Alias
-                - AWS::M2::Environment
-                - AWS::QuickSight::DataSource
-                - AWS::QuickSight::Template
-                - AWS::QuickSight::Theme
-                - AWS::RDS::OptionGroup
-                - AWS::Redshift::EndpointAccess
-                - AWS::Route53Resolver::FirewallRuleGroup
-                - AWS::SSM::Document
-                - AWS::AppConfig::ExtensionAssociation
-                - AWS::AppIntegrations::Application
-                - AWS::AppSync::ApiCache
-                - AWS::Bedrock::Guardrail
-                - AWS::Bedrock::KnowledgeBase
-                - AWS::Cognito::IdentityPool
-                - AWS::Connect::Rule
-                - AWS::Connect::User
-                - AWS::EC2::ClientVpnTargetNetworkAssociation
-                - AWS::EC2::EIPAssociation
-                - AWS::EC2::IPAMResourceDiscovery
-                - AWS::EC2::IPAMResourceDiscoveryAssociation
-                - AWS::EC2::InstanceConnectEndpoint
-                - AWS::EC2::SnapshotBlockPublicAccess
-                - AWS::EC2::VPCBlockPublicAccessExclusion
-                - AWS::EC2::VPCBlockPublicAccessOptions
-                - AWS::EC2::VPCEndpointConnectionNotification
-                - AWS::EC2::VPNConnectionRoute
-                - AWS::Evidently::Segment
-                - AWS::IAM::OIDCProvider
-                - AWS::InspectorV2::Activation
-                - AWS::MSK::ClusterPolicy
-                - AWS::MSK::VpcConnection
-                - AWS::MediaConnect::Gateway
-                - AWS::MemoryDB::SubnetGroup
-                - AWS::OpenSearchServerless::Collection
-                - AWS::OpenSearchServerless::VpcEndpoint
-                - AWS::Redshift::EndpointAuthorization
-                - AWS::Route53Profiles::Profile
-                - AWS::S3::StorageLensGroup
-                - AWS::S3Express::BucketPolicy
-                - AWS::S3Express::DirectoryBucket
-                - AWS::SageMaker::InferenceExperiment
-                - AWS::SecurityHub::Standard
-                - AWS::Transfer::Profile
-    - name: list-tags-for-resource
-      description: List the tags for Config resource.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of organization config packs returned on each page.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+        --organization-conformance-pack-names=: The name that you assign to an organization conformance pack.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: disassociate-resource-types
+      description: Removes all resource types specified in the `ResourceTypes` list from the [RecordingGroup](https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html) of configuration recorder and excludes these resource types when recording.
       flags:
-        --limit=: The maximum number of tags returned on each page.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-recorder-arn=!: The Amazon Resource Name (ARN) of the specified configuration recorder.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-types=!: The list of resource types you want to remove from the recording group of the specified configuration recorder.
+    - name: describe-compliance-by-resource
+      description: Indicates whether the specified Amazon Web Services resources are compliant.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --compliance-types=: Filters the results by compliance.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of evaluation results returned on each page.
+        --max-items=: The  total number of items to return in the command's output.
         --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-id=: The ID of the Amazon Web Services resource for which you want compliance information.
+        --resource-type=: The types of Amazon Web Services resources for which you want compliance information (for example, `AWS::EC2::Instance`).
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-delivery-channel-status
+      description: Returns the current status of the specified delivery channel.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delivery-channel-names=: A list of delivery channel names.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-delivery-channels
+      description: Returns details about the specified delivery channel.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delivery-channel-names=: A list of delivery channel names.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-organization-conformance-pack-detailed-status
+      description: Returns detailed status for each member account within an organization for a given organization conformance pack.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: An `OrganizationResourceDetailedStatusFilters` object.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of `OrganizationConformancePackDetailedStatuses` returned on each page.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+        --organization-conformance-pack-name=!: The name of organization conformance pack for which you want status details for member accounts.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-resource-evaluations
+      description: Returns a list of proactive resource evaluations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Returns a `ResourceEvaluationFilters` object.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of evaluations returned on each page.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: put-external-evaluation
+      description: Add or updates the evaluations for process checks.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --config-rule-name=!: The name of the Config rule.
+        --external-evaluation=!: An `ExternalEvaluation` object that provides details about compliance.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: put-resource-config
+      description: Records the configuration state for the resource provided in the request.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration=!: The configuration object of the resource in valid JSON format.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-id=!: Unique identifier of the resource.
+        --resource-name=: Name of the resource.
+        --resource-type=!: The type of the resource.
+        --schema-version-id=!: Version of the schema registered for the ResourceType in CloudFormation.
+        --tags=: Tags associated with the resource.
+    - name: tag-resource
+      description: Associates the specified tags to a resource with the specified `ResourceArn`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) that identifies the resource for which to list the tags.
+        --tags=!: An array of tag object.
+    - name: untag-resource
+      description: Deletes specified tags from a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) that identifies the resource for which to list the tags.
+        --tag-keys=!: The keys of the tags to be removed.
+    - name: delete-aggregation-authorization
+      description: Deletes the authorization granted to the specified configuration aggregator account in a specified region.
+      flags:
+        --authorized-account-id=!: The 12-digit account ID of the account authorized to aggregate data.
+        --authorized-aws-region=!: The region authorized to collect aggregated data.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-conformance-pack-status
+      description: Provides one or more conformance packs deployment status.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --conformance-pack-names=: Comma-separated list of conformance pack names.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of conformance packs status returned on each page.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The `nextToken` string returned in a previous request that you use to request the next page of results in a paginated response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: put-configuration-recorder
+      description: Creates or updates the customer managed configuration recorder.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-recorder=!: An object for the configuration recorder.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: The tags for the customer managed configuration recorder.
+    - name: put-service-linked-configuration-recorder
+      description: Creates a service-linked configuration recorder that is linked to a specific Amazon Web Services service based on the `ServicePrincipal` you specify.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-principal=!: The service principal of the Amazon Web Services service for the service-linked configuration recorder that you want to create.
+        --tags=: The tags for a service-linked configuration recorder.
+    - name: select-resource-config
+      description: Accepts a structured query language (SQL) `SELECT` command, performs the corresponding search, and returns resource configurations matching the properties.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expression=!: The SQL query `SELECT` command.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of query results returned on each page.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The `nextToken` string returned in a previous request that you use to request the next page of results in a paginated response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: stop-configuration-recorder
+      description: Stops the customer managed configuration recorder.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-recorder-name=!: The name of the customer managed configuration recorder that you want to stop.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: batch-get-aggregate-resource-config
+      description: Returns the current configuration items for resources that are present in your Config aggregator.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-aggregator-name=!: The name of the configuration aggregator.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-identifiers=!: A list of aggregate ResourceIdentifiers objects.
+    - name: delete-organization-config-rule
+      description: Deletes the specified organization Config rule and all of its evaluation results from all member accounts in that organization.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --organization-config-rule-name=!: The name of organization Config rule that you want to delete.
+    - name: get-conformance-pack-compliance-summary
+      description: Returns compliance details for the conformance pack based on the cumulative compliance results of all the rules in that conformance pack.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --conformance-pack-names=!: Names of conformance packs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of conformance packs returned on each page.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-resource-evaluation-summary
+      description: Returns a summary of resource evaluation for the specified resource evaluation ID from the proactive rules that were run.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-evaluation-id=!: The unique `ResourceEvaluationId` of Amazon Web Services resource execution for which you want to retrieve the evaluation summary.
+    - name: get-stored-query
+      description: Returns the details of a specific stored query.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --query-name=!: The name of the query.

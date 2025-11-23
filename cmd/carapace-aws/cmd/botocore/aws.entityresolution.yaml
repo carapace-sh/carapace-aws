@@ -1,235 +1,44 @@
 name: entityresolution
 description: AWS EntityResolution
 commands:
-    - name: delete-id-mapping-workflow
-      description: Deletes the `IdMappingWorkflow` with a given name.
-      flags:
-        --workflow-name=!: The name of the workflow to be deleted.
-    - name: delete-matching-workflow
-      description: Deletes the `MatchingWorkflow` with a given name.
-      flags:
-        --workflow-name=!: The name of the workflow to be retrieved.
-    - name: delete-policy-statement
-      description: Deletes the policy statement.
-      flags:
-        --arn=!: The ARN of the resource for which the policy need to be deleted.
-        --statement-id=!: A statement identifier that differentiates the statement from others in the same policy.
-    - name: list-schema-mappings
-      description: Returns a list of all the `SchemaMappings` that have been created for an Amazon Web Services account.
-      flags:
-        --max-results=: The maximum number of objects returned per page.
-        --next-token=: The pagination token from the previous API call.
-    - name: start-matching-job
-      description: Starts the `MatchingJob` of a workflow.
-      flags:
-        --workflow-name=!: The name of the matching job to be retrieved.
-    - name: generate-match-id
-      description: Generates or retrieves Match IDs for records using a rule-based matching workflow.
-      flags:
-        --processing-type=: The processing mode that determines how Match IDs are generated and results are saved.
-        --records=!: The records to match.
-        --workflow-name=!: The name of the rule-based matching workflow.
-      completion:
-        flag:
-            processing-type:
-                - CONSISTENT
-                - EVENTUAL
-                - EVENTUAL_NO_LOOKUP
-    - name: list-id-mapping-workflows
-      description: Returns a list of all the `IdMappingWorkflows` that have been created for an Amazon Web Services account.
-      flags:
-        --max-results=: The maximum number of objects returned per page.
-        --next-token=: The pagination token from the previous API call.
-    - name: untag-resource
-      description: Removes one or more tags from the specified Entity Resolution resource.
-      flags:
-        --resource-arn=!: The ARN of the resource for which you want to untag.
-        --tag-keys=!: The list of tag keys to remove from the resource.
-    - name: add-policy-statement
-      description: Adds a policy statement object.
-      flags:
-        --action=!: The action that the principal can use on the resource.
-        --arn=!: The Amazon Resource Name (ARN) of the resource that will be accessed by the principal.
-        --condition=: A set of condition keys that you can use in key policies.
-        --effect=!: Determines whether the permissions specified in the policy are to be allowed (`Allow`) or denied (`Deny`).
-        --principal=!: The Amazon Web Services service or Amazon Web Services account that can access the resource defined as ARN.
-        --statement-id=!: A statement identifier that differentiates the statement from others in the same policy.
-      completion:
-        flag:
-            effect:
-                - Allow
-                - Deny
-    - name: delete-schema-mapping
-      description: Deletes the `SchemaMapping` with a given name.
-      flags:
-        --schema-name=!: The name of the schema to delete.
-    - name: get-match-id
-      description: Returns the corresponding Match ID of a customer record if the record has been processed in a rule-based matching workflow.
-      flags:
-        --apply-normalization: Normalizes the attributes defined in the schema in the input data.
-        --no-apply-normalization: Normalizes the attributes defined in the schema in the input data.
-        --record=!: The record to fetch the Match ID for.
-        --workflow-name=!: The name of the workflow.
     - name: get-schema-mapping
       description: Returns the SchemaMapping of a given name.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --schema-name=!: The name of the schema to be retrieved.
     - name: list-id-mapping-jobs
       description: Lists all ID mapping jobs for a given workflow.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of objects returned per page.
         --next-token=: The pagination token from the previous API call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
         --workflow-name=!: The name of the workflow to be retrieved.
-    - name: list-matching-workflows
-      description: Returns a list of all the `MatchingWorkflows` that have been created for an Amazon Web Services account.
-      flags:
-        --max-results=: The maximum number of objects returned per page.
-        --next-token=: The pagination token from the previous API call.
-    - name: delete-id-namespace
-      description: Deletes the `IdNamespace` with a given name.
-      flags:
-        --id-namespace-name=!: The name of the ID namespace.
-    - name: get-id-mapping-workflow
-      description: Returns the `IdMappingWorkflow` with a given name, if it exists.
-      flags:
-        --workflow-name=!: The name of the workflow.
-    - name: get-matching-job
-      description: Returns the status, metrics, and errors (if there are any) that are associated with a job.
-      flags:
-        --job-id=!: The ID of the job.
-        --workflow-name=!: The name of the workflow.
     - name: list-matching-jobs
       description: Lists all jobs for a given workflow.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of objects returned per page.
         --next-token=: The pagination token from the previous API call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
         --workflow-name=!: The name of the workflow to be retrieved.
-    - name: update-id-namespace
-      description: Updates an existing ID namespace.
-      flags:
-        --description=: The description of the ID namespace.
-        --id-mapping-workflow-properties=: Determines the properties of `IdMappingWorkflow` where this `IdNamespace` can be used as a `Source` or a `Target`.
-        --id-namespace-name=!: The name of the ID namespace.
-        --input-source-config=: A list of `InputSource` objects, which have the fields `InputSourceARN` and `SchemaName`.
-        --role-arn=: The Amazon Resource Name (ARN) of the IAM role.
-    - name: create-matching-workflow
-      description: Creates a matching workflow that defines the configuration for a data processing job.
-      flags:
-        --description=: A description of the workflow.
-        --incremental-run-config=: Optional.
-        --input-source-config=!: A list of `InputSource` objects, which have the fields `InputSourceARN` and `SchemaName`.
-        --output-source-config=!: A list of `OutputSource` objects, each of which contains fields `outputS3Path`, `applyNormalization`, `KMSArn`, and `output`.
-        --resolution-techniques=!: An object which defines the `resolutionType` and the `ruleBasedProperties`.
-        --role-arn=!: The Amazon Resource Name (ARN) of the IAM role.
-        --tags=: The tags used to organize, track, or control access for this resource.
-        --workflow-name=!: The name of the workflow.
-    - name: get-id-namespace
-      description: Returns the `IdNamespace` with a given name, if it exists.
-      flags:
-        --id-namespace-name=!: The name of the ID namespace.
-    - name: update-schema-mapping
-      description: Updates a schema mapping.
-      flags:
-        --description=: A description of the schema.
-        --mapped-input-fields=!: A list of `MappedInputFields`.
-        --schema-name=!: The name of the schema.
-    - name: create-id-mapping-workflow
-      description: Creates an `IdMappingWorkflow` object which stores the configuration of the data processing job to be run.
-      flags:
-        --description=: A description of the workflow.
-        --id-mapping-techniques=!: An object which defines the ID mapping technique and any additional configurations.
-        --incremental-run-config=: The incremental run configuration for the ID mapping workflow.
-        --input-source-config=!: A list of `InputSource` objects, which have the fields `InputSourceARN` and `SchemaName`.
-        --output-source-config=: A list of `IdMappingWorkflowOutputSource` objects, each of which contains fields `outputS3Path` and `KMSArn`.
-        --role-arn=: The Amazon Resource Name (ARN) of the IAM role.
-        --tags=: The tags used to organize, track, or control access for this resource.
-        --workflow-name=!: The name of the workflow.
-    - name: get-matching-workflow
-      description: Returns the `MatchingWorkflow` with a given name, if it exists.
-      flags:
-        --workflow-name=!: The name of the workflow.
-    - name: get-policy
-      description: Returns the resource-based policy.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the resource for which the policy need to be returned.
-    - name: get-provider-service
-      description: Returns the `ProviderService` of a given name.
-      flags:
-        --provider-name=!: The name of the provider.
-        --provider-service-name=!: The ARN (Amazon Resource Name) of the product that the provider service provides.
-    - name: list-provider-services
-      description: Returns a list of all the `ProviderServices` that are available in this Amazon Web Services Region.
-      flags:
-        --max-results=: The maximum number of objects returned per page.
-        --next-token=: The pagination token from the previous API call.
-        --provider-name=: The name of the provider.
-    - name: tag-resource
-      description: Assigns one or more tags (key-value pairs) to the specified Entity Resolution resource.
-      flags:
-        --resource-arn=!: The ARN of the resource for which you want to view tags.
-        --tags=!: The tags used to organize, track, or control access for this resource.
-    - name: list-id-namespaces
-      description: Returns a list of all ID namespaces.
-      flags:
-        --max-results=: The maximum number of `IdNamespace` objects returned per page.
-        --next-token=: The pagination token from the previous API call.
-    - name: start-id-mapping-job
-      description: Starts the `IdMappingJob` of a workflow.
-      flags:
-        --job-type=: The job type for the ID mapping job.
-        --output-source-config=: A list of `OutputSource` objects.
-        --workflow-name=!: The name of the ID mapping job to be retrieved.
-      completion:
-        flag:
-            job-type:
-                - BATCH
-                - INCREMENTAL
-                - DELETE_ONLY
-    - name: get-id-mapping-job
-      description: Returns the status, metrics, and errors (if there are any) that are associated with a job.
-      flags:
-        --job-id=!: The ID of the job.
-        --workflow-name=!: The name of the workflow.
-    - name: list-tags-for-resource
-      description: Displays the tags associated with an Entity Resolution resource.
-      flags:
-        --resource-arn=!: The ARN of the resource for which you want to view tags.
-    - name: put-policy
-      description: Updates the resource-based policy.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the resource for which the policy needs to be updated.
-        --policy=!: The resource-based policy.
-        --token=: A unique identifier for the current revision of the policy.
-    - name: update-id-mapping-workflow
-      description: Updates an existing `IdMappingWorkflow`.
-      flags:
-        --description=: A description of the workflow.
-        --id-mapping-techniques=!: An object which defines the ID mapping technique and any additional configurations.
-        --incremental-run-config=: The incremental run configuration for the update ID mapping workflow.
-        --input-source-config=!: A list of `InputSource` objects, which have the fields `InputSourceARN` and `SchemaName`.
-        --output-source-config=: A list of `OutputSource` objects, each of which contains fields `outputS3Path` and `KMSArn`.
-        --role-arn=: The Amazon Resource Name (ARN) of the IAM role.
-        --workflow-name=!: The name of the workflow.
-    - name: update-matching-workflow
-      description: Updates an existing matching workflow.
-      flags:
-        --description=: A description of the workflow.
-        --incremental-run-config=: Optional.
-        --input-source-config=!: A list of `InputSource` objects, which have the fields `InputSourceARN` and `SchemaName`.
-        --output-source-config=!: A list of `OutputSource` objects, each of which contains fields `outputS3Path`, `applyNormalization`, `KMSArn`, and `output`.
-        --resolution-techniques=!: An object which defines the `resolutionType` and the `ruleBasedProperties`.
-        --role-arn=!: The Amazon Resource Name (ARN) of the IAM role.
-        --workflow-name=!: The name of the workflow to be retrieved.
-    - name: batch-delete-unique-id
-      description: Deletes multiple unique IDs in a matching workflow.
-      flags:
-        --input-source=: The input source for the batch delete unique ID operation.
-        --unique-ids=!: The unique IDs to delete.
-        --workflow-name=!: The name of the workflow.
     - name: create-id-namespace
       description: Creates an ID namespace object which will help customers provide metadata explaining their dataset and how to use it.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: The description of the ID namespace.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id-mapping-workflow-properties=: Determines the properties of `IdMappingWorflow` where this `IdNamespace` can be used as a `Source` or a `Target`.
         --id-namespace-name=!: The name of the ID namespace.
         --input-source-config=: A list of `InputSource` objects, which have the fields `InputSourceARN` and `SchemaName`.
@@ -244,7 +53,333 @@ commands:
     - name: create-schema-mapping
       description: Creates a schema mapping, which defines the schema of the input customer records table.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: A description of the schema.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --mapped-input-fields=!: A list of `MappedInputFields`.
         --schema-name=!: The name of the schema.
         --tags=: The tags used to organize, track, or control access for this resource.
+    - name: get-id-mapping-job
+      description: Returns the status, metrics, and errors (if there are any) that are associated with a job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The ID of the job.
+        --workflow-name=!: The name of the workflow.
+    - name: get-id-mapping-workflow
+      description: Returns the `IdMappingWorkflow` with a given name, if it exists.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workflow-name=!: The name of the workflow.
+    - name: get-matching-job
+      description: Returns the status, metrics, and errors (if there are any) that are associated with a job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The ID of the job.
+        --workflow-name=!: The name of the workflow.
+    - name: create-id-mapping-workflow
+      description: Creates an `IdMappingWorkflow` object which stores the configuration of the data processing job to be run.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the workflow.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id-mapping-techniques=!: An object which defines the ID mapping technique and any additional configurations.
+        --incremental-run-config=: The incremental run configuration for the ID mapping workflow.
+        --input-source-config=!: A list of `InputSource` objects, which have the fields `InputSourceARN` and `SchemaName`.
+        --output-source-config=: A list of `IdMappingWorkflowOutputSource` objects, each of which contains fields `outputS3Path` and `KMSArn`.
+        --role-arn=: The Amazon Resource Name (ARN) of the IAM role.
+        --tags=: The tags used to organize, track, or control access for this resource.
+        --workflow-name=!: The name of the workflow.
+    - name: delete-policy-statement
+      description: Deletes the policy statement.
+      flags:
+        --arn=!: The ARN of the resource for which the policy need to be deleted.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --statement-id=!: A statement identifier that differentiates the statement from others in the same policy.
+    - name: delete-schema-mapping
+      description: Deletes the `SchemaMapping` with a given name.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --schema-name=!: The name of the schema to delete.
+    - name: list-provider-services
+      description: Returns a list of all the `ProviderServices` that are available in this Amazon Web Services Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of objects returned per page.
+        --next-token=: The pagination token from the previous API call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --provider-name=: The name of the provider.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-schema-mappings
+      description: Returns a list of all the `SchemaMappings` that have been created for an Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of objects returned per page.
+        --next-token=: The pagination token from the previous API call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-matching-workflow
+      description: Returns the `MatchingWorkflow` with a given name, if it exists.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workflow-name=!: The name of the workflow.
+    - name: get-policy
+      description: Returns the resource-based policy.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the resource for which the policy need to be returned.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-provider-service
+      description: Returns the `ProviderService` of a given name.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --provider-name=!: The name of the provider.
+        --provider-service-name=!: The ARN (Amazon Resource Name) of the product that the provider service provides.
+    - name: create-matching-workflow
+      description: Creates a matching workflow that defines the configuration for a data processing job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the workflow.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --incremental-run-config=: Optional.
+        --input-source-config=!: A list of `InputSource` objects, which have the fields `InputSourceARN` and `SchemaName`.
+        --output-source-config=!: A list of `OutputSource` objects, each of which contains fields `outputS3Path`, `applyNormalization`, `KMSArn`, and `output`.
+        --resolution-techniques=!: An object which defines the `resolutionType` and the `ruleBasedProperties`.
+        --role-arn=!: The Amazon Resource Name (ARN) of the IAM role.
+        --tags=: The tags used to organize, track, or control access for this resource.
+        --workflow-name=!: The name of the workflow.
+    - name: delete-id-mapping-workflow
+      description: Deletes the `IdMappingWorkflow` with a given name.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workflow-name=!: The name of the workflow to be deleted.
+    - name: list-matching-workflows
+      description: Returns a list of all the `MatchingWorkflows` that have been created for an Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of objects returned per page.
+        --next-token=: The pagination token from the previous API call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: untag-resource
+      description: Removes one or more tags from the specified Entity Resolution resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource for which you want to untag.
+        --tag-keys=!: The list of tag keys to remove from the resource.
+    - name: batch-delete-unique-id
+      description: Deletes multiple unique IDs in a matching workflow.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-source=: The input source for the batch delete unique ID operation.
+        --unique-ids=!: The unique IDs to delete.
+        --workflow-name=!: The name of the workflow.
+    - name: delete-matching-workflow
+      description: Deletes the `MatchingWorkflow` with a given name.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workflow-name=!: The name of the workflow to be retrieved.
+    - name: get-id-namespace
+      description: Returns the `IdNamespace` with a given name, if it exists.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id-namespace-name=!: The name of the ID namespace.
+    - name: list-tags-for-resource
+      description: Displays the tags associated with an Entity Resolution resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource for which you want to view tags.
+    - name: put-policy
+      description: Updates the resource-based policy.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the resource for which the policy needs to be updated.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy=!: The resource-based policy.
+        --token=: A unique identifier for the current revision of the policy.
+    - name: start-matching-job
+      description: Starts the `MatchingJob` of a workflow.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workflow-name=!: The name of the matching job to be retrieved.
+    - name: update-id-namespace
+      description: Updates an existing ID namespace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description of the ID namespace.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id-mapping-workflow-properties=: Determines the properties of `IdMappingWorkflow` where this `IdNamespace` can be used as a `Source` or a `Target`.
+        --id-namespace-name=!: The name of the ID namespace.
+        --input-source-config=: A list of `InputSource` objects, which have the fields `InputSourceARN` and `SchemaName`.
+        --role-arn=: The Amazon Resource Name (ARN) of the IAM role.
+    - name: start-id-mapping-job
+      description: Starts the `IdMappingJob` of a workflow.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-type=: The job type for the ID mapping job.
+        --output-source-config=: A list of `OutputSource` objects.
+        --workflow-name=!: The name of the ID mapping job to be retrieved.
+      completion:
+        flag:
+            job-type:
+                - BATCH
+                - INCREMENTAL
+                - DELETE_ONLY
+    - name: update-id-mapping-workflow
+      description: Updates an existing `IdMappingWorkflow`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the workflow.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id-mapping-techniques=!: An object which defines the ID mapping technique and any additional configurations.
+        --incremental-run-config=: The incremental run configuration for the update ID mapping workflow.
+        --input-source-config=!: A list of `InputSource` objects, which have the fields `InputSourceARN` and `SchemaName`.
+        --output-source-config=: A list of `OutputSource` objects, each of which contains fields `outputS3Path` and `KMSArn`.
+        --role-arn=: The Amazon Resource Name (ARN) of the IAM role.
+        --workflow-name=!: The name of the workflow.
+    - name: generate-match-id
+      description: Generates or retrieves Match IDs for records using a rule-based matching workflow.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --processing-type=: The processing mode that determines how Match IDs are generated and results are saved.
+        --records=!: The records to match.
+        --workflow-name=!: The name of the rule-based matching workflow.
+      completion:
+        flag:
+            processing-type:
+                - CONSISTENT
+                - EVENTUAL
+                - EVENTUAL_NO_LOOKUP
+    - name: get-match-id
+      description: Returns the corresponding Match ID of a customer record if the record has been processed in a rule-based matching workflow.
+      flags:
+        --apply-normalization: Normalizes the attributes defined in the schema in the input data.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-apply-normalization: Normalizes the attributes defined in the schema in the input data.
+        --record=!: The record to fetch the Match ID for.
+        --workflow-name=!: The name of the workflow.
+    - name: add-policy-statement
+      description: Adds a policy statement object.
+      flags:
+        --action=!: The action that the principal can use on the resource.
+        --arn=!: The Amazon Resource Name (ARN) of the resource that will be accessed by the principal.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --condition=: A set of condition keys that you can use in key policies.
+        --effect=!: Determines whether the permissions specified in the policy are to be allowed (`Allow`) or denied (`Deny`).
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --principal=!: The Amazon Web Services service or Amazon Web Services account that can access the resource defined as ARN.
+        --statement-id=!: A statement identifier that differentiates the statement from others in the same policy.
+      completion:
+        flag:
+            effect:
+                - Allow
+                - Deny
+    - name: delete-id-namespace
+      description: Deletes the `IdNamespace` with a given name.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id-namespace-name=!: The name of the ID namespace.
+    - name: list-id-mapping-workflows
+      description: Returns a list of all the `IdMappingWorkflows` that have been created for an Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of objects returned per page.
+        --next-token=: The pagination token from the previous API call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: tag-resource
+      description: Assigns one or more tags (key-value pairs) to the specified Entity Resolution resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource for which you want to view tags.
+        --tags=!: The tags used to organize, track, or control access for this resource.
+    - name: update-matching-workflow
+      description: Updates an existing matching workflow.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the workflow.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --incremental-run-config=: Optional.
+        --input-source-config=!: A list of `InputSource` objects, which have the fields `InputSourceARN` and `SchemaName`.
+        --output-source-config=!: A list of `OutputSource` objects, each of which contains fields `outputS3Path`, `applyNormalization`, `KMSArn`, and `output`.
+        --resolution-techniques=!: An object which defines the `resolutionType` and the `ruleBasedProperties`.
+        --role-arn=!: The Amazon Resource Name (ARN) of the IAM role.
+        --workflow-name=!: The name of the workflow to be retrieved.
+    - name: update-schema-mapping
+      description: Updates a schema mapping.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the schema.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mapped-input-fields=!: A list of `MappedInputFields`.
+        --schema-name=!: The name of the schema.
+    - name: list-id-namespaces
+      description: Returns a list of all ID namespaces.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of `IdNamespace` objects returned per page.
+        --next-token=: The pagination token from the previous API call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.

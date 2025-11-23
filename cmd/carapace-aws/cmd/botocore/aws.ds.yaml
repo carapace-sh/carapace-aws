@@ -1,433 +1,140 @@
 name: ds
 description: AWS Directory Service
 commands:
-    - name: delete-ad-assessment
-      description: Deletes a directory assessment and all associated data.
+    - name: reset-user-password
+      description: Resets the password for any user in your Managed Microsoft AD or Simple AD directory.
       flags:
-        --assessment-id=!: The unique identifier of the directory assessment to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: Identifier of the Managed Microsoft AD or Simple AD directory in which the user resides.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --new-password=!: The new password that will be reset.
+        --user-name=!: The user name of the user whose password will be reset.
+    - name: restore-from-snapshot
+      description: Restores a directory using an existing directory snapshot.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --snapshot-id=!: The identifier of the snapshot to restore from.
     - name: describe-client-authentication-settings
       description: Retrieves information about the type of client authentication for the specified directory, if the type is specified.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --directory-id=!: The identifier of the directory for which to retrieve information.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --limit=: The maximum number of items to return.
+        --max-items=: The  total number of items to return in the command's output.
         --next-token=: The *DescribeClientAuthenticationSettingsResult.NextToken* value from a previous call to [DescribeClientAuthenticationSettings]().
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
         --type=: The type of client authentication for which to retrieve information.
       completion:
         flag:
             type:
                 - SmartCard
                 - SmartCardOrPassword
-    - name: describe-directory-data-access
-      description: Obtains status of directory data access enablement through the Directory Service Data API for the specified directory.
+    - name: describe-shared-directories
+      description: Returns the shared directories in your account.
       flags:
-        --directory-id=!: The directory identifier.
-    - name: disable-directory-data-access
-      description: Deactivates access to directory data via the Directory Service Data API for the specified directory.
-      flags:
-        --directory-id=!: The directory identifier.
-    - name: list-ip-routes
-      description: Lists the address blocks that you have added to a directory.
-      flags:
-        --directory-id=!: Identifier (ID) of the directory for which you want to retrieve the IP addresses.
-        --limit=: Maximum number of items to return.
-        --next-token=: The *ListIpRoutes.NextToken* value from a previous call to [ListIpRoutes]().
-    - name: unshare-directory
-      description: Stops the directory sharing between the directory owner and consumer accounts.
-      flags:
-        --directory-id=!: The identifier of the Managed Microsoft AD directory that you want to stop sharing.
-        --unshare-target=!: Identifier for the directory consumer account with whom the directory has to be unshared.
-    - name: delete-snapshot
-      description: Deletes a directory snapshot.
-      flags:
-        --snapshot-id=!: The identifier of the directory snapshot to be deleted.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The number of shared directories to return in the response object.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The `DescribeSharedDirectoriesResult.NextToken` value from a previous call to [DescribeSharedDirectories]().
+        --owner-directory-id=!: Returns the identifier of the directory in the directory owner account.
+        --page-size=: The size of each page to get in the AWS service call.
+        --shared-directory-ids=: A list of identifiers of all shared directories in your account.
+        --starting-token=: A token to specify where to start paginating.
     - name: get-directory-limits
       description: Obtains directory limit information for the current Region.
-    - name: list-certificates
-      description: For the specified directory, lists all the certificates registered for a secure LDAP or client certificate authentication.
       flags:
-        --directory-id=!: The identifier of the directory.
-        --limit=: The number of items that should show up on one page
-        --next-token=: A token for requesting another page of certificates if the `NextToken` response element indicates that more certificates are available.
-    - name: update-radius
-      description: Updates the Remote Authentication Dial In User Service (RADIUS) server information for an AD Connector or Microsoft AD directory.
-      flags:
-        --directory-id=!: The identifier of the directory for which to update the RADIUS server information.
-        --radius-settings=!: A [RadiusSettings]() object that contains information about the RADIUS server.
-    - name: create-conditional-forwarder
-      description: Creates a conditional forwarder associated with your Amazon Web Services directory.
-      flags:
-        --directory-id=!: The directory ID of the Amazon Web Services directory for which you are creating the conditional forwarder.
-        --dns-ip-addrs=: The IP addresses of the remote DNS server associated with RemoteDomainName.
-        --dns-ipv6-addrs=: The IPv6 addresses of the remote DNS server associated with RemoteDomainName.
-        --remote-domain-name=!: The fully qualified domain name (FQDN) of the remote domain with which you will set up a trust relationship.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: create-snapshot
       description: Creates a snapshot of a Simple AD or Microsoft AD directory in the Amazon Web Services cloud.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --directory-id=!: The identifier of the directory of which to take a snapshot.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=: The descriptive name to apply to the snapshot.
-    - name: delete-log-subscription
-      description: Deletes the specified log subscription.
+    - name: delete-snapshot
+      description: Deletes a directory snapshot.
       flags:
-        --directory-id=!: Identifier of the directory whose log subscription you want to delete.
-    - name: list-log-subscriptions
-      description: Lists the active log subscriptions for the Amazon Web Services account.
-      flags:
-        --directory-id=: If a *DirectoryID* is provided, lists only the log subscription associated with that directory.
-        --limit=: The maximum number of items returned.
-        --next-token=: The token for the next set of items to return.
-    - name: list-schema-extensions
-      description: Lists all schema extensions applied to a Microsoft AD Directory.
-      flags:
-        --directory-id=!: The identifier of the directory from which to retrieve the schema extension information.
-        --limit=: The maximum number of items to return.
-        --next-token=: The `ListSchemaExtensions.NextToken` value from a previous call to `ListSchemaExtensions`.
-    - name: remove-tags-from-resource
-      description: Removes tags from a directory.
-      flags:
-        --resource-id=!: Identifier (ID) of the directory from which to remove the tag.
-        --tag-keys=!: The tag key (name) of the tag to be removed.
-    - name: update-conditional-forwarder
-      description: Updates a conditional forwarder that has been set up for your Amazon Web Services directory.
-      flags:
-        --directory-id=!: The directory ID of the Amazon Web Services directory for which to update the conditional forwarder.
-        --dns-ip-addrs=: The updated IP addresses of the remote DNS server associated with the conditional forwarder.
-        --dns-ipv6-addrs=: The updated IPv6 addresses of the remote DNS server associated with the conditional forwarder.
-        --remote-domain-name=!: The fully qualified domain name (FQDN) of the remote domain with which you will set up a trust relationship.
-    - name: update-hybrid-ad
-      description: Updates the configuration of an existing hybrid directory.
-      flags:
-        --directory-id=!: The identifier of the hybrid directory to update.
-        --hybrid-administrator-account-update=: We create a hybrid directory administrator account when we create a hybrid directory.
-        --self-managed-instances-settings=: Updates to the self-managed AD configuration, including DNS server IP addresses and Amazon Web Services System Manager managed node identifiers.
-    - name: create-hybrid-ad
-      description: Creates a hybrid directory that connects your self-managed Active Directory (AD) infrastructure and Amazon Web Services.
-      flags:
-        --assessment-id=!: The unique identifier of the successful directory assessment that validates your self-managed AD environment.
-        --secret-arn=!: The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that contains the credentials for the service account used to join hybrid domain controllers to your self-managed AD domain.
-        --tags=: The tags to be assigned to the directory.
-    - name: deregister-certificate
-      description: Deletes from the system the certificate that was registered for secure LDAP or client certificate authentication.
-      flags:
-        --certificate-id=!: The identifier of the certificate.
-        --directory-id=!: The identifier of the directory.
-    - name: describe-event-topics
-      description: Obtains information about which Amazon SNS topics receive status messages from the specified directory.
-      flags:
-        --directory-id=: The Directory ID for which to get the list of associated Amazon SNS topics.
-        --topic-names=: A list of Amazon SNS topic names for which to obtain the information.
-    - name: register-event-topic
-      description: Associates a directory with an Amazon SNS topic.
-      flags:
-        --directory-id=!: The Directory ID that will publish status messages to the Amazon SNS topic.
-        --topic-name=!: The Amazon SNS topic name to which the directory will publish status messages.
-    - name: restore-from-snapshot
-      description: Restores a directory using an existing directory snapshot.
-      flags:
-        --snapshot-id=!: The identifier of the snapshot to restore from.
-    - name: update-trust
-      description: Updates the trust that has been set up between your Managed Microsoft AD directory and an self-managed Active Directory.
-      flags:
-        --selective-auth=: Updates selective authentication for the trust.
-        --trust-id=!: Identifier of the trust relationship.
-      completion:
-        flag:
-            selective-auth:
-                - Enabled
-                - Disabled
-    - name: create-microsoft-ad
-      description: Creates a Microsoft AD directory in the Amazon Web Services Cloud.
-      flags:
-        --description=: A description for the directory.
-        --edition=: 'Managed Microsoft AD is available in two editions: `Standard` and `Enterprise`.'
-        --name=!: The fully qualified domain name for the Managed Microsoft AD directory, such as `corp.example.com`.
-        --network-type=: The network type for your domain.
-        --password=!: The password for the default administrative user named `Admin`.
-        --short-name=: The NetBIOS name for your domain, such as `CORP`.
-        --tags=: The tags to be assigned to the Managed Microsoft AD directory.
-        --vpc-settings=!: Contains VPC information for the [CreateDirectory]() or [CreateMicrosoftAD]() operation.
-      completion:
-        flag:
-            edition:
-                - Enterprise
-                - Standard
-                - Hybrid
-            network-type:
-                - Dual-stack
-                - IPv4
-                - IPv6
-    - name: describe-domain-controllers
-      description: Provides information about any domain controllers in your directory.
-      flags:
-        --directory-id=!: Identifier of the directory for which to retrieve the domain controller information.
-        --domain-controller-ids=: A list of identifiers for the domain controllers whose information will be provided.
-        --limit=: The maximum number of items to return.
-        --next-token=: The *DescribeDomainControllers.NextToken* value from a previous call to [DescribeDomainControllers]().
-    - name: describe-ldaps-settings
-      description: Describes the status of LDAP security for the specified directory.
-      flags:
-        --directory-id=!: The identifier of the directory.
-        --limit=: Specifies the number of items that should be displayed on one page.
-        --next-token=: The type of next token used for pagination.
-        --type=: The type of LDAP security to enable.
-      completion:
-        flag:
-            type:
-                - Client
-    - name: update-directory-setup
-      description: Updates directory configuration for the specified update type.
-      flags:
-        --create-snapshot-before-update: Specifies whether to create a directory snapshot before performing the update.
-        --directory-id=!: The identifier of the directory to update.
-        --directory-size-update-settings=: Directory size configuration to apply during the update operation.
-        --network-update-settings=: Network configuration to apply during the directory update operation.
-        --no-create-snapshot-before-update: Specifies whether to create a directory snapshot before performing the update.
-        --os-update-settings=: Operating system configuration to apply during the directory update operation.
-        --update-type=!: The type of update to perform on the directory.
-      completion:
-        flag:
-            update-type:
-                - OS
-                - NETWORK
-                - SIZE
-    - name: create-computer
-      description: Creates an Active Directory computer object in the specified directory.
-      flags:
-        --computer-attributes=: An array of [Attribute]() objects that contain any LDAP attributes to apply to the computer account.
-        --computer-name=!: The name of the computer account.
-        --directory-id=!: The identifier of the directory in which to create the computer account.
-        --organizational-unit-distinguished-name=: The fully-qualified distinguished name of the organizational unit to place the computer account in.
-        --password=!: A one-time password that is used to join the computer to the directory.
-    - name: create-log-subscription
-      description: Creates a subscription to forward real-time Directory Service domain controller security logs to the specified Amazon CloudWatch log group in your Amazon Web Services account.
-      flags:
-        --directory-id=!: Identifier of the directory to which you want to subscribe and receive real-time logs to your specified CloudWatch log group.
-        --log-group-name=!: The name of the CloudWatch log group where the real-time domain controller logs are forwarded.
-    - name: enable-client-authentication
-      description: Enables alternative client authentication methods for the specified directory.
-      flags:
-        --directory-id=!: The identifier of the specified directory.
-        --type=!: The type of client authentication to enable.
-      completion:
-        flag:
-            type:
-                - SmartCard
-                - SmartCardOrPassword
-    - name: list-ad-assessments
-      description: Retrieves a list of directory assessments for the specified directory or all assessments in your account.
-      flags:
-        --directory-id=: The identifier of the directory for which to list assessments.
-        --limit=: The maximum number of assessment summaries to return.
-        --next-token=: The pagination token from a previous request to [ListADAssessments]().
-    - name: reject-shared-directory
-      description: Rejects a directory sharing request that was sent from the directory owner account.
-      flags:
-        --shared-directory-id=!: Identifier of the shared directory in the directory consumer account.
-    - name: create-alias
-      description: Creates an alias for a directory and assigns the alias to the directory.
-      flags:
-        --alias=!: The requested alias.
-        --directory-id=!: The identifier of the directory for which to create the alias.
-    - name: create-directory
-      description: Creates a Simple AD directory.
-      flags:
-        --description=: A description for the directory.
-        --name=!: The fully qualified name for the directory, such as `corp.example.com`.
-        --network-type=: The network type for your directory.
-        --password=!: The password for the directory administrator.
-        --short-name=: The NetBIOS name of the directory, such as `CORP`.
-        --size=!: The size of the directory.
-        --tags=: The tags to be assigned to the Simple AD directory.
-        --vpc-settings=: A [DirectoryVpcSettings]() object that contains additional information for the operation.
-      completion:
-        flag:
-            network-type:
-                - Dual-stack
-                - IPv4
-                - IPv6
-            size:
-                - Small
-                - Large
-    - name: describe-certificate
-      description: Displays information about the certificate registered for secure LDAP or client certificate authentication.
-      flags:
-        --certificate-id=!: The identifier of the certificate.
-        --directory-id=!: The identifier of the directory.
-    - name: enable-radius
-      description: Enables multi-factor authentication (MFA) with the Remote Authentication Dial In User Service (RADIUS) server for an AD Connector or Microsoft AD directory.
-      flags:
-        --directory-id=!: The identifier of the directory for which to enable MFA.
-        --radius-settings=!: A [RadiusSettings]() object that contains information about the RADIUS server.
-    - name: accept-shared-directory
-      description: Accepts a directory sharing request that was sent from the directory owner account.
-      flags:
-        --shared-directory-id=!: Identifier of the shared directory in the directory consumer account.
-    - name: cancel-schema-extension
-      description: Cancels an in-progress schema extension to a Microsoft AD directory.
-      flags:
-        --directory-id=!: The identifier of the directory whose schema extension will be canceled.
-        --schema-extension-id=!: The identifier of the schema extension that will be canceled.
-    - name: describe-hybrid-ad-update
-      description: Retrieves information about update activities for a hybrid directory.
-      flags:
-        --directory-id=!: The identifier of the hybrid directory for which to retrieve update information.
-        --next-token=: The pagination token from a previous request to [DescribeHybridADUpdate]().
-        --update-type=: The type of update activities to retrieve.
-      completion:
-        flag:
-            update-type:
-                - SelfManagedInstances
-                - HybridAdministratorAccount
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --snapshot-id=!: The identifier of the directory snapshot to be deleted.
     - name: disable-ldaps
       description: Deactivates LDAP secure calls for the specified directory.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --directory-id=!: The identifier of the directory.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --type=!: The type of LDAP security to enable.
       completion:
         flag:
             type:
                 - Client
-    - name: list-tags-for-resource
-      description: Lists all tags on a directory.
+    - name: disable-sso
+      description: Disables single-sign on for a directory.
       flags:
-        --limit=: Reserved for future use.
-        --next-token=: Reserved for future use.
-        --resource-id=!: Identifier (ID) of the directory for which you want to retrieve tags.
-    - name: update-settings
-      description: Updates the configurable settings for the specified directory.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The identifier of the directory for which to disable single-sign on.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --password=: The password of an alternate account to use to disable single-sign on.
+        --user-name=: The username of an alternate account to use to disable single-sign on.
+    - name: enable-radius
+      description: Enables multi-factor authentication (MFA) with the Remote Authentication Dial In User Service (RADIUS) server for an AD Connector or Microsoft AD directory.
       flags:
-        --directory-id=!: The identifier of the directory for which to update settings.
-        --settings=!: The list of [Setting]() objects.
-    - name: describe-ad-assessment
-      description: Retrieves detailed information about a directory assessment, including its current status, validation results, and configuration details.
-      flags:
-        --assessment-id=!: The identifier of the directory assessment to describe.
-    - name: describe-directories
-      description: Obtains information about the directories that belong to this account.
-      flags:
-        --directory-ids=: A list of identifiers of the directories for which to obtain the information.
-        --limit=: The maximum number of items to return.
-        --next-token=: The `DescribeDirectoriesResult.NextToken` value from a previous call to [DescribeDirectories]().
-    - name: describe-update-directory
-      description: Describes the updates of a directory for a particular update type.
-      flags:
-        --directory-id=!: The unique identifier of the directory.
-        --next-token=: The `DescribeUpdateDirectoryResult`.
-        --region-name=: The name of the Region.
-        --update-type=!: The type of updates you want to describe for the directory.
-      completion:
-        flag:
-            update-type:
-                - OS
-                - NETWORK
-                - SIZE
-    - name: enable-ldaps
-      description: Activates the switch for the specific directory to always use LDAP secure calls.
-      flags:
-        --directory-id=!: The identifier of the directory.
-        --type=!: The type of LDAP security to enable.
-      completion:
-        flag:
-            type:
-                - Client
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The identifier of the directory for which to enable MFA.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --radius-settings=!: A [RadiusSettings]() object that contains information about the RADIUS server.
     - name: enable-sso
       description: Enables single sign-on for a directory.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --directory-id=!: The identifier of the directory for which to enable single-sign on.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --password=: The password of an alternate account to use to enable single-sign on.
         --user-name=: The username of an alternate account to use to enable single-sign on.
-    - name: reset-user-password
-      description: Resets the password for any user in your Managed Microsoft AD or Simple AD directory.
+    - name: start-schema-extension
+      description: Applies a schema extension to a Microsoft AD directory.
       flags:
-        --directory-id=!: Identifier of the Managed Microsoft AD or Simple AD directory in which the user resides.
-        --new-password=!: The new password that will be reset.
-        --user-name=!: The user name of the user whose password will be reset.
-    - name: describe-ca-enrollment-policy
-      description: Retrieves detailed information about the certificate authority (CA) enrollment policy for the specified directory.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --create-snapshot-before-schema-extension!: If true, creates a snapshot of the directory before applying the schema extension.
+        --description=!: A description of the schema extension.
+        --directory-id=!: The identifier of the directory for which the schema extension will be applied to.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ldif-content=!: The LDIF file represented as a string.
+        --no-create-snapshot-before-schema-extension!: If true, creates a snapshot of the directory before applying the schema extension.
+    - name: update-hybrid-ad
+      description: Updates the configuration of an existing hybrid directory.
       flags:
-        --directory-id=!: The identifier of the directory for which to retrieve the CA enrollment policy information.
-    - name: disable-ca-enrollment-policy
-      description: Disables the certificate authority (CA) enrollment policy for the specified directory.
-      flags:
-        --directory-id=!: The identifier of the directory for which to disable the CA enrollment policy.
-    - name: enable-ca-enrollment-policy
-      description: Enables certificate authority (CA) enrollment policy for the specified directory.
-      flags:
-        --directory-id=!: The identifier of the directory for which to enable the CA enrollment policy.
-        --pca-connector-arn=!: The Amazon Resource Name (ARN) of the Private Certificate Authority (PCA) connector to use for automatic certificate enrollment.
-    - name: get-snapshot-limits
-      description: Obtains the manual snapshot limits for a directory.
-      flags:
-        --directory-id=!: Contains the identifier of the directory to obtain the limits for.
-    - name: register-certificate
-      description: Registers a certificate for a secure LDAP or client certificate authentication.
-      flags:
-        --certificate-data=!: The certificate PEM string that needs to be registered.
-        --client-cert-auth-settings=: A `ClientCertAuthSettings` object that contains client certificate authentication settings.
-        --directory-id=!: The identifier of the directory.
-        --type=: The function that the registered certificate performs.
-      completion:
-        flag:
-            type:
-                - ClientCertAuth
-                - ClientLDAPS
-    - name: delete-directory
-      description: Deletes an Directory Service directory.
-      flags:
-        --directory-id=!: The identifier of the directory to delete.
-    - name: deregister-event-topic
-      description: Removes the specified directory as a publisher to the specified Amazon SNS topic.
-      flags:
-        --directory-id=!: The Directory ID to remove as a publisher.
-        --topic-name=!: The name of the Amazon SNS topic from which to remove the directory as a publisher.
-    - name: describe-regions
-      description: Provides information about the Regions that are configured for multi-Region replication.
-      flags:
-        --directory-id=!: The identifier of the directory.
-        --next-token=: The `DescribeRegionsResult.NextToken` value from a previous call to [DescribeRegions]().
-        --region-name=: The name of the Region.
-    - name: describe-snapshots
-      description: Obtains information about the directory snapshots that belong to this account.
-      flags:
-        --directory-id=: The identifier of the directory for which to retrieve snapshot information.
-        --limit=: The maximum number of objects to return.
-        --next-token=: The *DescribeSnapshotsResult.NextToken* value from a previous call to [DescribeSnapshots]().
-        --snapshot-ids=: A list of identifiers of the snapshots to obtain the information for.
-    - name: update-number-of-domain-controllers
-      description: Adds or removes domain controllers to or from the directory.
-      flags:
-        --desired-number=!: The number of domain controllers desired in the directory.
-        --directory-id=!: Identifier of the directory to which the domain controllers will be added or removed.
-    - name: verify-trust
-      description: Directory Service for Microsoft Active Directory allows you to configure and verify trust relationships.
-      flags:
-        --trust-id=!: The unique Trust ID of the trust relationship to verify.
-    - name: add-region
-      description: Adds two domain controllers in the specified Region for the specified directory.
-      flags:
-        --directory-id=!: The identifier of the directory to which you want to add Region replication.
-        --region-name=!: The name of the Region where you want to add domain controllers for replication.
-        --vpc-settings=!: ""
-    - name: delete-conditional-forwarder
-      description: Deletes a conditional forwarder that has been set up for your Amazon Web Services directory.
-      flags:
-        --directory-id=!: The directory ID for which you are deleting the conditional forwarder.
-        --remote-domain-name=!: The fully qualified domain name (FQDN) of the remote domain with which you are deleting the conditional forwarder.
-    - name: describe-trusts
-      description: Obtains information about the trust relationships for this account.
-      flags:
-        --directory-id=: The Directory ID of the Amazon Web Services directory that is a part of the requested trust relationship.
-        --limit=: The maximum number of objects to return.
-        --next-token=: The *DescribeTrustsResult.NextToken* value from a previous call to [DescribeTrusts]().
-        --trust-ids=: A list of identifiers of the trust relationships for which to obtain the information.
-    - name: remove-region
-      description: Stops all replication and removes the domain controllers from the specified Region.
-      flags:
-        --directory-id=!: The identifier of the directory for which you want to remove Region replication.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The identifier of the hybrid directory to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --hybrid-administrator-account-update=: We create a hybrid directory administrator account when we create a hybrid directory.
+        --self-managed-instances-settings=: Updates to the self-managed AD configuration, including DNS server IP addresses and Amazon Web Services System Manager managed node identifiers.
     - name: connect-directory
       description: Creates an AD Connector to connect to a self-managed directory.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --connect-settings=!: A [DirectoryConnectSettings]() object that contains additional information for the operation.
         --description=: A description for the directory.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The fully qualified name of your self-managed directory, such as `corp.example.com`.
         --network-type=: The network type for your directory.
         --password=!: The password for your self-managed user account.
@@ -443,74 +150,234 @@ commands:
             size:
                 - Small
                 - Large
-    - name: describe-shared-directories
-      description: Returns the shared directories in your account.
+    - name: create-alias
+      description: Creates an alias for a directory and assigns the alias to the directory.
       flags:
-        --limit=: The number of shared directories to return in the response object.
-        --next-token=: The `DescribeSharedDirectoriesResult.NextToken` value from a previous call to [DescribeSharedDirectories]().
-        --owner-directory-id=!: Returns the identifier of the directory in the directory owner account.
-        --shared-directory-ids=: A list of identifiers of all shared directories in your account.
-    - name: share-directory
-      description: Shares a specified directory (`DirectoryId`) in your Amazon Web Services account (directory owner) with another Amazon Web Services account (directory consumer).
+        --alias=!: The requested alias.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The identifier of the directory for which to create the alias.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: deregister-event-topic
+      description: Removes the specified directory as a publisher to the specified Amazon SNS topic.
       flags:
-        --directory-id=!: Identifier of the Managed Microsoft AD directory that you want to share with other Amazon Web Services accounts.
-        --share-method=!: The method used when sharing a directory to determine whether the directory should be shared within your Amazon Web Services organization (`ORGANIZATIONS`) or with any Amazon Web Services account by sending a directory sharing request (`HANDSHAKE`).
-        --share-notes=: A directory share request that is sent by the directory owner to the directory consumer.
-        --share-target=!: Identifier for the directory consumer account with whom the directory is to be shared.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The Directory ID to remove as a publisher.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --topic-name=!: The name of the Amazon SNS topic from which to remove the directory as a publisher.
+    - name: describe-snapshots
+      description: Obtains information about the directory snapshots that belong to this account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=: The identifier of the directory for which to retrieve snapshot information.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of objects to return.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The *DescribeSnapshotsResult.NextToken* value from a previous call to [DescribeSnapshots]().
+        --page-size=: The size of each page to get in the AWS service call.
+        --snapshot-ids=: A list of identifiers of the snapshots to obtain the information for.
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-snapshot-limits
+      description: Obtains the manual snapshot limits for a directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: Contains the identifier of the directory to obtain the limits for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-ad-assessments
+      description: Retrieves a list of directory assessments for the specified directory or all assessments in your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=: The identifier of the directory for which to list assessments.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of assessment summaries to return.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The pagination token from a previous request to [ListADAssessments]().
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: start-ad-assessment
+      description: Initiates a directory assessment to validate your self-managed AD environment for hybrid domain join.
+      flags:
+        --assessment-configuration=: Configuration parameters for the directory assessment, including DNS server information, domain name, Amazon VPC subnet, and Amazon Web Services System Manager managed node details.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=: The identifier of the directory for which to perform the assessment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-number-of-domain-controllers
+      description: Adds or removes domain controllers to or from the directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --desired-number=!: The number of domain controllers desired in the directory.
+        --directory-id=!: Identifier of the directory to which the domain controllers will be added or removed.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-certificate
+      description: Displays information about the certificate registered for secure LDAP or client certificate authentication.
+      flags:
+        --certificate-id=!: The identifier of the certificate.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The identifier of the directory.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-domain-controllers
+      description: Provides information about any domain controllers in your directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: Identifier of the directory for which to retrieve the domain controller information.
+        --domain-controller-ids=: A list of identifiers for the domain controllers whose information will be provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of items to return.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The *DescribeDomainControllers.NextToken* value from a previous call to [DescribeDomainControllers]().
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-trusts
+      description: Obtains information about the trust relationships for this account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=: The Directory ID of the Amazon Web Services directory that is a part of the requested trust relationship.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of objects to return.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The *DescribeTrustsResult.NextToken* value from a previous call to [DescribeTrusts]().
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --trust-ids=: A list of identifiers of the trust relationships for which to obtain the information.
+    - name: disable-ca-enrollment-policy
+      description: Disables the certificate authority (CA) enrollment policy for the specified directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The identifier of the directory for which to disable the CA enrollment policy.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: enable-ca-enrollment-policy
+      description: Enables certificate authority (CA) enrollment policy for the specified directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The identifier of the directory for which to enable the CA enrollment policy.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pca-connector-arn=!: The Amazon Resource Name (ARN) of the Private Certificate Authority (PCA) connector to use for automatic certificate enrollment.
+    - name: enable-client-authentication
+      description: Enables alternative client authentication methods for the specified directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The identifier of the specified directory.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --type=!: The type of client authentication to enable.
       completion:
         flag:
-            share-method:
-                - ORGANIZATIONS
-                - HANDSHAKE
-    - name: delete-trust
-      description: Deletes an existing trust relationship between your Managed Microsoft AD directory and an external domain.
+            type:
+                - SmartCard
+                - SmartCardOrPassword
+    - name: enable-ldaps
+      description: Activates the switch for the specific directory to always use LDAP secure calls.
       flags:
-        --delete-associated-conditional-forwarder: Delete a conditional forwarder as part of a DeleteTrustRequest.
-        --no-delete-associated-conditional-forwarder: Delete a conditional forwarder as part of a DeleteTrustRequest.
-        --trust-id=!: The Trust ID of the trust relationship to be deleted.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The identifier of the directory.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --type=!: The type of LDAP security to enable.
+      completion:
+        flag:
+            type:
+                - Client
+    - name: verify-trust
+      description: Directory Service for Microsoft Active Directory allows you to configure and verify trust relationships.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --trust-id=!: The unique Trust ID of the trust relationship to verify.
+    - name: accept-shared-directory
+      description: Accepts a directory sharing request that was sent from the directory owner account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --shared-directory-id=!: Identifier of the shared directory in the directory consumer account.
+    - name: add-tags-to-resource
+      description: Adds or overwrites one or more tags for the specified directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-id=!: Identifier (ID) for the directory to which to add the tag.
+        --tags=!: The tags to be assigned to the directory.
+    - name: create-computer
+      description: Creates an Active Directory computer object in the specified directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --computer-attributes=: An array of [Attribute]() objects that contain any LDAP attributes to apply to the computer account.
+        --computer-name=!: The name of the computer account.
+        --directory-id=!: The identifier of the directory in which to create the computer account.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --organizational-unit-distinguished-name=: The fully-qualified distinguished name of the organizational unit to place the computer account in.
+        --password=!: A one-time password that is used to join the computer to the directory.
+    - name: create-hybrid-ad
+      description: Creates a hybrid directory that connects your self-managed Active Directory (AD) infrastructure and Amazon Web Services.
+      flags:
+        --assessment-id=!: The unique identifier of the successful directory assessment that validates your self-managed AD environment.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --secret-arn=!: The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that contains the credentials for the service account used to join hybrid domain controllers to your self-managed AD domain.
+        --tags=: The tags to be assigned to the directory.
     - name: disable-client-authentication
       description: Disables alternative client authentication methods for the specified directory.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --directory-id=!: The identifier of the directory
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --type=!: The type of client authentication to disable.
       completion:
         flag:
             type:
                 - SmartCard
                 - SmartCardOrPassword
-    - name: disable-sso
-      description: Disables single-sign on for a directory.
+    - name: update-settings
+      description: Updates the configurable settings for the specified directory.
       flags:
-        --directory-id=!: The identifier of the directory for which to disable single-sign on.
-        --password=: The password of an alternate account to use to disable single-sign on.
-        --user-name=: The username of an alternate account to use to disable single-sign on.
-    - name: enable-directory-data-access
-      description: Enables access to directory data via the Directory Service Data API for the specified directory.
-      flags:
-        --directory-id=!: The directory identifier.
-    - name: start-ad-assessment
-      description: Initiates a directory assessment to validate your self-managed AD environment for hybrid domain join.
-      flags:
-        --assessment-configuration=: Configuration parameters for the directory assessment, including DNS server information, domain name, Amazon VPC subnet, and Amazon Web Services System Manager managed node details.
-        --directory-id=: The identifier of the directory for which to perform the assessment.
-    - name: describe-conditional-forwarders
-      description: Obtains information about the conditional forwarders for this account.
-      flags:
-        --directory-id=!: The directory ID for which to get the list of associated conditional forwarders.
-        --remote-domain-names=: The fully qualified domain names (FQDN) of the remote domains for which to get the list of associated conditional forwarders.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The identifier of the directory for which to update settings.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --settings=!: The list of [Setting]() objects.
     - name: add-ip-routes
       description: If the DNS server for your self-managed domain uses a publicly addressable IP address, you must add a CIDR address block to correctly route traffic to and from your Microsoft AD on Amazon Web Services.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --directory-id=!: Identifier (ID) of the directory to which to add the address block.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --ip-routes=!: IP address blocks, using CIDR format, of the traffic to route.
         --no-update-security-group-for-directory-controllers: 'If set to true, updates the inbound and outbound rules of the security group that has the description: "Amazon Web Services created security group for *directory ID* directory controllers."'
         --update-security-group-for-directory-controllers: 'If set to true, updates the inbound and outbound rules of the security group that has the description: "Amazon Web Services created security group for *directory ID* directory controllers."'
+    - name: cancel-schema-extension
+      description: Cancels an in-progress schema extension to a Microsoft AD directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The identifier of the directory whose schema extension will be canceled.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --schema-extension-id=!: The identifier of the schema extension that will be canceled.
     - name: create-trust
       description: Directory Service for Microsoft Active Directory allows you to configure trust relationships.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --conditional-forwarder-ip-addrs=: The IP addresses of the remote DNS server associated with RemoteDomainName.
         --conditional-forwarder-ipv6-addrs=: The IPv6 addresses of the remote DNS server associated with RemoteDomainName.
         --directory-id=!: The Directory ID of the Managed Microsoft AD directory for which to establish the trust relationship.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --remote-domain-name=!: The Fully Qualified Domain Name (FQDN) of the external domain for which to create the trust relationship.
         --selective-auth=: Optional parameter to enable selective authentication for the trust.
         --trust-direction=!: The direction of the trust relationship.
@@ -528,14 +395,97 @@ commands:
             trust-type:
                 - Forest
                 - External
+    - name: list-schema-extensions
+      description: Lists all schema extensions applied to a Microsoft AD Directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The identifier of the directory from which to retrieve the schema extension information.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of items to return.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The `ListSchemaExtensions.NextToken` value from a previous call to `ListSchemaExtensions`.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: unshare-directory
+      description: Stops the directory sharing between the directory owner and consumer accounts.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The identifier of the Managed Microsoft AD directory that you want to stop sharing.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --unshare-target=!: Identifier for the directory consumer account with whom the directory has to be unshared.
+    - name: describe-conditional-forwarders
+      description: Obtains information about the conditional forwarders for this account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The directory ID for which to get the list of associated conditional forwarders.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --remote-domain-names=: The fully qualified domain names (FQDN) of the remote domains for which to get the list of associated conditional forwarders.
     - name: disable-radius
       description: Disables multi-factor authentication (MFA) with the Remote Authentication Dial In User Service (RADIUS) server for an AD Connector or Microsoft AD directory.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --directory-id=!: The identifier of the directory for which to disable MFA.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: reject-shared-directory
+      description: Rejects a directory sharing request that was sent from the directory owner account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --shared-directory-id=!: Identifier of the shared directory in the directory consumer account.
+    - name: remove-tags-from-resource
+      description: Removes tags from a directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-id=!: Identifier (ID) of the directory from which to remove the tag.
+        --tag-keys=!: The tag key (name) of the tag to be removed.
+    - name: create-log-subscription
+      description: Creates a subscription to forward real-time Directory Service domain controller security logs to the specified Amazon CloudWatch log group in your Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: Identifier of the directory to which you want to subscribe and receive real-time logs to your specified CloudWatch log group.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-group-name=!: The name of the CloudWatch log group where the real-time domain controller logs are forwarded.
+    - name: delete-trust
+      description: Deletes an existing trust relationship between your Managed Microsoft AD directory and an external domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delete-associated-conditional-forwarder: Delete a conditional forwarder as part of a DeleteTrustRequest.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-delete-associated-conditional-forwarder: Delete a conditional forwarder as part of a DeleteTrustRequest.
+        --trust-id=!: The Trust ID of the trust relationship to be deleted.
+    - name: describe-ldaps-settings
+      description: Describes the status of LDAP security for the specified directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The identifier of the directory.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: Specifies the number of items that should be displayed on one page.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The type of next token used for pagination.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --type=: The type of LDAP security to enable.
+      completion:
+        flag:
+            type:
+                - Client
     - name: describe-settings
       description: Retrieves information about the configurable settings for the specified directory.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --directory-id=!: The identifier of the directory for which to retrieve information.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --next-token=: The `DescribeSettingsResult.NextToken` value from a previous call to [DescribeSettings]().
         --status=: The status of the directory settings for which to retrieve information.
       completion:
@@ -546,32 +496,369 @@ commands:
                 - Updated
                 - Failed
                 - Default
+    - name: register-event-topic
+      description: Associates a directory with an Amazon SNS topic.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The Directory ID that will publish status messages to the Amazon SNS topic.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --topic-name=!: The Amazon SNS topic name to which the directory will publish status messages.
+    - name: update-directory-setup
+      description: Updates directory configuration for the specified update type.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --create-snapshot-before-update: Specifies whether to create a directory snapshot before performing the update.
+        --directory-id=!: The identifier of the directory to update.
+        --directory-size-update-settings=: Directory size configuration to apply during the update operation.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --network-update-settings=: Network configuration to apply during the directory update operation.
+        --no-create-snapshot-before-update: Specifies whether to create a directory snapshot before performing the update.
+        --os-update-settings=: Operating system configuration to apply during the directory update operation.
+        --update-type=!: The type of update to perform on the directory.
+      completion:
+        flag:
+            update-type:
+                - OS
+                - NETWORK
+                - SIZE
+    - name: create-conditional-forwarder
+      description: Creates a conditional forwarder associated with your Amazon Web Services directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The directory ID of the Amazon Web Services directory for which you are creating the conditional forwarder.
+        --dns-ip-addrs=: The IP addresses of the remote DNS server associated with RemoteDomainName.
+        --dns-ipv6-addrs=: The IPv6 addresses of the remote DNS server associated with RemoteDomainName.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --remote-domain-name=!: The fully qualified domain name (FQDN) of the remote domain with which you will set up a trust relationship.
+    - name: delete-conditional-forwarder
+      description: Deletes a conditional forwarder that has been set up for your Amazon Web Services directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The directory ID for which you are deleting the conditional forwarder.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --remote-domain-name=!: The fully qualified domain name (FQDN) of the remote domain with which you are deleting the conditional forwarder.
+    - name: delete-log-subscription
+      description: Deletes the specified log subscription.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: Identifier of the directory whose log subscription you want to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: disable-directory-data-access
+      description: Deactivates access to directory data via the Directory Service Data API for the specified directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The directory identifier.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-trust
+      description: Updates the trust that has been set up between your Managed Microsoft AD directory and an self-managed Active Directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --selective-auth=: Updates selective authentication for the trust.
+        --trust-id=!: Identifier of the trust relationship.
+      completion:
+        flag:
+            selective-auth:
+                - Enabled
+                - Disabled
+    - name: describe-hybrid-ad-update
+      description: Retrieves information about update activities for a hybrid directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The identifier of the hybrid directory for which to retrieve update information.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --next-token=: The pagination token from a previous request to [DescribeHybridADUpdate]().
+        --update-type=: The type of update activities to retrieve.
+      completion:
+        flag:
+            update-type:
+                - SelfManagedInstances
+                - HybridAdministratorAccount
+    - name: describe-regions
+      description: Provides information about the Regions that are configured for multi-Region replication.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The identifier of the directory.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The `DescribeRegionsResult.NextToken` value from a previous call to [DescribeRegions]().
+        --region-name=: The name of the Region.
+        --starting-token=: A token to specify where to start paginating.
+    - name: add-region
+      description: Adds two domain controllers in the specified Region for the specified directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The identifier of the directory to which you want to add Region replication.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --region-name=!: The name of the Region where you want to add domain controllers for replication.
+        --vpc-settings=!: ""
+    - name: describe-ca-enrollment-policy
+      description: Retrieves detailed information about the certificate authority (CA) enrollment policy for the specified directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The identifier of the directory for which to retrieve the CA enrollment policy information.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-event-topics
+      description: Obtains information about which Amazon SNS topics receive status messages from the specified directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=: The Directory ID for which to get the list of associated Amazon SNS topics.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --topic-names=: A list of Amazon SNS topic names for which to obtain the information.
     - name: remove-ip-routes
       description: Removes IP address blocks from a directory.
       flags:
         --cidr-ips=: IP address blocks that you want to remove.
         --cidr-ipv6s=: IPv6 address blocks that you want to remove.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --directory-id=!: Identifier (ID) of the directory from which you want to remove the IP addresses.
-    - name: start-schema-extension
-      description: Applies a schema extension to a Microsoft AD directory.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-radius
+      description: Updates the Remote Authentication Dial In User Service (RADIUS) server information for an AD Connector or Microsoft AD directory.
       flags:
-        --create-snapshot-before-schema-extension!: If true, creates a snapshot of the directory before applying the schema extension.
-        --description=!: A description of the schema extension.
-        --directory-id=!: The identifier of the directory for which the schema extension will be applied to.
-        --ldif-content=!: The LDIF file represented as a string.
-        --no-create-snapshot-before-schema-extension!: If true, creates a snapshot of the directory before applying the schema extension.
-    - name: add-tags-to-resource
-      description: Adds or overwrites one or more tags for the specified directory.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The identifier of the directory for which to update the RADIUS server information.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --radius-settings=!: A [RadiusSettings]() object that contains information about the RADIUS server.
+    - name: describe-update-directory
+      description: Describes the updates of a directory for a particular update type.
       flags:
-        --resource-id=!: Identifier (ID) for the directory to which to add the tag.
-        --tags=!: The tags to be assigned to the directory.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The unique identifier of the directory.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The `DescribeUpdateDirectoryResult`.
+        --region-name=: The name of the Region.
+        --starting-token=: A token to specify where to start paginating.
+        --update-type=!: The type of updates you want to describe for the directory.
+      completion:
+        flag:
+            update-type:
+                - OS
+                - NETWORK
+                - SIZE
+    - name: list-certificates
+      description: For the specified directory, lists all the certificates registered for a secure LDAP or client certificate authentication.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The identifier of the directory.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The number of items that should show up on one page
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: A token for requesting another page of certificates if the `NextToken` response element indicates that more certificates are available.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: create-directory
+      description: Creates a Simple AD directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description for the directory.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The fully qualified name for the directory, such as `corp.example.com`.
+        --network-type=: The network type for your directory.
+        --password=!: The password for the directory administrator.
+        --short-name=: The NetBIOS name of the directory, such as `CORP`.
+        --size=!: The size of the directory.
+        --tags=: The tags to be assigned to the Simple AD directory.
+        --vpc-settings=: A [DirectoryVpcSettings]() object that contains additional information for the operation.
+      completion:
+        flag:
+            network-type:
+                - Dual-stack
+                - IPv4
+                - IPv6
+            size:
+                - Small
+                - Large
+    - name: describe-directories
+      description: Obtains information about the directories that belong to this account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-ids=: A list of identifiers of the directories for which to obtain the information.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of items to return.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The `DescribeDirectoriesResult.NextToken` value from a previous call to [DescribeDirectories]().
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-ip-routes
+      description: Lists the address blocks that you have added to a directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: Identifier (ID) of the directory for which you want to retrieve the IP addresses.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: Maximum number of items to return.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The *ListIpRoutes.NextToken* value from a previous call to [ListIpRoutes]().
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-conditional-forwarder
+      description: Updates a conditional forwarder that has been set up for your Amazon Web Services directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The directory ID of the Amazon Web Services directory for which to update the conditional forwarder.
+        --dns-ip-addrs=: The updated IP addresses of the remote DNS server associated with the conditional forwarder.
+        --dns-ipv6-addrs=: The updated IPv6 addresses of the remote DNS server associated with the conditional forwarder.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --remote-domain-name=!: The fully qualified domain name (FQDN) of the remote domain with which you will set up a trust relationship.
+    - name: delete-ad-assessment
+      description: Deletes a directory assessment and all associated data.
+      flags:
+        --assessment-id=!: The unique identifier of the directory assessment to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: deregister-certificate
+      description: Deletes from the system the certificate that was registered for secure LDAP or client certificate authentication.
+      flags:
+        --certificate-id=!: The identifier of the certificate.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The identifier of the directory.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-log-subscriptions
+      description: Lists the active log subscriptions for the Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=: If a *DirectoryID* is provided, lists only the log subscription associated with that directory.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of items returned.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The token for the next set of items to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: Lists all tags on a directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: Reserved for future use.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: Reserved for future use.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-id=!: Identifier (ID) of the directory for which you want to retrieve tags.
+        --starting-token=: A token to specify where to start paginating.
+    - name: register-certificate
+      description: Registers a certificate for a secure LDAP or client certificate authentication.
+      flags:
+        --certificate-data=!: The certificate PEM string that needs to be registered.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-cert-auth-settings=: A `ClientCertAuthSettings` object that contains client certificate authentication settings.
+        --directory-id=!: The identifier of the directory.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --type=: The function that the registered certificate performs.
+      completion:
+        flag:
+            type:
+                - ClientCertAuth
+                - ClientLDAPS
+    - name: delete-directory
+      description: Deletes an Directory Service directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The identifier of the directory to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: enable-directory-data-access
+      description: Enables access to directory data via the Directory Service Data API for the specified directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The directory identifier.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: remove-region
+      description: Stops all replication and removes the domain controllers from the specified Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The identifier of the directory for which you want to remove Region replication.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: share-directory
+      description: Shares a specified directory (`DirectoryId`) in your Amazon Web Services account (directory owner) with another Amazon Web Services account (directory consumer).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: Identifier of the Managed Microsoft AD directory that you want to share with other Amazon Web Services accounts.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --share-method=!: The method used when sharing a directory to determine whether the directory should be shared within your Amazon Web Services organization (`ORGANIZATIONS`) or with any Amazon Web Services account by sending a directory sharing request (`HANDSHAKE`).
+        --share-notes=: A directory share request that is sent by the directory owner to the directory consumer.
+        --share-target=!: Identifier for the directory consumer account with whom the directory is to be shared.
+      completion:
+        flag:
+            share-method:
+                - ORGANIZATIONS
+                - HANDSHAKE
+    - name: create-microsoft-ad
+      description: Creates a Microsoft AD directory in the Amazon Web Services Cloud.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description for the directory.
+        --edition=: 'Managed Microsoft AD is available in two editions: `Standard` and `Enterprise`.'
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The fully qualified domain name for the Managed Microsoft AD directory, such as `corp.example.com`.
+        --network-type=: The network type for your domain.
+        --password=!: The password for the default administrative user named `Admin`.
+        --short-name=: The NetBIOS name for your domain, such as `CORP`.
+        --tags=: The tags to be assigned to the Managed Microsoft AD directory.
+        --vpc-settings=!: Contains VPC information for the [CreateDirectory]() or [CreateMicrosoftAD]() operation.
+      completion:
+        flag:
+            edition:
+                - Enterprise
+                - Standard
+                - Hybrid
+            network-type:
+                - Dual-stack
+                - IPv4
+                - IPv6
+    - name: describe-ad-assessment
+      description: Retrieves detailed information about a directory assessment, including its current status, validation results, and configuration details.
+      flags:
+        --assessment-id=!: The identifier of the directory assessment to describe.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-directory-data-access
+      description: Obtains status of directory data access enablement through the Directory Service Data API for the specified directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The directory identifier.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:
         - name: hybrid-ad-updated
           description: Retrieves information about update activities for a hybrid directory.
           flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
             --directory-id=!: The identifier of the hybrid directory for which to retrieve update information.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --next-token=: The pagination token from a previous request to [DescribeHybridADUpdate]().
             --update-type=: The type of update activities to retrieve.
           completion:

@@ -1,45 +1,139 @@
 name: kafkaconnect
 description: Managed Streaming for Kafka Connect
 commands:
-    - name: list-worker-configurations
-      description: Returns a list of all of the worker configurations in this account and Region.
+    - name: delete-worker-configuration
+      description: Deletes the specified worker configuration.
       flags:
-        --max-results=: The maximum number of worker configurations to list in one response.
-        --name-prefix=: Lists worker configuration names that start with the specified text string.
-        --next-token=: If the response of a ListWorkerConfigurations operation is truncated, it will include a NextToken.
-    - name: list-custom-plugins
-      description: Returns a list of all of the custom plugins in this account and Region.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --worker-configuration-arn=!: The Amazon Resource Name (ARN) of the worker configuration that you want to delete.
+    - name: describe-connector
+      description: Returns summary information about the connector.
       flags:
-        --max-results=: The maximum number of custom plugins to list in one response.
-        --name-prefix=: Lists custom plugin names that start with the specified text string.
-        --next-token=: If the response of a ListCustomPlugins operation is truncated, it will include a NextToken.
-    - name: delete-custom-plugin
-      description: Deletes a custom plugin.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connector-arn=!: The Amazon Resource Name (ARN) of the connector that you want to describe.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: untag-resource
+      description: Removes tags from the specified resource.
       flags:
-        --custom-plugin-arn=!: The Amazon Resource Name (ARN) of the custom plugin that you want to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource from which you want to remove tags.
+        --tag-keys=!: The keys of the tags that you want to remove from the resource.
+    - name: update-connector
+      description: Updates the specified connector.
+      flags:
+        --capacity=: The target capacity.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connector-arn=!: The Amazon Resource Name (ARN) of the connector that you want to update.
+        --connector-configuration=: A map of keys to values that represent the configuration for the connector.
+        --current-version=!: The current version of the connector that you want to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-connector-operation
+      description: Returns information about the specified connector's operations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connector-operation-arn=!: ARN of the connector operation to be described.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: describe-custom-plugin
       description: A summary description of the custom plugin.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --custom-plugin-arn=!: Returns information about a custom plugin.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-connector-operations
       description: Lists information about a connector's operation(s).
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --connector-arn=!: The Amazon Resource Name (ARN) of the connector for which to list operations.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: Maximum number of connector operations to fetch in one get request.
         --next-token=: If the response is truncated, it includes a NextToken.
-    - name: list-connectors
-      description: Returns a list of all the connectors in this account and Region.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: tag-resource
+      description: Attaches tags to the specified resource.
       flags:
-        --connector-name-prefix=: The name prefix that you want to use to search for and list connectors.
-        --max-results=: The maximum number of connectors to list in one response.
-        --next-token=: If the response of a ListConnectors operation is truncated, it will include a NextToken.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to which you want to attach tags.
+        --tags=!: The tags that you want to attach to the resource.
+    - name: create-custom-plugin
+      description: Creates a custom plugin using the specified properties.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content-type=!: The type of the plugin file.
+        --description=: A summary description of the custom plugin.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --location=!: Information about the location of a custom plugin.
+        --name=!: The name of the custom plugin.
+        --tags=: The tags you want to attach to the custom plugin.
+      completion:
+        flag:
+            content-type:
+                - JAR
+                - ZIP
+    - name: delete-connector
+      description: Deletes the specified connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connector-arn=!: The Amazon Resource Name (ARN) of the connector that you want to delete.
+        --current-version=: The current version of the connector that you want to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-custom-plugin
+      description: Deletes a custom plugin.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --custom-plugin-arn=!: The Amazon Resource Name (ARN) of the custom plugin that you want to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-worker-configuration
+      description: Returns information about a worker configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --worker-configuration-arn=!: The Amazon Resource Name (ARN) of the worker configuration that you want to get information about.
+    - name: list-tags-for-resource
+      description: Lists all the tags attached to the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource for which you want to list all attached tags.
+    - name: list-worker-configurations
+      description: Returns a list of all of the worker configurations in this account and Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of worker configurations to list in one response.
+        --name-prefix=: Lists worker configuration names that start with the specified text string.
+        --next-token=: If the response of a ListWorkerConfigurations operation is truncated, it will include a NextToken.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: create-connector
       description: Creates a connector using the specified properties.
       flags:
         --capacity=!: Information about the capacity allocated to the connector.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --connector-configuration=!: A map of keys to values that represent the configuration for the connector.
         --connector-description=: A summary description of the connector.
         --connector-name=!: The name of the connector.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --kafka-cluster-client-authentication=!: Details of the client authentication used by the Apache Kafka cluster.
         --kafka-cluster-encryption-in-transit=!: Details of encryption in transit to the Apache Kafka cluster.
         --kafka-cluster=!: Specifies which Apache Kafka cluster to connect to.
@@ -52,62 +146,34 @@ commands:
     - name: create-worker-configuration
       description: Creates a worker configuration using the specified properties.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: A summary description of the worker configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the worker configuration.
         --properties-file-content=!: Base64 encoded contents of connect-distributed.properties file.
         --tags=: The tags you want to attach to the worker configuration.
-    - name: delete-worker-configuration
-      description: Deletes the specified worker configuration.
+    - name: list-connectors
+      description: Returns a list of all the connectors in this account and Region.
       flags:
-        --worker-configuration-arn=!: The Amazon Resource Name (ARN) of the worker configuration that you want to delete.
-    - name: describe-connector-operation
-      description: Returns information about the specified connector's operations.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connector-name-prefix=: The name prefix that you want to use to search for and list connectors.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of connectors to list in one response.
+        --next-token=: If the response of a ListConnectors operation is truncated, it will include a NextToken.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-custom-plugins
+      description: Returns a list of all of the custom plugins in this account and Region.
       flags:
-        --connector-operation-arn=!: ARN of the connector operation to be described.
-    - name: list-tags-for-resource
-      description: Lists all the tags attached to the specified resource.
-      flags:
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource for which you want to list all attached tags.
-    - name: tag-resource
-      description: Attaches tags to the specified resource.
-      flags:
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to which you want to attach tags.
-        --tags=!: The tags that you want to attach to the resource.
-    - name: untag-resource
-      description: Removes tags from the specified resource.
-      flags:
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource from which you want to remove tags.
-        --tag-keys=!: The keys of the tags that you want to remove from the resource.
-    - name: update-connector
-      description: Updates the specified connector.
-      flags:
-        --capacity=: The target capacity.
-        --connector-arn=!: The Amazon Resource Name (ARN) of the connector that you want to update.
-        --connector-configuration=: A map of keys to values that represent the configuration for the connector.
-        --current-version=!: The current version of the connector that you want to update.
-    - name: create-custom-plugin
-      description: Creates a custom plugin using the specified properties.
-      flags:
-        --content-type=!: The type of the plugin file.
-        --description=: A summary description of the custom plugin.
-        --location=!: Information about the location of a custom plugin.
-        --name=!: The name of the custom plugin.
-        --tags=: The tags you want to attach to the custom plugin.
-      completion:
-        flag:
-            content-type:
-                - JAR
-                - ZIP
-    - name: delete-connector
-      description: Deletes the specified connector.
-      flags:
-        --connector-arn=!: The Amazon Resource Name (ARN) of the connector that you want to delete.
-        --current-version=: The current version of the connector that you want to delete.
-    - name: describe-connector
-      description: Returns summary information about the connector.
-      flags:
-        --connector-arn=!: The Amazon Resource Name (ARN) of the connector that you want to describe.
-    - name: describe-worker-configuration
-      description: Returns information about a worker configuration.
-      flags:
-        --worker-configuration-arn=!: The Amazon Resource Name (ARN) of the worker configuration that you want to get information about.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of custom plugins to list in one response.
+        --name-prefix=: Lists custom plugin names that start with the specified text string.
+        --next-token=: If the response of a ListCustomPlugins operation is truncated, it will include a NextToken.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.

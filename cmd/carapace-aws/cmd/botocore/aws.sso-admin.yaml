@@ -1,186 +1,201 @@
 name: sso-admin
 description: AWS Single Sign-On Admin
 commands:
-    - name: delete-permission-set
-      description: Deletes the specified permission set.
+    - name: delete-trusted-token-issuer
+      description: Deletes a trusted token issuer configuration from an instance of IAM Identity Center.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --trusted-token-issuer-arn=!: Specifies the ARN of the trusted token issuer configuration to delete.
+    - name: describe-instance-access-control-attribute-configuration
+      description: Returns the list of IAM Identity Center identity store attributes that have been configured to work with attributes-based access control (ABAC) for the specified IAM Identity Center instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
-        --permission-set-arn=!: The ARN of the permission set that should be deleted.
-    - name: get-application-authentication-method
-      description: Retrieves details about an authentication method used by an application.
-      flags:
-        --application-arn=!: Specifies the ARN of the application.
-        --authentication-method-type=!: Specifies the type of authentication method for which you want details.
-      completion:
-        flag:
-            authentication-method-type:
-                - IAM
-    - name: list-application-assignments
-      description: Lists Amazon Web Services account users that are assigned to an application.
-      flags:
-        --application-arn=!: Specifies the ARN of the application.
-        --max-results=: Specifies the total number of results that you want included in each response.
-        --next-token=: Specifies that you want to receive the next page of results.
-    - name: list-application-providers
-      description: Lists the application providers configured in the IAM Identity Center identity store.
-      flags:
-        --max-results=: Specifies the total number of results that you want included in each response.
-        --next-token=: Specifies that you want to receive the next page of results.
-    - name: list-instances
-      description: Lists the details of the organization and account instances of IAM Identity Center that were created in or visible to the account calling this API.
-      flags:
-        --max-results=: The maximum number of results to display for the instance.
-        --next-token=: The pagination token for the list API.
-    - name: attach-customer-managed-policy-reference-to-permission-set
-      description: Attaches the specified customer managed policy to the specified [PermissionSet]().
-      flags:
-        --customer-managed-policy-reference=!: Specifies the name and path of a customer managed policy.
-        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
-        --permission-set-arn=!: The ARN of the `PermissionSet`.
-    - name: describe-application
-      description: Retrieves the details of an application associated with an instance of IAM Identity Center.
-      flags:
-        --application-arn=!: Specifies the ARN of the application.
     - name: list-account-assignment-deletion-status
       description: Lists the status of the Amazon Web Services account assignment deletion requests for a specified IAM Identity Center instance.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --filter=: Filters results based on the passed attribute value.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to display for the assignment.
         --next-token=: The pagination token for the list API.
-    - name: list-customer-managed-policy-references-in-permission-set
-      description: Lists all customer managed policies attached to a specified [PermissionSet]().
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-application-assignments-for-principal
+      description: Lists the applications to which a specified principal is assigned.
       flags:
-        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
-        --max-results=: The maximum number of results to display for the list call.
-        --next-token=: The pagination token for the list API.
-        --permission-set-arn=!: The ARN of the `PermissionSet`.
-    - name: put-application-access-scope
-      description: Adds or updates the list of authorized targets for an IAM Identity Center access scope for an application.
-      flags:
-        --application-arn=!: Specifies the ARN of the application with the access scope with the targets to add or update.
-        --authorized-targets=: Specifies an array list of ARNs that represent the authorized targets for this access scope.
-        --scope=!: Specifies the name of the access scope to be associated with the specified targets.
-    - name: put-inline-policy-to-permission-set
-      description: Attaches an inline policy to a permission set.
-      flags:
-        --inline-policy=!: The inline policy to attach to a [PermissionSet]().
-        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
-        --permission-set-arn=!: The ARN of the permission set.
-    - name: delete-permissions-boundary-from-permission-set
-      description: Deletes the permissions boundary from a specified [PermissionSet]().
-      flags:
-        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
-        --permission-set-arn=!: The ARN of the `PermissionSet`.
-    - name: list-applications
-      description: Lists all applications associated with the instance of IAM Identity Center.
-      flags:
-        --filter=: Filters response results.
-        --instance-arn=!: The ARN of the IAM Identity Center application under which the operation will run.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: Filters the output to include only assignments associated with the application that has the specified ARN.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-arn=!: Specifies the instance of IAM Identity Center that contains principal and applications.
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: Specifies the total number of results that you want included in each response.
         --next-token=: Specifies that you want to receive the next page of results.
-    - name: list-tags-for-resource
-      description: Lists the tags that are attached to a specified resource.
-      flags:
-        --instance-arn=: The ARN of the IAM Identity Center instance under which the operation will be executed.
-        --next-token=: The pagination token for the list API.
-        --resource-arn=!: The ARN of the resource with the tags to be listed.
-    - name: update-instance
-      description: Update the details for the instance of IAM Identity Center that is owned by the Amazon Web Services account.
-      flags:
-        --encryption-configuration=: Specifies the encryption configuration for your IAM Identity Center instance.
-        --instance-arn=!: The ARN of the instance of IAM Identity Center under which the operation will run.
-        --name=: Updates the instance name.
-    - name: attach-managed-policy-to-permission-set
-      description: Attaches an Amazon Web Services managed policy ARN to a permission set.
-      flags:
-        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
-        --managed-policy-arn=!: The Amazon Web Services managed policy ARN to be attached to a permission set.
-        --permission-set-arn=!: The ARN of the [PermissionSet]() that the managed policy should be attached to.
-    - name: create-trusted-token-issuer
-      description: Creates a connection to a trusted token issuer in an instance of IAM Identity Center.
-      flags:
-        --client-token=: Specifies a unique, case-sensitive ID that you provide to ensure the idempotency of the request.
-        --instance-arn=!: Specifies the ARN of the instance of IAM Identity Center to contain the new trusted token issuer configuration.
-        --name=!: Specifies the name of the new trusted token issuer configuration.
-        --tags=: Specifies tags to be attached to the new trusted token issuer configuration.
-        --trusted-token-issuer-configuration=!: Specifies settings that apply to the new trusted token issuer configuration.
-        --trusted-token-issuer-type=!: Specifies the type of the new trusted token issuer.
+        --page-size=: The size of each page to get in the AWS service call.
+        --principal-id=!: Specifies the unique identifier of the principal for which you want to retrieve its assignments.
+        --principal-type=!: Specifies the type of the principal for which you want to retrieve its assignments.
+        --starting-token=: A token to specify where to start paginating.
       completion:
         flag:
-            trusted-token-issuer-type:
-                - OIDC_JWT
+            principal-type:
+                - USER
+                - GROUP
+    - name: provision-permission-set
+      description: The process by which a specified permission set is provisioned to the specified target.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
+        --permission-set-arn=!: The ARN of the permission set.
+        --target-id=: TargetID is an Amazon Web Services account identifier, (For example, 123456789012).
+        --target-type=!: The entity type for which the assignment will be created.
+      completion:
+        flag:
+            target-type:
+                - AWS_ACCOUNT
+                - ALL_PROVISIONED_ACCOUNTS
+    - name: update-permission-set
+      description: Updates an existing permission set.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description of the [PermissionSet]().
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
+        --permission-set-arn=!: The ARN of the permission set.
+        --relay-state=: Used to redirect users within the application during the federation authentication process.
+        --session-duration=: The length of time that the application user sessions are valid for in the ISO-8601 standard.
     - name: delete-application-authentication-method
       description: Deletes an authentication method from an application.
       flags:
         --application-arn=!: Specifies the ARN of the application with the authentication method to delete.
         --authentication-method-type=!: Specifies the authentication method type to delete from the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
       completion:
         flag:
             authentication-method-type:
                 - IAM
-    - name: describe-trusted-token-issuer
-      description: Retrieves details about a trusted token issuer configuration stored in an instance of IAM Identity Center.
+    - name: describe-application-provider
+      description: Retrieves details about a provider that can be used to connect an Amazon Web Services managed application or customer managed application to IAM Identity Center.
       flags:
-        --trusted-token-issuer-arn=!: Specifies the ARN of the trusted token issuer configuration that you want details about.
-    - name: get-application-assignment-configuration
-      description: Retrieves the configuration of [PutApplicationAssignmentConfiguration]().
+        --application-provider-arn=!: Specifies the ARN of the application provider for which you want details.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-managed-policies-in-permission-set
+      description: Lists the Amazon Web Services managed policy that is attached to a specified permission set.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to display for the [PermissionSet]().
+        --next-token=: The pagination token for the list API.
+        --page-size=: The size of each page to get in the AWS service call.
+        --permission-set-arn=!: The ARN of the [PermissionSet]() whose managed policies will be listed.
+        --starting-token=: A token to specify where to start paginating.
+    - name: put-application-session-configuration
+      description: Updates the session configuration for an application in IAM Identity Center.
+      flags:
+        --application-arn=!: The Amazon Resource Name (ARN) of the application for which to update the session configuration.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-background-session-application-status=: The status of user background sessions for the application.
+      completion:
+        flag:
+            user-background-session-application-status:
+                - ENABLED
+                - DISABLED
+    - name: attach-customer-managed-policy-reference-to-permission-set
+      description: Attaches the specified customer managed policy to the specified [PermissionSet]().
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --customer-managed-policy-reference=!: Specifies the name and path of a customer managed policy.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
+        --permission-set-arn=!: The ARN of the `PermissionSet`.
+    - name: detach-customer-managed-policy-reference-from-permission-set
+      description: Detaches the specified customer managed policy from the specified [PermissionSet]().
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --customer-managed-policy-reference=!: Specifies the name and path of a customer managed policy.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
+        --permission-set-arn=!: The ARN of the `PermissionSet`.
+    - name: get-application-authentication-method
+      description: Retrieves details about an authentication method used by an application.
       flags:
         --application-arn=!: Specifies the ARN of the application.
-    - name: describe-instance
-      description: Returns the details of an instance of IAM Identity Center.
+        --authentication-method-type=!: Specifies the type of authentication method for which you want details.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            authentication-method-type:
+                - IAM
+    - name: get-inline-policy-for-permission-set
+      description: Obtains the inline policy assigned to the permission set.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
+        --permission-set-arn=!: The ARN of the permission set.
+    - name: put-application-grant
+      description: Creates a configuration for an application to use grants.
+      flags:
+        --application-arn=!: Specifies the ARN of the application to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --grant-type=!: Specifies the type of grant to update.
+        --grant=!: Specifies a structure that describes the grant to update.
+      completion:
+        flag:
+            grant-type:
+                - authorization_code
+                - refresh_token
+                - urn:ietf:params:oauth:grant-type:jwt-bearer
+                - urn:ietf:params:oauth:grant-type:token-exchange
+    - name: put-permissions-boundary-to-permission-set
+      description: Attaches an Amazon Web Services managed or customer managed policy to the specified [PermissionSet]() as a permissions boundary.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
+        --permission-set-arn=!: The ARN of the `PermissionSet`.
+        --permissions-boundary=!: The permissions boundary that you want to attach to a `PermissionSet`.
+    - name: delete-instance
+      description: Deletes the instance of IAM Identity Center.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-arn=!: The ARN of the instance of IAM Identity Center under which the operation will run.
-    - name: delete-application-access-scope
-      description: Deletes an IAM Identity Center access scope from an application.
-      flags:
-        --application-arn=!: Specifies the ARN of the application with the access scope to delete.
-        --scope=!: Specifies the name of the access scope to remove from the application.
-    - name: delete-application-assignment
-      description: Revoke application access to an application by deleting application assignments for a user or group.
-      flags:
-        --application-arn=!: Specifies the ARN of the application.
-        --principal-id=!: An identifier for an object in IAM Identity Center, such as a user or group.
-        --principal-type=!: The entity type for which the assignment will be deleted.
-      completion:
-        flag:
-            principal-type:
-                - USER
-                - GROUP
-    - name: list-application-access-scopes
-      description: Lists the access scopes and authorized targets associated with an application.
-      flags:
-        --application-arn=!: Specifies the ARN of the application.
-        --max-results=: Specifies the total number of results that you want included in each response.
-        --next-token=: Specifies that you want to receive the next page of results.
-    - name: list-application-assignments-for-principal
-      description: Lists the applications to which a specified principal is assigned.
-      flags:
-        --filter=: Filters the output to include only assignments associated with the application that has the specified ARN.
-        --instance-arn=!: Specifies the instance of IAM Identity Center that contains principal and applications.
-        --max-results=: Specifies the total number of results that you want included in each response.
-        --next-token=: Specifies that you want to receive the next page of results.
-        --principal-id=!: Specifies the unique identifier of the principal for which you want to retrieve its assignments.
-        --principal-type=!: Specifies the type of the principal for which you want to retrieve its assignments.
-      completion:
-        flag:
-            principal-type:
-                - USER
-                - GROUP
-    - name: put-application-authentication-method
-      description: Adds or updates an authentication method for an application.
-      flags:
-        --application-arn=!: Specifies the ARN of the application with the authentication method to add or update.
-        --authentication-method-type=!: Specifies the type of the authentication method that you want to add or update.
-        --authentication-method=!: Specifies a structure that describes the authentication method to add or update.
-      completion:
-        flag:
-            authentication-method-type:
-                - IAM
     - name: describe-application-assignment
       description: Retrieves a direct assignment of a user or group to an application.
       flags:
         --application-arn=!: Specifies the ARN of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --principal-id=!: An identifier for an object in IAM Identity Center, such as a user or group.
         --principal-type=!: The entity type for which the assignment will be created.
       completion:
@@ -188,71 +203,76 @@ commands:
             principal-type:
                 - USER
                 - GROUP
-    - name: describe-application-provider
-      description: Retrieves details about a provider that can be used to connect an Amazon Web Services managed application or customer managed application to IAM Identity Center.
+    - name: list-instances
+      description: Lists the details of the organization and account instances of IAM Identity Center that were created in or visible to the account calling this API.
       flags:
-        --application-provider-arn=!: Specifies the ARN of the application provider for which you want details.
-    - name: describe-instance-access-control-attribute-configuration
-      description: Returns the list of IAM Identity Center identity store attributes that have been configured to work with attributes-based access control (ABAC) for the specified IAM Identity Center instance.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to display for the instance.
+        --next-token=: The pagination token for the list API.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-permission-sets
+      description: Lists the [PermissionSet]()s in an IAM Identity Center instance.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
-    - name: describe-permission-set-provisioning-status
-      description: Describes the status for the given permission set provisioning request.
-      flags:
-        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
-        --provision-permission-set-request-id=!: The identifier that is provided by the [ProvisionPermissionSet]() call to retrieve the current status of the provisioning workflow.
-    - name: list-account-assignments-for-principal
-      description: Retrieves a list of the IAM Identity Center associated Amazon Web Services accounts that the principal has access to.
-      flags:
-        --filter=: Specifies an Amazon Web Services account ID number.
-        --instance-arn=!: Specifies the ARN of the instance of IAM Identity Center that contains the principal.
-        --max-results=: Specifies the total number of results that you want included in each response.
-        --next-token=: Specifies that you want to receive the next page of results.
-        --principal-id=!: Specifies the principal for which you want to retrieve the list of account assignments.
-        --principal-type=!: Specifies the type of the principal.
-      completion:
-        flag:
-            principal-type:
-                - USER
-                - GROUP
-    - name: list-permission-set-provisioning-status
-      description: Lists the status of the permission set provisioning requests for a specified IAM Identity Center instance.
-      flags:
-        --filter=: Filters results based on the passed attribute value.
-        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to display for the assignment.
         --next-token=: The pagination token for the list API.
-    - name: put-permissions-boundary-to-permission-set
-      description: Attaches an Amazon Web Services managed or customer managed policy to the specified [PermissionSet]() as a permissions boundary.
-      flags:
-        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
-        --permission-set-arn=!: The ARN of the `PermissionSet`.
-        --permissions-boundary=!: The permissions boundary that you want to attach to a `PermissionSet`.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-trusted-token-issuers
       description: Lists all the trusted token issuers configured in an instance of IAM Identity Center.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-arn=!: Specifies the ARN of the instance of IAM Identity Center with the trusted token issuer configurations that you want to list.
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: Specifies the total number of results that you want included in each response.
         --next-token=: Specifies that you want to receive the next page of results.
-    - name: update-application
-      description: Updates application properties.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: put-application-access-scope
+      description: Adds or updates the list of authorized targets for an IAM Identity Center access scope for an application.
       flags:
-        --application-arn=!: Specifies the ARN of the application.
-        --description=: The description of the .
-        --name=: Specifies the updated name for the application.
-        --portal-options=: A structure that describes the options for the portal associated with an application.
-        --status=: Specifies whether the application is enabled or disabled.
-      completion:
-        flag:
-            status:
-                - ENABLED
-                - DISABLED
+        --application-arn=!: Specifies the ARN of the application with the access scope with the targets to add or update.
+        --authorized-targets=: Specifies an array list of ARNs that represent the authorized targets for this access scope.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scope=!: Specifies the name of the access scope to be associated with the specified targets.
+    - name: update-instance-access-control-attribute-configuration
+      description: Updates the IAM Identity Center identity store attributes that you can use with the IAM Identity Center instance for attributes-based access control (ABAC).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-access-control-attribute-configuration=!: Updates the attributes for your ABAC configuration.
+        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
+    - name: attach-managed-policy-to-permission-set
+      description: Attaches an Amazon Web Services managed policy ARN to a permission set.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
+        --managed-policy-arn=!: The Amazon Web Services managed policy ARN to be attached to a permission set.
+        --permission-set-arn=!: The ARN of the [PermissionSet]() that the managed policy should be attached to.
     - name: create-application
       description: Creates an OAuth 2.0 customer managed application in IAM Identity Center for the given application provider.
       flags:
         --application-provider-arn=!: The ARN of the application provider under which the operation will run.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: Specifies a unique, case-sensitive ID that you provide to ensure the idempotency of the request.
         --description=: The description of the .
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-arn=!: The ARN of the instance of IAM Identity Center under which the operation will run.
         --name=!: The name of the .
         --portal-options=: A structure that describes the options for the portal associated with an application.
@@ -263,61 +283,166 @@ commands:
             status:
                 - ENABLED
                 - DISABLED
+    - name: delete-application
+      description: Deletes the association with the application.
+      flags:
+        --application-arn=!: Specifies the ARN of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-application-assignment-configuration
+      description: Retrieves the configuration of [PutApplicationAssignmentConfiguration]().
+      flags:
+        --application-arn=!: Specifies the ARN of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: create-instance
       description: Creates an instance of IAM Identity Center for a standalone Amazon Web Services account that is not managed by Organizations or a member Amazon Web Services account in an organization.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: Specifies a unique, case-sensitive ID that you provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=: The name of the instance of IAM Identity Center.
         --tags=: Specifies tags to be attached to the instance of IAM Identity Center.
-    - name: create-permission-set
-      description: Creates a permission set within a specified IAM Identity Center instance.
+    - name: delete-application-access-scope
+      description: Deletes an IAM Identity Center access scope from an application.
       flags:
-        --description=: The description of the [PermissionSet]().
+        --application-arn=!: Specifies the ARN of the application with the access scope to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scope=!: Specifies the name of the access scope to remove from the application.
+    - name: list-customer-managed-policy-references-in-permission-set
+      description: Lists all customer managed policies attached to a specified [PermissionSet]().
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
-        --name=!: The name of the [PermissionSet]().
-        --relay-state=: Used to redirect users within the application during the federation authentication process.
-        --session-duration=: The length of time that the application user sessions are valid in the ISO-8601 standard.
-        --tags=: The tags to attach to the new [PermissionSet]().
-    - name: describe-account-assignment-deletion-status
-      description: Describes the status of the assignment deletion request.
-      flags:
-        --account-assignment-deletion-request-id=!: The identifier that is used to track the request operation progress.
-        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
-    - name: get-application-access-scope
-      description: Retrieves the authorized targets for an IAM Identity Center access scope for an application.
-      flags:
-        --application-arn=!: Specifies the ARN of the application with the access scope that you want to retrieve.
-        --scope=!: Specifies the name of the access scope for which you want the authorized targets.
-    - name: detach-customer-managed-policy-reference-from-permission-set
-      description: Detaches the specified customer managed policy from the specified [PermissionSet]().
-      flags:
-        --customer-managed-policy-reference=!: Specifies the name and path of a customer managed policy.
-        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to display for the list call.
+        --next-token=: The pagination token for the list API.
+        --page-size=: The size of each page to get in the AWS service call.
         --permission-set-arn=!: The ARN of the `PermissionSet`.
-    - name: get-inline-policy-for-permission-set
-      description: Obtains the inline policy assigned to the permission set.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-permission-set-provisioning-status
+      description: Lists the status of the permission set provisioning requests for a specified IAM Identity Center instance.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: Filters results based on the passed attribute value.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to display for the assignment.
+        --next-token=: The pagination token for the list API.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-permission-sets-provisioned-to-account
+      description: Lists all the permission sets that are provisioned to a specified Amazon Web Services account.
+      flags:
+        --account-id=!: The identifier of the Amazon Web Services account from which to list the assignments.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to display for the assignment.
+        --next-token=: The pagination token for the list API.
+        --page-size=: The size of each page to get in the AWS service call.
+        --provisioning-status=: The status object for the permission set provisioning operation.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            provisioning-status:
+                - LATEST_PERMISSION_SET_PROVISIONED
+                - LATEST_PERMISSION_SET_NOT_PROVISIONED
+    - name: create-trusted-token-issuer
+      description: Creates a connection to a trusted token issuer in an instance of IAM Identity Center.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Specifies a unique, case-sensitive ID that you provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-arn=!: Specifies the ARN of the instance of IAM Identity Center to contain the new trusted token issuer configuration.
+        --name=!: Specifies the name of the new trusted token issuer configuration.
+        --tags=: Specifies tags to be attached to the new trusted token issuer configuration.
+        --trusted-token-issuer-configuration=!: Specifies settings that apply to the new trusted token issuer configuration.
+        --trusted-token-issuer-type=!: Specifies the type of the new trusted token issuer.
+      completion:
+        flag:
+            trusted-token-issuer-type:
+                - OIDC_JWT
+    - name: get-application-session-configuration
+      description: Retrieves the session configuration for an application in IAM Identity Center.
+      flags:
+        --application-arn=!: The Amazon Resource Name (ARN) of the application for which to retrieve the session configuration.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-account-assignments-for-principal
+      description: Retrieves a list of the IAM Identity Center associated Amazon Web Services accounts that the principal has access to.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: Specifies an Amazon Web Services account ID number.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-arn=!: Specifies the ARN of the instance of IAM Identity Center that contains the principal.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specifies the total number of results that you want included in each response.
+        --next-token=: Specifies that you want to receive the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --principal-id=!: Specifies the principal for which you want to retrieve the list of account assignments.
+        --principal-type=!: Specifies the type of the principal.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            principal-type:
+                - USER
+                - GROUP
+    - name: put-inline-policy-to-permission-set
+      description: Attaches an inline policy to a permission set.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --inline-policy=!: The inline policy to attach to a [PermissionSet]().
         --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
         --permission-set-arn=!: The ARN of the permission set.
-    - name: tag-resource
-      description: Associates a set of tags with a specified resource.
+    - name: untag-resource
+      description: Disassociates a set of tags from a specified resource.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-arn=: The ARN of the IAM Identity Center instance under which the operation will be executed.
         --resource-arn=!: The ARN of the resource with the tags to be listed.
-        --tags=!: A set of key-value pairs that are used to manage the resource.
-    - name: update-instance-access-control-attribute-configuration
-      description: Updates the IAM Identity Center identity store attributes that you can use with the IAM Identity Center instance for attributes-based access control (ABAC).
+        --tag-keys=!: The keys of tags that are attached to the resource.
+    - name: describe-instance
+      description: Returns the details of an instance of IAM Identity Center.
       flags:
-        --instance-access-control-attribute-configuration=!: Updates the attributes for your ABAC configuration.
-        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
-    - name: create-instance-access-control-attribute-configuration
-      description: Enables the attributes-based access control (ABAC) feature for the specified IAM Identity Center instance.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-arn=!: The ARN of the instance of IAM Identity Center under which the operation will run.
+    - name: list-application-authentication-methods
+      description: Lists all of the authentication methods supported by the specified application.
       flags:
-        --instance-access-control-attribute-configuration=!: Specifies the IAM Identity Center identity store attributes to add to your ABAC configuration.
-        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
+        --application-arn=!: Specifies the ARN of the application with the authentication methods you want to list.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: Specifies that you want to receive the next page of results.
+        --starting-token=: A token to specify where to start paginating.
     - name: delete-account-assignment
       description: Deletes a principal's access from a specified Amazon Web Services account using a specified permission set.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
         --permission-set-arn=!: The ARN of the permission set that will be used to remove access.
         --principal-id=!: An identifier for an object in IAM Identity Center, such as a user or group.
@@ -331,69 +456,62 @@ commands:
                 - GROUP
             target-type:
                 - AWS_ACCOUNT
-    - name: delete-instance
-      description: Deletes the instance of IAM Identity Center.
-      flags:
-        --instance-arn=!: The ARN of the instance of IAM Identity Center under which the operation will run.
     - name: describe-account-assignment-creation-status
       description: Describes the status of the assignment creation request.
       flags:
         --account-assignment-creation-request-id=!: The identifier that is used to track the request operation progress.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
-    - name: describe-permission-set
-      description: Gets the details of the permission set.
+    - name: describe-trusted-token-issuer
+      description: Retrieves details about a trusted token issuer configuration stored in an instance of IAM Identity Center.
       flags:
-        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
-        --permission-set-arn=!: The ARN of the permission set.
-    - name: list-accounts-for-provisioned-permission-set
-      description: Lists all the Amazon Web Services accounts where the specified permission set is provisioned.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --trusted-token-issuer-arn=!: Specifies the ARN of the trusted token issuer configuration that you want details about.
+    - name: get-permissions-boundary-for-permission-set
+      description: Obtains the permissions boundary for a specified [PermissionSet]().
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
-        --max-results=: The maximum number of results to display for the [PermissionSet]().
-        --next-token=: The pagination token for the list API.
-        --permission-set-arn=!: The ARN of the [PermissionSet]() from which the associated Amazon Web Services accounts will be listed.
-        --provisioning-status=: The permission set provisioning status for an Amazon Web Services account.
-      completion:
-        flag:
-            provisioning-status:
-                - LATEST_PERMISSION_SET_PROVISIONED
-                - LATEST_PERMISSION_SET_NOT_PROVISIONED
-    - name: list-managed-policies-in-permission-set
-      description: Lists the Amazon Web Services managed policy that is attached to a specified permission set.
-      flags:
-        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
-        --max-results=: The maximum number of results to display for the [PermissionSet]().
-        --next-token=: The pagination token for the list API.
-        --permission-set-arn=!: The ARN of the [PermissionSet]() whose managed policies will be listed.
-    - name: provision-permission-set
-      description: The process by which a specified permission set is provisioned to the specified target.
-      flags:
-        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
-        --permission-set-arn=!: The ARN of the permission set.
-        --target-id=: TargetID is an Amazon Web Services account identifier, (For example, 123456789012).
-        --target-type=!: The entity type for which the assignment will be created.
-      completion:
-        flag:
-            target-type:
-                - AWS_ACCOUNT
-                - ALL_PROVISIONED_ACCOUNTS
+        --permission-set-arn=!: The ARN of the `PermissionSet`.
     - name: list-account-assignments
       description: Lists the assignee of the specified Amazon Web Services account with the specified permission set.
       flags:
         --account-id=!: The identifier of the Amazon Web Services account from which to list the assignments.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to display for the assignment.
         --next-token=: The pagination token for the list API.
+        --page-size=: The size of each page to get in the AWS service call.
         --permission-set-arn=!: The ARN of the permission set from which to list assignments.
-    - name: update-trusted-token-issuer
-      description: Updates the name of the trusted token issuer, or the path of a source attribute or destination attribute for a trusted token issuer configuration.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-applications
+      description: Lists all applications associated with the instance of IAM Identity Center.
       flags:
-        --name=: Specifies the updated name to be applied to the trusted token issuer configuration.
-        --trusted-token-issuer-arn=!: Specifies the ARN of the trusted token issuer configuration that you want to update.
-        --trusted-token-issuer-configuration=: Specifies a structure with settings to apply to the specified trusted token issuer.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: Filters response results.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-arn=!: The ARN of the IAM Identity Center application under which the operation will run.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specifies the total number of results that you want included in each response.
+        --next-token=: Specifies that you want to receive the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: create-account-assignment
       description: Assigns access to a principal for a specified Amazon Web Services account using a specified permission set.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
         --permission-set-arn=!: The ARN of the permission set that the admin wants to grant the principal access to.
         --principal-id=!: An identifier for an object in IAM Identity Center, such as a user or group.
@@ -407,102 +525,96 @@ commands:
                 - GROUP
             target-type:
                 - AWS_ACCOUNT
-    - name: delete-application
-      description: Deletes the association with the application.
+    - name: create-instance-access-control-attribute-configuration
+      description: Enables the attributes-based access control (ABAC) feature for the specified IAM Identity Center instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-access-control-attribute-configuration=!: Specifies the IAM Identity Center identity store attributes to add to your ABAC configuration.
+        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
+    - name: describe-account-assignment-deletion-status
+      description: Describes the status of the assignment deletion request.
+      flags:
+        --account-assignment-deletion-request-id=!: The identifier that is used to track the request operation progress.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
+    - name: describe-application
+      description: Retrieves the details of an application associated with an instance of IAM Identity Center.
       flags:
         --application-arn=!: Specifies the ARN of the application.
-    - name: delete-inline-policy-from-permission-set
-      description: Deletes the inline policy from a specified permission set.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-tags-for-resource
+      description: Lists the tags that are attached to a specified resource.
       flags:
-        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
-        --permission-set-arn=!: The ARN of the permission set that will be used to remove access.
-    - name: detach-managed-policy-from-permission-set
-      description: Detaches the attached Amazon Web Services managed policy ARN from the specified permission set.
-      flags:
-        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
-        --managed-policy-arn=!: The Amazon Web Services managed policy ARN to be detached from a permission set.
-        --permission-set-arn=!: The ARN of the [PermissionSet]() from which the policy should be detached.
-    - name: get-permissions-boundary-for-permission-set
-      description: Obtains the permissions boundary for a specified [PermissionSet]().
-      flags:
-        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
-        --permission-set-arn=!: The ARN of the `PermissionSet`.
-    - name: list-application-authentication-methods
-      description: Lists all of the authentication methods supported by the specified application.
-      flags:
-        --application-arn=!: Specifies the ARN of the application with the authentication methods you want to list.
-        --next-token=: Specifies that you want to receive the next page of results.
-    - name: list-application-grants
-      description: List the grants associated with an application.
-      flags:
-        --application-arn=!: Specifies the ARN of the application whose grants you want to list.
-        --next-token=: Specifies that you want to receive the next page of results.
-    - name: list-permission-sets
-      description: Lists the [PermissionSet]()s in an IAM Identity Center instance.
-      flags:
-        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
-        --max-results=: The maximum number of results to display for the assignment.
-        --next-token=: The pagination token for the list API.
-    - name: create-application-assignment
-      description: Grant application access to a user or group.
-      flags:
-        --application-arn=!: The ARN of the application for which the assignment is created.
-        --principal-id=!: An identifier for an object in IAM Identity Center, such as a user or group.
-        --principal-type=!: The entity type for which the assignment will be created.
-      completion:
-        flag:
-            principal-type:
-                - USER
-                - GROUP
-    - name: put-application-grant
-      description: Creates a configuration for an application to use grants.
-      flags:
-        --application-arn=!: Specifies the ARN of the application to update.
-        --grant-type=!: Specifies the type of grant to update.
-        --grant=!: Specifies a structure that describes the grant to update.
-      completion:
-        flag:
-            grant-type:
-                - authorization_code
-                - refresh_token
-                - urn:ietf:params:oauth:grant-type:jwt-bearer
-                - urn:ietf:params:oauth:grant-type:token-exchange
-    - name: put-application-session-configuration
-      description: Updates the session configuration for an application in IAM Identity Center.
-      flags:
-        --application-arn=!: The Amazon Resource Name (ARN) of the application for which to update the session configuration.
-        --user-background-session-application-status=: The status of user background sessions for the application.
-      completion:
-        flag:
-            user-background-session-application-status:
-                - ENABLED
-                - DISABLED
-    - name: untag-resource
-      description: Disassociates a set of tags from a specified resource.
-      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-arn=: The ARN of the IAM Identity Center instance under which the operation will be executed.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The pagination token for the list API.
         --resource-arn=!: The ARN of the resource with the tags to be listed.
-        --tag-keys=!: The keys of tags that are attached to the resource.
-    - name: delete-application-grant
-      description: Deletes a grant from an application.
+        --starting-token=: A token to specify where to start paginating.
+    - name: put-application-authentication-method
+      description: Adds or updates an authentication method for an application.
       flags:
-        --application-arn=!: Specifies the ARN of the application with the grant to delete.
-        --grant-type=!: Specifies the type of grant to delete from the application.
+        --application-arn=!: Specifies the ARN of the application with the authentication method to add or update.
+        --authentication-method-type=!: Specifies the type of the authentication method that you want to add or update.
+        --authentication-method=!: Specifies a structure that describes the authentication method to add or update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
       completion:
         flag:
-            grant-type:
-                - authorization_code
-                - refresh_token
-                - urn:ietf:params:oauth:grant-type:jwt-bearer
-                - urn:ietf:params:oauth:grant-type:token-exchange
-    - name: delete-instance-access-control-attribute-configuration
-      description: Disables the attributes-based access control (ABAC) feature for the specified IAM Identity Center instance and deletes all of the attribute mappings that have been configured.
+            authentication-method-type:
+                - IAM
+    - name: delete-permission-set
+      description: Deletes the specified permission set.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
+        --permission-set-arn=!: The ARN of the permission set that should be deleted.
+    - name: get-application-access-scope
+      description: Retrieves the authorized targets for an IAM Identity Center access scope for an application.
+      flags:
+        --application-arn=!: Specifies the ARN of the application with the access scope that you want to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scope=!: Specifies the name of the access scope for which you want the authorized targets.
+    - name: create-permission-set
+      description: Creates a permission set within a specified IAM Identity Center instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description of the [PermissionSet]().
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
+        --name=!: The name of the [PermissionSet]().
+        --relay-state=: Used to redirect users within the application during the federation authentication process.
+        --session-duration=: The length of time that the application user sessions are valid in the ISO-8601 standard.
+        --tags=: The tags to attach to the new [PermissionSet]().
+    - name: describe-permission-set
+      description: Gets the details of the permission set.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
+        --permission-set-arn=!: The ARN of the permission set.
     - name: get-application-grant
       description: Retrieves details about an application grant.
       flags:
         --application-arn=!: Specifies the ARN of the application that contains the grant.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --grant-type=!: Specifies the type of grant.
       completion:
         flag:
@@ -511,45 +623,215 @@ commands:
                 - refresh_token
                 - urn:ietf:params:oauth:grant-type:jwt-bearer
                 - urn:ietf:params:oauth:grant-type:token-exchange
-    - name: list-permission-sets-provisioned-to-account
-      description: Lists all the permission sets that are provisioned to a specified Amazon Web Services account.
+    - name: update-application
+      description: Updates application properties.
       flags:
-        --account-id=!: The identifier of the Amazon Web Services account from which to list the assignments.
-        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
-        --max-results=: The maximum number of results to display for the assignment.
-        --next-token=: The pagination token for the list API.
-        --provisioning-status=: The status object for the permission set provisioning operation.
+        --application-arn=!: Specifies the ARN of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description of the .
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: Specifies the updated name for the application.
+        --portal-options=: A structure that describes the options for the portal associated with an application.
+        --status=: Specifies whether the application is enabled or disabled.
       completion:
         flag:
-            provisioning-status:
-                - LATEST_PERMISSION_SET_PROVISIONED
-                - LATEST_PERMISSION_SET_NOT_PROVISIONED
-    - name: update-permission-set
-      description: Updates an existing permission set.
+            status:
+                - ENABLED
+                - DISABLED
+    - name: delete-inline-policy-from-permission-set
+      description: Deletes the inline policy from a specified permission set.
       flags:
-        --description=: The description of the [PermissionSet]().
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
-        --permission-set-arn=!: The ARN of the permission set.
-        --relay-state=: Used to redirect users within the application during the federation authentication process.
-        --session-duration=: The length of time that the application user sessions are valid for in the ISO-8601 standard.
-    - name: delete-trusted-token-issuer
-      description: Deletes a trusted token issuer configuration from an instance of IAM Identity Center.
+        --permission-set-arn=!: The ARN of the permission set that will be used to remove access.
+    - name: describe-permission-set-provisioning-status
+      description: Describes the status for the given permission set provisioning request.
       flags:
-        --trusted-token-issuer-arn=!: Specifies the ARN of the trusted token issuer configuration to delete.
-    - name: get-application-session-configuration
-      description: Retrieves the session configuration for an application in IAM Identity Center.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
+        --provision-permission-set-request-id=!: The identifier that is provided by the [ProvisionPermissionSet]() call to retrieve the current status of the provisioning workflow.
+    - name: list-application-providers
+      description: Lists the application providers configured in the IAM Identity Center identity store.
       flags:
-        --application-arn=!: The Amazon Resource Name (ARN) of the application for which to retrieve the session configuration.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specifies the total number of results that you want included in each response.
+        --next-token=: Specifies that you want to receive the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-trusted-token-issuer
+      description: Updates the name of the trusted token issuer, or the path of a source attribute or destination attribute for a trusted token issuer configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: Specifies the updated name to be applied to the trusted token issuer configuration.
+        --trusted-token-issuer-arn=!: Specifies the ARN of the trusted token issuer configuration that you want to update.
+        --trusted-token-issuer-configuration=: Specifies a structure with settings to apply to the specified trusted token issuer.
+    - name: delete-application-grant
+      description: Deletes a grant from an application.
+      flags:
+        --application-arn=!: Specifies the ARN of the application with the grant to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --grant-type=!: Specifies the type of grant to delete from the application.
+      completion:
+        flag:
+            grant-type:
+                - authorization_code
+                - refresh_token
+                - urn:ietf:params:oauth:grant-type:jwt-bearer
+                - urn:ietf:params:oauth:grant-type:token-exchange
     - name: list-account-assignment-creation-status
       description: Lists the status of the Amazon Web Services account assignment creation requests for a specified IAM Identity Center instance.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --filter=: Filters results based on the passed attribute value.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to display for the assignment.
         --next-token=: The pagination token for the list API.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-instance
+      description: Update the details for the instance of IAM Identity Center that is owned by the Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --encryption-configuration=: Specifies the encryption configuration for your IAM Identity Center instance.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-arn=!: The ARN of the instance of IAM Identity Center under which the operation will run.
+        --name=: Updates the instance name.
+    - name: create-application-assignment
+      description: Grant application access to a user or group.
+      flags:
+        --application-arn=!: The ARN of the application for which the assignment is created.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --principal-id=!: An identifier for an object in IAM Identity Center, such as a user or group.
+        --principal-type=!: The entity type for which the assignment will be created.
+      completion:
+        flag:
+            principal-type:
+                - USER
+                - GROUP
+    - name: delete-application-assignment
+      description: Revoke application access to an application by deleting application assignments for a user or group.
+      flags:
+        --application-arn=!: Specifies the ARN of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --principal-id=!: An identifier for an object in IAM Identity Center, such as a user or group.
+        --principal-type=!: The entity type for which the assignment will be deleted.
+      completion:
+        flag:
+            principal-type:
+                - USER
+                - GROUP
+    - name: delete-instance-access-control-attribute-configuration
+      description: Disables the attributes-based access control (ABAC) feature for the specified IAM Identity Center instance and deletes all of the attribute mappings that have been configured.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
+    - name: delete-permissions-boundary-from-permission-set
+      description: Deletes the permissions boundary from a specified [PermissionSet]().
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
+        --permission-set-arn=!: The ARN of the `PermissionSet`.
+    - name: list-application-access-scopes
+      description: Lists the access scopes and authorized targets associated with an application.
+      flags:
+        --application-arn=!: Specifies the ARN of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specifies the total number of results that you want included in each response.
+        --next-token=: Specifies that you want to receive the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: put-application-assignment-configuration
       description: Configure how users gain access to an application.
       flags:
         --application-arn=!: Specifies the ARN of the application.
         --assignment-required!: If `AssignmentsRequired` is `true` (default value), users don’t have access to the application unless an assignment is created using the [CreateApplicationAssignment API](https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_CreateApplicationAssignment.html).
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-assignment-required!: If `AssignmentsRequired` is `true` (default value), users don’t have access to the application unless an assignment is created using the [CreateApplicationAssignment API](https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_CreateApplicationAssignment.html).
+    - name: tag-resource
+      description: Associates a set of tags with a specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-arn=: The ARN of the IAM Identity Center instance under which the operation will be executed.
+        --resource-arn=!: The ARN of the resource with the tags to be listed.
+        --tags=!: A set of key-value pairs that are used to manage the resource.
+    - name: detach-managed-policy-from-permission-set
+      description: Detaches the attached Amazon Web Services managed policy ARN from the specified permission set.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
+        --managed-policy-arn=!: The Amazon Web Services managed policy ARN to be detached from a permission set.
+        --permission-set-arn=!: The ARN of the [PermissionSet]() from which the policy should be detached.
+    - name: list-accounts-for-provisioned-permission-set
+      description: Lists all the Amazon Web Services accounts where the specified permission set is provisioned.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-arn=!: The ARN of the IAM Identity Center instance under which the operation will be executed.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to display for the [PermissionSet]().
+        --next-token=: The pagination token for the list API.
+        --page-size=: The size of each page to get in the AWS service call.
+        --permission-set-arn=!: The ARN of the [PermissionSet]() from which the associated Amazon Web Services accounts will be listed.
+        --provisioning-status=: The permission set provisioning status for an Amazon Web Services account.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            provisioning-status:
+                - LATEST_PERMISSION_SET_PROVISIONED
+                - LATEST_PERMISSION_SET_NOT_PROVISIONED
+    - name: list-application-assignments
+      description: Lists Amazon Web Services account users that are assigned to an application.
+      flags:
+        --application-arn=!: Specifies the ARN of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specifies the total number of results that you want included in each response.
+        --next-token=: Specifies that you want to receive the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-application-grants
+      description: List the grants associated with an application.
+      flags:
+        --application-arn=!: Specifies the ARN of the application whose grants you want to list.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: Specifies that you want to receive the next page of results.
+        --starting-token=: A token to specify where to start paginating.

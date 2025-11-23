@@ -1,51 +1,82 @@
 name: signer
 description: AWS Signer
 commands:
-    - name: remove-profile-permission
-      description: Removes cross-account permissions from a signing profile.
+    - name: revoke-signature
+      description: Changes the state of a signing job to REVOKED.
       flags:
-        --profile-name=!: A human-readable name for the signing profile with permissions to be removed.
-        --revision-id=!: An identifier for the current revision of the signing profile permissions.
-        --statement-id=!: A unique identifier for the cross-account permissions statement.
-    - name: revoke-signing-profile
-      description: Changes the state of a signing profile to REVOKED.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: ID of the signing job to be revoked.
+        --job-owner=: AWS account ID of the job owner.
+        --reason=!: The reason for revoking the signing job.
+    - name: describe-signing-job
+      description: Returns information about a specific code signing job.
       flags:
-        --effective-time=!: A timestamp for when revocation of a Signing Profile should become effective.
-        --profile-name=!: The name of the signing profile to be revoked.
-        --profile-version=!: The version of the signing profile to be revoked.
-        --reason=!: The reason for revoking a signing profile.
-    - name: start-signing-job
-      description: Initiates a signing job to be performed on the code provided.
-      flags:
-        --client-request-token=!: String that identifies the signing request.
-        --destination=!: The S3 bucket in which to save your signed object.
-        --profile-name=!: The name of the signing profile.
-        --profile-owner=: The AWS account ID of the signing profile owner.
-        --source=!: The S3 bucket that contains the object to sign or a BLOB that contains your raw code.
-    - name: cancel-signing-profile
-      description: Changes the state of an `ACTIVE` signing profile to `CANCELED`.
-      flags:
-        --profile-name=!: The name of the signing profile to be canceled.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The ID of the signing job on input.
     - name: get-revocation-status
       description: Retrieves the revocation status of one or more of the signing profile, signing job, and signing certificate.
       flags:
         --certificate-hashes=!: A list of composite signed hashes that identify certificates.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --job-arn=!: The ARN of a signing job.
         --platform-id=!: The ID of a signing platform.
         --profile-version-arn=!: The version of a signing profile.
         --signature-timestamp=!: The timestamp of the signature that validates the profile or job.
+    - name: get-signing-profile
+      description: Returns information on a specific signing profile.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profile-name=!: The name of the target signing profile.
+        --profile-owner=: The AWS account ID of the profile owner.
+    - name: list-signing-platforms
+      description: Lists all signing platforms available in AWS Signer that match the request parameters.
+      flags:
+        --category=: The category type of a signing platform.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to be returned by this operation.
+        --next-token=: Value for specifying the next set of paginated results to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --partner=: Any partner entities connected to a signing platform.
+        --starting-token=: A token to specify where to start paginating.
+        --target=: The validation template that is used by the target signing platform.
+    - name: remove-profile-permission
+      description: Removes cross-account permissions from a signing profile.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profile-name=!: A human-readable name for the signing profile with permissions to be removed.
+        --revision-id=!: An identifier for the current revision of the signing profile permissions.
+        --statement-id=!: A unique identifier for the cross-account permissions statement.
     - name: list-signing-jobs
       description: Lists all your signing jobs.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --is-revoked: Filters results to return only signing jobs with revoked signatures.
         --job-invoker=: Filters results to return only signing jobs initiated by a specified IAM entity.
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: Specifies the maximum number of items to return in the response.
         --next-token=: String for specifying the next set of paginated results to return.
         --no-is-revoked: Filters results to return only signing jobs with revoked signatures.
+        --page-size=: The size of each page to get in the AWS service call.
         --platform-id=: The ID of microcontroller platform that you specified for the distribution of your code image.
         --requested-by=: The IAM principal that requested the signing job.
         --signature-expires-after=: Filters results to return only signing jobs with signatures expiring after a specified timestamp.
         --signature-expires-before=: Filters results to return only signing jobs with signatures expiring before a specified timestamp.
+        --starting-token=: A token to specify where to start paginating.
         --status=: A status value with which to filter your results.
       completion:
         flag:
@@ -53,41 +84,59 @@ commands:
                 - InProgress
                 - Failed
                 - Succeeded
+    - name: revoke-signing-profile
+      description: Changes the state of a signing profile to REVOKED.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --effective-time=!: A timestamp for when revocation of a Signing Profile should become effective.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profile-name=!: The name of the signing profile to be revoked.
+        --profile-version=!: The version of the signing profile to be revoked.
+        --reason=!: The reason for revoking a signing profile.
+    - name: sign-payload
+      description: Signs a binary payload and returns a signature envelope.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --payload-format=!: Payload content type.
+        --payload=!: Specifies the object digest (hash) to sign.
+        --profile-name=!: The name of the signing profile.
+        --profile-owner=: The AWS account ID of the profile owner.
+    - name: untag-resource
+      description: Removes one or more tags from a signing profile.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) for the signing profile.
+        --tag-keys=!: A list of tag keys to be removed from the signing profile.
     - name: add-profile-permission
       description: Adds cross-account permissions to a signing profile.
       flags:
         --action=!: For cross-account signing.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --principal=!: The AWS principal receiving cross-account permissions.
         --profile-name=!: The human-readable name of the signing profile.
         --profile-version=: The version of the signing profile.
         --revision-id=: A unique identifier for the current profile revision.
         --statement-id=!: A unique identifier for the cross-account permission statement.
-    - name: list-signing-profiles
-      description: Lists all available signing profiles in your AWS account.
+    - name: list-tags-for-resource
+      description: Returns a list of the tags associated with a signing profile resource.
       flags:
-        --include-canceled: Designates whether to include profiles with the status of `CANCELED`.
-        --max-results=: The maximum number of profiles to be returned.
-        --next-token=: Value for specifying the next set of paginated results to return.
-        --no-include-canceled: Designates whether to include profiles with the status of `CANCELED`.
-        --platform-id=: Filters results to return only signing jobs initiated for a specified signing platform.
-        --statuses=: Filters results to return only signing jobs with statuses in the specified list.
-    - name: revoke-signature
-      description: Changes the state of a signing job to REVOKED.
-      flags:
-        --job-id=!: ID of the signing job to be revoked.
-        --job-owner=: AWS account ID of the job owner.
-        --reason=!: The reason for revoking the signing job.
-    - name: list-signing-platforms
-      description: Lists all signing platforms available in AWS Signer that match the request parameters.
-      flags:
-        --category=: The category type of a signing platform.
-        --max-results=: The maximum number of results to be returned by this operation.
-        --next-token=: Value for specifying the next set of paginated results to return.
-        --partner=: Any partner entities connected to a signing platform.
-        --target=: The validation template that is used by the target signing platform.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) for the signing profile.
     - name: put-signing-profile
       description: Creates a signing profile.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --overrides=: A subfield of `platform`.
         --platform-id=!: The ID of the signing platform to be created.
         --profile-name=!: The name of the signing profile to be created.
@@ -95,49 +144,69 @@ commands:
         --signing-material=: The AWS Certificate Manager certificate that will be used to sign code with the new signing profile.
         --signing-parameters=: Map of key-value pairs for signing.
         --tags=: Tags to be associated with the signing profile that is being created.
-    - name: sign-payload
-      description: Signs a binary payload and returns a signature envelope.
+    - name: start-signing-job
+      description: Initiates a signing job to be performed on the code provided.
       flags:
-        --payload-format=!: Payload content type.
-        --payload=!: Specifies the object digest (hash) to sign.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=!: String that identifies the signing request.
+        --destination=!: The S3 bucket in which to save your signed object.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --profile-name=!: The name of the signing profile.
-        --profile-owner=: The AWS account ID of the profile owner.
+        --profile-owner=: The AWS account ID of the signing profile owner.
+        --source=!: The S3 bucket that contains the object to sign or a BLOB that contains your raw code.
     - name: tag-resource
       description: Adds one or more tags to a signing profile.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) for the signing profile.
         --tags=!: One or more tags to be associated with the signing profile.
-    - name: untag-resource
-      description: Removes one or more tags from a signing profile.
+    - name: cancel-signing-profile
+      description: Changes the state of an `ACTIVE` signing profile to `CANCELED`.
       flags:
-        --resource-arn=!: The Amazon Resource Name (ARN) for the signing profile.
-        --tag-keys=!: A list of tag keys to be removed from the signing profile.
-    - name: describe-signing-job
-      description: Returns information about a specific code signing job.
-      flags:
-        --job-id=!: The ID of the signing job on input.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profile-name=!: The name of the signing profile to be canceled.
     - name: get-signing-platform
       description: Returns information on a specific signing platform.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --platform-id=!: The ID of the target signing platform.
-    - name: get-signing-profile
-      description: Returns information on a specific signing profile.
-      flags:
-        --profile-name=!: The name of the target signing profile.
-        --profile-owner=: The AWS account ID of the profile owner.
     - name: list-profile-permissions
       description: Lists the cross-account permissions associated with a signing profile.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --next-token=: String for specifying the next set of paginated results.
         --profile-name=!: Name of the signing profile containing the cross-account permissions.
-    - name: list-tags-for-resource
-      description: Returns a list of the tags associated with a signing profile resource.
+    - name: list-signing-profiles
+      description: Lists all available signing profiles in your AWS account.
       flags:
-        --resource-arn=!: The Amazon Resource Name (ARN) for the signing profile.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-canceled: Designates whether to include profiles with the status of `CANCELED`.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of profiles to be returned.
+        --next-token=: Value for specifying the next set of paginated results to return.
+        --no-include-canceled: Designates whether to include profiles with the status of `CANCELED`.
+        --page-size=: The size of each page to get in the AWS service call.
+        --platform-id=: Filters results to return only signing jobs initiated for a specified signing platform.
+        --starting-token=: A token to specify where to start paginating.
+        --statuses=: Filters results to return only signing jobs with statuses in the specified list.
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:
         - name: successful-signing-job
           description: Returns information about a specific code signing job.
           flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --job-id=!: The ID of the signing job on input.

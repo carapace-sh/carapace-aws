@@ -1,41 +1,56 @@
 name: lakeformation
 description: AWS Lake Formation
 commands:
-    - name: batch-revoke-permissions
-      description: Batch operation to revoke permissions from the principal.
+    - name: search-databases-by-lf-tags
+      description: This operation allows a search on `DATABASE` resources by `TagCondition`.
       flags:
         --catalog-id=: The identifier for the Data Catalog.
-        --entries=!: A list of up to 20 entries for resource permissions to be revoked by batch operation to the principal.
-    - name: create-data-cells-filter
-      description: Creates a data cell filter to allow one to grant access to certain columns on certain rows.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expression=!: A list of conditions (`LFTag` structures) to search for in database resources.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: A continuation token, if this is not the first call to retrieve this list.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: batch-grant-permissions
+      description: Batch operation to grant permissions to the principal.
       flags:
-        --table-data=!: A `DataCellsFilter` structure containing information about the data cells filter.
+        --catalog-id=: The identifier for the Data Catalog.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entries=!: A list of up to 20 entries for resource permissions to be granted by batch operation to the principal.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-lake-formation-identity-center-configuration
+      description: Creates an IAM Identity Center connection with Lake Formation to allow IAM Identity Center users and groups to access Data Catalog resources.
+      flags:
+        --catalog-id=: The identifier for the Data Catalog.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --external-filtering=: A list of the account IDs of Amazon Web Services accounts of third-party applications that are allowed to access data managed by Lake Formation.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-arn=: The ARN of the IAM Identity Center instance for which the operation will be executed.
+        --service-integrations=: A list of service integrations for enabling trusted identity propagation with external services such as Redshift.
+        --share-recipients=: A list of Amazon Web Services account IDs and/or Amazon Web Services organization/organizational unit ARNs that are allowed to access data managed by Lake Formation.
     - name: delete-data-cells-filter
       description: Deletes a data cell filter.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --database-name=: A database in the Glue Data Catalog.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=: The name given by the user to the data filter cell.
         --table-catalog-id=: The ID of the catalog to which the table belongs.
         --table-name=: A table in the database.
-    - name: describe-resource
-      description: Retrieves the current data access role for the given resource registered in Lake Formation.
-      flags:
-        --resource-arn=!: The resource ARN.
-    - name: get-temporary-glue-table-credentials
-      description: Allows a caller in a secure environment to assume a role with permission to access Amazon S3.
-      flags:
-        --audit-context=: A structure representing context to access a resource (column names, query ID, etc).
-        --duration-seconds=: The time period, between 900 and 21,600 seconds, for the timeout of the temporary credentials.
-        --permissions=: Filters the request based on the user having been granted a list of specified permissions on the requested resource(s).
-        --query-session-context=: A structure used as a protocol between query engines and Lake Formation or Glue.
-        --s3-path=: The Amazon S3 path for the table.
-        --supported-permission-types=: A list of supported permission types for the table.
-        --table-arn=!: The ARN identifying a table in the Data Catalog for the temporary credentials request.
     - name: list-table-storage-optimizers
       description: Returns the configuration of all storage optimizers associated with a specified table.
       flags:
         --catalog-id=: The Catalog ID of the table.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --database-name=!: Name of the database where the table is present.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The number of storage optimizers to return on each call.
         --next-token=: A continuation token, if this is a continuation call.
         --storage-optimizer-type=: The specific type of storage optimizers to list.
@@ -46,26 +61,222 @@ commands:
                 - COMPACTION
                 - GARBAGE_COLLECTION
                 - ALL
+    - name: revoke-permissions
+      description: Revokes permissions to the principal to access metadata in the Data Catalog and data organized in underlying data storage such as Amazon S3.
+      flags:
+        --catalog-id=: The identifier for the Data Catalog.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --condition=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --permissions-with-grant-option=: Indicates a list of permissions for which to revoke the grant option allowing the principal to pass permissions to other principals.
+        --permissions=!: The permissions revoked to the principal on the resource.
+        --principal=!: The principal to be revoked permissions on the resource.
+        --resource=!: The resource to which permissions are to be revoked.
+    - name: get-lf-tag-expression
+      description: Returns the details about the LF-Tag expression.
+      flags:
+        --catalog-id=: The identifier for the Data Catalog.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name for the LF-Tag expression
+    - name: list-lf-tag-expressions
+      description: Returns the LF-Tag expressions in caller’s account filtered based on caller's permissions.
+      flags:
+        --catalog-id=: The identifier for the Data Catalog.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: A continuation token, if this is not the first call to retrieve this list.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: search-tables-by-lf-tags
+      description: This operation allows a search on `TABLE` resources by `LFTag`s.
+      flags:
+        --catalog-id=: The identifier for the Data Catalog.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expression=!: A list of conditions (`LFTag` structures) to search for in table resources.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: A continuation token, if this is not the first call to retrieve this list.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: delete-objects-on-cancel
+      description: For a specific governed table, provides a list of Amazon S3 objects that will be written during the current transaction and that can be automatically deleted if the transaction is canceled.
+      flags:
+        --catalog-id=: The Glue data catalog that contains the governed table.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --database-name=!: The database that contains the governed table.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --objects=!: A list of VirtualObject structures, which indicates the Amazon S3 objects to be deleted if the transaction cancels.
+        --table-name=!: The name of the governed table.
+        --transaction-id=!: ID of the transaction that the writes occur in.
+    - name: list-resources
+      description: Lists the resources registered to be managed by the Data Catalog.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-condition-list=: Any applicable row-level and/or column-level filtering conditions for the resources.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of resource results.
+        --next-token=: A continuation token, if this is not the first call to retrieve these resources.
+    - name: put-data-lake-settings
+      description: Sets the list of data lake administrators who have admin privileges on all resources managed by Lake Formation.
+      flags:
+        --catalog-id=: The identifier for the Data Catalog.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-lake-settings=!: A structure representing a list of Lake Formation principals designated as data lake administrators.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-lf-tag
+      description: Updates the list of possible values for the specified LF-tag key.
+      flags:
+        --catalog-id=: The identifier for the Data Catalog.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tag-key=!: The key-name for the LF-tag for which to add or delete values.
+        --tag-values-to-add=: A list of LF-tag values to add from the LF-tag.
+        --tag-values-to-delete=: A list of LF-tag values to delete from the LF-tag.
+    - name: get-data-cells-filter
+      description: Returns a data cells filter.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --database-name=!: A database in the Glue Data Catalog.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name given by the user to the data filter cell.
+        --table-catalog-id=!: The ID of the catalog to which the table belongs.
+        --table-name=!: A table in the database.
+    - name: create-lf-tag-expression
+      description: Creates a new LF-Tag expression with the provided name, description, catalog ID, and expression body.
+      flags:
+        --catalog-id=: The identifier for the Data Catalog.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description with information about the LF-Tag expression.
+        --expression=!: A list of LF-Tag conditions (key-value pairs).
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: A name for the expression.
+    - name: remove-lf-tags-from-resource
+      description: Removes an LF-tag from the resource.
+      flags:
+        --catalog-id=: The identifier for the Data Catalog.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lf-tags=!: The LF-tags to be removed from the resource.
+        --resource=!: The database, table, or column resource where you want to remove an LF-tag.
+    - name: start-query-planning
+      description: Submits a request to process a query statement.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --query-planning-context=!: A structure containing information about the query plan.
+        --query-string=!: A PartiQL query statement used as an input to the planner service.
     - name: delete-lf-tag-expression
       description: Deletes the LF-Tag expression.
       flags:
         --catalog-id=: The identifier for the Data Catalog.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name for the LF-Tag expression.
-    - name: deregister-resource
-      description: Deregisters the resource as managed by the Data Catalog.
+    - name: extend-transaction
+      description: Indicates to the service that the specified transaction is still active and should not be treated as idle and aborted.
       flags:
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource that you want to deregister.
-    - name: get-lf-tag
-      description: Returns an LF-tag definition.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --transaction-id=: The transaction to extend.
+    - name: get-data-lake-settings
+      description: Retrieves the list of the data lake administrators of a Lake Formation-managed data lake.
       flags:
         --catalog-id=: The identifier for the Data Catalog.
-        --tag-key=!: The key-name for the LF-tag.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-table-objects
+      description: Updates the manifest of Amazon S3 objects that make up the specified governed table.
+      flags:
+        --catalog-id=: The catalog containing the governed table to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --database-name=!: The database containing the governed table to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --table-name=!: The governed table to update.
+        --transaction-id=: The transaction at which to do the write.
+        --write-operations=!: A list of `WriteOperation` objects that define an object to add to or delete from the manifest for a governed table.
+    - name: get-data-lake-principal
+      description: Returns the identity of the invoking principal.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-data-cells-filter
+      description: Creates a data cell filter to allow one to grant access to certain columns on certain rows.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --table-data=!: A `DataCellsFilter` structure containing information about the data cells filter.
+    - name: get-temporary-glue-partition-credentials
+      description: This API is identical to `GetTemporaryTableCredentials` except that this is used when the target Data Catalog resource is of type Partition.
+      flags:
+        --audit-context=: A structure representing context to access a resource (column names, query ID, etc).
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --duration-seconds=: The time period, between 900 and 21,600 seconds, for the timeout of the temporary credentials.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --partition=!: A list of partition values identifying a single partition.
+        --permissions=: Filters the request based on the user having been granted a list of specified permissions on the requested resource(s).
+        --supported-permission-types=: A list of supported permission types for the partition.
+        --table-arn=!: The ARN of the partitions' table.
+    - name: get-work-units
+      description: Retrieves the work units generated by the `StartQueryPlanning` operation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: A continuation token, if this is a continuation call.
+        --page-size=: The size of each page to get in the Amazon Web Services service call.
+        --query-id=!: The ID of the plan query operation.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-lf-tags
+      description: Lists LF-tags that the requester has permission to view.
+      flags:
+        --catalog-id=: The identifier for the Data Catalog.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: A continuation token, if this is not the first call to retrieve this list.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-share-type=: If resource share type is `ALL`, returns both in-account LF-tags and shared LF-tags that the requester has permission to view.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            resource-share-type:
+                - FOREIGN
+                - ALL
     - name: update-lake-formation-identity-center-configuration
       description: Updates the IAM Identity Center connection parameters.
       flags:
         --application-status=: Allows to enable or disable the IAM Identity Center connection.
         --catalog-id=: The identifier for the Data Catalog.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --external-filtering=: A list of the account IDs of Amazon Web Services accounts of third-party applications that are allowed to access data managed by Lake Formation.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --service-integrations=: A list of service integrations for enabling trusted identity propagation with external services such as Redshift.
         --share-recipients=: A list of Amazon Web Services account IDs or Amazon Web Services organization/organizational unit ARNs that are allowed to access to access data managed by Lake Formation.
       completion:
@@ -73,28 +284,72 @@ commands:
             application-status:
                 - ENABLED
                 - DISABLED
-    - name: update-table-objects
-      description: Updates the manifest of Amazon S3 objects that make up the specified governed table.
+    - name: deregister-resource
+      description: Deregisters the resource as managed by the Data Catalog.
       flags:
-        --catalog-id=: The catalog containing the governed table to update.
-        --database-name=!: The database containing the governed table to update.
-        --table-name=!: The governed table to update.
-        --transaction-id=: The transaction at which to do the write.
-        --write-operations=!: A list of `WriteOperation` objects that define an object to add to or delete from the manifest for a governed table.
-    - name: commit-transaction
-      description: Attempts to commit the specified transaction.
-      flags:
-        --transaction-id=!: The transaction to commit.
-    - name: list-lf-tag-expressions
-      description: Returns the LF-Tag expressions in caller’s account filtered based on caller's permissions.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource that you want to deregister.
+    - name: add-lf-tags-to-resource
+      description: Attaches one or more LF-tags to an existing resource.
       flags:
         --catalog-id=: The identifier for the Data Catalog.
-        --max-results=: The maximum number of results to return.
-        --next-token=: A continuation token, if this is not the first call to retrieve this list.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lf-tags=!: The LF-tags to attach to the resource.
+        --resource=!: The database, table, or column resource to which to attach an LF-tag.
+    - name: batch-revoke-permissions
+      description: Batch operation to revoke permissions from the principal.
+      flags:
+        --catalog-id=: The identifier for the Data Catalog.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entries=!: A list of up to 20 entries for resource permissions to be revoked by batch operation to the principal.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-lake-formation-identity-center-configuration
+      description: Deletes an IAM Identity Center connection with Lake Formation.
+      flags:
+        --catalog-id=: The identifier for the Data Catalog.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-query-state
+      description: Returns the state of a query previously submitted.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --query-id=!: The ID of the plan query operation.
+    - name: get-query-statistics
+      description: Retrieves statistics on the planning and execution of a query.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --query-id=!: The ID of the plan query operation.
+    - name: get-table-objects
+      description: Returns the set of Amazon S3 objects that make up the specified governed table.
+      flags:
+        --catalog-id=: The catalog containing the governed table.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --database-name=!: The database containing the governed table.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Specifies how many values to return in a page.
+        --next-token=: A continuation token if this is not the first call to retrieve these objects.
+        --partition-predicate=: A predicate to filter the objects returned based on the partition keys defined in the governed table.
+        --query-as-of-time=: The time as of when to read the governed table contents.
+        --table-name=!: The governed table for which to retrieve objects.
+        --transaction-id=: The transaction ID at which to read the governed table contents.
     - name: list-permissions
       description: Returns a list of the principal permissions on the resource, filtered by the permissions of the caller.
       flags:
         --catalog-id=: The identifier for the Data Catalog.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --include-related=: Indicates that related permissions should be included in the results when listing permissions on a table resource.
         --max-results=: The maximum number of results to return.
         --next-token=: A continuation token, if this is not the first call to retrieve this list.
@@ -113,52 +368,244 @@ commands:
                 - LF_TAG_POLICY_DATABASE
                 - LF_TAG_POLICY_TABLE
                 - LF_NAMED_TAG_EXPRESSION
+    - name: cancel-transaction
+      description: Attempts to cancel the specified transaction.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --transaction-id=!: The transaction to cancel.
+    - name: register-resource
+      description: Registers the resource as managed by the Data Catalog.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --hybrid-access-enabled: Specifies whether the data access of tables pointing to the location can be managed by both Lake Formation permissions as well as Amazon S3 bucket policies.
+        --no-hybrid-access-enabled: Specifies whether the data access of tables pointing to the location can be managed by both Lake Formation permissions as well as Amazon S3 bucket policies.
+        --no-use-service-linked-role: Designates an Identity and Access Management (IAM) service-linked role by registering this role with the Data Catalog.
+        --no-with-federation: Whether or not the resource is a federated resource.
+        --no-with-privileged-access: Grants the calling principal the permissions to perform all supported Lake Formation operations on the registered data location.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource that you want to register.
+        --role-arn=: The identifier for the role that registers the resource.
+        --use-service-linked-role: Designates an Identity and Access Management (IAM) service-linked role by registering this role with the Data Catalog.
+        --with-federation: Whether or not the resource is a federated resource.
+        --with-privileged-access: Grants the calling principal the permissions to perform all supported Lake Formation operations on the registered data location.
     - name: update-resource
       description: Updates the data access role used for vending access to the given (registered) resource in Lake Formation.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --hybrid-access-enabled: Specifies whether the data access of tables pointing to the location can be managed by both Lake Formation permissions as well as Amazon S3 bucket policies.
         --no-hybrid-access-enabled: Specifies whether the data access of tables pointing to the location can be managed by both Lake Formation permissions as well as Amazon S3 bucket policies.
         --no-with-federation: Whether or not the resource is a federated resource.
         --resource-arn=!: The resource ARN.
         --role-arn=!: The new role to use for the given resource registered in Lake Formation.
         --with-federation: Whether or not the resource is a federated resource.
-    - name: extend-transaction
-      description: Indicates to the service that the specified transaction is still active and should not be treated as idle and aborted.
+    - name: update-table-storage-optimizer
+      description: Updates the configuration of the storage optimizers for a table.
       flags:
-        --transaction-id=: The transaction to extend.
+        --catalog-id=: The Catalog ID of the table.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --database-name=!: Name of the database where the table is present.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --storage-optimizer-config=!: Name of the configuration for the storage optimizer.
+        --table-name=!: Name of the table for which to enable the storage optimizer.
+    - name: create-lf-tag
+      description: Creates an LF-tag with the specified name and values.
+      flags:
+        --catalog-id=: The identifier for the Data Catalog.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tag-key=!: The key-name for the LF-tag.
+        --tag-values=!: A list of possible values an attribute can take.
+    - name: create-lake-formation-opt-in
+      description: Enforce Lake Formation permissions for the given databases, tables, and principals.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --condition=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --principal=!: ""
+        --resource=!: ""
+    - name: start-transaction
+      description: Starts a new transaction and returns its transaction ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --transaction-type=: Indicates whether this transaction should be read only or read and write.
+      completion:
+        flag:
+            transaction-type:
+                - READ_AND_WRITE
+                - READ_ONLY
+    - name: update-lf-tag-expression
+      description: Updates the name of the LF-Tag expression to the new description and expression body provided.
+      flags:
+        --catalog-id=: The identifier for the Data Catalog.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description with information about the saved LF-Tag expression.
+        --expression=!: The LF-Tag expression body composed of one more LF-Tag key-value pairs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name for the LF-Tag expression.
     - name: update-data-cells-filter
       description: Updates a data cell filter.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --table-data=!: A `DataCellsFilter` structure containing information about the data cells filter.
+    - name: describe-resource
+      description: Retrieves the current data access role for the given resource registered in Lake Formation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The resource ARN.
+    - name: commit-transaction
+      description: Attempts to commit the specified transaction.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --transaction-id=!: The transaction to commit.
+    - name: get-resource-lf-tags
+      description: Returns the LF-tags applied to a resource.
+      flags:
+        --catalog-id=: The identifier for the Data Catalog.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-show-assigned-lf-tags: Indicates whether to show the assigned LF-tags.
+        --resource=!: The database, table, or column resource for which you want to return LF-tags.
+        --show-assigned-lf-tags: Indicates whether to show the assigned LF-tags.
+    - name: get-temporary-glue-table-credentials
+      description: Allows a caller in a secure environment to assume a role with permission to access Amazon S3.
+      flags:
+        --audit-context=: A structure representing context to access a resource (column names, query ID, etc).
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --duration-seconds=: The time period, between 900 and 21,600 seconds, for the timeout of the temporary credentials.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --permissions=: Filters the request based on the user having been granted a list of specified permissions on the requested resource(s).
+        --query-session-context=: A structure used as a protocol between query engines and Lake Formation or Glue.
+        --s3-path=: The Amazon S3 path for the table.
+        --supported-permission-types=: A list of supported permission types for the table.
+        --table-arn=!: The ARN identifying a table in the Data Catalog for the temporary credentials request.
+    - name: delete-lf-tag
+      description: Deletes an LF-tag by its key name.
+      flags:
+        --catalog-id=: The identifier for the Data Catalog.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tag-key=!: The key-name for the LF-tag to delete.
     - name: get-effective-permissions-for-path
       description: Returns the Lake Formation permissions for a specified table or database resource located at a path in Amazon S3.
       flags:
         --catalog-id=: The identifier for the Data Catalog.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The maximum number of results to return.
         --next-token=: A continuation token, if this is not the first call to retrieve this list.
         --resource-arn=!: The Amazon Resource Name (ARN) of the resource for which you want to get permissions.
-    - name: get-temporary-glue-partition-credentials
-      description: This API is identical to `GetTemporaryTableCredentials` except that this is used when the target Data Catalog resource is of type Partition.
-      flags:
-        --audit-context=: A structure representing context to access a resource (column names, query ID, etc).
-        --duration-seconds=: The time period, between 900 and 21,600 seconds, for the timeout of the temporary credentials.
-        --partition=!: A list of partition values identifying a single partition.
-        --permissions=: Filters the request based on the user having been granted a list of specified permissions on the requested resource(s).
-        --supported-permission-types=: A list of supported permission types for the partition.
-        --table-arn=!: The ARN of the partitions' table.
     - name: grant-permissions
       description: Grants permissions to the principal to access metadata in the Data Catalog and data organized in underlying data storage such as Amazon S3.
       flags:
         --catalog-id=: The identifier for the Data Catalog.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --condition=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --permissions-with-grant-option=: Indicates a list of the granted permissions that the principal may pass to other users.
         --permissions=!: The permissions granted to the principal on the resource.
         --principal=!: The principal to be granted the permissions on the resource.
         --resource=!: The resource to which permissions are to be granted.
+    - name: list-lake-formation-opt-ins
+      description: Retrieve the current list of resources and principals that are opt in to enforce Lake Formation permissions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return.
+        --next-token=: A continuation token, if this is not the first call to retrieve this list.
+        --principal=: ""
+        --resource=: A structure for the resource.
+    - name: delete-lake-formation-opt-in
+      description: Remove the Lake Formation permissions enforcement of the given databases, tables, and principals.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --condition=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --principal=!: ""
+        --resource=!: ""
+    - name: describe-lake-formation-identity-center-configuration
+      description: Retrieves the instance ARN and application ARN for the connection.
+      flags:
+        --catalog-id=: The identifier for the Data Catalog.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-lf-tag
+      description: Returns an LF-tag definition.
+      flags:
+        --catalog-id=: The identifier for the Data Catalog.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tag-key=!: The key-name for the LF-tag.
+    - name: list-data-cells-filter
+      description: Lists all the data cell filters on a table.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum size of the response.
+        --next-token=: A continuation token, if this is a continuation call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --table=: A table in the Glue Data Catalog.
+    - name: assume-decorated-role-with-saml
+      description: Allows a caller to assume an IAM role decorated as the SAML user specified in the SAML assertion included in the request.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --duration-seconds=: The time period, between 900 and 43,200 seconds, for the timeout of the temporary credentials.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --principal-arn=!: The Amazon Resource Name (ARN) of the SAML provider in IAM that describes the IdP.
+        --role-arn=!: The role that represents an IAM principal whose scope down policy allows it to call credential vending APIs such as `GetTemporaryTableCredentials`.
+        --saml-assertion=!: A SAML assertion consisting of an assertion statement for the user who needs temporary credentials.
+    - name: describe-transaction
+      description: Returns the details of a single transaction.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --transaction-id=!: The transaction for which to return status.
+    - name: get-work-unit-results
+      description: Returns the work units resulting from the query.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --query-id=!: The ID of the plan query operation for which to get results.
+        --work-unit-id=!: The work unit ID for which to get results.
+        --work-unit-token=!: A work token used to query the execution service.
     - name: list-transactions
       description: Returns metadata about transactions and their status.
       flags:
         --catalog-id=: The catalog for which to list transactions.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The maximum number of transactions to return in a single call.
         --next-token=: A continuation token if this is not the first call to retrieve transactions.
         --status-filter=: A filter indicating the status of transactions to return.
@@ -170,252 +617,3 @@ commands:
                 - ACTIVE
                 - COMMITTED
                 - ABORTED
-    - name: register-resource
-      description: Registers the resource as managed by the Data Catalog.
-      flags:
-        --hybrid-access-enabled: Specifies whether the data access of tables pointing to the location can be managed by both Lake Formation permissions as well as Amazon S3 bucket policies.
-        --no-hybrid-access-enabled: Specifies whether the data access of tables pointing to the location can be managed by both Lake Formation permissions as well as Amazon S3 bucket policies.
-        --no-use-service-linked-role: Designates an Identity and Access Management (IAM) service-linked role by registering this role with the Data Catalog.
-        --no-with-federation: Whether or not the resource is a federated resource.
-        --no-with-privileged-access: Grants the calling principal the permissions to perform all supported Lake Formation operations on the registered data location.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource that you want to register.
-        --role-arn=: The identifier for the role that registers the resource.
-        --use-service-linked-role: Designates an Identity and Access Management (IAM) service-linked role by registering this role with the Data Catalog.
-        --with-federation: Whether or not the resource is a federated resource.
-        --with-privileged-access: Grants the calling principal the permissions to perform all supported Lake Formation operations on the registered data location.
-    - name: search-tables-by-lf-tags
-      description: This operation allows a search on `TABLE` resources by `LFTag`s.
-      flags:
-        --catalog-id=: The identifier for the Data Catalog.
-        --expression=!: A list of conditions (`LFTag` structures) to search for in table resources.
-        --max-results=: The maximum number of results to return.
-        --next-token=: A continuation token, if this is not the first call to retrieve this list.
-    - name: get-data-lake-settings
-      description: Retrieves the list of the data lake administrators of a Lake Formation-managed data lake.
-      flags:
-        --catalog-id=: The identifier for the Data Catalog.
-    - name: cancel-transaction
-      description: Attempts to cancel the specified transaction.
-      flags:
-        --transaction-id=!: The transaction to cancel.
-    - name: delete-lf-tag
-      description: Deletes an LF-tag by its key name.
-      flags:
-        --catalog-id=: The identifier for the Data Catalog.
-        --tag-key=!: The key-name for the LF-tag to delete.
-    - name: get-query-state
-      description: Returns the state of a query previously submitted.
-      flags:
-        --query-id=!: The ID of the plan query operation.
-    - name: delete-lake-formation-identity-center-configuration
-      description: Deletes an IAM Identity Center connection with Lake Formation.
-      flags:
-        --catalog-id=: The identifier for the Data Catalog.
-    - name: list-data-cells-filter
-      description: Lists all the data cell filters on a table.
-      flags:
-        --max-results=: The maximum size of the response.
-        --next-token=: A continuation token, if this is a continuation call.
-        --table=: A table in the Glue Data Catalog.
-    - name: start-transaction
-      description: Starts a new transaction and returns its transaction ID.
-      flags:
-        --transaction-type=: Indicates whether this transaction should be read only or read and write.
-      completion:
-        flag:
-            transaction-type:
-                - READ_AND_WRITE
-                - READ_ONLY
-    - name: list-lake-formation-opt-ins
-      description: Retrieve the current list of resources and principals that are opt in to enforce Lake Formation permissions.
-      flags:
-        --max-results=: The maximum number of results to return.
-        --next-token=: A continuation token, if this is not the first call to retrieve this list.
-        --principal=: ""
-        --resource=: A structure for the resource.
-    - name: update-table-storage-optimizer
-      description: Updates the configuration of the storage optimizers for a table.
-      flags:
-        --catalog-id=: The Catalog ID of the table.
-        --database-name=!: Name of the database where the table is present.
-        --storage-optimizer-config=!: Name of the configuration for the storage optimizer.
-        --table-name=!: Name of the table for which to enable the storage optimizer.
-    - name: add-lf-tags-to-resource
-      description: Attaches one or more LF-tags to an existing resource.
-      flags:
-        --catalog-id=: The identifier for the Data Catalog.
-        --lf-tags=!: The LF-tags to attach to the resource.
-        --resource=!: The database, table, or column resource to which to attach an LF-tag.
-    - name: get-query-statistics
-      description: Retrieves statistics on the planning and execution of a query.
-      flags:
-        --query-id=!: The ID of the plan query operation.
-    - name: list-lf-tags
-      description: Lists LF-tags that the requester has permission to view.
-      flags:
-        --catalog-id=: The identifier for the Data Catalog.
-        --max-results=: The maximum number of results to return.
-        --next-token=: A continuation token, if this is not the first call to retrieve this list.
-        --resource-share-type=: If resource share type is `ALL`, returns both in-account LF-tags and shared LF-tags that the requester has permission to view.
-      completion:
-        flag:
-            resource-share-type:
-                - FOREIGN
-                - ALL
-    - name: create-lf-tag
-      description: Creates an LF-tag with the specified name and values.
-      flags:
-        --catalog-id=: The identifier for the Data Catalog.
-        --tag-key=!: The key-name for the LF-tag.
-        --tag-values=!: A list of possible values an attribute can take.
-    - name: create-lake-formation-identity-center-configuration
-      description: Creates an IAM Identity Center connection with Lake Formation to allow IAM Identity Center users and groups to access Data Catalog resources.
-      flags:
-        --catalog-id=: The identifier for the Data Catalog.
-        --external-filtering=: A list of the account IDs of Amazon Web Services accounts of third-party applications that are allowed to access data managed by Lake Formation.
-        --instance-arn=: The ARN of the IAM Identity Center instance for which the operation will be executed.
-        --service-integrations=: A list of service integrations for enabling trusted identity propagation with external services such as Redshift.
-        --share-recipients=: A list of Amazon Web Services account IDs and/or Amazon Web Services organization/organizational unit ARNs that are allowed to access data managed by Lake Formation.
-    - name: list-resources
-      description: Lists the resources registered to be managed by the Data Catalog.
-      flags:
-        --filter-condition-list=: Any applicable row-level and/or column-level filtering conditions for the resources.
-        --max-results=: The maximum number of resource results.
-        --next-token=: A continuation token, if this is not the first call to retrieve these resources.
-    - name: update-lf-tag-expression
-      description: Updates the name of the LF-Tag expression to the new description and expression body provided.
-      flags:
-        --catalog-id=: The identifier for the Data Catalog.
-        --description=: The description with information about the saved LF-Tag expression.
-        --expression=!: The LF-Tag expression body composed of one more LF-Tag key-value pairs.
-        --name=!: The name for the LF-Tag expression.
-    - name: get-data-lake-principal
-      description: Returns the identity of the invoking principal.
-    - name: create-lf-tag-expression
-      description: Creates a new LF-Tag expression with the provided name, description, catalog ID, and expression body.
-      flags:
-        --catalog-id=: The identifier for the Data Catalog.
-        --description=: A description with information about the LF-Tag expression.
-        --expression=!: A list of LF-Tag conditions (key-value pairs).
-        --name=!: A name for the expression.
-    - name: delete-lake-formation-opt-in
-      description: Remove the Lake Formation permissions enforcement of the given databases, tables, and principals.
-      flags:
-        --condition=: ""
-        --principal=!: ""
-        --resource=!: ""
-    - name: describe-transaction
-      description: Returns the details of a single transaction.
-      flags:
-        --transaction-id=!: The transaction for which to return status.
-    - name: get-resource-lf-tags
-      description: Returns the LF-tags applied to a resource.
-      flags:
-        --catalog-id=: The identifier for the Data Catalog.
-        --no-show-assigned-lf-tags: Indicates whether to show the assigned LF-tags.
-        --resource=!: The database, table, or column resource for which you want to return LF-tags.
-        --show-assigned-lf-tags: Indicates whether to show the assigned LF-tags.
-    - name: get-table-objects
-      description: Returns the set of Amazon S3 objects that make up the specified governed table.
-      flags:
-        --catalog-id=: The catalog containing the governed table.
-        --database-name=!: The database containing the governed table.
-        --max-results=: Specifies how many values to return in a page.
-        --next-token=: A continuation token if this is not the first call to retrieve these objects.
-        --partition-predicate=: A predicate to filter the objects returned based on the partition keys defined in the governed table.
-        --query-as-of-time=: The time as of when to read the governed table contents.
-        --table-name=!: The governed table for which to retrieve objects.
-        --transaction-id=: The transaction ID at which to read the governed table contents.
-    - name: start-query-planning
-      description: Submits a request to process a query statement.
-      flags:
-        --query-planning-context=!: A structure containing information about the query plan.
-        --query-string=!: A PartiQL query statement used as an input to the planner service.
-    - name: describe-lake-formation-identity-center-configuration
-      description: Retrieves the instance ARN and application ARN for the connection.
-      flags:
-        --catalog-id=: The identifier for the Data Catalog.
-    - name: get-work-unit-results
-      description: Returns the work units resulting from the query.
-      flags:
-        --query-id=!: The ID of the plan query operation for which to get results.
-        --work-unit-id=!: The work unit ID for which to get results.
-        --work-unit-token=!: A work token used to query the execution service.
-    - name: remove-lf-tags-from-resource
-      description: Removes an LF-tag from the resource.
-      flags:
-        --catalog-id=: The identifier for the Data Catalog.
-        --lf-tags=!: The LF-tags to be removed from the resource.
-        --resource=!: The database, table, or column resource where you want to remove an LF-tag.
-    - name: revoke-permissions
-      description: Revokes permissions to the principal to access metadata in the Data Catalog and data organized in underlying data storage such as Amazon S3.
-      flags:
-        --catalog-id=: The identifier for the Data Catalog.
-        --condition=: ""
-        --permissions-with-grant-option=: Indicates a list of permissions for which to revoke the grant option allowing the principal to pass permissions to other principals.
-        --permissions=!: The permissions revoked to the principal on the resource.
-        --principal=!: The principal to be revoked permissions on the resource.
-        --resource=!: The resource to which permissions are to be revoked.
-    - name: update-lf-tag
-      description: Updates the list of possible values for the specified LF-tag key.
-      flags:
-        --catalog-id=: The identifier for the Data Catalog.
-        --tag-key=!: The key-name for the LF-tag for which to add or delete values.
-        --tag-values-to-add=: A list of LF-tag values to add from the LF-tag.
-        --tag-values-to-delete=: A list of LF-tag values to delete from the LF-tag.
-    - name: batch-grant-permissions
-      description: Batch operation to grant permissions to the principal.
-      flags:
-        --catalog-id=: The identifier for the Data Catalog.
-        --entries=!: A list of up to 20 entries for resource permissions to be granted by batch operation to the principal.
-    - name: get-lf-tag-expression
-      description: Returns the details about the LF-Tag expression.
-      flags:
-        --catalog-id=: The identifier for the Data Catalog.
-        --name=!: The name for the LF-Tag expression
-    - name: get-work-units
-      description: Retrieves the work units generated by the `StartQueryPlanning` operation.
-      flags:
-        --next-token=: A continuation token, if this is a continuation call.
-        --page-size=: The size of each page to get in the Amazon Web Services service call.
-        --query-id=!: The ID of the plan query operation.
-    - name: get-data-cells-filter
-      description: Returns a data cells filter.
-      flags:
-        --database-name=!: A database in the Glue Data Catalog.
-        --name=!: The name given by the user to the data filter cell.
-        --table-catalog-id=!: The ID of the catalog to which the table belongs.
-        --table-name=!: A table in the database.
-    - name: assume-decorated-role-with-saml
-      description: Allows a caller to assume an IAM role decorated as the SAML user specified in the SAML assertion included in the request.
-      flags:
-        --duration-seconds=: The time period, between 900 and 43,200 seconds, for the timeout of the temporary credentials.
-        --principal-arn=!: The Amazon Resource Name (ARN) of the SAML provider in IAM that describes the IdP.
-        --role-arn=!: The role that represents an IAM principal whose scope down policy allows it to call credential vending APIs such as `GetTemporaryTableCredentials`.
-        --saml-assertion=!: A SAML assertion consisting of an assertion statement for the user who needs temporary credentials.
-    - name: create-lake-formation-opt-in
-      description: Enforce Lake Formation permissions for the given databases, tables, and principals.
-      flags:
-        --condition=: ""
-        --principal=!: ""
-        --resource=!: ""
-    - name: delete-objects-on-cancel
-      description: For a specific governed table, provides a list of Amazon S3 objects that will be written during the current transaction and that can be automatically deleted if the transaction is canceled.
-      flags:
-        --catalog-id=: The Glue data catalog that contains the governed table.
-        --database-name=!: The database that contains the governed table.
-        --objects=!: A list of VirtualObject structures, which indicates the Amazon S3 objects to be deleted if the transaction cancels.
-        --table-name=!: The name of the governed table.
-        --transaction-id=!: ID of the transaction that the writes occur in.
-    - name: put-data-lake-settings
-      description: Sets the list of data lake administrators who have admin privileges on all resources managed by Lake Formation.
-      flags:
-        --catalog-id=: The identifier for the Data Catalog.
-        --data-lake-settings=!: A structure representing a list of Lake Formation principals designated as data lake administrators.
-    - name: search-databases-by-lf-tags
-      description: This operation allows a search on `DATABASE` resources by `TagCondition`.
-      flags:
-        --catalog-id=: The identifier for the Data Catalog.
-        --expression=!: A list of conditions (`LFTag` structures) to search for in database resources.
-        --max-results=: The maximum number of results to return.
-        --next-token=: A continuation token, if this is not the first call to retrieve this list.
