@@ -5,6 +5,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 
@@ -14,6 +15,17 @@ import (
 )
 
 func TestService(t *testing.T) {
+	testDir, err := os.MkdirTemp("", "carapace-aws_testService-*")
+	if err != nil {
+		t.Fatal(err.Error())
+	}
+	defer os.Remove(testDir)
+	testFile, err := os.Create(filepath.Join(testDir, "outfile"))
+	if err != nil {
+		t.Fatal(err.Error())
+	}
+	defer os.Remove(testFile.Name())
+
 	serviceToTest := os.Getenv("SERVICE")
 	for service := range botocore.Services() {
 		t.Run(service, func(t *testing.T) {
@@ -25,7 +37,7 @@ func TestService(t *testing.T) {
 
 			patch := carapace.DiffPatch(
 				bridge.ActionAws("aws"),
-				bridge.ActionCarapace("carapace-aws"),
+				bridge.ActionCarapace("carapace-aws").Chdir(testDir),
 				carapace.NewContext(service, ""),
 			)
 			for _, line := range patch {
@@ -48,7 +60,11 @@ func TestService(t *testing.T) {
 					t.Parallel()
 					patch := carapace.DiffPatch(
 						bridge.ActionAws("aws"),
-						bridge.ActionCarapace("carapace-aws"),
+						carapace.Batch(
+							bridge.ActionCarapace("carapace-aws"),
+							// force positional completion as well as aws completes 'outfile' for streaming operations
+							bridge.ActionCarapace("carapace-aws").Chdir(testDir).Invoke(carapace.NewContext(service, operation.Name, "")).ToA(),
+						).ToA(),
 						carapace.NewContext(service, operation.Name, "--"),
 					)
 
