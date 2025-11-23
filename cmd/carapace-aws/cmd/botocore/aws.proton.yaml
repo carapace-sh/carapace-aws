@@ -1,186 +1,6 @@
 name: proton
 description: AWS Proton
 commands:
-    - name: list-deployments
-      description: List deployments.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --component-name=: The name of a component for result list filtering.
-        --environment-name=: The name of an environment for result list filtering.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of deployments to list.
-        --next-token=: A token that indicates the location of the next deployment in the array of deployment, after the list of deployment that was previously requested.
-        --page-size=: The size of each page to get in the AWS service call.
-        --service-instance-name=: The name of a service instance for result list filtering.
-        --service-name=: The name of a service for result list filtering.
-        --starting-token=: A token to specify where to start paginating.
-    - name: cancel-environment-deployment
-      description: Attempts to cancel an environment deployment on an [UpdateEnvironment]() action, if the deployment is `IN_PROGRESS`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-name=!: The name of the environment with the deployment to cancel.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-component
-      description: Create an Proton component.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: The client token for the created component.
-        --description=: An optional customer-provided description of the component.
-        --environment-name=: The name of the Proton environment that you want to associate this component with.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --manifest=!: A path to a manifest file that lists the Infrastructure as Code (IaC) file, template language, and rendering engine for infrastructure that a custom component provisions.
-        --name=!: The customer-provided name of the component.
-        --service-instance-name=: The name of the service instance that you want to attach this component to.
-        --service-name=: The name of the service that `serviceInstanceName` is associated with.
-        --service-spec=: The service spec that you want the component to use to access service inputs.
-        --tags=: An optional list of metadata items that you can associate with the Proton component.
-        --template-file=!: A path to the Infrastructure as Code (IaC) file describing infrastructure that a custom component provisions.
-    - name: get-service-template
-      description: Get detailed data for a service template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the service template that you want to get detailed data for.
-    - name: get-service-template-version
-      description: Get detailed data for a major or minor version of a service template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --major-version=!: To get service template major version detail data, include `major Version`.
-        --minor-version=!: To get service template minor version detail data, include `minorVersion`.
-        --template-name=!: The name of the service template a version of which you want to get detailed data for.
-    - name: update-environment-account-connection
-      description: In an environment account, update an environment account connection to use a new IAM role.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --codebuild-role-arn=: The Amazon Resource Name (ARN) of an IAM service role in the environment account.
-        --component-role-arn=: The Amazon Resource Name (ARN) of the IAM service role that Proton uses when provisioning directly defined components in the associated environment account.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the environment account connection to update.
-        --role-arn=: The Amazon Resource Name (ARN) of the IAM service role that's associated with the environment account connection to update.
-    - name: update-service
-      description: Edit a service description or use a spec to add and delete service instances.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The edited service description.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the service to edit.
-        --spec=: Lists the service instances to add and the existing service instances to remain.
-    - name: update-service-template
-      description: Update a service template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description of the service template update.
-        --display-name=: The name of the service template to update that's displayed in the developer interface.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the service template to update.
-    - name: delete-environment-template-version
-      description: If no other minor versions of an environment template exist, delete a major version of the environment template if it's not the `Recommended` version.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --major-version=!: The environment template major version to delete.
-        --minor-version=!: The environment template minor version to delete.
-        --template-name=!: The name of the environment template.
-    - name: create-environment-template-version
-      description: Create a new major or minor version of an environment template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: When included, if two identical requests are made with the same client token, Proton returns the environment template version that the first request created.
-        --description=: A description of the new version of an environment template.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --major-version=: To create a new minor version of the environment template, include `major Version`.
-        --source=!: An object that includes the template bundle S3 bucket path and name for the new version of an template.
-        --tags=: An optional list of metadata items that you can associate with the Proton environment template version.
-        --template-name=!: The name of the environment template.
-    - name: get-repository-sync-status
-      description: Get the sync status of a repository used for Proton template sync.
-      flags:
-        --branch=!: The repository branch.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --repository-name=!: The repository name.
-        --repository-provider=!: The repository provider.
-        --sync-type=!: The repository sync type.
-      completion:
-        flag:
-            repository-provider:
-                - GITHUB
-                - GITHUB_ENTERPRISE
-                - BITBUCKET
-            sync-type:
-                - TEMPLATE_SYNC
-                - SERVICE_SYNC
-    - name: list-component-outputs
-      description: Get a list of component Infrastructure as Code (IaC) outputs.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --component-name=!: The name of the component whose outputs you want.
-        --deployment-id=: The ID of the deployment whose outputs you want.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: A token that indicates the location of the next output in the array of outputs, after the list of outputs that was previously requested.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-service-instance-outputs
-      description: Get a list service of instance Infrastructure as Code (IaC) outputs.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deployment-id=: The ID of the deployment whose outputs you want.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: A token that indicates the location of the next output in the array of outputs, after the list of outputs that was previously requested.
-        --service-instance-name=!: The name of the service instance whose outputs you want.
-        --service-name=!: The name of the service that `serviceInstanceName` is associated to.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-environment-template
-      description: Update an environment template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description of the environment template update.
-        --display-name=: The name of the environment template to update as displayed in the developer interface.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the environment template to update.
-    - name: update-service-pipeline
-      description: Update the service pipeline.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deployment-type=!: The deployment type.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --service-name=!: The name of the service to that the pipeline is associated with.
-        --spec=!: The spec for the service pipeline to update.
-        --template-major-version=: The major version of the service template that was used to create the service that the pipeline is associated with.
-        --template-minor-version=: The minor version of the service template that was used to create the service that the pipeline is associated with.
-      completion:
-        flag:
-            deployment-type:
-                - NONE
-                - CURRENT_VERSION
-                - MINOR_VERSION
-                - MAJOR_VERSION
-    - name: cancel-service-instance-deployment
-      description: Attempts to cancel a service instance deployment on an [UpdateServiceInstance]() action, if the deployment is `IN_PROGRESS`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --service-instance-name=!: The name of the service instance with the deployment to cancel.
-        --service-name=!: The name of the service with the service instance deployment to cancel.
     - name: create-environment-account-connection
       description: Create an environment account connection in an environment account so that environment infrastructure resources can be provisioned in the environment account from a management account.
       flags:
@@ -194,13 +14,49 @@ commands:
         --management-account-id=!: The ID of the management account that accepts or rejects the environment account connection.
         --role-arn=: The Amazon Resource Name (ARN) of the IAM service role that's created in the environment account.
         --tags=: An optional list of metadata items that you can associate with the Proton environment account connection.
-    - name: get-environment
-      description: Get detailed data for an environment.
+    - name: get-account-settings
+      description: Get detail data for Proton account-wide settings.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the environment that you want to get the detailed data for.
+    - name: update-service-instance
+      description: Update a service instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: The client token of the service instance to update.
+        --deployment-type=!: The deployment type.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the service instance to update.
+        --service-name=!: The name of the service that the service instance belongs to.
+        --spec=: The formatted specification that defines the service instance update.
+        --template-major-version=: The major version of the service template to update.
+        --template-minor-version=: The minor version of the service template to update.
+      completion:
+        flag:
+            deployment-type:
+                - NONE
+                - CURRENT_VERSION
+                - MINOR_VERSION
+                - MAJOR_VERSION
+    - name: accept-environment-account-connection
+      description: In a management account, an environment account connection request is accepted.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the environment account connection.
+    - name: list-component-provisioned-resources
+      description: List provisioned resources for a component with details.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --component-name=!: The name of the component whose provisioned resources you want.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: A token that indicates the location of the next provisioned resource in the array of provisioned resources, after the list of provisioned resources that was previously requested.
+        --starting-token=: A token to specify where to start paginating.
     - name: update-environment-template-version
       description: Update a major or minor version of an environment template.
       flags:
@@ -219,83 +75,139 @@ commands:
                 - REGISTRATION_FAILED
                 - DRAFT
                 - PUBLISHED
-    - name: get-template-sync-status
-      description: Get the status of a template sync.
+    - name: create-environment-template
+      description: Create an environment template for Proton.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the environment template.
+        --display-name=: The environment template name as displayed in the developer interface.
+        --encryption-key=: A customer provided encryption key that Proton uses to encrypt data.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --template-name=!: The template name.
-        --template-type=!: The template type.
-        --template-version=!: The template major version.
+        --name=!: The name of the environment template.
+        --provisioning=: When included, indicates that the environment template is for customer provisioned and managed infrastructure.
+        --tags=: An optional list of metadata items that you can associate with the Proton environment template.
       completion:
         flag:
-            template-type:
-                - ENVIRONMENT
-                - SERVICE
-    - name: list-service-pipeline-provisioned-resources
-      description: List provisioned resources for a service and pipeline with details.
+            provisioning:
+                - CUSTOMER_MANAGED
+    - name: delete-environment-template-version
+      description: If no other minor versions of an environment template exist, delete a major version of the environment template if it's not the `Recommended` version.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: A token that indicates the location of the next provisioned resource in the array of provisioned resources, after the list of provisioned resources that was previously requested.
-        --service-name=!: The name of the service whose pipeline's provisioned resources you want.
-        --starting-token=: A token to specify where to start paginating.
-    - name: create-service-template-version
-      description: Create a new major or minor version of a service template.
+        --major-version=!: The environment template major version to delete.
+        --minor-version=!: The environment template minor version to delete.
+        --template-name=!: The name of the environment template.
+    - name: get-service-instance
+      description: Get detailed data for a service instance.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: When included, if two identical requests are made with the same client token, Proton returns the service template version that the first request created.
-        --compatible-environment-templates=!: An array of environment template objects that are compatible with the new service template version.
-        --description=: A description of the new version of a service template.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --major-version=: To create a new minor version of the service template, include a `major Version`.
-        --source=!: An object that includes the template bundle S3 bucket path and name for the new version of a service template.
+        --name=!: The name of a service instance that you want to get the detailed data for.
+        --service-name=!: The name of the service that you want the service instance input for.
+    - name: update-service-template-version
+      description: Update a major or minor version of a service template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --compatible-environment-templates=: An array of environment template objects that are compatible with this service template version.
+        --description=: A description of a service template version to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --major-version=!: To update a major version of a service template, include `major Version`.
+        --minor-version=!: To update a minor version of a service template, include `minorVersion`.
+        --status=: The status of the service template minor version to update.
         --supported-component-sources=: An array of supported component sources.
-        --tags=: An optional list of metadata items that you can associate with the Proton service template version.
         --template-name=!: The name of the service template.
-    - name: list-service-templates
-      description: List service templates with detail data.
+      completion:
+        flag:
+            status:
+                - REGISTRATION_IN_PROGRESS
+                - REGISTRATION_FAILED
+                - DRAFT
+                - PUBLISHED
+    - name: list-environment-account-connections
+      description: View a list of environment account connections.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-name=: The environment name that's associated with each listed environment account connection.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of environment account connections to list.
+        --next-token=: A token that indicates the location of the next environment account connection in the array of environment account connections, after the list of environment account connections that was previously requested.
+        --page-size=: The size of each page to get in the AWS service call.
+        --requested-by=!: The type of account making the `ListEnvironmentAccountConnections` request.
+        --starting-token=: A token to specify where to start paginating.
+        --statuses=: The status details for each listed environment account connection.
+      completion:
+        flag:
+            requested-by:
+                - MANAGEMENT_ACCOUNT
+                - ENVIRONMENT_ACCOUNT
+    - name: list-service-template-versions
+      description: List major or minor versions of a service template with detail data.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --major-version=: To view a list of minor of versions under a major version of a service template, include `major Version`.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of service templates to list.
-        --next-token=: A token that indicates the location of the next service template in the array of service templates, after the list of service templates previously requested.
+        --max-results=: The maximum number of major or minor versions of a service template to list.
+        --next-token=: A token that indicates the location of the next major or minor version in the array of major or minor versions of a service template, after the list of major or minor versions that was previously requested.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: update-service-sync-config
-      description: Update the Proton Ops config file.
+        --template-name=!: The name of the service template.
+    - name: notify-resource-deployment-status-change
+      description: Notify Proton of status changes to a provisioned resource when you use self-managed provisioning.
       flags:
-        --branch=!: The name of the code repository branch where the Proton Ops file is found.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --file-path=!: The path to the Proton Ops file.
+        --deployment-id=: The deployment ID for your provisioned resource.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --repository-name=!: The name of the repository where the Proton Ops file is found.
-        --repository-provider=!: The name of the repository provider where the Proton Ops file is found.
-        --service-name=!: The name of the service the Proton Ops file is for.
+        --outputs=: The provisioned resource state change detail data that's returned by Proton.
+        --resource-arn=!: The provisioned resource Amazon Resource Name (ARN).
+        --status-message=: The deployment status message for your provisioned resource.
+        --status=: The status of your provisioned resource.
       completion:
         flag:
-            repository-provider:
-                - GITHUB
-                - GITHUB_ENTERPRISE
-                - BITBUCKET
-    - name: list-environment-outputs
-      description: List the infrastructure as code outputs for your environment.
+            status:
+                - IN_PROGRESS
+                - FAILED
+                - SUCCEEDED
+    - name: untag-resource
+      description: Remove a customer tag from a resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deployment-id=: The ID of the deployment whose outputs you want.
-        --environment-name=!: The environment name.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: A token that indicates the location of the next environment output in the array of environment outputs, after the list of environment outputs that was previously requested.
-        --starting-token=: A token to specify where to start paginating.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to remove customer tags from.
+        --tag-keys=!: A list of customer tag keys that indicate the customer tags to be removed from the resource.
+    - name: update-service
+      description: Edit a service description or use a spec to add and delete service instances.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The edited service description.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the service to edit.
+        --spec=: Lists the service instances to add and the existing service instances to remain.
+    - name: delete-deployment
+      description: Delete the deployment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the deployment to delete.
+    - name: delete-environment
+      description: Delete an environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the environment to delete.
     - name: delete-service-sync-config
       description: Delete the Proton Ops file.
       flags:
@@ -303,110 +215,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --service-name=!: The name of the service that you want to delete the service sync configuration for.
-    - name: create-environment
-      description: Deploy a new environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --codebuild-role-arn=: The Amazon Resource Name (ARN) of the IAM service role that allows Proton to provision infrastructure using CodeBuild-based provisioning on your behalf.
-        --component-role-arn=: The Amazon Resource Name (ARN) of the IAM service role that Proton uses when provisioning directly defined components in this environment.
-        --description=: A description of the environment that's being created and deployed.
-        --environment-account-connection-id=: The ID of the environment account connection that you provide if you're provisioning your environment infrastructure resources to an environment account.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the environment.
-        --proton-service-role-arn=: The Amazon Resource Name (ARN) of the Proton service role that allows Proton to make calls to other services on your behalf.
-        --provisioning-repository=: The linked repository that you use to host your rendered infrastructure templates for self-managed provisioning.
-        --spec=!: A YAML formatted string that provides inputs as defined in the environment template bundle schema file.
-        --tags=: An optional list of metadata items that you can associate with the Proton environment.
-        --template-major-version=!: The major version of the environment template.
-        --template-minor-version=: The minor version of the environment template.
-        --template-name=!: The name of the environment template.
-    - name: delete-environment-account-connection
-      description: In an environment account, delete an environment account connection.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the environment account connection to delete.
-    - name: get-resources-summary
-      description: Get counts of Proton resources.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-component-provisioned-resources
-      description: List provisioned resources for a component with details.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --component-name=!: The name of the component whose provisioned resources you want.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: A token that indicates the location of the next provisioned resource in the array of provisioned resources, after the list of provisioned resources that was previously requested.
-        --starting-token=: A token to specify where to start paginating.
-    - name: tag-resource
-      description: Tag a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the Proton resource to apply customer tags to.
-        --tags=!: A list of customer tags to apply to the Proton resource.
-    - name: list-repository-sync-definitions
-      description: List repository sync definitions with detail data.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: A token that indicates the location of the next repository sync definition in the array of repository sync definitions, after the list of repository sync definitions previously requested.
-        --repository-name=!: The repository name.
-        --repository-provider=!: The repository provider.
-        --starting-token=: A token to specify where to start paginating.
-        --sync-type=!: The sync type.
-      completion:
-        flag:
-            repository-provider:
-                - GITHUB
-                - GITHUB_ENTERPRISE
-                - BITBUCKET
-            sync-type:
-                - TEMPLATE_SYNC
-                - SERVICE_SYNC
-    - name: cancel-service-pipeline-deployment
-      description: Attempts to cancel a service pipeline deployment on an [UpdateServicePipeline]() action, if the deployment is `IN_PROGRESS`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --service-name=!: The name of the service with the service pipeline deployment to cancel.
-    - name: delete-environment-template
-      description: If no other major or minor versions of an environment template exist, delete the environment template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the environment template to delete.
-    - name: delete-template-sync-config
-      description: Delete a template sync configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --template-name=!: The template name.
-        --template-type=!: The template type.
-      completion:
-        flag:
-            template-type:
-                - ENVIRONMENT
-                - SERVICE
-    - name: get-environment-template
-      description: Get detailed data for an environment template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the environment template that you want to get the detailed data for.
     - name: get-service-sync-blocker-summary
       description: Get detailed data for the service sync blocker summary.
       flags:
@@ -415,6 +223,18 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --service-instance-name=: The name of the service instance that you want to get the service sync blocker summary for.
         --service-name=!: The name of the service that you want to get the service sync blocker summary for.
+    - name: list-service-instance-outputs
+      description: Get a list service of instance Infrastructure as Code (IaC) outputs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --deployment-id=: The ID of the deployment whose outputs you want.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: A token that indicates the location of the next output in the array of outputs, after the list of outputs that was previously requested.
+        --service-instance-name=!: The name of the service instance whose outputs you want.
+        --service-name=!: The name of the service that `serviceInstanceName` is associated to.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-service-pipeline-outputs
       description: Get a list of service pipeline Infrastructure as Code (IaC) outputs.
       flags:
@@ -426,18 +246,13 @@ commands:
         --next-token=: A token that indicates the location of the next output in the array of outputs, after the list of outputs that was previously requested.
         --service-name=!: The name of the service whose pipeline's outputs you want.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: List tags for a resource.
+    - name: reject-environment-account-connection
+      description: In a management account, reject an environment account connection from another environment account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of tags to list.
-        --next-token=: A token that indicates the location of the next resource tag in the array of resource tags, after the list of resource tags that was previously requested.
-        --page-size=: The size of each page to get in the AWS service call.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource for the listed tags.
-        --starting-token=: A token to specify where to start paginating.
+        --id=!: The ID of the environment account connection to reject.
     - name: update-component
       description: Update a component.
       flags:
@@ -457,37 +272,22 @@ commands:
             deployment-type:
                 - NONE
                 - CURRENT_VERSION
-    - name: delete-repository
-      description: De-register and unlink your repository.
+    - name: create-component
+      description: Create an Proton component.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: The client token for the created component.
+        --description=: An optional customer-provided description of the component.
+        --environment-name=: The name of the Proton environment that you want to associate this component with.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The repository name.
-        --provider=!: The repository provider.
-      completion:
-        flag:
-            provider:
-                - GITHUB
-                - GITHUB_ENTERPRISE
-                - BITBUCKET
-    - name: create-service-sync-config
-      description: Create the Proton Ops configuration file.
-      flags:
-        --branch=!: The repository branch for your Proton Ops file.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --file-path=!: The path to the Proton Ops file.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --repository-name=!: The repository name.
-        --repository-provider=!: The provider type for your repository.
-        --service-name=!: The name of the service the Proton Ops file is for.
-      completion:
-        flag:
-            repository-provider:
-                - GITHUB
-                - GITHUB_ENTERPRISE
-                - BITBUCKET
+        --manifest=!: A path to a manifest file that lists the Infrastructure as Code (IaC) file, template language, and rendering engine for infrastructure that a custom component provisions.
+        --name=!: The customer-provided name of the component.
+        --service-instance-name=: The name of the service instance that you want to attach this component to.
+        --service-name=: The name of the service that `serviceInstanceName` is associated with.
+        --service-spec=: The service spec that you want the component to use to access service inputs.
+        --tags=: An optional list of metadata items that you can associate with the Proton component.
+        --template-file=!: A path to the Infrastructure as Code (IaC) file describing infrastructure that a custom component provisions.
     - name: create-service-template
       description: Create a service template.
       flags:
@@ -504,13 +304,71 @@ commands:
         flag:
             pipeline-provisioning:
                 - CUSTOMER_MANAGED
-    - name: delete-component
-      description: Delete an Proton component resource.
+    - name: delete-environment-account-connection
+      description: In an environment account, delete an environment account connection.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the component to delete.
+        --id=!: The ID of the environment account connection to delete.
+    - name: get-component
+      description: Get detailed data for a component.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the component that you want to get the detailed data for.
+    - name: get-repository
+      description: Get detail data for a linked repository.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The repository name, for example `myrepos/myrepo`.
+        --provider=!: The repository provider.
+      completion:
+        flag:
+            provider:
+                - GITHUB
+                - GITHUB_ENTERPRISE
+                - BITBUCKET
+    - name: update-service-pipeline
+      description: Update the service pipeline.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --deployment-type=!: The deployment type.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-name=!: The name of the service to that the pipeline is associated with.
+        --spec=!: The spec for the service pipeline to update.
+        --template-major-version=: The major version of the service template that was used to create the service that the pipeline is associated with.
+        --template-minor-version=: The minor version of the service template that was used to create the service that the pipeline is associated with.
+      completion:
+        flag:
+            deployment-type:
+                - NONE
+                - CURRENT_VERSION
+                - MINOR_VERSION
+                - MAJOR_VERSION
+    - name: create-environment-template-version
+      description: Create a new major or minor version of an environment template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: When included, if two identical requests are made with the same client token, Proton returns the environment template version that the first request created.
+        --description=: A description of the new version of an environment template.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --major-version=: To create a new minor version of the environment template, include `major Version`.
+        --source=!: An object that includes the template bundle S3 bucket path and name for the new version of an template.
+        --tags=: An optional list of metadata items that you can associate with the Proton environment template version.
+        --template-name=!: The name of the environment template.
+    - name: get-service
+      description: Get detailed data for a service.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the service that you want to get the detailed data for.
     - name: get-service-instance-sync-status
       description: Get the status of the synced service instance.
       flags:
@@ -519,50 +377,18 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --service-instance-name=!: The name of the service instance that you want the sync status input for.
         --service-name=!: The name of the service that the service instance belongs to.
-    - name: update-template-sync-config
-      description: Update template sync configuration parameters, except for the `templateName` and `templateType`.
-      flags:
-        --branch=!: The repository branch for your template.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --repository-name=!: The repository name (for example, `myrepos/myrepo`).
-        --repository-provider=!: The repository provider.
-        --subdirectory=: A subdirectory path to your template bundle version.
-        --template-name=!: The synced template name.
-        --template-type=!: The synced template type.
-      completion:
-        flag:
-            repository-provider:
-                - GITHUB
-                - GITHUB_ENTERPRISE
-                - BITBUCKET
-            template-type:
-                - ENVIRONMENT
-                - SERVICE
-    - name: accept-environment-account-connection
-      description: In a management account, an environment account connection request is accepted.
+    - name: list-tags-for-resource
+      description: List tags for a resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the environment account connection.
-    - name: create-environment-template
-      description: Create an environment template for Proton.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description of the environment template.
-        --display-name=: The environment template name as displayed in the developer interface.
-        --encryption-key=: A customer provided encryption key that Proton uses to encrypt data.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the environment template.
-        --provisioning=: When included, indicates that the environment template is for customer provisioned and managed infrastructure.
-        --tags=: An optional list of metadata items that you can associate with the Proton environment template.
-      completion:
-        flag:
-            provisioning:
-                - CUSTOMER_MANAGED
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of tags to list.
+        --next-token=: A token that indicates the location of the next resource tag in the array of resource tags, after the list of resource tags that was previously requested.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource for the listed tags.
+        --starting-token=: A token to specify where to start paginating.
     - name: create-service
       description: Create an Proton service.
       flags:
@@ -579,77 +405,6 @@ commands:
         --template-major-version=!: The major version of the service template that was used to create the service.
         --template-minor-version=: The minor version of the service template that was used to create the service.
         --template-name=!: The name of the service template that's used to create the service.
-    - name: delete-service-template
-      description: If no other major or minor versions of the service template exist, delete the service template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the service template to delete.
-    - name: delete-service-template-version
-      description: If no other minor versions of a service template exist, delete a major version of the service template if it's not the `Recommended` version.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --major-version=!: The service template major version to delete.
-        --minor-version=!: The service template minor version to delete.
-        --template-name=!: The name of the service template.
-    - name: get-repository
-      description: Get detail data for a linked repository.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The repository name, for example `myrepos/myrepo`.
-        --provider=!: The repository provider.
-      completion:
-        flag:
-            provider:
-                - GITHUB
-                - GITHUB_ENTERPRISE
-                - BITBUCKET
-    - name: list-service-instance-provisioned-resources
-      description: List provisioned resources for a service instance with details.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: A token that indicates the location of the next provisioned resource in the array of provisioned resources, after the list of provisioned resources that was previously requested.
-        --service-instance-name=!: The name of the service instance whose provisioned resources you want.
-        --service-name=!: The name of the service that `serviceInstanceName` is associated to.
-        --starting-token=: A token to specify where to start paginating.
-    - name: create-repository
-      description: Create and register a link to a repository.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connection-arn=!: The Amazon Resource Name (ARN) of your AWS CodeStar connection that connects Proton to your repository provider account.
-        --encryption-key=: The ARN of your customer Amazon Web Services Key Management Service (Amazon Web Services KMS) key.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The repository name (for example, `myrepos/myrepo`).
-        --provider=!: The repository provider.
-        --tags=: An optional list of metadata items that you can associate with the Proton repository.
-      completion:
-        flag:
-            provider:
-                - GITHUB
-                - GITHUB_ENTERPRISE
-                - BITBUCKET
-    - name: create-service-instance
-      description: Create a service instance.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: The client token of the service instance to create.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the service instance to create.
-        --service-name=!: The name of the service the service instance is added to.
-        --spec=!: The spec for the service instance you want to create.
-        --tags=: An optional list of metadata items that you can associate with the Proton service instance.
-        --template-major-version=: To create a new major and minor version of the service template, *exclude* `major Version`.
-        --template-minor-version=: To create a new minor version of the service template, include a `major Version`.
     - name: create-template-sync-config
       description: Set up a template to create new template versions automatically by tracking a linked repository.
       flags:
@@ -671,6 +426,266 @@ commands:
             template-type:
                 - ENVIRONMENT
                 - SERVICE
+    - name: get-environment-template-version
+      description: Get detailed data for a major or minor version of an environment template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --major-version=!: To get environment template major version detail data, include `major Version`.
+        --minor-version=!: To get environment template minor version detail data, include `minorVersion`.
+        --template-name=!: The name of the environment template a version of which you want to get detailed data for.
+    - name: get-service-sync-config
+      description: Get detailed information for the service sync configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-name=!: The name of the service that you want to get the service sync configuration for.
+    - name: list-deployments
+      description: List deployments.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --component-name=: The name of a component for result list filtering.
+        --environment-name=: The name of an environment for result list filtering.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of deployments to list.
+        --next-token=: A token that indicates the location of the next deployment in the array of deployment, after the list of deployment that was previously requested.
+        --page-size=: The size of each page to get in the AWS service call.
+        --service-instance-name=: The name of a service instance for result list filtering.
+        --service-name=: The name of a service for result list filtering.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-service-templates
+      description: List service templates with detail data.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of service templates to list.
+        --next-token=: A token that indicates the location of the next service template in the array of service templates, after the list of service templates previously requested.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-environment-template
+      description: Update an environment template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the environment template update.
+        --display-name=: The name of the environment template to update as displayed in the developer interface.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the environment template to update.
+    - name: cancel-component-deployment
+      description: Attempts to cancel a component deployment (for a component that is in the `IN_PROGRESS` deployment status).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --component-name=!: The name of the component with the deployment to cancel.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-repository
+      description: Create and register a link to a repository.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connection-arn=!: The Amazon Resource Name (ARN) of your AWS CodeStar connection that connects Proton to your repository provider account.
+        --encryption-key=: The ARN of your customer Amazon Web Services Key Management Service (Amazon Web Services KMS) key.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The repository name (for example, `myrepos/myrepo`).
+        --provider=!: The repository provider.
+        --tags=: An optional list of metadata items that you can associate with the Proton repository.
+      completion:
+        flag:
+            provider:
+                - GITHUB
+                - GITHUB_ENTERPRISE
+                - BITBUCKET
+    - name: list-component-outputs
+      description: Get a list of component Infrastructure as Code (IaC) outputs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --component-name=!: The name of the component whose outputs you want.
+        --deployment-id=: The ID of the deployment whose outputs you want.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: A token that indicates the location of the next output in the array of outputs, after the list of outputs that was previously requested.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-service-instance-provisioned-resources
+      description: List provisioned resources for a service instance with details.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: A token that indicates the location of the next provisioned resource in the array of provisioned resources, after the list of provisioned resources that was previously requested.
+        --service-instance-name=!: The name of the service instance whose provisioned resources you want.
+        --service-name=!: The name of the service that `serviceInstanceName` is associated to.
+        --starting-token=: A token to specify where to start paginating.
+    - name: delete-service-template-version
+      description: If no other minor versions of a service template exist, delete a major version of the service template if it's not the `Recommended` version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --major-version=!: The service template major version to delete.
+        --minor-version=!: The service template minor version to delete.
+        --template-name=!: The name of the service template.
+    - name: create-service-sync-config
+      description: Create the Proton Ops configuration file.
+      flags:
+        --branch=!: The repository branch for your Proton Ops file.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --file-path=!: The path to the Proton Ops file.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --repository-name=!: The repository name.
+        --repository-provider=!: The provider type for your repository.
+        --service-name=!: The name of the service the Proton Ops file is for.
+      completion:
+        flag:
+            repository-provider:
+                - GITHUB
+                - GITHUB_ENTERPRISE
+                - BITBUCKET
+    - name: get-service-template
+      description: Get detailed data for a service template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the service template that you want to get detailed data for.
+    - name: get-template-sync-status
+      description: Get the status of a template sync.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --template-name=!: The template name.
+        --template-type=!: The template type.
+        --template-version=!: The template major version.
+      completion:
+        flag:
+            template-type:
+                - ENVIRONMENT
+                - SERVICE
+    - name: delete-template-sync-config
+      description: Delete a template sync configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --template-name=!: The template name.
+        --template-type=!: The template type.
+      completion:
+        flag:
+            template-type:
+                - ENVIRONMENT
+                - SERVICE
+    - name: get-resources-summary
+      description: Get counts of Proton resources.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-template-sync-config
+      description: Get detail data for a template sync configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --template-name=!: The template name.
+        --template-type=!: The template type.
+      completion:
+        flag:
+            template-type:
+                - ENVIRONMENT
+                - SERVICE
+    - name: list-environment-template-versions
+      description: List major or minor versions of an environment template with detail data.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --major-version=: To view a list of minor of versions under a major version of an environment template, include `major Version`.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of major or minor versions of an environment template to list.
+        --next-token=: A token that indicates the location of the next major or minor version in the array of major or minor versions of an environment template, after the list of major or minor versions that was previously requested.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --template-name=!: The name of the environment template.
+    - name: list-services
+      description: List services with summaries of detail data.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of services to list.
+        --next-token=: A token that indicates the location of the next service in the array of services, after the list of services that was previously requested.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-environment-account-connection
+      description: In an environment account, update an environment account connection to use a new IAM role.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --codebuild-role-arn=: The Amazon Resource Name (ARN) of an IAM service role in the environment account.
+        --component-role-arn=: The Amazon Resource Name (ARN) of the IAM service role that Proton uses when provisioning directly defined components in the associated environment account.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the environment account connection to update.
+        --role-arn=: The Amazon Resource Name (ARN) of the IAM service role that's associated with the environment account connection to update.
+    - name: update-service-sync-blocker
+      description: Update the service sync blocker by resolving it.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the service sync blocker.
+        --resolved-reason=!: The reason the service sync blocker was resolved.
+    - name: update-service-sync-config
+      description: Update the Proton Ops config file.
+      flags:
+        --branch=!: The name of the code repository branch where the Proton Ops file is found.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --file-path=!: The path to the Proton Ops file.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --repository-name=!: The name of the repository where the Proton Ops file is found.
+        --repository-provider=!: The name of the repository provider where the Proton Ops file is found.
+        --service-name=!: The name of the service the Proton Ops file is for.
+      completion:
+        flag:
+            repository-provider:
+                - GITHUB
+                - GITHUB_ENTERPRISE
+                - BITBUCKET
+    - name: create-environment
+      description: Deploy a new environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --codebuild-role-arn=: The Amazon Resource Name (ARN) of the IAM service role that allows Proton to provision infrastructure using CodeBuild-based provisioning on your behalf.
+        --component-role-arn=: The Amazon Resource Name (ARN) of the IAM service role that Proton uses when provisioning directly defined components in this environment.
+        --description=: A description of the environment that's being created and deployed.
+        --environment-account-connection-id=: The ID of the environment account connection that you provide if you're provisioning your environment infrastructure resources to an environment account.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the environment.
+        --proton-service-role-arn=: The Amazon Resource Name (ARN) of the Proton service role that allows Proton to make calls to other services on your behalf.
+        --provisioning-repository=: The linked repository that you use to host your rendered infrastructure templates for self-managed provisioning.
+        --spec=!: A YAML formatted string that provides inputs as defined in the environment template bundle schema file.
+        --tags=: An optional list of metadata items that you can associate with the Proton environment.
+        --template-major-version=!: The major version of the environment template.
+        --template-minor-version=: The minor version of the environment template.
+        --template-name=!: The name of the environment template.
+    - name: delete-service
+      description: Delete a service, with its instances and pipeline.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the service to delete.
     - name: get-deployment
       description: Get detailed data for a deployment.
       flags:
@@ -689,80 +704,137 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The ID of the environment account connection that you want to get the detailed data for.
-    - name: get-environment-template-version
-      description: Get detailed data for a major or minor version of an environment template.
+    - name: list-environment-outputs
+      description: List the infrastructure as code outputs for your environment.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --deployment-id=: The ID of the deployment whose outputs you want.
+        --environment-name=!: The environment name.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --major-version=!: To get environment template major version detail data, include `major Version`.
-        --minor-version=!: To get environment template minor version detail data, include `minorVersion`.
-        --template-name=!: The name of the environment template a version of which you want to get detailed data for.
-    - name: get-template-sync-config
-      description: Get detail data for a template sync configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --template-name=!: The template name.
-        --template-type=!: The template type.
-      completion:
-        flag:
-            template-type:
-                - ENVIRONMENT
-                - SERVICE
-    - name: notify-resource-deployment-status-change
-      description: Notify Proton of status changes to a provisioned resource when you use self-managed provisioning.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deployment-id=: The deployment ID for your provisioned resource.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --outputs=: The provisioned resource state change detail data that's returned by Proton.
-        --resource-arn=!: The provisioned resource Amazon Resource Name (ARN).
-        --status-message=: The deployment status message for your provisioned resource.
-        --status=: The status of your provisioned resource.
-      completion:
-        flag:
-            status:
-                - IN_PROGRESS
-                - FAILED
-                - SUCCEEDED
-    - name: list-environment-template-versions
-      description: List major or minor versions of an environment template with detail data.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --major-version=: To view a list of minor of versions under a major version of an environment template, include `major Version`.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of major or minor versions of an environment template to list.
-        --next-token=: A token that indicates the location of the next major or minor version in the array of major or minor versions of an environment template, after the list of major or minor versions that was previously requested.
+        --next-token=: A token that indicates the location of the next environment output in the array of environment outputs, after the list of environment outputs that was previously requested.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-repositories
+      description: List linked repositories with detail data.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of repositories to list.
+        --next-token=: A token that indicates the location of the next repository in the array of repositories, after the list of repositories previously requested.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-        --template-name=!: The name of the environment template.
-    - name: delete-environment
-      description: Delete an environment.
+    - name: list-repository-sync-definitions
+      description: List repository sync definitions with detail data.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the environment to delete.
-    - name: get-service-instance
-      description: Get detailed data for a service instance.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: A token that indicates the location of the next repository sync definition in the array of repository sync definitions, after the list of repository sync definitions previously requested.
+        --repository-name=!: The repository name.
+        --repository-provider=!: The repository provider.
+        --starting-token=: A token to specify where to start paginating.
+        --sync-type=!: The sync type.
+      completion:
+        flag:
+            repository-provider:
+                - GITHUB
+                - GITHUB_ENTERPRISE
+                - BITBUCKET
+            sync-type:
+                - TEMPLATE_SYNC
+                - SERVICE_SYNC
+    - name: cancel-environment-deployment
+      description: Attempts to cancel an environment deployment on an [UpdateEnvironment]() action, if the deployment is `IN_PROGRESS`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-name=!: The name of the environment with the deployment to cancel.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-service-instance
+      description: Create a service instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: The client token of the service instance to create.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the service instance to create.
+        --service-name=!: The name of the service the service instance is added to.
+        --spec=!: The spec for the service instance you want to create.
+        --tags=: An optional list of metadata items that you can associate with the Proton service instance.
+        --template-major-version=: To create a new major and minor version of the service template, *exclude* `major Version`.
+        --template-minor-version=: To create a new minor version of the service template, include a `major Version`.
+    - name: create-service-template-version
+      description: Create a new major or minor version of a service template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: When included, if two identical requests are made with the same client token, Proton returns the service template version that the first request created.
+        --compatible-environment-templates=!: An array of environment template objects that are compatible with the new service template version.
+        --description=: A description of the new version of a service template.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --major-version=: To create a new minor version of the service template, include a `major Version`.
+        --source=!: An object that includes the template bundle S3 bucket path and name for the new version of a service template.
+        --supported-component-sources=: An array of supported component sources.
+        --tags=: An optional list of metadata items that you can associate with the Proton service template version.
+        --template-name=!: The name of the service template.
+    - name: delete-component
+      description: Delete an Proton component resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of a service instance that you want to get the detailed data for.
-        --service-name=!: The name of the service that you want the service instance input for.
-    - name: get-service-sync-config
-      description: Get detailed information for the service sync configuration.
+        --name=!: The name of the component to delete.
+    - name: delete-repository
+      description: De-register and unlink your repository.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --service-name=!: The name of the service that you want to get the service sync configuration for.
+        --name=!: The repository name.
+        --provider=!: The repository provider.
+      completion:
+        flag:
+            provider:
+                - GITHUB
+                - GITHUB_ENTERPRISE
+                - BITBUCKET
+    - name: update-environment
+      description: Update an environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --codebuild-role-arn=: The Amazon Resource Name (ARN) of the IAM service role that allows Proton to provision infrastructure using CodeBuild-based provisioning on your behalf.
+        --component-role-arn=: The Amazon Resource Name (ARN) of the IAM service role that Proton uses when provisioning directly defined components in this environment.
+        --deployment-type=!: There are four modes for updating an environment.
+        --description=: A description of the environment update.
+        --environment-account-connection-id=: The ID of the environment account connection.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the environment to update.
+        --proton-service-role-arn=: The Amazon Resource Name (ARN) of the Proton service role that allows Proton to make API calls to other services your behalf.
+        --provisioning-repository=: The linked repository that you use to host your rendered infrastructure templates for self-managed provisioning.
+        --spec=: The formatted specification that defines the update.
+        --template-major-version=: The major version of the environment to update.
+        --template-minor-version=: The minor version of the environment to update.
+      completion:
+        flag:
+            deployment-type:
+                - NONE
+                - CURRENT_VERSION
+                - MINOR_VERSION
+                - MAJOR_VERSION
+    - name: update-service-template
+      description: Update a service template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the service template update.
+        --display-name=: The name of the service template to update that's displayed in the developer interface.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the service template to update.
     - name: list-environment-provisioned-resources
       description: List the provisioned resources for your environment.
       flags:
@@ -772,6 +844,31 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --next-token=: A token that indicates the location of the next environment provisioned resource in the array of environment provisioned resources, after the list of environment provisioned resources that was previously requested.
+        --starting-token=: A token to specify where to start paginating.
+    - name: delete-service-template
+      description: If no other major or minor versions of the service template exist, delete the service template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the service template to delete.
+    - name: get-environment-template
+      description: Get detailed data for an environment template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the environment template that you want to get the detailed data for.
+    - name: list-environment-templates
+      description: List environment templates.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of environment templates to list.
+        --next-token=: A token that indicates the location of the next environment template in the array of environment templates, after the list of environment templates that was previously requested.
+        --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
     - name: list-service-instances
       description: List service instances with summary data.
@@ -801,119 +898,63 @@ commands:
             sort-order:
                 - ASCENDING
                 - DESCENDING
-    - name: list-services
-      description: List services with summaries of detail data.
+    - name: cancel-service-instance-deployment
+      description: Attempts to cancel a service instance deployment on an [UpdateServiceInstance]() action, if the deployment is `IN_PROGRESS`.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of services to list.
-        --next-token=: A token that indicates the location of the next service in the array of services, after the list of services that was previously requested.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: reject-environment-account-connection
-      description: In a management account, reject an environment account connection from another environment account.
+        --service-instance-name=!: The name of the service instance with the deployment to cancel.
+        --service-name=!: The name of the service with the service instance deployment to cancel.
+    - name: delete-environment-template
+      description: If no other major or minor versions of an environment template exist, delete the environment template.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the environment account connection to reject.
-    - name: list-environment-account-connections
-      description: View a list of environment account connections.
+        --name=!: The name of the environment template to delete.
+    - name: get-environment
+      description: Get detailed data for an environment.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-name=: The environment name that's associated with each listed environment account connection.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of environment account connections to list.
-        --next-token=: A token that indicates the location of the next environment account connection in the array of environment account connections, after the list of environment account connections that was previously requested.
-        --page-size=: The size of each page to get in the AWS service call.
-        --requested-by=!: The type of account making the `ListEnvironmentAccountConnections` request.
-        --starting-token=: A token to specify where to start paginating.
-        --statuses=: The status details for each listed environment account connection.
+        --name=!: The name of the environment that you want to get the detailed data for.
+    - name: get-repository-sync-status
+      description: Get the sync status of a repository used for Proton template sync.
+      flags:
+        --branch=!: The repository branch.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --repository-name=!: The repository name.
+        --repository-provider=!: The repository provider.
+        --sync-type=!: The repository sync type.
       completion:
         flag:
-            requested-by:
-                - MANAGEMENT_ACCOUNT
-                - ENVIRONMENT_ACCOUNT
-    - name: cancel-component-deployment
-      description: Attempts to cancel a component deployment (for a component that is in the `IN_PROGRESS` deployment status).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --component-name=!: The name of the component with the deployment to cancel.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-deployment
-      description: Delete the deployment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the deployment to delete.
-    - name: get-component
-      description: Get detailed data for a component.
+            repository-provider:
+                - GITHUB
+                - GITHUB_ENTERPRISE
+                - BITBUCKET
+            sync-type:
+                - TEMPLATE_SYNC
+                - SERVICE_SYNC
+    - name: cancel-service-pipeline-deployment
+      description: Attempts to cancel a service pipeline deployment on an [UpdateServicePipeline]() action, if the deployment is `IN_PROGRESS`.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the component that you want to get the detailed data for.
-    - name: get-service
-      description: Get detailed data for a service.
+        --service-name=!: The name of the service with the service pipeline deployment to cancel.
+    - name: get-service-template-version
+      description: Get detailed data for a major or minor version of a service template.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the service that you want to get the detailed data for.
-    - name: list-environment-templates
-      description: List environment templates.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of environment templates to list.
-        --next-token=: A token that indicates the location of the next environment template in the array of environment templates, after the list of environment templates that was previously requested.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-service-template-versions
-      description: List major or minor versions of a service template with detail data.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --major-version=: To view a list of minor of versions under a major version of a service template, include `major Version`.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of major or minor versions of a service template to list.
-        --next-token=: A token that indicates the location of the next major or minor version in the array of major or minor versions of a service template, after the list of major or minor versions that was previously requested.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --template-name=!: The name of the service template.
-    - name: update-account-settings
-      description: Update Proton settings that are used for multiple services in the Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --delete-pipeline-provisioning-repository: Set to `true` to remove a configured pipeline repository from the account settings.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-delete-pipeline-provisioning-repository: Set to `true` to remove a configured pipeline repository from the account settings.
-        --pipeline-codebuild-role-arn=: The Amazon Resource Name (ARN) of the service role you want to use for provisioning pipelines.
-        --pipeline-provisioning-repository=: A linked repository for pipeline provisioning.
-        --pipeline-service-role-arn=: The Amazon Resource Name (ARN) of the service role you want to use for provisioning pipelines.
-    - name: delete-service
-      description: Delete a service, with its instances and pipeline.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the service to delete.
-    - name: get-account-settings
-      description: Get detail data for Proton account-wide settings.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --major-version=!: To get service template major version detail data, include `major Version`.
+        --minor-version=!: To get service template minor version detail data, include `minorVersion`.
+        --template-name=!: The name of the service template a version of which you want to get detailed data for.
     - name: list-components
       description: List components with summary data.
       flags:
@@ -940,137 +981,59 @@ commands:
         --next-token=: A token that indicates the location of the next environment in the array of environments, after the list of environments that was previously requested.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-repositories
-      description: List linked repositories with detail data.
+    - name: list-service-pipeline-provisioned-resources
+      description: List provisioned resources for a service and pipeline with details.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of repositories to list.
-        --next-token=: A token that indicates the location of the next repository in the array of repositories, after the list of repositories previously requested.
-        --page-size=: The size of each page to get in the AWS service call.
+        --next-token=: A token that indicates the location of the next provisioned resource in the array of provisioned resources, after the list of provisioned resources that was previously requested.
+        --service-name=!: The name of the service whose pipeline's provisioned resources you want.
         --starting-token=: A token to specify where to start paginating.
-    - name: untag-resource
-      description: Remove a customer tag from a resource.
+    - name: tag-resource
+      description: Tag a resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to remove customer tags from.
-        --tag-keys=!: A list of customer tag keys that indicate the customer tags to be removed from the resource.
-    - name: update-environment
-      description: Update an environment.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the Proton resource to apply customer tags to.
+        --tags=!: A list of customer tags to apply to the Proton resource.
+    - name: update-account-settings
+      description: Update Proton settings that are used for multiple services in the Amazon Web Services account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --codebuild-role-arn=: The Amazon Resource Name (ARN) of the IAM service role that allows Proton to provision infrastructure using CodeBuild-based provisioning on your behalf.
-        --component-role-arn=: The Amazon Resource Name (ARN) of the IAM service role that Proton uses when provisioning directly defined components in this environment.
-        --deployment-type=!: There are four modes for updating an environment.
-        --description=: A description of the environment update.
-        --environment-account-connection-id=: The ID of the environment account connection.
+        --delete-pipeline-provisioning-repository: Set to `true` to remove a configured pipeline repository from the account settings.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the environment to update.
-        --proton-service-role-arn=: The Amazon Resource Name (ARN) of the Proton service role that allows Proton to make API calls to other services your behalf.
-        --provisioning-repository=: The linked repository that you use to host your rendered infrastructure templates for self-managed provisioning.
-        --spec=: The formatted specification that defines the update.
-        --template-major-version=: The major version of the environment to update.
-        --template-minor-version=: The minor version of the environment to update.
+        --no-delete-pipeline-provisioning-repository: Set to `true` to remove a configured pipeline repository from the account settings.
+        --pipeline-codebuild-role-arn=: The Amazon Resource Name (ARN) of the service role you want to use for provisioning pipelines.
+        --pipeline-provisioning-repository=: A linked repository for pipeline provisioning.
+        --pipeline-service-role-arn=: The Amazon Resource Name (ARN) of the service role you want to use for provisioning pipelines.
+    - name: update-template-sync-config
+      description: Update template sync configuration parameters, except for the `templateName` and `templateType`.
+      flags:
+        --branch=!: The repository branch for your template.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --repository-name=!: The repository name (for example, `myrepos/myrepo`).
+        --repository-provider=!: The repository provider.
+        --subdirectory=: A subdirectory path to your template bundle version.
+        --template-name=!: The synced template name.
+        --template-type=!: The synced template type.
       completion:
         flag:
-            deployment-type:
-                - NONE
-                - CURRENT_VERSION
-                - MINOR_VERSION
-                - MAJOR_VERSION
-    - name: update-service-instance
-      description: Update a service instance.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: The client token of the service instance to update.
-        --deployment-type=!: The deployment type.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the service instance to update.
-        --service-name=!: The name of the service that the service instance belongs to.
-        --spec=: The formatted specification that defines the service instance update.
-        --template-major-version=: The major version of the service template to update.
-        --template-minor-version=: The minor version of the service template to update.
-      completion:
-        flag:
-            deployment-type:
-                - NONE
-                - CURRENT_VERSION
-                - MINOR_VERSION
-                - MAJOR_VERSION
-    - name: update-service-sync-blocker
-      description: Update the service sync blocker by resolving it.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the service sync blocker.
-        --resolved-reason=!: The reason the service sync blocker was resolved.
-    - name: update-service-template-version
-      description: Update a major or minor version of a service template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --compatible-environment-templates=: An array of environment template objects that are compatible with this service template version.
-        --description=: A description of a service template version to update.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --major-version=!: To update a major version of a service template, include `major Version`.
-        --minor-version=!: To update a minor version of a service template, include `minorVersion`.
-        --status=: The status of the service template minor version to update.
-        --supported-component-sources=: An array of supported component sources.
-        --template-name=!: The name of the service template.
-      completion:
-        flag:
-            status:
-                - REGISTRATION_IN_PROGRESS
-                - REGISTRATION_FAILED
-                - DRAFT
-                - PUBLISHED
+            repository-provider:
+                - GITHUB
+                - GITHUB_ENTERPRISE
+                - BITBUCKET
+            template-type:
+                - ENVIRONMENT
+                - SERVICE
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:
-        - name: service-template-version-registered
-          description: Get detailed data for a major or minor version of a service template.
-          flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-            --major-version=!: To get service template major version detail data, include `major Version`.
-            --minor-version=!: To get service template minor version detail data, include `minorVersion`.
-            --template-name=!: The name of the service template a version of which you want to get detailed data for.
-        - name: service-created
-          description: Get detailed data for a service.
-          flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-            --name=!: The name of the service that you want to get the detailed data for.
-        - name: service-deleted
-          description: Get detailed data for a service.
-          flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-            --name=!: The name of the service that you want to get the detailed data for.
-        - name: service-pipeline-deployed
-          description: Get detailed data for a service.
-          flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-            --name=!: The name of the service that you want to get the detailed data for.
-        - name: service-updated
-          description: Get detailed data for a service.
-          flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-            --name=!: The name of the service that you want to get the detailed data for.
         - name: component-deleted
           description: Get detailed data for a component.
           flags:
@@ -1092,6 +1055,15 @@ commands:
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --name=!: The name of the environment that you want to get the detailed data for.
+        - name: service-template-version-registered
+          description: Get detailed data for a major or minor version of a service template.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --major-version=!: To get service template major version detail data, include `major Version`.
+            --minor-version=!: To get service template minor version detail data, include `minorVersion`.
+            --template-name=!: The name of the service template a version of which you want to get detailed data for.
         - name: environment-template-version-registered
           description: Get detailed data for a major or minor version of an environment template.
           flags:
@@ -1101,6 +1073,20 @@ commands:
             --major-version=!: To get environment template major version detail data, include `major Version`.
             --minor-version=!: To get environment template minor version detail data, include `minorVersion`.
             --template-name=!: The name of the environment template a version of which you want to get detailed data for.
+        - name: service-created
+          description: Get detailed data for a service.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --name=!: The name of the service that you want to get the detailed data for.
+        - name: service-deleted
+          description: Get detailed data for a service.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --name=!: The name of the service that you want to get the detailed data for.
         - name: service-instance-deployed
           description: Get detailed data for a service instance.
           flags:
@@ -1109,3 +1095,17 @@ commands:
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --name=!: The name of a service instance that you want to get the detailed data for.
             --service-name=!: The name of the service that you want the service instance input for.
+        - name: service-pipeline-deployed
+          description: Get detailed data for a service.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --name=!: The name of the service that you want to get the detailed data for.
+        - name: service-updated
+          description: Get detailed data for a service.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --name=!: The name of the service that you want to get the detailed data for.

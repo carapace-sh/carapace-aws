@@ -1,6 +1,137 @@
 name: trustedadvisor
 description: TrustedAdvisor Public API
 commands:
+    - name: list-recommendations
+      description: List a filterable set of Recommendations
+      flags:
+        --after-last-updated-at=: After the last update of the Recommendation
+        --aws-service=: The aws service associated with the Recommendation
+        --before-last-updated-at=: Before the last update of the Recommendation
+        --check-identifier=: The check identifier of the Recommendation
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return per page.
+        --next-token=: The token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --pillar=: The pillar of the Recommendation
+        --source=: The source of the Recommendation
+        --starting-token=: A token to specify where to start paginating.
+        --status=: The status of the Recommendation
+        --type=: The type of the Recommendation
+      completion:
+        flag:
+            pillar:
+                - cost_optimizing
+                - performance
+                - security
+                - service_limits
+                - fault_tolerance
+                - operational_excellence
+            source:
+                - aws_config
+                - compute_optimizer
+                - cost_explorer
+                - lse
+                - manual
+                - pse
+                - rds
+                - resilience
+                - resilience_hub
+                - security_hub
+                - stir
+                - ta_check
+                - well_architected
+            status:
+                - ok
+                - warning
+                - error
+            type:
+                - standard
+                - priority
+    - name: batch-update-recommendation-resource-exclusion
+      description: Update one or more exclusion status for a list of recommendation resources
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recommendation-resource-exclusions=!: A list of recommendation resource ARNs and exclusion status to update
+    - name: list-checks
+      description: List a filterable set of Checks
+      flags:
+        --aws-service=: The aws service associated with the check
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --language=: The ISO 639-1 code for the language that you want your checks to appear in.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return per page.
+        --next-token=: The token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --pillar=: The pillar of the check
+        --source=: The source of the check
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            language:
+                - en
+                - ja
+                - zh
+                - fr
+                - de
+                - ko
+                - zh_TW
+                - it
+                - es
+                - pt_BR
+                - id
+            pillar:
+                - cost_optimizing
+                - performance
+                - security
+                - service_limits
+                - fault_tolerance
+                - operational_excellence
+            source:
+                - aws_config
+                - compute_optimizer
+                - cost_explorer
+                - lse
+                - manual
+                - pse
+                - rds
+                - resilience
+                - resilience_hub
+                - security_hub
+                - stir
+                - ta_check
+                - well_architected
+    - name: list-organization-recommendation-resources
+      description: List Resources of a Recommendation within an Organization.
+      flags:
+        --affected-account-id=: An account affected by this organization recommendation
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --exclusion-status=: The exclusion status of the resource
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return per page.
+        --next-token=: The token for the next set of results.
+        --organization-recommendation-identifier=!: The AWS Organization organization's Recommendation identifier
+        --page-size=: The size of each page to get in the AWS service call.
+        --region-code=: The AWS Region code of the resource
+        --starting-token=: A token to specify where to start paginating.
+        --status=: The status of the resource
+      completion:
+        flag:
+            exclusion-status:
+                - excluded
+                - included
+            status:
+                - ok
+                - warning
+                - error
     - name: update-organization-recommendation-lifecycle
       description: Update the lifecycle of a Recommendation within an Organization.
       flags:
@@ -26,6 +157,58 @@ commands:
                 - low_priority
                 - not_applicable
                 - other
+    - name: update-recommendation-lifecycle
+      description: Update the lifecyle of a Recommendation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lifecycle-stage=!: The new lifecycle stage
+        --recommendation-identifier=!: The Recommendation identifier for AWS Trusted Advisor Priority recommendations
+        --update-reason-code=: Reason code for the lifecycle state change
+        --update-reason=: Reason for the lifecycle stage change
+      completion:
+        flag:
+            lifecycle-stage:
+                - pending_response
+                - in_progress
+                - dismissed
+                - resolved
+            update-reason-code:
+                - non_critical_account
+                - temporary_account
+                - valid_business_case
+                - other_methods_available
+                - low_priority
+                - not_applicable
+                - other
+    - name: get-organization-recommendation
+      description: Get a specific recommendation within an AWS Organizations organization.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --organization-recommendation-identifier=!: The Recommendation identifier
+    - name: get-recommendation
+      description: Get a specific Recommendation
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recommendation-identifier=!: The Recommendation identifier
+    - name: list-organization-recommendation-accounts
+      description: Lists the accounts that own the resources for an organization aggregate recommendation.
+      flags:
+        --affected-account-id=: An account affected by this organization recommendation
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return per page.
+        --next-token=: The token for the next set of results.
+        --organization-recommendation-identifier=!: The Recommendation identifier
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-organization-recommendations
       description: List a filterable set of Recommendations within an Organization.
       flags:
@@ -99,186 +282,3 @@ commands:
                 - ok
                 - warning
                 - error
-    - name: update-recommendation-lifecycle
-      description: Update the lifecyle of a Recommendation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lifecycle-stage=!: The new lifecycle stage
-        --recommendation-identifier=!: The Recommendation identifier for AWS Trusted Advisor Priority recommendations
-        --update-reason-code=: Reason code for the lifecycle state change
-        --update-reason=: Reason for the lifecycle stage change
-      completion:
-        flag:
-            lifecycle-stage:
-                - pending_response
-                - in_progress
-                - dismissed
-                - resolved
-            update-reason-code:
-                - non_critical_account
-                - temporary_account
-                - valid_business_case
-                - other_methods_available
-                - low_priority
-                - not_applicable
-                - other
-    - name: batch-update-recommendation-resource-exclusion
-      description: Update one or more exclusion status for a list of recommendation resources
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recommendation-resource-exclusions=!: A list of recommendation resource ARNs and exclusion status to update
-    - name: get-organization-recommendation
-      description: Get a specific recommendation within an AWS Organizations organization.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --organization-recommendation-identifier=!: The Recommendation identifier
-    - name: get-recommendation
-      description: Get a specific Recommendation
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recommendation-identifier=!: The Recommendation identifier
-    - name: list-checks
-      description: List a filterable set of Checks
-      flags:
-        --aws-service=: The aws service associated with the check
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --language=: The ISO 639-1 code for the language that you want your checks to appear in.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return per page.
-        --next-token=: The token for the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --pillar=: The pillar of the check
-        --source=: The source of the check
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            language:
-                - en
-                - ja
-                - zh
-                - fr
-                - de
-                - ko
-                - zh_TW
-                - it
-                - es
-                - pt_BR
-                - id
-            pillar:
-                - cost_optimizing
-                - performance
-                - security
-                - service_limits
-                - fault_tolerance
-                - operational_excellence
-            source:
-                - aws_config
-                - compute_optimizer
-                - cost_explorer
-                - lse
-                - manual
-                - pse
-                - rds
-                - resilience
-                - resilience_hub
-                - security_hub
-                - stir
-                - ta_check
-                - well_architected
-    - name: list-organization-recommendation-accounts
-      description: Lists the accounts that own the resources for an organization aggregate recommendation.
-      flags:
-        --affected-account-id=: An account affected by this organization recommendation
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return per page.
-        --next-token=: The token for the next set of results.
-        --organization-recommendation-identifier=!: The Recommendation identifier
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-organization-recommendation-resources
-      description: List Resources of a Recommendation within an Organization.
-      flags:
-        --affected-account-id=: An account affected by this organization recommendation
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --exclusion-status=: The exclusion status of the resource
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return per page.
-        --next-token=: The token for the next set of results.
-        --organization-recommendation-identifier=!: The AWS Organization organization's Recommendation identifier
-        --page-size=: The size of each page to get in the AWS service call.
-        --region-code=: The AWS Region code of the resource
-        --starting-token=: A token to specify where to start paginating.
-        --status=: The status of the resource
-      completion:
-        flag:
-            exclusion-status:
-                - excluded
-                - included
-            status:
-                - ok
-                - warning
-                - error
-    - name: list-recommendations
-      description: List a filterable set of Recommendations
-      flags:
-        --after-last-updated-at=: After the last update of the Recommendation
-        --aws-service=: The aws service associated with the Recommendation
-        --before-last-updated-at=: Before the last update of the Recommendation
-        --check-identifier=: The check identifier of the Recommendation
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return per page.
-        --next-token=: The token for the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --pillar=: The pillar of the Recommendation
-        --source=: The source of the Recommendation
-        --starting-token=: A token to specify where to start paginating.
-        --status=: The status of the Recommendation
-        --type=: The type of the Recommendation
-      completion:
-        flag:
-            pillar:
-                - cost_optimizing
-                - performance
-                - security
-                - service_limits
-                - fault_tolerance
-                - operational_excellence
-            source:
-                - aws_config
-                - compute_optimizer
-                - cost_explorer
-                - lse
-                - manual
-                - pse
-                - rds
-                - resilience
-                - resilience_hub
-                - security_hub
-                - stir
-                - ta_check
-                - well_architected
-            status:
-                - ok
-                - warning
-                - error
-            type:
-                - standard
-                - priority

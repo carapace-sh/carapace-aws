@@ -1,55 +1,6 @@
 name: internetmonitor
 description: Amazon CloudWatch Internet Monitor
 commands:
-    - name: list-health-events
-      description: Lists all health events for a monitor in Amazon CloudWatch Internet Monitor.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --end-time=: The time when a health event ended.
-        --event-status=: The status of a health event.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --linked-account-id=: The account ID for an account that you've set up cross-account sharing for in Amazon CloudWatch Internet Monitor.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The number of health event objects that you want to return with this call.
-        --monitor-name=!: The name of the monitor.
-        --next-token=: The token for the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --start-time=: The time when a health event started.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            event-status:
-                - ACTIVE
-                - RESOLVED
-    - name: list-tags-for-resource
-      description: Lists the tags for a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) for a resource.
-    - name: create-monitor
-      description: Creates a monitor in Amazon CloudWatch Internet Monitor.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive string of up to 64 ASCII characters that you specify to make an idempotent API request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --health-events-config=: Defines the threshold percentages and other configuration information for when Amazon CloudWatch Internet Monitor creates a health event.
-        --internet-measurements-log-delivery=: Publish internet measurements for Internet Monitor to an Amazon S3 bucket in addition to CloudWatch Logs.
-        --max-city-networks-to-monitor=: The maximum number of city-networks to monitor for your resources.
-        --monitor-name=!: The name of the monitor.
-        --resources=: The resources to include in a monitor, which you provide as a set of Amazon Resource Names (ARNs).
-        --tags=: The tags for a monitor.
-        --traffic-percentage-to-monitor=: The percentage of the internet-facing traffic for your application that you want to monitor with this monitor.
-    - name: delete-monitor
-      description: Deletes a monitor in Amazon CloudWatch Internet Monitor.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --monitor-name=!: The name of the monitor to delete.
     - name: get-health-event
       description: Gets information that Amazon CloudWatch Internet Monitor has created and stored about a health event for a specified monitor.
       flags:
@@ -59,30 +10,48 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --linked-account-id=: The account ID for an account that you've set up cross-account sharing for in Amazon CloudWatch Internet Monitor.
         --monitor-name=!: The name of the monitor.
-    - name: get-query-status
-      description: Returns the current status of a query for the Amazon CloudWatch Internet Monitor query interface, for a specified query ID and monitor.
+    - name: list-monitors
+      description: Lists all of your monitors for Amazon CloudWatch Internet Monitor and their statuses, along with the Amazon Resource Name (ARN) and name of each monitor.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --monitor-name=!: The name of the monitor.
-        --query-id=!: The ID of the query that you want to return the status for.
-    - name: stop-query
-      description: Stop a query that is progress for a specific monitor.
+        --include-linked-accounts: A boolean option that you can set to `TRUE` to include monitors for linked accounts in a list of monitors, when you've set up cross-account sharing in Amazon CloudWatch Internet Monitor.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The number of monitor objects that you want to return with this call.
+        --monitor-status=: The status of a monitor.
+        --next-token=: The token for the next set of results.
+        --no-include-linked-accounts: A boolean option that you can set to `TRUE` to include monitors for linked accounts in a list of monitors, when you've set up cross-account sharing in Amazon CloudWatch Internet Monitor.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: Lists the tags for a resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --monitor-name=!: The name of the monitor.
-        --query-id=!: The ID of the query that you want to stop.
-    - name: tag-resource
-      description: Adds a tag to a resource.
+        --resource-arn=!: The Amazon Resource Name (ARN) for a resource.
+    - name: start-query
+      description: Start a query to return data for a specific query type for the Amazon CloudWatch Internet Monitor query interface.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=!: The timestamp that is the end of the period that you want to retrieve data for with your query.
+        --filter-parameters=: The `FilterParameters` field that you use with Amazon CloudWatch Internet Monitor queries is a string the defines how you want a query to be filtered.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) for a tag that you add to a resource.
-        --tags=!: Tags that you add to a resource.
+        --linked-account-id=: The account ID for an account that you've set up cross-account sharing for in Amazon CloudWatch Internet Monitor.
+        --monitor-name=!: The name of the monitor to query.
+        --query-type=!: The type of query to run.
+        --start-time=!: The timestamp that is the beginning of the period that you want to retrieve data for with your query.
+      completion:
+        flag:
+            query-type:
+                - MEASUREMENTS
+                - TOP_LOCATIONS
+                - TOP_LOCATION_DETAILS
+                - OVERALL_TRAFFIC_SUGGESTIONS
+                - OVERALL_TRAFFIC_SUGGESTIONS_DETAILS
+                - ROUTING_SUGGESTIONS
     - name: update-monitor
       description: Updates a monitor.
       flags:
@@ -105,13 +74,29 @@ commands:
                 - ACTIVE
                 - INACTIVE
                 - ERROR
-    - name: get-internet-event
-      description: Gets information that Amazon CloudWatch Internet Monitor has generated about an internet event.
+    - name: delete-monitor
+      description: Deletes a monitor in Amazon CloudWatch Internet Monitor.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --event-id=!: The `EventId` of the internet event to return information for.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --monitor-name=!: The name of the monitor to delete.
+    - name: get-monitor
+      description: Gets information about a monitor in Amazon CloudWatch Internet Monitor based on a monitor name.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --linked-account-id=: The account ID for an account that you've set up cross-account sharing for in Amazon CloudWatch Internet Monitor.
+        --monitor-name=!: The name of the monitor.
+    - name: stop-query
+      description: Stop a query that is progress for a specific monitor.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --monitor-name=!: The name of the monitor.
+        --query-id=!: The ID of the query that you want to stop.
     - name: get-query-results
       description: Return the data for a query with the Amazon CloudWatch Internet Monitor query interface.
       flags:
@@ -122,6 +107,72 @@ commands:
         --monitor-name=!: The name of the monitor to return data for.
         --next-token=: The token for the next set of results.
         --query-id=!: The ID of the query that you want to return data results for.
+    - name: get-query-status
+      description: Returns the current status of a query for the Amazon CloudWatch Internet Monitor query interface, for a specified query ID and monitor.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --monitor-name=!: The name of the monitor.
+        --query-id=!: The ID of the query that you want to return the status for.
+    - name: tag-resource
+      description: Adds a tag to a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) for a tag that you add to a resource.
+        --tags=!: Tags that you add to a resource.
+    - name: untag-resource
+      description: Removes a tag from a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) for a tag you remove a resource from.
+        --tag-keys=!: Tag keys that you remove from a resource.
+    - name: create-monitor
+      description: Creates a monitor in Amazon CloudWatch Internet Monitor.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive string of up to 64 ASCII characters that you specify to make an idempotent API request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --health-events-config=: Defines the threshold percentages and other configuration information for when Amazon CloudWatch Internet Monitor creates a health event.
+        --internet-measurements-log-delivery=: Publish internet measurements for Internet Monitor to an Amazon S3 bucket in addition to CloudWatch Logs.
+        --max-city-networks-to-monitor=: The maximum number of city-networks to monitor for your resources.
+        --monitor-name=!: The name of the monitor.
+        --resources=: The resources to include in a monitor, which you provide as a set of Amazon Resource Names (ARNs).
+        --tags=: The tags for a monitor.
+        --traffic-percentage-to-monitor=: The percentage of the internet-facing traffic for your application that you want to monitor with this monitor.
+    - name: get-internet-event
+      description: Gets information that Amazon CloudWatch Internet Monitor has generated about an internet event.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --event-id=!: The `EventId` of the internet event to return information for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-health-events
+      description: Lists all health events for a monitor in Amazon CloudWatch Internet Monitor.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=: The time when a health event ended.
+        --event-status=: The status of a health event.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --linked-account-id=: The account ID for an account that you've set up cross-account sharing for in Amazon CloudWatch Internet Monitor.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The number of health event objects that you want to return with this call.
+        --monitor-name=!: The name of the monitor.
+        --next-token=: The token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --start-time=: The time when a health event started.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            event-status:
+                - ACTIVE
+                - RESOLVED
     - name: list-internet-events
       description: Lists internet events that cause performance or availability issues for client locations.
       flags:
@@ -137,54 +188,3 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --start-time=: The start time of the time window that you want to get a list of internet events for.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-monitors
-      description: Lists all of your monitors for Amazon CloudWatch Internet Monitor and their statuses, along with the Amazon Resource Name (ARN) and name of each monitor.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --include-linked-accounts: A boolean option that you can set to `TRUE` to include monitors for linked accounts in a list of monitors, when you've set up cross-account sharing in Amazon CloudWatch Internet Monitor.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The number of monitor objects that you want to return with this call.
-        --monitor-status=: The status of a monitor.
-        --next-token=: The token for the next set of results.
-        --no-include-linked-accounts: A boolean option that you can set to `TRUE` to include monitors for linked accounts in a list of monitors, when you've set up cross-account sharing in Amazon CloudWatch Internet Monitor.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: start-query
-      description: Start a query to return data for a specific query type for the Amazon CloudWatch Internet Monitor query interface.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --end-time=!: The timestamp that is the end of the period that you want to retrieve data for with your query.
-        --filter-parameters=: The `FilterParameters` field that you use with Amazon CloudWatch Internet Monitor queries is a string the defines how you want a query to be filtered.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --linked-account-id=: The account ID for an account that you've set up cross-account sharing for in Amazon CloudWatch Internet Monitor.
-        --monitor-name=!: The name of the monitor to query.
-        --query-type=!: The type of query to run.
-        --start-time=!: The timestamp that is the beginning of the period that you want to retrieve data for with your query.
-      completion:
-        flag:
-            query-type:
-                - MEASUREMENTS
-                - TOP_LOCATIONS
-                - TOP_LOCATION_DETAILS
-                - OVERALL_TRAFFIC_SUGGESTIONS
-                - OVERALL_TRAFFIC_SUGGESTIONS_DETAILS
-                - ROUTING_SUGGESTIONS
-    - name: get-monitor
-      description: Gets information about a monitor in Amazon CloudWatch Internet Monitor based on a monitor name.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --linked-account-id=: The account ID for an account that you've set up cross-account sharing for in Amazon CloudWatch Internet Monitor.
-        --monitor-name=!: The name of the monitor.
-    - name: untag-resource
-      description: Removes a tag from a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) for a tag you remove a resource from.
-        --tag-keys=!: Tag keys that you remove from a resource.

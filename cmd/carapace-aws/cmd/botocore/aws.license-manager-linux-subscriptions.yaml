@@ -1,6 +1,22 @@
 name: license-manager-linux-subscriptions
 description: AWS License Manager Linux Subscriptions
 commands:
+    - name: tag-resource
+      description: Add metadata tags to the specified Amazon Web Services resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the Amazon Web Services resource to which to add the specified metadata tags.
+        --tags=!: The metadata tags to assign to the Amazon Web Services resource.
+    - name: untag-resource
+      description: Remove one or more metadata tag from the specified Amazon Web Services resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the Amazon Web Services resource to remove the metadata tags from.
+        --tag-keys=!: A list of metadata tag keys to remove from the requested resource.
     - name: deregister-subscription-provider
       description: Remove a third-party subscription provider from the Bring Your Own License (BYOL) subscriptions registered to your account.
       flags:
@@ -8,6 +24,12 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --subscription-provider-arn=!: The Amazon Resource Name (ARN) of the subscription provider resource to deregister.
+    - name: get-service-settings
+      description: Lists the Linux subscriptions service settings for your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-linux-subscription-instances
       description: Lists the running Amazon EC2 instances that were discovered with commercial Linux subscriptions.
       flags:
@@ -20,47 +42,6 @@ commands:
         --next-token=: A token to specify where to start paginating.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: List the metadata tags that are assigned to the specified Amazon Web Services resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource for which to list metadata tags.
-    - name: register-subscription-provider
-      description: Register the supported third-party subscription provider for your Bring Your Own License (BYOL) subscription.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --secret-arn=!: The Amazon Resource Name (ARN) of the secret where you've stored your subscription provider's access token.
-        --subscription-provider-source=!: The supported Linux subscription provider to register.
-        --tags=: The metadata tags to assign to your registered Linux subscription provider resource.
-      completion:
-        flag:
-            subscription-provider-source:
-                - RedHat
-    - name: untag-resource
-      description: Remove one or more metadata tag from the specified Amazon Web Services resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the Amazon Web Services resource to remove the metadata tags from.
-        --tag-keys=!: A list of metadata tag keys to remove from the requested resource.
-    - name: get-registered-subscription-provider
-      description: Get details for a Bring Your Own License (BYOL) subscription that's registered to your account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --subscription-provider-arn=!: The Amazon Resource Name (ARN) of the BYOL registration resource to get details for.
-    - name: get-service-settings
-      description: Lists the Linux subscriptions service settings for your account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-linux-subscriptions
       description: Lists the Linux subscriptions that have been discovered.
       flags:
@@ -85,14 +66,6 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
         --subscription-provider-sources=: To filter your results, specify which subscription providers to return in the list.
-    - name: tag-resource
-      description: Add metadata tags to the specified Amazon Web Services resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the Amazon Web Services resource to which to add the specified metadata tags.
-        --tags=!: The metadata tags to assign to the Amazon Web Services resource.
     - name: update-service-settings
       description: Updates the service settings for Linux subscriptions.
       flags:
@@ -108,3 +81,30 @@ commands:
             linux-subscriptions-discovery:
                 - Enabled
                 - Disabled
+    - name: get-registered-subscription-provider
+      description: Get details for a Bring Your Own License (BYOL) subscription that's registered to your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --subscription-provider-arn=!: The Amazon Resource Name (ARN) of the BYOL registration resource to get details for.
+    - name: list-tags-for-resource
+      description: List the metadata tags that are assigned to the specified Amazon Web Services resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource for which to list metadata tags.
+    - name: register-subscription-provider
+      description: Register the supported third-party subscription provider for your Bring Your Own License (BYOL) subscription.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --secret-arn=!: The Amazon Resource Name (ARN) of the secret where you've stored your subscription provider's access token.
+        --subscription-provider-source=!: The supported Linux subscription provider to register.
+        --tags=: The metadata tags to assign to your registered Linux subscription provider resource.
+      completion:
+        flag:
+            subscription-provider-source:
+                - RedHat

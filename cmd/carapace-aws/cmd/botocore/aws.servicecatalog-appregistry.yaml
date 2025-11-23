@@ -1,14 +1,6 @@
 name: servicecatalog-appregistry
 description: AWS Service Catalog App Registry
 commands:
-    - name: associate-attribute-group
-      description: Associates an attribute group with an application to augment the application's metadata with the group's attributes.
-      flags:
-        --application=!: The name, ID, or ARN of the application.
-        --attribute-group=!: The name, ID, or ARN of the attribute group that holds the attributes to describe the application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: associate-resource
       description: Associates a resource with an application.
       flags:
@@ -24,31 +16,36 @@ commands:
             resource-type:
                 - CFN_STACK
                 - RESOURCE_TAG_VALUE
-    - name: create-attribute-group
-      description: Creates a new attribute group as a container for user-defined attributes.
-      flags:
-        --attributes=!: A JSON string in the form of nested key-value pairs that represent the attributes in the group and describes an application and its components.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: A unique identifier that you provide to ensure idempotency.
-        --description=: The description of the attribute group that the user provides.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the attribute group.
-        --tags=: Key-value pairs you can use to associate with the attribute group.
-    - name: disassociate-attribute-group
-      description: Disassociates an attribute group from an application to remove the extra attributes contained in the attribute group from the application's metadata.
+    - name: get-application
+      description: Retrieves metadata information about one of your applications.
       flags:
         --application=!: The name, ID, or ARN of the application.
-        --attribute-group=!: The name, ID, or ARN of the attribute group that holds the attributes to describe the application.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-attribute-group
-      description: Retrieves an attribute group by its ARN, ID, or name.
+    - name: get-configuration
+      description: Retrieves a `TagKey` configuration from an account.
       flags:
-        --attribute-group=!: The name, ID, or ARN of the attribute group that holds the attributes to describe the application.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-attribute-groups
+      description: Lists all attribute groups which you have access to.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The upper bound of the number of results to return (cannot exceed 25).
+        --next-token=: The token to use to get the next page of results after a previous API call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: put-configuration
+      description: Associates a `TagKey` configuration to an account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration=!: Associates a `TagKey` configuration to an account.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: sync-resource
       description: Syncs the resource with current AppRegistry records.
@@ -87,18 +84,43 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-attribute-groups-for-application
-      description: Lists the details of all attribute groups associated with a specific application.
+    - name: get-attribute-group
+      description: Retrieves an attribute group by its ARN, ID, or name.
       flags:
-        --application=!: The name or ID of the application.
+        --attribute-group=!: The name, ID, or ARN of the attribute group that holds the attributes to describe the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-applications
+      description: Retrieves a list of all of your applications.
+      flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The upper bound of the number of results to return.
-        --next-token=: This token retrieves the next page of results after a previous API call.
+        --max-results=: The upper bound of the number of results to return (cannot exceed 25).
+        --next-token=: The token to use to get the next page of results after a previous API call.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-associated-resources
+      description: Lists all of the resources that are associated with the specified application.
+      flags:
+        --application=!: The name, ID, or ARN of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The upper bound of the number of results to return (cannot exceed 25).
+        --next-token=: The token to use to get the next page of results after a previous API call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: Lists all of the tags on the resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon resource name (ARN) that specifies the resource.
     - name: tag-resource
       description: Assigns one or more tags (key-value pairs) to the specified resource.
       flags:
@@ -107,6 +129,25 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon resource name (ARN) that specifies the resource.
         --tags=!: The new or modified tags for the resource.
+    - name: create-attribute-group
+      description: Creates a new attribute group as a container for user-defined attributes.
+      flags:
+        --attributes=!: A JSON string in the form of nested key-value pairs that represent the attributes in the group and describes an application and its components.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A unique identifier that you provide to ensure idempotency.
+        --description=: The description of the attribute group that the user provides.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the attribute group.
+        --tags=: Key-value pairs you can use to associate with the attribute group.
+    - name: disassociate-attribute-group
+      description: Disassociates an attribute group from an application to remove the extra attributes contained in the attribute group from the application's metadata.
+      flags:
+        --application=!: The name, ID, or ARN of the application.
+        --attribute-group=!: The name, ID, or ARN of the attribute group that holds the attributes to describe the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: disassociate-resource
       description: Disassociates a resource from application.
       flags:
@@ -121,60 +162,6 @@ commands:
             resource-type:
                 - CFN_STACK
                 - RESOURCE_TAG_VALUE
-    - name: get-application
-      description: Retrieves metadata information about one of your applications.
-      flags:
-        --application=!: The name, ID, or ARN of the application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-associated-resources
-      description: Lists all of the resources that are associated with the specified application.
-      flags:
-        --application=!: The name, ID, or ARN of the application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The upper bound of the number of results to return (cannot exceed 25).
-        --next-token=: The token to use to get the next page of results after a previous API call.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-attribute-groups
-      description: Lists all attribute groups which you have access to.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The upper bound of the number of results to return (cannot exceed 25).
-        --next-token=: The token to use to get the next page of results after a previous API call.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: put-configuration
-      description: Associates a `TagKey` configuration to an account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration=!: Associates a `TagKey` configuration to an account.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: untag-resource
-      description: Removes tags from a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon resource name (ARN) that specifies the resource.
-        --tag-keys=!: A list of the tag keys to remove from the specified resource.
-    - name: update-application
-      description: Updates an existing application with new attributes.
-      flags:
-        --application=!: The name, ID, or ARN of the application that will be updated.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The new description of the application.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: 'Deprecated: The new name of the application.'
     - name: get-associated-resource
       description: Gets the resource associated with the application.
       flags:
@@ -192,23 +179,45 @@ commands:
             resource-type:
                 - CFN_STACK
                 - RESOURCE_TAG_VALUE
-    - name: get-configuration
-      description: Retrieves a `TagKey` configuration from an account.
+    - name: update-attribute-group
+      description: Updates an existing attribute group with new details.
       flags:
+        --attribute-group=!: The name, ID, or ARN of the attribute group that holds the attributes to describe the application.
+        --attributes=: A JSON string in the form of nested key-value pairs that represent the attributes in the group and describes an application and its components.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description of the attribute group that the user provides.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-applications
-      description: Retrieves a list of all of your applications.
+        --name=: 'Deprecated: The new name of the attribute group.'
+    - name: list-attribute-groups-for-application
+      description: Lists the details of all attribute groups associated with a specific application.
       flags:
+        --application=!: The name or ID of the application.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The upper bound of the number of results to return (cannot exceed 25).
-        --next-token=: The token to use to get the next page of results after a previous API call.
+        --max-results=: The upper bound of the number of results to return.
+        --next-token=: This token retrieves the next page of results after a previous API call.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: untag-resource
+      description: Removes tags from a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon resource name (ARN) that specifies the resource.
+        --tag-keys=!: A list of the tag keys to remove from the specified resource.
+    - name: update-application
+      description: Updates an existing application with new attributes.
+      flags:
+        --application=!: The name, ID, or ARN of the application that will be updated.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The new description of the application.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: 'Deprecated: The new name of the application.'
     - name: list-associated-attribute-groups
       description: Lists all attribute groups that are associated with specified application.
       flags:
@@ -221,20 +230,11 @@ commands:
         --next-token=: The token to use to get the next page of results after a previous API call.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: Lists all of the tags on the resource.
+    - name: associate-attribute-group
+      description: Associates an attribute group with an application to augment the application's metadata with the group's attributes.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon resource name (ARN) that specifies the resource.
-    - name: update-attribute-group
-      description: Updates an existing attribute group with new details.
-      flags:
+        --application=!: The name, ID, or ARN of the application.
         --attribute-group=!: The name, ID, or ARN of the attribute group that holds the attributes to describe the application.
-        --attributes=: A JSON string in the form of nested key-value pairs that represent the attributes in the group and describes an application and its components.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The description of the attribute group that the user provides.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: 'Deprecated: The new name of the attribute group.'

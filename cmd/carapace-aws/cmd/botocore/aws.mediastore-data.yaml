@@ -1,6 +1,28 @@
 name: mediastore-data
 description: AWS Elemental MediaStore Data Plane
 commands:
+    - name: delete-object
+      description: Deletes an object at the specified path.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --path=!: The path (including the file name) where the object is stored in the container.
+    - name: describe-object
+      description: Gets the headers for an object at the specified path.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --path=!: The path (including the file name) where the object is stored in the container.
+    - name: get-object
+      description: Downloads the object at the specified path.
+      flags:
+        --path=!: The path (including the file name) where the object is stored in the container.
+        --range=: The range bytes of an object to retrieve.
+      completion:
+        positional:
+            - - $files
     - name: list-items
       description: Provides a list of metadata entries about folders and objects in the specified folder.
       flags:
@@ -32,25 +54,3 @@ commands:
             upload-availability:
                 - STANDARD
                 - STREAMING
-    - name: delete-object
-      description: Deletes an object at the specified path.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --path=!: The path (including the file name) where the object is stored in the container.
-    - name: describe-object
-      description: Gets the headers for an object at the specified path.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --path=!: The path (including the file name) where the object is stored in the container.
-    - name: get-object
-      description: Downloads the object at the specified path.
-      flags:
-        --path=!: The path (including the file name) where the object is stored in the container.
-        --range=: The range bytes of an object to retrieve.
-      completion:
-        positional:
-            - - $files

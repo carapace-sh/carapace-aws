@@ -1,6 +1,31 @@
 name: panorama
 description: AWS Panorama
 commands:
+    - name: delete-device
+      description: Deletes a device.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --device-id=!: The device's ID.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: deregister-package-version
+      description: Deregisters a package version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --owner-account=: An owner account.
+        --package-id=!: A package ID.
+        --package-version=!: A package version.
+        --patch-version=!: A patch version.
+        --updated-latest-patch-version=: If the version was marked latest, the new version to maker as latest.
+    - name: describe-application-instance-details
+      description: Returns information about an application instance's configuration manifest.
+      flags:
+        --application-instance-id=!: The application instance's ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: tag-resource
       description: Tags a resource.
       flags:
@@ -9,20 +34,57 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The resource's ARN.
         --tags=!: Tags for the resource.
-    - name: create-application-instance
-      description: Creates an application instance and deploys it to a device.
+    - name: update-device-metadata
+      description: Updates a device's metadata.
       flags:
-        --application-instance-id-to-replace=: The ID of an application instance to replace with the new instance.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --default-runtime-context-device=!: A device's ID.
-        --description=: A description for the application instance.
+        --description=: A description for the device.
+        --device-id=!: The device's ID.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --manifest-overrides-payload=: Setting overrides for the application manifest.
-        --manifest-payload=!: The application's manifest document.
-        --name=: A name for the application instance.
-        --runtime-role-arn=: The ARN of a runtime role for the application instance.
-        --tags=: Tags for the application instance.
+    - name: describe-package-version
+      description: Returns information about a package version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --owner-account=: The version's owner account.
+        --package-id=!: The version's ID.
+        --package-version=!: The version's version.
+        --patch-version=: The version's patch version.
+    - name: register-package-version
+      description: Registers a package version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mark-latest: Whether to mark the new version as the latest version.
+        --no-mark-latest: Whether to mark the new version as the latest version.
+        --owner-account=: An owner account.
+        --package-id=!: A package ID.
+        --package-version=!: A package version.
+        --patch-version=!: A patch version.
+    - name: list-tags-for-resource
+      description: Returns a list of tags for a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The resource's ARN.
+    - name: create-job-for-devices
+      description: Creates a job to run on a device.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --device-ids=!: ID of target device.
+        --device-job-config=: Configuration settings for a software update job.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-type=!: The type of job to run.
+      completion:
+        flag:
+            job-type:
+                - OTA
+                - REBOOT
     - name: create-node-from-template-job
       description: Creates a camera stream node.
       flags:
@@ -40,38 +102,20 @@ commands:
         flag:
             template-type:
                 - RTSP_CAMERA_STREAM
-    - name: describe-application-instance
-      description: Returns information about an application instance on a device.
-      flags:
-        --application-instance-id=!: The application instance's ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-application-instance-node-instances
-      description: Returns a list of application node instances.
-      flags:
-        --application-instance-id=!: The node instances' application instance ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of node instances to return in one page of results.
-        --next-token=: Specify the pagination token from a previous request to retrieve the next page of results.
-    - name: create-package-import-job
-      description: Imports a node package.
+    - name: describe-device-job
+      description: Returns information about a device job.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: A client token for the package import job.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input-config=!: An input config for the package import job.
-        --job-tags=: Tags for the package import job.
-        --job-type=!: A job type for the package import job.
-        --output-config=!: An output config for the package import job.
-      completion:
-        flag:
-            job-type:
-                - NODE_PACKAGE_VERSION
-                - MARKETPLACE_NODE_PACKAGE_VERSION
+        --job-id=!: The job's ID.
+    - name: describe-package
+      description: Returns information about a package.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --package-id=!: The package's ID.
     - name: describe-node
       description: Returns information about a node.
       flags:
@@ -80,106 +124,6 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --node-id=!: The node's ID.
         --owner-account=: The account ID of the node's owner.
-    - name: list-packages
-      description: Returns a list of packages.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of packages to return in one page of results.
-        --next-token=: Specify the pagination token from a previous request to retrieve the next page of results.
-    - name: signal-application-instance-node-instances
-      description: Signal camera nodes to stop or resume.
-      flags:
-        --application-instance-id=!: An application instance ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --node-signals=!: A list of signals.
-    - name: create-package
-      description: Creates a package and storage location in an Amazon S3 access point.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --package-name=!: A name for the package.
-        --tags=: Tags for the package.
-    - name: delete-package
-      description: Deletes a package.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --force-delete: Delete the package even if it has artifacts stored in its access point.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-force-delete: Delete the package even if it has artifacts stored in its access point.
-        --package-id=!: The package's ID.
-    - name: describe-package-import-job
-      description: Returns information about a package import job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The job's ID.
-    - name: untag-resource
-      description: Removes tags from a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The resource's ARN.
-        --tag-keys=!: Tag keys to remove.
-    - name: list-tags-for-resource
-      description: Returns a list of tags for a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The resource's ARN.
-    - name: deregister-package-version
-      description: Deregisters a package version.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --owner-account=: An owner account.
-        --package-id=!: A package ID.
-        --package-version=!: A package version.
-        --patch-version=!: A patch version.
-        --updated-latest-patch-version=: If the version was marked latest, the new version to maker as latest.
-    - name: describe-node-from-template-job
-      description: Returns information about a job to create a camera stream node.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The job's ID.
-    - name: list-application-instances
-      description: Returns a list of application instances.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --device-id=: The application instances' device ID.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of application instances to return in one page of results.
-        --next-token=: Specify the pagination token from a previous request to retrieve the next page of results.
-        --status-filter=: Only include instances with a specific status.
-      completion:
-        flag:
-            status-filter:
-                - DEPLOYMENT_SUCCEEDED
-                - DEPLOYMENT_ERROR
-                - REMOVAL_SUCCEEDED
-                - REMOVAL_FAILED
-                - PROCESSING_DEPLOYMENT
-                - PROCESSING_REMOVAL
-                - DEPLOYMENT_FAILED
-    - name: describe-package
-      description: Returns information about a package.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --package-id=!: The package's ID.
     - name: list-application-instance-dependencies
       description: Returns a list of application instance dependencies.
       flags:
@@ -189,50 +133,6 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The maximum number of application instance dependencies to return in one page of results.
         --next-token=: Specify the pagination token from a previous request to retrieve the next page of results.
-    - name: list-node-from-template-jobs
-      description: Returns a list of camera stream node jobs.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of node from template jobs to return in one page of results.
-        --next-token=: Specify the pagination token from a previous request to retrieve the next page of results.
-    - name: register-package-version
-      description: Registers a package version.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mark-latest: Whether to mark the new version as the latest version.
-        --no-mark-latest: Whether to mark the new version as the latest version.
-        --owner-account=: An owner account.
-        --package-id=!: A package ID.
-        --package-version=!: A package version.
-        --patch-version=!: A patch version.
-    - name: create-job-for-devices
-      description: Creates a job to run on a device.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --device-ids=!: ID of target device.
-        --device-job-config=: Configuration settings for a software update job.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-type=!: The type of job to run.
-      completion:
-        flag:
-            job-type:
-                - OTA
-                - REBOOT
-    - name: describe-package-version
-      description: Returns information about a package version.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --owner-account=: The version's owner account.
-        --package-id=!: The version's ID.
-        --package-version=!: The version's version.
-        --patch-version=: The version's patch version.
     - name: list-devices
       description: Returns a list of devices.
       flags:
@@ -266,6 +166,176 @@ commands:
             sort-order:
                 - ASCENDING
                 - DESCENDING
+    - name: list-node-from-template-jobs
+      description: Returns a list of camera stream node jobs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of node from template jobs to return in one page of results.
+        --next-token=: Specify the pagination token from a previous request to retrieve the next page of results.
+    - name: untag-resource
+      description: Removes tags from a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The resource's ARN.
+        --tag-keys=!: Tag keys to remove.
+    - name: provision-device
+      description: Creates a device and returns a configuration archive.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description for the device.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: A name for the device.
+        --networking-configuration=: A networking configuration for the device.
+        --tags=: Tags for the device.
+    - name: signal-application-instance-node-instances
+      description: Signal camera nodes to stop or resume.
+      flags:
+        --application-instance-id=!: An application instance ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --node-signals=!: A list of signals.
+    - name: create-application-instance
+      description: Creates an application instance and deploys it to a device.
+      flags:
+        --application-instance-id-to-replace=: The ID of an application instance to replace with the new instance.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --default-runtime-context-device=!: A device's ID.
+        --description=: A description for the application instance.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --manifest-overrides-payload=: Setting overrides for the application manifest.
+        --manifest-payload=!: The application's manifest document.
+        --name=: A name for the application instance.
+        --runtime-role-arn=: The ARN of a runtime role for the application instance.
+        --tags=: Tags for the application instance.
+    - name: create-package
+      description: Creates a package and storage location in an Amazon S3 access point.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --package-name=!: A name for the package.
+        --tags=: Tags for the package.
+    - name: create-package-import-job
+      description: Imports a node package.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A client token for the package import job.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-config=!: An input config for the package import job.
+        --job-tags=: Tags for the package import job.
+        --job-type=!: A job type for the package import job.
+        --output-config=!: An output config for the package import job.
+      completion:
+        flag:
+            job-type:
+                - NODE_PACKAGE_VERSION
+                - MARKETPLACE_NODE_PACKAGE_VERSION
+    - name: delete-package
+      description: Deletes a package.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --force-delete: Delete the package even if it has artifacts stored in its access point.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-force-delete: Delete the package even if it has artifacts stored in its access point.
+        --package-id=!: The package's ID.
+    - name: list-package-import-jobs
+      description: Returns a list of package import jobs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of package import jobs to return in one page of results.
+        --next-token=: Specify the pagination token from a previous request to retrieve the next page of results.
+    - name: list-packages
+      description: Returns a list of packages.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of packages to return in one page of results.
+        --next-token=: Specify the pagination token from a previous request to retrieve the next page of results.
+    - name: describe-package-import-job
+      description: Returns information about a package import job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The job's ID.
+    - name: list-application-instance-node-instances
+      description: Returns a list of application node instances.
+      flags:
+        --application-instance-id=!: The node instances' application instance ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of node instances to return in one page of results.
+        --next-token=: Specify the pagination token from a previous request to retrieve the next page of results.
+    - name: list-application-instances
+      description: Returns a list of application instances.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --device-id=: The application instances' device ID.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of application instances to return in one page of results.
+        --next-token=: Specify the pagination token from a previous request to retrieve the next page of results.
+        --status-filter=: Only include instances with a specific status.
+      completion:
+        flag:
+            status-filter:
+                - DEPLOYMENT_SUCCEEDED
+                - DEPLOYMENT_ERROR
+                - REMOVAL_SUCCEEDED
+                - REMOVAL_FAILED
+                - PROCESSING_DEPLOYMENT
+                - PROCESSING_REMOVAL
+                - DEPLOYMENT_FAILED
+    - name: list-devices-jobs
+      description: Returns a list of jobs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --device-id=: Filter results by the job's target device ID.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of device jobs to return in one page of results.
+        --next-token=: Specify the pagination token from a previous request to retrieve the next page of results.
+    - name: remove-application-instance
+      description: Removes an application instance.
+      flags:
+        --application-instance-id=!: An application instance ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-application-instance
+      description: Returns information about an application instance on a device.
+      flags:
+        --application-instance-id=!: The application instance's ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-device
+      description: Returns information about a device.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --device-id=!: The device's ID.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-node-from-template-job
+      description: Returns information about a job to create a camera stream node.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The job's ID.
     - name: list-nodes
       description: Returns a list of nodes.
       flags:
@@ -286,73 +356,3 @@ commands:
                 - ML_MODEL
                 - MEDIA_SOURCE
                 - MEDIA_SINK
-    - name: provision-device
-      description: Creates a device and returns a configuration archive.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description for the device.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: A name for the device.
-        --networking-configuration=: A networking configuration for the device.
-        --tags=: Tags for the device.
-    - name: remove-application-instance
-      description: Removes an application instance.
-      flags:
-        --application-instance-id=!: An application instance ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-device-metadata
-      description: Updates a device's metadata.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description for the device.
-        --device-id=!: The device's ID.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-device
-      description: Deletes a device.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --device-id=!: The device's ID.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-application-instance-details
-      description: Returns information about an application instance's configuration manifest.
-      flags:
-        --application-instance-id=!: The application instance's ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-device
-      description: Returns information about a device.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --device-id=!: The device's ID.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-device-job
-      description: Returns information about a device job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The job's ID.
-    - name: list-devices-jobs
-      description: Returns a list of jobs.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --device-id=: Filter results by the job's target device ID.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of device jobs to return in one page of results.
-        --next-token=: Specify the pagination token from a previous request to retrieve the next page of results.
-    - name: list-package-import-jobs
-      description: Returns a list of package import jobs.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of package import jobs to return in one page of results.
-        --next-token=: Specify the pagination token from a previous request to retrieve the next page of results.

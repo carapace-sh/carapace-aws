@@ -1,27 +1,31 @@
 name: fis
 description: AWS Fault Injection Simulator
 commands:
-    - name: get-target-account-configuration
-      description: Gets information about the specified target account configuration of the experiment template.
+    - name: delete-experiment-template
+      description: Deletes the specified experiment template.
       flags:
-        --account-id=!: The Amazon Web Services account ID of the target account.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --experiment-template-id=!: The ID of the experiment template.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-experiment-resolved-targets
-      description: Lists the resolved targets information of the specified experiment.
+        --id=!: The ID of the experiment template.
+    - name: get-action
+      description: Gets information about the specified FIS action.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --experiment-id=!: The ID of the experiment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the action.
+    - name: list-target-resource-types
+      description: Lists the target resource types.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return with a single call.
         --next-token=: The token for the next page of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-        --target-name=: The name of the target.
     - name: start-experiment
       description: Starts running an experiment from the specified experiment template.
       flags:
@@ -40,16 +44,29 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
         --tags=!: The tags for the resource.
-    - name: update-target-account-configuration
-      description: Updates the target account configuration for the specified experiment template.
+    - name: update-experiment-template
+      description: Updates the specified experiment template.
       flags:
-        --account-id=!: The Amazon Web Services account ID of the target account.
+        --actions=: The actions for the experiment.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The description of the target account.
-        --experiment-template-id=!: The ID of the experiment template.
+        --description=: A description for the template.
+        --experiment-options=: The experiment options for the experiment template.
+        --experiment-report-configuration=: The experiment report configuration for the experiment template.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --role-arn=: The Amazon Resource Name (ARN) of an IAM role for the target account.
+        --id=!: The ID of the experiment template.
+        --log-configuration=: The configuration for experiment logging.
+        --role-arn=: The Amazon Resource Name (ARN) of an IAM role that grants the FIS service permission to perform service actions on your behalf.
+        --stop-conditions=: The stop conditions for the experiment.
+        --targets=: The targets for the experiment.
+    - name: update-safety-lever-state
+      description: Updates the specified safety lever state.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the safety lever.
+        --state=!: The state of the safety lever.
     - name: create-experiment-template
       description: Creates an experiment template.
       flags:
@@ -66,6 +83,14 @@ commands:
         --stop-conditions=!: The stop conditions.
         --tags=: The tags to apply to the experiment template.
         --targets=: The targets for the experiment.
+    - name: delete-target-account-configuration
+      description: Deletes the specified target account configuration of the experiment template.
+      flags:
+        --account-id=!: The Amazon Web Services account ID of the target account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --experiment-template-id=!: The ID of the experiment template.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-experiment
       description: Gets information about the specified experiment.
       flags:
@@ -80,13 +105,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The ID of the experiment template.
-    - name: get-safety-lever
-      description: Gets information about the specified safety lever.
+    - name: get-target-account-configuration
+      description: Gets information about the specified target account configuration of the experiment template.
       flags:
+        --account-id=!: The Amazon Web Services account ID of the target account.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --experiment-template-id=!: The ID of the experiment template.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the safety lever.
     - name: list-actions
       description: Lists the available FIS actions.
       flags:
@@ -98,6 +124,19 @@ commands:
         --next-token=: The token for the next page of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-experiment-resolved-targets
+      description: Lists the resolved targets information of the specified experiment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --experiment-id=!: The ID of the experiment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return with a single call.
+        --next-token=: The token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --target-name=: The name of the target.
     - name: list-experiment-target-account-configurations
       description: Lists the target account configurations of the specified experiment.
       flags:
@@ -106,29 +145,6 @@ commands:
         --experiment-id=!: The ID of the experiment.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --next-token=: The token for the next page of results.
-    - name: list-experiments
-      description: Lists your experiments.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --experiment-template-id=: The ID of the experiment template.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return with a single call.
-        --next-token=: The token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-target-resource-types
-      description: Lists the target resource types.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return with a single call.
-        --next-token=: The token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
     - name: get-experiment-target-account-configuration
       description: Gets information about the specified target account configuration of the experiment.
       flags:
@@ -137,13 +153,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --experiment-id=!: The ID of the experiment.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-target-resource-type
-      description: Gets information about the specified resource type.
+    - name: get-safety-lever
+      description: Gets information about the specified safety lever.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-type=!: The resource type.
+        --id=!: The ID of the safety lever.
     - name: list-experiment-templates
       description: Lists your experiment templates.
       flags:
@@ -155,36 +171,6 @@ commands:
         --next-token=: The token for the next page of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: stop-experiment
-      description: Stops the specified experiment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the experiment.
-    - name: update-safety-lever-state
-      description: Updates the specified safety lever state.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the safety lever.
-        --state=!: The state of the safety lever.
-    - name: delete-target-account-configuration
-      description: Deletes the specified target account configuration of the experiment template.
-      flags:
-        --account-id=!: The Amazon Web Services account ID of the target account.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --experiment-template-id=!: The ID of the experiment template.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-action
-      description: Gets information about the specified FIS action.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the action.
     - name: list-tags-for-resource
       description: Lists the tags for the specified resource.
       flags:
@@ -204,29 +190,23 @@ commands:
         --next-token=: The token for the next page of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: untag-resource
-      description: Removes the specified tags from the specified resource.
+    - name: stop-experiment
+      description: Stops the specified experiment.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-        --tag-keys=: The tag keys to remove.
-    - name: update-experiment-template
-      description: Updates the specified experiment template.
+        --id=!: The ID of the experiment.
+    - name: update-target-account-configuration
+      description: Updates the target account configuration for the specified experiment template.
       flags:
-        --actions=: The actions for the experiment.
+        --account-id=!: The Amazon Web Services account ID of the target account.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description for the template.
-        --experiment-options=: The experiment options for the experiment template.
-        --experiment-report-configuration=: The experiment report configuration for the experiment template.
+        --description=: The description of the target account.
+        --experiment-template-id=!: The ID of the experiment template.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the experiment template.
-        --log-configuration=: The configuration for experiment logging.
-        --role-arn=: The Amazon Resource Name (ARN) of an IAM role that grants the FIS service permission to perform service actions on your behalf.
-        --stop-conditions=: The stop conditions for the experiment.
-        --targets=: The targets for the experiment.
+        --role-arn=: The Amazon Resource Name (ARN) of an IAM role for the target account.
     - name: create-target-account-configuration
       description: Creates a target account configuration for the experiment template.
       flags:
@@ -238,10 +218,30 @@ commands:
         --experiment-template-id=!: The experiment template ID.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --role-arn=!: The Amazon Resource Name (ARN) of an IAM role for the target account.
-    - name: delete-experiment-template
-      description: Deletes the specified experiment template.
+    - name: get-target-resource-type
+      description: Gets information about the specified resource type.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the experiment template.
+        --resource-type=!: The resource type.
+    - name: list-experiments
+      description: Lists your experiments.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --experiment-template-id=: The ID of the experiment template.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return with a single call.
+        --next-token=: The token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: untag-resource
+      description: Removes the specified tags from the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+        --tag-keys=: The tag keys to remove.

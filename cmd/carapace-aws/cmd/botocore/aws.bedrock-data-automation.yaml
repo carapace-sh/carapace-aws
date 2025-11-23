@@ -1,21 +1,6 @@
 name: bedrock-data-automation
 description: Data Automation for Amazon Bedrock
 commands:
-    - name: update-blueprint
-      description: Updates an existing Amazon Bedrock Data Automation Blueprint
-      flags:
-        --blueprint-arn=!: ARN generated at the server side when a Blueprint is created
-        --blueprint-stage=: ""
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --encryption-configuration=: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --schema=!: ""
-      completion:
-        flag:
-            blueprint-stage:
-                - DEVELOPMENT
-                - LIVE
     - name: update-data-automation-project
       description: Updates an existing Amazon Bedrock Data Automation Project
       flags:
@@ -34,29 +19,6 @@ commands:
             project-stage:
                 - DEVELOPMENT
                 - LIVE
-    - name: create-blueprint
-      description: Creates an Amazon Bedrock Data Automation Blueprint
-      flags:
-        --blueprint-name=!: ""
-        --blueprint-stage=: ""
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: ""
-        --encryption-configuration=: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --schema=!: ""
-        --tags=: ""
-        --type=!: ""
-      completion:
-        flag:
-            blueprint-stage:
-                - DEVELOPMENT
-                - LIVE
-            type:
-                - DOCUMENT
-                - IMAGE
-                - AUDIO
-                - VIDEO
     - name: create-blueprint-version
       description: Creates a new version of an existing Amazon Bedrock Data Automation Blueprint
       flags:
@@ -97,6 +59,27 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-data-automation-project
+      description: Deletes an existing Amazon Bedrock Data Automation Project
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --project-arn=!: ARN generated at the server side when a DataAutomationProject is created
+    - name: get-blueprint
+      description: Gets an existing Amazon Bedrock Data Automation Blueprint
+      flags:
+        --blueprint-arn=!: ARN generated at the server side when a Blueprint is created
+        --blueprint-stage=: Optional field to get a specific Blueprint stage
+        --blueprint-version=: Optional field to get a specific Blueprint version
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            blueprint-stage:
+                - DEVELOPMENT
+                - LIVE
     - name: get-data-automation-project
       description: Gets an existing Amazon Bedrock Data Automation Project
       flags:
@@ -134,6 +117,36 @@ commands:
             resource-owner:
                 - SERVICE
                 - ACCOUNT
+    - name: list-tags-for-resource
+      description: List tags for an Amazon Bedrock Data Automation resource
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: ""
+    - name: create-blueprint
+      description: Creates an Amazon Bedrock Data Automation Blueprint
+      flags:
+        --blueprint-name=!: ""
+        --blueprint-stage=: ""
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: ""
+        --encryption-configuration=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --schema=!: ""
+        --tags=: ""
+        --type=!: ""
+      completion:
+        flag:
+            blueprint-stage:
+                - DEVELOPMENT
+                - LIVE
+            type:
+                - DOCUMENT
+                - IMAGE
+                - AUDIO
+                - VIDEO
     - name: list-data-automation-projects
       description: Lists all existing Amazon Bedrock Data Automation Projects
       flags:
@@ -157,42 +170,6 @@ commands:
             resource-owner:
                 - SERVICE
                 - ACCOUNT
-    - name: untag-resource
-      description: Untag an Amazon Bedrock Data Automation resource
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: ""
-        --tag-keys=!: ""
-    - name: delete-data-automation-project
-      description: Deletes an existing Amazon Bedrock Data Automation Project
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --project-arn=!: ARN generated at the server side when a DataAutomationProject is created
-    - name: get-blueprint
-      description: Gets an existing Amazon Bedrock Data Automation Blueprint
-      flags:
-        --blueprint-arn=!: ARN generated at the server side when a Blueprint is created
-        --blueprint-stage=: Optional field to get a specific Blueprint stage
-        --blueprint-version=: Optional field to get a specific Blueprint version
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      completion:
-        flag:
-            blueprint-stage:
-                - DEVELOPMENT
-                - LIVE
-    - name: list-tags-for-resource
-      description: List tags for an Amazon Bedrock Data Automation resource
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: ""
     - name: tag-resource
       description: Tag an Amazon Bedrock Data Automation resource
       flags:
@@ -201,3 +178,26 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: ""
         --tags=!: ""
+    - name: untag-resource
+      description: Untag an Amazon Bedrock Data Automation resource
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: ""
+        --tag-keys=!: ""
+    - name: update-blueprint
+      description: Updates an existing Amazon Bedrock Data Automation Blueprint
+      flags:
+        --blueprint-arn=!: ARN generated at the server side when a Blueprint is created
+        --blueprint-stage=: ""
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --encryption-configuration=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --schema=!: ""
+      completion:
+        flag:
+            blueprint-stage:
+                - DEVELOPMENT
+                - LIVE
