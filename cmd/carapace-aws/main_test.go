@@ -44,7 +44,7 @@ func TestService(t *testing.T) {
 					t.Parallel()
 					patch := carapace.DiffPatch(
 						bridge.ActionAws("aws"),
-						bridge.ActionCarapaceBin("aws"),
+						bridge.ActionCarapace("carapace-aws"),
 						carapace.NewContext(service, operation, "--"),
 					)
 
