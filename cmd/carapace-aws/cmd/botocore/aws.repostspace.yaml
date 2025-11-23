@@ -1,6 +1,91 @@
 name: repostspace
 description: AWS re:Post Private
 commands:
+    - name: list-tags-for-resource
+      description: Returns the tags that are associated with the AWS re:Post Private resource specified by the resourceArn.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource that the tags are associated with.
+    - name: batch-remove-role
+      description: Remove a role from multiple users or groups in a private re:Post.
+      flags:
+        --accessor-ids=!: The user or group accessor identifiers to remove the role from.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --role=!: The role to remove from the users or groups.
+        --space-id=!: The unique ID of the private re:Post.
+      completion:
+        flag:
+            role:
+                - EXPERT
+                - MODERATOR
+                - ADMINISTRATOR
+                - SUPPORTREQUESTOR
+    - name: get-space
+      description: Displays information about the AWS re:Post Private private re:Post.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --space-id=!: The ID of the private re:Post.
+    - name: send-invites
+      description: Sends an invitation email to selected users and groups.
+      flags:
+        --accessor-ids=!: The array of identifiers for the users and groups.
+        --body=!: The body of the invite.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --space-id=!: The ID of the private re:Post.
+        --title=!: The title of the invite.
+    - name: untag-resource
+      description: Removes the association of the tag with the AWS re:Post Private resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource.
+        --tag-keys=!: The key values of the tag.
+    - name: create-channel
+      description: Creates a channel in an AWS re:Post Private private re:Post.
+      flags:
+        --channel-description=: A description for the channel.
+        --channel-name=!: The name for the channel.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --space-id=!: The unique ID of the private re:Post.
+    - name: list-channels
+      description: Returns the list of channel within a private re:Post with some information about each channel.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of channels to include in the results.
+        --next-token=: The token for the next set of channel to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --space-id=!: The unique ID of the private re:Post.
+        --starting-token=: A token to specify where to start paginating.
+    - name: register-admin
+      description: Adds a user or group to the list of administrators of the private re:Post.
+      flags:
+        --admin-id=!: The ID of the administrator.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --space-id=!: The ID of the private re:Post.
+    - name: tag-resource
+      description: Associates tags with an AWS re:Post Private resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource that the tag is associated with.
+        --tags=!: The list of tag keys and values that must be associated with the resource.
     - name: batch-add-channel-role-to-accessors
       description: Add role to multiple users or groups in a private re:Post channel.
       flags:
@@ -18,83 +103,6 @@ commands:
                 - EXPERT
                 - MODERATOR
                 - SUPPORTREQUESTOR
-    - name: get-channel
-      description: Displays information about a channel in a private re:Post.
-      flags:
-        --channel-id=!: The unique ID of the private re:Post channel.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --space-id=!: The unique ID of the private re:Post.
-    - name: untag-resource
-      description: Removes the association of the tag with the AWS re:Post Private resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource.
-        --tag-keys=!: The key values of the tag.
-    - name: batch-remove-channel-role-from-accessors
-      description: Remove a role from multiple users or groups in a private re:Post channel.
-      flags:
-        --accessor-ids=!: The users or groups identifiers to remove the role from.
-        --channel-id=!: The unique ID of the private re:Post channel.
-        --channel-role=!: The channel role to remove from the users or groups.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --space-id=!: The unique ID of the private re:Post.
-      completion:
-        flag:
-            channel-role:
-                - ASKER
-                - EXPERT
-                - MODERATOR
-                - SUPPORTREQUESTOR
-    - name: create-channel
-      description: Creates a channel in an AWS re:Post Private private re:Post.
-      flags:
-        --channel-description=: A description for the channel.
-        --channel-name=!: The name for the channel.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --space-id=!: The unique ID of the private re:Post.
-    - name: get-space
-      description: Displays information about the AWS re:Post Private private re:Post.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --space-id=!: The ID of the private re:Post.
-    - name: list-channels
-      description: Returns the list of channel within a private re:Post with some information about each channel.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of channels to include in the results.
-        --next-token=: The token for the next set of channel to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --space-id=!: The unique ID of the private re:Post.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-space
-      description: Modifies an existing AWS re:Post Private private re:Post.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description for the private re:Post.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --role-arn=: The IAM role that grants permissions to the private re:Post to convert unanswered questions into AWS support tickets.
-        --space-id=!: The unique ID of this private re:Post.
-        --supported-email-domains=: ""
-        --tier=: The pricing tier of this private re:Post.
-      completion:
-        flag:
-            tier:
-                - BASIC
-                - STANDARD
     - name: batch-add-role
       description: Add a role to multiple users or groups in a private re:Post.
       flags:
@@ -111,21 +119,22 @@ commands:
                 - MODERATOR
                 - ADMINISTRATOR
                 - SUPPORTREQUESTOR
-    - name: batch-remove-role
-      description: Remove a role from multiple users or groups in a private re:Post.
+    - name: batch-remove-channel-role-from-accessors
+      description: Remove a role from multiple users or groups in a private re:Post channel.
       flags:
-        --accessor-ids=!: The user or group accessor identifiers to remove the role from.
+        --accessor-ids=!: The users or groups identifiers to remove the role from.
+        --channel-id=!: The unique ID of the private re:Post channel.
+        --channel-role=!: The channel role to remove from the users or groups.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --role=!: The role to remove from the users or groups.
         --space-id=!: The unique ID of the private re:Post.
       completion:
         flag:
-            role:
+            channel-role:
+                - ASKER
                 - EXPERT
                 - MODERATOR
-                - ADMINISTRATOR
                 - SUPPORTREQUESTOR
     - name: create-space
       description: Creates an AWS re:Post Private private re:Post.
@@ -146,6 +155,55 @@ commands:
             tier:
                 - BASIC
                 - STANDARD
+    - name: delete-space
+      description: Deletes an AWS re:Post Private private re:Post.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --space-id=!: The unique ID of the private re:Post.
+    - name: get-channel
+      description: Displays information about a channel in a private re:Post.
+      flags:
+        --channel-id=!: The unique ID of the private re:Post channel.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --space-id=!: The unique ID of the private re:Post.
+    - name: update-space
+      description: Modifies an existing AWS re:Post Private private re:Post.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description for the private re:Post.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --role-arn=: The IAM role that grants permissions to the private re:Post to convert unanswered questions into AWS support tickets.
+        --space-id=!: The unique ID of this private re:Post.
+        --supported-email-domains=: ""
+        --tier=: The pricing tier of this private re:Post.
+      completion:
+        flag:
+            tier:
+                - BASIC
+                - STANDARD
+    - name: deregister-admin
+      description: Removes the user or group from the list of administrators of the private re:Post.
+      flags:
+        --admin-id=!: The ID of the admin to remove.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --space-id=!: The ID of the private re:Post to remove the admin from.
+    - name: update-channel
+      description: Modifies an existing channel.
+      flags:
+        --channel-description=: A description for the channel.
+        --channel-id=!: The unique ID of the private re:Post channel.
+        --channel-name=!: The name for the channel.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --space-id=!: The unique ID of the private re:Post.
     - name: list-spaces
       description: Returns a list of AWS re:Post Private private re:Posts in the account with some information about each private re:Post.
       flags:
@@ -157,74 +215,9 @@ commands:
         --next-token=: The token for the next set of private re:Posts to return.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: Returns the tags that are associated with the AWS re:Post Private resource specified by the resourceArn.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource that the tags are associated with.
-    - name: register-admin
-      description: Adds a user or group to the list of administrators of the private re:Post.
-      flags:
-        --admin-id=!: The ID of the administrator.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --space-id=!: The ID of the private re:Post.
-    - name: send-invites
-      description: Sends an invitation email to selected users and groups.
-      flags:
-        --accessor-ids=!: The array of identifiers for the users and groups.
-        --body=!: The body of the invite.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --space-id=!: The ID of the private re:Post.
-        --title=!: The title of the invite.
-    - name: update-channel
-      description: Modifies an existing channel.
-      flags:
-        --channel-description=: A description for the channel.
-        --channel-id=!: The unique ID of the private re:Post channel.
-        --channel-name=!: The name for the channel.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --space-id=!: The unique ID of the private re:Post.
-    - name: delete-space
-      description: Deletes an AWS re:Post Private private re:Post.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --space-id=!: The unique ID of the private re:Post.
-    - name: deregister-admin
-      description: Removes the user or group from the list of administrators of the private re:Post.
-      flags:
-        --admin-id=!: The ID of the admin to remove.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --space-id=!: The ID of the private re:Post to remove the admin from.
-    - name: tag-resource
-      description: Associates tags with an AWS re:Post Private resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource that the tag is associated with.
-        --tags=!: The list of tag keys and values that must be associated with the resource.
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:
-        - name: space-deleted
-          description: Displays information about the AWS re:Post Private private re:Post.
-          flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-            --space-id=!: The ID of the private re:Post.
         - name: channel-created
           description: Displays information about a channel in a private re:Post.
           flags:
@@ -242,6 +235,13 @@ commands:
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --space-id=!: The unique ID of the private re:Post.
         - name: space-created
+          description: Displays information about the AWS re:Post Private private re:Post.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --space-id=!: The ID of the private re:Post.
+        - name: space-deleted
           description: Displays information about the AWS re:Post Private private re:Post.
           flags:
             --cli-input-json=: Read arguments from the JSON string provided.

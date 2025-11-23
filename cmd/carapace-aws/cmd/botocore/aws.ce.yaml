@@ -1,6 +1,78 @@
 name: ce
 description: AWS Cost Explorer Service
 commands:
+    - name: delete-anomaly-monitor
+      description: Deletes a cost anomaly monitor.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --monitor-arn=!: The unique identifier of the cost anomaly monitor that you want to delete.
+    - name: delete-anomaly-subscription
+      description: Deletes a cost anomaly subscription.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --subscription-arn=!: The unique identifier of the cost anomaly subscription that you want to delete.
+    - name: get-cost-and-usage
+      description: Retrieves cost and usage metrics for your account.
+      flags:
+        --billing-view-arn=: The Amazon Resource Name (ARN) that uniquely identifies a specific billing view.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: Filters Amazon Web Services costs by different dimensions.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --granularity=!: Sets the Amazon Web Services cost granularity to `MONTHLY` or `DAILY`, or `HOURLY`.
+        --group-by=: You can group Amazon Web Services costs using up to two different groups, either dimensions, tag keys, cost categories, or any two group by types.
+        --metrics=!: Which metrics are returned in the query.
+        --next-page-token=: The token to retrieve the next set of results.
+        --time-period=!: Sets the start date and end date for retrieving Amazon Web Services costs.
+      completion:
+        flag:
+            granularity:
+                - DAILY
+                - MONTHLY
+                - HOURLY
+    - name: start-commitment-purchase-analysis
+      description: Specifies the parameters of a planned commitment purchase and starts the generation of the analysis.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --commitment-purchase-analysis-configuration=!: The configuration for the commitment purchase analysis.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-cost-category-definition
+      description: Returns the name, Amazon Resource Name (ARN), rules, definition, and effective dates of a Cost Category that's defined in the account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cost-category-arn=!: The unique identifier for your Cost Category.
+        --effective-on=: The date when the Cost Category was effective.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-commitment-purchase-analysis
+      description: Retrieves a commitment purchase analysis result based on the `AnalysisId`.
+      flags:
+        --analysis-id=!: The analysis ID that's associated with the commitment purchase analysis.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-cost-comparison-drivers
+      description: Retrieves key factors driving cost changes between two time periods within the last 13 months, such as usage changes, discount changes, and commitment-based savings.
+      flags:
+        --baseline-time-period=!: The reference time period for comparison.
+        --billing-view-arn=: The Amazon Resource Name (ARN) that uniquely identifies a specific billing view.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --comparison-time-period=!: The comparison time period for analysis.
+        --filter=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-by=: You can group results using the attributes `DIMENSION`, `TAG`, and `COST_CATEGORY`.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that are returned for the request.
+        --metric-for-comparison=!: The cost and usage metric to compare.
+        --next-page-token=: The token to retrieve the next set of paginated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: get-cost-forecast
       description: Retrieves a forecast for how much Amazon Web Services predicts that you will spend over the forecast time period that you select, based on your past costs.
       flags:
@@ -27,41 +99,77 @@ commands:
                 - NET_AMORTIZED_COST
                 - USAGE_QUANTITY
                 - NORMALIZED_USAGE_AMOUNT
-    - name: get-reservation-purchase-recommendation
-      description: Gets recommendations for reservation purchases.
+    - name: get-savings-plans-coverage
+      description: Retrieves the Savings Plans covered for your account.
       flags:
-        --account-id=: The account ID that's associated with the recommendation.
-        --account-scope=: The account scope that you want your recommendations for.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: ""
+        --filter=: Filters Savings Plans coverage data by dimensions.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lookback-period-in-days=: The number of previous days that you want Amazon Web Services to consider when it calculates your recommendations.
-        --next-page-token=: The pagination token that indicates the next set of results that you want to retrieve.
-        --page-size=: The number of recommendations that you want returned in a single response object.
-        --payment-option=: The reservation purchase option that you want recommendations for.
-        --service-specification=: The hardware specifications for the service instances that you want recommendations for, such as standard or convertible Amazon EC2 instances.
-        --service=!: The specific service that you want recommendations for.
-        --term-in-years=: The reservation term that you want recommendations for.
+        --granularity=: The granularity of the Amazon Web Services cost data for your Savings Plans.
+        --group-by=: You can group the data using the attributes `INSTANCE_FAMILY`, `REGION`, or `SERVICE`.
+        --max-results=: The number of items to be returned in a response.
+        --metrics=: The measurement that you want your Savings Plans coverage reported in.
+        --next-token=: The token to retrieve the next set of results.
+        --sort-by=: The value that you want to sort the data by.
+        --time-period=!: The time period that you want the usage and costs for.
       completion:
         flag:
-            account-scope:
-                - PAYER
-                - LINKED
-            lookback-period-in-days:
-                - SEVEN_DAYS
-                - THIRTY_DAYS
-                - SIXTY_DAYS
-            payment-option:
-                - NO_UPFRONT
-                - PARTIAL_UPFRONT
-                - ALL_UPFRONT
-                - LIGHT_UTILIZATION
-                - MEDIUM_UTILIZATION
-                - HEAVY_UTILIZATION
-            term-in-years:
-                - ONE_YEAR
-                - THREE_YEARS
+            granularity:
+                - DAILY
+                - MONTHLY
+                - HOURLY
+    - name: list-commitment-purchase-analyses
+      description: Lists the commitment purchase analyses for your account.
+      flags:
+        --analysis-ids=: The analysis IDs associated with the commitment purchase analyses.
+        --analysis-status=: The status of the analysis.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --next-page-token=: The token to retrieve the next set of results.
+        --page-size=: The number of analyses that you want returned in a single response object.
+      completion:
+        flag:
+            analysis-status:
+                - SUCCEEDED
+                - PROCESSING
+                - FAILED
+    - name: list-cost-category-definitions
+      description: Returns the name, Amazon Resource Name (ARN), `NumberOfRules` and effective dates of all Cost Categories defined in the account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --effective-on=: The date when the Cost Category was effective.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The number of entries a paginated response contains.
+        --next-token=: The token to retrieve the next set of results.
+    - name: list-tags-for-resource
+      description: Returns a list of resource tags associated with the resource specified by the Amazon Resource Name (ARN).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+    - name: get-cost-and-usage-with-resources
+      description: Retrieves cost and usage metrics with resources for your account.
+      flags:
+        --billing-view-arn=: The Amazon Resource Name (ARN) that uniquely identifies a specific billing view.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=!: Filters Amazon Web Services costs by different dimensions.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --granularity=!: Sets the Amazon Web Services cost granularity to `MONTHLY`, `DAILY`, or `HOURLY`.
+        --group-by=: 'You can group Amazon Web Services costs using up to two different groups: `DIMENSION`, `TAG`, `COST_CATEGORY`.'
+        --metrics=: Which metrics are returned in the query.
+        --next-page-token=: The token to retrieve the next set of results.
+        --time-period=!: Sets the start and end dates for retrieving Amazon Web Services costs.
+      completion:
+        flag:
+            granularity:
+                - DAILY
+                - MONTHLY
+                - HOURLY
     - name: get-tags
       description: Queries for available tag keys and tag values for a specified period.
       flags:
@@ -95,104 +203,54 @@ commands:
             type:
                 - AWSGenerated
                 - UserDefined
-    - name: tag-resource
-      description: An API operation for adding one or more tags (key-value pairs) to a resource.
+    - name: start-cost-allocation-tag-backfill
+      description: Request a cost allocation tag backfill.
+      flags:
+        --backfill-from=!: The date you want the backfill to start from.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: start-savings-plans-purchase-recommendation-generation
+      description: Requests a Savings Plans recommendation generation.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-        --resource-tags=!: A list of tag key-value pairs to be added to the resource.
-    - name: update-anomaly-monitor
-      description: Updates an existing cost anomaly monitor.
+    - name: get-anomalies
+      description: Retrieves all of the cost anomalies detected on your account during the time period that's specified by the `DateInterval` object.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --monitor-arn=!: Cost anomaly monitor Amazon Resource Names (ARNs).
-        --monitor-name=: The new name for the cost anomaly monitor.
-    - name: describe-cost-category-definition
-      description: Returns the name, Amazon Resource Name (ARN), rules, definition, and effective dates of a Cost Category that's defined in the account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cost-category-arn=!: The unique identifier for your Cost Category.
-        --effective-on=: The date when the Cost Category was effective.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-anomaly-subscriptions
-      description: Retrieves the cost anomaly subscription objects for your account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --date-interval=!: Assigns the start and end dates for retrieving cost anomalies.
+        --feedback=: Filters anomaly results by the feedback field on the anomaly object.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The number of entries a paginated response contains.
-        --monitor-arn=: Cost anomaly monitor ARNs.
+        --monitor-arn=: Retrieves all of the cost anomalies detected for a specific cost anomaly monitor Amazon Resource Name (ARN).
         --next-page-token=: The token to retrieve the next set of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-        --subscription-arn-list=: A list of cost anomaly subscription ARNs.
-    - name: get-usage-forecast
-      description: Retrieves a forecast for how much Amazon Web Services predicts that you will use over the forecast time period that you select, based on your past usage.
+        --total-impact=: Filters anomaly results by the total impact field on the anomaly object.
+      completion:
+        flag:
+            feedback:
+                - "YES"
+                - "NO"
+                - PLANNED_ACTIVITY
+    - name: get-cost-categories
+      description: Retrieves an array of Cost Category names and values incurred cost.
       flags:
         --billing-view-arn=: The Amazon Resource Name (ARN) that uniquely identifies a specific billing view.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: The filters that you want to use to filter your forecast.
+        --cost-category-name=: ""
+        --filter=: ""
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --granularity=!: How granular you want the forecast to be.
-        --metric=!: Which metric Cost Explorer uses to create your forecast.
-        --prediction-interval-level=: Amazon Web Services Cost Explorer always returns the mean forecast as a single point.
-        --time-period=!: The start and end dates of the period that you want to retrieve usage forecast for.
-      completion:
-        flag:
-            granularity:
-                - DAILY
-                - MONTHLY
-                - HOURLY
-            metric:
-                - BLENDED_COST
-                - UNBLENDED_COST
-                - AMORTIZED_COST
-                - NET_UNBLENDED_COST
-                - NET_AMORTIZED_COST
-                - USAGE_QUANTITY
-                - NORMALIZED_USAGE_AMOUNT
-    - name: list-commitment-purchase-analyses
-      description: Lists the commitment purchase analyses for your account.
-      flags:
-        --analysis-ids=: The analysis IDs associated with the commitment purchase analyses.
-        --analysis-status=: The status of the analysis.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --next-page-token=: The token to retrieve the next set of results.
-        --page-size=: The number of analyses that you want returned in a single response object.
-      completion:
-        flag:
-            analysis-status:
-                - SUCCEEDED
-                - PROCESSING
-                - FAILED
-    - name: get-cost-and-usage
-      description: Retrieves cost and usage metrics for your account.
-      flags:
-        --billing-view-arn=: The Amazon Resource Name (ARN) that uniquely identifies a specific billing view.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: Filters Amazon Web Services costs by different dimensions.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --granularity=!: Sets the Amazon Web Services cost granularity to `MONTHLY` or `DAILY`, or `HOURLY`.
-        --group-by=: You can group Amazon Web Services costs using up to two different groups, either dimensions, tag keys, cost categories, or any two group by types.
-        --metrics=!: Which metrics are returned in the query.
-        --next-page-token=: The token to retrieve the next set of results.
-        --time-period=!: Sets the start date and end date for retrieving Amazon Web Services costs.
-      completion:
-        flag:
-            granularity:
-                - DAILY
-                - MONTHLY
-                - HOURLY
+        --max-results=: This field is only used when the `SortBy` value is provided in the request.
+        --next-page-token=: If the number of objects that are still available for retrieval exceeds the quota, Amazon Web Services returns a NextPageToken value in the response.
+        --search-string=: The value that you want to search the filter values for.
+        --sort-by=: The value that you sort the data by.
+        --time-period=!: ""
     - name: get-dimension-values
       description: Retrieves all available filter values for a specified filter over a period of time.
       flags:
@@ -250,184 +308,25 @@ commands:
                 - INVOICING_ENTITY
                 - ANOMALY_TOTAL_IMPACT_ABSOLUTE
                 - ANOMALY_TOTAL_IMPACT_PERCENTAGE
-    - name: get-reservation-coverage
-      description: Retrieves the reservation coverage for your account, which you can use to see how much of your Amazon Elastic Compute Cloud, Amazon ElastiCache, Amazon Relational Database Service, or Amazon Redshift usage is covered by a reservation.
+    - name: get-rightsizing-recommendation
+      description: Creates recommendations that help you save cost by identifying idle and underutilized Amazon EC2 instances.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: Filters utilization data by dimensions.
+        --configuration=: You can use Configuration to customize recommendations across two attributes.
+        --filter=: ""
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --granularity=: The granularity of the Amazon Web Services cost data for the reservation.
-        --group-by=: 'You can group the data by the following attributes:'
-        --max-results=: The maximum number of objects that you returned for this request.
-        --metrics=: The measurement that you want your reservation coverage reported in.
-        --next-page-token=: The token to retrieve the next set of results.
-        --sort-by=: The value by which you want to sort the data.
-        --time-period=!: The start and end dates of the period that you want to retrieve data about reservation coverage for.
-      completion:
-        flag:
-            granularity:
-                - DAILY
-                - MONTHLY
-                - HOURLY
-    - name: get-savings-plans-utilization
-      description: Retrieves the Savings Plans utilization for your account across date ranges with daily or monthly granularity.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: Filters Savings Plans utilization coverage data for active Savings Plans dimensions.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --granularity=: The granularity of the Amazon Web Services utillization data for your Savings Plans.
-        --sort-by=: The value that you want to sort the data by.
-        --time-period=!: The time period that you want the usage and costs for.
-      completion:
-        flag:
-            granularity:
-                - DAILY
-                - MONTHLY
-                - HOURLY
-    - name: list-tags-for-resource
-      description: Returns a list of resource tags associated with the resource specified by the Amazon Resource Name (ARN).
+        --next-page-token=: The pagination token that indicates the next set of results that you want to retrieve.
+        --page-size=: The number of recommendations that you want returned in a single response object.
+        --service=!: The specific service that you want recommendations for.
+    - name: untag-resource
+      description: Removes one or more tags from a resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-    - name: provide-anomaly-feedback
-      description: Modifies the feedback property of a given cost anomaly.
-      flags:
-        --anomaly-id=!: A cost anomaly ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --feedback=!: Describes whether the cost anomaly was a planned activity or you considered it an anomaly.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      completion:
-        flag:
-            feedback:
-                - "YES"
-                - "NO"
-                - PLANNED_ACTIVITY
-    - name: start-cost-allocation-tag-backfill
-      description: Request a cost allocation tag backfill.
-      flags:
-        --backfill-from=!: The date you want the backfill to start from.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-anomaly-subscription
-      description: Updates an existing cost anomaly subscription.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --frequency=: The update to the frequency value that subscribers receive notifications.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --monitor-arn-list=: A list of cost anomaly monitor ARNs.
-        --subscribers=: The update to the subscriber list.
-        --subscription-arn=!: A cost anomaly subscription Amazon Resource Name (ARN).
-        --subscription-name=: The new name of the subscription.
-        --threshold-expression=: The update to the [Expression](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html) object used to specify the anomalies that you want to generate alerts for.
-        --threshold=: (deprecated)
-      completion:
-        flag:
-            frequency:
-                - DAILY
-                - IMMEDIATE
-                - WEEKLY
-    - name: create-cost-category-definition
-      description: Creates a new Cost Category with the requested name and rules.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --default-value=: ""
-        --effective-start=: The Cost Category's effective start date.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: ""
-        --resource-tags=: An optional list of tags to associate with the specified [`CostCategory`](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategory.html) .
-        --rule-version=!: ""
-        --rules=!: The Cost Category rules used to categorize costs.
-        --split-charge-rules=: The split charge rules used to allocate your charges between your Cost Category values.
-      completion:
-        flag:
-            rule-version:
-                - CostCategoryExpression.v1
-    - name: delete-cost-category-definition
-      description: Deletes a Cost Category.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cost-category-arn=!: The unique identifier for your Cost Category.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-commitment-purchase-analysis
-      description: Retrieves a commitment purchase analysis result based on the `AnalysisId`.
-      flags:
-        --analysis-id=!: The analysis ID that's associated with the commitment purchase analysis.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-cost-comparison-drivers
-      description: Retrieves key factors driving cost changes between two time periods within the last 13 months, such as usage changes, discount changes, and commitment-based savings.
-      flags:
-        --baseline-time-period=!: The reference time period for comparison.
-        --billing-view-arn=: The Amazon Resource Name (ARN) that uniquely identifies a specific billing view.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --comparison-time-period=!: The comparison time period for analysis.
-        --filter=: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-by=: You can group results using the attributes `DIMENSION`, `TAG`, and `COST_CATEGORY`.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that are returned for the request.
-        --metric-for-comparison=!: The cost and usage metric to compare.
-        --next-page-token=: The token to retrieve the next set of paginated results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-cost-category-definition
-      description: Updates an existing Cost Category.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cost-category-arn=!: The unique identifier for your Cost Category.
-        --default-value=: ""
-        --effective-start=: The Cost Category's effective start date.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --rule-version=!: ""
-        --rules=!: The `Expression` object used to categorize costs.
-        --split-charge-rules=: The split charge rules used to allocate your charges between your Cost Category values.
-      completion:
-        flag:
-            rule-version:
-                - CostCategoryExpression.v1
-    - name: get-anomaly-monitors
-      description: Retrieves the cost anomaly monitor definitions for your account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The number of entries that a paginated response contains.
-        --monitor-arn-list=: A list of cost anomaly monitor ARNs.
-        --next-page-token=: The token to retrieve the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: get-cost-and-usage-with-resources
-      description: Retrieves cost and usage metrics with resources for your account.
-      flags:
-        --billing-view-arn=: The Amazon Resource Name (ARN) that uniquely identifies a specific billing view.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=!: Filters Amazon Web Services costs by different dimensions.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --granularity=!: Sets the Amazon Web Services cost granularity to `MONTHLY`, `DAILY`, or `HOURLY`.
-        --group-by=: 'You can group Amazon Web Services costs using up to two different groups: `DIMENSION`, `TAG`, `COST_CATEGORY`.'
-        --metrics=: Which metrics are returned in the query.
-        --next-page-token=: The token to retrieve the next set of results.
-        --time-period=!: Sets the start and end dates for retrieving Amazon Web Services costs.
-      completion:
-        flag:
-            granularity:
-                - DAILY
-                - MONTHLY
-                - HOURLY
+        --resource-tag-keys=!: A list of tag keys associated with tags that need to be removed from the resource.
     - name: get-savings-plans-purchase-recommendation
       description: Retrieves the Savings Plans recommendations for your account.
       flags:
@@ -465,28 +364,6 @@ commands:
             term-in-years:
                 - ONE_YEAR
                 - THREE_YEARS
-    - name: list-savings-plans-purchase-recommendation-generation
-      description: Retrieves a list of your historical recommendation generations within the past 30 days.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --generation-status=: The status of the recommendation generation.
-        --next-page-token=: The token to retrieve the next set of results.
-        --page-size=: The number of recommendations that you want returned in a single response object.
-        --recommendation-ids=: The IDs for each specific recommendation.
-      completion:
-        flag:
-            generation-status:
-                - SUCCEEDED
-                - PROCESSING
-                - FAILED
-    - name: start-savings-plans-purchase-recommendation-generation
-      description: Requests a Savings Plans recommendation generation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: create-anomaly-monitor
       description: Creates a new cost anomaly detection monitor with the requested type and monitor specification.
       flags:
@@ -495,27 +372,84 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-tags=: An optional list of tags to associate with the specified [`AnomalyMonitor`](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalyMonitor.html) .
-    - name: delete-anomaly-subscription
-      description: Deletes a cost anomaly subscription.
+    - name: create-cost-category-definition
+      description: Creates a new Cost Category with the requested name and rules.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --default-value=: ""
+        --effective-start=: The Cost Category's effective start date.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --subscription-arn=!: The unique identifier of the cost anomaly subscription that you want to delete.
-    - name: get-approximate-usage-records
-      description: Retrieves estimated usage records for hourly granularity or resource-level data at daily granularity.
-      flags:
-        --approximation-dimension=!: The service to evaluate for the usage records.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --granularity=!: How granular you want the data to be.
-        --services=: The service metadata for the service or services you want to query.
+        --name=!: ""
+        --resource-tags=: An optional list of tags to associate with the specified [`CostCategory`](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategory.html) .
+        --rule-version=!: ""
+        --rules=!: The Cost Category rules used to categorize costs.
+        --split-charge-rules=: The split charge rules used to allocate your charges between your Cost Category values.
       completion:
         flag:
-            approximation-dimension:
-                - SERVICE
-                - RESOURCE
+            rule-version:
+                - CostCategoryExpression.v1
+    - name: get-anomaly-subscriptions
+      description: Retrieves the cost anomaly subscription objects for your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The number of entries a paginated response contains.
+        --monitor-arn=: Cost anomaly monitor ARNs.
+        --next-page-token=: The token to retrieve the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --subscription-arn-list=: A list of cost anomaly subscription ARNs.
+    - name: list-cost-allocation-tag-backfill-history
+      description: Retrieves a list of your historical cost allocation tag backfill requests.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of objects that are returned for this request.
+        --next-token=: The token to retrieve the next set of results.
+    - name: tag-resource
+      description: An API operation for adding one or more tags (key-value pairs) to a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+        --resource-tags=!: A list of tag key-value pairs to be added to the resource.
+    - name: update-cost-category-definition
+      description: Updates an existing Cost Category.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cost-category-arn=!: The unique identifier for your Cost Category.
+        --default-value=: ""
+        --effective-start=: The Cost Category's effective start date.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --rule-version=!: ""
+        --rules=!: The `Expression` object used to categorize costs.
+        --split-charge-rules=: The split charge rules used to allocate your charges between your Cost Category values.
+      completion:
+        flag:
+            rule-version:
+                - CostCategoryExpression.v1
+    - name: get-reservation-coverage
+      description: Retrieves the reservation coverage for your account, which you can use to see how much of your Amazon Elastic Compute Cloud, Amazon ElastiCache, Amazon Relational Database Service, or Amazon Redshift usage is covered by a reservation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: Filters utilization data by dimensions.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --granularity=: The granularity of the Amazon Web Services cost data for the reservation.
+        --group-by=: 'You can group the data by the following attributes:'
+        --max-results=: The maximum number of objects that you returned for this request.
+        --metrics=: The measurement that you want your reservation coverage reported in.
+        --next-page-token=: The token to retrieve the next set of results.
+        --sort-by=: The value by which you want to sort the data.
+        --time-period=!: The start and end dates of the period that you want to retrieve data about reservation coverage for.
+      completion:
+        flag:
             granularity:
                 - DAILY
                 - MONTHLY
@@ -539,53 +473,116 @@ commands:
                 - DAILY
                 - MONTHLY
                 - HOURLY
-    - name: get-savings-plans-utilization-details
-      description: Retrieves attribute data along with aggregate utilization and savings data for a given time period.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-type=: The data type.
-        --filter=: Filters Savings Plans utilization coverage data for active Savings Plans dimensions.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The number of items to be returned in a response.
-        --next-token=: The token to retrieve the next set of results.
-        --sort-by=: The value that you want to sort the data by.
-        --time-period=!: The time period that you want the usage and costs for.
-    - name: update-cost-allocation-tags-status
-      description: Updates status for cost allocation tags in bulk, with maximum batch size of 20. If the tag status that's updated is the same as the existing tag status, the request doesn't fail.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cost-allocation-tags-status=!: The list of `CostAllocationTagStatusEntry` objects that are used to update cost allocation tags status for this request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-anomaly-monitor
-      description: Deletes a cost anomaly monitor.
+    - name: list-savings-plans-purchase-recommendation-generation
+      description: Retrieves a list of your historical recommendation generations within the past 30 days.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --monitor-arn=!: The unique identifier of the cost anomaly monitor that you want to delete.
-    - name: get-anomalies
-      description: Retrieves all of the cost anomalies detected on your account during the time period that's specified by the `DateInterval` object.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --date-interval=!: Assigns the start and end dates for retrieving cost anomalies.
-        --feedback=: Filters anomaly results by the feedback field on the anomaly object.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The number of entries a paginated response contains.
-        --monitor-arn=: Retrieves all of the cost anomalies detected for a specific cost anomaly monitor Amazon Resource Name (ARN).
+        --generation-status=: The status of the recommendation generation.
         --next-page-token=: The token to retrieve the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --total-impact=: Filters anomaly results by the total impact field on the anomaly object.
+        --page-size=: The number of recommendations that you want returned in a single response object.
+        --recommendation-ids=: The IDs for each specific recommendation.
+      completion:
+        flag:
+            generation-status:
+                - SUCCEEDED
+                - PROCESSING
+                - FAILED
+    - name: get-reservation-purchase-recommendation
+      description: Gets recommendations for reservation purchases.
+      flags:
+        --account-id=: The account ID that's associated with the recommendation.
+        --account-scope=: The account scope that you want your recommendations for.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lookback-period-in-days=: The number of previous days that you want Amazon Web Services to consider when it calculates your recommendations.
+        --next-page-token=: The pagination token that indicates the next set of results that you want to retrieve.
+        --page-size=: The number of recommendations that you want returned in a single response object.
+        --payment-option=: The reservation purchase option that you want recommendations for.
+        --service-specification=: The hardware specifications for the service instances that you want recommendations for, such as standard or convertible Amazon EC2 instances.
+        --service=!: The specific service that you want recommendations for.
+        --term-in-years=: The reservation term that you want recommendations for.
+      completion:
+        flag:
+            account-scope:
+                - PAYER
+                - LINKED
+            lookback-period-in-days:
+                - SEVEN_DAYS
+                - THIRTY_DAYS
+                - SIXTY_DAYS
+            payment-option:
+                - NO_UPFRONT
+                - PARTIAL_UPFRONT
+                - ALL_UPFRONT
+                - LIGHT_UTILIZATION
+                - MEDIUM_UTILIZATION
+                - HEAVY_UTILIZATION
+            term-in-years:
+                - ONE_YEAR
+                - THREE_YEARS
+    - name: provide-anomaly-feedback
+      description: Modifies the feedback property of a given cost anomaly.
+      flags:
+        --anomaly-id=!: A cost anomaly ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --feedback=!: Describes whether the cost anomaly was a planned activity or you considered it an anomaly.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
       completion:
         flag:
             feedback:
                 - "YES"
                 - "NO"
                 - PLANNED_ACTIVITY
+    - name: update-anomaly-monitor
+      description: Updates an existing cost anomaly monitor.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --monitor-arn=!: Cost anomaly monitor Amazon Resource Names (ARNs).
+        --monitor-name=: The new name for the cost anomaly monitor.
+    - name: delete-cost-category-definition
+      description: Deletes a Cost Category.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cost-category-arn=!: The unique identifier for your Cost Category.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-anomaly-monitors
+      description: Retrieves the cost anomaly monitor definitions for your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The number of entries that a paginated response contains.
+        --monitor-arn-list=: A list of cost anomaly monitor ARNs.
+        --next-page-token=: The token to retrieve the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-approximate-usage-records
+      description: Retrieves estimated usage records for hourly granularity or resource-level data at daily granularity.
+      flags:
+        --approximation-dimension=!: The service to evaluate for the usage records.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --granularity=!: How granular you want the data to be.
+        --services=: The service metadata for the service or services you want to query.
+      completion:
+        flag:
+            approximation-dimension:
+                - SERVICE
+                - RESOURCE
+            granularity:
+                - DAILY
+                - MONTHLY
+                - HOURLY
     - name: get-cost-and-usage-comparisons
       description: Retrieves cost and usage comparisons for your account between two periods within the last 13 months.
       flags:
@@ -603,17 +600,6 @@ commands:
         --next-page-token=: The token to retrieve the next set of paginated results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: get-rightsizing-recommendation
-      description: Creates recommendations that help you save cost by identifying idle and underutilized Amazon EC2 instances.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration=: You can use Configuration to customize recommendations across two attributes.
-        --filter=: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --next-page-token=: The pagination token that indicates the next set of results that you want to retrieve.
-        --page-size=: The number of recommendations that you want returned in a single response object.
-        --service=!: The specific service that you want recommendations for.
     - name: get-savings-plan-purchase-recommendation-details
       description: Retrieves the details for a Savings Plan recommendation.
       flags:
@@ -621,57 +607,66 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --recommendation-detail-id=!: The ID that is associated with the Savings Plan recommendation.
-    - name: list-cost-allocation-tag-backfill-history
-      description: Retrieves a list of your historical cost allocation tag backfill requests.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of objects that are returned for this request.
-        --next-token=: The token to retrieve the next set of results.
-    - name: list-cost-category-definitions
-      description: Returns the name, Amazon Resource Name (ARN), `NumberOfRules` and effective dates of all Cost Categories defined in the account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --effective-on=: The date when the Cost Category was effective.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The number of entries a paginated response contains.
-        --next-token=: The token to retrieve the next set of results.
-    - name: create-anomaly-subscription
-      description: Adds an alert subscription to a cost anomaly detection monitor.
-      flags:
-        --anomaly-subscription=!: The cost anomaly subscription object that you want to create.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-tags=: An optional list of tags to associate with the specified [`AnomalySubscription`](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalySubscription.html) .
-    - name: get-cost-categories
-      description: Retrieves an array of Cost Category names and values incurred cost.
+    - name: get-usage-forecast
+      description: Retrieves a forecast for how much Amazon Web Services predicts that you will use over the forecast time period that you select, based on your past usage.
       flags:
         --billing-view-arn=: The Amazon Resource Name (ARN) that uniquely identifies a specific billing view.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cost-category-name=: ""
-        --filter=: ""
+        --filter=: The filters that you want to use to filter your forecast.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: This field is only used when the `SortBy` value is provided in the request.
-        --next-page-token=: If the number of objects that are still available for retrieval exceeds the quota, Amazon Web Services returns a NextPageToken value in the response.
-        --search-string=: The value that you want to search the filter values for.
-        --sort-by=: The value that you sort the data by.
-        --time-period=!: ""
-    - name: get-savings-plans-coverage
-      description: Retrieves the Savings Plans covered for your account.
+        --granularity=!: How granular you want the forecast to be.
+        --metric=!: Which metric Cost Explorer uses to create your forecast.
+        --prediction-interval-level=: Amazon Web Services Cost Explorer always returns the mean forecast as a single point.
+        --time-period=!: The start and end dates of the period that you want to retrieve usage forecast for.
+      completion:
+        flag:
+            granularity:
+                - DAILY
+                - MONTHLY
+                - HOURLY
+            metric:
+                - BLENDED_COST
+                - UNBLENDED_COST
+                - AMORTIZED_COST
+                - NET_UNBLENDED_COST
+                - NET_AMORTIZED_COST
+                - USAGE_QUANTITY
+                - NORMALIZED_USAGE_AMOUNT
+    - name: update-anomaly-subscription
+      description: Updates an existing cost anomaly subscription.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: Filters Savings Plans coverage data by dimensions.
+        --frequency=: The update to the frequency value that subscribers receive notifications.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --granularity=: The granularity of the Amazon Web Services cost data for your Savings Plans.
-        --group-by=: You can group the data using the attributes `INSTANCE_FAMILY`, `REGION`, or `SERVICE`.
-        --max-results=: The number of items to be returned in a response.
-        --metrics=: The measurement that you want your Savings Plans coverage reported in.
-        --next-token=: The token to retrieve the next set of results.
+        --monitor-arn-list=: A list of cost anomaly monitor ARNs.
+        --subscribers=: The update to the subscriber list.
+        --subscription-arn=!: A cost anomaly subscription Amazon Resource Name (ARN).
+        --subscription-name=: The new name of the subscription.
+        --threshold-expression=: The update to the [Expression](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html) object used to specify the anomalies that you want to generate alerts for.
+        --threshold=: (deprecated)
+      completion:
+        flag:
+            frequency:
+                - DAILY
+                - IMMEDIATE
+                - WEEKLY
+    - name: update-cost-allocation-tags-status
+      description: Updates status for cost allocation tags in bulk, with maximum batch size of 20. If the tag status that's updated is the same as the existing tag status, the request doesn't fail.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cost-allocation-tags-status=!: The list of `CostAllocationTagStatusEntry` objects that are used to update cost allocation tags status for this request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-savings-plans-utilization
+      description: Retrieves the Savings Plans utilization for your account across date ranges with daily or monthly granularity.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: Filters Savings Plans utilization coverage data for active Savings Plans dimensions.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --granularity=: The granularity of the Amazon Web Services utillization data for your Savings Plans.
         --sort-by=: The value that you want to sort the data by.
         --time-period=!: The time period that you want the usage and costs for.
       completion:
@@ -680,18 +675,23 @@ commands:
                 - DAILY
                 - MONTHLY
                 - HOURLY
-    - name: start-commitment-purchase-analysis
-      description: Specifies the parameters of a planned commitment purchase and starts the generation of the analysis.
+    - name: get-savings-plans-utilization-details
+      description: Retrieves attribute data along with aggregate utilization and savings data for a given time period.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --commitment-purchase-analysis-configuration=!: The configuration for the commitment purchase analysis.
+        --data-type=: The data type.
+        --filter=: Filters Savings Plans utilization coverage data for active Savings Plans dimensions.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: untag-resource
-      description: Removes one or more tags from a resource.
+        --max-results=: The number of items to be returned in a response.
+        --next-token=: The token to retrieve the next set of results.
+        --sort-by=: The value that you want to sort the data by.
+        --time-period=!: The time period that you want the usage and costs for.
+    - name: create-anomaly-subscription
+      description: Adds an alert subscription to a cost anomaly detection monitor.
       flags:
+        --anomaly-subscription=!: The cost anomaly subscription object that you want to create.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-        --resource-tag-keys=!: A list of tag keys associated with tags that need to be removed from the resource.
+        --resource-tags=: An optional list of tags to associate with the specified [`AnomalySubscription`](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalySubscription.html) .

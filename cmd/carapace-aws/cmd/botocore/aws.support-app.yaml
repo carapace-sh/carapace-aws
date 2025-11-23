@@ -1,6 +1,64 @@
 name: support-app
 description: AWS Support App
 commands:
+    - name: update-slack-channel-configuration
+      description: Updates the configuration for a Slack channel, such as case update notifications.
+      flags:
+        --channel-id=!: The channel ID in Slack.
+        --channel-name=: The Slack channel name that you want to update.
+        --channel-role-arn=: The Amazon Resource Name (ARN) of an IAM role that you want to use to perform operations on Amazon Web Services.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-notify-on-add-correspondence-to-case: Whether you want to get notified when a support case has a new correspondence.
+        --no-notify-on-create-or-reopen-case: Whether you want to get notified when a support case is created or reopened.
+        --no-notify-on-resolve-case: Whether you want to get notified when a support case is resolved.
+        --notify-on-add-correspondence-to-case: Whether you want to get notified when a support case has a new correspondence.
+        --notify-on-case-severity=: The case severity for a support case that you want to receive notifications.
+        --notify-on-create-or-reopen-case: Whether you want to get notified when a support case is created or reopened.
+        --notify-on-resolve-case: Whether you want to get notified when a support case is resolved.
+        --team-id=!: The team ID in Slack.
+      completion:
+        flag:
+            notify-on-case-severity:
+                - none
+                - all
+                - high
+    - name: delete-slack-workspace-configuration
+      description: Deletes a Slack workspace configuration from your Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --team-id=!: The team ID in Slack.
+    - name: list-slack-channel-configurations
+      description: Lists the Slack channel configurations for an Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --next-token=: If the results of a search are large, the API only returns a portion of the results and includes a `nextToken` pagination token in the response.
+    - name: list-slack-workspace-configurations
+      description: Lists the Slack workspace configurations for an Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --next-token=: If the results of a search are large, the API only returns a portion of the results and includes a `nextToken` pagination token in the response.
+    - name: put-account-alias
+      description: Creates or updates an individual alias for each Amazon Web Services account ID.
+      flags:
+        --account-alias=!: An alias or short name for an Amazon Web Services account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: register-slack-workspace-for-organization
+      description: Registers a Slack workspace for your Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --team-id=!: The team ID in Slack.
     - name: create-slack-channel-configuration
       description: Creates a Slack channel configuration for your Amazon Web Services account.
       flags:
@@ -30,9 +88,10 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-slack-workspace-configuration
-      description: Deletes a Slack workspace configuration from your Amazon Web Services account.
+    - name: delete-slack-channel-configuration
+      description: Deletes a Slack channel configuration from your Amazon Web Services account.
       flags:
+        --channel-id=!: The channel ID in Slack.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -43,62 +102,3 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: put-account-alias
-      description: Creates or updates an individual alias for each Amazon Web Services account ID.
-      flags:
-        --account-alias=!: An alias or short name for an Amazon Web Services account.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: register-slack-workspace-for-organization
-      description: Registers a Slack workspace for your Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --team-id=!: The team ID in Slack.
-    - name: update-slack-channel-configuration
-      description: Updates the configuration for a Slack channel, such as case update notifications.
-      flags:
-        --channel-id=!: The channel ID in Slack.
-        --channel-name=: The Slack channel name that you want to update.
-        --channel-role-arn=: The Amazon Resource Name (ARN) of an IAM role that you want to use to perform operations on Amazon Web Services.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-notify-on-add-correspondence-to-case: Whether you want to get notified when a support case has a new correspondence.
-        --no-notify-on-create-or-reopen-case: Whether you want to get notified when a support case is created or reopened.
-        --no-notify-on-resolve-case: Whether you want to get notified when a support case is resolved.
-        --notify-on-add-correspondence-to-case: Whether you want to get notified when a support case has a new correspondence.
-        --notify-on-case-severity=: The case severity for a support case that you want to receive notifications.
-        --notify-on-create-or-reopen-case: Whether you want to get notified when a support case is created or reopened.
-        --notify-on-resolve-case: Whether you want to get notified when a support case is resolved.
-        --team-id=!: The team ID in Slack.
-      completion:
-        flag:
-            notify-on-case-severity:
-                - none
-                - all
-                - high
-    - name: delete-slack-channel-configuration
-      description: Deletes a Slack channel configuration from your Amazon Web Services account.
-      flags:
-        --channel-id=!: The channel ID in Slack.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --team-id=!: The team ID in Slack.
-    - name: list-slack-channel-configurations
-      description: Lists the Slack channel configurations for an Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --next-token=: If the results of a search are large, the API only returns a portion of the results and includes a `nextToken` pagination token in the response.
-    - name: list-slack-workspace-configurations
-      description: Lists the Slack workspace configurations for an Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --next-token=: If the results of a search are large, the API only returns a portion of the results and includes a `nextToken` pagination token in the response.

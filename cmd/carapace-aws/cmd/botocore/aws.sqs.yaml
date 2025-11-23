@@ -1,37 +1,34 @@
 name: sqs
 description: Amazon Simple Queue Service
 commands:
-    - name: delete-queue
-      description: Deletes the queue specified by the `QueueUrl`, regardless of the queue's contents.
+    - name: untag-queue
+      description: Remove cost allocation tags from the specified Amazon SQS queue.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --queue-url=!: The URL of the Amazon SQS queue to delete.
-    - name: remove-permission
-      description: Revokes any permissions in the queue policy that matches the specified `Label` parameter.
+        --queue-url=!: The URL of the queue.
+        --tag-keys=!: The list of tags to be removed from the specified queue.
+    - name: change-message-visibility-batch
+      description: Changes the visibility timeout of multiple messages.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entries=!: Lists the receipt handles of the messages for which the visibility timeout must be changed.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --queue-url=!: The URL of the Amazon SQS queue whose messages' visibility is changed.
+    - name: list-dead-letter-source-queues
+      description: Returns a list of your queues that have the `RedrivePolicy` queue attribute configured with a dead-letter queue.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --label=!: The identification of the permission to remove.
-        --queue-url=!: The URL of the Amazon SQS queue from which permissions are removed.
-    - name: send-message-batch
-      description: You can use `SendMessageBatch` to send up to 10 messages to the specified queue by assigning either identical or different values to each message (or by not assigning values at all).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --entries=!: A list of `SendMessageBatchRequestEntry` items.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --queue-url=!: The URL of the Amazon SQS queue to which batched messages are sent.
-    - name: delete-message-batch
-      description: Deletes up to ten messages from the specified queue.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --entries=!: Lists the receipt handles for the messages to be deleted.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --queue-url=!: The URL of the Amazon SQS queue from which messages are deleted.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of results to include in the response.
+        --next-token=: Pagination token to request the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --queue-url=!: The URL of a dead-letter queue.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-message-move-tasks
       description: Gets the most recent message movement tasks (up to 10) under a specific source queue.
       flags:
@@ -40,19 +37,29 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The maximum number of results to include in the response.
         --source-arn=!: The ARN of the queue whose message movement tasks are to be listed.
-    - name: send-message
-      description: Delivers a message to the specified queue.
+    - name: receive-message
+      description: Retrieves one or more messages (up to 10), from the specified queue.
+      flags:
+        --attribute-names=: This parameter has been discontinued but will be supported for backward compatibility.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-number-of-messages=: The maximum number of messages to return.
+        --message-attribute-names=: The name of the message attribute, where *N* is the index.
+        --message-system-attribute-names=: A list of attributes that need to be returned along with each message.
+        --queue-url=!: The URL of the Amazon SQS queue from which messages are received.
+        --receive-request-attempt-id=: This parameter applies only to FIFO (first-in-first-out) queues.
+        --visibility-timeout=: The duration (in seconds) that the received messages are hidden from subsequent retrieve requests after being retrieved by a `ReceiveMessage` request.
+        --wait-time-seconds=: The duration (in seconds) for which the call waits for a message to arrive in the queue before returning.
+    - name: start-message-move-task
+      description: Starts an asynchronous task to move messages from a specified source queue to a specified destination queue.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --delay-seconds=: The length of time, in seconds, for which to delay a specific message.
+        --destination-arn=: The ARN of the queue that receives the moved messages.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --message-attributes=: Each message attribute consists of a `Name`, `Type`, and `Value`.
-        --message-body=!: The message to send.
-        --message-deduplication-id=: This parameter applies only to FIFO (first-in-first-out) queues.
-        --message-group-id=: '`MessageGroupId` is an attribute used in Amazon SQS FIFO (First-In-First-Out) and standard queues.'
-        --message-system-attributes=: The message system attribute to send.
-        --queue-url=!: The URL of the Amazon SQS queue to which a message is sent.
+        --max-number-of-messages-per-second=: The number of messages to be moved per second (the message movement rate).
+        --source-arn=!: The ARN of the queue that contains the messages to be moved to another queue.
     - name: tag-queue
       description: Add cost allocation tags to the specified Amazon SQS queue.
       flags:
@@ -61,6 +68,18 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --queue-url=!: The URL of the queue.
         --tags=!: The list of tags to be added to the specified queue.
+    - name: list-queues
+      description: Returns a list of your queues in the current region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of results to include in the response.
+        --next-token=: Pagination token to request the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --queue-name-prefix=: A string to use for filtering the list results.
+        --starting-token=: A token to specify where to start paginating.
     - name: add-permission
       description: Adds a permission to a queue for a specific [principal](https://docs.aws.amazon.com/general/latest/gr/glos-chap.html#P).
       flags:
@@ -71,6 +90,30 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --label=!: The unique identification of the permission you're setting (for example, `AliceSendMessage`).
         --queue-url=!: The URL of the Amazon SQS queue to which permissions are added.
+    - name: delete-message
+      description: Deletes the specified message from the specified queue.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --queue-url=!: The URL of the Amazon SQS queue from which messages are deleted.
+        --receipt-handle=!: The receipt handle associated with the message to delete.
+    - name: delete-message-batch
+      description: Deletes up to ten messages from the specified queue.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entries=!: Lists the receipt handles for the messages to be deleted.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --queue-url=!: The URL of the Amazon SQS queue from which messages are deleted.
+    - name: remove-permission
+      description: Revokes any permissions in the queue policy that matches the specified `Label` parameter.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --label=!: The identification of the permission to remove.
+        --queue-url=!: The URL of the Amazon SQS queue from which permissions are removed.
     - name: cancel-message-move-task
       description: Cancels a specified message movement task.
       flags:
@@ -87,6 +130,26 @@ commands:
         --queue-url=!: The URL of the Amazon SQS queue whose message's visibility is changed.
         --receipt-handle=!: The receipt handle associated with the message, whose visibility timeout is changed.
         --visibility-timeout=!: The new value for the message's visibility timeout (in seconds).
+    - name: purge-queue
+      description: Deletes available messages in a queue (including in-flight messages) specified by the `QueueURL` parameter.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --queue-url=!: The URL of the queue from which the `PurgeQueue` action deletes messages.
+    - name: send-message
+      description: Delivers a message to the specified queue.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delay-seconds=: The length of time, in seconds, for which to delay a specific message.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --message-attributes=: Each message attribute consists of a `Name`, `Type`, and `Value`.
+        --message-body=!: The message to send.
+        --message-deduplication-id=: This parameter applies only to FIFO (first-in-first-out) queues.
+        --message-group-id=: '`MessageGroupId` is an attribute used in Amazon SQS FIFO (First-In-First-Out) and standard queues.'
+        --message-system-attributes=: The message system attribute to send.
+        --queue-url=!: The URL of the Amazon SQS queue to which a message is sent.
     - name: create-queue
       description: Creates a new standard or FIFO queue.
       flags:
@@ -96,6 +159,13 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --queue-name=!: The name of the new queue.
         --tags=: Add cost allocation tags to the specified Amazon SQS queue.
+    - name: delete-queue
+      description: Deletes the queue specified by the `QueueUrl`, regardless of the queue's contents.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --queue-url=!: The URL of the Amazon SQS queue to delete.
     - name: get-queue-attributes
       description: Gets attributes for the specified queue.
       flags:
@@ -104,45 +174,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --queue-url=!: The URL of the Amazon SQS queue whose attribute information is retrieved.
-    - name: list-dead-letter-source-queues
-      description: Returns a list of your queues that have the `RedrivePolicy` queue attribute configured with a dead-letter queue.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Maximum number of results to include in the response.
-        --next-token=: Pagination token to request the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --queue-url=!: The URL of a dead-letter queue.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-queue-tags
-      description: List all cost allocation tags added to the specified Amazon SQS queue.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --queue-url=!: The URL of the queue.
-    - name: list-queues
-      description: Returns a list of your queues in the current region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Maximum number of results to include in the response.
-        --next-token=: Pagination token to request the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --queue-name-prefix=: A string to use for filtering the list results.
-        --starting-token=: A token to specify where to start paginating.
-    - name: change-message-visibility-batch
-      description: Changes the visibility timeout of multiple messages.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --entries=!: Lists the receipt handles of the messages for which the visibility timeout must be changed.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --queue-url=!: The URL of the Amazon SQS queue whose messages' visibility is changed.
     - name: get-queue-url
       description: The `GetQueueUrl` API returns the URL of an existing Amazon SQS queue.
       flags:
@@ -151,27 +182,21 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --queue-name=!: (Required) The name of the queue for which you want to fetch the URL.
         --queue-owner-aws-account-id=: (Optional) The Amazon Web Services account ID of the account that created the queue.
-    - name: purge-queue
-      description: Deletes available messages in a queue (including in-flight messages) specified by the `QueueURL` parameter.
+    - name: list-queue-tags
+      description: List all cost allocation tags added to the specified Amazon SQS queue.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --queue-url=!: The URL of the queue from which the `PurgeQueue` action deletes messages.
-    - name: receive-message
-      description: Retrieves one or more messages (up to 10), from the specified queue.
+        --queue-url=!: The URL of the queue.
+    - name: send-message-batch
+      description: You can use `SendMessageBatch` to send up to 10 messages to the specified queue by assigning either identical or different values to each message (or by not assigning values at all).
       flags:
-        --attribute-names=: This parameter has been discontinued but will be supported for backward compatibility.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entries=!: A list of `SendMessageBatchRequestEntry` items.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-number-of-messages=: The maximum number of messages to return.
-        --message-attribute-names=: The name of the message attribute, where *N* is the index.
-        --message-system-attribute-names=: A list of attributes that need to be returned along with each message.
-        --queue-url=!: The URL of the Amazon SQS queue from which messages are received.
-        --receive-request-attempt-id=: This parameter applies only to FIFO (first-in-first-out) queues.
-        --visibility-timeout=: The duration (in seconds) that the received messages are hidden from subsequent retrieve requests after being retrieved by a `ReceiveMessage` request.
-        --wait-time-seconds=: The duration (in seconds) for which the call waits for a message to arrive in the queue before returning.
+        --queue-url=!: The URL of the Amazon SQS queue to which batched messages are sent.
     - name: set-queue-attributes
       description: Sets the value of one or more queue attributes, like a policy.
       flags:
@@ -180,28 +205,3 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --queue-url=!: The URL of the Amazon SQS queue whose attributes are set.
-    - name: start-message-move-task
-      description: Starts an asynchronous task to move messages from a specified source queue to a specified destination queue.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --destination-arn=: The ARN of the queue that receives the moved messages.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-number-of-messages-per-second=: The number of messages to be moved per second (the message movement rate).
-        --source-arn=!: The ARN of the queue that contains the messages to be moved to another queue.
-    - name: untag-queue
-      description: Remove cost allocation tags from the specified Amazon SQS queue.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --queue-url=!: The URL of the queue.
-        --tag-keys=!: The list of tags to be removed from the specified queue.
-    - name: delete-message
-      description: Deletes the specified message from the specified queue.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --queue-url=!: The URL of the Amazon SQS queue from which messages are deleted.
-        --receipt-handle=!: The receipt handle associated with the message to delete.

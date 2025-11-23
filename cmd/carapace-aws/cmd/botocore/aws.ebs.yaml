@@ -1,6 +1,21 @@
 name: ebs
 description: Amazon Elastic Block Store
 commands:
+    - name: start-snapshot
+      description: Creates a new Amazon EBS snapshot.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --description=: A description for the snapshot.
+        --encrypted: Indicates whether to encrypt the snapshot.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-arn=: The Amazon Resource Name (ARN) of the Key Management Service (KMS) key to be used to encrypt the snapshot.
+        --no-encrypted: Indicates whether to encrypt the snapshot.
+        --parent-snapshot-id=: The ID of the parent snapshot.
+        --tags=: The tags to apply to the snapshot.
+        --timeout=: 'The amount of time (in minutes) after which the snapshot is automatically cancelled if:'
+        --volume-size=!: The size of the volume, in GiB.
     - name: complete-snapshot
       description: Seals and completes the snapshot after all of the required blocks of data have been written to it.
       flags:
@@ -23,10 +38,10 @@ commands:
       flags:
         --block-index=!: The block index of the block in which to read the data.
         --block-token=!: The block token of the block from which to get data.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --snapshot-id=!: The ID of the snapshot containing the block from which to get data.
+      completion:
+        positional:
+            - - $files
     - name: list-changed-blocks
       description: Returns information about the blocks that are different between two Amazon Elastic Block Store snapshots of the same volume/snapshot lineage.
       flags:
@@ -65,18 +80,3 @@ commands:
         flag:
             checksum-algorithm:
                 - SHA256
-    - name: start-snapshot
-      description: Creates a new Amazon EBS snapshot.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --description=: A description for the snapshot.
-        --encrypted: Indicates whether to encrypt the snapshot.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kms-key-arn=: The Amazon Resource Name (ARN) of the Key Management Service (KMS) key to be used to encrypt the snapshot.
-        --no-encrypted: Indicates whether to encrypt the snapshot.
-        --parent-snapshot-id=: The ID of the parent snapshot.
-        --tags=: The tags to apply to the snapshot.
-        --timeout=: 'The amount of time (in minutes) after which the snapshot is automatically cancelled if:'
-        --volume-size=!: The size of the volume, in GiB.

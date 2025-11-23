@@ -1,68 +1,14 @@
 name: clouddirectory
 description: Amazon CloudDirectory
 commands:
-    - name: add-facet-to-object
-      description: Adds a new [Facet]() to an object.
+    - name: get-facet
+      description: Gets details of the [Facet](), such as facet name, attributes, [Rule]()s, or `ObjectType`.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --directory-arn=!: The Amazon Resource Name (ARN) that is associated with the [Directory]() where the object resides.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --object-attribute-list=: Attributes on the facet that you are adding to the object.
-        --object-reference=!: A reference to the object you are adding the specified facet to.
-        --schema-facet=!: Identifiers for the facet that you are adding to the object.
-    - name: list-attached-indices
-      description: Lists indices attached to the specified object.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --consistency-level=: The consistency level to use for this operation.
-        --directory-arn=!: The ARN of the directory.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to retrieve.
-        --next-token=: The pagination token.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --target-reference=!: A reference to the object that has indices attached.
-      completion:
-        flag:
-            consistency-level:
-                - SERIALIZABLE
-                - EVENTUAL
-    - name: lookup-policy
-      description: Lists all policies from the root of the [Directory]() to the object specified.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --directory-arn=!: The Amazon Resource Name (ARN) that is associated with the [Directory]().
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to be retrieved in a single call.
-        --next-token=: The token to request the next page of results.
-        --object-reference=!: Reference that identifies the object whose policies will be looked up.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: delete-directory
-      description: Deletes a directory.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --directory-arn=!: The ARN of the directory to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-object-parent-paths
-      description: Retrieves all available parent paths for any object type such as node, leaf node, policy node, and index node objects.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --directory-arn=!: The ARN of the directory to which the parent path applies.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to be retrieved in a single call.
-        --next-token=: The pagination token.
-        --object-reference=!: The reference that identifies the object whose parent paths are listed.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+        --name=!: The name of the facet to retrieve.
+        --schema-arn=!: The Amazon Resource Name (ARN) that is associated with the [Facet]().
     - name: apply-schema
       description: Copies the input published schema, at the specified version, into the [Directory]() with the same name and version as that of the published schema.
       flags:
@@ -71,177 +17,6 @@ commands:
         --directory-arn=!: The Amazon Resource Name (ARN) that is associated with the [Directory]() into which the schema is copied.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --published-schema-arn=!: Published schema Amazon Resource Name (ARN) that needs to be copied.
-    - name: attach-typed-link
-      description: Attaches a typed link to a specified source and target object.
-      flags:
-        --attributes=!: A set of attributes that are associated with the typed link.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --directory-arn=!: The Amazon Resource Name (ARN) of the directory where you want to attach the typed link.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-object-reference=!: Identifies the source object that the typed link will attach to.
-        --target-object-reference=!: Identifies the target object that the typed link will attach to.
-        --typed-link-facet=!: Identifies the typed link facet that is associated with the typed link.
-    - name: create-index
-      description: Creates an index object.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --directory-arn=!: The ARN of the directory where the index should be created.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --is-unique!: Indicates whether the attribute that is being indexed has unique values or not.
-        --link-name=: The name of the link between the parent object and the index object.
-        --no-is-unique!: Indicates whether the attribute that is being indexed has unique values or not.
-        --ordered-indexed-attribute-list=!: Specifies the attributes that should be indexed on.
-        --parent-reference=: A reference to the parent object that contains the index object.
-    - name: create-schema
-      description: Creates a new schema in a development state.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name that is associated with the schema.
-    - name: create-typed-link-facet
-      description: Creates a [TypedLinkFacet]().
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --facet=!: '[Facet]() structure that is associated with the typed link facet.'
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --schema-arn=!: The Amazon Resource Name (ARN) that is associated with the schema.
-    - name: get-directory
-      description: Retrieves metadata about a directory.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --directory-arn=!: The ARN of the directory.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-link-attributes
-      description: Retrieves attributes that are associated with a typed link.
-      flags:
-        --attribute-names=!: A list of attribute names whose values will be retrieved.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --consistency-level=: The consistency level at which to retrieve the attributes on a typed link.
-        --directory-arn=!: The Amazon Resource Name (ARN) that is associated with the Directory where the typed link resides.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --typed-link-specifier=!: Allows a typed link specifier to be accepted as input.
-      completion:
-        flag:
-            consistency-level:
-                - SERIALIZABLE
-                - EVENTUAL
-    - name: list-directories
-      description: Lists directories created within an account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to retrieve.
-        --next-token=: The pagination token.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --state=: The state of the directories in the list.
-      completion:
-        flag:
-            state:
-                - ENABLED
-                - DISABLED
-                - DELETED
-    - name: delete-object
-      description: Deletes an object and its associated attributes.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --directory-arn=!: The Amazon Resource Name (ARN) that is associated with the [Directory]() where the object resides.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --object-reference=!: A reference that identifies the object.
-    - name: list-object-attributes
-      description: Lists all attributes that are associated with an object.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --consistency-level=: Represents the manner and timing in which the successful write or update of an object is reflected in a subsequent read operation of that same object.
-        --directory-arn=!: The Amazon Resource Name (ARN) that is associated with the [Directory]() where the object resides.
-        --facet-filter=: Used to filter the list of object attributes that are associated with a certain facet.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to be retrieved in a single call.
-        --next-token=: The pagination token.
-        --object-reference=!: The reference that identifies the object whose attributes will be listed.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            consistency-level:
-                - SERIALIZABLE
-                - EVENTUAL
-    - name: publish-schema
-      description: Publishes a development schema with a major version and a recommended minor version.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --development-schema-arn=!: The Amazon Resource Name (ARN) that is associated with the development schema.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --minor-version=: The minor version under which the schema will be published.
-        --name=: The new name under which the schema will be published.
-        --schema-version=!: The major version under which the schema will be published.
-    - name: upgrade-published-schema
-      description: Upgrades a published schema under a new minor version revision using the current contents of `DevelopmentSchemaArn`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --development-schema-arn=!: The ARN of the development schema with the changes used for the upgrade.
-        --dry-run: Used for testing whether the Development schema provided is backwards compatible, or not, with the publish schema provided by the user to be upgraded.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --minor-version=!: Identifies the minor version of the published schema that will be created.
-        --no-dry-run: Used for testing whether the Development schema provided is backwards compatible, or not, with the publish schema provided by the user to be upgraded.
-        --published-schema-arn=!: The ARN of the published schema to be upgraded.
-    - name: delete-facet
-      description: Deletes a given [Facet]().
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the facet to delete.
-        --schema-arn=!: The Amazon Resource Name (ARN) that is associated with the [Facet]().
-    - name: list-policy-attachments
-      description: Returns all of the `ObjectIdentifiers` to which a given policy is attached.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --consistency-level=: Represents the manner and timing in which the successful write or update of an object is reflected in a subsequent read operation of that same object.
-        --directory-arn=!: The Amazon Resource Name (ARN) that is associated with the [Directory]() where objects reside.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to be retrieved in a single call.
-        --next-token=: The pagination token.
-        --page-size=: The size of each page to get in the AWS service call.
-        --policy-reference=!: The reference that identifies the policy object.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            consistency-level:
-                - SERIALIZABLE
-                - EVENTUAL
-    - name: remove-facet-from-object
-      description: Removes the specified facet from the specified object.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --directory-arn=!: The ARN of the directory in which the object resides.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --object-reference=!: A reference to the object to remove the facet from.
-        --schema-facet=!: The facet to remove.
-    - name: untag-resource
-      description: An API operation for removing tags from a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-        --tag-keys=!: Keys of the tag that need to be removed from the resource.
     - name: attach-object
       description: Attaches an existing object to another object.
       flags:
@@ -252,131 +27,21 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --link-name=!: The link name with which the child object is attached to the parent.
         --parent-reference=!: The parent object reference.
-    - name: create-facet
-      description: Creates a new [Facet]() in a schema.
-      flags:
-        --attributes=: The attributes that are associated with the [Facet]().
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --facet-style=: There are two different styles that you can define on any given facet, `Static` and `Dynamic`.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the [Facet](), which is unique for a given schema.
-        --object-type=: Specifies whether a given object created from this facet is of type node, leaf node, policy or index.
-        --schema-arn=!: The schema ARN in which the new [Facet]() will be created.
-      completion:
-        flag:
-            facet-style:
-                - STATIC
-                - DYNAMIC
-            object-type:
-                - NODE
-                - LEAF_NODE
-                - POLICY
-                - INDEX
-    - name: list-facet-attributes
-      description: Retrieves attributes attached to the facet.
+    - name: create-directory
+      description: Creates a [Directory]() by copying the published schema into the directory.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to retrieve.
-        --name=!: The name of the facet whose attributes will be retrieved.
-        --next-token=: The pagination token.
-        --page-size=: The size of each page to get in the AWS service call.
-        --schema-arn=!: The ARN of the schema where the facet resides.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-index
-      description: Lists objects attached to the specified index.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --consistency-level=: The consistency level to execute the request at.
-        --directory-arn=!: The ARN of the directory that the index exists in.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-reference=!: The reference to the index to list.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of objects in a single page to retrieve from the index during a request.
-        --next-token=: The pagination token.
-        --page-size=: The size of each page to get in the AWS service call.
-        --ranges-on-indexed-values=: Specifies the ranges of indexed values that you want to query.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            consistency-level:
-                - SERIALIZABLE
-                - EVENTUAL
-    - name: list-published-schema-arns
-      description: Lists the major version families of each published schema.
+        --name=!: The name of the [Directory]().
+        --schema-arn=!: The Amazon Resource Name (ARN) of the published schema that will be copied into the data [Directory]().
+    - name: create-schema
+      description: Creates a new schema in a development state.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to retrieve.
-        --next-token=: The pagination token.
-        --page-size=: The size of each page to get in the AWS service call.
-        --schema-arn=: The response for `ListPublishedSchemaArns` when this parameter is used will list all minor version ARNs for a major version.
-        --starting-token=: A token to specify where to start paginating.
-    - name: tag-resource
-      description: An API operation for adding tags to a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-        --tags=!: A list of tag key-value pairs.
-    - name: attach-policy
-      description: Attaches a policy object to a regular object.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --directory-arn=!: The Amazon Resource Name (ARN) that is associated with the [Directory]() where both objects reside.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --object-reference=!: The reference that identifies the object to which the policy will be attached.
-        --policy-reference=!: The reference that is associated with the policy object.
-    - name: batch-read
-      description: Performs all the read operations in a batch.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --consistency-level=: Represents the manner and timing in which the successful write or update of an object is reflected in a subsequent read operation of that same object.
-        --directory-arn=!: The Amazon Resource Name (ARN) that is associated with the [Directory]().
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --operations=!: A list of operations that are part of the batch.
-      completion:
-        flag:
-            consistency-level:
-                - SERIALIZABLE
-                - EVENTUAL
-    - name: batch-write
-      description: Performs all the write operations in a batch.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --directory-arn=!: The Amazon Resource Name (ARN) that is associated with the [Directory]().
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --operations=!: A list of operations that are part of the batch.
-    - name: disable-directory
-      description: Disables the specified directory.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --directory-arn=!: The ARN of the directory to disable.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-applied-schema-arns
-      description: Lists schema major versions applied to a directory.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --directory-arn=!: The ARN of the directory you are listing.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to retrieve.
-        --next-token=: The pagination token.
-        --page-size=: The size of each page to get in the AWS service call.
-        --schema-arn=: The response for `ListAppliedSchemaArns` when this parameter is used will list all minor version ARNs for a major version.
-        --starting-token=: A token to specify where to start paginating.
+        --name=!: The name that is associated with the schema.
     - name: list-outgoing-typed-links
       description: Returns a paginated list of all the outgoing [TypedLinkSpecifier]() information for an object.
       flags:
@@ -398,6 +63,290 @@ commands:
             consistency-level:
                 - SERIALIZABLE
                 - EVENTUAL
+    - name: remove-facet-from-object
+      description: Removes the specified facet from the specified object.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-arn=!: The ARN of the directory in which the object resides.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --object-reference=!: A reference to the object to remove the facet from.
+        --schema-facet=!: The facet to remove.
+    - name: upgrade-applied-schema
+      description: Upgrades a single directory in-place using the `PublishedSchemaArn` with schema updates found in `MinorVersion`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-arn=!: The ARN for the directory to which the upgraded schema will be applied.
+        --dry-run: Used for testing whether the major version schemas are backward compatible or not.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-dry-run: Used for testing whether the major version schemas are backward compatible or not.
+        --published-schema-arn=!: The revision of the published schema to upgrade the directory to.
+    - name: list-applied-schema-arns
+      description: Lists schema major versions applied to a directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-arn=!: The ARN of the directory you are listing.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to retrieve.
+        --next-token=: The pagination token.
+        --page-size=: The size of each page to get in the AWS service call.
+        --schema-arn=: The response for `ListAppliedSchemaArns` when this parameter is used will list all minor version ARNs for a major version.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-facet-attributes
+      description: Retrieves attributes attached to the facet.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to retrieve.
+        --name=!: The name of the facet whose attributes will be retrieved.
+        --next-token=: The pagination token.
+        --page-size=: The size of each page to get in the AWS service call.
+        --schema-arn=!: The ARN of the schema where the facet resides.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: Returns tags for a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The `MaxResults` parameter sets the maximum number of results returned in a single page.
+        --next-token=: The pagination token.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-typed-link-facet-attributes
+      description: Returns a paginated list of all attribute definitions for a particular [TypedLinkFacet]().
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to retrieve.
+        --name=!: The unique name of the typed link facet.
+        --next-token=: The pagination token.
+        --page-size=: The size of each page to get in the AWS service call.
+        --schema-arn=!: The Amazon Resource Name (ARN) that is associated with the schema.
+        --starting-token=: A token to specify where to start paginating.
+    - name: create-typed-link-facet
+      description: Creates a [TypedLinkFacet]().
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --facet=!: '[Facet]() structure that is associated with the typed link facet.'
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --schema-arn=!: The Amazon Resource Name (ARN) that is associated with the schema.
+    - name: get-schema-as-json
+      description: Retrieves a JSON representation of the schema.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --schema-arn=!: The ARN of the schema to retrieve.
+    - name: list-facet-names
+      description: Retrieves the names of facets that exist in a schema.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to retrieve.
+        --next-token=: The pagination token.
+        --page-size=: The size of each page to get in the AWS service call.
+        --schema-arn=!: The Amazon Resource Name (ARN) to retrieve facet names from.
+        --starting-token=: A token to specify where to start paginating.
+    - name: untag-resource
+      description: An API operation for removing tags from a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+        --tag-keys=!: Keys of the tag that need to be removed from the resource.
+    - name: delete-facet
+      description: Deletes a given [Facet]().
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the facet to delete.
+        --schema-arn=!: The Amazon Resource Name (ARN) that is associated with the [Facet]().
+    - name: get-object-attributes
+      description: Retrieves attributes within a facet that are associated with an object.
+      flags:
+        --attribute-names=!: List of attribute names whose values will be retrieved.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --consistency-level=: The consistency level at which to retrieve the attributes on an object.
+        --directory-arn=!: The Amazon Resource Name (ARN) that is associated with the [Directory]() where the object resides.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --object-reference=!: Reference that identifies the object whose attributes will be retrieved.
+        --schema-facet=!: Identifier for the facet whose attributes will be retrieved.
+      completion:
+        flag:
+            consistency-level:
+                - SERIALIZABLE
+                - EVENTUAL
+    - name: list-index
+      description: Lists objects attached to the specified index.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --consistency-level=: The consistency level to execute the request at.
+        --directory-arn=!: The ARN of the directory that the index exists in.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-reference=!: The reference to the index to list.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of objects in a single page to retrieve from the index during a request.
+        --next-token=: The pagination token.
+        --page-size=: The size of each page to get in the AWS service call.
+        --ranges-on-indexed-values=: Specifies the ranges of indexed values that you want to query.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            consistency-level:
+                - SERIALIZABLE
+                - EVENTUAL
+    - name: list-object-attributes
+      description: Lists all attributes that are associated with an object.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --consistency-level=: Represents the manner and timing in which the successful write or update of an object is reflected in a subsequent read operation of that same object.
+        --directory-arn=!: The Amazon Resource Name (ARN) that is associated with the [Directory]() where the object resides.
+        --facet-filter=: Used to filter the list of object attributes that are associated with a certain facet.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to be retrieved in a single call.
+        --next-token=: The pagination token.
+        --object-reference=!: The reference that identifies the object whose attributes will be listed.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            consistency-level:
+                - SERIALIZABLE
+                - EVENTUAL
+    - name: list-object-parent-paths
+      description: Retrieves all available parent paths for any object type such as node, leaf node, policy node, and index node objects.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-arn=!: The ARN of the directory to which the parent path applies.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to be retrieved in a single call.
+        --next-token=: The pagination token.
+        --object-reference=!: The reference that identifies the object whose parent paths are listed.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: delete-object
+      description: Deletes an object and its associated attributes.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-arn=!: The Amazon Resource Name (ARN) that is associated with the [Directory]() where the object resides.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --object-reference=!: A reference that identifies the object.
+    - name: enable-directory
+      description: Enables the specified directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-arn=!: The ARN of the directory to enable.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-link-attributes
+      description: Retrieves attributes that are associated with a typed link.
+      flags:
+        --attribute-names=!: A list of attribute names whose values will be retrieved.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --consistency-level=: The consistency level at which to retrieve the attributes on a typed link.
+        --directory-arn=!: The Amazon Resource Name (ARN) that is associated with the Directory where the typed link resides.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --typed-link-specifier=!: Allows a typed link specifier to be accepted as input.
+      completion:
+        flag:
+            consistency-level:
+                - SERIALIZABLE
+                - EVENTUAL
+    - name: add-facet-to-object
+      description: Adds a new [Facet]() to an object.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-arn=!: The Amazon Resource Name (ARN) that is associated with the [Directory]() where the object resides.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --object-attribute-list=: Attributes on the facet that you are adding to the object.
+        --object-reference=!: A reference to the object you are adding the specified facet to.
+        --schema-facet=!: Identifiers for the facet that you are adding to the object.
+    - name: attach-policy
+      description: Attaches a policy object to a regular object.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-arn=!: The Amazon Resource Name (ARN) that is associated with the [Directory]() where both objects reside.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --object-reference=!: The reference that identifies the object to which the policy will be attached.
+        --policy-reference=!: The reference that is associated with the policy object.
+    - name: publish-schema
+      description: Publishes a development schema with a major version and a recommended minor version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --development-schema-arn=!: The Amazon Resource Name (ARN) that is associated with the development schema.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --minor-version=: The minor version under which the schema will be published.
+        --name=: The new name under which the schema will be published.
+        --schema-version=!: The major version under which the schema will be published.
+    - name: update-link-attributes
+      description: Updates a given typed link’s attributes.
+      flags:
+        --attribute-updates=!: The attributes update structure.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-arn=!: The Amazon Resource Name (ARN) that is associated with the Directory where the updated typed link resides.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --typed-link-specifier=!: Allows a typed link specifier to be accepted as input.
+    - name: tag-resource
+      description: An API operation for adding tags to a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+        --tags=!: A list of tag key-value pairs.
+    - name: delete-directory
+      description: Deletes a directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-arn=!: The ARN of the directory to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-attached-indices
+      description: Lists indices attached to the specified object.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --consistency-level=: The consistency level to use for this operation.
+        --directory-arn=!: The ARN of the directory.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to retrieve.
+        --next-token=: The pagination token.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --target-reference=!: A reference to the object that has indices attached.
+      completion:
+        flag:
+            consistency-level:
+                - SERIALIZABLE
+                - EVENTUAL
     - name: list-typed-link-facet-names
       description: Returns a paginated list of `TypedLink` facet names for a particular schema.
       flags:
@@ -410,71 +359,6 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --schema-arn=!: The Amazon Resource Name (ARN) that is associated with the schema.
         --starting-token=: A token to specify where to start paginating.
-    - name: update-schema
-      description: Updates the schema name with a new name.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the schema.
-        --schema-arn=!: The Amazon Resource Name (ARN) of the development schema.
-    - name: upgrade-applied-schema
-      description: Upgrades a single directory in-place using the `PublishedSchemaArn` with schema updates found in `MinorVersion`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --directory-arn=!: The ARN for the directory to which the upgraded schema will be applied.
-        --dry-run: Used for testing whether the major version schemas are backward compatible or not.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-dry-run: Used for testing whether the major version schemas are backward compatible or not.
-        --published-schema-arn=!: The revision of the published schema to upgrade the directory to.
-    - name: create-directory
-      description: Creates a [Directory]() by copying the published schema into the directory.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the [Directory]().
-        --schema-arn=!: The Amazon Resource Name (ARN) of the published schema that will be copied into the data [Directory]().
-    - name: update-object-attributes
-      description: Updates a given object's attributes.
-      flags:
-        --attribute-updates=!: The attributes update structure.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --directory-arn=!: The Amazon Resource Name (ARN) that is associated with the [Directory]() where the object resides.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --object-reference=!: The reference that identifies the object.
-    - name: put-schema-from-json
-      description: Allows a schema to be updated using JSON upload.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --document=!: The replacement JSON schema.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --schema-arn=!: The ARN of the schema to update.
-    - name: get-facet
-      description: Gets details of the [Facet](), such as facet name, attributes, [Rule]()s, or `ObjectType`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the facet to retrieve.
-        --schema-arn=!: The Amazon Resource Name (ARN) that is associated with the [Facet]().
-    - name: get-object-information
-      description: Retrieves metadata about an object.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --consistency-level=: The consistency level at which to retrieve the object information.
-        --directory-arn=!: The ARN of the directory being retrieved.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --object-reference=!: A reference to the object.
-      completion:
-        flag:
-            consistency-level:
-                - SERIALIZABLE
-                - EVENTUAL
     - name: update-facet
       description: 'Does the following:'
       flags:
@@ -492,6 +376,282 @@ commands:
                 - LEAF_NODE
                 - POLICY
                 - INDEX
+    - name: update-object-attributes
+      description: Updates a given object's attributes.
+      flags:
+        --attribute-updates=!: The attributes update structure.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-arn=!: The Amazon Resource Name (ARN) that is associated with the [Directory]() where the object resides.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --object-reference=!: The reference that identifies the object.
+    - name: attach-typed-link
+      description: Attaches a typed link to a specified source and target object.
+      flags:
+        --attributes=!: A set of attributes that are associated with the typed link.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-arn=!: The Amazon Resource Name (ARN) of the directory where you want to attach the typed link.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-object-reference=!: Identifies the source object that the typed link will attach to.
+        --target-object-reference=!: Identifies the target object that the typed link will attach to.
+        --typed-link-facet=!: Identifies the typed link facet that is associated with the typed link.
+    - name: lookup-policy
+      description: Lists all policies from the root of the [Directory]() to the object specified.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-arn=!: The Amazon Resource Name (ARN) that is associated with the [Directory]().
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to be retrieved in a single call.
+        --next-token=: The token to request the next page of results.
+        --object-reference=!: Reference that identifies the object whose policies will be looked up.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: create-facet
+      description: Creates a new [Facet]() in a schema.
+      flags:
+        --attributes=: The attributes that are associated with the [Facet]().
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --facet-style=: There are two different styles that you can define on any given facet, `Static` and `Dynamic`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the [Facet](), which is unique for a given schema.
+        --object-type=: Specifies whether a given object created from this facet is of type node, leaf node, policy or index.
+        --schema-arn=!: The schema ARN in which the new [Facet]() will be created.
+      completion:
+        flag:
+            facet-style:
+                - STATIC
+                - DYNAMIC
+            object-type:
+                - NODE
+                - LEAF_NODE
+                - POLICY
+                - INDEX
+    - name: detach-typed-link
+      description: Detaches a typed link from a specified source and target object.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-arn=!: The Amazon Resource Name (ARN) of the directory where you want to detach the typed link.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --typed-link-specifier=!: Used to accept a typed link specifier as input.
+    - name: list-development-schema-arns
+      description: Retrieves each Amazon Resource Name (ARN) of schemas in the development state.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to retrieve.
+        --next-token=: The pagination token.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: batch-write
+      description: Performs all the write operations in a batch.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-arn=!: The Amazon Resource Name (ARN) that is associated with the [Directory]().
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --operations=!: A list of operations that are part of the batch.
+    - name: detach-object
+      description: Detaches a given object from the parent object.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-arn=!: The Amazon Resource Name (ARN) that is associated with the [Directory]() where objects reside.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --link-name=!: The link name associated with the object that needs to be detached.
+        --parent-reference=!: The parent reference from which the object with the specified link name is detached.
+    - name: upgrade-published-schema
+      description: Upgrades a published schema under a new minor version revision using the current contents of `DevelopmentSchemaArn`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --development-schema-arn=!: The ARN of the development schema with the changes used for the upgrade.
+        --dry-run: Used for testing whether the Development schema provided is backwards compatible, or not, with the publish schema provided by the user to be upgraded.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --minor-version=!: Identifies the minor version of the published schema that will be created.
+        --no-dry-run: Used for testing whether the Development schema provided is backwards compatible, or not, with the publish schema provided by the user to be upgraded.
+        --published-schema-arn=!: The ARN of the published schema to be upgraded.
+    - name: disable-directory
+      description: Disables the specified directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-arn=!: The ARN of the directory to disable.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-typed-link-facet-information
+      description: Returns the identity attribute order for a specific [TypedLinkFacet]().
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The unique name of the typed link facet.
+        --schema-arn=!: The Amazon Resource Name (ARN) that is associated with the schema.
+    - name: put-schema-from-json
+      description: Allows a schema to be updated using JSON upload.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --document=!: The replacement JSON schema.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --schema-arn=!: The ARN of the schema to update.
+    - name: update-typed-link-facet
+      description: Updates a [TypedLinkFacet]().
+      flags:
+        --attribute-updates=!: Attributes update structure.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-attribute-order=!: The order of identity attributes for the facet, from most significant to least significant.
+        --name=!: The unique name of the typed link facet.
+        --schema-arn=!: The Amazon Resource Name (ARN) that is associated with the schema.
+    - name: get-directory
+      description: Retrieves metadata about a directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-arn=!: The ARN of the directory.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-applied-schema-version
+      description: Returns current applied schema version ARN, including the minor version in use.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --schema-arn=!: The ARN of the applied schema.
+    - name: get-object-information
+      description: Retrieves metadata about an object.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --consistency-level=: The consistency level at which to retrieve the object information.
+        --directory-arn=!: The ARN of the directory being retrieved.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --object-reference=!: A reference to the object.
+      completion:
+        flag:
+            consistency-level:
+                - SERIALIZABLE
+                - EVENTUAL
+    - name: list-managed-schema-arns
+      description: Lists the major version families of each managed schema.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to retrieve.
+        --next-token=: The pagination token.
+        --page-size=: The size of each page to get in the AWS service call.
+        --schema-arn=: The response for ListManagedSchemaArns.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-object-children
+      description: Returns a paginated list of child objects that are associated with a given object.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --consistency-level=: Represents the manner and timing in which the successful write or update of an object is reflected in a subsequent read operation of that same object.
+        --directory-arn=!: The Amazon Resource Name (ARN) that is associated with the [Directory]() where the object resides.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of items to be retrieved in a single call.
+        --next-token=: The pagination token.
+        --object-reference=!: The reference that identifies the object for which child objects are being listed.
+      completion:
+        flag:
+            consistency-level:
+                - SERIALIZABLE
+                - EVENTUAL
+    - name: update-schema
+      description: Updates the schema name with a new name.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the schema.
+        --schema-arn=!: The Amazon Resource Name (ARN) of the development schema.
+    - name: attach-to-index
+      description: Attaches the specified object to the specified index.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-arn=!: The Amazon Resource Name (ARN) of the directory where the object and index exist.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-reference=!: A reference to the index that you are attaching the object to.
+        --target-reference=!: A reference to the object that you are attaching to the index.
+    - name: batch-read
+      description: Performs all the read operations in a batch.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --consistency-level=: Represents the manner and timing in which the successful write or update of an object is reflected in a subsequent read operation of that same object.
+        --directory-arn=!: The Amazon Resource Name (ARN) that is associated with the [Directory]().
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --operations=!: A list of operations that are part of the batch.
+      completion:
+        flag:
+            consistency-level:
+                - SERIALIZABLE
+                - EVENTUAL
+    - name: create-index
+      description: Creates an index object.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-arn=!: The ARN of the directory where the index should be created.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --is-unique!: Indicates whether the attribute that is being indexed has unique values or not.
+        --link-name=: The name of the link between the parent object and the index object.
+        --no-is-unique!: Indicates whether the attribute that is being indexed has unique values or not.
+        --ordered-indexed-attribute-list=!: Specifies the attributes that should be indexed on.
+        --parent-reference=: A reference to the parent object that contains the index object.
+    - name: delete-schema
+      description: Deletes a given schema.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --schema-arn=!: The Amazon Resource Name (ARN) of the development schema.
+    - name: detach-from-index
+      description: Detaches the specified object from the specified index.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-arn=!: The Amazon Resource Name (ARN) of the directory the index and object exist in.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-reference=!: A reference to the index object.
+        --target-reference=!: A reference to the object being detached from the index.
+    - name: detach-policy
+      description: Detaches a policy from an object.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-arn=!: The Amazon Resource Name (ARN) that is associated with the [Directory]() where both objects reside.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --object-reference=!: Reference that identifies the object whose policy object will be detached.
+        --policy-reference=!: Reference that identifies the policy object.
+    - name: list-directories
+      description: Lists directories created within an account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to retrieve.
+        --next-token=: The pagination token.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --state=: The state of the directories in the list.
+      completion:
+        flag:
+            state:
+                - ENABLED
+                - DISABLED
+                - DELETED
     - name: list-object-parents
       description: Lists parent objects that are associated with a given object in pagination fashion.
       flags:
@@ -529,75 +689,25 @@ commands:
             consistency-level:
                 - SERIALIZABLE
                 - EVENTUAL
-    - name: list-typed-link-facet-attributes
-      description: Returns a paginated list of all attribute definitions for a particular [TypedLinkFacet]().
+    - name: list-policy-attachments
+      description: Returns all of the `ObjectIdentifiers` to which a given policy is attached.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --consistency-level=: Represents the manner and timing in which the successful write or update of an object is reflected in a subsequent read operation of that same object.
+        --directory-arn=!: The Amazon Resource Name (ARN) that is associated with the [Directory]() where objects reside.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to retrieve.
-        --name=!: The unique name of the typed link facet.
+        --max-results=: The maximum number of items to be retrieved in a single call.
         --next-token=: The pagination token.
         --page-size=: The size of each page to get in the AWS service call.
-        --schema-arn=!: The Amazon Resource Name (ARN) that is associated with the schema.
+        --policy-reference=!: The reference that identifies the policy object.
         --starting-token=: A token to specify where to start paginating.
-    - name: delete-typed-link-facet
-      description: Deletes a [TypedLinkFacet]().
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The unique name of the typed link facet.
-        --schema-arn=!: The Amazon Resource Name (ARN) that is associated with the schema.
-    - name: enable-directory
-      description: Enables the specified directory.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --directory-arn=!: The ARN of the directory to enable.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-development-schema-arns
-      description: Retrieves each Amazon Resource Name (ARN) of schemas in the development state.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to retrieve.
-        --next-token=: The pagination token.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-managed-schema-arns
-      description: Lists the major version families of each managed schema.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to retrieve.
-        --next-token=: The pagination token.
-        --page-size=: The size of each page to get in the AWS service call.
-        --schema-arn=: The response for ListManagedSchemaArns.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-link-attributes
-      description: Updates a given typed link’s attributes.
-      flags:
-        --attribute-updates=!: The attributes update structure.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --directory-arn=!: The Amazon Resource Name (ARN) that is associated with the Directory where the updated typed link resides.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --typed-link-specifier=!: Allows a typed link specifier to be accepted as input.
-    - name: attach-to-index
-      description: Attaches the specified object to the specified index.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --directory-arn=!: The Amazon Resource Name (ARN) of the directory where the object and index exist.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-reference=!: A reference to the index that you are attaching the object to.
-        --target-reference=!: A reference to the object that you are attaching to the index.
+      completion:
+        flag:
+            consistency-level:
+                - SERIALIZABLE
+                - EVENTUAL
     - name: create-object
       description: Creates an object in a [Directory]().
       flags:
@@ -609,89 +719,14 @@ commands:
         --object-attribute-list=: The attribute map whose attribute ARN contains the key and attribute value as the map value.
         --parent-reference=: If specified, the parent reference to which this object will be attached.
         --schema-facets=!: A list of schema facets to be associated with the object.
-    - name: delete-schema
-      description: Deletes a given schema.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --schema-arn=!: The Amazon Resource Name (ARN) of the development schema.
-    - name: detach-from-index
-      description: Detaches the specified object from the specified index.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --directory-arn=!: The Amazon Resource Name (ARN) of the directory the index and object exist in.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-reference=!: A reference to the index object.
-        --target-reference=!: A reference to the object being detached from the index.
-    - name: detach-policy
-      description: Detaches a policy from an object.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --directory-arn=!: The Amazon Resource Name (ARN) that is associated with the [Directory]() where both objects reside.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --object-reference=!: Reference that identifies the object whose policy object will be detached.
-        --policy-reference=!: Reference that identifies the policy object.
-    - name: get-object-attributes
-      description: Retrieves attributes within a facet that are associated with an object.
-      flags:
-        --attribute-names=!: List of attribute names whose values will be retrieved.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --consistency-level=: The consistency level at which to retrieve the attributes on an object.
-        --directory-arn=!: The Amazon Resource Name (ARN) that is associated with the [Directory]() where the object resides.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --object-reference=!: Reference that identifies the object whose attributes will be retrieved.
-        --schema-facet=!: Identifier for the facet whose attributes will be retrieved.
-      completion:
-        flag:
-            consistency-level:
-                - SERIALIZABLE
-                - EVENTUAL
-    - name: get-schema-as-json
-      description: Retrieves a JSON representation of the schema.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --schema-arn=!: The ARN of the schema to retrieve.
-    - name: get-typed-link-facet-information
-      description: Returns the identity attribute order for a specific [TypedLinkFacet]().
+    - name: delete-typed-link-facet
+      description: Deletes a [TypedLinkFacet]().
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The unique name of the typed link facet.
         --schema-arn=!: The Amazon Resource Name (ARN) that is associated with the schema.
-    - name: detach-typed-link
-      description: Detaches a typed link from a specified source and target object.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --directory-arn=!: The Amazon Resource Name (ARN) of the directory where you want to detach the typed link.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --typed-link-specifier=!: Used to accept a typed link specifier as input.
-    - name: get-applied-schema-version
-      description: Returns current applied schema version ARN, including the minor version in use.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --schema-arn=!: The ARN of the applied schema.
-    - name: list-facet-names
-      description: Retrieves the names of facets that exist in a schema.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to retrieve.
-        --next-token=: The pagination token.
-        --page-size=: The size of each page to get in the AWS service call.
-        --schema-arn=!: The Amazon Resource Name (ARN) to retrieve facet names from.
-        --starting-token=: A token to specify where to start paginating.
     - name: list-incoming-typed-links
       description: Returns a paginated list of all the incoming [TypedLinkSpecifier]() information for an object.
       flags:
@@ -713,50 +748,15 @@ commands:
             consistency-level:
                 - SERIALIZABLE
                 - EVENTUAL
-    - name: list-tags-for-resource
-      description: Returns tags for a resource.
+    - name: list-published-schema-arns
+      description: Lists the major version families of each published schema.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The `MaxResults` parameter sets the maximum number of results returned in a single page.
+        --max-results=: The maximum number of results to retrieve.
         --next-token=: The pagination token.
         --page-size=: The size of each page to get in the AWS service call.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+        --schema-arn=: The response for `ListPublishedSchemaArns` when this parameter is used will list all minor version ARNs for a major version.
         --starting-token=: A token to specify where to start paginating.
-    - name: detach-object
-      description: Detaches a given object from the parent object.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --directory-arn=!: The Amazon Resource Name (ARN) that is associated with the [Directory]() where objects reside.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --link-name=!: The link name associated with the object that needs to be detached.
-        --parent-reference=!: The parent reference from which the object with the specified link name is detached.
-    - name: list-object-children
-      description: Returns a paginated list of child objects that are associated with a given object.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --consistency-level=: Represents the manner and timing in which the successful write or update of an object is reflected in a subsequent read operation of that same object.
-        --directory-arn=!: The Amazon Resource Name (ARN) that is associated with the [Directory]() where the object resides.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of items to be retrieved in a single call.
-        --next-token=: The pagination token.
-        --object-reference=!: The reference that identifies the object for which child objects are being listed.
-      completion:
-        flag:
-            consistency-level:
-                - SERIALIZABLE
-                - EVENTUAL
-    - name: update-typed-link-facet
-      description: Updates a [TypedLinkFacet]().
-      flags:
-        --attribute-updates=!: Attributes update structure.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-attribute-order=!: The order of identity attributes for the facet, from most significant to least significant.
-        --name=!: The unique name of the typed link facet.
-        --schema-arn=!: The Amazon Resource Name (ARN) that is associated with the schema.

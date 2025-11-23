@@ -1,29 +1,118 @@
 name: bedrock-agentcore
 description: Amazon Bedrock AgentCore
 commands:
-    - name: get-code-interpreter-session
-      description: Retrieves detailed information about a specific code interpreter session in Amazon Bedrock.
+    - name: get-event
+      description: Retrieves information about a specific event in an AgentCore Memory resource.
       flags:
+        --actor-id=!: The identifier of the actor associated with the event.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --code-interpreter-identifier=!: The unique identifier of the code interpreter associated with the session.
+        --event-id=!: The identifier of the event to retrieve.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --session-id=!: The unique identifier of the code interpreter session to retrieve.
-    - name: list-browser-sessions
-      description: Retrieves a list of browser sessions in Amazon Bedrock that match the specified criteria.
+        --memory-id=!: The identifier of the AgentCore Memory resource containing the event.
+        --session-id=!: The identifier of the session containing the event.
+    - name: list-events
+      description: Lists events in an AgentCore Memory resource based on specified criteria.
       flags:
-        --browser-identifier=!: The unique identifier of the browser to list sessions for.
+        --actor-id=!: The identifier of the actor for which to list events.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: Filter criteria to apply when listing events.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-payloads: Specifies whether to include event payloads in the response.
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return in a single call.
+        --memory-id=!: The identifier of the AgentCore Memory resource for which to list events.
         --next-token=: The token for the next set of results.
-        --status=: The status of the browser sessions to list.
-      completion:
-        flag:
-            status:
-                - READY
-                - TERMINATED
+        --no-include-payloads: Specifies whether to include event payloads in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --session-id=!: The identifier of the session for which to list events.
+        --starting-token=: A token to specify where to start paginating.
+    - name: start-code-interpreter-session
+      description: Creates and initializes a code interpreter session in Amazon Bedrock.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
+        --code-interpreter-identifier=!: The unique identifier of the code interpreter to use for this session.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The name of the code interpreter session.
+        --session-timeout-seconds=: The time in seconds after which the session automatically terminates if there is no activity.
+        --trace-id=: The trace identifier for request tracking.
+        --trace-parent=: The parent trace information for distributed tracing.
+    - name: stop-browser-session
+      description: Terminates an active browser session in Amazon Bedrock.
+      flags:
+        --browser-identifier=!: The unique identifier of the browser associated with the session.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --session-id=!: The unique identifier of the browser session to stop.
+        --trace-id=: The trace identifier for request tracking.
+        --trace-parent=: The parent trace information for distributed tracing.
+    - name: get-browser-session
+      description: Retrieves detailed information about a specific browser session in Amazon Bedrock.
+      flags:
+        --browser-identifier=!: The unique identifier of the browser associated with the session.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --session-id=!: The unique identifier of the browser session to retrieve.
+    - name: update-browser-stream
+      description: Updates a browser stream.
+      flags:
+        --browser-identifier=!: The identifier of the browser.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than one time.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --session-id=!: The identifier of the browser session.
+        --stream-update=!: The update to apply to the browser stream.
+    - name: batch-update-memory-records
+      description: Updates multiple memory records with custom content in a single batch operation within the specified memory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --memory-id=!: The unique ID of the memory resource where records will be updated.
+        --records=!: A list of memory record update inputs to be processed in the batch operation.
+    - name: list-memory-extraction-jobs
+      description: Lists all long-term memory extraction jobs that are eligible to be started with optional filtering.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: Filter criteria to apply when listing extraction jobs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --memory-id=!: The unique identifier of the memory to list extraction jobs for.
+        --next-token=: The token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: delete-memory-record
+      description: Deletes a memory record from an AgentCore Memory resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --memory-id=!: The identifier of the AgentCore Memory resource from which to delete the memory record.
+        --memory-record-id=!: The identifier of the memory record to delete.
+    - name: get-memory-record
+      description: Retrieves a specific memory record from an AgentCore Memory resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --memory-id=!: The identifier of the AgentCore Memory resource containing the memory record.
+        --memory-record-id=!: The identifier of the memory record to retrieve.
+    - name: get-workload-access-token
+      description: Obtains a workload access token for agentic workloads not acting on behalf of a user.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workload-name=!: The unique identifier for the registered workload.
     - name: stop-code-interpreter-session
       description: Terminates an active code interpreter session in Amazon Bedrock.
       flags:
@@ -35,34 +124,6 @@ commands:
         --session-id=!: The unique identifier of the code interpreter session to stop.
         --trace-id=: The trace identifier for request tracking.
         --trace-parent=: The parent trace information for distributed tracing.
-    - name: get-event
-      description: Retrieves information about a specific event in an AgentCore Memory resource.
-      flags:
-        --actor-id=!: The identifier of the actor associated with the event.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --event-id=!: The identifier of the event to retrieve.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --memory-id=!: The identifier of the AgentCore Memory resource containing the event.
-        --session-id=!: The identifier of the session containing the event.
-    - name: get-resource-api-key
-      description: Retrieves the API key associated with an API key credential provider.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-credential-provider-name=!: The credential provider name for the resource from which you are retrieving the API key.
-        --workload-identity-token=!: The identity token of the workload from which you want to retrieve the API key.
-    - name: delete-event
-      description: Deletes an event from an AgentCore Memory resource.
-      flags:
-        --actor-id=!: The identifier of the actor associated with the event to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --event-id=!: The identifier of the event to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --memory-id=!: The identifier of the AgentCore Memory resource from which to delete the event.
-        --session-id=!: The identifier of the session containing the event to delete.
     - name: start-browser-session
       description: Creates and initializes a browser session in Amazon Bedrock.
       flags:
@@ -76,89 +137,31 @@ commands:
         --trace-id=: The trace identifier for request tracking.
         --trace-parent=: The parent trace information for distributed tracing.
         --view-port=: The dimensions of the browser viewport for this session.
-    - name: start-memory-extraction-job
-      description: Starts a memory extraction job that processes events that failed extraction previously in an AgentCore Memory resource and produces structured memory records.
+    - name: batch-create-memory-records
+      description: Creates multiple memory records in a single batch operation for the specified memory with custom content.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier to ensure idempotent processing of the request.
-        --extraction-job=!: Extraction job to start in this operation.
+        --client-token=: A unique, case-sensitive identifier to ensure idempotent processing of the batch request.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --memory-id=!: The unique identifier of the memory for which to start extraction jobs.
-    - name: update-browser-stream
-      description: Updates a browser stream.
-      flags:
-        --browser-identifier=!: The identifier of the browser.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than one time.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --session-id=!: The identifier of the browser session.
-        --stream-update=!: The update to apply to the browser stream.
-    - name: get-browser-session
-      description: Retrieves detailed information about a specific browser session in Amazon Bedrock.
-      flags:
-        --browser-identifier=!: The unique identifier of the browser associated with the session.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --session-id=!: The unique identifier of the browser session to retrieve.
-    - name: get-workload-access-token-for-jwt
-      description: Obtains a workload access token for agentic workloads acting on behalf of a user, using a JWT token.
+        --memory-id=!: The unique ID of the memory resource where records will be created.
+        --records=!: A list of memory record creation inputs to be processed in the batch operation.
+    - name: batch-delete-memory-records
+      description: Deletes multiple memory records in a single batch operation from the specified memory.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-token=!: The OAuth 2.0 token issued by the user's identity provider.
-        --workload-name=!: The unique identifier for the registered workload.
-    - name: get-workload-access-token-for-user-id
-      description: Obtains a workload access token for agentic workloads acting on behalf of a user, using the user's ID.
+        --memory-id=!: The unique ID of the memory resource where records will be deleted.
+        --records=!: A list of memory record deletion inputs to be processed in the batch operation.
+    - name: complete-resource-token-auth
+      description: Confirms the user authentication session for obtaining OAuth2.0 tokens for a resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-id=!: The ID of the user for whom you are retrieving the access token.
-        --workload-name=!: The name of the workload from which you want to retrieve the access token.
-    - name: start-code-interpreter-session
-      description: Creates and initializes a code interpreter session in Amazon Bedrock.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
-        --code-interpreter-identifier=!: The unique identifier of the code interpreter to use for this session.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: The name of the code interpreter session.
-        --session-timeout-seconds=: The time in seconds after which the session automatically terminates if there is no activity.
-        --trace-id=: The trace identifier for request tracking.
-        --trace-parent=: The parent trace information for distributed tracing.
-    - name: list-code-interpreter-sessions
-      description: Retrieves a list of code interpreter sessions in Amazon Bedrock that match the specified criteria.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --code-interpreter-identifier=!: The unique identifier of the code interpreter to list sessions for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in a single call.
-        --next-token=: The token for the next set of results.
-        --status=: The status of the code interpreter sessions to list.
-      completion:
-        flag:
-            status:
-                - READY
-                - TERMINATED
-    - name: list-sessions
-      description: Lists sessions in an AgentCore Memory resource based on specified criteria.
-      flags:
-        --actor-id=!: The identifier of the actor for which to list sessions.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in a single call.
-        --memory-id=!: The identifier of the AgentCore Memory resource for which to list sessions.
-        --next-token=: The token for the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+        --session-uri=!: Unique identifier for the user's authentication session for retrieving OAuth2 tokens.
+        --user-identifier=!: The OAuth2.0 token or user ID that was used to generate the workload access token used for initiating the user authorization flow to retrieve OAuth2.0 tokens.
     - name: get-resource-oauth2-token
       description: Returns the OAuth 2.0 token of the provided resource.
       flags:
@@ -180,22 +183,6 @@ commands:
             oauth2-flow:
                 - USER_FEDERATION
                 - M2M
-    - name: complete-resource-token-auth
-      description: Confirms the user authentication session for obtaining OAuth2.0 tokens for a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --session-uri=!: Unique identifier for the user's authentication session for retrieving OAuth2 tokens.
-        --user-identifier=!: The OAuth2.0 token or user ID that was used to generate the workload access token used for initiating the user authorization flow to retrieve OAuth2.0 tokens.
-    - name: delete-memory-record
-      description: Deletes a memory record from an AgentCore Memory resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --memory-id=!: The identifier of the AgentCore Memory resource from which to delete the memory record.
-        --memory-record-id=!: The identifier of the memory record to delete.
     - name: invoke-agent-runtime
       description: Sends a request to an agent or tool hosted in an Amazon Bedrock AgentCore Runtime and receives responses in real-time.
       flags:
@@ -203,10 +190,7 @@ commands:
         --account-id=: The identifier of the Amazon Web Services account for the agent runtime resource.
         --agent-runtime-arn=!: The Amazon Web Services Resource Name (ARN) of the agent runtime to invoke.
         --baggage=: Additional context information for distributed tracing.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --content-type=: The MIME type of the input data in the payload.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --mcp-protocol-version=: The version of the MCP protocol being used.
         --mcp-session-id=: The identifier of the MCP session.
         --payload=!: The input data to send to the agent runtime.
@@ -216,6 +200,74 @@ commands:
         --trace-id=: The trace identifier for request tracking.
         --trace-parent=: The parent trace information for distributed tracing.
         --trace-state=: The trace state information for distributed tracing.
+      completion:
+        positional:
+            - - $files
+    - name: list-sessions
+      description: Lists sessions in an AgentCore Memory resource based on specified criteria.
+      flags:
+        --actor-id=!: The identifier of the actor for which to list sessions.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --memory-id=!: The identifier of the AgentCore Memory resource for which to list sessions.
+        --next-token=: The token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: start-memory-extraction-job
+      description: Starts a memory extraction job that processes events that failed extraction previously in an AgentCore Memory resource and produces structured memory records.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure idempotent processing of the request.
+        --extraction-job=!: Extraction job to start in this operation.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --memory-id=!: The unique identifier of the memory for which to start extraction jobs.
+    - name: delete-event
+      description: Deletes an event from an AgentCore Memory resource.
+      flags:
+        --actor-id=!: The identifier of the actor associated with the event to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --event-id=!: The identifier of the event to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --memory-id=!: The identifier of the AgentCore Memory resource from which to delete the event.
+        --session-id=!: The identifier of the session containing the event to delete.
+    - name: get-agent-card
+      description: Retrieves the A2A agent card associated with an AgentCore Runtime agent.
+      flags:
+        --agent-runtime-arn=!: The ARN of the AgentCore Runtime agent for which you want to get the A2A agent card.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --qualifier=: Optional qualifier to specify an agent alias, such as `prod`code&gt; or `dev`.
+        --runtime-session-id=: The session ID that the AgentCore Runtime agent is using.
+    - name: get-code-interpreter-session
+      description: Retrieves detailed information about a specific code interpreter session in Amazon Bedrock.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --code-interpreter-identifier=!: The unique identifier of the code interpreter associated with the session.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --session-id=!: The unique identifier of the code interpreter session to retrieve.
+    - name: get-workload-access-token-for-jwt
+      description: Obtains a workload access token for agentic workloads acting on behalf of a user, using a JWT token.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-token=!: The OAuth 2.0 token issued by the user's identity provider.
+        --workload-name=!: The unique identifier for the registered workload.
+    - name: get-workload-access-token-for-user-id
+      description: Obtains a workload access token for agentic workloads acting on behalf of a user, using the user's ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-id=!: The ID of the user for whom you are retrieving the access token.
+        --workload-name=!: The name of the workload from which you want to retrieve the access token.
     - name: list-actors
       description: Lists all actors in an AgentCore Memory resource.
       flags:
@@ -228,144 +280,6 @@ commands:
         --next-token=: The token for the next set of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: invoke-code-interpreter
-      description: Executes code within an active code interpreter session in Amazon Bedrock.
-      flags:
-        --arguments=: The arguments for the code interpreter.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --code-interpreter-identifier=!: The unique identifier of the code interpreter associated with the session.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the code interpreter to invoke.
-        --session-id=: The unique identifier of the code interpreter session to use.
-        --trace-id=: The trace identifier for request tracking.
-        --trace-parent=: The parent trace information for distributed tracing.
-      completion:
-        flag:
-            name:
-                - executeCode
-                - executeCommand
-                - readFiles
-                - listFiles
-                - removeFiles
-                - writeFiles
-                - startCommandExecution
-                - getTask
-                - stopTask
-    - name: batch-create-memory-records
-      description: Creates multiple memory records in a single batch operation for the specified memory with custom content.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier to ensure idempotent processing of the batch request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --memory-id=!: The unique ID of the memory resource where records will be created.
-        --records=!: A list of memory record creation inputs to be processed in the batch operation.
-    - name: batch-delete-memory-records
-      description: Deletes multiple memory records in a single batch operation from the specified memory.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --memory-id=!: The unique ID of the memory resource where records will be deleted.
-        --records=!: A list of memory record deletion inputs to be processed in the batch operation.
-    - name: batch-update-memory-records
-      description: Updates multiple memory records with custom content in a single batch operation within the specified memory.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --memory-id=!: The unique ID of the memory resource where records will be updated.
-        --records=!: A list of memory record update inputs to be processed in the batch operation.
-    - name: list-events
-      description: Lists events in an AgentCore Memory resource based on specified criteria.
-      flags:
-        --actor-id=!: The identifier of the actor for which to list events.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: Filter criteria to apply when listing events.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --include-payloads: Specifies whether to include event payloads in the response.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in a single call.
-        --memory-id=!: The identifier of the AgentCore Memory resource for which to list events.
-        --next-token=: The token for the next set of results.
-        --no-include-payloads: Specifies whether to include event payloads in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --session-id=!: The identifier of the session for which to list events.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-memory-extraction-jobs
-      description: Lists all long-term memory extraction jobs that are eligible to be started with optional filtering.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: Filter criteria to apply when listing extraction jobs.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in a single call.
-        --memory-id=!: The unique identifier of the memory to list extraction jobs for.
-        --next-token=: The token for the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: retrieve-memory-records
-      description: Searches for and retrieves memory records from an AgentCore Memory resource based on specified search criteria.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in a single call.
-        --memory-id=!: The identifier of the AgentCore Memory resource from which to retrieve memory records.
-        --namespace=!: The namespace to filter memory records by.
-        --next-token=: The token for the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --search-criteria=!: The search criteria to use for finding relevant memory records.
-        --starting-token=: A token to specify where to start paginating.
-    - name: stop-browser-session
-      description: Terminates an active browser session in Amazon Bedrock.
-      flags:
-        --browser-identifier=!: The unique identifier of the browser associated with the session.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --session-id=!: The unique identifier of the browser session to stop.
-        --trace-id=: The trace identifier for request tracking.
-        --trace-parent=: The parent trace information for distributed tracing.
-    - name: stop-runtime-session
-      description: Stops a session that is running in an running AgentCore Runtime agent.
-      flags:
-        --agent-runtime-arn=!: The ARN of the agent that contains the session that you want to stop.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: Idempotent token used to identify the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --qualifier=: Optional qualifier to specify an agent alias, such as `prod`code&gt; or `dev`.
-        --runtime-session-id=!: The ID of the session that you want to stop.
-    - name: get-agent-card
-      description: Retrieves the A2A agent card associated with an AgentCore Runtime agent.
-      flags:
-        --agent-runtime-arn=!: The ARN of the AgentCore Runtime agent for which you want to get the A2A agent card.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --qualifier=: Optional qualifier to specify an agent alias, such as `prod`code&gt; or `dev`.
-        --runtime-session-id=: The session ID that the AgentCore Runtime agent is using.
-    - name: get-memory-record
-      description: Retrieves a specific memory record from an AgentCore Memory resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --memory-id=!: The identifier of the AgentCore Memory resource containing the memory record.
-        --memory-record-id=!: The identifier of the memory record to retrieve.
-    - name: get-workload-access-token
-      description: Obtains a workload access token for agentic workloads not acting on behalf of a user.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --workload-name=!: The unique identifier for the registered workload.
     - name: list-memory-records
       description: Lists memory records in an AgentCore Memory resource based on specified criteria.
       flags:
@@ -394,3 +308,89 @@ commands:
         --metadata=: The key-value metadata to attach to the event.
         --payload=!: The content payload of the event.
         --session-id=: The identifier of the session in which this event occurs.
+    - name: list-browser-sessions
+      description: Retrieves a list of browser sessions in Amazon Bedrock that match the specified criteria.
+      flags:
+        --browser-identifier=!: The unique identifier of the browser to list sessions for.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token for the next set of results.
+        --status=: The status of the browser sessions to list.
+      completion:
+        flag:
+            status:
+                - READY
+                - TERMINATED
+    - name: list-code-interpreter-sessions
+      description: Retrieves a list of code interpreter sessions in Amazon Bedrock that match the specified criteria.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --code-interpreter-identifier=!: The unique identifier of the code interpreter to list sessions for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token for the next set of results.
+        --status=: The status of the code interpreter sessions to list.
+      completion:
+        flag:
+            status:
+                - READY
+                - TERMINATED
+    - name: retrieve-memory-records
+      description: Searches for and retrieves memory records from an AgentCore Memory resource based on specified search criteria.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --memory-id=!: The identifier of the AgentCore Memory resource from which to retrieve memory records.
+        --namespace=!: The namespace to filter memory records by.
+        --next-token=: The token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --search-criteria=!: The search criteria to use for finding relevant memory records.
+        --starting-token=: A token to specify where to start paginating.
+    - name: stop-runtime-session
+      description: Stops a session that is running in an running AgentCore Runtime agent.
+      flags:
+        --agent-runtime-arn=!: The ARN of the agent that contains the session that you want to stop.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Idempotent token used to identify the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --qualifier=: Optional qualifier to specify an agent alias, such as `prod`code&gt; or `dev`.
+        --runtime-session-id=!: The ID of the session that you want to stop.
+    - name: get-resource-api-key
+      description: Retrieves the API key associated with an API key credential provider.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-credential-provider-name=!: The credential provider name for the resource from which you are retrieving the API key.
+        --workload-identity-token=!: The identity token of the workload from which you want to retrieve the API key.
+    - name: invoke-code-interpreter
+      description: Executes code within an active code interpreter session in Amazon Bedrock.
+      flags:
+        --arguments=: The arguments for the code interpreter.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --code-interpreter-identifier=!: The unique identifier of the code interpreter associated with the session.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the code interpreter to invoke.
+        --session-id=: The unique identifier of the code interpreter session to use.
+        --trace-id=: The trace identifier for request tracking.
+        --trace-parent=: The parent trace information for distributed tracing.
+      completion:
+        flag:
+            name:
+                - executeCode
+                - executeCommand
+                - readFiles
+                - listFiles
+                - removeFiles
+                - writeFiles
+                - startCommandExecution
+                - getTask
+                - stopTask

@@ -1,6 +1,43 @@
 name: networkmonitor
 description: Amazon CloudWatch Network Monitor
 commands:
+    - name: list-tags-for-resource
+      description: Lists the tags assigned to this resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The
+    - name: untag-resource
+      description: Removes a key-value pair from a monitor or probe.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the monitor or probe that the tag should be removed from.
+        --tag-keys=!: The key-value pa
+    - name: delete-monitor
+      description: Deletes a specified monitor.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --monitor-name=!: The name of the monitor to delete.
+    - name: delete-probe
+      description: Deletes the specified probe.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --monitor-name=!: The name of the monitor to delete.
+        --probe-id=!: The ID of the probe to delete.
+    - name: get-monitor
+      description: Returns details about a specific monitor.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --monitor-name=!: The name of the monitor that details are returned for.
     - name: tag-resource
       description: Adds key-value pairs to a monitor or probe.
       flags:
@@ -9,6 +46,14 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The ARN of the monitor or probe to tag.
         --tags=!: The list of key-value pairs assigned to the monitor or probe.
+    - name: update-monitor
+      description: Updates the `aggregationPeriod` for a monitor.
+      flags:
+        --aggregation-period=!: The aggregation time, in seconds, to change to.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --monitor-name=!: The name of the monitor to update.
     - name: update-probe
       description: Updates a monitor probe.
       flags:
@@ -45,14 +90,16 @@ commands:
         --monitor-name=!: The name identifying the monitor.
         --probes=: Displays a list of all of the probes created for a monitor.
         --tags=: The list of key-value pairs created and assigned to the monitor.
-    - name: delete-probe
-      description: Deletes the specified probe.
+    - name: create-probe
+      description: Create a probe within a monitor.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique, case-sensitive identifier to ensure the idempotency of the request.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --monitor-name=!: The name of the monitor to delete.
-        --probe-id=!: The ID of the probe to delete.
+        --monitor-name=!: The name of the monitor to associated with the probe.
+        --probe=!: Describes the details of an individual probe for a monitor.
+        --tags=: The list of key-value pairs created and assigned to the probe.
     - name: get-probe
       description: Returns the details about a probe.
       flags:
@@ -73,50 +120,3 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
         --state=: The list of all monitors and their states.
-    - name: list-tags-for-resource
-      description: Lists the tags assigned to this resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The
-    - name: untag-resource
-      description: Removes a key-value pair from a monitor or probe.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the monitor or probe that the tag should be removed from.
-        --tag-keys=!: The key-value pa
-    - name: update-monitor
-      description: Updates the `aggregationPeriod` for a monitor.
-      flags:
-        --aggregation-period=!: The aggregation time, in seconds, to change to.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --monitor-name=!: The name of the monitor to update.
-    - name: create-probe
-      description: Create a probe within a monitor.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: Unique, case-sensitive identifier to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --monitor-name=!: The name of the monitor to associated with the probe.
-        --probe=!: Describes the details of an individual probe for a monitor.
-        --tags=: The list of key-value pairs created and assigned to the probe.
-    - name: delete-monitor
-      description: Deletes a specified monitor.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --monitor-name=!: The name of the monitor to delete.
-    - name: get-monitor
-      description: Returns details about a specific monitor.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --monitor-name=!: The name of the monitor that details are returned for.

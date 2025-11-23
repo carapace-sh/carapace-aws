@@ -1,71 +1,6 @@
 name: codecatalyst
 description: Amazon CodeCatalyst
 commands:
-    - name: list-spaces
-      description: Retrieves a list of spaces.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: A token returned from a call to this API to indicate the next batch of results to return, if any.
-        --starting-token=: A token to specify where to start paginating.
-    - name: create-access-token
-      description: Creates a personal access token (PAT) for the current user.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expires-time=: The date and time the personal access token expires, in coordinated universal time (UTC) timestamp format as specified in [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339#section-5.6).
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The friendly name of the personal access token.
-    - name: create-project
-      description: Creates a project in a specified space.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The description of the project.
-        --display-name=!: The friendly name of the project that will be displayed to users.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --space-name=!: The name of the space.
-    - name: delete-access-token
-      description: Deletes a specified personal access token (PAT).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the personal access token to delete.
-    - name: get-dev-environment
-      description: Returns information about a Dev Environment for a source repository in a project.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The system-generated unique ID of the Dev Environment for which you want to view information.
-        --project-name=!: The name of the project in the space.
-        --space-name=!: The name of the space.
-    - name: get-user-details
-      description: Returns information about a user.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=: The system-generated unique ID of the user.
-        --user-name=: The name of the user as displayed in Amazon CodeCatalyst.
-    - name: list-event-logs
-      description: Retrieves a list of events that occurred during a specific time in a space.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --end-time=!: The time after which you do not want any events retrieved, in coordinated universal time (UTC) timestamp format as specified in [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339#section-5.6).
-        --event-name=: The name of the event.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to show in a single call to this API.
-        --next-token=: A token returned from a call to this API to indicate the next batch of results to return, if any.
-        --page-size=: The size of each page to get in the AWS service call.
-        --space-name=!: The name of the space.
-        --start-time=!: The date and time when you want to start retrieving events, in coordinated universal time (UTC) timestamp format as specified in [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339#section-5.6).
-        --starting-token=: A token to specify where to start paginating.
     - name: list-workflows
       description: Retrieves a list of workflows in a specified project.
       flags:
@@ -80,6 +15,50 @@ commands:
         --sort-by=: Information used to sort the items in the returned list.
         --space-name=!: The name of the space.
         --starting-token=: A token to specify where to start paginating.
+    - name: start-dev-environment
+      description: Starts a specified Dev Environment and puts it into an active state.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The system-generated unique ID of the Dev Environment.
+        --ides=: Information about the integrated development environment (IDE) configured for a Dev Environment.
+        --inactivity-timeout-minutes=: The amount of time the Dev Environment will run without any activity detected before stopping, in minutes.
+        --instance-type=: The Amazon EC2 instace type to use for the Dev Environment.
+        --project-name=!: The name of the project in the space.
+        --space-name=!: The name of the space.
+      completion:
+        flag:
+            instance-type:
+                - dev.standard1.small
+                - dev.standard1.medium
+                - dev.standard1.large
+                - dev.standard1.xlarge
+    - name: start-dev-environment-session
+      description: Starts a session for a specified Dev Environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The system-generated unique ID of the Dev Environment.
+        --project-name=!: The name of the project in the space.
+        --session-configuration=!: ""
+        --space-name=!: The name of the space.
+    - name: update-space
+      description: Changes one or more values for a space.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description of the space.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the space.
+    - name: delete-space
+      description: Deletes a space.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the space.
     - name: get-project
       description: Returns information about a project.
       flags:
@@ -88,61 +67,19 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the project in the space.
         --space-name=!: The name of the space.
-    - name: list-dev-environment-sessions
-      description: Retrieves a list of active sessions for a Dev Environment in a project.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dev-environment-id=!: The system-generated unique ID of the Dev Environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to show in a single call to this API.
-        --next-token=: A token returned from a call to this API to indicate the next batch of results to return, if any.
-        --page-size=: The size of each page to get in the AWS service call.
-        --project-name=!: The name of the project in the space.
-        --space-name=!: The name of the space.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-projects
-      description: Retrieves a list of projects.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Information about filters to apply to narrow the results returned in the list.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to show in a single call to this API.
-        --next-token=: A token returned from a call to this API to indicate the next batch of results to return, if any.
-        --page-size=: The size of each page to get in the AWS service call.
-        --space-name=!: The name of the space.
-        --starting-token=: A token to specify where to start paginating.
-    - name: start-workflow-run
-      description: Begins a run of a specified workflow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A user-specified idempotency token.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --project-name=!: The name of the project in the space.
-        --space-name=!: The name of the space.
-        --workflow-id=!: The system-generated unique ID of the workflow.
-    - name: delete-space
-      description: Deletes a space.
+    - name: verify-session
+      description: Verifies whether the calling user has a valid Amazon CodeCatalyst login and session.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the space.
-    - name: list-access-tokens
-      description: Lists all personal access tokens (PATs) associated with the user who calls the API.
+    - name: delete-access-token
+      description: Deletes a specified personal access token (PAT).
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to show in a single call to this API.
-        --next-token=: A token returned from a call to this API to indicate the next batch of results to return, if any.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+        --id=!: The ID of the personal access token to delete.
     - name: update-project
       description: Changes one or more values for a project.
       flags:
@@ -152,12 +89,6 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the project.
         --space-name=!: The name of the space.
-    - name: verify-session
-      description: Verifies whether the calling user has a valid Amazon CodeCatalyst login and session.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: create-source-repository
       description: Creates an empty Git-based source repository in a specified project.
       flags:
@@ -177,49 +108,31 @@ commands:
         --name=!: The name of the source repository.
         --project-name=!: The name of the project in the space.
         --space-name=!: The name of the space.
-    - name: update-dev-environment
-      description: Changes one or more values for a Dev Environment.
-      flags:
-        --alias=: The user-specified alias for the Dev Environment.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A user-specified idempotency token.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The system-generated unique ID of the Dev Environment.
-        --ides=: Information about the integrated development environment (IDE) configured for a Dev Environment.
-        --inactivity-timeout-minutes=: The amount of time the Dev Environment will run without any activity detected before stopping, in minutes.
-        --instance-type=: The Amazon EC2 instace type to use for the Dev Environment.
-        --project-name=!: The name of the project in the space.
-        --space-name=!: The name of the space.
-      completion:
-        flag:
-            instance-type:
-                - dev.standard1.small
-                - dev.standard1.medium
-                - dev.standard1.large
-                - dev.standard1.xlarge
-    - name: delete-dev-environment
-      description: Deletes a Dev Environment.
+    - name: get-space
+      description: Returns information about an space.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The system-generated unique ID of the Dev Environment you want to delete.
-        --project-name=!: The name of the project in the space.
-        --space-name=!: The name of the space.
-    - name: list-dev-environments
-      description: Retrieves a list of Dev Environments in a project.
+        --name=!: The name of the space.
+    - name: get-user-details
+      description: Returns information about a user.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Information about filters to apply to narrow the results returned in the list.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=: The system-generated unique ID of the user.
+        --user-name=: The name of the user as displayed in Amazon CodeCatalyst.
+    - name: list-access-tokens
+      description: Lists all personal access tokens (PATs) associated with the user who calls the API.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to show in a single call to this API.
         --next-token=: A token returned from a call to this API to indicate the next batch of results to return, if any.
         --page-size=: The size of each page to get in the AWS service call.
-        --project-name=: The name of the project in the space.
-        --space-name=!: The name of the space.
         --starting-token=: A token to specify where to start paginating.
     - name: list-source-repository-branches
       description: Retrieves a list of branches in a specified source repository.
@@ -235,106 +148,6 @@ commands:
         --source-repository-name=!: The name of the source repository.
         --space-name=!: The name of the space.
         --starting-token=: A token to specify where to start paginating.
-    - name: create-source-repository-branch
-      description: Creates a branch in a specified source repository in Amazon CodeCatalyst.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --head-commit-id=: The commit ID in an existing branch from which you want to create the new branch.
-        --name=!: The name for the branch you're creating.
-        --project-name=!: The name of the project in the space.
-        --source-repository-name=!: The name of the repository where you want to create a branch.
-        --space-name=!: The name of the space.
-    - name: get-source-repository-clone-urls
-      description: Returns information about the URLs that can be used with a Git client to clone a source repository.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --project-name=!: The name of the project in the space.
-        --source-repository-name=!: The name of the source repository.
-        --space-name=!: The name of the space.
-    - name: get-workflow
-      description: Returns information about a workflow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the workflow.
-        --project-name=!: The name of the project in the space.
-        --space-name=!: The name of the space.
-    - name: get-workflow-run
-      description: Returns information about a specified run of a workflow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the workflow run.
-        --project-name=!: The name of the project in the space.
-        --space-name=!: The name of the space.
-    - name: list-workflow-runs
-      description: Retrieves a list of workflow runs of a specified workflow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to show in a single call to this API.
-        --next-token=: A token returned from a call to this API to indicate the next batch of results to return, if any.
-        --page-size=: The size of each page to get in the AWS service call.
-        --project-name=!: The name of the project in the space.
-        --sort-by=: Information used to sort the items in the returned list.
-        --space-name=!: The name of the space.
-        --starting-token=: A token to specify where to start paginating.
-        --workflow-id=: The ID of the workflow.
-    - name: start-dev-environment-session
-      description: Starts a session for a specified Dev Environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The system-generated unique ID of the Dev Environment.
-        --project-name=!: The name of the project in the space.
-        --session-configuration=!: ""
-        --space-name=!: The name of the space.
-    - name: delete-project
-      description: Deletes a project in a space.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the project in the space.
-        --space-name=!: The name of the space.
-    - name: delete-source-repository
-      description: Deletes a source repository in Amazon CodeCatalyst.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the source repository.
-        --project-name=!: The name of the project in the space.
-        --space-name=!: The name of the space.
-    - name: get-subscription
-      description: Returns information about the Amazon Web Services account used for billing purposes and the billing plan for the space.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --space-name=!: The name of the space.
-    - name: list-source-repositories
-      description: Retrieves a list of source repositories in a project.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to show in a single call to this API.
-        --next-token=: A token returned from a call to this API to indicate the next batch of results to return, if any.
-        --page-size=: The size of each page to get in the AWS service call.
-        --project-name=!: The name of the project in the space.
-        --space-name=!: The name of the space.
-        --starting-token=: A token to specify where to start paginating.
     - name: stop-dev-environment-session
       description: Stops a session for a specified Dev Environment.
       flags:
@@ -345,14 +158,6 @@ commands:
         --project-name=!: The name of the project in the space.
         --session-id=!: The system-generated unique ID of the Dev Environment session.
         --space-name=!: The name of the space.
-    - name: update-space
-      description: Changes one or more values for a space.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The description of the space.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the space.
     - name: create-dev-environment
       description: Creates a Dev Environment in Amazon CodeCatalyst, a cloud-based development environment that you can use to quickly work on the code stored in the source repositories of your project.
       flags:
@@ -376,18 +181,222 @@ commands:
                 - dev.standard1.medium
                 - dev.standard1.large
                 - dev.standard1.xlarge
-    - name: get-space
-      description: Returns information about an space.
+    - name: delete-source-repository
+      description: Deletes a source repository in Amazon CodeCatalyst.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the space.
-    - name: start-dev-environment
-      description: Starts a specified Dev Environment and puts it into an active state.
+        --name=!: The name of the source repository.
+        --project-name=!: The name of the project in the space.
+        --space-name=!: The name of the space.
+    - name: get-subscription
+      description: Returns information about the Amazon Web Services account used for billing purposes and the billing plan for the space.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --space-name=!: The name of the space.
+    - name: get-workflow-run
+      description: Returns information about a specified run of a workflow.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the workflow run.
+        --project-name=!: The name of the project in the space.
+        --space-name=!: The name of the space.
+    - name: list-event-logs
+      description: Retrieves a list of events that occurred during a specific time in a space.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=!: The time after which you do not want any events retrieved, in coordinated universal time (UTC) timestamp format as specified in [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339#section-5.6).
+        --event-name=: The name of the event.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to show in a single call to this API.
+        --next-token=: A token returned from a call to this API to indicate the next batch of results to return, if any.
+        --page-size=: The size of each page to get in the AWS service call.
+        --space-name=!: The name of the space.
+        --start-time=!: The date and time when you want to start retrieving events, in coordinated universal time (UTC) timestamp format as specified in [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339#section-5.6).
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-spaces
+      description: Retrieves a list of spaces.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: A token returned from a call to this API to indicate the next batch of results to return, if any.
+        --starting-token=: A token to specify where to start paginating.
+    - name: start-workflow-run
+      description: Begins a run of a specified workflow.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A user-specified idempotency token.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --project-name=!: The name of the project in the space.
+        --space-name=!: The name of the space.
+        --workflow-id=!: The system-generated unique ID of the workflow.
+    - name: create-project
+      description: Creates a project in a specified space.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description of the project.
+        --display-name=!: The friendly name of the project that will be displayed to users.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --space-name=!: The name of the space.
+    - name: get-source-repository-clone-urls
+      description: Returns information about the URLs that can be used with a Git client to clone a source repository.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --project-name=!: The name of the project in the space.
+        --source-repository-name=!: The name of the source repository.
+        --space-name=!: The name of the space.
+    - name: list-source-repositories
+      description: Retrieves a list of source repositories in a project.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to show in a single call to this API.
+        --next-token=: A token returned from a call to this API to indicate the next batch of results to return, if any.
+        --page-size=: The size of each page to get in the AWS service call.
+        --project-name=!: The name of the project in the space.
+        --space-name=!: The name of the space.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-workflow-runs
+      description: Retrieves a list of workflow runs of a specified workflow.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to show in a single call to this API.
+        --next-token=: A token returned from a call to this API to indicate the next batch of results to return, if any.
+        --page-size=: The size of each page to get in the AWS service call.
+        --project-name=!: The name of the project in the space.
+        --sort-by=: Information used to sort the items in the returned list.
+        --space-name=!: The name of the space.
+        --starting-token=: A token to specify where to start paginating.
+        --workflow-id=: The ID of the workflow.
+    - name: create-source-repository-branch
+      description: Creates a branch in a specified source repository in Amazon CodeCatalyst.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --head-commit-id=: The commit ID in an existing branch from which you want to create the new branch.
+        --name=!: The name for the branch you're creating.
+        --project-name=!: The name of the project in the space.
+        --source-repository-name=!: The name of the repository where you want to create a branch.
+        --space-name=!: The name of the space.
+    - name: delete-dev-environment
+      description: Deletes a Dev Environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The system-generated unique ID of the Dev Environment you want to delete.
+        --project-name=!: The name of the project in the space.
+        --space-name=!: The name of the space.
+    - name: delete-project
+      description: Deletes a project in a space.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the project in the space.
+        --space-name=!: The name of the space.
+    - name: get-dev-environment
+      description: Returns information about a Dev Environment for a source repository in a project.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The system-generated unique ID of the Dev Environment for which you want to view information.
+        --project-name=!: The name of the project in the space.
+        --space-name=!: The name of the space.
+    - name: list-dev-environment-sessions
+      description: Retrieves a list of active sessions for a Dev Environment in a project.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dev-environment-id=!: The system-generated unique ID of the Dev Environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to show in a single call to this API.
+        --next-token=: A token returned from a call to this API to indicate the next batch of results to return, if any.
+        --page-size=: The size of each page to get in the AWS service call.
+        --project-name=!: The name of the project in the space.
+        --space-name=!: The name of the space.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-dev-environments
+      description: Retrieves a list of Dev Environments in a project.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Information about filters to apply to narrow the results returned in the list.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to show in a single call to this API.
+        --next-token=: A token returned from a call to this API to indicate the next batch of results to return, if any.
+        --page-size=: The size of each page to get in the AWS service call.
+        --project-name=: The name of the project in the space.
+        --space-name=!: The name of the space.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-projects
+      description: Retrieves a list of projects.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Information about filters to apply to narrow the results returned in the list.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to show in a single call to this API.
+        --next-token=: A token returned from a call to this API to indicate the next batch of results to return, if any.
+        --page-size=: The size of each page to get in the AWS service call.
+        --space-name=!: The name of the space.
+        --starting-token=: A token to specify where to start paginating.
+    - name: stop-dev-environment
+      description: Pauses a specified Dev Environment and places it in a non-running state.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The system-generated unique ID of the Dev Environment.
+        --project-name=!: The name of the project in the space.
+        --space-name=!: The name of the space.
+    - name: create-access-token
+      description: Creates a personal access token (PAT) for the current user.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expires-time=: The date and time the personal access token expires, in coordinated universal time (UTC) timestamp format as specified in [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339#section-5.6).
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The friendly name of the personal access token.
+    - name: get-workflow
+      description: Returns information about a workflow.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the workflow.
+        --project-name=!: The name of the project in the space.
+        --space-name=!: The name of the space.
+    - name: update-dev-environment
+      description: Changes one or more values for a Dev Environment.
+      flags:
+        --alias=: The user-specified alias for the Dev Environment.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A user-specified idempotency token.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The system-generated unique ID of the Dev Environment.
         --ides=: Information about the integrated development environment (IDE) configured for a Dev Environment.
@@ -402,12 +411,3 @@ commands:
                 - dev.standard1.medium
                 - dev.standard1.large
                 - dev.standard1.xlarge
-    - name: stop-dev-environment
-      description: Pauses a specified Dev Environment and places it in a non-running state.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The system-generated unique ID of the Dev Environment.
-        --project-name=!: The name of the project in the space.
-        --space-name=!: The name of the space.

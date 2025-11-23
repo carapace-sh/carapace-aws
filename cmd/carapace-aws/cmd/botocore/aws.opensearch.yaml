@@ -1,394 +1,29 @@
 name: opensearch
 description: Amazon OpenSearch Service
 commands:
-    - name: create-vpc-endpoint
-      description: Creates an Amazon OpenSearch Service-managed VPC endpoint.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
-        --domain-arn=!: The Amazon Resource Name (ARN) of the domain to create the endpoint for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --vpc-options=!: Options to specify the subnets and security groups for the endpoint.
-    - name: get-direct-query-data-source
-      description: Returns detailed configuration information for a specific direct query data source in Amazon OpenSearch Service.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source-name=!: A unique, user-defined label that identifies the data source within your OpenSearch Service environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-dry-run-progress
-      description: Describes the progress of a pre-update dry run analysis on an Amazon OpenSearch Service domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain.
-        --dry-run-id=: The unique identifier of the dry run.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --load-dry-run-config: Whether to include the configuration of the dry run in the response.
-        --no-load-dry-run-config: Whether to include the configuration of the dry run in the response.
-    - name: describe-inbound-connections
-      description: Lists all the inbound cross-cluster search connections for a destination (remote) Amazon OpenSearch Service domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: A list of filters used to match properties for inbound cross-cluster connections.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: An optional parameter that specifies the maximum number of results to return.
-        --next-token=: If your initial `DescribeInboundConnections` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `DescribeInboundConnections` operations, which returns results in the next page.
-    - name: get-upgrade-history
-      description: Retrieves the complete history of the last 10 upgrades performed on an Amazon OpenSearch Service domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of an existing domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: An optional parameter that specifies the maximum number of results to return.
-        --next-token=: If your initial `GetUpgradeHistory` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `GetUpgradeHistory` operations, which returns results in the next page.
-    - name: list-domain-names
-      description: Returns the names of all Amazon OpenSearch Service domains owned by the current user in the active Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --engine-type=: Filters the output by domain engine type.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      completion:
-        flag:
-            engine-type:
-                - OpenSearch
-                - Elasticsearch
-    - name: associate-package
-      description: Associates a package with an Amazon OpenSearch Service domain.
-      flags:
-        --association-configuration=: The configuration for associating a package with an Amazon OpenSearch Service domain.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: Name of the domain to associate the package with.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --package-id=!: Internal ID of the package to associate with a domain.
-        --prerequisite-package-id-list=: A list of package IDs that must be associated with the domain before the package specified in the request can be associated.
-    - name: authorize-vpc-endpoint-access
-      description: Provides access to an Amazon OpenSearch Service domain through the use of an interface VPC endpoint.
-      flags:
-        --account=: The Amazon Web Services account ID to grant access to.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the OpenSearch Service domain to provide access to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --service=: The Amazon Web Services service SP to grant access to.
-      completion:
-        flag:
-            service:
-                - application.opensearchservice.amazonaws.com
-    - name: create-index
-      description: Creates an OpenSearch index with optional automatic semantic enrichment for specified text fields.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-name=!: The name of the index to create.
-        --index-schema=!: The JSON schema defining index mappings, settings, and semantic enrichment configuration.
-    - name: delete-inbound-connection
-      description: Allows the destination Amazon OpenSearch Service domain owner to delete an existing inbound cross-cluster search connection.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connection-id=!: The ID of the inbound connection to permanently delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-packages
-      description: Describes all packages available to OpenSearch Service.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Only returns packages that match the `DescribePackagesFilterList` values.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: An optional parameter that specifies the maximum number of results to return.
-        --next-token=: If your initial `DescribePackageFilters` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `DescribePackageFilters` operations, which returns results in the next page.
-    - name: get-application
-      description: Retrieves the configuration and status of an existing OpenSearch application.
+    - name: list-vpc-endpoints
+      description: Retrieves all Amazon OpenSearch Service-managed VPC endpoints in the current Amazon Web Services account and Region.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The unique identifier of the OpenSearch application to retrieve.
-    - name: list-tags
-      description: Returns all resource tags for an Amazon OpenSearch Service domain, data source, or application.
-      flags:
-        --arn=!: Amazon Resource Name (ARN) for the domain, data source, or application to view tags for.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-vpc-endpoints-for-domain
-      description: Retrieves all Amazon OpenSearch Service-managed VPC endpoints associated with a particular domain.
+        --next-token=: If your initial `ListVpcEndpoints` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListVpcEndpoints` operations, which returns results in the next page.
+    - name: update-data-source
+      description: Updates a direct-query data source.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain to list associated VPC endpoints for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --next-token=: If your initial `ListEndpointsForDomain` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListEndpointsForDomain` operations, which returns results in the next page.
-    - name: describe-domain-change-progress
-      description: Returns information about the current blue/green deployment happening on an Amazon OpenSearch Service domain.
-      flags:
-        --change-id=: The specific change ID for which you want to get progress information.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain to get progress information for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-domain
-      description: Describes the domain configuration for the specified Amazon OpenSearch Service domain, including the domain ID, domain service endpoint, and domain ARN.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain that you want information about.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-data-sources
-      description: Lists direct-query data sources for a specific domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-source-type=!: The type of data source.
+        --description=: A new description of the data source.
         --domain-name=!: The name of the domain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: start-domain-maintenance
-      description: Starts the node maintenance process on the data node.
-      flags:
-        --action=!: The name of the action.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --node-id=: The ID of the data node.
+        --name=!: The name of the data source to modify.
+        --status=: The status of the data source update.
       completion:
         flag:
-            action:
-                - REBOOT_NODE
-                - RESTART_SEARCH_PROCESS
-                - RESTART_DASHBOARD
-    - name: update-vpc-endpoint
-      description: Modifies an Amazon OpenSearch Service-managed interface VPC endpoint.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --vpc-endpoint-id=!: The unique identifier of the endpoint.
-        --vpc-options=!: The security groups and/or subnets to add, remove, or modify.
-    - name: describe-domain-auto-tunes
-      description: Returns the list of optimizations that Auto-Tune has made to an Amazon OpenSearch Service domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: Name of the domain that you want Auto-Tune details about.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: An optional parameter that specifies the maximum number of results to return.
-        --next-token=: If your initial `DescribeDomainAutoTunes` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `DescribeDomainAutoTunes` operations, which returns results in the next page.
-    - name: describe-reserved-instances
-      description: Describes the Amazon OpenSearch Service instances that you have reserved in a given Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: An optional parameter that specifies the maximum number of results to return.
-        --next-token=: If your initial `DescribeReservedInstances` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `DescribeReservedInstances` operations, which returns results in the next page.
-        --reserved-instance-id=: The reserved instance identifier filter value.
-    - name: describe-vpc-endpoints
-      description: Describes one or more Amazon OpenSearch Service-managed VPC endpoints.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --vpc-endpoint-ids=!: The unique identifiers of the endpoints to get information about.
-    - name: list-applications
-      description: Lists all OpenSearch applications under your account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: ""
-        --next-token=: ""
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --statuses=: Filters the list of OpenSearch applications by status.
-    - name: list-packages-for-domain
-      description: Lists all packages associated with an Amazon OpenSearch Service domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain for which you want to list associated packages.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: An optional parameter that specifies the maximum number of results to return.
-        --next-token=: If your initial `ListPackagesForDomain` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListPackagesForDomain` operations, which returns results in the next page.
-    - name: list-vpc-endpoint-access
-      description: Retrieves information about each Amazon Web Services principal that is allowed to access a given Amazon OpenSearch Service domain through the use of an interface VPC endpoint.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the OpenSearch Service domain to retrieve access information for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --next-token=: If your initial `ListVpcEndpointAccess` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListVpcEndpointAccess` operations, which returns results in the next page.
-    - name: purchase-reserved-instance-offering
-      description: Allows you to purchase Amazon OpenSearch Service Reserved Instances.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-count=: The number of OpenSearch instances to reserve.
-        --reservation-name=!: A customer-specified identifier to track this reservation.
-        --reserved-instance-offering-id=!: The ID of the Reserved Instance offering to purchase.
-    - name: start-service-software-update
-      description: Schedules a service software update for an Amazon OpenSearch Service domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --desired-start-time=: The Epoch timestamp when you want the service software update to start.
-        --domain-name=!: The name of the domain that you want to update to the latest service software.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --schedule-at=: When to start the service software update.
-      completion:
-        flag:
-            schedule-at:
-                - NOW
-                - TIMESTAMP
-                - OFF_PEAK_WINDOW
-    - name: create-application
-      description: Creates an OpenSearch UI application.
-      flags:
-        --app-configs=: Configuration settings for the OpenSearch application, including administrative options.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
-        --data-sources=: The data sources to link to the OpenSearch application.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --iam-identity-center-options=: Configuration settings for integrating Amazon Web Services IAM Identity Center with the OpenSearch application.
-        --name=!: The unique name of the OpenSearch application.
-        --tag-list=: ""
-    - name: describe-domain-health
-      description: Returns information about domain and node health, the standby Availability Zone, number of nodes per Availability Zone, and shard count per node.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-data-source
-      description: Retrieves information about a direct query data source.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the data source to get information about.
-    - name: get-domain-maintenance-status
-      description: The status of the maintenance action.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --maintenance-id=!: The request ID of the maintenance action.
-    - name: put-default-application-setting
-      description: Sets the default application to the application with the specified ARN.
-      flags:
-        --application-arn=!: ""
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-set-as-default!: Set to true to set the specified ARN as the default application.
-        --set-as-default!: Set to true to set the specified ARN as the default application.
-    - name: revoke-vpc-endpoint-access
-      description: Revokes access to an Amazon OpenSearch Service domain that was provided through an interface VPC endpoint.
-      flags:
-        --account=: The account ID to revoke access from.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the OpenSearch Service domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --service=: The service SP to revoke access from.
-      completion:
-        flag:
-            service:
-                - application.opensearchservice.amazonaws.com
-    - name: update-scheduled-action
-      description: Reschedules a planned domain configuration change for a later time.
-      flags:
-        --action-id=!: The unique identifier of the action to reschedule.
-        --action-type=!: The type of action to reschedule.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --desired-start-time=: The time to implement the change, in Coordinated Universal Time (UTC).
-        --domain-name=!: The name of the domain to reschedule an action for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --schedule-at=!: When to schedule the action.
-      completion:
-        flag:
-            action-type:
-                - SERVICE_SOFTWARE_UPDATE
-                - JVM_HEAP_SIZE_TUNING
-                - JVM_YOUNG_GEN_TUNING
-            schedule-at:
-                - NOW
-                - TIMESTAMP
-                - OFF_PEAK_WINDOW
-    - name: create-outbound-connection
-      description: Creates a new cross-cluster search connection from a source Amazon OpenSearch Service domain to a destination domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connection-alias=!: Name of the connection.
-        --connection-mode=: The connection mode.
-        --connection-properties=: The `ConnectionProperties` for the outbound connection.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --local-domain-info=!: Name and Region of the source (local) domain.
-        --remote-domain-info=!: Name and Region of the destination (remote) domain.
-      completion:
-        flag:
-            connection-mode:
-                - DIRECT
-                - VPC_ENDPOINT
-    - name: delete-application
-      description: Deletes a specified OpenSearch application.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The unique identifier of the OpenSearch application to delete.
-    - name: delete-data-source
-      description: Deletes a direct-query data source.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the data source to delete.
-    - name: delete-index
-      description: Deletes an OpenSearch index.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-name=!: The name of the index to delete.
-    - name: delete-outbound-connection
-      description: Allows the source Amazon OpenSearch Service domain owner to delete an existing outbound cross-cluster search connection.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connection-id=!: The ID of the outbound connection you want to permanently delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: dissociate-packages
-      description: Dissociates multiple packages from a domain simultaneously.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --package-list=!: A list of package IDs to be dissociated from a domain.
-    - name: reject-inbound-connection
-      description: Allows the remote Amazon OpenSearch Service domain owner to reject an inbound cross-cluster connection request.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connection-id=!: The unique identifier of the inbound connection to reject.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            status:
+                - ACTIVE
+                - DISABLED
     - name: update-domain-config
       description: Modifies the cluster configuration of the specified Amazon OpenSearch Service domain.
       flags:
@@ -432,22 +67,119 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain-name=!: Name of the OpenSearch Service domain configuration that you want to describe.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-data-source
-      description: Updates a direct-query data source.
+    - name: describe-reserved-instance-offerings
+      description: Describes the available Amazon OpenSearch Service Reserved Instance offerings for a given Region.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source-type=!: The type of data source.
-        --description=: A new description of the data source.
-        --domain-name=!: The name of the domain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the data source to modify.
-        --status=: The status of the data source update.
-      completion:
-        flag:
-            status:
-                - ACTIVE
-                - DISABLED
+        --max-results=: An optional parameter that specifies the maximum number of results to return.
+        --next-token=: If your initial `DescribeReservedInstanceOfferings` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `DescribeReservedInstanceOfferings` operations, which returns results in the next page.
+        --reserved-instance-offering-id=: The Reserved Instance identifier filter value.
+    - name: dissociate-packages
+      description: Dissociates multiple packages from a domain simultaneously.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --package-list=!: A list of package IDs to be dissociated from a domain.
+    - name: update-index
+      description: Updates an existing OpenSearch index schema and semantic enrichment configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-name=!: The name of the index to update.
+        --index-schema=!: The updated JSON schema for the index including any changes to mappings, settings, and semantic enrichment configuration.
+    - name: add-direct-query-data-source
+      description: Adds a new data source in Amazon OpenSearch Service so that you can perform direct queries on external data.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-source-name=!: A unique, user-defined label to identify the data source within your OpenSearch Service environment.
+        --data-source-type=!: The supported Amazon Web Services service that you want to use as the source for direct queries in OpenSearch Service.
+        --description=: An optional text field for providing additional context and details about the data source.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --open-search-arns=!: A list of Amazon Resource Names (ARNs) for the OpenSearch collections that are associated with the direct query data source.
+        --tag-list=: ""
+    - name: delete-inbound-connection
+      description: Allows the destination Amazon OpenSearch Service domain owner to delete an existing inbound cross-cluster search connection.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connection-id=!: The ID of the inbound connection to permanently delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-packages
+      description: Describes all packages available to OpenSearch Service.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Only returns packages that match the `DescribePackagesFilterList` values.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: An optional parameter that specifies the maximum number of results to return.
+        --next-token=: If your initial `DescribePackageFilters` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `DescribePackageFilters` operations, which returns results in the next page.
+    - name: dissociate-package
+      description: Removes a package from the specified Amazon OpenSearch Service domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: Name of the domain to dissociate the package from.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --package-id=!: Internal ID of the package to dissociate from the domain.
+    - name: describe-domains
+      description: Returns domain configuration information about the specified Amazon OpenSearch Service domains.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-names=!: Array of OpenSearch Service domain names that you want information about.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-reserved-instances
+      description: Describes the Amazon OpenSearch Service instances that you have reserved in a given Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: An optional parameter that specifies the maximum number of results to return.
+        --next-token=: If your initial `DescribeReservedInstances` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `DescribeReservedInstances` operations, which returns results in the next page.
+        --reserved-instance-id=: The reserved instance identifier filter value.
+    - name: get-upgrade-history
+      description: Retrieves the complete history of the last 10 upgrades performed on an Amazon OpenSearch Service domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of an existing domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: An optional parameter that specifies the maximum number of results to return.
+        --next-token=: If your initial `GetUpgradeHistory` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `GetUpgradeHistory` operations, which returns results in the next page.
+    - name: list-applications
+      description: Lists all OpenSearch applications under your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --statuses=: Filters the list of OpenSearch applications by status.
+    - name: reject-inbound-connection
+      description: Allows the remote Amazon OpenSearch Service domain owner to reject an inbound cross-cluster connection request.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connection-id=!: The unique identifier of the inbound connection to reject.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: remove-tags
+      description: Removes the specified set of tags from an Amazon OpenSearch Service domain, data source, or application.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the domain, data source, or application from which you want to delete the specified tags.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tag-keys=!: The list of tag keys to remove from the domain, data source, or application.
     - name: update-direct-query-data-source
       description: Updates the configuration or properties of an existing direct query data source in Amazon OpenSearch Service.
       flags:
@@ -458,35 +190,99 @@ commands:
         --description=: An optional text field for providing additional context and details about the data source.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --open-search-arns=!: A list of Amazon Resource Names (ARNs) for the OpenSearch collections that are associated with the direct query data source.
-    - name: update-package
-      description: Updates a package for use with Amazon OpenSearch Service domains.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --commit-message=: Commit message for the updated file, which is shown as part of `GetPackageVersionHistoryResponse`.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --package-configuration=: The updated configuration details for a package.
-        --package-description=: A new description of the package.
-        --package-encryption-options=: Encryption options for a package.
-        --package-id=!: The unique identifier for the package.
-        --package-source=!: Amazon S3 bucket and key for the package.
-    - name: upgrade-domain
-      description: Allows you to either upgrade your Amazon OpenSearch Service domain or perform an upgrade eligibility check to a compatible version of OpenSearch or Elasticsearch.
-      flags:
-        --advanced-options=: Only supports the `override_main_response_version` parameter and not other advanced options.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: Name of the OpenSearch Service domain that you want to upgrade.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-perform-check-only: When true, indicates that an upgrade eligibility check needs to be performed.
-        --perform-check-only: When true, indicates that an upgrade eligibility check needs to be performed.
-        --target-version=!: OpenSearch or Elasticsearch version to which you want to upgrade, in the format Opensearch\_X.Y or Elasticsearch\_X.Y.
-    - name: get-default-application-setting
-      description: Gets the ARN of the current default application.
+    - name: delete-package
+      description: Deletes an Amazon OpenSearch Service package.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --package-id=!: The internal ID of the package you want to delete.
+    - name: describe-domain-health
+      description: Returns information about domain and node health, the standby Availability Zone, number of nodes per Availability Zone, and shard count per node.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-domain-maintenances
+      description: A list of maintenance actions for the domain.
+      flags:
+        --action=: The name of the action.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: An optional parameter that specifies the maximum number of results to return.
+        --next-token=: If your initial `ListDomainMaintenances` operation returns a `nextToken`, include the returned `nextToken` in subsequent `ListDomainMaintenances` operations, which returns results in the next page.
+        --status=: The status of the action.
+      completion:
+        flag:
+            action:
+                - REBOOT_NODE
+                - RESTART_SEARCH_PROCESS
+                - RESTART_DASHBOARD
+            status:
+                - PENDING
+                - IN_PROGRESS
+                - COMPLETED
+                - FAILED
+                - TIMED_OUT
+    - name: list-domain-names
+      description: Returns the names of all Amazon OpenSearch Service domains owned by the current user in the active Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --engine-type=: Filters the output by domain engine type.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            engine-type:
+                - OpenSearch
+                - Elasticsearch
+    - name: list-packages-for-domain
+      description: Lists all packages associated with an Amazon OpenSearch Service domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain for which you want to list associated packages.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: An optional parameter that specifies the maximum number of results to return.
+        --next-token=: If your initial `ListPackagesForDomain` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListPackagesForDomain` operations, which returns results in the next page.
+    - name: create-index
+      description: Creates an OpenSearch index with optional automatic semantic enrichment for specified text fields.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-name=!: The name of the index to create.
+        --index-schema=!: The JSON schema defining index mappings, settings, and semantic enrichment configuration.
+    - name: describe-domain-auto-tunes
+      description: Returns the list of optimizations that Auto-Tune has made to an Amazon OpenSearch Service domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: Name of the domain that you want Auto-Tune details about.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: An optional parameter that specifies the maximum number of results to return.
+        --next-token=: If your initial `DescribeDomainAutoTunes` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `DescribeDomainAutoTunes` operations, which returns results in the next page.
+    - name: describe-domain-change-progress
+      description: Returns information about the current blue/green deployment happening on an Amazon OpenSearch Service domain.
+      flags:
+        --change-id=: The specific change ID for which you want to get progress information.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain to get progress information for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-outbound-connections
+      description: Lists all the outbound cross-cluster connections for a local (source) Amazon OpenSearch Service domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: List of filter names and values that you can use for requests.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: An optional parameter that specifies the maximum number of results to return.
+        --next-token=: If your initial `DescribeOutboundConnections` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `DescribeOutboundConnections` operations, which returns results in the next page.
     - name: list-domains-for-package
       description: Lists all Amazon OpenSearch Service domains associated with a given package.
       flags:
@@ -496,61 +292,92 @@ commands:
         --max-results=: An optional parameter that specifies the maximum number of results to return.
         --next-token=: If your initial `ListDomainsForPackage` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListDomainsForPackage` operations, which returns results in the next page.
         --package-id=!: The unique identifier of the package for which to list associated domains.
-    - name: add-data-source
-      description: Creates a new direct-query data source to the specified domain.
+    - name: accept-inbound-connection
+      description: Allows the destination Amazon OpenSearch Service domain owner to accept an inbound cross-cluster search connection request.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source-type=!: The type of data source.
-        --description=: A description of the data source.
-        --domain-name=!: The name of the domain to add the data source to.
+        --connection-id=!: The ID of the inbound connection to accept.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: A name for the data source.
-    - name: create-domain
-      description: Creates an Amazon OpenSearch Service domain.
+    - name: add-tags
+      description: Attaches tags to an existing Amazon OpenSearch Service domain, data source, or application.
       flags:
-        --access-policies=: Identity and Access Management (IAM) policy document specifying the access policies for the new domain.
-        --advanced-options=: Key-value pairs to specify advanced configuration options.
-        --advanced-security-options=: Options for fine-grained access control.
-        --aiml-options=: Options for all machine learning features for the specified domain.
-        --auto-tune-options=: Options for Auto-Tune.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-config=: Container for the cluster configuration of a domain.
-        --cognito-options=: Key-value pairs to configure Amazon Cognito authentication.
-        --domain-endpoint-options=: Additional options for the domain endpoint, such as whether to require HTTPS for all traffic.
-        --domain-name=!: Name of the OpenSearch Service domain to create.
-        --ebs-options=: Container for the parameters required to enable EBS-based storage for an OpenSearch Service domain.
-        --encryption-at-rest-options=: Key-value pairs to enable encryption at rest.
-        --engine-version=: String of format Elasticsearch\_X.Y or OpenSearch\_X.Y to specify the engine version for the OpenSearch Service domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-center-options=: Configuration options for enabling and managing IAM Identity Center integration within a domain.
-        --ip-address-type=: Specify either dual stack or IPv4 as your IP address type.
-        --log-publishing-options=: Key-value pairs to configure log publishing.
-        --node-to-node-encryption-options=: Enables node-to-node encryption.
-        --off-peak-window-options=: Specifies a daily 10-hour time block during which OpenSearch Service can perform configuration changes on the domain, including service software updates and Auto-Tune enhancements that require a blue/green deployment.
-        --snapshot-options=: DEPRECATED.
-        --software-update-options=: Software update options for the domain.
-        --tag-list=: List of tags to add to the domain upon creation.
-        --vpc-options=: Container for the values required to configure VPC access domains.
-      completion:
-        flag:
-            ip-address-type:
-                - ipv4
-                - dualstack
-    - name: delete-vpc-endpoint
-      description: Deletes an Amazon OpenSearch Service-managed interface VPC endpoint.
-      flags:
+        --arn=!: Amazon Resource Name (ARN) for the OpenSearch Service domain, data source, or application to which you want to attach resource tags.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --vpc-endpoint-id=!: The unique identifier of the endpoint.
+        --tag-list=!: List of resource tags.
+    - name: delete-direct-query-data-source
+      description: Deletes a previously configured direct query data source from Amazon OpenSearch Service.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-source-name=!: A unique, user-defined label to identify the data source within your OpenSearch Service environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-domain
+      description: Describes the domain configuration for the specified Amazon OpenSearch Service domain, including the domain ID, domain service endpoint, and domain ARN.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain that you want information about.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-compatible-versions
       description: Returns a map of OpenSearch or Elasticsearch versions and the versions you can upgrade them to.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain-name=: The name of an existing domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-default-application-setting
+      description: Gets the ARN of the current default application.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-direct-query-data-source
+      description: Returns detailed configuration information for a specific direct query data source in Amazon OpenSearch Service.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-source-name=!: A unique, user-defined label that identifies the data source within your OpenSearch Service environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-direct-query-data-sources
+      description: Lists an inventory of all the direct query data sources that you have configured within Amazon OpenSearch Service.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --next-token=: ""
+    - name: list-tags
+      description: Returns all resource tags for an Amazon OpenSearch Service domain, data source, or application.
+      flags:
+        --arn=!: Amazon Resource Name (ARN) for the domain, data source, or application to view tags for.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-versions
+      description: Lists all versions of OpenSearch and Elasticsearch that Amazon OpenSearch Service supports.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: An optional parameter that specifies the maximum number of results to return.
+        --next-token=: If your initial `ListVersions` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListVersions` operations, which returns results in the next page.
+    - name: purchase-reserved-instance-offering
+      description: Allows you to purchase Amazon OpenSearch Service Reserved Instances.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-count=: The number of OpenSearch instances to reserve.
+        --reservation-name=!: A customer-specified identifier to track this reservation.
+        --reserved-instance-offering-id=!: The ID of the Reserved Instance offering to purchase.
+    - name: describe-domain-nodes
+      description: Returns information about domain and nodes, including data nodes, master nodes, ultrawarm nodes, Availability Zone(s), standby nodes, node configurations, and node states.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-instance-type-details
       description: Lists all instance types and available features for a given OpenSearch or Elasticsearch version.
@@ -565,144 +392,37 @@ commands:
         --next-token=: If your initial `ListInstanceTypeDetails` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListInstanceTypeDetails` operations, which returns results in the next page.
         --no-retrieve-azs: An optional parameter that specifies the Availability Zones for the domain.
         --retrieve-azs: An optional parameter that specifies the Availability Zones for the domain.
-    - name: update-package-scope
-      description: Updates the scope of a package.
+    - name: list-vpc-endpoints-for-domain
+      description: Retrieves all Amazon OpenSearch Service-managed VPC endpoints associated with a particular domain.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain to list associated VPC endpoints for.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --operation=!: The operation to perform on the package scope (e.g., add/remove/override users).
-        --package-id=!: ID of the package whose scope is being updated.
-        --package-user-list=!: List of users to be added or removed from the package scope.
+        --next-token=: If your initial `ListEndpointsForDomain` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListEndpointsForDomain` operations, which returns results in the next page.
+    - name: associate-package
+      description: Associates a package with an Amazon OpenSearch Service domain.
+      flags:
+        --association-configuration=: The configuration for associating a package with an Amazon OpenSearch Service domain.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: Name of the domain to associate the package with.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --package-id=!: Internal ID of the package to associate with a domain.
+        --prerequisite-package-id-list=: A list of package IDs that must be associated with the domain before the package specified in the request can be associated.
+    - name: authorize-vpc-endpoint-access
+      description: Provides access to an Amazon OpenSearch Service domain through the use of an interface VPC endpoint.
+      flags:
+        --account=: The Amazon Web Services account ID to grant access to.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the OpenSearch Service domain to provide access to.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service=: The Amazon Web Services service SP to grant access to.
       completion:
         flag:
-            operation:
-                - ADD
-                - OVERRIDE
-                - REMOVE
-    - name: add-direct-query-data-source
-      description: Adds a new data source in Amazon OpenSearch Service so that you can perform direct queries on external data.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source-name=!: A unique, user-defined label to identify the data source within your OpenSearch Service environment.
-        --data-source-type=!: The supported Amazon Web Services service that you want to use as the source for direct queries in OpenSearch Service.
-        --description=: An optional text field for providing additional context and details about the data source.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --open-search-arns=!: A list of Amazon Resource Names (ARNs) for the OpenSearch collections that are associated with the direct query data source.
-        --tag-list=: ""
-    - name: cancel-domain-config-change
-      description: Cancels a pending configuration change on an Amazon OpenSearch Service domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: ""
-        --dry-run: When set to `True`, returns the list of change IDs and properties that will be cancelled without actually cancelling the change.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-dry-run: When set to `True`, returns the list of change IDs and properties that will be cancelled without actually cancelling the change.
-    - name: cancel-service-software-update
-      description: Cancels a scheduled service software update for an Amazon OpenSearch Service domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: Name of the OpenSearch Service domain that you want to cancel the service software update on.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-direct-query-data-source
-      description: Deletes a previously configured direct query data source from Amazon OpenSearch Service.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source-name=!: A unique, user-defined label to identify the data source within your OpenSearch Service environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-package-version-history
-      description: Returns a list of Amazon OpenSearch Service package versions, along with their creation time, commit message, and plugin properties (if the package is a zip plugin package).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: An optional parameter that specifies the maximum number of results to return.
-        --next-token=: If your initial `GetPackageVersionHistory` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `GetPackageVersionHistory` operations, which returns results in the next page.
-        --package-id=!: The unique identifier of the package.
-    - name: get-upgrade-status
-      description: Returns the most recent status of the last upgrade or upgrade eligibility check performed on an Amazon OpenSearch Service domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The domain of the domain to get upgrade status information for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-scheduled-actions
-      description: Retrieves a list of configuration changes that are scheduled for a domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: An optional parameter that specifies the maximum number of results to return.
-        --next-token=: If your initial `ListScheduledActions` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListScheduledActions` operations, which returns results in the next page.
-    - name: create-package
-      description: Creates a package for use with Amazon OpenSearch Service domains.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --engine-version=: The version of the Amazon OpenSearch Service engine for which is compatible with the package.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --package-configuration=: The configuration parameters for the package being created.
-        --package-description=: Description of the package.
-        --package-encryption-options=: The encryption parameters for the package being created.
-        --package-name=!: Unique name for the package.
-        --package-source=!: The Amazon S3 location from which to import the package.
-        --package-type=!: The type of package.
-        --package-vending-options=: The vending options for the package being created.
-      completion:
-        flag:
-            package-type:
-                - TXT-DICTIONARY
-                - ZIP-PLUGIN
-                - PACKAGE-LICENSE
-                - PACKAGE-CONFIG
-    - name: list-vpc-endpoints
-      description: Retrieves all Amazon OpenSearch Service-managed VPC endpoints in the current Amazon Web Services account and Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --next-token=: If your initial `ListVpcEndpoints` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListVpcEndpoints` operations, which returns results in the next page.
-    - name: accept-inbound-connection
-      description: Allows the destination Amazon OpenSearch Service domain owner to accept an inbound cross-cluster search connection request.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connection-id=!: The ID of the inbound connection to accept.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: associate-packages
-      description: Operation in the Amazon OpenSearch Service API for associating multiple packages with a domain simultaneously.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --package-list=!: A list of packages and their prerequisites to be associated with a domain.
-    - name: delete-domain
-      description: Deletes an Amazon OpenSearch Service domain and all of its data.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain you want to permanently delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-domain-nodes
-      description: Returns information about domain and nodes, including data nodes, master nodes, ultrawarm nodes, Availability Zone(s), standby nodes, node configurations, and node states.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-domains
-      description: Returns domain configuration information about the specified Amazon OpenSearch Service domains.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-names=!: Array of OpenSearch Service domain names that you want information about.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            service:
+                - application.opensearchservice.amazonaws.com
     - name: describe-instance-type-limits
       description: Describes the instance count, storage, and master node limits for a given OpenSearch or Elasticsearch version and instance type.
       flags:
@@ -818,78 +538,6 @@ commands:
                 - r6gd.16xlarge.search
                 - t4g.small.search
                 - t4g.medium.search
-    - name: describe-outbound-connections
-      description: Lists all the outbound cross-cluster connections for a local (source) Amazon OpenSearch Service domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: List of filter names and values that you can use for requests.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: An optional parameter that specifies the maximum number of results to return.
-        --next-token=: If your initial `DescribeOutboundConnections` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `DescribeOutboundConnections` operations, which returns results in the next page.
-    - name: describe-reserved-instance-offerings
-      description: Describes the available Amazon OpenSearch Service Reserved Instance offerings for a given Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: An optional parameter that specifies the maximum number of results to return.
-        --next-token=: If your initial `DescribeReservedInstanceOfferings` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `DescribeReservedInstanceOfferings` operations, which returns results in the next page.
-        --reserved-instance-offering-id=: The Reserved Instance identifier filter value.
-    - name: dissociate-package
-      description: Removes a package from the specified Amazon OpenSearch Service domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: Name of the domain to dissociate the package from.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --package-id=!: Internal ID of the package to dissociate from the domain.
-    - name: get-index
-      description: Retrieves information about an OpenSearch index including its schema and semantic enrichment configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-name=!: The name of the index to retrieve information about.
-    - name: list-direct-query-data-sources
-      description: Lists an inventory of all the direct query data sources that you have configured within Amazon OpenSearch Service.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --next-token=: ""
-    - name: list-domain-maintenances
-      description: A list of maintenance actions for the domain.
-      flags:
-        --action=: The name of the action.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: An optional parameter that specifies the maximum number of results to return.
-        --next-token=: If your initial `ListDomainMaintenances` operation returns a `nextToken`, include the returned `nextToken` in subsequent `ListDomainMaintenances` operations, which returns results in the next page.
-        --status=: The status of the action.
-      completion:
-        flag:
-            action:
-                - REBOOT_NODE
-                - RESTART_SEARCH_PROCESS
-                - RESTART_DASHBOARD
-            status:
-                - PENDING
-                - IN_PROGRESS
-                - COMPLETED
-                - FAILED
-                - TIMED_OUT
-    - name: remove-tags
-      description: Removes the specified set of tags from an Amazon OpenSearch Service domain, data source, or application.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the domain, data source, or application from which you want to delete the specified tags.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tag-keys=!: The list of tag keys to remove from the domain, data source, or application.
     - name: update-application
       description: Updates the configuration and settings of an existing OpenSearch application.
       flags:
@@ -899,35 +547,387 @@ commands:
         --data-sources=: The data sources to associate with the OpenSearch application.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The unique identifier for the OpenSearch application to be updated.
-    - name: add-tags
-      description: Attaches tags to an existing Amazon OpenSearch Service domain, data source, or application.
-      flags:
-        --arn=!: Amazon Resource Name (ARN) for the OpenSearch Service domain, data source, or application to which you want to attach resource tags.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tag-list=!: List of resource tags.
-    - name: delete-package
-      description: Deletes an Amazon OpenSearch Service package.
+    - name: update-package-scope
+      description: Updates the scope of a package.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --package-id=!: The internal ID of the package you want to delete.
-    - name: list-versions
-      description: Lists all versions of OpenSearch and Elasticsearch that Amazon OpenSearch Service supports.
+        --operation=!: The operation to perform on the package scope (e.g., add/remove/override users).
+        --package-id=!: ID of the package whose scope is being updated.
+        --package-user-list=!: List of users to be added or removed from the package scope.
+      completion:
+        flag:
+            operation:
+                - ADD
+                - OVERRIDE
+                - REMOVE
+    - name: update-scheduled-action
+      description: Reschedules a planned domain configuration change for a later time.
+      flags:
+        --action-id=!: The unique identifier of the action to reschedule.
+        --action-type=!: The type of action to reschedule.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --desired-start-time=: The time to implement the change, in Coordinated Universal Time (UTC).
+        --domain-name=!: The name of the domain to reschedule an action for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --schedule-at=!: When to schedule the action.
+      completion:
+        flag:
+            action-type:
+                - SERVICE_SOFTWARE_UPDATE
+                - JVM_HEAP_SIZE_TUNING
+                - JVM_YOUNG_GEN_TUNING
+            schedule-at:
+                - NOW
+                - TIMESTAMP
+                - OFF_PEAK_WINDOW
+    - name: add-data-source
+      description: Creates a new direct-query data source to the specified domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-source-type=!: The type of data source.
+        --description=: A description of the data source.
+        --domain-name=!: The name of the domain to add the data source to.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: A name for the data source.
+    - name: create-outbound-connection
+      description: Creates a new cross-cluster search connection from a source Amazon OpenSearch Service domain to a destination domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connection-alias=!: Name of the connection.
+        --connection-mode=: The connection mode.
+        --connection-properties=: The `ConnectionProperties` for the outbound connection.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --local-domain-info=!: Name and Region of the source (local) domain.
+        --remote-domain-info=!: Name and Region of the destination (remote) domain.
+      completion:
+        flag:
+            connection-mode:
+                - DIRECT
+                - VPC_ENDPOINT
+    - name: create-package
+      description: Creates a package for use with Amazon OpenSearch Service domains.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --engine-version=: The version of the Amazon OpenSearch Service engine for which is compatible with the package.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --package-configuration=: The configuration parameters for the package being created.
+        --package-description=: Description of the package.
+        --package-encryption-options=: The encryption parameters for the package being created.
+        --package-name=!: Unique name for the package.
+        --package-source=!: The Amazon S3 location from which to import the package.
+        --package-type=!: The type of package.
+        --package-vending-options=: The vending options for the package being created.
+      completion:
+        flag:
+            package-type:
+                - TXT-DICTIONARY
+                - ZIP-PLUGIN
+                - PACKAGE-LICENSE
+                - PACKAGE-CONFIG
+    - name: delete-outbound-connection
+      description: Allows the source Amazon OpenSearch Service domain owner to delete an existing outbound cross-cluster search connection.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connection-id=!: The ID of the outbound connection you want to permanently delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-vpc-endpoint
+      description: Deletes an Amazon OpenSearch Service-managed interface VPC endpoint.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --vpc-endpoint-id=!: The unique identifier of the endpoint.
+    - name: revoke-vpc-endpoint-access
+      description: Revokes access to an Amazon OpenSearch Service domain that was provided through an interface VPC endpoint.
+      flags:
+        --account=: The account ID to revoke access from.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the OpenSearch Service domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service=: The service SP to revoke access from.
+      completion:
+        flag:
+            service:
+                - application.opensearchservice.amazonaws.com
+    - name: update-vpc-endpoint
+      description: Modifies an Amazon OpenSearch Service-managed interface VPC endpoint.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --vpc-endpoint-id=!: The unique identifier of the endpoint.
+        --vpc-options=!: The security groups and/or subnets to add, remove, or modify.
+    - name: delete-application
+      description: Deletes a specified OpenSearch application.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The unique identifier of the OpenSearch application to delete.
+    - name: get-domain-maintenance-status
+      description: The status of the maintenance action.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --maintenance-id=!: The request ID of the maintenance action.
+    - name: get-package-version-history
+      description: Returns a list of Amazon OpenSearch Service package versions, along with their creation time, commit message, and plugin properties (if the package is a zip plugin package).
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: An optional parameter that specifies the maximum number of results to return.
-        --next-token=: If your initial `ListVersions` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListVersions` operations, which returns results in the next page.
-    - name: update-index
-      description: Updates an existing OpenSearch index schema and semantic enrichment configuration.
+        --next-token=: If your initial `GetPackageVersionHistory` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `GetPackageVersionHistory` operations, which returns results in the next page.
+        --package-id=!: The unique identifier of the package.
+    - name: get-upgrade-status
+      description: Returns the most recent status of the last upgrade or upgrade eligibility check performed on an Amazon OpenSearch Service domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The domain of the domain to get upgrade status information for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: put-default-application-setting
+      description: Sets the default application to the application with the specified ARN.
+      flags:
+        --application-arn=!: ""
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-set-as-default!: Set to true to set the specified ARN as the default application.
+        --set-as-default!: Set to true to set the specified ARN as the default application.
+    - name: cancel-domain-config-change
+      description: Cancels a pending configuration change on an Amazon OpenSearch Service domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: ""
+        --dry-run: When set to `True`, returns the list of change IDs and properties that will be cancelled without actually cancelling the change.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-dry-run: When set to `True`, returns the list of change IDs and properties that will be cancelled without actually cancelling the change.
+    - name: create-application
+      description: Creates an OpenSearch UI application.
+      flags:
+        --app-configs=: Configuration settings for the OpenSearch application, including administrative options.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
+        --data-sources=: The data sources to link to the OpenSearch application.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --iam-identity-center-options=: Configuration settings for integrating Amazon Web Services IAM Identity Center with the OpenSearch application.
+        --name=!: The unique name of the OpenSearch application.
+        --tag-list=: ""
+    - name: create-domain
+      description: Creates an Amazon OpenSearch Service domain.
+      flags:
+        --access-policies=: Identity and Access Management (IAM) policy document specifying the access policies for the new domain.
+        --advanced-options=: Key-value pairs to specify advanced configuration options.
+        --advanced-security-options=: Options for fine-grained access control.
+        --aiml-options=: Options for all machine learning features for the specified domain.
+        --auto-tune-options=: Options for Auto-Tune.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-config=: Container for the cluster configuration of a domain.
+        --cognito-options=: Key-value pairs to configure Amazon Cognito authentication.
+        --domain-endpoint-options=: Additional options for the domain endpoint, such as whether to require HTTPS for all traffic.
+        --domain-name=!: Name of the OpenSearch Service domain to create.
+        --ebs-options=: Container for the parameters required to enable EBS-based storage for an OpenSearch Service domain.
+        --encryption-at-rest-options=: Key-value pairs to enable encryption at rest.
+        --engine-version=: String of format Elasticsearch\_X.Y or OpenSearch\_X.Y to specify the engine version for the OpenSearch Service domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-center-options=: Configuration options for enabling and managing IAM Identity Center integration within a domain.
+        --ip-address-type=: Specify either dual stack or IPv4 as your IP address type.
+        --log-publishing-options=: Key-value pairs to configure log publishing.
+        --node-to-node-encryption-options=: Enables node-to-node encryption.
+        --off-peak-window-options=: Specifies a daily 10-hour time block during which OpenSearch Service can perform configuration changes on the domain, including service software updates and Auto-Tune enhancements that require a blue/green deployment.
+        --snapshot-options=: DEPRECATED.
+        --software-update-options=: Software update options for the domain.
+        --tag-list=: List of tags to add to the domain upon creation.
+        --vpc-options=: Container for the values required to configure VPC access domains.
+      completion:
+        flag:
+            ip-address-type:
+                - ipv4
+                - dualstack
+    - name: get-application
+      description: Retrieves the configuration and status of an existing OpenSearch application.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The unique identifier of the OpenSearch application to retrieve.
+    - name: start-domain-maintenance
+      description: Starts the node maintenance process on the data node.
+      flags:
+        --action=!: The name of the action.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --node-id=: The ID of the data node.
+      completion:
+        flag:
+            action:
+                - REBOOT_NODE
+                - RESTART_SEARCH_PROCESS
+                - RESTART_DASHBOARD
+    - name: update-package
+      description: Updates a package for use with Amazon OpenSearch Service domains.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --commit-message=: Commit message for the updated file, which is shown as part of `GetPackageVersionHistoryResponse`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --package-configuration=: The updated configuration details for a package.
+        --package-description=: A new description of the package.
+        --package-encryption-options=: Encryption options for a package.
+        --package-id=!: The unique identifier for the package.
+        --package-source=!: Amazon S3 bucket and key for the package.
+    - name: list-vpc-endpoint-access
+      description: Retrieves information about each Amazon Web Services principal that is allowed to access a given Amazon OpenSearch Service domain through the use of an interface VPC endpoint.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the OpenSearch Service domain to retrieve access information for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --next-token=: If your initial `ListVpcEndpointAccess` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListVpcEndpointAccess` operations, which returns results in the next page.
+    - name: start-service-software-update
+      description: Schedules a service software update for an Amazon OpenSearch Service domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --desired-start-time=: The Epoch timestamp when you want the service software update to start.
+        --domain-name=!: The name of the domain that you want to update to the latest service software.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --schedule-at=: When to start the service software update.
+      completion:
+        flag:
+            schedule-at:
+                - NOW
+                - TIMESTAMP
+                - OFF_PEAK_WINDOW
+    - name: upgrade-domain
+      description: Allows you to either upgrade your Amazon OpenSearch Service domain or perform an upgrade eligibility check to a compatible version of OpenSearch or Elasticsearch.
+      flags:
+        --advanced-options=: Only supports the `override_main_response_version` parameter and not other advanced options.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: Name of the OpenSearch Service domain that you want to upgrade.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-perform-check-only: When true, indicates that an upgrade eligibility check needs to be performed.
+        --perform-check-only: When true, indicates that an upgrade eligibility check needs to be performed.
+        --target-version=!: OpenSearch or Elasticsearch version to which you want to upgrade, in the format Opensearch\_X.Y or Elasticsearch\_X.Y.
+    - name: create-vpc-endpoint
+      description: Creates an Amazon OpenSearch Service-managed VPC endpoint.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
+        --domain-arn=!: The Amazon Resource Name (ARN) of the domain to create the endpoint for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --vpc-options=!: Options to specify the subnets and security groups for the endpoint.
+    - name: describe-inbound-connections
+      description: Lists all the inbound cross-cluster search connections for a destination (remote) Amazon OpenSearch Service domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: A list of filters used to match properties for inbound cross-cluster connections.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: An optional parameter that specifies the maximum number of results to return.
+        --next-token=: If your initial `DescribeInboundConnections` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `DescribeInboundConnections` operations, which returns results in the next page.
+    - name: associate-packages
+      description: Operation in the Amazon OpenSearch Service API for associating multiple packages with a domain simultaneously.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain-name=!: ""
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-name=!: The name of the index to update.
-        --index-schema=!: The updated JSON schema for the index including any changes to mappings, settings, and semantic enrichment configuration.
+        --package-list=!: A list of packages and their prerequisites to be associated with a domain.
+    - name: delete-domain
+      description: Deletes an Amazon OpenSearch Service domain and all of its data.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain you want to permanently delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-index
+      description: Deletes an OpenSearch index.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-name=!: The name of the index to delete.
+    - name: describe-dry-run-progress
+      description: Describes the progress of a pre-update dry run analysis on an Amazon OpenSearch Service domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain.
+        --dry-run-id=: The unique identifier of the dry run.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --load-dry-run-config: Whether to include the configuration of the dry run in the response.
+        --no-load-dry-run-config: Whether to include the configuration of the dry run in the response.
+    - name: describe-vpc-endpoints
+      description: Describes one or more Amazon OpenSearch Service-managed VPC endpoints.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --vpc-endpoint-ids=!: The unique identifiers of the endpoints to get information about.
+    - name: get-data-source
+      description: Retrieves information about a direct query data source.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the data source to get information about.
+    - name: list-data-sources
+      description: Lists direct-query data sources for a specific domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-scheduled-actions
+      description: Retrieves a list of configuration changes that are scheduled for a domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: An optional parameter that specifies the maximum number of results to return.
+        --next-token=: If your initial `ListScheduledActions` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListScheduledActions` operations, which returns results in the next page.
+    - name: cancel-service-software-update
+      description: Cancels a scheduled service software update for an Amazon OpenSearch Service domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: Name of the OpenSearch Service domain that you want to cancel the service software update on.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-data-source
+      description: Deletes a direct-query data source.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the data source to delete.
+    - name: get-index
+      description: Retrieves information about an OpenSearch index including its schema and semantic enrichment configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-name=!: The name of the index to retrieve information about.

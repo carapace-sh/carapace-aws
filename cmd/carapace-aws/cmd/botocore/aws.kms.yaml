@@ -1,302 +1,19 @@
 name: kms
 description: AWS Key Management Service
 commands:
-    - name: rotate-key-on-demand
-      description: Immediately initiates rotation of the key material of the specified symmetric encryption KMS key.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-id=!: Identifies a symmetric encryption KMS key.
-    - name: create-custom-key-store
-      description: Creates a [custom key store](https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html) backed by a key store that you own and manage.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cloud-hsm-cluster-id=: Identifies the CloudHSM cluster for an CloudHSM key store.
-        --custom-key-store-name=!: Specifies a friendly name for the custom key store.
-        --custom-key-store-type=: Specifies the type of custom key store.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-store-password=: Specifies the `kmsuser` password for an CloudHSM key store.
-        --trust-anchor-certificate=: Specifies the certificate for an CloudHSM key store.
-        --xks-proxy-authentication-credential=: Specifies an authentication credential for the external key store proxy (XKS proxy).
-        --xks-proxy-connectivity=: Indicates how KMS communicates with the external key store proxy.
-        --xks-proxy-uri-endpoint=: Specifies the endpoint that KMS uses to send requests to the external key store proxy (XKS proxy).
-        --xks-proxy-uri-path=: Specifies the base path to the proxy APIs for this external key store.
-        --xks-proxy-vpc-endpoint-service-name=: Specifies the name of the Amazon VPC endpoint service for interface endpoints that is used to communicate with your external key store proxy (XKS proxy).
-        --xks-proxy-vpc-endpoint-service-owner=: Specifies the Amazon Web Services account ID that owns the Amazon VPC service endpoint for the interface that is used to communicate with your external key store proxy (XKS proxy).
-      completion:
-        flag:
-            custom-key-store-type:
-                - AWS_CLOUDHSM
-                - EXTERNAL_KEY_STORE
-            xks-proxy-connectivity:
-                - PUBLIC_ENDPOINT
-                - VPC_ENDPOINT_SERVICE
-    - name: decrypt
-      description: 'Decrypts ciphertext that was encrypted by a KMS key using any of the following operations:'
-      flags:
-        --ciphertext-blob=!: Ciphertext to be decrypted.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dry-run: Checks if your request will succeed.
-        --encryption-algorithm=: Specifies the encryption algorithm that will be used to decrypt the ciphertext.
-        --encryption-context=: Specifies the encryption context to use when decrypting the data.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --grant-tokens=: A list of grant tokens.
-        --key-id=: Specifies the KMS key that KMS uses to decrypt the ciphertext.
-        --no-dry-run: Checks if your request will succeed.
-        --recipient=: A signed [attestation document](https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-concepts.html#term-attestdoc) from an Amazon Web Services Nitro enclave or NitroTPM, and the encryption algorithm to use with the public key in the attestation document.
-      completion:
-        flag:
-            encryption-algorithm:
-                - SYMMETRIC_DEFAULT
-                - RSAES_OAEP_SHA_1
-                - RSAES_OAEP_SHA_256
-                - SM2PKE
-    - name: describe-custom-key-stores
-      description: Gets information about [custom key stores](https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html) in the account and Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --custom-key-store-id=: Gets only information about the specified custom key store.
-        --custom-key-store-name=: Gets only information about the specified custom key store.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: Use this parameter to specify the maximum number of items to return.
-        --marker=: Use this parameter in a subsequent request after you receive a response with truncated results.
-        --max-items=: The  total number of items to return in the command's output.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: generate-data-key-pair
-      description: Returns a unique asymmetric data key pair for use outside of KMS.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dry-run: Checks if your request will succeed.
-        --encryption-context=: Specifies the encryption context that will be used when encrypting the private key in the data key pair.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --grant-tokens=: A list of grant tokens.
-        --key-id=!: Specifies the symmetric encryption KMS key that encrypts the private key in the data key pair.
-        --key-pair-spec=!: Determines the type of data key pair that is generated.
-        --no-dry-run: Checks if your request will succeed.
-        --recipient=: A signed [attestation document](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave-how.html#term-attestdoc) from an Amazon Web Services Nitro enclave or NitroTPM, and the encryption algorithm to use with the public key in the attestation document.
-      completion:
-        flag:
-            key-pair-spec:
-                - RSA_2048
-                - RSA_3072
-                - RSA_4096
-                - ECC_NIST_P256
-                - ECC_NIST_P384
-                - ECC_NIST_P521
-                - ECC_SECG_P256K1
-                - SM2
-                - ECC_NIST_EDWARDS25519
-    - name: generate-data-key-without-plaintext
-      description: Returns a unique symmetric data key for use outside of KMS.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dry-run: Checks if your request will succeed.
-        --encryption-context=: Specifies the encryption context that will be used when encrypting the data key.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --grant-tokens=: A list of grant tokens.
-        --key-id=!: Specifies the symmetric encryption KMS key that encrypts the data key.
-        --key-spec=: The length of the data key.
-        --no-dry-run: Checks if your request will succeed.
-        --number-of-bytes=: The length of the data key in bytes.
-      completion:
-        flag:
-            key-spec:
-                - AES_256
-                - AES_128
-    - name: list-aliases
-      description: Gets a list of aliases in the caller's Amazon Web Services account and region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-id=: Lists only aliases that are associated with the specified KMS key.
-        --limit=: Use this parameter to specify the maximum number of items to return.
-        --marker=: Use this parameter in a subsequent request after you receive a response with truncated results.
-        --max-items=: The  total number of items to return in the command's output.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: tag-resource
-      description: Adds or edits tags on a [customer managed key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-mgn-key).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-id=!: Identifies a customer managed key in the account and Region.
-        --tags=!: One or more tags.
-    - name: update-alias
-      description: Associates an existing KMS alias with a different KMS key.
-      flags:
-        --alias-name=!: Identifies the alias that is changing its KMS key.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --target-key-id=!: Identifies the [customer managed key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-mgn-key) to associate with the alias.
-    - name: connect-custom-key-store
-      description: Connects or reconnects a [custom key store](https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html) to its backing key store.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --custom-key-store-id=!: Enter the key store ID of the custom key store that you want to connect.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-grant
-      description: Adds a grant to a KMS key.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --constraints=: Specifies a grant constraint.
-        --dry-run: Checks if your request will succeed.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --grant-tokens=: A list of grant tokens.
-        --grantee-principal=!: The identity that gets the permissions specified in the grant.
-        --key-id=!: Identifies the KMS key for the grant.
-        --name=: A friendly name for the grant.
-        --no-dry-run: Checks if your request will succeed.
-        --operations=!: A list of operations that the grant permits.
-        --retiring-principal=: The principal that has permission to use the [RetireGrant]() operation to retire the grant.
-    - name: delete-alias
-      description: Deletes the specified alias.
-      flags:
-        --alias-name=!: The alias to be deleted.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-custom-key-store
-      description: Deletes a [custom key store](https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --custom-key-store-id=!: Enter the ID of the custom key store you want to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: encrypt
-      description: Encrypts plaintext of up to 4,096 bytes using a KMS key.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dry-run: Checks if your request will succeed.
-        --encryption-algorithm=: Specifies the encryption algorithm that KMS will use to encrypt the plaintext message.
-        --encryption-context=: Specifies the encryption context that will be used to encrypt the data.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --grant-tokens=: A list of grant tokens.
-        --key-id=!: Identifies the KMS key to use in the encryption operation.
-        --no-dry-run: Checks if your request will succeed.
-        --plaintext=!: Data to be encrypted.
-      completion:
-        flag:
-            encryption-algorithm:
-                - SYMMETRIC_DEFAULT
-                - RSAES_OAEP_SHA_1
-                - RSAES_OAEP_SHA_256
-                - SM2PKE
-    - name: get-public-key
-      description: Returns the public key of an asymmetric KMS key.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --grant-tokens=: A list of grant tokens.
-        --key-id=!: Identifies the asymmetric KMS key that includes the public key.
-    - name: list-keys
-      description: Gets a list of all KMS keys in the caller's Amazon Web Services account and Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: Use this parameter to specify the maximum number of items to return.
-        --marker=: Use this parameter in a subsequent request after you receive a response with truncated results.
-        --max-items=: The  total number of items to return in the command's output.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-retirable-grants
-      description: Returns information about all grants in the Amazon Web Services account and Region that have the specified retiring principal.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: Use this parameter to specify the maximum number of items to return.
-        --marker=: Use this parameter in a subsequent request after you receive a response with truncated results.
-        --max-items=: The  total number of items to return in the command's output.
-        --page-size=: The size of each page to get in the AWS service call.
-        --retiring-principal=!: The retiring principal for which to list grants.
-        --starting-token=: A token to specify where to start paginating.
-    - name: generate-mac
-      description: Generates a hash-based message authentication code (HMAC) for a message using an HMAC KMS key and a MAC algorithm that the key supports.
+    - name: sign
+      description: Creates a [digital signature](https://en.wikipedia.org/wiki/Digital_signature) for a message or message digest by using the private key in an asymmetric signing KMS key.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --dry-run: Checks if your request will succeed.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --grant-tokens=: A list of grant tokens.
-        --key-id=!: The HMAC KMS key to use in the operation.
-        --mac-algorithm=!: The MAC algorithm used in the operation.
-        --message=!: The message to be hashed.
-        --no-dry-run: Checks if your request will succeed.
-      completion:
-        flag:
-            mac-algorithm:
-                - HMAC_SHA_224
-                - HMAC_SHA_256
-                - HMAC_SHA_384
-                - HMAC_SHA_512
-    - name: revoke-grant
-      description: Deletes the specified grant.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dry-run: Checks if your request will succeed.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --grant-id=!: Identifies the grant to revoke.
-        --key-id=!: A unique identifier for the KMS key associated with the grant.
-        --no-dry-run: Checks if your request will succeed.
-    - name: schedule-key-deletion
-      description: Schedules the deletion of a KMS key.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-id=!: The unique identifier of the KMS key to delete.
-        --pending-window-in-days=: The waiting period, specified in number of days.
-    - name: update-custom-key-store
-      description: Changes the properties of a custom key store.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cloud-hsm-cluster-id=: Associates the custom key store with a related CloudHSM cluster.
-        --custom-key-store-id=!: Identifies the custom key store that you want to update.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-store-password=: Enter the current password of the `kmsuser` crypto user (CU) in the CloudHSM cluster that is associated with the custom key store.
-        --new-custom-key-store-name=: Changes the friendly name of the custom key store to the value that you specify.
-        --xks-proxy-authentication-credential=: Changes the credentials that KMS uses to sign requests to the external key store proxy (XKS proxy).
-        --xks-proxy-connectivity=: Changes the connectivity setting for the external key store.
-        --xks-proxy-uri-endpoint=: Changes the URI endpoint that KMS uses to connect to your external key store proxy (XKS proxy).
-        --xks-proxy-uri-path=: Changes the base path to the proxy APIs for this external key store.
-        --xks-proxy-vpc-endpoint-service-name=: Changes the name that KMS uses to identify the Amazon VPC endpoint service for your external key store proxy (XKS proxy).
-        --xks-proxy-vpc-endpoint-service-owner=: Changes the Amazon Web Services account ID that KMS uses to identify the Amazon VPC endpoint service for your external key store proxy (XKS proxy).
-      completion:
-        flag:
-            xks-proxy-connectivity:
-                - PUBLIC_ENDPOINT
-                - VPC_ENDPOINT_SERVICE
-    - name: verify
-      description: Verifies a digital signature that was generated by the [Sign]() operation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dry-run: Checks if your request will succeed.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --grant-tokens=: A list of grant tokens.
-        --key-id=!: Identifies the asymmetric KMS key that will be used to verify the signature.
+        --key-id=!: Identifies an asymmetric KMS key.
         --message-type=: Tells KMS whether the value of the `Message` parameter should be hashed as part of the signing algorithm.
-        --message=!: Specifies the message that was signed.
+        --message=!: Specifies the message or message digest to sign.
         --no-dry-run: Checks if your request will succeed.
-        --signature=!: The signature that the `Sign` operation generated.
-        --signing-algorithm=!: The signing algorithm that was used to sign the message.
+        --signing-algorithm=!: Specifies the signing algorithm to use when signing the message.
       completion:
         flag:
             message-type:
@@ -337,213 +54,46 @@ commands:
                 - HMAC_SHA_256
                 - HMAC_SHA_384
                 - HMAC_SHA_512
-    - name: delete-imported-key-material
-      description: Deletes key material that was previously imported.
+    - name: connect-custom-key-store
+      description: Connects or reconnects a [custom key store](https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html) to its backing key store.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --custom-key-store-id=!: Enter the key store ID of the custom key store that you want to connect.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-id=!: Identifies the KMS key from which you are deleting imported key material.
-        --key-material-id=: Identifies the imported key material you are deleting.
-    - name: derive-shared-secret
-      description: Derives a shared secret using a key agreement algorithm.
+    - name: decrypt
+      description: 'Decrypts ciphertext that was encrypted by a KMS key using any of the following operations:'
       flags:
+        --ciphertext-blob=!: Ciphertext to be decrypted.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --dry-run: Checks if your request will succeed.
+        --encryption-algorithm=: Specifies the encryption algorithm that will be used to decrypt the ciphertext.
+        --encryption-context=: Specifies the encryption context to use when decrypting the data.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --grant-tokens=: A list of grant tokens.
-        --key-agreement-algorithm=!: Specifies the key agreement algorithm used to derive the shared secret.
-        --key-id=!: Identifies an asymmetric NIST-standard ECC or SM2 (China Regions only) KMS key.
+        --key-id=: Specifies the KMS key that KMS uses to decrypt the ciphertext.
         --no-dry-run: Checks if your request will succeed.
-        --public-key=!: Specifies the public key in your peer's NIST-standard elliptic curve (ECC) or SM2 (China Regions only) key pair.
-        --recipient=: A signed [attestation document](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave-how.html#term-attestdoc) from an Amazon Web Services Nitro enclave or NitroTPM, and the encryption algorithm to use with the public key in the attestation document.
+        --recipient=: A signed [attestation document](https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-concepts.html#term-attestdoc) from an Amazon Web Services Nitro enclave or NitroTPM, and the encryption algorithm to use with the public key in the attestation document.
       completion:
         flag:
-            key-agreement-algorithm:
-                - ECDH
-    - name: describe-key
-      description: Provides detailed information about a KMS key.
+            encryption-algorithm:
+                - SYMMETRIC_DEFAULT
+                - RSAES_OAEP_SHA_1
+                - RSAES_OAEP_SHA_256
+                - SM2PKE
+    - name: list-retirable-grants
+      description: Returns information about all grants in the Amazon Web Services account and Region that have the specified retiring principal.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --grant-tokens=: A list of grant tokens.
-        --key-id=!: Describes the specified KMS key.
-    - name: disable-key-rotation
-      description: Disables [automatic rotation of the key material](https://docs.aws.amazon.com/kms/latest/developerguide/rotating-keys-enable-disable.html) of the specified symmetric encryption KMS key.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-id=!: Identifies a symmetric encryption KMS key.
-    - name: untag-resource
-      description: Deletes tags from a [customer managed key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-mgn-key). To delete a tag, specify the tag key and the KMS key.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-id=!: Identifies the KMS key from which you are removing tags.
-        --tag-keys=!: One or more tag keys.
-    - name: cancel-key-deletion
-      description: Cancels the deletion of a KMS key.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-id=!: Identifies the KMS key whose deletion is being canceled.
-    - name: disconnect-custom-key-store
-      description: Disconnects the [custom key store](https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html) from its backing key store.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --custom-key-store-id=!: Enter the ID of the custom key store you want to disconnect.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: generate-random
-      description: Returns a random byte string that is cryptographically secure.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --custom-key-store-id=: Generates the random byte string in the CloudHSM cluster that is associated with the specified CloudHSM key store.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --number-of-bytes=: The length of the random byte string.
-        --recipient=: A signed [attestation document](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave-how.html#term-attestdoc) from an Amazon Web Services Nitro enclave or NitroTPM, and the encryption algorithm to use with the public key in the attestation document.
-    - name: import-key-material
-      description: Imports or reimports key material into an existing KMS key that was created without key material.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --encrypted-key-material=!: The encrypted key material to import.
-        --expiration-model=: Specifies whether the key material expires.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --import-token=!: The import token that you received in the response to a previous [GetParametersForImport]() request.
-        --import-type=: Indicates whether the key material being imported is previously associated with this KMS key or not.
-        --key-id=!: The identifier of the KMS key that will be associated with the imported key material.
-        --key-material-description=: Description for the key material being imported.
-        --key-material-id=: Identifies the key material being imported.
-        --valid-to=: The date and time when the imported key material expires.
-      completion:
-        flag:
-            expiration-model:
-                - KEY_MATERIAL_EXPIRES
-                - KEY_MATERIAL_DOES_NOT_EXPIRE
-            import-type:
-                - NEW_KEY_MATERIAL
-                - EXISTING_KEY_MATERIAL
-    - name: list-grants
-      description: Gets a list of all grants for the specified KMS key.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --grant-id=: Returns only the grant with the specified grant ID.
-        --grantee-principal=: Returns only grants where the specified principal is the grantee principal for the grant.
-        --key-id=!: Returns only grants for the specified KMS key.
         --limit=: Use this parameter to specify the maximum number of items to return.
         --marker=: Use this parameter in a subsequent request after you receive a response with truncated results.
         --max-items=: The  total number of items to return in the command's output.
         --page-size=: The size of each page to get in the AWS service call.
+        --retiring-principal=!: The retiring principal for which to list grants.
         --starting-token=: A token to specify where to start paginating.
-    - name: replicate-key
-      description: Replicates a multi-Region key into the specified Region.
-      flags:
-        --bypass-policy-lockout-safety-check: Skips ("bypasses") the key policy lockout safety check.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description of the KMS key.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-id=!: Identifies the multi-Region primary key that is being replicated.
-        --no-bypass-policy-lockout-safety-check: Skips ("bypasses") the key policy lockout safety check.
-        --policy=: The key policy to attach to the KMS key.
-        --replica-region=!: The Region ID of the Amazon Web Services Region for this replica key.
-        --tags=: Assigns one or more tags to the replica key.
-    - name: retire-grant
-      description: Deletes a grant.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dry-run: Checks if your request will succeed.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --grant-id=: Identifies the grant to retire.
-        --grant-token=: Identifies the grant to be retired.
-        --key-id=: The key ARN KMS key associated with the grant.
-        --no-dry-run: Checks if your request will succeed.
-    - name: sign
-      description: Creates a [digital signature](https://en.wikipedia.org/wiki/Digital_signature) for a message or message digest by using the private key in an asymmetric signing KMS key.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dry-run: Checks if your request will succeed.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --grant-tokens=: A list of grant tokens.
-        --key-id=!: Identifies an asymmetric KMS key.
-        --message-type=: Tells KMS whether the value of the `Message` parameter should be hashed as part of the signing algorithm.
-        --message=!: Specifies the message or message digest to sign.
-        --no-dry-run: Checks if your request will succeed.
-        --signing-algorithm=!: Specifies the signing algorithm to use when signing the message.
-      completion:
-        flag:
-            message-type:
-                - RAW
-                - DIGEST
-                - EXTERNAL_MU
-            signing-algorithm:
-                - RSASSA_PSS_SHA_256
-                - RSASSA_PSS_SHA_384
-                - RSASSA_PSS_SHA_512
-                - RSASSA_PKCS1_V1_5_SHA_256
-                - RSASSA_PKCS1_V1_5_SHA_384
-                - RSASSA_PKCS1_V1_5_SHA_512
-                - ECDSA_SHA_256
-                - ECDSA_SHA_384
-                - ECDSA_SHA_512
-                - SM2DSA
-                - ML_DSA_SHAKE_256
-                - ED25519_SHA_512
-                - ED25519_PH_SHA_512
-    - name: generate-data-key
-      description: Returns a unique symmetric data key for use outside of KMS.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dry-run: Checks if your request will succeed.
-        --encryption-context=: Specifies the encryption context that will be used when encrypting the data key.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --grant-tokens=: A list of grant tokens.
-        --key-id=!: Specifies the symmetric encryption KMS key that encrypts the data key.
-        --key-spec=: Specifies the length of the data key.
-        --no-dry-run: Checks if your request will succeed.
-        --number-of-bytes=: Specifies the length of the data key in bytes.
-        --recipient=: A signed [attestation document](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave-how.html#term-attestdoc) from an Amazon Web Services Nitro enclave or NitroTPM, and the encryption algorithm to use with the public key in the attestation document.
-      completion:
-        flag:
-            key-spec:
-                - AES_256
-                - AES_128
-    - name: generate-data-key-pair-without-plaintext
-      description: Returns a unique asymmetric data key pair for use outside of KMS.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dry-run: Checks if your request will succeed.
-        --encryption-context=: Specifies the encryption context that will be used when encrypting the private key in the data key pair.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --grant-tokens=: A list of grant tokens.
-        --key-id=!: Specifies the symmetric encryption KMS key that encrypts the private key in the data key pair.
-        --key-pair-spec=!: Determines the type of data key pair that is generated.
-        --no-dry-run: Checks if your request will succeed.
-      completion:
-        flag:
-            key-pair-spec:
-                - RSA_2048
-                - RSA_3072
-                - RSA_4096
-                - ECC_NIST_P256
-                - ECC_NIST_P384
-                - ECC_NIST_P521
-                - ECC_SECG_P256K1
-                - SM2
-                - ECC_NIST_EDWARDS25519
     - name: re-encrypt
       description: Decrypts ciphertext and then reencrypts it entirely within KMS.
       flags:
@@ -572,6 +122,325 @@ commands:
                 - RSAES_OAEP_SHA_1
                 - RSAES_OAEP_SHA_256
                 - SM2PKE
+    - name: rotate-key-on-demand
+      description: Immediately initiates rotation of the key material of the specified symmetric encryption KMS key.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-id=!: Identifies a symmetric encryption KMS key.
+    - name: untag-resource
+      description: Deletes tags from a [customer managed key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-mgn-key). To delete a tag, specify the tag key and the KMS key.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-id=!: Identifies the KMS key from which you are removing tags.
+        --tag-keys=!: One or more tag keys.
+    - name: verify
+      description: Verifies a digital signature that was generated by the [Sign]() operation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dry-run: Checks if your request will succeed.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --grant-tokens=: A list of grant tokens.
+        --key-id=!: Identifies the asymmetric KMS key that will be used to verify the signature.
+        --message-type=: Tells KMS whether the value of the `Message` parameter should be hashed as part of the signing algorithm.
+        --message=!: Specifies the message that was signed.
+        --no-dry-run: Checks if your request will succeed.
+        --signature=!: The signature that the `Sign` operation generated.
+        --signing-algorithm=!: The signing algorithm that was used to sign the message.
+      completion:
+        flag:
+            message-type:
+                - RAW
+                - DIGEST
+                - EXTERNAL_MU
+            signing-algorithm:
+                - RSASSA_PSS_SHA_256
+                - RSASSA_PSS_SHA_384
+                - RSASSA_PSS_SHA_512
+                - RSASSA_PKCS1_V1_5_SHA_256
+                - RSASSA_PKCS1_V1_5_SHA_384
+                - RSASSA_PKCS1_V1_5_SHA_512
+                - ECDSA_SHA_256
+                - ECDSA_SHA_384
+                - ECDSA_SHA_512
+                - SM2DSA
+                - ML_DSA_SHAKE_256
+                - ED25519_SHA_512
+                - ED25519_PH_SHA_512
+    - name: delete-imported-key-material
+      description: Deletes key material that was previously imported.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-id=!: Identifies the KMS key from which you are deleting imported key material.
+        --key-material-id=: Identifies the imported key material you are deleting.
+    - name: derive-shared-secret
+      description: Derives a shared secret using a key agreement algorithm.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dry-run: Checks if your request will succeed.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --grant-tokens=: A list of grant tokens.
+        --key-agreement-algorithm=!: Specifies the key agreement algorithm used to derive the shared secret.
+        --key-id=!: Identifies an asymmetric NIST-standard ECC or SM2 (China Regions only) KMS key.
+        --no-dry-run: Checks if your request will succeed.
+        --public-key=!: Specifies the public key in your peer's NIST-standard elliptic curve (ECC) or SM2 (China Regions only) key pair.
+        --recipient=: A signed [attestation document](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave-how.html#term-attestdoc) from an Amazon Web Services Nitro enclave or NitroTPM, and the encryption algorithm to use with the public key in the attestation document.
+      completion:
+        flag:
+            key-agreement-algorithm:
+                - ECDH
+    - name: disconnect-custom-key-store
+      description: Disconnects the [custom key store](https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html) from its backing key store.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --custom-key-store-id=!: Enter the ID of the custom key store you want to disconnect.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: enable-key-rotation
+      description: Enables [automatic rotation of the key material](https://docs.aws.amazon.com/kms/latest/developerguide/rotating-keys-enable-disable.html) of the specified symmetric encryption KMS key.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-id=!: Identifies a symmetric encryption KMS key.
+        --rotation-period-in-days=: Use this parameter to specify a custom period of time between each rotation date.
+    - name: update-alias
+      description: Associates an existing KMS alias with a different KMS key.
+      flags:
+        --alias-name=!: Identifies the alias that is changing its KMS key.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --target-key-id=!: Identifies the [customer managed key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-mgn-key) to associate with the alias.
+    - name: update-custom-key-store
+      description: Changes the properties of a custom key store.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cloud-hsm-cluster-id=: Associates the custom key store with a related CloudHSM cluster.
+        --custom-key-store-id=!: Identifies the custom key store that you want to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-store-password=: Enter the current password of the `kmsuser` crypto user (CU) in the CloudHSM cluster that is associated with the custom key store.
+        --new-custom-key-store-name=: Changes the friendly name of the custom key store to the value that you specify.
+        --xks-proxy-authentication-credential=: Changes the credentials that KMS uses to sign requests to the external key store proxy (XKS proxy).
+        --xks-proxy-connectivity=: Changes the connectivity setting for the external key store.
+        --xks-proxy-uri-endpoint=: Changes the URI endpoint that KMS uses to connect to your external key store proxy (XKS proxy).
+        --xks-proxy-uri-path=: Changes the base path to the proxy APIs for this external key store.
+        --xks-proxy-vpc-endpoint-service-name=: Changes the name that KMS uses to identify the Amazon VPC endpoint service for your external key store proxy (XKS proxy).
+        --xks-proxy-vpc-endpoint-service-owner=: Changes the Amazon Web Services account ID that KMS uses to identify the Amazon VPC endpoint service for your external key store proxy (XKS proxy).
+      completion:
+        flag:
+            xks-proxy-connectivity:
+                - PUBLIC_ENDPOINT
+                - VPC_ENDPOINT_SERVICE
+    - name: delete-alias
+      description: Deletes the specified alias.
+      flags:
+        --alias-name=!: The alias to be deleted.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: encrypt
+      description: Encrypts plaintext of up to 4,096 bytes using a KMS key.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dry-run: Checks if your request will succeed.
+        --encryption-algorithm=: Specifies the encryption algorithm that KMS will use to encrypt the plaintext message.
+        --encryption-context=: Specifies the encryption context that will be used to encrypt the data.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --grant-tokens=: A list of grant tokens.
+        --key-id=!: Identifies the KMS key to use in the encryption operation.
+        --no-dry-run: Checks if your request will succeed.
+        --plaintext=!: Data to be encrypted.
+      completion:
+        flag:
+            encryption-algorithm:
+                - SYMMETRIC_DEFAULT
+                - RSAES_OAEP_SHA_1
+                - RSAES_OAEP_SHA_256
+                - SM2PKE
+    - name: get-public-key
+      description: Returns the public key of an asymmetric KMS key.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --grant-tokens=: A list of grant tokens.
+        --key-id=!: Identifies the asymmetric KMS key that includes the public key.
+    - name: list-aliases
+      description: Gets a list of aliases in the caller's Amazon Web Services account and region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-id=: Lists only aliases that are associated with the specified KMS key.
+        --limit=: Use this parameter to specify the maximum number of items to return.
+        --marker=: Use this parameter in a subsequent request after you receive a response with truncated results.
+        --max-items=: The  total number of items to return in the command's output.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-key-policies
+      description: Gets the names of the key policies that are attached to a KMS key.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-id=!: Gets the names of key policies for the specified KMS key.
+        --limit=: Use this parameter to specify the maximum number of items to return.
+        --marker=: Use this parameter in a subsequent request after you receive a response with truncated results.
+        --max-items=: The  total number of items to return in the command's output.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: cancel-key-deletion
+      description: Cancels the deletion of a KMS key.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-id=!: Identifies the KMS key whose deletion is being canceled.
+    - name: describe-custom-key-stores
+      description: Gets information about [custom key stores](https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html) in the account and Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --custom-key-store-id=: Gets only information about the specified custom key store.
+        --custom-key-store-name=: Gets only information about the specified custom key store.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: Use this parameter to specify the maximum number of items to return.
+        --marker=: Use this parameter in a subsequent request after you receive a response with truncated results.
+        --max-items=: The  total number of items to return in the command's output.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: disable-key
+      description: Sets the state of a KMS key to disabled.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-id=!: Identifies the KMS key to disable.
+    - name: enable-key
+      description: Sets the key state of a KMS key to enabled.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-id=!: Identifies the KMS key to enable.
+    - name: generate-data-key-without-plaintext
+      description: Returns a unique symmetric data key for use outside of KMS.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dry-run: Checks if your request will succeed.
+        --encryption-context=: Specifies the encryption context that will be used when encrypting the data key.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --grant-tokens=: A list of grant tokens.
+        --key-id=!: Specifies the symmetric encryption KMS key that encrypts the data key.
+        --key-spec=: The length of the data key.
+        --no-dry-run: Checks if your request will succeed.
+        --number-of-bytes=: The length of the data key in bytes.
+      completion:
+        flag:
+            key-spec:
+                - AES_256
+                - AES_128
+    - name: list-keys
+      description: Gets a list of all KMS keys in the caller's Amazon Web Services account and Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: Use this parameter to specify the maximum number of items to return.
+        --marker=: Use this parameter in a subsequent request after you receive a response with truncated results.
+        --max-items=: The  total number of items to return in the command's output.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: revoke-grant
+      description: Deletes the specified grant.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dry-run: Checks if your request will succeed.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --grant-id=!: Identifies the grant to revoke.
+        --key-id=!: A unique identifier for the KMS key associated with the grant.
+        --no-dry-run: Checks if your request will succeed.
+    - name: schedule-key-deletion
+      description: Schedules the deletion of a KMS key.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-id=!: The unique identifier of the KMS key to delete.
+        --pending-window-in-days=: The waiting period, specified in number of days.
+    - name: delete-custom-key-store
+      description: Deletes a [custom key store](https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --custom-key-store-id=!: Enter the ID of the custom key store you want to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: generate-random
+      description: Returns a random byte string that is cryptographically secure.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --custom-key-store-id=: Generates the random byte string in the CloudHSM cluster that is associated with the specified CloudHSM key store.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --number-of-bytes=: The length of the random byte string.
+        --recipient=: A signed [attestation document](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave-how.html#term-attestdoc) from an Amazon Web Services Nitro enclave or NitroTPM, and the encryption algorithm to use with the public key in the attestation document.
+    - name: get-parameters-for-import
+      description: Returns the public key and an import token you need to import or reimport key material for a KMS key.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-id=!: The identifier of the KMS key that will be associated with the imported key material.
+        --wrapping-algorithm=!: The algorithm you will use with the RSA public key (`PublicKey`) in the response to protect your key material during import.
+        --wrapping-key-spec=!: The type of RSA public key to return in the response.
+      completion:
+        flag:
+            wrapping-algorithm:
+                - RSAES_PKCS1_V1_5
+                - RSAES_OAEP_SHA_1
+                - RSAES_OAEP_SHA_256
+                - RSA_AES_KEY_WRAP_SHA_1
+                - RSA_AES_KEY_WRAP_SHA_256
+                - SM2PKE
+            wrapping-key-spec:
+                - RSA_2048
+                - RSA_3072
+                - RSA_4096
+                - SM2
+    - name: list-grants
+      description: Gets a list of all grants for the specified KMS key.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --grant-id=: Returns only the grant with the specified grant ID.
+        --grantee-principal=: Returns only grants where the specified principal is the grantee principal for the grant.
+        --key-id=!: Returns only grants for the specified KMS key.
+        --limit=: Use this parameter to specify the maximum number of items to return.
+        --marker=: Use this parameter in a subsequent request after you receive a response with truncated results.
+        --max-items=: The  total number of items to return in the command's output.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: tag-resource
+      description: Adds or edits tags on a [customer managed key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-mgn-key).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-id=!: Identifies a customer managed key in the account and Region.
+        --tags=!: One or more tags.
     - name: update-key-description
       description: Updates the description of a KMS key.
       flags:
@@ -580,6 +449,242 @@ commands:
         --description=!: New description for the KMS key.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --key-id=!: Updates the description of the specified KMS key.
+    - name: describe-key
+      description: Provides detailed information about a KMS key.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --grant-tokens=: A list of grant tokens.
+        --key-id=!: Describes the specified KMS key.
+    - name: disable-key-rotation
+      description: Disables [automatic rotation of the key material](https://docs.aws.amazon.com/kms/latest/developerguide/rotating-keys-enable-disable.html) of the specified symmetric encryption KMS key.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-id=!: Identifies a symmetric encryption KMS key.
+    - name: generate-mac
+      description: Generates a hash-based message authentication code (HMAC) for a message using an HMAC KMS key and a MAC algorithm that the key supports.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dry-run: Checks if your request will succeed.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --grant-tokens=: A list of grant tokens.
+        --key-id=!: The HMAC KMS key to use in the operation.
+        --mac-algorithm=!: The MAC algorithm used in the operation.
+        --message=!: The message to be hashed.
+        --no-dry-run: Checks if your request will succeed.
+      completion:
+        flag:
+            mac-algorithm:
+                - HMAC_SHA_224
+                - HMAC_SHA_256
+                - HMAC_SHA_384
+                - HMAC_SHA_512
+    - name: get-key-rotation-status
+      description: Provides detailed information about the rotation status for a KMS key, including whether [automatic rotation of the key material](https://docs.aws.amazon.com/kms/latest/developerguide/rotating-keys-enable-disable.html) is enabled for the specified KMS key, the [rotation period](https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html#rotation-period), and the next scheduled rotation date.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-id=!: Gets the rotation status for the specified KMS key.
+    - name: import-key-material
+      description: Imports or reimports key material into an existing KMS key that was created without key material.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --encrypted-key-material=!: The encrypted key material to import.
+        --expiration-model=: Specifies whether the key material expires.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --import-token=!: The import token that you received in the response to a previous [GetParametersForImport]() request.
+        --import-type=: Indicates whether the key material being imported is previously associated with this KMS key or not.
+        --key-id=!: The identifier of the KMS key that will be associated with the imported key material.
+        --key-material-description=: Description for the key material being imported.
+        --key-material-id=: Identifies the key material being imported.
+        --valid-to=: The date and time when the imported key material expires.
+      completion:
+        flag:
+            expiration-model:
+                - KEY_MATERIAL_EXPIRES
+                - KEY_MATERIAL_DOES_NOT_EXPIRE
+            import-type:
+                - NEW_KEY_MATERIAL
+                - EXISTING_KEY_MATERIAL
+    - name: list-resource-tags
+      description: Returns all tags on the specified KMS key.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-id=!: Gets tags on the specified KMS key.
+        --limit=: Use this parameter to specify the maximum number of items to return.
+        --marker=: Use this parameter in a subsequent request after you receive a response with truncated results.
+        --max-items=: The  total number of items to return in the command's output.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: replicate-key
+      description: Replicates a multi-Region key into the specified Region.
+      flags:
+        --bypass-policy-lockout-safety-check: Skips ("bypasses") the key policy lockout safety check.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the KMS key.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-id=!: Identifies the multi-Region primary key that is being replicated.
+        --no-bypass-policy-lockout-safety-check: Skips ("bypasses") the key policy lockout safety check.
+        --policy=: The key policy to attach to the KMS key.
+        --replica-region=!: The Region ID of the Amazon Web Services Region for this replica key.
+        --tags=: Assigns one or more tags to the replica key.
+    - name: update-primary-region
+      description: Changes the primary key of a multi-Region key.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-id=!: Identifies the current primary key.
+        --primary-region=!: The Amazon Web Services Region of the new primary key.
+    - name: create-custom-key-store
+      description: Creates a [custom key store](https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html) backed by a key store that you own and manage.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cloud-hsm-cluster-id=: Identifies the CloudHSM cluster for an CloudHSM key store.
+        --custom-key-store-name=!: Specifies a friendly name for the custom key store.
+        --custom-key-store-type=: Specifies the type of custom key store.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-store-password=: Specifies the `kmsuser` password for an CloudHSM key store.
+        --trust-anchor-certificate=: Specifies the certificate for an CloudHSM key store.
+        --xks-proxy-authentication-credential=: Specifies an authentication credential for the external key store proxy (XKS proxy).
+        --xks-proxy-connectivity=: Indicates how KMS communicates with the external key store proxy.
+        --xks-proxy-uri-endpoint=: Specifies the endpoint that KMS uses to send requests to the external key store proxy (XKS proxy).
+        --xks-proxy-uri-path=: Specifies the base path to the proxy APIs for this external key store.
+        --xks-proxy-vpc-endpoint-service-name=: Specifies the name of the Amazon VPC endpoint service for interface endpoints that is used to communicate with your external key store proxy (XKS proxy).
+        --xks-proxy-vpc-endpoint-service-owner=: Specifies the Amazon Web Services account ID that owns the Amazon VPC service endpoint for the interface that is used to communicate with your external key store proxy (XKS proxy).
+      completion:
+        flag:
+            custom-key-store-type:
+                - AWS_CLOUDHSM
+                - EXTERNAL_KEY_STORE
+            xks-proxy-connectivity:
+                - PUBLIC_ENDPOINT
+                - VPC_ENDPOINT_SERVICE
+    - name: create-grant
+      description: Adds a grant to a KMS key.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --constraints=: Specifies a grant constraint.
+        --dry-run: Checks if your request will succeed.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --grant-tokens=: A list of grant tokens.
+        --grantee-principal=!: The identity that gets the permissions specified in the grant.
+        --key-id=!: Identifies the KMS key for the grant.
+        --name=: A friendly name for the grant.
+        --no-dry-run: Checks if your request will succeed.
+        --operations=!: A list of operations that the grant permits.
+        --retiring-principal=: The principal that has permission to use the [RetireGrant]() operation to retire the grant.
+    - name: generate-data-key
+      description: Returns a unique symmetric data key for use outside of KMS.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dry-run: Checks if your request will succeed.
+        --encryption-context=: Specifies the encryption context that will be used when encrypting the data key.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --grant-tokens=: A list of grant tokens.
+        --key-id=!: Specifies the symmetric encryption KMS key that encrypts the data key.
+        --key-spec=: Specifies the length of the data key.
+        --no-dry-run: Checks if your request will succeed.
+        --number-of-bytes=: Specifies the length of the data key in bytes.
+        --recipient=: A signed [attestation document](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave-how.html#term-attestdoc) from an Amazon Web Services Nitro enclave or NitroTPM, and the encryption algorithm to use with the public key in the attestation document.
+      completion:
+        flag:
+            key-spec:
+                - AES_256
+                - AES_128
+    - name: generate-data-key-pair
+      description: Returns a unique asymmetric data key pair for use outside of KMS.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dry-run: Checks if your request will succeed.
+        --encryption-context=: Specifies the encryption context that will be used when encrypting the private key in the data key pair.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --grant-tokens=: A list of grant tokens.
+        --key-id=!: Specifies the symmetric encryption KMS key that encrypts the private key in the data key pair.
+        --key-pair-spec=!: Determines the type of data key pair that is generated.
+        --no-dry-run: Checks if your request will succeed.
+        --recipient=: A signed [attestation document](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave-how.html#term-attestdoc) from an Amazon Web Services Nitro enclave or NitroTPM, and the encryption algorithm to use with the public key in the attestation document.
+      completion:
+        flag:
+            key-pair-spec:
+                - RSA_2048
+                - RSA_3072
+                - RSA_4096
+                - ECC_NIST_P256
+                - ECC_NIST_P384
+                - ECC_NIST_P521
+                - ECC_SECG_P256K1
+                - SM2
+                - ECC_NIST_EDWARDS25519
+    - name: get-key-policy
+      description: Gets a key policy attached to the specified KMS key.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-id=!: Gets the key policy for the specified KMS key.
+        --policy-name=: Specifies the name of the key policy.
+    - name: list-key-rotations
+      description: Returns information about the key materials associated with the specified KMS key.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-key-material=: Use this optional parameter to control which key materials associated with this key are listed in the response.
+        --key-id=!: Gets the key rotations for the specified KMS key.
+        --limit=: Use this parameter to specify the maximum number of items to return.
+        --marker=: Use this parameter in a subsequent request after you receive a response with truncated results.
+        --max-items=: The  total number of items to return in the command's output.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            include-key-material:
+                - ALL_KEY_MATERIAL
+                - ROTATIONS_ONLY
+    - name: put-key-policy
+      description: Attaches a key policy to the specified KMS key.
+      flags:
+        --bypass-policy-lockout-safety-check: Skips ("bypasses") the key policy lockout safety check.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-id=!: Sets the key policy on the specified KMS key.
+        --no-bypass-policy-lockout-safety-check: Skips ("bypasses") the key policy lockout safety check.
+        --policy-name=: The name of the key policy.
+        --policy=!: The key policy to attach to the KMS key.
+    - name: retire-grant
+      description: Deletes a grant.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dry-run: Checks if your request will succeed.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --grant-id=: Identifies the grant to retire.
+        --grant-token=: Identifies the grant to be retired.
+        --key-id=: The key ARN KMS key associated with the grant.
+        --no-dry-run: Checks if your request will succeed.
+    - name: create-alias
+      description: Creates a friendly name for a KMS key.
+      flags:
+        --alias-name=!: Specifies the alias name.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --target-key-id=!: Associates the alias with the specified [customer managed key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-mgn-key).
     - name: create-key
       description: Creates a unique customer managed [KMS key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#kms-keys) in your Amazon Web Services account and Region.
       flags:
@@ -643,132 +748,27 @@ commands:
                 - EXTERNAL
                 - AWS_CLOUDHSM
                 - EXTERNAL_KEY_STORE
-    - name: enable-key
-      description: Sets the key state of a KMS key to enabled.
+    - name: generate-data-key-pair-without-plaintext
+      description: Returns a unique asymmetric data key pair for use outside of KMS.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dry-run: Checks if your request will succeed.
+        --encryption-context=: Specifies the encryption context that will be used when encrypting the private key in the data key pair.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-id=!: Identifies the KMS key to enable.
-    - name: get-key-policy
-      description: Gets a key policy attached to the specified KMS key.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-id=!: Gets the key policy for the specified KMS key.
-        --policy-name=: Specifies the name of the key policy.
-    - name: list-key-policies
-      description: Gets the names of the key policies that are attached to a KMS key.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-id=!: Gets the names of key policies for the specified KMS key.
-        --limit=: Use this parameter to specify the maximum number of items to return.
-        --marker=: Use this parameter in a subsequent request after you receive a response with truncated results.
-        --max-items=: The  total number of items to return in the command's output.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-resource-tags
-      description: Returns all tags on the specified KMS key.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-id=!: Gets tags on the specified KMS key.
-        --limit=: Use this parameter to specify the maximum number of items to return.
-        --marker=: Use this parameter in a subsequent request after you receive a response with truncated results.
-        --max-items=: The  total number of items to return in the command's output.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-primary-region
-      description: Changes the primary key of a multi-Region key.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-id=!: Identifies the current primary key.
-        --primary-region=!: The Amazon Web Services Region of the new primary key.
-    - name: create-alias
-      description: Creates a friendly name for a KMS key.
-      flags:
-        --alias-name=!: Specifies the alias name.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --target-key-id=!: Associates the alias with the specified [customer managed key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-mgn-key).
-    - name: disable-key
-      description: Sets the state of a KMS key to disabled.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-id=!: Identifies the KMS key to disable.
-    - name: enable-key-rotation
-      description: Enables [automatic rotation of the key material](https://docs.aws.amazon.com/kms/latest/developerguide/rotating-keys-enable-disable.html) of the specified symmetric encryption KMS key.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-id=!: Identifies a symmetric encryption KMS key.
-        --rotation-period-in-days=: Use this parameter to specify a custom period of time between each rotation date.
-    - name: get-key-rotation-status
-      description: Provides detailed information about the rotation status for a KMS key, including whether [automatic rotation of the key material](https://docs.aws.amazon.com/kms/latest/developerguide/rotating-keys-enable-disable.html) is enabled for the specified KMS key, the [rotation period](https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html#rotation-period), and the next scheduled rotation date.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-id=!: Gets the rotation status for the specified KMS key.
-    - name: get-parameters-for-import
-      description: Returns the public key and an import token you need to import or reimport key material for a KMS key.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-id=!: The identifier of the KMS key that will be associated with the imported key material.
-        --wrapping-algorithm=!: The algorithm you will use with the RSA public key (`PublicKey`) in the response to protect your key material during import.
-        --wrapping-key-spec=!: The type of RSA public key to return in the response.
+        --grant-tokens=: A list of grant tokens.
+        --key-id=!: Specifies the symmetric encryption KMS key that encrypts the private key in the data key pair.
+        --key-pair-spec=!: Determines the type of data key pair that is generated.
+        --no-dry-run: Checks if your request will succeed.
       completion:
         flag:
-            wrapping-algorithm:
-                - RSAES_PKCS1_V1_5
-                - RSAES_OAEP_SHA_1
-                - RSAES_OAEP_SHA_256
-                - RSA_AES_KEY_WRAP_SHA_1
-                - RSA_AES_KEY_WRAP_SHA_256
-                - SM2PKE
-            wrapping-key-spec:
+            key-pair-spec:
                 - RSA_2048
                 - RSA_3072
                 - RSA_4096
+                - ECC_NIST_P256
+                - ECC_NIST_P384
+                - ECC_NIST_P521
+                - ECC_SECG_P256K1
                 - SM2
-    - name: list-key-rotations
-      description: Returns information about the key materials associated with the specified KMS key.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --include-key-material=: Use this optional parameter to control which key materials associated with this key are listed in the response.
-        --key-id=!: Gets the key rotations for the specified KMS key.
-        --limit=: Use this parameter to specify the maximum number of items to return.
-        --marker=: Use this parameter in a subsequent request after you receive a response with truncated results.
-        --max-items=: The  total number of items to return in the command's output.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            include-key-material:
-                - ALL_KEY_MATERIAL
-                - ROTATIONS_ONLY
-    - name: put-key-policy
-      description: Attaches a key policy to the specified KMS key.
-      flags:
-        --bypass-policy-lockout-safety-check: Skips ("bypasses") the key policy lockout safety check.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-id=!: Sets the key policy on the specified KMS key.
-        --no-bypass-policy-lockout-safety-check: Skips ("bypasses") the key policy lockout safety check.
-        --policy-name=: The name of the key policy.
-        --policy=!: The key policy to attach to the KMS key.
+                - ECC_NIST_EDWARDS25519

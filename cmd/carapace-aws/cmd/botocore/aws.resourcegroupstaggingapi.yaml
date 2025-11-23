@@ -1,12 +1,22 @@
 name: resourcegroupstaggingapi
 description: AWS Resource Groups Tagging API
 commands:
-    - name: describe-report-creation
-      description: Describes the status of the `StartReportCreation` operation.
+    - name: get-compliance-summary
+      description: Returns a table that shows counts of resources that are noncompliant with their tag policies.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-by=: Specifies a list of attributes to group the counts of noncompliant resources by.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specifies the maximum number of results to be returned in each page.
+        --page-size=: The size of each page to get in the AWS service call.
+        --pagination-token=: Specifies a `PaginationToken` response value from a previous request to indicate that you want the next page of results.
+        --region-filters=: Specifies a list of Amazon Web Services Regions to limit the output to.
+        --resource-type-filters=: Specifies that you want the response to include information for only resources of the specified types.
+        --starting-token=: A token to specify where to start paginating.
+        --tag-key-filters=: Specifies that you want the response to include information for only resources that have tags with the specified tag keys.
+        --target-id-filters=: Specifies target identifiers (usually, specific account IDs) to limit the output by.
     - name: get-resources
       description: Returns all the tagged or previously tagged resources that are located in the specified Amazon Web Services Region for the account.
       flags:
@@ -35,6 +45,17 @@ commands:
         --max-items=: The  total number of items to return in the command's output.
         --pagination-token=: Specifies a `PaginationToken` response value from a previous request to indicate that you want the next page of results.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-required-tags
+      description: Lists the required tags for supported resource types in an Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of required tags.
+        --next-token=: A token for requesting another page of required tags if the `NextToken` response element indicates that more required tags are available.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: tag-resources
       description: Applies one or more tags to the specified resources.
       flags:
@@ -51,22 +72,12 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn-list=!: Specifies a list of ARNs of the resources that you want to remove tags from.
         --tag-keys=!: Specifies a list of tag keys that you want to remove from the specified resources.
-    - name: get-compliance-summary
-      description: Returns a table that shows counts of resources that are noncompliant with their tag policies.
+    - name: describe-report-creation
+      description: Describes the status of the `StartReportCreation` operation.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-by=: Specifies a list of attributes to group the counts of noncompliant resources by.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Specifies the maximum number of results to be returned in each page.
-        --page-size=: The size of each page to get in the AWS service call.
-        --pagination-token=: Specifies a `PaginationToken` response value from a previous request to indicate that you want the next page of results.
-        --region-filters=: Specifies a list of Amazon Web Services Regions to limit the output to.
-        --resource-type-filters=: Specifies that you want the response to include information for only resources of the specified types.
-        --starting-token=: A token to specify where to start paginating.
-        --tag-key-filters=: Specifies that you want the response to include information for only resources that have tags with the specified tag keys.
-        --target-id-filters=: Specifies target identifiers (usually, specific account IDs) to limit the output by.
     - name: get-tag-values
       description: Returns all tag values for the specified key that are used in the specified Amazon Web Services Region for the calling account.
       flags:
@@ -76,17 +87,6 @@ commands:
         --key=!: Specifies the tag key for which you want to list all existing values that are currently used in the specified Amazon Web Services Region for the calling account.
         --max-items=: The  total number of items to return in the command's output.
         --pagination-token=: Specifies a `PaginationToken` response value from a previous request to indicate that you want the next page of results.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-required-tags
-      description: Lists the required tags for supported resource types in an Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of required tags.
-        --next-token=: A token for requesting another page of required tags if the `NextToken` response element indicates that more required tags are available.
-        --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
     - name: start-report-creation
       description: Generates a report that lists all tagged resources in the accounts across your organization and tells whether each resource is compliant with the effective tag policy.

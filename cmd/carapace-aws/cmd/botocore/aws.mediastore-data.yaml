@@ -1,6 +1,18 @@
 name: mediastore-data
 description: AWS Elemental MediaStore Data Plane
 commands:
+    - name: list-items
+      description: Provides a list of metadata entries about folders and objects in the specified folder.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return per API request.
+        --next-token=: The token that identifies which batch of results that you want to see.
+        --page-size=: The size of each page to get in the AWS service call.
+        --path=: The path in the container from which to retrieve items.
+        --starting-token=: A token to specify where to start paginating.
     - name: put-object
       description: Uploads an object to the specified path.
       flags:
@@ -37,20 +49,8 @@ commands:
     - name: get-object
       description: Downloads the object at the specified path.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --path=!: The path (including the file name) where the object is stored in the container.
         --range=: The range bytes of an object to retrieve.
-    - name: list-items
-      description: Provides a list of metadata entries about folders and objects in the specified folder.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return per API request.
-        --next-token=: The token that identifies which batch of results that you want to see.
-        --page-size=: The size of each page to get in the AWS service call.
-        --path=: The path in the container from which to retrieve items.
-        --starting-token=: A token to specify where to start paginating.
+      completion:
+        positional:
+            - - $files

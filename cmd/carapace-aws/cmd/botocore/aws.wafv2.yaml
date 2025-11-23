@@ -1,10 +1,166 @@
 name: wafv2
 description: AWS WAFV2
 commands:
-    - name: create-web-acl
-      description: Creates a [WebACL]() per the specifications provided.
+    - name: delete-regex-pattern-set
+      description: Deletes the specified [RegexPatternSet]().
       flags:
-        --application-config=: Configures the ability for the WAF console to store and retrieve application attributes during the web ACL creation process.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: A unique identifier for the set.
+        --lock-token=!: A token used for optimistic locking.
+        --name=!: The name of the set.
+        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
+      completion:
+        flag:
+            scope:
+                - CLOUDFRONT
+                - REGIONAL
+    - name: delete-rule-group
+      description: Deletes the specified [RuleGroup]().
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: A unique identifier for the rule group.
+        --lock-token=!: A token used for optimistic locking.
+        --name=!: The name of the rule group.
+        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
+      completion:
+        flag:
+            scope:
+                - CLOUDFRONT
+                - REGIONAL
+    - name: generate-mobile-sdk-release-url
+      description: Generates a presigned download URL for the specified release of the mobile SDK.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --platform=!: The device platform.
+        --release-version=!: The release version.
+      completion:
+        flag:
+            platform:
+                - IOS
+                - ANDROID
+    - name: get-regex-pattern-set
+      description: Retrieves the specified [RegexPatternSet]().
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: A unique identifier for the set.
+        --name=!: The name of the set.
+        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
+      completion:
+        flag:
+            scope:
+                - CLOUDFRONT
+                - REGIONAL
+    - name: update-regex-pattern-set
+      description: Updates the specified [RegexPatternSet]().
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the set that helps with identification.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: A unique identifier for the set.
+        --lock-token=!: A token used for optimistic locking.
+        --name=!: The name of the set.
+        --regular-expression-list=!: ""
+        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
+      completion:
+        flag:
+            scope:
+                - CLOUDFRONT
+                - REGIONAL
+    - name: get-rate-based-statement-managed-keys
+      description: Retrieves the IP addresses that are currently blocked by a rate-based rule instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --rule-group-rule-name=: The name of the rule group reference statement in your web ACL.
+        --rule-name=!: The name of the rate-based rule to get the keys for.
+        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
+        --web-acl-id=!: The unique identifier for the web ACL.
+        --web-acl-name=!: The name of the web ACL.
+      completion:
+        flag:
+            scope:
+                - CLOUDFRONT
+                - REGIONAL
+    - name: get-managed-rule-set
+      description: Retrieves the specified managed rule set.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: A unique identifier for the managed rule set.
+        --name=!: The name of the managed rule set.
+        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
+      completion:
+        flag:
+            scope:
+                - CLOUDFRONT
+                - REGIONAL
+    - name: list-mobile-sdk-releases
+      description: Retrieves a list of the available releases for the mobile SDK and the specified device platform.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of objects that you want WAF to return for this request.
+        --next-marker=: When you request a list of objects with a `Limit` setting, if the number of objects that are still available for retrieval exceeds the limit, WAF returns a `NextMarker` value in the response.
+        --platform=!: The device platform to retrieve the list for.
+      completion:
+        flag:
+            platform:
+                - IOS
+                - ANDROID
+    - name: list-regex-pattern-sets
+      description: Retrieves an array of [RegexPatternSetSummary]() objects for the regex pattern sets that you manage.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of objects that you want WAF to return for this request.
+        --next-marker=: When you request a list of objects with a `Limit` setting, if the number of objects that are still available for retrieval exceeds the limit, WAF returns a `NextMarker` value in the response.
+        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
+      completion:
+        flag:
+            scope:
+                - CLOUDFRONT
+                - REGIONAL
+    - name: put-logging-configuration
+      description: Enables the specified [LoggingConfiguration](), to start logging from a web ACL, according to the configuration provided.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --logging-configuration=!: ""
+    - name: put-managed-rule-set-versions
+      description: Defines the versions of your managed rule set that you are offering to the customers.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: A unique identifier for the managed rule set.
+        --lock-token=!: A token used for optimistic locking.
+        --name=!: The name of the managed rule set.
+        --recommended-version=: The version of the named managed rule group that you'd like your customers to choose, from among your version offerings.
+        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
+        --versions-to-publish=: The versions of the named managed rule group that you want to offer to your customers.
+      completion:
+        flag:
+            scope:
+                - CLOUDFRONT
+                - REGIONAL
+    - name: update-web-acl
+      description: Updates the specified [WebACL]().
+      flags:
+        --application-config=: Configures the ability for the WAF console to store and retrieve application attributes.
         --association-config=: Specifies custom configurations for the associations between the web ACL and protected resources.
         --captcha-config=: Specifies how WAF should handle `CAPTCHA` evaluations for rules that don't have their own `CaptchaConfig` settings.
         --challenge-config=: Specifies how WAF should handle challenge evaluations for rules that don't have their own `ChallengeConfig` settings.
@@ -15,11 +171,12 @@ commands:
         --default-action=!: The action to perform if none of the `Rules` contained in the `WebACL` match.
         --description=: A description of the web ACL that helps with identification.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The unique identifier for the web ACL.
+        --lock-token=!: A token used for optimistic locking.
         --name=!: The name of the web ACL.
         --on-source-d-do-s-protection-config=: Specifies the type of DDoS protection to apply to web request data for a web ACL.
         --rules=: The [Rule]() statements used to identify the web requests that you want to manage.
         --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
-        --tags=: An array of key:value pairs to associate with the resource.
         --token-domains=: Specifies the domains that WAF should accept in a web request token.
         --visibility-config=!: Defines and enables Amazon CloudWatch metrics and web request sample collection.
       completion:
@@ -27,13 +184,221 @@ commands:
             scope:
                 - CLOUDFRONT
                 - REGIONAL
-    - name: disassociate-web-acl
-      description: Disassociates the specified resource from its web ACL association, if it has one.
+    - name: check-capacity
+      description: Returns the web ACL capacity unit (WCU) requirements for a specified scope and set of rules.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to disassociate from the web ACL.
+        --rules=!: An array of [Rule]() that you're configuring to use in a rule group or web ACL.
+        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
+      completion:
+        flag:
+            scope:
+                - CLOUDFRONT
+                - REGIONAL
+    - name: delete-api-key
+      description: Deletes the specified API key.
+      flags:
+        --api-key=!: The encrypted API key that you want to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
+      completion:
+        flag:
+            scope:
+                - CLOUDFRONT
+                - REGIONAL
+    - name: delete-firewall-manager-rule-groups
+      description: Deletes all rule groups that are managed by Firewall Manager from the specified [WebACL]().
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --web-acl-arn=!: The Amazon Resource Name (ARN) of the web ACL.
+        --web-acl-lock-token=!: A token used for optimistic locking.
+    - name: get-mobile-sdk-release
+      description: Retrieves information for the specified mobile SDK release, including release notes and tags.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --platform=!: The device platform.
+        --release-version=!: The release version.
+      completion:
+        flag:
+            platform:
+                - IOS
+                - ANDROID
+    - name: list-resources-for-web-acl
+      description: Retrieves an array of the Amazon Resource Names (ARNs) for the resources that are associated with the specified web ACL.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-type=: Retrieves the web ACLs that are used by the specified resource type.
+        --web-acl-arn=!: The Amazon Resource Name (ARN) of the web ACL.
+      completion:
+        flag:
+            resource-type:
+                - APPLICATION_LOAD_BALANCER
+                - API_GATEWAY
+                - APPSYNC
+                - COGNITO_USER_POOL
+                - APP_RUNNER_SERVICE
+                - VERIFIED_ACCESS_INSTANCE
+                - AMPLIFY
+    - name: list-rule-groups
+      description: Retrieves an array of [RuleGroupSummary]() objects for the rule groups that you manage.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of objects that you want WAF to return for this request.
+        --next-marker=: When you request a list of objects with a `Limit` setting, if the number of objects that are still available for retrieval exceeds the limit, WAF returns a `NextMarker` value in the response.
+        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
+      completion:
+        flag:
+            scope:
+                - CLOUDFRONT
+                - REGIONAL
+    - name: untag-resource
+      description: Disassociates tags from an Amazon Web Services resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+        --tag-keys=!: An array of keys identifying the tags to disassociate from the resource.
+    - name: update-managed-rule-set-version-expiry-date
+      description: Updates the expiration information for your managed rule set.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expiry-timestamp=!: The time that you want the version to expire.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: A unique identifier for the managed rule set.
+        --lock-token=!: A token used for optimistic locking.
+        --name=!: The name of the managed rule set.
+        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
+        --version-to-expire=!: The version that you want to remove from your list of offerings for the named managed rule group.
+      completion:
+        flag:
+            scope:
+                - CLOUDFRONT
+                - REGIONAL
+    - name: create-regex-pattern-set
+      description: Creates a [RegexPatternSet](), which you reference in a [RegexPatternSetReferenceStatement](), to have WAF inspect a web request component for the specified patterns.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the set that helps with identification.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the set.
+        --regular-expression-list=!: Array of regular expression strings.
+        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
+        --tags=: An array of key:value pairs to associate with the resource.
+      completion:
+        flag:
+            scope:
+                - CLOUDFRONT
+                - REGIONAL
+    - name: describe-all-managed-products
+      description: Provides high-level information for the Amazon Web Services Managed Rules rule groups and Amazon Web Services Marketplace managed rule groups.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
+      completion:
+        flag:
+            scope:
+                - CLOUDFRONT
+                - REGIONAL
+    - name: describe-managed-products-by-vendor
+      description: Provides high-level information for the managed rule groups owned by a specific vendor.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
+        --vendor-name=!: The name of the managed rule group vendor.
+      completion:
+        flag:
+            scope:
+                - CLOUDFRONT
+                - REGIONAL
+    - name: get-decrypted-api-key
+      description: Returns your API key in decrypted form.
+      flags:
+        --api-key=!: The encrypted API key.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
+      completion:
+        flag:
+            scope:
+                - CLOUDFRONT
+                - REGIONAL
+    - name: get-permission-policy
+      description: Returns the IAM policy that is attached to the specified rule group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the rule group for which you want to get the policy.
+    - name: list-available-managed-rule-groups
+      description: Retrieves an array of managed rule groups that are available for you to use.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of objects that you want WAF to return for this request.
+        --next-marker=: When you request a list of objects with a `Limit` setting, if the number of objects that are still available for retrieval exceeds the limit, WAF returns a `NextMarker` value in the response.
+        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
+      completion:
+        flag:
+            scope:
+                - CLOUDFRONT
+                - REGIONAL
+    - name: list-managed-rule-sets
+      description: Retrieves the managed rule sets that you own.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of objects that you want WAF to return for this request.
+        --next-marker=: When you request a list of objects with a `Limit` setting, if the number of objects that are still available for retrieval exceeds the limit, WAF returns a `NextMarker` value in the response.
+        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
+      completion:
+        flag:
+            scope:
+                - CLOUDFRONT
+                - REGIONAL
+    - name: list-web-ac-ls
+      description: Retrieves an array of [WebACLSummary]() objects for the web ACLs that you manage.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of objects that you want WAF to return for this request.
+        --next-marker=: When you request a list of objects with a `Limit` setting, if the number of objects that are still available for retrieval exceeds the limit, WAF returns a `NextMarker` value in the response.
+        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
+      completion:
+        flag:
+            scope:
+                - CLOUDFRONT
+                - REGIONAL
+    - name: associate-web-acl
+      description: Associates a web ACL with a resource, to protect the resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to associate with the web ACL.
+        --web-acl-arn=!: The Amazon Resource Name (ARN) of the web ACL that you want to associate with the resource.
     - name: list-available-managed-rule-group-versions
       description: Returns a list of the available versions for the specified managed rule group.
       flags:
@@ -69,41 +434,54 @@ commands:
             scope:
                 - CLOUDFRONT
                 - REGIONAL
-    - name: list-managed-rule-sets
-      description: Retrieves the managed rule sets that you own.
+    - name: list-tags-for-resource
+      description: Retrieves the [TagInfoForResource]() for the specified resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --limit=: The maximum number of objects that you want WAF to return for this request.
         --next-marker=: When you request a list of objects with a `Limit` setting, if the number of objects that are still available for retrieval exceeds the limit, WAF returns a `NextMarker` value in the response.
-        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
-      completion:
-        flag:
-            scope:
-                - CLOUDFRONT
-                - REGIONAL
-    - name: update-ip-set
-      description: Updates the specified [IPSet]().
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+    - name: put-permission-policy
+      description: Use this to share a rule group with other accounts.
       flags:
-        --addresses=!: Contains an array of strings that specifies zero or more IP addresses or blocks of IP addresses that you want WAF to inspect for in incoming requests.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description of the IP set that helps with identification.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: A unique identifier for the set.
+        --policy=!: The policy to attach to the specified rule group.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the [RuleGroup]() to which you want to attach the policy.
+    - name: tag-resource
+      description: Associates tags with the specified Amazon Web Services resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+        --tags=!: An array of key:value pairs to associate with the resource.
+    - name: update-rule-group
+      description: Updates the specified [RuleGroup]().
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --custom-response-bodies=: A map of custom response keys and content bodies.
+        --description=: A description of the rule group that helps with identification.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: A unique identifier for the rule group.
         --lock-token=!: A token used for optimistic locking.
-        --name=!: The name of the IP set.
+        --name=!: The name of the rule group.
+        --rules=: The [Rule]() statements used to identify the web requests that you want to manage.
         --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
+        --visibility-config=!: Defines and enables Amazon CloudWatch metrics and web request sample collection.
       completion:
         flag:
             scope:
                 - CLOUDFRONT
                 - REGIONAL
-    - name: update-web-acl
-      description: Updates the specified [WebACL]().
+    - name: create-web-acl
+      description: Creates a [WebACL]() per the specifications provided.
       flags:
-        --application-config=: Configures the ability for the WAF console to store and retrieve application attributes.
+        --application-config=: Configures the ability for the WAF console to store and retrieve application attributes during the web ACL creation process.
         --association-config=: Specifies custom configurations for the associations between the web ACL and protected resources.
         --captcha-config=: Specifies how WAF should handle `CAPTCHA` evaluations for rules that don't have their own `CaptchaConfig` settings.
         --challenge-config=: Specifies how WAF should handle challenge evaluations for rules that don't have their own `ChallengeConfig` settings.
@@ -114,203 +492,13 @@ commands:
         --default-action=!: The action to perform if none of the `Rules` contained in the `WebACL` match.
         --description=: A description of the web ACL that helps with identification.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The unique identifier for the web ACL.
-        --lock-token=!: A token used for optimistic locking.
         --name=!: The name of the web ACL.
         --on-source-d-do-s-protection-config=: Specifies the type of DDoS protection to apply to web request data for a web ACL.
         --rules=: The [Rule]() statements used to identify the web requests that you want to manage.
         --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
+        --tags=: An array of key:value pairs to associate with the resource.
         --token-domains=: Specifies the domains that WAF should accept in a web request token.
         --visibility-config=!: Defines and enables Amazon CloudWatch metrics and web request sample collection.
-      completion:
-        flag:
-            scope:
-                - CLOUDFRONT
-                - REGIONAL
-    - name: delete-permission-policy
-      description: Permanently deletes an IAM policy from the specified rule group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the rule group from which you want to delete the policy.
-    - name: get-logging-configuration
-      description: Returns the [LoggingConfiguration]() for the specified web ACL.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --log-scope=: The owner of the logging configuration, which must be set to `CUSTOMER` for the configurations that you manage.
-        --log-type=: Used to distinguish between various logging options.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the web ACL for which you want to get the [LoggingConfiguration]().
-      completion:
-        flag:
-            log-scope:
-                - CUSTOMER
-                - SECURITY_LAKE
-                - CLOUDWATCH_TELEMETRY_RULE_MANAGED
-            log-type:
-                - WAF_LOGS
-    - name: get-rate-based-statement-managed-keys
-      description: Retrieves the IP addresses that are currently blocked by a rate-based rule instance.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --rule-group-rule-name=: The name of the rule group reference statement in your web ACL.
-        --rule-name=!: The name of the rate-based rule to get the keys for.
-        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
-        --web-acl-id=!: The unique identifier for the web ACL.
-        --web-acl-name=!: The name of the web ACL.
-      completion:
-        flag:
-            scope:
-                - CLOUDFRONT
-                - REGIONAL
-    - name: get-rule-group
-      description: Retrieves the specified [RuleGroup]().
-      flags:
-        --arn=: The Amazon Resource Name (ARN) of the entity.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=: A unique identifier for the rule group.
-        --name=: The name of the rule group.
-        --scope=: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
-      completion:
-        flag:
-            scope:
-                - CLOUDFRONT
-                - REGIONAL
-    - name: list-regex-pattern-sets
-      description: Retrieves an array of [RegexPatternSetSummary]() objects for the regex pattern sets that you manage.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of objects that you want WAF to return for this request.
-        --next-marker=: When you request a list of objects with a `Limit` setting, if the number of objects that are still available for retrieval exceeds the limit, WAF returns a `NextMarker` value in the response.
-        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
-      completion:
-        flag:
-            scope:
-                - CLOUDFRONT
-                - REGIONAL
-    - name: list-resources-for-web-acl
-      description: Retrieves an array of the Amazon Resource Names (ARNs) for the resources that are associated with the specified web ACL.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-type=: Retrieves the web ACLs that are used by the specified resource type.
-        --web-acl-arn=!: The Amazon Resource Name (ARN) of the web ACL.
-      completion:
-        flag:
-            resource-type:
-                - APPLICATION_LOAD_BALANCER
-                - API_GATEWAY
-                - APPSYNC
-                - COGNITO_USER_POOL
-                - APP_RUNNER_SERVICE
-                - VERIFIED_ACCESS_INSTANCE
-                - AMPLIFY
-    - name: check-capacity
-      description: Returns the web ACL capacity unit (WCU) requirements for a specified scope and set of rules.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --rules=!: An array of [Rule]() that you're configuring to use in a rule group or web ACL.
-        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
-      completion:
-        flag:
-            scope:
-                - CLOUDFRONT
-                - REGIONAL
-    - name: delete-api-key
-      description: Deletes the specified API key.
-      flags:
-        --api-key=!: The encrypted API key that you want to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
-      completion:
-        flag:
-            scope:
-                - CLOUDFRONT
-                - REGIONAL
-    - name: delete-web-acl
-      description: Deletes the specified [WebACL]().
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The unique identifier for the web ACL.
-        --lock-token=!: A token used for optimistic locking.
-        --name=!: The name of the web ACL.
-        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
-      completion:
-        flag:
-            scope:
-                - CLOUDFRONT
-                - REGIONAL
-    - name: describe-managed-products-by-vendor
-      description: Provides high-level information for the managed rule groups owned by a specific vendor.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
-        --vendor-name=!: The name of the managed rule group vendor.
-      completion:
-        flag:
-            scope:
-                - CLOUDFRONT
-                - REGIONAL
-    - name: get-ip-set
-      description: Retrieves the specified [IPSet]().
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: A unique identifier for the set.
-        --name=!: The name of the IP set.
-        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
-      completion:
-        flag:
-            scope:
-                - CLOUDFRONT
-                - REGIONAL
-    - name: get-mobile-sdk-release
-      description: Retrieves information for the specified mobile SDK release, including release notes and tags.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --platform=!: The device platform.
-        --release-version=!: The release version.
-      completion:
-        flag:
-            platform:
-                - IOS
-                - ANDROID
-    - name: get-permission-policy
-      description: Returns the IAM policy that is attached to the specified rule group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the rule group for which you want to get the policy.
-    - name: get-regex-pattern-set
-      description: Retrieves the specified [RegexPatternSet]().
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: A unique identifier for the set.
-        --name=!: The name of the set.
-        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
       completion:
         flag:
             scope:
@@ -348,6 +536,129 @@ commands:
                 - CLOUDWATCH_TELEMETRY_RULE_MANAGED
             log-type:
                 - WAF_LOGS
+    - name: describe-managed-rule-group
+      description: Provides high-level information for a managed rule group, including descriptions of the rules.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the managed rule group.
+        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
+        --vendor-name=!: The name of the managed rule group vendor.
+        --version-name=: The version of the rule group.
+      completion:
+        flag:
+            scope:
+                - CLOUDFRONT
+                - REGIONAL
+    - name: disassociate-web-acl
+      description: Disassociates the specified resource from its web ACL association, if it has one.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to disassociate from the web ACL.
+    - name: get-ip-set
+      description: Retrieves the specified [IPSet]().
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: A unique identifier for the set.
+        --name=!: The name of the IP set.
+        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
+      completion:
+        flag:
+            scope:
+                - CLOUDFRONT
+                - REGIONAL
+    - name: get-logging-configuration
+      description: Returns the [LoggingConfiguration]() for the specified web ACL.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-scope=: The owner of the logging configuration, which must be set to `CUSTOMER` for the configurations that you manage.
+        --log-type=: Used to distinguish between various logging options.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the web ACL for which you want to get the [LoggingConfiguration]().
+      completion:
+        flag:
+            log-scope:
+                - CUSTOMER
+                - SECURITY_LAKE
+                - CLOUDWATCH_TELEMETRY_RULE_MANAGED
+            log-type:
+                - WAF_LOGS
+    - name: get-web-acl-for-resource
+      description: Retrieves the [WebACL]() for the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource whose web ACL you want to retrieve.
+    - name: create-api-key
+      description: Creates an API key that contains a set of token domains.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
+        --token-domains=!: The client application domains that you want to use this API key for.
+      completion:
+        flag:
+            scope:
+                - CLOUDFRONT
+                - REGIONAL
+    - name: create-ip-set
+      description: Creates an [IPSet](), which you use to identify web requests that originate from specific IP addresses or ranges of IP addresses.
+      flags:
+        --addresses=!: Contains an array of strings that specifies zero or more IP addresses or blocks of IP addresses that you want WAF to inspect for in incoming requests.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the IP set that helps with identification.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ip-address-version=!: The version of the IP addresses, either `IPV4` or `IPV6`.
+        --name=!: The name of the IP set.
+        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
+        --tags=: An array of key:value pairs to associate with the resource.
+      completion:
+        flag:
+            ip-address-version:
+                - IPV4
+                - IPV6
+            scope:
+                - CLOUDFRONT
+                - REGIONAL
+    - name: delete-web-acl
+      description: Deletes the specified [WebACL]().
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The unique identifier for the web ACL.
+        --lock-token=!: A token used for optimistic locking.
+        --name=!: The name of the web ACL.
+        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
+      completion:
+        flag:
+            scope:
+                - CLOUDFRONT
+                - REGIONAL
+    - name: get-rule-group
+      description: Retrieves the specified [RuleGroup]().
+      flags:
+        --arn=: The Amazon Resource Name (ARN) of the entity.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=: A unique identifier for the rule group.
+        --name=: The name of the rule group.
+        --scope=: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
+      completion:
+        flag:
+            scope:
+                - CLOUDFRONT
+                - REGIONAL
     - name: get-web-acl
       description: Retrieves the specified [WebACL]().
       flags:
@@ -377,20 +688,6 @@ commands:
             scope:
                 - CLOUDFRONT
                 - REGIONAL
-    - name: list-available-managed-rule-groups
-      description: Retrieves an array of managed rule groups that are available for you to use.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of objects that you want WAF to return for this request.
-        --next-marker=: When you request a list of objects with a `Limit` setting, if the number of objects that are still available for retrieval exceeds the limit, WAF returns a `NextMarker` value in the response.
-        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
-      completion:
-        flag:
-            scope:
-                - CLOUDFRONT
-                - REGIONAL
     - name: list-ip-sets
       description: Retrieves an array of [IPSetSummary]() objects for the IP sets that you manage.
       flags:
@@ -400,50 +697,6 @@ commands:
         --limit=: The maximum number of objects that you want WAF to return for this request.
         --next-marker=: When you request a list of objects with a `Limit` setting, if the number of objects that are still available for retrieval exceeds the limit, WAF returns a `NextMarker` value in the response.
         --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
-      completion:
-        flag:
-            scope:
-                - CLOUDFRONT
-                - REGIONAL
-    - name: list-rule-groups
-      description: Retrieves an array of [RuleGroupSummary]() objects for the rule groups that you manage.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of objects that you want WAF to return for this request.
-        --next-marker=: When you request a list of objects with a `Limit` setting, if the number of objects that are still available for retrieval exceeds the limit, WAF returns a `NextMarker` value in the response.
-        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
-      completion:
-        flag:
-            scope:
-                - CLOUDFRONT
-                - REGIONAL
-    - name: list-web-ac-ls
-      description: Retrieves an array of [WebACLSummary]() objects for the web ACLs that you manage.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of objects that you want WAF to return for this request.
-        --next-marker=: When you request a list of objects with a `Limit` setting, if the number of objects that are still available for retrieval exceeds the limit, WAF returns a `NextMarker` value in the response.
-        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
-      completion:
-        flag:
-            scope:
-                - CLOUDFRONT
-                - REGIONAL
-    - name: create-regex-pattern-set
-      description: Creates a [RegexPatternSet](), which you reference in a [RegexPatternSetReferenceStatement](), to have WAF inspect a web request component for the specified patterns.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description of the set that helps with identification.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the set.
-        --regular-expression-list=!: Array of regular expression strings.
-        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
-        --tags=: An array of key:value pairs to associate with the resource.
       completion:
         flag:
             scope:
@@ -468,248 +721,13 @@ commands:
             scope:
                 - CLOUDFRONT
                 - REGIONAL
-    - name: delete-firewall-manager-rule-groups
-      description: Deletes all rule groups that are managed by Firewall Manager from the specified [WebACL]().
+    - name: delete-permission-policy
+      description: Permanently deletes an IAM policy from the specified rule group.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --web-acl-arn=!: The Amazon Resource Name (ARN) of the web ACL.
-        --web-acl-lock-token=!: A token used for optimistic locking.
-    - name: put-logging-configuration
-      description: Enables the specified [LoggingConfiguration](), to start logging from a web ACL, according to the configuration provided.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --logging-configuration=!: ""
-    - name: update-managed-rule-set-version-expiry-date
-      description: Updates the expiration information for your managed rule set.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expiry-timestamp=!: The time that you want the version to expire.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: A unique identifier for the managed rule set.
-        --lock-token=!: A token used for optimistic locking.
-        --name=!: The name of the managed rule set.
-        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
-        --version-to-expire=!: The version that you want to remove from your list of offerings for the named managed rule group.
-      completion:
-        flag:
-            scope:
-                - CLOUDFRONT
-                - REGIONAL
-    - name: update-rule-group
-      description: Updates the specified [RuleGroup]().
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --custom-response-bodies=: A map of custom response keys and content bodies.
-        --description=: A description of the rule group that helps with identification.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: A unique identifier for the rule group.
-        --lock-token=!: A token used for optimistic locking.
-        --name=!: The name of the rule group.
-        --rules=: The [Rule]() statements used to identify the web requests that you want to manage.
-        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
-        --visibility-config=!: Defines and enables Amazon CloudWatch metrics and web request sample collection.
-      completion:
-        flag:
-            scope:
-                - CLOUDFRONT
-                - REGIONAL
-    - name: associate-web-acl
-      description: Associates a web ACL with a resource, to protect the resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to associate with the web ACL.
-        --web-acl-arn=!: The Amazon Resource Name (ARN) of the web ACL that you want to associate with the resource.
-    - name: delete-rule-group
-      description: Deletes the specified [RuleGroup]().
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: A unique identifier for the rule group.
-        --lock-token=!: A token used for optimistic locking.
-        --name=!: The name of the rule group.
-        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
-      completion:
-        flag:
-            scope:
-                - CLOUDFRONT
-                - REGIONAL
-    - name: generate-mobile-sdk-release-url
-      description: Generates a presigned download URL for the specified release of the mobile SDK.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --platform=!: The device platform.
-        --release-version=!: The release version.
-      completion:
-        flag:
-            platform:
-                - IOS
-                - ANDROID
-    - name: get-managed-rule-set
-      description: Retrieves the specified managed rule set.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: A unique identifier for the managed rule set.
-        --name=!: The name of the managed rule set.
-        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
-      completion:
-        flag:
-            scope:
-                - CLOUDFRONT
-                - REGIONAL
-    - name: list-tags-for-resource
-      description: Retrieves the [TagInfoForResource]() for the specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of objects that you want WAF to return for this request.
-        --next-marker=: When you request a list of objects with a `Limit` setting, if the number of objects that are still available for retrieval exceeds the limit, WAF returns a `NextMarker` value in the response.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-    - name: put-managed-rule-set-versions
-      description: Defines the versions of your managed rule set that you are offering to the customers.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: A unique identifier for the managed rule set.
-        --lock-token=!: A token used for optimistic locking.
-        --name=!: The name of the managed rule set.
-        --recommended-version=: The version of the named managed rule group that you'd like your customers to choose, from among your version offerings.
-        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
-        --versions-to-publish=: The versions of the named managed rule group that you want to offer to your customers.
-      completion:
-        flag:
-            scope:
-                - CLOUDFRONT
-                - REGIONAL
-    - name: put-permission-policy
-      description: Use this to share a rule group with other accounts.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy=!: The policy to attach to the specified rule group.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the [RuleGroup]() to which you want to attach the policy.
-    - name: tag-resource
-      description: Associates tags with the specified Amazon Web Services resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-        --tags=!: An array of key:value pairs to associate with the resource.
-    - name: delete-regex-pattern-set
-      description: Deletes the specified [RegexPatternSet]().
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: A unique identifier for the set.
-        --lock-token=!: A token used for optimistic locking.
-        --name=!: The name of the set.
-        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
-      completion:
-        flag:
-            scope:
-                - CLOUDFRONT
-                - REGIONAL
-    - name: describe-managed-rule-group
-      description: Provides high-level information for a managed rule group, including descriptions of the rules.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the managed rule group.
-        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
-        --vendor-name=!: The name of the managed rule group vendor.
-        --version-name=: The version of the rule group.
-      completion:
-        flag:
-            scope:
-                - CLOUDFRONT
-                - REGIONAL
-    - name: get-decrypted-api-key
-      description: Returns your API key in decrypted form.
-      flags:
-        --api-key=!: The encrypted API key.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
-      completion:
-        flag:
-            scope:
-                - CLOUDFRONT
-                - REGIONAL
-    - name: list-mobile-sdk-releases
-      description: Retrieves a list of the available releases for the mobile SDK and the specified device platform.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of objects that you want WAF to return for this request.
-        --next-marker=: When you request a list of objects with a `Limit` setting, if the number of objects that are still available for retrieval exceeds the limit, WAF returns a `NextMarker` value in the response.
-        --platform=!: The device platform to retrieve the list for.
-      completion:
-        flag:
-            platform:
-                - IOS
-                - ANDROID
-    - name: update-regex-pattern-set
-      description: Updates the specified [RegexPatternSet]().
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description of the set that helps with identification.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: A unique identifier for the set.
-        --lock-token=!: A token used for optimistic locking.
-        --name=!: The name of the set.
-        --regular-expression-list=!: ""
-        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
-      completion:
-        flag:
-            scope:
-                - CLOUDFRONT
-                - REGIONAL
-    - name: create-api-key
-      description: Creates an API key that contains a set of token domains.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
-        --token-domains=!: The client application domains that you want to use this API key for.
-      completion:
-        flag:
-            scope:
-                - CLOUDFRONT
-                - REGIONAL
-    - name: describe-all-managed-products
-      description: Provides high-level information for the Amazon Web Services Managed Rules rule groups and Amazon Web Services Marketplace managed rule groups.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
-      completion:
-        flag:
-            scope:
-                - CLOUDFRONT
-                - REGIONAL
+        --resource-arn=!: The Amazon Resource Name (ARN) of the rule group from which you want to delete the policy.
     - name: get-sampled-requests
       description: Gets detailed information about a specified number of requests--a sample--that WAF randomly selects from among the first 5,000 requests that your Amazon Web Services resource received during a time range that you choose.
       flags:
@@ -726,38 +744,20 @@ commands:
             scope:
                 - CLOUDFRONT
                 - REGIONAL
-    - name: get-web-acl-for-resource
-      description: Retrieves the [WebACL]() for the specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource whose web ACL you want to retrieve.
-    - name: untag-resource
-      description: Disassociates tags from an Amazon Web Services resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-        --tag-keys=!: An array of keys identifying the tags to disassociate from the resource.
-    - name: create-ip-set
-      description: Creates an [IPSet](), which you use to identify web requests that originate from specific IP addresses or ranges of IP addresses.
+    - name: update-ip-set
+      description: Updates the specified [IPSet]().
       flags:
         --addresses=!: Contains an array of strings that specifies zero or more IP addresses or blocks of IP addresses that you want WAF to inspect for in incoming requests.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: A description of the IP set that helps with identification.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ip-address-version=!: The version of the IP addresses, either `IPV4` or `IPV6`.
+        --id=!: A unique identifier for the set.
+        --lock-token=!: A token used for optimistic locking.
         --name=!: The name of the IP set.
         --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
-        --tags=: An array of key:value pairs to associate with the resource.
       completion:
         flag:
-            ip-address-version:
-                - IPV4
-                - IPV6
             scope:
                 - CLOUDFRONT
                 - REGIONAL

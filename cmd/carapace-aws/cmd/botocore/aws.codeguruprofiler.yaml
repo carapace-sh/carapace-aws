@@ -1,6 +1,29 @@
 name: codeguruprofiler
 description: Amazon CodeGuru Profiler
 commands:
+    - name: add-notification-channels
+      description: Add up to 2 anomaly notifications channels for a profiling group.
+      flags:
+        --channels=!: One or 2 channels to report to when anomalies are detected.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profiling-group-name=!: The name of the profiling group that we are setting up notifications for.
+    - name: list-tags-for-resource
+      description: Returns a list of the tags that are assigned to a specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource that contains the tags to return.
+    - name: remove-notification-channel
+      description: Remove one anomaly notifications channel for a profiling group.
+      flags:
+        --channel-id=!: The id of the channel that we want to stop receiving notifications.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profiling-group-name=!: The name of the profiling group we want to change notification configuration for.
     - name: batch-get-frame-metric-data
       description: Returns the time series of values for a requested list of frame metrics from a time period.
       flags:
@@ -49,6 +72,47 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --profiling-group-name=!: The name of the profiling group to get information about.
+    - name: get-notification-configuration
+      description: Get the current configuration for anomaly notifications for a profiling group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profiling-group-name=!: The name of the profiling group we want to get the notification configuration for.
+    - name: get-policy
+      description: Returns the JSON-formatted resource-based policy on a profiling group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profiling-group-name=!: The name of the profiling group.
+    - name: list-profiling-groups
+      description: Returns a list of profiling groups.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-description: A `Boolean` value indicating whether to include a description.
+        --max-results=: The maximum number of profiling groups results returned by `ListProfilingGroups` in paginated output.
+        --next-token=: The `nextToken` value returned from a previous paginated `ListProfilingGroups` request where `maxResults` was used and the results exceeded the value of that parameter.
+        --no-include-description: A `Boolean` value indicating whether to include a description.
+    - name: tag-resource
+      description: Use to assign one or more tags to a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource that the tags are added to.
+        --tags=!: The list of tags that are added to the specified resource.
+    - name: configure-agent
+      description: Used by profiler agents to report their current state and to receive remote configuration updates.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fleet-instance-id=: A universally unique identifier (UUID) for a profiling instance.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --metadata=: Metadata captured about the compute platform the agent is running on.
+        --profiling-group-name=!: The name of the profiling group for which the configured agent is collecting profiling data.
     - name: get-findings-report-account-summary
       description: Returns a list of [`FindingsReportSummary`](https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_FindingsReportSummary.html) objects that contain analysis results for all profiling groups in your AWS account.
       flags:
@@ -59,34 +123,19 @@ commands:
         --max-results=: The maximum number of results returned by `GetFindingsReportAccountSummary` in paginated output.
         --next-token=: The `nextToken` value returned from a previous paginated `GetFindingsReportAccountSummary` request where `maxResults` was used and the results exceeded the value of that parameter.
         --no-daily-reports-only: A `Boolean` value indicating whether to only return reports from daily profiles.
-    - name: get-recommendations
-      description: Returns a list of [`Recommendation`](https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_Recommendation.html) objects that contain recommendations for a profiling group for a given time period.
+    - name: list-findings-reports
+      description: List the available reports for a given profiling group and time range.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --end-time=!: The start time of the profile to get analysis data about.
+        --daily-reports-only: A `Boolean` value indicating whether to only return reports from daily profiles.
+        --end-time=!: The end time of the profile to get analysis data about.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --locale=: The language used to provide analysis.
-        --profiling-group-name=!: The name of the profiling group to get analysis data about.
-        --start-time=!: The end time of the profile to get analysis data about.
-    - name: post-agent-profile
-      description: Submits profiling data to an aggregated profile of a profiling group.
-      flags:
-        --agent-profile=!: The submitted profiling data.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-type=!: The format of the submitted profiling data.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --profile-token=: Amazon CodeGuru Profiler uses this universally unique identifier (UUID) to prevent the accidental submission of duplicate profiling data if there are failures and retries.
-        --profiling-group-name=!: The name of the profiling group with the aggregated profile that receives the submitted profiling data.
-    - name: tag-resource
-      description: Use to assign one or more tags to a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource that the tags are added to.
-        --tags=!: The list of tags that are added to the specified resource.
+        --max-results=: The maximum number of report results returned by `ListFindingsReports` in paginated output.
+        --next-token=: The `nextToken` value returned from a previous paginated `ListFindingsReportsRequest` request where `maxResults` was used and the results exceeded the value of that parameter.
+        --no-daily-reports-only: A `Boolean` value indicating whether to only return reports from daily profiles.
+        --profiling-group-name=!: The name of the profiling group from which to search for analysis data.
+        --start-time=!: The start time of the profile to get analysis data about.
     - name: list-profile-times
       description: Lists the start times of the available aggregated profiles of a profiling group for an aggregation period within the specified time range.
       flags:
@@ -112,16 +161,68 @@ commands:
                 - PT5M
                 - PT1H
                 - P1D
-    - name: list-profiling-groups
-      description: Returns a list of profiling groups.
+    - name: untag-resource
+      description: Use to remove one or more tags from a resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --include-description: A `Boolean` value indicating whether to include a description.
-        --max-results=: The maximum number of profiling groups results returned by `ListProfilingGroups` in paginated output.
-        --next-token=: The `nextToken` value returned from a previous paginated `ListProfilingGroups` request where `maxResults` was used and the results exceeded the value of that parameter.
-        --no-include-description: A `Boolean` value indicating whether to include a description.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource that contains the tags to remove.
+        --tag-keys=!: A list of tag keys.
+    - name: update-profiling-group
+      description: Updates a profiling group.
+      flags:
+        --agent-orchestration-config=!: Specifies whether profiling is enabled or disabled for a profiling group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profiling-group-name=!: The name of the profiling group to update.
+    - name: get-profile
+      description: Gets the aggregated profile of a profiling group for a specified time range.
+      flags:
+        --accept=: The format of the returned profiling data.
+        --end-time=: The end time of the requested profile.
+        --max-depth=: The maximum depth of the stacks in the code that is represented in the aggregated profile.
+        --period=: Used with `startTime` or `endTime` to specify the time range for the returned aggregated profile.
+        --profiling-group-name=!: The name of the profiling group to get.
+        --start-time=: The start time of the profile to get.
+      completion:
+        positional:
+            - - $files
+    - name: get-recommendations
+      description: Returns a list of [`Recommendation`](https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_Recommendation.html) objects that contain recommendations for a profiling group for a given time period.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=!: The start time of the profile to get analysis data about.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --locale=: The language used to provide analysis.
+        --profiling-group-name=!: The name of the profiling group to get analysis data about.
+        --start-time=!: The end time of the profile to get analysis data about.
+    - name: post-agent-profile
+      description: Submits profiling data to an aggregated profile of a profiling group.
+      flags:
+        --agent-profile=!: The submitted profiling data.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content-type=!: The format of the submitted profiling data.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profile-token=: Amazon CodeGuru Profiler uses this universally unique identifier (UUID) to prevent the accidental submission of duplicate profiling data if there are failures and retries.
+        --profiling-group-name=!: The name of the profiling group with the aggregated profile that receives the submitted profiling data.
+    - name: put-permission
+      description: Adds permissions to a profiling group's resource-based policy that are provided using an action group.
+      flags:
+        --action-group=!: Specifies an action group that contains permissions to add to a profiling group resource.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --principals=!: A list ARNs for the roles and users you want to grant access to the profiling group.
+        --profiling-group-name=!: The name of the profiling group to grant access to.
+        --revision-id=: A universally unique identifier (UUID) for the revision of the policy you are adding to the profiling group.
+      completion:
+        flag:
+            action-group:
+                - agentPermissions
     - name: remove-permission
       description: Removes permissions from a profiling group's resource-based policy that are provided using an action group.
       flags:
@@ -150,104 +251,3 @@ commands:
             type:
                 - Positive
                 - Negative
-    - name: untag-resource
-      description: Use to remove one or more tags from a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource that contains the tags to remove.
-        --tag-keys=!: A list of tag keys.
-    - name: update-profiling-group
-      description: Updates a profiling group.
-      flags:
-        --agent-orchestration-config=!: Specifies whether profiling is enabled or disabled for a profiling group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --profiling-group-name=!: The name of the profiling group to update.
-    - name: add-notification-channels
-      description: Add up to 2 anomaly notifications channels for a profiling group.
-      flags:
-        --channels=!: One or 2 channels to report to when anomalies are detected.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --profiling-group-name=!: The name of the profiling group that we are setting up notifications for.
-    - name: get-policy
-      description: Returns the JSON-formatted resource-based policy on a profiling group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --profiling-group-name=!: The name of the profiling group.
-    - name: put-permission
-      description: Adds permissions to a profiling group's resource-based policy that are provided using an action group.
-      flags:
-        --action-group=!: Specifies an action group that contains permissions to add to a profiling group resource.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --principals=!: A list ARNs for the roles and users you want to grant access to the profiling group.
-        --profiling-group-name=!: The name of the profiling group to grant access to.
-        --revision-id=: A universally unique identifier (UUID) for the revision of the policy you are adding to the profiling group.
-      completion:
-        flag:
-            action-group:
-                - agentPermissions
-    - name: configure-agent
-      description: Used by profiler agents to report their current state and to receive remote configuration updates.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --fleet-instance-id=: A universally unique identifier (UUID) for a profiling instance.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --metadata=: Metadata captured about the compute platform the agent is running on.
-        --profiling-group-name=!: The name of the profiling group for which the configured agent is collecting profiling data.
-    - name: get-notification-configuration
-      description: Get the current configuration for anomaly notifications for a profiling group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --profiling-group-name=!: The name of the profiling group we want to get the notification configuration for.
-    - name: get-profile
-      description: Gets the aggregated profile of a profiling group for a specified time range.
-      flags:
-        --accept=: The format of the returned profiling data.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --end-time=: The end time of the requested profile.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-depth=: The maximum depth of the stacks in the code that is represented in the aggregated profile.
-        --period=: Used with `startTime` or `endTime` to specify the time range for the returned aggregated profile.
-        --profiling-group-name=!: The name of the profiling group to get.
-        --start-time=: The start time of the profile to get.
-    - name: list-findings-reports
-      description: List the available reports for a given profiling group and time range.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --daily-reports-only: A `Boolean` value indicating whether to only return reports from daily profiles.
-        --end-time=!: The end time of the profile to get analysis data about.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of report results returned by `ListFindingsReports` in paginated output.
-        --next-token=: The `nextToken` value returned from a previous paginated `ListFindingsReportsRequest` request where `maxResults` was used and the results exceeded the value of that parameter.
-        --no-daily-reports-only: A `Boolean` value indicating whether to only return reports from daily profiles.
-        --profiling-group-name=!: The name of the profiling group from which to search for analysis data.
-        --start-time=!: The start time of the profile to get analysis data about.
-    - name: list-tags-for-resource
-      description: Returns a list of the tags that are assigned to a specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource that contains the tags to return.
-    - name: remove-notification-channel
-      description: Remove one anomaly notifications channel for a profiling group.
-      flags:
-        --channel-id=!: The id of the channel that we want to stop receiving notifications.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --profiling-group-name=!: The name of the profiling group we want to change notification configuration for.

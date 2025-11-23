@@ -1,64 +1,211 @@
 name: wellarchitected
 description: AWS Well-Architected Tool
 commands:
-    - name: list-template-shares
-      description: List review template shares.
+    - name: list-lens-reviews
+      description: List lens reviews for a particular workload.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return for this request.
+        --max-results=: ""
+        --milestone-number=: ""
         --next-token=: ""
-        --shared-with-prefix=: The Amazon Web Services account ID, organization ID, or organizational unit (OU) ID with which the profile is shared.
-        --status=: ""
-        --template-arn=!: The review template ARN.
-      completion:
-        flag:
-            status:
-                - ACCEPTED
-                - REJECTED
-                - PENDING
-                - REVOKED
-                - EXPIRED
-                - ASSOCIATING
-                - ASSOCIATED
-                - FAILED
-    - name: get-profile-template
-      description: Get profile template.
+        --workload-id=!: ""
+    - name: list-review-templates
+      description: List review templates.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-review-template-answer
-      description: Get review template answer.
+        --max-results=: ""
+        --next-token=: ""
+    - name: update-review-template-lens-review
+      description: Update a lens review associated with a review template.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --lens-alias=!: ""
-        --question-id=!: ""
+        --lens-notes=: ""
+        --pillar-notes=: ""
         --template-arn=!: The review template ARN.
-    - name: list-lenses
-      description: List the available lenses.
+    - name: upgrade-profile-version
+      description: Upgrade a profile.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --milestone-name=: ""
+        --profile-arn=!: The profile ARN.
+        --workload-id=!: ""
+    - name: update-answer
+      description: Update the answer to a specific question in a workload review.
+      flags:
+        --choice-updates=: A list of choices to update on a question in your workload.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --is-applicable: ""
+        --lens-alias=!: ""
+        --no-is-applicable: ""
+        --notes=: ""
+        --question-id=!: ""
+        --reason=: The reason why a question is not applicable to your workload.
+        --selected-choices=: ""
+        --workload-id=!: ""
+      completion:
+        flag:
+            reason:
+                - OUT_OF_SCOPE
+                - BUSINESS_PRIORITIES
+                - ARCHITECTURE_CONSTRAINTS
+                - OTHER
+                - NONE
+    - name: disassociate-lenses
+      description: Disassociate a lens from a workload.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lens-name=: ""
-        --lens-status=: The status of lenses to be returned.
-        --lens-type=: The type of lenses to be returned.
-        --max-results=: ""
-        --next-token=: ""
+        --lens-aliases=!: ""
+        --workload-id=!: ""
+    - name: get-lens
+      description: Get an existing lens.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lens-alias=!: ""
+        --lens-version=: The lens version to be retrieved.
+    - name: get-profile
+      description: Get profile information.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profile-arn=!: The profile ARN.
+        --profile-version=: The profile version.
+    - name: create-profile
+      description: Create a profile.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profile-description=!: The profile description.
+        --profile-name=!: Name of the profile.
+        --profile-questions=!: The profile questions.
+        --tags=: The tags assigned to the profile.
+    - name: create-workload-share
+      description: Create a workload share.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --permission-type=!: ""
+        --shared-with=!: ""
+        --workload-id=!: ""
       completion:
         flag:
-            lens-status:
-                - ALL
-                - DRAFT
-                - PUBLISHED
-            lens-type:
-                - AWS_OFFICIAL
-                - CUSTOM_SHARED
-                - CUSTOM_SELF
+            permission-type:
+                - READONLY
+                - CONTRIBUTOR
+    - name: list-answers
+      description: List of answers for a particular workload and lens.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lens-alias=!: ""
+        --max-results=: The maximum number of results to return for this request.
+        --milestone-number=: ""
+        --next-token=: ""
+        --pillar-id=: ""
+        --question-priority=: The priority of the question.
+        --workload-id=!: ""
+      completion:
+        flag:
+            question-priority:
+                - PRIORITIZED
+                - NONE
+    - name: list-review-template-answers
+      description: List the answers of a review template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lens-alias=!: ""
+        --max-results=: The maximum number of results to return for this request.
+        --next-token=: ""
+        --pillar-id=: ""
+        --template-arn=!: The ARN of the review template.
+    - name: tag-resource
+      description: Adds one or more tags to the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=!: The tags for the resource.
+        --workload-arn=!: ""
+    - name: update-share-invitation
+      description: Update a workload or custom lens share invitation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --share-invitation-action=!: ""
+        --share-invitation-id=!: The ID assigned to the share invitation.
+      completion:
+        flag:
+            share-invitation-action:
+                - ACCEPT
+                - REJECT
+    - name: update-workload
+      description: Update an existing workload.
+      flags:
+        --account-ids=: ""
+        --applications=: List of AppRegistry application ARNs to associate to the workload.
+        --architectural-design=: ""
+        --aws-regions=: ""
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: ""
+        --discovery-config=: Well-Architected discovery configuration settings to associate to the workload.
+        --environment=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --improvement-status=: ""
+        --industry-type=: ""
+        --industry=: ""
+        --is-review-owner-update-acknowledged: Flag indicating whether the workload owner has acknowledged that the *Review owner* field is required.
+        --jira-configuration=: Configuration of the Jira integration.
+        --no-is-review-owner-update-acknowledged: Flag indicating whether the workload owner has acknowledged that the *Review owner* field is required.
+        --non-aws-regions=: ""
+        --notes=: ""
+        --pillar-priorities=: ""
+        --review-owner=: ""
+        --workload-id=!: ""
+        --workload-name=: ""
+      completion:
+        flag:
+            environment:
+                - PRODUCTION
+                - PREPRODUCTION
+            improvement-status:
+                - NOT_APPLICABLE
+                - NOT_STARTED
+                - IN_PROGRESS
+                - COMPLETE
+                - RISK_ACKNOWLEDGED
+    - name: associate-lenses
+      description: Associate a lens to a workload.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lens-aliases=!: ""
+        --workload-id=!: ""
     - name: delete-lens-share
       description: Delete a lens share.
       flags:
@@ -68,34 +215,21 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --lens-alias=!: ""
         --share-id=!: ""
-    - name: get-milestone
-      description: Get a milestone for an existing workload.
+    - name: get-review-template
+      description: Get review template.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --milestone-number=!: ""
-        --workload-id=!: ""
-    - name: get-workload
-      description: Get an existing workload.
+        --template-arn=!: The review template ARN.
+    - name: get-review-template-lens-review
+      description: Get a lens review associated with a review template.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --workload-id=!: ""
-    - name: list-check-summaries
-      description: List of Trusted Advisor checks summarized for all accounts related to the workload.
-      flags:
-        --choice-id=!: ""
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lens-arn=!: Well-Architected Lens ARN.
-        --max-results=: ""
-        --next-token=: ""
-        --pillar-id=!: ""
-        --question-id=!: ""
-        --workload-id=!: ""
+        --lens-alias=!: ""
+        --template-arn=!: The review template ARN.
     - name: create-workload
       description: Create a new workload.
       flags:
@@ -136,91 +270,40 @@ commands:
         --lens-alias=!: ""
         --milestone-number=: ""
         --workload-id=!: ""
-    - name: list-milestones
-      description: List all milestones for an existing workload.
+    - name: list-check-summaries
+      description: List of Trusted Advisor checks summarized for all accounts related to the workload.
       flags:
+        --choice-id=!: ""
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lens-arn=!: Well-Architected Lens ARN.
         --max-results=: ""
         --next-token=: ""
+        --pillar-id=!: ""
+        --question-id=!: ""
         --workload-id=!: ""
-    - name: get-global-settings
-      description: Global settings for all workloads.
+    - name: list-lenses
+      description: List the available lenses.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-lens-review-report
-      description: Get lens review report.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lens-alias=!: ""
-        --milestone-number=: ""
-        --workload-id=!: ""
-    - name: list-lens-review-improvements
-      description: List the improvements of a particular lens review.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lens-alias=!: ""
-        --max-results=: The maximum number of results to return for this request.
-        --milestone-number=: ""
+        --lens-name=: ""
+        --lens-status=: The status of lenses to be returned.
+        --lens-type=: The type of lenses to be returned.
+        --max-results=: ""
         --next-token=: ""
-        --pillar-id=: ""
-        --question-priority=: The priority of the question.
-        --workload-id=!: ""
       completion:
         flag:
-            question-priority:
-                - PRIORITIZED
-                - NONE
-    - name: update-integration
-      description: Update integration features.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=!: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --integrating-service=!: Which integrated service to update.
-        --workload-id=!: ""
-      completion:
-        flag:
-            integrating-service:
-                - JIRA
-    - name: update-review-template-lens-review
-      description: Update a lens review associated with a review template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lens-alias=!: ""
-        --lens-notes=: ""
-        --pillar-notes=: ""
-        --template-arn=!: The review template ARN.
-    - name: list-review-template-answers
-      description: List the answers of a review template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lens-alias=!: ""
-        --max-results=: The maximum number of results to return for this request.
-        --next-token=: ""
-        --pillar-id=: ""
-        --template-arn=!: The ARN of the review template.
-    - name: list-workloads
-      description: Paginated list of workloads.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return for this request.
-        --next-token=: ""
-        --workload-name-prefix=: ""
+            lens-status:
+                - ALL
+                - DRAFT
+                - PUBLISHED
+            lens-type:
+                - AWS_OFFICIAL
+                - CUSTOM_SHARED
+                - CUSTOM_SELF
     - name: list-share-invitations
       description: List the share invitations.
       flags:
@@ -241,13 +324,347 @@ commands:
                 - LENS
                 - PROFILE
                 - TEMPLATE
-    - name: associate-lenses
-      description: Associate a lens to a workload.
+    - name: list-workloads
+      description: Paginated list of workloads.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lens-aliases=!: ""
+        --max-results=: The maximum number of results to return for this request.
+        --next-token=: ""
+        --workload-name-prefix=: ""
+    - name: untag-resource
+      description: Deletes specified tags from a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tag-keys=!: A list of tag keys.
+        --workload-arn=!: ""
+    - name: update-integration
+      description: Update integration features.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --integrating-service=!: Which integrated service to update.
+        --workload-id=!: ""
+      completion:
+        flag:
+            integrating-service:
+                - JIRA
+    - name: delete-review-template
+      description: Delete a review template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --template-arn=!: The review template ARN.
+    - name: get-answer
+      description: Get the answer to a specific question in a workload review.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lens-alias=!: ""
+        --milestone-number=: ""
+        --question-id=!: ""
+        --workload-id=!: ""
+    - name: get-milestone
+      description: Get a milestone for an existing workload.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --milestone-number=!: ""
+        --workload-id=!: ""
+    - name: list-check-details
+      description: List of Trusted Advisor check details by account related to the workload.
+      flags:
+        --choice-id=!: ""
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lens-arn=!: Well-Architected Lens ARN.
+        --max-results=: ""
+        --next-token=: ""
+        --pillar-id=!: ""
+        --question-id=!: ""
+        --workload-id=!: ""
+    - name: list-profile-notifications
+      description: List profile notifications.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: ""
+        --next-token=: ""
+        --workload-id=: ""
+    - name: list-profile-shares
+      description: List profile shares.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return for this request.
+        --next-token=: ""
+        --profile-arn=!: The profile ARN.
+        --shared-with-prefix=: The Amazon Web Services account ID, organization ID, or organizational unit (OU) ID with which the profile is shared.
+        --status=: ""
+      completion:
+        flag:
+            status:
+                - ACCEPTED
+                - REJECTED
+                - PENDING
+                - REVOKED
+                - EXPIRED
+                - ASSOCIATING
+                - ASSOCIATED
+                - FAILED
+    - name: update-profile
+      description: Update a profile.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profile-arn=!: The profile ARN.
+        --profile-description=: The profile description.
+        --profile-questions=: Profile questions.
+    - name: associate-profiles
+      description: Associate a profile with a workload.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profile-arns=!: The list of profile ARNs to associate with the workload.
+        --workload-id=!: ""
+    - name: create-milestone
+      description: Create a milestone for an existing workload.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --milestone-name=!: ""
+        --workload-id=!: ""
+    - name: delete-workload
+      description: Delete an existing workload.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workload-id=!: ""
+    - name: import-lens
+      description: Import a new custom lens or update an existing custom lens.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --json-string=!: The JSON representation of a lens.
+        --lens-alias=: ""
+        --tags=: Tags to associate to a lens.
+    - name: list-milestones
+      description: List all milestones for an existing workload.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: ""
+        --next-token=: ""
+        --workload-id=!: ""
+    - name: update-review-template
+      description: Update a review template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The review template description.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lenses-to-associate=: A list of lens aliases or ARNs to apply to the review template.
+        --lenses-to-disassociate=: A list of lens aliases or ARNs to unapply to the review template.
+        --notes=: ""
+        --template-arn=!: The review template ARN.
+        --template-name=: The review template name.
+    - name: delete-profile
+      description: Delete a profile.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profile-arn=!: The profile ARN.
+    - name: delete-profile-share
+      description: Delete a profile share.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profile-arn=!: The profile ARN.
+        --share-id=!: ""
+    - name: get-lens-version-difference
+      description: Get lens version differences.
+      flags:
+        --base-lens-version=: The base version of the lens.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lens-alias=!: ""
+        --target-lens-version=: The lens version to target a difference for.
+    - name: get-workload
+      description: Get an existing workload.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workload-id=!: ""
+    - name: list-notifications
+      description: List lens notifications.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return for this request.
+        --next-token=: ""
+        --resource-arn=: The ARN for the related resource for the notification.
+        --workload-id=: ""
+    - name: list-tags-for-resource
+      description: List the tags for a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workload-arn=!: ""
+    - name: update-lens-review
+      description: Update lens review for a particular workload.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --jira-configuration=: Configuration of the Jira integration.
+        --lens-alias=!: ""
+        --lens-notes=: ""
+        --pillar-notes=: ""
+        --workload-id=!: ""
+    - name: create-lens-share
+      description: Create a lens share.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lens-alias=!: ""
+        --shared-with=!: ""
+    - name: delete-template-share
+      description: Delete a review template share.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --share-id=!: ""
+        --template-arn=!: The review template ARN.
+    - name: get-consolidated-report
+      description: Get a consolidated report of your workloads.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --format=!: The format of the consolidated report.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-shared-resources: Set to `true` to have shared resources included in the report.
+        --max-results=: The maximum number of results to return for this request.
+        --next-token=: ""
+        --no-include-shared-resources: Set to `true` to have shared resources included in the report.
+      completion:
+        flag:
+            format:
+                - PDF
+                - JSON
+    - name: get-review-template-answer
+      description: Get review template answer.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lens-alias=!: ""
+        --question-id=!: ""
+        --template-arn=!: The review template ARN.
+    - name: list-lens-review-improvements
+      description: List the improvements of a particular lens review.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lens-alias=!: ""
+        --max-results=: The maximum number of results to return for this request.
+        --milestone-number=: ""
+        --next-token=: ""
+        --pillar-id=: ""
+        --question-priority=: The priority of the question.
+        --workload-id=!: ""
+      completion:
+        flag:
+            question-priority:
+                - PRIORITIZED
+                - NONE
+    - name: list-workload-shares
+      description: List the workload shares associated with the workload.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return for this request.
+        --next-token=: ""
+        --shared-with-prefix=: The Amazon Web Services account ID, organization ID, or organizational unit (OU) ID with which the workload is shared.
+        --status=: ""
+        --workload-id=!: ""
+      completion:
+        flag:
+            status:
+                - ACCEPTED
+                - REJECTED
+                - PENDING
+                - REVOKED
+                - EXPIRED
+                - ASSOCIATING
+                - ASSOCIATED
+                - FAILED
+    - name: update-workload-share
+      description: Update a workload share.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --permission-type=!: ""
+        --share-id=!: ""
+        --workload-id=!: ""
+      completion:
+        flag:
+            permission-type:
+                - READONLY
+                - CONTRIBUTOR
+    - name: upgrade-lens-review
+      description: Upgrade lens review for a particular workload.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lens-alias=!: ""
+        --milestone-name=!: ""
+        --workload-id=!: ""
+    - name: get-lens-review-report
+      description: Get lens review report.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lens-alias=!: ""
+        --milestone-number=: ""
         --workload-id=!: ""
     - name: create-lens-version
       description: Create a new lens version.
@@ -260,6 +677,86 @@ commands:
         --lens-alias=!: ""
         --lens-version=!: The version of the lens being created.
         --no-is-major-version: Set to true if this new major lens version.
+    - name: create-template-share
+      description: Create a review template share.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --shared-with=!: ""
+        --template-arn=!: The review template ARN.
+    - name: delete-workload-share
+      description: Delete a workload share.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --share-id=!: ""
+        --workload-id=!: ""
+    - name: disassociate-profiles
+      description: Disassociate a profile from a workload.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profile-arns=!: The list of profile ARNs to disassociate from the workload.
+        --workload-id=!: ""
+    - name: get-global-settings
+      description: Global settings for all workloads.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-global-settings
+      description: Update whether the Amazon Web Services account is opted into organization sharing and discovery integration features.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --discovery-integration-status=: The status of discovery support settings.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --jira-configuration=: The status of Jira integration settings.
+        --organization-sharing-status=: The status of organization sharing settings.
+      completion:
+        flag:
+            discovery-integration-status:
+                - ENABLED
+                - DISABLED
+            organization-sharing-status:
+                - ENABLED
+                - DISABLED
+    - name: create-profile-share
+      description: Create a profile share.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profile-arn=!: The profile ARN.
+        --shared-with=!: ""
+    - name: list-template-shares
+      description: List review template shares.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return for this request.
+        --next-token=: ""
+        --shared-with-prefix=: The Amazon Web Services account ID, organization ID, or organizational unit (OU) ID with which the profile is shared.
+        --status=: ""
+        --template-arn=!: The review template ARN.
+      completion:
+        flag:
+            status:
+                - ACCEPTED
+                - REJECTED
+                - PENDING
+                - REVOKED
+                - EXPIRED
+                - ASSOCIATING
+                - ASSOCIATED
+                - FAILED
     - name: create-review-template
       description: Create a review template.
       flags:
@@ -287,48 +784,6 @@ commands:
                 - ALL
                 - DRAFT
                 - PUBLISHED
-    - name: delete-profile-share
-      description: Delete a profile share.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=!: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --profile-arn=!: The profile ARN.
-        --share-id=!: ""
-    - name: delete-review-template
-      description: Delete a review template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=!: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --template-arn=!: The review template ARN.
-    - name: untag-resource
-      description: Deletes specified tags from a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tag-keys=!: A list of tag keys.
-        --workload-arn=!: ""
-    - name: create-lens-share
-      description: Create a lens share.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=!: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lens-alias=!: ""
-        --shared-with=!: ""
-    - name: get-profile
-      description: Get profile information.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --profile-arn=!: The profile ARN.
-        --profile-version=: The profile version.
     - name: list-lens-shares
       description: List the lens shares associated with the lens.
       flags:
@@ -351,232 +806,12 @@ commands:
                 - ASSOCIATING
                 - ASSOCIATED
                 - FAILED
-    - name: list-notifications
-      description: List lens notifications.
+    - name: get-profile-template
+      description: Get profile template.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return for this request.
-        --next-token=: ""
-        --resource-arn=: The ARN for the related resource for the notification.
-        --workload-id=: ""
-    - name: update-answer
-      description: Update the answer to a specific question in a workload review.
-      flags:
-        --choice-updates=: A list of choices to update on a question in your workload.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --is-applicable: ""
-        --lens-alias=!: ""
-        --no-is-applicable: ""
-        --notes=: ""
-        --question-id=!: ""
-        --reason=: The reason why a question is not applicable to your workload.
-        --selected-choices=: ""
-        --workload-id=!: ""
-      completion:
-        flag:
-            reason:
-                - OUT_OF_SCOPE
-                - BUSINESS_PRIORITIES
-                - ARCHITECTURE_CONSTRAINTS
-                - OTHER
-                - NONE
-    - name: update-global-settings
-      description: Update whether the Amazon Web Services account is opted into organization sharing and discovery integration features.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --discovery-integration-status=: The status of discovery support settings.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --jira-configuration=: The status of Jira integration settings.
-        --organization-sharing-status=: The status of organization sharing settings.
-      completion:
-        flag:
-            discovery-integration-status:
-                - ENABLED
-                - DISABLED
-            organization-sharing-status:
-                - ENABLED
-                - DISABLED
-    - name: update-lens-review
-      description: Update lens review for a particular workload.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --jira-configuration=: Configuration of the Jira integration.
-        --lens-alias=!: ""
-        --lens-notes=: ""
-        --pillar-notes=: ""
-        --workload-id=!: ""
-    - name: upgrade-profile-version
-      description: Upgrade a profile.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --milestone-name=: ""
-        --profile-arn=!: The profile ARN.
-        --workload-id=!: ""
-    - name: delete-profile
-      description: Delete a profile.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=!: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --profile-arn=!: The profile ARN.
-    - name: delete-workload-share
-      description: Delete a workload share.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=!: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --share-id=!: ""
-        --workload-id=!: ""
-    - name: get-answer
-      description: Get the answer to a specific question in a workload review.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lens-alias=!: ""
-        --milestone-number=: ""
-        --question-id=!: ""
-        --workload-id=!: ""
-    - name: update-profile
-      description: Update a profile.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --profile-arn=!: The profile ARN.
-        --profile-description=: The profile description.
-        --profile-questions=: Profile questions.
-    - name: create-profile
-      description: Create a profile.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=!: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --profile-description=!: The profile description.
-        --profile-name=!: Name of the profile.
-        --profile-questions=!: The profile questions.
-        --tags=: The tags assigned to the profile.
-    - name: create-template-share
-      description: Create a review template share.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=!: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --shared-with=!: ""
-        --template-arn=!: The review template ARN.
-    - name: delete-template-share
-      description: Delete a review template share.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=!: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --share-id=!: ""
-        --template-arn=!: The review template ARN.
-    - name: list-check-details
-      description: List of Trusted Advisor check details by account related to the workload.
-      flags:
-        --choice-id=!: ""
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lens-arn=!: Well-Architected Lens ARN.
-        --max-results=: ""
-        --next-token=: ""
-        --pillar-id=!: ""
-        --question-id=!: ""
-        --workload-id=!: ""
-    - name: list-lens-reviews
-      description: List lens reviews for a particular workload.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: ""
-        --milestone-number=: ""
-        --next-token=: ""
-        --workload-id=!: ""
-    - name: update-share-invitation
-      description: Update a workload or custom lens share invitation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --share-invitation-action=!: ""
-        --share-invitation-id=!: The ID assigned to the share invitation.
-      completion:
-        flag:
-            share-invitation-action:
-                - ACCEPT
-                - REJECT
-    - name: update-workload-share
-      description: Update a workload share.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --permission-type=!: ""
-        --share-id=!: ""
-        --workload-id=!: ""
-      completion:
-        flag:
-            permission-type:
-                - READONLY
-                - CONTRIBUTOR
-    - name: disassociate-lenses
-      description: Disassociate a lens from a workload.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lens-aliases=!: ""
-        --workload-id=!: ""
-    - name: get-consolidated-report
-      description: Get a consolidated report of your workloads.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --format=!: The format of the consolidated report.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --include-shared-resources: Set to `true` to have shared resources included in the report.
-        --max-results=: The maximum number of results to return for this request.
-        --next-token=: ""
-        --no-include-shared-resources: Set to `true` to have shared resources included in the report.
-      completion:
-        flag:
-            format:
-                - PDF
-                - JSON
-    - name: get-lens
-      description: Get an existing lens.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lens-alias=!: ""
-        --lens-version=: The lens version to be retrieved.
-    - name: get-review-template-lens-review
-      description: Get a lens review associated with a review template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lens-alias=!: ""
-        --template-arn=!: The review template ARN.
     - name: list-profiles
       description: List profiles.
       flags:
@@ -592,87 +827,6 @@ commands:
             profile-owner-type:
                 - SELF
                 - SHARED
-    - name: list-workload-shares
-      description: List the workload shares associated with the workload.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return for this request.
-        --next-token=: ""
-        --shared-with-prefix=: The Amazon Web Services account ID, organization ID, or organizational unit (OU) ID with which the workload is shared.
-        --status=: ""
-        --workload-id=!: ""
-      completion:
-        flag:
-            status:
-                - ACCEPTED
-                - REJECTED
-                - PENDING
-                - REVOKED
-                - EXPIRED
-                - ASSOCIATING
-                - ASSOCIATED
-                - FAILED
-    - name: disassociate-profiles
-      description: Disassociate a profile from a workload.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --profile-arns=!: The list of profile ARNs to disassociate from the workload.
-        --workload-id=!: ""
-    - name: associate-profiles
-      description: Associate a profile with a workload.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --profile-arns=!: The list of profile ARNs to associate with the workload.
-        --workload-id=!: ""
-    - name: list-profile-shares
-      description: List profile shares.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return for this request.
-        --next-token=: ""
-        --profile-arn=!: The profile ARN.
-        --shared-with-prefix=: The Amazon Web Services account ID, organization ID, or organizational unit (OU) ID with which the profile is shared.
-        --status=: ""
-      completion:
-        flag:
-            status:
-                - ACCEPTED
-                - REJECTED
-                - PENDING
-                - REVOKED
-                - EXPIRED
-                - ASSOCIATING
-                - ASSOCIATED
-                - FAILED
-    - name: update-review-template
-      description: Update a review template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The review template description.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lenses-to-associate=: A list of lens aliases or ARNs to apply to the review template.
-        --lenses-to-disassociate=: A list of lens aliases or ARNs to unapply to the review template.
-        --notes=: ""
-        --template-arn=!: The review template ARN.
-        --template-name=: The review template name.
-    - name: create-milestone
-      description: Create a milestone for an existing workload.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=!: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --milestone-name=!: ""
-        --workload-id=!: ""
     - name: export-lens
       description: Export an existing lens.
       flags:
@@ -681,90 +835,6 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --lens-alias=!: ""
         --lens-version=: The lens version to be exported.
-    - name: list-tags-for-resource
-      description: List the tags for a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --workload-arn=!: ""
-    - name: tag-resource
-      description: Adds one or more tags to the specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=!: The tags for the resource.
-        --workload-arn=!: ""
-    - name: update-workload
-      description: Update an existing workload.
-      flags:
-        --account-ids=: ""
-        --applications=: List of AppRegistry application ARNs to associate to the workload.
-        --architectural-design=: ""
-        --aws-regions=: ""
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: ""
-        --discovery-config=: Well-Architected discovery configuration settings to associate to the workload.
-        --environment=: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --improvement-status=: ""
-        --industry-type=: ""
-        --industry=: ""
-        --is-review-owner-update-acknowledged: Flag indicating whether the workload owner has acknowledged that the *Review owner* field is required.
-        --jira-configuration=: Configuration of the Jira integration.
-        --no-is-review-owner-update-acknowledged: Flag indicating whether the workload owner has acknowledged that the *Review owner* field is required.
-        --non-aws-regions=: ""
-        --notes=: ""
-        --pillar-priorities=: ""
-        --review-owner=: ""
-        --workload-id=!: ""
-        --workload-name=: ""
-      completion:
-        flag:
-            environment:
-                - PRODUCTION
-                - PREPRODUCTION
-            improvement-status:
-                - NOT_APPLICABLE
-                - NOT_STARTED
-                - IN_PROGRESS
-                - COMPLETE
-                - RISK_ACKNOWLEDGED
-    - name: create-workload-share
-      description: Create a workload share.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=!: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --permission-type=!: ""
-        --shared-with=!: ""
-        --workload-id=!: ""
-      completion:
-        flag:
-            permission-type:
-                - READONLY
-                - CONTRIBUTOR
-    - name: list-review-templates
-      description: List review templates.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: ""
-        --next-token=: ""
-    - name: upgrade-lens-review
-      description: Upgrade lens review for a particular workload.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lens-alias=!: ""
-        --milestone-name=!: ""
-        --workload-id=!: ""
     - name: upgrade-review-template-lens-review
       description: Upgrade the lens review of a review template.
       flags:
@@ -774,60 +844,6 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --lens-alias=!: ""
         --template-arn=!: The ARN of the review template.
-    - name: delete-workload
-      description: Delete an existing workload.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=!: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --workload-id=!: ""
-    - name: get-lens-version-difference
-      description: Get lens version differences.
-      flags:
-        --base-lens-version=: The base version of the lens.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lens-alias=!: ""
-        --target-lens-version=: The lens version to target a difference for.
-    - name: import-lens
-      description: Import a new custom lens or update an existing custom lens.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=!: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --json-string=!: The JSON representation of a lens.
-        --lens-alias=: ""
-        --tags=: Tags to associate to a lens.
-    - name: list-answers
-      description: List of answers for a particular workload and lens.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lens-alias=!: ""
-        --max-results=: The maximum number of results to return for this request.
-        --milestone-number=: ""
-        --next-token=: ""
-        --pillar-id=: ""
-        --question-priority=: The priority of the question.
-        --workload-id=!: ""
-      completion:
-        flag:
-            question-priority:
-                - PRIORITIZED
-                - NONE
-    - name: list-profile-notifications
-      description: List profile notifications.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: ""
-        --next-token=: ""
-        --workload-id=: ""
     - name: update-review-template-answer
       description: Update a review template answer.
       flags:
@@ -851,19 +867,3 @@ commands:
                 - ARCHITECTURE_CONSTRAINTS
                 - OTHER
                 - NONE
-    - name: create-profile-share
-      description: Create a profile share.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=!: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --profile-arn=!: The profile ARN.
-        --shared-with=!: ""
-    - name: get-review-template
-      description: Get review template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --template-arn=!: The review template ARN.

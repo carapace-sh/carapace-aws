@@ -1,6 +1,33 @@
 name: kinesisanalytics
 description: Amazon Kinesis Analytics
 commands:
+    - name: describe-application
+      description: This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications.
+      flags:
+        --application-name=!: Name of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: discover-input-schema
+      description: This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-processing-configuration=: The [InputProcessingConfiguration](https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html) to use to preprocess the records before discovering the schema of the records.
+        --input-starting-position-configuration=: Point at which you want Amazon Kinesis Analytics to start reading records from the specified streaming source discovery purposes.
+        --resource-arn=: Amazon Resource Name (ARN) of the streaming source.
+        --role-arn=: ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream on your behalf.
+        --s3-configuration=: Specify this parameter to discover a schema from data in an Amazon S3 object.
+    - name: update-application
+      description: This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications.
+      flags:
+        --application-name=!: Name of the Amazon Kinesis Analytics application to update.
+        --application-update=!: Describes application updates.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --current-application-version-id=!: The current application version ID.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: add-application-cloud-watch-logging-option
       description: This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications.
       flags:
@@ -10,22 +37,48 @@ commands:
         --cloud-watch-logging-option=!: Provides the CloudWatch log stream Amazon Resource Name (ARN) and the IAM role ARN.
         --current-application-version-id=!: The version ID of the Kinesis Analytics application.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-application-output
+    - name: add-application-input
       description: This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications.
       flags:
-        --application-name=!: Amazon Kinesis Analytics application name.
+        --application-name=!: Name of your existing Amazon Kinesis Analytics application to which you want to add the streaming source.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --current-application-version-id=!: Amazon Kinesis Analytics application version.
+        --current-application-version-id=!: Current version of your Amazon Kinesis Analytics application.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --output-id=!: The ID of the configuration to delete.
-    - name: describe-application
+        --input=!: The [Input](https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_Input.html) to add.
+    - name: start-application
       description: This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications.
       flags:
         --application-name=!: Name of the application.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-configurations=!: Identifies the specific input, by ID, that the application starts consuming.
+    - name: tag-resource
+      description: Adds one or more key-value tags to a Kinesis Analytics application.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the application to assign the tags.
+        --tags=!: The key-value tags to assign to the application.
+    - name: delete-application-input-processing-configuration
+      description: This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications.
+      flags:
+        --application-name=!: The Kinesis Analytics application name.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --current-application-version-id=!: The version ID of the Kinesis Analytics application.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-id=!: The ID of the input configuration from which to delete the input processing configuration.
+    - name: list-applications
+      description: This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --exclusive-start-application-name=: Name of the application to start the list with.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: Maximum number of applications to list.
     - name: untag-resource
       description: Removes one or more tags from a Kinesis Analytics application.
       flags:
@@ -34,6 +87,16 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The ARN of the Kinesis Analytics application from which to remove the tags.
         --tag-keys=!: A list of keys of tags to remove from the specified application.
+    - name: add-application-input-processing-configuration
+      description: This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications.
+      flags:
+        --application-name=!: Name of the application to which you want to add the input processing configuration.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --current-application-version-id=!: Version of the application to which you want to add the input processing configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-id=!: The ID of the input configuration to add the input processing configuration to.
+        --input-processing-configuration=!: The [InputProcessingConfiguration](https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html) to add to the application.
     - name: add-application-output
       description: This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications.
       flags:
@@ -43,6 +106,15 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --current-application-version-id=!: Version of the application to which you want to add the output configuration.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: add-application-reference-data-source
+      description: This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications.
+      flags:
+        --application-name=!: Name of an existing application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --current-application-version-id=!: Version of the application for which you are adding the reference data source.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --reference-data-source=!: The reference data source can be an object in your Amazon S3 bucket.
     - name: create-application
       description: This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications.
       flags:
@@ -56,14 +128,24 @@ commands:
         --inputs=: Use this parameter to configure the application input.
         --outputs=: You can configure application output to write data from any of the in-application streams to up to three destinations.
         --tags=: A list of one or more tags to assign to the application.
-    - name: delete-application
+    - name: delete-application-cloud-watch-logging-option
       description: This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications.
       flags:
-        --application-name=!: Name of the Amazon Kinesis Analytics application to delete.
+        --application-name=!: The Kinesis Analytics application name.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --create-timestamp=!: You can use the `DescribeApplication` operation to get this value.
+        --cloud-watch-logging-option-id=!: The `CloudWatchLoggingOptionId` of the CloudWatch logging option to delete.
+        --current-application-version-id=!: The version ID of the Kinesis Analytics application.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-application-output
+      description: This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications.
+      flags:
+        --application-name=!: Amazon Kinesis Analytics application name.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --current-application-version-id=!: Amazon Kinesis Analytics application version.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --output-id=!: The ID of the configuration to delete.
     - name: list-tags-for-resource
       description: Retrieves the list of key-value tags assigned to the application.
       flags:
@@ -78,87 +160,13 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-application
+    - name: delete-application
       description: This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications.
       flags:
-        --application-name=!: Name of the Amazon Kinesis Analytics application to update.
-        --application-update=!: Describes application updates.
+        --application-name=!: Name of the Amazon Kinesis Analytics application to delete.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --current-application-version-id=!: The current application version ID.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: add-application-input-processing-configuration
-      description: This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications.
-      flags:
-        --application-name=!: Name of the application to which you want to add the input processing configuration.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --current-application-version-id=!: Version of the application to which you want to add the input processing configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input-id=!: The ID of the input configuration to add the input processing configuration to.
-        --input-processing-configuration=!: The [InputProcessingConfiguration](https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html) to add to the application.
-    - name: add-application-reference-data-source
-      description: This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications.
-      flags:
-        --application-name=!: Name of an existing application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --current-application-version-id=!: Version of the application for which you are adding the reference data source.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --reference-data-source=!: The reference data source can be an object in your Amazon S3 bucket.
-    - name: delete-application-input-processing-configuration
-      description: This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications.
-      flags:
-        --application-name=!: The Kinesis Analytics application name.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --current-application-version-id=!: The version ID of the Kinesis Analytics application.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input-id=!: The ID of the input configuration from which to delete the input processing configuration.
-    - name: discover-input-schema
-      description: This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input-processing-configuration=: The [InputProcessingConfiguration](https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html) to use to preprocess the records before discovering the schema of the records.
-        --input-starting-position-configuration=: Point at which you want Amazon Kinesis Analytics to start reading records from the specified streaming source discovery purposes.
-        --resource-arn=: Amazon Resource Name (ARN) of the streaming source.
-        --role-arn=: ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream on your behalf.
-        --s3-configuration=: Specify this parameter to discover a schema from data in an Amazon S3 object.
-    - name: list-applications
-      description: This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --exclusive-start-application-name=: Name of the application to start the list with.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: Maximum number of applications to list.
-    - name: start-application
-      description: This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications.
-      flags:
-        --application-name=!: Name of the application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input-configurations=!: Identifies the specific input, by ID, that the application starts consuming.
-    - name: add-application-input
-      description: This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications.
-      flags:
-        --application-name=!: Name of your existing Amazon Kinesis Analytics application to which you want to add the streaming source.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --current-application-version-id=!: Current version of your Amazon Kinesis Analytics application.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input=!: The [Input](https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_Input.html) to add.
-    - name: delete-application-cloud-watch-logging-option
-      description: This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications.
-      flags:
-        --application-name=!: The Kinesis Analytics application name.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cloud-watch-logging-option-id=!: The `CloudWatchLoggingOptionId` of the CloudWatch logging option to delete.
-        --current-application-version-id=!: The version ID of the Kinesis Analytics application.
+        --create-timestamp=!: You can use the `DescribeApplication` operation to get this value.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-application-reference-data-source
       description: This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications.
@@ -169,11 +177,3 @@ commands:
         --current-application-version-id=!: Version of the application.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --reference-id=!: ID of the reference data source.
-    - name: tag-resource
-      description: Adds one or more key-value tags to a Kinesis Analytics application.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the application to assign the tags.
-        --tags=!: The key-value tags to assign to the application.
