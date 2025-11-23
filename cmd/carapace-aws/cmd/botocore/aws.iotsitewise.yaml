@@ -1,6 +1,16 @@
 name: iotsitewise
 description: AWS IoT SiteWise
 commands:
+    - name: associate-time-series-to-asset-property
+      description: Associates a time series (data stream) with an asset property.
+      flags:
+        --alias=!: The alias that identifies the time series.
+        --asset-id=!: The ID of the asset in which the asset property was created.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --property-id=!: The ID of the asset property.
     - name: batch-get-asset-property-value
       description: Gets the current value for one or more asset properties.
       flags:
@@ -9,64 +19,233 @@ commands:
         --entries=!: The list of asset property value entries for the batch get request.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --next-token=: The token to be used for the next set of paginated results.
-    - name: delete-dashboard
-      description: Deletes a dashboard from IoT SiteWise Monitor.
+    - name: create-dashboard
+      description: Creates a dashboard in an IoT SiteWise Monitor project.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
-        --dashboard-id=!: The ID of the dashboard to delete.
+        --dashboard-definition=!: The dashboard definition specified in a JSON literal.
+        --dashboard-description=: A description for the dashboard.
+        --dashboard-name=!: A friendly name for the dashboard.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-dataset
-      description: Deletes a dataset.
+        --project-id=!: The ID of the project in which to create the dashboard.
+        --tags=: A list of key-value pairs that contain metadata for the dashboard.
+    - name: list-assets
+      description: Retrieves a paginated list of asset summaries.
       flags:
+        --asset-model-id=: The ID of the asset model by which to filter the list of assets.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
-        --dataset-id=!: The ID of the dataset.
+        --filter=: The filter for the requested list of assets.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-bulk-import-job
-      description: Retrieves information about a bulk import job request.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The ID of the job.
-    - name: describe-gateway
-      description: Retrieves information about a gateway.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --gateway-id=!: The ID of the gateway device.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-interpolated-asset-property-values
-      description: Get interpolated values for an asset property for a specified time interval, during a period of time.
-      flags:
-        --asset-id=: The ID of the asset, in UUID format.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --end-time-in-seconds=!: The inclusive end of the range from which to interpolate data, expressed in seconds in Unix epoch time.
-        --end-time-offset-in-nanos=: The nanosecond offset converted from `endTimeInSeconds`.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --interval-in-seconds=!: The time interval in seconds over which to interpolate data.
-        --interval-window-in-seconds=: The query interval for the window, in seconds.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return for each paginated request.
         --next-token=: The token to be used for the next set of paginated results.
         --page-size=: The size of each page to get in the AWS service call.
-        --property-alias=: The alias that identifies the property, such as an OPC-UA server data stream path (for example, `/company/windfarm/3/turbine/7/temperature`).
-        --property-id=: The ID of the asset property, in UUID format.
-        --quality=!: The quality of the asset property value.
-        --start-time-in-seconds=!: The exclusive start of the range from which to interpolate data, expressed in seconds in Unix epoch time.
-        --start-time-offset-in-nanos=: The nanosecond offset converted from `startTimeInSeconds`.
         --starting-token=: A token to specify where to start paginating.
-        --type=!: The interpolation type.
       completion:
         flag:
-            quality:
-                - GOOD
-                - BAD
-                - UNCERTAIN
+            filter:
+                - ALL
+                - TOP_LEVEL
+    - name: update-dataset
+      description: Updates a dataset.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+        --dataset-description=: A description about the dataset, and its functionality.
+        --dataset-id=!: The ID of the dataset.
+        --dataset-name=!: The name of the dataset.
+        --dataset-source=!: The data source for the dataset.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-asset-model-interface-relationship
+      description: Retrieves information about an interface relationship between an asset model and an interface asset model.
+      flags:
+        --asset-model-id=!: The ID of the asset model.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --interface-asset-model-id=!: The ID of the interface asset model.
+    - name: describe-logging-options
+      description: Retrieves the current IoT SiteWise logging options.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-asset-property-value
+      description: Gets an asset property's current value.
+      flags:
+        --asset-id=: The ID of the asset, in UUID format.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --property-alias=: The alias that identifies the property, such as an OPC-UA server data stream path (for example, `/company/windfarm/3/turbine/7/temperature`).
+        --property-id=: The ID of the asset property, in UUID format.
+    - name: update-access-policy
+      description: Updates an existing access policy that specifies an identity's access to an IoT SiteWise Monitor portal or project resource.
+      flags:
+        --access-policy-id=!: The ID of the access policy.
+        --access-policy-identity=!: The identity for this access policy.
+        --access-policy-permission=!: The permission level for this access policy.
+        --access-policy-resource=!: The IoT SiteWise Monitor resource for this access policy.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            access-policy-permission:
+                - ADMINISTRATOR
+                - VIEWER
+    - name: update-project
+      description: Updates an IoT SiteWise Monitor project.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --project-description=: A new description for the project.
+        --project-id=!: The ID of the project to update.
+        --project-name=!: A new friendly name for the project.
+    - name: batch-put-asset-property-value
+      description: Sends a list of asset property values to IoT SiteWise.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --enable-partial-entry-processing: This setting enables partial ingestion at entry-level.
+        --entries=!: The list of asset property value entries for the batch put request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-enable-partial-entry-processing: This setting enables partial ingestion at entry-level.
+    - name: create-dataset
+      description: Creates a dataset to connect an external datasource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+        --dataset-description=: A description about the dataset, and its functionality.
+        --dataset-id=: The ID of the dataset.
+        --dataset-name=!: The name of the dataset.
+        --dataset-source=!: The data source for the dataset.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: A list of key-value pairs that contain metadata for the access policy.
+    - name: describe-action
+      description: Retrieves information about an action.
+      flags:
+        --action-id=!: The ID of the action.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-asset-composite-model
+      description: Retrieves information about an asset composite model (also known as an asset component).
+      flags:
+        --asset-composite-model-id=!: The ID of a composite model on this asset.
+        --asset-id=!: The ID of the asset.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-project
+      description: Retrieves information about a project.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --project-id=!: The ID of the project.
+    - name: list-actions
+      description: Retrieves a paginated list of actions for a specific target resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return for each paginated request.
+        --next-token=: The token to be used for the next set of paginated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resolve-to-resource-id=: The ID of the resolved resource.
+        --resolve-to-resource-type=: The type of the resolved resource.
+        --starting-token=: A token to specify where to start paginating.
+        --target-resource-id=!: The ID of the target resource.
+        --target-resource-type=!: The type of resource.
+      completion:
+        flag:
+            resolve-to-resource-type:
+                - ASSET
+            target-resource-type:
+                - ASSET
+                - COMPUTATION_MODEL
+    - name: list-asset-relationships
+      description: Retrieves a paginated list of asset relationships for an asset.
+      flags:
+        --asset-id=!: The ID of the asset.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return for each paginated request.
+        --next-token=: The token to be used for the next set of paginated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --traversal-type=!: The type of traversal to use to identify asset relationships.
+      completion:
+        flag:
+            traversal-type:
+                - PATH_TO_ROOT
+    - name: list-computation-model-resolve-to-resources
+      description: Lists all distinct resources that are resolved from the executed actions of the computation model.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --computation-model-id=!: The ID of the computation model for which to list resolved resources.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results returned for each paginated request.
+        --next-token=: The token used for the next set of paginated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: delete-asset-model-composite-model
+      description: Deletes a composite model.
+      flags:
+        --asset-model-composite-model-id=!: The ID of a composite model on this asset model.
+        --asset-model-id=!: The ID of the asset model, in UUID format.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --if-match=: The expected current entity tag (ETag) for the asset model’s latest or active version (specified using `matchForVersionType`).
+        --if-none-match=: Accepts **\*** to reject the delete request if an active version (specified using `matchForVersionType` as `ACTIVE`) already exists for the asset model.
+        --match-for-version-type=: Specifies the asset model version type (`LATEST` or `ACTIVE`) used in conjunction with `If-Match` or `If-None-Match` headers to determine the target ETag for the delete operation.
+      completion:
+        flag:
+            match-for-version-type:
+                - LATEST
+                - ACTIVE
+    - name: describe-access-policy
+      description: Describes an access policy, which specifies an identity's access to an IoT SiteWise Monitor portal or project.
+      flags:
+        --access-policy-id=!: The ID of the access policy.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-associated-assets
+      description: Retrieves a paginated list of associated assets.
+      flags:
+        --asset-id=!: The ID of the asset to query.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --hierarchy-id=: (Optional) If you don't provide a `hierarchyId`, all the immediate assets in the `traversalDirection` will be returned.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return for each paginated request.
+        --next-token=: The token to be used for the next set of paginated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --traversal-direction=: The direction to list associated assets.
+      completion:
+        flag:
+            traversal-direction:
+                - PARENT
+                - CHILD
     - name: list-executions
       description: Retrieves a paginated list of summaries of all executions.
       flags:
@@ -90,8 +269,8 @@ commands:
             target-resource-type:
                 - ASSET
                 - COMPUTATION_MODEL
-    - name: list-project-assets
-      description: Retrieves a paginated list of assets associated with an IoT SiteWise Monitor project.
+    - name: list-portals
+      description: Retrieves a paginated list of IoT SiteWise Monitor portals.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -100,255 +279,15 @@ commands:
         --max-results=: The maximum number of results to return for each paginated request.
         --next-token=: The token to be used for the next set of paginated results.
         --page-size=: The size of each page to get in the AWS service call.
-        --project-id=!: The ID of the project.
         --starting-token=: A token to specify where to start paginating.
-    - name: delete-asset-model-interface-relationship
-      description: Deletes an interface relationship between an asset model and an interface asset model.
-      flags:
-        --asset-model-id=!: The ID of the asset model.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --interface-asset-model-id=!: The ID of the interface asset model.
-    - name: batch-disassociate-project-assets
-      description: Disassociates a group (batch) of assets from an IoT SiteWise Monitor project.
-      flags:
-        --asset-ids=!: The IDs of the assets to be disassociated from the project.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --project-id=!: The ID of the project from which to disassociate the assets.
-    - name: describe-asset-model-composite-model
-      description: Retrieves information about an asset model composite model (also known as an asset model component).
-      flags:
-        --asset-model-composite-model-id=!: The ID of a composite model on this asset model.
-        --asset-model-id=!: The ID of the asset model.
-        --asset-model-version=: The version alias that specifies the latest or active version of the asset model.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-execution
-      description: Retrieves information about the execution.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --execution-id=!: The ID of the execution.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: execute-query
-      description: Run SQL queries to retrieve metadata and time-series data from asset models, assets, measurements, metrics, transforms, and aggregates.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return at one time.
-        --next-token=: The string that specifies the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --query-statement=!: The IoT SiteWise query statement.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-composition-relationships
-      description: Retrieves a paginated list of composition relationships for an asset model of type `COMPONENT_MODEL`.
-      flags:
-        --asset-model-id=!: The ID of the asset model.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return for each paginated request.
-        --next-token=: The token to be used for the next set of paginated results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-projects
-      description: Retrieves a paginated list of projects for an IoT SiteWise Monitor portal.
+    - name: untag-resource
+      description: Removes a tag from an IoT SiteWise resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return for each paginated request.
-        --next-token=: The token to be used for the next set of paginated results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --portal-id=!: The ID of the portal.
-        --starting-token=: A token to specify where to start paginating.
-    - name: batch-put-asset-property-value
-      description: Sends a list of asset property values to IoT SiteWise.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --enable-partial-entry-processing: This setting enables partial ingestion at entry-level.
-        --entries=!: The list of asset property value entries for the batch put request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-enable-partial-entry-processing: This setting enables partial ingestion at entry-level.
-    - name: create-portal
-      description: Creates a portal, which can contain projects and dashboards.
-      flags:
-        --alarms=: Contains the configuration information of an alarm created in an IoT SiteWise Monitor portal.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --notification-sender-email=: The email address that sends alarm notifications.
-        --portal-auth-mode=: The service to use to authenticate users to the portal.
-        --portal-contact-email=!: The Amazon Web Services administrator's contact email address.
-        --portal-description=: A description for the portal.
-        --portal-logo-image-file=: A logo image to display in the portal.
-        --portal-name=!: A friendly name for the portal.
-        --portal-type-configuration=: The configuration entry associated with the specific portal type.
-        --portal-type=: Define the type of portal.
-        --role-arn=!: The [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of a service role that allows the portal's users to access your IoT SiteWise resources on your behalf.
-        --tags=: A list of key-value pairs that contain metadata for the portal.
-      completion:
-        flag:
-            portal-auth-mode:
-                - IAM
-                - SSO
-            portal-type:
-                - SITEWISE_PORTAL_V1
-                - SITEWISE_PORTAL_V2
-    - name: delete-gateway
-      description: Deletes a gateway from IoT SiteWise.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --gateway-id=!: The ID of the gateway to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-storage-configuration
-      description: Retrieves information about the storage configuration for IoT SiteWise.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-time-series
-      description: Retrieves information about a time series (data stream).
-      flags:
-        --alias=: The alias that identifies the time series.
-        --asset-id=: The ID of the asset in which the asset property was created.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --property-id=: The ID of the asset property.
-    - name: list-asset-model-properties
-      description: Retrieves a paginated list of properties associated with an asset model.
-      flags:
-        --asset-model-id=!: The ID of the asset model.
-        --asset-model-version=: The version alias that specifies the latest or active version of the asset model.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: Filters the requested list of asset model properties.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return for each paginated request.
-        --next-token=: The token to be used for the next set of paginated results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            filter:
-                - ALL
-                - BASE
-    - name: list-computation-model-data-binding-usages
-      description: Lists all data binding usages for computation models.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-binding-value-filter=!: A filter used to limit the returned data binding usages based on specific data binding values.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results returned for each paginated request.
-        --next-token=: The token used for the next set of paginated results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: put-asset-model-interface-relationship
-      description: Creates or updates an interface relationship between an asset model and an interface asset model.
-      flags:
-        --asset-model-id=!: The ID of the asset model.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --interface-asset-model-id=!: The ID of the interface asset model.
-        --property-mapping-configuration=!: The configuration for mapping properties from the interface asset model to the asset model where the interface is applied.
-    - name: create-gateway
-      description: Creates a gateway, which is a virtual or edge device that delivers industrial data streams from local servers to IoT SiteWise.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --gateway-name=!: A unique name for the gateway.
-        --gateway-platform=!: The gateway's platform.
-        --gateway-version=: The version of the gateway to create.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: A list of key-value pairs that contain metadata for the gateway.
-    - name: list-datasets
-      description: Retrieves a paginated list of datasets for a specific target resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return for each paginated request.
-        --next-token=: The token for the next set of results, or null if there are no additional results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --source-type=!: The type of data source for the dataset.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            source-type:
-                - KENDRA
-    - name: list-time-series
-      description: Retrieves a paginated list of time series (data streams).
-      flags:
-        --alias-prefix=: The alias prefix of the time series.
-        --asset-id=: The ID of the asset in which the asset property was created.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return for each paginated request.
-        --next-token=: The token to be used for the next set of paginated results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --time-series-type=: The type of the time series.
-      completion:
-        flag:
-            time-series-type:
-                - ASSOCIATED
-                - DISASSOCIATED
-    - name: update-asset
-      description: Updates an asset's name.
-      flags:
-        --asset-description=: A description for the asset.
-        --asset-external-id=: An external ID to assign to the asset.
-        --asset-id=!: The ID of the asset to update.
-        --asset-name=!: A friendly name for the asset.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-asset-model
-      description: Updates an asset model and all of the assets that were created from the model.
-      flags:
-        --asset-model-composite-models=: The composite models that are part of this asset model.
-        --asset-model-description=: A description for the asset model.
-        --asset-model-external-id=: An external ID to assign to the asset model.
-        --asset-model-hierarchies=: The updated hierarchy definitions of the asset model.
-        --asset-model-id=!: The ID of the asset model to update.
-        --asset-model-name=!: A unique name for the asset model.
-        --asset-model-properties=: The updated property definitions of the asset model.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --if-match=: The expected current entity tag (ETag) for the asset model’s latest or active version (specified using `matchForVersionType`).
-        --if-none-match=: Accepts **\*** to reject the update request if an active version (specified using `matchForVersionType` as `ACTIVE`) already exists for the asset model.
-        --match-for-version-type=: Specifies the asset model version type (`LATEST` or `ACTIVE`) used in conjunction with `If-Match` or `If-None-Match` headers to determine the target ETag for the update operation.
-      completion:
-        flag:
-            match-for-version-type:
-                - LATEST
-                - ACTIVE
+        --resource-arn=!: The [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource to untag.
+        --tag-keys=!: A list of keys for tags to remove from the resource.
     - name: update-computation-model
       description: Updates the computation model.
       flags:
@@ -372,6 +311,287 @@ commands:
         --dashboard-id=!: The ID of the dashboard to update.
         --dashboard-name=!: A new friendly name for the dashboard.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-bulk-import-job
+      description: Defines a job to ingest data to IoT SiteWise from Amazon S3.
+      flags:
+        --adaptive-ingestion: If set to true, ingest new data into IoT SiteWise storage.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delete-files-after-import: If set to true, your data files is deleted from S3, after ingestion into IoT SiteWise storage.
+        --error-report-location=!: The Amazon S3 destination where errors associated with the job creation request are saved.
+        --files=!: The files in the specified Amazon S3 bucket that contain your data.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-configuration=!: Contains the configuration information of a job, such as the file format used to save data in Amazon S3.
+        --job-name=!: The unique name that helps identify the job request.
+        --job-role-arn=!: The [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the IAM role that allows IoT SiteWise to read Amazon S3 data.
+        --no-adaptive-ingestion: If set to true, ingest new data into IoT SiteWise storage.
+        --no-delete-files-after-import: If set to true, your data files is deleted from S3, after ingestion into IoT SiteWise storage.
+    - name: delete-time-series
+      description: Deletes a time series (data stream).
+      flags:
+        --alias=: The alias that identifies the time series.
+        --asset-id=: The ID of the asset in which the asset property was created.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --property-id=: The ID of the asset property.
+    - name: describe-portal
+      description: Retrieves information about a portal.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --portal-id=!: The ID of the portal.
+    - name: list-interface-relationships
+      description: Retrieves a paginated list of asset models that have a specific interface asset model applied to them.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --interface-asset-model-id=!: The ID of the interface asset model.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return for each paginated request.
+        --next-token=: The token to be used for the next set of paginated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: delete-access-policy
+      description: Deletes an access policy that grants the specified identity access to the specified IoT SiteWise Monitor resource.
+      flags:
+        --access-policy-id=!: The ID of the access policy to be deleted.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-dataset
+      description: Deletes a dataset.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+        --dataset-id=!: The ID of the dataset.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-computation-model
+      description: Retrieves information about a computation model.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --computation-model-id=!: The ID of the computation model.
+        --computation-model-version=: The version of the computation model.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-dataset
+      description: Retrieves information about a dataset.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-id=!: The ID of the dataset.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-gateway-capability-configuration
+      description: Each gateway capability defines data sources for a gateway.
+      flags:
+        --capability-namespace=!: The namespace of the capability configuration.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --gateway-id=!: The ID of the gateway that defines the capability configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-asset-property-value-history
+      description: Gets the history of an asset property's values.
+      flags:
+        --asset-id=: The ID of the asset, in UUID format.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-date=: The inclusive end of the range from which to query historical data, expressed in seconds in Unix epoch time.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return for each paginated request.
+        --next-token=: The token to be used for the next set of paginated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --property-alias=: The alias that identifies the property, such as an OPC-UA server data stream path (for example, `/company/windfarm/3/turbine/7/temperature`).
+        --property-id=: The ID of the asset property, in UUID format.
+        --qualities=: The quality by which to filter asset data.
+        --start-date=: The exclusive start of the range from which to query historical data, expressed in seconds in Unix epoch time.
+        --starting-token=: A token to specify where to start paginating.
+        --time-ordering=: The chronological sorting order of the requested information.
+      completion:
+        flag:
+            time-ordering:
+                - ASCENDING
+                - DESCENDING
+    - name: put-logging-options
+      description: Sets logging options for IoT SiteWise.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --logging-options=!: The logging options to set.
+    - name: update-asset-property
+      description: Updates an asset property's alias and notification state.
+      flags:
+        --asset-id=!: The ID of the asset to be updated.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --property-alias=: The alias that identifies the property, such as an OPC-UA server data stream path (for example, `/company/windfarm/3/turbine/7/temperature`).
+        --property-id=!: The ID of the asset property to be updated.
+        --property-notification-state=: The MQTT notification state (enabled or disabled) for this asset property.
+        --property-unit=: The unit of measure (such as Newtons or RPM) of the asset property.
+      completion:
+        flag:
+            property-notification-state:
+                - ENABLED
+                - DISABLED
+    - name: create-project
+      description: Creates a project in the specified portal.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --portal-id=!: The ID of the portal in which to create the project.
+        --project-description=: A description for the project.
+        --project-name=!: A friendly name for the project.
+        --tags=: A list of key-value pairs that contain metadata for the project.
+    - name: delete-dashboard
+      description: Deletes a dashboard from IoT SiteWise Monitor.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+        --dashboard-id=!: The ID of the dashboard to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-project
+      description: Deletes a project from IoT SiteWise Monitor.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --project-id=!: The ID of the project.
+    - name: disassociate-time-series-from-asset-property
+      description: Disassociates a time series (data stream) from an asset property.
+      flags:
+        --alias=!: The alias that identifies the time series.
+        --asset-id=!: The ID of the asset in which the asset property was created.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --property-id=!: The ID of the asset property.
+    - name: list-dashboards
+      description: Retrieves a paginated list of dashboards for an IoT SiteWise Monitor project.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return for each paginated request.
+        --next-token=: The token to be used for the next set of paginated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --project-id=!: The ID of the project.
+        --starting-token=: A token to specify where to start paginating.
+    - name: delete-asset-model-interface-relationship
+      description: Deletes an interface relationship between an asset model and an interface asset model.
+      flags:
+        --asset-model-id=!: The ID of the asset model.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --interface-asset-model-id=!: The ID of the interface asset model.
+    - name: delete-portal
+      description: Deletes a portal from IoT SiteWise Monitor.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --portal-id=!: The ID of the portal to delete.
+    - name: describe-asset
+      description: Retrieves information about an asset.
+      flags:
+        --asset-id=!: The ID of the asset.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --exclude-properties: Whether or not to exclude asset properties from the response.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-exclude-properties: Whether or not to exclude asset properties from the response.
+    - name: disassociate-assets
+      description: Disassociates a child asset from the given parent asset through a hierarchy defined in the parent asset's model.
+      flags:
+        --asset-id=!: The ID of the parent asset from which to disassociate the child asset.
+        --child-asset-id=!: The ID of the child asset to disassociate.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --hierarchy-id=!: The ID of a hierarchy in the parent asset's model.
+    - name: execute-action
+      description: Executes an action on a target resource.
+      flags:
+        --action-definition-id=!: The ID of the action definition.
+        --action-payload=!: The JSON payload of the action.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resolve-to=: The detailed resource this action resolves to.
+        --target-resource=!: The resource the action will be taken on.
+    - name: describe-asset-model
+      description: Retrieves information about an asset model.
+      flags:
+        --asset-model-id=!: The ID of the asset model.
+        --asset-model-version=: The version alias that specifies the latest or active version of the asset model.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --exclude-properties: Whether or not to exclude asset model properties from the response.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-exclude-properties: Whether or not to exclude asset model properties from the response.
+    - name: list-computation-model-data-binding-usages
+      description: Lists all data binding usages for computation models.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-binding-value-filter=!: A filter used to limit the returned data binding usages based on specific data binding values.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results returned for each paginated request.
+        --next-token=: The token used for the next set of paginated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: put-storage-configuration
+      description: Configures storage settings for IoT SiteWise.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --disallow-ingest-null-na-n: Describes the configuration for ingesting NULL and NaN data.
+        --disassociated-data-storage=: Contains the storage configuration for time series (data streams) that aren't associated with asset properties.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --multi-layer-storage=: Identifies a storage destination.
+        --no-disallow-ingest-null-na-n: Describes the configuration for ingesting NULL and NaN data.
+        --retention-period=: ""
+        --storage-type=!: The storage tier that you specified for your data.
+        --warm-tier-retention-period=: Set this period to specify how long your data is stored in the warm tier before it is deleted.
+        --warm-tier=: A service managed storage tier optimized for analytical queries.
+      completion:
+        flag:
+            disassociated-data-storage:
+                - ENABLED
+                - DISABLED
+            storage-type:
+                - SITEWISE_DEFAULT_STORAGE
+                - MULTI_LAYER_STORAGE
+            warm-tier:
+                - ENABLED
+                - DISABLED
+    - name: update-gateway
+      description: Updates a gateway's name.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --gateway-id=!: The ID of the gateway to update.
+        --gateway-name=!: A unique name for the gateway.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: update-gateway-capability-configuration
       description: Updates a gateway capability configuration or defines a new capability configuration.
       flags:
@@ -381,6 +601,100 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --gateway-id=!: The ID of the gateway to be updated.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-asset-model
+      description: Deletes an asset model.
+      flags:
+        --asset-model-id=!: The ID of the asset model to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --if-match=: The expected current entity tag (ETag) for the asset model’s latest or active version (specified using `matchForVersionType`).
+        --if-none-match=: Accepts **\*** to reject the delete request if an active version (specified using `matchForVersionType` as `ACTIVE`) already exists for the asset model.
+        --match-for-version-type=: Specifies the asset model version type (`LATEST` or `ACTIVE`) used in conjunction with `If-Match` or `If-None-Match` headers to determine the target ETag for the delete operation.
+      completion:
+        flag:
+            match-for-version-type:
+                - LATEST
+                - ACTIVE
+    - name: describe-bulk-import-job
+      description: Retrieves information about a bulk import job request.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The ID of the job.
+    - name: describe-dashboard
+      description: Retrieves information about a dashboard.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dashboard-id=!: The ID of the dashboard.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-computation-models
+      description: Retrieves a paginated list of summaries of all computation models.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --computation-model-type=: The type of computation model.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return for each paginated request.
+        --next-token=: The token to be used for the next set of paginated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            computation-model-type:
+                - ANOMALY_DETECTION
+    - name: list-gateways
+      description: Retrieves a paginated list of gateways.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return for each paginated request.
+        --next-token=: The token to be used for the next set of paginated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-projects
+      description: Retrieves a paginated list of projects for an IoT SiteWise Monitor portal.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return for each paginated request.
+        --next-token=: The token to be used for the next set of paginated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --portal-id=!: The ID of the portal.
+        --starting-token=: A token to specify where to start paginating.
+    - name: batch-associate-project-assets
+      description: Associates a group (batch) of assets with an IoT SiteWise Monitor project.
+      flags:
+        --asset-ids=!: The IDs of the assets to be associated to the project.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --project-id=!: The ID of the project to which to associate the assets.
+    - name: create-access-policy
+      description: Creates an access policy that grants the specified identity (IAM Identity Center user, IAM Identity Center group, or IAM user) access to the specified IoT SiteWise Monitor portal or project resource.
+      flags:
+        --access-policy-identity=!: The identity for this access policy.
+        --access-policy-permission=!: The permission level for this access policy.
+        --access-policy-resource=!: The IoT SiteWise Monitor resource for this access policy.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: A list of key-value pairs that contain metadata for the access policy.
+      completion:
+        flag:
+            access-policy-permission:
+                - ADMINISTRATOR
+                - VIEWER
     - name: create-asset-model
       description: Creates an asset model from specified property and hierarchy definitions.
       flags:
@@ -427,296 +741,26 @@ commands:
             match-for-version-type:
                 - LATEST
                 - ACTIVE
-    - name: list-associated-assets
-      description: Retrieves a paginated list of associated assets.
-      flags:
-        --asset-id=!: The ID of the asset to query.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hierarchy-id=: (Optional) If you don't provide a `hierarchyId`, all the immediate assets in the `traversalDirection` will be returned.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return for each paginated request.
-        --next-token=: The token to be used for the next set of paginated results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --traversal-direction=: The direction to list associated assets.
-      completion:
-        flag:
-            traversal-direction:
-                - PARENT
-                - CHILD
-    - name: list-portals
-      description: Retrieves a paginated list of IoT SiteWise Monitor portals.
+    - name: describe-default-encryption-configuration
+      description: Retrieves information about the default encryption configuration for the Amazon Web Services account in the default or specified Region.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return for each paginated request.
-        --next-token=: The token to be used for the next set of paginated results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-portal
-      description: Updates an IoT SiteWise Monitor portal.
-      flags:
-        --alarms=: Contains the configuration information of an alarm created in an IoT SiteWise Monitor portal.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --notification-sender-email=: The email address that sends alarm notifications.
-        --portal-contact-email=!: The Amazon Web Services administrator's contact email address.
-        --portal-description=: A new description for the portal.
-        --portal-id=!: The ID of the portal to update.
-        --portal-logo-image=: ""
-        --portal-name=!: A new friendly name for the portal.
-        --portal-type-configuration=: The configuration entry associated with the specific portal type.
-        --portal-type=: Define the type of portal.
-        --role-arn=!: The [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of a service role that allows the portal's users to access your IoT SiteWise resources on your behalf.
-      completion:
-        flag:
-            portal-type:
-                - SITEWISE_PORTAL_V1
-                - SITEWISE_PORTAL_V2
-    - name: update-project
-      description: Updates an IoT SiteWise Monitor project.
+    - name: describe-execution
+      description: Retrieves information about the execution.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+        --execution-id=!: The ID of the execution.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --project-description=: A new description for the project.
-        --project-id=!: The ID of the project to update.
-        --project-name=!: A new friendly name for the project.
-    - name: create-computation-model
-      description: Create a computation model with a configuration and data binding.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
-        --computation-model-configuration=!: The configuration for the computation model.
-        --computation-model-data-binding=!: The data binding for the computation model.
-        --computation-model-description=: The description of the computation model.
-        --computation-model-name=!: The name of the computation model.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: A list of key-value pairs that contain metadata for the asset.
-    - name: delete-asset-model-composite-model
-      description: Deletes a composite model.
-      flags:
-        --asset-model-composite-model-id=!: The ID of a composite model on this asset model.
-        --asset-model-id=!: The ID of the asset model, in UUID format.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --if-match=: The expected current entity tag (ETag) for the asset model’s latest or active version (specified using `matchForVersionType`).
-        --if-none-match=: Accepts **\*** to reject the delete request if an active version (specified using `matchForVersionType` as `ACTIVE`) already exists for the asset model.
-        --match-for-version-type=: Specifies the asset model version type (`LATEST` or `ACTIVE`) used in conjunction with `If-Match` or `If-None-Match` headers to determine the target ETag for the delete operation.
-      completion:
-        flag:
-            match-for-version-type:
-                - LATEST
-                - ACTIVE
-    - name: delete-project
-      description: Deletes a project from IoT SiteWise Monitor.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --project-id=!: The ID of the project.
-    - name: describe-project
-      description: Retrieves information about a project.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --project-id=!: The ID of the project.
-    - name: execute-action
-      description: Executes an action on a target resource.
-      flags:
-        --action-definition-id=!: The ID of the action definition.
-        --action-payload=!: The JSON payload of the action.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resolve-to=: The detailed resource this action resolves to.
-        --target-resource=!: The resource the action will be taken on.
-    - name: get-asset-property-aggregates
-      description: Gets aggregated values for an asset property.
-      flags:
-        --aggregate-types=!: The data aggregating function.
-        --asset-id=: The ID of the asset, in UUID format.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --end-date=!: The inclusive end of the range from which to query historical data, expressed in seconds in Unix epoch time.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return for each paginated request.
-        --next-token=: The token to be used for the next set of paginated results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --property-alias=: The alias that identifies the property, such as an OPC-UA server data stream path (for example, `/company/windfarm/3/turbine/7/temperature`).
-        --property-id=: The ID of the asset property, in UUID format.
-        --qualities=: The quality by which to filter asset data.
-        --resolution=!: The time interval over which to aggregate data.
-        --start-date=!: The exclusive start of the range from which to query historical data, expressed in seconds in Unix epoch time.
-        --starting-token=: A token to specify where to start paginating.
-        --time-ordering=: The chronological sorting order of the requested information.
-      completion:
-        flag:
-            time-ordering:
-                - ASCENDING
-                - DESCENDING
-    - name: update-access-policy
-      description: Updates an existing access policy that specifies an identity's access to an IoT SiteWise Monitor portal or project resource.
-      flags:
-        --access-policy-id=!: The ID of the access policy.
-        --access-policy-identity=!: The identity for this access policy.
-        --access-policy-permission=!: The permission level for this access policy.
-        --access-policy-resource=!: The IoT SiteWise Monitor resource for this access policy.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      completion:
-        flag:
-            access-policy-permission:
-                - ADMINISTRATOR
-                - VIEWER
-    - name: create-bulk-import-job
-      description: Defines a job to ingest data to IoT SiteWise from Amazon S3.
-      flags:
-        --adaptive-ingestion: If set to true, ingest new data into IoT SiteWise storage.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --delete-files-after-import: If set to true, your data files is deleted from S3, after ingestion into IoT SiteWise storage.
-        --error-report-location=!: The Amazon S3 destination where errors associated with the job creation request are saved.
-        --files=!: The files in the specified Amazon S3 bucket that contain your data.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-configuration=!: Contains the configuration information of a job, such as the file format used to save data in Amazon S3.
-        --job-name=!: The unique name that helps identify the job request.
-        --job-role-arn=!: The [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the IAM role that allows IoT SiteWise to read Amazon S3 data.
-        --no-adaptive-ingestion: If set to true, ingest new data into IoT SiteWise storage.
-        --no-delete-files-after-import: If set to true, your data files is deleted from S3, after ingestion into IoT SiteWise storage.
-    - name: create-dataset
-      description: Creates a dataset to connect an external datasource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
-        --dataset-description=: A description about the dataset, and its functionality.
-        --dataset-id=: The ID of the dataset.
-        --dataset-name=!: The name of the dataset.
-        --dataset-source=!: The data source for the dataset.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: A list of key-value pairs that contain metadata for the access policy.
-    - name: create-project
-      description: Creates a project in the specified portal.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --portal-id=!: The ID of the portal in which to create the project.
-        --project-description=: A description for the project.
-        --project-name=!: A friendly name for the project.
-        --tags=: A list of key-value pairs that contain metadata for the project.
-    - name: delete-access-policy
-      description: Deletes an access policy that grants the specified identity access to the specified IoT SiteWise Monitor resource.
-      flags:
-        --access-policy-id=!: The ID of the access policy to be deleted.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-computation-model
-      description: Deletes a computation model.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
-        --computation-model-id=!: The ID of the computation model.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-asset-property
-      description: Retrieves information about an asset property.
+    - name: list-asset-properties
+      description: Retrieves a paginated list of properties associated with an asset.
       flags:
         --asset-id=!: The ID of the asset.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --property-id=!: The ID of the asset property.
-    - name: list-dashboards
-      description: Retrieves a paginated list of dashboards for an IoT SiteWise Monitor project.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return for each paginated request.
-        --next-token=: The token to be used for the next set of paginated results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --project-id=!: The ID of the project.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: Retrieves the list of tags for an IoT SiteWise resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource.
-    - name: batch-get-asset-property-aggregates
-      description: Gets aggregated values (for example, average, minimum, and maximum) for one or more asset properties.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --entries=!: The list of asset property aggregate entries for the batch get request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return for each paginated request.
-        --next-token=: The token to be used for the next set of paginated results.
-    - name: describe-computation-model-execution-summary
-      description: Retrieves information about the execution summary of a computation model.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --computation-model-id=!: The ID of the computation model.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resolve-to-resource-id=: The ID of the resolved resource.
-        --resolve-to-resource-type=: The type of the resolved resource.
-      completion:
-        flag:
-            resolve-to-resource-type:
-                - ASSET
-    - name: list-actions
-      description: Retrieves a paginated list of actions for a specific target resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return for each paginated request.
-        --next-token=: The token to be used for the next set of paginated results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --resolve-to-resource-id=: The ID of the resolved resource.
-        --resolve-to-resource-type=: The type of the resolved resource.
-        --starting-token=: A token to specify where to start paginating.
-        --target-resource-id=!: The ID of the target resource.
-        --target-resource-type=!: The type of resource.
-      completion:
-        flag:
-            resolve-to-resource-type:
-                - ASSET
-            target-resource-type:
-                - ASSET
-                - COMPUTATION_MODEL
-    - name: list-assets
-      description: Retrieves a paginated list of asset summaries.
-      flags:
-        --asset-model-id=: The ID of the asset model by which to filter the list of assets.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: The filter for the requested list of assets.
+        --filter=: Filters the requested list of asset properties.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return for each paginated request.
@@ -727,68 +771,129 @@ commands:
         flag:
             filter:
                 - ALL
-                - TOP_LEVEL
-    - name: untag-resource
-      description: Removes a tag from an IoT SiteWise resource.
+                - BASE
+    - name: list-bulk-import-jobs
+      description: Retrieves a paginated list of bulk import job requests.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: You can use a filter to select the bulk import jobs that you want to retrieve.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource to untag.
-        --tag-keys=!: A list of keys for tags to remove from the resource.
-    - name: update-asset-model-composite-model
-      description: Updates a composite model and all of the assets that were created from the model.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return for each paginated request.
+        --next-token=: The token to be used for the next set of paginated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            filter:
+                - ALL
+                - PENDING
+                - RUNNING
+                - CANCELLED
+                - FAILED
+                - COMPLETED_WITH_FAILURES
+                - COMPLETED
+    - name: create-asset
+      description: Creates an asset from an existing asset model.
       flags:
-        --asset-model-composite-model-description=: A description for the composite model.
-        --asset-model-composite-model-external-id=: An external ID to assign to the asset model.
-        --asset-model-composite-model-id=!: The ID of a composite model on this asset model.
-        --asset-model-composite-model-name=!: A unique name for the composite model.
-        --asset-model-composite-model-properties=: The property definitions of the composite model.
-        --asset-model-id=!: The ID of the asset model, in UUID format.
+        --asset-description=: A description for the asset.
+        --asset-external-id=: An external ID to assign to the asset.
+        --asset-id=: The ID to assign to the asset, if desired.
+        --asset-model-id=!: The ID of the asset model from which to create the asset.
+        --asset-name=!: A friendly name for the asset.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --if-match=: The expected current entity tag (ETag) for the asset model’s latest or active version (specified using `matchForVersionType`).
-        --if-none-match=: Accepts **\*** to reject the update request if an active version (specified using `matchForVersionType` as `ACTIVE`) already exists for the asset model.
-        --match-for-version-type=: Specifies the asset model version type (`LATEST` or `ACTIVE`) used in conjunction with `If-Match` or `If-None-Match` headers to determine the target ETag for the update operation.
-      completion:
-        flag:
-            match-for-version-type:
-                - LATEST
-                - ACTIVE
-    - name: delete-asset-model
-      description: Deletes an asset model.
+        --tags=: A list of key-value pairs that contain metadata for the asset.
+    - name: create-portal
+      description: Creates a portal, which can contain projects and dashboards.
       flags:
-        --asset-model-id=!: The ID of the asset model to delete.
+        --alarms=: Contains the configuration information of an alarm created in an IoT SiteWise Monitor portal.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --if-match=: The expected current entity tag (ETag) for the asset model’s latest or active version (specified using `matchForVersionType`).
-        --if-none-match=: Accepts **\*** to reject the delete request if an active version (specified using `matchForVersionType` as `ACTIVE`) already exists for the asset model.
-        --match-for-version-type=: Specifies the asset model version type (`LATEST` or `ACTIVE`) used in conjunction with `If-Match` or `If-None-Match` headers to determine the target ETag for the delete operation.
+        --notification-sender-email=: The email address that sends alarm notifications.
+        --portal-auth-mode=: The service to use to authenticate users to the portal.
+        --portal-contact-email=!: The Amazon Web Services administrator's contact email address.
+        --portal-description=: A description for the portal.
+        --portal-logo-image-file=: A logo image to display in the portal.
+        --portal-name=!: A friendly name for the portal.
+        --portal-type-configuration=: The configuration entry associated with the specific portal type.
+        --portal-type=: Define the type of portal.
+        --role-arn=!: The [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of a service role that allows the portal's users to access your IoT SiteWise resources on your behalf.
+        --tags=: A list of key-value pairs that contain metadata for the portal.
       completion:
         flag:
-            match-for-version-type:
-                - LATEST
-                - ACTIVE
-    - name: describe-asset
-      description: Retrieves information about an asset.
-      flags:
-        --asset-id=!: The ID of the asset.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --exclude-properties: Whether or not to exclude asset properties from the response.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-exclude-properties: Whether or not to exclude asset properties from the response.
-    - name: describe-portal
-      description: Retrieves information about a portal.
+            portal-auth-mode:
+                - IAM
+                - SSO
+            portal-type:
+                - SITEWISE_PORTAL_V1
+                - SITEWISE_PORTAL_V2
+    - name: describe-gateway
+      description: Retrieves information about a gateway.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --gateway-id=!: The ID of the gateway device.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --portal-id=!: The ID of the portal.
+    - name: describe-storage-configuration
+      description: Retrieves information about the storage configuration for IoT SiteWise.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-asset-model-composite-models
+      description: Retrieves a paginated list of composite models associated with the asset model
+      flags:
+        --asset-model-id=!: The ID of the asset model.
+        --asset-model-version=: The version alias that specifies the latest or active version of the asset model.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return for each paginated request.
+        --next-token=: The token to be used for the next set of paginated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-datasets
+      description: Retrieves a paginated list of datasets for a specific target resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return for each paginated request.
+        --next-token=: The token for the next set of results, or null if there are no additional results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --source-type=!: The type of data source for the dataset.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            source-type:
+                - KENDRA
+    - name: list-time-series
+      description: Retrieves a paginated list of time series (data streams).
+      flags:
+        --alias-prefix=: The alias prefix of the time series.
+        --asset-id=: The ID of the asset in which the asset property was created.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return for each paginated request.
+        --next-token=: The token to be used for the next set of paginated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --time-series-type=: The type of the time series.
+      completion:
+        flag:
+            time-series-type:
+                - ASSOCIATED
+                - DISASSOCIATED
     - name: put-default-encryption-configuration
       description: Sets the default encryption configuration for the Amazon Web Services account.
       flags:
@@ -802,184 +907,60 @@ commands:
             encryption-type:
                 - SITEWISE_DEFAULT_ENCRYPTION
                 - KMS_BASED_ENCRYPTION
-    - name: update-dataset
-      description: Updates a dataset.
+    - name: create-gateway
+      description: Creates a gateway, which is a virtual or edge device that delivers industrial data streams from local servers to IoT SiteWise.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
-        --dataset-description=: A description about the dataset, and its functionality.
-        --dataset-id=!: The ID of the dataset.
-        --dataset-name=!: The name of the dataset.
-        --dataset-source=!: The data source for the dataset.
+        --gateway-name=!: A unique name for the gateway.
+        --gateway-platform=!: The gateway's platform.
+        --gateway-version=: The version of the gateway to create.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: batch-get-asset-property-value-history
-      description: Gets the historical values for one or more asset properties.
+        --tags=: A list of key-value pairs that contain metadata for the gateway.
+    - name: delete-asset
+      description: Deletes an asset.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --entries=!: The list of asset property historical value entries for the batch get request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return for each paginated request.
-        --next-token=: The token to be used for the next set of paginated results.
-    - name: create-access-policy
-      description: Creates an access policy that grants the specified identity (IAM Identity Center user, IAM Identity Center group, or IAM user) access to the specified IoT SiteWise Monitor portal or project resource.
-      flags:
-        --access-policy-identity=!: The identity for this access policy.
-        --access-policy-permission=!: The permission level for this access policy.
-        --access-policy-resource=!: The IoT SiteWise Monitor resource for this access policy.
+        --asset-id=!: The ID of the asset to delete.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: A list of key-value pairs that contain metadata for the access policy.
-      completion:
-        flag:
-            access-policy-permission:
-                - ADMINISTRATOR
-                - VIEWER
-    - name: delete-portal
-      description: Deletes a portal from IoT SiteWise Monitor.
+    - name: delete-computation-model
+      description: Deletes a computation model.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+        --computation-model-id=!: The ID of the computation model.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --portal-id=!: The ID of the portal to delete.
-    - name: describe-access-policy
-      description: Describes an access policy, which specifies an identity's access to an IoT SiteWise Monitor portal or project.
-      flags:
-        --access-policy-id=!: The ID of the access policy.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-logging-options
-      description: Retrieves the current IoT SiteWise logging options.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: put-storage-configuration
-      description: Configures storage settings for IoT SiteWise.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --disallow-ingest-null-na-n: Describes the configuration for ingesting NULL and NaN data.
-        --disassociated-data-storage=: Contains the storage configuration for time series (data streams) that aren't associated with asset properties.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --multi-layer-storage=: Identifies a storage destination.
-        --no-disallow-ingest-null-na-n: Describes the configuration for ingesting NULL and NaN data.
-        --retention-period=: ""
-        --storage-type=!: The storage tier that you specified for your data.
-        --warm-tier-retention-period=: Set this period to specify how long your data is stored in the warm tier before it is deleted.
-        --warm-tier=: A service managed storage tier optimized for analytical queries.
-      completion:
-        flag:
-            disassociated-data-storage:
-                - ENABLED
-                - DISABLED
-            storage-type:
-                - SITEWISE_DEFAULT_STORAGE
-                - MULTI_LAYER_STORAGE
-            warm-tier:
-                - ENABLED
-                - DISABLED
-    - name: create-dashboard
-      description: Creates a dashboard in an IoT SiteWise Monitor project.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
-        --dashboard-definition=!: The dashboard definition specified in a JSON literal.
-        --dashboard-description=: A description for the dashboard.
-        --dashboard-name=!: A friendly name for the dashboard.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --project-id=!: The ID of the project in which to create the dashboard.
-        --tags=: A list of key-value pairs that contain metadata for the dashboard.
-    - name: delete-time-series
-      description: Deletes a time series (data stream).
-      flags:
-        --alias=: The alias that identifies the time series.
-        --asset-id=: The ID of the asset in which the asset property was created.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --property-id=: The ID of the asset property.
-    - name: describe-asset-composite-model
-      description: Retrieves information about an asset composite model (also known as an asset component).
-      flags:
-        --asset-composite-model-id=!: The ID of a composite model on this asset.
-        --asset-id=!: The ID of the asset.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-asset-model
-      description: Retrieves information about an asset model.
-      flags:
-        --asset-model-id=!: The ID of the asset model.
-        --asset-model-version=: The version alias that specifies the latest or active version of the asset model.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --exclude-properties: Whether or not to exclude asset model properties from the response.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-exclude-properties: Whether or not to exclude asset model properties from the response.
-    - name: describe-dashboard
-      description: Retrieves information about a dashboard.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dashboard-id=!: The ID of the dashboard.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-gateway-capability-configuration
-      description: Each gateway capability defines data sources for a gateway.
-      flags:
-        --capability-namespace=!: The namespace of the capability configuration.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --gateway-id=!: The ID of the gateway that defines the capability configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-asset-property-value
-      description: Gets an asset property's current value.
+    - name: get-interpolated-asset-property-values
+      description: Get interpolated values for an asset property for a specified time interval, during a period of time.
       flags:
         --asset-id=: The ID of the asset, in UUID format.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time-in-seconds=!: The inclusive end of the range from which to interpolate data, expressed in seconds in Unix epoch time.
+        --end-time-offset-in-nanos=: The nanosecond offset converted from `endTimeInSeconds`.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --property-alias=: The alias that identifies the property, such as an OPC-UA server data stream path (for example, `/company/windfarm/3/turbine/7/temperature`).
-        --property-id=: The ID of the asset property, in UUID format.
-    - name: get-asset-property-value-history
-      description: Gets the history of an asset property's values.
-      flags:
-        --asset-id=: The ID of the asset, in UUID format.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --end-date=: The inclusive end of the range from which to query historical data, expressed in seconds in Unix epoch time.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --interval-in-seconds=!: The time interval in seconds over which to interpolate data.
+        --interval-window-in-seconds=: The query interval for the window, in seconds.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return for each paginated request.
         --next-token=: The token to be used for the next set of paginated results.
         --page-size=: The size of each page to get in the AWS service call.
         --property-alias=: The alias that identifies the property, such as an OPC-UA server data stream path (for example, `/company/windfarm/3/turbine/7/temperature`).
         --property-id=: The ID of the asset property, in UUID format.
-        --qualities=: The quality by which to filter asset data.
-        --start-date=: The exclusive start of the range from which to query historical data, expressed in seconds in Unix epoch time.
+        --quality=!: The quality of the asset property value.
+        --start-time-in-seconds=!: The exclusive start of the range from which to interpolate data, expressed in seconds in Unix epoch time.
+        --start-time-offset-in-nanos=: The nanosecond offset converted from `startTimeInSeconds`.
         --starting-token=: A token to specify where to start paginating.
-        --time-ordering=: The chronological sorting order of the requested information.
+        --type=!: The interpolation type.
       completion:
         flag:
-            time-ordering:
-                - ASCENDING
-                - DESCENDING
-    - name: batch-associate-project-assets
-      description: Associates a group (batch) of assets with an IoT SiteWise Monitor project.
-      flags:
-        --asset-ids=!: The IDs of the assets to be associated to the project.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --project-id=!: The ID of the project to which to associate the assets.
+            quality:
+                - GOOD
+                - BAD
+                - UNCERTAIN
     - name: list-access-policies
       description: Retrieves a paginated list of access policies for an identity (an IAM Identity Center user, an IAM Identity Center group, or an IAM user) or an IoT SiteWise Monitor resource (a portal or project).
       flags:
@@ -1005,6 +986,166 @@ commands:
             resource-type:
                 - PORTAL
                 - PROJECT
+    - name: list-project-assets
+      description: Retrieves a paginated list of assets associated with an IoT SiteWise Monitor project.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return for each paginated request.
+        --next-token=: The token to be used for the next set of paginated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --project-id=!: The ID of the project.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: Retrieves the list of tags for an IoT SiteWise resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource.
+    - name: delete-gateway
+      description: Deletes a gateway from IoT SiteWise.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --gateway-id=!: The ID of the gateway to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-asset-model-composite-model
+      description: Retrieves information about an asset model composite model (also known as an asset model component).
+      flags:
+        --asset-model-composite-model-id=!: The ID of a composite model on this asset model.
+        --asset-model-id=!: The ID of the asset model.
+        --asset-model-version=: The version alias that specifies the latest or active version of the asset model.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-asset-property-aggregates
+      description: Gets aggregated values for an asset property.
+      flags:
+        --aggregate-types=!: The data aggregating function.
+        --asset-id=: The ID of the asset, in UUID format.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-date=!: The inclusive end of the range from which to query historical data, expressed in seconds in Unix epoch time.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return for each paginated request.
+        --next-token=: The token to be used for the next set of paginated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --property-alias=: The alias that identifies the property, such as an OPC-UA server data stream path (for example, `/company/windfarm/3/turbine/7/temperature`).
+        --property-id=: The ID of the asset property, in UUID format.
+        --qualities=: The quality by which to filter asset data.
+        --resolution=!: The time interval over which to aggregate data.
+        --start-date=!: The exclusive start of the range from which to query historical data, expressed in seconds in Unix epoch time.
+        --starting-token=: A token to specify where to start paginating.
+        --time-ordering=: The chronological sorting order of the requested information.
+      completion:
+        flag:
+            time-ordering:
+                - ASCENDING
+                - DESCENDING
+    - name: list-asset-model-properties
+      description: Retrieves a paginated list of properties associated with an asset model.
+      flags:
+        --asset-model-id=!: The ID of the asset model.
+        --asset-model-version=: The version alias that specifies the latest or active version of the asset model.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: Filters the requested list of asset model properties.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return for each paginated request.
+        --next-token=: The token to be used for the next set of paginated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            filter:
+                - ALL
+                - BASE
+    - name: list-composition-relationships
+      description: Retrieves a paginated list of composition relationships for an asset model of type `COMPONENT_MODEL`.
+      flags:
+        --asset-model-id=!: The ID of the asset model.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return for each paginated request.
+        --next-token=: The token to be used for the next set of paginated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: tag-resource
+      description: Adds tags to an IoT SiteWise resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource to tag.
+        --tags=!: A list of key-value pairs that contain metadata for the resource.
+    - name: update-asset
+      description: Updates an asset's name.
+      flags:
+        --asset-description=: A description for the asset.
+        --asset-external-id=: An external ID to assign to the asset.
+        --asset-id=!: The ID of the asset to update.
+        --asset-name=!: A friendly name for the asset.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-asset-model-composite-model
+      description: Updates a composite model and all of the assets that were created from the model.
+      flags:
+        --asset-model-composite-model-description=: A description for the composite model.
+        --asset-model-composite-model-external-id=: An external ID to assign to the asset model.
+        --asset-model-composite-model-id=!: The ID of a composite model on this asset model.
+        --asset-model-composite-model-name=!: A unique name for the composite model.
+        --asset-model-composite-model-properties=: The property definitions of the composite model.
+        --asset-model-id=!: The ID of the asset model, in UUID format.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --if-match=: The expected current entity tag (ETag) for the asset model’s latest or active version (specified using `matchForVersionType`).
+        --if-none-match=: Accepts **\*** to reject the update request if an active version (specified using `matchForVersionType` as `ACTIVE`) already exists for the asset model.
+        --match-for-version-type=: Specifies the asset model version type (`LATEST` or `ACTIVE`) used in conjunction with `If-Match` or `If-None-Match` headers to determine the target ETag for the update operation.
+      completion:
+        flag:
+            match-for-version-type:
+                - LATEST
+                - ACTIVE
+    - name: batch-disassociate-project-assets
+      description: Disassociates a group (batch) of assets from an IoT SiteWise Monitor project.
+      flags:
+        --asset-ids=!: The IDs of the assets to be disassociated from the project.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --project-id=!: The ID of the project from which to disassociate the assets.
+    - name: create-computation-model
+      description: Create a computation model with a configuration and data binding.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+        --computation-model-configuration=!: The configuration for the computation model.
+        --computation-model-data-binding=!: The data binding for the computation model.
+        --computation-model-description=: The description of the computation model.
+        --computation-model-name=!: The name of the computation model.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: A list of key-value pairs that contain metadata for the asset.
+    - name: describe-asset-property
+      description: Retrieves information about an asset property.
+      flags:
+        --asset-id=!: The ID of the asset.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --property-id=!: The ID of the asset property.
     - name: list-asset-models
       description: Retrieves a paginated list of summaries of all asset models.
       flags:
@@ -1018,49 +1159,113 @@ commands:
         --next-token=: The token to be used for the next set of paginated results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-computation-models
-      description: Retrieves a paginated list of summaries of all computation models.
+    - name: put-asset-model-interface-relationship
+      description: Creates or updates an interface relationship between an asset model and an interface asset model.
       flags:
+        --asset-model-id=!: The ID of the asset model.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --computation-model-type=: The type of computation model.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return for each paginated request.
-        --next-token=: The token to be used for the next set of paginated results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            computation-model-type:
-                - ANOMALY_DETECTION
-    - name: list-interface-relationships
-      description: Retrieves a paginated list of asset models that have a specific interface asset model applied to them.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --interface-asset-model-id=!: The ID of the interface asset model.
-        --max-items=: The  total number of items to return in the command's output.
+        --property-mapping-configuration=!: The configuration for mapping properties from the interface asset model to the asset model where the interface is applied.
+    - name: update-asset-model
+      description: Updates an asset model and all of the assets that were created from the model.
+      flags:
+        --asset-model-composite-models=: The composite models that are part of this asset model.
+        --asset-model-description=: A description for the asset model.
+        --asset-model-external-id=: An external ID to assign to the asset model.
+        --asset-model-hierarchies=: The updated hierarchy definitions of the asset model.
+        --asset-model-id=!: The ID of the asset model to update.
+        --asset-model-name=!: A unique name for the asset model.
+        --asset-model-properties=: The updated property definitions of the asset model.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --if-match=: The expected current entity tag (ETag) for the asset model’s latest or active version (specified using `matchForVersionType`).
+        --if-none-match=: Accepts **\*** to reject the update request if an active version (specified using `matchForVersionType` as `ACTIVE`) already exists for the asset model.
+        --match-for-version-type=: Specifies the asset model version type (`LATEST` or `ACTIVE`) used in conjunction with `If-Match` or `If-None-Match` headers to determine the target ETag for the update operation.
+      completion:
+        flag:
+            match-for-version-type:
+                - LATEST
+                - ACTIVE
+    - name: update-portal
+      description: Updates an IoT SiteWise Monitor portal.
+      flags:
+        --alarms=: Contains the configuration information of an alarm created in an IoT SiteWise Monitor portal.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --notification-sender-email=: The email address that sends alarm notifications.
+        --portal-contact-email=!: The Amazon Web Services administrator's contact email address.
+        --portal-description=: A new description for the portal.
+        --portal-id=!: The ID of the portal to update.
+        --portal-logo-image=: ""
+        --portal-name=!: A new friendly name for the portal.
+        --portal-type-configuration=: The configuration entry associated with the specific portal type.
+        --portal-type=: Define the type of portal.
+        --role-arn=!: The [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of a service role that allows the portal's users to access your IoT SiteWise resources on your behalf.
+      completion:
+        flag:
+            portal-type:
+                - SITEWISE_PORTAL_V1
+                - SITEWISE_PORTAL_V2
+    - name: batch-get-asset-property-aggregates
+      description: Gets aggregated values (for example, average, minimum, and maximum) for one or more asset properties.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entries=!: The list of asset property aggregate entries for the batch get request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The maximum number of results to return for each paginated request.
         --next-token=: The token to be used for the next set of paginated results.
+    - name: batch-get-asset-property-value-history
+      description: Gets the historical values for one or more asset properties.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entries=!: The list of asset property historical value entries for the batch get request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return for each paginated request.
+        --next-token=: The token to be used for the next set of paginated results.
+    - name: describe-computation-model-execution-summary
+      description: Retrieves information about the execution summary of a computation model.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --computation-model-id=!: The ID of the computation model.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resolve-to-resource-id=: The ID of the resolved resource.
+        --resolve-to-resource-type=: The type of the resolved resource.
+      completion:
+        flag:
+            resolve-to-resource-type:
+                - ASSET
+    - name: describe-time-series
+      description: Retrieves information about a time series (data stream).
+      flags:
+        --alias=: The alias that identifies the time series.
+        --asset-id=: The ID of the asset in which the asset property was created.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --property-id=: The ID of the asset property.
+    - name: execute-query
+      description: Run SQL queries to retrieve metadata and time-series data from asset models, assets, measurements, metrics, transforms, and aggregates.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return at one time.
+        --next-token=: The string that specifies the next page of results.
         --page-size=: The size of each page to get in the AWS service call.
+        --query-statement=!: The IoT SiteWise query statement.
         --starting-token=: A token to specify where to start paginating.
-    - name: put-logging-options
-      description: Sets logging options for IoT SiteWise.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --logging-options=!: The logging options to set.
-    - name: update-gateway
-      description: Updates a gateway's name.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --gateway-id=!: The ID of the gateway to update.
-        --gateway-name=!: A unique name for the gateway.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: associate-assets
       description: Associates a child asset with the given parent asset through a hierarchy defined in the parent asset's model.
       flags:
@@ -1071,234 +1276,9 @@ commands:
         --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --hierarchy-id=!: The ID of a hierarchy in the parent asset's model.
-    - name: describe-action
-      description: Retrieves information about an action.
-      flags:
-        --action-id=!: The ID of the action.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-asset-properties
-      description: Retrieves a paginated list of properties associated with an asset.
-      flags:
-        --asset-id=!: The ID of the asset.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: Filters the requested list of asset properties.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return for each paginated request.
-        --next-token=: The token to be used for the next set of paginated results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            filter:
-                - ALL
-                - BASE
-    - name: associate-time-series-to-asset-property
-      description: Associates a time series (data stream) with an asset property.
-      flags:
-        --alias=!: The alias that identifies the time series.
-        --asset-id=!: The ID of the asset in which the asset property was created.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --property-id=!: The ID of the asset property.
-    - name: create-asset
-      description: Creates an asset from an existing asset model.
-      flags:
-        --asset-description=: A description for the asset.
-        --asset-external-id=: An external ID to assign to the asset.
-        --asset-id=: The ID to assign to the asset, if desired.
-        --asset-model-id=!: The ID of the asset model from which to create the asset.
-        --asset-name=!: A friendly name for the asset.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: A list of key-value pairs that contain metadata for the asset.
-    - name: delete-asset
-      description: Deletes an asset.
-      flags:
-        --asset-id=!: The ID of the asset to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-asset-relationships
-      description: Retrieves a paginated list of asset relationships for an asset.
-      flags:
-        --asset-id=!: The ID of the asset.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return for each paginated request.
-        --next-token=: The token to be used for the next set of paginated results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --traversal-type=!: The type of traversal to use to identify asset relationships.
-      completion:
-        flag:
-            traversal-type:
-                - PATH_TO_ROOT
-    - name: list-gateways
-      description: Retrieves a paginated list of gateways.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return for each paginated request.
-        --next-token=: The token to be used for the next set of paginated results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: describe-computation-model
-      description: Retrieves information about a computation model.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --computation-model-id=!: The ID of the computation model.
-        --computation-model-version=: The version of the computation model.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-dataset
-      description: Retrieves information about a dataset.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-id=!: The ID of the dataset.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-default-encryption-configuration
-      description: Retrieves information about the default encryption configuration for the Amazon Web Services account in the default or specified Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-asset-model-interface-relationship
-      description: Retrieves information about an interface relationship between an asset model and an interface asset model.
-      flags:
-        --asset-model-id=!: The ID of the asset model.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --interface-asset-model-id=!: The ID of the interface asset model.
-    - name: disassociate-assets
-      description: Disassociates a child asset from the given parent asset through a hierarchy defined in the parent asset's model.
-      flags:
-        --asset-id=!: The ID of the parent asset from which to disassociate the child asset.
-        --child-asset-id=!: The ID of the child asset to disassociate.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hierarchy-id=!: The ID of a hierarchy in the parent asset's model.
-    - name: disassociate-time-series-from-asset-property
-      description: Disassociates a time series (data stream) from an asset property.
-      flags:
-        --alias=!: The alias that identifies the time series.
-        --asset-id=!: The ID of the asset in which the asset property was created.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --property-id=!: The ID of the asset property.
-    - name: list-asset-model-composite-models
-      description: Retrieves a paginated list of composite models associated with the asset model
-      flags:
-        --asset-model-id=!: The ID of the asset model.
-        --asset-model-version=: The version alias that specifies the latest or active version of the asset model.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return for each paginated request.
-        --next-token=: The token to be used for the next set of paginated results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-bulk-import-jobs
-      description: Retrieves a paginated list of bulk import job requests.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: You can use a filter to select the bulk import jobs that you want to retrieve.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return for each paginated request.
-        --next-token=: The token to be used for the next set of paginated results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            filter:
-                - ALL
-                - PENDING
-                - RUNNING
-                - CANCELLED
-                - FAILED
-                - COMPLETED_WITH_FAILURES
-                - COMPLETED
-    - name: list-computation-model-resolve-to-resources
-      description: Lists all distinct resources that are resolved from the executed actions of the computation model.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --computation-model-id=!: The ID of the computation model for which to list resolved resources.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results returned for each paginated request.
-        --next-token=: The token used for the next set of paginated results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: tag-resource
-      description: Adds tags to an IoT SiteWise resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource to tag.
-        --tags=!: A list of key-value pairs that contain metadata for the resource.
-    - name: update-asset-property
-      description: Updates an asset property's alias and notification state.
-      flags:
-        --asset-id=!: The ID of the asset to be updated.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --property-alias=: The alias that identifies the property, such as an OPC-UA server data stream path (for example, `/company/windfarm/3/turbine/7/temperature`).
-        --property-id=!: The ID of the asset property to be updated.
-        --property-notification-state=: The MQTT notification state (enabled or disabled) for this asset property.
-        --property-unit=: The unit of measure (such as Newtons or RPM) of the asset property.
-      completion:
-        flag:
-            property-notification-state:
-                - ENABLED
-                - DISABLED
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:
-        - name: asset-model-not-exists
-          description: Retrieves information about an asset model.
-          flags:
-            --asset-model-id=!: The ID of the asset model.
-            --asset-model-version=: The version alias that specifies the latest or active version of the asset model.
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --exclude-properties: Whether or not to exclude asset model properties from the response.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-            --no-exclude-properties: Whether or not to exclude asset model properties from the response.
-        - name: asset-model-active
-          description: Retrieves information about an asset model.
-          flags:
-            --asset-model-id=!: The ID of the asset model.
-            --asset-model-version=: The version alias that specifies the latest or active version of the asset model.
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --exclude-properties: Whether or not to exclude asset model properties from the response.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-            --no-exclude-properties: Whether or not to exclude asset model properties from the response.
         - name: asset-not-exists
           description: Retrieves information about an asset.
           flags:
@@ -1331,3 +1311,23 @@ commands:
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --portal-id=!: The ID of the portal.
+        - name: asset-model-not-exists
+          description: Retrieves information about an asset model.
+          flags:
+            --asset-model-id=!: The ID of the asset model.
+            --asset-model-version=: The version alias that specifies the latest or active version of the asset model.
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --exclude-properties: Whether or not to exclude asset model properties from the response.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --no-exclude-properties: Whether or not to exclude asset model properties from the response.
+        - name: asset-model-active
+          description: Retrieves information about an asset model.
+          flags:
+            --asset-model-id=!: The ID of the asset model.
+            --asset-model-version=: The version alias that specifies the latest or active version of the asset model.
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --exclude-properties: Whether or not to exclude asset model properties from the response.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --no-exclude-properties: Whether or not to exclude asset model properties from the response.

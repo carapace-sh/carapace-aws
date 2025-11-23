@@ -1,6 +1,98 @@
 name: lookoutequipment
 description: Amazon Lookout for Equipment
 commands:
+    - name: import-dataset
+      description: Imports a dataset.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A unique identifier for the request.
+        --dataset-name=: The name of the machine learning dataset to be created.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --server-side-kms-key-id=: Provides the identifier of the KMS key key used to encrypt model data by Amazon Lookout for Equipment.
+        --source-dataset-arn=!: The Amazon Resource Name (ARN) of the dataset to import.
+        --tags=: Any tags associated with the dataset to be created.
+    - name: list-inference-executions
+      description: Lists all inference executions that have been performed by the specified inference scheduler.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-end-time-before=: The time reference in the inferenced dataset before which Amazon Lookout for Equipment stopped the inference execution.
+        --data-start-time-after=: The time reference in the inferenced dataset after which Amazon Lookout for Equipment started the inference execution.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --inference-scheduler-name=!: The name of the inference scheduler for the inference execution listed.
+        --max-results=: Specifies the maximum number of inference executions to list.
+        --next-token=: An opaque pagination token indicating where to continue the listing of inference executions.
+        --status=: The status of the inference execution.
+      completion:
+        flag:
+            status:
+                - IN_PROGRESS
+                - SUCCESS
+                - FAILED
+    - name: list-models
+      description: Generates a list of all models in the account, including model name and ARN, dataset, and status.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-name-begins-with=: The beginning of the name of the dataset of the machine learning models to be listed.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Specifies the maximum number of machine learning models to list.
+        --model-name-begins-with=: The beginning of the name of the machine learning models being listed.
+        --next-token=: An opaque pagination token indicating where to continue the listing of machine learning models.
+        --status=: The status of the machine learning model.
+      completion:
+        flag:
+            status:
+                - IN_PROGRESS
+                - SUCCESS
+                - FAILED
+                - IMPORT_IN_PROGRESS
+    - name: create-label
+      description: Creates a label for an event.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A unique identifier for the request to create a label.
+        --end-time=!: The end time of the labeled event.
+        --equipment=: Indicates that a label pertains to a particular piece of equipment.
+        --fault-code=: Provides additional information about the label.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --label-group-name=!: The name of a group of labels.
+        --notes=: Metadata providing additional information about the label.
+        --rating=!: Indicates whether a labeled event represents an anomaly.
+        --start-time=!: The start time of the labeled event.
+      completion:
+        flag:
+            rating:
+                - ANOMALY
+                - NO_ANOMALY
+                - NEUTRAL
+    - name: delete-label
+      description: Deletes a label.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --label-group-name=!: The name of the label group that contains the label that you want to delete.
+        --label-id=!: The ID of the label that you want to delete.
+    - name: list-data-ingestion-jobs
+      description: Provides a list of all data ingestion jobs, including dataset name and ARN, S3 location of the input data, status, and so on.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-name=: The name of the dataset being used for the data ingestion job.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Specifies the maximum number of data ingestion jobs to list.
+        --next-token=: An opaque pagination token indicating where to continue the listing of data ingestion jobs.
+        --status=: Indicates the status of the data ingestion job.
+      completion:
+        flag:
+            status:
+                - IN_PROGRESS
+                - SUCCESS
+                - FAILED
+                - IMPORT_IN_PROGRESS
     - name: list-inference-schedulers
       description: Retrieves a list of all inference schedulers currently available for your account.
       flags:
@@ -19,6 +111,110 @@ commands:
                 - RUNNING
                 - STOPPING
                 - STOPPED
+    - name: untag-resource
+      description: Removes a specific tag from a given resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to which the tag is currently associated.
+        --tag-keys=!: Specifies the key of the tag to be removed from a specified resource.
+    - name: update-label-group
+      description: Updates the label group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fault-codes=: Updates the code indicating the type of anomaly associated with the label.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --label-group-name=!: The name of the label group to be updated.
+    - name: create-model
+      description: Creates a machine learning model for data inference.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A unique identifier for the request.
+        --data-pre-processing-configuration=: The configuration is the `TargetSamplingRate`, which is the sampling rate of the data after post processing by Amazon Lookout for Equipment.
+        --dataset-name=!: The name of the dataset for the machine learning model being created.
+        --dataset-schema=: The data schema for the machine learning model being created.
+        --evaluation-data-end-time=: Indicates the time reference in the dataset that should be used to end the subset of evaluation data for the machine learning model.
+        --evaluation-data-start-time=: Indicates the time reference in the dataset that should be used to begin the subset of evaluation data for the machine learning model.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --labels-input-configuration=: The input configuration for the labels being used for the machine learning model that's being created.
+        --model-diagnostics-output-configuration=: The Amazon S3 location where you want Amazon Lookout for Equipment to save the pointwise model diagnostics.
+        --model-name=!: The name for the machine learning model to be created.
+        --off-condition=: Indicates that the asset associated with this sensor has been shut off.
+        --role-arn=: The Amazon Resource Name (ARN) of a role with permission to access the data source being used to create the machine learning model.
+        --server-side-kms-key-id=: Provides the identifier of the KMS key used to encrypt model data by Amazon Lookout for Equipment.
+        --tags=: Any tags associated with the machine learning model being created.
+        --training-data-end-time=: Indicates the time reference in the dataset that should be used to end the subset of training data for the machine learning model.
+        --training-data-start-time=: Indicates the time reference in the dataset that should be used to begin the subset of training data for the machine learning model.
+    - name: create-retraining-scheduler
+      description: Creates a retraining scheduler on the specified model.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A unique identifier for the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lookback-window=!: The number of past days of data that will be used for retraining.
+        --model-name=!: The name of the model to add the retraining scheduler to.
+        --promote-mode=: Indicates how the service will use new models.
+        --retraining-frequency=!: 'This parameter uses the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Durations) standard to set the frequency at which you want retraining to occur in terms of Years, Months, and/or Days (note: other parameters like Time are not currently supported).'
+        --retraining-start-date=: The start date for the retraining scheduler.
+      completion:
+        flag:
+            promote-mode:
+                - MANAGED
+                - MANUAL
+    - name: delete-label-group
+      description: Deletes a group of labels.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --label-group-name=!: The name of the label group that you want to delete.
+    - name: describe-retraining-scheduler
+      description: Provides a description of the retraining scheduler, including information such as the model name and retraining parameters.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --model-name=!: The name of the model that the retraining scheduler is attached to.
+    - name: list-inference-events
+      description: Lists all inference events that have been found for the specified inference scheduler.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --inference-scheduler-name=!: The name of the inference scheduler for the inference events listed.
+        --interval-end-time=!: Returns all the inference events with an end start time equal to or greater than less than the end time given.
+        --interval-start-time=!: Lookout for Equipment will return all the inference events with an end time equal to or greater than the start time given.
+        --max-results=: Specifies the maximum number of inference events to list.
+        --next-token=: An opaque pagination token indicating where to continue the listing of inference events.
+    - name: list-tags-for-resource
+      description: Lists all the tags for a specified resource, including key and value.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource (such as the dataset or model) that is the focus of the `ListTagsForResource` operation.
+    - name: tag-resource
+      description: Associates a given tag to a resource in your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the specific resource to which the tag should be associated.
+        --tags=!: The tag or tags to be associated with a specific resource.
+    - name: create-label-group
+      description: Creates a group of labels.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A unique identifier for the request to create a label group.
+        --fault-codes=: The acceptable fault codes (indicating the type of anomaly associated with the label) that can be used with this label group.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --label-group-name=!: Names a group of labels.
+        --tags=: Tags that provide metadata about the label group you are creating.
     - name: put-resource-policy
       description: Creates a resource control policy for a given resource.
       flags:
@@ -29,28 +225,43 @@ commands:
         --policy-revision-id=: A unique identifier for a revision of the resource policy.
         --resource-arn=!: The Amazon Resource Name (ARN) of the resource for which the policy is being created.
         --resource-policy=!: The JSON-formatted resource policy to create.
-    - name: start-retraining-scheduler
-      description: Starts a retraining scheduler.
+    - name: update-active-model-version
+      description: Sets the active model version for a given machine learning model.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-name=!: The name of the model whose retraining scheduler you want to start.
-    - name: tag-resource
-      description: Associates a given tag to a resource in your account.
+        --model-name=!: The name of the machine learning model for which the active model version is being set.
+        --model-version=!: The version of the machine learning model for which the active model version is being set.
+    - name: update-retraining-scheduler
+      description: Updates a retraining scheduler.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the specific resource to which the tag should be associated.
-        --tags=!: The tag or tags to be associated with a specific resource.
-    - name: delete-resource-policy
-      description: Deletes the resource policy attached to the resource.
+        --lookback-window=: The number of past days of data that will be used for retraining.
+        --model-name=!: The name of the model whose retraining scheduler you want to update.
+        --promote-mode=: Indicates how the service will use new models.
+        --retraining-frequency=: 'This parameter uses the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Durations) standard to set the frequency at which you want retraining to occur in terms of Years, Months, and/or Days (note: other parameters like Time are not currently supported).'
+        --retraining-start-date=: The start date for the retraining scheduler.
+      completion:
+        flag:
+            promote-mode:
+                - MANAGED
+                - MANUAL
+    - name: list-labels
+      description: Provides a list of labels.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --equipment=: Lists the labels that pertain to a particular piece of equipment.
+        --fault-code=: Returns labels with a particular fault code.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource for which the resource policy should be deleted.
+        --interval-end-time=: Returns all labels with a start time earlier than the end time given.
+        --interval-start-time=: Returns all the labels with a end time equal to or later than the start time given.
+        --label-group-name=!: Returns the name of the label group.
+        --max-results=: Specifies the maximum number of labels to list.
+        --next-token=: An opaque pagination token indicating where to continue the listing of label groups.
     - name: list-model-versions
       description: Generates a list of all model versions for a given model, including the model version, model version ARN, and status.
       flags:
@@ -78,44 +289,45 @@ commands:
                 - FAILED
                 - IMPORT_IN_PROGRESS
                 - CANCELED
-    - name: start-inference-scheduler
-      description: Starts an inference scheduler.
+    - name: update-model
+      description: Updates a model in the account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --inference-scheduler-name=!: The name of the inference scheduler to be started.
-    - name: stop-inference-scheduler
-      description: Stops an inference scheduler.
+        --labels-input-configuration=: ""
+        --model-diagnostics-output-configuration=: The Amazon S3 location where you want Amazon Lookout for Equipment to save the pointwise model diagnostics for the model.
+        --model-name=!: The name of the model to update.
+        --role-arn=: The ARN of the model to update.
+    - name: delete-model
+      description: Deletes a machine learning model currently available for Amazon Lookout for Equipment.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --inference-scheduler-name=!: The name of the inference scheduler to be stopped.
-    - name: untag-resource
-      description: Removes a specific tag from a given resource.
+        --model-name=!: The name of the machine learning model to be deleted.
+    - name: delete-retraining-scheduler
+      description: Deletes a retraining scheduler from a model.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to which the tag is currently associated.
-        --tag-keys=!: Specifies the key of the tag to be removed from a specified resource.
-    - name: update-retraining-scheduler
-      description: Updates a retraining scheduler.
+        --model-name=!: The name of the model whose retraining scheduler you want to delete.
+    - name: describe-data-ingestion-job
+      description: Provides information on a specific data ingestion job such as creation time, dataset ARN, and status.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lookback-window=: The number of past days of data that will be used for retraining.
-        --model-name=!: The name of the model whose retraining scheduler you want to update.
-        --promote-mode=: Indicates how the service will use new models.
-        --retraining-frequency=: 'This parameter uses the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Durations) standard to set the frequency at which you want retraining to occur in terms of Years, Months, and/or Days (note: other parameters like Time are not currently supported).'
-        --retraining-start-date=: The start date for the retraining scheduler.
-      completion:
-        flag:
-            promote-mode:
-                - MANAGED
-                - MANUAL
+        --job-id=!: The job ID of the data ingestion job.
+    - name: describe-label
+      description: Returns the name of the label.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --label-group-name=!: Returns the name of the group containing the label.
+        --label-id=!: Returns the ID of the label.
     - name: import-model-version
       description: Imports a model that has been trained successfully.
       flags:
@@ -137,68 +349,13 @@ commands:
                 - NO_IMPORT
                 - ADD_WHEN_EMPTY
                 - OVERWRITE
-    - name: delete-retraining-scheduler
-      description: Deletes a retraining scheduler from a model.
+    - name: stop-inference-scheduler
+      description: Stops an inference scheduler.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-name=!: The name of the model whose retraining scheduler you want to delete.
-    - name: create-label-group
-      description: Creates a group of labels.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: A unique identifier for the request to create a label group.
-        --fault-codes=: The acceptable fault codes (indicating the type of anomaly associated with the label) that can be used with this label group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --label-group-name=!: Names a group of labels.
-        --tags=: Tags that provide metadata about the label group you are creating.
-    - name: delete-label
-      description: Deletes a label.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --label-group-name=!: The name of the label group that contains the label that you want to delete.
-        --label-id=!: The ID of the label that you want to delete.
-    - name: describe-dataset
-      description: Provides a JSON description of the data in each time series dataset, including names, column names, and data types.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-name=!: The name of the dataset to be described.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-label-group
-      description: Returns information about the label group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --label-group-name=!: Returns the name of the label group.
-    - name: list-labels
-      description: Provides a list of labels.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --equipment=: Lists the labels that pertain to a particular piece of equipment.
-        --fault-code=: Returns labels with a particular fault code.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --interval-end-time=: Returns all labels with a start time earlier than the end time given.
-        --interval-start-time=: Returns all the labels with a end time equal to or later than the start time given.
-        --label-group-name=!: Returns the name of the label group.
-        --max-results=: Specifies the maximum number of labels to list.
-        --next-token=: An opaque pagination token indicating where to continue the listing of label groups.
-    - name: list-sensor-statistics
-      description: Lists statistics about the data collected for each of the sensors that have been successfully ingested in the particular dataset.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-name=!: The name of the dataset associated with the list of Sensor Statistics.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ingestion-job-id=: The ingestion job id associated with the list of Sensor Statistics.
-        --max-results=: Specifies the maximum number of sensors for which to retrieve statistics.
-        --next-token=: An opaque pagination token indicating where to continue the listing of sensor statistics.
+        --inference-scheduler-name=!: The name of the inference scheduler to be stopped.
     - name: create-inference-scheduler
       description: Creates a scheduled inference.
       flags:
@@ -230,31 +387,37 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --dataset-name=!: The name of the dataset to be deleted.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-inference-scheduler
-      description: Specifies information about the inference scheduler being used, including name, model, status, and associated metadata
+    - name: delete-inference-scheduler
+      description: Deletes an inference scheduler that has been set up.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --inference-scheduler-name=!: The name of the inference scheduler being described.
-    - name: list-inference-executions
-      description: Lists all inference executions that have been performed by the specified inference scheduler.
+        --inference-scheduler-name=!: The name of the inference scheduler to be deleted.
+    - name: describe-model
+      description: Provides a JSON containing the overall information about a specific machine learning model, including model name and ARN, dataset, training and evaluation information, status, and so on.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-end-time-before=: The time reference in the inferenced dataset before which Amazon Lookout for Equipment stopped the inference execution.
-        --data-start-time-after=: The time reference in the inferenced dataset after which Amazon Lookout for Equipment started the inference execution.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --inference-scheduler-name=!: The name of the inference scheduler for the inference execution listed.
-        --max-results=: Specifies the maximum number of inference executions to list.
-        --next-token=: An opaque pagination token indicating where to continue the listing of inference executions.
-        --status=: The status of the inference execution.
-      completion:
-        flag:
-            status:
-                - IN_PROGRESS
-                - SUCCESS
-                - FAILED
+        --model-name=!: The name of the machine learning model to be described.
+    - name: describe-model-version
+      description: Retrieves information about a specific machine learning model version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --model-name=!: The name of the machine learning model that this version belongs to.
+        --model-version=!: The version of the machine learning model.
+    - name: list-datasets
+      description: Lists all datasets currently available in your account, filtering on the dataset name.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-name-begins-with=: The beginning of the name of the datasets to be listed.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Specifies the maximum number of datasets to list.
+        --next-token=: An opaque pagination token indicating where to continue the listing of datasets.
     - name: list-label-groups
       description: Returns a list of the label groups.
       flags:
@@ -264,13 +427,75 @@ commands:
         --label-group-name-begins-with=: The beginning of the name of the label groups to be listed.
         --max-results=: Specifies the maximum number of label groups to list.
         --next-token=: An opaque pagination token indicating where to continue the listing of label groups.
-    - name: list-tags-for-resource
-      description: Lists all the tags for a specified resource, including key and value.
+    - name: list-retraining-schedulers
+      description: Lists all retraining schedulers in your account, filtering by model name prefix and status.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource (such as the dataset or model) that is the focus of the `ListTagsForResource` operation.
+        --max-results=: Specifies the maximum number of retraining schedulers to list.
+        --model-name-begins-with=: Specify this field to only list retraining schedulers whose machine learning models begin with the value you specify.
+        --next-token=: If the number of results exceeds the maximum, a pagination token is returned.
+        --status=: Specify this field to only list retraining schedulers whose status matches the value you specify.
+      completion:
+        flag:
+            status:
+                - PENDING
+                - RUNNING
+                - STOPPING
+                - STOPPED
+    - name: create-dataset
+      description: Creates a container for a collection of data being ingested for analysis.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A unique identifier for the request.
+        --dataset-name=!: The name of the dataset being created.
+        --dataset-schema=: A JSON description of the data that is in each time series dataset, including names, column names, and data types.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --server-side-kms-key-id=: Provides the identifier of the KMS key used to encrypt dataset data by Amazon Lookout for Equipment.
+        --tags=: Any tags associated with the ingested data described in the dataset.
+    - name: delete-resource-policy
+      description: Deletes the resource policy attached to the resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource for which the resource policy should be deleted.
+    - name: list-sensor-statistics
+      description: Lists statistics about the data collected for each of the sensors that have been successfully ingested in the particular dataset.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-name=!: The name of the dataset associated with the list of Sensor Statistics.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ingestion-job-id=: The ingestion job id associated with the list of Sensor Statistics.
+        --max-results=: Specifies the maximum number of sensors for which to retrieve statistics.
+        --next-token=: An opaque pagination token indicating where to continue the listing of sensor statistics.
+    - name: start-data-ingestion-job
+      description: Starts a data ingestion job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A unique identifier for the request.
+        --dataset-name=!: The name of the dataset being used by the data ingestion job.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ingestion-input-configuration=!: Specifies information for the input data for the data ingestion job, including dataset S3 location.
+        --role-arn=!: The Amazon Resource Name (ARN) of a role with permission to access the data source for the data ingestion job.
+    - name: start-inference-scheduler
+      description: Starts an inference scheduler.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --inference-scheduler-name=!: The name of the inference scheduler to be started.
+    - name: start-retraining-scheduler
+      description: Starts a retraining scheduler.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --model-name=!: The name of the model whose retraining scheduler you want to start.
     - name: stop-retraining-scheduler
       description: Stops a retraining scheduler.
       flags:
@@ -278,69 +503,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --model-name=!: The name of the model whose retraining scheduler you want to stop.
-    - name: update-model
-      description: Updates a model in the account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --labels-input-configuration=: ""
-        --model-diagnostics-output-configuration=: The Amazon S3 location where you want Amazon Lookout for Equipment to save the pointwise model diagnostics for the model.
-        --model-name=!: The name of the model to update.
-        --role-arn=: The ARN of the model to update.
-    - name: create-label
-      description: Creates a label for an event.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: A unique identifier for the request to create a label.
-        --end-time=!: The end time of the labeled event.
-        --equipment=: Indicates that a label pertains to a particular piece of equipment.
-        --fault-code=: Provides additional information about the label.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --label-group-name=!: The name of a group of labels.
-        --notes=: Metadata providing additional information about the label.
-        --rating=!: Indicates whether a labeled event represents an anomaly.
-        --start-time=!: The start time of the labeled event.
-      completion:
-        flag:
-            rating:
-                - ANOMALY
-                - NO_ANOMALY
-                - NEUTRAL
-    - name: delete-label-group
-      description: Deletes a group of labels.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --label-group-name=!: The name of the label group that you want to delete.
-    - name: delete-model
-      description: Deletes a machine learning model currently available for Amazon Lookout for Equipment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-name=!: The name of the machine learning model to be deleted.
-    - name: describe-model-version
-      description: Retrieves information about a specific machine learning model version.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-name=!: The name of the machine learning model that this version belongs to.
-        --model-version=!: The version of the machine learning model.
-    - name: import-dataset
-      description: Imports a dataset.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: A unique identifier for the request.
-        --dataset-name=: The name of the machine learning dataset to be created.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --server-side-kms-key-id=: Provides the identifier of the KMS key key used to encrypt model data by Amazon Lookout for Equipment.
-        --source-dataset-arn=!: The Amazon Resource Name (ARN) of the dataset to import.
-        --tags=: Any tags associated with the dataset to be created.
     - name: update-inference-scheduler
       description: Updates an inference scheduler.
       flags:
@@ -361,51 +523,27 @@ commands:
                 - PT15M
                 - PT30M
                 - PT1H
-    - name: describe-model
-      description: Provides a JSON containing the overall information about a specific machine learning model, including model name and ARN, dataset, training and evaluation information, status, and so on.
+    - name: describe-dataset
+      description: Provides a JSON description of the data in each time series dataset, including names, column names, and data types.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-name=!: The name of the dataset to be described.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-inference-scheduler
+      description: Specifies information about the inference scheduler being used, including name, model, status, and associated metadata
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-name=!: The name of the machine learning model to be described.
-    - name: list-data-ingestion-jobs
-      description: Provides a list of all data ingestion jobs, including dataset name and ARN, S3 location of the input data, status, and so on.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-name=: The name of the dataset being used for the data ingestion job.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: Specifies the maximum number of data ingestion jobs to list.
-        --next-token=: An opaque pagination token indicating where to continue the listing of data ingestion jobs.
-        --status=: Indicates the status of the data ingestion job.
-      completion:
-        flag:
-            status:
-                - IN_PROGRESS
-                - SUCCESS
-                - FAILED
-                - IMPORT_IN_PROGRESS
-    - name: list-inference-events
-      description: Lists all inference events that have been found for the specified inference scheduler.
+        --inference-scheduler-name=!: The name of the inference scheduler being described.
+    - name: describe-label-group
+      description: Returns information about the label group.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --inference-scheduler-name=!: The name of the inference scheduler for the inference events listed.
-        --interval-end-time=!: Returns all the inference events with an end start time equal to or greater than less than the end time given.
-        --interval-start-time=!: Lookout for Equipment will return all the inference events with an end time equal to or greater than the start time given.
-        --max-results=: Specifies the maximum number of inference events to list.
-        --next-token=: An opaque pagination token indicating where to continue the listing of inference events.
-    - name: start-data-ingestion-job
-      description: Starts a data ingestion job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: A unique identifier for the request.
-        --dataset-name=!: The name of the dataset being used by the data ingestion job.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ingestion-input-configuration=!: Specifies information for the input data for the data ingestion job, including dataset S3 location.
-        --role-arn=!: The Amazon Resource Name (ARN) of a role with permission to access the data source for the data ingestion job.
+        --label-group-name=!: Returns the name of the label group.
     - name: describe-resource-policy
       description: Provides the details of a resource policy attached to a resource.
       flags:
@@ -413,141 +551,3 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the resource that is associated with the resource policy.
-    - name: create-dataset
-      description: Creates a container for a collection of data being ingested for analysis.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: A unique identifier for the request.
-        --dataset-name=!: The name of the dataset being created.
-        --dataset-schema=: A JSON description of the data that is in each time series dataset, including names, column names, and data types.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --server-side-kms-key-id=: Provides the identifier of the KMS key used to encrypt dataset data by Amazon Lookout for Equipment.
-        --tags=: Any tags associated with the ingested data described in the dataset.
-    - name: create-retraining-scheduler
-      description: Creates a retraining scheduler on the specified model.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: A unique identifier for the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lookback-window=!: The number of past days of data that will be used for retraining.
-        --model-name=!: The name of the model to add the retraining scheduler to.
-        --promote-mode=: Indicates how the service will use new models.
-        --retraining-frequency=!: 'This parameter uses the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Durations) standard to set the frequency at which you want retraining to occur in terms of Years, Months, and/or Days (note: other parameters like Time are not currently supported).'
-        --retraining-start-date=: The start date for the retraining scheduler.
-      completion:
-        flag:
-            promote-mode:
-                - MANAGED
-                - MANUAL
-    - name: delete-inference-scheduler
-      description: Deletes an inference scheduler that has been set up.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --inference-scheduler-name=!: The name of the inference scheduler to be deleted.
-    - name: list-retraining-schedulers
-      description: Lists all retraining schedulers in your account, filtering by model name prefix and status.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: Specifies the maximum number of retraining schedulers to list.
-        --model-name-begins-with=: Specify this field to only list retraining schedulers whose machine learning models begin with the value you specify.
-        --next-token=: If the number of results exceeds the maximum, a pagination token is returned.
-        --status=: Specify this field to only list retraining schedulers whose status matches the value you specify.
-      completion:
-        flag:
-            status:
-                - PENDING
-                - RUNNING
-                - STOPPING
-                - STOPPED
-    - name: update-label-group
-      description: Updates the label group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --fault-codes=: Updates the code indicating the type of anomaly associated with the label.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --label-group-name=!: The name of the label group to be updated.
-    - name: create-model
-      description: Creates a machine learning model for data inference.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: A unique identifier for the request.
-        --data-pre-processing-configuration=: The configuration is the `TargetSamplingRate`, which is the sampling rate of the data after post processing by Amazon Lookout for Equipment.
-        --dataset-name=!: The name of the dataset for the machine learning model being created.
-        --dataset-schema=: The data schema for the machine learning model being created.
-        --evaluation-data-end-time=: Indicates the time reference in the dataset that should be used to end the subset of evaluation data for the machine learning model.
-        --evaluation-data-start-time=: Indicates the time reference in the dataset that should be used to begin the subset of evaluation data for the machine learning model.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --labels-input-configuration=: The input configuration for the labels being used for the machine learning model that's being created.
-        --model-diagnostics-output-configuration=: The Amazon S3 location where you want Amazon Lookout for Equipment to save the pointwise model diagnostics.
-        --model-name=!: The name for the machine learning model to be created.
-        --off-condition=: Indicates that the asset associated with this sensor has been shut off.
-        --role-arn=: The Amazon Resource Name (ARN) of a role with permission to access the data source being used to create the machine learning model.
-        --server-side-kms-key-id=: Provides the identifier of the KMS key used to encrypt model data by Amazon Lookout for Equipment.
-        --tags=: Any tags associated with the machine learning model being created.
-        --training-data-end-time=: Indicates the time reference in the dataset that should be used to end the subset of training data for the machine learning model.
-        --training-data-start-time=: Indicates the time reference in the dataset that should be used to begin the subset of training data for the machine learning model.
-    - name: list-models
-      description: Generates a list of all models in the account, including model name and ARN, dataset, and status.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-name-begins-with=: The beginning of the name of the dataset of the machine learning models to be listed.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: Specifies the maximum number of machine learning models to list.
-        --model-name-begins-with=: The beginning of the name of the machine learning models being listed.
-        --next-token=: An opaque pagination token indicating where to continue the listing of machine learning models.
-        --status=: The status of the machine learning model.
-      completion:
-        flag:
-            status:
-                - IN_PROGRESS
-                - SUCCESS
-                - FAILED
-                - IMPORT_IN_PROGRESS
-    - name: update-active-model-version
-      description: Sets the active model version for a given machine learning model.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-name=!: The name of the machine learning model for which the active model version is being set.
-        --model-version=!: The version of the machine learning model for which the active model version is being set.
-    - name: describe-data-ingestion-job
-      description: Provides information on a specific data ingestion job such as creation time, dataset ARN, and status.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The job ID of the data ingestion job.
-    - name: describe-label
-      description: Returns the name of the label.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --label-group-name=!: Returns the name of the group containing the label.
-        --label-id=!: Returns the ID of the label.
-    - name: describe-retraining-scheduler
-      description: Provides a description of the retraining scheduler, including information such as the model name and retraining parameters.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-name=!: The name of the model that the retraining scheduler is attached to.
-    - name: list-datasets
-      description: Lists all datasets currently available in your account, filtering on the dataset name.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-name-begins-with=: The beginning of the name of the datasets to be listed.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: Specifies the maximum number of datasets to list.
-        --next-token=: An opaque pagination token indicating where to continue the listing of datasets.

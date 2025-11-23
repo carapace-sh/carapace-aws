@@ -1,29 +1,234 @@
 name: chime-sdk-voice
 description: Amazon Chime SDK Voice
 commands:
+    - name: delete-voice-connector-termination-credentials
+      description: Deletes the specified SIP credentials used by your equipment to authenticate during call termination.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --usernames=!: The RFC2617 compliant username associated with the SIP credentials, in US-ASCII format.
+        --voice-connector-id=!: The Voice Connector ID.
+    - name: create-proxy-session
+      description: Creates a proxy session for the specified Amazon Chime SDK Voice Connector for the specified participant phone numbers.
+      flags:
+        --capabilities=!: The proxy session's capabilities.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expiry-minutes=: The number of minutes allowed for the proxy session.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --geo-match-level=: The preference for matching the country or area code of the proxy phone number with that of the first participant.
+        --geo-match-params=: The country and area code for the proxy phone number.
+        --name=: The name of the proxy session.
+        --number-selection-behavior=: The preference for proxy phone number reuse, or stickiness, between the same participants across sessions.
+        --participant-phone-numbers=!: The participant phone numbers.
+        --voice-connector-id=!: The Voice Connector ID.
+      completion:
+        flag:
+            geo-match-level:
+                - Country
+                - AreaCode
+            number-selection-behavior:
+                - PreferSticky
+                - AvoidSticky
+    - name: delete-voice-connector
+      description: Deletes an Amazon Chime SDK Voice Connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --voice-connector-id=!: The Voice Connector ID.
+    - name: delete-voice-connector-origination
+      description: Deletes the origination settings for the specified Amazon Chime SDK Voice Connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --voice-connector-id=!: The Voice Connector ID.
     - name: get-phone-number-settings
       description: Retrieves the phone number settings for the administrator's AWS account, such as the default outbound calling name.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-speaker-search-task
-      description: Retrieves the details of the specified speaker search task.
+    - name: list-available-voice-connector-regions
+      description: Lists the available AWS Regions in which you can create an Amazon Chime SDK Voice Connector.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --speaker-search-task-id=!: The ID of the speaker search task.
+    - name: list-proxy-sessions
+      description: Lists the proxy sessions for the specified Amazon Chime SDK Voice Connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token used to retrieve the next page of results.
+        --status=: The proxy session status.
         --voice-connector-id=!: The Voice Connector ID.
-    - name: get-voice-connector-proxy
-      description: Retrieves the proxy configuration details for the specified Amazon Chime SDK Voice Connector.
+      completion:
+        flag:
+            status:
+                - Open
+                - InProgress
+                - Closed
+    - name: put-voice-connector-emergency-calling-configuration
+      description: Updates a Voice Connector's emergency calling configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --emergency-calling-configuration=!: The configuration being updated.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --voice-connector-id=!: The Voice Connector ID.
+    - name: delete-voice-connector-external-systems-configuration
+      description: Deletes the external systems configuration for a Voice Connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --voice-connector-id=!: The ID of the Voice Connector for which to delete the external system configuration.
+    - name: delete-voice-connector-streaming-configuration
+      description: Deletes a Voice Connector's streaming configuration.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --voice-connector-id=!: The Voice Connector ID.
-    - name: list-voice-connector-groups
-      description: Lists the Amazon Chime SDK Voice Connector groups in the administrator's AWS account.
+    - name: list-supported-phone-number-countries
+      description: Lists the countries that you can order phone numbers from.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --product-type=!: The phone number product type.
+      completion:
+        flag:
+            product-type:
+                - VoiceConnector
+                - SipMediaApplicationDialIn
+    - name: put-voice-connector-external-systems-configuration
+      description: Adds an external systems configuration to a Voice Connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --contact-center-system-types=: The contact center system to use.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --session-border-controller-types=: The session border controllers to use.
+        --voice-connector-id=!: The ID of the Voice Connector for which to add the external system configuration.
+    - name: put-voice-connector-logging-configuration
+      description: Updates a Voice Connector's logging configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --logging-configuration=!: The logging configuration being updated.
+        --voice-connector-id=!: The Voice Connector ID.
+    - name: put-voice-connector-origination
+      description: Updates a Voice Connector's origination settings.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --origination=!: The origination settings being updated.
+        --voice-connector-id=!: The Voice Connector ID.
+    - name: stop-voice-tone-analysis-task
+      description: Stops a voice tone analysis task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --voice-connector-id=!: The Voice Connector ID.
+        --voice-tone-analysis-task-id=!: The ID of the voice tone analysis task.
+    - name: update-global-settings
+      description: Updates global settings for the Amazon Chime SDK Voice Connectors in an AWS account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --voice-connector=: The Voice Connector settings.
+    - name: get-phone-number
+      description: Retrieves details for the specified phone number ID, such as associations, capabilities, and product type.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --phone-number-id=!: The phone number ID.
+    - name: update-voice-profile-domain
+      description: Updates the settings for the specified voice profile domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description of the voice profile domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The name of the voice profile domain.
+        --voice-profile-domain-id=!: The domain ID.
+    - name: validate-e911-address
+      description: Validates an address to be used for 911 calls made with Amazon Chime SDK Voice Connectors.
+      flags:
+        --aws-account-id=!: The AWS account ID.
+        --city=!: The address city, such as `Portland`.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --country=!: The country in the address being validated as two-letter country code in ISO 3166-1 alpha-2 format, such as `US`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --postal-code=!: The dress postal code, such `04352`.
+        --state=!: The address state, such as `ME`.
+        --street-info=!: The address street information, such as `8th Avenue`.
+        --street-number=!: The address street number, such as `200` or `2121`.
+    - name: create-sip-rule
+      description: Creates a SIP rule, which can be used to run a SIP media application as a target for a specific trigger type.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --disabled: Disables or enables a SIP rule.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the SIP rule.
+        --no-disabled: Disables or enables a SIP rule.
+        --target-applications=: List of SIP media applications, with priority and AWS Region.
+        --trigger-type=!: The type of trigger assigned to the SIP rule in `TriggerValue`, currently `RequestUriHostname` or `ToPhoneNumber`.
+        --trigger-value=!: If `TriggerType` is `RequestUriHostname`, the value can be the outbound host name of a Voice Connector.
+      completion:
+        flag:
+            trigger-type:
+                - ToPhoneNumber
+                - RequestUriHostname
+    - name: disassociate-phone-numbers-from-voice-connector-group
+      description: Disassociates the specified phone numbers from the specified Amazon Chime SDK Voice Connector group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --e164-phone-numbers=!: The list of phone numbers, in E.164 format.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --voice-connector-group-id=!: The Voice Connector group ID.
+    - name: get-global-settings
+      description: Retrieves the global settings for the Amazon Chime SDK Voice Connectors in an AWS account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-proxy-session
+      description: Retrieves the specified proxy session details for the specified Amazon Chime SDK Voice Connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --proxy-session-id=!: The proxy session ID.
+        --voice-connector-id=!: The Voice Connector ID.
+    - name: list-sip-rules
+      description: Lists the SIP rules under the administrator's AWS account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token used to return the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sip-media-application-id=: The SIP media application ID.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-voice-profile-domains
+      description: Lists the specified voice profile domains in the administrator's AWS account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -39,37 +244,70 @@ commands:
         --max-results=: The maximum number of results in the request.
         --next-token=: The token used to retrieve the next page of results.
         --voice-profile-domain-id=!: The ID of the voice profile domain.
-    - name: put-voice-connector-emergency-calling-configuration
-      description: Updates a Voice Connector's emergency calling configuration.
+    - name: search-available-phone-numbers
+      description: Searches the provisioned phone numbers in an organization.
       flags:
+        --area-code=: Confines a search to just the phone numbers associated with the specified area code.
+        --city=: Confines a search to just the phone numbers associated with the specified city.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --emergency-calling-configuration=!: The configuration being updated.
+        --country=: Confines a search to just the phone numbers associated with the specified country.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --voice-connector-id=!: The Voice Connector ID.
-    - name: put-voice-connector-external-systems-configuration
-      description: Adds an external systems configuration to a Voice Connector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --contact-center-system-types=: The contact center system to use.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --session-border-controller-types=: The session border controllers to use.
-        --voice-connector-id=!: The ID of the Voice Connector for which to add the external system configuration.
-    - name: get-voice-connector-group
-      description: Retrieves details for the specified Amazon Chime SDK Voice Connector group, such as timestamps,name, and associated `VoiceConnectorItems`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --voice-connector-group-id=!: The Voice Connector group ID.
-    - name: get-voice-profile
-      description: Retrieves the details of the specified voice profile.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token used to return the next page of results.
+        --phone-number-type=: Confines a search to just the phone numbers associated with the specified phone number type, either **local** or **toll-free**.
+        --state=: Confines a search to just the phone numbers associated with the specified state.
+        --toll-free-prefix=: Confines a search to just the phone numbers associated with the specified toll-free prefix.
+      completion:
+        flag:
+            phone-number-type:
+                - Local
+                - TollFree
+    - name: create-voice-profile
+      description: Creates a voice profile, which consists of an enrolled user and their latest voice print.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --voice-profile-id=!: The voice profile ID.
+        --speaker-search-task-id=!: The ID of the speaker search task.
+    - name: delete-sip-rule
+      description: Deletes a SIP rule.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --sip-rule-id=!: The SIP rule ID.
+    - name: restore-phone-number
+      description: Restores a deleted phone number.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --phone-number-id=!: The ID of the phone number being restored.
+    - name: untag-resource
+      description: Removes tags from a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource having its tags removed.
+        --tag-keys=!: The keys of the tags being removed from the resource.
+    - name: update-phone-number-settings
+      description: Updates the phone number settings for the administrator's AWS account, such as the default outbound calling name.
+      flags:
+        --calling-name=!: The default outbound calling name for the account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-sip-media-application
+      description: Updates the details of the specified SIP media application.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --endpoints=: The new set of endpoints for the specified SIP media application.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The new name for the specified SIP media application.
+        --sip-media-application-id=!: The SIP media application ID.
     - name: get-voice-tone-analysis-task
       description: Retrieves the details of a voice tone analysis task.
       flags:
@@ -80,36 +318,119 @@ commands:
         --no-is-caller!: Specifies whether the voice being analyzed is the caller (originator) or the callee (responder).
         --voice-connector-id=!: The Voice Connector ID.
         --voice-tone-analysis-task-id=!: The ID of the voice tone analysis task.
-    - name: put-voice-connector-termination-credentials
-      description: Updates a Voice Connector's termination credentials.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --credentials=: The termination credentials being updated.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --voice-connector-id=!: The Voice Connector ID.
-    - name: start-voice-tone-analysis-task
-      description: Starts a voice tone analysis task.
+    - name: create-voice-profile-domain
+      description: Creates a voice profile domain, a collection of voice profiles, their voice prints, and encrypted enrollment audio.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-request-token=: The unique identifier for the client request.
+        --description=: A description of the voice profile domain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --language-code=!: The language code.
-        --transaction-id=!: The transaction ID.
-        --voice-connector-id=!: The Voice Connector ID.
-      completion:
-        flag:
-            language-code:
-                - en-US
-    - name: tag-resource
-      description: Adds a tag to the specified resource.
+        --name=!: The name of the voice profile domain.
+        --server-side-encryption-configuration=!: The server-side encryption configuration for the request.
+        --tags=: The tags assigned to the domain.
+    - name: delete-phone-number
+      description: Moves the specified phone number into the **Deletion queue**.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource being tagged.
-        --tags=!: A list of the tags being added to the resource.
+        --phone-number-id=!: The phone number ID.
+    - name: get-voice-connector-emergency-calling-configuration
+      description: Retrieves the emergency calling configuration details for the specified Voice Connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --voice-connector-id=!: The Voice Connector ID.
+    - name: get-voice-connector-termination-health
+      description: Retrieves information about the last time a `SIP OPTIONS` ping was received from your SIP infrastructure for the specified Amazon Chime SDK Voice Connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --voice-connector-id=!: The Voice Connector ID.
+    - name: batch-delete-phone-number
+      description: Moves phone numbers into the **Deletion queue**.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --phone-number-ids=!: List of phone number IDs.
+    - name: get-sip-media-application
+      description: Retrieves the information for a SIP media application, including name, AWS Region, and endpoints.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --sip-media-application-id=!: The SIP media application ID .
+    - name: get-voice-connector-streaming-configuration
+      description: Retrieves the streaming configuration details for the specified Amazon Chime SDK Voice Connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --voice-connector-id=!: The Voice Connector ID.
+    - name: start-speaker-search-task
+      description: Starts a speaker search task.
+      flags:
+        --call-leg=: Specifies which call leg to stream for speaker search.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: The unique identifier for the client request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --transaction-id=!: The transaction ID of the call being analyzed.
+        --voice-connector-id=!: The Voice Connector ID.
+        --voice-profile-domain-id=!: The ID of the voice profile domain that will store the voice profile.
+      completion:
+        flag:
+            call-leg:
+                - Caller
+                - Callee
+    - name: update-sip-rule
+      description: Updates the details of the specified SIP rule.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --disabled: The new value that indicates whether the rule is disabled.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The new name for the specified SIP rule.
+        --no-disabled: The new value that indicates whether the rule is disabled.
+        --sip-rule-id=!: The SIP rule ID.
+        --target-applications=: The new list of target applications.
+    - name: delete-voice-profile-domain
+      description: Deletes all voice profiles in the domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --voice-profile-domain-id=!: The voice profile domain ID.
+    - name: list-sip-media-applications
+      description: Lists the SIP media applications under the administrator's AWS account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token used to return the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: Returns a list of the tags in a given resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The resource ARN.
+    - name: put-sip-media-application-logging-configuration
+      description: Updates the logging configuration for the specified SIP media application.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --sip-media-application-id=!: The SIP media application ID.
+        --sip-media-application-logging-configuration=: The logging configuration for the specified SIP media application.
     - name: update-phone-number
       description: Updates phone number details, such as product type, calling name, or phone number name for the specified phone number ID.
       flags:
@@ -125,16 +446,91 @@ commands:
             product-type:
                 - VoiceConnector
                 - SipMediaApplicationDialIn
-    - name: create-sip-media-application
-      description: Creates a SIP media application.
+    - name: update-proxy-session
+      description: Updates the specified proxy session details, such as voice or SMS capabilities.
       flags:
-        --aws-region=!: The AWS Region assigned to the SIP media application.
+        --capabilities=!: The proxy session capabilities.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --endpoints=!: List of endpoints (Lambda ARNs) specified for the SIP media application.
+        --expiry-minutes=: The number of minutes allowed for the proxy session.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The SIP media application's name.
-        --tags=: The tags assigned to the SIP media application.
+        --proxy-session-id=!: The proxy session ID.
+        --voice-connector-id=!: The Voice Connector ID.
+    - name: update-sip-media-application-call
+      description: Invokes the AWS Lambda function associated with the SIP media application and transaction ID in an update request.
+      flags:
+        --arguments=!: Arguments made available to the Lambda function as part of the `CALL_UPDATE_REQUESTED` event.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --sip-media-application-id=!: The ID of the SIP media application handling the call.
+        --transaction-id=!: The ID of the call transaction.
+    - name: delete-proxy-session
+      description: Deletes the specified proxy session from the specified Amazon Chime SDK Voice Connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --proxy-session-id=!: The proxy session ID.
+        --voice-connector-id=!: The Voice Connector ID.
+    - name: get-voice-connector-external-systems-configuration
+      description: Gets information about an external systems configuration for a Voice Connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --voice-connector-id=!: The ID of the Voice Connector for which to return information about the external system configuration.
+    - name: list-voice-connector-termination-credentials
+      description: Lists the SIP credentials for the specified Amazon Chime SDK Voice Connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --voice-connector-id=!: The Voice Connector ID.
+    - name: list-voice-connectors
+      description: Lists the Amazon Chime SDK Voice Connectors in the administrators AWS account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token used to return the next page of results.
+    - name: put-voice-connector-termination-credentials
+      description: Updates a Voice Connector's termination credentials.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --credentials=: The termination credentials being updated.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --voice-connector-id=!: The Voice Connector ID.
+    - name: tag-resource
+      description: Adds a tag to the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource being tagged.
+        --tags=!: A list of the tags being added to the resource.
+    - name: update-voice-connector-group
+      description: Updates the settings for the specified Amazon Chime SDK Voice Connector group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the Voice Connector group.
+        --voice-connector-group-id=!: The Voice Connector ID.
+        --voice-connector-items=!: The `VoiceConnectorItems` to associate with the Voice Connector group.
+    - name: create-sip-media-application-call
+      description: Creates an outbound call to a phone number from the phone number specified in the request, and it invokes the endpoint of the specified `sipMediaApplicationId`.
+      flags:
+        --arguments-map=: Context passed to a CreateSipMediaApplication API call.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --from-phone-number=!: The phone number that a user calls from.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --sip-headers=: The SIP headers added to an outbound call leg.
+        --sip-media-application-id=!: The ID of the SIP media application.
+        --to-phone-number=!: The phone number that the service should call.
     - name: create-voice-connector
       description: Creates an Amazon Chime SDK Voice Connector.
       flags:
@@ -167,120 +563,8 @@ commands:
             network-type:
                 - IPV4_ONLY
                 - DUAL_STACK
-    - name: delete-voice-connector-emergency-calling-configuration
-      description: Deletes the emergency calling details from the specified Amazon Chime SDK Voice Connector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --voice-connector-id=!: The Voice Connector ID.
-    - name: get-phone-number
-      description: Retrieves details for the specified phone number ID, such as associations, capabilities, and product type.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --phone-number-id=!: The phone number ID.
-    - name: get-voice-connector-external-systems-configuration
-      description: Gets information about an external systems configuration for a Voice Connector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --voice-connector-id=!: The ID of the Voice Connector for which to return information about the external system configuration.
-    - name: untag-resource
-      description: Removes tags from a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource having its tags removed.
-        --tag-keys=!: The keys of the tags being removed from the resource.
-    - name: create-voice-connector-group
-      description: Creates an Amazon Chime SDK Voice Connector group under the administrator's AWS account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the Voice Connector group.
-        --voice-connector-items=: Lists the Voice Connectors that inbound calls are routed to.
-    - name: delete-voice-connector-termination-credentials
-      description: Deletes the specified SIP credentials used by your equipment to authenticate during call termination.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --usernames=!: The RFC2617 compliant username associated with the SIP credentials, in US-ASCII format.
-        --voice-connector-id=!: The Voice Connector ID.
-    - name: get-sip-media-application-alexa-skill-configuration
-      description: Gets the Alexa Skill configuration for the SIP media application.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --sip-media-application-id=!: The SIP media application ID.
-    - name: list-proxy-sessions
-      description: Lists the proxy sessions for the specified Amazon Chime SDK Voice Connector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in a single call.
-        --next-token=: The token used to retrieve the next page of results.
-        --status=: The proxy session status.
-        --voice-connector-id=!: The Voice Connector ID.
-      completion:
-        flag:
-            status:
-                - Open
-                - InProgress
-                - Closed
-    - name: put-voice-connector-logging-configuration
-      description: Updates a Voice Connector's logging configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --logging-configuration=!: The logging configuration being updated.
-        --voice-connector-id=!: The Voice Connector ID.
-    - name: delete-phone-number
-      description: Moves the specified phone number into the **Deletion queue**.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --phone-number-id=!: The phone number ID.
-    - name: delete-voice-connector-origination
-      description: Deletes the origination settings for the specified Amazon Chime SDK Voice Connector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --voice-connector-id=!: The Voice Connector ID.
-    - name: get-phone-number-order
-      description: Retrieves details for the specified phone number order, such as the order creation timestamp, phone numbers in E.164 format, product type, and order status.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --phone-number-order-id=!: The ID of the phone number order .
-    - name: get-voice-connector-logging-configuration
-      description: Retrieves the logging configuration settings for the specified Voice Connector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --voice-connector-id=!: The Voice Connector ID.
-    - name: update-voice-profile
-      description: Updates the specified voice profile’s voice print and refreshes its expiration timestamp.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --speaker-search-task-id=!: The ID of the speaker search task.
-        --voice-profile-id=!: The profile ID.
-    - name: delete-voice-connector
-      description: Deletes an Amazon Chime SDK Voice Connector.
+    - name: delete-voice-connector-proxy
+      description: Deletes the proxy configuration from the specified Amazon Chime SDK Voice Connector.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -288,399 +572,6 @@ commands:
         --voice-connector-id=!: The Voice Connector ID.
     - name: delete-voice-connector-termination
       description: Deletes the termination settings for the specified Amazon Chime SDK Voice Connector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --voice-connector-id=!: The Voice Connector ID.
-    - name: get-global-settings
-      description: Retrieves the global settings for the Amazon Chime SDK Voice Connectors in an AWS account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-supported-phone-number-countries
-      description: Lists the countries that you can order phone numbers from.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --product-type=!: The phone number product type.
-      completion:
-        flag:
-            product-type:
-                - VoiceConnector
-                - SipMediaApplicationDialIn
-    - name: put-sip-media-application-logging-configuration
-      description: Updates the logging configuration for the specified SIP media application.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --sip-media-application-id=!: The SIP media application ID.
-        --sip-media-application-logging-configuration=: The logging configuration for the specified SIP media application.
-    - name: search-available-phone-numbers
-      description: Searches the provisioned phone numbers in an organization.
-      flags:
-        --area-code=: Confines a search to just the phone numbers associated with the specified area code.
-        --city=: Confines a search to just the phone numbers associated with the specified city.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --country=: Confines a search to just the phone numbers associated with the specified country.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token used to return the next page of results.
-        --phone-number-type=: Confines a search to just the phone numbers associated with the specified phone number type, either **local** or **toll-free**.
-        --state=: Confines a search to just the phone numbers associated with the specified state.
-        --toll-free-prefix=: Confines a search to just the phone numbers associated with the specified toll-free prefix.
-      completion:
-        flag:
-            phone-number-type:
-                - Local
-                - TollFree
-    - name: delete-voice-profile
-      description: Deletes a voice profile, including its voice print and enrollment data.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --voice-profile-id=!: The voice profile ID.
-    - name: get-voice-profile-domain
-      description: Retrieves the details of the specified voice profile domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --voice-profile-domain-id=!: The voice profile domain ID.
-    - name: list-sip-rules
-      description: Lists the SIP rules under the administrator's AWS account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in a single call.
-        --next-token=: The token used to return the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --sip-media-application-id=: The SIP media application ID.
-        --starting-token=: A token to specify where to start paginating.
-    - name: batch-delete-phone-number
-      description: Moves phone numbers into the **Deletion queue**.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --phone-number-ids=!: List of phone number IDs.
-    - name: batch-update-phone-number
-      description: Updates phone number product types, calling names, or phone number names.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --update-phone-number-request-items=!: Lists the phone numbers in the update request.
-    - name: create-sip-media-application-call
-      description: Creates an outbound call to a phone number from the phone number specified in the request, and it invokes the endpoint of the specified `sipMediaApplicationId`.
-      flags:
-        --arguments-map=: Context passed to a CreateSipMediaApplication API call.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --from-phone-number=!: The phone number that a user calls from.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --sip-headers=: The SIP headers added to an outbound call leg.
-        --sip-media-application-id=!: The ID of the SIP media application.
-        --to-phone-number=!: The phone number that the service should call.
-    - name: delete-voice-profile-domain
-      description: Deletes all voice profiles in the domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --voice-profile-domain-id=!: The voice profile domain ID.
-    - name: get-sip-rule
-      description: Retrieves the details of a SIP rule, such as the rule ID, name, triggers, and target endpoints.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --sip-rule-id=!: The SIP rule ID.
-    - name: get-voice-connector-emergency-calling-configuration
-      description: Retrieves the emergency calling configuration details for the specified Voice Connector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --voice-connector-id=!: The Voice Connector ID.
-    - name: list-available-voice-connector-regions
-      description: Lists the available AWS Regions in which you can create an Amazon Chime SDK Voice Connector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-proxy-session
-      description: Creates a proxy session for the specified Amazon Chime SDK Voice Connector for the specified participant phone numbers.
-      flags:
-        --capabilities=!: The proxy session's capabilities.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expiry-minutes=: The number of minutes allowed for the proxy session.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --geo-match-level=: The preference for matching the country or area code of the proxy phone number with that of the first participant.
-        --geo-match-params=: The country and area code for the proxy phone number.
-        --name=: The name of the proxy session.
-        --number-selection-behavior=: The preference for proxy phone number reuse, or stickiness, between the same participants across sessions.
-        --participant-phone-numbers=!: The participant phone numbers.
-        --voice-connector-id=!: The Voice Connector ID.
-      completion:
-        flag:
-            geo-match-level:
-                - Country
-                - AreaCode
-            number-selection-behavior:
-                - PreferSticky
-                - AvoidSticky
-    - name: create-sip-rule
-      description: Creates a SIP rule, which can be used to run a SIP media application as a target for a specific trigger type.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --disabled: Disables or enables a SIP rule.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the SIP rule.
-        --no-disabled: Disables or enables a SIP rule.
-        --target-applications=: List of SIP media applications, with priority and AWS Region.
-        --trigger-type=!: The type of trigger assigned to the SIP rule in `TriggerValue`, currently `RequestUriHostname` or `ToPhoneNumber`.
-        --trigger-value=!: If `TriggerType` is `RequestUriHostname`, the value can be the outbound host name of a Voice Connector.
-      completion:
-        flag:
-            trigger-type:
-                - ToPhoneNumber
-                - RequestUriHostname
-    - name: delete-sip-media-application
-      description: Deletes a SIP media application.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --sip-media-application-id=!: The SIP media application ID.
-    - name: get-sip-media-application
-      description: Retrieves the information for a SIP media application, including name, AWS Region, and endpoints.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --sip-media-application-id=!: The SIP media application ID .
-    - name: get-voice-connector
-      description: Retrieves details for the specified Amazon Chime SDK Voice Connector, such as timestamps,name, outbound host, and encryption requirements.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --voice-connector-id=!: The Voice Connector ID.
-    - name: list-tags-for-resource
-      description: Returns a list of the tags in a given resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The resource ARN.
-    - name: put-sip-media-application-alexa-skill-configuration
-      description: Updates the Alexa Skill configuration for the SIP media application.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --sip-media-application-alexa-skill-configuration=: The Alexa Skill configuration.
-        --sip-media-application-id=!: The SIP media application ID.
-    - name: start-speaker-search-task
-      description: Starts a speaker search task.
-      flags:
-        --call-leg=: Specifies which call leg to stream for speaker search.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: The unique identifier for the client request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --transaction-id=!: The transaction ID of the call being analyzed.
-        --voice-connector-id=!: The Voice Connector ID.
-        --voice-profile-domain-id=!: The ID of the voice profile domain that will store the voice profile.
-      completion:
-        flag:
-            call-leg:
-                - Caller
-                - Callee
-    - name: associate-phone-numbers-with-voice-connector
-      description: Associates phone numbers with the specified Amazon Chime SDK Voice Connector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --e164-phone-numbers=!: List of phone numbers, in E.164 format.
-        --force-associate: If true, associates the provided phone numbers with the provided Amazon Chime SDK Voice Connector and removes any previously existing associations.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-force-associate: If true, associates the provided phone numbers with the provided Amazon Chime SDK Voice Connector and removes any previously existing associations.
-        --voice-connector-id=!: The Voice Connector ID.
-    - name: create-phone-number-order
-      description: Creates an order for phone numbers to be provisioned.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --e164-phone-numbers=!: List of phone numbers, in E.164 format.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: Specifies the name assigned to one or more phone numbers.
-        --product-type=!: The phone number product type.
-      completion:
-        flag:
-            product-type:
-                - VoiceConnector
-                - SipMediaApplicationDialIn
-    - name: create-voice-profile
-      description: Creates a voice profile, which consists of an enrolled user and their latest voice print.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --speaker-search-task-id=!: The ID of the speaker search task.
-    - name: delete-proxy-session
-      description: Deletes the specified proxy session from the specified Amazon Chime SDK Voice Connector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --proxy-session-id=!: The proxy session ID.
-        --voice-connector-id=!: The Voice Connector ID.
-    - name: delete-voice-connector-external-systems-configuration
-      description: Deletes the external systems configuration for a Voice Connector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --voice-connector-id=!: The ID of the Voice Connector for which to delete the external system configuration.
-    - name: list-voice-connectors
-      description: Lists the Amazon Chime SDK Voice Connectors in the administrators AWS account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in a single call.
-        --next-token=: The token used to return the next page of results.
-    - name: stop-speaker-search-task
-      description: Stops a speaker search task.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --speaker-search-task-id=!: The speaker search task ID.
-        --voice-connector-id=!: The Voice Connector ID.
-    - name: update-proxy-session
-      description: Updates the specified proxy session details, such as voice or SMS capabilities.
-      flags:
-        --capabilities=!: The proxy session capabilities.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expiry-minutes=: The number of minutes allowed for the proxy session.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --proxy-session-id=!: The proxy session ID.
-        --voice-connector-id=!: The Voice Connector ID.
-    - name: delete-voice-connector-group
-      description: Deletes an Amazon Chime SDK Voice Connector group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --voice-connector-group-id=!: The Voice Connector Group ID.
-    - name: list-phone-number-orders
-      description: Lists the phone numbers for an administrator's Amazon Chime SDK account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in a single call.
-        --next-token=: The token used to retrieve the next page of results.
-    - name: put-voice-connector-streaming-configuration
-      description: Updates a Voice Connector's streaming configuration settings.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --streaming-configuration=!: The streaming settings being updated.
-        --voice-connector-id=!: The Voice Connector ID.
-    - name: stop-voice-tone-analysis-task
-      description: Stops a voice tone analysis task.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --voice-connector-id=!: The Voice Connector ID.
-        --voice-tone-analysis-task-id=!: The ID of the voice tone analysis task.
-    - name: update-sip-media-application
-      description: Updates the details of the specified SIP media application.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --endpoints=: The new set of endpoints for the specified SIP media application.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: The new name for the specified SIP media application.
-        --sip-media-application-id=!: The SIP media application ID.
-    - name: update-sip-rule
-      description: Updates the details of the specified SIP rule.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --disabled: The new value that indicates whether the rule is disabled.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The new name for the specified SIP rule.
-        --no-disabled: The new value that indicates whether the rule is disabled.
-        --sip-rule-id=!: The SIP rule ID.
-        --target-applications=: The new list of target applications.
-    - name: associate-phone-numbers-with-voice-connector-group
-      description: Associates phone numbers with the specified Amazon Chime SDK Voice Connector group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --e164-phone-numbers=!: List of phone numbers, in E.164 format.
-        --force-associate: If true, associates the provided phone numbers with the provided Amazon Chime SDK Voice Connector Group and removes any previously existing associations.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-force-associate: If true, associates the provided phone numbers with the provided Amazon Chime SDK Voice Connector Group and removes any previously existing associations.
-        --voice-connector-group-id=!: The Amazon Chime SDK Voice Connector group ID.
-    - name: disassociate-phone-numbers-from-voice-connector-group
-      description: Disassociates the specified phone numbers from the specified Amazon Chime SDK Voice Connector group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --e164-phone-numbers=!: The list of phone numbers, in E.164 format.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --voice-connector-group-id=!: The Voice Connector group ID.
-    - name: update-sip-media-application-call
-      description: Invokes the AWS Lambda function associated with the SIP media application and transaction ID in an update request.
-      flags:
-        --arguments=!: Arguments made available to the Lambda function as part of the `CALL_UPDATE_REQUESTED` event.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --sip-media-application-id=!: The ID of the SIP media application handling the call.
-        --transaction-id=!: The ID of the call transaction.
-    - name: get-proxy-session
-      description: Retrieves the specified proxy session details for the specified Amazon Chime SDK Voice Connector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --proxy-session-id=!: The proxy session ID.
-        --voice-connector-id=!: The Voice Connector ID.
-    - name: get-voice-connector-origination
-      description: Retrieves the origination settings for the specified Voice Connector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --voice-connector-id=!: The Voice Connector ID.
-    - name: get-voice-connector-termination
-      description: Retrieves the termination setting details for the specified Voice Connector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --voice-connector-id=!: The Voice Connector ID.
-    - name: get-voice-connector-termination-health
-      description: Retrieves information about the last time a `SIP OPTIONS` ping was received from your SIP infrastructure for the specified Amazon Chime SDK Voice Connector.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -707,19 +598,260 @@ commands:
             product-type:
                 - VoiceConnector
                 - SipMediaApplicationDialIn
-    - name: list-sip-media-applications
-      description: Lists the SIP media applications under the administrator's AWS account.
+    - name: update-voice-connector
+      description: Updates the details for the specified Amazon Chime SDK Voice Connector.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
+        --name=!: The name of the Voice Connector.
+        --no-require-encryption!: When enabled, requires encryption for the Voice Connector.
+        --require-encryption!: When enabled, requires encryption for the Voice Connector.
+        --voice-connector-id=!: The Voice Connector ID.
+    - name: update-voice-profile
+      description: Updates the specified voice profile’s voice print and refreshes its expiration timestamp.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --speaker-search-task-id=!: The ID of the speaker search task.
+        --voice-profile-id=!: The profile ID.
+    - name: create-voice-connector-group
+      description: Creates an Amazon Chime SDK Voice Connector group under the administrator's AWS account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the Voice Connector group.
+        --voice-connector-items=: Lists the Voice Connectors that inbound calls are routed to.
+    - name: delete-voice-connector-emergency-calling-configuration
+      description: Deletes the emergency calling details from the specified Amazon Chime SDK Voice Connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --voice-connector-id=!: The Voice Connector ID.
+    - name: get-voice-profile
+      description: Retrieves the details of the specified voice profile.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --voice-profile-id=!: The voice profile ID.
+    - name: put-sip-media-application-alexa-skill-configuration
+      description: Updates the Alexa Skill configuration for the SIP media application.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --sip-media-application-alexa-skill-configuration=: The Alexa Skill configuration.
+        --sip-media-application-id=!: The SIP media application ID.
+    - name: start-voice-tone-analysis-task
+      description: Starts a voice tone analysis task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: The unique identifier for the client request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --language-code=!: The language code.
+        --transaction-id=!: The transaction ID.
+        --voice-connector-id=!: The Voice Connector ID.
+      completion:
+        flag:
+            language-code:
+                - en-US
+    - name: associate-phone-numbers-with-voice-connector-group
+      description: Associates phone numbers with the specified Amazon Chime SDK Voice Connector group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --e164-phone-numbers=!: List of phone numbers, in E.164 format.
+        --force-associate: If true, associates the provided phone numbers with the provided Amazon Chime SDK Voice Connector Group and removes any previously existing associations.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-force-associate: If true, associates the provided phone numbers with the provided Amazon Chime SDK Voice Connector Group and removes any previously existing associations.
+        --voice-connector-group-id=!: The Amazon Chime SDK Voice Connector group ID.
+    - name: get-voice-connector-logging-configuration
+      description: Retrieves the logging configuration settings for the specified Voice Connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --voice-connector-id=!: The Voice Connector ID.
+    - name: get-voice-connector-origination
+      description: Retrieves the origination settings for the specified Voice Connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --voice-connector-id=!: The Voice Connector ID.
+    - name: list-voice-connector-groups
+      description: Lists the Amazon Chime SDK Voice Connector groups in the administrator's AWS account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The maximum number of results to return in a single call.
         --next-token=: The token used to return the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-voice-connector-termination-credentials
-      description: Lists the SIP credentials for the specified Amazon Chime SDK Voice Connector.
+    - name: batch-update-phone-number
+      description: Updates phone number product types, calling names, or phone number names.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --update-phone-number-request-items=!: Lists the phone numbers in the update request.
+    - name: delete-sip-media-application
+      description: Deletes a SIP media application.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --sip-media-application-id=!: The SIP media application ID.
+    - name: get-sip-media-application-alexa-skill-configuration
+      description: Gets the Alexa Skill configuration for the SIP media application.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --sip-media-application-id=!: The SIP media application ID.
+    - name: get-speaker-search-task
+      description: Retrieves the details of the specified speaker search task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --speaker-search-task-id=!: The ID of the speaker search task.
+        --voice-connector-id=!: The Voice Connector ID.
+    - name: get-voice-profile-domain
+      description: Retrieves the details of the specified voice profile domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --voice-profile-domain-id=!: The voice profile domain ID.
+    - name: put-voice-connector-termination
+      description: Updates a Voice Connector's termination settings.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --termination=!: The termination settings to be updated.
+        --voice-connector-id=!: The Voice Connector ID.
+    - name: associate-phone-numbers-with-voice-connector
+      description: Associates phone numbers with the specified Amazon Chime SDK Voice Connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --e164-phone-numbers=!: List of phone numbers, in E.164 format.
+        --force-associate: If true, associates the provided phone numbers with the provided Amazon Chime SDK Voice Connector and removes any previously existing associations.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-force-associate: If true, associates the provided phone numbers with the provided Amazon Chime SDK Voice Connector and removes any previously existing associations.
+        --voice-connector-id=!: The Voice Connector ID.
+    - name: create-phone-number-order
+      description: Creates an order for phone numbers to be provisioned.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --e164-phone-numbers=!: List of phone numbers, in E.164 format.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: Specifies the name assigned to one or more phone numbers.
+        --product-type=!: The phone number product type.
+      completion:
+        flag:
+            product-type:
+                - VoiceConnector
+                - SipMediaApplicationDialIn
+    - name: create-sip-media-application
+      description: Creates a SIP media application.
+      flags:
+        --aws-region=!: The AWS Region assigned to the SIP media application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --endpoints=!: List of endpoints (Lambda ARNs) specified for the SIP media application.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The SIP media application's name.
+        --tags=: The tags assigned to the SIP media application.
+    - name: disassociate-phone-numbers-from-voice-connector
+      description: Disassociates the specified phone numbers from the specified Amazon Chime SDK Voice Connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --e164-phone-numbers=!: List of phone numbers, in E.164 format.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --voice-connector-id=!: The Voice Connector ID.
+    - name: get-phone-number-order
+      description: Retrieves details for the specified phone number order, such as the order creation timestamp, phone numbers in E.164 format, product type, and order status.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --phone-number-order-id=!: The ID of the phone number order .
+    - name: get-sip-rule
+      description: Retrieves the details of a SIP rule, such as the rule ID, name, triggers, and target endpoints.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --sip-rule-id=!: The SIP rule ID.
+    - name: delete-voice-connector-group
+      description: Deletes an Amazon Chime SDK Voice Connector group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --voice-connector-group-id=!: The Voice Connector Group ID.
+    - name: delete-voice-profile
+      description: Deletes a voice profile, including its voice print and enrollment data.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --voice-profile-id=!: The voice profile ID.
+    - name: get-sip-media-application-logging-configuration
+      description: Retrieves the logging configuration for the specified SIP media application.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --sip-media-application-id=!: The SIP media application ID.
+    - name: get-voice-connector
+      description: Retrieves details for the specified Amazon Chime SDK Voice Connector, such as timestamps,name, outbound host, and encryption requirements.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --voice-connector-id=!: The Voice Connector ID.
+    - name: list-phone-number-orders
+      description: Lists the phone numbers for an administrator's Amazon Chime SDK account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token used to retrieve the next page of results.
+    - name: put-voice-connector-streaming-configuration
+      description: Updates a Voice Connector's streaming configuration settings.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --streaming-configuration=!: The streaming settings being updated.
+        --voice-connector-id=!: The Voice Connector ID.
+    - name: get-voice-connector-group
+      description: Retrieves details for the specified Amazon Chime SDK Voice Connector group, such as timestamps,name, and associated `VoiceConnectorItems`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --voice-connector-group-id=!: The Voice Connector group ID.
+    - name: get-voice-connector-proxy
+      description: Retrieves the proxy configuration details for the specified Amazon Chime SDK Voice Connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --voice-connector-id=!: The Voice Connector ID.
+    - name: get-voice-connector-termination
+      description: Retrieves the termination setting details for the specified Voice Connector.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -737,143 +869,11 @@ commands:
         --no-disabled: When true, stops proxy sessions from being created on the specified Amazon Chime SDK Voice Connector.
         --phone-number-pool-countries=!: The countries for proxy phone numbers to be selected from.
         --voice-connector-id=!: The Voice Connector ID.
-    - name: get-sip-media-application-logging-configuration
-      description: Retrieves the logging configuration for the specified SIP media application.
+    - name: stop-speaker-search-task
+      description: Stops a speaker search task.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --sip-media-application-id=!: The SIP media application ID.
-    - name: get-voice-connector-streaming-configuration
-      description: Retrieves the streaming configuration details for the specified Amazon Chime SDK Voice Connector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --speaker-search-task-id=!: The speaker search task ID.
         --voice-connector-id=!: The Voice Connector ID.
-    - name: list-voice-profile-domains
-      description: Lists the specified voice profile domains in the administrator's AWS account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in a single call.
-        --next-token=: The token used to return the next page of results.
-    - name: put-voice-connector-origination
-      description: Updates a Voice Connector's origination settings.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --origination=!: The origination settings being updated.
-        --voice-connector-id=!: The Voice Connector ID.
-    - name: put-voice-connector-termination
-      description: Updates a Voice Connector's termination settings.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --termination=!: The termination settings to be updated.
-        --voice-connector-id=!: The Voice Connector ID.
-    - name: update-global-settings
-      description: Updates global settings for the Amazon Chime SDK Voice Connectors in an AWS account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --voice-connector=: The Voice Connector settings.
-    - name: update-voice-connector-group
-      description: Updates the settings for the specified Amazon Chime SDK Voice Connector group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the Voice Connector group.
-        --voice-connector-group-id=!: The Voice Connector ID.
-        --voice-connector-items=!: The `VoiceConnectorItems` to associate with the Voice Connector group.
-    - name: delete-sip-rule
-      description: Deletes a SIP rule.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --sip-rule-id=!: The SIP rule ID.
-    - name: delete-voice-connector-streaming-configuration
-      description: Deletes a Voice Connector's streaming configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --voice-connector-id=!: The Voice Connector ID.
-    - name: disassociate-phone-numbers-from-voice-connector
-      description: Disassociates the specified phone numbers from the specified Amazon Chime SDK Voice Connector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --e164-phone-numbers=!: List of phone numbers, in E.164 format.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --voice-connector-id=!: The Voice Connector ID.
-    - name: restore-phone-number
-      description: Restores a deleted phone number.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --phone-number-id=!: The ID of the phone number being restored.
-    - name: validate-e911-address
-      description: Validates an address to be used for 911 calls made with Amazon Chime SDK Voice Connectors.
-      flags:
-        --aws-account-id=!: The AWS account ID.
-        --city=!: The address city, such as `Portland`.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --country=!: The country in the address being validated as two-letter country code in ISO 3166-1 alpha-2 format, such as `US`.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --postal-code=!: The dress postal code, such `04352`.
-        --state=!: The address state, such as `ME`.
-        --street-info=!: The address street information, such as `8th Avenue`.
-        --street-number=!: The address street number, such as `200` or `2121`.
-    - name: delete-voice-connector-proxy
-      description: Deletes the proxy configuration from the specified Amazon Chime SDK Voice Connector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --voice-connector-id=!: The Voice Connector ID.
-    - name: update-phone-number-settings
-      description: Updates the phone number settings for the administrator's AWS account, such as the default outbound calling name.
-      flags:
-        --calling-name=!: The default outbound calling name for the account.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-voice-connector
-      description: Updates the details for the specified Amazon Chime SDK Voice Connector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the Voice Connector.
-        --no-require-encryption!: When enabled, requires encryption for the Voice Connector.
-        --require-encryption!: When enabled, requires encryption for the Voice Connector.
-        --voice-connector-id=!: The Voice Connector ID.
-    - name: update-voice-profile-domain
-      description: Updates the settings for the specified voice profile domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The description of the voice profile domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: The name of the voice profile domain.
-        --voice-profile-domain-id=!: The domain ID.
-    - name: create-voice-profile-domain
-      description: Creates a voice profile domain, a collection of voice profiles, their voice prints, and encrypted enrollment audio.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: The unique identifier for the client request.
-        --description=: A description of the voice profile domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the voice profile domain.
-        --server-side-encryption-configuration=!: The server-side encryption configuration for the request.
-        --tags=: The tags assigned to the domain.

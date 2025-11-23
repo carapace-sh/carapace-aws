@@ -1,10 +1,26 @@
 name: appfabric
 description: AppFabric
 commands:
-    - name: list-app-authorizations
-      description: Returns a list of all app authorizations configured for an app bundle.
+    - name: delete-ingestion-destination
+      description: Deletes an ingestion destination.
       flags:
         --app-bundle-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the app bundle to use for the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ingestion-destination-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the ingestion destination to use for the request.
+        --ingestion-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the ingestion to use for the request.
+    - name: get-ingestion
+      description: Returns information about an ingestion.
+      flags:
+        --app-bundle-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the app bundle to use for the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ingestion-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the ingestion to use for the request.
+    - name: list-app-bundles
+      description: Returns a list of app bundles.
+      flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -26,41 +42,6 @@ commands:
         --next-token=: If `nextToken` is returned, there are more results available.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: stop-ingestion
-      description: Stops (disables) an ingestion.
-      flags:
-        --app-bundle-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the app bundle to use for the request.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ingestion-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the ingestion to use for the request.
-    - name: batch-get-user-access-tasks
-      description: Gets user access details in a batch request.
-      flags:
-        --app-bundle-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the app bundle to use for the request.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --task-id-list=!: The tasks IDs to use for the request.
-    - name: list-ingestions
-      description: Returns a list of all ingestions configured for an app bundle.
-      flags:
-        --app-bundle-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the app bundle to use for the request.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that are returned per call.
-        --next-token=: If `nextToken` is returned, there are more results available.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: Returns a list of tags for a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource for which you want to retrieve tags.
     - name: start-user-access-tasks
       description: Starts the tasks to search user access status for a specific email address.
       flags:
@@ -69,24 +50,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --email=!: The email address of the target user.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: untag-resource
-      description: Removes a tag or tags from a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource that you want to untag.
-        --tag-keys=!: The keys of the key-value pairs for the tag or tags you want to remove from the specified resource.
-    - name: update-app-authorization
-      description: Updates an app authorization within an app bundle, which allows AppFabric to connect to an application.
-      flags:
-        --app-authorization-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the app authorization to use for the request.
-        --app-bundle-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the app bundle to use for the request.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --credential=: Contains credentials for the application, such as an API key or OAuth2 client ID and secret.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tenant=: Contains information about an application tenant, such as the application display name and identifier.
     - name: create-app-bundle
       description: Creates an app bundle to collect data from an application using AppFabric.
       flags:
@@ -96,14 +59,13 @@ commands:
         --customer-managed-key-identifier=: The Amazon Resource Name (ARN) of the Key Management Service (KMS) key to use to encrypt the application data.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --tags=: A map of the key-value pairs of the tag or tags to assign to the resource.
-    - name: start-ingestion
-      description: Starts (enables) an ingestion, which collects data from an application.
+    - name: get-app-bundle
+      description: Returns information about an app bundle.
       flags:
         --app-bundle-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the app bundle to use for the request.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ingestion-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the ingestion to use for the request.
     - name: tag-resource
       description: Assigns one or more tags (key-value pairs) to the specified resource.
       flags:
@@ -112,6 +74,14 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the resource that you want to tag.
         --tags=!: A map of the key-value pairs of the tag or tags to assign to the resource.
+    - name: untag-resource
+      description: Removes a tag or tags from a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource that you want to untag.
+        --tag-keys=!: The keys of the key-value pairs for the tag or tags you want to remove from the specified resource.
     - name: update-ingestion-destination
       description: Updates an ingestion destination, which specifies how an application's ingested data is processed by Amazon Web Services AppFabric and where it's delivered.
       flags:
@@ -143,23 +113,16 @@ commands:
         --ingestion-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the ingestion to use for the request.
         --processing-configuration=!: Contains information about how ingested data is processed.
         --tags=: A map of the key-value pairs of the tag or tags to assign to the resource.
-    - name: delete-app-bundle
-      description: Deletes an app bundle.
+    - name: get-app-authorization
+      description: Returns information about an app authorization.
       flags:
-        --app-bundle-identifier=!: The ID or Amazon Resource Name (ARN) of the app bundle that needs to be deleted.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-ingestion
-      description: Deletes an ingestion.
-      flags:
+        --app-authorization-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the app authorization to use for the request.
         --app-bundle-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the app bundle to use for the request.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ingestion-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the ingestion to use for the request.
-    - name: delete-ingestion-destination
-      description: Deletes an ingestion destination.
+    - name: get-ingestion-destination
+      description: Returns information about an ingestion destination.
       flags:
         --app-bundle-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the app bundle to use for the request.
         --cli-input-json=: Read arguments from the JSON string provided.
@@ -167,24 +130,10 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --ingestion-destination-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the ingestion destination to use for the request.
         --ingestion-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the ingestion to use for the request.
-    - name: get-app-bundle
-      description: Returns information about an app bundle.
+    - name: list-ingestions
+      description: Returns a list of all ingestions configured for an app bundle.
       flags:
         --app-bundle-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the app bundle to use for the request.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-ingestion
-      description: Returns information about an ingestion.
-      flags:
-        --app-bundle-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the app bundle to use for the request.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ingestion-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the ingestion to use for the request.
-    - name: list-app-bundles
-      description: Returns a list of app bundles.
-      flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -193,24 +142,29 @@ commands:
         --next-token=: If `nextToken` is returned, there are more results available.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: create-app-authorization
-      description: Creates an app authorization within an app bundle, which allows AppFabric to connect to an application.
+    - name: list-tags-for-resource
+      description: Returns a list of tags for a resource.
       flags:
-        --app-bundle-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the app bundle to use for the request.
-        --app=!: The name of the application.
-        --auth-type=!: The authorization type for the app authorization.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --credential=!: Contains credentials for the application, such as an API key or OAuth2 client ID and secret.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: A map of the key-value pairs of the tag or tags to assign to the resource.
-        --tenant=!: Contains information about an application tenant, such as the application display name and identifier.
-      completion:
-        flag:
-            auth-type:
-                - oauth2
-                - apiKey
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource for which you want to retrieve tags.
+    - name: start-ingestion
+      description: Starts (enables) an ingestion, which collects data from an application.
+      flags:
+        --app-bundle-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the app bundle to use for the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ingestion-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the ingestion to use for the request.
+    - name: stop-ingestion
+      description: Stops (disables) an ingestion.
+      flags:
+        --app-bundle-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the app bundle to use for the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ingestion-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the ingestion to use for the request.
     - name: create-ingestion
       description: Creates a data ingestion for an application.
       flags:
@@ -235,20 +189,66 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-app-authorization
-      description: Returns information about an app authorization.
+    - name: delete-app-bundle
+      description: Deletes an app bundle.
+      flags:
+        --app-bundle-identifier=!: The ID or Amazon Resource Name (ARN) of the app bundle that needs to be deleted.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-app-authorizations
+      description: Returns a list of all app authorizations configured for an app bundle.
+      flags:
+        --app-bundle-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the app bundle to use for the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that are returned per call.
+        --next-token=: If `nextToken` is returned, there are more results available.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-app-authorization
+      description: Updates an app authorization within an app bundle, which allows AppFabric to connect to an application.
       flags:
         --app-authorization-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the app authorization to use for the request.
         --app-bundle-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the app bundle to use for the request.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --credential=: Contains credentials for the application, such as an API key or OAuth2 client ID and secret.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-ingestion-destination
-      description: Returns information about an ingestion destination.
+        --tenant=: Contains information about an application tenant, such as the application display name and identifier.
+    - name: batch-get-user-access-tasks
+      description: Gets user access details in a batch request.
       flags:
         --app-bundle-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the app bundle to use for the request.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ingestion-destination-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the ingestion destination to use for the request.
+        --task-id-list=!: The tasks IDs to use for the request.
+    - name: create-app-authorization
+      description: Creates an app authorization within an app bundle, which allows AppFabric to connect to an application.
+      flags:
+        --app-bundle-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the app bundle to use for the request.
+        --app=!: The name of the application.
+        --auth-type=!: The authorization type for the app authorization.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --credential=!: Contains credentials for the application, such as an API key or OAuth2 client ID and secret.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: A map of the key-value pairs of the tag or tags to assign to the resource.
+        --tenant=!: Contains information about an application tenant, such as the application display name and identifier.
+      completion:
+        flag:
+            auth-type:
+                - oauth2
+                - apiKey
+    - name: delete-ingestion
+      description: Deletes an ingestion.
+      flags:
+        --app-bundle-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the app bundle to use for the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --ingestion-identifier=!: The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the ingestion to use for the request.

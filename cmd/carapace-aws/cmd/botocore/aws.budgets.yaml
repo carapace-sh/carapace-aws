@@ -1,18 +1,8 @@
 name: budgets
 description: AWS Budgets
 commands:
-    - name: delete-subscriber
-      description: Deletes a subscriber.
-      flags:
-        --account-id=!: The `accountId` that is associated with the budget whose subscriber you want to delete.
-        --budget-name=!: The name of the budget whose subscriber you want to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --notification=!: The notification whose subscriber you want to delete.
-        --subscriber=!: The subscriber that you want to delete.
-    - name: describe-budget-performance-history
-      description: Describes the history for `DAILY`, `MONTHLY`, and `QUARTERLY` budgets.
+    - name: describe-budget-actions-for-budget
+      description: Describes all of the budget actions for a budget.
       flags:
         --account-id=!: ""
         --budget-name=!: ""
@@ -24,7 +14,6 @@ commands:
         --next-token=: ""
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-        --time-period=: Retrieves how often the budget went into an `ALARM` state for the specified time period.
     - name: describe-budgets
       description: Lists the budgets that are associated with an account.
       flags:
@@ -39,19 +28,122 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --show-filter-expression: Specifies whether the response includes the filter expression associated with the budgets.
         --starting-token=: A token to specify where to start paginating.
-    - name: describe-notifications-for-budget
-      description: Lists the notifications that are associated with a budget.
+    - name: tag-resource
+      description: Creates tags for a budget or budget action resource.
       flags:
-        --account-id=!: The `accountId` that is associated with the budget whose notifications you want descriptions of.
-        --budget-name=!: The name of the budget whose notifications you want descriptions of.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The unique identifier for the resource.
+        --resource-tags=!: The tags associated with the resource.
+    - name: untag-resource
+      description: Deletes tags associated with a budget or budget action resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The unique identifier for the resource.
+        --resource-tag-keys=!: The key that's associated with the tag.
+    - name: update-budget
+      description: Updates a budget.
+      flags:
+        --account-id=!: The `accountId` that is associated with the budget that you want to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --new-budget=!: The budget that you want to update your budget to.
+    - name: delete-budget-action
+      description: Deletes a budget action.
+      flags:
+        --account-id=!: ""
+        --action-id=!: A system-generated universally unique identifier (UUID) for the action.
+        --budget-name=!: ""
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-budget-action
+      description: Describes a budget action detail.
+      flags:
+        --account-id=!: ""
+        --action-id=!: A system-generated universally unique identifier (UUID) for the action.
+        --budget-name=!: ""
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-budget-action-histories
+      description: Describes a budget action history detail.
+      flags:
+        --account-id=!: ""
+        --action-id=!: A system-generated universally unique identifier (UUID) for the action.
+        --budget-name=!: ""
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: An optional integer that represents how many entries a paginated response contains.
-        --next-token=: The pagination token that you include in your request to indicate the next set of results that you want to retrieve.
+        --max-results=: ""
+        --next-token=: ""
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+        --time-period=: ""
+    - name: describe-budget-notifications-for-account
+      description: Lists the budget names and notifications that are associated with an account.
+      flags:
+        --account-id=!: ""
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: An integer that represents how many budgets a paginated response contains.
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: execute-budget-action
+      description: Executes a budget action.
+      flags:
+        --account-id=!: ""
+        --action-id=!: A system-generated universally unique identifier (UUID) for the action.
+        --budget-name=!: ""
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --execution-type=!: The type of execution.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            execution-type:
+                - APPROVE_BUDGET_ACTION
+                - RETRY_BUDGET_ACTION
+                - REVERSE_BUDGET_ACTION
+                - RESET_BUDGET_ACTION
+    - name: list-tags-for-resource
+      description: Lists tags associated with a budget or budget action resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The unique identifier for the resource.
+    - name: update-budget-action
+      description: Updates a budget action.
+      flags:
+        --account-id=!: ""
+        --action-id=!: A system-generated universally unique identifier (UUID) for the action.
+        --action-threshold=: ""
+        --approval-model=: This specifies if the action needs manual or automatic approval.
+        --budget-name=!: ""
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --definition=: ""
+        --execution-role-arn=: The role passed for action execution and reversion.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --notification-type=: ""
+        --subscribers=: ""
+      completion:
+        flag:
+            approval-model:
+                - AUTOMATIC
+                - MANUAL
+            notification-type:
+                - ACTUAL
+                - FORECASTED
     - name: describe-subscribers-for-notification
       description: Lists the subscribers that are associated with a notification.
       flags:
@@ -66,49 +158,6 @@ commands:
         --notification=!: The notification whose subscribers you want to list.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: update-budget
-      description: Updates a budget.
-      flags:
-        --account-id=!: The `accountId` that is associated with the budget that you want to update.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --new-budget=!: The budget that you want to update your budget to.
-    - name: create-budget
-      description: Creates a budget and, if included, notifications and subscribers.
-      flags:
-        --account-id=!: The `accountId` that is associated with the budget.
-        --budget=!: The budget object that you want to create.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --notifications-with-subscribers=: A notification that you want to associate with a budget.
-        --resource-tags=: An optional list of tags to associate with the specified budget.
-    - name: delete-notification
-      description: Deletes a notification.
-      flags:
-        --account-id=!: The `accountId` that is associated with the budget whose notification you want to delete.
-        --budget-name=!: The name of the budget whose notification you want to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --notification=!: The notification that you want to delete.
-    - name: describe-budget-action
-      description: Describes a budget action detail.
-      flags:
-        --account-id=!: ""
-        --action-id=!: A system-generated universally unique identifier (UUID) for the action.
-        --budget-name=!: ""
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-tags-for-resource
-      description: Lists tags associated with a budget or budget action resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The unique identifier for the resource.
     - name: update-notification
       description: Updates a notification.
       flags:
@@ -130,6 +179,92 @@ commands:
         --new-subscriber=!: The updated subscriber that is associated with a budget notification.
         --notification=!: The notification whose subscriber you want to update.
         --old-subscriber=!: The previous subscriber that is associated with a budget notification.
+    - name: create-budget
+      description: Creates a budget and, if included, notifications and subscribers.
+      flags:
+        --account-id=!: The `accountId` that is associated with the budget.
+        --budget=!: The budget object that you want to create.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --notifications-with-subscribers=: A notification that you want to associate with a budget.
+        --resource-tags=: An optional list of tags to associate with the specified budget.
+    - name: create-notification
+      description: Creates a notification.
+      flags:
+        --account-id=!: The `accountId` that is associated with the budget that you want to create a notification for.
+        --budget-name=!: The name of the budget that you want Amazon Web Services to notify you about.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --notification=!: The notification that you want to create.
+        --subscribers=!: A list of subscribers that you want to associate with the notification.
+    - name: create-subscriber
+      description: Creates a subscriber.
+      flags:
+        --account-id=!: The `accountId` that is associated with the budget that you want to create a subscriber for.
+        --budget-name=!: The name of the budget that you want to subscribe to.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --notification=!: The notification that you want to create a subscriber for.
+        --subscriber=!: The subscriber that you want to associate with a budget notification.
+    - name: delete-budget
+      description: Deletes a budget.
+      flags:
+        --account-id=!: The `accountId` that is associated with the budget that you want to delete.
+        --budget-name=!: The name of the budget that you want to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-notification
+      description: Deletes a notification.
+      flags:
+        --account-id=!: The `accountId` that is associated with the budget whose notification you want to delete.
+        --budget-name=!: The name of the budget whose notification you want to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --notification=!: The notification that you want to delete.
+    - name: describe-budget-actions-for-account
+      description: Describes all of the budget actions for an account.
+      flags:
+        --account-id=!: ""
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-budget-performance-history
+      description: Describes the history for `DAILY`, `MONTHLY`, and `QUARTERLY` budgets.
+      flags:
+        --account-id=!: ""
+        --budget-name=!: ""
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --time-period=: Retrieves how often the budget went into an `ALARM` state for the specified time period.
+    - name: describe-notifications-for-budget
+      description: Lists the notifications that are associated with a budget.
+      flags:
+        --account-id=!: The `accountId` that is associated with the budget whose notifications you want descriptions of.
+        --budget-name=!: The name of the budget whose notifications you want descriptions of.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: An optional integer that represents how many entries a paginated response contains.
+        --next-token=: The pagination token that you include in your request to indicate the next set of results that you want to retrieve.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: create-budget-action
       description: Creates a budget action.
       flags:
@@ -158,24 +293,16 @@ commands:
             notification-type:
                 - ACTUAL
                 - FORECASTED
-    - name: create-notification
-      description: Creates a notification.
+    - name: delete-subscriber
+      description: Deletes a subscriber.
       flags:
-        --account-id=!: The `accountId` that is associated with the budget that you want to create a notification for.
-        --budget-name=!: The name of the budget that you want Amazon Web Services to notify you about.
+        --account-id=!: The `accountId` that is associated with the budget whose subscriber you want to delete.
+        --budget-name=!: The name of the budget whose subscriber you want to delete.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --notification=!: The notification that you want to create.
-        --subscribers=!: A list of subscribers that you want to associate with the notification.
-    - name: delete-budget
-      description: Deletes a budget.
-      flags:
-        --account-id=!: The `accountId` that is associated with the budget that you want to delete.
-        --budget-name=!: The name of the budget that you want to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --notification=!: The notification whose subscriber you want to delete.
+        --subscriber=!: The subscriber that you want to delete.
     - name: describe-budget
       description: Describes a budget.
       flags:
@@ -186,130 +313,3 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-show-filter-expression: Specifies whether the response includes the filter expression associated with the budget.
         --show-filter-expression: Specifies whether the response includes the filter expression associated with the budget.
-    - name: describe-budget-actions-for-account
-      description: Describes all of the budget actions for an account.
-      flags:
-        --account-id=!: ""
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: ""
-        --next-token=: ""
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: describe-budget-actions-for-budget
-      description: Describes all of the budget actions for a budget.
-      flags:
-        --account-id=!: ""
-        --budget-name=!: ""
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: ""
-        --next-token=: ""
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: execute-budget-action
-      description: Executes a budget action.
-      flags:
-        --account-id=!: ""
-        --action-id=!: A system-generated universally unique identifier (UUID) for the action.
-        --budget-name=!: ""
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --execution-type=!: The type of execution.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      completion:
-        flag:
-            execution-type:
-                - APPROVE_BUDGET_ACTION
-                - RETRY_BUDGET_ACTION
-                - REVERSE_BUDGET_ACTION
-                - RESET_BUDGET_ACTION
-    - name: tag-resource
-      description: Creates tags for a budget or budget action resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The unique identifier for the resource.
-        --resource-tags=!: The tags associated with the resource.
-    - name: create-subscriber
-      description: Creates a subscriber.
-      flags:
-        --account-id=!: The `accountId` that is associated with the budget that you want to create a subscriber for.
-        --budget-name=!: The name of the budget that you want to subscribe to.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --notification=!: The notification that you want to create a subscriber for.
-        --subscriber=!: The subscriber that you want to associate with a budget notification.
-    - name: describe-budget-action-histories
-      description: Describes a budget action history detail.
-      flags:
-        --account-id=!: ""
-        --action-id=!: A system-generated universally unique identifier (UUID) for the action.
-        --budget-name=!: ""
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: ""
-        --next-token=: ""
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --time-period=: ""
-    - name: untag-resource
-      description: Deletes tags associated with a budget or budget action resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The unique identifier for the resource.
-        --resource-tag-keys=!: The key that's associated with the tag.
-    - name: update-budget-action
-      description: Updates a budget action.
-      flags:
-        --account-id=!: ""
-        --action-id=!: A system-generated universally unique identifier (UUID) for the action.
-        --action-threshold=: ""
-        --approval-model=: This specifies if the action needs manual or automatic approval.
-        --budget-name=!: ""
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --definition=: ""
-        --execution-role-arn=: The role passed for action execution and reversion.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --notification-type=: ""
-        --subscribers=: ""
-      completion:
-        flag:
-            approval-model:
-                - AUTOMATIC
-                - MANUAL
-            notification-type:
-                - ACTUAL
-                - FORECASTED
-    - name: describe-budget-notifications-for-account
-      description: Lists the budget names and notifications that are associated with an account.
-      flags:
-        --account-id=!: ""
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: An integer that represents how many budgets a paginated response contains.
-        --next-token=: ""
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: delete-budget-action
-      description: Deletes a budget action.
-      flags:
-        --account-id=!: ""
-        --action-id=!: A system-generated universally unique identifier (UUID) for the action.
-        --budget-name=!: ""
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.

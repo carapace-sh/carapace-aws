@@ -1,54 +1,63 @@
 name: medical-imaging
 description: AWS Health Imaging
 commands:
-    - name: delete-image-set
-      description: Delete an image set.
+    - name: update-image-set-metadata
+      description: Update image set metadata attributes.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --datastore-id=!: The data store identifier.
+        --force: 'Setting this flag will force the `UpdateImageSetMetadata` operation for the following attributes:'
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --image-set-id=!: The image set identifier.
-    - name: tag-resource
-      description: Adds a user-specifed key and value tag to a medical imaging resource.
+        --latest-version-id=!: The latest image set version identifier.
+        --no-force: 'Setting this flag will force the `UpdateImageSetMetadata` operation for the following attributes:'
+        --update-image-set-metadata-updates=!: Update image set metadata updates.
+    - name: get-image-set-metadata
+      description: Get metadata attributes for an image set.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the medical imaging resource that tags are being added to.
-        --tags=!: The user-specified key and value tag pairs added to a medical imaging resource.
-    - name: create-datastore
-      description: Create a data store.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: A unique identifier for API idempotency.
-        --datastore-name=: The data store name.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kms-key-arn=: The Amazon Resource Name (ARN) assigned to the Key Management Service (KMS) key for accessing encrypted data.
-        --lambda-authorizer-arn=: The ARN of the authorizer's Lambda function.
-        --lossless-storage-format=: The lossless storage format for the datastore.
-        --tags=: The tags provided when creating a data store.
+        --datastore-id=!: The data store identifier.
+        --image-set-id=!: The image set identifier.
+        --version-id=: The image set version identifier.
       completion:
-        flag:
-            lossless-storage-format:
-                - HTJ2K
-                - JPEG_2000_LOSSLESS
-    - name: get-dicom-import-job
-      description: Get the import job properties to learn more about the job or job progress.
+        positional:
+            - - $files
+    - name: list-tags-for-resource
+      description: Lists all tags associated with a medical imaging resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the medical imaging resource to list tags for.
+    - name: copy-image-set
+      description: Copy an image set.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --copy-image-set-information=!: Copy image set information.
+        --datastore-id=!: The data store identifier.
+        --force: Providing this parameter will force completion of the `CopyImageSet` operation, even if there are inconsistent Patient, Study, and/or Series level metadata elements between the `sourceImageSet` and `destinationImageSet`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-force: Providing this parameter will force completion of the `CopyImageSet` operation, even if there are inconsistent Patient, Study, and/or Series level metadata elements between the `sourceImageSet` and `destinationImageSet`.
+        --no-promote-to-primary: Providing this parameter will configure the `CopyImageSet` operation to promote the given image set to the primary DICOM hierarchy.
+        --promote-to-primary: Providing this parameter will configure the `CopyImageSet` operation to promote the given image set to the primary DICOM hierarchy.
+        --source-image-set-id=!: The source image set identifier.
+    - name: delete-datastore
+      description: Delete a data store.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --datastore-id=!: The data store identifier.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The import job identifier.
-    - name: get-datastore
-      description: Get data store properties.
+    - name: get-image-frame
+      description: Get an image frame (pixel data) for an image set.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --datastore-id=!: The data store identifier.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-frame-information=!: Information about the image frame (pixel data) identifier.
+        --image-set-id=!: The image set identifier.
+      completion:
+        positional:
+            - - $files
     - name: get-image-set
       description: Get image set properties.
       flags:
@@ -58,6 +67,21 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --image-set-id=!: The image set identifier.
         --version-id=: The image set version identifier.
+    - name: tag-resource
+      description: Adds a user-specifed key and value tag to a medical imaging resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the medical imaging resource that tags are being added to.
+        --tags=!: The user-specified key and value tag pairs added to a medical imaging resource.
+    - name: get-datastore
+      description: Get data store properties.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --datastore-id=!: The data store identifier.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-datastores
       description: List data stores.
       flags:
@@ -78,26 +102,6 @@ commands:
                 - ACTIVE
                 - DELETING
                 - DELETED
-    - name: list-image-set-versions
-      description: List image set versions.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --datastore-id=!: The data store identifier.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-set-id=!: The image set identifier.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The max results count.
-        --next-token=: The pagination token used to request the list of image set versions on the next page.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: Lists all tags associated with a medical imaging resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the medical imaging resource to list tags for.
     - name: search-image-sets
       description: Search image sets based on defined input attributes.
       flags:
@@ -111,52 +115,52 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --search-criteria=: The search criteria that filters by applying a maximum of 1 item to `SearchByAttribute`.
         --starting-token=: A token to specify where to start paginating.
-    - name: delete-datastore
-      description: Delete a data store.
+    - name: start-dicom-import-job
+      description: Start importing bulk data into an `ACTIVE` data store.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A unique identifier for API idempotency.
+        --data-access-role-arn=!: The Amazon Resource Name (ARN) of the IAM role that grants permission to access medical imaging resources.
         --datastore-id=!: The data store identifier.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-image-frame
-      description: Get an image frame (pixel data) for an image set.
+        --input-owner-account-id=: The account ID of the source S3 bucket owner.
+        --input-s3-uri=!: The input prefix path for the S3 bucket that contains the DICOM files to be imported.
+        --job-name=: The import job name.
+        --output-s3-uri=!: The output prefix of the S3 bucket to upload the results of the DICOM import job.
+    - name: create-datastore
+      description: Create a data store.
       flags:
-        --datastore-id=!: The data store identifier.
-        --image-frame-information=!: Information about the image frame (pixel data) identifier.
-        --image-set-id=!: The image set identifier.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A unique identifier for API idempotency.
+        --datastore-name=: The data store name.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-arn=: The Amazon Resource Name (ARN) assigned to the Key Management Service (KMS) key for accessing encrypted data.
+        --lambda-authorizer-arn=: The ARN of the authorizer's Lambda function.
+        --lossless-storage-format=: The lossless storage format for the datastore.
+        --tags=: The tags provided when creating a data store.
       completion:
-        positional:
-            - - $files
-    - name: get-image-set-metadata
-      description: Get metadata attributes for an image set.
+        flag:
+            lossless-storage-format:
+                - HTJ2K
+                - JPEG_2000_LOSSLESS
+    - name: delete-image-set
+      description: Delete an image set.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --datastore-id=!: The data store identifier.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --image-set-id=!: The image set identifier.
-        --version-id=: The image set version identifier.
-      completion:
-        positional:
-            - - $files
-    - name: untag-resource
-      description: Removes tags from a medical imaging resource.
+    - name: get-dicom-import-job
+      description: Get the import job properties to learn more about the job or job progress.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the medical imaging resource that tags are being removed from.
-        --tag-keys=!: The keys for the tags to be removed from the medical imaging resource.
-    - name: copy-image-set
-      description: Copy an image set.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --copy-image-set-information=!: Copy image set information.
         --datastore-id=!: The data store identifier.
-        --force: Providing this parameter will force completion of the `CopyImageSet` operation, even if there are inconsistent Patient, Study, and/or Series level metadata elements between the `sourceImageSet` and `destinationImageSet`.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-force: Providing this parameter will force completion of the `CopyImageSet` operation, even if there are inconsistent Patient, Study, and/or Series level metadata elements between the `sourceImageSet` and `destinationImageSet`.
-        --no-promote-to-primary: Providing this parameter will configure the `CopyImageSet` operation to promote the given image set to the primary DICOM hierarchy.
-        --promote-to-primary: Providing this parameter will configure the `CopyImageSet` operation to promote the given image set to the primary DICOM hierarchy.
-        --source-image-set-id=!: The source image set identifier.
+        --job-id=!: The import job identifier.
     - name: list-dicom-import-jobs
       description: List import jobs created for a specific data store.
       flags:
@@ -177,28 +181,24 @@ commands:
                 - IN_PROGRESS
                 - COMPLETED
                 - FAILED
-    - name: start-dicom-import-job
-      description: Start importing bulk data into an `ACTIVE` data store.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: A unique identifier for API idempotency.
-        --data-access-role-arn=!: The Amazon Resource Name (ARN) of the IAM role that grants permission to access medical imaging resources.
-        --datastore-id=!: The data store identifier.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input-owner-account-id=: The account ID of the source S3 bucket owner.
-        --input-s3-uri=!: The input prefix path for the S3 bucket that contains the DICOM files to be imported.
-        --job-name=: The import job name.
-        --output-s3-uri=!: The output prefix of the S3 bucket to upload the results of the DICOM import job.
-    - name: update-image-set-metadata
-      description: Update image set metadata attributes.
+    - name: list-image-set-versions
+      description: List image set versions.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --datastore-id=!: The data store identifier.
-        --force: 'Setting this flag will force the `UpdateImageSetMetadata` operation for the following attributes:'
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --image-set-id=!: The image set identifier.
-        --latest-version-id=!: The latest image set version identifier.
-        --no-force: 'Setting this flag will force the `UpdateImageSetMetadata` operation for the following attributes:'
-        --update-image-set-metadata-updates=!: Update image set metadata updates.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The max results count.
+        --next-token=: The pagination token used to request the list of image set versions on the next page.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: untag-resource
+      description: Removes tags from a medical imaging resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the medical imaging resource that tags are being removed from.
+        --tag-keys=!: The keys for the tags to be removed from the medical imaging resource.

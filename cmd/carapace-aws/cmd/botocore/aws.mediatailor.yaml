@@ -1,110 +1,36 @@
 name: mediatailor
 description: AWS MediaTailor
 commands:
-    - name: list-channels
-      description: Retrieves information about the channels that are associated with the current AWS account.
+    - name: delete-playback-configuration
+      description: Deletes a playback configuration.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of channels that you want MediaTailor to return in response to the current request.
-        --next-token=: Pagination token returned by the list request when results exceed the maximum allowed.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-live-sources
-      description: Lists the live sources contained in a source location.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of live sources that you want MediaTailor to return in response to the current request.
-        --next-token=: Pagination token returned by the list request when results exceed the maximum allowed.
-        --page-size=: The size of each page to get in the AWS service call.
-        --source-location-name=!: The name of the source location associated with this Live Sources list.
-        --starting-token=: A token to specify where to start paginating.
-    - name: delete-channel-policy
-      description: The channel policy to delete.
-      flags:
-        --channel-name=!: The name of the channel associated with this channel policy.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-source-location
-      description: Creates a source location.
-      flags:
-        --access-configuration=: Access configuration parameters.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --default-segment-delivery-configuration=: The optional configuration for the server that serves segments.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --http-configuration=!: The source's HTTP package configurations.
-        --segment-delivery-configurations=: A list of the segment delivery configurations associated with this resource.
-        --source-location-name=!: The name associated with the source location.
-        --tags=: The tags to assign to the source location.
-    - name: delete-channel
-      description: Deletes a channel.
+        --name=!: The name of the playback configuration.
+    - name: describe-channel
+      description: Describes a channel.
       flags:
         --channel-name=!: The name of the channel.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-vod-source
-      description: The video on demand (VOD) source to delete.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-location-name=!: The name of the source location associated with this VOD Source.
-        --vod-source-name=!: The name of the VOD source.
-    - name: delete-live-source
-      description: The live source to delete.
+    - name: describe-live-source
+      description: The live source to describe.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --live-source-name=!: The name of the live source.
         --source-location-name=!: The name of the source location associated with this Live Source.
-    - name: get-prefetch-schedule
-      description: Retrieves a prefetch schedule for a playback configuration.
+    - name: describe-program
+      description: Describes a program within a channel.
       flags:
+        --channel-name=!: The name of the channel associated with this Program.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the prefetch schedule.
-        --playback-configuration-name=!: Returns information about the prefetch schedule for a specific playback configuration.
-    - name: list-alerts
-      description: Lists the alerts that are associated with a MediaTailor channel assembly resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of alerts that you want MediaTailor to return in response to the current request.
-        --next-token=: Pagination token returned by the list request when results exceed the maximum allowed.
-        --page-size=: The size of each page to get in the AWS service call.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-playback-configurations
-      description: Retrieves existing playback configurations.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of playback configurations that you want MediaTailor to return in response to the current request.
-        --next-token=: Pagination token returned by the list request when results exceed the maximum allowed.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: untag-resource
-      description: The resource to untag.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to untag.
-        --tag-keys=!: The tag keys associated with the resource.
+        --program-name=!: The name of the program.
     - name: update-channel
       description: Updates a channel.
       flags:
@@ -116,113 +42,6 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --outputs=!: The channel's output properties.
         --time-shift-configuration=: The time-shifted viewing configuration you want to associate to the channel.
-    - name: delete-playback-configuration
-      description: Deletes a playback configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the playback configuration.
-    - name: configure-logs-for-channel
-      description: Configures Amazon CloudWatch log settings for a channel.
-      flags:
-        --channel-name=!: The name of the channel.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --log-types=!: The types of logs to collect.
-    - name: create-channel
-      description: Creates a channel.
-      flags:
-        --audiences=: The list of audiences defined in channel.
-        --channel-name=!: The name of the channel.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filler-slate=: The slate used to fill gaps between programs in the schedule.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --outputs=!: The channel's output properties.
-        --playback-mode=!: The type of playback mode to use for this channel.
-        --tags=: The tags to assign to the channel.
-        --tier=: The tier of the channel.
-        --time-shift-configuration=: The time-shifted viewing configuration you want to associate to the channel.
-      completion:
-        flag:
-            playback-mode:
-                - LOOP
-                - LINEAR
-            tier:
-                - BASIC
-                - STANDARD
-    - name: create-live-source
-      description: The live source configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --http-package-configurations=!: A list of HTTP package configuration parameters for this live source.
-        --live-source-name=!: The name of the live source.
-        --source-location-name=!: The name of the source location.
-        --tags=: The tags to assign to the live source.
-    - name: describe-channel
-      description: Describes a channel.
-      flags:
-        --channel-name=!: The name of the channel.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-prefetch-schedules
-      description: Lists the prefetch schedules for a playback configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of prefetch schedules that you want MediaTailor to return in response to the current request.
-        --next-token=: Pagination token returned by the list request when results exceed the maximum allowed.
-        --page-size=: The size of each page to get in the AWS service call.
-        --playback-configuration-name=!: Retrieves the prefetch schedule(s) for a specific playback configuration.
-        --schedule-type=: The type of prefetch schedules that you want to list.
-        --starting-token=: A token to specify where to start paginating.
-        --stream-id=: An optional filtering parameter whereby MediaTailor filters the prefetch schedules to include only specific streams.
-      completion:
-        flag:
-            schedule-type:
-                - SINGLE
-                - RECURRING
-                - ALL
-    - name: create-vod-source
-      description: The VOD source configuration parameters.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --http-package-configurations=!: A list of HTTP package configuration parameters for this VOD source.
-        --source-location-name=!: The name of the source location for this VOD source.
-        --tags=: The tags to assign to the VOD source.
-        --vod-source-name=!: The name associated with the VOD source.&gt;
-    - name: get-channel-policy
-      description: Returns the channel's IAM policy.
-      flags:
-        --channel-name=!: The name of the channel associated with this Channel Policy.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-program
-      description: Describes a program within a channel.
-      flags:
-        --channel-name=!: The name of the channel associated with this Program.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --program-name=!: The name of the program.
-    - name: delete-program
-      description: Deletes a program within a channel.
-      flags:
-        --channel-name=!: The name of the channel.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --program-name=!: The name of the program.
     - name: configure-logs-for-playback-configuration
       description: Defines where AWS Elemental MediaTailor sends logs for the playback configuration.
       flags:
@@ -234,6 +53,71 @@ commands:
         --manifest-service-interaction-log=: The event types that MediaTailor emits in logs for interactions with the origin server.
         --percent-enabled=!: The percentage of session logs that MediaTailor sends to your CloudWatch Logs account.
         --playback-configuration-name=!: The name of the playback configuration.
+    - name: get-channel-policy
+      description: Returns the channel's IAM policy.
+      flags:
+        --channel-name=!: The name of the channel associated with this Channel Policy.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-channels
+      description: Retrieves information about the channels that are associated with the current AWS account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of channels that you want MediaTailor to return in response to the current request.
+        --next-token=: Pagination token returned by the list request when results exceed the maximum allowed.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-source-locations
+      description: Lists the source locations for a channel.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of source locations that you want MediaTailor to return in response to the current request.
+        --next-token=: Pagination token returned by the list request when results exceed the maximum allowed.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: configure-logs-for-channel
+      description: Configures Amazon CloudWatch log settings for a channel.
+      flags:
+        --channel-name=!: The name of the channel.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-types=!: The types of logs to collect.
+    - name: create-live-source
+      description: The live source configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --http-package-configurations=!: A list of HTTP package configuration parameters for this live source.
+        --live-source-name=!: The name of the live source.
+        --source-location-name=!: The name of the source location.
+        --tags=: The tags to assign to the live source.
+    - name: create-prefetch-schedule
+      description: Creates a prefetch schedule for a playback configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --consumption=: The configuration settings for how and when MediaTailor consumes prefetched ads from the ad decision server for single prefetch schedules.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name to assign to the schedule request.
+        --playback-configuration-name=!: The name to assign to the playback configuration.
+        --recurring-prefetch-configuration=: The configuration that defines how and when MediaTailor performs ad prefetching in a live event.
+        --retrieval=: The configuration settings for retrieval of prefetched ads from the ad decision server.
+        --schedule-type=: The frequency that MediaTailor creates prefetch schedules.
+        --stream-id=: An optional stream identifier that MediaTailor uses to prefetch ads for multiple streams that use the same playback configuration.
+      completion:
+        flag:
+            schedule-type:
+                - SINGLE
+                - RECURRING
     - name: create-program
       description: Creates a program within a channel.
       flags:
@@ -248,6 +132,60 @@ commands:
         --schedule-configuration=!: The schedule configuration settings.
         --source-location-name=!: The name of the source location.
         --vod-source-name=: The name that's used to refer to a VOD source.
+    - name: list-vod-sources
+      description: Lists the VOD sources contained in a source location.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of VOD sources that you want MediaTailor to return in response to the current request.
+        --next-token=: Pagination token returned by the list request when results exceed the maximum allowed.
+        --page-size=: The size of each page to get in the AWS service call.
+        --source-location-name=!: The name of the source location associated with this VOD Source list.
+        --starting-token=: A token to specify where to start paginating.
+    - name: stop-channel
+      description: Stops a channel.
+      flags:
+        --channel-name=!: The name of the channel.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-live-source
+      description: Updates a live source's configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --http-package-configurations=!: A list of HTTP package configurations for the live source on this account.
+        --live-source-name=!: The name of the live source.
+        --source-location-name=!: The name of the source location associated with this Live Source.
+    - name: update-program
+      description: Updates a program within a channel.
+      flags:
+        --ad-breaks=: The ad break configuration settings.
+        --audience-media=: The list of AudienceMedia defined in program.
+        --channel-name=!: The name of the channel for this Program.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --program-name=!: The name of the Program.
+        --schedule-configuration=!: The schedule configuration settings.
+    - name: delete-channel
+      description: Deletes a channel.
+      flags:
+        --channel-name=!: The name of the channel.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-prefetch-schedule
+      description: Deletes a prefetch schedule for a specific playback configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the prefetch schedule.
+        --playback-configuration-name=!: The name of the playback configuration for this prefetch schedule.
     - name: delete-source-location
       description: Deletes a source location.
       flags:
@@ -255,14 +193,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --source-location-name=!: The name of the source location.
-    - name: list-source-locations
-      description: Lists the source locations for a channel.
+    - name: list-playback-configurations
+      description: Retrieves existing playback configurations.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of source locations that you want MediaTailor to return in response to the current request.
+        --max-results=: The maximum number of playback configurations that you want MediaTailor to return in response to the current request.
         --next-token=: Pagination token returned by the list request when results exceed the maximum allowed.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
@@ -293,32 +231,14 @@ commands:
             insertion-mode:
                 - STITCHED_ONLY
                 - PLAYER_SELECT
-    - name: start-channel
-      description: Starts a channel.
-      flags:
-        --channel-name=!: The name of the channel.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-tags-for-resource
-      description: A list of tags that are associated with this resource.
+    - name: tag-resource
+      description: The resource to tag.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) associated with this resource.
-    - name: list-vod-sources
-      description: Lists the VOD sources contained in a source location.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of VOD sources that you want MediaTailor to return in response to the current request.
-        --next-token=: Pagination token returned by the list request when results exceed the maximum allowed.
-        --page-size=: The size of each page to get in the AWS service call.
-        --source-location-name=!: The name of the source location associated with this VOD Source list.
-        --starting-token=: A token to specify where to start paginating.
+        --resource-arn=!: The Amazon Resource Name (ARN) associated with the resource.
+        --tags=!: The tags to assign to the resource.
     - name: update-source-location
       description: Updates a source location.
       flags:
@@ -330,64 +250,14 @@ commands:
         --http-configuration=!: The HTTP configuration for the source location.
         --segment-delivery-configurations=: A list of the segment delivery configurations associated with this resource.
         --source-location-name=!: The name of the source location.
-    - name: create-prefetch-schedule
-      description: Creates a prefetch schedule for a playback configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --consumption=: The configuration settings for how and when MediaTailor consumes prefetched ads from the ad decision server for single prefetch schedules.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name to assign to the schedule request.
-        --playback-configuration-name=!: The name to assign to the playback configuration.
-        --recurring-prefetch-configuration=: The configuration that defines how and when MediaTailor performs ad prefetching in a live event.
-        --retrieval=: The configuration settings for retrieval of prefetched ads from the ad decision server.
-        --schedule-type=: The frequency that MediaTailor creates prefetch schedules.
-        --stream-id=: An optional stream identifier that MediaTailor uses to prefetch ads for multiple streams that use the same playback configuration.
-      completion:
-        flag:
-            schedule-type:
-                - SINGLE
-                - RECURRING
-    - name: describe-vod-source
-      description: Provides details about a specific video on demand (VOD) source in a specific source location.
+    - name: delete-live-source
+      description: The live source to delete.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-location-name=!: The name of the source location associated with this VOD Source.
-        --vod-source-name=!: The name of the VOD Source.
-    - name: get-playback-configuration
-      description: Retrieves a playback configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The identifier for the playback configuration.
-    - name: put-channel-policy
-      description: Creates an IAM policy for the channel.
-      flags:
-        --channel-name=!: The channel name associated with this Channel Policy.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy=!: Adds an IAM role that determines the permissions of your channel.
-    - name: update-live-source
-      description: Updates a live source's configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --http-package-configurations=!: A list of HTTP package configurations for the live source on this account.
         --live-source-name=!: The name of the live source.
         --source-location-name=!: The name of the source location associated with this Live Source.
-    - name: delete-prefetch-schedule
-      description: Deletes a prefetch schedule for a specific playback configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the prefetch schedule.
-        --playback-configuration-name=!: The name of the playback configuration for this prefetch schedule.
     - name: get-channel-schedule
       description: Retrieves information about your channel's schedule.
       flags:
@@ -402,32 +272,177 @@ commands:
         --next-token=: (Optional) If the playback configuration has more than `MaxResults` channel schedules, use `NextToken` to get the second and subsequent pages of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: stop-channel
-      description: Stops a channel.
+    - name: get-playback-configuration
+      description: Retrieves a playback configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The identifier for the playback configuration.
+    - name: list-live-sources
+      description: Lists the live sources contained in a source location.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of live sources that you want MediaTailor to return in response to the current request.
+        --next-token=: Pagination token returned by the list request when results exceed the maximum allowed.
+        --page-size=: The size of each page to get in the AWS service call.
+        --source-location-name=!: The name of the source location associated with this Live Sources list.
+        --starting-token=: A token to specify where to start paginating.
+    - name: create-channel
+      description: Creates a channel.
+      flags:
+        --audiences=: The list of audiences defined in channel.
+        --channel-name=!: The name of the channel.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filler-slate=: The slate used to fill gaps between programs in the schedule.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --outputs=!: The channel's output properties.
+        --playback-mode=!: The type of playback mode to use for this channel.
+        --tags=: The tags to assign to the channel.
+        --tier=: The tier of the channel.
+        --time-shift-configuration=: The time-shifted viewing configuration you want to associate to the channel.
+      completion:
+        flag:
+            playback-mode:
+                - LOOP
+                - LINEAR
+            tier:
+                - BASIC
+                - STANDARD
+    - name: create-vod-source
+      description: The VOD source configuration parameters.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --http-package-configurations=!: A list of HTTP package configuration parameters for this VOD source.
+        --source-location-name=!: The name of the source location for this VOD source.
+        --tags=: The tags to assign to the VOD source.
+        --vod-source-name=!: The name associated with the VOD source.&gt;
+    - name: delete-program
+      description: Deletes a program within a channel.
       flags:
         --channel-name=!: The name of the channel.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: tag-resource
-      description: The resource to tag.
+        --program-name=!: The name of the program.
+    - name: delete-vod-source
+      description: The video on demand (VOD) source to delete.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) associated with the resource.
-        --tags=!: The tags to assign to the resource.
-    - name: update-program
-      description: Updates a program within a channel.
+        --source-location-name=!: The name of the source location associated with this VOD Source.
+        --vod-source-name=!: The name of the VOD source.
+    - name: describe-source-location
+      description: Describes a source location.
       flags:
-        --ad-breaks=: The ad break configuration settings.
-        --audience-media=: The list of AudienceMedia defined in program.
-        --channel-name=!: The name of the channel for this Program.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --program-name=!: The name of the Program.
-        --schedule-configuration=!: The schedule configuration settings.
+        --source-location-name=!: The name of the source location.
+    - name: get-prefetch-schedule
+      description: Retrieves a prefetch schedule for a playback configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the prefetch schedule.
+        --playback-configuration-name=!: Returns information about the prefetch schedule for a specific playback configuration.
+    - name: list-prefetch-schedules
+      description: Lists the prefetch schedules for a playback configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of prefetch schedules that you want MediaTailor to return in response to the current request.
+        --next-token=: Pagination token returned by the list request when results exceed the maximum allowed.
+        --page-size=: The size of each page to get in the AWS service call.
+        --playback-configuration-name=!: Retrieves the prefetch schedule(s) for a specific playback configuration.
+        --schedule-type=: The type of prefetch schedules that you want to list.
+        --starting-token=: A token to specify where to start paginating.
+        --stream-id=: An optional filtering parameter whereby MediaTailor filters the prefetch schedules to include only specific streams.
+      completion:
+        flag:
+            schedule-type:
+                - SINGLE
+                - RECURRING
+                - ALL
+    - name: put-channel-policy
+      description: Creates an IAM policy for the channel.
+      flags:
+        --channel-name=!: The channel name associated with this Channel Policy.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy=!: Adds an IAM role that determines the permissions of your channel.
+    - name: create-source-location
+      description: Creates a source location.
+      flags:
+        --access-configuration=: Access configuration parameters.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --default-segment-delivery-configuration=: The optional configuration for the server that serves segments.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --http-configuration=!: The source's HTTP package configurations.
+        --segment-delivery-configurations=: A list of the segment delivery configurations associated with this resource.
+        --source-location-name=!: The name associated with the source location.
+        --tags=: The tags to assign to the source location.
+    - name: describe-vod-source
+      description: Provides details about a specific video on demand (VOD) source in a specific source location.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-location-name=!: The name of the source location associated with this VOD Source.
+        --vod-source-name=!: The name of the VOD Source.
+    - name: list-alerts
+      description: Lists the alerts that are associated with a MediaTailor channel assembly resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of alerts that you want MediaTailor to return in response to the current request.
+        --next-token=: Pagination token returned by the list request when results exceed the maximum allowed.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+        --starting-token=: A token to specify where to start paginating.
+    - name: start-channel
+      description: Starts a channel.
+      flags:
+        --channel-name=!: The name of the channel.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: untag-resource
+      description: The resource to untag.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to untag.
+        --tag-keys=!: The tag keys associated with the resource.
+    - name: delete-channel-policy
+      description: The channel policy to delete.
+      flags:
+        --channel-name=!: The name of the channel associated with this channel policy.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-tags-for-resource
+      description: A list of tags that are associated with this resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) associated with this resource.
     - name: update-vod-source
       description: Updates a VOD source's configuration.
       flags:
@@ -437,18 +452,3 @@ commands:
         --http-package-configurations=!: A list of HTTP package configurations for the VOD source on this account.
         --source-location-name=!: The name of the source location associated with this VOD Source.
         --vod-source-name=!: The name of the VOD source.
-    - name: describe-live-source
-      description: The live source to describe.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --live-source-name=!: The name of the live source.
-        --source-location-name=!: The name of the source location associated with this Live Source.
-    - name: describe-source-location
-      description: Describes a source location.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-location-name=!: The name of the source location.
