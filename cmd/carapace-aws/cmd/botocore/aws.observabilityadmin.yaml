@@ -1,6 +1,101 @@
 name: observabilityadmin
 description: CloudWatch Observability Admin Service
 commands:
+    - name: get-telemetry-evaluation-status-for-organization
+      description: This returns the onboarding status of the telemetry configuration feature for the organization.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: untag-resource
+      description: Removes tags from a telemetry rule resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the telemetry rule resource to remove tags from.
+        --tag-keys=!: The list of tag keys to remove from the telemetry rule resource.
+    - name: create-centralization-rule-for-organization
+      description: Creates a centralization rule that applies across an Amazon Web Services Organization.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --rule-name=!: A unique name for the organization-wide centralization rule being created.
+        --rule=!: The configuration details for the organization-wide centralization rule, including the source configuration and the destination configuration to centralize telemetry data across the organization.
+        --tags=: The key-value pairs to associate with the organization telemetry rule resource for categorization and management purposes.
+    - name: delete-telemetry-rule
+      description: Deletes a telemetry rule from your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --rule-identifier=!: The identifier (name or ARN) of the telemetry rule to delete.
+    - name: delete-telemetry-rule-for-organization
+      description: Deletes an organization-wide telemetry rule.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --rule-identifier=!: The identifier (name or ARN) of the organization telemetry rule to delete.
+    - name: list-telemetry-rules
+      description: Lists all telemetry rules in your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of telemetry rules to return in a single call.
+        --next-token=: The token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --rule-name-prefix=: A string to filter telemetry rules whose names begin with the specified prefix.
+        --starting-token=: A token to specify where to start paginating.
+    - name: stop-telemetry-enrichment
+      description: Disables the resource tags for telemetry feature for your account, stopping the enhancement of telemetry data with additional resource metadata.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-telemetry-rule
+      description: Creates a telemetry rule that defines how telemetry should be configured for Amazon Web Services resources in your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --rule-name=!: A unique name for the telemetry rule being created.
+        --rule=!: The configuration details for the telemetry rule, including the resource type, telemetry type, destination configuration, and selection criteria for which resources the rule applies to.
+        --tags=: The key-value pairs to associate with the telemetry rule resource for categorization and management purposes.
+    - name: start-telemetry-evaluation
+      description: This action begins onboarding the caller Amazon Web Services account to the telemetry config feature.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-centralization-rule-for-organization
+      description: Updates an existing centralization rule that applies across an Amazon Web Services Organization.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --rule-identifier=!: The identifier (name or ARN) of the organization centralization rule to update.
+        --rule=!: The configuration details for the organization-wide centralization rule, including the source configuration and the destination configuration to centralize telemetry data across the organization.
+    - name: update-telemetry-rule-for-organization
+      description: Updates an existing telemetry rule that applies across an Amazon Web Services Organization.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --rule-identifier=!: The identifier (name or ARN) of the organization telemetry rule to update.
+        --rule=!: The new configuration details for the organization telemetry rule, including resource type, telemetry type, and destination configuration.
+    - name: create-telemetry-rule-for-organization
+      description: Creates a telemetry rule that applies across an Amazon Web Services Organization.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --rule-name=!: A unique name for the organization-wide telemetry rule being created.
+        --rule=!: The configuration details for the organization-wide telemetry rule, including the resource type, telemetry type, destination configuration, and selection criteria for which resources the rule applies to across the organization.
+        --tags=: The key-value pairs to associate with the organization telemetry rule resource for categorization and management purposes.
     - name: list-resource-telemetry
       description: Returns a list of telemetry configurations for Amazon Web Services resources supported by telemetry config.
       flags:
@@ -16,120 +111,40 @@ commands:
         --resource-types=: A list of resource types used to filter resources supported by telemetry config.
         --starting-token=: A token to specify where to start paginating.
         --telemetry-configuration-state=: A key-value pair to filter resources based on the telemetry type and the state of the telemetry configuration.
-    - name: start-telemetry-enrichment
-      description: Enables the resource tags for telemetry feature for your account, which enhances telemetry data with additional resource metadata from Amazon Web Services Resource Explorer to provide richer context for monitoring and observability.
+    - name: get-centralization-rule-for-organization
+      description: Retrieves the details of a specific organization centralization rule.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: stop-telemetry-evaluation-for-organization
-      description: This action offboards the Organization of the caller Amazon Web Services account from the telemetry config feature.
+        --rule-identifier=!: The identifier (name or ARN) of the organization centralization rule to retrieve.
+    - name: get-telemetry-enrichment-status
+      description: Returns the current status of the resource tags for telemetry feature, which enhances telemetry data with additional resource metadata from Amazon Web Services Resource Explorer.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-telemetry-rule
-      description: Updates an existing telemetry rule in your account.
+    - name: get-telemetry-rule
+      description: Retrieves the details of a specific telemetry rule in your account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --rule-identifier=!: The identifier (name or ARN) of the telemetry rule to update.
-        --rule=!: The new configuration details for the telemetry rule.
-    - name: create-telemetry-rule-for-organization
-      description: Creates a telemetry rule that applies across an Amazon Web Services Organization.
+        --rule-identifier=!: The identifier (name or ARN) of the telemetry rule to retrieve.
+    - name: list-centralization-rules-for-organization
+      description: Lists all centralization rules in your organization.
       flags:
+        --all-regions: A flag determining whether to return organization centralization rules from all regions or only the current region.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --rule-name=!: A unique name for the organization-wide telemetry rule being created.
-        --rule=!: The configuration details for the organization-wide telemetry rule, including the resource type, telemetry type, destination configuration, and selection criteria for which resources the rule applies to across the organization.
-        --tags=: The key-value pairs to associate with the organization telemetry rule resource for categorization and management purposes.
-    - name: delete-telemetry-rule
-      description: Deletes a telemetry rule from your account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --rule-identifier=!: The identifier (name or ARN) of the telemetry rule to delete.
-    - name: stop-telemetry-enrichment
-      description: Disables the resource tags for telemetry feature for your account, stopping the enhancement of telemetry data with additional resource metadata.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-centralization-rule-for-organization
-      description: Updates an existing centralization rule that applies across an Amazon Web Services Organization.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --rule-identifier=!: The identifier (name or ARN) of the organization centralization rule to update.
-        --rule=!: The configuration details for the organization-wide centralization rule, including the source configuration and the destination configuration to centralize telemetry data across the organization.
-    - name: delete-centralization-rule-for-organization
-      description: Deletes an organization-wide centralization rule.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --rule-identifier=!: The identifier (name or ARN) of the organization centralization rule to delete.
-    - name: get-telemetry-evaluation-status-for-organization
-      description: This returns the onboarding status of the telemetry configuration feature for the organization.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: tag-resource
-      description: Adds or updates tags for a telemetry rule resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the telemetry rule resource to tag.
-        --tags=!: The key-value pairs to add or update for the telemetry rule resource.
-    - name: untag-resource
-      description: Removes tags from a telemetry rule resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the telemetry rule resource to remove tags from.
-        --tag-keys=!: The list of tag keys to remove from the telemetry rule resource.
-    - name: get-telemetry-evaluation-status
-      description: Returns the current onboarding status of the telemetry config feature, including the status of the feature and reason the feature failed to start or stop.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: start-telemetry-evaluation
-      description: This action begins onboarding the caller Amazon Web Services account to the telemetry config feature.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: start-telemetry-evaluation-for-organization
-      description: This actions begins onboarding the organization and all member accounts to the telemetry config feature.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-telemetry-rule-for-organization
-      description: Updates an existing telemetry rule that applies across an Amazon Web Services Organization.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --rule-identifier=!: The identifier (name or ARN) of the organization telemetry rule to update.
-        --rule=!: The new configuration details for the organization telemetry rule, including resource type, telemetry type, and destination configuration.
-    - name: create-telemetry-rule
-      description: Creates a telemetry rule that defines how telemetry should be configured for Amazon Web Services resources in your account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --rule-name=!: A unique name for the telemetry rule being created.
-        --rule=!: The configuration details for the telemetry rule, including the resource type, telemetry type, destination configuration, and selection criteria for which resources the rule applies to.
-        --tags=: The key-value pairs to associate with the telemetry rule resource for categorization and management purposes.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of organization centralization rules to return in a single call.
+        --next-token=: The token for the next set of results.
+        --no-all-regions: A flag determining whether to return organization centralization rules from all regions or only the current region.
+        --page-size=: The size of each page to get in the AWS service call.
+        --rule-name-prefix=: A string to filter organization centralization rules whose names begin with the specified prefix.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-resource-telemetry-for-organization
       description: Returns a list of telemetry configurations for Amazon Web Services resources supported by telemetry config in the organization.
       flags:
@@ -146,42 +161,21 @@ commands:
         --resource-types=: A list of resource types used to filter resources in the organization.
         --starting-token=: A token to specify where to start paginating.
         --telemetry-configuration-state=: A key-value pair to filter resources in the organization based on the telemetry type and the state of the telemetry configuration.
-    - name: list-tags-for-resource
-      description: Lists all tags attached to the specified telemetry rule resource.
+    - name: tag-resource
+      description: Adds or updates tags for a telemetry rule resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the telemetry rule resource whose tags you want to list.
-    - name: create-centralization-rule-for-organization
-      description: Creates a centralization rule that applies across an Amazon Web Services Organization.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the telemetry rule resource to tag.
+        --tags=!: The key-value pairs to add or update for the telemetry rule resource.
+    - name: delete-centralization-rule-for-organization
+      description: Deletes an organization-wide centralization rule.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --rule-name=!: A unique name for the organization-wide centralization rule being created.
-        --rule=!: The configuration details for the organization-wide centralization rule, including the source configuration and the destination configuration to centralize telemetry data across the organization.
-        --tags=: The key-value pairs to associate with the organization telemetry rule resource for categorization and management purposes.
-    - name: delete-telemetry-rule-for-organization
-      description: Deletes an organization-wide telemetry rule.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --rule-identifier=!: The identifier (name or ARN) of the organization telemetry rule to delete.
-    - name: get-centralization-rule-for-organization
-      description: Retrieves the details of a specific organization centralization rule.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --rule-identifier=!: The identifier (name or ARN) of the organization centralization rule to retrieve.
-    - name: get-telemetry-enrichment-status
-      description: Returns the current status of the resource tags for telemetry feature, which enhances telemetry data with additional resource metadata from Amazon Web Services Resource Explorer.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --rule-identifier=!: The identifier (name or ARN) of the organization centralization rule to delete.
     - name: get-telemetry-rule-for-organization
       description: Retrieves the details of a specific organization telemetry rule.
       flags:
@@ -189,32 +183,18 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --rule-identifier=!: The identifier (name or ARN) of the organization telemetry rule to retrieve.
-    - name: list-centralization-rules-for-organization
-      description: Lists all centralization rules in your organization.
-      flags:
-        --all-regions: A flag determining whether to return organization centralization rules from all regions or only the current region.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of organization centralization rules to return in a single call.
-        --next-token=: The token for the next set of results.
-        --no-all-regions: A flag determining whether to return organization centralization rules from all regions or only the current region.
-        --page-size=: The size of each page to get in the AWS service call.
-        --rule-name-prefix=: A string to filter organization centralization rules whose names begin with the specified prefix.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-telemetry-rules
-      description: Lists all telemetry rules in your account.
+    - name: stop-telemetry-evaluation-for-organization
+      description: This action offboards the Organization of the caller Amazon Web Services account from the telemetry config feature.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of telemetry rules to return in a single call.
-        --next-token=: The token for the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --rule-name-prefix=: A string to filter telemetry rules whose names begin with the specified prefix.
-        --starting-token=: A token to specify where to start paginating.
+    - name: get-telemetry-evaluation-status
+      description: Returns the current onboarding status of the telemetry config feature, including the status of the feature and reason the feature failed to start or stop.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-telemetry-rules-for-organization
       description: Lists all telemetry rules in your organization.
       flags:
@@ -235,10 +215,30 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-telemetry-rule
-      description: Retrieves the details of a specific telemetry rule in your account.
+    - name: update-telemetry-rule
+      description: Updates an existing telemetry rule in your account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --rule-identifier=!: The identifier (name or ARN) of the telemetry rule to retrieve.
+        --rule-identifier=!: The identifier (name or ARN) of the telemetry rule to update.
+        --rule=!: The new configuration details for the telemetry rule.
+    - name: list-tags-for-resource
+      description: Lists all tags attached to the specified telemetry rule resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the telemetry rule resource whose tags you want to list.
+    - name: start-telemetry-enrichment
+      description: Enables the resource tags for telemetry feature for your account, which enhances telemetry data with additional resource metadata from Amazon Web Services Resource Explorer to provide richer context for monitoring and observability.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: start-telemetry-evaluation-for-organization
+      description: This actions begins onboarding the organization and all member accounts to the telemetry config feature.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.

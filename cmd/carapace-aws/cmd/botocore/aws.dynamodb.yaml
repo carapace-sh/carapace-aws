@@ -1,70 +1,107 @@
 name: dynamodb
 description: Amazon DynamoDB
 commands:
-    - name: create-global-table
-      description: Creates a global table from an existing table.
+    - name: transact-write-items
+      description: '`TransactWriteItems` is a synchronous write operation that groups up to 100 action requests.'
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: Providing a `ClientRequestToken` makes the call to `TransactWriteItems` idempotent, meaning that multiple identical calls have the same effect as one single call.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-table-name=!: The global table name.
-        --replication-group=!: The Regions where the global table needs to be created.
-    - name: delete-table
-      description: The `DeleteTable` operation deletes a table and all of its items.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --table-name=!: The name of the table to delete.
-    - name: describe-import
-      description: Represents the properties of the import.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --import-arn=!: The Amazon Resource Name (ARN) associated with the table you're importing to.
-    - name: get-item
-      description: The `GetItem` operation returns a set of attributes for the item with the given primary key.
-      flags:
-        --attributes-to-get=: This is a legacy parameter.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --consistent-read: 'Determines the read consistency model: If set to `true`, then the operation uses strongly consistent reads; otherwise, the operation uses eventually consistent reads.'
-        --expression-attribute-names=: One or more substitution tokens for attribute names in an expression.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key=!: A map of attribute names to `AttributeValue` objects, representing the primary key of the item to retrieve.
-        --no-consistent-read: 'Determines the read consistency model: If set to `true`, then the operation uses strongly consistent reads; otherwise, the operation uses eventually consistent reads.'
-        --projection-expression=: A string that identifies one or more attributes to retrieve from the table.
         --return-consumed-capacity=: ""
-        --table-name=!: The name of the table containing the requested item.
+        --return-item-collection-metrics=: Determines whether item collection metrics are returned.
+        --transact-items=!: An ordered array of up to 100 `TransactWriteItem` objects, each of which contains a `ConditionCheck`, `Put`, `Update`, or `Delete` object.
       completion:
         flag:
             return-consumed-capacity:
                 - INDEXES
                 - TOTAL
                 - NONE
-    - name: list-backups
-      description: List DynamoDB backups that are associated with an Amazon Web Services account and weren't made with Amazon Web Services Backup.
+            return-item-collection-metrics:
+                - SIZE
+                - NONE
+    - name: export-table-to-point-in-time
+      description: Exports table data to an S3 bucket.
       flags:
-        --backup-type=: The backups from the table specified by `BackupType` are listed.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --exclusive-start-backup-arn=: '`LastEvaluatedBackupArn` is the Amazon Resource Name (ARN) of the backup last evaluated when the current page of results was returned, inclusive of the current page of results.'
+        --client-token=: Providing a `ClientToken` makes the call to `ExportTableToPointInTimeInput` idempotent, meaning that multiple identical calls have the same effect as one single call.
+        --export-format=: The format for the exported data.
+        --export-time=: Time in the past from which to export table data, counted in seconds from the start of the Unix epoch.
+        --export-type=: Choice of whether to execute as a full export or incremental export.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: Maximum number of backups to return at once.
-        --max-items=: The  total number of items to return in the command's output.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --table-name=: Lists the backups from the table specified in `TableName`.
-        --time-range-lower-bound=: Only backups created after this time are listed.
-        --time-range-upper-bound=: Only backups created before this time are listed.
+        --incremental-export-specification=: Optional object containing the parameters specific to an incremental export.
+        --s3-bucket-owner=: The ID of the Amazon Web Services account that owns the bucket the export will be stored in.
+        --s3-bucket=!: The name of the Amazon S3 bucket to export the snapshot to.
+        --s3-prefix=: The Amazon S3 bucket prefix to use as the file name and path of the exported snapshot.
+        --s3-sse-algorithm=: Type of encryption used on the bucket where export data will be stored.
+        --s3-sse-kms-key-id=: The ID of the KMS managed key used to encrypt the S3 bucket where export data will be stored (if applicable).
+        --table-arn=!: The Amazon Resource Name (ARN) associated with the table to export.
       completion:
         flag:
-            backup-type:
-                - USER
-                - SYSTEM
-                - AWS_BACKUP
-                - ALL
+            export-format:
+                - DYNAMODB_JSON
+                - ION
+            export-type:
+                - FULL_EXPORT
+                - INCREMENTAL_EXPORT
+            s3-sse-algorithm:
+                - AES256
+                - KMS
+    - name: update-table-replica-auto-scaling
+      description: Updates auto scaling settings on your global tables at once.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --global-secondary-index-updates=: Represents the auto scaling settings of the global secondary indexes of the replica to be updated.
+        --provisioned-write-capacity-auto-scaling-update=: ""
+        --replica-updates=: Represents the auto scaling settings of replicas of the table that will be modified.
+        --table-name=!: The name of the global table to be updated.
+    - name: create-backup
+      description: Creates a backup for an existing table.
+      flags:
+        --backup-name=!: Specified name for the backup.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --table-name=!: The name of the table.
+    - name: create-table
+      description: The `CreateTable` operation adds a new table to your account.
+      flags:
+        --attribute-definitions=!: An array of attributes that describe the key schema for the table and indexes.
+        --billing-mode=: Controls how you are charged for read and write throughput and how you manage capacity.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --deletion-protection-enabled: Indicates whether deletion protection is to be enabled (true) or disabled (false) on the table.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --global-secondary-indexes=: One or more global secondary indexes (the maximum is 20) to be created on the table.
+        --key-schema=!: Specifies the attributes that make up the primary key for a table or an index.
+        --local-secondary-indexes=: One or more local secondary indexes (the maximum is 5) to be created on the table.
+        --no-deletion-protection-enabled: Indicates whether deletion protection is to be enabled (true) or disabled (false) on the table.
+        --on-demand-throughput=: Sets the maximum number of read and write units for the specified table in on-demand capacity mode.
+        --provisioned-throughput=: Represents the provisioned throughput settings for a specified table or index.
+        --resource-policy=: An Amazon Web Services resource-based policy document in JSON format that will be attached to the table.
+        --sse-specification=: Represents the settings used to enable server-side encryption.
+        --stream-specification=: The settings for DynamoDB Streams on the table.
+        --table-class=: The table class of the new table.
+        --table-name=!: The name of the table to create.
+        --tags=: A list of key-value pairs to label the table.
+        --warm-throughput=: Represents the warm throughput (in read units per second and write units per second) for creating a table.
+      completion:
+        flag:
+            billing-mode:
+                - PROVISIONED
+                - PAY_PER_REQUEST
+            table-class:
+                - STANDARD
+                - STANDARD_INFREQUENT_ACCESS
+    - name: describe-limits
+      description: Returns the current provisioned-capacity quotas for your Amazon Web Services account in a Region, both for the Region as a whole and for any one DynamoDB table that you create there.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: restore-table-to-point-in-time
       description: Restores the specified table to the specified point in time within `EarliestRestorableDateTime` and `LatestRestorableDateTime`.
       flags:
@@ -88,131 +125,14 @@ commands:
             billing-mode-override:
                 - PROVISIONED
                 - PAY_PER_REQUEST
-    - name: update-table
-      description: Modifies the provisioned throughput settings, global secondary indexes, or DynamoDB Streams settings for a given table.
-      flags:
-        --attribute-definitions=: An array of attributes that describe the key schema for the table and indexes.
-        --billing-mode=: Controls how you are charged for read and write throughput and how you manage capacity.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deletion-protection-enabled: Indicates whether deletion protection is to be enabled (true) or disabled (false) on the table.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-secondary-index-updates=: An array of one or more global secondary indexes for the table.
-        --global-table-witness-updates=: A list of witness updates for a MRSC global table.
-        --multi-region-consistency=: Specifies the consistency mode for a new global table.
-        --no-deletion-protection-enabled: Indicates whether deletion protection is to be enabled (true) or disabled (false) on the table.
-        --on-demand-throughput=: Updates the maximum number of read and write units for the specified table in on-demand capacity mode.
-        --provisioned-throughput=: The new provisioned throughput settings for the specified table or index.
-        --replica-updates=: A list of replica update actions (create, delete, or update) for the table.
-        --sse-specification=: The new server-side encryption settings for the specified table.
-        --stream-specification=: Represents the DynamoDB Streams configuration for the table.
-        --table-class=: The table class of the table to be updated.
-        --table-name=!: The name of the table to be updated.
-        --warm-throughput=: Represents the warm throughput (in read units per second and write units per second) for updating a table.
-      completion:
-        flag:
-            billing-mode:
-                - PROVISIONED
-                - PAY_PER_REQUEST
-            multi-region-consistency:
-                - EVENTUAL
-                - STRONG
-            table-class:
-                - STANDARD
-                - STANDARD_INFREQUENT_ACCESS
-    - name: tag-resource
-      description: Associate a set of tags with an Amazon DynamoDB resource.
+    - name: update-continuous-backups
+      description: '`UpdateContinuousBackups` enables or disables point in time recovery for the specified table.'
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: Identifies the Amazon DynamoDB resource to which tags should be added.
-        --tags=!: The tags to be assigned to the Amazon DynamoDB resource.
-    - name: batch-get-item
-      description: The `BatchGetItem` operation returns the attributes of one or more items from one or more tables.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --request-items=!: A map of one or more table names or table ARNs and, for each table, a map that describes one or more items to retrieve from that table.
-        --return-consumed-capacity=: ""
-      completion:
-        flag:
-            return-consumed-capacity:
-                - INDEXES
-                - TOTAL
-                - NONE
-    - name: list-exports
-      description: Lists completed exports within the past 90 days.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: Maximum number of results to return per page.
-        --next-token=: An optional string that, if supplied, must be copied from the output of a previous call to `ListExports`.
-        --table-arn=: The Amazon Resource Name (ARN) associated with the exported table.
-    - name: transact-write-items
-      description: '`TransactWriteItems` is a synchronous write operation that groups up to 100 action requests.'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: Providing a `ClientRequestToken` makes the call to `TransactWriteItems` idempotent, meaning that multiple identical calls have the same effect as one single call.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --return-consumed-capacity=: ""
-        --return-item-collection-metrics=: Determines whether item collection metrics are returned.
-        --transact-items=!: An ordered array of up to 100 `TransactWriteItem` objects, each of which contains a `ConditionCheck`, `Put`, `Update`, or `Delete` object.
-      completion:
-        flag:
-            return-consumed-capacity:
-                - INDEXES
-                - TOTAL
-                - NONE
-            return-item-collection-metrics:
-                - SIZE
-                - NONE
-    - name: update-kinesis-streaming-destination
-      description: The command to update the Kinesis stream destination.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --stream-arn=!: The Amazon Resource Name (ARN) for the Kinesis stream input.
-        --table-name=!: The table name for the Kinesis streaming destination input.
-        --update-kinesis-streaming-configuration=: The command to update the Kinesis stream configuration.
-    - name: describe-kinesis-streaming-destination
-      description: Returns information about the status of Kinesis streaming.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --table-name=!: The name of the table being described.
-    - name: describe-table
-      description: Returns information about the table, including the current status of the table, when it was created, the primary key schema, and any indexes on the table.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --table-name=!: The name of the table to describe.
-    - name: list-global-tables
-      description: Lists all global tables that have a replica in the specified Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --exclusive-start-global-table-name=: The first global table name that this operation will evaluate.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of table names to return, if the parameter is not specified DynamoDB defaults to 100.
-        --region-name=: Lists the global tables in a specific Region.
-    - name: list-tables
-      description: Returns an array of table names associated with the current account and endpoint.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --exclusive-start-table-name=: The first table name that this operation will evaluate.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: A maximum number of table names to return.
-        --max-items=: The  total number of items to return in the command's output.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+        --point-in-time-recovery-specification=!: Represents the settings used to enable point in time recovery.
+        --table-name=!: The name of the table.
     - name: describe-contributor-insights
       description: Returns information about contributor insights for a given table or global secondary index.
       flags:
@@ -221,33 +141,8 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --index-name=: The name of the global secondary index to describe, if applicable.
         --table-name=!: The name of the table to describe.
-    - name: describe-global-table
-      description: Returns information about the specified global table.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-table-name=!: The name of the global table.
-    - name: batch-write-item
-      description: The `BatchWriteItem` operation puts or deletes multiple items in one or more tables.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --request-items=!: A map of one or more table names or table ARNs and, for each table, a list of operations to be performed (`DeleteRequest` or `PutRequest`).
-        --return-consumed-capacity=: ""
-        --return-item-collection-metrics=: Determines whether item collection metrics are returned.
-      completion:
-        flag:
-            return-consumed-capacity:
-                - INDEXES
-                - TOTAL
-                - NONE
-            return-item-collection-metrics:
-                - SIZE
-                - NONE
-    - name: enable-kinesis-streaming-destination
-      description: Starts table data replication to the specified Kinesis data stream at a timestamp chosen during the enable workflow.
+    - name: disable-kinesis-streaming-destination
+      description: Stops replication from the DynamoDB table to the Kinesis data stream.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -255,39 +150,39 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --stream-arn=!: The ARN for a Kinesis data stream.
         --table-name=!: The name of the DynamoDB table.
-    - name: list-imports
-      description: Lists completed imports within the past 90 days.
+    - name: update-contributor-insights
+      description: Updates the status for contributor insights for a specific table or index.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --contributor-insights-action=!: Represents the contributor insights action.
+        --contributor-insights-mode=: Specifies whether to track all access and throttled events or throttled events only for the DynamoDB table or index.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --next-token=: An optional string that, if supplied, must be copied from the output of a previous call to `ListImports`.
-        --page-size=: The number of `ImportSummary`objects returned in a single page.
-        --table-arn=: The Amazon Resource Name (ARN) associated with the table that was imported to.
-    - name: list-tags-of-resource
-      description: List all tags on an Amazon DynamoDB resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: An optional string that, if supplied, must be copied from the output of a previous call to ListTagOfResource.
-        --resource-arn=!: The Amazon DynamoDB resource with tags to be listed.
-        --starting-token=: A token to specify where to start paginating.
-    - name: batch-execute-statement
-      description: This operation allows you to perform batch reads or writes on data stored in DynamoDB, using PartiQL.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --return-consumed-capacity=: ""
-        --statements=!: The list of PartiQL statements representing the batch to run.
+        --index-name=: The global secondary index name, if applicable.
+        --table-name=!: The name of the table.
       completion:
         flag:
-            return-consumed-capacity:
-                - INDEXES
-                - TOTAL
-                - NONE
+            contributor-insights-action:
+                - ENABLE
+                - DISABLE
+            contributor-insights-mode:
+                - ACCESSED_AND_THROTTLED_KEYS
+                - THROTTLED_KEYS
+    - name: update-time-to-live
+      description: The `UpdateTimeToLive` method enables or disables Time to Live (TTL) for the specified table.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --table-name=!: The name of the table to be configured.
+        --time-to-live-specification=!: Represents the settings used to enable or disable Time to Live for the specified table.
+    - name: describe-global-table-settings
+      description: Describes Region-specific settings for a global table.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --global-table-name=!: The name of the global table to describe.
     - name: scan
       description: The `Scan` operation returns one or more items and item attributes by accessing every item in a table or a secondary index.
       flags:
@@ -328,58 +223,6 @@ commands:
                 - ALL_PROJECTED_ATTRIBUTES
                 - SPECIFIC_ATTRIBUTES
                 - COUNT
-    - name: delete-item
-      description: Deletes a single item in a table by primary key.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --condition-expression=: A condition that must be satisfied in order for a conditional `DeleteItem` to succeed.
-        --conditional-operator=: This is a legacy parameter.
-        --expected=: This is a legacy parameter.
-        --expression-attribute-names=: One or more substitution tokens for attribute names in an expression.
-        --expression-attribute-values=: One or more values that can be substituted in an expression.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key=!: A map of attribute names to `AttributeValue` objects, representing the primary key of the item to delete.
-        --return-consumed-capacity=: ""
-        --return-item-collection-metrics=: Determines whether item collection metrics are returned.
-        --return-values-on-condition-check-failure=: An optional parameter that returns the item attributes for a `DeleteItem` operation that failed a condition check.
-        --return-values=: Use `ReturnValues` if you want to get the item attributes as they appeared before they were deleted.
-        --table-name=!: The name of the table from which to delete the item.
-      completion:
-        flag:
-            conditional-operator:
-                - AND
-                - OR
-            return-consumed-capacity:
-                - INDEXES
-                - TOTAL
-                - NONE
-            return-item-collection-metrics:
-                - SIZE
-                - NONE
-            return-values:
-                - NONE
-                - ALL_OLD
-                - UPDATED_OLD
-                - ALL_NEW
-                - UPDATED_NEW
-            return-values-on-condition-check-failure:
-                - ALL_OLD
-                - NONE
-    - name: describe-continuous-backups
-      description: Checks the status of continuous backups and point in time recovery on the specified table.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --table-name=!: Name of the table for which the customer wants to check the continuous backups and point in time recovery settings.
-    - name: describe-global-table-settings
-      description: Describes Region-specific settings for a global table.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-table-name=!: The name of the global table to describe.
     - name: put-resource-policy
       description: Attaches a resource-based policy document to the resource, which can be a table or stream.
       flags:
@@ -391,45 +234,6 @@ commands:
         --no-confirm-remove-self-resource-access: Set this parameter to `true` to confirm that you want to remove your permissions to change the policy of this resource in the future.
         --policy=!: An Amazon Web Services resource-based policy document in JSON format.
         --resource-arn=!: The Amazon Resource Name (ARN) of the DynamoDB resource to which the policy will be attached.
-    - name: update-contributor-insights
-      description: Updates the status for contributor insights for a specific table or index.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --contributor-insights-action=!: Represents the contributor insights action.
-        --contributor-insights-mode=: Specifies whether to track all access and throttled events or throttled events only for the DynamoDB table or index.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-name=: The global secondary index name, if applicable.
-        --table-name=!: The name of the table.
-      completion:
-        flag:
-            contributor-insights-action:
-                - ENABLE
-                - DISABLE
-            contributor-insights-mode:
-                - ACCESSED_AND_THROTTLED_KEYS
-                - THROTTLED_KEYS
-    - name: delete-backup
-      description: Deletes an existing backup of a table.
-      flags:
-        --backup-arn=!: The ARN associated with the backup.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-export
-      description: Describes an existing table export.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --export-arn=!: The Amazon Resource Name (ARN) associated with the export.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-table-replica-auto-scaling
-      description: Describes auto scaling settings across replicas of the global table at once.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --table-name=!: The name of the table.
     - name: untag-resource
       description: Removes the association of tags from an Amazon DynamoDB resource.
       flags:
@@ -438,67 +242,12 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The DynamoDB resource that the tags will be removed from.
         --tag-keys=!: A list of tag keys.
-    - name: describe-backup
-      description: Describes an existing backup of a table.
-      flags:
-        --backup-arn=!: The Amazon Resource Name (ARN) associated with the backup.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: transact-get-items
-      description: '`TransactGetItems` is a synchronous operation that atomically retrieves multiple items from one or more tables (but not from indexes) in a single account and Region.'
+    - name: describe-endpoints
+      description: Returns the regional endpoint information.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --return-consumed-capacity=: A value of `TOTAL` causes consumed capacity information to be returned, and a value of `NONE` prevents that information from being returned.
-        --transact-items=!: An ordered array of up to 100 `TransactGetItem` objects, each of which contains a `Get` structure.
-      completion:
-        flag:
-            return-consumed-capacity:
-                - INDEXES
-                - TOTAL
-                - NONE
-    - name: update-table-replica-auto-scaling
-      description: Updates auto scaling settings on your global tables at once.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-secondary-index-updates=: Represents the auto scaling settings of the global secondary indexes of the replica to be updated.
-        --provisioned-write-capacity-auto-scaling-update=: ""
-        --replica-updates=: Represents the auto scaling settings of replicas of the table that will be modified.
-        --table-name=!: The name of the global table to be updated.
-    - name: update-time-to-live
-      description: The `UpdateTimeToLive` method enables or disables Time to Live (TTL) for the specified table.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --table-name=!: The name of the table to be configured.
-        --time-to-live-specification=!: Represents the settings used to enable or disable Time to Live for the specified table.
-    - name: describe-time-to-live
-      description: Gives a description of the Time to Live (TTL) status on the specified table.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --table-name=!: The name of the table to be described.
-    - name: execute-transaction
-      description: This operation allows you to perform transactional reads or writes on data stored in DynamoDB, using PartiQL.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: Set this value to get remaining results, if `NextToken` was returned in the statement response.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --return-consumed-capacity=: Determines the level of detail about either provisioned or on-demand throughput consumption that is returned in the response.
-        --transact-statements=!: The list of PartiQL statements representing the transaction to run.
-      completion:
-        flag:
-            return-consumed-capacity:
-                - INDEXES
-                - TOTAL
-                - NONE
     - name: put-item
       description: Creates a new item, or replaces an old item with a new item.
       flags:
@@ -537,207 +286,22 @@ commands:
             return-values-on-condition-check-failure:
                 - ALL_OLD
                 - NONE
-    - name: update-continuous-backups
-      description: '`UpdateContinuousBackups` enables or disables point in time recovery for the specified table.'
+    - name: delete-table
+      description: The `DeleteTable` operation deletes a table and all of its items.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --point-in-time-recovery-specification=!: Represents the settings used to enable point in time recovery.
-        --table-name=!: The name of the table.
-    - name: export-table-to-point-in-time
-      description: Exports table data to an S3 bucket.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: Providing a `ClientToken` makes the call to `ExportTableToPointInTimeInput` idempotent, meaning that multiple identical calls have the same effect as one single call.
-        --export-format=: The format for the exported data.
-        --export-time=: Time in the past from which to export table data, counted in seconds from the start of the Unix epoch.
-        --export-type=: Choice of whether to execute as a full export or incremental export.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --incremental-export-specification=: Optional object containing the parameters specific to an incremental export.
-        --s3-bucket-owner=: The ID of the Amazon Web Services account that owns the bucket the export will be stored in.
-        --s3-bucket=!: The name of the Amazon S3 bucket to export the snapshot to.
-        --s3-prefix=: The Amazon S3 bucket prefix to use as the file name and path of the exported snapshot.
-        --s3-sse-algorithm=: Type of encryption used on the bucket where export data will be stored.
-        --s3-sse-kms-key-id=: The ID of the KMS managed key used to encrypt the S3 bucket where export data will be stored (if applicable).
-        --table-arn=!: The Amazon Resource Name (ARN) associated with the table to export.
-      completion:
-        flag:
-            export-format:
-                - DYNAMODB_JSON
-                - ION
-            export-type:
-                - FULL_EXPORT
-                - INCREMENTAL_EXPORT
-            s3-sse-algorithm:
-                - AES256
-                - KMS
-    - name: describe-limits
-      description: Returns the current provisioned-capacity quotas for your Amazon Web Services account in a Region, both for the Region as a whole and for any one DynamoDB table that you create there.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-resource-policy
-      description: Returns the resource-based policy document attached to the resource, which can be a table or stream, in JSON format.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the DynamoDB resource to which the policy is attached.
-    - name: restore-table-from-backup
-      description: Creates a new table from an existing backup.
-      flags:
-        --backup-arn=!: The Amazon Resource Name (ARN) associated with the backup.
-        --billing-mode-override=: The billing mode of the restored table.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-secondary-index-override=: List of global secondary indexes for the restored table.
-        --local-secondary-index-override=: List of local secondary indexes for the restored table.
-        --on-demand-throughput-override=: ""
-        --provisioned-throughput-override=: Provisioned throughput settings for the restored table.
-        --sse-specification-override=: The new server-side encryption settings for the restored table.
-        --target-table-name=!: The name of the new table to which the backup must be restored.
-      completion:
-        flag:
-            billing-mode-override:
-                - PROVISIONED
-                - PAY_PER_REQUEST
-    - name: update-item
-      description: Edits an existing item's attributes, or adds a new item to the table if it does not already exist.
-      flags:
-        --attribute-updates=: This is a legacy parameter.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --condition-expression=: A condition that must be satisfied in order for a conditional update to succeed.
-        --conditional-operator=: This is a legacy parameter.
-        --expected=: This is a legacy parameter.
-        --expression-attribute-names=: One or more substitution tokens for attribute names in an expression.
-        --expression-attribute-values=: One or more values that can be substituted in an expression.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key=!: The primary key of the item to be updated.
-        --return-consumed-capacity=: ""
-        --return-item-collection-metrics=: Determines whether item collection metrics are returned.
-        --return-values-on-condition-check-failure=: An optional parameter that returns the item attributes for an `UpdateItem` operation that failed a condition check.
-        --return-values=: Use `ReturnValues` if you want to get the item attributes as they appear before or after they are successfully updated.
-        --table-name=!: The name of the table containing the item to update.
-        --update-expression=: An expression that defines one or more attributes to be updated, the action to be performed on them, and new values for them.
-      completion:
-        flag:
-            conditional-operator:
-                - AND
-                - OR
-            return-consumed-capacity:
-                - INDEXES
-                - TOTAL
-                - NONE
-            return-item-collection-metrics:
-                - SIZE
-                - NONE
-            return-values:
-                - NONE
-                - ALL_OLD
-                - UPDATED_OLD
-                - ALL_NEW
-                - UPDATED_NEW
-            return-values-on-condition-check-failure:
-                - ALL_OLD
-                - NONE
-    - name: execute-statement
-      description: This operation allows you to perform reads and singleton writes on data stored in DynamoDB, using PartiQL.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --consistent-read: The consistency of a read operation.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of items to evaluate (not necessarily the number of matching items).
-        --next-token=: Set this value to get remaining results, if `NextToken` was returned in the statement response.
-        --no-consistent-read: The consistency of a read operation.
-        --parameters=: The parameters for the PartiQL statement, if any.
-        --return-consumed-capacity=: ""
-        --return-values-on-condition-check-failure=: An optional parameter that returns the item attributes for an `ExecuteStatement` operation that failed a condition check.
-        --statement=!: The PartiQL statement representing the operation to run.
-      completion:
-        flag:
-            return-consumed-capacity:
-                - INDEXES
-                - TOTAL
-                - NONE
-            return-values-on-condition-check-failure:
-                - ALL_OLD
-                - NONE
-    - name: create-backup
-      description: Creates a backup for an existing table.
-      flags:
-        --backup-name=!: Specified name for the backup.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --table-name=!: The name of the table.
-    - name: delete-resource-policy
-      description: Deletes the resource-based policy attached to the resource, which can be a table or stream.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expected-revision-id=: A string value that you can use to conditionally delete your policy.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the DynamoDB resource from which the policy will be removed.
-    - name: update-global-table
-      description: Adds or removes replicas in the specified global table.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-table-name=!: The global table name.
-        --replica-updates=!: A list of Regions that should be added or removed from the global table.
-    - name: describe-endpoints
-      description: Returns the regional endpoint information.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: disable-kinesis-streaming-destination
-      description: Stops replication from the DynamoDB table to the Kinesis data stream.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --enable-kinesis-streaming-configuration=: The source for the Kinesis streaming information that is being enabled.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --stream-arn=!: The ARN for a Kinesis data stream.
-        --table-name=!: The name of the DynamoDB table.
-    - name: import-table
-      description: Imports table data from an S3 bucket.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: Providing a `ClientToken` makes the call to `ImportTableInput` idempotent, meaning that multiple identical calls have the same effect as one single call.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input-compression-type=: Type of compression to be used on the input coming from the imported table.
-        --input-format-options=: Additional properties that specify how the input is formatted,
-        --input-format=!: The format of the source data.
-        --s3-bucket-source=!: The S3 bucket that provides the source for the import.
-        --table-creation-parameters=!: Parameters for the table to import the data into.
-      completion:
-        flag:
-            input-compression-type:
-                - GZIP
-                - ZSTD
-                - NONE
-            input-format:
-                - DYNAMODB_JSON
-                - ION
-                - CSV
-    - name: list-contributor-insights
-      description: Returns a list of ContributorInsightsSummary for a table and all its global secondary indexes.
+        --table-name=!: The name of the table to delete.
+    - name: list-exports
+      description: Lists completed exports within the past 90 days.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: Maximum number of results to return per page.
-        --next-token=: A token to for the desired page, if there is one.
-        --table-name=: The name of the table.
+        --next-token=: An optional string that, if supplied, must be copied from the output of a previous call to `ListExports`.
+        --table-arn=: The Amazon Resource Name (ARN) associated with the exported table.
     - name: query
       description: You must provide the name of the partition key attribute and a single value for that attribute.
       flags:
@@ -780,6 +344,293 @@ commands:
                 - ALL_PROJECTED_ATTRIBUTES
                 - SPECIFIC_ATTRIBUTES
                 - COUNT
+    - name: list-backups
+      description: List DynamoDB backups that are associated with an Amazon Web Services account and weren't made with Amazon Web Services Backup.
+      flags:
+        --backup-type=: The backups from the table specified by `BackupType` are listed.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --exclusive-start-backup-arn=: '`LastEvaluatedBackupArn` is the Amazon Resource Name (ARN) of the backup last evaluated when the current page of results was returned, inclusive of the current page of results.'
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: Maximum number of backups to return at once.
+        --max-items=: The  total number of items to return in the command's output.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --table-name=: Lists the backups from the table specified in `TableName`.
+        --time-range-lower-bound=: Only backups created after this time are listed.
+        --time-range-upper-bound=: Only backups created before this time are listed.
+      completion:
+        flag:
+            backup-type:
+                - USER
+                - SYSTEM
+                - AWS_BACKUP
+                - ALL
+    - name: list-contributor-insights
+      description: Returns a list of ContributorInsightsSummary for a table and all its global secondary indexes.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Maximum number of results to return per page.
+        --next-token=: A token to for the desired page, if there is one.
+        --table-name=: The name of the table.
+    - name: batch-execute-statement
+      description: This operation allows you to perform batch reads or writes on data stored in DynamoDB, using PartiQL.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --return-consumed-capacity=: ""
+        --statements=!: The list of PartiQL statements representing the batch to run.
+      completion:
+        flag:
+            return-consumed-capacity:
+                - INDEXES
+                - TOTAL
+                - NONE
+    - name: get-item
+      description: The `GetItem` operation returns a set of attributes for the item with the given primary key.
+      flags:
+        --attributes-to-get=: This is a legacy parameter.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --consistent-read: 'Determines the read consistency model: If set to `true`, then the operation uses strongly consistent reads; otherwise, the operation uses eventually consistent reads.'
+        --expression-attribute-names=: One or more substitution tokens for attribute names in an expression.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key=!: A map of attribute names to `AttributeValue` objects, representing the primary key of the item to retrieve.
+        --no-consistent-read: 'Determines the read consistency model: If set to `true`, then the operation uses strongly consistent reads; otherwise, the operation uses eventually consistent reads.'
+        --projection-expression=: A string that identifies one or more attributes to retrieve from the table.
+        --return-consumed-capacity=: ""
+        --table-name=!: The name of the table containing the requested item.
+      completion:
+        flag:
+            return-consumed-capacity:
+                - INDEXES
+                - TOTAL
+                - NONE
+    - name: list-global-tables
+      description: Lists all global tables that have a replica in the specified Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --exclusive-start-global-table-name=: The first global table name that this operation will evaluate.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of table names to return, if the parameter is not specified DynamoDB defaults to 100.
+        --region-name=: Lists the global tables in a specific Region.
+    - name: list-imports
+      description: Lists completed imports within the past 90 days.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --next-token=: An optional string that, if supplied, must be copied from the output of a previous call to `ListImports`.
+        --page-size=: The number of `ImportSummary`objects returned in a single page.
+        --table-arn=: The Amazon Resource Name (ARN) associated with the table that was imported to.
+    - name: update-item
+      description: Edits an existing item's attributes, or adds a new item to the table if it does not already exist.
+      flags:
+        --attribute-updates=: This is a legacy parameter.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --condition-expression=: A condition that must be satisfied in order for a conditional update to succeed.
+        --conditional-operator=: This is a legacy parameter.
+        --expected=: This is a legacy parameter.
+        --expression-attribute-names=: One or more substitution tokens for attribute names in an expression.
+        --expression-attribute-values=: One or more values that can be substituted in an expression.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key=!: The primary key of the item to be updated.
+        --return-consumed-capacity=: ""
+        --return-item-collection-metrics=: Determines whether item collection metrics are returned.
+        --return-values-on-condition-check-failure=: An optional parameter that returns the item attributes for an `UpdateItem` operation that failed a condition check.
+        --return-values=: Use `ReturnValues` if you want to get the item attributes as they appear before or after they are successfully updated.
+        --table-name=!: The name of the table containing the item to update.
+        --update-expression=: An expression that defines one or more attributes to be updated, the action to be performed on them, and new values for them.
+      completion:
+        flag:
+            conditional-operator:
+                - AND
+                - OR
+            return-consumed-capacity:
+                - INDEXES
+                - TOTAL
+                - NONE
+            return-item-collection-metrics:
+                - SIZE
+                - NONE
+            return-values:
+                - NONE
+                - ALL_OLD
+                - UPDATED_OLD
+                - ALL_NEW
+                - UPDATED_NEW
+            return-values-on-condition-check-failure:
+                - ALL_OLD
+                - NONE
+    - name: describe-backup
+      description: Describes an existing backup of a table.
+      flags:
+        --backup-arn=!: The Amazon Resource Name (ARN) associated with the backup.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-export
+      description: Describes an existing table export.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --export-arn=!: The Amazon Resource Name (ARN) associated with the export.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-tables
+      description: Returns an array of table names associated with the current account and endpoint.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --exclusive-start-table-name=: The first table name that this operation will evaluate.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: A maximum number of table names to return.
+        --max-items=: The  total number of items to return in the command's output.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: delete-item
+      description: Deletes a single item in a table by primary key.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --condition-expression=: A condition that must be satisfied in order for a conditional `DeleteItem` to succeed.
+        --conditional-operator=: This is a legacy parameter.
+        --expected=: This is a legacy parameter.
+        --expression-attribute-names=: One or more substitution tokens for attribute names in an expression.
+        --expression-attribute-values=: One or more values that can be substituted in an expression.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key=!: A map of attribute names to `AttributeValue` objects, representing the primary key of the item to delete.
+        --return-consumed-capacity=: ""
+        --return-item-collection-metrics=: Determines whether item collection metrics are returned.
+        --return-values-on-condition-check-failure=: An optional parameter that returns the item attributes for a `DeleteItem` operation that failed a condition check.
+        --return-values=: Use `ReturnValues` if you want to get the item attributes as they appeared before they were deleted.
+        --table-name=!: The name of the table from which to delete the item.
+      completion:
+        flag:
+            conditional-operator:
+                - AND
+                - OR
+            return-consumed-capacity:
+                - INDEXES
+                - TOTAL
+                - NONE
+            return-item-collection-metrics:
+                - SIZE
+                - NONE
+            return-values:
+                - NONE
+                - ALL_OLD
+                - UPDATED_OLD
+                - ALL_NEW
+                - UPDATED_NEW
+            return-values-on-condition-check-failure:
+                - ALL_OLD
+                - NONE
+    - name: delete-resource-policy
+      description: Deletes the resource-based policy attached to the resource, which can be a table or stream.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-revision-id=: A string value that you can use to conditionally delete your policy.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the DynamoDB resource from which the policy will be removed.
+    - name: execute-statement
+      description: This operation allows you to perform reads and singleton writes on data stored in DynamoDB, using PartiQL.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --consistent-read: The consistency of a read operation.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of items to evaluate (not necessarily the number of matching items).
+        --next-token=: Set this value to get remaining results, if `NextToken` was returned in the statement response.
+        --no-consistent-read: The consistency of a read operation.
+        --parameters=: The parameters for the PartiQL statement, if any.
+        --return-consumed-capacity=: ""
+        --return-values-on-condition-check-failure=: An optional parameter that returns the item attributes for an `ExecuteStatement` operation that failed a condition check.
+        --statement=!: The PartiQL statement representing the operation to run.
+      completion:
+        flag:
+            return-consumed-capacity:
+                - INDEXES
+                - TOTAL
+                - NONE
+            return-values-on-condition-check-failure:
+                - ALL_OLD
+                - NONE
+    - name: update-kinesis-streaming-destination
+      description: The command to update the Kinesis stream destination.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --stream-arn=!: The Amazon Resource Name (ARN) for the Kinesis stream input.
+        --table-name=!: The table name for the Kinesis streaming destination input.
+        --update-kinesis-streaming-configuration=: The command to update the Kinesis stream configuration.
+    - name: delete-backup
+      description: Deletes an existing backup of a table.
+      flags:
+        --backup-arn=!: The ARN associated with the backup.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-table-replica-auto-scaling
+      description: Describes auto scaling settings across replicas of the global table at once.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --table-name=!: The name of the table.
+    - name: describe-time-to-live
+      description: Gives a description of the Time to Live (TTL) status on the specified table.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --table-name=!: The name of the table to be described.
+    - name: update-table
+      description: Modifies the provisioned throughput settings, global secondary indexes, or DynamoDB Streams settings for a given table.
+      flags:
+        --attribute-definitions=: An array of attributes that describe the key schema for the table and indexes.
+        --billing-mode=: Controls how you are charged for read and write throughput and how you manage capacity.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --deletion-protection-enabled: Indicates whether deletion protection is to be enabled (true) or disabled (false) on the table.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --global-secondary-index-updates=: An array of one or more global secondary indexes for the table.
+        --global-table-witness-updates=: A list of witness updates for a MRSC global table.
+        --multi-region-consistency=: Specifies the consistency mode for a new global table.
+        --no-deletion-protection-enabled: Indicates whether deletion protection is to be enabled (true) or disabled (false) on the table.
+        --on-demand-throughput=: Updates the maximum number of read and write units for the specified table in on-demand capacity mode.
+        --provisioned-throughput=: The new provisioned throughput settings for the specified table or index.
+        --replica-updates=: A list of replica update actions (create, delete, or update) for the table.
+        --sse-specification=: The new server-side encryption settings for the specified table.
+        --stream-specification=: Represents the DynamoDB Streams configuration for the table.
+        --table-class=: The table class of the table to be updated.
+        --table-name=!: The name of the table to be updated.
+        --warm-throughput=: Represents the warm throughput (in read units per second and write units per second) for updating a table.
+      completion:
+        flag:
+            billing-mode:
+                - PROVISIONED
+                - PAY_PER_REQUEST
+            multi-region-consistency:
+                - EVENTUAL
+                - STRONG
+            table-class:
+                - STANDARD
+                - STANDARD_INFREQUENT_ACCESS
+    - name: update-global-table
+      description: Adds or removes replicas in the specified global table.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --global-table-name=!: The global table name.
+        --replica-updates=!: A list of Regions that should be added or removed from the global table.
     - name: update-global-table-settings
       description: Updates settings for a global table.
       flags:
@@ -797,36 +648,185 @@ commands:
             global-table-billing-mode:
                 - PROVISIONED
                 - PAY_PER_REQUEST
-    - name: create-table
-      description: The `CreateTable` operation adds a new table to your account.
+    - name: batch-write-item
+      description: The `BatchWriteItem` operation puts or deletes multiple items in one or more tables.
       flags:
-        --attribute-definitions=!: An array of attributes that describe the key schema for the table and indexes.
-        --billing-mode=: Controls how you are charged for read and write throughput and how you manage capacity.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deletion-protection-enabled: Indicates whether deletion protection is to be enabled (true) or disabled (false) on the table.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-secondary-indexes=: One or more global secondary indexes (the maximum is 20) to be created on the table.
-        --key-schema=!: Specifies the attributes that make up the primary key for a table or an index.
-        --local-secondary-indexes=: One or more local secondary indexes (the maximum is 5) to be created on the table.
-        --no-deletion-protection-enabled: Indicates whether deletion protection is to be enabled (true) or disabled (false) on the table.
-        --on-demand-throughput=: Sets the maximum number of read and write units for the specified table in on-demand capacity mode.
-        --provisioned-throughput=: Represents the provisioned throughput settings for a specified table or index.
-        --resource-policy=: An Amazon Web Services resource-based policy document in JSON format that will be attached to the table.
-        --sse-specification=: Represents the settings used to enable server-side encryption.
-        --stream-specification=: The settings for DynamoDB Streams on the table.
-        --table-class=: The table class of the new table.
-        --table-name=!: The name of the table to create.
-        --tags=: A list of key-value pairs to label the table.
-        --warm-throughput=: Represents the warm throughput (in read units per second and write units per second) for creating a table.
+        --request-items=!: A map of one or more table names or table ARNs and, for each table, a list of operations to be performed (`DeleteRequest` or `PutRequest`).
+        --return-consumed-capacity=: ""
+        --return-item-collection-metrics=: Determines whether item collection metrics are returned.
       completion:
         flag:
-            billing-mode:
+            return-consumed-capacity:
+                - INDEXES
+                - TOTAL
+                - NONE
+            return-item-collection-metrics:
+                - SIZE
+                - NONE
+    - name: create-global-table
+      description: Creates a global table from an existing table.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --global-table-name=!: The global table name.
+        --replication-group=!: The Regions where the global table needs to be created.
+    - name: describe-continuous-backups
+      description: Checks the status of continuous backups and point in time recovery on the specified table.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --table-name=!: Name of the table for which the customer wants to check the continuous backups and point in time recovery settings.
+    - name: describe-import
+      description: Represents the properties of the import.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --import-arn=!: The Amazon Resource Name (ARN) associated with the table you're importing to.
+    - name: describe-table
+      description: Returns information about the table, including the current status of the table, when it was created, the primary key schema, and any indexes on the table.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --table-name=!: The name of the table to describe.
+    - name: batch-get-item
+      description: The `BatchGetItem` operation returns the attributes of one or more items from one or more tables.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --request-items=!: A map of one or more table names or table ARNs and, for each table, a map that describes one or more items to retrieve from that table.
+        --return-consumed-capacity=: ""
+      completion:
+        flag:
+            return-consumed-capacity:
+                - INDEXES
+                - TOTAL
+                - NONE
+    - name: describe-kinesis-streaming-destination
+      description: Returns information about the status of Kinesis streaming.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --table-name=!: The name of the table being described.
+    - name: execute-transaction
+      description: This operation allows you to perform transactional reads or writes on data stored in DynamoDB, using PartiQL.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: Set this value to get remaining results, if `NextToken` was returned in the statement response.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --return-consumed-capacity=: Determines the level of detail about either provisioned or on-demand throughput consumption that is returned in the response.
+        --transact-statements=!: The list of PartiQL statements representing the transaction to run.
+      completion:
+        flag:
+            return-consumed-capacity:
+                - INDEXES
+                - TOTAL
+                - NONE
+    - name: get-resource-policy
+      description: Returns the resource-based policy document attached to the resource, which can be a table or stream, in JSON format.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the DynamoDB resource to which the policy is attached.
+    - name: list-tags-of-resource
+      description: List all tags on an Amazon DynamoDB resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: An optional string that, if supplied, must be copied from the output of a previous call to ListTagOfResource.
+        --resource-arn=!: The Amazon DynamoDB resource with tags to be listed.
+        --starting-token=: A token to specify where to start paginating.
+    - name: enable-kinesis-streaming-destination
+      description: Starts table data replication to the specified Kinesis data stream at a timestamp chosen during the enable workflow.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --enable-kinesis-streaming-configuration=: The source for the Kinesis streaming information that is being enabled.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --stream-arn=!: The ARN for a Kinesis data stream.
+        --table-name=!: The name of the DynamoDB table.
+    - name: restore-table-from-backup
+      description: Creates a new table from an existing backup.
+      flags:
+        --backup-arn=!: The Amazon Resource Name (ARN) associated with the backup.
+        --billing-mode-override=: The billing mode of the restored table.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --global-secondary-index-override=: List of global secondary indexes for the restored table.
+        --local-secondary-index-override=: List of local secondary indexes for the restored table.
+        --on-demand-throughput-override=: ""
+        --provisioned-throughput-override=: Provisioned throughput settings for the restored table.
+        --sse-specification-override=: The new server-side encryption settings for the restored table.
+        --target-table-name=!: The name of the new table to which the backup must be restored.
+      completion:
+        flag:
+            billing-mode-override:
                 - PROVISIONED
                 - PAY_PER_REQUEST
-            table-class:
-                - STANDARD
-                - STANDARD_INFREQUENT_ACCESS
+    - name: transact-get-items
+      description: '`TransactGetItems` is a synchronous operation that atomically retrieves multiple items from one or more tables (but not from indexes) in a single account and Region.'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --return-consumed-capacity=: A value of `TOTAL` causes consumed capacity information to be returned, and a value of `NONE` prevents that information from being returned.
+        --transact-items=!: An ordered array of up to 100 `TransactGetItem` objects, each of which contains a `Get` structure.
+      completion:
+        flag:
+            return-consumed-capacity:
+                - INDEXES
+                - TOTAL
+                - NONE
+    - name: describe-global-table
+      description: Returns information about the specified global table.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --global-table-name=!: The name of the global table.
+    - name: import-table
+      description: Imports table data from an S3 bucket.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Providing a `ClientToken` makes the call to `ImportTableInput` idempotent, meaning that multiple identical calls have the same effect as one single call.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-compression-type=: Type of compression to be used on the input coming from the imported table.
+        --input-format-options=: Additional properties that specify how the input is formatted,
+        --input-format=!: The format of the source data.
+        --s3-bucket-source=!: The S3 bucket that provides the source for the import.
+        --table-creation-parameters=!: Parameters for the table to import the data into.
+      completion:
+        flag:
+            input-compression-type:
+                - GZIP
+                - ZSTD
+                - NONE
+            input-format:
+                - DYNAMODB_JSON
+                - ION
+                - CSV
+    - name: tag-resource
+      description: Associate a set of tags with an Amazon DynamoDB resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: Identifies the Amazon DynamoDB resource to which tags should be added.
+        --tags=!: The tags to be assigned to the Amazon DynamoDB resource.
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:

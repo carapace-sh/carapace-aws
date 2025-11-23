@@ -1,6 +1,27 @@
 name: license-manager-user-subscriptions
 description: AWS License Manager User Subscriptions
 commands:
+    - name: update-identity-provider-settings
+      description: Updates additional product configuration settings for the registered identity provider.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-provider-arn=: The Amazon Resource Name (ARN) of the identity provider to update.
+        --identity-provider=: ""
+        --product=: The name of the user-based subscription product.
+        --update-settings=!: Updates the registered identity provider’s product related configuration settings.
+    - name: associate-user
+      description: Associates the user to an EC2 instance to utilize user-based subscriptions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain=: The domain name of the Active Directory that contains information for the user to associate.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-provider=!: The identity provider for the user.
+        --instance-id=!: The ID of the EC2 instance that provides the user-based subscription.
+        --tags=: The tags that apply for the user association.
+        --username=!: The user name from the identity provider.
     - name: list-license-server-endpoints
       description: List the Remote Desktop Services (RDS) License Server endpoints
       flags:
@@ -13,13 +34,6 @@ commands:
         --next-token=: A token to specify where to start paginating.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: Returns the list of tags for the specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource whose tags you want to retrieve.
     - name: register-identity-provider
       description: Registers an identity provider for user-based subscriptions.
       flags:
@@ -30,38 +44,6 @@ commands:
         --product=!: The name of the user-based subscription product.
         --settings=: The registered identity provider’s product related configuration settings such as the subnets to provision VPC endpoints.
         --tags=: The tags that apply to the identity provider's registration.
-    - name: associate-user
-      description: Associates the user to an EC2 instance to utilize user-based subscriptions.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain=: The domain name of the Active Directory that contains information for the user to associate.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-provider=!: The identity provider for the user.
-        --instance-id=!: The ID of the EC2 instance that provides the user-based subscription.
-        --tags=: The tags that apply for the user association.
-        --username=!: The user name from the identity provider.
-    - name: delete-license-server-endpoint
-      description: Deletes a `LicenseServerEndpoint` resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --license-server-endpoint-arn=!: The Amazon Resource Name (ARN) that identifies the `LicenseServerEndpoint` resource to delete.
-        --server-type=!: The type of License Server that the delete request refers to.
-      completion:
-        flag:
-            server-type:
-                - RDS_SAL
-    - name: deregister-identity-provider
-      description: Deregisters the Active Directory identity provider from License Manager user-based subscriptions.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-provider-arn=: The Amazon Resource Name (ARN) that identifies the identity provider to deregister.
-        --identity-provider=: An object that specifies details for the Active Directory identity provider.
-        --product=: The name of the user-based subscription product.
     - name: start-product-subscription
       description: Starts a product subscription for a user with the specified identity provider.
       flags:
@@ -73,28 +55,22 @@ commands:
         --product=!: The name of the user-based subscription product.
         --tags=: The tags that apply to the product subscription.
         --username=!: The user name from the identity provider of the user.
-    - name: stop-product-subscription
-      description: Stops a product subscription for a user with the specified identity provider.
+    - name: deregister-identity-provider
+      description: Deregisters the Active Directory identity provider from License Manager user-based subscriptions.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain=: The domain name of the Active Directory that contains the user for whom to stop the product subscription.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-provider=: An object that specifies details for the identity provider.
-        --product-user-arn=: The Amazon Resource Name (ARN) of the product user.
-        --product=: The name of the user-based subscription product.
-        --username=: The user name from the identity provider for the user.
-    - name: disassociate-user
-      description: Disassociates the user from an EC2 instance providing user-based subscriptions.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain=: The domain name of the Active Directory that contains information for the user to disassociate.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-provider-arn=: The Amazon Resource Name (ARN) that identifies the identity provider to deregister.
         --identity-provider=: An object that specifies details for the Active Directory identity provider.
-        --instance-id=: The ID of the EC2 instance which provides user-based subscriptions.
-        --instance-user-arn=: The Amazon Resource Name (ARN) of the user to disassociate from the EC2 instance.
-        --username=: The user name from the Active Directory identity provider for the user.
+        --product=: The name of the user-based subscription product.
+    - name: list-tags-for-resource
+      description: Returns the list of tags for the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource whose tags you want to retrieve.
     - name: list-user-associations
       description: Lists user associations for an identity provider.
       flags:
@@ -109,22 +85,38 @@ commands:
         --next-token=: A token to specify where to start paginating.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: tag-resource
-      description: Adds tags to a resource.
+    - name: create-license-server-endpoint
+      description: Creates a network endpoint for the Remote Desktop Services (RDS) license server.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource that you want to tag.
-        --tags=!: The tags to apply to the specified resource.
-    - name: untag-resource
-      description: Removes tags from a resource.
+        --identity-provider-arn=!: The Amazon Resource Name (ARN) that identifies the `IdentityProvider` resource that contains details about a registered identity provider.
+        --license-server-settings=!: The `LicenseServerSettings` resource to create for the endpoint.
+        --tags=: The tags that apply for the license server endpoint.
+    - name: disassociate-user
+      description: Disassociates the user from an EC2 instance providing user-based subscriptions.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain=: The domain name of the Active Directory that contains information for the user to disassociate.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource that you want to remove tags from.
-        --tag-keys=!: The tag keys to remove from the resource.
+        --identity-provider=: An object that specifies details for the Active Directory identity provider.
+        --instance-id=: The ID of the EC2 instance which provides user-based subscriptions.
+        --instance-user-arn=: The Amazon Resource Name (ARN) of the user to disassociate from the EC2 instance.
+        --username=: The user name from the Active Directory identity provider for the user.
+    - name: list-instances
+      description: Lists the EC2 instances providing user-based subscriptions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: 'You can use the following filters to streamline results:'
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return from a single request.
+        --next-token=: A token to specify where to start paginating.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-product-subscriptions
       description: Lists the user-based subscription products available from an identity provider.
       flags:
@@ -139,25 +131,26 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --product=: The name of the user-based subscription product.
         --starting-token=: A token to specify where to start paginating.
-    - name: update-identity-provider-settings
-      description: Updates additional product configuration settings for the registered identity provider.
+    - name: untag-resource
+      description: Removes tags from a resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-provider-arn=: The Amazon Resource Name (ARN) of the identity provider to update.
-        --identity-provider=: ""
-        --product=: The name of the user-based subscription product.
-        --update-settings=!: Updates the registered identity provider’s product related configuration settings.
-    - name: create-license-server-endpoint
-      description: Creates a network endpoint for the Remote Desktop Services (RDS) license server.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource that you want to remove tags from.
+        --tag-keys=!: The tag keys to remove from the resource.
+    - name: delete-license-server-endpoint
+      description: Deletes a `LicenseServerEndpoint` resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-provider-arn=!: The Amazon Resource Name (ARN) that identifies the `IdentityProvider` resource that contains details about a registered identity provider.
-        --license-server-settings=!: The `LicenseServerSettings` resource to create for the endpoint.
-        --tags=: The tags that apply for the license server endpoint.
+        --license-server-endpoint-arn=!: The Amazon Resource Name (ARN) that identifies the `LicenseServerEndpoint` resource to delete.
+        --server-type=!: The type of License Server that the delete request refers to.
+      completion:
+        flag:
+            server-type:
+                - RDS_SAL
     - name: list-identity-providers
       description: Lists the Active Directory identity providers for user-based subscriptions.
       flags:
@@ -170,15 +163,22 @@ commands:
         --next-token=: A token to specify where to start paginating.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-instances
-      description: Lists the EC2 instances providing user-based subscriptions.
+    - name: stop-product-subscription
+      description: Stops a product subscription for a user with the specified identity provider.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: 'You can use the following filters to streamline results:'
+        --domain=: The domain name of the Active Directory that contains the user for whom to stop the product subscription.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return from a single request.
-        --next-token=: A token to specify where to start paginating.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+        --identity-provider=: An object that specifies details for the identity provider.
+        --product-user-arn=: The Amazon Resource Name (ARN) of the product user.
+        --product=: The name of the user-based subscription product.
+        --username=: The user name from the identity provider for the user.
+    - name: tag-resource
+      description: Adds tags to a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource that you want to tag.
+        --tags=!: The tags to apply to the specified resource.

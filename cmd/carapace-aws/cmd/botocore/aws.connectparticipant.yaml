@@ -1,6 +1,60 @@
 name: connectparticipant
 description: Amazon Connect Participant Service
 commands:
+    - name: get-attachment
+      description: Provides a pre-signed URL for download of a completed attachment.
+      flags:
+        --attachment-id=!: A unique identifier for the attachment.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connection-token=!: The authentication token associated with the participant's connection.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --url-expiry-in-seconds=: The expiration time of the URL in ISO timestamp.
+    - name: send-event
+      description: The `application/vnd.amazonaws.connect.event.connection.acknowledged` ContentType is no longer maintained since December 31, 2024. This event has been migrated to the [CreateParticipantConnection](https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html) API using the `ConnectParticipant` field.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --connection-token=!: The authentication token associated with the participant's connection.
+        --content-type=!: The content type of the request.
+        --content=: The content of the event to be sent (for example, message text).
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: complete-attachment-upload
+      description: Allows you to confirm that the attachment has been uploaded using the pre-signed URL provided in StartAttachmentUpload API.
+      flags:
+        --attachment-ids=!: A list of unique identifiers for the attachments.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --connection-token=!: The authentication token associated with the participant's connection.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-participant-connection
+      description: Creates the participant's connection.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connect-participant: Amazon Connect Participant is used to mark the participant as connected for customer participant in message streaming, as well as for agent or manager participant in non-streaming chats.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-connect-participant: Amazon Connect Participant is used to mark the participant as connected for customer participant in message streaming, as well as for agent or manager participant in non-streaming chats.
+        --participant-token=!: This is a header parameter.
+        --type=: Type of connection information required.
+    - name: describe-view
+      description: Retrieves the view for the specified view token.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connection-token=!: The connection token.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --view-token=!: An encrypted token originating from the interactive message of a ShowView block operation.
+    - name: disconnect-participant
+      description: Disconnects a participant.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --connection-token=!: The authentication token associated with the participant's connection.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-authentication-url
       description: Retrieves the AuthenticationUrl for the current authentication session for the AuthenticateCustomer flow block.
       flags:
@@ -31,16 +85,6 @@ commands:
             sort-order:
                 - DESCENDING
                 - ASCENDING
-    - name: send-event
-      description: The `application/vnd.amazonaws.connect.event.connection.acknowledged` ContentType is no longer maintained since December 31, 2024. This event has been migrated to the [CreateParticipantConnection](https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html) API using the `ConnectParticipant` field.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --connection-token=!: The authentication token associated with the participant's connection.
-        --content-type=!: The content type of the request.
-        --content=: The content of the event to be sent (for example, message text).
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: send-message
       description: Sends a message.
       flags:
@@ -50,24 +94,6 @@ commands:
         --connection-token=!: The authentication token associated with the connection.
         --content-type=!: The type of the content.
         --content=!: The content of the message.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-participant-connection
-      description: Creates the participant's connection.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connect-participant: Amazon Connect Participant is used to mark the participant as connected for customer participant in message streaming, as well as for agent or manager participant in non-streaming chats.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-connect-participant: Amazon Connect Participant is used to mark the participant as connected for customer participant in message streaming, as well as for agent or manager participant in non-streaming chats.
-        --participant-token=!: This is a header parameter.
-        --type=: Type of connection information required.
-    - name: disconnect-participant
-      description: Disconnects a participant.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --connection-token=!: The authentication token associated with the participant's connection.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: start-attachment-upload
       description: Provides a pre-signed Amazon S3 URL in response for uploading the file directly to S3.
@@ -88,29 +114,3 @@ commands:
         --connection-token=!: The authentication token associated with the participant's connection.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --session-id=!: The `sessionId` provided in the `authenticationInitiated` event.
-    - name: complete-attachment-upload
-      description: Allows you to confirm that the attachment has been uploaded using the pre-signed URL provided in StartAttachmentUpload API.
-      flags:
-        --attachment-ids=!: A list of unique identifiers for the attachments.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --connection-token=!: The authentication token associated with the participant's connection.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-view
-      description: Retrieves the view for the specified view token.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connection-token=!: The connection token.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --view-token=!: An encrypted token originating from the interactive message of a ShowView block operation.
-    - name: get-attachment
-      description: Provides a pre-signed URL for download of a completed attachment.
-      flags:
-        --attachment-id=!: A unique identifier for the attachment.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connection-token=!: The authentication token associated with the participant's connection.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --url-expiry-in-seconds=: The expiration time of the URL in ISO timestamp.

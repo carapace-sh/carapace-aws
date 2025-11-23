@@ -1,35 +1,20 @@
 name: outposts
 description: AWS Outposts
 commands:
-    - name: delete-outpost
-      description: Deletes the specified Outpost.
+    - name: list-catalog-items
+      description: Lists the items in the catalog.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --ec2-family-filter=: Filters the results by EC2 family (for example, M5).
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --outpost-id=!: The ID or ARN of the Outpost.
-    - name: get-catalog-item
-      description: Gets information about the specified catalog item.
-      flags:
-        --catalog-item-id=!: The ID of the catalog item.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-outpost
-      description: Gets information about the specified Outpost.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --outpost-id=!: The ID or ARN of the Outpost.
-    - name: tag-resource
-      description: Adds tags to the specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-        --tags=!: The tags to add to the resource.
+        --item-class-filter=: Filters the results by item class.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --supported-storage-filter=: Filters the results by storage option.
     - name: update-outpost
       description: Updates an Outpost.
       flags:
@@ -45,20 +30,34 @@ commands:
             supported-hardware-type:
                 - RACK
                 - SERVER
-    - name: update-site-address
-      description: Updates the address of the specified site.
+    - name: list-sites
+      description: Lists the Outpost sites for your Amazon Web Services account.
       flags:
-        --address-type=!: The type of the address.
-        --address=!: The address for the site.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --site-id=!: The ID or the Amazon Resource Name (ARN) of the site.
-      completion:
-        flag:
-            address-type:
-                - SHIPPING_ADDRESS
-                - OPERATING_ADDRESS
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: ""
+        --operating-address-city-filter=: Filters the results by city.
+        --operating-address-country-code-filter=: Filters the results by country code.
+        --operating-address-state-or-region-filter=: Filters the results by state or region.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-outpost
+      description: Gets information about the specified Outpost.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --outpost-id=!: The ID or ARN of the Outpost.
+    - name: cancel-order
+      description: Cancels the specified order for an Outpost.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --order-id=!: The ID of the order.
     - name: create-outpost
       description: Creates an Outpost.
       flags:
@@ -77,29 +76,66 @@ commands:
             supported-hardware-type:
                 - RACK
                 - SERVER
-    - name: list-capacity-tasks
-      description: Lists the capacity tasks for your Amazon Web Services account.
+    - name: get-outpost-supported-instance-types
+      description: Gets the instance types that an Outpost can support in `InstanceTypeCapacity`.
       flags:
-        --capacity-task-status-filter=: A list of statuses.
+        --asset-id=: The ID of the Outpost asset.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: ""
         --next-token=: ""
-        --outpost-identifier-filter=: Filters the results by an Outpost ID or an Outpost ARN.
+        --order-id=: The ID for the Amazon Web Services Outposts order.
+        --outpost-identifier=!: The ID or ARN of the Outpost.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-orders
-      description: Lists the Outpost orders for your Amazon Web Services account.
+    - name: get-site
+      description: Gets information about the specified Outpost site.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --site-id=!: The ID or the Amazon Resource Name (ARN) of the site.
+    - name: tag-resource
+      description: Adds tags to the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+        --tags=!: The tags to add to the resource.
+    - name: create-order
+      description: Creates an order for an Outpost.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --line-items=: The line items that make up the order.
+        --outpost-identifier=!: The ID or the Amazon Resource Name (ARN) of the Outpost.
+        --payment-option=!: The payment option.
+        --payment-term=: The payment terms.
+      completion:
+        flag:
+            payment-option:
+                - ALL_UPFRONT
+                - NO_UPFRONT
+                - PARTIAL_UPFRONT
+            payment-term:
+                - THREE_YEARS
+                - ONE_YEAR
+                - FIVE_YEARS
+    - name: list-blocking-instances-for-capacity-task
+      description: A list of Amazon EC2 instances running on the Outpost and belonging to the account that initiated the capacity task.
+      flags:
+        --capacity-task-id=!: The ID of the capacity task.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: ""
         --next-token=: ""
-        --outpost-identifier-filter=: The ID or the Amazon Resource Name (ARN) of the Outpost.
+        --outpost-identifier=!: The ID or ARN of the Outpost associated with the specified capacity task.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
     - name: start-capacity-task
@@ -121,83 +157,6 @@ commands:
             task-action-on-blocking-instances:
                 - WAIT_FOR_EVACUATION
                 - FAIL_TASK
-    - name: get-outpost-instance-types
-      description: Gets the instance types for the specified Outpost.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: ""
-        --next-token=: ""
-        --outpost-id=!: The ID or ARN of the Outpost.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: get-site
-      description: Gets information about the specified Outpost site.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --site-id=!: The ID or the Amazon Resource Name (ARN) of the site.
-    - name: list-blocking-instances-for-capacity-task
-      description: A list of Amazon EC2 instances running on the Outpost and belonging to the account that initiated the capacity task.
-      flags:
-        --capacity-task-id=!: The ID of the capacity task.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: ""
-        --next-token=: ""
-        --outpost-identifier=!: The ID or ARN of the Outpost associated with the specified capacity task.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: start-connection
-      description: Amazon Web Services uses this action to install Outpost servers.
-      flags:
-        --asset-id=!: The ID of the Outpost server.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-public-key=!: The public key of the client.
-        --device-serial-number=: The serial number of the dongle.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --network-interface-device-index=!: The device index of the network interface on the Outpost server.
-    - name: get-connection
-      description: Amazon Web Services uses this action to install Outpost servers.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connection-id=!: The ID of the connection.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-outpost-supported-instance-types
-      description: Gets the instance types that an Outpost can support in `InstanceTypeCapacity`.
-      flags:
-        --asset-id=: The ID of the Outpost asset.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: ""
-        --next-token=: ""
-        --order-id=: The ID for the Amazon Web Services Outposts order.
-        --outpost-identifier=!: The ID or ARN of the Outpost.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-outposts
-      description: Lists the Outposts for your Amazon Web Services account.
-      flags:
-        --availability-zone-filter=: Filters the results by Availability Zone (for example, `us-east-1a`).
-        --availability-zone-id-filter=: Filters the results by AZ ID (for example, `use1-az1`).
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --life-cycle-status-filter=: Filters the results by the lifecycle status.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: ""
-        --next-token=: ""
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
     - name: start-outpost-decommission
       description: Starts the decommission process to return the Outposts racks or servers.
       flags:
@@ -207,137 +166,6 @@ commands:
         --no-validate-only: Validates the request without starting the decommission process.
         --outpost-identifier=!: The ID or ARN of the Outpost that you want to decommission.
         --validate-only: Validates the request without starting the decommission process.
-    - name: cancel-capacity-task
-      description: Cancels the capacity task.
-      flags:
-        --capacity-task-id=!: ID of the capacity task that you want to cancel.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --outpost-identifier=!: ID or ARN of the Outpost associated with the capacity task that you want to cancel.
-    - name: delete-site
-      description: Deletes the specified site.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --site-id=!: The ID or the Amazon Resource Name (ARN) of the site.
-    - name: get-order
-      description: Gets information about the specified order.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --order-id=!: The ID of the order.
-    - name: get-outpost-billing-information
-      description: Gets current and historical billing information about the specified Outpost.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: ""
-        --next-token=: ""
-        --outpost-identifier=!: The ID or ARN of the Outpost.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-asset-instances
-      description: A list of Amazon EC2 instances, belonging to all accounts, running on the specified Outpost.
-      flags:
-        --account-id-filter=: Filters the results by account ID.
-        --asset-id-filter=: Filters the results by asset ID.
-        --aws-service-filter=: Filters the results by Amazon Web Services service.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-type-filter=: Filters the results by instance ID.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: ""
-        --next-token=: ""
-        --outpost-identifier=!: The ID of the Outpost.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: untag-resource
-      description: Removes tags from the specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-        --tag-keys=!: The tag keys.
-    - name: create-order
-      description: Creates an order for an Outpost.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --line-items=: The line items that make up the order.
-        --outpost-identifier=!: The ID or the Amazon Resource Name (ARN) of the Outpost.
-        --payment-option=!: The payment option.
-        --payment-term=: The payment terms.
-      completion:
-        flag:
-            payment-option:
-                - ALL_UPFRONT
-                - NO_UPFRONT
-                - PARTIAL_UPFRONT
-            payment-term:
-                - THREE_YEARS
-                - ONE_YEAR
-                - FIVE_YEARS
-    - name: list-catalog-items
-      description: Lists the items in the catalog.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --ec2-family-filter=: Filters the results by EC2 family (for example, M5).
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --item-class-filter=: Filters the results by item class.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: ""
-        --next-token=: ""
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --supported-storage-filter=: Filters the results by storage option.
-    - name: list-tags-for-resource
-      description: Lists the tags for the specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-    - name: update-site
-      description: Updates the specified site.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: ""
-        --notes=: Notes about a site.
-        --site-id=!: The ID or the Amazon Resource Name (ARN) of the site.
-    - name: get-capacity-task
-      description: Gets details of the specified capacity task.
-      flags:
-        --capacity-task-id=!: ID of the capacity task.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --outpost-identifier=!: ID or ARN of the Outpost associated with the specified capacity task.
-    - name: list-assets
-      description: Lists the hardware assets for the specified Outpost.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --host-id-filter=: Filters the results by the host ID of a Dedicated Host.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: ""
-        --next-token=: ""
-        --outpost-identifier=!: The ID or the Amazon Resource Name (ARN) of the Outpost.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --status-filter=: Filters the results by state.
     - name: update-site-rack-physical-properties
       description: Update the physical and logistical details for a rack at a site.
       flags:
@@ -412,26 +240,44 @@ commands:
                 - UPLINK_10G
                 - UPLINK_40G
                 - UPLINK_100G
-    - name: cancel-order
-      description: Cancels the specified order for an Outpost.
+    - name: get-outpost-billing-information
+      description: Gets current and historical billing information about the specified Outpost.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --order-id=!: The ID of the order.
-    - name: create-site
-      description: Creates a site for an Outpost.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: ""
+        --outpost-identifier=!: The ID or ARN of the Outpost.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-asset-instances
+      description: A list of Amazon EC2 instances, belonging to all accounts, running on the specified Outpost.
+      flags:
+        --account-id-filter=: Filters the results by account ID.
+        --asset-id-filter=: Filters the results by asset ID.
+        --aws-service-filter=: Filters the results by Amazon Web Services service.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-type-filter=: Filters the results by instance ID.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: ""
+        --outpost-identifier=!: The ID of the Outpost.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-site
+      description: Updates the specified site.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: ""
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: ""
-        --notes=: Additional information that you provide about site access requirements, electrician scheduling, personal protective equipment, or regulation of equipment materials that could affect your installation process.
-        --operating-address=: The location to install and power on the hardware.
-        --rack-physical-properties=: Information about the physical and logistical details for the rack at this site.
-        --shipping-address=: The location to ship the hardware.
-        --tags=: The tags to apply to a site.
+        --name=: ""
+        --notes=: Notes about a site.
+        --site-id=!: The ID or the Amazon Resource Name (ARN) of the site.
     - name: get-site-address
       description: Gets the site address of the specified site.
       flags:
@@ -445,8 +291,29 @@ commands:
             address-type:
                 - SHIPPING_ADDRESS
                 - OPERATING_ADDRESS
-    - name: list-sites
-      description: Lists the Outpost sites for your Amazon Web Services account.
+    - name: list-outposts
+      description: Lists the Outposts for your Amazon Web Services account.
+      flags:
+        --availability-zone-filter=: Filters the results by Availability Zone (for example, `us-east-1a`).
+        --availability-zone-id-filter=: Filters the results by AZ ID (for example, `use1-az1`).
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --life-cycle-status-filter=: Filters the results by the lifecycle status.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: Lists the tags for the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+    - name: list-orders
+      description: Lists the Outpost orders for your Amazon Web Services account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -454,8 +321,141 @@ commands:
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: ""
         --next-token=: ""
-        --operating-address-city-filter=: Filters the results by city.
-        --operating-address-country-code-filter=: Filters the results by country code.
-        --operating-address-state-or-region-filter=: Filters the results by state or region.
+        --outpost-identifier-filter=: The ID or the Amazon Resource Name (ARN) of the Outpost.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: delete-outpost
+      description: Deletes the specified Outpost.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --outpost-id=!: The ID or ARN of the Outpost.
+    - name: get-capacity-task
+      description: Gets details of the specified capacity task.
+      flags:
+        --capacity-task-id=!: ID of the capacity task.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --outpost-identifier=!: ID or ARN of the Outpost associated with the specified capacity task.
+    - name: get-catalog-item
+      description: Gets information about the specified catalog item.
+      flags:
+        --catalog-item-id=!: The ID of the catalog item.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-connection
+      description: Amazon Web Services uses this action to install Outpost servers.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connection-id=!: The ID of the connection.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-assets
+      description: Lists the hardware assets for the specified Outpost.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --host-id-filter=: Filters the results by the host ID of a Dedicated Host.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: ""
+        --outpost-identifier=!: The ID or the Amazon Resource Name (ARN) of the Outpost.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --status-filter=: Filters the results by state.
+    - name: untag-resource
+      description: Removes tags from the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+        --tag-keys=!: The tag keys.
+    - name: get-order
+      description: Gets information about the specified order.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --order-id=!: The ID of the order.
+    - name: get-outpost-instance-types
+      description: Gets the instance types for the specified Outpost.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: ""
+        --outpost-id=!: The ID or ARN of the Outpost.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: cancel-capacity-task
+      description: Cancels the capacity task.
+      flags:
+        --capacity-task-id=!: ID of the capacity task that you want to cancel.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --outpost-identifier=!: ID or ARN of the Outpost associated with the capacity task that you want to cancel.
+    - name: create-site
+      description: Creates a site for an Outpost.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: ""
+        --notes=: Additional information that you provide about site access requirements, electrician scheduling, personal protective equipment, or regulation of equipment materials that could affect your installation process.
+        --operating-address=: The location to install and power on the hardware.
+        --rack-physical-properties=: Information about the physical and logistical details for the rack at this site.
+        --shipping-address=: The location to ship the hardware.
+        --tags=: The tags to apply to a site.
+    - name: delete-site
+      description: Deletes the specified site.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --site-id=!: The ID or the Amazon Resource Name (ARN) of the site.
+    - name: list-capacity-tasks
+      description: Lists the capacity tasks for your Amazon Web Services account.
+      flags:
+        --capacity-task-status-filter=: A list of statuses.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: ""
+        --outpost-identifier-filter=: Filters the results by an Outpost ID or an Outpost ARN.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: start-connection
+      description: Amazon Web Services uses this action to install Outpost servers.
+      flags:
+        --asset-id=!: The ID of the Outpost server.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-public-key=!: The public key of the client.
+        --device-serial-number=: The serial number of the dongle.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --network-interface-device-index=!: The device index of the network interface on the Outpost server.
+    - name: update-site-address
+      description: Updates the address of the specified site.
+      flags:
+        --address-type=!: The type of the address.
+        --address=!: The address for the site.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --site-id=!: The ID or the Amazon Resource Name (ARN) of the site.
+      completion:
+        flag:
+            address-type:
+                - SHIPPING_ADDRESS
+                - OPERATING_ADDRESS

@@ -1,6 +1,394 @@
 name: neptunedata
 description: Amazon NeptuneData
 commands:
+    - name: start-ml-data-processing-job
+      description: Creates a new Neptune ML data processing job for processing the graph data exported from Neptune for training.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --config-file-name=: A data specification file that describes how to load the exported graph data for training.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=: A unique identifier for the new job.
+        --input-data-s3-location=!: The URI of the Amazon S3 location where you want SageMaker to download the data needed to run the data processing job.
+        --model-type=: 'One of the two model types that Neptune ML currently supports: heterogeneous graph models (`heterogeneous`), and knowledge graph (`kge`).'
+        --neptune-iam-role-arn=: The Amazon Resource Name (ARN) of an IAM role that SageMaker can assume to perform tasks on your behalf.
+        --previous-data-processing-job-id=: The job ID of a completed data processing job run on an earlier version of the data.
+        --processed-data-s3-location=!: The URI of the Amazon S3 location where you want SageMaker to save the results of a data processing job.
+        --processing-instance-type=: The type of ML instance used during data processing.
+        --processing-instance-volume-size-in-gb=: The disk volume size of the processing instance.
+        --processing-time-out-in-seconds=: Timeout in seconds for the data processing job.
+        --s3-output-encryption-kms-key=: The Amazon Key Management Service (Amazon KMS) key that SageMaker uses to encrypt the output of the processing job.
+        --sagemaker-iam-role-arn=: The ARN of an IAM role for SageMaker execution.
+        --security-group-ids=: The VPC security group IDs.
+        --subnets=: The IDs of the subnets in the Neptune VPC.
+        --volume-encryption-kms-key=: The Amazon Key Management Service (Amazon KMS) key that SageMaker uses to encrypt data on the storage volume attached to the ML compute instances that run the training job.
+    - name: cancel-open-cypher-query
+      description: Cancels a specified openCypher query.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-silent: If set to `TRUE`, causes the cancelation of the openCypher query to happen silently.
+        --query-id=!: The unique ID of the openCypher query to cancel.
+        --silent: If set to `TRUE`, causes the cancelation of the openCypher query to happen silently.
+    - name: list-open-cypher-queries
+      description: Lists active openCypher queries.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-waiting: When set to `TRUE` and other parameters are not present, causes status information to be returned for waiting queries as well as for running queries.
+        --no-include-waiting: When set to `TRUE` and other parameters are not present, causes status information to be returned for waiting queries as well as for running queries.
+    - name: create-ml-endpoint
+      description: Creates a new Neptune ML inference endpoint that lets you query one specific model that the model-training process constructed.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=: A unique identifier for the new inference endpoint.
+        --instance-count=: The minimum number of Amazon EC2 instances to deploy to an endpoint for prediction.
+        --instance-type=: The type of Neptune ML instance to use for online servicing.
+        --ml-model-training-job-id=: The job Id of the completed model-training job that has created the model that the inference endpoint will point to.
+        --ml-model-transform-job-id=: The job Id of the completed model-transform job.
+        --model-name=: Model type for training.
+        --neptune-iam-role-arn=: The ARN of an IAM role providing Neptune access to SageMaker and Amazon S3 resources.
+        --no-update: If set to `true`, `update` indicates that this is an update request.
+        --update: If set to `true`, `update` indicates that this is an update request.
+        --volume-encryption-kms-key=: The Amazon Key Management Service (Amazon KMS) key that SageMaker uses to encrypt data on the storage volume attached to the ML compute instances that run the training job.
+    - name: delete-propertygraph-statistics
+      description: Deletes statistics for Gremlin and openCypher (property graph) data.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: execute-fast-reset
+      description: The fast reset REST API lets you reset a Neptune graph quicky and easily, removing all of its data.
+      flags:
+        --action=!: The fast reset action.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --token=: The fast-reset token to initiate the reset.
+      completion:
+        flag:
+            action:
+                - initiateDatabaseReset
+                - performDatabaseReset
+    - name: cancel-gremlin-query
+      description: Cancels a Gremlin query.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --query-id=!: The unique identifier that identifies the query to be canceled.
+    - name: execute-gremlin-query
+      description: This commands executes a Gremlin query.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --gremlin-query=!: Using this API, you can run Gremlin queries in string format much as you can using the HTTP endpoint.
+        --serializer=: If non-null, the query results are returned in a serialized response message in the format specified by this parameter.
+    - name: get-ml-data-processing-job
+      description: Retrieves information about a specified data processing job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The unique identifier of the data-processing job to be retrieved.
+        --neptune-iam-role-arn=: The ARN of an IAM role that provides Neptune access to SageMaker and Amazon S3 resources.
+    - name: get-propertygraph-summary
+      description: Gets a graph summary for a property graph.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mode=: 'Mode can take one of two values: `BASIC` (the default), and `DETAILED`.'
+      completion:
+        flag:
+            mode:
+                - basic
+                - detailed
+    - name: list-ml-model-training-jobs
+      description: Lists Neptune ML model-training jobs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The maximum number of items to return (from 1 to 1024; the default is 10).
+        --neptune-iam-role-arn=: The ARN of an IAM role that provides Neptune access to SageMaker and Amazon S3 resources.
+    - name: manage-propertygraph-statistics
+      description: Manages the generation and use of property graph statistics.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mode=: The statistics generation mode.
+      completion:
+        flag:
+            mode:
+                - disableAutoCompute
+                - enableAutoCompute
+                - refresh
+    - name: execute-gremlin-profile-query
+      description: Executes a Gremlin Profile query, which runs a specified traversal, collects various metrics about the run, and produces a profile report as output.
+      flags:
+        --chop=: If non-zero, causes the results string to be truncated at that number of characters.
+        --gremlin-query=!: The Gremlin query string to profile.
+        --index-ops: If this flag is set to `TRUE`, the results include a detailed report of all index operations that took place during query execution and serialization.
+        --no-index-ops: If this flag is set to `TRUE`, the results include a detailed report of all index operations that took place during query execution and serialization.
+        --no-results: If this flag is set to `TRUE`, the query results are gathered and displayed as part of the profile report.
+        --results: If this flag is set to `TRUE`, the query results are gathered and displayed as part of the profile report.
+        --serializer=: If non-null, the gathered results are returned in a serialized response message in the format specified by this parameter.
+      completion:
+        positional:
+            - - $files
+    - name: cancel-loader-job
+      description: Cancels a specified load job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --load-id=!: The ID of the load job to be deleted.
+    - name: cancel-ml-data-processing-job
+      description: Cancels a Neptune ML data processing job.
+      flags:
+        --clean: If set to `TRUE`, this flag specifies that all Neptune ML S3 artifacts should be deleted when the job is stopped.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The unique identifier of the data-processing job.
+        --neptune-iam-role-arn=: The ARN of an IAM role that provides Neptune access to SageMaker and Amazon S3 resources.
+        --no-clean: If set to `TRUE`, this flag specifies that all Neptune ML S3 artifacts should be deleted when the job is stopped.
+    - name: cancel-ml-model-training-job
+      description: Cancels a Neptune ML model training job.
+      flags:
+        --clean: If set to `TRUE`, this flag specifies that all Amazon S3 artifacts should be deleted when the job is stopped.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The unique identifier of the model-training job to be canceled.
+        --neptune-iam-role-arn=: The ARN of an IAM role that provides Neptune access to SageMaker and Amazon S3 resources.
+        --no-clean: If set to `TRUE`, this flag specifies that all Amazon S3 artifacts should be deleted when the job is stopped.
+    - name: get-engine-status
+      description: Retrieves the status of the graph database on the host.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-ml-model-training-job
+      description: Retrieves information about a Neptune ML model training job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The unique identifier of the model-training job to retrieve.
+        --neptune-iam-role-arn=: The ARN of an IAM role that provides Neptune access to SageMaker and Amazon S3 resources.
+    - name: get-propertygraph-stream
+      description: Gets a stream for a property graph.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --commit-num=: The commit number of the starting record to read from the change-log stream.
+        --encoding=: If set to TRUE, Neptune compresses the response using gzip encoding.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --iterator-type=: 'Can be one of:'
+        --limit=: Specifies the maximum number of records to return.
+        --op-num=: The operation sequence number within the specified commit to start reading from in the change-log stream data.
+      completion:
+        flag:
+            encoding:
+                - gzip
+            iterator-type:
+                - AT_SEQUENCE_NUMBER
+                - AFTER_SEQUENCE_NUMBER
+                - TRIM_HORIZON
+                - LATEST
+    - name: list-gremlin-queries
+      description: Lists active Gremlin queries.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-waiting: If set to `TRUE`, the list returned includes waiting queries.
+        --no-include-waiting: If set to `TRUE`, the list returned includes waiting queries.
+    - name: delete-sparql-statistics
+      description: Deletes SPARQL statistics
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: execute-open-cypher-explain-query
+      description: Executes an openCypher `explain` request.
+      flags:
+        --explain-mode=!: The openCypher `explain` mode.
+        --open-cypher-query=!: The openCypher query string.
+        --parameters=: The openCypher query parameters.
+      completion:
+        flag:
+            explain-mode:
+                - static
+                - dynamic
+                - details
+        positional:
+            - - $files
+    - name: get-open-cypher-query-status
+      description: Retrieves the status of a specified openCypher query.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --query-id=!: The unique ID of the openCypher query for which to retrieve the query status.
+    - name: get-sparql-stream
+      description: Gets a stream for an RDF graph.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --commit-num=: The commit number of the starting record to read from the change-log stream.
+        --encoding=: If set to TRUE, Neptune compresses the response using gzip encoding.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --iterator-type=: 'Can be one of:'
+        --limit=: Specifies the maximum number of records to return.
+        --op-num=: The operation sequence number within the specified commit to start reading from in the change-log stream data.
+      completion:
+        flag:
+            encoding:
+                - gzip
+            iterator-type:
+                - AT_SEQUENCE_NUMBER
+                - AFTER_SEQUENCE_NUMBER
+                - TRIM_HORIZON
+                - LATEST
+    - name: list-ml-data-processing-jobs
+      description: Returns a list of Neptune ML data processing jobs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The maximum number of items to return (from 1 to 1024; the default is 10).
+        --neptune-iam-role-arn=: The ARN of an IAM role that provides Neptune access to SageMaker and Amazon S3 resources.
+    - name: list-ml-endpoints
+      description: Lists existing inference endpoints.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The maximum number of items to return (from 1 to 1024; the default is 10.
+        --neptune-iam-role-arn=: The ARN of an IAM role that provides Neptune access to SageMaker and Amazon S3 resources.
+    - name: list-ml-model-transform-jobs
+      description: Returns a list of model transform job IDs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The maximum number of items to return (from 1 to 1024; the default is 10).
+        --neptune-iam-role-arn=: The ARN of an IAM role that provides Neptune access to SageMaker and Amazon S3 resources.
+    - name: manage-sparql-statistics
+      description: Manages the generation and use of RDF graph statistics.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mode=: The statistics generation mode.
+      completion:
+        flag:
+            mode:
+                - disableAutoCompute
+                - enableAutoCompute
+                - refresh
+    - name: execute-open-cypher-query
+      description: Executes an openCypher query.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --open-cypher-query=!: The openCypher query string to be executed.
+        --parameters=: The openCypher query parameters for query execution.
+    - name: list-loader-jobs
+      description: Retrieves a list of the `loadIds` for all active loader jobs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-queued-loads: An optional parameter that can be used to exclude the load IDs of queued load requests when requesting a list of load IDs by setting the parameter to `FALSE`.
+        --limit=: The number of load IDs to list.
+        --no-include-queued-loads: An optional parameter that can be used to exclude the load IDs of queued load requests when requesting a list of load IDs by setting the parameter to `FALSE`.
+    - name: start-ml-model-transform-job
+      description: Creates a new model transform job.
+      flags:
+        --base-processing-instance-type=: The type of ML instance used in preparing and managing training of ML models.
+        --base-processing-instance-volume-size-in-gb=: The disk volume size of the training instance in gigabytes.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --custom-model-transform-parameters=: Configuration information for a model transform using a custom model.
+        --data-processing-job-id=: The job ID of a completed data-processing job.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=: A unique identifier for the new job.
+        --ml-model-training-job-id=: The job ID of a completed model-training job.
+        --model-transform-output-s3-location=!: The location in Amazon S3 where the model artifacts are to be stored.
+        --neptune-iam-role-arn=: The ARN of an IAM role that provides Neptune access to SageMaker and Amazon S3 resources.
+        --s3-output-encryption-kms-key=: The Amazon Key Management Service (KMS) key that SageMaker uses to encrypt the output of the processing job.
+        --sagemaker-iam-role-arn=: The ARN of an IAM role for SageMaker execution.
+        --security-group-ids=: The VPC security group IDs.
+        --subnets=: The IDs of the subnets in the Neptune VPC.
+        --training-job-name=: The name of a completed SageMaker training job.
+        --volume-encryption-kms-key=: The Amazon Key Management Service (KMS) key that SageMaker uses to encrypt data on the storage volume attached to the ML compute instances that run the training job.
+    - name: delete-ml-endpoint
+      description: Cancels the creation of a Neptune ML inference endpoint.
+      flags:
+        --clean: If this flag is set to `TRUE`, all Neptune ML S3 artifacts should be deleted when the job is stopped.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The unique identifier of the inference endpoint.
+        --neptune-iam-role-arn=: The ARN of an IAM role providing Neptune access to SageMaker and Amazon S3 resources.
+        --no-clean: If this flag is set to `TRUE`, all Neptune ML S3 artifacts should be deleted when the job is stopped.
+    - name: get-gremlin-query-status
+      description: Gets the status of a specified Gremlin query.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --query-id=!: The unique identifier that identifies the Gremlin query.
+    - name: get-loader-job-status
+      description: Gets status information about a specified load job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --details: Flag indicating whether or not to include details beyond the overall status (`TRUE` or `FALSE`; the default is `FALSE`).
+        --errors: Flag indicating whether or not to include a list of errors encountered (`TRUE` or `FALSE`; the default is `FALSE`).
+        --errors-per-page=: The number of errors returned in each page (a positive integer; the default is `10`).
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --load-id=!: The load ID of the load job to get the status of.
+        --no-details: Flag indicating whether or not to include details beyond the overall status (`TRUE` or `FALSE`; the default is `FALSE`).
+        --no-errors: Flag indicating whether or not to include a list of errors encountered (`TRUE` or `FALSE`; the default is `FALSE`).
+        --page=: The error page number (a positive integer; the default is `1`).
+    - name: get-ml-endpoint
+      description: Retrieves details about an inference endpoint.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The unique identifier of the inference endpoint.
+        --neptune-iam-role-arn=: The ARN of an IAM role that provides Neptune access to SageMaker and Amazon S3 resources.
+    - name: get-rdf-graph-summary
+      description: Gets a graph summary for an RDF graph.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mode=: 'Mode can take one of two values: `BASIC` (the default), and `DETAILED`.'
+      completion:
+        flag:
+            mode:
+                - basic
+                - detailed
+    - name: get-sparql-statistics
+      description: Gets RDF statistics (SPARQL).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: start-loader-job
       description: Starts a Neptune bulk loader job to load data from an Amazon S3 bucket into a Neptune DB instance.
       flags:
@@ -103,288 +491,6 @@ commands:
         --training-instance-volume-size-in-gb=: The disk volume size of the training instance.
         --training-time-out-in-seconds=: Timeout in seconds for the training job.
         --volume-encryption-kms-key=: The Amazon Key Management Service (KMS) key that SageMaker uses to encrypt data on the storage volume attached to the ML compute instances that run the training job.
-    - name: delete-ml-endpoint
-      description: Cancels the creation of a Neptune ML inference endpoint.
-      flags:
-        --clean: If this flag is set to `TRUE`, all Neptune ML S3 artifacts should be deleted when the job is stopped.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The unique identifier of the inference endpoint.
-        --neptune-iam-role-arn=: The ARN of an IAM role providing Neptune access to SageMaker and Amazon S3 resources.
-        --no-clean: If this flag is set to `TRUE`, all Neptune ML S3 artifacts should be deleted when the job is stopped.
-    - name: delete-propertygraph-statistics
-      description: Deletes statistics for Gremlin and openCypher (property graph) data.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: execute-fast-reset
-      description: The fast reset REST API lets you reset a Neptune graph quicky and easily, removing all of its data.
-      flags:
-        --action=!: The fast reset action.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --token=: The fast-reset token to initiate the reset.
-      completion:
-        flag:
-            action:
-                - initiateDatabaseReset
-                - performDatabaseReset
-    - name: get-propertygraph-stream
-      description: Gets a stream for a property graph.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --commit-num=: The commit number of the starting record to read from the change-log stream.
-        --encoding=: If set to TRUE, Neptune compresses the response using gzip encoding.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --iterator-type=: 'Can be one of:'
-        --limit=: Specifies the maximum number of records to return.
-        --op-num=: The operation sequence number within the specified commit to start reading from in the change-log stream data.
-      completion:
-        flag:
-            encoding:
-                - gzip
-            iterator-type:
-                - AT_SEQUENCE_NUMBER
-                - AFTER_SEQUENCE_NUMBER
-                - TRIM_HORIZON
-                - LATEST
-    - name: list-ml-model-training-jobs
-      description: Lists Neptune ML model-training jobs.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The maximum number of items to return (from 1 to 1024; the default is 10).
-        --neptune-iam-role-arn=: The ARN of an IAM role that provides Neptune access to SageMaker and Amazon S3 resources.
-    - name: execute-open-cypher-explain-query
-      description: Executes an openCypher `explain` request.
-      flags:
-        --explain-mode=!: The openCypher `explain` mode.
-        --open-cypher-query=!: The openCypher query string.
-        --parameters=: The openCypher query parameters.
-      completion:
-        flag:
-            explain-mode:
-                - static
-                - dynamic
-                - details
-        positional:
-            - - $files
-    - name: get-ml-model-training-job
-      description: Retrieves information about a Neptune ML model training job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The unique identifier of the model-training job to retrieve.
-        --neptune-iam-role-arn=: The ARN of an IAM role that provides Neptune access to SageMaker and Amazon S3 resources.
-    - name: get-ml-model-transform-job
-      description: Gets information about a specified model transform job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The unique identifier of the model-transform job to be reetrieved.
-        --neptune-iam-role-arn=: The ARN of an IAM role that provides Neptune access to SageMaker and Amazon S3 resources.
-    - name: get-open-cypher-query-status
-      description: Retrieves the status of a specified openCypher query.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --query-id=!: The unique ID of the openCypher query for which to retrieve the query status.
-    - name: get-propertygraph-summary
-      description: Gets a graph summary for a property graph.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mode=: 'Mode can take one of two values: `BASIC` (the default), and `DETAILED`.'
-      completion:
-        flag:
-            mode:
-                - basic
-                - detailed
-    - name: list-loader-jobs
-      description: Retrieves a list of the `loadIds` for all active loader jobs.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --include-queued-loads: An optional parameter that can be used to exclude the load IDs of queued load requests when requesting a list of load IDs by setting the parameter to `FALSE`.
-        --limit=: The number of load IDs to list.
-        --no-include-queued-loads: An optional parameter that can be used to exclude the load IDs of queued load requests when requesting a list of load IDs by setting the parameter to `FALSE`.
-    - name: cancel-loader-job
-      description: Cancels a specified load job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --load-id=!: The ID of the load job to be deleted.
-    - name: cancel-ml-data-processing-job
-      description: Cancels a Neptune ML data processing job.
-      flags:
-        --clean: If set to `TRUE`, this flag specifies that all Neptune ML S3 artifacts should be deleted when the job is stopped.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The unique identifier of the data-processing job.
-        --neptune-iam-role-arn=: The ARN of an IAM role that provides Neptune access to SageMaker and Amazon S3 resources.
-        --no-clean: If set to `TRUE`, this flag specifies that all Neptune ML S3 artifacts should be deleted when the job is stopped.
-    - name: create-ml-endpoint
-      description: Creates a new Neptune ML inference endpoint that lets you query one specific model that the model-training process constructed.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=: A unique identifier for the new inference endpoint.
-        --instance-count=: The minimum number of Amazon EC2 instances to deploy to an endpoint for prediction.
-        --instance-type=: The type of Neptune ML instance to use for online servicing.
-        --ml-model-training-job-id=: The job Id of the completed model-training job that has created the model that the inference endpoint will point to.
-        --ml-model-transform-job-id=: The job Id of the completed model-transform job.
-        --model-name=: Model type for training.
-        --neptune-iam-role-arn=: The ARN of an IAM role providing Neptune access to SageMaker and Amazon S3 resources.
-        --no-update: If set to `true`, `update` indicates that this is an update request.
-        --update: If set to `true`, `update` indicates that this is an update request.
-        --volume-encryption-kms-key=: The Amazon Key Management Service (Amazon KMS) key that SageMaker uses to encrypt data on the storage volume attached to the ML compute instances that run the training job.
-    - name: get-loader-job-status
-      description: Gets status information about a specified load job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --details: Flag indicating whether or not to include details beyond the overall status (`TRUE` or `FALSE`; the default is `FALSE`).
-        --errors: Flag indicating whether or not to include a list of errors encountered (`TRUE` or `FALSE`; the default is `FALSE`).
-        --errors-per-page=: The number of errors returned in each page (a positive integer; the default is `10`).
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --load-id=!: The load ID of the load job to get the status of.
-        --no-details: Flag indicating whether or not to include details beyond the overall status (`TRUE` or `FALSE`; the default is `FALSE`).
-        --no-errors: Flag indicating whether or not to include a list of errors encountered (`TRUE` or `FALSE`; the default is `FALSE`).
-        --page=: The error page number (a positive integer; the default is `1`).
-    - name: get-ml-endpoint
-      description: Retrieves details about an inference endpoint.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The unique identifier of the inference endpoint.
-        --neptune-iam-role-arn=: The ARN of an IAM role that provides Neptune access to SageMaker and Amazon S3 resources.
-    - name: get-rdf-graph-summary
-      description: Gets a graph summary for an RDF graph.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mode=: 'Mode can take one of two values: `BASIC` (the default), and `DETAILED`.'
-      completion:
-        flag:
-            mode:
-                - basic
-                - detailed
-    - name: get-sparql-stream
-      description: Gets a stream for an RDF graph.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --commit-num=: The commit number of the starting record to read from the change-log stream.
-        --encoding=: If set to TRUE, Neptune compresses the response using gzip encoding.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --iterator-type=: 'Can be one of:'
-        --limit=: Specifies the maximum number of records to return.
-        --op-num=: The operation sequence number within the specified commit to start reading from in the change-log stream data.
-      completion:
-        flag:
-            encoding:
-                - gzip
-            iterator-type:
-                - AT_SEQUENCE_NUMBER
-                - AFTER_SEQUENCE_NUMBER
-                - TRIM_HORIZON
-                - LATEST
-    - name: list-ml-data-processing-jobs
-      description: Returns a list of Neptune ML data processing jobs.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The maximum number of items to return (from 1 to 1024; the default is 10).
-        --neptune-iam-role-arn=: The ARN of an IAM role that provides Neptune access to SageMaker and Amazon S3 resources.
-    - name: cancel-gremlin-query
-      description: Cancels a Gremlin query.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --query-id=!: The unique identifier that identifies the query to be canceled.
-    - name: execute-gremlin-query
-      description: This commands executes a Gremlin query.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --gremlin-query=!: Using this API, you can run Gremlin queries in string format much as you can using the HTTP endpoint.
-        --serializer=: If non-null, the query results are returned in a serialized response message in the format specified by this parameter.
-    - name: execute-open-cypher-query
-      description: Executes an openCypher query.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --open-cypher-query=!: The openCypher query string to be executed.
-        --parameters=: The openCypher query parameters for query execution.
-    - name: get-ml-data-processing-job
-      description: Retrieves information about a specified data processing job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The unique identifier of the data-processing job to be retrieved.
-        --neptune-iam-role-arn=: The ARN of an IAM role that provides Neptune access to SageMaker and Amazon S3 resources.
-    - name: list-ml-endpoints
-      description: Lists existing inference endpoints.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The maximum number of items to return (from 1 to 1024; the default is 10.
-        --neptune-iam-role-arn=: The ARN of an IAM role that provides Neptune access to SageMaker and Amazon S3 resources.
-    - name: list-open-cypher-queries
-      description: Lists active openCypher queries.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --include-waiting: When set to `TRUE` and other parameters are not present, causes status information to be returned for waiting queries as well as for running queries.
-        --no-include-waiting: When set to `TRUE` and other parameters are not present, causes status information to be returned for waiting queries as well as for running queries.
-    - name: manage-propertygraph-statistics
-      description: Manages the generation and use of property graph statistics.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mode=: The statistics generation mode.
-      completion:
-        flag:
-            mode:
-                - disableAutoCompute
-                - enableAutoCompute
-                - refresh
-    - name: manage-sparql-statistics
-      description: Manages the generation and use of RDF graph statistics.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mode=: The statistics generation mode.
-      completion:
-        flag:
-            mode:
-                - disableAutoCompute
-                - enableAutoCompute
-                - refresh
     - name: cancel-ml-model-transform-job
       description: Cancels a specified model transform job.
       flags:
@@ -395,12 +501,6 @@ commands:
         --id=!: The unique ID of the model transform job to be canceled.
         --neptune-iam-role-arn=: The ARN of an IAM role that provides Neptune access to SageMaker and Amazon S3 resources.
         --no-clean: If this flag is set to `TRUE`, all Neptune ML S3 artifacts should be deleted when the job is stopped.
-    - name: delete-sparql-statistics
-      description: Deletes SPARQL statistics
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: execute-gremlin-explain-query
       description: Executes a Gremlin Explain query.
       flags:
@@ -408,117 +508,17 @@ commands:
       completion:
         positional:
             - - $files
-    - name: get-engine-status
-      description: Retrieves the status of the graph database on the host.
+    - name: get-ml-model-transform-job
+      description: Gets information about a specified model transform job.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-ml-model-transform-jobs
-      description: Returns a list of model transform job IDs.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The maximum number of items to return (from 1 to 1024; the default is 10).
+        --id=!: The unique identifier of the model-transform job to be reetrieved.
         --neptune-iam-role-arn=: The ARN of an IAM role that provides Neptune access to SageMaker and Amazon S3 resources.
-    - name: start-ml-data-processing-job
-      description: Creates a new Neptune ML data processing job for processing the graph data exported from Neptune for training.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --config-file-name=: A data specification file that describes how to load the exported graph data for training.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=: A unique identifier for the new job.
-        --input-data-s3-location=!: The URI of the Amazon S3 location where you want SageMaker to download the data needed to run the data processing job.
-        --model-type=: 'One of the two model types that Neptune ML currently supports: heterogeneous graph models (`heterogeneous`), and knowledge graph (`kge`).'
-        --neptune-iam-role-arn=: The Amazon Resource Name (ARN) of an IAM role that SageMaker can assume to perform tasks on your behalf.
-        --previous-data-processing-job-id=: The job ID of a completed data processing job run on an earlier version of the data.
-        --processed-data-s3-location=!: The URI of the Amazon S3 location where you want SageMaker to save the results of a data processing job.
-        --processing-instance-type=: The type of ML instance used during data processing.
-        --processing-instance-volume-size-in-gb=: The disk volume size of the processing instance.
-        --processing-time-out-in-seconds=: Timeout in seconds for the data processing job.
-        --s3-output-encryption-kms-key=: The Amazon Key Management Service (Amazon KMS) key that SageMaker uses to encrypt the output of the processing job.
-        --sagemaker-iam-role-arn=: The ARN of an IAM role for SageMaker execution.
-        --security-group-ids=: The VPC security group IDs.
-        --subnets=: The IDs of the subnets in the Neptune VPC.
-        --volume-encryption-kms-key=: The Amazon Key Management Service (Amazon KMS) key that SageMaker uses to encrypt data on the storage volume attached to the ML compute instances that run the training job.
-    - name: start-ml-model-transform-job
-      description: Creates a new model transform job.
-      flags:
-        --base-processing-instance-type=: The type of ML instance used in preparing and managing training of ML models.
-        --base-processing-instance-volume-size-in-gb=: The disk volume size of the training instance in gigabytes.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --custom-model-transform-parameters=: Configuration information for a model transform using a custom model.
-        --data-processing-job-id=: The job ID of a completed data-processing job.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=: A unique identifier for the new job.
-        --ml-model-training-job-id=: The job ID of a completed model-training job.
-        --model-transform-output-s3-location=!: The location in Amazon S3 where the model artifacts are to be stored.
-        --neptune-iam-role-arn=: The ARN of an IAM role that provides Neptune access to SageMaker and Amazon S3 resources.
-        --s3-output-encryption-kms-key=: The Amazon Key Management Service (KMS) key that SageMaker uses to encrypt the output of the processing job.
-        --sagemaker-iam-role-arn=: The ARN of an IAM role for SageMaker execution.
-        --security-group-ids=: The VPC security group IDs.
-        --subnets=: The IDs of the subnets in the Neptune VPC.
-        --training-job-name=: The name of a completed SageMaker training job.
-        --volume-encryption-kms-key=: The Amazon Key Management Service (KMS) key that SageMaker uses to encrypt data on the storage volume attached to the ML compute instances that run the training job.
-    - name: execute-gremlin-profile-query
-      description: Executes a Gremlin Profile query, which runs a specified traversal, collects various metrics about the run, and produces a profile report as output.
-      flags:
-        --chop=: If non-zero, causes the results string to be truncated at that number of characters.
-        --gremlin-query=!: The Gremlin query string to profile.
-        --index-ops: If this flag is set to `TRUE`, the results include a detailed report of all index operations that took place during query execution and serialization.
-        --no-index-ops: If this flag is set to `TRUE`, the results include a detailed report of all index operations that took place during query execution and serialization.
-        --no-results: If this flag is set to `TRUE`, the query results are gathered and displayed as part of the profile report.
-        --results: If this flag is set to `TRUE`, the query results are gathered and displayed as part of the profile report.
-        --serializer=: If non-null, the gathered results are returned in a serialized response message in the format specified by this parameter.
-      completion:
-        positional:
-            - - $files
     - name: get-propertygraph-statistics
       description: Gets property graph statistics (Gremlin and openCypher).
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-sparql-statistics
-      description: Gets RDF statistics (SPARQL).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: cancel-ml-model-training-job
-      description: Cancels a Neptune ML model training job.
-      flags:
-        --clean: If set to `TRUE`, this flag specifies that all Amazon S3 artifacts should be deleted when the job is stopped.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The unique identifier of the model-training job to be canceled.
-        --neptune-iam-role-arn=: The ARN of an IAM role that provides Neptune access to SageMaker and Amazon S3 resources.
-        --no-clean: If set to `TRUE`, this flag specifies that all Amazon S3 artifacts should be deleted when the job is stopped.
-    - name: cancel-open-cypher-query
-      description: Cancels a specified openCypher query.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-silent: If set to `TRUE`, causes the cancelation of the openCypher query to happen silently.
-        --query-id=!: The unique ID of the openCypher query to cancel.
-        --silent: If set to `TRUE`, causes the cancelation of the openCypher query to happen silently.
-    - name: get-gremlin-query-status
-      description: Gets the status of a specified Gremlin query.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --query-id=!: The unique identifier that identifies the Gremlin query.
-    - name: list-gremlin-queries
-      description: Lists active Gremlin queries.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --include-waiting: If set to `TRUE`, the list returned includes waiting queries.
-        --no-include-waiting: If set to `TRUE`, the list returned includes waiting queries.

@@ -1,86 +1,33 @@
 name: schemas
 description: Schemas
 commands:
-    - name: get-resource-policy
-      description: Retrieves the resource-based policy attached to a given registry.
+    - name: delete-registry
+      description: Deletes a Registry.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --registry-name=: The name of the registry.
-    - name: list-discoverers
-      description: List the discoverers.
+        --registry-name=!: The name of the registry.
+    - name: stop-discoverer
+      description: Stops the discoverer
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --discoverer-id-prefix=: Specifying this limits the results to only those discoverer IDs that start with the specified prefix.
+        --discoverer-id=!: The ID of the discoverer.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-registries
+      description: List the registries.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --limit=: ""
         --max-items=: The  total number of items to return in the command's output.
         --next-token=: The token that specifies the next page of results to return.
         --page-size=: The size of each page to get in the AWS service call.
-        --source-arn-prefix=: Specifying this limits the results to only those ARNs that start with the specified prefix.
+        --registry-name-prefix=: Specifying this limits the results to only those registry names that start with the specified prefix.
+        --scope=: Can be set to Local or AWS to limit responses to your custom registries, or the ones provided by AWS.
         --starting-token=: A token to specify where to start paginating.
-    - name: put-code-binding
-      description: Put code binding URI
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --language=!: The language of the code binding.
-        --registry-name=!: The name of the registry.
-        --schema-name=!: The name of the schema.
-        --schema-version=: Specifying this limits the results to only this schema version.
-    - name: update-schema
-      description: Updates the schema definition
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token-id=: The ID of the client token.
-        --content=: The source of the schema definition.
-        --description=: The description of the schema.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --registry-name=!: The name of the registry.
-        --schema-name=!: The name of the schema.
-        --type=: The schema type for the events schema.
-      completion:
-        flag:
-            type:
-                - OpenApi3
-                - JSONSchemaDraft4
-    - name: delete-discoverer
-      description: Deletes a discoverer.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --discoverer-id=!: The ID of the discoverer.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-discoverer
-      description: Describes the discoverer.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --discoverer-id=!: The ID of the discoverer.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: export-schema
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --registry-name=!: The name of the registry.
-        --schema-name=!: The name of the schema.
-        --schema-version=: Specifying this limits the results to only this schema version.
-        --type=!: ""
-    - name: get-code-binding-source
-      description: Get the code binding source URI.
-      flags:
-        --language=!: The language of the code binding.
-        --registry-name=!: The name of the registry.
-        --schema-name=!: The name of the schema.
-        --schema-version=: Specifying this limits the results to only this schema version.
-      completion:
-        positional:
-            - - $files
     - name: list-schema-versions
       description: Provides a list of the schema versions and related information.
       flags:
@@ -93,6 +40,176 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --registry-name=!: The name of the registry.
         --schema-name=!: The name of the schema.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-schemas
+      description: List the schemas.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: ""
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The token that specifies the next page of results to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --registry-name=!: The name of the registry.
+        --schema-name-prefix=: Specifying this limits the results to only those schema names that start with the specified prefix.
+        --starting-token=: A token to specify where to start paginating.
+    - name: put-resource-policy
+      description: The name of the policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy=!: The resource-based policy.
+        --registry-name=: The name of the registry.
+        --revision-id=: The revision ID of the policy.
+    - name: create-discoverer
+      description: Creates a discoverer.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cross-account: Support discovery of schemas in events sent to the bus from another account.
+        --description=: A description for the discoverer.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-cross-account: Support discovery of schemas in events sent to the bus from another account.
+        --source-arn=!: The ARN of the event bus.
+        --tags=: Tags associated with the resource.
+    - name: delete-resource-policy
+      description: Delete the resource-based policy attached to the specified registry.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --registry-name=: The name of the registry.
+    - name: describe-registry
+      description: Describes the registry.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --registry-name=!: The name of the registry.
+    - name: get-code-binding-source
+      description: Get the code binding source URI.
+      flags:
+        --language=!: The language of the code binding.
+        --registry-name=!: The name of the registry.
+        --schema-name=!: The name of the schema.
+        --schema-version=: Specifying this limits the results to only this schema version.
+      completion:
+        positional:
+            - - $files
+    - name: export-schema
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --registry-name=!: The name of the registry.
+        --schema-name=!: The name of the schema.
+        --schema-version=: Specifying this limits the results to only this schema version.
+        --type=!: ""
+    - name: put-code-binding
+      description: Put code binding URI
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --language=!: The language of the code binding.
+        --registry-name=!: The name of the registry.
+        --schema-name=!: The name of the schema.
+        --schema-version=: Specifying this limits the results to only this schema version.
+    - name: create-schema
+      description: Creates a schema definition.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content=!: The source of the schema definition.
+        --description=: A description of the schema.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --registry-name=!: The name of the registry.
+        --schema-name=!: The name of the schema.
+        --tags=: Tags associated with the schema.
+        --type=!: The type of schema.
+      completion:
+        flag:
+            type:
+                - OpenApi3
+                - JSONSchemaDraft4
+    - name: describe-code-binding
+      description: Describe the code binding URI.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --language=!: The language of the code binding.
+        --registry-name=!: The name of the registry.
+        --schema-name=!: The name of the schema.
+        --schema-version=: Specifying this limits the results to only this schema version.
+    - name: describe-schema
+      description: Retrieve the schema definition.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --registry-name=!: The name of the registry.
+        --schema-name=!: The name of the schema.
+        --schema-version=: Specifying this limits the results to only this schema version.
+    - name: get-discovered-schema
+      description: Get the discovered schema that was generated based on sampled events.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --events=!: An array of strings where each string is a JSON event.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --type=!: The type of event.
+      completion:
+        flag:
+            type:
+                - OpenApi3
+                - JSONSchemaDraft4
+    - name: get-resource-policy
+      description: Retrieves the resource-based policy attached to a given registry.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --registry-name=: The name of the registry.
+    - name: start-discoverer
+      description: Starts the discoverer
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --discoverer-id=!: The ID of the discoverer.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-registry
+      description: Creates a registry.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the registry to be created.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --registry-name=!: The name of the registry.
+        --tags=: Tags to associate with the registry.
+    - name: delete-schema-version
+      description: Delete the schema version definition
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --registry-name=!: The name of the registry.
+        --schema-name=!: The name of the schema.
+        --schema-version=!: The version number of the schema
+    - name: list-discoverers
+      description: List the discoverers.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --discoverer-id-prefix=: Specifying this limits the results to only those discoverer IDs that start with the specified prefix.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: ""
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The token that specifies the next page of results to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --source-arn-prefix=: Specifying this limits the results to only those ARNs that start with the specified prefix.
         --starting-token=: A token to specify where to start paginating.
     - name: search-schemas
       description: Search the schemas
@@ -115,91 +232,20 @@ commands:
         --description=: The description of the registry to update.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --registry-name=!: The name of the registry.
-    - name: describe-code-binding
-      description: Describe the code binding URI.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --language=!: The language of the code binding.
-        --registry-name=!: The name of the registry.
-        --schema-name=!: The name of the schema.
-        --schema-version=: Specifying this limits the results to only this schema version.
-    - name: describe-schema
-      description: Retrieve the schema definition.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --registry-name=!: The name of the registry.
-        --schema-name=!: The name of the schema.
-        --schema-version=: Specifying this limits the results to only this schema version.
-    - name: list-schemas
-      description: List the schemas.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: ""
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: The token that specifies the next page of results to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --registry-name=!: The name of the registry.
-        --schema-name-prefix=: Specifying this limits the results to only those schema names that start with the specified prefix.
-        --starting-token=: A token to specify where to start paginating.
-    - name: start-discoverer
-      description: Starts the discoverer
+    - name: delete-discoverer
+      description: Deletes a discoverer.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --discoverer-id=!: The ID of the discoverer.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: stop-discoverer
-      description: Stops the discoverer
+    - name: describe-discoverer
+      description: Describes the discoverer.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --discoverer-id=!: The ID of the discoverer.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-registries
-      description: List the registries.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: ""
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: The token that specifies the next page of results to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --registry-name-prefix=: Specifying this limits the results to only those registry names that start with the specified prefix.
-        --scope=: Can be set to Local or AWS to limit responses to your custom registries, or the ones provided by AWS.
-        --starting-token=: A token to specify where to start paginating.
-    - name: create-discoverer
-      description: Creates a discoverer.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cross-account: Support discovery of schemas in events sent to the bus from another account.
-        --description=: A description for the discoverer.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-cross-account: Support discovery of schemas in events sent to the bus from another account.
-        --source-arn=!: The ARN of the event bus.
-        --tags=: Tags associated with the resource.
-    - name: delete-registry
-      description: Deletes a Registry.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --registry-name=!: The name of the registry.
-    - name: untag-resource
-      description: Removes tags from a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource.
-        --tag-keys=!: Keys of key-value pairs.
     - name: update-discoverer
       description: Updates the discoverer
       flags:
@@ -210,23 +256,6 @@ commands:
         --discoverer-id=!: The ID of the discoverer.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-cross-account: Support discovery of schemas in events sent to the bus from another account.
-    - name: create-schema
-      description: Creates a schema definition.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content=!: The source of the schema definition.
-        --description=: A description of the schema.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --registry-name=!: The name of the registry.
-        --schema-name=!: The name of the schema.
-        --tags=: Tags associated with the schema.
-        --type=!: The type of schema.
-      completion:
-        flag:
-            type:
-                - OpenApi3
-                - JSONSchemaDraft4
     - name: delete-schema
       description: Delete a schema definition.
       flags:
@@ -235,35 +264,6 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --registry-name=!: The name of the registry.
         --schema-name=!: The name of the schema.
-    - name: delete-schema-version
-      description: Delete the schema version definition
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --registry-name=!: The name of the registry.
-        --schema-name=!: The name of the schema.
-        --schema-version=!: The version number of the schema
-    - name: describe-registry
-      description: Describes the registry.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --registry-name=!: The name of the registry.
-    - name: get-discovered-schema
-      description: Get the discovered schema that was generated based on sampled events.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --events=!: An array of strings where each string is a JSON event.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --type=!: The type of event.
-      completion:
-        flag:
-            type:
-                - OpenApi3
-                - JSONSchemaDraft4
     - name: list-tags-for-resource
       description: Get tags for resource.
       flags:
@@ -271,15 +271,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The ARN of the resource.
-    - name: put-resource-policy
-      description: The name of the policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy=!: The resource-based policy.
-        --registry-name=: The name of the registry.
-        --revision-id=: The revision ID of the policy.
     - name: tag-resource
       description: Add tags to a resource.
       flags:
@@ -288,22 +279,31 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The ARN of the resource.
         --tags=!: Tags associated with the resource.
-    - name: create-registry
-      description: Creates a registry.
+    - name: untag-resource
+      description: Removes tags from a resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description of the registry to be created.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource.
+        --tag-keys=!: Keys of key-value pairs.
+    - name: update-schema
+      description: Updates the schema definition
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token-id=: The ID of the client token.
+        --content=: The source of the schema definition.
+        --description=: The description of the schema.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --registry-name=!: The name of the registry.
-        --tags=: Tags to associate with the registry.
-    - name: delete-resource-policy
-      description: Delete the resource-based policy attached to the specified registry.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --registry-name=: The name of the registry.
+        --schema-name=!: The name of the schema.
+        --type=: The schema type for the events schema.
+      completion:
+        flag:
+            type:
+                - OpenApi3
+                - JSONSchemaDraft4
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:

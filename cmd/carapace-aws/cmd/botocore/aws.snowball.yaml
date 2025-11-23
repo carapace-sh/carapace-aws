@@ -1,13 +1,61 @@
 name: snowball
 description: Amazon Import/Export Snowball
 commands:
-    - name: cancel-job
-      description: Cancels the specified job.
+    - name: describe-cluster
+      description: Returns information about a specific cluster including shipping information, cluster status, and other important metadata.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-id=!: The automatically generated ID for a cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-job-unlock-code
+      description: Returns the `UnlockCode` code value for the specified job.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The 39-character job ID for the job that you want to cancel, for example `JID123e4567-e89b-12d3-a456-426655440000`.
+        --job-id=!: The ID for the job that you want to get the `UnlockCode` value for, for example `JID123e4567-e89b-12d3-a456-426655440000`.
+    - name: get-software-updates
+      description: Returns an Amazon S3 presigned URL for an update file associated with a specified `JobId`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The ID for a job that you want to get the software update file for, for example `JID123e4567-e89b-12d3-a456-426655440000`.
+    - name: list-jobs
+      description: Returns an array of `JobListEntry` objects of the specified length.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The number of `JobListEntry` objects to return.
+        --next-token=: HTTP requests are stateless.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-pickup-locations
+      description: A list of locations from which the customer can choose to pickup a device.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of locations to list per page.
+        --next-token=: HTTP requests are stateless.
+    - name: list-service-versions
+      description: Lists all supported versions for Snow on-device services.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dependent-services=: A list of names and versions of dependant services of the requested service.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of `ListServiceVersions` objects to return.
+        --next-token=: Because HTTP requests are stateless, this is the starting point for the next list of returned `ListServiceVersionsRequest` versions.
+        --service-name=!: The name of the service for which you're requesting supported versions.
+      completion:
+        flag:
+            service-name:
+                - KUBERNETES
+                - EKS_ANYWHERE
     - name: create-long-term-pricing
       description: Creates a job with the long-term usage option for a device.
       flags:
@@ -53,30 +101,42 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --job-id=!: The automatically generated ID for a job, for example `JID123e4567-e89b-12d3-a456-426655440000`.
-    - name: get-job-manifest
-      description: Returns a link to an Amazon S3 presigned URL for the manifest file associated with the specified `JobId` value.
+    - name: update-job
+      description: While a job's `JobState` value is `New`, you can update some of the information associated with a job.
       flags:
+        --address-id=: The ID of the updated [Address]() object.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The updated description of this job's [JobMetadata]() object.
+        --forwarding-address-id=: The updated ID for the forwarding address for a job.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The ID for a job that you want to get the manifest file for, for example `JID123e4567-e89b-12d3-a456-426655440000`.
-    - name: update-long-term-pricing
-      description: Updates the long-term pricing type.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --is-long-term-pricing-auto-renew: If set to `true`, specifies that the current long-term pricing type for the device should be automatically renewed before the long-term pricing contract expires.
-        --long-term-pricing-id=!: The ID of the long-term pricing type for the device.
-        --no-is-long-term-pricing-auto-renew: If set to `true`, specifies that the current long-term pricing type for the device should be automatically renewed before the long-term pricing contract expires.
-        --replacement-job=: Specifies that a device that is ordered with long-term pricing should be replaced with a new device.
-    - name: cancel-cluster
-      description: Cancels a cluster job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-id=!: The 39-character ID for the cluster that you want to cancel, for example `CID123e4567-e89b-12d3-a456-426655440000`.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The job ID of the job that you want to update, for example `JID123e4567-e89b-12d3-a456-426655440000`.
+        --notification=: The new or updated [Notification]() object.
+        --on-device-service-configuration=: Specifies the service or services on the Snow Family device that your transferred data will be exported from or imported into.
+        --pickup-details=: ""
+        --resources=: The updated `JobResource` object, or the updated [JobResource]() object.
+        --role-arn=: The new role Amazon Resource Name (ARN) that you want to associate with this job.
+        --shipping-option=: The updated shipping option value of this job's [ShippingDetails]() object.
+        --snowball-capacity-preference=: The updated `SnowballCapacityPreference` of this job's [JobMetadata]() object.
+      completion:
+        flag:
+            shipping-option:
+                - SECOND_DAY
+                - NEXT_DAY
+                - EXPRESS
+                - STANDARD
+            snowball-capacity-preference:
+                - T50
+                - T80
+                - T100
+                - T42
+                - T98
+                - T8
+                - T14
+                - T32
+                - NoPreference
+                - T240
+                - T13
     - name: create-address
       description: Creates an address for a Snow device to be shipped to.
       flags:
@@ -146,41 +206,6 @@ commands:
                 - V3_5C
                 - V3_5S
                 - RACK_5U_C
-    - name: update-cluster
-      description: While a cluster's `ClusterState` value is in the `AwaitingQuorum` state, you can update some of the information associated with a cluster.
-      flags:
-        --address-id=: The ID of the updated [Address]() object.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-id=!: The cluster ID of the cluster that you want to update, for example `CID123e4567-e89b-12d3-a456-426655440000`.
-        --description=: The updated description of this cluster.
-        --forwarding-address-id=: The updated ID for the forwarding address for a cluster.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --notification=: The new or updated [Notification]() object.
-        --on-device-service-configuration=: Specifies the service or services on the Snow Family device that your transferred data will be exported from or imported into.
-        --resources=: The updated arrays of [JobResource]() objects that can include updated [S3Resource]() objects or [LambdaResource]() objects.
-        --role-arn=: The new role Amazon Resource Name (ARN) that you want to associate with this cluster.
-        --shipping-option=: The updated shipping option value of this cluster's [ShippingDetails]() object.
-      completion:
-        flag:
-            shipping-option:
-                - SECOND_DAY
-                - NEXT_DAY
-                - EXPRESS
-                - STANDARD
-    - name: update-job-shipment-state
-      description: Updates the state when a shipment state changes to a different state.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The job ID of the job whose shipment date you want to update, for example `JID123e4567-e89b-12d3-a456-426655440000`.
-        --shipment-state=!: The state of a device when it is being shipped.
-      completion:
-        flag:
-            shipment-state:
-                - RECEIVED
-                - RETURNED
     - name: create-job
       description: Creates a job to import or export data between Amazon S3 and your on-premises data center.
       flags:
@@ -250,49 +275,13 @@ commands:
                 - V3_5C
                 - V3_5S
                 - RACK_5U_C
-    - name: describe-cluster
-      description: Returns information about a specific cluster including shipping information, cluster status, and other important metadata.
+    - name: describe-address
+      description: Takes an `AddressId` and returns specific details about that address in the form of an `Address` object.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-id=!: The automatically generated ID for a cluster.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-job-unlock-code
-      description: Returns the `UnlockCode` code value for the specified job.
-      flags:
+        --address-id=!: The automatically generated ID for a specific address.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The ID for the job that you want to get the `UnlockCode` value for, for example `JID123e4567-e89b-12d3-a456-426655440000`.
-    - name: get-software-updates
-      description: Returns an Amazon S3 presigned URL for an update file associated with a specified `JobId`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The ID for a job that you want to get the software update file for, for example `JID123e4567-e89b-12d3-a456-426655440000`.
-    - name: list-compatible-images
-      description: This action returns a list of the different Amazon EC2-compatible Amazon Machine Images (AMIs) that are owned by your Amazon Web Services accountthat would be supported for use on a Snow device.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results for the list of compatible images.
-        --next-token=: HTTP requests are stateless.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-jobs
-      description: Returns an array of `JobListEntry` objects of the specified length.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The number of `JobListEntry` objects to return.
-        --next-token=: HTTP requests are stateless.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
     - name: list-long-term-pricing
       description: Lists all long-term pricing types.
       flags:
@@ -304,22 +293,21 @@ commands:
         --next-token=: Because HTTP requests are stateless, this is the starting point for your next list of `ListLongTermPricing` to return.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-pickup-locations
-      description: A list of locations from which the customer can choose to pickup a device.
+    - name: update-cluster
+      description: While a cluster's `ClusterState` value is in the `AwaitingQuorum` state, you can update some of the information associated with a cluster.
       flags:
+        --address-id=: The ID of the updated [Address]() object.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-id=!: The cluster ID of the cluster that you want to update, for example `CID123e4567-e89b-12d3-a456-426655440000`.
+        --description=: The updated description of this cluster.
+        --forwarding-address-id=: The updated ID for the forwarding address for a cluster.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of locations to list per page.
-        --next-token=: HTTP requests are stateless.
-    - name: create-return-shipping-label
-      description: Creates a shipping label that will be used to return the Snow device to Amazon Web Services.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The ID for a job that you want to create the return shipping label for; for example, `JID123e4567-e89b-12d3-a456-426655440000`.
-        --shipping-option=: The shipping speed for a particular job.
+        --notification=: The new or updated [Notification]() object.
+        --on-device-service-configuration=: Specifies the service or services on the Snow Family device that your transferred data will be exported from or imported into.
+        --resources=: The updated arrays of [JobResource]() objects that can include updated [S3Resource]() objects or [LambdaResource]() objects.
+        --role-arn=: The new role Amazon Resource Name (ARN) that you want to associate with this cluster.
+        --shipping-option=: The updated shipping option value of this cluster's [ShippingDetails]() object.
       completion:
         flag:
             shipping-option:
@@ -327,13 +315,26 @@ commands:
                 - NEXT_DAY
                 - EXPRESS
                 - STANDARD
-    - name: describe-address
-      description: Takes an `AddressId` and returns specific details about that address in the form of an `Address` object.
+    - name: update-job-shipment-state
+      description: Updates the state when a shipment state changes to a different state.
       flags:
-        --address-id=!: The automatically generated ID for a specific address.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The job ID of the job whose shipment date you want to update, for example `JID123e4567-e89b-12d3-a456-426655440000`.
+        --shipment-state=!: The state of a device when it is being shipped.
+      completion:
+        flag:
+            shipment-state:
+                - RECEIVED
+                - RETURNED
+    - name: cancel-job
+      description: Cancels the specified job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The 39-character job ID for the job that you want to cancel, for example `JID123e4567-e89b-12d3-a456-426655440000`.
     - name: describe-return-shipping-label
       description: Information on the shipping label of a Snow device that is being returned to Amazon Web Services.
       flags:
@@ -341,6 +342,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --job-id=!: The automatically generated ID for a job, for example `JID123e4567-e89b-12d3-a456-426655440000`.
+    - name: get-job-manifest
+      description: Returns a link to an Amazon S3 presigned URL for the manifest file associated with the specified `JobId` value.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The ID for a job that you want to get the manifest file for, for example `JID123e4567-e89b-12d3-a456-426655440000`.
     - name: get-snowball-usage
       description: Returns information about the Snow Family service limit for your account, and also the number of Snow devices your account has in use.
       flags:
@@ -370,38 +378,42 @@ commands:
         --next-token=: HTTP requests are stateless.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-service-versions
-      description: Lists all supported versions for Snow on-device services.
+    - name: list-compatible-images
+      description: This action returns a list of the different Amazon EC2-compatible Amazon Machine Images (AMIs) that are owned by your Amazon Web Services accountthat would be supported for use on a Snow device.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dependent-services=: A list of names and versions of dependant services of the requested service.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of `ListServiceVersions` objects to return.
-        --next-token=: Because HTTP requests are stateless, this is the starting point for the next list of returned `ListServiceVersionsRequest` versions.
-        --service-name=!: The name of the service for which you're requesting supported versions.
-      completion:
-        flag:
-            service-name:
-                - KUBERNETES
-                - EKS_ANYWHERE
-    - name: update-job
-      description: While a job's `JobState` value is `New`, you can update some of the information associated with a job.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results for the list of compatible images.
+        --next-token=: HTTP requests are stateless.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-long-term-pricing
+      description: Updates the long-term pricing type.
       flags:
-        --address-id=: The ID of the updated [Address]() object.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The updated description of this job's [JobMetadata]() object.
-        --forwarding-address-id=: The updated ID for the forwarding address for a job.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The job ID of the job that you want to update, for example `JID123e4567-e89b-12d3-a456-426655440000`.
-        --notification=: The new or updated [Notification]() object.
-        --on-device-service-configuration=: Specifies the service or services on the Snow Family device that your transferred data will be exported from or imported into.
-        --pickup-details=: ""
-        --resources=: The updated `JobResource` object, or the updated [JobResource]() object.
-        --role-arn=: The new role Amazon Resource Name (ARN) that you want to associate with this job.
-        --shipping-option=: The updated shipping option value of this job's [ShippingDetails]() object.
-        --snowball-capacity-preference=: The updated `SnowballCapacityPreference` of this job's [JobMetadata]() object.
+        --is-long-term-pricing-auto-renew: If set to `true`, specifies that the current long-term pricing type for the device should be automatically renewed before the long-term pricing contract expires.
+        --long-term-pricing-id=!: The ID of the long-term pricing type for the device.
+        --no-is-long-term-pricing-auto-renew: If set to `true`, specifies that the current long-term pricing type for the device should be automatically renewed before the long-term pricing contract expires.
+        --replacement-job=: Specifies that a device that is ordered with long-term pricing should be replaced with a new device.
+    - name: cancel-cluster
+      description: Cancels a cluster job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-id=!: The 39-character ID for the cluster that you want to cancel, for example `CID123e4567-e89b-12d3-a456-426655440000`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-return-shipping-label
+      description: Creates a shipping label that will be used to return the Snow device to Amazon Web Services.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The ID for a job that you want to create the return shipping label for; for example, `JID123e4567-e89b-12d3-a456-426655440000`.
+        --shipping-option=: The shipping speed for a particular job.
       completion:
         flag:
             shipping-option:
@@ -409,15 +421,3 @@ commands:
                 - NEXT_DAY
                 - EXPRESS
                 - STANDARD
-            snowball-capacity-preference:
-                - T50
-                - T80
-                - T100
-                - T42
-                - T98
-                - T8
-                - T14
-                - T32
-                - NoPreference
-                - T240
-                - T13

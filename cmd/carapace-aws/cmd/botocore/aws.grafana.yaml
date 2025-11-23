@@ -1,13 +1,13 @@
 name: grafana
 description: Amazon Managed Grafana
 commands:
-    - name: describe-workspace-authentication
-      description: Displays information about the authentication methods used in one Amazon Managed Grafana workspace.
+    - name: describe-workspace
+      description: Displays information about one Amazon Managed Grafana workspace.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --workspace-id=!: The ID of the workspace to return authentication information about.
+        --workspace-id=!: The ID of the workspace to display information about.
     - name: list-versions
       description: Lists available versions of Grafana.
       flags:
@@ -20,30 +20,23 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
         --workspace-id=: The ID of the workspace to list the available upgrade versions.
-    - name: list-workspace-service-account-tokens
-      description: Returns a list of tokens for a workspace service account.
+    - name: untag-resource
+      description: The `UntagResource` operation removes the association of the tag with the Amazon Managed Grafana resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of tokens to include in the results.
-        --next-token=: The token for the next set of service accounts to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --service-account-id=!: The ID of the service account for which to return tokens.
-        --starting-token=: A token to specify where to start paginating.
-        --workspace-id=!: The ID of the workspace for which to return tokens.
-    - name: list-workspaces
-      description: Returns a list of Amazon Managed Grafana workspaces in the account, with some information about each workspace.
+        --resource-arn=!: The ARN of the resource the tag association is removed from.
+        --tag-keys=!: The key values of the tag to be removed from the resource.
+    - name: update-workspace-authentication
+      description: Use this operation to define the identity provider (IdP) that this workspace authenticates users from, using SAML.
       flags:
+        --authentication-providers=!: Specifies whether this workspace uses SAML 2.0, IAM Identity Center, or both to authenticate users for using the Grafana console within a workspace.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of workspaces to include in the results.
-        --next-token=: The token for the next set of workspaces to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+        --saml-configuration=: If the workspace uses SAML, use this structure to map SAML assertion attributes to workspace user information and define which groups in the assertion attribute are to have the `Admin` and `Editor` roles in the workspace.
+        --workspace-id=!: The ID of the workspace to update the authentication for.
     - name: associate-license
       description: Assigns a Grafana Enterprise license to a workspace.
       flags:
@@ -58,6 +51,63 @@ commands:
             license-type:
                 - ENTERPRISE
                 - ENTERPRISE_FREE_TRIAL
+    - name: create-workspace
+      description: Creates a *workspace*.
+      flags:
+        --account-access-type=!: Specifies whether the workspace can access Amazon Web Services resources in this Amazon Web Services account only, or whether it can also access Amazon Web Services resources in other accounts in the same organization.
+        --authentication-providers=!: Specifies whether this workspace uses SAML 2.0, IAM Identity Center, or both to authenticate users for using the Grafana console within a workspace.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
+        --configuration=: The configuration string for the workspace that you create.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --grafana-version=: Specifies the version of Grafana to support in the new workspace.
+        --network-access-control=: Configuration for network access to your workspace.
+        --organization-role-name=: The name of an IAM role that already exists to use with Organizations to access Amazon Web Services data sources and notification channels in other accounts in an organization.
+        --permission-type=!: When creating a workspace through the Amazon Web Services API, CLI or Amazon Web Services CloudFormation, you must manage IAM roles and provision the permissions that the workspace needs to use Amazon Web Services data sources and notification channels.
+        --stack-set-name=: The name of the CloudFormation stack set to use to generate IAM roles to be used for this workspace.
+        --tags=: The list of tags associated with the workspace.
+        --vpc-configuration=: The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to.
+        --workspace-data-sources=: This parameter is for internal use only, and should not be used.
+        --workspace-description=: A description for the workspace.
+        --workspace-name=: The name for the workspace.
+        --workspace-notification-destinations=: Specify the Amazon Web Services notification channels that you plan to use in this workspace.
+        --workspace-organizational-units=: Specifies the organizational units that this workspace is allowed to use data sources from, if this workspace is in an account that is part of an organization.
+        --workspace-role-arn=: Specified the IAM role that grants permissions to the Amazon Web Services resources that the workspace will view data from, including both data sources and notification channels.
+      completion:
+        flag:
+            account-access-type:
+                - CURRENT_ACCOUNT
+                - ORGANIZATION
+            permission-type:
+                - CUSTOMER_MANAGED
+                - SERVICE_MANAGED
+    - name: describe-workspace-configuration
+      description: Gets the current configuration string for the given workspace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workspace-id=!: The ID of the workspace to get configuration information for.
+    - name: list-tags-for-resource
+      description: The `ListTagsForResource` operation returns the tags that are associated with the Amazon Managed Service for Grafana resource specified by the `resourceArn`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource the list of tags are associated with.
+    - name: list-workspace-service-accounts
+      description: Returns a list of service accounts for a workspace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of service accounts to include in the results.
+        --next-token=: The token for the next set of service accounts to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --workspace-id=!: The workspace for which to list service accounts.
     - name: create-workspace-service-account-token
       description: Creates a token that can be used to authenticate and authorize Grafana HTTP API operations for the given [workspace service account](https://docs.aws.amazon.com/grafana/latest/userguide/service-accounts.html).
       flags:
@@ -84,20 +134,110 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --service-account-id=!: The ID of the service account to delete.
         --workspace-id=!: The ID of the workspace where the service account resides.
-    - name: describe-workspace-configuration
-      description: Gets the current configuration string for the given workspace.
+    - name: describe-workspace-authentication
+      description: Displays information about the authentication methods used in one Amazon Managed Grafana workspace.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --workspace-id=!: The ID of the workspace to get configuration information for.
-    - name: list-tags-for-resource
-      description: The `ListTagsForResource` operation returns the tags that are associated with the Amazon Managed Service for Grafana resource specified by the `resourceArn`.
+        --workspace-id=!: The ID of the workspace to return authentication information about.
+    - name: list-permissions
+      description: Lists the users and groups who have the Grafana `Admin` and `Editor` roles in this workspace.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource the list of tags are associated with.
+        --group-id=: (Optional) Limits the results to only the group that matches this ID.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to include in the response.
+        --next-token=: The token to use when requesting the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --user-id=: (Optional) Limits the results to only the user that matches this ID.
+        --user-type=: (Optional) If you specify `SSO_USER`, then only the permissions of IAM Identity Center users are returned.
+        --workspace-id=!: The ID of the workspace to list permissions for.
+      completion:
+        flag:
+            user-type:
+                - SSO_USER
+                - SSO_GROUP
+    - name: list-workspace-service-account-tokens
+      description: Returns a list of tokens for a workspace service account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of tokens to include in the results.
+        --next-token=: The token for the next set of service accounts to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --service-account-id=!: The ID of the service account for which to return tokens.
+        --starting-token=: A token to specify where to start paginating.
+        --workspace-id=!: The ID of the workspace for which to return tokens.
+    - name: list-workspaces
+      description: Returns a list of Amazon Managed Grafana workspaces in the account, with some information about each workspace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of workspaces to include in the results.
+        --next-token=: The token for the next set of workspaces to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-permissions
+      description: Updates which users in a workspace have the Grafana `Admin` or `Editor` roles.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --update-instruction-batch=!: An array of structures that contain the permission updates to make.
+        --workspace-id=!: The ID of the workspace to update.
+    - name: create-workspace-api-key
+      description: Creates a Grafana API key for the workspace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-name=!: Specifies the name of the key.
+        --key-role=!: Specifies the permission level of the key.
+        --seconds-to-live=!: Specifies the time in seconds until the key expires.
+        --workspace-id=!: The ID of the workspace to create an API key.
+    - name: create-workspace-service-account
+      description: Creates a service account for the workspace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --grafana-role=!: The permission level to use for this service account.
+        --name=!: A name for the service account.
+        --workspace-id=!: The ID of the workspace within which to create the service account.
+      completion:
+        flag:
+            grafana-role:
+                - ADMIN
+                - EDITOR
+                - VIEWER
+    - name: delete-workspace
+      description: Deletes an Amazon Managed Grafana workspace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workspace-id=!: The ID of the workspace to delete.
+    - name: disassociate-license
+      description: Removes the Grafana Enterprise license from a workspace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --license-type=!: The type of license to remove from the workspace.
+        --workspace-id=!: The ID of the workspace to remove the Grafana Enterprise license from.
+      completion:
+        flag:
+            license-type:
+                - ENTERPRISE
+                - ENTERPRISE_FREE_TRIAL
     - name: tag-resource
       description: The `TagResource` operation associates tags with an Amazon Managed Grafana resource.
       flags:
@@ -137,50 +277,6 @@ commands:
             permission-type:
                 - CUSTOMER_MANAGED
                 - SERVICE_MANAGED
-    - name: create-workspace-service-account
-      description: Creates a service account for the workspace.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --grafana-role=!: The permission level to use for this service account.
-        --name=!: A name for the service account.
-        --workspace-id=!: The ID of the workspace within which to create the service account.
-      completion:
-        flag:
-            grafana-role:
-                - ADMIN
-                - EDITOR
-                - VIEWER
-    - name: delete-workspace
-      description: Deletes an Amazon Managed Grafana workspace.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --workspace-id=!: The ID of the workspace to delete.
-    - name: disassociate-license
-      description: Removes the Grafana Enterprise license from a workspace.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --license-type=!: The type of license to remove from the workspace.
-        --workspace-id=!: The ID of the workspace to remove the Grafana Enterprise license from.
-      completion:
-        flag:
-            license-type:
-                - ENTERPRISE
-                - ENTERPRISE_FREE_TRIAL
-    - name: update-workspace-authentication
-      description: Use this operation to define the identity provider (IdP) that this workspace authenticates users from, using SAML.
-      flags:
-        --authentication-providers=!: Specifies whether this workspace uses SAML 2.0, IAM Identity Center, or both to authenticate users for using the Grafana console within a workspace.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --saml-configuration=: If the workspace uses SAML, use this structure to map SAML assertion attributes to workspace user information and define which groups in the assertion attribute are to have the `Admin` and `Editor` roles in the workspace.
-        --workspace-id=!: The ID of the workspace to update the authentication for.
     - name: update-workspace-configuration
       description: Updates the configuration string for the given workspace
       flags:
@@ -190,102 +286,6 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --grafana-version=: Specifies the version of Grafana to support in the workspace.
         --workspace-id=!: The ID of the workspace to update.
-    - name: create-workspace-api-key
-      description: Creates a Grafana API key for the workspace.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-name=!: Specifies the name of the key.
-        --key-role=!: Specifies the permission level of the key.
-        --seconds-to-live=!: Specifies the time in seconds until the key expires.
-        --workspace-id=!: The ID of the workspace to create an API key.
-    - name: describe-workspace
-      description: Displays information about one Amazon Managed Grafana workspace.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --workspace-id=!: The ID of the workspace to display information about.
-    - name: list-permissions
-      description: Lists the users and groups who have the Grafana `Admin` and `Editor` roles in this workspace.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-id=: (Optional) Limits the results to only the group that matches this ID.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to include in the response.
-        --next-token=: The token to use when requesting the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --user-id=: (Optional) Limits the results to only the user that matches this ID.
-        --user-type=: (Optional) If you specify `SSO_USER`, then only the permissions of IAM Identity Center users are returned.
-        --workspace-id=!: The ID of the workspace to list permissions for.
-      completion:
-        flag:
-            user-type:
-                - SSO_USER
-                - SSO_GROUP
-    - name: list-workspace-service-accounts
-      description: Returns a list of service accounts for a workspace.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of service accounts to include in the results.
-        --next-token=: The token for the next set of service accounts to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --workspace-id=!: The workspace for which to list service accounts.
-    - name: untag-resource
-      description: The `UntagResource` operation removes the association of the tag with the Amazon Managed Grafana resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource the tag association is removed from.
-        --tag-keys=!: The key values of the tag to be removed from the resource.
-    - name: update-permissions
-      description: Updates which users in a workspace have the Grafana `Admin` or `Editor` roles.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --update-instruction-batch=!: An array of structures that contain the permission updates to make.
-        --workspace-id=!: The ID of the workspace to update.
-    - name: create-workspace
-      description: Creates a *workspace*.
-      flags:
-        --account-access-type=!: Specifies whether the workspace can access Amazon Web Services resources in this Amazon Web Services account only, or whether it can also access Amazon Web Services resources in other accounts in the same organization.
-        --authentication-providers=!: Specifies whether this workspace uses SAML 2.0, IAM Identity Center, or both to authenticate users for using the Grafana console within a workspace.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
-        --configuration=: The configuration string for the workspace that you create.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --grafana-version=: Specifies the version of Grafana to support in the new workspace.
-        --network-access-control=: Configuration for network access to your workspace.
-        --organization-role-name=: The name of an IAM role that already exists to use with Organizations to access Amazon Web Services data sources and notification channels in other accounts in an organization.
-        --permission-type=!: When creating a workspace through the Amazon Web Services API, CLI or Amazon Web Services CloudFormation, you must manage IAM roles and provision the permissions that the workspace needs to use Amazon Web Services data sources and notification channels.
-        --stack-set-name=: The name of the CloudFormation stack set to use to generate IAM roles to be used for this workspace.
-        --tags=: The list of tags associated with the workspace.
-        --vpc-configuration=: The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to.
-        --workspace-data-sources=: This parameter is for internal use only, and should not be used.
-        --workspace-description=: A description for the workspace.
-        --workspace-name=: The name for the workspace.
-        --workspace-notification-destinations=: Specify the Amazon Web Services notification channels that you plan to use in this workspace.
-        --workspace-organizational-units=: Specifies the organizational units that this workspace is allowed to use data sources from, if this workspace is in an account that is part of an organization.
-        --workspace-role-arn=: Specified the IAM role that grants permissions to the Amazon Web Services resources that the workspace will view data from, including both data sources and notification channels.
-      completion:
-        flag:
-            account-access-type:
-                - CURRENT_ACCOUNT
-                - ORGANIZATION
-            permission-type:
-                - CUSTOMER_MANAGED
-                - SERVICE_MANAGED
     - name: delete-workspace-service-account-token
       description: Deletes a token for the workspace service account.
       flags:

@@ -1,6 +1,127 @@
 name: verifiedpermissions
 description: Amazon Verified Permissions
 commands:
+    - name: delete-identity-source
+      description: Deletes an identity source that references an identity provider (IdP) such as Amazon Cognito.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-source-id=!: Specifies the ID of the identity source that you want to delete.
+        --policy-store-id=!: Specifies the ID of the policy store that contains the identity source that you want to delete.
+    - name: list-policies
+      description: Returns a paginated list of all policies stored in the specified policy store.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: Specifies a filter that limits the response to only policies that match the specified criteria.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specifies the total number of results that you want included in each response.
+        --next-token=: Specifies that you want to receive the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --policy-store-id=!: Specifies the ID of the policy store you want to list policies from.
+        --starting-token=: A token to specify where to start paginating.
+    - name: create-policy
+      description: Creates a Cedar policy and saves it in the specified policy store.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Specifies a unique, case-sensitive ID that you provide to ensure the idempotency of the request.
+        --definition=!: A structure that specifies the policy type and content to use for the new policy.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-store-id=!: Specifies the `PolicyStoreId` of the policy store you want to store the policy in.
+    - name: create-policy-store
+      description: Creates a policy store.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Specifies a unique, case-sensitive ID that you provide to ensure the idempotency of the request.
+        --deletion-protection=: Specifies whether the policy store can be deleted.
+        --description=: Descriptive text that you can provide to help with identification of the current policy store.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: The list of key-value pairs to associate with the policy store.
+        --validation-settings=!: Specifies the validation setting for this policy store.
+      completion:
+        flag:
+            deletion-protection:
+                - ENABLED
+                - DISABLED
+    - name: list-policy-stores
+      description: Returns a paginated list of all policy stores in the calling Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specifies the total number of results that you want included in each response.
+        --next-token=: Specifies that you want to receive the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-identity-source
+      description: Updates the specified identity source to use a new identity provider (IdP), or to change the mapping of identities from the IdP to a different principal entity type.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-source-id=!: Specifies the ID of the identity source that you want to update.
+        --policy-store-id=!: Specifies the ID of the policy store that contains the identity source that you want to update.
+        --principal-entity-type=: Specifies the data type of principals generated for identities authenticated by the identity source.
+        --update-configuration=!: Specifies the details required to communicate with the identity provider (IdP) associated with this identity source.
+    - name: delete-policy-template
+      description: Deletes the specified policy template from the policy store.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-store-id=!: Specifies the ID of the policy store that contains the policy template that you want to delete.
+        --policy-template-id=!: Specifies the ID of the policy template that you want to delete.
+    - name: get-policy-template
+      description: Retrieve the details for the specified policy template in the specified policy store.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-store-id=!: Specifies the ID of the policy store that contains the policy template that you want information about.
+        --policy-template-id=!: Specifies the ID of the policy template that you want information about.
+    - name: is-authorized
+      description: Makes an authorization decision about a service request described in the parameters.
+      flags:
+        --action=: Specifies the requested action to be authorized.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --context=: Specifies additional context that can be used to make more granular authorization decisions.
+        --entities=: (Optional) Specifies the list of resources and principals and their associated attributes that Verified Permissions can examine when evaluating the policies.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-store-id=!: Specifies the ID of the policy store.
+        --principal=: Specifies the principal for which the authorization decision is to be made.
+        --resource=: Specifies the resource for which the authorization decision is to be made.
+    - name: list-tags-for-resource
+      description: Returns the tags associated with the specified Amazon Verified Permissions resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource for which you want to view tags.
+    - name: update-policy-template
+      description: Updates the specified policy template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: Specifies a new description to apply to the policy template.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-store-id=!: Specifies the ID of the policy store that contains the policy template that you want to update.
+        --policy-template-id=!: Specifies the ID of the policy template that you want to update.
+        --statement=!: Specifies new statement content written in Cedar policy language to replace the current body of the policy template.
+    - name: batch-is-authorized
+      description: Makes a series of decisions about multiple authorization requests for one principal or resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entities=: (Optional) Specifies the list of resources and principals and their associated attributes that Verified Permissions can examine when evaluating the policies.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-store-id=!: Specifies the ID of the policy store.
+        --requests=!: An array of up to 30 requests that you want Verified Permissions to evaluate.
     - name: get-policy-store
       description: Retrieves details about a policy store.
       flags:
@@ -10,35 +131,13 @@ commands:
         --no-tags: Specifies whether to return the tags that are attached to the policy store.
         --policy-store-id=!: Specifies the ID of the policy store that you want information about.
         --tags: Specifies whether to return the tags that are attached to the policy store.
-    - name: is-authorized-with-token
-      description: Makes an authorization decision about a service request described in the parameters.
-      flags:
-        --access-token=: Specifies an access token for the principal to be authorized.
-        --action=: Specifies the requested action to be authorized.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --context=: Specifies additional context that can be used to make more granular authorization decisions.
-        --entities=: (Optional) Specifies the list of resources and their associated attributes that Verified Permissions can examine when evaluating the policies.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-token=: Specifies an identity token for the principal to be authorized.
-        --policy-store-id=!: Specifies the ID of the policy store.
-        --resource=: Specifies the resource for which the authorization decision is made.
-    - name: delete-identity-source
-      description: Deletes an identity source that references an identity provider (IdP) such as Amazon Cognito.
+    - name: get-schema
+      description: Retrieve the details for the specified schema in the specified policy store.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-source-id=!: Specifies the ID of the identity source that you want to delete.
-        --policy-store-id=!: Specifies the ID of the policy store that contains the identity source that you want to delete.
-    - name: tag-resource
-      description: Assigns one or more tags (key-value pairs) to the specified Amazon Verified Permissions resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource that you're adding tags to.
-        --tags=!: The list of key-value pairs to associate with the resource.
+        --policy-store-id=!: Specifies the ID of the policy store that contains the schema.
     - name: update-policy
       description: Modifies a Cedar static policy in the specified policy store.
       flags:
@@ -63,22 +162,92 @@ commands:
             deletion-protection:
                 - ENABLED
                 - DISABLED
-    - name: create-policy-store
-      description: Creates a policy store.
+    - name: create-policy-template
+      description: Creates a policy template.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: Specifies a unique, case-sensitive ID that you provide to ensure the idempotency of the request.
-        --deletion-protection=: Specifies whether the policy store can be deleted.
-        --description=: Descriptive text that you can provide to help with identification of the current policy store.
+        --description=: Specifies a description for the policy template.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: The list of key-value pairs to associate with the policy store.
-        --validation-settings=!: Specifies the validation setting for this policy store.
-      completion:
-        flag:
-            deletion-protection:
-                - ENABLED
-                - DISABLED
+        --policy-store-id=!: The ID of the policy store in which to create the policy template.
+        --statement=!: Specifies the content that you want to use for the new policy template, written in the Cedar policy language.
+    - name: delete-policy
+      description: Deletes the specified policy from the policy store.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-id=!: Specifies the ID of the policy that you want to delete.
+        --policy-store-id=!: Specifies the ID of the policy store that contains the policy that you want to delete.
+    - name: delete-policy-store
+      description: Deletes the specified policy store.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-store-id=!: Specifies the ID of the policy store that you want to delete.
+    - name: list-identity-sources
+      description: Returns a paginated list of all of the identity sources defined in the specified policy store.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Specifies characteristics of an identity source that you can use to limit the output to matching identity sources.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specifies the total number of results that you want included in each response.
+        --next-token=: Specifies that you want to receive the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --policy-store-id=!: Specifies the ID of the policy store that contains the identity sources that you want to list.
+        --starting-token=: A token to specify where to start paginating.
+    - name: batch-is-authorized-with-token
+      description: Makes a series of decisions about multiple authorization requests for one token.
+      flags:
+        --access-token=: Specifies an access token for the principal that you want to authorize in each request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entities=: (Optional) Specifies the list of resources and their associated attributes that Verified Permissions can examine when evaluating the policies.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-token=: Specifies an identity (ID) token for the principal that you want to authorize in each request.
+        --policy-store-id=!: Specifies the ID of the policy store.
+        --requests=!: An array of up to 30 requests that you want Verified Permissions to evaluate.
+    - name: get-identity-source
+      description: Retrieves the details about the specified identity source.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-source-id=!: Specifies the ID of the identity source you want information about.
+        --policy-store-id=!: Specifies the ID of the policy store that contains the identity source you want information about.
+    - name: is-authorized-with-token
+      description: Makes an authorization decision about a service request described in the parameters.
+      flags:
+        --access-token=: Specifies an access token for the principal to be authorized.
+        --action=: Specifies the requested action to be authorized.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --context=: Specifies additional context that can be used to make more granular authorization decisions.
+        --entities=: (Optional) Specifies the list of resources and their associated attributes that Verified Permissions can examine when evaluating the policies.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-token=: Specifies an identity token for the principal to be authorized.
+        --policy-store-id=!: Specifies the ID of the policy store.
+        --resource=: Specifies the resource for which the authorization decision is made.
+    - name: untag-resource
+      description: Removes one or more tags from the specified Amazon Verified Permissions resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource from which you are removing tags.
+        --tag-keys=!: The list of tag keys to remove from the resource.
+    - name: get-policy
+      description: Retrieves information about the specified policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-id=!: Specifies the ID of the policy you want information about.
+        --policy-store-id=!: Specifies the ID of the policy store that contains the policy that you want information about.
     - name: list-policy-templates
       description: Returns a paginated list of all policy templates in the specified policy store.
       flags:
@@ -99,104 +268,21 @@ commands:
         --definition=!: Specifies the definition of the schema to be stored.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --policy-store-id=!: Specifies the ID of the policy store in which to place the schema.
-    - name: batch-is-authorized-with-token
-      description: Makes a series of decisions about multiple authorization requests for one token.
-      flags:
-        --access-token=: Specifies an access token for the principal that you want to authorize in each request.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --entities=: (Optional) Specifies the list of resources and their associated attributes that Verified Permissions can examine when evaluating the policies.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-token=: Specifies an identity (ID) token for the principal that you want to authorize in each request.
-        --policy-store-id=!: Specifies the ID of the policy store.
-        --requests=!: An array of up to 30 requests that you want Verified Permissions to evaluate.
-    - name: delete-policy-store
-      description: Deletes the specified policy store.
+    - name: tag-resource
+      description: Assigns one or more tags (key-value pairs) to the specified Amazon Verified Permissions resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-store-id=!: Specifies the ID of the policy store that you want to delete.
-    - name: delete-policy-template
-      description: Deletes the specified policy template from the policy store.
+        --resource-arn=!: The ARN of the resource that you're adding tags to.
+        --tags=!: The list of key-value pairs to associate with the resource.
+    - name: batch-get-policy
+      description: Retrieves information about a group (batch) of policies.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-store-id=!: Specifies the ID of the policy store that contains the policy template that you want to delete.
-        --policy-template-id=!: Specifies the ID of the policy template that you want to delete.
-    - name: list-identity-sources
-      description: Returns a paginated list of all of the identity sources defined in the specified policy store.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Specifies characteristics of an identity source that you can use to limit the output to matching identity sources.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Specifies the total number of results that you want included in each response.
-        --next-token=: Specifies that you want to receive the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --policy-store-id=!: Specifies the ID of the policy store that contains the identity sources that you want to list.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-policy-stores
-      description: Returns a paginated list of all policy stores in the calling Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Specifies the total number of results that you want included in each response.
-        --next-token=: Specifies that you want to receive the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: untag-resource
-      description: Removes one or more tags from the specified Amazon Verified Permissions resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource from which you are removing tags.
-        --tag-keys=!: The list of tag keys to remove from the resource.
-    - name: update-policy-template
-      description: Updates the specified policy template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: Specifies a new description to apply to the policy template.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-store-id=!: Specifies the ID of the policy store that contains the policy template that you want to update.
-        --policy-template-id=!: Specifies the ID of the policy template that you want to update.
-        --statement=!: Specifies new statement content written in Cedar policy language to replace the current body of the policy template.
-    - name: get-identity-source
-      description: Retrieves the details about the specified identity source.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-source-id=!: Specifies the ID of the identity source you want information about.
-        --policy-store-id=!: Specifies the ID of the policy store that contains the identity source you want information about.
-    - name: is-authorized
-      description: Makes an authorization decision about a service request described in the parameters.
-      flags:
-        --action=: Specifies the requested action to be authorized.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --context=: Specifies additional context that can be used to make more granular authorization decisions.
-        --entities=: (Optional) Specifies the list of resources and principals and their associated attributes that Verified Permissions can examine when evaluating the policies.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-store-id=!: Specifies the ID of the policy store.
-        --principal=: Specifies the principal for which the authorization decision is to be made.
-        --resource=: Specifies the resource for which the authorization decision is to be made.
-    - name: update-identity-source
-      description: Updates the specified identity source to use a new identity provider (IdP), or to change the mapping of identities from the IdP to a different principal entity type.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-source-id=!: Specifies the ID of the identity source that you want to update.
-        --policy-store-id=!: Specifies the ID of the policy store that contains the identity source that you want to update.
-        --principal-entity-type=: Specifies the data type of principals generated for identities authenticated by the identity source.
-        --update-configuration=!: Specifies the details required to communicate with the identity provider (IdP) associated with this identity source.
+        --requests=!: An array of up to 100 policies you want information about.
     - name: create-identity-source
       description: Adds an identity source to a policy store–an Amazon Cognito user pool or OpenID Connect (OIDC) identity provider (IdP).
       flags:
@@ -207,89 +293,3 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --policy-store-id=!: Specifies the ID of the policy store in which you want to store this identity source.
         --principal-entity-type=: Specifies the namespace and data type of the principals generated for identities authenticated by the new identity source.
-    - name: create-policy-template
-      description: Creates a policy template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: Specifies a unique, case-sensitive ID that you provide to ensure the idempotency of the request.
-        --description=: Specifies a description for the policy template.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-store-id=!: The ID of the policy store in which to create the policy template.
-        --statement=!: Specifies the content that you want to use for the new policy template, written in the Cedar policy language.
-    - name: batch-is-authorized
-      description: Makes a series of decisions about multiple authorization requests for one principal or resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --entities=: (Optional) Specifies the list of resources and principals and their associated attributes that Verified Permissions can examine when evaluating the policies.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-store-id=!: Specifies the ID of the policy store.
-        --requests=!: An array of up to 30 requests that you want Verified Permissions to evaluate.
-    - name: get-policy-template
-      description: Retrieve the details for the specified policy template in the specified policy store.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-store-id=!: Specifies the ID of the policy store that contains the policy template that you want information about.
-        --policy-template-id=!: Specifies the ID of the policy template that you want information about.
-    - name: list-policies
-      description: Returns a paginated list of all policies stored in the specified policy store.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: Specifies a filter that limits the response to only policies that match the specified criteria.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Specifies the total number of results that you want included in each response.
-        --next-token=: Specifies that you want to receive the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --policy-store-id=!: Specifies the ID of the policy store you want to list policies from.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: Returns the tags associated with the specified Amazon Verified Permissions resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource for which you want to view tags.
-    - name: delete-policy
-      description: Deletes the specified policy from the policy store.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-id=!: Specifies the ID of the policy that you want to delete.
-        --policy-store-id=!: Specifies the ID of the policy store that contains the policy that you want to delete.
-    - name: get-policy
-      description: Retrieves information about the specified policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-id=!: Specifies the ID of the policy you want information about.
-        --policy-store-id=!: Specifies the ID of the policy store that contains the policy that you want information about.
-    - name: get-schema
-      description: Retrieve the details for the specified schema in the specified policy store.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-store-id=!: Specifies the ID of the policy store that contains the schema.
-    - name: batch-get-policy
-      description: Retrieves information about a group (batch) of policies.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --requests=!: An array of up to 100 policies you want information about.
-    - name: create-policy
-      description: Creates a Cedar policy and saves it in the specified policy store.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: Specifies a unique, case-sensitive ID that you provide to ensure the idempotency of the request.
-        --definition=!: A structure that specifies the policy type and content to use for the new policy.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-store-id=!: Specifies the `PolicyStoreId` of the policy store you want to store the policy in.

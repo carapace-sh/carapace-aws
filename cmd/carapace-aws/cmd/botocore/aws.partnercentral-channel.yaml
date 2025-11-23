@@ -1,6 +1,65 @@
 name: partnercentral-channel
 description: Partner Central Channel API
 commands:
+    - name: tag-resource
+      description: Adds or updates tags for a specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to tag.
+        --tags=!: Key-value pairs to associate with the resource.
+    - name: untag-resource
+      description: Removes tags from a specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to remove tags from.
+        --tag-keys=!: The keys of the tags to remove from the resource.
+    - name: list-relationships
+      description: Lists partner relationships based on specified criteria.
+      flags:
+        --associated-account-ids=: Filter by associated AWS account IDs.
+        --association-types=: Filter by association types.
+        --catalog=!: The catalog identifier to filter relationships.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --display-names=: Filter by display names.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: Token for retrieving the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --program-management-account-identifiers=: Filter by program management account identifiers.
+        --sort=: Sorting options for the results.
+        --starting-token=: A token to specify where to start paginating.
+    - name: cancel-channel-handshake
+      description: Cancels a pending channel handshake request.
+      flags:
+        --catalog=!: The catalog identifier for the handshake request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the channel handshake to cancel.
+    - name: create-channel-handshake
+      description: Creates a new channel handshake request to establish a partnership with another AWS account.
+      flags:
+        --associated-resource-identifier=!: The identifier of the resource associated with this handshake.
+        --catalog=!: The catalog identifier for the handshake request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --handshake-type=!: The type of handshake to create (e.g., start service period, revoke service period).
+        --payload=: The payload containing specific details for the handshake type.
+        --tags=: Key-value pairs to associate with the channel handshake.
+      completion:
+        flag:
+            handshake-type:
+                - START_SERVICE_PERIOD
+                - REVOKE_SERVICE_PERIOD
+                - PROGRAM_MANAGEMENT_ACCOUNT
     - name: delete-program-management-account
       description: Deletes a program management account.
       flags:
@@ -20,50 +79,33 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identifier=!: The unique identifier of the relationship to delete.
         --program-management-account-identifier=!: The identifier of the program management account associated with the relationship.
-    - name: list-program-management-accounts
-      description: Lists program management accounts based on specified criteria.
+    - name: list-channel-handshakes
+      description: Lists channel handshakes based on specified criteria.
       flags:
-        --account-ids=: Filter by AWS account IDs.
-        --catalog=!: The catalog identifier to filter accounts.
+        --associated-resource-identifiers=: Filter by associated resource identifiers.
+        --catalog=!: The catalog identifier to filter handshakes.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --display-names=: Filter by display names.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --handshake-type-filters=: Type-specific filters for handshakes.
+        --handshake-type-sort=: Type-specific sorting options for handshakes.
+        --handshake-type=!: Filter results by handshake type.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return in a single call.
         --next-token=: Token for retrieving the next page of results.
         --page-size=: The size of each page to get in the AWS service call.
-        --programs=: Filter by program types.
-        --sort=: Sorting options for the results.
+        --participant-type=!: Filter by participant type (sender or receiver).
         --starting-token=: A token to specify where to start paginating.
-        --statuses=: Filter by program management account statuses.
-    - name: list-relationships
-      description: Lists partner relationships based on specified criteria.
-      flags:
-        --associated-account-ids=: Filter by associated AWS account IDs.
-        --association-types=: Filter by association types.
-        --catalog=!: The catalog identifier to filter relationships.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --display-names=: Filter by display names.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in a single call.
-        --next-token=: Token for retrieving the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --program-management-account-identifiers=: Filter by program management account identifiers.
-        --sort=: Sorting options for the results.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-program-management-account
-      description: Updates the properties of a program management account.
-      flags:
-        --catalog=!: The catalog identifier for the program management account.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --display-name=: The new display name for the program management account.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The unique identifier of the program management account to update.
-        --revision=: The current revision number of the program management account.
+        --statuses=: Filter results by handshake status.
+      completion:
+        flag:
+            handshake-type:
+                - START_SERVICE_PERIOD
+                - REVOKE_SERVICE_PERIOD
+                - PROGRAM_MANAGEMENT_ACCOUNT
+            participant-type:
+                - SENDER
+                - RECEIVER
     - name: update-relationship
       description: Updates the properties of a partner relationship.
       flags:
@@ -76,14 +118,47 @@ commands:
         --program-management-account-identifier=!: The identifier of the program management account associated with the relationship.
         --requested-support-plan=: The updated support plan for the relationship.
         --revision=: The current revision number of the relationship.
-    - name: cancel-channel-handshake
-      description: Cancels a pending channel handshake request.
+    - name: list-tags-for-resource
+      description: Lists tags associated with a specific resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to list tags for.
+    - name: reject-channel-handshake
+      description: Rejects a pending channel handshake request.
       flags:
         --catalog=!: The catalog identifier for the handshake request.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The unique identifier of the channel handshake to cancel.
+        --identifier=!: The unique identifier of the channel handshake to reject.
+    - name: accept-channel-handshake
+      description: Accepts a pending channel handshake request from another AWS account.
+      flags:
+        --catalog=!: The catalog identifier for the handshake request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the channel handshake to accept.
+    - name: create-program-management-account
+      description: Creates a new program management account for managing partner relationships.
+      flags:
+        --account-id=!: The AWS account ID to associate with the program management account.
+        --catalog=!: The catalog identifier for the program management account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
+        --display-name=!: A human-readable name for the program management account.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --program=!: The program type for the management account.
+        --tags=: Key-value pairs to associate with the program management account.
+      completion:
+        flag:
+            program:
+                - SOLUTION_PROVIDER
+                - DISTRIBUTION
+                - DISTRIBUTION_SELLER
     - name: create-relationship
       description: Creates a new partner relationship between accounts.
       flags:
@@ -114,30 +189,16 @@ commands:
                 - COMMERCIAL
                 - GOVERNMENT
                 - GOVERNMENT_EXCEPTION
-    - name: reject-channel-handshake
-      description: Rejects a pending channel handshake request.
+    - name: update-program-management-account
+      description: Updates the properties of a program management account.
       flags:
-        --catalog=!: The catalog identifier for the handshake request.
+        --catalog=!: The catalog identifier for the program management account.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --display-name=: The new display name for the program management account.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The unique identifier of the channel handshake to reject.
-    - name: tag-resource
-      description: Adds or updates tags for a specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to tag.
-        --tags=!: Key-value pairs to associate with the resource.
-    - name: untag-resource
-      description: Removes tags from a specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to remove tags from.
-        --tag-keys=!: The keys of the tags to remove from the resource.
+        --identifier=!: The unique identifier of the program management account to update.
+        --revision=: The current revision number of the program management account.
     - name: get-relationship
       description: Retrieves details of a specific partner relationship.
       flags:
@@ -147,81 +208,20 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identifier=!: The unique identifier of the relationship to retrieve.
         --program-management-account-identifier=!: The identifier of the program management account associated with the relationship.
-    - name: list-channel-handshakes
-      description: Lists channel handshakes based on specified criteria.
+    - name: list-program-management-accounts
+      description: Lists program management accounts based on specified criteria.
       flags:
-        --associated-resource-identifiers=: Filter by associated resource identifiers.
-        --catalog=!: The catalog identifier to filter handshakes.
+        --account-ids=: Filter by AWS account IDs.
+        --catalog=!: The catalog identifier to filter accounts.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --display-names=: Filter by display names.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --handshake-type-filters=: Type-specific filters for handshakes.
-        --handshake-type-sort=: Type-specific sorting options for handshakes.
-        --handshake-type=!: Filter results by handshake type.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return in a single call.
         --next-token=: Token for retrieving the next page of results.
         --page-size=: The size of each page to get in the AWS service call.
-        --participant-type=!: Filter by participant type (sender or receiver).
+        --programs=: Filter by program types.
+        --sort=: Sorting options for the results.
         --starting-token=: A token to specify where to start paginating.
-        --statuses=: Filter results by handshake status.
-      completion:
-        flag:
-            handshake-type:
-                - START_SERVICE_PERIOD
-                - REVOKE_SERVICE_PERIOD
-                - PROGRAM_MANAGEMENT_ACCOUNT
-            participant-type:
-                - SENDER
-                - RECEIVER
-    - name: list-tags-for-resource
-      description: Lists tags associated with a specific resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to list tags for.
-    - name: accept-channel-handshake
-      description: Accepts a pending channel handshake request from another AWS account.
-      flags:
-        --catalog=!: The catalog identifier for the handshake request.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The unique identifier of the channel handshake to accept.
-    - name: create-channel-handshake
-      description: Creates a new channel handshake request to establish a partnership with another AWS account.
-      flags:
-        --associated-resource-identifier=!: The identifier of the resource associated with this handshake.
-        --catalog=!: The catalog identifier for the handshake request.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --handshake-type=!: The type of handshake to create (e.g., start service period, revoke service period).
-        --payload=: The payload containing specific details for the handshake type.
-        --tags=: Key-value pairs to associate with the channel handshake.
-      completion:
-        flag:
-            handshake-type:
-                - START_SERVICE_PERIOD
-                - REVOKE_SERVICE_PERIOD
-                - PROGRAM_MANAGEMENT_ACCOUNT
-    - name: create-program-management-account
-      description: Creates a new program management account for managing partner relationships.
-      flags:
-        --account-id=!: The AWS account ID to associate with the program management account.
-        --catalog=!: The catalog identifier for the program management account.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
-        --display-name=!: A human-readable name for the program management account.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --program=!: The program type for the management account.
-        --tags=: Key-value pairs to associate with the program management account.
-      completion:
-        flag:
-            program:
-                - SOLUTION_PROVIDER
-                - DISTRIBUTION
-                - DISTRIBUTION_SELLER
+        --statuses=: Filter by program management account statuses.

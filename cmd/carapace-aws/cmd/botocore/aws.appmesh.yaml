@@ -1,39 +1,24 @@
 name: appmesh
 description: AWS App Mesh
 commands:
-    - name: create-virtual-gateway
-      description: Creates a virtual gateway.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mesh-name=!: The name of the service mesh to create the virtual gateway in.
-        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
-        --spec=!: The virtual gateway specification to apply.
-        --tags=: Optional metadata that you can apply to the virtual gateway to assist with categorization and organization.
-        --virtual-gateway-name=!: The name to use for the virtual gateway.
-    - name: create-virtual-service
-      description: Creates a virtual service within a service mesh.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mesh-name=!: The name of the service mesh to create the virtual service in.
-        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
-        --spec=!: The virtual service specification to apply.
-        --tags=: Optional metadata that you can apply to the virtual service to assist with categorization and organization.
-        --virtual-service-name=!: The name to use for the virtual service.
-    - name: delete-virtual-service
-      description: Deletes an existing virtual service.
+    - name: delete-virtual-router
+      description: Deletes an existing virtual router.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mesh-name=!: The name of the service mesh to delete the virtual service in.
+        --mesh-name=!: The name of the service mesh to delete the virtual router in.
         --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
-        --virtual-service-name=!: The name of the virtual service to delete.
+        --virtual-router-name=!: The name of the virtual router to delete.
+    - name: describe-virtual-router
+      description: Describes an existing virtual router.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mesh-name=!: The name of the service mesh that the virtual router resides in.
+        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
+        --virtual-router-name=!: The name of the virtual router to describe.
     - name: list-gateway-routes
       description: Returns a list of existing gateway routes that are associated to a virtual gateway.
       flags:
@@ -48,246 +33,6 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
         --virtual-gateway-name=!: The name of the virtual gateway to list gateway routes in.
-    - name: list-routes
-      description: Returns a list of existing routes in a service mesh.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of results returned by `ListRoutes` in paginated output.
-        --max-items=: The  total number of items to return in the command's output.
-        --mesh-name=!: The name of the service mesh to list routes in.
-        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
-        --next-token=: The `nextToken` value returned from a previous paginated `ListRoutes` request where `limit` was used and the results exceeded the value of that parameter.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --virtual-router-name=!: The name of the virtual router to list routes in.
-    - name: update-route
-      description: Updates an existing route for a specified service mesh and virtual router.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mesh-name=!: The name of the service mesh that the route resides in.
-        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
-        --route-name=!: The name of the route to update.
-        --spec=!: The new route specification to apply.
-        --virtual-router-name=!: The name of the virtual router that the route is associated with.
-    - name: describe-route
-      description: Describes an existing route.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mesh-name=!: The name of the service mesh that the route resides in.
-        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
-        --route-name=!: The name of the route to describe.
-        --virtual-router-name=!: The name of the virtual router that the route is associated with.
-    - name: describe-virtual-router
-      description: Describes an existing virtual router.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mesh-name=!: The name of the service mesh that the virtual router resides in.
-        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
-        --virtual-router-name=!: The name of the virtual router to describe.
-    - name: list-virtual-gateways
-      description: Returns a list of existing virtual gateways in a service mesh.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of results returned by `ListVirtualGateways` in paginated output.
-        --max-items=: The  total number of items to return in the command's output.
-        --mesh-name=!: The name of the service mesh to list virtual gateways in.
-        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
-        --next-token=: The `nextToken` value returned from a previous paginated `ListVirtualGateways` request where `limit` was used and the results exceeded the value of that parameter.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-virtual-service
-      description: Updates an existing virtual service in a specified service mesh.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mesh-name=!: The name of the service mesh that the virtual service resides in.
-        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
-        --spec=!: The new virtual service specification to apply.
-        --virtual-service-name=!: The name of the virtual service to update.
-    - name: delete-gateway-route
-      description: Deletes an existing gateway route.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --gateway-route-name=!: The name of the gateway route to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mesh-name=!: The name of the service mesh to delete the gateway route from.
-        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
-        --virtual-gateway-name=!: The name of the virtual gateway to delete the route from.
-    - name: delete-mesh
-      description: Deletes an existing service mesh.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mesh-name=!: The name of the service mesh to delete.
-    - name: delete-route
-      description: Deletes an existing route.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mesh-name=!: The name of the service mesh to delete the route in.
-        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
-        --route-name=!: The name of the route to delete.
-        --virtual-router-name=!: The name of the virtual router to delete the route in.
-    - name: describe-mesh
-      description: Describes an existing service mesh.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mesh-name=!: The name of the service mesh to describe.
-        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
-    - name: describe-virtual-service
-      description: Describes an existing virtual service.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mesh-name=!: The name of the service mesh that the virtual service resides in.
-        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
-        --virtual-service-name=!: The name of the virtual service to describe.
-    - name: tag-resource
-      description: Associates the specified tags to a resource with the specified `resourceArn`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to add tags to.
-        --tags=!: The tags to add to the resource.
-    - name: update-virtual-node
-      description: Updates an existing virtual node in a specified service mesh.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mesh-name=!: The name of the service mesh that the virtual node resides in.
-        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
-        --spec=!: The new virtual node specification to apply.
-        --virtual-node-name=!: The name of the virtual node to update.
-    - name: delete-virtual-router
-      description: Deletes an existing virtual router.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mesh-name=!: The name of the service mesh to delete the virtual router in.
-        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
-        --virtual-router-name=!: The name of the virtual router to delete.
-    - name: list-virtual-nodes
-      description: Returns a list of existing virtual nodes.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of results returned by `ListVirtualNodes` in paginated output.
-        --max-items=: The  total number of items to return in the command's output.
-        --mesh-name=!: The name of the service mesh to list virtual nodes in.
-        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
-        --next-token=: The `nextToken` value returned from a previous paginated `ListVirtualNodes` request where `limit` was used and the results exceeded the value of that parameter.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-virtual-routers
-      description: Returns a list of existing virtual routers in a service mesh.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of results returned by `ListVirtualRouters` in paginated output.
-        --max-items=: The  total number of items to return in the command's output.
-        --mesh-name=!: The name of the service mesh to list virtual routers in.
-        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
-        --next-token=: The `nextToken` value returned from a previous paginated `ListVirtualRouters` request where `limit` was used and the results exceeded the value of that parameter.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-virtual-router
-      description: Updates an existing virtual router in a specified service mesh.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mesh-name=!: The name of the service mesh that the virtual router resides in.
-        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
-        --spec=!: The new virtual router specification to apply.
-        --virtual-router-name=!: The name of the virtual router to update.
-    - name: create-gateway-route
-      description: Creates a gateway route.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --gateway-route-name=!: The name to use for the gateway route.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mesh-name=!: The name of the service mesh to create the gateway route in.
-        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
-        --spec=!: The gateway route specification to apply.
-        --tags=: Optional metadata that you can apply to the gateway route to assist with categorization and organization.
-        --virtual-gateway-name=!: The name of the virtual gateway to associate the gateway route with.
-    - name: describe-gateway-route
-      description: Describes an existing gateway route.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --gateway-route-name=!: The name of the gateway route to describe.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mesh-name=!: The name of the service mesh that the gateway route resides in.
-        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
-        --virtual-gateway-name=!: The name of the virtual gateway that the gateway route is associated with.
-    - name: describe-virtual-node
-      description: Describes an existing virtual node.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mesh-name=!: The name of the service mesh that the virtual node resides in.
-        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
-        --virtual-node-name=!: The name of the virtual node to describe.
-    - name: untag-resource
-      description: Deletes specified tags from a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to delete tags from.
-        --tag-keys=!: The keys of the tags to be removed.
-    - name: create-route
-      description: Creates a route that is associated with a virtual router.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mesh-name=!: The name of the service mesh to create the route in.
-        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
-        --route-name=!: The name to use for the route.
-        --spec=!: The route specification to apply.
-        --tags=: Optional metadata that you can apply to the route to assist with categorization and organization.
-        --virtual-router-name=!: The name of the virtual router in which to create the route.
-    - name: delete-virtual-gateway
-      description: Deletes an existing virtual gateway.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mesh-name=!: The name of the service mesh to delete the virtual gateway from.
-        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
-        --virtual-gateway-name=!: The name of the virtual gateway to delete.
     - name: list-meshes
       description: Returns a list of existing service meshes.
       flags:
@@ -297,39 +42,6 @@ commands:
         --limit=: The maximum number of results returned by `ListMeshes` in paginated output.
         --max-items=: The  total number of items to return in the command's output.
         --next-token=: The `nextToken` value returned from a previous paginated `ListMeshes` request where `limit` was used and the results exceeded the value of that parameter.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-virtual-gateway
-      description: Updates an existing virtual gateway in a specified service mesh.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mesh-name=!: The name of the service mesh that the virtual gateway resides in.
-        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
-        --spec=!: The new virtual gateway specification to apply.
-        --virtual-gateway-name=!: The name of the virtual gateway to update.
-    - name: delete-virtual-node
-      description: Deletes an existing virtual node.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mesh-name=!: The name of the service mesh to delete the virtual node in.
-        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
-        --virtual-node-name=!: The name of the virtual node to delete.
-    - name: list-virtual-services
-      description: Returns a list of existing virtual services in a service mesh.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of results returned by `ListVirtualServices` in paginated output.
-        --max-items=: The  total number of items to return in the command's output.
-        --mesh-name=!: The name of the service mesh to list virtual services in.
-        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
-        --next-token=: The `nextToken` value returned from a previous paginated `ListVirtualServices` request where `limit` was used and the results exceeded the value of that parameter.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
     - name: create-mesh
@@ -354,6 +66,179 @@ commands:
         --spec=!: The virtual node specification to apply.
         --tags=: Optional metadata that you can apply to the virtual node to assist with categorization and organization.
         --virtual-node-name=!: The name to use for the virtual node.
+    - name: delete-route
+      description: Deletes an existing route.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mesh-name=!: The name of the service mesh to delete the route in.
+        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
+        --route-name=!: The name of the route to delete.
+        --virtual-router-name=!: The name of the virtual router to delete the route in.
+    - name: tag-resource
+      description: Associates the specified tags to a resource with the specified `resourceArn`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to add tags to.
+        --tags=!: The tags to add to the resource.
+    - name: create-route
+      description: Creates a route that is associated with a virtual router.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mesh-name=!: The name of the service mesh to create the route in.
+        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
+        --route-name=!: The name to use for the route.
+        --spec=!: The route specification to apply.
+        --tags=: Optional metadata that you can apply to the route to assist with categorization and organization.
+        --virtual-router-name=!: The name of the virtual router in which to create the route.
+    - name: delete-mesh
+      description: Deletes an existing service mesh.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mesh-name=!: The name of the service mesh to delete.
+    - name: delete-virtual-gateway
+      description: Deletes an existing virtual gateway.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mesh-name=!: The name of the service mesh to delete the virtual gateway from.
+        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
+        --virtual-gateway-name=!: The name of the virtual gateway to delete.
+    - name: update-route
+      description: Updates an existing route for a specified service mesh and virtual router.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mesh-name=!: The name of the service mesh that the route resides in.
+        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
+        --route-name=!: The name of the route to update.
+        --spec=!: The new route specification to apply.
+        --virtual-router-name=!: The name of the virtual router that the route is associated with.
+    - name: describe-route
+      description: Describes an existing route.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mesh-name=!: The name of the service mesh that the route resides in.
+        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
+        --route-name=!: The name of the route to describe.
+        --virtual-router-name=!: The name of the virtual router that the route is associated with.
+    - name: describe-virtual-node
+      description: Describes an existing virtual node.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mesh-name=!: The name of the service mesh that the virtual node resides in.
+        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
+        --virtual-node-name=!: The name of the virtual node to describe.
+    - name: list-virtual-services
+      description: Returns a list of existing virtual services in a service mesh.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of results returned by `ListVirtualServices` in paginated output.
+        --max-items=: The  total number of items to return in the command's output.
+        --mesh-name=!: The name of the service mesh to list virtual services in.
+        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
+        --next-token=: The `nextToken` value returned from a previous paginated `ListVirtualServices` request where `limit` was used and the results exceeded the value of that parameter.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-virtual-gateway
+      description: Updates an existing virtual gateway in a specified service mesh.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mesh-name=!: The name of the service mesh that the virtual gateway resides in.
+        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
+        --spec=!: The new virtual gateway specification to apply.
+        --virtual-gateway-name=!: The name of the virtual gateway to update.
+    - name: create-virtual-service
+      description: Creates a virtual service within a service mesh.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mesh-name=!: The name of the service mesh to create the virtual service in.
+        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
+        --spec=!: The virtual service specification to apply.
+        --tags=: Optional metadata that you can apply to the virtual service to assist with categorization and organization.
+        --virtual-service-name=!: The name to use for the virtual service.
+    - name: describe-mesh
+      description: Describes an existing service mesh.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mesh-name=!: The name of the service mesh to describe.
+        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
+    - name: delete-gateway-route
+      description: Deletes an existing gateway route.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --gateway-route-name=!: The name of the gateway route to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mesh-name=!: The name of the service mesh to delete the gateway route from.
+        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
+        --virtual-gateway-name=!: The name of the virtual gateway to delete the route from.
+    - name: list-virtual-routers
+      description: Returns a list of existing virtual routers in a service mesh.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of results returned by `ListVirtualRouters` in paginated output.
+        --max-items=: The  total number of items to return in the command's output.
+        --mesh-name=!: The name of the service mesh to list virtual routers in.
+        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
+        --next-token=: The `nextToken` value returned from a previous paginated `ListVirtualRouters` request where `limit` was used and the results exceeded the value of that parameter.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: untag-resource
+      description: Deletes specified tags from a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to delete tags from.
+        --tag-keys=!: The keys of the tags to be removed.
+    - name: update-mesh
+      description: Updates an existing service mesh.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mesh-name=!: The name of the service mesh to update.
+        --spec=: The service mesh specification to apply.
+    - name: update-virtual-service
+      description: Updates an existing virtual service in a specified service mesh.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mesh-name=!: The name of the service mesh that the virtual service resides in.
+        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
+        --spec=!: The new virtual service specification to apply.
+        --virtual-service-name=!: The name of the virtual service to update.
     - name: create-virtual-router
       description: Creates a virtual router within a service mesh.
       flags:
@@ -366,15 +251,25 @@ commands:
         --spec=!: The virtual router specification to apply.
         --tags=: Optional metadata that you can apply to the virtual router to assist with categorization and organization.
         --virtual-router-name=!: The name to use for the virtual router.
-    - name: describe-virtual-gateway
-      description: Describes an existing virtual gateway.
+    - name: describe-gateway-route
+      description: Describes an existing gateway route.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --gateway-route-name=!: The name of the gateway route to describe.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mesh-name=!: The name of the service mesh that the gateway route resides in.
+        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
+        --virtual-gateway-name=!: The name of the virtual gateway that the gateway route is associated with.
+    - name: describe-virtual-service
+      description: Describes an existing virtual service.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mesh-name=!: The name of the service mesh that the gateway route resides in.
+        --mesh-name=!: The name of the service mesh that the virtual service resides in.
         --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
-        --virtual-gateway-name=!: The name of the virtual gateway to describe.
+        --virtual-service-name=!: The name of the virtual service to describe.
     - name: list-tags-for-resource
       description: List the tags for an App Mesh resource.
       flags:
@@ -387,6 +282,74 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --resource-arn=!: The Amazon Resource Name (ARN) that identifies the resource to list the tags for.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-virtual-nodes
+      description: Returns a list of existing virtual nodes.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of results returned by `ListVirtualNodes` in paginated output.
+        --max-items=: The  total number of items to return in the command's output.
+        --mesh-name=!: The name of the service mesh to list virtual nodes in.
+        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
+        --next-token=: The `nextToken` value returned from a previous paginated `ListVirtualNodes` request where `limit` was used and the results exceeded the value of that parameter.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-virtual-node
+      description: Updates an existing virtual node in a specified service mesh.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mesh-name=!: The name of the service mesh that the virtual node resides in.
+        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
+        --spec=!: The new virtual node specification to apply.
+        --virtual-node-name=!: The name of the virtual node to update.
+    - name: create-virtual-gateway
+      description: Creates a virtual gateway.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mesh-name=!: The name of the service mesh to create the virtual gateway in.
+        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
+        --spec=!: The virtual gateway specification to apply.
+        --tags=: Optional metadata that you can apply to the virtual gateway to assist with categorization and organization.
+        --virtual-gateway-name=!: The name to use for the virtual gateway.
+    - name: delete-virtual-service
+      description: Deletes an existing virtual service.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mesh-name=!: The name of the service mesh to delete the virtual service in.
+        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
+        --virtual-service-name=!: The name of the virtual service to delete.
+    - name: describe-virtual-gateway
+      description: Describes an existing virtual gateway.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mesh-name=!: The name of the service mesh that the gateway route resides in.
+        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
+        --virtual-gateway-name=!: The name of the virtual gateway to describe.
+    - name: list-routes
+      description: Returns a list of existing routes in a service mesh.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of results returned by `ListRoutes` in paginated output.
+        --max-items=: The  total number of items to return in the command's output.
+        --mesh-name=!: The name of the service mesh to list routes in.
+        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
+        --next-token=: The `nextToken` value returned from a previous paginated `ListRoutes` request where `limit` was used and the results exceeded the value of that parameter.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --virtual-router-name=!: The name of the virtual router to list routes in.
     - name: update-gateway-route
       description: Updates an existing gateway route that is associated to a specified virtual gateway in a service mesh.
       flags:
@@ -399,12 +362,49 @@ commands:
         --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
         --spec=!: The new gateway route specification to apply.
         --virtual-gateway-name=!: The name of the virtual gateway that the gateway route is associated with.
-    - name: update-mesh
-      description: Updates an existing service mesh.
+    - name: update-virtual-router
+      description: Updates an existing virtual router in a specified service mesh.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mesh-name=!: The name of the service mesh to update.
-        --spec=: The service mesh specification to apply.
+        --mesh-name=!: The name of the service mesh that the virtual router resides in.
+        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
+        --spec=!: The new virtual router specification to apply.
+        --virtual-router-name=!: The name of the virtual router to update.
+    - name: list-virtual-gateways
+      description: Returns a list of existing virtual gateways in a service mesh.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of results returned by `ListVirtualGateways` in paginated output.
+        --max-items=: The  total number of items to return in the command's output.
+        --mesh-name=!: The name of the service mesh to list virtual gateways in.
+        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
+        --next-token=: The `nextToken` value returned from a previous paginated `ListVirtualGateways` request where `limit` was used and the results exceeded the value of that parameter.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: create-gateway-route
+      description: Creates a gateway route.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --gateway-route-name=!: The name to use for the gateway route.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mesh-name=!: The name of the service mesh to create the gateway route in.
+        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
+        --spec=!: The gateway route specification to apply.
+        --tags=: Optional metadata that you can apply to the gateway route to assist with categorization and organization.
+        --virtual-gateway-name=!: The name of the virtual gateway to associate the gateway route with.
+    - name: delete-virtual-node
+      description: Deletes an existing virtual node.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mesh-name=!: The name of the service mesh to delete the virtual node in.
+        --mesh-owner=: The Amazon Web Services IAM account ID of the service mesh owner.
+        --virtual-node-name=!: The name of the virtual node to delete.
