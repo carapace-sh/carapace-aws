@@ -21,6 +21,8 @@ func TestService(t *testing.T) {
 				t.SkipNow()
 			}
 
+			fmt.Printf("\033[2m# %v\033[0m\n", service)
+
 			patch := carapace.DiffPatch(
 				bridge.ActionAws("aws"),
 				bridge.ActionCarapace("carapace-aws"),
@@ -45,16 +47,19 @@ func TestService(t *testing.T) {
 						bridge.ActionCarapaceBin("aws"),
 						carapace.NewContext(service, operation, "--"),
 					)
+
+					s := []string{fmt.Sprintf("\033[2m# %v %v\033[0m", service, operation)}
 					for _, line := range patch {
 						switch {
 						case strings.HasPrefix(line, "-"):
-							fmt.Printf("\033[0;31m%v\033[0m\n", line)
+							s = append(s, fmt.Sprintf("\033[0;31m%v\033[0m", line))
 							t.Fail()
 						case strings.HasPrefix(line, "+"):
-							fmt.Printf("\033[0;32m%v\033[0m\n", line)
+							s = append(s, fmt.Sprintf("\033[0;32m%v\033[0m", line))
 							t.Fail()
 						}
 					}
+					fmt.Println(strings.Join(s, "\n")) // TODO locking needed?
 				})
 			}
 		})
