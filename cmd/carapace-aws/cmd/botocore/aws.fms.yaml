@@ -1,68 +1,30 @@
 name: fms
 description: Firewall Management Service
 commands:
-    - name: get-compliance-detail
-      description: Returns detailed compliance information about the specified member account.
+    - name: associate-third-party-firewall
+      description: Sets the Firewall Manager policy administrator as a tenant administrator of a third-party firewall service.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --member-account=!: The Amazon Web Services account that owns the resources that you want to get the details for.
-        --policy-id=!: The ID of the policy that you want to get the details for.
-    - name: get-notification-channel
-      description: Information about the Amazon Simple Notification Service (SNS) topic that is used to record Firewall Manager SNS logs.
+        --third-party-firewall=!: The name of the third-party firewall vendor.
+      completion:
+        flag:
+            third-party-firewall:
+                - PALO_ALTO_NETWORKS_CLOUD_NGFW
+                - FORTIGATE_CLOUD_NATIVE_FIREWALL
+    - name: disassociate-third-party-firewall
+      description: Disassociates a Firewall Manager policy administrator from a third-party firewall tenant.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-resource-sets
-      description: Returns an array of `ResourceSetSummary` objects.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of objects that you want Firewall Manager to return for this request.
-        --next-token=: When you request a list of objects with a `MaxResults` setting, if the number of objects that are still available for retrieval exceeds the maximum you requested, Firewall Manager returns a `NextToken` value in the response.
-    - name: associate-admin-account
-      description: Sets a Firewall Manager default administrator account.
-      flags:
-        --admin-account=!: The Amazon Web Services account ID to associate with Firewall Manager as the Firewall Manager default administrator account.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-apps-list
-      description: Permanently deletes an Firewall Manager applications list.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --list-id=!: The ID of the applications list that you want to delete.
-    - name: disassociate-admin-account
-      description: Disassociates an Firewall Manager administrator account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-violation-details
-      description: Retrieves violations for a resource based on the specified Firewall Manager policy and Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --member-account=!: The Amazon Web Services account ID that you want the details for.
-        --policy-id=!: The ID of the Firewall Manager policy that you want the details for.
-        --resource-id=!: The ID of the resource that has violations.
-        --resource-type=!: The resource type.
-    - name: list-discovered-resources
-      description: Returns an array of resources in the organization's accounts that are available to be associated with a resource set.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of objects that you want Firewall Manager to return for this request.
-        --member-account-ids=!: The Amazon Web Services account IDs to discover resources in.
-        --next-token=: When you request a list of objects with a `MaxResults` setting, if the number of objects that are still available for retrieval exceeds the maximum you requested, Firewall Manager returns a `NextToken` value in the response.
-        --resource-type=!: The type of resources to discover.
+        --third-party-firewall=!: The name of the third-party firewall vendor.
+      completion:
+        flag:
+            third-party-firewall:
+                - PALO_ALTO_NETWORKS_CLOUD_NGFW
+                - FORTIGATE_CLOUD_NATIVE_FIREWALL
     - name: list-protocols-lists
       description: Returns an array of `ProtocolsListDataSummary` objects.
       flags:
@@ -85,194 +47,6 @@ commands:
         --identifier=!: A unique identifier for the resource set, used in a request to refer to the resource set.
         --max-results=: The maximum number of objects that you want Firewall Manager to return for this request.
         --next-token=: When you request a list of objects with a `MaxResults` setting, if the number of objects that are still available for retrieval exceeds the maximum you requested, Firewall Manager returns a `NextToken` value in the response.
-    - name: put-admin-account
-      description: Creates or updates an Firewall Manager administrator account.
-      flags:
-        --admin-account=!: The Amazon Web Services account ID to add as an Firewall Manager administrator account.
-        --admin-scope=: Configures the resources that the specified Firewall Manager administrator can manage.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: associate-third-party-firewall
-      description: Sets the Firewall Manager policy administrator as a tenant administrator of a third-party firewall service.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --third-party-firewall=!: The name of the third-party firewall vendor.
-      completion:
-        flag:
-            third-party-firewall:
-                - PALO_ALTO_NETWORKS_CLOUD_NGFW
-                - FORTIGATE_CLOUD_NATIVE_FIREWALL
-    - name: delete-resource-set
-      description: Deletes the specified [ResourceSet]().
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: A unique identifier for the resource set, used in a request to refer to the resource set.
-    - name: get-admin-account
-      description: Returns the Organizations account that is associated with Firewall Manager as the Firewall Manager default administrator.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-protection-status
-      description: If you created a Shield Advanced policy, returns policy-level attack summary information in the event of a potential DDoS attack.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --end-time=: The end of the time period to query for the attacks.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: Specifies the number of objects that you want Firewall Manager to return for this request.
-        --member-account-id=: The Amazon Web Services account that is in scope of the policy that you want to get the details for.
-        --next-token=: If you specify a value for `MaxResults` and you have more objects than the number that you specify for `MaxResults`, Firewall Manager returns a `NextToken` value in the response, which you can use to retrieve another group of objects.
-        --policy-id=!: The ID of the policy for which you want to get the attack information.
-        --start-time=: The start of the time period to query for the attacks.
-    - name: put-protocols-list
-      description: Creates an Firewall Manager protocols list.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --protocols-list=!: The details of the Firewall Manager protocols list to be created.
-        --tag-list=: The tags associated with the resource.
-    - name: tag-resource
-      description: Adds one or more tags to an Amazon Web Services resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to return tags for.
-        --tag-list=!: The tags to add to the resource.
-    - name: untag-resource
-      description: Removes one or more tags from an Amazon Web Services resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to return tags for.
-        --tag-keys=!: The keys of the tags to remove from the resource.
-    - name: batch-disassociate-resource
-      description: Disassociates resources from a Firewall Manager resource set.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --items=!: The uniform resource identifiers (URI) of resources that should be disassociated from the resource set.
-        --resource-set-identifier=!: A unique identifier for the resource set, used in a request to refer to the resource set.
-    - name: get-protocols-list
-      description: Returns information about the specified Firewall Manager protocols list.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --default-list: Specifies whether the list to retrieve is a default list owned by Firewall Manager.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --list-id=!: The ID of the Firewall Manager protocols list that you want the details for.
-        --no-default-list: Specifies whether the list to retrieve is a default list owned by Firewall Manager.
-    - name: put-policy
-      description: Creates an Firewall Manager policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy=!: The details of the Firewall Manager policy to be created.
-        --tag-list=: The tags to add to the Amazon Web Services resource.
-    - name: put-resource-set
-      description: Creates the resource set.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-set=!: Details about the resource set to be created or updated.&gt;
-        --tag-list=: Retrieves the tags associated with the specified resource set.
-    - name: get-policy
-      description: Returns information about the specified Firewall Manager policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-id=!: The ID of the Firewall Manager policy that you want the details for.
-    - name: get-resource-set
-      description: Gets information about a specific resource set.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: A unique identifier for the resource set, used in a request to refer to the resource set.
-    - name: list-apps-lists
-      description: Returns an array of `AppsListDataSummary` objects.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --default-lists: Specifies whether the lists to retrieve are default lists owned by Firewall Manager.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=!: The maximum number of objects that you want Firewall Manager to return for this request.
-        --next-token=: If you specify a value for `MaxResults` in your list request, and you have more objects than the maximum, Firewall Manager returns this token in the response.
-        --no-default-lists: Specifies whether the lists to retrieve are default lists owned by Firewall Manager.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-member-accounts
-      description: Returns a `MemberAccounts` object that lists the member accounts in the administrator's Amazon Web Services organization.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Specifies the number of member account IDs that you want Firewall Manager to return for this request.
-        --next-token=: If you specify a value for `MaxResults` and you have more account IDs than the number that you specify for `MaxResults`, Firewall Manager returns a `NextToken` value in the response that allows you to list another group of IDs.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: Retrieves the list of tags for the specified Amazon Web Services resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to return tags for.
-    - name: get-admin-scope
-      description: Returns information about the specified account's administrative scope.
-      flags:
-        --admin-account=!: The administrator account that you want to get the details for.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-admins-managing-account
-      description: Lists the accounts that are managing the specified Organizations member account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of objects that you want Firewall Manager to return for this request.
-        --next-token=: When you request a list of objects with a `MaxResults` setting, if the number of objects that are still available for retrieval exceeds the maximum you requested, Firewall Manager returns a `NextToken` value in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-compliance-status
-      description: Returns an array of `PolicyComplianceStatus` objects.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Specifies the number of `PolicyComplianceStatus` objects that you want Firewall Manager to return for this request.
-        --next-token=: If you specify a value for `MaxResults` and you have more `PolicyComplianceStatus` objects than the number that you specify for `MaxResults`, Firewall Manager returns a `NextToken` value in the response that allows you to list another group of `PolicyComplianceStatus` objects.
-        --page-size=: The size of each page to get in the AWS service call.
-        --policy-id=!: The ID of the Firewall Manager policy that you want the details for.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-policies
-      description: Returns an array of `PolicySummary` objects.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Specifies the number of `PolicySummary` objects that you want Firewall Manager to return for this request.
-        --next-token=: If you specify a value for `MaxResults` and you have more `PolicySummary` objects than the number that you specify for `MaxResults`, Firewall Manager returns a `NextToken` value in the response that allows you to list another group of `PolicySummary` objects.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
     - name: list-third-party-firewall-firewall-policies
       description: Retrieves a list of all of the third-party firewall policies that are associated with the third-party firewall administrator's account.
       flags:
@@ -290,6 +64,99 @@ commands:
             third-party-firewall:
                 - PALO_ALTO_NETWORKS_CLOUD_NGFW
                 - FORTIGATE_CLOUD_NATIVE_FIREWALL
+    - name: tag-resource
+      description: Adds one or more tags to an Amazon Web Services resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to return tags for.
+        --tag-list=!: The tags to add to the resource.
+    - name: delete-protocols-list
+      description: Permanently deletes an Firewall Manager protocols list.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --list-id=!: The ID of the protocols list that you want to delete.
+    - name: disassociate-admin-account
+      description: Disassociates an Firewall Manager administrator account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-admin-scope
+      description: Returns information about the specified account's administrative scope.
+      flags:
+        --admin-account=!: The administrator account that you want to get the details for.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-protocols-list
+      description: Returns information about the specified Firewall Manager protocols list.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --default-list: Specifies whether the list to retrieve is a default list owned by Firewall Manager.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --list-id=!: The ID of the Firewall Manager protocols list that you want the details for.
+        --no-default-list: Specifies whether the list to retrieve is a default list owned by Firewall Manager.
+    - name: list-admin-accounts-for-organization
+      description: Returns a `AdminAccounts` object that lists the Firewall Manager administrators within the organization that are onboarded to Firewall Manager by [AssociateAdminAccount]().
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of objects that you want Firewall Manager to return for this request.
+        --next-token=: When you request a list of objects with a `MaxResults` setting, if the number of objects that are still available for retrieval exceeds the maximum you requested, Firewall Manager returns a `NextToken` value in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: put-apps-list
+      description: Creates an Firewall Manager applications list.
+      flags:
+        --apps-list=!: The details of the Firewall Manager applications list to be created.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tag-list=: The tags associated with the resource.
+    - name: delete-resource-set
+      description: Deletes the specified [ResourceSet]().
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: A unique identifier for the resource set, used in a request to refer to the resource set.
+    - name: put-protocols-list
+      description: Creates an Firewall Manager protocols list.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --protocols-list=!: The details of the Firewall Manager protocols list to be created.
+        --tag-list=: The tags associated with the resource.
+    - name: list-admins-managing-account
+      description: Lists the accounts that are managing the specified Organizations member account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of objects that you want Firewall Manager to return for this request.
+        --next-token=: When you request a list of objects with a `MaxResults` setting, if the number of objects that are still available for retrieval exceeds the maximum you requested, Firewall Manager returns a `NextToken` value in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-member-accounts
+      description: Returns a `MemberAccounts` object that lists the member accounts in the administrator's Amazon Web Services organization.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specifies the number of member account IDs that you want Firewall Manager to return for this request.
+        --next-token=: If you specify a value for `MaxResults` and you have more account IDs than the number that you specify for `MaxResults`, Firewall Manager returns a `NextToken` value in the response that allows you to list another group of IDs.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: put-notification-channel
       description: Designates the IAM role and Amazon Simple Notification Service (SNS) topic that Firewall Manager uses to record SNS logs.
       flags:
@@ -304,38 +171,94 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: disassociate-third-party-firewall
-      description: Disassociates a Firewall Manager policy administrator from a third-party firewall tenant.
+    - name: get-policy
+      description: Returns information about the specified Firewall Manager policy.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --third-party-firewall=!: The name of the third-party firewall vendor.
-      completion:
-        flag:
-            third-party-firewall:
-                - PALO_ALTO_NETWORKS_CLOUD_NGFW
-                - FORTIGATE_CLOUD_NATIVE_FIREWALL
-    - name: list-admin-accounts-for-organization
-      description: Returns a `AdminAccounts` object that lists the Firewall Manager administrators within the organization that are onboarded to Firewall Manager by [AssociateAdminAccount]().
+        --policy-id=!: The ID of the Firewall Manager policy that you want the details for.
+    - name: get-protection-status
+      description: If you created a Shield Advanced policy, returns policy-level attack summary information in the event of a potential DDoS attack.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=: The end of the time period to query for the attacks.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Specifies the number of objects that you want Firewall Manager to return for this request.
+        --member-account-id=: The Amazon Web Services account that is in scope of the policy that you want to get the details for.
+        --next-token=: If you specify a value for `MaxResults` and you have more objects than the number that you specify for `MaxResults`, Firewall Manager returns a `NextToken` value in the response, which you can use to retrieve another group of objects.
+        --policy-id=!: The ID of the policy for which you want to get the attack information.
+        --start-time=: The start of the time period to query for the attacks.
+    - name: list-policies
+      description: Returns an array of `PolicySummary` objects.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of objects that you want Firewall Manager to return for this request.
-        --next-token=: When you request a list of objects with a `MaxResults` setting, if the number of objects that are still available for retrieval exceeds the maximum you requested, Firewall Manager returns a `NextToken` value in the response.
+        --max-results=: Specifies the number of `PolicySummary` objects that you want Firewall Manager to return for this request.
+        --next-token=: If you specify a value for `MaxResults` and you have more `PolicySummary` objects than the number that you specify for `MaxResults`, Firewall Manager returns a `NextToken` value in the response that allows you to list another group of `PolicySummary` objects.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: get-apps-list
-      description: Returns information about the specified Firewall Manager applications list.
+    - name: list-resource-sets
+      description: Returns an array of `ResourceSetSummary` objects.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --default-list: Specifies whether the list to retrieve is a default list owned by Firewall Manager.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --list-id=!: The ID of the Firewall Manager applications list that you want the details for.
-        --no-default-list: Specifies whether the list to retrieve is a default list owned by Firewall Manager.
+        --max-results=: The maximum number of objects that you want Firewall Manager to return for this request.
+        --next-token=: When you request a list of objects with a `MaxResults` setting, if the number of objects that are still available for retrieval exceeds the maximum you requested, Firewall Manager returns a `NextToken` value in the response.
+    - name: put-resource-set
+      description: Creates the resource set.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-set=!: Details about the resource set to be created or updated.&gt;
+        --tag-list=: Retrieves the tags associated with the specified resource set.
+    - name: associate-admin-account
+      description: Sets a Firewall Manager default administrator account.
+      flags:
+        --admin-account=!: The Amazon Web Services account ID to associate with Firewall Manager as the Firewall Manager default administrator account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-admin-account
+      description: Returns the Organizations account that is associated with Firewall Manager as the Firewall Manager default administrator.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-resource-set
+      description: Gets information about a specific resource set.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: A unique identifier for the resource set, used in a request to refer to the resource set.
+    - name: list-compliance-status
+      description: Returns an array of `PolicyComplianceStatus` objects.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specifies the number of `PolicyComplianceStatus` objects that you want Firewall Manager to return for this request.
+        --next-token=: If you specify a value for `MaxResults` and you have more `PolicyComplianceStatus` objects than the number that you specify for `MaxResults`, Firewall Manager returns a `NextToken` value in the response that allows you to list another group of `PolicyComplianceStatus` objects.
+        --page-size=: The size of each page to get in the AWS service call.
+        --policy-id=!: The ID of the Firewall Manager policy that you want the details for.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-discovered-resources
+      description: Returns an array of resources in the organization's accounts that are available to be associated with a resource set.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of objects that you want Firewall Manager to return for this request.
+        --member-account-ids=!: The Amazon Web Services account IDs to discover resources in.
+        --next-token=: When you request a list of objects with a `MaxResults` setting, if the number of objects that are still available for retrieval exceeds the maximum you requested, Firewall Manager returns a `NextToken` value in the response.
+        --resource-type=!: The type of resources to discover.
     - name: batch-associate-resource
       description: Associate resources to a Firewall Manager resource set.
       flags:
@@ -344,6 +267,68 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --items=!: The uniform resource identifiers (URIs) of resources that should be associated to the resource set.
         --resource-set-identifier=!: A unique identifier for the resource set, used in a request to refer to the resource set.
+    - name: batch-disassociate-resource
+      description: Disassociates resources from a Firewall Manager resource set.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --items=!: The uniform resource identifiers (URI) of resources that should be disassociated from the resource set.
+        --resource-set-identifier=!: A unique identifier for the resource set, used in a request to refer to the resource set.
+    - name: get-compliance-detail
+      description: Returns detailed compliance information about the specified member account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --member-account=!: The Amazon Web Services account that owns the resources that you want to get the details for.
+        --policy-id=!: The ID of the policy that you want to get the details for.
+    - name: get-notification-channel
+      description: Information about the Amazon Simple Notification Service (SNS) topic that is used to record Firewall Manager SNS logs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-violation-details
+      description: Retrieves violations for a resource based on the specified Firewall Manager policy and Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --member-account=!: The Amazon Web Services account ID that you want the details for.
+        --policy-id=!: The ID of the Firewall Manager policy that you want the details for.
+        --resource-id=!: The ID of the resource that has violations.
+        --resource-type=!: The resource type.
+    - name: list-tags-for-resource
+      description: Retrieves the list of tags for the specified Amazon Web Services resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to return tags for.
+    - name: put-admin-account
+      description: Creates or updates an Firewall Manager administrator account.
+      flags:
+        --admin-account=!: The Amazon Web Services account ID to add as an Firewall Manager administrator account.
+        --admin-scope=: Configures the resources that the specified Firewall Manager administrator can manage.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: untag-resource
+      description: Removes one or more tags from an Amazon Web Services resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to return tags for.
+        --tag-keys=!: The keys of the tags to remove from the resource.
+    - name: delete-apps-list
+      description: Permanently deletes an Firewall Manager applications list.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --list-id=!: The ID of the applications list that you want to delete.
     - name: delete-policy
       description: Permanently deletes an Firewall Manager policy.
       flags:
@@ -353,13 +338,15 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-delete-all-policy-resources: If `True`, the request performs cleanup according to the policy type.
         --policy-id=!: The ID of the policy that you want to delete.
-    - name: delete-protocols-list
-      description: Permanently deletes an Firewall Manager protocols list.
+    - name: get-apps-list
+      description: Returns information about the specified Firewall Manager applications list.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --default-list: Specifies whether the list to retrieve is a default list owned by Firewall Manager.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --list-id=!: The ID of the protocols list that you want to delete.
+        --list-id=!: The ID of the Firewall Manager applications list that you want the details for.
+        --no-default-list: Specifies whether the list to retrieve is a default list owned by Firewall Manager.
     - name: get-third-party-firewall-association-status
       description: The onboarding status of a Firewall Manager admin account to third-party firewall vendor tenant.
       flags:
@@ -372,11 +359,24 @@ commands:
             third-party-firewall:
                 - PALO_ALTO_NETWORKS_CLOUD_NGFW
                 - FORTIGATE_CLOUD_NATIVE_FIREWALL
-    - name: put-apps-list
-      description: Creates an Firewall Manager applications list.
+    - name: list-apps-lists
+      description: Returns an array of `AppsListDataSummary` objects.
       flags:
-        --apps-list=!: The details of the Firewall Manager applications list to be created.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --default-lists: Specifies whether the lists to retrieve are default lists owned by Firewall Manager.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=!: The maximum number of objects that you want Firewall Manager to return for this request.
+        --next-token=: If you specify a value for `MaxResults` in your list request, and you have more objects than the maximum, Firewall Manager returns this token in the response.
+        --no-default-lists: Specifies whether the lists to retrieve are default lists owned by Firewall Manager.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: put-policy
+      description: Creates an Firewall Manager policy.
+      flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tag-list=: The tags associated with the resource.
+        --policy=!: The details of the Firewall Manager policy to be created.
+        --tag-list=: The tags to add to the Amazon Web Services resource.

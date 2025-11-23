@@ -1,6 +1,22 @@
 name: firehose
 description: Amazon Kinesis Firehose
 commands:
+    - name: list-delivery-streams
+      description: Lists your Firehose streams in alphabetical order of their names.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delivery-stream-type=: The Firehose stream type.
+        --exclusive-start-delivery-stream-name=: The list of Firehose streams returned by this call to `ListDeliveryStreams` will start with the Firehose stream whose name comes alphabetically immediately after the name you specify in `ExclusiveStartDeliveryStreamName`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of Firehose streams to list.
+      completion:
+        flag:
+            delivery-stream-type:
+                - DirectPut
+                - KinesisStreamAsSource
+                - MSKAsSource
+                - DatabaseAsSource
     - name: put-record
       description: Writes a single data record into an Firehose stream.
       flags:
@@ -9,14 +25,14 @@ commands:
         --delivery-stream-name=!: The name of the Firehose stream.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --record=!: The record.
-    - name: put-record-batch
-      description: Writes multiple data records into a Firehose stream in a single call, which can achieve higher throughput per producer than when writing single records.
+    - name: start-delivery-stream-encryption
+      description: Enables server-side encryption (SSE) for the Firehose stream.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --delivery-stream-name=!: The name of the Firehose stream.
+        --delivery-stream-encryption-configuration-input=: Used to specify the type and Amazon Resource Name (ARN) of the KMS key needed for Server-Side Encryption (SSE).
+        --delivery-stream-name=!: The name of the Firehose stream for which you want to enable server-side encryption (SSE).
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --records=!: One or more records.
     - name: stop-delivery-stream-encryption
       description: Disables server-side encryption (SSE) for the Firehose stream.
       flags:
@@ -24,6 +40,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --delivery-stream-name=!: The name of the Firehose stream for which you want to disable server-side encryption (SSE).
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: untag-delivery-stream
+      description: Removes tags from the specified Firehose stream.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delivery-stream-name=!: The name of the Firehose stream.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tag-keys=!: A list of tag keys.
     - name: create-delivery-stream
       description: Creates a Firehose stream.
       flags:
@@ -55,15 +79,6 @@ commands:
                 - KinesisStreamAsSource
                 - MSKAsSource
                 - DatabaseAsSource
-    - name: delete-delivery-stream
-      description: Deletes a Firehose stream and its data.
-      flags:
-        --allow-force-delete: Set this to true if you want to delete the Firehose stream even if Firehose is unable to retire the grant for the CMK.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --delivery-stream-name=!: The name of the Firehose stream.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-allow-force-delete: Set this to true if you want to delete the Firehose stream even if Firehose is unable to retire the grant for the CMK.
     - name: describe-delivery-stream
       description: Describes the specified Firehose stream and its status.
       flags:
@@ -73,30 +88,23 @@ commands:
         --exclusive-start-destination-id=: The ID of the destination to start returning the destination information.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --limit=: The limit on the number of destinations to return.
-    - name: list-delivery-streams
-      description: Lists your Firehose streams in alphabetical order of their names.
+    - name: list-tags-for-delivery-stream
+      description: Lists the tags for the specified Firehose stream.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --delivery-stream-type=: The Firehose stream type.
-        --exclusive-start-delivery-stream-name=: The list of Firehose streams returned by this call to `ListDeliveryStreams` will start with the Firehose stream whose name comes alphabetically immediately after the name you specify in `ExclusiveStartDeliveryStreamName`.
+        --delivery-stream-name=!: The name of the Firehose stream whose tags you want to list.
+        --exclusive-start-tag-key=: The key to use as the starting point for the list of tags.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of Firehose streams to list.
-      completion:
-        flag:
-            delivery-stream-type:
-                - DirectPut
-                - KinesisStreamAsSource
-                - MSKAsSource
-                - DatabaseAsSource
-    - name: start-delivery-stream-encryption
-      description: Enables server-side encryption (SSE) for the Firehose stream.
+        --limit=: The number of tags to return.
+    - name: put-record-batch
+      description: Writes multiple data records into a Firehose stream in a single call, which can achieve higher throughput per producer than when writing single records.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --delivery-stream-encryption-configuration-input=: Used to specify the type and Amazon Resource Name (ARN) of the KMS key needed for Server-Side Encryption (SSE).
-        --delivery-stream-name=!: The name of the Firehose stream for which you want to enable server-side encryption (SSE).
+        --delivery-stream-name=!: The name of the Firehose stream.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --records=!: One or more records.
     - name: tag-delivery-stream
       description: Adds or updates tags for the specified Firehose stream.
       flags:
@@ -105,14 +113,6 @@ commands:
         --delivery-stream-name=!: The name of the Firehose stream to which you want to add the tags.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --tags=!: A set of key-value pairs to use to create the tags.
-    - name: untag-delivery-stream
-      description: Removes tags from the specified Firehose stream.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --delivery-stream-name=!: The name of the Firehose stream.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tag-keys=!: A list of tag keys.
     - name: update-destination
       description: Updates the specified destination of the specified Firehose stream.
       flags:
@@ -132,12 +132,12 @@ commands:
         --s3-destination-update=: \[Deprecated] Describes an update for a destination in Amazon S3.
         --snowflake-destination-update=: Update to the Snowflake destination configuration settings.
         --splunk-destination-update=: Describes an update for a destination in Splunk.
-    - name: list-tags-for-delivery-stream
-      description: Lists the tags for the specified Firehose stream.
+    - name: delete-delivery-stream
+      description: Deletes a Firehose stream and its data.
       flags:
+        --allow-force-delete: Set this to true if you want to delete the Firehose stream even if Firehose is unable to retire the grant for the CMK.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --delivery-stream-name=!: The name of the Firehose stream whose tags you want to list.
-        --exclusive-start-tag-key=: The key to use as the starting point for the list of tags.
+        --delivery-stream-name=!: The name of the Firehose stream.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The number of tags to return.
+        --no-allow-force-delete: Set this to true if you want to delete the Firehose stream even if Firehose is unable to retire the grant for the CMK.

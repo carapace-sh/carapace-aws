@@ -1,13 +1,44 @@
 name: finspace
 description: FinSpace User Environment Management service
 commands:
-    - name: list-tags-for-resource
-      description: A list of all tags for a resource.
+    - name: delete-kx-cluster
+      description: Deletes a kdb cluster.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that ensures idempotency.
+        --cluster-name=!: The name of the cluster that you want to delete.
+        --environment-id=!: A unique identifier for the kdb environment.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name of the resource.
+    - name: delete-kx-volume
+      description: Deletes a volume.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that ensures idempotency.
+        --environment-id=!: A unique identifier for the kdb environment, whose clusters can attach to the volume.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --volume-name=!: The name of the volume that you want to delete.
+    - name: list-kx-cluster-nodes
+      description: Lists all the nodes in a kdb cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-name=!: A unique name for the cluster.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in this request.
+        --next-token=: A token that indicates where a results page should begin.
+    - name: list-kx-dataviews
+      description: Returns a list of all the dataviews in the database.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --database-name=!: The name of the database where the dataviews were created.
+        --environment-id=!: A unique identifier for the kdb environment, for which you want to retrieve a list of dataviews.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in this request.
+        --next-token=: A token that indicates where a results page should begin.
     - name: update-kx-database
       description: Updates information for the given kdb database.
       flags:
@@ -18,6 +49,157 @@ commands:
         --description=: A description of the database.
         --environment-id=!: A unique identifier for the kdb environment.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-kx-environment-network
+      description: Updates environment network to connect to your internal network by using a transit gateway.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that ensures idempotency.
+        --custom-dns-configuration=: A list of DNS server name and server IP.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --transit-gateway-configuration=: Specifies the transit gateway and network configuration to connect the kdb environment to an internal network.
+    - name: update-kx-volume
+      description: Updates the throughput or capacity of a volume.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that ensures idempotency.
+        --description=: A description of the volume.
+        --environment-id=!: A unique identifier for the kdb environment where you created the storage volume.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --nas1-configuration=: Specifies the configuration for the Network attached storage (NAS\_1) file system volume.
+        --volume-name=!: A unique identifier for the volume.
+    - name: get-kx-user
+      description: Retrieves information about the specified kdb user.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-name=!: A unique identifier for the user.
+    - name: create-kx-dataview
+      description: Creates a snapshot of kdb database with tiered storage capabilities and a pre-warmed cache, ready for mounting on kdb clusters.
+      flags:
+        --auto-update: The option to specify whether you want to apply all the future additions and corrections automatically to the dataview, when you ingest new changesets.
+        --availability-zone-id=: The identifier of the availability zones.
+        --az-mode=!: The number of availability zones you want to assign per volume.
+        --changeset-id=: A unique identifier of the changeset that you want to use to ingest data.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A token that ensures idempotency.
+        --database-name=!: The name of the database where you want to create a dataview.
+        --dataview-name=!: A unique identifier for the dataview.
+        --description=: A description of the dataview.
+        --environment-id=!: A unique identifier for the kdb environment, where you want to create the dataview.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-auto-update: The option to specify whether you want to apply all the future additions and corrections automatically to the dataview, when you ingest new changesets.
+        --no-read-write: The option to specify whether you want to make the dataview writable to perform database maintenance.
+        --read-write: The option to specify whether you want to make the dataview writable to perform database maintenance.
+        --segment-configurations=: The configuration that contains the database path of the data that you want to place on each selected volume.
+        --tags=: A list of key-value pairs to label the dataview.
+      completion:
+        flag:
+            az-mode:
+                - SINGLE
+                - MULTI
+    - name: delete-kx-cluster-node
+      description: Deletes the specified nodes from a cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-name=!: The name of the cluster, for which you want to delete the nodes.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --node-id=!: A unique identifier for the node that you want to delete.
+    - name: delete-kx-environment
+      description: Deletes the kdb environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that ensures idempotency.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-environment
+      description: Returns the FinSpace environment object.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=!: The identifier of the FinSpace environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-kx-cluster
+      description: Retrieves information about a kdb cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-name=!: The name of the cluster that you want to retrieve.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-kx-volumes
+      description: Lists all the volumes in a kdb environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=!: A unique identifier for the kdb environment, whose clusters can attach to the volume.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in this request.
+        --next-token=: A token that indicates where a results page should begin.
+        --volume-type=: The type of file system volume.
+      completion:
+        flag:
+            volume-type:
+                - NAS_1
+    - name: update-environment
+      description: Update your FinSpace environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description of the environment.
+        --environment-id=!: The identifier of the FinSpace environment.
+        --federation-mode=: Authentication mode for the environment.
+        --federation-parameters=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The name of the environment.
+      completion:
+        flag:
+            federation-mode:
+                - FEDERATED
+                - LOCAL
+    - name: get-kx-connection-string
+      description: Retrieves a connection string for a user to connect to a kdb cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-name=!: A name of the kdb cluster.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-arn=!: The Amazon Resource Name (ARN) that identifies the user.
+    - name: get-kx-scaling-group
+      description: Retrieves details of a scaling group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scaling-group-name=!: A unique identifier for the kdb scaling group.
+    - name: list-kx-changesets
+      description: Returns a list of all the changesets for a database.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --database-name=!: The name of the kdb database.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in this request.
+        --next-token=: A token that indicates where a results page should begin.
+    - name: untag-resource
+      description: Removes metadata tags from a FinSpace resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: A FinSpace resource from which you want to remove a tag or tags.
+        --tag-keys=!: The tag keys (names) of one or more tags to be removed.
     - name: update-kx-dataview
       description: Updates the specified dataview.
       flags:
@@ -31,6 +213,26 @@ commands:
         --environment-id=!: A unique identifier for the kdb environment, where you want to update the dataview.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --segment-configurations=: The configuration that contains the database path of the data that you want to place on each selected volume.
+    - name: update-kx-environment
+      description: Updates information for the given kdb environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that ensures idempotency.
+        --description=: A description of the kdb environment.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The name of the kdb environment.
+    - name: update-kx-user
+      description: Updates the user details.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that ensures idempotency.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --iam-role=!: The IAM role ARN that is associated with the user.
+        --user-name=!: A unique identifier for the user.
     - name: create-kx-changeset
       description: Creates a changeset for a kdb database.
       flags:
@@ -40,6 +242,172 @@ commands:
         --client-token=!: A token that ensures idempotency.
         --database-name=!: The name of the kdb database.
         --environment-id=!: A unique identifier of the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-kx-scaling-group
+      description: Creates a new scaling group.
+      flags:
+        --availability-zone-id=!: The identifier of the availability zones.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A token that ensures idempotency.
+        --environment-id=!: A unique identifier for the kdb environment, where you want to create the scaling group.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --host-type=!: The memory and CPU capabilities of the scaling group host on which FinSpace Managed kdb clusters will be placed.
+        --scaling-group-name=!: A unique identifier for the kdb scaling group.
+        --tags=: A list of key-value pairs to label the scaling group.
+    - name: delete-environment
+      description: Delete an FinSpace environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=!: The identifier for the FinSpace environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-kx-database
+      description: Returns database information for the specified environment ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --database-name=!: The name of the kdb database.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: tag-resource
+      description: Adds metadata tags to a FinSpace resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) for the resource.
+        --tags=!: One or more tags to be assigned to the resource.
+    - name: create-environment
+      description: Create a new FinSpace environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-bundles=: The list of Amazon Resource Names (ARN) of the data bundles to install.
+        --description=: The description of the FinSpace environment to be created.
+        --federation-mode=: Authentication mode for the environment.
+        --federation-parameters=: Configuration information when authentication mode is FEDERATED.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-id=: The KMS key id to encrypt your data in the FinSpace environment.
+        --name=!: The name of the FinSpace environment to be created.
+        --superuser-parameters=: Configuration information for the superuser.
+        --tags=: Add tags to your FinSpace environment.
+      completion:
+        flag:
+            federation-mode:
+                - FEDERATED
+                - LOCAL
+    - name: create-kx-environment
+      description: Creates a managed kdb environment for the account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that ensures idempotency.
+        --description=: A description for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-id=!: The KMS key ID to encrypt your data in the FinSpace environment.
+        --name=!: The name of the kdb environment that you want to create.
+        --tags=: A list of key-value pairs to label the kdb environment.
+    - name: create-kx-volume
+      description: Creates a new volume with a specific amount of throughput and storage capacity.
+      flags:
+        --availability-zone-ids=!: The identifier of the availability zones.
+        --az-mode=!: The number of availability zones you want to assign per volume.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that ensures idempotency.
+        --description=: A description of the volume.
+        --environment-id=!: A unique identifier for the kdb environment, whose clusters can attach to the volume.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --nas1-configuration=: Specifies the configuration for the Network attached storage (NAS\_1) file system volume.
+        --tags=: A list of key-value pairs to label the volume.
+        --volume-name=!: A unique identifier for the volume.
+        --volume-type=!: The type of file system volume.
+      completion:
+        flag:
+            az-mode:
+                - SINGLE
+                - MULTI
+            volume-type:
+                - NAS_1
+    - name: delete-kx-user
+      description: Deletes a user in the specified kdb environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that ensures idempotency.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-name=!: A unique identifier for the user that you want to delete.
+    - name: list-kx-databases
+      description: Returns a list of all the databases in the kdb environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in this request.
+        --next-token=: A token that indicates where a results page should begin.
+    - name: list-kx-environments
+      description: Returns a list of kdb environments created in an account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in this request.
+        --next-token=: A token that indicates where a results page should begin.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-kx-scaling-groups
+      description: Returns a list of scaling groups in a kdb environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=!: A unique identifier for the kdb environment, for which you want to retrieve a list of scaling groups.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in this request.
+        --next-token=: A token that indicates where a results page should begin.
+    - name: update-kx-cluster-code-configuration
+      description: Allows you to update code configuration on a running cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that ensures idempotency.
+        --cluster-name=!: The name of the cluster.
+        --code=!: ""
+        --command-line-arguments=: Specifies the key-value pairs to make them available inside the cluster.
+        --deployment-configuration=: The configuration that allows you to choose how you want to update the code on a cluster.
+        --environment-id=!: A unique identifier of the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --initialization-script=: Specifies a Q program that will be run at launch of a cluster.
+    - name: get-kx-volume
+      description: Retrieves the information about the volume.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=!: A unique identifier for the kdb environment, whose clusters can attach to the volume.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --volume-name=!: A unique identifier for the volume.
+    - name: create-kx-database
+      description: Creates a new kdb database in the environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A token that ensures idempotency.
+        --database-name=!: The name of the kdb database.
+        --description=: A description of the database.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: A list of key-value pairs to label the kdb database.
+    - name: delete-kx-database
+      description: Deletes the specified database and all of its associated data.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A token that ensures idempotency.
+        --database-name=!: The name of the kdb database that you want to delete.
+        --environment-id=!: A unique identifier for the kdb environment.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-kx-dataview
       description: Deletes the specified dataview.
@@ -51,104 +419,42 @@ commands:
         --dataview-name=!: The name of the dataview that you want to delete.
         --environment-id=!: A unique identifier for the kdb environment, from where you want to delete the dataview.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-kx-cluster
-      description: Retrieves information about a kdb cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-name=!: The name of the cluster that you want to retrieve.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-kx-environment
-      description: Retrieves all the information for the specified kdb environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-kx-databases
-      description: Returns a list of all the databases in the kdb environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in this request.
-        --next-token=: A token that indicates where a results page should begin.
-    - name: update-kx-environment
-      description: Updates information for the given kdb environment.
+    - name: delete-kx-scaling-group
+      description: Deletes the specified scaling group.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A token that ensures idempotency.
-        --description=: A description of the kdb environment.
+        --environment-id=!: A unique identifier for the kdb environment, from where you want to delete the dataview.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scaling-group-name=!: A unique identifier for the kdb scaling group.
+    - name: get-kx-changeset
+      description: Returns information about a kdb changeset.
+      flags:
+        --changeset-id=!: A unique identifier of the changeset for which you want to retrieve data.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --database-name=!: The name of the kdb database.
         --environment-id=!: A unique identifier for the kdb environment.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: The name of the kdb environment.
-    - name: update-kx-environment-network
-      description: Updates environment network to connect to your internal network by using a transit gateway.
+    - name: list-tags-for-resource
+      description: A list of all tags for a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name of the resource.
+    - name: update-kx-cluster-databases
+      description: Updates the databases mounted on a kdb cluster, which includes the `changesetId` and all the dbPaths to be cached.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A token that ensures idempotency.
-        --custom-dns-configuration=: A list of DNS server name and server IP.
-        --environment-id=!: A unique identifier for the kdb environment.
+        --cluster-name=!: A unique name for the cluster that you want to modify.
+        --databases=!: The structure of databases mounted on the cluster.
+        --deployment-configuration=: The configuration that allows you to choose how you want to update the databases on a cluster.
+        --environment-id=!: The unique identifier of a kdb environment.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --transit-gateway-configuration=: Specifies the transit gateway and network configuration to connect the kdb environment to an internal network.
-    - name: update-kx-user
-      description: Updates the user details.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures idempotency.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --iam-role=!: The IAM role ARN that is associated with the user.
-        --user-name=!: A unique identifier for the user.
-    - name: delete-kx-cluster
-      description: Deletes a kdb cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures idempotency.
-        --cluster-name=!: The name of the cluster that you want to delete.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-kx-environment
-      description: Deletes the kdb environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures idempotency.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-kx-cluster-nodes
-      description: Lists all the nodes in a kdb cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-name=!: A unique name for the cluster.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in this request.
-        --next-token=: A token that indicates where a results page should begin.
-    - name: list-kx-users
-      description: Lists all the users in a kdb environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in this request.
-        --next-token=: A token that indicates where a results page should begin.
-    - name: untag-resource
-      description: Removes metadata tags from a FinSpace resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: A FinSpace resource from which you want to remove a tag or tags.
-        --tag-keys=!: The tag keys (names) of one or more tags to be removed.
     - name: create-kx-cluster
       description: Creates a new kdb cluster.
       flags:
@@ -198,261 +504,20 @@ commands:
         --iam-role=!: The IAM role ARN that will be associated with the user.
         --tags=: A list of key-value pairs to label the user.
         --user-name=!: A unique identifier for the user.
-    - name: create-kx-volume
-      description: Creates a new volume with a specific amount of throughput and storage capacity.
-      flags:
-        --availability-zone-ids=!: The identifier of the availability zones.
-        --az-mode=!: The number of availability zones you want to assign per volume.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures idempotency.
-        --description=: A description of the volume.
-        --environment-id=!: A unique identifier for the kdb environment, whose clusters can attach to the volume.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --nas1-configuration=: Specifies the configuration for the Network attached storage (NAS\_1) file system volume.
-        --tags=: A list of key-value pairs to label the volume.
-        --volume-name=!: A unique identifier for the volume.
-        --volume-type=!: The type of file system volume.
-      completion:
-        flag:
-            az-mode:
-                - SINGLE
-                - MULTI
-            volume-type:
-                - NAS_1
-    - name: delete-environment
-      description: Delete an FinSpace environment.
+    - name: get-kx-dataview
+      description: Retrieves details of the dataview.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=!: The identifier for the FinSpace environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-kx-changeset
-      description: Returns information about a kdb changeset.
-      flags:
-        --changeset-id=!: A unique identifier of the changeset for which you want to retrieve data.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --database-name=!: The name of the kdb database.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-kx-volume
-      description: Updates the throughput or capacity of a volume.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures idempotency.
-        --description=: A description of the volume.
-        --environment-id=!: A unique identifier for the kdb environment where you created the storage volume.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --nas1-configuration=: Specifies the configuration for the Network attached storage (NAS\_1) file system volume.
-        --volume-name=!: A unique identifier for the volume.
-    - name: create-kx-database
-      description: Creates a new kdb database in the environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: A token that ensures idempotency.
-        --database-name=!: The name of the kdb database.
-        --description=: A description of the database.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: A list of key-value pairs to label the kdb database.
-    - name: create-kx-environment
-      description: Creates a managed kdb environment for the account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures idempotency.
-        --description=: A description for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kms-key-id=!: The KMS key ID to encrypt your data in the FinSpace environment.
-        --name=!: The name of the kdb environment that you want to create.
-        --tags=: A list of key-value pairs to label the kdb environment.
-    - name: delete-kx-cluster-node
-      description: Deletes the specified nodes from a cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-name=!: The name of the cluster, for which you want to delete the nodes.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --node-id=!: A unique identifier for the node that you want to delete.
-    - name: get-kx-database
-      description: Returns database information for the specified environment ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --database-name=!: The name of the kdb database.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-kx-scaling-group
-      description: Retrieves details of a scaling group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --scaling-group-name=!: A unique identifier for the kdb scaling group.
-    - name: update-kx-cluster-code-configuration
-      description: Allows you to update code configuration on a running cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures idempotency.
-        --cluster-name=!: The name of the cluster.
-        --code=!: ""
-        --command-line-arguments=: Specifies the key-value pairs to make them available inside the cluster.
-        --deployment-configuration=: The configuration that allows you to choose how you want to update the code on a cluster.
-        --environment-id=!: A unique identifier of the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --initialization-script=: Specifies a Q program that will be run at launch of a cluster.
-    - name: create-kx-dataview
-      description: Creates a snapshot of kdb database with tiered storage capabilities and a pre-warmed cache, ready for mounting on kdb clusters.
-      flags:
-        --auto-update: The option to specify whether you want to apply all the future additions and corrections automatically to the dataview, when you ingest new changesets.
-        --availability-zone-id=: The identifier of the availability zones.
-        --az-mode=!: The number of availability zones you want to assign per volume.
-        --changeset-id=: A unique identifier of the changeset that you want to use to ingest data.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: A token that ensures idempotency.
-        --database-name=!: The name of the database where you want to create a dataview.
+        --database-name=!: The name of the database where you created the dataview.
         --dataview-name=!: A unique identifier for the dataview.
-        --description=: A description of the dataview.
-        --environment-id=!: A unique identifier for the kdb environment, where you want to create the dataview.
+        --environment-id=!: A unique identifier for the kdb environment, from where you want to retrieve the dataview details.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-auto-update: The option to specify whether you want to apply all the future additions and corrections automatically to the dataview, when you ingest new changesets.
-        --no-read-write: The option to specify whether you want to make the dataview writable to perform database maintenance.
-        --read-write: The option to specify whether you want to make the dataview writable to perform database maintenance.
-        --segment-configurations=: The configuration that contains the database path of the data that you want to place on each selected volume.
-        --tags=: A list of key-value pairs to label the dataview.
-      completion:
-        flag:
-            az-mode:
-                - SINGLE
-                - MULTI
-    - name: get-kx-connection-string
-      description: Retrieves a connection string for a user to connect to a kdb cluster.
+    - name: get-kx-environment
+      description: Retrieves all the information for the specified kdb environment.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-name=!: A name of the kdb cluster.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-arn=!: The Amazon Resource Name (ARN) that identifies the user.
-    - name: get-kx-user
-      description: Retrieves information about the specified kdb user.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-name=!: A unique identifier for the user.
-    - name: list-kx-changesets
-      description: Returns a list of all the changesets for a database.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --database-name=!: The name of the kdb database.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in this request.
-        --next-token=: A token that indicates where a results page should begin.
-    - name: list-kx-volumes
-      description: Lists all the volumes in a kdb environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=!: A unique identifier for the kdb environment, whose clusters can attach to the volume.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in this request.
-        --next-token=: A token that indicates where a results page should begin.
-        --volume-type=: The type of file system volume.
-      completion:
-        flag:
-            volume-type:
-                - NAS_1
-    - name: update-kx-cluster-databases
-      description: Updates the databases mounted on a kdb cluster, which includes the `changesetId` and all the dbPaths to be cached.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures idempotency.
-        --cluster-name=!: A unique name for the cluster that you want to modify.
-        --databases=!: The structure of databases mounted on the cluster.
-        --deployment-configuration=: The configuration that allows you to choose how you want to update the databases on a cluster.
-        --environment-id=!: The unique identifier of a kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-kx-scaling-group
-      description: Creates a new scaling group.
-      flags:
-        --availability-zone-id=!: The identifier of the availability zones.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: A token that ensures idempotency.
-        --environment-id=!: A unique identifier for the kdb environment, where you want to create the scaling group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --host-type=!: The memory and CPU capabilities of the scaling group host on which FinSpace Managed kdb clusters will be placed.
-        --scaling-group-name=!: A unique identifier for the kdb scaling group.
-        --tags=: A list of key-value pairs to label the scaling group.
-    - name: delete-kx-volume
-      description: Deletes a volume.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures idempotency.
-        --environment-id=!: A unique identifier for the kdb environment, whose clusters can attach to the volume.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --volume-name=!: The name of the volume that you want to delete.
-    - name: get-environment
-      description: Returns the FinSpace environment object.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=!: The identifier of the FinSpace environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-kx-dataviews
-      description: Returns a list of all the dataviews in the database.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --database-name=!: The name of the database where the dataviews were created.
-        --environment-id=!: A unique identifier for the kdb environment, for which you want to retrieve a list of dataviews.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in this request.
-        --next-token=: A token that indicates where a results page should begin.
-    - name: tag-resource
-      description: Adds metadata tags to a FinSpace resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) for the resource.
-        --tags=!: One or more tags to be assigned to the resource.
-    - name: update-environment
-      description: Update your FinSpace environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The description of the environment.
-        --environment-id=!: The identifier of the FinSpace environment.
-        --federation-mode=: Authentication mode for the environment.
-        --federation-parameters=: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: The name of the environment.
-      completion:
-        flag:
-            federation-mode:
-                - FEDERATED
-                - LOCAL
-    - name: delete-kx-database
-      description: Deletes the specified database and all of its associated data.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: A token that ensures idempotency.
-        --database-name=!: The name of the kdb database that you want to delete.
         --environment-id=!: A unique identifier for the kdb environment.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-environments
@@ -481,77 +546,12 @@ commands:
                 - GATEWAY
                 - GP
                 - TICKERPLANT
-    - name: list-kx-environments
-      description: Returns a list of kdb environments created in an account.
+    - name: list-kx-users
+      description: Lists all the users in a kdb environment.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in this request.
-        --next-token=: A token that indicates where a results page should begin.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-kx-scaling-groups
-      description: Returns a list of scaling groups in a kdb environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=!: A unique identifier for the kdb environment, for which you want to retrieve a list of scaling groups.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in this request.
-        --next-token=: A token that indicates where a results page should begin.
-    - name: get-kx-volume
-      description: Retrieves the information about the volume.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=!: A unique identifier for the kdb environment, whose clusters can attach to the volume.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --volume-name=!: A unique identifier for the volume.
-    - name: create-environment
-      description: Create a new FinSpace environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-bundles=: The list of Amazon Resource Names (ARN) of the data bundles to install.
-        --description=: The description of the FinSpace environment to be created.
-        --federation-mode=: Authentication mode for the environment.
-        --federation-parameters=: Configuration information when authentication mode is FEDERATED.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kms-key-id=: The KMS key id to encrypt your data in the FinSpace environment.
-        --name=!: The name of the FinSpace environment to be created.
-        --superuser-parameters=: Configuration information for the superuser.
-        --tags=: Add tags to your FinSpace environment.
-      completion:
-        flag:
-            federation-mode:
-                - FEDERATED
-                - LOCAL
-    - name: delete-kx-scaling-group
-      description: Deletes the specified scaling group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures idempotency.
-        --environment-id=!: A unique identifier for the kdb environment, from where you want to delete the dataview.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --scaling-group-name=!: A unique identifier for the kdb scaling group.
-    - name: delete-kx-user
-      description: Deletes a user in the specified kdb environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures idempotency.
         --environment-id=!: A unique identifier for the kdb environment.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-name=!: A unique identifier for the user that you want to delete.
-    - name: get-kx-dataview
-      description: Retrieves details of the dataview.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --database-name=!: The name of the database where you created the dataview.
-        --dataview-name=!: A unique identifier for the dataview.
-        --environment-id=!: A unique identifier for the kdb environment, from where you want to retrieve the dataview details.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in this request.
+        --next-token=: A token that indicates where a results page should begin.

@@ -1,173 +1,25 @@
 name: ecr-public
 description: Amazon Elastic Container Registry Public
 commands:
-    - name: batch-delete-image
-      description: Deletes a list of specified images that are within a repository in a public registry.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-ids=!: A list of image ID references that correspond to images to delete.
-        --registry-id=: The Amazon Web Services account ID, or registry alias, that's associated with the registry that contains the image to delete.
-        --repository-name=!: The repository in a public registry that contains the image to delete.
-    - name: delete-repository-policy
-      description: Deletes the repository policy that's associated with the specified repository.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --registry-id=: The Amazon Web Services account ID that's associated with the public registry that contains the repository policy to delete.
-        --repository-name=!: The name of the repository that's associated with the repository policy to delete.
-    - name: get-repository-policy
-      description: Retrieves the repository policy for the specified repository.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --registry-id=: The Amazon Web Services account ID that's associated with the public registry that contains the repository.
-        --repository-name=!: The name of the repository with the policy to retrieve.
-    - name: put-image
-      description: Creates or updates the image manifest and tags that are associated with an image.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-digest=: The image digest of the image manifest that corresponds to the image.
-        --image-manifest-media-type=: The media type of the image manifest.
-        --image-manifest=!: The image manifest that corresponds to the image to be uploaded.
-        --image-tag=: The tag to associate with the image.
-        --registry-id=: The Amazon Web Services account ID, or registry alias, that's associated with the public registry that contains the repository where the image is put.
-        --repository-name=!: The name of the repository where the image is put.
-    - name: put-repository-catalog-data
-      description: Creates or updates the catalog data for a repository in a public registry.
-      flags:
-        --catalog-data=!: An object containing the catalog data for a repository.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --registry-id=: The Amazon Web Services account ID that's associated with the public registry the repository is in.
-        --repository-name=!: The name of the repository to create or update the catalog data for.
-    - name: upload-layer-part
-      description: Uploads an image layer part to Amazon ECR.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --layer-part-blob=!: The base64-encoded layer part payload.
-        --part-first-byte=!: The position of the first byte of the layer part witin the overall image layer.
-        --part-last-byte=!: The position of the last byte of the layer part within the overall image layer.
-        --registry-id=: The Amazon Web Services account ID, or registry alias, that's associated with the registry that you're uploading layer parts to.
-        --repository-name=!: The name of the repository that you're uploading layer parts to.
-        --upload-id=!: The upload ID from a previous [InitiateLayerUpload]() operation to associate with the layer part upload.
-    - name: complete-layer-upload
-      description: Informs Amazon ECR that the image layer upload is complete for a specified public registry, repository name, and upload ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --layer-digests=!: The `sha256` digest of the image layer.
-        --registry-id=: The Amazon Web Services account ID, or registry alias, associated with the registry where layers are uploaded.
-        --repository-name=!: The name of the repository in a public registry to associate with the image layer.
-        --upload-id=!: The upload ID from a previous [InitiateLayerUpload]() operation to associate with the image layer.
-    - name: delete-repository
-      description: Deletes a repository in a public registry.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --force: The force option can be used to delete a repository that contains images.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-force: The force option can be used to delete a repository that contains images.
-        --registry-id=: The Amazon Web Services account ID that's associated with the public registry that contains the repository to delete.
-        --repository-name=!: The name of the repository to delete.
-    - name: describe-image-tags
-      description: Returns the image tag details for a repository in a public registry.
+    - name: describe-repositories
+      description: Describes repositories that are in a public registry.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of repository results that's returned by `DescribeImageTags` in paginated output.
-        --next-token=: The `nextToken` value that's returned from a previous paginated `DescribeImageTags` request where `maxResults` was used and the results exceeded the value of that parameter.
+        --max-results=: The maximum number of repository results that's returned by `DescribeRepositories` in paginated output.
+        --next-token=: The `nextToken` value that's returned from a previous paginated `DescribeRepositories` request where `maxResults` was used and the results exceeded the value of that parameter.
         --page-size=: The size of each page to get in the AWS service call.
-        --registry-id=: The Amazon Web Services account ID that's associated with the public registry that contains the repository where images are described.
-        --repository-name=!: The name of the repository that contains the image tag details to describe.
+        --registry-id=: The Amazon Web Services account ID that's associated with the registry that contains the repositories to be described.
+        --repository-names=: A list of repositories to describe.
         --starting-token=: A token to specify where to start paginating.
-    - name: describe-registries
-      description: Returns details for a public registry.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of repository results that's returned by `DescribeRegistries` in paginated output.
-        --next-token=: The `nextToken` value that's returned from a previous paginated `DescribeRegistries` request where `maxResults` was used and the results exceeded the value of that parameter.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: get-authorization-token
-      description: Retrieves an authorization token.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: initiate-layer-upload
-      description: Notifies Amazon ECR that you intend to upload an image layer.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --registry-id=: The Amazon Web Services account ID, or registry alias, that's associated with the registry to which you intend to upload layers.
-        --repository-name=!: The name of the repository that you want to upload layers to.
-    - name: list-tags-for-resource
-      description: List the tags for an Amazon ECR Public resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) that identifies the resource to list the tags for.
     - name: put-registry-catalog-data
       description: Create or update the catalog data for a public registry.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --display-name=: The display name for a public registry.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: batch-check-layer-availability
-      description: Checks the availability of one or more image layers that are within a repository in a public registry.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --layer-digests=!: The digests of the image layers to check.
-        --registry-id=: The Amazon Web Services account ID, or registry alias, associated with the public registry that contains the image layers to check.
-        --repository-name=!: The name of the repository that's associated with the image layers to check.
-    - name: create-repository
-      description: Creates a repository in a public registry.
-      flags:
-        --catalog-data=: The details about the repository that are publicly visible in the Amazon ECR Public Gallery.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --repository-name=!: The name to use for the repository.
-        --tags=: The metadata that you apply to each repository to help categorize and organize your repositories.
-    - name: describe-images
-      description: Returns metadata that's related to the images in a repository in a public registry.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-ids=: The list of image IDs for the requested repository.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of repository results that's returned by `DescribeImages` in paginated output.
-        --next-token=: The `nextToken` value that's returned from a previous paginated `DescribeImages` request where `maxResults` was used and the results exceeded the value of that parameter.
-        --page-size=: The size of each page to get in the AWS service call.
-        --registry-id=: The Amazon Web Services account ID that's associated with the public registry that contains the repository where images are described.
-        --repository-name=!: The repository that contains the images to describe.
-        --starting-token=: A token to specify where to start paginating.
-    - name: get-registry-catalog-data
-      description: Retrieves catalog metadata for a public registry.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: tag-resource
       description: Associates the specified tags to a resource with the specified `resourceArn`.
@@ -185,18 +37,138 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the resource to delete tags from.
         --tag-keys=!: The keys of the tags to be removed.
-    - name: describe-repositories
-      description: Describes repositories that are in a public registry.
+    - name: batch-check-layer-availability
+      description: Checks the availability of one or more image layers that are within a repository in a public registry.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --layer-digests=!: The digests of the image layers to check.
+        --registry-id=: The Amazon Web Services account ID, or registry alias, associated with the public registry that contains the image layers to check.
+        --repository-name=!: The name of the repository that's associated with the image layers to check.
+    - name: complete-layer-upload
+      description: Informs Amazon ECR that the image layer upload is complete for a specified public registry, repository name, and upload ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --layer-digests=!: The `sha256` digest of the image layer.
+        --registry-id=: The Amazon Web Services account ID, or registry alias, associated with the registry where layers are uploaded.
+        --repository-name=!: The name of the repository in a public registry to associate with the image layer.
+        --upload-id=!: The upload ID from a previous [InitiateLayerUpload]() operation to associate with the image layer.
+    - name: create-repository
+      description: Creates a repository in a public registry.
+      flags:
+        --catalog-data=: The details about the repository that are publicly visible in the Amazon ECR Public Gallery.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --repository-name=!: The name to use for the repository.
+        --tags=: The metadata that you apply to each repository to help categorize and organize your repositories.
+    - name: delete-repository
+      description: Deletes a repository in a public registry.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --force: The force option can be used to delete a repository that contains images.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-force: The force option can be used to delete a repository that contains images.
+        --registry-id=: The Amazon Web Services account ID that's associated with the public registry that contains the repository to delete.
+        --repository-name=!: The name of the repository to delete.
+    - name: delete-repository-policy
+      description: Deletes the repository policy that's associated with the specified repository.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --registry-id=: The Amazon Web Services account ID that's associated with the public registry that contains the repository policy to delete.
+        --repository-name=!: The name of the repository that's associated with the repository policy to delete.
+    - name: describe-images
+      description: Returns metadata that's related to the images in a repository in a public registry.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-ids=: The list of image IDs for the requested repository.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of repository results that's returned by `DescribeImages` in paginated output.
+        --next-token=: The `nextToken` value that's returned from a previous paginated `DescribeImages` request where `maxResults` was used and the results exceeded the value of that parameter.
+        --page-size=: The size of each page to get in the AWS service call.
+        --registry-id=: The Amazon Web Services account ID that's associated with the public registry that contains the repository where images are described.
+        --repository-name=!: The repository that contains the images to describe.
+        --starting-token=: A token to specify where to start paginating.
+    - name: upload-layer-part
+      description: Uploads an image layer part to Amazon ECR.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --layer-part-blob=!: The base64-encoded layer part payload.
+        --part-first-byte=!: The position of the first byte of the layer part witin the overall image layer.
+        --part-last-byte=!: The position of the last byte of the layer part within the overall image layer.
+        --registry-id=: The Amazon Web Services account ID, or registry alias, that's associated with the registry that you're uploading layer parts to.
+        --repository-name=!: The name of the repository that you're uploading layer parts to.
+        --upload-id=!: The upload ID from a previous [InitiateLayerUpload]() operation to associate with the layer part upload.
+    - name: describe-image-tags
+      description: Returns the image tag details for a repository in a public registry.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of repository results that's returned by `DescribeRepositories` in paginated output.
-        --next-token=: The `nextToken` value that's returned from a previous paginated `DescribeRepositories` request where `maxResults` was used and the results exceeded the value of that parameter.
+        --max-results=: The maximum number of repository results that's returned by `DescribeImageTags` in paginated output.
+        --next-token=: The `nextToken` value that's returned from a previous paginated `DescribeImageTags` request where `maxResults` was used and the results exceeded the value of that parameter.
         --page-size=: The size of each page to get in the AWS service call.
-        --registry-id=: The Amazon Web Services account ID that's associated with the registry that contains the repositories to be described.
-        --repository-names=: A list of repositories to describe.
+        --registry-id=: The Amazon Web Services account ID that's associated with the public registry that contains the repository where images are described.
+        --repository-name=!: The name of the repository that contains the image tag details to describe.
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-authorization-token
+      description: Retrieves an authorization token.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-registry-catalog-data
+      description: Retrieves catalog metadata for a public registry.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-repository-policy
+      description: Retrieves the repository policy for the specified repository.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --registry-id=: The Amazon Web Services account ID that's associated with the public registry that contains the repository.
+        --repository-name=!: The name of the repository with the policy to retrieve.
+    - name: initiate-layer-upload
+      description: Notifies Amazon ECR that you intend to upload an image layer.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --registry-id=: The Amazon Web Services account ID, or registry alias, that's associated with the registry to which you intend to upload layers.
+        --repository-name=!: The name of the repository that you want to upload layers to.
+    - name: put-repository-catalog-data
+      description: Creates or updates the catalog data for a repository in a public registry.
+      flags:
+        --catalog-data=!: An object containing the catalog data for a repository.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --registry-id=: The Amazon Web Services account ID that's associated with the public registry the repository is in.
+        --repository-name=!: The name of the repository to create or update the catalog data for.
+    - name: describe-registries
+      description: Returns details for a public registry.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of repository results that's returned by `DescribeRegistries` in paginated output.
+        --next-token=: The `nextToken` value that's returned from a previous paginated `DescribeRegistries` request where `maxResults` was used and the results exceeded the value of that parameter.
+        --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
     - name: get-repository-catalog-data
       description: Retrieve catalog metadata for a repository in a public registry.
@@ -206,6 +178,25 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --registry-id=: The Amazon Web Services account ID that's associated with the registry that contains the repositories to be described.
         --repository-name=!: The name of the repository to retrieve the catalog metadata for.
+    - name: list-tags-for-resource
+      description: List the tags for an Amazon ECR Public resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) that identifies the resource to list the tags for.
+    - name: put-image
+      description: Creates or updates the image manifest and tags that are associated with an image.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-digest=: The image digest of the image manifest that corresponds to the image.
+        --image-manifest-media-type=: The media type of the image manifest.
+        --image-manifest=!: The image manifest that corresponds to the image to be uploaded.
+        --image-tag=: The tag to associate with the image.
+        --registry-id=: The Amazon Web Services account ID, or registry alias, that's associated with the public registry that contains the repository where the image is put.
+        --repository-name=!: The name of the repository where the image is put.
     - name: set-repository-policy
       description: Applies a repository policy to the specified public repository to control access permissions.
       flags:
@@ -217,3 +208,12 @@ commands:
         --policy-text=!: The JSON repository policy text to apply to the repository.
         --registry-id=: The Amazon Web Services account ID that's associated with the registry that contains the repository.
         --repository-name=!: The name of the repository to receive the policy.
+    - name: batch-delete-image
+      description: Deletes a list of specified images that are within a repository in a public registry.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-ids=!: A list of image ID references that correspond to images to delete.
+        --registry-id=: The Amazon Web Services account ID, or registry alias, that's associated with the registry that contains the image to delete.
+        --repository-name=!: The repository in a public registry that contains the image to delete.

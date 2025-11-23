@@ -1,6 +1,55 @@
 name: geo-maps
 description: Amazon Location Service Maps V2
 commands:
+    - name: get-style-descriptor
+      description: '`GetStyleDescriptor` returns information about the style.'
+      flags:
+        --color-scheme=: Sets color tone for map such as dark and light for specific map styles.
+        --contour-density=: Displays the shape and steepness of terrain features using elevation lines.
+        --key=: 'Optional: The API key to be used for authorization.'
+        --political-view=: Specifies the political view using ISO 3166-2 or ISO 3166-3 country code format.
+        --style=!: Style specifies the desired map style.
+        --terrain=: Adjusts how physical terrain details are rendered on the map.
+        --traffic=: Displays real-time traffic information overlay on map, such as incident events and flow events.
+        --travel-modes=: Renders additional map information relevant to selected travel modes.
+      completion:
+        flag:
+            color-scheme:
+                - Light
+                - Dark
+            contour-density:
+                - Medium
+            style:
+                - Standard
+                - Monochrome
+                - Hybrid
+                - Satellite
+            terrain:
+                - Hillshade
+            traffic:
+                - All
+        positional:
+            - - $files
+    - name: get-tile
+      description: '`GetTile` returns a tile.'
+      flags:
+        --additional-features=: A list of optional additional parameters such as map styles that can be requested for each result.
+        --key=: 'Optional: The API key to be used for authorization.'
+        --tileset=!: Specifies the desired tile set.
+        --x=!: The X axis value for the map tile.
+        --y=!: The Y axis value for the map tile.
+        --z=!: The zoom value for the map tile.
+      completion:
+        positional:
+            - - $files
+    - name: get-glyphs
+      description: '`GetGlyphs` returns the map''s glyphs.'
+      flags:
+        --font-stack=!: Name of the `FontStack` to retrieve.
+        --font-unicode-range=!: A Unicode range of characters to download glyphs for.
+      completion:
+        positional:
+            - - $files
     - name: get-sprites
       description: '`GetSprites` returns the map''s sprites.'
       flags:
@@ -65,54 +114,5 @@ commands:
             style:
                 - Satellite
                 - Standard
-        positional:
-            - - $files
-    - name: get-style-descriptor
-      description: '`GetStyleDescriptor` returns information about the style.'
-      flags:
-        --color-scheme=: Sets color tone for map such as dark and light for specific map styles.
-        --contour-density=: Displays the shape and steepness of terrain features using elevation lines.
-        --key=: 'Optional: The API key to be used for authorization.'
-        --political-view=: Specifies the political view using ISO 3166-2 or ISO 3166-3 country code format.
-        --style=!: Style specifies the desired map style.
-        --terrain=: Adjusts how physical terrain details are rendered on the map.
-        --traffic=: Displays real-time traffic information overlay on map, such as incident events and flow events.
-        --travel-modes=: Renders additional map information relevant to selected travel modes.
-      completion:
-        flag:
-            color-scheme:
-                - Light
-                - Dark
-            contour-density:
-                - Medium
-            style:
-                - Standard
-                - Monochrome
-                - Hybrid
-                - Satellite
-            terrain:
-                - Hillshade
-            traffic:
-                - All
-        positional:
-            - - $files
-    - name: get-tile
-      description: '`GetTile` returns a tile.'
-      flags:
-        --additional-features=: A list of optional additional parameters such as map styles that can be requested for each result.
-        --key=: 'Optional: The API key to be used for authorization.'
-        --tileset=!: Specifies the desired tile set.
-        --x=!: The X axis value for the map tile.
-        --y=!: The Y axis value for the map tile.
-        --z=!: The zoom value for the map tile.
-      completion:
-        positional:
-            - - $files
-    - name: get-glyphs
-      description: '`GetGlyphs` returns the map''s glyphs.'
-      flags:
-        --font-stack=!: Name of the `FontStack` to retrieve.
-        --font-unicode-range=!: A Unicode range of characters to download glyphs for.
-      completion:
         positional:
             - - $files

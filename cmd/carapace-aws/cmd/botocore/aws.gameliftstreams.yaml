@@ -1,176 +1,6 @@
 name: gameliftstreams
 description: Amazon GameLift Streams
 commands:
-    - name: create-application
-      description: Creates an application resource in Amazon GameLift Streams, which specifies the application content you want to stream, such as a game build or other software, and configures the settings to run it.
-      flags:
-        --application-log-output-uri=: An Amazon S3 URI to a bucket where you would like Amazon GameLift Streams to save application logs.
-        --application-log-paths=: Locations of log files that your content generates during a stream session.
-        --application-source-uri=!: The location of the content that you want to stream.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique identifier that represents a client request.
-        --description=!: A human-readable label for the application.
-        --executable-path=!: The relative path and file name of the executable file that Amazon GameLift Streams will stream.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --runtime-environment=!: Configuration settings that identify the operating system for an application resource.
-        --tags=: A list of labels to assign to the new application resource.
-    - name: delete-stream-group
-      description: Permanently deletes all compute resources and information related to a stream group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: An [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) or ID that uniquely identifies the stream group resource.
-    - name: disassociate-applications
-      description: When you disassociate, or unlink, an application from a stream group, you can no longer stream this application by using that stream group's allocated compute resources.
-      flags:
-        --application-identifiers=!: A set of applications that you want to disassociate from the stream group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: A stream group to disassociate these applications from.
-    - name: get-application
-      description: Retrieves properties for an Amazon GameLift Streams application resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: An [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) or ID that uniquely identifies the application resource.
-    - name: get-stream-session
-      description: Retrieves properties for a Amazon GameLift Streams stream session resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The stream group that runs this stream session.
-        --stream-session-identifier=!: An [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) or ID that uniquely identifies the stream session resource.
-    - name: list-stream-groups
-      description: Retrieves a list of all Amazon GameLift Streams stream groups that are associated with the Amazon Web Services account in use.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The number of results to return.
-        --next-token=: A token that marks the start of the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: tag-resource
-      description: Assigns one or more tags to a Amazon GameLift Streams resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) of the Amazon GameLift Streams resource that you want to apply tags to.
-        --tags=!: A list of tags, in the form of key-value pairs, to assign to the specified Amazon GameLift Streams resource.
-    - name: terminate-stream-session
-      description: Permanently terminates an active stream session.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: '[Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) or ID that uniquely identifies the stream group resource.'
-        --stream-session-identifier=!: '[Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) or ID that uniquely identifies the stream session resource.'
-    - name: associate-applications
-      description: When you associate, or link, an application with a stream group, then Amazon GameLift Streams can launch the application using the stream group's allocated compute resources.
-      flags:
-        --application-identifiers=!: A set of applications to associate with the stream group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: A stream group to associate to the applications.
-    - name: create-stream-group
-      description: Stream groups manage how Amazon GameLift Streams allocates resources and handles concurrent streams, allowing you to effectively manage capacity and costs.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique identifier that represents a client request.
-        --default-application-identifier=: The unique identifier of the Amazon GameLift Streams application that you want to set as the default application in a stream group.
-        --description=!: A descriptive label for the stream group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location-configurations=: A set of one or more locations and the streaming capacity for each location.
-        --stream-class=!: The target stream quality for sessions that are hosted in this stream group.
-        --tags=: A list of labels to assign to the new stream group resource.
-      completion:
-        flag:
-            stream-class:
-                - gen4n_high
-                - gen4n_ultra
-                - gen4n_win2022
-                - gen5n_high
-                - gen5n_ultra
-                - gen5n_win2022
-    - name: create-stream-session-connection
-      description: Enables clients to reconnect to a stream session while preserving all session state and data in the disconnected session.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique identifier that represents a client request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: '[Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) or ID that uniquely identifies the stream group resource.'
-        --signal-request=!: A WebRTC ICE offer string to use when initializing a WebRTC connection.
-        --stream-session-identifier=!: '[Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) or ID that uniquely identifies the stream session resource.'
-    - name: get-stream-group
-      description: Retrieves properties for a Amazon GameLift Streams stream group resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: An [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) or ID that uniquely identifies the stream group resource.
-    - name: list-stream-sessions-by-account
-      description: Retrieves a list of Amazon GameLift Streams stream sessions that this user account has access to.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --export-files-status=: Filter by the exported files status.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The number of results to return.
-        --next-token=: The token that marks the start of the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --status=: Filter by the stream session status.
-      completion:
-        flag:
-            export-files-status:
-                - SUCCEEDED
-                - FAILED
-                - PENDING
-            status:
-                - ACTIVATING
-                - ACTIVE
-                - CONNECTED
-                - PENDING_CLIENT_RECONNECTION
-                - RECONNECTING
-                - TERMINATING
-                - TERMINATED
-                - ERROR
-    - name: list-tags-for-resource
-      description: Retrieves all tags assigned to a Amazon GameLift Streams resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) that you want to retrieve tags for.
-    - name: update-stream-group
-      description: Updates the configuration settings for an Amazon GameLift Streams stream group resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --default-application-identifier=: The unique identifier of the Amazon GameLift Streams application that you want to set as the default application in a stream group.
-        --description=: A descriptive label for the stream group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: An [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) or ID that uniquely identifies the stream group resource.
-        --location-configurations=: A set of one or more locations and the streaming capacity for each location.
-    - name: add-stream-group-locations
-      description: Add locations that can host stream sessions.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: A stream group to add the specified locations to.
-        --location-configurations=!: A set of one or more locations and the streaming capacity for each location.
     - name: export-stream-session-files
       description: Export the files that your application modifies or generates in a stream session, which can help you debug or verify your application.
       flags:
@@ -179,6 +9,14 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identifier=!: An [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) or ID that uniquely identifies the stream group resource.
         --output-uri=!: The S3 bucket URI where Amazon GameLift Streams uploads the set of compressed exported files for this stream session.
+        --stream-session-identifier=!: An [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) or ID that uniquely identifies the stream session resource.
+    - name: get-stream-session
+      description: Retrieves properties for a Amazon GameLift Streams stream session resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The stream group that runs this stream session.
         --stream-session-identifier=!: An [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) or ID that uniquely identifies the stream session resource.
     - name: list-applications
       description: Retrieves a list of all Amazon GameLift Streams applications that are associated with the Amazon Web Services account in use.
@@ -220,6 +58,159 @@ commands:
                 - TERMINATING
                 - TERMINATED
                 - ERROR
+    - name: remove-stream-group-locations
+      description: Removes a set of remote locations from this stream group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: A stream group to remove the specified locations from.
+        --locations=!: A set of locations to remove this stream group.
+    - name: delete-application
+      description: Permanently deletes an Amazon GameLift Streams application resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: An [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) or ID that uniquely identifies the application resource.
+    - name: delete-stream-group
+      description: Permanently deletes all compute resources and information related to a stream group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: An [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) or ID that uniquely identifies the stream group resource.
+    - name: list-stream-groups
+      description: Retrieves a list of all Amazon GameLift Streams stream groups that are associated with the Amazon Web Services account in use.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The number of results to return.
+        --next-token=: A token that marks the start of the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: tag-resource
+      description: Assigns one or more tags to a Amazon GameLift Streams resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) of the Amazon GameLift Streams resource that you want to apply tags to.
+        --tags=!: A list of tags, in the form of key-value pairs, to assign to the specified Amazon GameLift Streams resource.
+    - name: terminate-stream-session
+      description: Permanently terminates an active stream session.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: '[Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) or ID that uniquely identifies the stream group resource.'
+        --stream-session-identifier=!: '[Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) or ID that uniquely identifies the stream session resource.'
+    - name: add-stream-group-locations
+      description: Add locations that can host stream sessions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: A stream group to add the specified locations to.
+        --location-configurations=!: A set of one or more locations and the streaming capacity for each location.
+    - name: create-stream-group
+      description: Stream groups manage how Amazon GameLift Streams allocates resources and handles concurrent streams, allowing you to effectively manage capacity and costs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique identifier that represents a client request.
+        --default-application-identifier=: The unique identifier of the Amazon GameLift Streams application that you want to set as the default application in a stream group.
+        --description=!: A descriptive label for the stream group.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --location-configurations=: A set of one or more locations and the streaming capacity for each location.
+        --stream-class=!: The target stream quality for sessions that are hosted in this stream group.
+        --tags=: A list of labels to assign to the new stream group resource.
+      completion:
+        flag:
+            stream-class:
+                - gen4n_high
+                - gen4n_ultra
+                - gen4n_win2022
+                - gen5n_high
+                - gen5n_ultra
+                - gen5n_win2022
+    - name: disassociate-applications
+      description: When you disassociate, or unlink, an application from a stream group, you can no longer stream this application by using that stream group's allocated compute resources.
+      flags:
+        --application-identifiers=!: A set of applications that you want to disassociate from the stream group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: A stream group to disassociate these applications from.
+    - name: get-application
+      description: Retrieves properties for an Amazon GameLift Streams application resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: An [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) or ID that uniquely identifies the application resource.
+    - name: get-stream-group
+      description: Retrieves properties for a Amazon GameLift Streams stream group resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: An [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) or ID that uniquely identifies the stream group resource.
+    - name: list-stream-sessions-by-account
+      description: Retrieves a list of Amazon GameLift Streams stream sessions that this user account has access to.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --export-files-status=: Filter by the exported files status.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The number of results to return.
+        --next-token=: The token that marks the start of the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: Filter by the stream session status.
+      completion:
+        flag:
+            export-files-status:
+                - SUCCEEDED
+                - FAILED
+                - PENDING
+            status:
+                - ACTIVATING
+                - ACTIVE
+                - CONNECTED
+                - PENDING_CLIENT_RECONNECTION
+                - RECONNECTING
+                - TERMINATING
+                - TERMINATED
+                - ERROR
+    - name: associate-applications
+      description: When you associate, or link, an application with a stream group, then Amazon GameLift Streams can launch the application using the stream group's allocated compute resources.
+      flags:
+        --application-identifiers=!: A set of applications to associate with the stream group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: A stream group to associate to the applications.
+    - name: create-stream-session-connection
+      description: Enables clients to reconnect to a stream session while preserving all session state and data in the disconnected session.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique identifier that represents a client request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: '[Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) or ID that uniquely identifies the stream group resource.'
+        --signal-request=!: A WebRTC ICE offer string to use when initializing a WebRTC connection.
+        --stream-session-identifier=!: '[Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) or ID that uniquely identifies the stream session resource.'
+    - name: list-tags-for-resource
+      description: Retrieves all tags assigned to a Amazon GameLift Streams resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) that you want to retrieve tags for.
     - name: start-stream-session
       description: This action initiates a new stream session and outputs connection information that clients can use to access the stream.
       flags:
@@ -260,21 +251,30 @@ commands:
         --description=: A human-readable label for the application.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identifier=!: An [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) or ID that uniquely identifies the application resource.
-    - name: delete-application
-      description: Permanently deletes an Amazon GameLift Streams application resource.
+    - name: update-stream-group
+      description: Updates the configuration settings for an Amazon GameLift Streams stream group resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --default-application-identifier=: The unique identifier of the Amazon GameLift Streams application that you want to set as the default application in a stream group.
+        --description=: A descriptive label for the stream group.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: An [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) or ID that uniquely identifies the application resource.
-    - name: remove-stream-group-locations
-      description: Removes a set of remote locations from this stream group.
+        --identifier=!: An [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) or ID that uniquely identifies the stream group resource.
+        --location-configurations=: A set of one or more locations and the streaming capacity for each location.
+    - name: create-application
+      description: Creates an application resource in Amazon GameLift Streams, which specifies the application content you want to stream, such as a game build or other software, and configures the settings to run it.
       flags:
+        --application-log-output-uri=: An Amazon S3 URI to a bucket where you would like Amazon GameLift Streams to save application logs.
+        --application-log-paths=: Locations of log files that your content generates during a stream session.
+        --application-source-uri=!: The location of the content that you want to stream.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique identifier that represents a client request.
+        --description=!: A human-readable label for the application.
+        --executable-path=!: The relative path and file name of the executable file that Amazon GameLift Streams will stream.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: A stream group to remove the specified locations from.
-        --locations=!: A set of locations to remove this stream group.
+        --runtime-environment=!: Configuration settings that identify the operating system for an application resource.
+        --tags=: A list of labels to assign to the new application resource.
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:
