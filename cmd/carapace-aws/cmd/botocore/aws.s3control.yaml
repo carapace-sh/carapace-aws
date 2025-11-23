@@ -1,535 +1,231 @@
 name: s3control
 description: AWS S3 Control
 commands:
-    - name: get-access-grants-location
-      description: Retrieves the details of a particular location registered in your S3 Access Grants instance.
-      flags:
-        --access-grants-location-id=!: The ID of the registered location that you are retrieving.
-        --account-id=!: The Amazon Web Services account ID of the S3 Access Grants instance.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-multi-region-access-point-policy-status
-      description: This operation is not supported by directory buckets.
-      flags:
-        --account-id=!: The Amazon Web Services account ID for the owner of the Multi-Region Access Point.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: Specifies the Multi-Region Access Point.
-    - name: list-access-points
-      description: This operation is not supported by directory buckets.
-      flags:
-        --account-id=!: The Amazon Web Services account ID for the account that owns the specified access points.
-        --bucket=: The name of the bucket whose associated access points you want to list.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source-id=: The unique identifier for the data source of the access point.
-        --data-source-type=: The type of the data source that the access point is attached to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of access points that you want to include in the list.
-        --next-token=: A continuation token.
-    - name: put-access-grants-instance-resource-policy
-      description: Updates the resource policy of the S3 Access Grants instance.
-      flags:
-        --account-id=!: The Amazon Web Services account ID of the S3 Access Grants instance.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --organization=: The Organization of the resource policy of the S3 Access Grants instance.
-        --policy=!: The resource policy of the S3 Access Grants instance that you are updating.
-    - name: put-access-point-scope
-      description: Creates or replaces the access point scope for a directory bucket.
-      flags:
-        --account-id=!: The Amazon Web Services account ID that owns the access point with scope that you want to create or replace.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the access point with the scope that you want to create or replace.
-        --scope=!: Object prefixes, API operations, or a combination of both.
-    - name: create-access-grants-instance
-      description: Creates an S3 Access Grants instance, which serves as a logical grouping for access grants.
-      flags:
-        --account-id=!: The Amazon Web Services account ID of the S3 Access Grants instance.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-center-arn=: If you would like to associate your S3 Access Grants instance with an Amazon Web Services IAM Identity Center instance, use this field to pass the Amazon Resource Name (ARN) of the Amazon Web Services IAM Identity Center instance that you are associating with your S3 Access Grants instance.
-        --tags=: The Amazon Web Services resource tags that you are adding to the S3 Access Grants instance.
-    - name: delete-bucket-tagging
-      description: This action deletes an Amazon S3 on Outposts bucket's tags.
-      flags:
-        --account-id=!: The Amazon Web Services account ID of the Outposts bucket tag set to be removed.
-        --bucket=!: The bucket ARN that has the tag set to be removed.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-multi-region-access-point
-      description: This operation is not supported by directory buckets.
-      flags:
-        --account-id=!: The Amazon Web Services account ID for the owner of the Multi-Region Access Point.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: An idempotency token used to identify the request and guarantee that requests are unique.
-        --details=!: A container element containing details about the Multi-Region Access Point.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-access-grants-instance
-      description: Retrieves the S3 Access Grants instance for a Region in your account.
-      flags:
-        --account-id=!: The Amazon Web Services account ID of the S3 Access Grants instance.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-access-grants
-      description: Returns the list of access grants in your S3 Access Grants instance.
-      flags:
-        --account-id=!: The Amazon Web Services account ID of the S3 Access Grants instance.
-        --application-arn=: The Amazon Resource Name (ARN) of an Amazon Web Services IAM Identity Center application associated with your Identity Center instance.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --grant-scope=: The S3 path of the data to which you are granting access.
-        --grantee-identifier=: The unique identifer of the `Grantee`.
-        --grantee-type=: The type of the grantee to which access has been granted.
-        --max-results=: The maximum number of access grants that you would like returned in the `List Access Grants` response.
-        --next-token=: A pagination token to request the next page of results.
-        --permission=: 'The type of permission granted to your S3 data, which can be set to one of the following values:'
-      completion:
-        flag:
-            grantee-type:
-                - DIRECTORY_USER
-                - DIRECTORY_GROUP
-                - IAM
-            permission:
-                - READ
-                - WRITE
-                - READWRITE
-    - name: put-job-tagging
-      description: Sets the supplied tag-set on an S3 Batch Operations job.
-      flags:
-        --account-id=!: The Amazon Web Services account ID associated with the S3 Batch Operations job.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The ID for the S3 Batch Operations job whose tags you want to replace.
-        --tags=!: The set of tags to associate with the S3 Batch Operations job.
-    - name: tag-resource
-      description: Creates a new user-defined tag or updates an existing tag.
-      flags:
-        --account-id=!: The Amazon Web Services account ID that created the S3 resource that you're trying to add tags to or the requester's account ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the S3 resource that you're applying tags to.
-        --tags=!: The Amazon Web Services resource tags that you want to add to the specified S3 resource.
-    - name: untag-resource
-      description: This operation removes the specified user-defined tags from an S3 resource.
-      flags:
-        --account-id=!: The Amazon Web Services account ID that owns the resource that you're trying to remove the tags from.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the S3 resource that you're removing tags from.
-        --tag-keys=!: The array of tag key-value pairs that you're trying to remove from of the S3 resource.
-    - name: delete-storage-lens-configuration
-      description: This operation is not supported by directory buckets.
-      flags:
-        --account-id=!: The account ID of the requester.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --config-id=!: The ID of the S3 Storage Lens configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-access-grant
-      description: Deletes the access grant from the S3 Access Grants instance.
-      flags:
-        --access-grant-id=!: The ID of the access grant.
-        --account-id=!: The Amazon Web Services account ID of the S3 Access Grants instance.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-access-grants-instance-resource-policy
-      description: Deletes the resource policy of the S3 Access Grants instance.
-      flags:
-        --account-id=!: The Amazon Web Services account ID of the S3 Access Grants instance.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-access-point-policy
-      description: Deletes the access point policy for the specified access point.
-      flags:
-        --account-id=!: The account ID for the account that owns the specified access point.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the access point whose policy you want to delete.
-    - name: list-storage-lens-configurations
-      description: This operation is not supported by directory buckets.
-      flags:
-        --account-id=!: The account ID of the requester.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --next-token=: A pagination token to request the next page of results.
     - name: put-access-point-policy-for-object-lambda
       description: This operation is not supported by directory buckets.
       flags:
         --account-id=!: The account ID for the account that owns the specified Object Lambda Access Point.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the Object Lambda Access Point.
         --policy=!: Object Lambda Access Point resource policy document.
-    - name: put-bucket-versioning
-      description: This operation sets the versioning state for S3 on Outposts buckets only.
-      flags:
-        --account-id=!: The Amazon Web Services account ID of the S3 on Outposts bucket.
-        --bucket=!: The S3 on Outposts bucket to set the versioning state for.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mfa=: The concatenation of the authentication device's serial number, a space, and the value that is displayed on your authentication device.
-        --versioning-configuration=!: The root-level tag for the `VersioningConfiguration` parameters.
-    - name: get-access-grants-instance-for-prefix
-      description: Retrieve the S3 Access Grants instance that contains a particular prefix.
-      flags:
-        --account-id=!: The ID of the Amazon Web Services account that is making this request.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --s3-prefix=!: The S3 prefix of the access grants that you would like to retrieve.
-    - name: get-access-point-policy-status-for-object-lambda
+    - name: put-storage-lens-configuration-tagging
       description: This operation is not supported by directory buckets.
       flags:
-        --account-id=!: The account ID for the account that owns the specified Object Lambda Access Point.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the Object Lambda Access Point.
-    - name: get-multi-region-access-point-policy
-      description: This operation is not supported by directory buckets.
-      flags:
-        --account-id=!: The Amazon Web Services account ID for the owner of the Multi-Region Access Point.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: Specifies the Multi-Region Access Point.
-    - name: get-storage-lens-group
-      description: Retrieves the Storage Lens group configuration details.
-      flags:
-        --account-id=!: The Amazon Web Services account ID associated with the Storage Lens group that you're trying to retrieve the details for.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the Storage Lens group that you're trying to retrieve the configuration details for.
-    - name: list-multi-region-access-points
-      description: This operation is not supported by directory buckets.
-      flags:
-        --account-id=!: The Amazon Web Services account ID for the owner of the Multi-Region Access Point.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: Not currently used.
-        --next-token=: Not currently used.
-    - name: put-bucket-lifecycle-configuration
-      description: This action puts a lifecycle configuration to an Amazon S3 on Outposts bucket.
-      flags:
-        --account-id=!: The Amazon Web Services account ID of the Outposts bucket.
-        --bucket=!: The name of the bucket for which to set the configuration.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lifecycle-configuration=: Container for lifecycle rules.
+        --account-id=!: The account ID of the requester.
+        --config-id=!: The ID of the S3 Storage Lens configuration.
+        --tags=!: The tag set of the S3 Storage Lens configuration.
     - name: submit-multi-region-access-point-routes
       description: This operation is not supported by directory buckets.
       flags:
         --account-id=!: The Amazon Web Services account ID for the owner of the Multi-Region Access Point.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --mrap=!: The Multi-Region Access Point ARN.
         --route-updates=!: The different routes that make up the new route configuration.
-    - name: get-access-grants-instance-resource-policy
-      description: Returns the resource policy of the S3 Access Grants instance.
+    - name: delete-access-point-scope
+      description: Deletes an existing access point scope for a directory bucket.
       flags:
-        --account-id=!: The Amazon Web Services account ID of the S3 Access Grants instance.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-bucket-lifecycle-configuration
-      description: This action gets an Amazon S3 on Outposts bucket's lifecycle configuration.
-      flags:
-        --account-id=!: The Amazon Web Services account ID of the Outposts bucket.
-        --bucket=!: The Amazon Resource Name (ARN) of the bucket.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-bucket-replication
-      description: This operation gets an Amazon S3 on Outposts bucket's replication configuration.
-      flags:
-        --account-id=!: The Amazon Web Services account ID of the Outposts bucket.
-        --bucket=!: Specifies the bucket to get the replication information for.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-multi-region-access-point-routes
-      description: This operation is not supported by directory buckets.
-      flags:
-        --account-id=!: The Amazon Web Services account ID for the owner of the Multi-Region Access Point.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mrap=!: The Multi-Region Access Point ARN.
-    - name: list-storage-lens-groups
-      description: Lists all the Storage Lens groups in the specified home Region.
-      flags:
-        --account-id=!: The Amazon Web Services account ID that owns the Storage Lens groups.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --next-token=: The token for the next set of results, or `null` if there are no more results.
-    - name: get-data-access
-      description: Returns a temporary access credential from S3 Access Grants to the grantee or client application.
-      flags:
-        --account-id=!: The Amazon Web Services account ID of the S3 Access Grants instance.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --duration-seconds=: The session duration, in seconds, of the temporary access credential that S3 Access Grants vends to the grantee or client application.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --permission=!: 'The type of permission granted to your S3 data, which can be set to one of the following values:'
-        --privilege=: The scope of the temporary access credential that S3 Access Grants vends to the grantee or client application.
-        --target-type=: The type of `Target`.
-        --target=!: The S3 URI path of the data to which you are requesting temporary access credentials.
-      completion:
-        flag:
-            permission:
-                - READ
-                - WRITE
-                - READWRITE
-            privilege:
-                - Minimal
-                - Default
-            target-type:
-                - Object
-    - name: get-multi-region-access-point
-      description: This operation is not supported by directory buckets.
-      flags:
-        --account-id=!: The Amazon Web Services account ID for the owner of the Multi-Region Access Point.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the Multi-Region Access Point whose configuration information you want to receive.
-    - name: get-storage-lens-configuration
-      description: This operation is not supported by directory buckets.
-      flags:
-        --account-id=!: The account ID of the requester.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --config-id=!: The ID of the Amazon S3 Storage Lens configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-access-points-for-directory-buckets
-      description: Returns a list of the access points that are owned by the Amazon Web Services account and that are associated with the specified directory bucket.
-      flags:
-        --account-id=!: The Amazon Web Services account ID that owns the access points.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --directory-bucket=: The name of the directory bucket associated with the access points you want to list.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of access points that you would like returned in the `ListAccessPointsForDirectoryBuckets` response.
-        --next-token=: If `NextToken` is returned, there are more access points available than requested in the `maxResults` value.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: delete-bucket-replication
-      description: This operation deletes an Amazon S3 on Outposts bucket's replication configuration.
-      flags:
-        --account-id=!: The Amazon Web Services account ID of the Outposts bucket to delete the replication configuration for.
-        --bucket=!: Specifies the S3 on Outposts bucket to delete the replication configuration for.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-access-point-policy-for-object-lambda
-      description: This operation is not supported by directory buckets.
-      flags:
-        --account-id=!: The account ID for the account that owns the specified Object Lambda Access Point.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the Object Lambda Access Point you want to delete the policy for.
+        --account-id=!: The Amazon Web Services account ID that owns the access point with the scope that you want to delete.
+        --name=!: The name of the access point with the scope that you want to delete.
     - name: delete-bucket-lifecycle-configuration
       description: This action deletes an Amazon S3 on Outposts bucket's lifecycle configuration.
       flags:
         --account-id=!: The account ID of the lifecycle configuration to delete.
         --bucket=!: Specifies the bucket.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-access-grants-instances
-      description: Returns a list of S3 Access Grants instances.
+    - name: delete-bucket-tagging
+      description: This action deletes an Amazon S3 on Outposts bucket's tags.
+      flags:
+        --account-id=!: The Amazon Web Services account ID of the Outposts bucket tag set to be removed.
+        --bucket=!: The bucket ARN that has the tag set to be removed.
+    - name: get-job-tagging
+      description: Returns the tags on an S3 Batch Operations job.
+      flags:
+        --account-id=!: The Amazon Web Services account ID associated with the S3 Batch Operations job.
+        --job-id=!: The ID for the S3 Batch Operations job whose tags you want to retrieve.
+    - name: get-public-access-block
+      description: This operation is not supported by directory buckets.
+      flags:
+        --account-id=!: The account ID for the Amazon Web Services account whose `PublicAccessBlock` configuration you want to retrieve.
+    - name: get-storage-lens-group
+      description: Retrieves the Storage Lens group configuration details.
+      flags:
+        --account-id=!: The Amazon Web Services account ID associated with the Storage Lens group that you're trying to retrieve the details for.
+        --name=!: The name of the Storage Lens group that you're trying to retrieve the configuration details for.
+    - name: put-multi-region-access-point-policy
+      description: This operation is not supported by directory buckets.
+      flags:
+        --account-id=!: The Amazon Web Services account ID for the owner of the Multi-Region Access Point.
+        --client-token=!: An idempotency token used to identify the request and guarantee that requests are unique.
+        --details=!: A container element containing the details of the policy for the Multi-Region Access Point.
+    - name: delete-access-grants-instance
+      description: Deletes your S3 Access Grants instance.
       flags:
         --account-id=!: The Amazon Web Services account ID of the S3 Access Grants instance.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of access grants that you would like returned in the `List Access Grants` response.
-        --next-token=: A pagination token to request the next page of results.
+    - name: delete-access-grants-instance-resource-policy
+      description: Deletes the resource policy of the S3 Access Grants instance.
+      flags:
+        --account-id=!: The Amazon Web Services account ID of the S3 Access Grants instance.
+    - name: get-access-grants-instance-for-prefix
+      description: Retrieve the S3 Access Grants instance that contains a particular prefix.
+      flags:
+        --account-id=!: The ID of the Amazon Web Services account that is making this request.
+        --s3-prefix=!: The S3 prefix of the access grants that you would like to retrieve.
+    - name: get-access-point-policy-for-object-lambda
+      description: This operation is not supported by directory buckets.
+      flags:
+        --account-id=!: The account ID for the account that owns the specified Object Lambda Access Point.
+        --name=!: The name of the Object Lambda Access Point.
     - name: list-caller-access-grants
       description: Use this API to list the access grants that grant the caller access to Amazon S3 data through S3 Access Grants.
       flags:
         --account-id=!: The Amazon Web Services account ID of the S3 Access Grants instance.
         --allowed-by-application: If this optional parameter is passed in the request, a filter is applied to the results.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --grant-scope=: The S3 path of the data that you would like to access.
-        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of access grants that you would like returned in the `List Caller Access Grants` response.
         --next-token=: A pagination token to request the next page of results.
         --no-allowed-by-application: If this optional parameter is passed in the request, a filter is applied to the results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: create-access-grant
-      description: Creates an access grant that gives a grantee access to your S3 data.
-      flags:
-        --access-grants-location-configuration=: The configuration options of the grant location.
-        --access-grants-location-id=!: The ID of the registered location to which you are granting access.
-        --account-id=!: The Amazon Web Services account ID of the S3 Access Grants instance.
-        --application-arn=: The Amazon Resource Name (ARN) of an Amazon Web Services IAM Identity Center application associated with your Identity Center instance.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --grantee=!: The user, group, or role to which you are granting access.
-        --permission=!: 'The type of access that you are granting to your S3 data, which can be set to one of the following values:'
-        --s3-prefix-type=: The type of `S3SubPrefix`.
-        --tags=: The Amazon Web Services resource tags that you are adding to the access grant.
-      completion:
-        flag:
-            permission:
-                - READ
-                - WRITE
-                - READWRITE
-            s3-prefix-type:
-                - Object
-    - name: describe-multi-region-access-point-operation
-      description: This operation is not supported by directory buckets.
-      flags:
-        --account-id=!: The Amazon Web Services account ID for the owner of the Multi-Region Access Point.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --request-token-arn=!: The request token associated with the request you want to know about.
-    - name: get-bucket-policy
-      description: This action gets a bucket policy for an Amazon S3 on Outposts bucket.
+    - name: put-bucket-tagging
+      description: This action puts tags on an Amazon S3 on Outposts bucket.
       flags:
         --account-id=!: The Amazon Web Services account ID of the Outposts bucket.
-        --bucket=!: Specifies the bucket.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-access-point-for-object-lambda
+        --bucket=!: The Amazon Resource Name (ARN) of the bucket.
+        --tagging=!: ""
+    - name: get-storage-lens-configuration
       description: This operation is not supported by directory buckets.
       flags:
-        --account-id=!: The account ID for the account that owns the specified Object Lambda Access Point.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the Object Lambda Access Point.
-    - name: get-access-point-policy-status
-      description: This operation is not supported by directory buckets.
+        --account-id=!: The account ID of the requester.
+        --config-id=!: The ID of the Amazon S3 Storage Lens configuration.
+    - name: list-storage-lens-groups
+      description: Lists all the Storage Lens groups in the specified home Region.
       flags:
-        --account-id=!: The account ID for the account that owns the specified access point.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the access point whose policy status you want to retrieve.
-    - name: get-bucket-tagging
-      description: This action gets an Amazon S3 on Outposts bucket's tags.
-      flags:
-        --account-id=!: The Amazon Web Services account ID of the Outposts bucket.
-        --bucket=!: Specifies the bucket.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-access-point-for-object-lambda
-      description: This operation is not supported by directory buckets.
-      flags:
-        --account-id=!: The Amazon Web Services account ID for owner of the specified Object Lambda Access Point.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration=!: Object Lambda Access Point configuration as a JSON document.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name you want to assign to this Object Lambda Access Point.
-    - name: create-storage-lens-group
-      description: Creates a new S3 Storage Lens group and associates it with the specified Amazon Web Services account ID.
-      flags:
-        --account-id=!: The Amazon Web Services account ID that the Storage Lens group is created from and associated with.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --storage-lens-group=!: The Storage Lens group configuration.
-        --tags=: The Amazon Web Services resource tags that you're adding to your Storage Lens group.
+        --account-id=!: The Amazon Web Services account ID that owns the Storage Lens groups.
+        --next-token=: The token for the next set of results, or `null` if there are no more results.
     - name: delete-access-grants-location
       description: Deregisters a location from your S3 Access Grants instance.
       flags:
         --access-grants-location-id=!: The ID of the registered location that you are deregistering from your S3 Access Grants instance.
         --account-id=!: The Amazon Web Services account ID of the S3 Access Grants instance.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-job-tagging
-      description: Removes the entire tag set from the specified S3 Batch Operations job.
+    - name: delete-access-point-for-object-lambda
+      description: This operation is not supported by directory buckets.
+      flags:
+        --account-id=!: The account ID for the account that owns the specified Object Lambda Access Point.
+        --name=!: The name of the access point you want to delete.
+    - name: get-access-point-for-object-lambda
+      description: This operation is not supported by directory buckets.
+      flags:
+        --account-id=!: The account ID for the account that owns the specified Object Lambda Access Point.
+        --name=!: The name of the Object Lambda Access Point.
+    - name: create-access-point-for-object-lambda
+      description: This operation is not supported by directory buckets.
+      flags:
+        --account-id=!: The Amazon Web Services account ID for owner of the specified Object Lambda Access Point.
+        --configuration=!: Object Lambda Access Point configuration as a JSON document.
+        --name=!: The name you want to assign to this Object Lambda Access Point.
+    - name: describe-job
+      description: Retrieves the configuration parameters and status for a Batch Operations job.
       flags:
         --account-id=!: The Amazon Web Services account ID associated with the S3 Batch Operations job.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The ID for the S3 Batch Operations job whose tags you want to delete.
-    - name: delete-storage-lens-group
-      description: Deletes an existing S3 Storage Lens group.
+        --job-id=!: The ID for the job whose information you want to retrieve.
+    - name: get-access-grants-instance-resource-policy
+      description: Returns the resource policy of the S3 Access Grants instance.
       flags:
-        --account-id=!: The Amazon Web Services account ID used to create the Storage Lens group that you're trying to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the Storage Lens group that you're trying to delete.
-    - name: get-bucket
-      description: Gets an Amazon S3 on Outposts bucket.
+        --account-id=!: The Amazon Web Services account ID of the S3 Access Grants instance.
+    - name: get-bucket-lifecycle-configuration
+      description: This action gets an Amazon S3 on Outposts bucket's lifecycle configuration.
       flags:
         --account-id=!: The Amazon Web Services account ID of the Outposts bucket.
-        --bucket=!: Specifies the bucket.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-bucket-versioning
-      description: This operation returns the versioning state for S3 on Outposts buckets only.
+        --bucket=!: The Amazon Resource Name (ARN) of the bucket.
+    - name: get-multi-region-access-point
+      description: This operation is not supported by directory buckets.
       flags:
-        --account-id=!: The Amazon Web Services account ID of the S3 on Outposts bucket.
-        --bucket=!: The S3 on Outposts bucket to return the versioning state for.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --account-id=!: The Amazon Web Services account ID for the owner of the Multi-Region Access Point.
+        --name=!: The name of the Multi-Region Access Point whose configuration information you want to receive.
+    - name: get-multi-region-access-point-routes
+      description: This operation is not supported by directory buckets.
+      flags:
+        --account-id=!: The Amazon Web Services account ID for the owner of the Multi-Region Access Point.
+        --mrap=!: The Multi-Region Access Point ARN.
+    - name: create-access-grants-instance
+      description: Creates an S3 Access Grants instance, which serves as a logical grouping for access grants.
+      flags:
+        --account-id=!: The Amazon Web Services account ID of the S3 Access Grants instance.
+        --identity-center-arn=: If you would like to associate your S3 Access Grants instance with an Amazon Web Services IAM Identity Center instance, use this field to pass the Amazon Resource Name (ARN) of the Amazon Web Services IAM Identity Center instance that you are associating with your S3 Access Grants instance.
+        --tags=: The Amazon Web Services resource tags that you are adding to the S3 Access Grants instance.
+    - name: delete-multi-region-access-point
+      description: This operation is not supported by directory buckets.
+      flags:
+        --account-id=!: The Amazon Web Services account ID for the owner of the Multi-Region Access Point.
+        --client-token=!: An idempotency token used to identify the request and guarantee that requests are unique.
+        --details=!: A container element containing details about the Multi-Region Access Point.
+    - name: get-access-point-policy
+      description: Returns the access point policy associated with the specified access point.
+      flags:
+        --account-id=!: The account ID for the account that owns the specified access point.
+        --name=!: The name of the access point whose policy you want to retrieve.
+    - name: put-bucket-lifecycle-configuration
+      description: This action puts a lifecycle configuration to an Amazon S3 on Outposts bucket.
+      flags:
+        --account-id=!: The Amazon Web Services account ID of the Outposts bucket.
+        --bucket=!: The name of the bucket for which to set the configuration.
+        --lifecycle-configuration=: Container for lifecycle rules.
+    - name: put-bucket-replication
+      description: This action creates an Amazon S3 on Outposts bucket's replication configuration.
+      flags:
+        --account-id=!: The Amazon Web Services account ID of the Outposts bucket.
+        --bucket=!: Specifies the S3 on Outposts bucket to set the configuration for.
+        --replication-configuration=!: ""
     - name: create-access-point
       description: Creates an access point and associates it to a specified bucket.
       flags:
         --account-id=!: The Amazon Web Services account ID for the account that owns the specified access point.
         --bucket-account-id=: The Amazon Web Services account ID associated with the S3 bucket associated with this access point.
         --bucket=!: The name of the bucket that you want to associate this access point with.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name you want to assign to this access point.
         --public-access-block-configuration=: The `PublicAccessBlock` configuration that you want to apply to the access point.
         --scope=: For directory buckets, you can filter access control to specific prefixes, API operations, or a combination of both.
         --tags=: An array of tags that you can apply to an access point.
         --vpc-configuration=: If you include this field, Amazon S3 restricts access to this access point to requests from the specified virtual private cloud (VPC).
+    - name: delete-access-point-policy-for-object-lambda
+      description: This operation is not supported by directory buckets.
+      flags:
+        --account-id=!: The account ID for the account that owns the specified Object Lambda Access Point.
+        --name=!: The name of the Object Lambda Access Point you want to delete the policy for.
+    - name: delete-bucket-policy
+      description: This action deletes an Amazon S3 on Outposts bucket policy.
+      flags:
+        --account-id=!: The account ID of the Outposts bucket.
+        --bucket=!: Specifies the bucket.
+    - name: delete-storage-lens-configuration
+      description: This operation is not supported by directory buckets.
+      flags:
+        --account-id=!: The account ID of the requester.
+        --config-id=!: The ID of the S3 Storage Lens configuration.
+    - name: dissociate-access-grants-identity-center
+      description: Dissociates the Amazon Web Services IAM Identity Center instance from the S3 Access Grants instance.
+      flags:
+        --account-id=!: The Amazon Web Services account ID of the S3 Access Grants instance.
+    - name: update-job-status
+      description: Updates the status for the specified job.
+      flags:
+        --account-id=!: The Amazon Web Services account ID associated with the S3 Batch Operations job.
+        --job-id=!: The ID of the job whose status you want to update.
+        --requested-job-status=!: The status that you want to move the specified job to.
+        --status-update-reason=: A description of the reason why you want to change the specified job's status.
+      completion:
+        flag:
+            requested-job-status:
+                - Cancelled
+                - Ready
+    - name: create-access-grants-location
+      description: The S3 data location that you would like to register in your S3 Access Grants instance.
+      flags:
+        --account-id=!: The Amazon Web Services account ID of the S3 Access Grants instance.
+        --iam-role-arn=!: The Amazon Resource Name (ARN) of the IAM role for the registered location.
+        --location-scope=!: The S3 path to the location that you are registering.
+        --tags=: The Amazon Web Services resource tags that you are adding to the S3 Access Grants location.
     - name: create-bucket
       description: This action creates an Amazon S3 on Outposts bucket.
       flags:
         --acl=: The canned ACL to apply to the bucket.
         --bucket=!: The name of the bucket.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --create-bucket-configuration=: The configuration information for the bucket.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --grant-full-control=: Allows grantee the read, write, read ACP, and write ACP permissions on the bucket.
         --grant-read-acp=: Allows grantee to read the bucket ACL.
         --grant-read=: Allows grantee to list the objects in the bucket.
@@ -550,53 +246,202 @@ commands:
       flags:
         --account-id=!: The account ID that owns the Outposts bucket.
         --bucket=!: Specifies the bucket being deleted.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-bucket-replication
+      description: This operation deletes an Amazon S3 on Outposts bucket's replication configuration.
+      flags:
+        --account-id=!: The Amazon Web Services account ID of the Outposts bucket to delete the replication configuration for.
+        --bucket=!: Specifies the S3 on Outposts bucket to delete the replication configuration for.
+    - name: delete-storage-lens-configuration-tagging
+      description: This operation is not supported by directory buckets.
+      flags:
+        --account-id=!: The account ID of the requester.
+        --config-id=!: The ID of the S3 Storage Lens configuration.
     - name: get-access-point
       description: Returns configuration information about the specified access point.
       flags:
         --account-id=!: The Amazon Web Services account ID for the account that owns the specified access point.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the access point whose configuration information you want to retrieve.
+    - name: put-public-access-block
+      description: This operation is not supported by directory buckets.
+      flags:
+        --account-id=!: The account ID for the Amazon Web Services account whose `PublicAccessBlock` configuration you want to set.
+        --public-access-block-configuration=!: The `PublicAccessBlock` configuration that you want to apply to the specified Amazon Web Services account.
+    - name: untag-resource
+      description: This operation removes the specified user-defined tags from an S3 resource.
+      flags:
+        --account-id=!: The Amazon Web Services account ID that owns the resource that you're trying to remove the tags from.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the S3 resource that you're removing tags from.
+        --tag-keys=!: The array of tag key-value pairs that you're trying to remove from of the S3 resource.
+    - name: delete-access-point-policy
+      description: Deletes the access point policy for the specified access point.
+      flags:
+        --account-id=!: The account ID for the account that owns the specified access point.
+        --name=!: The name of the access point whose policy you want to delete.
+    - name: delete-storage-lens-group
+      description: Deletes an existing S3 Storage Lens group.
+      flags:
+        --account-id=!: The Amazon Web Services account ID used to create the Storage Lens group that you're trying to delete.
+        --name=!: The name of the Storage Lens group that you're trying to delete.
+    - name: get-access-grants-instance
+      description: Retrieves the S3 Access Grants instance for a Region in your account.
+      flags:
+        --account-id=!: The Amazon Web Services account ID of the S3 Access Grants instance.
+    - name: get-access-point-policy-status
+      description: This operation is not supported by directory buckets.
+      flags:
+        --account-id=!: The account ID for the account that owns the specified access point.
+        --name=!: The name of the access point whose policy status you want to retrieve.
+    - name: list-multi-region-access-points
+      description: This operation is not supported by directory buckets.
+      flags:
+        --account-id=!: The Amazon Web Services account ID for the owner of the Multi-Region Access Point.
+        --max-results=: Not currently used.
+        --next-token=: Not currently used.
     - name: put-access-point-policy
       description: Associates an access policy with the specified access point.
       flags:
         --account-id=!: The Amazon Web Services account ID for owner of the bucket associated with the specified access point.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the access point that you want to associate with the specified policy.
         --policy=!: The policy that you want to apply to the specified access point.
-    - name: put-bucket-tagging
-      description: This action puts tags on an Amazon S3 on Outposts bucket.
+    - name: update-job-priority
+      description: Updates an existing S3 Batch Operations job's priority.
       flags:
-        --account-id=!: The Amazon Web Services account ID of the Outposts bucket.
-        --bucket=!: The Amazon Resource Name (ARN) of the bucket.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tagging=!: ""
+        --account-id=!: The Amazon Web Services account ID associated with the S3 Batch Operations job.
+        --job-id=!: The ID for the job whose priority you want to update.
+        --priority=!: The priority you want to assign to this job.
+    - name: delete-access-point
+      description: Deletes the specified access point.
+      flags:
+        --account-id=!: The Amazon Web Services account ID for the account that owns the specified access point.
+        --name=!: The name of the access point you want to delete.
+    - name: delete-job-tagging
+      description: Removes the entire tag set from the specified S3 Batch Operations job.
+      flags:
+        --account-id=!: The Amazon Web Services account ID associated with the S3 Batch Operations job.
+        --job-id=!: The ID for the S3 Batch Operations job whose tags you want to delete.
     - name: get-access-point-scope
       description: Returns the access point scope for a directory bucket.
       flags:
         --account-id=!: The Amazon Web Services account ID that owns the access point with the scope that you want to retrieve.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the access point with the scope you want to retrieve.
+    - name: get-bucket-policy
+      description: This action gets a bucket policy for an Amazon S3 on Outposts bucket.
+      flags:
+        --account-id=!: The Amazon Web Services account ID of the Outposts bucket.
+        --bucket=!: Specifies the bucket.
+    - name: get-data-access
+      description: Returns a temporary access credential from S3 Access Grants to the grantee or client application.
+      flags:
+        --account-id=!: The Amazon Web Services account ID of the S3 Access Grants instance.
+        --duration-seconds=: The session duration, in seconds, of the temporary access credential that S3 Access Grants vends to the grantee or client application.
+        --permission=!: 'The type of permission granted to your S3 data, which can be set to one of the following values:'
+        --privilege=: The scope of the temporary access credential that S3 Access Grants vends to the grantee or client application.
+        --target-type=: The type of `Target`.
+        --target=!: The S3 URI path of the data to which you are requesting temporary access credentials.
+      completion:
+        flag:
+            permission:
+                - READ
+                - WRITE
+                - READWRITE
+            privilege:
+                - Minimal
+                - Default
+            target-type:
+                - Object
+    - name: list-access-points
+      description: This operation is not supported by directory buckets.
+      flags:
+        --account-id=!: The Amazon Web Services account ID for the account that owns the specified access points.
+        --bucket=: The name of the bucket whose associated access points you want to list.
+        --data-source-id=: The unique identifier for the data source of the access point.
+        --data-source-type=: The type of the data source that the access point is attached to.
+        --max-results=: The maximum number of access points that you want to include in the list.
+        --next-token=: A continuation token.
+    - name: list-access-points-for-directory-buckets
+      description: Returns a list of the access points that are owned by the Amazon Web Services account and that are associated with the specified directory bucket.
+      flags:
+        --account-id=!: The Amazon Web Services account ID that owns the access points.
+        --directory-bucket=: The name of the directory bucket associated with the access points you want to list.
+        --max-results=: The maximum number of access points that you would like returned in the `ListAccessPointsForDirectoryBuckets` response.
+        --next-token=: If `NextToken` is returned, there are more access points available than requested in the `maxResults` value.
+    - name: list-jobs
+      description: Lists current S3 Batch Operations jobs as well as the jobs that have ended within the last 90 days for the Amazon Web Services account making the request.
+      flags:
+        --account-id=!: The Amazon Web Services account ID associated with the S3 Batch Operations job.
+        --job-statuses=: The `List Jobs` request returns jobs that match the statuses listed in this element.
+        --max-results=: The maximum number of jobs that Amazon S3 will include in the `List Jobs` response.
+        --next-token=: A pagination token to request the next page of results.
+    - name: associate-access-grants-identity-center
+      description: Associate your S3 Access Grants instance with an Amazon Web Services IAM Identity Center instance.
+      flags:
+        --account-id=!: The Amazon Web Services account ID of the S3 Access Grants instance.
+        --identity-center-arn=!: The Amazon Resource Name (ARN) of the Amazon Web Services IAM Identity Center instance that you are associating with your S3 Access Grants instance.
+    - name: delete-access-grant
+      description: Deletes the access grant from the S3 Access Grants instance.
+      flags:
+        --access-grant-id=!: The ID of the access grant.
+        --account-id=!: The Amazon Web Services account ID of the S3 Access Grants instance.
+    - name: get-bucket-replication
+      description: This operation gets an Amazon S3 on Outposts bucket's replication configuration.
+      flags:
+        --account-id=!: The Amazon Web Services account ID of the Outposts bucket.
+        --bucket=!: Specifies the bucket to get the replication information for.
+    - name: get-storage-lens-configuration-tagging
+      description: This operation is not supported by directory buckets.
+      flags:
+        --account-id=!: The account ID of the requester.
+        --config-id=!: The ID of the Amazon S3 Storage Lens configuration.
+    - name: list-storage-lens-configurations
+      description: This operation is not supported by directory buckets.
+      flags:
+        --account-id=!: The account ID of the requester.
+        --next-token=: A pagination token to request the next page of results.
+    - name: put-bucket-versioning
+      description: This operation sets the versioning state for S3 on Outposts buckets only.
+      flags:
+        --account-id=!: The Amazon Web Services account ID of the S3 on Outposts bucket.
+        --bucket=!: The S3 on Outposts bucket to set the versioning state for.
+        --mfa=: The concatenation of the authentication device's serial number, a space, and the value that is displayed on your authentication device.
+        --versioning-configuration=!: The root-level tag for the `VersioningConfiguration` parameters.
+    - name: tag-resource
+      description: Creates a new user-defined tag or updates an existing tag.
+      flags:
+        --account-id=!: The Amazon Web Services account ID that created the S3 resource that you're trying to add tags to or the requester's account ID.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the S3 resource that you're applying tags to.
+        --tags=!: The Amazon Web Services resource tags that you want to add to the specified S3 resource.
+    - name: update-access-grants-location
+      description: Updates the IAM role of a registered location in your S3 Access Grants instance.
+      flags:
+        --access-grants-location-id=!: The ID of the registered location that you are updating.
+        --account-id=!: The Amazon Web Services account ID of the S3 Access Grants instance.
+        --iam-role-arn=!: The Amazon Resource Name (ARN) of the IAM role for the registered location.
+    - name: create-access-grant
+      description: Creates an access grant that gives a grantee access to your S3 data.
+      flags:
+        --access-grants-location-configuration=: The configuration options of the grant location.
+        --access-grants-location-id=!: The ID of the registered location to which you are granting access.
+        --account-id=!: The Amazon Web Services account ID of the S3 Access Grants instance.
+        --application-arn=: The Amazon Resource Name (ARN) of an Amazon Web Services IAM Identity Center application associated with your Identity Center instance.
+        --grantee=!: The user, group, or role to which you are granting access.
+        --permission=!: 'The type of access that you are granting to your S3 data, which can be set to one of the following values:'
+        --s3-prefix-type=: The type of `S3SubPrefix`.
+        --tags=: The Amazon Web Services resource tags that you are adding to the access grant.
+      completion:
+        flag:
+            permission:
+                - READ
+                - WRITE
+                - READWRITE
+            s3-prefix-type:
+                - Object
     - name: create-job
       description: This operation creates an S3 Batch Operations job.
       flags:
         --account-id=!: The Amazon Web Services account ID that creates the job.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-request-token=!: An idempotency token to ensure that you don't accidentally submit the same request twice.
         --confirmation-required: Indicates whether confirmation is required before Amazon S3 runs the job.
         --description=: A description for this job.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --manifest-generator=: The attribute container for the ManifestGenerator details.
         --manifest=: Configuration parameters for the manifest.
         --no-confirmation-required: Indicates whether confirmation is required before Amazon S3 runs the job.
@@ -605,311 +450,166 @@ commands:
         --report=!: Configuration parameters for the optional job-completion report.
         --role-arn=!: The Amazon Resource Name (ARN) for the Identity and Access Management (IAM) role that Batch Operations will use to run this job's action on every object in the manifest.
         --tags=: A set of tags to associate with the S3 Batch Operations job.
-    - name: delete-access-grants-instance
-      description: Deletes your S3 Access Grants instance.
+    - name: create-multi-region-access-point
+      description: This operation is not supported by directory buckets.
       flags:
-        --account-id=!: The Amazon Web Services account ID of the S3 Access Grants instance.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-job
-      description: Retrieves the configuration parameters and status for a Batch Operations job.
-      flags:
-        --account-id=!: The Amazon Web Services account ID associated with the S3 Batch Operations job.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The ID for the job whose information you want to retrieve.
-    - name: list-tags-for-resource
-      description: This operation allows you to list all of the tags for a specified resource.
-      flags:
-        --account-id=!: The Amazon Web Services account ID of the resource owner.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the S3 resource that you want to list tags for.
-    - name: update-job-priority
-      description: Updates an existing S3 Batch Operations job's priority.
-      flags:
-        --account-id=!: The Amazon Web Services account ID associated with the S3 Batch Operations job.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The ID for the job whose priority you want to update.
-        --priority=!: The priority you want to assign to this job.
-    - name: associate-access-grants-identity-center
-      description: Associate your S3 Access Grants instance with an Amazon Web Services IAM Identity Center instance.
-      flags:
-        --account-id=!: The Amazon Web Services account ID of the S3 Access Grants instance.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-center-arn=!: The Amazon Resource Name (ARN) of the Amazon Web Services IAM Identity Center instance that you are associating with your S3 Access Grants instance.
+        --account-id=!: The Amazon Web Services account ID for the owner of the Multi-Region Access Point.
+        --client-token=!: An idempotency token used to identify the request and guarantee that requests are unique.
+        --details=!: A container element containing details about the Multi-Region Access Point.
     - name: get-access-grant
       description: Get the details of an access grant from your S3 Access Grants instance.
       flags:
         --access-grant-id=!: The ID of the access grant.
         --account-id=!: The Amazon Web Services account ID of the S3 Access Grants instance.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-access-grants-location
+      description: Retrieves the details of a particular location registered in your S3 Access Grants instance.
+      flags:
+        --access-grants-location-id=!: The ID of the registered location that you are retrieving.
+        --account-id=!: The Amazon Web Services account ID of the S3 Access Grants instance.
+    - name: get-access-point-configuration-for-object-lambda
+      description: This operation is not supported by directory buckets.
+      flags:
+        --account-id=!: The account ID for the account that owns the specified Object Lambda Access Point.
+        --name=!: The name of the Object Lambda Access Point you want to return the configuration for.
+    - name: get-multi-region-access-point-policy
+      description: This operation is not supported by directory buckets.
+      flags:
+        --account-id=!: The Amazon Web Services account ID for the owner of the Multi-Region Access Point.
+        --name=!: Specifies the Multi-Region Access Point.
+    - name: put-access-point-configuration-for-object-lambda
+      description: This operation is not supported by directory buckets.
+      flags:
+        --account-id=!: The account ID for the account that owns the specified Object Lambda Access Point.
+        --configuration=!: Object Lambda Access Point configuration document.
+        --name=!: The name of the Object Lambda Access Point.
+    - name: create-storage-lens-group
+      description: Creates a new S3 Storage Lens group and associates it with the specified Amazon Web Services account ID.
+      flags:
+        --account-id=!: The Amazon Web Services account ID that the Storage Lens group is created from and associated with.
+        --storage-lens-group=!: The Storage Lens group configuration.
+        --tags=: The Amazon Web Services resource tags that you're adding to your Storage Lens group.
+    - name: get-bucket-versioning
+      description: This operation returns the versioning state for S3 on Outposts buckets only.
+      flags:
+        --account-id=!: The Amazon Web Services account ID of the S3 on Outposts bucket.
+        --bucket=!: The S3 on Outposts bucket to return the versioning state for.
     - name: list-access-grants-locations
       description: Returns a list of the locations registered in your S3 Access Grants instance.
       flags:
         --account-id=!: The Amazon Web Services account ID of the S3 Access Grants instance.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --location-scope=: The S3 path to the location that you are registering.
         --max-results=: The maximum number of access grants that you would like returned in the `List Access Grants` response.
         --next-token=: A pagination token to request the next page of results.
-    - name: list-jobs
-      description: Lists current S3 Batch Operations jobs as well as the jobs that have ended within the last 90 days for the Amazon Web Services account making the request.
+    - name: put-access-point-scope
+      description: Creates or replaces the access point scope for a directory bucket.
       flags:
-        --account-id=!: The Amazon Web Services account ID associated with the S3 Batch Operations job.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-statuses=: The `List Jobs` request returns jobs that match the statuses listed in this element.
-        --max-results=: The maximum number of jobs that Amazon S3 will include in the `List Jobs` response.
+        --account-id=!: The Amazon Web Services account ID that owns the access point with scope that you want to create or replace.
+        --name=!: The name of the access point with the scope that you want to create or replace.
+        --scope=!: Object prefixes, API operations, or a combination of both.
+    - name: list-access-grants-instances
+      description: Returns a list of S3 Access Grants instances.
+      flags:
+        --account-id=!: The Amazon Web Services account ID of the S3 Access Grants instance.
+        --max-results=: The maximum number of access grants that you would like returned in the `List Access Grants` response.
         --next-token=: A pagination token to request the next page of results.
-    - name: put-multi-region-access-point-policy
-      description: This operation is not supported by directory buckets.
-      flags:
-        --account-id=!: The Amazon Web Services account ID for the owner of the Multi-Region Access Point.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: An idempotency token used to identify the request and guarantee that requests are unique.
-        --details=!: A container element containing the details of the policy for the Multi-Region Access Point.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: put-storage-lens-configuration
-      description: This operation is not supported by directory buckets.
-      flags:
-        --account-id=!: The account ID of the requester.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --config-id=!: The ID of the S3 Storage Lens configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --storage-lens-configuration=!: The S3 Storage Lens configuration.
-        --tags=: The tag set of the S3 Storage Lens configuration.
-    - name: update-job-status
-      description: Updates the status for the specified job.
-      flags:
-        --account-id=!: The Amazon Web Services account ID associated with the S3 Batch Operations job.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The ID of the job whose status you want to update.
-        --requested-job-status=!: The status that you want to move the specified job to.
-        --status-update-reason=: A description of the reason why you want to change the specified job's status.
-      completion:
-        flag:
-            requested-job-status:
-                - Cancelled
-                - Ready
-    - name: update-storage-lens-group
-      description: Updates the existing Storage Lens group.
-      flags:
-        --account-id=!: The Amazon Web Services account ID of the Storage Lens group owner.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the Storage Lens group that you want to update.
-        --storage-lens-group=!: The JSON file that contains the Storage Lens group configuration.
-    - name: delete-access-point-scope
-      description: Deletes an existing access point scope for a directory bucket.
-      flags:
-        --account-id=!: The Amazon Web Services account ID that owns the access point with the scope that you want to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the access point with the scope that you want to delete.
-    - name: delete-bucket-policy
-      description: This action deletes an Amazon S3 on Outposts bucket policy.
-      flags:
-        --account-id=!: The account ID of the Outposts bucket.
-        --bucket=!: Specifies the bucket.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-access-points-for-object-lambda
       description: This operation is not supported by directory buckets.
       flags:
         --account-id=!: The account ID for the account that owns the specified Object Lambda Access Point.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of access points that you want to include in the list.
         --next-token=: If the list has more access points than can be returned in one call to this API, this field contains a continuation token that you can provide in subsequent calls to this API to retrieve additional access points.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: This operation allows you to list all of the tags for a specified resource.
+      flags:
+        --account-id=!: The Amazon Web Services account ID of the resource owner.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the S3 resource that you want to list tags for.
+    - name: put-access-grants-instance-resource-policy
+      description: Updates the resource policy of the S3 Access Grants instance.
+      flags:
+        --account-id=!: The Amazon Web Services account ID of the S3 Access Grants instance.
+        --organization=: The Organization of the resource policy of the S3 Access Grants instance.
+        --policy=!: The resource policy of the S3 Access Grants instance that you are updating.
+    - name: update-storage-lens-group
+      description: Updates the existing Storage Lens group.
+      flags:
+        --account-id=!: The Amazon Web Services account ID of the Storage Lens group owner.
+        --name=!: The name of the Storage Lens group that you want to update.
+        --storage-lens-group=!: The JSON file that contains the Storage Lens group configuration.
+    - name: get-access-point-policy-status-for-object-lambda
+      description: This operation is not supported by directory buckets.
+      flags:
+        --account-id=!: The account ID for the account that owns the specified Object Lambda Access Point.
+        --name=!: The name of the Object Lambda Access Point.
+    - name: get-bucket
+      description: Gets an Amazon S3 on Outposts bucket.
+      flags:
+        --account-id=!: The Amazon Web Services account ID of the Outposts bucket.
+        --bucket=!: Specifies the bucket.
+    - name: get-bucket-tagging
+      description: This action gets an Amazon S3 on Outposts bucket's tags.
+      flags:
+        --account-id=!: The Amazon Web Services account ID of the Outposts bucket.
+        --bucket=!: Specifies the bucket.
+    - name: get-multi-region-access-point-policy-status
+      description: This operation is not supported by directory buckets.
+      flags:
+        --account-id=!: The Amazon Web Services account ID for the owner of the Multi-Region Access Point.
+        --name=!: Specifies the Multi-Region Access Point.
+    - name: list-access-grants
+      description: Returns the list of access grants in your S3 Access Grants instance.
+      flags:
+        --account-id=!: The Amazon Web Services account ID of the S3 Access Grants instance.
+        --application-arn=: The Amazon Resource Name (ARN) of an Amazon Web Services IAM Identity Center application associated with your Identity Center instance.
+        --grant-scope=: The S3 path of the data to which you are granting access.
+        --grantee-identifier=: The unique identifer of the `Grantee`.
+        --grantee-type=: The type of the grantee to which access has been granted.
+        --max-results=: The maximum number of access grants that you would like returned in the `List Access Grants` response.
+        --next-token=: A pagination token to request the next page of results.
+        --permission=: 'The type of permission granted to your S3 data, which can be set to one of the following values:'
+      completion:
+        flag:
+            grantee-type:
+                - DIRECTORY_USER
+                - DIRECTORY_GROUP
+                - IAM
+            permission:
+                - READ
+                - WRITE
+                - READWRITE
     - name: put-bucket-policy
       description: This action puts a bucket policy to an Amazon S3 on Outposts bucket.
       flags:
         --account-id=!: The Amazon Web Services account ID of the Outposts bucket.
         --bucket=!: Specifies the bucket.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --confirm-remove-self-bucket-access: Set this parameter to true to confirm that you want to remove your permissions to change this bucket policy in the future.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-confirm-remove-self-bucket-access: Set this parameter to true to confirm that you want to remove your permissions to change this bucket policy in the future.
         --policy=!: The bucket policy as a JSON document.
-    - name: put-public-access-block
-      description: This operation is not supported by directory buckets.
+    - name: put-job-tagging
+      description: Sets the supplied tag-set on an S3 Batch Operations job.
       flags:
-        --account-id=!: The account ID for the Amazon Web Services account whose `PublicAccessBlock` configuration you want to set.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --public-access-block-configuration=!: The `PublicAccessBlock` configuration that you want to apply to the specified Amazon Web Services account.
-    - name: put-storage-lens-configuration-tagging
+        --account-id=!: The Amazon Web Services account ID associated with the S3 Batch Operations job.
+        --job-id=!: The ID for the S3 Batch Operations job whose tags you want to replace.
+        --tags=!: The set of tags to associate with the S3 Batch Operations job.
+    - name: put-storage-lens-configuration
       description: This operation is not supported by directory buckets.
       flags:
         --account-id=!: The account ID of the requester.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --config-id=!: The ID of the S3 Storage Lens configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=!: The tag set of the S3 Storage Lens configuration.
-    - name: update-access-grants-location
-      description: Updates the IAM role of a registered location in your S3 Access Grants instance.
-      flags:
-        --access-grants-location-id=!: The ID of the registered location that you are updating.
-        --account-id=!: The Amazon Web Services account ID of the S3 Access Grants instance.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --iam-role-arn=!: The Amazon Resource Name (ARN) of the IAM role for the registered location.
-    - name: get-access-point-policy-for-object-lambda
-      description: This operation is not supported by directory buckets.
-      flags:
-        --account-id=!: The account ID for the account that owns the specified Object Lambda Access Point.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the Object Lambda Access Point.
-    - name: get-public-access-block
-      description: This operation is not supported by directory buckets.
-      flags:
-        --account-id=!: The account ID for the Amazon Web Services account whose `PublicAccessBlock` configuration you want to retrieve.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-regional-buckets
-      description: This operation is not supported by directory buckets.
-      flags:
-        --account-id=!: The Amazon Web Services account ID of the Outposts bucket.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: ""
-        --next-token=: ""
-        --outpost-id=: The ID of the Outposts resource.
+        --storage-lens-configuration=!: The S3 Storage Lens configuration.
+        --tags=: The tag set of the S3 Storage Lens configuration.
     - name: delete-public-access-block
       description: This operation is not supported by directory buckets.
       flags:
         --account-id=!: The account ID for the Amazon Web Services account whose `PublicAccessBlock` configuration you want to remove.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-access-point
-      description: Deletes the specified access point.
-      flags:
-        --account-id=!: The Amazon Web Services account ID for the account that owns the specified access point.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the access point you want to delete.
-    - name: delete-storage-lens-configuration-tagging
-      description: This operation is not supported by directory buckets.
-      flags:
-        --account-id=!: The account ID of the requester.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --config-id=!: The ID of the S3 Storage Lens configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-access-point-policy
-      description: Returns the access point policy associated with the specified access point.
-      flags:
-        --account-id=!: The account ID for the account that owns the specified access point.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the access point whose policy you want to retrieve.
-    - name: get-job-tagging
-      description: Returns the tags on an S3 Batch Operations job.
-      flags:
-        --account-id=!: The Amazon Web Services account ID associated with the S3 Batch Operations job.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The ID for the S3 Batch Operations job whose tags you want to retrieve.
-    - name: get-storage-lens-configuration-tagging
-      description: This operation is not supported by directory buckets.
-      flags:
-        --account-id=!: The account ID of the requester.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --config-id=!: The ID of the Amazon S3 Storage Lens configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-access-grants-location
-      description: The S3 data location that you would like to register in your S3 Access Grants instance.
-      flags:
-        --account-id=!: The Amazon Web Services account ID of the S3 Access Grants instance.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --iam-role-arn=!: The Amazon Resource Name (ARN) of the IAM role for the registered location.
-        --location-scope=!: The S3 path to the location that you are registering.
-        --tags=: The Amazon Web Services resource tags that you are adding to the S3 Access Grants location.
-    - name: get-access-point-configuration-for-object-lambda
-      description: This operation is not supported by directory buckets.
-      flags:
-        --account-id=!: The account ID for the account that owns the specified Object Lambda Access Point.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the Object Lambda Access Point you want to return the configuration for.
-    - name: put-access-point-configuration-for-object-lambda
-      description: This operation is not supported by directory buckets.
-      flags:
-        --account-id=!: The account ID for the account that owns the specified Object Lambda Access Point.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration=!: Object Lambda Access Point configuration document.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the Object Lambda Access Point.
-    - name: put-bucket-replication
-      description: This action creates an Amazon S3 on Outposts bucket's replication configuration.
-      flags:
-        --account-id=!: The Amazon Web Services account ID of the Outposts bucket.
-        --bucket=!: Specifies the S3 on Outposts bucket to set the configuration for.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --replication-configuration=!: ""
-    - name: create-multi-region-access-point
+    - name: describe-multi-region-access-point-operation
       description: This operation is not supported by directory buckets.
       flags:
         --account-id=!: The Amazon Web Services account ID for the owner of the Multi-Region Access Point.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: An idempotency token used to identify the request and guarantee that requests are unique.
-        --details=!: A container element containing details about the Multi-Region Access Point.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-access-point-for-object-lambda
+        --request-token-arn=!: The request token associated with the request you want to know about.
+    - name: list-regional-buckets
       description: This operation is not supported by directory buckets.
       flags:
-        --account-id=!: The account ID for the account that owns the specified Object Lambda Access Point.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the access point you want to delete.
-    - name: dissociate-access-grants-identity-center
-      description: Dissociates the Amazon Web Services IAM Identity Center instance from the S3 Access Grants instance.
-      flags:
-        --account-id=!: The Amazon Web Services account ID of the S3 Access Grants instance.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --account-id=!: The Amazon Web Services account ID of the Outposts bucket.
+        --max-results=: ""
+        --next-token=: ""
+        --outpost-id=: The ID of the Outposts resource.

@@ -1,24 +1,27 @@
 name: route53resolver
 description: Amazon Route 53 Resolver
 commands:
-    - name: associate-resolver-rule
-      description: Associates a Resolver rule with a VPC.
+    - name: import-firewall-domains
+      description: Imports domain names from a file into a domain list, for use in a DNS firewall rule group.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: A name for the association that you're creating between a Resolver rule and a VPC.
-        --resolver-rule-id=!: The ID of the Resolver rule that you want to associate with the VPC.
-        --vpc-id=!: The ID of the VPC that you want to associate the Resolver rule with.
+        --domain-file-url=!: The fully qualified URL or URI of the file stored in Amazon Simple Storage Service (Amazon S3) that contains the list of domains to import.
+        --firewall-domain-list-id=!: The ID of the domain list that you want to modify with the import operation.
+        --operation=!: What you want DNS Firewall to do with the domains that are listed in the file.
+      completion:
+        flag:
+            operation:
+                - REPLACE
+    - name: list-firewall-rule-groups
+      description: Retrieves the minimal high-level information for the rule groups that you have defined.
+      flags:
+        --max-results=: The maximum number of objects that you want Resolver to return for this request.
+        --next-token=: For the first call to this list request, omit this value.
     - name: create-resolver-rule
       description: For DNS queries that originate in your VPCs, specifies which Resolver endpoint the queries pass through, one domain name that you want to forward to your network, and the IP addresses of the DNS resolvers in your network.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --creator-request-id=!: A unique string that identifies the request and that allows failed requests to be retried without the risk of running the operation twice.
         --delegation-record=: DNS queries with the delegation records that match this domain name are forwarded to the resolvers on your network.
         --domain-name=: DNS queries for this domain name are forwarded to the IP addresses that you specify in `TargetIps`.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=: A friendly name that lets you easily find a rule in the Resolver dashboard in the Route 53 console.
         --resolver-endpoint-id=: The ID of the outbound Resolver endpoint that you want to use to route DNS queries to the IP addresses that you specify in `TargetIps`.
         --rule-type=!: When you want to forward DNS queries for specified domain name to resolvers on your network, specify `FORWARD` or `DELEGATE`.
@@ -31,72 +34,22 @@ commands:
                 - SYSTEM
                 - RECURSIVE
                 - DELEGATE
-    - name: delete-outpost-resolver
-      description: Deletes a Resolver on the Outpost.
+    - name: delete-resolver-rule
+      description: Deletes a Resolver rule.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: A unique string that identifies the Resolver on the Outpost.
-    - name: get-resolver-rule-association
-      description: Gets information about an association between a specified Resolver rule and a VPC.
+        --resolver-rule-id=!: The ID of the Resolver rule that you want to delete.
+    - name: disassociate-resolver-query-log-config
+      description: Disassociates a VPC from a query logging configuration.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resolver-rule-association-id=!: The ID of the Resolver rule association that you want to get information about.
-    - name: put-firewall-rule-group-policy
-      description: Attaches an Identity and Access Management (Amazon Web Services IAM) policy for sharing the rule group.
-      flags:
-        --arn=!: The ARN (Amazon Resource Name) for the rule group that you want to share.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --firewall-rule-group-policy=!: The Identity and Access Management (Amazon Web Services IAM) policy to attach to the rule group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-outpost-resolver
-      description: You can use `UpdateOutpostResolver` to update the instance count, type, or name of a Resolver on an Outpost.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: A unique string that identifies Resolver on an Outpost.
-        --instance-count=: The Amazon EC2 instance count for a Resolver on the Outpost.
-        --name=: Name of the Resolver on the Outpost.
-        --preferred-instance-type=: Amazon EC2 instance type.
-    - name: update-resolver-dnssec-config
-      description: Updates an existing DNSSEC validation configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-id=!: The ID of the virtual private cloud (VPC) that you're updating the DNSSEC validation status for.
-        --validation=!: The new value that you are specifying for DNSSEC validation for the VPC.
-      completion:
-        flag:
-            validation:
-                - ENABLE
-                - DISABLE
-                - USE_LOCAL_RESOURCE_SETTING
-    - name: get-firewall-rule-group-association
-      description: Retrieves a firewall rule group association, which enables DNS filtering for a VPC with one rule group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --firewall-rule-group-association-id=!: The identifier of the [FirewallRuleGroupAssociation]().
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resolver-query-log-config-id=!: The ID of the query logging configuration that you want to disassociate a specified VPC from.
+        --resource-id=!: The ID of the Amazon VPC that you want to disassociate from a specified query logging configuration.
     - name: list-firewall-rule-group-associations
       description: Retrieves the firewall rule group associations that you have defined.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --firewall-rule-group-id=: The unique identifier of the firewall rule group that you want to retrieve the associations for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of objects that you want Resolver to return for this request.
         --next-token=: For the first call to this list request, omit this value.
-        --page-size=: The size of each page to get in the AWS service call.
         --priority=: The setting that determines the processing order of the rule group among the rule groups that are associated with a single VPC.
-        --starting-token=: A token to specify where to start paginating.
         --status=: The association `Status` setting that you want DNS Firewall to filter on for the list.
         --vpc-id=: The unique identifier of the VPC that you want to retrieve the associations for.
       completion:
@@ -105,395 +58,9 @@ commands:
                 - COMPLETE
                 - DELETING
                 - UPDATING
-    - name: list-resolver-dnssec-configs
-      description: Lists the configurations for DNSSEC validation that are associated with the current Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: An optional specification to return a subset of objects.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: '*Optional*: An integer that specifies the maximum number of DNSSEC configuration results that you want Amazon Route 53 to return.'
-        --next-token=: (Optional) If the current Amazon Web Services account has more than `MaxResults` DNSSEC configurations, use `NextToken` to get the second and subsequent pages of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: associate-resolver-query-log-config
-      description: Associates an Amazon VPC with a specified query logging configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resolver-query-log-config-id=!: The ID of the query logging configuration that you want to associate a VPC with.
-        --resource-id=!: The ID of an Amazon VPC that you want this query logging configuration to log queries for.
-    - name: get-firewall-config
-      description: Retrieves the configuration of the firewall behavior provided by DNS Firewall for a single VPC from Amazon Virtual Private Cloud (Amazon VPC).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-id=!: The ID of the VPC from Amazon VPC that the configuration is for.
-    - name: get-firewall-rule-group
-      description: Retrieves the specified firewall rule group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --firewall-rule-group-id=!: The unique identifier of the firewall rule group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-firewall-domain-lists
-      description: Retrieves the firewall domain lists that you have defined.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of objects that you want Resolver to return for this request.
-        --next-token=: For the first call to this list request, omit this value.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: create-outpost-resolver
-      description: Creates a Route 53 Resolver on an Outpost.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --creator-request-id=!: A unique string that identifies the request and that allows failed requests to be retried without the risk of running the operation twice.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-count=: Number of Amazon EC2 instances for the Resolver on Outpost.
-        --name=!: A friendly name that lets you easily find a configuration in the Resolver dashboard in the Route 53 console.
-        --outpost-arn=!: The Amazon Resource Name (ARN) of the Outpost.
-        --preferred-instance-type=!: The Amazon EC2 instance type.
-        --tags=: A string that helps identify the Route 53 Resolvers on Outpost.
-    - name: delete-firewall-domain-list
-      description: Deletes the specified domain list.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --firewall-domain-list-id=!: The ID of the domain list that you want to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-firewall-rule
-      description: Deletes the specified firewall rule.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --firewall-domain-list-id=: The ID of the domain list that's used in the rule.
-        --firewall-rule-group-id=!: The unique identifier of the firewall rule group that you want to delete the rule from.
-        --firewall-threat-protection-id=: The ID that is created for a DNS Firewall Advanced rule.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --qtype=: The DNS query type that the rule you are deleting evaluates.
-    - name: delete-resolver-rule
-      description: Deletes a Resolver rule.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resolver-rule-id=!: The ID of the Resolver rule that you want to delete.
-    - name: import-firewall-domains
-      description: Imports domain names from a file into a domain list, for use in a DNS firewall rule group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-file-url=!: The fully qualified URL or URI of the file stored in Amazon Simple Storage Service (Amazon S3) that contains the list of domains to import.
-        --firewall-domain-list-id=!: The ID of the domain list that you want to modify with the import operation.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --operation=!: What you want DNS Firewall to do with the domains that are listed in the file.
-      completion:
-        flag:
-            operation:
-                - REPLACE
-    - name: list-outpost-resolvers
-      description: Lists all the Resolvers on Outposts that were created using the current Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of Resolvers on the Outpost that you want to return in the response to a `ListOutpostResolver` request.
-        --next-token=: For the first `ListOutpostResolver` request, omit this value.
-        --outpost-arn=: The Amazon Resource Name (ARN) of the Outpost.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-firewall-config
-      description: Updates the configuration of the firewall behavior provided by DNS Firewall for a single VPC from Amazon Virtual Private Cloud (Amazon VPC).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --firewall-fail-open=!: Determines how Route 53 Resolver handles queries during failures, for example when all traffic that is sent to DNS Firewall fails to receive a reply.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-id=!: The ID of the VPC that the configuration is for.
-      completion:
-        flag:
-            firewall-fail-open:
-                - ENABLED
-                - DISABLED
-                - USE_LOCAL_RESOURCE_SETTING
-    - name: list-resolver-rule-associations
-      description: Lists the associations that were created between Resolver rules and VPCs using the current Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: An optional specification to return a subset of Resolver rules, such as Resolver rules that are associated with the same VPC ID.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of rule associations that you want to return in the response to a `ListResolverRuleAssociations` request.
-        --next-token=: For the first `ListResolverRuleAssociation` request, omit this value.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: associate-firewall-rule-group
-      description: Associates a [FirewallRuleGroup]() with a VPC, to provide DNS filtering for the VPC.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --creator-request-id=!: A unique string that identifies the request and that allows failed requests to be retried without the risk of running the operation twice.
-        --firewall-rule-group-id=!: The unique identifier of the firewall rule group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mutation-protection=: If enabled, this setting disallows modification or removal of the association, to help prevent against accidentally altering DNS firewall protections.
-        --name=!: A name that lets you identify the association, to manage and use it.
-        --priority=!: The setting that determines the processing order of the rule group among the rule groups that you associate with the specified VPC.
-        --tags=: A list of the tag keys and values that you want to associate with the rule group association.
-        --vpc-id=!: The unique identifier of the VPC that you want to associate with the rule group.
-      completion:
-        flag:
-            mutation-protection:
-                - ENABLED
-                - DISABLED
-    - name: disassociate-resolver-query-log-config
-      description: Disassociates a VPC from a query logging configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resolver-query-log-config-id=!: The ID of the query logging configuration that you want to disassociate a specified VPC from.
-        --resource-id=!: The ID of the Amazon VPC that you want to disassociate from a specified query logging configuration.
-    - name: get-resolver-config
-      description: Retrieves the behavior configuration of Route 53 Resolver behavior for a single VPC from Amazon Virtual Private Cloud.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-id=!: Resource ID of the Amazon VPC that you want to get information about.
-    - name: list-firewall-rule-groups
-      description: Retrieves the minimal high-level information for the rule groups that you have defined.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of objects that you want Resolver to return for this request.
-        --next-token=: For the first call to this list request, omit this value.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: get-resolver-query-log-config-policy
-      description: Gets information about a query logging policy.
-      flags:
-        --arn=!: The ARN of the query logging configuration that you want to get the query logging policy for.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: put-resolver-rule-policy
-      description: Specifies an Amazon Web Services rule that you want to share with another account, the account that you want to share the rule with, and the operations that you want the account to be able to perform on the rule.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the rule that you want to share with another account.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resolver-rule-policy=!: An Identity and Access Management policy statement that lists the rules that you want to share with another Amazon Web Services account and the operations that you want the account to be able to perform.
-    - name: update-resolver-rule
-      description: Updates settings for a specified Resolver rule.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --config=!: The new settings for the Resolver rule.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resolver-rule-id=!: The ID of the Resolver rule that you want to update.
-    - name: disassociate-resolver-endpoint-ip-address
-      description: Removes IP addresses from an inbound or an outbound Resolver endpoint.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ip-address=!: The IPv4 address that you want to remove from a Resolver endpoint.
-        --resolver-endpoint-id=!: The ID of the Resolver endpoint that you want to disassociate an IP address from.
-    - name: list-resolver-configs
-      description: Retrieves the Resolver configurations that you have defined.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of Resolver configurations that you want to return in the response to a `ListResolverConfigs` request.
-        --next-token=: (Optional) If the current Amazon Web Services account has more than `MaxResults` Resolver configurations, use `NextToken` to get the second and subsequent pages of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: create-resolver-endpoint
-      description: Creates a Resolver endpoint.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --creator-request-id=!: A unique string that identifies the request and that allows failed requests to be retried without the risk of running the operation twice.
-        --direction=!: 'Specify the applicable value:'
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ip-addresses=!: The subnets and IP addresses in your VPC that DNS queries originate from (for outbound endpoints) or that you forward DNS queries to (for inbound endpoints).
-        --name=: A friendly name that lets you easily find a configuration in the Resolver dashboard in the Route 53 console.
-        --outpost-arn=: The Amazon Resource Name (ARN) of the Outpost.
-        --preferred-instance-type=: The instance type.
-        --protocols=: The protocols you want to use for the endpoint.
-        --resolver-endpoint-type=: For the endpoint type you can choose either IPv4, IPv6, or dual-stack.
-        --security-group-ids=!: The ID of one or more security groups that you want to use to control access to this VPC.
-        --tags=: A list of the tag keys and values that you want to associate with the endpoint.
-      completion:
-        flag:
-            direction:
-                - INBOUND
-                - OUTBOUND
-                - INBOUND_DELEGATION
-            resolver-endpoint-type:
-                - IPV6
-                - IPV4
-                - DUALSTACK
-    - name: delete-firewall-rule-group
-      description: Deletes the specified firewall rule group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --firewall-rule-group-id=!: The unique identifier of the firewall rule group that you want to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: disassociate-resolver-rule
-      description: Removes the association between a specified Resolver rule and a specified VPC.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resolver-rule-id=!: The ID of the Resolver rule that you want to disassociate from the specified VPC.
-        --vpc-id=!: The ID of the VPC that you want to disassociate the Resolver rule from.
-    - name: get-resolver-endpoint
-      description: Gets information about a specified Resolver endpoint, such as whether it's an inbound or an outbound Resolver endpoint, and the current status of the endpoint.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resolver-endpoint-id=!: The ID of the Resolver endpoint that you want to get information about.
-    - name: get-resolver-query-log-config
-      description: Gets information about a specified Resolver query logging configuration, such as the number of VPCs that the configuration is logging queries for and the location that logs are sent to.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resolver-query-log-config-id=!: The ID of the Resolver query logging configuration that you want to get information about.
-    - name: list-resolver-rules
-      description: Lists the Resolver rules that were created using the current Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: An optional specification to return a subset of Resolver rules, such as all Resolver rules that are associated with the same Resolver endpoint.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of Resolver rules that you want to return in the response to a `ListResolverRules` request.
-        --next-token=: For the first `ListResolverRules` request, omit this value.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: get-firewall-rule-group-policy
-      description: Returns the Identity and Access Management (Amazon Web Services IAM) policy for sharing the specified rule group.
-      flags:
-        --arn=!: The ARN (Amazon Resource Name) for the rule group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-firewall-rule
-      description: Updates the specified firewall rule.
-      flags:
-        --action=: 'The action that DNS Firewall should take on a DNS query when it matches one of the domains in the rule''s domain list, or a threat in a DNS Firewall Advanced rule:'
-        --block-override-dns-type=: The DNS record's type.
-        --block-override-domain=: The custom DNS record to send back in response to the query.
-        --block-override-ttl=: The recommended amount of time, in seconds, for the DNS resolver or web browser to cache the provided override record.
-        --block-response=: The way that you want DNS Firewall to block the request.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --confidence-threshold=: The confidence threshold for DNS Firewall Advanced.
-        --dns-threat-protection=: The type of the DNS Firewall Advanced rule.
-        --firewall-domain-list-id=: The ID of the domain list to use in the rule.
-        --firewall-domain-redirection-action=: How you want the the rule to evaluate DNS redirection in the DNS redirection chain, such as CNAME or DNAME.
-        --firewall-rule-group-id=!: The unique identifier of the firewall rule group for the rule.
-        --firewall-threat-protection-id=: The DNS Firewall Advanced rule ID.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: The name of the rule.
-        --priority=: The setting that determines the processing order of the rule in the rule group.
-        --qtype=: The DNS query type you want the rule to evaluate.
-      completion:
-        flag:
-            action:
-                - ALLOW
-                - BLOCK
-                - ALERT
-            block-override-dns-type:
-                - CNAME
-            block-response:
-                - NODATA
-                - NXDOMAIN
-                - OVERRIDE
-            confidence-threshold:
-                - LOW
-                - MEDIUM
-                - HIGH
-            dns-threat-protection:
-                - DGA
-                - DNS_TUNNELING
-                - DICTIONARY_DGA
-            firewall-domain-redirection-action:
-                - INSPECT_REDIRECTION_DOMAIN
-                - TRUST_REDIRECTION_DOMAIN
-    - name: get-outpost-resolver
-      description: Gets information about a specified Resolver on the Outpost, such as its instance count and type, name, and the current status of the Resolver.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the Resolver on the Outpost.
-    - name: get-resolver-dnssec-config
-      description: Gets DNSSEC validation information for a specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-id=!: The ID of the virtual private cloud (VPC) for the DNSSEC validation status.
-    - name: list-resolver-query-log-config-associations
-      description: Lists information about associations between Amazon VPCs and query logging configurations.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: An optional specification to return a subset of query logging associations.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of query logging associations that you want to return in the response to a `ListResolverQueryLogConfigAssociations` request.
-        --next-token=: For the first `ListResolverQueryLogConfigAssociations` request, omit this value.
-        --page-size=: The size of each page to get in the AWS service call.
-        --sort-by=: The element that you want Resolver to sort query logging associations by.
-        --sort-order=: If you specified a value for `SortBy`, the order that you want query logging associations to be listed in, `ASCENDING` or `DESCENDING`.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            sort-order:
-                - ASCENDING
-                - DESCENDING
-    - name: delete-resolver-endpoint
-      description: Deletes a Resolver endpoint.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resolver-endpoint-id=!: The ID of the Resolver endpoint that you want to delete.
-    - name: untag-resource
-      description: Removes one or more tags from a specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) for the resource that you want to remove tags from.
-        --tag-keys=!: The tags that you want to remove to the specified resource.
     - name: update-resolver-endpoint
       description: Updates the name, or endpoint type for an inbound or an outbound Resolver endpoint.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=: The name of the Resolver endpoint that you want to update.
         --protocols=: The protocols you want to use for the endpoint.
         --resolver-endpoint-id=!: The ID of the Resolver endpoint that you want to update.
@@ -505,96 +72,43 @@ commands:
                 - IPV6
                 - IPV4
                 - DUALSTACK
+    - name: get-resolver-rule
+      description: Gets information about a specified Resolver rule, such as the domain name that the rule forwards DNS queries for and the ID of the outbound Resolver endpoint that the rule is associated with.
+      flags:
+        --resolver-rule-id=!: The ID of the Resolver rule that you want to get information about.
     - name: list-firewall-configs
       description: Retrieves the firewall configurations that you have defined.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of objects that you want Resolver to return for this request.
         --next-token=: For the first call to this list request, omit this value.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-resolver-endpoint-ip-addresses
-      description: Gets the IP addresses for a specified Resolver endpoint.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of IP addresses that you want to return in the response to a `ListResolverEndpointIpAddresses` request.
-        --next-token=: For the first `ListResolverEndpointIpAddresses` request, omit this value.
-        --page-size=: The size of each page to get in the AWS service call.
-        --resolver-endpoint-id=!: The ID of the Resolver endpoint that you want to get IP addresses for.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-resolver-endpoints
-      description: Lists all the Resolver endpoints that were created using the current Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: An optional specification to return a subset of Resolver endpoints, such as all inbound Resolver endpoints.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of Resolver endpoints that you want to return in the response to a `ListResolverEndpoints` request.
-        --next-token=: For the first `ListResolverEndpoints` request, omit this value.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-resolver-query-log-configs
-      description: Lists information about the specified query logging configurations.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: An optional specification to return a subset of query logging configurations.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of query logging configurations that you want to return in the response to a `ListResolverQueryLogConfigs` request.
-        --next-token=: For the first `ListResolverQueryLogConfigs` request, omit this value.
-        --page-size=: The size of each page to get in the AWS service call.
-        --sort-by=: The element that you want Resolver to sort query logging configurations by.
-        --sort-order=: If you specified a value for `SortBy`, the order that you want query logging configurations to be listed in, `ASCENDING` or `DESCENDING`.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            sort-order:
-                - ASCENDING
-                - DESCENDING
-    - name: list-tags-for-resource
-      description: Lists the tags that you associated with the specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of tags that you want to return in the response to a `ListTagsForResource` request.
-        --next-token=: For the first `ListTagsForResource` request, omit this value.
-        --page-size=: The size of each page to get in the AWS service call.
-        --resource-arn=!: The Amazon Resource Name (ARN) for the resource that you want to list tags for.
-        --starting-token=: A token to specify where to start paginating.
-    - name: create-firewall-rule-group
-      description: Creates an empty DNS Firewall rule group for filtering DNS network traffic in a VPC.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --creator-request-id=!: A unique string defined by you to identify the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: A name that lets you identify the rule group, to manage and use it.
-        --tags=: A list of the tag keys and values that you want to associate with the rule group.
-    - name: get-resolver-rule-policy
-      description: Gets information about the Resolver rule policy for a specified rule.
-      flags:
-        --arn=!: The ID of the Resolver rule that you want to get the Resolver rule policy for.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: tag-resource
       description: Adds one or more tags to a specified resource.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) for the resource that you want to add tags to.
         --tags=!: The tags that you want to add to the specified resource.
+    - name: untag-resource
+      description: Removes one or more tags from a specified resource.
+      flags:
+        --resource-arn=!: The Amazon Resource Name (ARN) for the resource that you want to remove tags from.
+        --tag-keys=!: The tags that you want to remove to the specified resource.
+    - name: delete-resolver-endpoint
+      description: Deletes a Resolver endpoint.
+      flags:
+        --resolver-endpoint-id=!: The ID of the Resolver endpoint that you want to delete.
+    - name: get-firewall-domain-list
+      description: Retrieves the specified firewall domain list.
+      flags:
+        --firewall-domain-list-id=!: The ID of the domain list.
+    - name: get-resolver-rule-association
+      description: Gets information about an association between a specified Resolver rule and a VPC.
+      flags:
+        --resolver-rule-association-id=!: The ID of the Resolver rule association that you want to get information about.
+    - name: list-firewall-domains
+      description: Retrieves the domains that you have defined for the specified firewall domain list.
+      flags:
+        --firewall-domain-list-id=!: The ID of the domain list whose domains you want to retrieve.
+        --max-results=: The maximum number of objects that you want Resolver to return for this request.
+        --next-token=: For the first call to this list request, omit this value.
     - name: create-firewall-rule
       description: Creates a single DNS Firewall rule in the specified rule group, using the specified domain list.
       flags:
@@ -603,15 +117,12 @@ commands:
         --block-override-domain=: The custom DNS record to send back in response to the query.
         --block-override-ttl=: The recommended amount of time, in seconds, for the DNS resolver or web browser to cache the provided override record.
         --block-response=: The way that you want DNS Firewall to block the request, used with the rule action setting `BLOCK`.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --confidence-threshold=: The confidence threshold for DNS Firewall Advanced.
         --creator-request-id=!: A unique string that identifies the request and that allows you to retry failed requests without the risk of running the operation twice.
         --dns-threat-protection=: Use to create a DNS Firewall Advanced rule.
         --firewall-domain-list-id=: The ID of the domain list that you want to use in the rule.
         --firewall-domain-redirection-action=: How you want the the rule to evaluate DNS redirection in the DNS redirection chain, such as CNAME or DNAME.
         --firewall-rule-group-id=!: The unique identifier of the firewall rule group where you want to create the rule.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: A name that lets you identify the rule in the rule group.
         --priority=!: The setting that determines the processing order of the rule in the rule group.
         --qtype=: The DNS query type you want the rule to evaluate.
@@ -638,71 +149,36 @@ commands:
             firewall-domain-redirection-action:
                 - INSPECT_REDIRECTION_DOMAIN
                 - TRUST_REDIRECTION_DOMAIN
-    - name: create-resolver-query-log-config
-      description: Creates a Resolver query logging configuration, which defines where you want Resolver to save DNS query logs that originate in your VPCs.
+    - name: update-resolver-config
+      description: Updates the behavior configuration of Route 53 Resolver behavior for a single VPC from Amazon Virtual Private Cloud.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --creator-request-id=!: A unique string that identifies the request and that allows failed requests to be retried without the risk of running the operation twice.
-        --destination-arn=!: The ARN of the resource that you want Resolver to send query logs.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name that you want to give the query logging configuration.
-        --tags=: A list of the tag keys and values that you want to associate with the query logging configuration.
-    - name: delete-resolver-query-log-config
-      description: Deletes a query logging configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resolver-query-log-config-id=!: The ID of the query logging configuration that you want to delete.
-    - name: list-firewall-domains
-      description: Retrieves the domains that you have defined for the specified firewall domain list.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --firewall-domain-list-id=!: The ID of the domain list whose domains you want to retrieve.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of objects that you want Resolver to return for this request.
-        --next-token=: For the first call to this list request, omit this value.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-firewall-rules
-      description: Retrieves the firewall rules that you have defined for the specified firewall rule group.
-      flags:
-        --action=: Optional additional filter for the rules to retrieve.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --firewall-rule-group-id=!: The unique identifier of the firewall rule group that you want to retrieve the rules for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of objects that you want Resolver to return for this request.
-        --next-token=: For the first call to this list request, omit this value.
-        --page-size=: The size of each page to get in the AWS service call.
-        --priority=: Optional additional filter for the rules to retrieve.
-        --starting-token=: A token to specify where to start paginating.
+        --autodefined-reverse-flag=!: Indicates whether or not the Resolver will create autodefined rules for reverse DNS lookups.
+        --resource-id=!: The ID of the Amazon Virtual Private Cloud VPC or a Route 53 Profile that you're configuring Resolver for.
       completion:
         flag:
-            action:
-                - ALLOW
-                - BLOCK
-                - ALERT
-    - name: put-resolver-query-log-config-policy
-      description: Specifies an Amazon Web Services account that you want to share a query logging configuration with, the query logging configuration that you want to share, and the operations that you want the account to be able to perform on the configuration.
+            autodefined-reverse-flag:
+                - ENABLE
+                - DISABLE
+                - USE_LOCAL_RESOURCE_SETTING
+    - name: delete-outpost-resolver
+      description: Deletes a Resolver on the Outpost.
       flags:
-        --arn=!: The Amazon Resource Name (ARN) of the account that you want to share rules with.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resolver-query-log-config-policy=!: An Identity and Access Management policy statement that lists the query logging configurations that you want to share with another Amazon Web Services account and the operations that you want the account to be able to perform.
+        --id=!: A unique string that identifies the Resolver on the Outpost.
+    - name: get-resolver-query-log-config
+      description: Gets information about a specified Resolver query logging configuration, such as the number of VPCs that the configuration is logging queries for and the location that logs are sent to.
+      flags:
+        --resolver-query-log-config-id=!: The ID of the Resolver query logging configuration that you want to get information about.
+    - name: list-resolver-endpoints
+      description: Lists all the Resolver endpoints that were created using the current Amazon Web Services account.
+      flags:
+        --filters=: An optional specification to return a subset of Resolver endpoints, such as all inbound Resolver endpoints.
+        --max-results=: The maximum number of Resolver endpoints that you want to return in the response to a `ListResolverEndpoints` request.
+        --next-token=: For the first `ListResolverEndpoints` request, omit this value.
     - name: update-firewall-domains
       description: Updates the firewall domain list from an array of domain specifications.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --domains=!: A list of domains to use in the update operation.
         --firewall-domain-list-id=!: The ID of the domain list whose domains you want to update.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --operation=!: 'What you want DNS Firewall to do with the domains that you are providing:'
       completion:
         flag:
@@ -710,16 +186,283 @@ commands:
                 - ADD
                 - REMOVE
                 - REPLACE
-    - name: update-firewall-rule-group-association
-      description: Changes the association of a [FirewallRuleGroup]() with a VPC.
+    - name: update-outpost-resolver
+      description: You can use `UpdateOutpostResolver` to update the instance count, type, or name of a Resolver on an Outpost.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --id=!: A unique string that identifies Resolver on an Outpost.
+        --instance-count=: The Amazon EC2 instance count for a Resolver on the Outpost.
+        --name=: Name of the Resolver on the Outpost.
+        --preferred-instance-type=: Amazon EC2 instance type.
+    - name: put-firewall-rule-group-policy
+      description: Attaches an Identity and Access Management (Amazon Web Services IAM) policy for sharing the rule group.
+      flags:
+        --arn=!: The ARN (Amazon Resource Name) for the rule group that you want to share.
+        --firewall-rule-group-policy=!: The Identity and Access Management (Amazon Web Services IAM) policy to attach to the rule group.
+    - name: create-firewall-rule-group
+      description: Creates an empty DNS Firewall rule group for filtering DNS network traffic in a VPC.
+      flags:
+        --creator-request-id=!: A unique string defined by you to identify the request.
+        --name=!: A name that lets you identify the rule group, to manage and use it.
+        --tags=: A list of the tag keys and values that you want to associate with the rule group.
+    - name: delete-resolver-query-log-config
+      description: Deletes a query logging configuration.
+      flags:
+        --resolver-query-log-config-id=!: The ID of the query logging configuration that you want to delete.
+    - name: list-resolver-dnssec-configs
+      description: Lists the configurations for DNSSEC validation that are associated with the current Amazon Web Services account.
+      flags:
+        --filters=: An optional specification to return a subset of objects.
+        --max-results=: '*Optional*: An integer that specifies the maximum number of DNSSEC configuration results that you want Amazon Route 53 to return.'
+        --next-token=: (Optional) If the current Amazon Web Services account has more than `MaxResults` DNSSEC configurations, use `NextToken` to get the second and subsequent pages of results.
+    - name: list-outpost-resolvers
+      description: Lists all the Resolvers on Outposts that were created using the current Amazon Web Services account.
+      flags:
+        --max-results=: The maximum number of Resolvers on the Outpost that you want to return in the response to a `ListOutpostResolver` request.
+        --next-token=: For the first `ListOutpostResolver` request, omit this value.
+        --outpost-arn=: The Amazon Resource Name (ARN) of the Outpost.
+    - name: create-outpost-resolver
+      description: Creates a Route 53 Resolver on an Outpost.
+      flags:
+        --creator-request-id=!: A unique string that identifies the request and that allows failed requests to be retried without the risk of running the operation twice.
+        --instance-count=: Number of Amazon EC2 instances for the Resolver on Outpost.
+        --name=!: A friendly name that lets you easily find a configuration in the Resolver dashboard in the Route 53 console.
+        --outpost-arn=!: The Amazon Resource Name (ARN) of the Outpost.
+        --preferred-instance-type=!: The Amazon EC2 instance type.
+        --tags=: A string that helps identify the Route 53 Resolvers on Outpost.
+    - name: create-resolver-query-log-config
+      description: Creates a Resolver query logging configuration, which defines where you want Resolver to save DNS query logs that originate in your VPCs.
+      flags:
+        --creator-request-id=!: A unique string that identifies the request and that allows failed requests to be retried without the risk of running the operation twice.
+        --destination-arn=!: The ARN of the resource that you want Resolver to send query logs.
+        --name=!: The name that you want to give the query logging configuration.
+        --tags=: A list of the tag keys and values that you want to associate with the query logging configuration.
+    - name: get-outpost-resolver
+      description: Gets information about a specified Resolver on the Outpost, such as its instance count and type, name, and the current status of the Resolver.
+      flags:
+        --id=!: The ID of the Resolver on the Outpost.
+    - name: get-resolver-rule-policy
+      description: Gets information about the Resolver rule policy for a specified rule.
+      flags:
+        --arn=!: The ID of the Resolver rule that you want to get the Resolver rule policy for.
+    - name: list-resolver-configs
+      description: Retrieves the Resolver configurations that you have defined.
+      flags:
+        --max-results=: The maximum number of Resolver configurations that you want to return in the response to a `ListResolverConfigs` request.
+        --next-token=: (Optional) If the current Amazon Web Services account has more than `MaxResults` Resolver configurations, use `NextToken` to get the second and subsequent pages of results.
+    - name: update-resolver-dnssec-config
+      description: Updates an existing DNSSEC validation configuration.
+      flags:
+        --resource-id=!: The ID of the virtual private cloud (VPC) that you're updating the DNSSEC validation status for.
+        --validation=!: The new value that you are specifying for DNSSEC validation for the VPC.
+      completion:
+        flag:
+            validation:
+                - ENABLE
+                - DISABLE
+                - USE_LOCAL_RESOURCE_SETTING
+    - name: get-firewall-config
+      description: Retrieves the configuration of the firewall behavior provided by DNS Firewall for a single VPC from Amazon Virtual Private Cloud (Amazon VPC).
+      flags:
+        --resource-id=!: The ID of the VPC from Amazon VPC that the configuration is for.
+    - name: get-firewall-rule-group-association
+      description: Retrieves a firewall rule group association, which enables DNS filtering for a VPC with one rule group.
+      flags:
         --firewall-rule-group-association-id=!: The identifier of the [FirewallRuleGroupAssociation]().
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: put-resolver-rule-policy
+      description: Specifies an Amazon Web Services rule that you want to share with another account, the account that you want to share the rule with, and the operations that you want the account to be able to perform on the rule.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the rule that you want to share with another account.
+        --resolver-rule-policy=!: An Identity and Access Management policy statement that lists the rules that you want to share with another Amazon Web Services account and the operations that you want the account to be able to perform.
+    - name: associate-resolver-query-log-config
+      description: Associates an Amazon VPC with a specified query logging configuration.
+      flags:
+        --resolver-query-log-config-id=!: The ID of the query logging configuration that you want to associate a VPC with.
+        --resource-id=!: The ID of an Amazon VPC that you want this query logging configuration to log queries for.
+    - name: create-resolver-endpoint
+      description: Creates a Resolver endpoint.
+      flags:
+        --creator-request-id=!: A unique string that identifies the request and that allows failed requests to be retried without the risk of running the operation twice.
+        --direction=!: 'Specify the applicable value:'
+        --ip-addresses=!: The subnets and IP addresses in your VPC that DNS queries originate from (for outbound endpoints) or that you forward DNS queries to (for inbound endpoints).
+        --name=: A friendly name that lets you easily find a configuration in the Resolver dashboard in the Route 53 console.
+        --outpost-arn=: The Amazon Resource Name (ARN) of the Outpost.
+        --preferred-instance-type=: The instance type.
+        --protocols=: The protocols you want to use for the endpoint.
+        --resolver-endpoint-type=: For the endpoint type you can choose either IPv4, IPv6, or dual-stack.
+        --security-group-ids=!: The ID of one or more security groups that you want to use to control access to this VPC.
+        --tags=: A list of the tag keys and values that you want to associate with the endpoint.
+      completion:
+        flag:
+            direction:
+                - INBOUND
+                - OUTBOUND
+                - INBOUND_DELEGATION
+            resolver-endpoint-type:
+                - IPV6
+                - IPV4
+                - DUALSTACK
+    - name: disassociate-firewall-rule-group
+      description: Disassociates a [FirewallRuleGroup]() from a VPC, to remove DNS filtering from the VPC.
+      flags:
+        --firewall-rule-group-association-id=!: The identifier of the [FirewallRuleGroupAssociation]().
+    - name: disassociate-resolver-rule
+      description: Removes the association between a specified Resolver rule and a specified VPC.
+      flags:
+        --resolver-rule-id=!: The ID of the Resolver rule that you want to disassociate from the specified VPC.
+        --vpc-id=!: The ID of the VPC that you want to disassociate the Resolver rule from.
+    - name: get-resolver-query-log-config-association
+      description: Gets information about a specified association between a Resolver query logging configuration and an Amazon VPC.
+      flags:
+        --resolver-query-log-config-association-id=!: The ID of the Resolver query logging configuration association that you want to get information about.
+    - name: list-resolver-rule-associations
+      description: Lists the associations that were created between Resolver rules and VPCs using the current Amazon Web Services account.
+      flags:
+        --filters=: An optional specification to return a subset of Resolver rules, such as Resolver rules that are associated with the same VPC ID.
+        --max-results=: The maximum number of rule associations that you want to return in the response to a `ListResolverRuleAssociations` request.
+        --next-token=: For the first `ListResolverRuleAssociation` request, omit this value.
+    - name: update-firewall-config
+      description: Updates the configuration of the firewall behavior provided by DNS Firewall for a single VPC from Amazon Virtual Private Cloud (Amazon VPC).
+      flags:
+        --firewall-fail-open=!: Determines how Route 53 Resolver handles queries during failures, for example when all traffic that is sent to DNS Firewall fails to receive a reply.
+        --resource-id=!: The ID of the VPC that the configuration is for.
+      completion:
+        flag:
+            firewall-fail-open:
+                - ENABLED
+                - DISABLED
+                - USE_LOCAL_RESOURCE_SETTING
+    - name: update-firewall-rule
+      description: Updates the specified firewall rule.
+      flags:
+        --action=: 'The action that DNS Firewall should take on a DNS query when it matches one of the domains in the rule''s domain list, or a threat in a DNS Firewall Advanced rule:'
+        --block-override-dns-type=: The DNS record's type.
+        --block-override-domain=: The custom DNS record to send back in response to the query.
+        --block-override-ttl=: The recommended amount of time, in seconds, for the DNS resolver or web browser to cache the provided override record.
+        --block-response=: The way that you want DNS Firewall to block the request.
+        --confidence-threshold=: The confidence threshold for DNS Firewall Advanced.
+        --dns-threat-protection=: The type of the DNS Firewall Advanced rule.
+        --firewall-domain-list-id=: The ID of the domain list to use in the rule.
+        --firewall-domain-redirection-action=: How you want the the rule to evaluate DNS redirection in the DNS redirection chain, such as CNAME or DNAME.
+        --firewall-rule-group-id=!: The unique identifier of the firewall rule group for the rule.
+        --firewall-threat-protection-id=: The DNS Firewall Advanced rule ID.
+        --name=: The name of the rule.
+        --priority=: The setting that determines the processing order of the rule in the rule group.
+        --qtype=: The DNS query type you want the rule to evaluate.
+      completion:
+        flag:
+            action:
+                - ALLOW
+                - BLOCK
+                - ALERT
+            block-override-dns-type:
+                - CNAME
+            block-response:
+                - NODATA
+                - NXDOMAIN
+                - OVERRIDE
+            confidence-threshold:
+                - LOW
+                - MEDIUM
+                - HIGH
+            dns-threat-protection:
+                - DGA
+                - DNS_TUNNELING
+                - DICTIONARY_DGA
+            firewall-domain-redirection-action:
+                - INSPECT_REDIRECTION_DOMAIN
+                - TRUST_REDIRECTION_DOMAIN
+    - name: disassociate-resolver-endpoint-ip-address
+      description: Removes IP addresses from an inbound or an outbound Resolver endpoint.
+      flags:
+        --ip-address=!: The IPv4 address that you want to remove from a Resolver endpoint.
+        --resolver-endpoint-id=!: The ID of the Resolver endpoint that you want to disassociate an IP address from.
+    - name: list-firewall-domain-lists
+      description: Retrieves the firewall domain lists that you have defined.
+      flags:
+        --max-results=: The maximum number of objects that you want Resolver to return for this request.
+        --next-token=: For the first call to this list request, omit this value.
+    - name: list-resolver-query-log-config-associations
+      description: Lists information about associations between Amazon VPCs and query logging configurations.
+      flags:
+        --filters=: An optional specification to return a subset of query logging associations.
+        --max-results=: The maximum number of query logging associations that you want to return in the response to a `ListResolverQueryLogConfigAssociations` request.
+        --next-token=: For the first `ListResolverQueryLogConfigAssociations` request, omit this value.
+        --sort-by=: The element that you want Resolver to sort query logging associations by.
+        --sort-order=: If you specified a value for `SortBy`, the order that you want query logging associations to be listed in, `ASCENDING` or `DESCENDING`.
+      completion:
+        flag:
+            sort-order:
+                - ASCENDING
+                - DESCENDING
+    - name: update-resolver-rule
+      description: Updates settings for a specified Resolver rule.
+      flags:
+        --config=!: The new settings for the Resolver rule.
+        --resolver-rule-id=!: The ID of the Resolver rule that you want to update.
+    - name: delete-firewall-domain-list
+      description: Deletes the specified domain list.
+      flags:
+        --firewall-domain-list-id=!: The ID of the domain list that you want to delete.
+    - name: get-resolver-dnssec-config
+      description: Gets DNSSEC validation information for a specified resource.
+      flags:
+        --resource-id=!: The ID of the virtual private cloud (VPC) for the DNSSEC validation status.
+    - name: list-resolver-endpoint-ip-addresses
+      description: Gets the IP addresses for a specified Resolver endpoint.
+      flags:
+        --max-results=: The maximum number of IP addresses that you want to return in the response to a `ListResolverEndpointIpAddresses` request.
+        --next-token=: For the first `ListResolverEndpointIpAddresses` request, omit this value.
+        --resolver-endpoint-id=!: The ID of the Resolver endpoint that you want to get IP addresses for.
+    - name: list-resolver-query-log-configs
+      description: Lists information about the specified query logging configurations.
+      flags:
+        --filters=: An optional specification to return a subset of query logging configurations.
+        --max-results=: The maximum number of query logging configurations that you want to return in the response to a `ListResolverQueryLogConfigs` request.
+        --next-token=: For the first `ListResolverQueryLogConfigs` request, omit this value.
+        --sort-by=: The element that you want Resolver to sort query logging configurations by.
+        --sort-order=: If you specified a value for `SortBy`, the order that you want query logging configurations to be listed in, `ASCENDING` or `DESCENDING`.
+      completion:
+        flag:
+            sort-order:
+                - ASCENDING
+                - DESCENDING
+    - name: associate-resolver-rule
+      description: Associates a Resolver rule with a VPC.
+      flags:
+        --name=: A name for the association that you're creating between a Resolver rule and a VPC.
+        --resolver-rule-id=!: The ID of the Resolver rule that you want to associate with the VPC.
+        --vpc-id=!: The ID of the VPC that you want to associate the Resolver rule with.
+    - name: get-resolver-config
+      description: Retrieves the behavior configuration of Route 53 Resolver behavior for a single VPC from Amazon Virtual Private Cloud.
+      flags:
+        --resource-id=!: Resource ID of the Amazon VPC that you want to get information about.
+    - name: list-resolver-rules
+      description: Lists the Resolver rules that were created using the current Amazon Web Services account.
+      flags:
+        --filters=: An optional specification to return a subset of Resolver rules, such as all Resolver rules that are associated with the same Resolver endpoint.
+        --max-results=: The maximum number of Resolver rules that you want to return in the response to a `ListResolverRules` request.
+        --next-token=: For the first `ListResolverRules` request, omit this value.
+    - name: list-tags-for-resource
+      description: Lists the tags that you associated with the specified resource.
+      flags:
+        --max-results=: The maximum number of tags that you want to return in the response to a `ListTagsForResource` request.
+        --next-token=: For the first `ListTagsForResource` request, omit this value.
+        --resource-arn=!: The Amazon Resource Name (ARN) for the resource that you want to list tags for.
+    - name: put-resolver-query-log-config-policy
+      description: Specifies an Amazon Web Services account that you want to share a query logging configuration with, the query logging configuration that you want to share, and the operations that you want the account to be able to perform on the configuration.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the account that you want to share rules with.
+        --resolver-query-log-config-policy=!: An Identity and Access Management policy statement that lists the query logging configurations that you want to share with another Amazon Web Services account and the operations that you want the account to be able to perform.
+    - name: associate-firewall-rule-group
+      description: Associates a [FirewallRuleGroup]() with a VPC, to provide DNS filtering for the VPC.
+      flags:
+        --creator-request-id=!: A unique string that identifies the request and that allows failed requests to be retried without the risk of running the operation twice.
+        --firewall-rule-group-id=!: The unique identifier of the firewall rule group.
         --mutation-protection=: If enabled, this setting disallows modification or removal of the association, to help prevent against accidentally altering DNS firewall protections.
-        --name=: The name of the rule group association.
-        --priority=: The setting that determines the processing order of the rule group among the rule groups that you associate with the specified VPC.
+        --name=!: A name that lets you identify the association, to manage and use it.
+        --priority=!: The setting that determines the processing order of the rule group among the rule groups that you associate with the specified VPC.
+        --tags=: A list of the tag keys and values that you want to associate with the rule group association.
+        --vpc-id=!: The unique identifier of the VPC that you want to associate with the rule group.
       completion:
         flag:
             mutation-protection:
@@ -728,59 +471,64 @@ commands:
     - name: associate-resolver-endpoint-ip-address
       description: Adds IP addresses to an inbound or an outbound Resolver endpoint.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --ip-address=!: Either the IPv4 address that you want to add to a Resolver endpoint or a subnet ID.
         --resolver-endpoint-id=!: The ID of the Resolver endpoint that you want to associate IP addresses with.
-    - name: disassociate-firewall-rule-group
-      description: Disassociates a [FirewallRuleGroup]() from a VPC, to remove DNS filtering from the VPC.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --firewall-rule-group-association-id=!: The identifier of the [FirewallRuleGroupAssociation]().
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-resolver-config
-      description: Updates the behavior configuration of Route 53 Resolver behavior for a single VPC from Amazon Virtual Private Cloud.
-      flags:
-        --autodefined-reverse-flag=!: Indicates whether or not the Resolver will create autodefined rules for reverse DNS lookups.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-id=!: The ID of the Amazon Virtual Private Cloud VPC or a Route 53 Profile that you're configuring Resolver for.
-      completion:
-        flag:
-            autodefined-reverse-flag:
-                - ENABLE
-                - DISABLE
-                - USE_LOCAL_RESOURCE_SETTING
     - name: create-firewall-domain-list
       description: Creates an empty firewall domain list for use in DNS Firewall rules.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --creator-request-id=!: A unique string that identifies the request and that allows you to retry failed requests without the risk of running the operation twice.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: A name that lets you identify the domain list to manage and use it.
         --tags=: A list of the tag keys and values that you want to associate with the domain list.
-    - name: get-firewall-domain-list
-      description: Retrieves the specified firewall domain list.
+    - name: get-resolver-endpoint
+      description: Gets information about a specified Resolver endpoint, such as whether it's an inbound or an outbound Resolver endpoint, and the current status of the endpoint.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --firewall-domain-list-id=!: The ID of the domain list.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-resolver-query-log-config-association
-      description: Gets information about a specified association between a Resolver query logging configuration and an Amazon VPC.
+        --resolver-endpoint-id=!: The ID of the Resolver endpoint that you want to get information about.
+    - name: get-resolver-query-log-config-policy
+      description: Gets information about a query logging policy.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resolver-query-log-config-association-id=!: The ID of the Resolver query logging configuration association that you want to get information about.
-    - name: get-resolver-rule
-      description: Gets information about a specified Resolver rule, such as the domain name that the rule forwards DNS queries for and the ID of the outbound Resolver endpoint that the rule is associated with.
+        --arn=!: The ARN of the query logging configuration that you want to get the query logging policy for.
+    - name: update-firewall-rule-group-association
+      description: Changes the association of a [FirewallRuleGroup]() with a VPC.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resolver-rule-id=!: The ID of the Resolver rule that you want to get information about.
+        --firewall-rule-group-association-id=!: The identifier of the [FirewallRuleGroupAssociation]().
+        --mutation-protection=: If enabled, this setting disallows modification or removal of the association, to help prevent against accidentally altering DNS firewall protections.
+        --name=: The name of the rule group association.
+        --priority=: The setting that determines the processing order of the rule group among the rule groups that you associate with the specified VPC.
+      completion:
+        flag:
+            mutation-protection:
+                - ENABLED
+                - DISABLED
+    - name: list-firewall-rules
+      description: Retrieves the firewall rules that you have defined for the specified firewall rule group.
+      flags:
+        --action=: Optional additional filter for the rules to retrieve.
+        --firewall-rule-group-id=!: The unique identifier of the firewall rule group that you want to retrieve the rules for.
+        --max-results=: The maximum number of objects that you want Resolver to return for this request.
+        --next-token=: For the first call to this list request, omit this value.
+        --priority=: Optional additional filter for the rules to retrieve.
+      completion:
+        flag:
+            action:
+                - ALLOW
+                - BLOCK
+                - ALERT
+    - name: get-firewall-rule-group
+      description: Retrieves the specified firewall rule group.
+      flags:
+        --firewall-rule-group-id=!: The unique identifier of the firewall rule group.
+    - name: get-firewall-rule-group-policy
+      description: Returns the Identity and Access Management (Amazon Web Services IAM) policy for sharing the specified rule group.
+      flags:
+        --arn=!: The ARN (Amazon Resource Name) for the rule group.
+    - name: delete-firewall-rule
+      description: Deletes the specified firewall rule.
+      flags:
+        --firewall-domain-list-id=: The ID of the domain list that's used in the rule.
+        --firewall-rule-group-id=!: The unique identifier of the firewall rule group that you want to delete the rule from.
+        --firewall-threat-protection-id=: The ID that is created for a DNS Firewall Advanced rule.
+        --qtype=: The DNS query type that the rule you are deleting evaluates.
+    - name: delete-firewall-rule-group
+      description: Deletes the specified firewall rule group.
+      flags:
+        --firewall-rule-group-id=!: The unique identifier of the firewall rule group that you want to delete.

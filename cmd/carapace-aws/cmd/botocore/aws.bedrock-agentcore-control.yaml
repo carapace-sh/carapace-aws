@@ -1,157 +1,233 @@
 name: bedrock-agentcore-control
 description: Amazon Bedrock AgentCore Control
 commands:
-    - name: update-agent-runtime-endpoint
-      description: Updates an existing Amazon Bedrock AgentCore Runtime endpoint.
+    - name: get-memory
+      description: Retrieve an existing Amazon Bedrock AgentCore Memory resource.
       flags:
-        --agent-runtime-id=!: The unique identifier of the AgentCore Runtime associated with the endpoint.
-        --agent-runtime-version=: The updated version of the AgentCore Runtime for the endpoint.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
-        --description=: The updated description of the AgentCore Runtime endpoint.
-        --endpoint-name=!: The name of the AgentCore Runtime endpoint to update.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-workload-identity
-      description: Updates an existing workload identity.
+        --memory-id=!: The unique identifier of the memory to retrieve.
+    - name: get-token-vault
+      description: Retrieves information about a token vault.
       flags:
-        --allowed-resource-oauth2-return-urls=: The new list of allowed OAuth2 return URLs for resources associated with this workload identity.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the workload identity to update.
-    - name: create-api-key-credential-provider
-      description: Creates a new API key credential provider.
-      flags:
-        --api-key=!: The API key to use for authentication.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the API key credential provider.
-        --tags=: A map of tag keys and values to assign to the API key credential provider.
-    - name: get-agent-runtime-endpoint
-      description: Gets information about an Amazon Secure AgentEndpoint.
-      flags:
-        --agent-runtime-id=!: The unique identifier of the AgentCore Runtime associated with the endpoint.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --endpoint-name=!: The name of the AgentCore Runtime endpoint to retrieve.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-code-interpreter
-      description: Gets information about a custom code interpreter.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --code-interpreter-id=!: The unique identifier of the code interpreter to retrieve.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-gateway-target
-      description: Updates an existing gateway target.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --credential-provider-configurations=: The updated credential provider configurations for the gateway target.
-        --description=: The updated description for the gateway target.
-        --gateway-identifier=!: The unique identifier of the gateway associated with the target.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The updated name for the gateway target.
-        --target-configuration=!: ""
-        --target-id=!: The unique identifier of the gateway target to update.
-    - name: delete-api-key-credential-provider
-      description: Deletes an API key credential provider.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the API key credential provider to delete.
-    - name: delete-memory
-      description: Deletes an Amazon Bedrock AgentCore Memory resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A client token is used for keeping track of idempotent requests.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --memory-id=!: The unique identifier of the memory to delete.
-    - name: get-browser
-      description: Gets information about a custom browser.
-      flags:
-        --browser-id=!: The unique identifier of the browser to retrieve.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --token-vault-id=: The unique identifier of the token vault to retrieve.
     - name: tag-resource
       description: Associates the specified tags to a resource with the specified resourceArn.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the resource that you want to tag.
         --tags=!: The tags to add to the resource.
     - name: untag-resource
       description: Removes the specified tags from the specified resource.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the resource that you want to untag.
         --tag-keys=!: The tag keys of the tags to remove from the resource.
-    - name: update-oauth2-credential-provider
-      description: Updates an existing OAuth2 credential provider.
+    - name: update-agent-runtime
+      description: Updates an existing Amazon Secure Agent.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --credential-provider-vendor=!: The vendor of the OAuth2 credential provider.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the OAuth2 credential provider to update.
-        --oauth2-provider-config-input=!: The configuration input for the OAuth2 provider.
+        --agent-runtime-artifact=!: The updated artifact of the AgentCore Runtime.
+        --agent-runtime-id=!: The unique identifier of the AgentCore Runtime to update.
+        --authorizer-configuration=: The updated authorizer configuration for the AgentCore Runtime.
+        --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
+        --description=: The updated description of the AgentCore Runtime.
+        --environment-variables=: Updated environment variables to set in the AgentCore Runtime environment.
+        --lifecycle-configuration=: The updated life cycle configuration for the AgentCore Runtime.
+        --network-configuration=!: The updated network configuration for the AgentCore Runtime.
+        --protocol-configuration=: ""
+        --request-header-configuration=: The updated configuration for HTTP request headers that will be passed through to the runtime.
+        --role-arn=!: The updated IAM role ARN that provides permissions for the AgentCore Runtime.
+    - name: delete-browser
+      description: Deletes a custom browser.
+      flags:
+        --browser-id=!: The unique identifier of the browser to delete.
+        --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
+    - name: delete-code-interpreter
+      description: Deletes a custom code interpreter.
+      flags:
+        --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
+        --code-interpreter-id=!: The unique identifier of the code interpreter to delete.
+    - name: delete-gateway
+      description: Deletes a gateway.
+      flags:
+        --gateway-identifier=!: The identifier of the gateway to delete.
+    - name: list-tags-for-resource
+      description: Lists the tags associated with the specified resource.
+      flags:
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource for which you want to list tags.
+    - name: update-agent-runtime-endpoint
+      description: Updates an existing Amazon Bedrock AgentCore Runtime endpoint.
+      flags:
+        --agent-runtime-id=!: The unique identifier of the AgentCore Runtime associated with the endpoint.
+        --agent-runtime-version=: The updated version of the AgentCore Runtime for the endpoint.
+        --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
+        --description=: The updated description of the AgentCore Runtime endpoint.
+        --endpoint-name=!: The name of the AgentCore Runtime endpoint to update.
+    - name: update-memory
+      description: Update an Amazon Bedrock AgentCore Memory resource memory.
+      flags:
+        --client-token=: A client token is used for keeping track of idempotent requests.
+        --description=: The updated description of the AgentCore Memory resource.
+        --event-expiry-duration=: The number of days after which memory events will expire, between 7 and 365 days.
+        --memory-execution-role-arn=: The ARN of the IAM role that provides permissions for the AgentCore Memory resource.
+        --memory-id=!: The unique identifier of the memory to update.
+        --memory-strategies=: The memory strategies to add, modify, or delete.
+    - name: get-gateway-target
+      description: Retrieves information about a specific gateway target.
+      flags:
+        --gateway-identifier=!: The identifier of the gateway that contains the target.
+        --target-id=!: The unique identifier of the target to retrieve.
+    - name: create-workload-identity
+      description: Creates a new workload identity.
+      flags:
+        --allowed-resource-oauth2-return-urls=: The list of allowed OAuth2 return URLs for resources associated with this workload identity.
+        --name=!: The name of the workload identity.
+        --tags=: A map of tag keys and values to assign to the workload identity.
+    - name: delete-memory
+      description: Deletes an Amazon Bedrock AgentCore Memory resource.
+      flags:
+        --client-token=: A client token is used for keeping track of idempotent requests.
+        --memory-id=!: The unique identifier of the memory to delete.
+    - name: get-agent-runtime-endpoint
+      description: Gets information about an Amazon Secure AgentEndpoint.
+      flags:
+        --agent-runtime-id=!: The unique identifier of the AgentCore Runtime associated with the endpoint.
+        --endpoint-name=!: The name of the AgentCore Runtime endpoint to retrieve.
+    - name: get-browser
+      description: Gets information about a custom browser.
+      flags:
+        --browser-id=!: The unique identifier of the browser to retrieve.
+    - name: list-agent-runtime-endpoints
+      description: Lists all endpoints for a specific Amazon Secure Agent.
+      flags:
+        --agent-runtime-id=!: The unique identifier of the AgentCore Runtime to list endpoints for.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: A token to retrieve the next page of results.
+    - name: list-gateway-targets
+      description: Lists all targets for a specific gateway.
+      flags:
+        --gateway-identifier=!: The identifier of the gateway to list targets for.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
+    - name: list-memories
+      description: Lists the available Amazon Bedrock AgentCore Memory resources in the current Amazon Web Services Region.
+      flags:
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token for the next set of results.
+    - name: create-api-key-credential-provider
+      description: Creates a new API key credential provider.
+      flags:
+        --api-key=!: The API key to use for authentication.
+        --name=!: The name of the API key credential provider.
+        --tags=: A map of tag keys and values to assign to the API key credential provider.
+    - name: create-gateway-target
+      description: Creates a target for a gateway.
+      flags:
+        --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
+        --credential-provider-configurations=: The credential provider configurations for the target.
+        --description=: The description of the gateway target.
+        --gateway-identifier=!: The identifier of the gateway to create a target for.
+        --name=!: The name of the gateway target.
+        --target-configuration=!: The configuration settings for the target, including endpoint information and schema definitions.
+    - name: create-memory
+      description: Creates a new Amazon Bedrock AgentCore Memory resource.
+      flags:
+        --client-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than one time.
+        --description=: The description of the memory.
+        --encryption-key-arn=: The Amazon Resource Name (ARN) of the KMS key used to encrypt the memory data.
+        --event-expiry-duration=!: The duration after which memory events expire.
+        --memory-execution-role-arn=: The Amazon Resource Name (ARN) of the IAM role that provides permissions for the memory to access Amazon Web Services services.
+        --memory-strategies=: The memory strategies to use for this memory.
+        --name=!: The name of the memory.
+        --tags=: A map of tag keys and values to assign to an AgentCore Memory.
+    - name: delete-workload-identity
+      description: Deletes a workload identity.
+      flags:
+        --name=!: The name of the workload identity to delete.
+    - name: get-api-key-credential-provider
+      description: Retrieves information about an API key credential provider.
+      flags:
+        --name=!: The name of the API key credential provider to retrieve.
+    - name: list-api-key-credential-providers
+      description: Lists all API key credential providers in your account.
+      flags:
+        --max-results=: Maximum number of results to return.
+        --next-token=: Pagination token.
+    - name: list-gateways
+      description: Lists all gateways in the account.
+      flags:
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
+    - name: set-token-vault-cmk
+      description: Sets the customer master key (CMK) for a token vault.
+      flags:
+        --kms-configuration=!: The KMS configuration for the token vault, including the key type and KMS key ARN.
+        --token-vault-id=: The unique identifier of the token vault to update.
+    - name: get-code-interpreter
+      description: Gets information about a custom code interpreter.
+      flags:
+        --code-interpreter-id=!: The unique identifier of the code interpreter to retrieve.
+    - name: get-oauth2-credential-provider
+      description: Retrieves information about an OAuth2 credential provider.
+      flags:
+        --name=!: The name of the OAuth2 credential provider to retrieve.
+    - name: get-workload-identity
+      description: Retrieves information about a workload identity.
+      flags:
+        --name=!: The name of the workload identity to retrieve.
+    - name: update-gateway
+      description: Updates an existing gateway.
+      flags:
+        --authorizer-configuration=: The updated authorizer configuration for the gateway.
+        --authorizer-type=!: The updated authorizer type for the gateway.
+        --description=: The updated description for the gateway.
+        --exception-level=: The level of detail in error messages returned when invoking the gateway.
+        --gateway-identifier=!: The identifier of the gateway to update.
+        --interceptor-configurations=: The updated interceptor configurations for the gateway.
+        --kms-key-arn=: The updated ARN of the KMS key used to encrypt the gateway.
+        --name=!: The name of the gateway.
+        --protocol-configuration=: ""
+        --protocol-type=!: The updated protocol type for the gateway.
+        --role-arn=!: The updated IAM role ARN that provides permissions for the gateway.
       completion:
         flag:
-            credential-provider-vendor:
-                - GoogleOauth2
-                - GithubOauth2
-                - SlackOauth2
-                - SalesforceOauth2
-                - MicrosoftOauth2
-                - CustomOauth2
-                - AtlassianOauth2
-                - LinkedinOauth2
-                - XOauth2
-                - OktaOauth2
-                - OneLoginOauth2
-                - PingOneOauth2
-                - FacebookOauth2
-                - YandexOauth2
-                - RedditOauth2
-                - ZoomOauth2
-                - TwitchOauth2
-                - SpotifyOauth2
-                - DropboxOauth2
-                - NotionOauth2
-                - HubspotOauth2
-                - CyberArkOauth2
-                - FusionAuthOauth2
-                - Auth0Oauth2
-                - CognitoOauth2
-    - name: create-browser
-      description: Creates a custom browser.
+            authorizer-type:
+                - CUSTOM_JWT
+                - AWS_IAM
+                - NONE
+            exception-level:
+                - DEBUG
+            protocol-type:
+                - MCP
+    - name: update-gateway-target
+      description: Updates an existing gateway target.
       flags:
-        --browser-signing=: The browser signing configuration that enables cryptographic agent identification using HTTP message signatures for web bot authentication.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than one time.
-        --description=: The description of the browser.
-        --execution-role-arn=: The Amazon Resource Name (ARN) of the IAM role that provides permissions for the browser to access Amazon Web Services services.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the browser.
-        --network-configuration=!: The network configuration for the browser.
-        --recording=: The recording configuration for the browser.
-        --tags=: A map of tag keys and values to assign to the browser.
+        --credential-provider-configurations=: The updated credential provider configurations for the gateway target.
+        --description=: The updated description for the gateway target.
+        --gateway-identifier=!: The unique identifier of the gateway associated with the target.
+        --name=!: The updated name for the gateway target.
+        --target-configuration=!: ""
+        --target-id=!: The unique identifier of the gateway target to update.
+    - name: update-workload-identity
+      description: Updates an existing workload identity.
+      flags:
+        --allowed-resource-oauth2-return-urls=: The new list of allowed OAuth2 return URLs for resources associated with this workload identity.
+        --name=!: The name of the workload identity to update.
+    - name: create-agent-runtime
+      description: Creates an Amazon Bedrock AgentCore Runtime.
+      flags:
+        --agent-runtime-artifact=!: The artifact of the AgentCore Runtime.
+        --agent-runtime-name=!: The name of the AgentCore Runtime.
+        --authorizer-configuration=: The authorizer configuration for the AgentCore Runtime.
+        --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
+        --description=: The description of the AgentCore Runtime.
+        --environment-variables=: Environment variables to set in the AgentCore Runtime environment.
+        --lifecycle-configuration=: The life cycle configuration for the AgentCore Runtime.
+        --network-configuration=!: The network configuration for the AgentCore Runtime.
+        --protocol-configuration=: ""
+        --request-header-configuration=: Configuration for HTTP request headers that will be passed through to the runtime.
+        --role-arn=!: The IAM role ARN that provides permissions for the AgentCore Runtime.
+        --tags=: A map of tag keys and values to assign to the agent runtime.
     - name: create-oauth2-credential-provider
       description: Creates a new OAuth2 credential provider.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --credential-provider-vendor=!: The vendor of the OAuth2 credential provider.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the OAuth2 credential provider.
         --oauth2-provider-config-input=!: The configuration settings for the OAuth2 provider, including client ID, client secret, and other vendor-specific settings.
         --tags=: A map of tag keys and values to assign to the OAuth2 credential provider.
@@ -183,291 +259,72 @@ commands:
                 - FusionAuthOauth2
                 - Auth0Oauth2
                 - CognitoOauth2
-    - name: create-workload-identity
-      description: Creates a new workload identity.
-      flags:
-        --allowed-resource-oauth2-return-urls=: The list of allowed OAuth2 return URLs for resources associated with this workload identity.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the workload identity.
-        --tags=: A map of tag keys and values to assign to the workload identity.
-    - name: delete-browser
-      description: Deletes a custom browser.
-      flags:
-        --browser-id=!: The unique identifier of the browser to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-oauth2-credential-provider
-      description: Deletes an OAuth2 credential provider.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the OAuth2 credential provider to delete.
-    - name: get-oauth2-credential-provider
-      description: Retrieves information about an OAuth2 credential provider.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the OAuth2 credential provider to retrieve.
-    - name: get-workload-identity
-      description: Retrieves information about a workload identity.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the workload identity to retrieve.
-    - name: list-agent-runtime-versions
-      description: Lists all versions of a specific Amazon Secure Agent.
-      flags:
-        --agent-runtime-id=!: The unique identifier of the AgentCore Runtime to list versions for.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in the response.
-        --next-token=: A token to retrieve the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: delete-gateway
-      description: Deletes a gateway.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --gateway-identifier=!: The identifier of the gateway to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-workload-identity
-      description: Deletes a workload identity.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the workload identity to delete.
-    - name: get-gateway
-      description: Retrieves information about a specific Gateway.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --gateway-identifier=!: The identifier of the gateway to retrieve.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-api-key-credential-providers
-      description: Lists all API key credential providers in your account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Maximum number of results to return.
-        --next-token=: Pagination token.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-browsers
-      description: Lists all custom browsers in your account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in a single call.
-        --next-token=: The token for the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --type=: The type of browsers to list.
-      completion:
-        flag:
-            type:
-                - SYSTEM
-                - CUSTOM
-    - name: list-oauth2-credential-providers
-      description: Lists all OAuth2 credential providers in your account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Maximum number of results to return.
-        --next-token=: Pagination token.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: Lists the tags associated with the specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource for which you want to list tags.
     - name: list-workload-identities
       description: Lists all workload identities in your account.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
         --max-results=: Maximum number of results to return.
         --next-token=: Pagination token.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: create-agent-runtime
-      description: Creates an Amazon Bedrock AgentCore Runtime.
+    - name: synchronize-gateway-targets
+      description: The gateway targets.
       flags:
-        --agent-runtime-artifact=!: The artifact of the AgentCore Runtime.
-        --agent-runtime-name=!: The name of the AgentCore Runtime.
-        --authorizer-configuration=: The authorizer configuration for the AgentCore Runtime.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
-        --description=: The description of the AgentCore Runtime.
-        --environment-variables=: Environment variables to set in the AgentCore Runtime environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lifecycle-configuration=: The life cycle configuration for the AgentCore Runtime.
-        --network-configuration=!: The network configuration for the AgentCore Runtime.
-        --protocol-configuration=: ""
-        --request-header-configuration=: Configuration for HTTP request headers that will be passed through to the runtime.
-        --role-arn=!: The IAM role ARN that provides permissions for the AgentCore Runtime.
-        --tags=: A map of tag keys and values to assign to the agent runtime.
-    - name: delete-agent-runtime
-      description: Deletes an Amazon Bedrock AgentCore Runtime.
-      flags:
-        --agent-runtime-id=!: The unique identifier of the AgentCore Runtime to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than one time.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-code-interpreter
-      description: Deletes a custom code interpreter.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
-        --code-interpreter-id=!: The unique identifier of the code interpreter to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-agent-runtime
-      description: Gets an Amazon Bedrock AgentCore Runtime.
-      flags:
-        --agent-runtime-id=!: The unique identifier of the AgentCore Runtime to retrieve.
-        --agent-runtime-version=: The version of the AgentCore Runtime to retrieve.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-api-key-credential-provider
-      description: Retrieves information about an API key credential provider.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the API key credential provider to retrieve.
-    - name: get-gateway-target
-      description: Retrieves information about a specific gateway target.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --gateway-identifier=!: The identifier of the gateway that contains the target.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --target-id=!: The unique identifier of the target to retrieve.
-    - name: list-agent-runtimes
-      description: Lists all Amazon Secure Agents in your account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in the response.
-        --next-token=: A token to retrieve the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+        --gateway-identifier=!: The gateway Identifier.
+        --target-id-list=!: The target ID list.
     - name: update-api-key-credential-provider
       description: Updates an existing API key credential provider.
       flags:
         --api-key=!: The new API key to use for authentication.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the API key credential provider to update.
-    - name: delete-gateway-target
-      description: Deletes a gateway target.
+    - name: update-oauth2-credential-provider
+      description: Updates an existing OAuth2 credential provider.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --gateway-identifier=!: The unique identifier of the gateway associated with the target.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --target-id=!: The unique identifier of the gateway target to delete.
-    - name: list-gateway-targets
-      description: Lists all targets for a specific gateway.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --gateway-identifier=!: The identifier of the gateway to list targets for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in the response.
-        --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-gateways
-      description: Lists all gateways in the account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in the response.
-        --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-gateway
-      description: Updates an existing gateway.
-      flags:
-        --authorizer-configuration=: The updated authorizer configuration for the gateway.
-        --authorizer-type=!: The updated authorizer type for the gateway.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The updated description for the gateway.
-        --exception-level=: The level of detail in error messages returned when invoking the gateway.
-        --gateway-identifier=!: The identifier of the gateway to update.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --interceptor-configurations=: The updated interceptor configurations for the gateway.
-        --kms-key-arn=: The updated ARN of the KMS key used to encrypt the gateway.
-        --name=!: The name of the gateway.
-        --protocol-configuration=: ""
-        --protocol-type=!: The updated protocol type for the gateway.
-        --role-arn=!: The updated IAM role ARN that provides permissions for the gateway.
+        --credential-provider-vendor=!: The vendor of the OAuth2 credential provider.
+        --name=!: The name of the OAuth2 credential provider to update.
+        --oauth2-provider-config-input=!: The configuration input for the OAuth2 provider.
       completion:
         flag:
-            authorizer-type:
-                - CUSTOM_JWT
-                - AWS_IAM
-                - NONE
-            exception-level:
-                - DEBUG
-            protocol-type:
-                - MCP
-    - name: update-memory
-      description: Update an Amazon Bedrock AgentCore Memory resource memory.
+            credential-provider-vendor:
+                - GoogleOauth2
+                - GithubOauth2
+                - SlackOauth2
+                - SalesforceOauth2
+                - MicrosoftOauth2
+                - CustomOauth2
+                - AtlassianOauth2
+                - LinkedinOauth2
+                - XOauth2
+                - OktaOauth2
+                - OneLoginOauth2
+                - PingOneOauth2
+                - FacebookOauth2
+                - YandexOauth2
+                - RedditOauth2
+                - ZoomOauth2
+                - TwitchOauth2
+                - SpotifyOauth2
+                - DropboxOauth2
+                - NotionOauth2
+                - HubspotOauth2
+                - CyberArkOauth2
+                - FusionAuthOauth2
+                - Auth0Oauth2
+                - CognitoOauth2
+    - name: create-agent-runtime-endpoint
+      description: Creates an AgentCore Runtime endpoint.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A client token is used for keeping track of idempotent requests.
-        --description=: The updated description of the AgentCore Memory resource.
-        --event-expiry-duration=: The number of days after which memory events will expire, between 7 and 365 days.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --memory-execution-role-arn=: The ARN of the IAM role that provides permissions for the AgentCore Memory resource.
-        --memory-id=!: The unique identifier of the memory to update.
-        --memory-strategies=: The memory strategies to add, modify, or delete.
+        --agent-runtime-id=!: The unique identifier of the AgentCore Runtime to create an endpoint for.
+        --agent-runtime-version=: The version of the AgentCore Runtime to use for the endpoint.
+        --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
+        --description=: The description of the AgentCore Runtime endpoint.
+        --name=!: The name of the AgentCore Runtime endpoint.
+        --tags=: A map of tag keys and values to assign to the agent runtime endpoint.
     - name: create-gateway
       description: Creates a gateway for Amazon Bedrock Agent.
       flags:
         --authorizer-configuration=: The authorizer configuration for the gateway.
         --authorizer-type=!: The type of authorizer to use for the gateway.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
         --description=: The description of the gateway.
         --exception-level=: The level of detail in error messages returned when invoking the gateway.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --interceptor-configurations=: A list of configuration settings for a gateway interceptor.
         --kms-key-arn=: The Amazon Resource Name (ARN) of the KMS key used to encrypt data associated with the gateway.
         --name=!: The name of the gateway.
@@ -485,108 +342,37 @@ commands:
                 - DEBUG
             protocol-type:
                 - MCP
-    - name: create-gateway-target
-      description: Creates a target for a gateway.
+    - name: delete-agent-runtime
+      description: Deletes an Amazon Bedrock AgentCore Runtime.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
-        --credential-provider-configurations=: The credential provider configurations for the target.
-        --description=: The description of the gateway target.
-        --gateway-identifier=!: The identifier of the gateway to create a target for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the gateway target.
-        --target-configuration=!: The configuration settings for the target, including endpoint information and schema definitions.
-    - name: create-memory
-      description: Creates a new Amazon Bedrock AgentCore Memory resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --agent-runtime-id=!: The unique identifier of the AgentCore Runtime to delete.
         --client-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than one time.
-        --description=: The description of the memory.
-        --encryption-key-arn=: The Amazon Resource Name (ARN) of the KMS key used to encrypt the memory data.
-        --event-expiry-duration=!: The duration after which memory events expire.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --memory-execution-role-arn=: The Amazon Resource Name (ARN) of the IAM role that provides permissions for the memory to access Amazon Web Services services.
-        --memory-strategies=: The memory strategies to use for this memory.
-        --name=!: The name of the memory.
-        --tags=: A map of tag keys and values to assign to an AgentCore Memory.
-    - name: get-memory
-      description: Retrieve an existing Amazon Bedrock AgentCore Memory resource.
+    - name: delete-api-key-credential-provider
+      description: Deletes an API key credential provider.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --memory-id=!: The unique identifier of the memory to retrieve.
-    - name: list-agent-runtime-endpoints
-      description: Lists all endpoints for a specific Amazon Secure Agent.
+        --name=!: The name of the API key credential provider to delete.
+    - name: list-agent-runtimes
+      description: Lists all Amazon Secure Agents in your account.
       flags:
-        --agent-runtime-id=!: The unique identifier of the AgentCore Runtime to list endpoints for.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return in the response.
         --next-token=: A token to retrieve the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-memories
-      description: Lists the available Amazon Bedrock AgentCore Memory resources in the current Amazon Web Services Region.
+    - name: create-browser
+      description: Creates a custom browser.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in a single call.
-        --next-token=: The token for the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: synchronize-gateway-targets
-      description: The gateway targets.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --gateway-identifier=!: The gateway Identifier.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --target-id-list=!: The target ID list.
-    - name: update-agent-runtime
-      description: Updates an existing Amazon Secure Agent.
-      flags:
-        --agent-runtime-artifact=!: The updated artifact of the AgentCore Runtime.
-        --agent-runtime-id=!: The unique identifier of the AgentCore Runtime to update.
-        --authorizer-configuration=: The updated authorizer configuration for the AgentCore Runtime.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
-        --description=: The updated description of the AgentCore Runtime.
-        --environment-variables=: Updated environment variables to set in the AgentCore Runtime environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lifecycle-configuration=: The updated life cycle configuration for the AgentCore Runtime.
-        --network-configuration=!: The updated network configuration for the AgentCore Runtime.
-        --protocol-configuration=: ""
-        --request-header-configuration=: The updated configuration for HTTP request headers that will be passed through to the runtime.
-        --role-arn=!: The updated IAM role ARN that provides permissions for the AgentCore Runtime.
-    - name: create-agent-runtime-endpoint
-      description: Creates an AgentCore Runtime endpoint.
-      flags:
-        --agent-runtime-id=!: The unique identifier of the AgentCore Runtime to create an endpoint for.
-        --agent-runtime-version=: The version of the AgentCore Runtime to use for the endpoint.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
-        --description=: The description of the AgentCore Runtime endpoint.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the AgentCore Runtime endpoint.
-        --tags=: A map of tag keys and values to assign to the agent runtime endpoint.
+        --browser-signing=: The browser signing configuration that enables cryptographic agent identification using HTTP message signatures for web bot authentication.
+        --client-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than one time.
+        --description=: The description of the browser.
+        --execution-role-arn=: The Amazon Resource Name (ARN) of the IAM role that provides permissions for the browser to access Amazon Web Services services.
+        --name=!: The name of the browser.
+        --network-configuration=!: The network configuration for the browser.
+        --recording=: The recording configuration for the browser.
+        --tags=: A map of tag keys and values to assign to the browser.
     - name: create-code-interpreter
       description: Creates a custom code interpreter.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than one time.
         --description=: The description of the code interpreter.
         --execution-role-arn=: The Amazon Resource Name (ARN) of the IAM role that provides permissions for the code interpreter to access Amazon Web Services services.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the code interpreter.
         --network-configuration=!: The network configuration for the code interpreter.
         --tags=: A map of tag keys and values to assign to the code interpreter.
@@ -594,50 +380,63 @@ commands:
       description: Deletes an AAgentCore Runtime endpoint.
       flags:
         --agent-runtime-id=!: The unique identifier of the AgentCore Runtime associated with the endpoint.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
         --endpoint-name=!: The name of the AgentCore Runtime endpoint to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-token-vault
-      description: Retrieves information about a token vault.
+    - name: get-gateway
+      description: Retrieves information about a specific Gateway.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --token-vault-id=: The unique identifier of the token vault to retrieve.
+        --gateway-identifier=!: The identifier of the gateway to retrieve.
+    - name: list-agent-runtime-versions
+      description: Lists all versions of a specific Amazon Secure Agent.
+      flags:
+        --agent-runtime-id=!: The unique identifier of the AgentCore Runtime to list versions for.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: A token to retrieve the next page of results.
+    - name: list-browsers
+      description: Lists all custom browsers in your account.
+      flags:
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token for the next set of results.
+        --type=: The type of browsers to list.
+      completion:
+        flag:
+            type:
+                - SYSTEM
+                - CUSTOM
     - name: list-code-interpreters
       description: Lists all custom code interpreters in your account.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return in the response.
         --next-token=: A token to retrieve the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
         --type=: The type of code interpreters to list.
       completion:
         flag:
             type:
                 - SYSTEM
                 - CUSTOM
-    - name: set-token-vault-cmk
-      description: Sets the customer master key (CMK) for a token vault.
+    - name: list-oauth2-credential-providers
+      description: Lists all OAuth2 credential providers in your account.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kms-configuration=!: The KMS configuration for the token vault, including the key type and KMS key ARN.
-        --token-vault-id=: The unique identifier of the token vault to update.
+        --max-results=: Maximum number of results to return.
+        --next-token=: Pagination token.
+    - name: delete-gateway-target
+      description: Deletes a gateway target.
+      flags:
+        --gateway-identifier=!: The unique identifier of the gateway associated with the target.
+        --target-id=!: The unique identifier of the gateway target to delete.
+    - name: delete-oauth2-credential-provider
+      description: Deletes an OAuth2 credential provider.
+      flags:
+        --name=!: The name of the OAuth2 credential provider to delete.
+    - name: get-agent-runtime
+      description: Gets an Amazon Bedrock AgentCore Runtime.
+      flags:
+        --agent-runtime-id=!: The unique identifier of the AgentCore Runtime to retrieve.
+        --agent-runtime-version=: The version of the AgentCore Runtime to retrieve.
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:
         - name: memory-created
           description: Retrieve an existing Amazon Bedrock AgentCore Memory resource.
           flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --memory-id=!: The unique identifier of the memory to retrieve.

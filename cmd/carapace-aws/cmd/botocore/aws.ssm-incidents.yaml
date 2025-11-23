@@ -1,55 +1,86 @@
 name: ssm-incidents
 description: AWS Systems Manager Incident Manager
 commands:
-    - name: start-incident
-      description: Used to start an incident from CloudWatch alarms, EventBridge events, or manually.
+    - name: delete-timeline-event
+      description: Deletes a timeline event from an incident.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token ensuring that the operation is called only once with the specified details.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --impact=: Defines the impact to the customers.
-        --related-items=: Add related items to the incident for other responders to use.
-        --response-plan-arn=!: The Amazon Resource Name (ARN) of the response plan that pre-defines summary, chat channels, Amazon SNS topics, runbooks, title, and impact of the incident.
-        --title=: Provide a title for the incident.
-        --trigger-details=: Details of what created the incident record in Incident Manager.
+        --event-id=!: The ID of the event to update.
+        --incident-record-arn=!: The Amazon Resource Name (ARN) of the incident that includes the timeline event.
+    - name: put-resource-policy
+      description: Adds a resource policy to the specified response plan.
+      flags:
+        --policy=!: Details of the resource policy.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the response plan to add the resource policy to.
+    - name: delete-response-plan
+      description: Deletes the specified response plan.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the response plan.
+    - name: get-incident-record
+      description: Returns the details for the specified incident record.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the incident record.
+    - name: get-response-plan
+      description: Retrieves the details of the specified response plan.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the response plan.
+    - name: list-related-items
+      description: List all related items for an incident record.
+      flags:
+        --incident-record-arn=!: The Amazon Resource Name (ARN) of the incident record containing the listed related items.
+        --max-results=: The maximum number of related items per page.
+        --next-token=: The pagination token for the next set of items to return.
+    - name: delete-replication-set
+      description: Deletes all Regions in your replication set.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the replication set you're deleting.
+    - name: list-incident-findings
+      description: Retrieves a list of the IDs of findings, plus their last modified times, that have been identified for a specified incident.
+      flags:
+        --incident-record-arn=!: The Amazon Resource Name (ARN) of the incident for which you want to view associated findings.
+        --max-results=: The maximum number of findings to retrieve per call.
+        --next-token=: The pagination token for the next set of items to return.
+    - name: delete-incident-record
+      description: Delete an incident record from Incident Manager.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the incident record you are deleting.
+    - name: list-tags-for-resource
+      description: Lists the tags that are attached to the specified response plan or incident.
+      flags:
+        --resource-arn=!: The Amazon Resource Name (ARN) of the response plan or incident.
     - name: tag-resource
       description: Adds a tag to a response plan.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the response plan you're adding the tags to.
         --tags=!: A list of tags to add to the response plan.
-    - name: update-related-items
-      description: Add or remove related items from the related items tab of an incident record.
+    - name: update-deletion-protection
+      description: Update deletion protection to either allow or deny deletion of the final Region in a replication set.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures that a client calls the operation only once with the specified details.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --incident-record-arn=!: The Amazon Resource Name (ARN) of the incident record that contains the related items that you update.
-        --related-items-update=!: Details about the item that you are add to, or delete from, an incident.
-    - name: batch-get-incident-findings
-      description: Retrieves details about all specified findings for an incident, including descriptive details about each finding.
+        --arn=!: The Amazon Resource Name (ARN) of the replication set to update.
+        --client-token=: A token that ensures that the operation is called only once with the specified details.
+        --deletion-protected!: Specifies if deletion protection is turned on or off in your account.
+        --no-deletion-protected!: Specifies if deletion protection is turned on or off in your account.
+    - name: create-timeline-event
+      description: Creates a custom timeline event on the incident details page of an incident record.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --finding-ids=!: A list of IDs of findings for which you want to view details.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --incident-record-arn=!: The Amazon Resource Name (ARN) of the incident for which you want to view finding details.
+        --client-token=: A token that ensures that a client calls the action only once with the specified details.
+        --event-data=!: A short description of the event.
+        --event-references=: Adds one or more references to the `TimelineEvent`.
+        --event-time=!: The timestamp for when the event occurred.
+        --event-type=!: The type of event.
+        --incident-record-arn=!: The Amazon Resource Name (ARN) of the incident record that the action adds the incident to.
+    - name: get-replication-set
+      description: Retrieve your Incident Manager replication set.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the replication set you want to retrieve.
     - name: update-response-plan
       description: Updates the specified response plan.
       flags:
         --actions=: The actions that this response plan takes at the beginning of an incident.
         --arn=!: The Amazon Resource Name (ARN) of the response plan.
         --chat-channel=: The Chatbot chat channel used for collaboration during an incident.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A token ensuring that the operation is called only once with the specified details.
         --display-name=: The long format name of the response plan.
         --engagements=: The Amazon Resource Name (ARN) for the contacts and escalation plans that the response plan engages during an incident.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --incident-template-dedupe-string=: The string Incident Manager uses to prevent duplicate incidents from being created by the same incident in the same account.
         --incident-template-impact=: Defines the impact to the customers.
         --incident-template-notification-targets=: The Amazon SNS targets that are notified when updates are made to an incident.
@@ -57,28 +88,27 @@ commands:
         --incident-template-tags=: Tags to assign to the template.
         --incident-template-title=: The short format name of the incident.
         --integrations=: Information about third-party services integrated into the response plan.
-    - name: list-tags-for-resource
-      description: Lists the tags that are attached to the specified response plan or incident.
+    - name: create-replication-set
+      description: A replication set replicates and encrypts your data to the provided Regions with the provided KMS key.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the response plan or incident.
+        --client-token=: A token that ensures that the operation is called only once with the specified details.
+        --regions=!: The Regions that Incident Manager replicates your data to.
+        --tags=: A list of tags to add to the replication set.
+    - name: list-incident-records
+      description: Lists all incident records in your account.
+      flags:
+        --filters=: Filters the list of incident records you want to search through.
+        --max-results=: The maximum number of results per page.
+        --next-token=: The pagination token for the next set of items to return.
     - name: list-timeline-events
       description: Lists timeline events for the specified incident record.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --filters=: Filters the timeline events based on the provided conditional values.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --incident-record-arn=!: The Amazon Resource Name (ARN) of the incident that includes the timeline event.
-        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results per page.
         --next-token=: The pagination token for the next set of items to return.
-        --page-size=: The size of each page to get in the AWS service call.
         --sort-by=: Sort timeline events by the specified key value pair.
         --sort-order=: Sorts the order of timeline events by the value specified in the `sortBy` field.
-        --starting-token=: A token to specify where to start paginating.
       completion:
         flag:
             sort-by:
@@ -86,110 +116,69 @@ commands:
             sort-order:
                 - ASCENDING
                 - DESCENDING
-    - name: create-response-plan
-      description: Creates a response plan that automates the initial response to incidents.
+    - name: update-replication-set
+      description: Add or delete Regions from your replication set.
       flags:
-        --actions=: The actions that the response plan starts at the beginning of an incident.
-        --chat-channel=: The Chatbot chat channel used for collaboration during an incident.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token ensuring that the operation is called only once with the specified details.
-        --display-name=: The long format of the response plan name.
-        --engagements=: The Amazon Resource Name (ARN) for the contacts and escalation plans that the response plan engages during an incident.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --incident-template=!: Details used to create an incident when using this response plan.
-        --integrations=: Information about third-party services integrated into the response plan.
-        --name=!: The short format name of the response plan.
-        --tags=: A list of tags that you are adding to the response plan.
-    - name: create-timeline-event
-      description: Creates a custom timeline event on the incident details page of an incident record.
+        --actions=!: An action to add or delete a Region.
+        --arn=!: The Amazon Resource Name (ARN) of the replication set you're updating.
+        --client-token=: A token that ensures that the operation is called only once with the specified details.
+    - name: get-timeline-event
+      description: Retrieves a timeline event based on its ID and incident record.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures that a client calls the action only once with the specified details.
-        --event-data=!: A short description of the event.
-        --event-references=: Adds one or more references to the `TimelineEvent`.
-        --event-time=!: The timestamp for when the event occurred.
-        --event-type=!: The type of event.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --incident-record-arn=!: The Amazon Resource Name (ARN) of the incident record that the action adds the incident to.
-    - name: get-resource-policies
-      description: Retrieves the resource policies attached to the specified response plan.
+        --event-id=!: The ID of the event.
+        --incident-record-arn=!: The Amazon Resource Name (ARN) of the incident that includes the timeline event.
+    - name: list-replication-sets
+      description: Lists details about the replication set configured in your account.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of resource policies to display for each page of results.
+        --max-results=: The maximum number of results per page.
         --next-token=: The pagination token for the next set of items to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the response plan with the attached resource policy.
-        --starting-token=: A token to specify where to start paginating.
     - name: list-response-plans
       description: Lists all response plans in your account.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of response plans per page.
         --next-token=: The pagination token for the next set of items to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: put-resource-policy
-      description: Adds a resource policy to the specified response plan.
+    - name: start-incident
+      description: Used to start an incident from CloudWatch alarms, EventBridge events, or manually.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy=!: Details of the resource policy.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the response plan to add the resource policy to.
-    - name: delete-incident-record
-      description: Delete an incident record from Incident Manager.
+        --client-token=: A token ensuring that the operation is called only once with the specified details.
+        --impact=: Defines the impact to the customers.
+        --related-items=: Add related items to the incident for other responders to use.
+        --response-plan-arn=!: The Amazon Resource Name (ARN) of the response plan that pre-defines summary, chat channels, Amazon SNS topics, runbooks, title, and impact of the incident.
+        --title=: Provide a title for the incident.
+        --trigger-details=: Details of what created the incident record in Incident Manager.
+    - name: update-related-items
+      description: Add or remove related items from the related items tab of an incident record.
       flags:
-        --arn=!: The Amazon Resource Name (ARN) of the incident record you are deleting.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-resource-policy
-      description: Deletes the resource policy that Resource Access Manager uses to share your Incident Manager resource.
+        --client-token=: A token that ensures that a client calls the operation only once with the specified details.
+        --incident-record-arn=!: The Amazon Resource Name (ARN) of the incident record that contains the related items that you update.
+        --related-items-update=!: Details about the item that you are add to, or delete from, an incident.
+    - name: update-timeline-event
+      description: Updates a timeline event.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-id=!: The ID of the resource policy you're deleting.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource you're deleting the policy from.
-    - name: list-related-items
-      description: List all related items for an incident record.
+        --client-token=: A token that ensures that a client calls the operation only once with the specified details.
+        --event-data=: A short description of the event.
+        --event-id=!: The ID of the event to update.
+        --event-references=: Updates all existing references in a `TimelineEvent`.
+        --event-time=: The timestamp for when the event occurred.
+        --event-type=: The type of event.
+        --incident-record-arn=!: The Amazon Resource Name (ARN) of the incident that includes the timeline event.
+    - name: get-resource-policies
+      description: Retrieves the resource policies attached to the specified response plan.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --incident-record-arn=!: The Amazon Resource Name (ARN) of the incident record containing the listed related items.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of related items per page.
+        --max-results=: The maximum number of resource policies to display for each page of results.
         --next-token=: The pagination token for the next set of items to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-deletion-protection
-      description: Update deletion protection to either allow or deny deletion of the final Region in a replication set.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the response plan with the attached resource policy.
+    - name: untag-resource
+      description: Removes a tag from a resource.
       flags:
-        --arn=!: The Amazon Resource Name (ARN) of the replication set to update.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures that the operation is called only once with the specified details.
-        --deletion-protected!: Specifies if deletion protection is turned on or off in your account.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-deletion-protected!: Specifies if deletion protection is turned on or off in your account.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the response plan you're removing a tag from.
+        --tag-keys=!: The name of the tag to remove from the response plan.
     - name: update-incident-record
       description: Update the details of an incident record.
       flags:
         --arn=!: The Amazon Resource Name (ARN) of the incident record you are updating.
         --chat-channel=: The Chatbot chat channel where responders can collaborate.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A token that ensures that a client calls the operation only once with the specified details.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --impact=: Defines the impact of the incident to customers and applications.
         --notification-targets=: The Amazon SNS targets that Incident Manager notifies when a client updates an incident.
         --status=: The status of the incident.
@@ -200,131 +189,28 @@ commands:
             status:
                 - OPEN
                 - RESOLVED
-    - name: get-timeline-event
-      description: Retrieves a timeline event based on its ID and incident record.
+    - name: batch-get-incident-findings
+      description: Retrieves details about all specified findings for an incident, including descriptive details about each finding.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --event-id=!: The ID of the event.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --incident-record-arn=!: The Amazon Resource Name (ARN) of the incident that includes the timeline event.
-    - name: update-timeline-event
-      description: Updates a timeline event.
+        --finding-ids=!: A list of IDs of findings for which you want to view details.
+        --incident-record-arn=!: The Amazon Resource Name (ARN) of the incident for which you want to view finding details.
+    - name: create-response-plan
+      description: Creates a response plan that automates the initial response to incidents.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures that a client calls the operation only once with the specified details.
-        --event-data=: A short description of the event.
-        --event-id=!: The ID of the event to update.
-        --event-references=: Updates all existing references in a `TimelineEvent`.
-        --event-time=: The timestamp for when the event occurred.
-        --event-type=: The type of event.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --incident-record-arn=!: The Amazon Resource Name (ARN) of the incident that includes the timeline event.
-    - name: create-replication-set
-      description: A replication set replicates and encrypts your data to the provided Regions with the provided KMS key.
+        --actions=: The actions that the response plan starts at the beginning of an incident.
+        --chat-channel=: The Chatbot chat channel used for collaboration during an incident.
+        --client-token=: A token ensuring that the operation is called only once with the specified details.
+        --display-name=: The long format of the response plan name.
+        --engagements=: The Amazon Resource Name (ARN) for the contacts and escalation plans that the response plan engages during an incident.
+        --incident-template=!: Details used to create an incident when using this response plan.
+        --integrations=: Information about third-party services integrated into the response plan.
+        --name=!: The short format name of the response plan.
+        --tags=: A list of tags that you are adding to the response plan.
+    - name: delete-resource-policy
+      description: Deletes the resource policy that Resource Access Manager uses to share your Incident Manager resource.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures that the operation is called only once with the specified details.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --regions=!: The Regions that Incident Manager replicates your data to.
-        --tags=: A list of tags to add to the replication set.
-    - name: delete-response-plan
-      description: Deletes the specified response plan.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the response plan.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-timeline-event
-      description: Deletes a timeline event from an incident.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --event-id=!: The ID of the event to update.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --incident-record-arn=!: The Amazon Resource Name (ARN) of the incident that includes the timeline event.
-    - name: delete-replication-set
-      description: Deletes all Regions in your replication set.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the replication set you're deleting.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-incident-record
-      description: Returns the details for the specified incident record.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the incident record.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-replication-set
-      description: Retrieve your Incident Manager replication set.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the replication set you want to retrieve.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-incident-records
-      description: Lists all incident records in your account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters the list of incident records you want to search through.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results per page.
-        --next-token=: The pagination token for the next set of items to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: untag-resource
-      description: Removes a tag from a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the response plan you're removing a tag from.
-        --tag-keys=!: The name of the tag to remove from the response plan.
-    - name: update-replication-set
-      description: Add or delete Regions from your replication set.
-      flags:
-        --actions=!: An action to add or delete a Region.
-        --arn=!: The Amazon Resource Name (ARN) of the replication set you're updating.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures that the operation is called only once with the specified details.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-response-plan
-      description: Retrieves the details of the specified response plan.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the response plan.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-incident-findings
-      description: Retrieves a list of the IDs of findings, plus their last modified times, that have been identified for a specified incident.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --incident-record-arn=!: The Amazon Resource Name (ARN) of the incident for which you want to view associated findings.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of findings to retrieve per call.
-        --next-token=: The pagination token for the next set of items to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-replication-sets
-      description: Lists details about the replication set configured in your account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results per page.
-        --next-token=: The pagination token for the next set of items to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+        --policy-id=!: The ID of the resource policy you're deleting.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource you're deleting the policy from.
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:
@@ -332,13 +218,7 @@ commands:
           description: Retrieve your Incident Manager replication set.
           flags:
             --arn=!: The Amazon Resource Name (ARN) of the replication set you want to retrieve.
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         - name: wait-for-replication-set-deleted
           description: Retrieve your Incident Manager replication set.
           flags:
             --arn=!: The Amazon Resource Name (ARN) of the replication set you want to retrieve.
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.

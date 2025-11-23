@@ -1,65 +1,15 @@
 name: opensearchserverless
 description: OpenSearch Service Serverless
 commands:
-    - name: batch-get-collection
-      description: Returns attributes for one or more collections, including the collection endpoint, the OpenSearch Dashboards endpoint, and FIPS-compliant endpoints.
+    - name: delete-index
+      description: Deletes an index from an OpenSearch Serverless collection.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ids=: A list of collection IDs.
-        --names=: A list of collection names.
-    - name: batch-get-vpc-endpoint
-      description: Returns attributes for one or more VPC endpoints associated with the current account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ids=!: A list of VPC endpoint identifiers.
-    - name: delete-lifecycle-policy
-      description: Deletes an OpenSearch Serverless lifecycle policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the policy to delete.
-        --type=!: The type of lifecycle policy.
-      completion:
-        flag:
-            type:
-                - retention
-    - name: list-security-policies
-      description: Returns information about configured OpenSearch Serverless security policies.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: An optional parameter that specifies the maximum number of results to return.
-        --next-token=: If your initial `ListSecurityPolicies` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListSecurityPolicies` operations, which returns results in the next page.
-        --resource=: Resource filters (can be collection or indexes) that policies can apply to.
-        --type=!: The type of policy.
-      completion:
-        flag:
-            type:
-                - encryption
-                - network
-    - name: update-index
-      description: Updates an existing index in an OpenSearch Serverless collection.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The unique identifier of the collection containing the index to update.
-        --index-name=!: The name of the index to update.
-        --index-schema=: The updated JSON schema definition for the index, including field mappings and settings.
+        --id=!: The unique identifier of the collection containing the index to delete.
+        --index-name=!: The name of the index to delete.
     - name: delete-security-policy
       description: Deletes an OpenSearch Serverless security policy.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the policy to delete.
         --type=!: The type of policy.
       completion:
@@ -67,107 +17,25 @@ commands:
             type:
                 - encryption
                 - network
-    - name: delete-vpc-endpoint
-      description: Deletes an OpenSearch Serverless-managed interface endpoint.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The VPC endpoint identifier.
-    - name: get-account-settings
-      description: Returns account-level settings related to OpenSearch Serverless.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-index
       description: Retrieves information about an index in an OpenSearch Serverless collection, including its schema definition.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The unique identifier of the collection containing the index.
         --index-name=!: The name of the index to retrieve information about.
-    - name: list-collections
-      description: Lists all OpenSearch Serverless collections.
+    - name: list-tags-for-resource
+      description: Returns the tags for an OpenSearch Serverless resource.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collection-filters=: A list of filter names and values that you can use for requests.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return.
-        --next-token=: If your initial `ListCollections` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListCollections` operations, which returns results in the next page.
-    - name: batch-get-lifecycle-policy
-      description: Returns one or more configured OpenSearch Serverless lifecycle policies.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+    - name: tag-resource
+      description: Associates tags with an OpenSearch Serverless resource.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifiers=!: The unique identifiers of policy types and policy names.
-    - name: create-security-config
-      description: Specifies a security configuration for OpenSearch Serverless.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
-        --description=: A description of the security configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --iam-federation-options=: Describes IAM federation options in the form of a key-value map.
-        --iam-identity-center-options=: Describes IAM Identity Center options in the form of a key-value map.
-        --name=!: The name of the security configuration.
-        --saml-options=: Describes SAML options in in the form of a key-value map.
-        --type=!: The type of security configuration.
-      completion:
-        flag:
-            type:
-                - saml
-                - iamidentitycenter
-                - iamfederation
-    - name: get-security-policy
-      description: Returns information about a configured OpenSearch Serverless security policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the security policy.
-        --type=!: The type of security policy.
-      completion:
-        flag:
-            type:
-                - encryption
-                - network
-    - name: list-access-policies
-      description: Returns information about a list of OpenSearch Serverless access policies.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: An optional parameter that specifies the maximum number of results to return.
-        --next-token=: If your initial `ListAccessPolicies` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListAccessPolicies` operations, which returns results in the next page.
-        --resource=: Resource filters (can be collections or indexes) that policies can apply to.
-        --type=!: The type of access policy.
-      completion:
-        flag:
-            type:
-                - data
-    - name: list-vpc-endpoints
-      description: Returns the OpenSearch Serverless-managed interface VPC endpoints associated with the current account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: An optional parameter that specifies the maximum number of results to return.
-        --next-token=: If your initial `ListVpcEndpoints` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListVpcEndpoints` operations, which returns results in the next page.
-        --vpc-endpoint-filters=: Filter the results according to the current status of the VPC endpoint.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+        --tags=!: A list of tags (key-value pairs) to add to the resource.
     - name: update-security-policy
       description: Updates an OpenSearch Serverless security policy.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
         --description=: A description of the policy.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the policy.
         --policy-version=!: The version of the policy being updated.
         --policy=: The JSON policy document to use as the content for the new policy.
@@ -177,100 +45,17 @@ commands:
             type:
                 - encryption
                 - network
-    - name: delete-index
-      description: Deletes an index from an OpenSearch Serverless collection.
+    - name: create-index
+      description: Creates an index within an OpenSearch Serverless collection.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The unique identifier of the collection containing the index to delete.
-        --index-name=!: The name of the index to delete.
-    - name: create-security-policy
-      description: Creates a security policy to be used by one or more OpenSearch Serverless collections.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
-        --description=: A description of the policy.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the policy.
-        --policy=!: The JSON policy document to use as the content for the new policy.
-        --type=!: The type of security policy.
-      completion:
-        flag:
-            type:
-                - encryption
-                - network
-    - name: delete-access-policy
-      description: Deletes an OpenSearch Serverless access policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the policy to delete.
-        --type=!: The type of policy.
-      completion:
-        flag:
-            type:
-                - data
-    - name: delete-collection
-      description: Deletes an OpenSearch Serverless collection.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The unique identifier of the collection.
-    - name: get-access-policy
-      description: Returns an OpenSearch Serverless access policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the access policy.
-        --type=!: Tye type of policy.
-      completion:
-        flag:
-            type:
-                - data
-    - name: create-access-policy
-      description: Creates a data access policy for OpenSearch Serverless.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
-        --description=: A description of the policy.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the policy.
-        --policy=!: The JSON policy document to use as the content for the policy.
-        --type=!: The type of policy.
-      completion:
-        flag:
-            type:
-                - data
-    - name: get-policies-stats
-      description: Returns statistical information about your OpenSearch Serverless access policies, security configurations, and security policies.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: tag-resource
-      description: Associates tags with an OpenSearch Serverless resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-        --tags=!: A list of tags (key-value pairs) to add to the resource.
+        --id=!: The unique identifier of the collection in which to create the index.
+        --index-name=!: The name of the index to create.
+        --index-schema=: The JSON schema definition for the index, including field mappings and settings.
     - name: update-access-policy
       description: Updates an OpenSearch Serverless access policy.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
         --description=: A description of the policy.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the policy.
         --policy-version=!: The version of the policy being updated.
         --policy=: The JSON policy document to use as the content for the policy.
@@ -279,21 +64,49 @@ commands:
         flag:
             type:
                 - data
-    - name: update-account-settings
-      description: Update the OpenSearch Serverless settings for the current Amazon Web Services account.
+    - name: update-security-config
+      description: Updates a security configuration for OpenSearch Serverless.
       flags:
-        --capacity-limits=: ""
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
+        --config-version=!: The version of the security configuration to be updated.
+        --description=: A description of the security configuration.
+        --iam-federation-options=: Describes IAM federation options in the form of a key-value map for updating an existing security configuration.
+        --iam-identity-center-options-updates=: Describes IAM Identity Center options in the form of a key-value map.
+        --id=!: The security configuration identifier.
+        --saml-options=: SAML options in in the form of a key-value map.
+    - name: update-vpc-endpoint
+      description: Updates an OpenSearch Serverless-managed interface endpoint.
+      flags:
+        --add-security-group-ids=: The unique identifiers of the security groups to add to the endpoint.
+        --add-subnet-ids=: The ID of one or more subnets to add to the endpoint.
+        --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
+        --id=!: The unique identifier of the interface endpoint to update.
+        --remove-security-group-ids=: The unique identifiers of the security groups to remove from the endpoint.
+        --remove-subnet-ids=: The unique identifiers of the subnets to remove from the endpoint.
+    - name: batch-get-effective-lifecycle-policy
+      description: Returns a list of successful and failed retrievals for the OpenSearch Serverless indexes.
+      flags:
+        --resource-identifiers=!: The unique identifiers of policy types and resource names.
+    - name: delete-access-policy
+      description: Deletes an OpenSearch Serverless access policy.
+      flags:
+        --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
+        --name=!: The name of the policy to delete.
+        --type=!: The type of policy.
+      completion:
+        flag:
+            type:
+                - data
+    - name: untag-resource
+      description: Removes a tag or set of tags from an OpenSearch Serverless resource.
+      flags:
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to remove tags from.
+        --tag-keys=!: The tag or set of tags to remove from the resource.
     - name: update-lifecycle-policy
       description: Updates an OpenSearch Serverless access policy.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
         --description=: A description of the lifecycle policy.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the policy.
         --policy-version=!: The version of the policy being updated.
         --policy=: The JSON policy document to use as the content for the lifecycle policy.
@@ -302,107 +115,48 @@ commands:
         flag:
             type:
                 - retention
-    - name: batch-get-effective-lifecycle-policy
-      description: Returns a list of successful and failed retrievals for the OpenSearch Serverless indexes.
+    - name: get-policies-stats
+      description: Returns statistical information about your OpenSearch Serverless access policies, security configurations, and security policies.
+    - name: get-security-config
+      description: Returns information about an OpenSearch Serverless security configuration.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-identifiers=!: The unique identifiers of policy types and resource names.
-    - name: create-index
-      description: Creates an index within an OpenSearch Serverless collection.
+        --id=!: The unique identifier of the security configuration.
+    - name: list-collections
+      description: Lists all OpenSearch Serverless collections.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The unique identifier of the collection in which to create the index.
-        --index-name=!: The name of the index to create.
-        --index-schema=: The JSON schema definition for the index, including field mappings and settings.
-    - name: create-vpc-endpoint
-      description: Creates an OpenSearch Serverless-managed interface VPC endpoint.
+        --collection-filters=: A list of filter names and values that you can use for requests.
+        --max-results=: The maximum number of results to return.
+        --next-token=: If your initial `ListCollections` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListCollections` operations, which returns results in the next page.
+    - name: batch-get-collection
+      description: Returns attributes for one or more collections, including the collection endpoint, the OpenSearch Dashboards endpoint, and FIPS-compliant endpoints.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the interface endpoint.
-        --security-group-ids=: The unique identifiers of the security groups that define the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint.
-        --subnet-ids=!: The ID of one or more subnets from which you'll access OpenSearch Serverless.
-        --vpc-id=!: The ID of the VPC from which you'll access OpenSearch Serverless.
-    - name: list-security-configs
-      description: Returns information about configured OpenSearch Serverless security configurations.
+        --ids=: A list of collection IDs.
+        --names=: A list of collection names.
+    - name: batch-get-lifecycle-policy
+      description: Returns one or more configured OpenSearch Serverless lifecycle policies.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: An optional parameter that specifies the maximum number of results to return.
-        --next-token=: If your initial `ListSecurityConfigs` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListSecurityConfigs` operations, which returns results in the next page.
-        --type=!: The type of security configuration.
-      completion:
-        flag:
-            type:
-                - saml
-                - iamidentitycenter
-                - iamfederation
-    - name: untag-resource
-      description: Removes a tag or set of tags from an OpenSearch Serverless resource.
+        --identifiers=!: The unique identifiers of policy types and policy names.
+    - name: delete-collection
+      description: Deletes an OpenSearch Serverless collection.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to remove tags from.
-        --tag-keys=!: The tag or set of tags to remove from the resource.
-    - name: update-collection
-      description: Updates an OpenSearch Serverless collection.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
-        --description=: A description of the collection.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
         --id=!: The unique identifier of the collection.
     - name: delete-security-config
       description: Deletes a security configuration for OpenSearch Serverless.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The security configuration identifier.
-    - name: get-security-config
-      description: Returns information about an OpenSearch Serverless security configuration.
+    - name: get-account-settings
+      description: Returns account-level settings related to OpenSearch Serverless.
+    - name: batch-get-vpc-endpoint
+      description: Returns attributes for one or more VPC endpoints associated with the current account.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The unique identifier of the security configuration.
-    - name: list-tags-for-resource
-      description: Returns the tags for an OpenSearch Serverless resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-    - name: update-vpc-endpoint
-      description: Updates an OpenSearch Serverless-managed interface endpoint.
-      flags:
-        --add-security-group-ids=: The unique identifiers of the security groups to add to the endpoint.
-        --add-subnet-ids=: The ID of one or more subnets to add to the endpoint.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The unique identifier of the interface endpoint to update.
-        --remove-security-group-ids=: The unique identifiers of the security groups to remove from the endpoint.
-        --remove-subnet-ids=: The unique identifiers of the subnets to remove from the endpoint.
+        --ids=!: A list of VPC endpoint identifiers.
     - name: create-collection
       description: Creates a new OpenSearch Serverless collection.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
         --description=: Description of the collection.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: Name of the collection.
         --standby-replicas=: Indicates whether standby replicas should be used for a collection.
         --tags=: An arbitrary set of tags (key–value pairs) to associate with the OpenSearch Serverless collection.
@@ -416,27 +170,46 @@ commands:
                 - SEARCH
                 - TIMESERIES
                 - VECTORSEARCH
-    - name: create-lifecycle-policy
-      description: Creates a lifecyle policy to be applied to OpenSearch Serverless indexes.
+    - name: create-security-policy
+      description: Creates a security policy to be used by one or more OpenSearch Serverless collections.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
-        --description=: A description of the lifecycle policy.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the lifecycle policy.
-        --policy=!: The JSON policy document to use as the content for the lifecycle policy.
-        --type=!: The type of lifecycle policy.
+        --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
+        --description=: A description of the policy.
+        --name=!: The name of the policy.
+        --policy=!: The JSON policy document to use as the content for the new policy.
+        --type=!: The type of security policy.
       completion:
         flag:
             type:
-                - retention
+                - encryption
+                - network
+    - name: list-vpc-endpoints
+      description: Returns the OpenSearch Serverless-managed interface VPC endpoints associated with the current account.
+      flags:
+        --max-results=: An optional parameter that specifies the maximum number of results to return.
+        --next-token=: If your initial `ListVpcEndpoints` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListVpcEndpoints` operations, which returns results in the next page.
+        --vpc-endpoint-filters=: Filter the results according to the current status of the VPC endpoint.
+    - name: update-index
+      description: Updates an existing index in an OpenSearch Serverless collection.
+      flags:
+        --id=!: The unique identifier of the collection containing the index to update.
+        --index-name=!: The name of the index to update.
+        --index-schema=: The updated JSON schema definition for the index, including field mappings and settings.
+    - name: create-access-policy
+      description: Creates a data access policy for OpenSearch Serverless.
+      flags:
+        --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
+        --description=: A description of the policy.
+        --name=!: The name of the policy.
+        --policy=!: The JSON policy document to use as the content for the policy.
+        --type=!: The type of policy.
+      completion:
+        flag:
+            type:
+                - data
     - name: list-lifecycle-policies
       description: Returns a list of OpenSearch Serverless lifecycle policies.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: An optional parameter that specifies the maximum number of results to return.
         --next-token=: If your initial `ListLifecyclePolicies` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListLifecyclePolicies` operations, which returns results in the next page.
         --resources=: Resource filters that policies can apply to.
@@ -445,16 +218,118 @@ commands:
         flag:
             type:
                 - retention
-    - name: update-security-config
-      description: Updates a security configuration for OpenSearch Serverless.
+    - name: update-account-settings
+      description: Update the OpenSearch Serverless settings for the current Amazon Web Services account.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --capacity-limits=: ""
+    - name: list-security-configs
+      description: Returns information about configured OpenSearch Serverless security configurations.
+      flags:
+        --max-results=: An optional parameter that specifies the maximum number of results to return.
+        --next-token=: If your initial `ListSecurityConfigs` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListSecurityConfigs` operations, which returns results in the next page.
+        --type=!: The type of security configuration.
+      completion:
+        flag:
+            type:
+                - saml
+                - iamidentitycenter
+                - iamfederation
+    - name: create-lifecycle-policy
+      description: Creates a lifecyle policy to be applied to OpenSearch Serverless indexes.
+      flags:
+        --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
+        --description=: A description of the lifecycle policy.
+        --name=!: The name of the lifecycle policy.
+        --policy=!: The JSON policy document to use as the content for the lifecycle policy.
+        --type=!: The type of lifecycle policy.
+      completion:
+        flag:
+            type:
+                - retention
+    - name: list-access-policies
+      description: Returns information about a list of OpenSearch Serverless access policies.
+      flags:
+        --max-results=: An optional parameter that specifies the maximum number of results to return.
+        --next-token=: If your initial `ListAccessPolicies` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListAccessPolicies` operations, which returns results in the next page.
+        --resource=: Resource filters (can be collections or indexes) that policies can apply to.
+        --type=!: The type of access policy.
+      completion:
+        flag:
+            type:
+                - data
+    - name: update-collection
+      description: Updates an OpenSearch Serverless collection.
+      flags:
         --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
-        --config-version=!: The version of the security configuration to be updated.
+        --description=: A description of the collection.
+        --id=!: The unique identifier of the collection.
+    - name: get-security-policy
+      description: Returns information about a configured OpenSearch Serverless security policy.
+      flags:
+        --name=!: The name of the security policy.
+        --type=!: The type of security policy.
+      completion:
+        flag:
+            type:
+                - encryption
+                - network
+    - name: delete-lifecycle-policy
+      description: Deletes an OpenSearch Serverless lifecycle policy.
+      flags:
+        --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
+        --name=!: The name of the policy to delete.
+        --type=!: The type of lifecycle policy.
+      completion:
+        flag:
+            type:
+                - retention
+    - name: delete-vpc-endpoint
+      description: Deletes an OpenSearch Serverless-managed interface endpoint.
+      flags:
+        --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
+        --id=!: The VPC endpoint identifier.
+    - name: get-access-policy
+      description: Returns an OpenSearch Serverless access policy.
+      flags:
+        --name=!: The name of the access policy.
+        --type=!: Tye type of policy.
+      completion:
+        flag:
+            type:
+                - data
+    - name: list-security-policies
+      description: Returns information about configured OpenSearch Serverless security policies.
+      flags:
+        --max-results=: An optional parameter that specifies the maximum number of results to return.
+        --next-token=: If your initial `ListSecurityPolicies` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListSecurityPolicies` operations, which returns results in the next page.
+        --resource=: Resource filters (can be collection or indexes) that policies can apply to.
+        --type=!: The type of policy.
+      completion:
+        flag:
+            type:
+                - encryption
+                - network
+    - name: create-security-config
+      description: Specifies a security configuration for OpenSearch Serverless.
+      flags:
+        --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
         --description=: A description of the security configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --iam-federation-options=: Describes IAM federation options in the form of a key-value map for updating an existing security configuration.
-        --iam-identity-center-options-updates=: Describes IAM Identity Center options in the form of a key-value map.
-        --id=!: The security configuration identifier.
-        --saml-options=: SAML options in in the form of a key-value map.
+        --iam-federation-options=: Describes IAM federation options in the form of a key-value map.
+        --iam-identity-center-options=: Describes IAM Identity Center options in the form of a key-value map.
+        --name=!: The name of the security configuration.
+        --saml-options=: Describes SAML options in in the form of a key-value map.
+        --type=!: The type of security configuration.
+      completion:
+        flag:
+            type:
+                - saml
+                - iamidentitycenter
+                - iamfederation
+    - name: create-vpc-endpoint
+      description: Creates an OpenSearch Serverless-managed interface VPC endpoint.
+      flags:
+        --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
+        --name=!: The name of the interface endpoint.
+        --security-group-ids=: The unique identifiers of the security groups that define the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint.
+        --subnet-ids=!: The ID of one or more subnets from which you'll access OpenSearch Serverless.
+        --vpc-id=!: The ID of the VPC from which you'll access OpenSearch Serverless.

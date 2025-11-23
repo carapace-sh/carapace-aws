@@ -1,40 +1,13 @@
 name: neptune-graph
 description: Amazon Neptune Graph
 commands:
-    - name: list-queries
-      description: Lists active openCypher queries.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --graph-identifier=!: The unique identifier of the Neptune Analytics graph.
-        --max-results=!: The maximum number of results to be fetched by the API.
-        --state=: Filtered list of queries based on state.
-      completion:
-        flag:
-            state:
-                - ALL
-                - RUNNING
-                - WAITING
-                - CANCELLING
-    - name: cancel-query
-      description: Cancels a specified query.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --graph-identifier=!: The unique identifier of the Neptune Analytics graph.
-        --query-id=!: The unique identifier of the query to cancel.
     - name: create-graph-using-import-task
       description: Creates a new Neptune Analytics graph and imports data into it, either from Amazon Simple Storage Service (S3) or from a Neptune database or a Neptune database snapshot.
       flags:
         --blank-node-handling=: The method to handle blank nodes in the dataset.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --deletion-protection: Indicates whether or not to enable deletion protection on the graph.
         --fail-on-error: If set to `true`, the task halts when an import error is encountered.
         --format=: Specifies the format of S3 data to be imported.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --graph-name=!: A name for the new Neptune Analytics graph to be created.
         --import-options=: Contains options for controlling the import process.
         --kms-key-identifier=: Specifies a KMS key to use to encrypt data imported into the new graph.
@@ -61,81 +34,63 @@ commands:
                 - NTRIPLES
             parquet-type:
                 - COLUMNAR
-    - name: create-private-graph-endpoint
-      description: Create a private graph endpoint to allow private access from to the graph from within a VPC.
+    - name: delete-private-graph-endpoint
+      description: Deletes a private graph endpoint.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --graph-identifier=!: The unique identifier of the Neptune Analytics graph.
-        --subnet-ids=: Subnets in which private graph endpoint ENIs are created.
-        --vpc-id=: The VPC in which the private graph endpoint needs to be created.
-        --vpc-security-group-ids=: Security groups to be attached to the private graph endpoint..
-    - name: get-export-task
-      description: Retrieves a specified export task.
+        --vpc-id=!: The ID of the VPC where the private endpoint is located.
+    - name: get-private-graph-endpoint
+      description: Retrieves information about a specified private endpoint.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --graph-identifier=!: The unique identifier of the Neptune Analytics graph.
+        --vpc-id=!: The ID of the VPC where the private endpoint is located.
+    - name: untag-resource
+      description: Removes the specified tags from the specified resource.
+      flags:
+        --resource-arn=!: ARN of the resource whose tag needs to be removed.
+        --tag-keys=!: Tag keys for the tags to be removed.
+    - name: cancel-export-task
+      description: Cancel the specified export task.
+      flags:
         --task-identifier=!: The unique identifier of the export task.
-    - name: list-export-tasks
-      description: Retrieves a list of export tasks.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --graph-identifier=: The unique identifier of the Neptune Analytics graph.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of export tasks to return.
-        --next-token=: Pagination token used to paginate input.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: cancel-import-task
-      description: Deletes the specified import task.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --task-identifier=!: The unique identifier of the import task.
     - name: get-graph
       description: Gets information about a specified graph.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --graph-identifier=!: The unique identifier of the Neptune Analytics graph.
-    - name: list-graph-snapshots
-      description: Lists available snapshots of a specified Neptune Analytics graph.
+    - name: get-query
+      description: Retrieves the status of a specified query.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --graph-identifier=: The unique identifier of the Neptune Analytics graph.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The total number of records to return in the command's output.
-        --next-token=: Pagination token used to paginate output.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+        --graph-identifier=!: The unique identifier of the Neptune Analytics graph.
+        --query-id=!: The ID of the query in question.
     - name: list-import-tasks
       description: Lists import tasks.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The total number of records to return in the command's output.
         --next-token=: Pagination token used to paginate output.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+    - name: list-private-graph-endpoints
+      description: Lists private endpoints for a specified Neptune Analytics graph.
+      flags:
+        --graph-identifier=!: The unique identifier of the Neptune Analytics graph.
+        --max-results=: The total number of records to return in the command's output.
+        --next-token=: Pagination token used to paginate output.
+    - name: restore-graph-from-snapshot
+      description: Restores a graph from a snapshot.
+      flags:
+        --deletion-protection: A value that indicates whether the graph has deletion protection enabled.
+        --graph-name=!: A name for the new Neptune Analytics graph to be created from the snapshot.
+        --no-deletion-protection: A value that indicates whether the graph has deletion protection enabled.
+        --no-public-connectivity: Specifies whether or not the graph can be reachable over the internet.
+        --provisioned-memory=: The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph.
+        --public-connectivity: Specifies whether or not the graph can be reachable over the internet.
+        --replica-count=: The number of replicas in other AZs.
+        --snapshot-identifier=!: The ID of the snapshot in question.
+        --tags=: Adds metadata tags to the snapshot.
     - name: start-import-task
       description: Import data into existing Neptune Analytics graph from Amazon Simple Storage Service (S3).
       flags:
         --blank-node-handling=: The method to handle blank nodes in the dataset.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --fail-on-error: If set to true, the task halts when an import error is encountered.
         --format=: Specifies the format of Amazon S3 data to be imported.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --graph-identifier=!: The unique identifier of the Neptune Analytics graph.
         --import-options=: ""
         --no-fail-on-error: If set to true, the task halts when an import error is encountered.
@@ -153,43 +108,118 @@ commands:
                 - NTRIPLES
             parquet-type:
                 - COLUMNAR
-    - name: stop-graph
-      description: Stops the specific graph.
+    - name: tag-resource
+      description: Adds tags to the specified resource.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: ARN of the resource for which tags need to be added.
+        --tags=!: The tags to be assigned to the Neptune Analytics resource.
+    - name: create-graph-snapshot
+      description: Creates a snapshot of the specific graph.
+      flags:
         --graph-identifier=!: The unique identifier of the Neptune Analytics graph.
-    - name: untag-resource
-      description: Removes the specified tags from the specified resource.
+        --snapshot-name=!: The snapshot name.
+        --tags=: Adds metadata tags to the new graph.
+    - name: start-export-task
+      description: Export data from an existing Neptune Analytics graph to Amazon S3.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: ARN of the resource whose tag needs to be removed.
-        --tag-keys=!: Tag keys for the tags to be removed.
-    - name: cancel-export-task
-      description: Cancel the specified export task.
+        --destination=!: The Amazon S3 URI where data will be exported to.
+        --export-filter=: The export filter of the export task.
+        --format=!: The format of the export task.
+        --graph-identifier=!: The source graph identifier of the export task.
+        --kms-key-identifier=!: The KMS key identifier of the export task.
+        --parquet-type=: The parquet type of the export task.
+        --role-arn=!: The ARN of the IAM role that will allow data to be exported to the destination.
+        --tags=: Tags to be applied to the export task.
+      completion:
+        flag:
+            format:
+                - PARQUET
+                - CSV
+            parquet-type:
+                - COLUMNAR
+    - name: create-graph
+      description: Creates a new Neptune Analytics graph.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --deletion-protection: Indicates whether or not to enable deletion protection on the graph.
+        --graph-name=!: A name for the new Neptune Analytics graph to be created.
+        --kms-key-identifier=: Specifies a KMS key to use to encrypt data in the new graph.
+        --no-deletion-protection: Indicates whether or not to enable deletion protection on the graph.
+        --no-public-connectivity: Specifies whether or not the graph can be reachable over the internet.
+        --provisioned-memory=!: The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph.
+        --public-connectivity: Specifies whether or not the graph can be reachable over the internet.
+        --replica-count=: The number of replicas in other AZs.
+        --tags=: Adds metadata tags to the new graph.
+        --vector-search-configuration=: Specifies the number of dimensions for vector embeddings that will be loaded into the graph.
+    - name: delete-graph
+      description: Deletes the specified graph.
+      flags:
+        --graph-identifier=!: The unique identifier of the Neptune Analytics graph.
+        --no-skip-snapshot!: Determines whether a final graph snapshot is created before the graph is deleted.
+        --skip-snapshot!: Determines whether a final graph snapshot is created before the graph is deleted.
+    - name: get-graph-summary
+      description: Gets a graph summary for a property graph.
+      flags:
+        --graph-identifier=!: The unique identifier of the Neptune Analytics graph.
+        --mode=: 'The summary mode can take one of two values: `basic` (the default), and `detailed`.'
+      completion:
+        flag:
+            mode:
+                - BASIC
+                - DETAILED
+    - name: list-graphs
+      description: Lists available Neptune Analytics graphs.
+      flags:
+        --max-results=: The total number of records to return in the command's output.
+        --next-token=: Pagination token used to paginate output.
+    - name: start-graph
+      description: Starts the specific graph.
+      flags:
+        --graph-identifier=!: The unique identifier of the Neptune Analytics graph.
+    - name: create-private-graph-endpoint
+      description: Create a private graph endpoint to allow private access from to the graph from within a VPC.
+      flags:
+        --graph-identifier=!: The unique identifier of the Neptune Analytics graph.
+        --subnet-ids=: Subnets in which private graph endpoint ENIs are created.
+        --vpc-id=: The VPC in which the private graph endpoint needs to be created.
+        --vpc-security-group-ids=: Security groups to be attached to the private graph endpoint..
+    - name: list-tags-for-resource
+      description: Lists tags associated with a specified resource.
+      flags:
+        --resource-arn=!: The ARN of the resource.
+    - name: cancel-import-task
+      description: Deletes the specified import task.
+      flags:
+        --task-identifier=!: The unique identifier of the import task.
+    - name: delete-graph-snapshot
+      description: Deletes the specifed graph snapshot.
+      flags:
+        --snapshot-identifier=!: ID of the graph snapshot to be deleted.
+    - name: get-export-task
+      description: Retrieves a specified export task.
+      flags:
         --task-identifier=!: The unique identifier of the export task.
-    - name: delete-private-graph-endpoint
-      description: Deletes a private graph endpoint.
+    - name: get-graph-snapshot
+      description: Retrieves a specified graph snapshot.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --snapshot-identifier=!: The ID of the snapshot to retrieve.
+    - name: update-graph
+      description: Updates the configuration of a specified Neptune Analytics graph
+      flags:
+        --deletion-protection: A value that indicates whether the graph has deletion protection enabled.
         --graph-identifier=!: The unique identifier of the Neptune Analytics graph.
-        --vpc-id=!: The ID of the VPC where the private endpoint is located.
+        --no-deletion-protection: A value that indicates whether the graph has deletion protection enabled.
+        --no-public-connectivity: Specifies whether or not the graph can be reachable over the internet.
+        --provisioned-memory=: The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph.
+        --public-connectivity: Specifies whether or not the graph can be reachable over the internet.
+    - name: cancel-query
+      description: Cancels a specified query.
+      flags:
+        --graph-identifier=!: The unique identifier of the Neptune Analytics graph.
+        --query-id=!: The unique identifier of the query to cancel.
     - name: execute-query
       description: Execute an openCypher query.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --explain-mode=: The explain mode parameter returns a query explain instead of the actual query results.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --graph-identifier=!: The unique identifier of the Neptune Analytics graph.
         --language=!: The query language the query is written in.
         --parameters=: The data parameters the query can use in JSON format.
@@ -207,271 +237,91 @@ commands:
                 - ENABLED
                 - DISABLED
                 - AUTO
-    - name: start-export-task
-      description: Export data from an existing Neptune Analytics graph to Amazon S3.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --destination=!: The Amazon S3 URI where data will be exported to.
-        --export-filter=: The export filter of the export task.
-        --format=!: The format of the export task.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --graph-identifier=!: The source graph identifier of the export task.
-        --kms-key-identifier=!: The KMS key identifier of the export task.
-        --parquet-type=: The parquet type of the export task.
-        --role-arn=!: The ARN of the IAM role that will allow data to be exported to the destination.
-        --tags=: Tags to be applied to the export task.
-      completion:
-        flag:
-            format:
-                - PARQUET
-                - CSV
-            parquet-type:
-                - COLUMNAR
-    - name: update-graph
-      description: Updates the configuration of a specified Neptune Analytics graph
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deletion-protection: A value that indicates whether the graph has deletion protection enabled.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --graph-identifier=!: The unique identifier of the Neptune Analytics graph.
-        --no-deletion-protection: A value that indicates whether the graph has deletion protection enabled.
-        --no-public-connectivity: Specifies whether or not the graph can be reachable over the internet.
-        --provisioned-memory=: The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph.
-        --public-connectivity: Specifies whether or not the graph can be reachable over the internet.
-    - name: create-graph
-      description: Creates a new Neptune Analytics graph.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deletion-protection: Indicates whether or not to enable deletion protection on the graph.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --graph-name=!: A name for the new Neptune Analytics graph to be created.
-        --kms-key-identifier=: Specifies a KMS key to use to encrypt data in the new graph.
-        --no-deletion-protection: Indicates whether or not to enable deletion protection on the graph.
-        --no-public-connectivity: Specifies whether or not the graph can be reachable over the internet.
-        --provisioned-memory=!: The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph.
-        --public-connectivity: Specifies whether or not the graph can be reachable over the internet.
-        --replica-count=: The number of replicas in other AZs.
-        --tags=: Adds metadata tags to the new graph.
-        --vector-search-configuration=: Specifies the number of dimensions for vector embeddings that will be loaded into the graph.
-    - name: delete-graph-snapshot
-      description: Deletes the specifed graph snapshot.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --snapshot-identifier=!: ID of the graph snapshot to be deleted.
     - name: get-import-task
       description: Retrieves a specified import task.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --task-identifier=!: The unique identifier of the import task.
-    - name: list-private-graph-endpoints
-      description: Lists private endpoints for a specified Neptune Analytics graph.
+    - name: list-export-tasks
+      description: Retrieves a list of export tasks.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --graph-identifier=!: The unique identifier of the Neptune Analytics graph.
-        --max-items=: The  total number of items to return in the command's output.
+        --graph-identifier=: The unique identifier of the Neptune Analytics graph.
+        --max-results=: The maximum number of export tasks to return.
+        --next-token=: Pagination token used to paginate input.
+    - name: list-graph-snapshots
+      description: Lists available snapshots of a specified Neptune Analytics graph.
+      flags:
+        --graph-identifier=: The unique identifier of the Neptune Analytics graph.
         --max-results=: The total number of records to return in the command's output.
         --next-token=: Pagination token used to paginate output.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+    - name: list-queries
+      description: Lists active openCypher queries.
+      flags:
+        --graph-identifier=!: The unique identifier of the Neptune Analytics graph.
+        --max-results=!: The maximum number of results to be fetched by the API.
+        --state=: Filtered list of queries based on state.
+      completion:
+        flag:
+            state:
+                - ALL
+                - RUNNING
+                - WAITING
+                - CANCELLING
     - name: reset-graph
       description: Empties the data from a specified Neptune Analytics graph.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --graph-identifier=!: ID of the graph to reset.
         --no-skip-snapshot!: Determines whether a final graph snapshot is created before the graph data is deleted.
         --skip-snapshot!: Determines whether a final graph snapshot is created before the graph data is deleted.
-    - name: tag-resource
-      description: Adds tags to the specified resource.
+    - name: stop-graph
+      description: Stops the specific graph.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: ARN of the resource for which tags need to be added.
-        --tags=!: The tags to be assigned to the Neptune Analytics resource.
-    - name: get-query
-      description: Retrieves the status of a specified query.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --graph-identifier=!: The unique identifier of the Neptune Analytics graph.
-        --query-id=!: The ID of the query in question.
-    - name: delete-graph
-      description: Deletes the specified graph.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --graph-identifier=!: The unique identifier of the Neptune Analytics graph.
-        --no-skip-snapshot!: Determines whether a final graph snapshot is created before the graph is deleted.
-        --skip-snapshot!: Determines whether a final graph snapshot is created before the graph is deleted.
-    - name: get-graph-summary
-      description: Gets a graph summary for a property graph.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --graph-identifier=!: The unique identifier of the Neptune Analytics graph.
-        --mode=: 'The summary mode can take one of two values: `basic` (the default), and `detailed`.'
-      completion:
-        flag:
-            mode:
-                - BASIC
-                - DETAILED
-    - name: get-private-graph-endpoint
-      description: Retrieves information about a specified private endpoint.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --graph-identifier=!: The unique identifier of the Neptune Analytics graph.
-        --vpc-id=!: The ID of the VPC where the private endpoint is located.
-    - name: list-graphs
-      description: Lists available Neptune Analytics graphs.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The total number of records to return in the command's output.
-        --next-token=: Pagination token used to paginate output.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: Lists tags associated with a specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource.
-    - name: restore-graph-from-snapshot
-      description: Restores a graph from a snapshot.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deletion-protection: A value that indicates whether the graph has deletion protection enabled.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --graph-name=!: A name for the new Neptune Analytics graph to be created from the snapshot.
-        --no-deletion-protection: A value that indicates whether the graph has deletion protection enabled.
-        --no-public-connectivity: Specifies whether or not the graph can be reachable over the internet.
-        --provisioned-memory=: The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph.
-        --public-connectivity: Specifies whether or not the graph can be reachable over the internet.
-        --replica-count=: The number of replicas in other AZs.
-        --snapshot-identifier=!: The ID of the snapshot in question.
-        --tags=: Adds metadata tags to the snapshot.
-    - name: start-graph
-      description: Starts the specific graph.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --graph-identifier=!: The unique identifier of the Neptune Analytics graph.
-    - name: create-graph-snapshot
-      description: Creates a snapshot of the specific graph.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --graph-identifier=!: The unique identifier of the Neptune Analytics graph.
-        --snapshot-name=!: The snapshot name.
-        --tags=: Adds metadata tags to the new graph.
-    - name: get-graph-snapshot
-      description: Retrieves a specified graph snapshot.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --snapshot-identifier=!: The ID of the snapshot to retrieve.
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:
-        - name: graph-deleted
-          description: Gets information about a specified graph.
-          flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-            --graph-identifier=!: The unique identifier of the Neptune Analytics graph.
-        - name: graph-snapshot-deleted
-          description: Retrieves a specified graph snapshot.
-          flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-            --snapshot-identifier=!: The ID of the snapshot to retrieve.
-        - name: graph-stopped
-          description: Gets information about a specified graph.
-          flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-            --graph-identifier=!: The unique identifier of the Neptune Analytics graph.
         - name: export-task-cancelled
           description: Retrieves a specified export task.
           flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-            --task-identifier=!: The unique identifier of the export task.
-        - name: export-task-successful
-          description: Retrieves a specified export task.
-          flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --task-identifier=!: The unique identifier of the export task.
         - name: graph-available
           description: Gets information about a specified graph.
           flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --graph-identifier=!: The unique identifier of the Neptune Analytics graph.
         - name: graph-snapshot-available
           description: Retrieves a specified graph snapshot.
           flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --snapshot-identifier=!: The ID of the snapshot to retrieve.
+        - name: graph-snapshot-deleted
+          description: Retrieves a specified graph snapshot.
+          flags:
             --snapshot-identifier=!: The ID of the snapshot to retrieve.
         - name: import-task-cancelled
           description: Retrieves a specified import task.
           flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --task-identifier=!: The unique identifier of the import task.
+        - name: export-task-successful
+          description: Retrieves a specified export task.
+          flags:
+            --task-identifier=!: The unique identifier of the export task.
+        - name: graph-deleted
+          description: Gets information about a specified graph.
+          flags:
+            --graph-identifier=!: The unique identifier of the Neptune Analytics graph.
+        - name: graph-stopped
+          description: Gets information about a specified graph.
+          flags:
+            --graph-identifier=!: The unique identifier of the Neptune Analytics graph.
         - name: import-task-successful
           description: Retrieves a specified import task.
           flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --task-identifier=!: The unique identifier of the import task.
         - name: private-graph-endpoint-available
           description: Retrieves information about a specified private endpoint.
           flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --graph-identifier=!: The unique identifier of the Neptune Analytics graph.
             --vpc-id=!: The ID of the VPC where the private endpoint is located.
         - name: private-graph-endpoint-deleted
           description: Retrieves information about a specified private endpoint.
           flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --graph-identifier=!: The unique identifier of the Neptune Analytics graph.
             --vpc-id=!: The ID of the VPC where the private endpoint is located.

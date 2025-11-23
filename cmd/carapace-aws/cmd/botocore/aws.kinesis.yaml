@@ -1,178 +1,92 @@
 name: kinesis
 description: Amazon Kinesis
 commands:
-    - name: decrease-stream-retention-period
-      description: Decreases the Kinesis data stream's retention period, which is the length of time data records are accessible after they are added to the stream.
+    - name: deregister-stream-consumer
+      description: To deregister a consumer, provide its ARN.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --retention-period-hours=!: The new retention period of the stream, in hours.
-        --stream-arn=: The ARN of the stream.
-        --stream-name=: The name of the stream to modify.
-    - name: describe-limits
-      description: Describes the shard limits and usage for the account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-stream-consumer
-      description: To get the description of a registered consumer, provide the ARN of the consumer.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --consumer-arn=: The ARN returned by Kinesis Data Streams when you registered the consumer.
         --consumer-name=: The name that you gave to the consumer.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --stream-arn=: The ARN of the Kinesis data stream that the consumer is registered with.
-    - name: describe-stream-summary
-      description: Provides a summarized description of the specified Kinesis data stream without the shard list.
+    - name: describe-limits
+      description: Describes the shard limits and usage for the account.
+    - name: describe-stream
+      description: Describes the specified Kinesis data stream.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --exclusive-start-shard-id=: The shard ID of the shard to start with.
+        --limit=: The maximum number of shards to return in a single call.
         --stream-arn=: The ARN of the stream.
         --stream-name=: The name of the stream to describe.
-    - name: list-stream-consumers
-      description: Lists the consumers registered to receive data from a stream using enhanced fan-out, and provides information about each consumer.
+    - name: update-account-settings
+      description: Updates the account-level settings for Amazon Kinesis Data Streams.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of consumers that you want a single call of `ListStreamConsumers` to return.
-        --next-token=: When the number of consumers that are registered with the data stream is greater than the default value for the `MaxResults` parameter, or if you explicitly specify a value for `MaxResults` that is less than the number of consumers that are registered with the data stream, the response includes a pagination token named `NextToken`.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --stream-arn=!: The ARN of the Kinesis data stream for which you want to list the registered consumers.
-        --stream-creation-timestamp=: Specify this input parameter to distinguish data streams that have the same name.
-    - name: update-stream-mode
-      description: Updates the capacity mode of the data stream.
+        --minimum-throughput-billing-commitment=!: Specifies the minimum throughput billing commitment configuration for your account.
+    - name: list-streams
+      description: Lists your Kinesis data streams.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --stream-arn=!: Specifies the ARN of the data stream whose capacity mode you want to update.
-        --stream-mode-details=!: Specifies the capacity mode to which you want to set your data stream.
-        --warm-throughput-mi-bps=: The target warm throughput in MB/s that the stream should be scaled to handle.
+        --exclusive-start-stream-name=: The name of the stream to start the list with.
+        --limit=: The maximum number of streams to list.
+        --next-token=: ""
+    - name: register-stream-consumer
+      description: Registers a consumer with a Kinesis data stream.
+      flags:
+        --consumer-name=!: For a given Kinesis data stream, each consumer must have a unique name.
+        --stream-arn=!: The ARN of the Kinesis data stream that you want to register the consumer with.
+        --tags=: A set of up to 50 key-value pairs.
     - name: update-stream-warm-throughput
       description: Updates the warm throughput configuration for the specified Amazon Kinesis Data Streams on-demand data stream.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --stream-arn=: The ARN of the stream to be updated.
         --stream-name=: The name of the stream to be updated.
         --warm-throughput-mi-bps=!: The target warm throughput in MB/s that the stream should be scaled to handle.
-    - name: delete-stream
-      description: Deletes a Kinesis data stream and all its shards and data.
+    - name: decrease-stream-retention-period
+      description: Decreases the Kinesis data stream's retention period, which is the length of time data records are accessible after they are added to the stream.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --enforce-consumer-deletion: If this parameter is unset (`null`) or if you set it to `false`, and the stream has registered consumers, the call to `DeleteStream` fails with a `ResourceInUseException`.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-enforce-consumer-deletion: If this parameter is unset (`null`) or if you set it to `false`, and the stream has registered consumers, the call to `DeleteStream` fails with a `ResourceInUseException`.
-        --stream-arn=: The ARN of the stream.
-        --stream-name=: The name of the stream to delete.
-    - name: get-records
-      description: Gets data records from a Kinesis data stream's shard.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of records to return.
-        --shard-iterator=!: The position in the shard from which you want to start sequentially reading data records.
-        --stream-arn=: The ARN of the stream.
-    - name: list-tags-for-stream
-      description: Lists the tags for the specified Kinesis data stream.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --exclusive-start-tag-key=: The key to use as the starting point for the list of tags.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The number of tags to return.
-        --stream-arn=: The ARN of the stream.
-        --stream-name=: The name of the stream.
-    - name: remove-tags-from-stream
-      description: Removes tags from the specified Kinesis data stream.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --stream-arn=: The ARN of the stream.
-        --stream-name=: The name of the stream.
-        --tag-keys=!: A list of tag keys.
-    - name: stop-stream-encryption
-      description: Disables server-side encryption for a specified stream.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --encryption-type=!: The encryption type.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-id=!: The GUID for the customer-managed Amazon Web Services KMS key to use for encryption.
-        --stream-arn=: The ARN of the stream.
-        --stream-name=: The name of the stream on which to stop encrypting records.
-      completion:
-        flag:
-            encryption-type:
-                - NONE
-                - KMS
-    - name: describe-account-settings
-      description: Describes the account-level settings for Amazon Kinesis Data Streams.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-resource-policy
-      description: Returns a policy attached to the specified data stream or consumer.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the data stream or consumer.
-    - name: increase-stream-retention-period
-      description: Increases the Kinesis data stream's retention period, which is the length of time data records are accessible after they are added to the stream.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --retention-period-hours=!: The new retention period of the stream, in hours.
         --stream-arn=: The ARN of the stream.
         --stream-name=: The name of the stream to modify.
+    - name: list-shards
+      description: Lists the shards in a stream and provides information about each shard.
+      flags:
+        --exclusive-start-shard-id=: Specify this parameter to indicate that you want to list the shards starting with the shard whose ID immediately follows `ExclusiveStartShardId`.
+        --max-results=: The maximum number of shards to return in a single call to `ListShards`.
+        --next-token=: When the number of shards in the data stream is greater than the default value for the `MaxResults` parameter, or if you explicitly specify a value for `MaxResults` that is less than the number of shards in the data stream, the response includes a pagination token named `NextToken`.
+        --shard-filter=: Enables you to filter out the response of the `ListShards` API.
+        --stream-arn=: The ARN of the stream.
+        --stream-creation-timestamp=: Specify this input parameter to distinguish data streams that have the same name.
+        --stream-name=: The name of the data stream whose shards you want to list.
     - name: merge-shards
       description: Merges two adjacent shards in a Kinesis data stream and combines them into a single shard to reduce the stream's capacity to ingest and transport data.
       flags:
         --adjacent-shard-to-merge=!: The shard ID of the adjacent shard for the merge.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --shard-to-merge=!: The shard ID of the shard to combine with the adjacent shard for the merge.
         --stream-arn=: The ARN of the stream.
         --stream-name=: The name of the stream for the merge.
+    - name: update-stream-mode
+      description: Updates the capacity mode of the data stream.
+      flags:
+        --stream-arn=!: Specifies the ARN of the data stream whose capacity mode you want to update.
+        --stream-mode-details=!: Specifies the capacity mode to which you want to set your data stream.
+        --warm-throughput-mi-bps=: The target warm throughput in MB/s that the stream should be scaled to handle.
+    - name: increase-stream-retention-period
+      description: Increases the Kinesis data stream's retention period, which is the length of time data records are accessible after they are added to the stream.
+      flags:
+        --retention-period-hours=!: The new retention period of the stream, in hours.
+        --stream-arn=: The ARN of the stream.
+        --stream-name=: The name of the stream to modify.
+    - name: list-tags-for-resource
+      description: List all tags added to the specified Kinesis resource.
+      flags:
+        --resource-arn=!: The Amazon Resource Name (ARN) of the Kinesis resource for which to list tags.
     - name: put-records
       description: Writes multiple data records into a Kinesis data stream in a single call (also referred to as a `PutRecords` request).
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --records=!: The records associated with the request.
         --stream-arn=: The ARN of the stream.
         --stream-name=: The stream name associated with the request.
-    - name: put-resource-policy
-      description: Attaches a resource-based policy to a data stream or registered consumer.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy=!: Details of the resource policy.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the data stream or consumer.
     - name: start-stream-encryption
       description: Enables or updates server-side encryption using an Amazon Web Services KMS key for a specified stream.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --encryption-type=!: The encryption type to use.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --key-id=!: The GUID for the customer-managed Amazon Web Services KMS key to use for encryption.
         --stream-arn=: The ARN of the stream.
         --stream-name=: The name of the stream for which to start encrypting records.
@@ -181,30 +95,27 @@ commands:
             encryption-type:
                 - NONE
                 - KMS
-    - name: disable-enhanced-monitoring
-      description: Disables enhanced monitoring.
+    - name: stop-stream-encryption
+      description: Disables server-side encryption for a specified stream.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --shard-level-metrics=!: List of shard-level metrics to disable.
+        --encryption-type=!: The encryption type.
+        --key-id=!: The GUID for the customer-managed Amazon Web Services KMS key to use for encryption.
         --stream-arn=: The ARN of the stream.
-        --stream-name=: The name of the Kinesis data stream for which to disable enhanced monitoring.
-    - name: enable-enhanced-monitoring
-      description: Enables enhanced Kinesis data stream monitoring for shard-level metrics.
+        --stream-name=: The name of the stream on which to stop encrypting records.
+      completion:
+        flag:
+            encryption-type:
+                - NONE
+                - KMS
+    - name: subscribe-to-shard
+      description: This operation establishes an HTTP/2 connection between the consumer you specify in the `ConsumerARN` parameter and the shard you specify in the `ShardId` parameter.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --shard-level-metrics=!: List of shard-level metrics to enable.
-        --stream-arn=: The ARN of the stream.
-        --stream-name=: The name of the stream for which to enable enhanced monitoring.
+        --consumer-arn=!: For this parameter, use the value you obtained when you called [RegisterStreamConsumer]().
+        --shard-id=!: The ID of the shard you want to subscribe to.
+        --starting-position=!: The starting position in the data stream from which to start streaming.
     - name: get-shard-iterator
       description: Gets an Amazon Kinesis shard iterator.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --shard-id=!: The shard ID of the Kinesis Data Streams shard to get the iterator for.
         --shard-iterator-type=!: Determines how the shard iterator is used to start reading data records from the shard.
         --starting-sequence-number=: The sequence number of the data record in the shard from which to start reading.
@@ -219,138 +130,109 @@ commands:
                 - TRIM_HORIZON
                 - LATEST
                 - AT_TIMESTAMP
-    - name: split-shard
-      description: Splits a shard into two new shards in the Kinesis data stream, to increase the stream's capacity to ingest and transport data.
+    - name: remove-tags-from-stream
+      description: Removes tags from the specified Kinesis data stream.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --new-starting-hash-key=!: A hash key value for the starting hash key of one of the child shards created by the split.
-        --shard-to-split=!: The shard ID of the shard to split.
         --stream-arn=: The ARN of the stream.
-        --stream-name=: The name of the stream for the shard split.
-    - name: update-account-settings
-      description: Updates the account-level settings for Amazon Kinesis Data Streams.
+        --stream-name=: The name of the stream.
+        --tag-keys=!: A list of tag keys.
+    - name: update-max-record-size
+      description: This allows you to update the `MaxRecordSize` of a single record that you can write to, and read from a stream.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --minimum-throughput-billing-commitment=!: Specifies the minimum throughput billing commitment configuration for your account.
-    - name: list-shards
-      description: Lists the shards in a stream and provides information about each shard.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --exclusive-start-shard-id=: Specify this parameter to indicate that you want to list the shards starting with the shard whose ID immediately follows `ExclusiveStartShardId`.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of shards to return in a single call to `ListShards`.
-        --next-token=: When the number of shards in the data stream is greater than the default value for the `MaxResults` parameter, or if you explicitly specify a value for `MaxResults` that is less than the number of shards in the data stream, the response includes a pagination token named `NextToken`.
-        --page-size=: The size of each page to get in the AWS service call.
-        --shard-filter=: Enables you to filter out the response of the `ListShards` API.
-        --starting-token=: A token to specify where to start paginating.
-        --stream-arn=: The ARN of the stream.
-        --stream-creation-timestamp=: Specify this input parameter to distinguish data streams that have the same name.
-        --stream-name=: The name of the data stream whose shards you want to list.
-    - name: put-record
-      description: Writes a single data record into an Amazon Kinesis data stream.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data=!: The data blob to put into the record, which is base64-encoded when the blob is serialized.
-        --explicit-hash-key=: The hash value used to explicitly determine the shard the data record is assigned to by overriding the partition key hash.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --partition-key=!: Determines which shard in the stream the data record is assigned to.
-        --sequence-number-for-ordering=: Guarantees strictly increasing sequence numbers, for puts from the same client and to the same partition key.
-        --stream-arn=: The ARN of the stream.
-        --stream-name=: The name of the stream to put the data record into.
-    - name: register-stream-consumer
-      description: Registers a consumer with a Kinesis data stream.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --consumer-name=!: For a given Kinesis data stream, each consumer must have a unique name.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --stream-arn=!: The ARN of the Kinesis data stream that you want to register the consumer with.
-        --tags=: A set of up to 50 key-value pairs.
-    - name: untag-resource
-      description: Removes tags from the specified Kinesis resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the Kinesis resource from which to remove tags.
-        --tag-keys=!: A list of tag key-value pairs.
+        --max-record-size-in-ki-b=!: The maximum record size of a single record in KiB that you can write to, and read from a stream.
+        --stream-arn=: The Amazon Resource Name (ARN) of the stream for the `MaxRecordSize` update.
     - name: create-stream
       description: Creates a Kinesis data stream.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-record-size-in-ki-b=: The maximum record size of a single record in kibibyte (KiB) that you can write to, and read from a stream.
         --shard-count=: The number of shards that the stream will use.
         --stream-mode-details=: Indicates the capacity mode of the data stream.
         --stream-name=!: A name to identify the stream.
         --tags=: A set of up to 50 key-value pairs to use to create the tags.
         --warm-throughput-mi-bps=: The target warm throughput in MB/s that the stream should be scaled to handle.
-    - name: list-streams
-      description: Lists your Kinesis data streams.
+    - name: delete-stream
+      description: Deletes a Kinesis data stream and all its shards and data.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --exclusive-start-stream-name=: The name of the stream to start the list with.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of streams to list.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: ""
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: List all tags added to the specified Kinesis resource.
+        --enforce-consumer-deletion: If this parameter is unset (`null`) or if you set it to `false`, and the stream has registered consumers, the call to `DeleteStream` fails with a `ResourceInUseException`.
+        --no-enforce-consumer-deletion: If this parameter is unset (`null`) or if you set it to `false`, and the stream has registered consumers, the call to `DeleteStream` fails with a `ResourceInUseException`.
+        --stream-arn=: The ARN of the stream.
+        --stream-name=: The name of the stream to delete.
+    - name: describe-account-settings
+      description: Describes the account-level settings for Amazon Kinesis Data Streams.
+    - name: disable-enhanced-monitoring
+      description: Disables enhanced monitoring.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the Kinesis resource for which to list tags.
-    - name: update-max-record-size
-      description: This allows you to update the `MaxRecordSize` of a single record that you can write to, and read from a stream.
+        --shard-level-metrics=!: List of shard-level metrics to disable.
+        --stream-arn=: The ARN of the stream.
+        --stream-name=: The name of the Kinesis data stream for which to disable enhanced monitoring.
+    - name: get-records
+      description: Gets data records from a Kinesis data stream's shard.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-record-size-in-ki-b=!: The maximum record size of a single record in KiB that you can write to, and read from a stream.
-        --stream-arn=: The Amazon Resource Name (ARN) of the stream for the `MaxRecordSize` update.
+        --limit=: The maximum number of records to return.
+        --shard-iterator=!: The position in the shard from which you want to start sequentially reading data records.
+        --stream-arn=: The ARN of the stream.
+    - name: get-resource-policy
+      description: Returns a policy attached to the specified data stream or consumer.
+      flags:
+        --resource-arn=!: The Amazon Resource Name (ARN) of the data stream or consumer.
+    - name: list-tags-for-stream
+      description: Lists the tags for the specified Kinesis data stream.
+      flags:
+        --exclusive-start-tag-key=: The key to use as the starting point for the list of tags.
+        --limit=: The number of tags to return.
+        --stream-arn=: The ARN of the stream.
+        --stream-name=: The name of the stream.
+    - name: put-resource-policy
+      description: Attaches a resource-based policy to a data stream or registered consumer.
+      flags:
+        --policy=!: Details of the resource policy.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the data stream or consumer.
     - name: add-tags-to-stream
       description: Adds or updates tags for the specified Kinesis data stream.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --stream-arn=: The ARN of the stream.
         --stream-name=: The name of the stream.
         --tags=!: A set of up to 50 key-value pairs to use to create the tags.
     - name: delete-resource-policy
       description: Delete a policy for the specified data stream or consumer.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the data stream or consumer.
-    - name: deregister-stream-consumer
-      description: To deregister a consumer, provide its ARN.
+    - name: describe-stream-consumer
+      description: To get the description of a registered consumer, provide the ARN of the consumer.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --consumer-arn=: The ARN returned by Kinesis Data Streams when you registered the consumer.
         --consumer-name=: The name that you gave to the consumer.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --stream-arn=: The ARN of the Kinesis data stream that the consumer is registered with.
+    - name: enable-enhanced-monitoring
+      description: Enables enhanced Kinesis data stream monitoring for shard-level metrics.
+      flags:
+        --shard-level-metrics=!: List of shard-level metrics to enable.
+        --stream-arn=: The ARN of the stream.
+        --stream-name=: The name of the stream for which to enable enhanced monitoring.
+    - name: put-record
+      description: Writes a single data record into an Amazon Kinesis data stream.
+      flags:
+        --data=!: The data blob to put into the record, which is base64-encoded when the blob is serialized.
+        --explicit-hash-key=: The hash value used to explicitly determine the shard the data record is assigned to by overriding the partition key hash.
+        --partition-key=!: Determines which shard in the stream the data record is assigned to.
+        --sequence-number-for-ordering=: Guarantees strictly increasing sequence numbers, for puts from the same client and to the same partition key.
+        --stream-arn=: The ARN of the stream.
+        --stream-name=: The name of the stream to put the data record into.
+    - name: split-shard
+      description: Splits a shard into two new shards in the Kinesis data stream, to increase the stream's capacity to ingest and transport data.
+      flags:
+        --new-starting-hash-key=!: A hash key value for the starting hash key of one of the child shards created by the split.
+        --shard-to-split=!: The shard ID of the shard to split.
+        --stream-arn=: The ARN of the stream.
+        --stream-name=: The name of the stream for the shard split.
+    - name: untag-resource
+      description: Removes tags from the specified Kinesis resource.
+      flags:
+        --resource-arn=!: The Amazon Resource Name (ARN) of the Kinesis resource from which to remove tags.
+        --tag-keys=!: A list of tag key-value pairs.
     - name: update-shard-count
       description: Updates the shard count of the specified stream to the specified number of shards.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --scaling-type=!: The scaling type.
         --stream-arn=: The ARN of the stream.
         --stream-name=: The name of the stream.
@@ -359,34 +241,21 @@ commands:
         flag:
             scaling-type:
                 - UNIFORM_SCALING
-    - name: describe-stream
-      description: Describes the specified Kinesis data stream.
+    - name: describe-stream-summary
+      description: Provides a summarized description of the specified Kinesis data stream without the shard list.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --exclusive-start-shard-id=: The shard ID of the shard to start with.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of shards to return in a single call.
-        --max-items=: The  total number of items to return in the command's output.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
         --stream-arn=: The ARN of the stream.
         --stream-name=: The name of the stream to describe.
-    - name: subscribe-to-shard
-      description: This operation establishes an HTTP/2 connection between the consumer you specify in the `ConsumerARN` parameter and the shard you specify in the `ShardId` parameter.
+    - name: list-stream-consumers
+      description: Lists the consumers registered to receive data from a stream using enhanced fan-out, and provides information about each consumer.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --consumer-arn=!: For this parameter, use the value you obtained when you called [RegisterStreamConsumer]().
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --shard-id=!: The ID of the shard you want to subscribe to.
-        --starting-position=!: The starting position in the data stream from which to start streaming.
+        --max-results=: The maximum number of consumers that you want a single call of `ListStreamConsumers` to return.
+        --next-token=: When the number of consumers that are registered with the data stream is greater than the default value for the `MaxResults` parameter, or if you explicitly specify a value for `MaxResults` that is less than the number of consumers that are registered with the data stream, the response includes a pagination token named `NextToken`.
+        --stream-arn=!: The ARN of the Kinesis data stream for which you want to list the registered consumers.
+        --stream-creation-timestamp=: Specify this input parameter to distinguish data streams that have the same name.
     - name: tag-resource
       description: Adds or updates tags for the specified Kinesis resource.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the Kinesis resource to which to add tags.
         --tags=!: An array of tags to be added to the Kinesis resource.
     - name: wait
@@ -395,26 +264,14 @@ commands:
         - name: stream-exists
           description: Describes the specified Kinesis data stream.
           flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
             --exclusive-start-shard-id=: The shard ID of the shard to start with.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --limit=: The maximum number of shards to return in a single call.
-            --max-items=: The  total number of items to return in the command's output.
-            --page-size=: The size of each page to get in the AWS service call.
-            --starting-token=: A token to specify where to start paginating.
             --stream-arn=: The ARN of the stream.
             --stream-name=: The name of the stream to describe.
         - name: stream-not-exists
           description: Describes the specified Kinesis data stream.
           flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
             --exclusive-start-shard-id=: The shard ID of the shard to start with.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --limit=: The maximum number of shards to return in a single call.
-            --max-items=: The  total number of items to return in the command's output.
-            --page-size=: The size of each page to get in the AWS service call.
-            --starting-token=: A token to specify where to start paginating.
             --stream-arn=: The ARN of the stream.
             --stream-name=: The name of the stream to describe.

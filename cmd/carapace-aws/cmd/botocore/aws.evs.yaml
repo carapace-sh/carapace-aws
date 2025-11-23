@@ -1,86 +1,68 @@
 name: evs
 description: Amazon Elastic VMware Service
 commands:
-    - name: list-tags-for-resource
-      description: Lists the tags for an Amazon EVS resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) that identifies the resource to list tags for.
-    - name: tag-resource
-      description: Associates the specified tags to an Amazon EVS resource with the specified `resourceArn`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to add tags to.
-        --tags=!: Metadata that assists with categorization and organization.
-    - name: create-environment-host
-      description: Creates an ESXi host and adds it to an Amazon EVS environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: This parameter is not used in Amazon EVS currently.
-        --environment-id=!: A unique ID for the environment that the host is added to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --host=!: The host that is created and added to the environment.
-    - name: delete-environment
-      description: Deletes an Amazon EVS environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: This parameter is not used in Amazon EVS currently.
-        --environment-id=!: A unique ID associated with the environment to be deleted.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-environment-host
       description: Deletes a host from an Amazon EVS environment.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: This parameter is not used in Amazon EVS currently.
         --environment-id=!: A unique ID for the host's environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --host-name=!: The DNS hostname associated with the host to be deleted.
-    - name: list-environments
-      description: Lists the Amazon EVS environments in your Amazon Web Services account in the specified Amazon Web Services Region.
+    - name: get-environment
+      description: Returns a description of the specified environment.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
+        --environment-id=!: A unique ID for the environment.
+    - name: list-environment-hosts
+      description: List the hosts within an environment.
+      flags:
+        --environment-id=!: A unique ID for the environment.
         --max-results=: The maximum number of results to return.
         --next-token=: A unique pagination token for each page.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --state=: The state of an environment.
-    - name: untag-resource
-      description: Deletes specified tags from an Amazon EVS resource.
+    - name: list-environment-vlans
+      description: Lists environment VLANs that are associated with the specified environment.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to delete tags from.
-        --tag-keys=!: The keys of the tags to delete.
+        --environment-id=!: A unique ID for the environment.
+        --max-results=: The maximum number of results to return.
+        --next-token=: A unique pagination token for each page.
+    - name: tag-resource
+      description: Associates the specified tags to an Amazon EVS resource with the specified `resourceArn`.
+      flags:
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to add tags to.
+        --tags=!: Metadata that assists with categorization and organization.
     - name: associate-eip-to-vlan
       description: Associates an Elastic IP address with a public HCX VLAN.
       flags:
         --allocation-id=!: The Elastic IP address allocation ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: This parameter is not used in Amazon EVS currently.
         --environment-id=!: A unique ID for the environment containing the VLAN that the Elastic IP address associates with.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --vlan-name=!: The name of the VLAN.
+    - name: disassociate-eip-from-vlan
+      description: Disassociates an Elastic IP address from a public HCX VLAN.
+      flags:
+        --association-id=!: A unique ID for the Elastic IP address association.
+        --client-token=: This parameter is not used in Amazon EVS currently.
+        --environment-id=!: A unique ID for the environment containing the VLAN that the Elastic IP address disassociates from.
+        --vlan-name=!: The name of the VLAN.
+    - name: list-environments
+      description: Lists the Amazon EVS environments in your Amazon Web Services account in the specified Amazon Web Services Region.
+      flags:
+        --max-results=: The maximum number of results to return.
+        --next-token=: A unique pagination token for each page.
+        --state=: The state of an environment.
+    - name: list-tags-for-resource
+      description: Lists the tags for an Amazon EVS resource.
+      flags:
+        --resource-arn=!: The Amazon Resource Name (ARN) that identifies the resource to list tags for.
+    - name: untag-resource
+      description: Deletes specified tags from an Amazon EVS resource.
+      flags:
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to delete tags from.
+        --tag-keys=!: The keys of the tags to delete.
     - name: create-environment
       description: Creates an Amazon EVS environment that runs VCF software, such as SDDC Manager, NSX Manager, and vCenter Server.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: This parameter is not used in Amazon EVS currently.
         --connectivity-info=!: The connectivity configuration for the environment.
         --environment-name=: The name to give to your environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --hosts=!: The ESXi hosts to add to the environment.
         --initial-vlans=!: The initial VLAN subnets for the Amazon EVS environment.
         --kms-key-id=: A unique ID for the customer-managed KMS key that is used to encrypt the VCF credential pairs for SDDC Manager, NSX Manager, and vCenter appliances.
@@ -98,44 +80,14 @@ commands:
         flag:
             vcf-version:
                 - VCF-5.2.1
-    - name: disassociate-eip-from-vlan
-      description: Disassociates an Elastic IP address from a public HCX VLAN.
+    - name: create-environment-host
+      description: Creates an ESXi host and adds it to an Amazon EVS environment.
       flags:
-        --association-id=!: A unique ID for the Elastic IP address association.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: This parameter is not used in Amazon EVS currently.
-        --environment-id=!: A unique ID for the environment containing the VLAN that the Elastic IP address disassociates from.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --vlan-name=!: The name of the VLAN.
-    - name: get-environment
-      description: Returns a description of the specified environment.
+        --environment-id=!: A unique ID for the environment that the host is added to.
+        --host=!: The host that is created and added to the environment.
+    - name: delete-environment
+      description: Deletes an Amazon EVS environment.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=!: A unique ID for the environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-environment-hosts
-      description: List the hosts within an environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=!: A unique ID for the environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return.
-        --next-token=: A unique pagination token for each page.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-environment-vlans
-      description: Lists environment VLANs that are associated with the specified environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=!: A unique ID for the environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return.
-        --next-token=: A unique pagination token for each page.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+        --client-token=: This parameter is not used in Amazon EVS currently.
+        --environment-id=!: A unique ID associated with the environment to be deleted.

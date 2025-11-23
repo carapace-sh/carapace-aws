@@ -1,308 +1,80 @@
 name: neptune
 description: Amazon Neptune
 commands:
-    - name: describe-db-cluster-snapshots
-      description: Returns information about DB cluster snapshots.
+    - name: delete-db-instance
+      description: The DeleteDBInstance action deletes a previously provisioned DB instance.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-cluster-identifier=: The ID of the DB cluster to retrieve the list of DB cluster snapshots for.
-        --db-cluster-snapshot-identifier=: A specific DB cluster snapshot identifier to describe.
+        --db-instance-identifier=!: The DB instance identifier for the DB instance to be deleted.
+        --final-db-snapshot-identifier=: The DBSnapshotIdentifier of the new DBSnapshot created when SkipFinalSnapshot is set to `false`.
+        --no-skip-final-snapshot: Determines whether a final DB snapshot is created before the DB instance is deleted.
+        --skip-final-snapshot: Determines whether a final DB snapshot is created before the DB instance is deleted.
+    - name: describe-event-categories
+      description: Displays a list of categories for all event source types, or, if specified, for a specified source type.
+      flags:
         --filters=: This parameter is not currently supported.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --include-public: True to include manual DB cluster snapshots that are public and can be copied or restored by any Amazon account, and otherwise false.
-        --include-shared: True to include shared manual DB cluster snapshots from other Amazon accounts that this Amazon account has been given permission to copy or restore, and otherwise false.
-        --marker=: An optional pagination token provided by a previous `DescribeDBClusterSnapshots` request.
-        --max-items=: The  total number of items to return in the command's output.
+        --source-type=: The type of source that is generating the events.
+    - name: describe-event-subscriptions
+      description: Lists all the subscription descriptions for a customer account.
+      flags:
+        --filters=: This parameter is not currently supported.
+        --marker=: An optional pagination token provided by a previous DescribeOrderableDBInstanceOptions request.
         --max-records=: The maximum number of records to include in the response.
-        --no-include-public: True to include manual DB cluster snapshots that are public and can be copied or restored by any Amazon account, and otherwise false.
-        --no-include-shared: True to include shared manual DB cluster snapshots from other Amazon accounts that this Amazon account has been given permission to copy or restore, and otherwise false.
-        --page-size=: The size of each page to get in the AWS service call.
-        --snapshot-type=: The type of DB cluster snapshots to be returned.
-        --starting-token=: A token to specify where to start paginating.
-    - name: restore-db-cluster-to-point-in-time
-      description: Restores a DB cluster to an arbitrary point in time.
+        --subscription-name=: The name of the event notification subscription you want to describe.
+    - name: describe-events
+      description: Returns events related to DB instances, DB security groups, DB snapshots, and DB parameter groups for the past 14 days.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-cluster-identifier=!: The name of the new DB cluster to be created.
-        --db-cluster-parameter-group-name=: The name of the DB cluster parameter group to associate with the new DB cluster.
-        --db-subnet-group-name=: The DB subnet group name to use for the new DB cluster.
-        --deletion-protection: A value that indicates whether the DB cluster has deletion protection enabled.
-        --enable-cloudwatch-logs-exports=: The list of logs that the restored DB cluster is to export to CloudWatch Logs.
-        --enable-iam-database-authentication: True to enable mapping of Amazon Identity and Access Management (IAM) accounts to database accounts, and otherwise false.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kms-key-id=: The Amazon KMS key identifier to use when restoring an encrypted DB cluster from an encrypted DB cluster.
-        --no-deletion-protection: A value that indicates whether the DB cluster has deletion protection enabled.
-        --no-enable-iam-database-authentication: True to enable mapping of Amazon Identity and Access Management (IAM) accounts to database accounts, and otherwise false.
-        --no-use-latest-restorable-time: A value that is set to `true` to restore the DB cluster to the latest restorable backup time, and `false` otherwise.
-        --option-group-name=: '*(Not supported by Neptune)*'
-        --port=: The port number on which the new DB cluster accepts connections.
-        --restore-to-time=: The date and time to restore the DB cluster to.
-        --restore-type=: The type of restore to be performed.
-        --serverless-v2-scaling-configuration=: Contains the scaling configuration of a Neptune Serverless DB cluster.
-        --source-db-cluster-identifier=!: The identifier of the source DB cluster from which to restore.
-        --storage-type=: Specifies the storage type to be associated with the DB cluster.
-        --tags=: The tags to be applied to the restored DB cluster.
-        --use-latest-restorable-time: A value that is set to `true` to restore the DB cluster to the latest restorable backup time, and `false` otherwise.
-        --vpc-security-group-ids=: A list of VPC security groups that the new DB cluster belongs to.
-    - name: create-db-cluster-snapshot
-      description: Creates a snapshot of a DB cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-cluster-identifier=!: The identifier of the DB cluster to create a snapshot for.
-        --db-cluster-snapshot-identifier=!: The identifier of the DB cluster snapshot.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: The tags to be assigned to the DB cluster snapshot.
-    - name: describe-db-engine-versions
-      description: Returns a list of the available DB engines.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-parameter-group-family=: The name of a specific DB parameter group family to return details for.
-        --default-only: Indicates that only the default version of the specified engine or engine and major version combination is returned.
-        --engine-version=: The database engine version to return.
-        --engine=: The database engine to return.
-        --filters=: Not currently supported.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --list-supported-character-sets: If this parameter is specified and the requested engine supports the `CharacterSetName` parameter for `CreateDBInstance`, the response includes a list of supported character sets for each engine version.
-        --list-supported-timezones: If this parameter is specified and the requested engine supports the `TimeZone` parameter for `CreateDBInstance`, the response includes a list of supported time zones for each engine version.
-        --marker=: An optional pagination token provided by a previous request.
-        --max-items=: The  total number of items to return in the command's output.
+        --duration=: The number of minutes to retrieve events for.
+        --end-time=: The end of the time interval for which to retrieve events, specified in ISO 8601 format.
+        --event-categories=: A list of event categories that trigger notifications for a event notification subscription.
+        --filters=: This parameter is not currently supported.
+        --marker=: An optional pagination token provided by a previous DescribeEvents request.
         --max-records=: The maximum number of records to include in the response.
-        --no-default-only: Indicates that only the default version of the specified engine or engine and major version combination is returned.
-        --no-list-supported-character-sets: If this parameter is specified and the requested engine supports the `CharacterSetName` parameter for `CreateDBInstance`, the response includes a list of supported character sets for each engine version.
-        --no-list-supported-timezones: If this parameter is specified and the requested engine supports the `TimeZone` parameter for `CreateDBInstance`, the response includes a list of supported time zones for each engine version.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+        --source-identifier=: The identifier of the event source for which events are returned.
+        --source-type=: The event source to retrieve events for.
+        --start-time=: The beginning of the time interval to retrieve events for, specified in ISO 8601 format.
+      completion:
+        flag:
+            source-type:
+                - db-instance
+                - db-parameter-group
+                - db-security-group
+                - db-snapshot
+                - db-cluster
+                - db-cluster-snapshot
     - name: describe-orderable-db-instance-options
       description: Returns a list of orderable DB instance options for the specified engine.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-instance-class=: The DB instance class filter value.
         --engine-version=: The engine version filter value.
         --engine=!: The name of the engine to retrieve DB instance options for.
         --filters=: This parameter is not currently supported.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --license-model=: The license model filter value.
         --marker=: An optional pagination token provided by a previous DescribeOrderableDBInstanceOptions request.
-        --max-items=: The  total number of items to return in the command's output.
         --max-records=: The maximum number of records to include in the response.
         --no-vpc: The VPC filter value.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
         --vpc: The VPC filter value.
-    - name: describe-valid-db-instance-modifications
-      description: You can call [DescribeValidDBInstanceModifications]() to learn what modifications you can make to your DB instance.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-instance-identifier=!: The customer identifier or the ARN of your DB instance.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: remove-role-from-db-cluster
-      description: Disassociates an Identity and Access Management (IAM) role from a DB cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-cluster-identifier=!: The name of the DB cluster to disassociate the IAM role from.
-        --feature-name=: The name of the feature for the DB cluster that the IAM role is to be disassociated from.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --role-arn=!: The Amazon Resource Name (ARN) of the IAM role to disassociate from the DB cluster, for example `arn:aws:iam::123456789012:role/NeptuneAccessRole`.
-    - name: delete-db-cluster
-      description: The DeleteDBCluster action deletes a previously provisioned DB cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-cluster-identifier=!: The DB cluster identifier for the DB cluster to be deleted.
-        --final-db-snapshot-identifier=: The DB cluster snapshot identifier of the new DB cluster snapshot created when `SkipFinalSnapshot` is set to `false`.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-skip-final-snapshot: Determines whether a final DB cluster snapshot is created before the DB cluster is deleted.
-        --skip-final-snapshot: Determines whether a final DB cluster snapshot is created before the DB cluster is deleted.
-    - name: describe-engine-default-parameters
-      description: Returns the default engine and system parameter information for the specified database engine.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-parameter-group-family=!: The name of the DB parameter group family.
-        --filters=: Not currently supported.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional pagination token provided by a previous `DescribeEngineDefaultParameters` request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: describe-event-categories
-      description: Displays a list of categories for all event source types, or, if specified, for a specified source type.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: This parameter is not currently supported.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-type=: The type of source that is generating the events.
-    - name: modify-db-cluster-parameter-group
-      description: Modifies the parameters of a DB cluster parameter group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-cluster-parameter-group-name=!: The name of the DB cluster parameter group to modify.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --parameters=!: A list of parameters in the DB cluster parameter group to modify.
-    - name: modify-event-subscription
-      description: Modifies an existing event notification subscription.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --enabled: A Boolean value; set to **true** to activate the subscription.
-        --event-categories=: A list of event categories for a SourceType that you want to subscribe to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-enabled: A Boolean value; set to **true** to activate the subscription.
-        --sns-topic-arn=: The Amazon Resource Name (ARN) of the SNS topic created for event notification.
-        --source-type=: The type of source that is generating the events.
-        --subscription-name=!: The name of the event notification subscription.
-    - name: reset-db-parameter-group
-      description: Modifies the parameters of a DB parameter group to the engine/system default value.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-parameter-group-name=!: The name of the DB parameter group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-reset-all-parameters: Specifies whether (`true`) or not (`false`) to reset all parameters in the DB parameter group to default values.
-        --parameters=: To reset the entire DB parameter group, specify the `DBParameterGroup` name and `ResetAllParameters` parameters.
-        --reset-all-parameters: Specifies whether (`true`) or not (`false`) to reset all parameters in the DB parameter group to default values.
-    - name: describe-db-cluster-parameters
-      description: Returns the detailed parameter list for a particular DB cluster parameter group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-cluster-parameter-group-name=!: The name of a specific DB cluster parameter group to return parameter details for.
-        --filters=: This parameter is not currently supported.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional pagination token provided by a previous `DescribeDBClusterParameters` request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --source=: A value that indicates to return only parameters for a specific source.
-        --starting-token=: A token to specify where to start paginating.
-    - name: add-source-identifier-to-subscription
-      description: Adds a source identifier to an existing event notification subscription.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-identifier=!: The identifier of the event source to be added.
-        --subscription-name=!: The name of the event notification subscription you want to add a source identifier to.
-    - name: create-global-cluster
-      description: Creates a Neptune global database spread across multiple Amazon Regions.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deletion-protection: The deletion protection setting for the new global database.
-        --engine-version=: The Neptune engine version to be used by the global database.
-        --engine=: The name of the database engine to be used in the global database.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-cluster-identifier=!: The cluster identifier of the new global database cluster.
-        --no-deletion-protection: The deletion protection setting for the new global database.
-        --no-storage-encrypted: The storage encryption setting for the new global database cluster.
-        --source-db-cluster-identifier=: (*Optional*) The Amazon Resource Name (ARN) of an existing Neptune DB cluster to use as the primary cluster of the new global database.
-        --storage-encrypted: The storage encryption setting for the new global database cluster.
     - name: delete-event-subscription
       description: Deletes an event notification subscription.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --subscription-name=!: The name of the event notification subscription you want to delete.
-    - name: modify-db-instance
-      description: Modifies settings for a DB instance.
-      flags:
-        --allocated-storage=: Not supported by Neptune.
-        --allow-major-version-upgrade: Indicates that major version upgrades are allowed.
-        --apply-immediately: Specifies whether the modifications in this request and any pending modifications are asynchronously applied as soon as possible, regardless of the `PreferredMaintenanceWindow` setting for the DB instance.
-        --auto-minor-version-upgrade: Indicates that minor version upgrades are applied automatically to the DB instance during the maintenance window.
-        --backup-retention-period=: Not applicable.
-        --ca-certificate-identifier=: Indicates the certificate that needs to be associated with the instance.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cloudwatch-logs-export-configuration=: The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance or DB cluster.
-        --copy-tags-to-snapshot: True to copy all tags from the DB instance to snapshots of the DB instance, and otherwise false.
-        --db-instance-class=: The new compute and memory capacity of the DB instance, for example, `db.m4.large`. Not all DB instance classes are available in all Amazon Regions.
-        --db-instance-identifier=!: The DB instance identifier.
-        --db-parameter-group-name=: The name of the DB parameter group to apply to the DB instance.
-        --db-port-number=: The port number on which the database accepts connections.
-        --db-security-groups=: A list of DB security groups to authorize on this DB instance.
-        --db-subnet-group-name=: The new DB subnet group for the DB instance.
-        --deletion-protection: A value that indicates whether the DB instance has deletion protection enabled.
-        --domain-iam-role-name=: Not supported
-        --domain=: Not supported.
-        --enable-iam-database-authentication: True to enable mapping of Amazon Identity and Access Management (IAM) accounts to database accounts, and otherwise false.
-        --enable-performance-insights: '*(Not supported by Neptune)*'
-        --engine-version=: The version number of the database engine to upgrade to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --iops=: The new Provisioned IOPS (I/O operations per second) value for the instance.
-        --license-model=: Not supported by Neptune.
-        --master-user-password=: Not supported by Neptune.
-        --monitoring-interval=: The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance.
-        --monitoring-role-arn=: The ARN for the IAM role that permits Neptune to send enhanced monitoring metrics to Amazon CloudWatch Logs.
-        --multi-az: Specifies if the DB instance is a Multi-AZ deployment.
-        --new-db-instance-identifier=: The new DB instance identifier for the DB instance when renaming a DB instance.
-        --no-allow-major-version-upgrade: Indicates that major version upgrades are allowed.
-        --no-apply-immediately: Specifies whether the modifications in this request and any pending modifications are asynchronously applied as soon as possible, regardless of the `PreferredMaintenanceWindow` setting for the DB instance.
-        --no-auto-minor-version-upgrade: Indicates that minor version upgrades are applied automatically to the DB instance during the maintenance window.
-        --no-copy-tags-to-snapshot: True to copy all tags from the DB instance to snapshots of the DB instance, and otherwise false.
-        --no-deletion-protection: A value that indicates whether the DB instance has deletion protection enabled.
-        --no-enable-iam-database-authentication: True to enable mapping of Amazon Identity and Access Management (IAM) accounts to database accounts, and otherwise false.
-        --no-enable-performance-insights: '*(Not supported by Neptune)*'
-        --no-multi-az: Specifies if the DB instance is a Multi-AZ deployment.
-        --no-publicly-accessible: Indicates whether the DB instance is publicly accessible.
-        --option-group-name=: '*(Not supported by Neptune)*'
-        --performance-insights-kms-key-id=: '*(Not supported by Neptune)*'
-        --preferred-backup-window=: The daily time range during which automated backups are created if automated backups are enabled.
-        --preferred-maintenance-window=: The weekly time range (in UTC) during which system maintenance can occur, which might result in an outage.
-        --promotion-tier=: A value that specifies the order in which a Read Replica is promoted to the primary instance after a failure of the existing primary instance.
-        --publicly-accessible: Indicates whether the DB instance is publicly accessible.
-        --storage-type=: Not applicable.
-        --tde-credential-arn=: The ARN from the key store with which to associate the instance for TDE encryption.
-        --tde-credential-password=: The password for the given ARN from the key store in order to access the device.
-        --vpc-security-group-ids=: A list of EC2 VPC security groups to authorize on this DB instance.
-    - name: copy-db-cluster-parameter-group
-      description: Copies the specified DB cluster parameter group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-db-cluster-parameter-group-identifier=!: The identifier or Amazon Resource Name (ARN) for the source DB cluster parameter group.
-        --tags=: The tags to be assigned to the copied DB cluster parameter group.
-        --target-db-cluster-parameter-group-description=!: A description for the copied DB cluster parameter group.
-        --target-db-cluster-parameter-group-identifier=!: The identifier for the copied DB cluster parameter group.
     - name: delete-global-cluster
       description: Deletes a global database.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --global-cluster-identifier=!: The cluster identifier of the global database cluster being deleted.
-    - name: describe-global-clusters
-      description: Returns information about Neptune global database clusters.
+    - name: describe-db-cluster-endpoints
+      description: Returns information about endpoints for an Amazon Neptune DB cluster.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-cluster-identifier=: The user-supplied DB cluster identifier.
-        --marker=: (*Optional*) A pagination token returned by a previous call to `DescribeGlobalClusters`.
-        --max-items=: The  total number of items to return in the command's output.
+        --db-cluster-endpoint-identifier=: The identifier of the endpoint to describe.
+        --db-cluster-identifier=: The DB cluster identifier of the DB cluster associated with the endpoint.
+        --filters=: A set of name-value pairs that define which endpoints to include in the output.
+        --marker=: An optional pagination token provided by a previous `DescribeDBClusterEndpoints` request.
         --max-records=: The maximum number of records to include in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
     - name: modify-db-cluster
       description: Modify a setting for a DB cluster.
       flags:
         --allow-major-version-upgrade: A value that indicates whether upgrades between different major versions are allowed.
         --apply-immediately: A value that specifies whether the modifications in this request and any pending modifications are asynchronously applied as soon as possible, regardless of the `PreferredMaintenanceWindow` setting for the DB cluster.
         --backup-retention-period=: The number of days for which automated backups are retained.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --cloudwatch-logs-export-configuration=: The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB cluster.
         --copy-tags-to-snapshot: '*If set to `true`, tags are copied to any snapshot of the DB cluster that is created.*'
         --db-cluster-identifier=!: The DB cluster identifier for the cluster being modified.
@@ -311,7 +83,6 @@ commands:
         --deletion-protection: A value that indicates whether the DB cluster has deletion protection enabled.
         --enable-iam-database-authentication: True to enable mapping of Amazon Identity and Access Management (IAM) accounts to database accounts, and otherwise false.
         --engine-version=: The version number of the database engine to which you want to upgrade.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --master-user-password=: Not supported by Neptune.
         --new-db-cluster-identifier=: The new DB cluster identifier for the DB cluster when renaming a DB cluster.
         --no-allow-major-version-upgrade: A value that indicates whether upgrades between different major versions are allowed.
@@ -326,134 +97,203 @@ commands:
         --serverless-v2-scaling-configuration=: Contains the scaling configuration of a Neptune Serverless DB cluster.
         --storage-type=: The storage type to associate with the DB cluster.
         --vpc-security-group-ids=: A list of VPC security groups that the DB cluster will belong to.
-    - name: modify-global-cluster
-      description: Modify a setting for an Amazon Neptune global cluster.
+    - name: modify-db-parameter-group
+      description: Modifies the parameters of a DB parameter group.
       flags:
-        --allow-major-version-upgrade: A value that indicates whether major version upgrades are allowed.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deletion-protection: Indicates whether the global database has deletion protection enabled.
-        --engine-version=: The version number of the database engine to which you want to upgrade.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-cluster-identifier=!: The DB cluster identifier for the global cluster being modified.
-        --new-global-cluster-identifier=: A new cluster identifier to assign to the global database.
-        --no-allow-major-version-upgrade: A value that indicates whether major version upgrades are allowed.
-        --no-deletion-protection: Indicates whether the global database has deletion protection enabled.
-    - name: modify-db-cluster-endpoint
-      description: Modifies the properties of an endpoint in an Amazon Neptune DB cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-cluster-endpoint-identifier=!: The identifier of the endpoint to modify.
-        --endpoint-type=: The type of the endpoint.
-        --excluded-members=: List of DB instance identifiers that aren't part of the custom endpoint group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --static-members=: List of DB instance identifiers that are part of the custom endpoint group.
-    - name: create-db-cluster-parameter-group
-      description: Creates a new DB cluster parameter group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-cluster-parameter-group-name=!: The name of the DB cluster parameter group.
-        --db-parameter-group-family=!: The DB cluster parameter group family name.
-        --description=!: The description for the DB cluster parameter group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: The tags to be assigned to the new DB cluster parameter group.
-    - name: create-db-parameter-group
-      description: Creates a new DB parameter group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-parameter-group-family=!: The DB parameter group family name.
         --db-parameter-group-name=!: The name of the DB parameter group.
-        --description=!: The description for the DB parameter group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: The tags to be assigned to the new DB parameter group.
+        --parameters=!: An array of parameter names, values, and the apply method for the parameter update.
     - name: delete-db-subnet-group
       description: Deletes a DB subnet group.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-subnet-group-name=!: The name of the database subnet group to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-db-parameters
-      description: Returns the detailed parameter list for a particular DB parameter group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-parameter-group-name=!: The name of a specific DB parameter group to return details for.
-        --filters=: This parameter is not currently supported.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional pagination token provided by a previous `DescribeDBParameters` request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --source=: The parameter types to return.
-        --starting-token=: A token to specify where to start paginating.
-    - name: stop-db-cluster
-      description: Stops an Amazon Neptune DB cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-cluster-identifier=!: The DB cluster identifier of the Neptune DB cluster to be stopped.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: switchover-global-cluster
-      description: Switches over the specified secondary DB cluster to be the new primary DB cluster in the global database cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-cluster-identifier=!: The identifier of the global database cluster to switch over.
-        --target-db-cluster-identifier=!: The Amazon Resource Name (ARN) of the secondary Neptune DB cluster that you want to promote to primary for the global database.
     - name: describe-db-clusters
       description: Returns information about provisioned DB clusters, and supports pagination.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-cluster-identifier=: The user-supplied DB cluster identifier.
         --filters=: A filter that specifies one or more DB clusters to describe.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: An optional pagination token provided by a previous [DescribeDBClusters]() request.
-        --max-items=: The  total number of items to return in the command's output.
         --max-records=: The maximum number of records to include in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+    - name: describe-db-engine-versions
+      description: Returns a list of the available DB engines.
+      flags:
+        --db-parameter-group-family=: The name of a specific DB parameter group family to return details for.
+        --default-only: Indicates that only the default version of the specified engine or engine and major version combination is returned.
+        --engine-version=: The database engine version to return.
+        --engine=: The database engine to return.
+        --filters=: Not currently supported.
+        --list-supported-character-sets: If this parameter is specified and the requested engine supports the `CharacterSetName` parameter for `CreateDBInstance`, the response includes a list of supported character sets for each engine version.
+        --list-supported-timezones: If this parameter is specified and the requested engine supports the `TimeZone` parameter for `CreateDBInstance`, the response includes a list of supported time zones for each engine version.
+        --marker=: An optional pagination token provided by a previous request.
+        --max-records=: The maximum number of records to include in the response.
+        --no-default-only: Indicates that only the default version of the specified engine or engine and major version combination is returned.
+        --no-list-supported-character-sets: If this parameter is specified and the requested engine supports the `CharacterSetName` parameter for `CreateDBInstance`, the response includes a list of supported character sets for each engine version.
+        --no-list-supported-timezones: If this parameter is specified and the requested engine supports the `TimeZone` parameter for `CreateDBInstance`, the response includes a list of supported time zones for each engine version.
+    - name: describe-db-parameter-groups
+      description: Returns a list of `DBParameterGroup` descriptions.
+      flags:
+        --db-parameter-group-name=: The name of a specific DB parameter group to return details for.
+        --filters=: This parameter is not currently supported.
+        --marker=: An optional pagination token provided by a previous `DescribeDBParameterGroups` request.
+        --max-records=: The maximum number of records to include in the response.
+    - name: switchover-global-cluster
+      description: Switches over the specified secondary DB cluster to be the new primary DB cluster in the global database cluster.
+      flags:
+        --global-cluster-identifier=!: The identifier of the global database cluster to switch over.
+        --target-db-cluster-identifier=!: The Amazon Resource Name (ARN) of the secondary Neptune DB cluster that you want to promote to primary for the global database.
+    - name: add-tags-to-resource
+      description: Adds metadata tags to an Amazon Neptune resource.
+      flags:
+        --resource-name=!: The Amazon Neptune resource that the tags are added to.
+        --tags=!: The tags to be assigned to the Amazon Neptune resource.
+    - name: copy-db-parameter-group
+      description: Copies the specified DB parameter group.
+      flags:
+        --source-db-parameter-group-identifier=!: The identifier or ARN for the source DB parameter group.
+        --tags=: The tags to be assigned to the copied DB parameter group.
+        --target-db-parameter-group-description=!: A description for the copied DB parameter group.
+        --target-db-parameter-group-identifier=!: The identifier for the copied DB parameter group.
+    - name: reboot-db-instance
+      description: You might need to reboot your DB instance, usually for maintenance reasons.
+      flags:
+        --db-instance-identifier=!: The DB instance identifier.
+        --force-failover: When `true`, the reboot is conducted through a MultiAZ failover.
+        --no-force-failover: When `true`, the reboot is conducted through a MultiAZ failover.
+    - name: remove-source-identifier-from-subscription
+      description: Removes a source identifier from an existing event notification subscription.
+      flags:
+        --source-identifier=!: The source identifier to be removed from the subscription, such as the **DB instance identifier** for a DB instance or the name of a security group.
+        --subscription-name=!: The name of the event notification subscription you want to remove a source identifier from.
+    - name: delete-db-cluster-parameter-group
+      description: Deletes a specified DB cluster parameter group.
+      flags:
+        --db-cluster-parameter-group-name=!: The name of the DB cluster parameter group.
     - name: failover-global-cluster
       description: Initiates the failover process for a Neptune global database.
       flags:
         --allow-data-loss: Specifies whether to allow data loss for this global database cluster operation.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --global-cluster-identifier=!: Identifier of the Neptune global database that should be failed over.
         --no-allow-data-loss: Specifies whether to allow data loss for this global database cluster operation.
         --no-switchover: Specifies whether to switch over this global database cluster.
         --switchover: Specifies whether to switch over this global database cluster.
         --target-db-cluster-identifier=!: The Amazon Resource Name (ARN) of the secondary Neptune DB cluster that you want to promote to primary for the global database.
-    - name: list-tags-for-resource
-      description: Lists all tags on an Amazon Neptune resource.
+    - name: remove-from-global-cluster
+      description: Detaches a Neptune DB cluster from a Neptune global database.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --db-cluster-identifier=!: The Amazon Resource Name (ARN) identifying the cluster to be detached from the Neptune global database cluster.
+        --global-cluster-identifier=!: The identifier of the Neptune global database from which to detach the specified Neptune DB cluster.
+    - name: reset-db-parameter-group
+      description: Modifies the parameters of a DB parameter group to the engine/system default value.
+      flags:
+        --db-parameter-group-name=!: The name of the DB parameter group.
+        --no-reset-all-parameters: Specifies whether (`true`) or not (`false`) to reset all parameters in the DB parameter group to default values.
+        --parameters=: To reset the entire DB parameter group, specify the `DBParameterGroup` name and `ResetAllParameters` parameters.
+        --reset-all-parameters: Specifies whether (`true`) or not (`false`) to reset all parameters in the DB parameter group to default values.
+    - name: start-db-cluster
+      description: Starts an Amazon Neptune DB cluster that was stopped using the Amazon console, the Amazon CLI stop-db-cluster command, or the StopDBCluster API.
+      flags:
+        --db-cluster-identifier=!: The DB cluster identifier of the Neptune DB cluster to be started.
+    - name: copy-db-cluster-parameter-group
+      description: Copies the specified DB cluster parameter group.
+      flags:
+        --source-db-cluster-parameter-group-identifier=!: The identifier or Amazon Resource Name (ARN) for the source DB cluster parameter group.
+        --tags=: The tags to be assigned to the copied DB cluster parameter group.
+        --target-db-cluster-parameter-group-description=!: A description for the copied DB cluster parameter group.
+        --target-db-cluster-parameter-group-identifier=!: The identifier for the copied DB cluster parameter group.
+    - name: create-event-subscription
+      description: Creates an event notification subscription.
+      flags:
+        --enabled: A Boolean value; set to **true** to activate the subscription, set to **false** to create the subscription but not active it.
+        --event-categories=: A list of event categories for a SourceType that you want to subscribe to.
+        --no-enabled: A Boolean value; set to **true** to activate the subscription, set to **false** to create the subscription but not active it.
+        --sns-topic-arn=!: The Amazon Resource Name (ARN) of the SNS topic created for event notification.
+        --source-ids=: The list of identifiers of the event sources for which events are returned.
+        --source-type=: The type of source that is generating the events.
+        --subscription-name=!: The name of the subscription.
+        --tags=: The tags to be applied to the new event subscription.
+    - name: delete-db-cluster-snapshot
+      description: Deletes a DB cluster snapshot.
+      flags:
+        --db-cluster-snapshot-identifier=!: The identifier of the DB cluster snapshot to delete.
+    - name: describe-db-instances
+      description: Returns information about provisioned instances, and supports pagination.
+      flags:
+        --db-instance-identifier=: The user-supplied instance identifier.
+        --filters=: A filter that specifies one or more DB instances to describe.
+        --marker=: An optional pagination token provided by a previous `DescribeDBInstances` request.
+        --max-records=: The maximum number of records to include in the response.
+    - name: create-db-cluster-endpoint
+      description: Creates a new custom endpoint and associates it with an Amazon Neptune DB cluster.
+      flags:
+        --db-cluster-endpoint-identifier=!: The identifier to use for the new endpoint.
+        --db-cluster-identifier=!: The DB cluster identifier of the DB cluster associated with the endpoint.
+        --endpoint-type=!: The type of the endpoint.
+        --excluded-members=: List of DB instance identifiers that aren't part of the custom endpoint group.
+        --static-members=: List of DB instance identifiers that are part of the custom endpoint group.
+        --tags=: The tags to be assigned to the Amazon Neptune resource.
+    - name: create-db-subnet-group
+      description: Creates a new DB subnet group.
+      flags:
+        --db-subnet-group-description=!: The description for the DB subnet group.
+        --db-subnet-group-name=!: The name for the DB subnet group.
+        --subnet-ids=!: The EC2 Subnet IDs for the DB subnet group.
+        --tags=: The tags to be assigned to the new DB subnet group.
+    - name: describe-db-cluster-parameters
+      description: Returns the detailed parameter list for a particular DB cluster parameter group.
+      flags:
+        --db-cluster-parameter-group-name=!: The name of a specific DB cluster parameter group to return parameter details for.
         --filters=: This parameter is not currently supported.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-name=!: The Amazon Neptune resource with tags to be listed.
-    - name: remove-source-identifier-from-subscription
-      description: Removes a source identifier from an existing event notification subscription.
+        --marker=: An optional pagination token provided by a previous `DescribeDBClusterParameters` request.
+        --max-records=: The maximum number of records to include in the response.
+        --source=: A value that indicates to return only parameters for a specific source.
+    - name: delete-db-parameter-group
+      description: Deletes a specified DBParameterGroup.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-identifier=!: The source identifier to be removed from the subscription, such as the **DB instance identifier** for a DB instance or the name of a security group.
-        --subscription-name=!: The name of the event notification subscription you want to remove a source identifier from.
+        --db-parameter-group-name=!: The name of the DB parameter group.
+    - name: describe-db-cluster-snapshots
+      description: Returns information about DB cluster snapshots.
+      flags:
+        --db-cluster-identifier=: The ID of the DB cluster to retrieve the list of DB cluster snapshots for.
+        --db-cluster-snapshot-identifier=: A specific DB cluster snapshot identifier to describe.
+        --filters=: This parameter is not currently supported.
+        --include-public: True to include manual DB cluster snapshots that are public and can be copied or restored by any Amazon account, and otherwise false.
+        --include-shared: True to include shared manual DB cluster snapshots from other Amazon accounts that this Amazon account has been given permission to copy or restore, and otherwise false.
+        --marker=: An optional pagination token provided by a previous `DescribeDBClusterSnapshots` request.
+        --max-records=: The maximum number of records to include in the response.
+        --no-include-public: True to include manual DB cluster snapshots that are public and can be copied or restored by any Amazon account, and otherwise false.
+        --no-include-shared: True to include shared manual DB cluster snapshots from other Amazon accounts that this Amazon account has been given permission to copy or restore, and otherwise false.
+        --snapshot-type=: The type of DB cluster snapshots to be returned.
+    - name: describe-db-subnet-groups
+      description: Returns a list of DBSubnetGroup descriptions.
+      flags:
+        --db-subnet-group-name=: The name of the DB subnet group to return details for.
+        --filters=: This parameter is not currently supported.
+        --marker=: An optional pagination token provided by a previous DescribeDBSubnetGroups request.
+        --max-records=: The maximum number of records to include in the response.
+    - name: describe-pending-maintenance-actions
+      description: Returns a list of resources (for example, DB instances) that have at least one pending maintenance action.
+      flags:
+        --filters=: A filter that specifies one or more resources to return pending maintenance actions for.
+        --marker=: An optional pagination token provided by a previous `DescribePendingMaintenanceActions` request.
+        --max-records=: The maximum number of records to include in the response.
+        --resource-identifier=: The ARN of a resource to return pending maintenance actions for.
+    - name: modify-db-subnet-group
+      description: Modifies an existing DB subnet group.
+      flags:
+        --db-subnet-group-description=: The description for the DB subnet group.
+        --db-subnet-group-name=!: The name for the DB subnet group.
+        --subnet-ids=!: The EC2 subnet IDs for the DB subnet group.
+    - name: reset-db-cluster-parameter-group
+      description: Modifies the parameters of a DB cluster parameter group to the default value.
+      flags:
+        --db-cluster-parameter-group-name=!: The name of the DB cluster parameter group to reset.
+        --no-reset-all-parameters: A value that is set to `true` to reset all parameters in the DB cluster parameter group to their default values, and `false` otherwise.
+        --parameters=: A list of parameter names in the DB cluster parameter group to reset to the default values.
+        --reset-all-parameters: A value that is set to `true` to reset all parameters in the DB cluster parameter group to their default values, and `false` otherwise.
     - name: add-role-to-db-cluster
       description: Associates an Identity and Access Management (IAM) role with an Neptune DB cluster.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-cluster-identifier=!: The name of the DB cluster to associate the IAM role with.
         --feature-name=: The name of the feature for the Neptune DB cluster that the IAM role is to be associated with.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --role-arn=!: The Amazon Resource Name (ARN) of the IAM role to associate with the Neptune DB cluster, for example `arn:aws:iam::123456789012:role/NeptuneAccessRole`.
     - name: create-db-cluster
       description: Creates a new Amazon Neptune DB cluster.
@@ -461,8 +301,6 @@ commands:
         --availability-zones=: A list of EC2 Availability Zones that instances in the DB cluster can be created in.
         --backup-retention-period=: The number of days for which automated backups are retained.
         --character-set-name=: '*(Not supported by Neptune)*'
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --copy-tags-to-snapshot: '*If set to `true`, tags are copied to any snapshot of the DB cluster that is created.*'
         --database-name=: The name for your database of up to 64 alpha-numeric characters.
         --db-cluster-identifier=!: The DB cluster identifier.
@@ -473,7 +311,6 @@ commands:
         --enable-iam-database-authentication: If set to `true`, enables Amazon Identity and Access Management (IAM) authentication for the entire DB cluster (this cannot be set at an instance level).
         --engine-version=: The version number of the database engine to use for the new DB cluster.
         --engine=!: The name of the database engine to be used for this DB cluster.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --global-cluster-identifier=: The ID of the Neptune global database to which this new DB cluster should be added.
         --kms-key-id=: The Amazon KMS key identifier for an encrypted DB cluster.
         --master-user-password=: Not supported by Neptune.
@@ -493,46 +330,6 @@ commands:
         --storage-type=: The storage type for the new DB cluster.
         --tags=: The tags to assign to the new DB cluster.
         --vpc-security-group-ids=: A list of EC2 VPC security groups to associate with this DB cluster.
-    - name: delete-db-cluster-endpoint
-      description: Deletes a custom endpoint and removes it from an Amazon Neptune DB cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-cluster-endpoint-identifier=!: The identifier associated with the custom endpoint.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-db-cluster-parameter-group
-      description: Deletes a specified DB cluster parameter group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-cluster-parameter-group-name=!: The name of the DB cluster parameter group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: promote-read-replica-db-cluster
-      description: Not supported.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-cluster-identifier=!: Not supported.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: apply-pending-maintenance-action
-      description: Applies a pending maintenance action to a resource (for example, to a DB instance).
-      flags:
-        --apply-action=!: The pending maintenance action to apply to this resource.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --opt-in-type=!: A value that specifies the type of opt-in request, or undoes an opt-in request.
-        --resource-identifier=!: The Amazon Resource Name (ARN) of the resource that the pending maintenance action applies to.
-    - name: copy-db-parameter-group
-      description: Copies the specified DB parameter group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-db-parameter-group-identifier=!: The identifier or ARN for the source DB parameter group.
-        --tags=: The tags to be assigned to the copied DB parameter group.
-        --target-db-parameter-group-description=!: A description for the copied DB parameter group.
-        --target-db-parameter-group-identifier=!: The identifier for the copied DB parameter group.
     - name: create-db-instance
       description: Creates a new DB instance.
       flags:
@@ -541,8 +338,6 @@ commands:
         --availability-zone=: The EC2 Availability Zone that the DB instance is created in
         --backup-retention-period=: The number of days for which automated backups are retained.
         --character-set-name=: '*(Not supported by Neptune)*'
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --copy-tags-to-snapshot: True to copy all tags from the DB instance to snapshots of the DB instance, and otherwise false.
         --db-cluster-identifier=!: The identifier of the DB cluster that the instance will belong to.
         --db-instance-class=!: The compute and memory capacity of the DB instance, for example, `db.m4.large`. Not all DB instance classes are available in all Amazon Regions.
@@ -559,7 +354,6 @@ commands:
         --enable-performance-insights: '*(Not supported by Neptune)*'
         --engine-version=: The version number of the database engine to use.
         --engine=!: The name of the database engine to be used for this instance.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --iops=: The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for the DB instance.
         --kms-key-id=: The Amazon KMS key identifier for an encrypted DB instance.
         --license-model=: License model information for this DB instance.
@@ -590,89 +384,113 @@ commands:
         --tde-credential-password=: The password for the given ARN from the key store in order to access the device.
         --timezone=: The time zone of the DB instance.
         --vpc-security-group-ids=: A list of EC2 VPC security groups to associate with this DB instance.
-    - name: describe-engine-default-cluster-parameters
-      description: Returns the default engine and system parameter information for the cluster database engine.
+    - name: delete-db-cluster
+      description: The DeleteDBCluster action deletes a previously provisioned DB cluster.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-parameter-group-family=!: The name of the DB cluster parameter group family to return engine parameter information for.
+        --db-cluster-identifier=!: The DB cluster identifier for the DB cluster to be deleted.
+        --final-db-snapshot-identifier=: The DB cluster snapshot identifier of the new DB cluster snapshot created when `SkipFinalSnapshot` is set to `false`.
+        --no-skip-final-snapshot: Determines whether a final DB cluster snapshot is created before the DB cluster is deleted.
+        --skip-final-snapshot: Determines whether a final DB cluster snapshot is created before the DB cluster is deleted.
+    - name: modify-db-cluster-parameter-group
+      description: Modifies the parameters of a DB cluster parameter group.
+      flags:
+        --db-cluster-parameter-group-name=!: The name of the DB cluster parameter group to modify.
+        --parameters=!: A list of parameters in the DB cluster parameter group to modify.
+    - name: stop-db-cluster
+      description: Stops an Amazon Neptune DB cluster.
+      flags:
+        --db-cluster-identifier=!: The DB cluster identifier of the Neptune DB cluster to be stopped.
+    - name: create-db-cluster-parameter-group
+      description: Creates a new DB cluster parameter group.
+      flags:
+        --db-cluster-parameter-group-name=!: The name of the DB cluster parameter group.
+        --db-parameter-group-family=!: The DB cluster parameter group family name.
+        --description=!: The description for the DB cluster parameter group.
+        --tags=: The tags to be assigned to the new DB cluster parameter group.
+    - name: create-global-cluster
+      description: Creates a Neptune global database spread across multiple Amazon Regions.
+      flags:
+        --deletion-protection: The deletion protection setting for the new global database.
+        --engine-version=: The Neptune engine version to be used by the global database.
+        --engine=: The name of the database engine to be used in the global database.
+        --global-cluster-identifier=!: The cluster identifier of the new global database cluster.
+        --no-deletion-protection: The deletion protection setting for the new global database.
+        --no-storage-encrypted: The storage encryption setting for the new global database cluster.
+        --source-db-cluster-identifier=: (*Optional*) The Amazon Resource Name (ARN) of an existing Neptune DB cluster to use as the primary cluster of the new global database.
+        --storage-encrypted: The storage encryption setting for the new global database cluster.
+    - name: describe-db-cluster-parameter-groups
+      description: Returns a list of `DBClusterParameterGroup` descriptions.
+      flags:
+        --db-cluster-parameter-group-name=: The name of a specific DB cluster parameter group to return details for.
         --filters=: This parameter is not currently supported.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional pagination token provided by a previous `DescribeEngineDefaultClusterParameters` request.
+        --marker=: An optional pagination token provided by a previous `DescribeDBClusterParameterGroups` request.
         --max-records=: The maximum number of records to include in the response.
+    - name: describe-db-parameters
+      description: Returns the detailed parameter list for a particular DB parameter group.
+      flags:
+        --db-parameter-group-name=!: The name of a specific DB parameter group to return details for.
+        --filters=: This parameter is not currently supported.
+        --marker=: An optional pagination token provided by a previous `DescribeDBParameters` request.
+        --max-records=: The maximum number of records to include in the response.
+        --source=: The parameter types to return.
+    - name: list-tags-for-resource
+      description: Lists all tags on an Amazon Neptune resource.
+      flags:
+        --filters=: This parameter is not currently supported.
+        --resource-name=!: The Amazon Neptune resource with tags to be listed.
+    - name: modify-event-subscription
+      description: Modifies an existing event notification subscription.
+      flags:
+        --enabled: A Boolean value; set to **true** to activate the subscription.
+        --event-categories=: A list of event categories for a SourceType that you want to subscribe to.
+        --no-enabled: A Boolean value; set to **true** to activate the subscription.
+        --sns-topic-arn=: The Amazon Resource Name (ARN) of the SNS topic created for event notification.
+        --source-type=: The type of source that is generating the events.
+        --subscription-name=!: The name of the event notification subscription.
+    - name: apply-pending-maintenance-action
+      description: Applies a pending maintenance action to a resource (for example, to a DB instance).
+      flags:
+        --apply-action=!: The pending maintenance action to apply to this resource.
+        --opt-in-type=!: A value that specifies the type of opt-in request, or undoes an opt-in request.
+        --resource-identifier=!: The Amazon Resource Name (ARN) of the resource that the pending maintenance action applies to.
+    - name: create-db-parameter-group
+      description: Creates a new DB parameter group.
+      flags:
+        --db-parameter-group-family=!: The DB parameter group family name.
+        --db-parameter-group-name=!: The name of the DB parameter group.
+        --description=!: The description for the DB parameter group.
+        --tags=: The tags to be assigned to the new DB parameter group.
     - name: failover-db-cluster
       description: Forces a failover for a DB cluster.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-cluster-identifier=: A DB cluster identifier to force a failover for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --target-db-instance-identifier=: The name of the instance to promote to the primary instance.
+    - name: describe-global-clusters
+      description: Returns information about Neptune global database clusters.
+      flags:
+        --global-cluster-identifier=: The user-supplied DB cluster identifier.
+        --marker=: (*Optional*) A pagination token returned by a previous call to `DescribeGlobalClusters`.
+        --max-records=: The maximum number of records to include in the response.
+    - name: modify-db-cluster-endpoint
+      description: Modifies the properties of an endpoint in an Amazon Neptune DB cluster.
+      flags:
+        --db-cluster-endpoint-identifier=!: The identifier of the endpoint to modify.
+        --endpoint-type=: The type of the endpoint.
+        --excluded-members=: List of DB instance identifiers that aren't part of the custom endpoint group.
+        --static-members=: List of DB instance identifiers that are part of the custom endpoint group.
+    - name: promote-read-replica-db-cluster
+      description: Not supported.
+      flags:
+        --db-cluster-identifier=!: Not supported.
     - name: remove-tags-from-resource
       description: Removes metadata tags from an Amazon Neptune resource.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-name=!: The Amazon Neptune resource that the tags are removed from.
         --tag-keys=!: The tag key (name) of the tag to be removed.
-    - name: reset-db-cluster-parameter-group
-      description: Modifies the parameters of a DB cluster parameter group to the default value.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-cluster-parameter-group-name=!: The name of the DB cluster parameter group to reset.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-reset-all-parameters: A value that is set to `true` to reset all parameters in the DB cluster parameter group to their default values, and `false` otherwise.
-        --parameters=: A list of parameter names in the DB cluster parameter group to reset to the default values.
-        --reset-all-parameters: A value that is set to `true` to reset all parameters in the DB cluster parameter group to their default values, and `false` otherwise.
-    - name: delete-db-parameter-group
-      description: Deletes a specified DBParameterGroup.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-parameter-group-name=!: The name of the DB parameter group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-db-instances
-      description: Returns information about provisioned instances, and supports pagination.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-instance-identifier=: The user-supplied instance identifier.
-        --filters=: A filter that specifies one or more DB instances to describe.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional pagination token provided by a previous `DescribeDBInstances` request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: describe-db-parameter-groups
-      description: Returns a list of `DBParameterGroup` descriptions.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-parameter-group-name=: The name of a specific DB parameter group to return details for.
-        --filters=: This parameter is not currently supported.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional pagination token provided by a previous `DescribeDBParameterGroups` request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: remove-from-global-cluster
-      description: Detaches a Neptune DB cluster from a Neptune global database.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-cluster-identifier=!: The Amazon Resource Name (ARN) identifying the cluster to be detached from the Neptune global database cluster.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-cluster-identifier=!: The identifier of the Neptune global database from which to detach the specified Neptune DB cluster.
     - name: restore-db-cluster-from-snapshot
       description: Creates a new DB cluster from a DB snapshot or DB cluster snapshot.
       flags:
         --availability-zones=: Provides the list of EC2 Availability Zones that instances in the restored DB cluster can be created in.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --copy-tags-to-snapshot: '*If set to `true`, tags are copied to any snapshot of the restored DB cluster that is created.*'
         --database-name=: Not supported.
         --db-cluster-identifier=!: The name of the DB cluster to create from the DB snapshot or DB cluster snapshot.
@@ -683,7 +501,6 @@ commands:
         --enable-iam-database-authentication: True to enable mapping of Amazon Identity and Access Management (IAM) accounts to database accounts, and otherwise false.
         --engine-version=: The version of the database engine to use for the new DB cluster.
         --engine=!: The database engine to use for the new DB cluster.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --kms-key-id=: The Amazon KMS key identifier to use when restoring an encrypted DB cluster from a DB snapshot or DB cluster snapshot.
         --no-copy-tags-to-snapshot: '*If set to `true`, tags are copied to any snapshot of the restored DB cluster that is created.*'
         --no-deletion-protection: A value that indicates whether the DB cluster has deletion protection enabled.
@@ -695,249 +512,162 @@ commands:
         --storage-type=: Specifies the storage type to be associated with the DB cluster.
         --tags=: The tags to be assigned to the restored DB cluster.
         --vpc-security-group-ids=: A list of VPC security groups that the new DB cluster will belong to.
+    - name: restore-db-cluster-to-point-in-time
+      description: Restores a DB cluster to an arbitrary point in time.
+      flags:
+        --db-cluster-identifier=!: The name of the new DB cluster to be created.
+        --db-cluster-parameter-group-name=: The name of the DB cluster parameter group to associate with the new DB cluster.
+        --db-subnet-group-name=: The DB subnet group name to use for the new DB cluster.
+        --deletion-protection: A value that indicates whether the DB cluster has deletion protection enabled.
+        --enable-cloudwatch-logs-exports=: The list of logs that the restored DB cluster is to export to CloudWatch Logs.
+        --enable-iam-database-authentication: True to enable mapping of Amazon Identity and Access Management (IAM) accounts to database accounts, and otherwise false.
+        --kms-key-id=: The Amazon KMS key identifier to use when restoring an encrypted DB cluster from an encrypted DB cluster.
+        --no-deletion-protection: A value that indicates whether the DB cluster has deletion protection enabled.
+        --no-enable-iam-database-authentication: True to enable mapping of Amazon Identity and Access Management (IAM) accounts to database accounts, and otherwise false.
+        --no-use-latest-restorable-time: A value that is set to `true` to restore the DB cluster to the latest restorable backup time, and `false` otherwise.
+        --option-group-name=: '*(Not supported by Neptune)*'
+        --port=: The port number on which the new DB cluster accepts connections.
+        --restore-to-time=: The date and time to restore the DB cluster to.
+        --restore-type=: The type of restore to be performed.
+        --serverless-v2-scaling-configuration=: Contains the scaling configuration of a Neptune Serverless DB cluster.
+        --source-db-cluster-identifier=!: The identifier of the source DB cluster from which to restore.
+        --storage-type=: Specifies the storage type to be associated with the DB cluster.
+        --tags=: The tags to be applied to the restored DB cluster.
+        --use-latest-restorable-time: A value that is set to `true` to restore the DB cluster to the latest restorable backup time, and `false` otherwise.
+        --vpc-security-group-ids=: A list of VPC security groups that the new DB cluster belongs to.
     - name: copy-db-cluster-snapshot
       description: Copies a snapshot of a DB cluster.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --copy-tags: True to copy all tags from the source DB cluster snapshot to the target DB cluster snapshot, and otherwise false.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --kms-key-id=: The Amazon Amazon KMS key ID for an encrypted DB cluster snapshot.
         --no-copy-tags: True to copy all tags from the source DB cluster snapshot to the target DB cluster snapshot, and otherwise false.
         --pre-signed-url=: Not currently supported.
         --source-db-cluster-snapshot-identifier=!: The identifier of the DB cluster snapshot to copy.
         --tags=: The tags to assign to the new DB cluster snapshot copy.
         --target-db-cluster-snapshot-identifier=!: The identifier of the new DB cluster snapshot to create from the source DB cluster snapshot.
-    - name: create-db-subnet-group
-      description: Creates a new DB subnet group.
+    - name: describe-db-cluster-snapshot-attributes
+      description: Returns a list of DB cluster snapshot attribute names and values for a manual DB cluster snapshot.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-subnet-group-description=!: The description for the DB subnet group.
-        --db-subnet-group-name=!: The name for the DB subnet group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --subnet-ids=!: The EC2 Subnet IDs for the DB subnet group.
-        --tags=: The tags to be assigned to the new DB subnet group.
+        --db-cluster-snapshot-identifier=!: The identifier for the DB cluster snapshot to describe the attributes for.
+    - name: describe-engine-default-parameters
+      description: Returns the default engine and system parameter information for the specified database engine.
+      flags:
+        --db-parameter-group-family=!: The name of the DB parameter group family.
+        --filters=: Not currently supported.
+        --marker=: An optional pagination token provided by a previous `DescribeEngineDefaultParameters` request.
+        --max-records=: The maximum number of records to include in the response.
+    - name: modify-db-instance
+      description: Modifies settings for a DB instance.
+      flags:
+        --allocated-storage=: Not supported by Neptune.
+        --allow-major-version-upgrade: Indicates that major version upgrades are allowed.
+        --apply-immediately: Specifies whether the modifications in this request and any pending modifications are asynchronously applied as soon as possible, regardless of the `PreferredMaintenanceWindow` setting for the DB instance.
+        --auto-minor-version-upgrade: Indicates that minor version upgrades are applied automatically to the DB instance during the maintenance window.
+        --backup-retention-period=: Not applicable.
+        --ca-certificate-identifier=: Indicates the certificate that needs to be associated with the instance.
+        --cloudwatch-logs-export-configuration=: The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance or DB cluster.
+        --copy-tags-to-snapshot: True to copy all tags from the DB instance to snapshots of the DB instance, and otherwise false.
+        --db-instance-class=: The new compute and memory capacity of the DB instance, for example, `db.m4.large`. Not all DB instance classes are available in all Amazon Regions.
+        --db-instance-identifier=!: The DB instance identifier.
+        --db-parameter-group-name=: The name of the DB parameter group to apply to the DB instance.
+        --db-port-number=: The port number on which the database accepts connections.
+        --db-security-groups=: A list of DB security groups to authorize on this DB instance.
+        --db-subnet-group-name=: The new DB subnet group for the DB instance.
+        --deletion-protection: A value that indicates whether the DB instance has deletion protection enabled.
+        --domain-iam-role-name=: Not supported
+        --domain=: Not supported.
+        --enable-iam-database-authentication: True to enable mapping of Amazon Identity and Access Management (IAM) accounts to database accounts, and otherwise false.
+        --enable-performance-insights: '*(Not supported by Neptune)*'
+        --engine-version=: The version number of the database engine to upgrade to.
+        --iops=: The new Provisioned IOPS (I/O operations per second) value for the instance.
+        --license-model=: Not supported by Neptune.
+        --master-user-password=: Not supported by Neptune.
+        --monitoring-interval=: The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance.
+        --monitoring-role-arn=: The ARN for the IAM role that permits Neptune to send enhanced monitoring metrics to Amazon CloudWatch Logs.
+        --multi-az: Specifies if the DB instance is a Multi-AZ deployment.
+        --new-db-instance-identifier=: The new DB instance identifier for the DB instance when renaming a DB instance.
+        --no-allow-major-version-upgrade: Indicates that major version upgrades are allowed.
+        --no-apply-immediately: Specifies whether the modifications in this request and any pending modifications are asynchronously applied as soon as possible, regardless of the `PreferredMaintenanceWindow` setting for the DB instance.
+        --no-auto-minor-version-upgrade: Indicates that minor version upgrades are applied automatically to the DB instance during the maintenance window.
+        --no-copy-tags-to-snapshot: True to copy all tags from the DB instance to snapshots of the DB instance, and otherwise false.
+        --no-deletion-protection: A value that indicates whether the DB instance has deletion protection enabled.
+        --no-enable-iam-database-authentication: True to enable mapping of Amazon Identity and Access Management (IAM) accounts to database accounts, and otherwise false.
+        --no-enable-performance-insights: '*(Not supported by Neptune)*'
+        --no-multi-az: Specifies if the DB instance is a Multi-AZ deployment.
+        --no-publicly-accessible: Indicates whether the DB instance is publicly accessible.
+        --option-group-name=: '*(Not supported by Neptune)*'
+        --performance-insights-kms-key-id=: '*(Not supported by Neptune)*'
+        --preferred-backup-window=: The daily time range during which automated backups are created if automated backups are enabled.
+        --preferred-maintenance-window=: The weekly time range (in UTC) during which system maintenance can occur, which might result in an outage.
+        --promotion-tier=: A value that specifies the order in which a Read Replica is promoted to the primary instance after a failure of the existing primary instance.
+        --publicly-accessible: Indicates whether the DB instance is publicly accessible.
+        --storage-type=: Not applicable.
+        --tde-credential-arn=: The ARN from the key store with which to associate the instance for TDE encryption.
+        --tde-credential-password=: The password for the given ARN from the key store in order to access the device.
+        --vpc-security-group-ids=: A list of EC2 VPC security groups to authorize on this DB instance.
+    - name: modify-global-cluster
+      description: Modify a setting for an Amazon Neptune global cluster.
+      flags:
+        --allow-major-version-upgrade: A value that indicates whether major version upgrades are allowed.
+        --deletion-protection: Indicates whether the global database has deletion protection enabled.
+        --engine-version=: The version number of the database engine to which you want to upgrade.
+        --global-cluster-identifier=!: The DB cluster identifier for the global cluster being modified.
+        --new-global-cluster-identifier=: A new cluster identifier to assign to the global database.
+        --no-allow-major-version-upgrade: A value that indicates whether major version upgrades are allowed.
+        --no-deletion-protection: Indicates whether the global database has deletion protection enabled.
+    - name: remove-role-from-db-cluster
+      description: Disassociates an Identity and Access Management (IAM) role from a DB cluster.
+      flags:
+        --db-cluster-identifier=!: The name of the DB cluster to disassociate the IAM role from.
+        --feature-name=: The name of the feature for the DB cluster that the IAM role is to be disassociated from.
+        --role-arn=!: The Amazon Resource Name (ARN) of the IAM role to disassociate from the DB cluster, for example `arn:aws:iam::123456789012:role/NeptuneAccessRole`.
+    - name: create-db-cluster-snapshot
+      description: Creates a snapshot of a DB cluster.
+      flags:
+        --db-cluster-identifier=!: The identifier of the DB cluster to create a snapshot for.
+        --db-cluster-snapshot-identifier=!: The identifier of the DB cluster snapshot.
+        --tags=: The tags to be assigned to the DB cluster snapshot.
+    - name: delete-db-cluster-endpoint
+      description: Deletes a custom endpoint and removes it from an Amazon Neptune DB cluster.
+      flags:
+        --db-cluster-endpoint-identifier=!: The identifier associated with the custom endpoint.
+    - name: describe-valid-db-instance-modifications
+      description: You can call [DescribeValidDBInstanceModifications]() to learn what modifications you can make to your DB instance.
+      flags:
+        --db-instance-identifier=!: The customer identifier or the ARN of your DB instance.
+    - name: add-source-identifier-to-subscription
+      description: Adds a source identifier to an existing event notification subscription.
+      flags:
+        --source-identifier=!: The identifier of the event source to be added.
+        --subscription-name=!: The name of the event notification subscription you want to add a source identifier to.
+    - name: describe-engine-default-cluster-parameters
+      description: Returns the default engine and system parameter information for the cluster database engine.
+      flags:
+        --db-parameter-group-family=!: The name of the DB cluster parameter group family to return engine parameter information for.
+        --filters=: This parameter is not currently supported.
+        --marker=: An optional pagination token provided by a previous `DescribeEngineDefaultClusterParameters` request.
+        --max-records=: The maximum number of records to include in the response.
     - name: modify-db-cluster-snapshot-attribute
       description: Adds an attribute and values to, or removes an attribute and values from, a manual DB cluster snapshot.
       flags:
         --attribute-name=!: The name of the DB cluster snapshot attribute to modify.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-cluster-snapshot-identifier=!: The identifier for the DB cluster snapshot to modify the attributes for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --values-to-add=: A list of DB cluster snapshot attributes to add to the attribute specified by `AttributeName`.
         --values-to-remove=: A list of DB cluster snapshot attributes to remove from the attribute specified by `AttributeName`.
-    - name: modify-db-parameter-group
-      description: Modifies the parameters of a DB parameter group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-parameter-group-name=!: The name of the DB parameter group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --parameters=!: An array of parameter names, values, and the apply method for the parameter update.
-    - name: modify-db-subnet-group
-      description: Modifies an existing DB subnet group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-subnet-group-description=: The description for the DB subnet group.
-        --db-subnet-group-name=!: The name for the DB subnet group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --subnet-ids=!: The EC2 subnet IDs for the DB subnet group.
-    - name: delete-db-cluster-snapshot
-      description: Deletes a DB cluster snapshot.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-cluster-snapshot-identifier=!: The identifier of the DB cluster snapshot to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-db-cluster-endpoints
-      description: Returns information about endpoints for an Amazon Neptune DB cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-cluster-endpoint-identifier=: The identifier of the endpoint to describe.
-        --db-cluster-identifier=: The DB cluster identifier of the DB cluster associated with the endpoint.
-        --filters=: A set of name-value pairs that define which endpoints to include in the output.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional pagination token provided by a previous `DescribeDBClusterEndpoints` request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: describe-event-subscriptions
-      description: Lists all the subscription descriptions for a customer account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: This parameter is not currently supported.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional pagination token provided by a previous DescribeOrderableDBInstanceOptions request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --subscription-name=: The name of the event notification subscription you want to describe.
-    - name: describe-events
-      description: Returns events related to DB instances, DB security groups, DB snapshots, and DB parameter groups for the past 14 days.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --duration=: The number of minutes to retrieve events for.
-        --end-time=: The end of the time interval for which to retrieve events, specified in ISO 8601 format.
-        --event-categories=: A list of event categories that trigger notifications for a event notification subscription.
-        --filters=: This parameter is not currently supported.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional pagination token provided by a previous DescribeEvents request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --source-identifier=: The identifier of the event source for which events are returned.
-        --source-type=: The event source to retrieve events for.
-        --start-time=: The beginning of the time interval to retrieve events for, specified in ISO 8601 format.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            source-type:
-                - db-instance
-                - db-parameter-group
-                - db-security-group
-                - db-snapshot
-                - db-cluster
-                - db-cluster-snapshot
-    - name: describe-pending-maintenance-actions
-      description: Returns a list of resources (for example, DB instances) that have at least one pending maintenance action.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: A filter that specifies one or more resources to return pending maintenance actions for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional pagination token provided by a previous `DescribePendingMaintenanceActions` request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --resource-identifier=: The ARN of a resource to return pending maintenance actions for.
-        --starting-token=: A token to specify where to start paginating.
-    - name: start-db-cluster
-      description: Starts an Amazon Neptune DB cluster that was stopped using the Amazon console, the Amazon CLI stop-db-cluster command, or the StopDBCluster API.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-cluster-identifier=!: The DB cluster identifier of the Neptune DB cluster to be started.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: add-tags-to-resource
-      description: Adds metadata tags to an Amazon Neptune resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-name=!: The Amazon Neptune resource that the tags are added to.
-        --tags=!: The tags to be assigned to the Amazon Neptune resource.
-    - name: create-db-cluster-endpoint
-      description: Creates a new custom endpoint and associates it with an Amazon Neptune DB cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-cluster-endpoint-identifier=!: The identifier to use for the new endpoint.
-        --db-cluster-identifier=!: The DB cluster identifier of the DB cluster associated with the endpoint.
-        --endpoint-type=!: The type of the endpoint.
-        --excluded-members=: List of DB instance identifiers that aren't part of the custom endpoint group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --static-members=: List of DB instance identifiers that are part of the custom endpoint group.
-        --tags=: The tags to be assigned to the Amazon Neptune resource.
-    - name: create-event-subscription
-      description: Creates an event notification subscription.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --enabled: A Boolean value; set to **true** to activate the subscription, set to **false** to create the subscription but not active it.
-        --event-categories=: A list of event categories for a SourceType that you want to subscribe to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-enabled: A Boolean value; set to **true** to activate the subscription, set to **false** to create the subscription but not active it.
-        --sns-topic-arn=!: The Amazon Resource Name (ARN) of the SNS topic created for event notification.
-        --source-ids=: The list of identifiers of the event sources for which events are returned.
-        --source-type=: The type of source that is generating the events.
-        --subscription-name=!: The name of the subscription.
-        --tags=: The tags to be applied to the new event subscription.
-    - name: describe-db-subnet-groups
-      description: Returns a list of DBSubnetGroup descriptions.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-subnet-group-name=: The name of the DB subnet group to return details for.
-        --filters=: This parameter is not currently supported.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional pagination token provided by a previous DescribeDBSubnetGroups request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: reboot-db-instance
-      description: You might need to reboot your DB instance, usually for maintenance reasons.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-instance-identifier=!: The DB instance identifier.
-        --force-failover: When `true`, the reboot is conducted through a MultiAZ failover.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-force-failover: When `true`, the reboot is conducted through a MultiAZ failover.
-    - name: delete-db-instance
-      description: The DeleteDBInstance action deletes a previously provisioned DB instance.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-instance-identifier=!: The DB instance identifier for the DB instance to be deleted.
-        --final-db-snapshot-identifier=: The DBSnapshotIdentifier of the new DBSnapshot created when SkipFinalSnapshot is set to `false`.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-skip-final-snapshot: Determines whether a final DB snapshot is created before the DB instance is deleted.
-        --skip-final-snapshot: Determines whether a final DB snapshot is created before the DB instance is deleted.
-    - name: describe-db-cluster-parameter-groups
-      description: Returns a list of `DBClusterParameterGroup` descriptions.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-cluster-parameter-group-name=: The name of a specific DB cluster parameter group to return details for.
-        --filters=: This parameter is not currently supported.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional pagination token provided by a previous `DescribeDBClusterParameterGroups` request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: describe-db-cluster-snapshot-attributes
-      description: Returns a list of DB cluster snapshot attribute names and values for a manual DB cluster snapshot.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-cluster-snapshot-identifier=!: The identifier for the DB cluster snapshot to describe the attributes for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:
-        - name: db-instance-deleted
-          description: Returns information about provisioned instances, and supports pagination.
-          flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --db-instance-identifier=: The user-supplied instance identifier.
-            --filters=: A filter that specifies one or more DB instances to describe.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-            --marker=: An optional pagination token provided by a previous `DescribeDBInstances` request.
-            --max-items=: The  total number of items to return in the command's output.
-            --max-records=: The maximum number of records to include in the response.
-            --page-size=: The size of each page to get in the AWS service call.
-            --starting-token=: A token to specify where to start paginating.
         - name: db-instance-available
           description: Returns information about provisioned instances, and supports pagination.
           flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
             --db-instance-identifier=: The user-supplied instance identifier.
             --filters=: A filter that specifies one or more DB instances to describe.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --marker=: An optional pagination token provided by a previous `DescribeDBInstances` request.
-            --max-items=: The  total number of items to return in the command's output.
             --max-records=: The maximum number of records to include in the response.
-            --page-size=: The size of each page to get in the AWS service call.
-            --starting-token=: A token to specify where to start paginating.
+        - name: db-instance-deleted
+          description: Returns information about provisioned instances, and supports pagination.
+          flags:
+            --db-instance-identifier=: The user-supplied instance identifier.
+            --filters=: A filter that specifies one or more DB instances to describe.
+            --marker=: An optional pagination token provided by a previous `DescribeDBInstances` request.
+            --max-records=: The maximum number of records to include in the response.
