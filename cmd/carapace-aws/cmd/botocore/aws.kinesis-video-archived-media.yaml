@@ -1,15 +1,6 @@
 name: kinesis-video-archived-media
 description: Amazon Kinesis Video Streams Archived Media
 commands:
-    - name: get-clip
-      description: Downloads an MP4 file (clip) containing the archived, on-demand media from the specified video stream over the specified time range.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --clip-fragment-selector=!: The time range of the requested clip and the source of the timestamps.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --stream-arn=: The Amazon Resource Name (ARN) of the stream for which to retrieve the media clip.
-        --stream-name=: The name of the stream for which to retrieve the media clip.
     - name: get-dash-streaming-session-url
       description: Retrieves an MPEG Dynamic Adaptive Streaming over HTTP (DASH) URL for the stream.
       flags:
@@ -99,12 +90,12 @@ commands:
     - name: get-media-for-fragment-list
       description: Gets media for a list of fragments (specified by fragment number) from the archived data in an Amazon Kinesis video stream.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --fragments=!: A list of the numbers of fragments for which to retrieve media.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --stream-arn=: The Amazon Resource Name (ARN) of the stream from which to retrieve fragment media.
         --stream-name=: The name of the stream from which to retrieve fragment media.
+      completion:
+        positional:
+            - - $files
     - name: list-fragments
       description: Returns a list of [Fragment]() objects from the specified stream and timestamp range within the archived data.
       flags:
@@ -119,3 +110,12 @@ commands:
         --starting-token=: A token to specify where to start paginating.
         --stream-arn=: The Amazon Resource Name (ARN) of the stream from which to retrieve a fragment list.
         --stream-name=: The name of the stream from which to retrieve a fragment list.
+    - name: get-clip
+      description: Downloads an MP4 file (clip) containing the archived, on-demand media from the specified video stream over the specified time range.
+      flags:
+        --clip-fragment-selector=!: The time range of the requested clip and the source of the timestamps.
+        --stream-arn=: The Amazon Resource Name (ARN) of the stream for which to retrieve the media clip.
+        --stream-name=: The name of the stream for which to retrieve the media clip.
+      completion:
+        positional:
+            - - $files

@@ -1,34 +1,14 @@
 name: route53-recovery-control-config
 description: AWS Route53 Recovery Control Config
 commands:
-    - name: update-cluster
-      description: Updates an existing cluster.
+    - name: update-safety-rule
+      description: Update a safety rule (an assertion rule or gating rule).
       flags:
+        --assertion-rule-update=: The assertion rule to update.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-arn=!: The Amazon Resource Name (ARN) of the cluster.
+        --gating-rule-update=: The gating rule to update.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --network-type=!: The network type of the cluster.
-      completion:
-        flag:
-            network-type:
-                - IPV4
-                - DUALSTACK
-    - name: create-cluster
-      description: Create a new cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive string of up to 64 ASCII characters.
-        --cluster-name=!: The name of the cluster.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --network-type=: The network type of the cluster.
-        --tags=: The tags associated with the cluster.
-      completion:
-        flag:
-            network-type:
-                - IPV4
-                - DUALSTACK
     - name: create-routing-control
       description: Creates a new routing control.
       flags:
@@ -39,6 +19,13 @@ commands:
         --control-panel-arn=: The Amazon Resource Name (ARN) of the control panel that includes the routing control.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --routing-control-name=!: The name of the routing control.
+    - name: delete-control-panel
+      description: Deletes a control panel.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --control-panel-arn=!: The Amazon Resource Name (ARN) of the control panel.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: describe-safety-rule
       description: Returns information about a safety rule.
       flags:
@@ -57,20 +44,50 @@ commands:
         --next-token=: The token that identifies which batch of results you want to see.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-control-panels
-      description: Returns an array of control panels in an account or in a cluster.
+    - name: list-safety-rules
+      description: List the safety rules (the assertion rules and gating rules) that you've defined for the routing controls in a control panel.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-arn=: The Amazon Resource Name (ARN) of a cluster.
+        --control-panel-arn=!: The Amazon Resource Name (ARN) of the control panel.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The number of objects that you want to return with this call.
         --next-token=: The token that identifies which batch of results you want to see.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-safety-rules
-      description: List the safety rules (the assertion rules and gating rules) that you've defined for the routing controls in a control panel.
+    - name: update-control-panel
+      description: Updates a control panel.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --control-panel-arn=!: The Amazon Resource Name (ARN) of the control panel.
+        --control-panel-name=!: The name of the control panel.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-cluster
+      description: Create a new cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive string of up to 64 ASCII characters.
+        --cluster-name=!: The name of the cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --network-type=: The network type of the cluster.
+        --tags=: The tags associated with the cluster.
+      completion:
+        flag:
+            network-type:
+                - IPV4
+                - DUALSTACK
+    - name: delete-safety-rule
+      description: Deletes a safety rule.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --safety-rule-arn=!: The ARN of the safety rule.
+    - name: list-routing-controls
+      description: Returns an array of routing controls for a control panel.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -89,6 +106,31 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) for the resource that's tagged.
         --tag-keys=!: Keys for the tags to be removed.
+    - name: update-routing-control
+      description: Updates a routing control.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --routing-control-arn=!: The Amazon Resource Name (ARN) of the routing control.
+        --routing-control-name=!: The name of the routing control.
+    - name: get-resource-policy
+      description: Get information about the resource policy for a cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+    - name: create-control-panel
+      description: Creates a new control panel.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive string of up to 64 ASCII characters.
+        --cluster-arn=!: The Amazon Resource Name (ARN) of the cluster for the control panel.
+        --control-panel-name=!: The name of the control panel.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: The tags associated with the control panel.
     - name: create-safety-rule
       description: Creates a safety rule in a control panel.
       flags:
@@ -106,36 +148,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --cluster-arn=!: The Amazon Resource Name (ARN) of the cluster that you're deleting.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-routing-control
-      description: Deletes a routing control.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --routing-control-arn=!: The Amazon Resource Name (ARN) of the routing control that you're deleting.
-    - name: update-routing-control
-      description: Updates a routing control.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --routing-control-arn=!: The Amazon Resource Name (ARN) of the routing control.
-        --routing-control-name=!: The name of the routing control.
-    - name: update-safety-rule
-      description: Update a safety rule (an assertion rule or gating rule).
-      flags:
-        --assertion-rule-update=: The assertion rule to update.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --gating-rule-update=: The gating rule to update.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-control-panel
-      description: Deletes a control panel.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --control-panel-arn=!: The Amazon Resource Name (ARN) of the control panel.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: describe-cluster
       description: Display the details about a cluster.
       flags:
@@ -143,53 +155,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --cluster-arn=!: The Amazon Resource Name (ARN) of the cluster.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-control-panel
-      description: Displays details about a control panel.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --control-panel-arn=!: The Amazon Resource Name (ARN) of the control panel.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-resource-policy
-      description: Get information about the resource policy for a cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-    - name: tag-resource
-      description: Adds a tag to a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) for the resource that's tagged.
-        --tags=!: The tags associated with the resource.
-    - name: update-control-panel
-      description: Updates a control panel.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --control-panel-arn=!: The Amazon Resource Name (ARN) of the control panel.
-        --control-panel-name=!: The name of the control panel.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-control-panel
-      description: Creates a new control panel.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive string of up to 64 ASCII characters.
-        --cluster-arn=!: The Amazon Resource Name (ARN) of the cluster for the control panel.
-        --control-panel-name=!: The name of the control panel.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: The tags associated with the control panel.
-    - name: delete-safety-rule
-      description: Deletes a safety rule.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --safety-rule-arn=!: The ARN of the safety rule.
     - name: describe-routing-control
       description: Displays details about a routing control.
       flags:
@@ -197,6 +162,33 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --routing-control-arn=!: The Amazon Resource Name (ARN) of the routing control.
+    - name: update-cluster
+      description: Updates an existing cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The Amazon Resource Name (ARN) of the cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --network-type=!: The network type of the cluster.
+      completion:
+        flag:
+            network-type:
+                - IPV4
+                - DUALSTACK
+    - name: delete-routing-control
+      description: Deletes a routing control.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --routing-control-arn=!: The Amazon Resource Name (ARN) of the routing control that you're deleting.
+    - name: describe-control-panel
+      description: Displays details about a control panel.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --control-panel-arn=!: The Amazon Resource Name (ARN) of the control panel.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-associated-route53-health-checks
       description: Returns an array of all Amazon Route 53 health checks associated with a specific routing control.
       flags:
@@ -209,12 +201,12 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --routing-control-arn=!: The Amazon Resource Name (ARN) of the routing control.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-routing-controls
-      description: Returns an array of routing controls for a control panel.
+    - name: list-control-panels
+      description: Returns an array of control panels in an account or in a cluster.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --control-panel-arn=!: The Amazon Resource Name (ARN) of the control panel.
+        --cluster-arn=: The Amazon Resource Name (ARN) of a cluster.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The number of objects that you want to return with this call.
@@ -228,23 +220,17 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) for the resource that's tagged.
+    - name: tag-resource
+      description: Adds a tag to a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) for the resource that's tagged.
+        --tags=!: The tags associated with the resource.
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:
-        - name: control-panel-deleted
-          description: Displays details about a control panel.
-          flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --control-panel-arn=!: The Amazon Resource Name (ARN) of the control panel.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        - name: routing-control-created
-          description: Displays details about a routing control.
-          flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-            --routing-control-arn=!: The Amazon Resource Name (ARN) of the routing control.
         - name: routing-control-deleted
           description: Displays details about a routing control.
           flags:
@@ -273,3 +259,17 @@ commands:
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --control-panel-arn=!: The Amazon Resource Name (ARN) of the control panel.
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        - name: control-panel-deleted
+          description: Displays details about a control panel.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --control-panel-arn=!: The Amazon Resource Name (ARN) of the control panel.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        - name: routing-control-created
+          description: Displays details about a routing control.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --routing-control-arn=!: The Amazon Resource Name (ARN) of the routing control.

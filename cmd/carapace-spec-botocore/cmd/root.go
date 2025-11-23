@@ -343,7 +343,14 @@ func isStreaming(service Service, operation Operation) bool {
 	if shape, ok := service.Shapes[operation.Output.Shape]; ok {
 		if shape.Payload != "" {
 			if payloadShape, ok := shape.Members[shape.Payload]; ok {
-				return strings.ToLower(payloadShape.Shape) == "blob"
+				if strings.ToLower(payloadShape.Shape) == "blob" {
+					return true
+				}
+				if payloadShape, ok := service.Shapes[payloadShape.Shape]; ok {
+					if strings.ToLower(payloadShape.Type) == "blob" {
+						return true
+					}
+				}
 			}
 		}
 	}

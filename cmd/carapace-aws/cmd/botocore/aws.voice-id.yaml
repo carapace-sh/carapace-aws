@@ -1,82 +1,37 @@
 name: voice-id
 description: Amazon Voice ID
 commands:
-    - name: list-speaker-enrollment-jobs
-      description: Lists all the speaker enrollment jobs in the domain with the specified `JobStatus`.
+    - name: delete-domain
+      description: Deletes the specified domain from Voice ID.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: The identifier of the domain that contains the speaker enrollment jobs.
+        --domain-id=!: The identifier of the domain you want to delete.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-status=: Provides the status of your speaker enrollment Job.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that are returned per call.
-        --next-token=: If `NextToken` is returned, there are more results available.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            job-status:
-                - SUBMITTED
-                - IN_PROGRESS
-                - COMPLETED
-                - COMPLETED_WITH_ERRORS
-                - FAILED
-    - name: describe-domain
-      description: Describes the specified domain.
+    - name: describe-fraudster-registration-job
+      description: Describes the specified fraudster registration job.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: The identifier of the domain that you are describing.
+        --domain-id=!: The identifier of the domain that contains the fraudster registration job.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-domains
-      description: Lists all the domains in the Amazon Web Services account.
+        --job-id=!: The identifier of the fraudster registration job you are describing.
+    - name: describe-speaker-enrollment-job
+      description: Describes the specified speaker enrollment job.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-id=!: The identifier of the domain that contains the speaker enrollment job.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that are returned per call.
-        --next-token=: If `NextToken` is returned, there are more results available.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-watchlists
-      description: Lists all watchlists in a specified domain.
+        --job-id=!: The identifier of the speaker enrollment job you are describing.
+    - name: evaluate-session
+      description: Evaluates a specified session based on audio data accumulated during a streaming Amazon Connect Voice ID call.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: The identifier of the domain.
+        --domain-id=!: The identifier of the domain where the session started.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that are returned per call.
-        --next-token=: If `NextToken` is returned, there are more results available.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: tag-resource
-      description: Tags a Voice ID resource with the provided list of tags.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the Voice ID resource you want to tag.
-        --tags=!: The list of tags to assign to the specified resource.
-    - name: disassociate-fraudster
-      description: Disassociates the fraudsters from the watchlist specified.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: The identifier of the domain that contains the fraudster.
-        --fraudster-id=!: The identifier of the fraudster to be disassociated from the watchlist.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --watchlist-id=!: The identifier of the watchlist that you want to disassociate from the fraudster.
-    - name: opt-out-speaker
-      description: Opts out a speaker from Voice ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: The identifier of the domain that contains the speaker.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --speaker-id=!: The identifier of the speaker you want opted-out.
+        --session-name-or-id=!: The session identifier, or name of the session, that you want to evaluate.
     - name: start-speaker-enrollment-job
       description: Starts a new batch speaker enrollment job using specified details.
       flags:
@@ -90,22 +45,6 @@ commands:
         --input-data-config=!: The input data config containing the S3 location for the input manifest file that contains the list of speaker enrollment requests.
         --job-name=: A name for your speaker enrollment job.
         --output-data-config=!: The output data config containing the S3 location where Voice ID writes the job output file; you must also include a KMS key ID to encrypt the file.
-    - name: associate-fraudster
-      description: Associates the fraudsters with the watchlist specified in the same domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: The identifier of the domain that contains the fraudster.
-        --fraudster-id=!: The identifier of the fraudster to be associated with the watchlist.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --watchlist-id=!: The identifier of the watchlist you want to associate with the fraudster.
-    - name: delete-domain
-      description: Deletes the specified domain from Voice ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: The identifier of the domain you want to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-watchlist
       description: Deletes the specified watchlist from Voice ID.
       flags:
@@ -114,72 +53,6 @@ commands:
         --domain-id=!: The identifier of the domain that contains the watchlist.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --watchlist-id=!: The identifier of the watchlist to be deleted.
-    - name: list-speakers
-      description: Lists all speakers in a specified domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: The identifier of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that are returned per call.
-        --next-token=: If `NextToken` is returned, there are more results available.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: Lists all tags associated with a specified Voice ID resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the Voice ID resource for which you want to list the tags.
-    - name: describe-watchlist
-      description: Describes the specified watchlist.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: The identifier of the domain that contains the watchlist.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --watchlist-id=!: The identifier of the watchlist that you are describing.
-    - name: delete-speaker
-      description: Deletes the specified speaker from Voice ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: The identifier of the domain that contains the speaker.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --speaker-id=!: The identifier of the speaker you want to delete.
-    - name: list-fraudster-registration-jobs
-      description: Lists all the fraudster registration jobs in the domain with the given `JobStatus`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: The identifier of the domain that contains the fraudster registration Jobs.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-status=: Provides the status of your fraudster registration job.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that are returned per call.
-        --next-token=: If `NextToken` is returned, there are more results available.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            job-status:
-                - SUBMITTED
-                - IN_PROGRESS
-                - COMPLETED
-                - COMPLETED_WITH_ERRORS
-                - FAILED
-    - name: create-watchlist
-      description: Creates a watchlist that fraudsters can be a part of.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --description=: A brief description of this watchlist.
-        --domain-id=!: The identifier of the domain that contains the watchlist.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the watchlist.
     - name: describe-fraudster
       description: Describes the specified fraudster.
       flags:
@@ -188,14 +61,6 @@ commands:
         --domain-id=!: The identifier of the domain that contains the fraudster.
         --fraudster-id=!: The identifier of the fraudster you are describing.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-speaker
-      description: Describes the specified speaker.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: The identifier of the domain that contains the speaker.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --speaker-id=!: The identifier of the speaker you are describing.
     - name: list-fraudsters
       description: Lists all fraudsters in a specified watchlist or domain.
       flags:
@@ -222,24 +87,6 @@ commands:
         --job-name=: The name of the new fraudster registration job.
         --output-data-config=!: The output data config containing the S3 location where Voice ID writes the job output file; you must also include a KMS key ID to encrypt the file.
         --registration-config=: The registration config containing details such as the action to take when a duplicate fraudster is detected, and the similarity threshold to use for detecting a duplicate fraudster.
-    - name: untag-resource
-      description: Removes specified tags from a specified Amazon Connect Voice ID resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the Voice ID resource you want to remove tags from.
-        --tag-keys=!: The list of tag keys you want to remove from the specified resource.
-    - name: update-domain
-      description: Updates the specified domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A brief description about this domain.
-        --domain-id=!: The identifier of the domain to be updated.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the domain.
-        --server-side-encryption-configuration=!: The configuration, containing the KMS key identifier, to be used by Voice ID for the server-side encryption of your data.
     - name: update-watchlist
       description: Updates the specified watchlist.
       flags:
@@ -250,6 +97,105 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=: The name of the watchlist.
         --watchlist-id=!: The identifier of the watchlist to be updated.
+    - name: associate-fraudster
+      description: Associates the fraudsters with the watchlist specified in the same domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-id=!: The identifier of the domain that contains the fraudster.
+        --fraudster-id=!: The identifier of the fraudster to be associated with the watchlist.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --watchlist-id=!: The identifier of the watchlist you want to associate with the fraudster.
+    - name: untag-resource
+      description: Removes specified tags from a specified Amazon Connect Voice ID resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the Voice ID resource you want to remove tags from.
+        --tag-keys=!: The list of tag keys you want to remove from the specified resource.
+    - name: list-domains
+      description: Lists all the domains in the Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that are returned per call.
+        --next-token=: If `NextToken` is returned, there are more results available.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-speaker-enrollment-jobs
+      description: Lists all the speaker enrollment jobs in the domain with the specified `JobStatus`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-id=!: The identifier of the domain that contains the speaker enrollment jobs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-status=: Provides the status of your speaker enrollment Job.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that are returned per call.
+        --next-token=: If `NextToken` is returned, there are more results available.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            job-status:
+                - SUBMITTED
+                - IN_PROGRESS
+                - COMPLETED
+                - COMPLETED_WITH_ERRORS
+                - FAILED
+    - name: disassociate-fraudster
+      description: Disassociates the fraudsters from the watchlist specified.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-id=!: The identifier of the domain that contains the fraudster.
+        --fraudster-id=!: The identifier of the fraudster to be disassociated from the watchlist.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --watchlist-id=!: The identifier of the watchlist that you want to disassociate from the fraudster.
+    - name: list-fraudster-registration-jobs
+      description: Lists all the fraudster registration jobs in the domain with the given `JobStatus`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-id=!: The identifier of the domain that contains the fraudster registration Jobs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-status=: Provides the status of your fraudster registration job.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that are returned per call.
+        --next-token=: If `NextToken` is returned, there are more results available.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            job-status:
+                - SUBMITTED
+                - IN_PROGRESS
+                - COMPLETED
+                - COMPLETED_WITH_ERRORS
+                - FAILED
+    - name: list-watchlists
+      description: Lists all watchlists in a specified domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-id=!: The identifier of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that are returned per call.
+        --next-token=: If `NextToken` is returned, there are more results available.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: tag-resource
+      description: Tags a Voice ID resource with the provided list of tags.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the Voice ID resource you want to tag.
+        --tags=!: The list of tags to assign to the specified resource.
     - name: create-domain
       description: Creates a domain that contains all Amazon Connect Voice ID data, such as speakers, fraudsters, customer audio, and voiceprints.
       flags:
@@ -261,6 +207,34 @@ commands:
         --name=!: The name of the domain.
         --server-side-encryption-configuration=!: The configuration, containing the KMS key identifier, to be used by Voice ID for the server-side encryption of your data.
         --tags=: A list of tags you want added to the domain.
+    - name: delete-speaker
+      description: Deletes the specified speaker from Voice ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-id=!: The identifier of the domain that contains the speaker.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --speaker-id=!: The identifier of the speaker you want to delete.
+    - name: describe-watchlist
+      description: Describes the specified watchlist.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-id=!: The identifier of the domain that contains the watchlist.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --watchlist-id=!: The identifier of the watchlist that you are describing.
+    - name: list-speakers
+      description: Lists all speakers in a specified domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-id=!: The identifier of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that are returned per call.
+        --next-token=: If `NextToken` is returned, there are more results available.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: delete-fraudster
       description: Deletes the specified fraudster from Voice ID.
       flags:
@@ -269,27 +243,53 @@ commands:
         --domain-id=!: The identifier of the domain that contains the fraudster.
         --fraudster-id=!: The identifier of the fraudster you want to delete.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-fraudster-registration-job
-      description: Describes the specified fraudster registration job.
+    - name: list-tags-for-resource
+      description: Lists all tags associated with a specified Voice ID resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: The identifier of the domain that contains the fraudster registration job.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The identifier of the fraudster registration job you are describing.
-    - name: describe-speaker-enrollment-job
-      description: Describes the specified speaker enrollment job.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the Voice ID resource for which you want to list the tags.
+    - name: update-domain
+      description: Updates the specified domain.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: The identifier of the domain that contains the speaker enrollment job.
+        --description=: A brief description about this domain.
+        --domain-id=!: The identifier of the domain to be updated.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The identifier of the speaker enrollment job you are describing.
-    - name: evaluate-session
-      description: Evaluates a specified session based on audio data accumulated during a streaming Amazon Connect Voice ID call.
+        --name=!: The name of the domain.
+        --server-side-encryption-configuration=!: The configuration, containing the KMS key identifier, to be used by Voice ID for the server-side encryption of your data.
+    - name: create-watchlist
+      description: Creates a watchlist that fraudsters can be a part of.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-id=!: The identifier of the domain where the session started.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --description=: A brief description of this watchlist.
+        --domain-id=!: The identifier of the domain that contains the watchlist.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --session-name-or-id=!: The session identifier, or name of the session, that you want to evaluate.
+        --name=!: The name of the watchlist.
+    - name: describe-domain
+      description: Describes the specified domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-id=!: The identifier of the domain that you are describing.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-speaker
+      description: Describes the specified speaker.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-id=!: The identifier of the domain that contains the speaker.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --speaker-id=!: The identifier of the speaker you are describing.
+    - name: opt-out-speaker
+      description: Opts out a speaker from Voice ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-id=!: The identifier of the domain that contains the speaker.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --speaker-id=!: The identifier of the speaker you want opted-out.

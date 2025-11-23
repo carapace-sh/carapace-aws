@@ -1,37 +1,243 @@
 name: iotwireless
 description: AWS IoT Wireless
 commands:
-    - name: associate-wireless-device-with-fuota-task
-      description: Associate a wireless device with a FUOTA task.
+    - name: create-fuota-task
+      description: Creates a FUOTA task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: ""
+        --description=: ""
+        --descriptor=: ""
+        --firmware-update-image=!: ""
+        --firmware-update-role=!: ""
+        --fragment-interval-ms=: ""
+        --fragment-size-bytes=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lorawan=: ""
+        --name=: ""
+        --redundancy-percent=: ""
+        --tags=: ""
+    - name: delete-wireless-gateway-task-definition
+      description: Deletes a wireless gateway task definition.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the resource to delete.
+    - name: disassociate-wireless-device-from-fuota-task
+      description: Disassociates a wireless device from a FUOTA task.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: ""
         --wireless-device-id=!: ""
-    - name: create-service-profile
-      description: Creates a new service profile.
+    - name: list-event-configurations
+      description: List event configurations where at least one event topic has been enabled.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: ""
+        --next-token=: To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.
+        --resource-type=!: Resource type to filter event configurations.
+      completion:
+        flag:
+            resource-type:
+                - SidewalkAccount
+                - WirelessDevice
+                - WirelessGateway
+    - name: untag-resource
+      description: Removes one or more tags from a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource to remove tags from.
+        --tag-keys=!: A list of the keys of the tags to remove from the resource.
+    - name: update-log-levels-by-resource-types
+      description: Set default log level, or log levels by resource types.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --default-log-level=: ""
+        --fuota-task-log-options=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --wireless-device-log-options=: ""
+        --wireless-gateway-log-options=: ""
+      completion:
+        flag:
+            default-log-level:
+                - INFO
+                - ERROR
+                - DISABLED
+    - name: associate-aws-account-with-partner-account
+      description: Associates a partner account with your AWS account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-request-token=: Each resource must have a unique client request token.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lorawan=: The service profile information to use to create the service profile.
-        --name=: The name of the new resource.
-        --tags=: The tags to attach to the new service profile.
-    - name: get-position-configuration
-      description: Get position configuration for a given resource.
+        --sidewalk=!: The Sidewalk account credentials.
+        --tags=: The tags to attach to the specified resource.
+    - name: associate-wireless-device-with-multicast-group
+      description: Associates a wireless device with a multicast group.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-identifier=!: Resource identifier used in a position configuration.
-        --resource-type=!: Resource type of the resource for which position configuration is retrieved.
+        --id=!: ""
+        --wireless-device-id=!: ""
+    - name: associate-wireless-device-with-thing
+      description: Associates a wireless device with a thing.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the resource to update.
+        --thing-arn=!: The ARN of the thing to associate with the wireless device.
+    - name: disassociate-wireless-device-from-multicast-group
+      description: Disassociates a wireless device from a multicast group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: ""
+        --wireless-device-id=!: ""
+    - name: get-multicast-group
+      description: Gets information about a multicast group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: ""
+    - name: list-wireless-gateways
+      description: Lists the wireless gateways registered to your AWS account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in this operation.
+        --next-token=: To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.
+    - name: delete-network-analyzer-configuration
+      description: Deletes a network analyzer configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-name=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-wireless-gateway-task
+      description: Deletes a wireless gateway task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the resource to delete.
+    - name: get-event-configuration-by-resource-types
+      description: Get the event configuration based on resource types.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-fuota-task
+      description: Gets information about a FUOTA task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: ""
+    - name: get-wireless-device
+      description: Gets information about a wireless device.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier-type=!: The type of identifier used in `identifier`.
+        --identifier=!: The identifier of the wireless device to get.
       completion:
         flag:
-            resource-type:
-                - WirelessDevice
-                - WirelessGateway
+            identifier-type:
+                - WirelessDeviceId
+                - DevEui
+                - ThingName
+                - SidewalkManufacturingSn
+    - name: put-resource-log-level
+      description: Sets the log-level override for a resource ID and resource type.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-level=!: ""
+        --resource-identifier=!: ""
+        --resource-type=!: The type of resource, which can be `WirelessDevice`, `WirelessGateway`, or `FuotaTask`.
+      completion:
+        flag:
+            log-level:
+                - INFO
+                - ERROR
+                - DISABLED
+    - name: send-data-to-multicast-group
+      description: Sends the specified data to a multicast group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: ""
+        --payload-data=!: ""
+        --wireless-metadata=!: ""
+    - name: associate-wireless-gateway-with-certificate
+      description: Associates a wireless gateway with a certificate.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the resource to update.
+        --iot-certificate-id=!: The ID of the certificate to associate with the wireless gateway.
+    - name: delete-queued-messages
+      description: Remove queued messages from the downlink queue.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of a given wireless device for which downlink messages will be deleted.
+        --message-id=!: If message ID is `"*"`, it cleares the entire downlink queue for a given device, specified by the wireless device ID.
+        --wireless-device-type=: The wireless device type, which can be either Sidewalk or LoRaWAN.
+      completion:
+        flag:
+            wireless-device-type:
+                - Sidewalk
+                - LoRaWAN
+    - name: disassociate-aws-account-from-partner-account
+      description: Disassociates your AWS account from a partner account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --partner-account-id=!: The partner account ID to disassociate from the AWS account.
+        --partner-type=!: The partner type.
+      completion:
+        flag:
+            partner-type:
+                - Sidewalk
+    - name: disassociate-wireless-gateway-from-thing
+      description: Disassociates a wireless gateway from its currently associated thing.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the resource to update.
+    - name: get-position-estimate
+      description: Get estimated position information as a payload in GeoJSON format.
+      flags:
+        --cell-towers=: Retrieves an estimated device position by resolving measurement data from cellular radio towers.
+        --gnss=: Retrieves an estimated device position by resolving the global navigation satellite system (GNSS) scan data.
+        --ip=: Retrieves an estimated device position by resolving the IP address information from the device.
+        --timestamp=: Optional information that specifies the time when the position information will be resolved.
+        --wi-fi-access-points=: Retrieves an estimated device position by resolving WLAN measurement data.
+      completion:
+        positional:
+            - - $files
     - name: get-resource-event-configuration
       description: Get the event configuration for a particular resource identifier.
       flags:
@@ -51,34 +257,117 @@ commands:
                 - WirelessGatewayId
             partner-type:
                 - Sidewalk
-    - name: start-single-wireless-device-import-task
-      description: Start import task for a single wireless device.
+    - name: get-wireless-device-statistics
+      description: Gets operating information about a wireless device.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: ""
-        --destination-name=!: The name of the Sidewalk destination that describes the IoT rule to route messages from the device in the import task that will be onboarded to AWS IoT Wireless.
-        --device-name=: The name of the wireless device for which an import task is being started.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --positioning=: The integration status of the Device Location feature for Sidewalk devices.
-        --sidewalk=!: The Sidewalk-related parameters for importing a single wireless device.
-        --tags=: ""
-      completion:
-        flag:
-            positioning:
-                - Enabled
-                - Disabled
-    - name: create-device-profile
-      description: Creates a new device profile.
+        --wireless-device-id=!: The ID of the wireless device for which to get the data.
+    - name: list-tags-for-resource
+      description: Lists the tags (metadata) you have assigned to the resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource for which you want to list tags.
+    - name: create-destination
+      description: Creates a new destination that maps a device message to an AWS IoT rule.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-request-token=: Each resource must have a unique client request token.
+        --description=: The description of the new resource.
+        --expression-type=!: The type of value in `Expression`.
+        --expression=!: The rule name or topic rule to send messages to.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lorawan=: The device profile information to use to create the device profile.
+        --name=!: The name of the new resource.
+        --role-arn=!: The ARN of the IAM Role that authorizes the destination.
+        --tags=: The tags to attach to the new destination.
+      completion:
+        flag:
+            expression-type:
+                - RuleName
+                - MqttTopic
+    - name: get-network-analyzer-configuration
+      description: Get network analyzer configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-name=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-resource-position
+      description: Get the position information for a given wireless device or a wireless gateway resource.
+      flags:
+        --resource-identifier=!: The identifier of the resource for which position information is retrieved.
+        --resource-type=!: The type of resource for which position information is retrieved, which can be a wireless device or a wireless gateway.
+      completion:
+        flag:
+            resource-type:
+                - WirelessDevice
+                - WirelessGateway
+        positional:
+            - - $files
+    - name: get-wireless-gateway-statistics
+      description: Gets operating information about a wireless gateway.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --wireless-gateway-id=!: The ID of the wireless gateway for which to get the data.
+    - name: list-device-profiles
+      description: Lists the device profiles registered to your AWS account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --device-profile-type=: A filter to list only device profiles that use this type, which can be `LoRaWAN` or `Sidewalk`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in this operation.
+        --next-token=: To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.
+      completion:
+        flag:
+            device-profile-type:
+                - Sidewalk
+                - LoRaWAN
+    - name: update-network-analyzer-configuration
+      description: Update network analyzer configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-name=!: ""
+        --description=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --multicast-groups-to-add=: Multicast group resources to add to the network analyzer configuration.
+        --multicast-groups-to-remove=: Multicast group resources to remove from the network analyzer configuration.
+        --trace-content=: ""
+        --wireless-devices-to-add=: Wireless device resources to add to the network analyzer configuration.
+        --wireless-devices-to-remove=: Wireless device resources to remove from the network analyzer configuration.
+        --wireless-gateways-to-add=: Wireless gateway resources to add to the network analyzer configuration.
+        --wireless-gateways-to-remove=: Wireless gateway resources to remove from the network analyzer configuration.
+    - name: update-wireless-gateway
+      description: Updates properties of a wireless gateway.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A new description of the resource.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the resource to update.
+        --join-eui-filters=: ""
+        --max-eirp=: The MaxEIRP value.
+        --name=: The new name of the resource.
+        --net-id-filters=: ""
+    - name: create-wireless-gateway-task-definition
+      description: Creates a gateway task definition.
+      flags:
+        --auto-create-tasks!: Whether to automatically create tasks using this task definition for all gateways with the specified current version.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: Each resource must have a unique client request token.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=: The name of the new resource.
-        --sidewalk=: The Sidewalk-related information for creating the Sidewalk device profile.
-        --tags=: The tags to attach to the new device profile.
+        --no-auto-create-tasks!: Whether to automatically create tasks using this task definition for all gateways with the specified current version.
+        --tags=: The tags to attach to the specified resource.
+        --update=: Information about the gateways to update.
     - name: create-wireless-device
       description: Provisions a wireless device.
       flags:
@@ -102,43 +391,130 @@ commands:
             type:
                 - Sidewalk
                 - LoRaWAN
-    - name: delete-fuota-task
-      description: Deletes a FUOTA task.
+    - name: create-wireless-gateway-task
+      description: Creates a task for a wireless gateway.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: ""
-    - name: delete-service-profile
-      description: Deletes a service profile.
+        --id=!: The ID of the resource to update.
+        --wireless-gateway-task-definition-id=!: The ID of the WirelessGatewayTaskDefinition.
+    - name: get-log-levels-by-resource-types
+      description: Returns current default log levels or log levels by resource types.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the resource to delete.
-    - name: disassociate-multicast-group-from-fuota-task
-      description: Disassociates a multicast group from a FUOTA task.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: ""
-        --multicast-group-id=!: ""
-    - name: list-event-configurations
-      description: List event configurations where at least one event topic has been enabled.
+    - name: list-fuota-tasks
+      description: Lists the FUOTA tasks registered to your AWS account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: ""
         --next-token=: To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.
-        --resource-type=!: Resource type to filter event configurations.
+    - name: list-multicast-groups-by-fuota-task
+      description: List all multicast groups associated with a FUOTA task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: ""
+        --max-results=: ""
+        --next-token=: To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.
+    - name: associate-wireless-device-with-fuota-task
+      description: Associate a wireless device with a FUOTA task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: ""
+        --wireless-device-id=!: ""
+    - name: get-position
+      description: Get the position information for a given resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-identifier=!: Resource identifier used to retrieve the position information.
+        --resource-type=!: Resource type of the resource for which position information is retrieved.
       completion:
         flag:
             resource-type:
-                - SidewalkAccount
                 - WirelessDevice
                 - WirelessGateway
+    - name: list-service-profiles
+      description: Lists the service profiles registered to your AWS account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in this operation.
+        --next-token=: To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.
+    - name: list-wireless-device-import-tasks
+      description: List of import tasks and summary information of onboarding status of devices in each import task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: ""
+        --next-token=: To retrieve the next set of results, the `nextToken` value from a previous response; otherwise `null` to receive the first set of results.
+    - name: start-fuota-task
+      description: Starts a FUOTA task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: ""
+        --lorawan=: ""
+    - name: start-multicast-group-session
+      description: Starts a multicast group session.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: ""
+        --lorawan=!: ""
+    - name: start-single-wireless-device-import-task
+      description: Start import task for a single wireless device.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: ""
+        --destination-name=!: The name of the Sidewalk destination that describes the IoT rule to route messages from the device in the import task that will be onboarded to AWS IoT Wireless.
+        --device-name=: The name of the wireless device for which an import task is being started.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --positioning=: The integration status of the Device Location feature for Sidewalk devices.
+        --sidewalk=!: The Sidewalk-related parameters for importing a single wireless device.
+        --tags=: ""
+      completion:
+        flag:
+            positioning:
+                - Enabled
+                - Disabled
+    - name: start-wireless-device-import-task
+      description: Start import task for provisioning Sidewalk devices in bulk using an S3 CSV file.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: ""
+        --destination-name=!: The name of the Sidewalk destination that describes the IoT rule to route messages from the devices in the import task that are onboarded to AWS IoT Wireless.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --positioning=: The integration status of the Device Location feature for Sidewalk devices.
+        --sidewalk=!: The Sidewalk-related parameters for importing wireless devices that need to be provisioned in bulk.
+        --tags=: ""
+      completion:
+        flag:
+            positioning:
+                - Enabled
+                - Disabled
+    - name: delete-destination
+      description: Deletes a destination.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the resource to delete.
     - name: delete-multicast-group
       description: Deletes a multicast group if it is not in use by a FUOTA task.
       flags:
@@ -146,78 +522,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: ""
-    - name: deregister-wireless-device
-      description: Deregister a wireless device from AWS IoT Wireless.
+    - name: disassociate-wireless-device-from-thing
+      description: Disassociates a wireless device from its currently associated thing.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The identifier of the wireless device to deregister from AWS IoT Wireless.
-        --wireless-device-type=: The type of wireless device to deregister from AWS IoT Wireless, which can be `LoRaWAN` or `Sidewalk`.
-      completion:
-        flag:
-            wireless-device-type:
-                - Sidewalk
-                - LoRaWAN
-    - name: get-metrics
-      description: Get the summary metrics for this AWS account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --summary-metric-queries=: The list of queries to retrieve the summary metrics.
-    - name: get-wireless-device
-      description: Gets information about a wireless device.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier-type=!: The type of identifier used in `identifier`.
-        --identifier=!: The identifier of the wireless device to get.
-      completion:
-        flag:
-            identifier-type:
-                - WirelessDeviceId
-                - DevEui
-                - ThingName
-                - SidewalkManufacturingSn
-    - name: list-position-configurations
-      description: List position configurations for a given resource, such as positioning solvers.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: ""
-        --next-token=: To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.
-        --resource-type=: Resource type for which position configurations are listed.
-      completion:
-        flag:
-            resource-type:
-                - WirelessDevice
-                - WirelessGateway
-    - name: list-queued-messages
-      description: List queued messages in the downlink queue.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of a given wireless device which the downlink message packets are being sent.
-        --max-results=: The maximum number of results to return in this operation.
-        --next-token=: To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.
-        --wireless-device-type=: The wireless device type, whic can be either Sidewalk or LoRaWAN.
-      completion:
-        flag:
-            wireless-device-type:
-                - Sidewalk
-                - LoRaWAN
-    - name: untag-resource
-      description: Removes one or more tags from a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource to remove tags from.
-        --tag-keys=!: A list of the keys of the tags to remove from the resource.
+        --id=!: The ID of the resource to update.
     - name: update-partner-account
       description: Updates properties of a partner account.
       flags:
@@ -231,58 +542,6 @@ commands:
         flag:
             partner-type:
                 - Sidewalk
-    - name: associate-aws-account-with-partner-account
-      description: Associates a partner account with your AWS account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: Each resource must have a unique client request token.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --sidewalk=!: The Sidewalk account credentials.
-        --tags=: The tags to attach to the specified resource.
-    - name: associate-multicast-group-with-fuota-task
-      description: Associate a multicast group with a FUOTA task.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: ""
-        --multicast-group-id=!: ""
-    - name: create-network-analyzer-configuration
-      description: Creates a new network analyzer configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: ""
-        --description=: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --multicast-groups=: Multicast Group resources to add to the network analyzer configruation.
-        --name=!: ""
-        --tags=: ""
-        --trace-content=: ""
-        --wireless-devices=: Wireless device resources to add to the network analyzer configuration.
-        --wireless-gateways=: Wireless gateway resources to add to the network analyzer configuration.
-    - name: test-wireless-device
-      description: Simulates a provisioned device by sending an uplink data payload of `Hello`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the wireless device to test.
-    - name: update-position
-      description: Update the position information of a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --position=!: The position information of the resource.
-        --resource-identifier=!: Resource identifier of the resource for which position is updated.
-        --resource-type=!: Resource type of the resource for which position is updated.
-      completion:
-        flag:
-            resource-type:
-                - WirelessDevice
-                - WirelessGateway
     - name: update-resource-event-configuration
       description: Update the event configuration for a particular resource identifier.
       flags:
@@ -307,218 +566,6 @@ commands:
                 - WirelessGatewayId
             partner-type:
                 - Sidewalk
-    - name: create-destination
-      description: Creates a new destination that maps a device message to an AWS IoT rule.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: Each resource must have a unique client request token.
-        --description=: The description of the new resource.
-        --expression-type=!: The type of value in `Expression`.
-        --expression=!: The rule name or topic rule to send messages to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the new resource.
-        --role-arn=!: The ARN of the IAM Role that authorizes the destination.
-        --tags=: The tags to attach to the new destination.
-      completion:
-        flag:
-            expression-type:
-                - RuleName
-                - MqttTopic
-    - name: create-wireless-gateway-task
-      description: Creates a task for a wireless gateway.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the resource to update.
-        --wireless-gateway-task-definition-id=!: The ID of the WirelessGatewayTaskDefinition.
-    - name: disassociate-wireless-device-from-multicast-group
-      description: Disassociates a wireless device from a multicast group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: ""
-        --wireless-device-id=!: ""
-    - name: get-multicast-group
-      description: Gets information about a multicast group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: ""
-    - name: get-resource-log-level
-      description: Fetches the log-level override, if any, for a given resource ID and resource type..
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-identifier=!: ""
-        --resource-type=!: The type of resource, which can be `WirelessDevice`, `WirelessGateway`, or `FuotaTask`.
-    - name: get-service-endpoint
-      description: Gets the account-specific endpoint for Configuration and Update Server (CUPS) protocol or LoRaWAN Network Server (LNS) connections.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --service-type=: The service type for which to get endpoint information about.
-      completion:
-        flag:
-            service-type:
-                - CUPS
-                - LNS
-    - name: list-fuota-tasks
-      description: Lists the FUOTA tasks registered to your AWS account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: ""
-        --next-token=: To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.
-    - name: list-partner-accounts
-      description: Lists the partner accounts associated with your AWS account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in this operation.
-        --next-token=: To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.
-    - name: get-log-levels-by-resource-types
-      description: Returns current default log levels or log levels by resource types.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-position-estimate
-      description: Get estimated position information as a payload in GeoJSON format.
-      flags:
-        --cell-towers=: Retrieves an estimated device position by resolving measurement data from cellular radio towers.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --gnss=: Retrieves an estimated device position by resolving the global navigation satellite system (GNSS) scan data.
-        --ip=: Retrieves an estimated device position by resolving the IP address information from the device.
-        --timestamp=: Optional information that specifies the time when the position information will be resolved.
-        --wi-fi-access-points=: Retrieves an estimated device position by resolving WLAN measurement data.
-    - name: get-service-profile
-      description: Gets information about a service profile.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the resource to get.
-    - name: get-wireless-gateway
-      description: Gets information about a wireless gateway.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier-type=!: The type of identifier used in `identifier`.
-        --identifier=!: The identifier of the wireless gateway to get.
-      completion:
-        flag:
-            identifier-type:
-                - GatewayEui
-                - WirelessGatewayId
-                - ThingName
-    - name: get-wireless-gateway-task-definition
-      description: Gets information about a wireless gateway task definition.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the resource to get.
-    - name: list-device-profiles
-      description: Lists the device profiles registered to your AWS account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --device-profile-type=: A filter to list only device profiles that use this type, which can be `LoRaWAN` or `Sidewalk`.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in this operation.
-        --next-token=: To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.
-      completion:
-        flag:
-            device-profile-type:
-                - Sidewalk
-                - LoRaWAN
-    - name: put-position-configuration
-      description: Put position configuration for a given resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --destination=: The position data destination that describes the AWS IoT rule that processes the device's position data for use by AWS IoT Core for LoRaWAN.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-identifier=!: Resource identifier used to update the position configuration.
-        --resource-type=!: Resource type of the resource for which you want to update the position configuration.
-        --solvers=: The positioning solvers used to update the position configuration of the resource.
-      completion:
-        flag:
-            resource-type:
-                - WirelessDevice
-                - WirelessGateway
-    - name: start-multicast-group-session
-      description: Starts a multicast group session.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: ""
-        --lorawan=!: ""
-    - name: delete-destination
-      description: Deletes a destination.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the resource to delete.
-    - name: disassociate-wireless-gateway-from-thing
-      description: Disassociates a wireless gateway from its currently associated thing.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the resource to update.
-    - name: get-wireless-device-statistics
-      description: Gets operating information about a wireless device.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --wireless-device-id=!: The ID of the wireless device for which to get the data.
-    - name: get-wireless-gateway-firmware-information
-      description: Gets the firmware version and other information about a wireless gateway.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the resource to get.
-    - name: start-bulk-disassociate-wireless-device-from-multicast-group
-      description: Starts a bulk disassociatin of all qualifying wireless devices from a multicast group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: ""
-        --query-string=: ""
-        --tags=: ""
-    - name: update-fuota-task
-      description: Updates properties of a FUOTA task.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: ""
-        --descriptor=: ""
-        --firmware-update-image=: ""
-        --firmware-update-role=: ""
-        --fragment-interval-ms=: ""
-        --fragment-size-bytes=: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: ""
-        --lorawan=: ""
-        --name=: ""
-        --redundancy-percent=: ""
     - name: update-resource-position
       description: Update the position information of a given wireless device or a wireless gateway resource.
       flags:
@@ -533,153 +580,6 @@ commands:
             resource-type:
                 - WirelessDevice
                 - WirelessGateway
-    - name: update-wireless-gateway
-      description: Updates properties of a wireless gateway.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A new description of the resource.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the resource to update.
-        --join-eui-filters=: ""
-        --max-eirp=: The MaxEIRP value.
-        --name=: The new name of the resource.
-        --net-id-filters=: ""
-    - name: associate-wireless-gateway-with-thing
-      description: Associates a wireless gateway with a thing.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the resource to update.
-        --thing-arn=!: The ARN of the thing to associate with the wireless gateway.
-    - name: cancel-multicast-group-session
-      description: Cancels an existing multicast group session.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: ""
-    - name: disassociate-aws-account-from-partner-account
-      description: Disassociates your AWS account from a partner account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --partner-account-id=!: The partner account ID to disassociate from the AWS account.
-        --partner-type=!: The partner type.
-      completion:
-        flag:
-            partner-type:
-                - Sidewalk
-    - name: get-destination
-      description: Gets information about a destination.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the resource to get.
-    - name: list-wireless-device-import-tasks
-      description: List of import tasks and summary information of onboarding status of devices in each import task.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: ""
-        --next-token=: To retrieve the next set of results, the `nextToken` value from a previous response; otherwise `null` to receive the first set of results.
-    - name: put-resource-log-level
-      description: Sets the log-level override for a resource ID and resource type.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --log-level=!: ""
-        --resource-identifier=!: ""
-        --resource-type=!: The type of resource, which can be `WirelessDevice`, `WirelessGateway`, or `FuotaTask`.
-      completion:
-        flag:
-            log-level:
-                - INFO
-                - ERROR
-                - DISABLED
-    - name: reset-resource-log-level
-      description: Removes the log-level override, if any, for a specific resource ID and resource type.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-identifier=!: ""
-        --resource-type=!: The type of resource, which can be `WirelessDevice`, `WirelessGateway`, or `FuotaTask`.
-    - name: update-metric-configuration
-      description: Update the summary metric configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --summary-metric=: The value to be used to set summary metric configuration.
-    - name: delete-network-analyzer-configuration
-      description: Deletes a network analyzer configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration-name=!: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-event-configuration-by-resource-types
-      description: Get the event configuration based on resource types.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-fuota-task
-      description: Gets information about a FUOTA task.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: ""
-    - name: get-partner-account
-      description: Gets information about a partner account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --partner-account-id=!: The partner account ID to disassociate from the AWS account.
-        --partner-type=!: The partner type.
-      completion:
-        flag:
-            partner-type:
-                - Sidewalk
-    - name: get-position
-      description: Get the position information for a given resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-identifier=!: Resource identifier used to retrieve the position information.
-        --resource-type=!: Resource type of the resource for which position information is retrieved.
-      completion:
-        flag:
-            resource-type:
-                - WirelessDevice
-                - WirelessGateway
-    - name: get-wireless-gateway-task
-      description: Gets information about a wireless gateway task.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the resource to get.
-    - name: update-event-configuration-by-resource-types
-      description: Update the event configuration based on resource types.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connection-status=: Connection status resource type event configuration object for enabling and disabling wireless gateway topic.
-        --device-registration-state=: Device registration state resource type event configuration object for enabling and disabling wireless gateway topic.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --join=: Join resource type event configuration object for enabling and disabling wireless device topic.
-        --message-delivery-status=: Message delivery status resource type event configuration object for enabling and disabling wireless device topic.
-        --proximity=: Proximity resource type event configuration object for enabling and disabling wireless gateway topic.
     - name: update-wireless-device
       description: Updates properties of a wireless device.
       flags:
@@ -698,6 +598,109 @@ commands:
             positioning:
                 - Enabled
                 - Disabled
+    - name: associate-wireless-gateway-with-thing
+      description: Associates a wireless gateway with a thing.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the resource to update.
+        --thing-arn=!: The ARN of the thing to associate with the wireless gateway.
+    - name: deregister-wireless-device
+      description: Deregister a wireless device from AWS IoT Wireless.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The identifier of the wireless device to deregister from AWS IoT Wireless.
+        --wireless-device-type=: The type of wireless device to deregister from AWS IoT Wireless, which can be `LoRaWAN` or `Sidewalk`.
+      completion:
+        flag:
+            wireless-device-type:
+                - Sidewalk
+                - LoRaWAN
+    - name: get-destination
+      description: Gets information about a destination.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the resource to get.
+    - name: get-multicast-group-session
+      description: Gets information about a multicast group session.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: ""
+    - name: get-partner-account
+      description: Gets information about a partner account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --partner-account-id=!: The partner account ID to disassociate from the AWS account.
+        --partner-type=!: The partner type.
+      completion:
+        flag:
+            partner-type:
+                - Sidewalk
+    - name: get-wireless-gateway
+      description: Gets information about a wireless gateway.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier-type=!: The type of identifier used in `identifier`.
+        --identifier=!: The identifier of the wireless gateway to get.
+      completion:
+        flag:
+            identifier-type:
+                - GatewayEui
+                - WirelessGatewayId
+                - ThingName
+    - name: reset-resource-log-level
+      description: Removes the log-level override, if any, for a specific resource ID and resource type.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-identifier=!: ""
+        --resource-type=!: The type of resource, which can be `WirelessDevice`, `WirelessGateway`, or `FuotaTask`.
+    - name: send-data-to-wireless-device
+      description: Sends a decrypted application data frame to a device.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the wireless device to receive the data.
+        --payload-data=!: ""
+        --transmit-mode=!: The transmit mode to use to send data to the wireless device.
+        --wireless-metadata=: Metadata about the message request.
+    - name: create-network-analyzer-configuration
+      description: Creates a new network analyzer configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: ""
+        --description=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --multicast-groups=: Multicast Group resources to add to the network analyzer configruation.
+        --name=!: ""
+        --tags=: ""
+        --trace-content=: ""
+        --wireless-devices=: Wireless device resources to add to the network analyzer configuration.
+        --wireless-gateways=: Wireless gateway resources to add to the network analyzer configuration.
+    - name: create-service-profile
+      description: Creates a new service profile.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: Each resource must have a unique client request token.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lorawan=: The service profile information to use to create the service profile.
+        --name=: The name of the new resource.
+        --tags=: The tags to attach to the new service profile.
     - name: create-multicast-group
       description: Creates a multicast group.
       flags:
@@ -709,6 +712,56 @@ commands:
         --lorawan=!: ""
         --name=: ""
         --tags=: ""
+    - name: get-metric-configuration
+      description: Get the metric configuration status for this AWS account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-resource-log-level
+      description: Fetches the log-level override, if any, for a given resource ID and resource type..
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-identifier=!: ""
+        --resource-type=!: The type of resource, which can be `WirelessDevice`, `WirelessGateway`, or `FuotaTask`.
+    - name: list-destinations
+      description: Lists the destinations registered to your AWS account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in this operation.
+        --next-token=: To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.
+    - name: list-wireless-gateway-task-definitions
+      description: List the wireless gateway tasks definitions registered to your AWS account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in this operation.
+        --next-token=: To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.
+        --task-definition-type=: A filter to list only the wireless gateway task definitions that use this task definition type.
+      completion:
+        flag:
+            task-definition-type:
+                - UPDATE
+    - name: put-position-configuration
+      description: Put position configuration for a given resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --destination=: The position data destination that describes the AWS IoT rule that processes the device's position data for use by AWS IoT Core for LoRaWAN.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-identifier=!: Resource identifier used to update the position configuration.
+        --resource-type=!: Resource type of the resource for which you want to update the position configuration.
+        --solvers=: The positioning solvers used to update the position configuration of the resource.
+      completion:
+        flag:
+            resource-type:
+                - WirelessDevice
+                - WirelessGateway
     - name: create-wireless-gateway
       description: Provisions a wireless gateway.
       flags:
@@ -720,171 +773,13 @@ commands:
         --lorawan=!: The gateway configuration information to use to create the wireless gateway.
         --name=: The name of the new resource.
         --tags=: The tags to attach to the new wireless gateway.
-    - name: delete-device-profile
-      description: Deletes a device profile.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the resource to delete.
-    - name: delete-wireless-gateway-task-definition
-      description: Deletes a wireless gateway task definition.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the resource to delete.
-    - name: get-network-analyzer-configuration
-      description: Get network analyzer configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration-name=!: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-resource-position
-      description: Get the position information for a given wireless device or a wireless gateway resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-identifier=!: The identifier of the resource for which position information is retrieved.
-        --resource-type=!: The type of resource for which position information is retrieved, which can be a wireless device or a wireless gateway.
-      completion:
-        flag:
-            resource-type:
-                - WirelessDevice
-                - WirelessGateway
-    - name: get-wireless-gateway-certificate
-      description: Gets the ID of the certificate that is currently associated with a wireless gateway.
+    - name: get-wireless-gateway-task
+      description: Gets information about a wireless gateway task.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The ID of the resource to get.
-    - name: list-multicast-groups-by-fuota-task
-      description: List all multicast groups associated with a FUOTA task.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: ""
-        --max-results=: ""
-        --next-token=: To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.
-    - name: associate-wireless-device-with-multicast-group
-      description: Associates a wireless device with a multicast group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: ""
-        --wireless-device-id=!: ""
-    - name: delete-wireless-device
-      description: Deletes a wireless device.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the resource to delete.
-    - name: delete-wireless-gateway
-      description: Deletes a wireless gateway.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the resource to delete.
-    - name: disassociate-wireless-device-from-fuota-task
-      description: Disassociates a wireless device from a FUOTA task.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: ""
-        --wireless-device-id=!: ""
-    - name: get-metric-configuration
-      description: Get the metric configuration status for this AWS account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-wireless-device-import-task
-      description: Get information about an import task and count of device onboarding summary information for the import task.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The identifier of the import task for which information is requested.
-    - name: get-wireless-gateway-statistics
-      description: Gets operating information about a wireless gateway.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --wireless-gateway-id=!: The ID of the wireless gateway for which to get the data.
-    - name: list-service-profiles
-      description: Lists the service profiles registered to your AWS account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in this operation.
-        --next-token=: To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.
-    - name: create-fuota-task
-      description: Creates a FUOTA task.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: ""
-        --description=: ""
-        --descriptor=: ""
-        --firmware-update-image=!: ""
-        --firmware-update-role=!: ""
-        --fragment-interval-ms=: ""
-        --fragment-size-bytes=: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lorawan=: ""
-        --name=: ""
-        --redundancy-percent=: ""
-        --tags=: ""
-    - name: disassociate-wireless-gateway-from-certificate
-      description: Disassociates a wireless gateway from its currently associated certificate.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the resource to update.
-    - name: get-multicast-group-session
-      description: Gets information about a multicast group session.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: ""
-    - name: list-destinations
-      description: Lists the destinations registered to your AWS account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in this operation.
-        --next-token=: To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.
-    - name: list-network-analyzer-configurations
-      description: Lists the network analyzer configurations.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: ""
-        --next-token=: To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.
-    - name: send-data-to-wireless-device
-      description: Sends a decrypted application data frame to a device.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the wireless device to receive the data.
-        --payload-data=!: ""
-        --transmit-mode=!: The transmit mode to use to send data to the wireless device.
-        --wireless-metadata=: Metadata about the message request.
     - name: start-bulk-associate-wireless-device-with-multicast-group
       description: Starts a bulk association of all qualifying wireless devices with a multicast group.
       flags:
@@ -910,37 +805,121 @@ commands:
             expression-type:
                 - RuleName
                 - MqttTopic
-    - name: get-device-profile
-      description: Gets information about a device profile.
+    - name: update-fuota-task
+      description: Updates properties of a FUOTA task.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the resource to get.
-    - name: list-tags-for-resource
-      description: Lists the tags (metadata) you have assigned to the resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource for which you want to list tags.
-    - name: send-data-to-multicast-group
-      description: Sends the specified data to a multicast group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: ""
-        --payload-data=!: ""
-        --wireless-metadata=!: ""
-    - name: start-fuota-task
-      description: Starts a FUOTA task.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: ""
+        --descriptor=: ""
+        --firmware-update-image=: ""
+        --firmware-update-role=: ""
+        --fragment-interval-ms=: ""
+        --fragment-size-bytes=: ""
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: ""
         --lorawan=: ""
+        --name=: ""
+        --redundancy-percent=: ""
+    - name: update-metric-configuration
+      description: Update the summary metric configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --summary-metric=: The value to be used to set summary metric configuration.
+    - name: update-wireless-device-import-task
+      description: Update an import task to add more devices to the task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The identifier of the import task to be updated.
+        --sidewalk=!: The Sidewalk-related parameters of the import task to be updated.
+    - name: associate-multicast-group-with-fuota-task
+      description: Associate a multicast group with a FUOTA task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: ""
+        --multicast-group-id=!: ""
+    - name: create-device-profile
+      description: Creates a new device profile.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: Each resource must have a unique client request token.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lorawan=: The device profile information to use to create the device profile.
+        --name=: The name of the new resource.
+        --sidewalk=: The Sidewalk-related information for creating the Sidewalk device profile.
+        --tags=: The tags to attach to the new device profile.
+    - name: list-partner-accounts
+      description: Lists the partner accounts associated with your AWS account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in this operation.
+        --next-token=: To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.
+    - name: list-position-configurations
+      description: List position configurations for a given resource, such as positioning solvers.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: ""
+        --next-token=: To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.
+        --resource-type=: Resource type for which position configurations are listed.
+      completion:
+        flag:
+            resource-type:
+                - WirelessDevice
+                - WirelessGateway
+    - name: start-bulk-disassociate-wireless-device-from-multicast-group
+      description: Starts a bulk disassociatin of all qualifying wireless devices from a multicast group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: ""
+        --query-string=: ""
+        --tags=: ""
+    - name: test-wireless-device
+      description: Simulates a provisioned device by sending an uplink data payload of `Hello`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the wireless device to test.
+    - name: delete-device-profile
+      description: Deletes a device profile.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the resource to delete.
+    - name: get-service-endpoint
+      description: Gets the account-specific endpoint for Configuration and Update Server (CUPS) protocol or LoRaWAN Network Server (LNS) connections.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-type=: The service type for which to get endpoint information about.
+      completion:
+        flag:
+            service-type:
+                - CUPS
+                - LNS
+    - name: list-network-analyzer-configurations
+      description: Lists the network analyzer configurations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: ""
+        --next-token=: To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.
     - name: tag-resource
       description: Adds a tag to a resource.
       flags:
@@ -949,104 +928,17 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The ARN of the resource to add tags to.
         --tags=!: Adds to or modifies the tags of the given resource.
-    - name: update-log-levels-by-resource-types
-      description: Set default log level, or log levels by resource types.
+    - name: update-event-configuration-by-resource-types
+      description: Update the event configuration based on resource types.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --default-log-level=: ""
-        --fuota-task-log-options=: ""
+        --connection-status=: Connection status resource type event configuration object for enabling and disabling wireless gateway topic.
+        --device-registration-state=: Device registration state resource type event configuration object for enabling and disabling wireless gateway topic.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --wireless-device-log-options=: ""
-        --wireless-gateway-log-options=: ""
-      completion:
-        flag:
-            default-log-level:
-                - INFO
-                - ERROR
-                - DISABLED
-    - name: update-network-analyzer-configuration
-      description: Update network analyzer configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration-name=!: ""
-        --description=: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --multicast-groups-to-add=: Multicast group resources to add to the network analyzer configuration.
-        --multicast-groups-to-remove=: Multicast group resources to remove from the network analyzer configuration.
-        --trace-content=: ""
-        --wireless-devices-to-add=: Wireless device resources to add to the network analyzer configuration.
-        --wireless-devices-to-remove=: Wireless device resources to remove from the network analyzer configuration.
-        --wireless-gateways-to-add=: Wireless gateway resources to add to the network analyzer configuration.
-        --wireless-gateways-to-remove=: Wireless gateway resources to remove from the network analyzer configuration.
-    - name: associate-wireless-device-with-thing
-      description: Associates a wireless device with a thing.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the resource to update.
-        --thing-arn=!: The ARN of the thing to associate with the wireless device.
-    - name: create-wireless-gateway-task-definition
-      description: Creates a gateway task definition.
-      flags:
-        --auto-create-tasks!: Whether to automatically create tasks using this task definition for all gateways with the specified current version.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: Each resource must have a unique client request token.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: The name of the new resource.
-        --no-auto-create-tasks!: Whether to automatically create tasks using this task definition for all gateways with the specified current version.
-        --tags=: The tags to attach to the specified resource.
-        --update=: Information about the gateways to update.
-    - name: list-devices-for-wireless-device-import-task
-      description: List the Sidewalk devices in an import task and their onboarding status.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The identifier of the import task for which wireless devices are listed.
-        --max-results=: ""
-        --next-token=: To retrieve the next set of results, the `nextToken` value from a previous response; otherwise `null` to receive the first set of results.
-        --status=: The status of the devices in the import task.
-      completion:
-        flag:
-            status:
-                - INITIALIZED
-                - PENDING
-                - ONBOARDED
-                - FAILED
-    - name: list-multicast-groups
-      description: Lists the multicast groups registered to your AWS account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: ""
-        --next-token=: To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.
-    - name: reset-all-resource-log-levels
-      description: Removes the log-level overrides for all resources; wireless devices, wireless gateways, and FUOTA tasks.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: start-wireless-device-import-task
-      description: Start import task for provisioning Sidewalk devices in bulk using an S3 CSV file.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: ""
-        --destination-name=!: The name of the Sidewalk destination that describes the IoT rule to route messages from the devices in the import task that are onboarded to AWS IoT Wireless.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --positioning=: The integration status of the Device Location feature for Sidewalk devices.
-        --sidewalk=!: The Sidewalk-related parameters for importing wireless devices that need to be provisioned in bulk.
-        --tags=: ""
-      completion:
-        flag:
-            positioning:
-                - Enabled
-                - Disabled
+        --join=: Join resource type event configuration object for enabling and disabling wireless device topic.
+        --message-delivery-status=: Message delivery status resource type event configuration object for enabling and disabling wireless device topic.
+        --proximity=: Proximity resource type event configuration object for enabling and disabling wireless gateway topic.
     - name: update-multicast-group
       description: Updates properties of a multicast group session.
       flags:
@@ -1057,20 +949,34 @@ commands:
         --id=!: ""
         --lorawan=: ""
         --name=: ""
-    - name: delete-queued-messages
-      description: Remove queued messages from the downlink queue.
+    - name: update-position
+      description: Update the position information of a resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of a given wireless device for which downlink messages will be deleted.
-        --message-id=!: If message ID is `"*"`, it cleares the entire downlink queue for a given device, specified by the wireless device ID.
-        --wireless-device-type=: The wireless device type, which can be either Sidewalk or LoRaWAN.
+        --position=!: The position information of the resource.
+        --resource-identifier=!: Resource identifier of the resource for which position is updated.
+        --resource-type=!: Resource type of the resource for which position is updated.
       completion:
         flag:
-            wireless-device-type:
-                - Sidewalk
-                - LoRaWAN
+            resource-type:
+                - WirelessDevice
+                - WirelessGateway
+    - name: delete-fuota-task
+      description: Deletes a FUOTA task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: ""
+    - name: delete-service-profile
+      description: Deletes a service profile.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the resource to delete.
     - name: delete-wireless-device-import-task
       description: Delete an import task.
       flags:
@@ -1078,20 +984,92 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The unique identifier of the import task to be deleted.
-    - name: delete-wireless-gateway-task
-      description: Deletes a wireless gateway task.
+    - name: get-wireless-device-import-task
+      description: Get information about an import task and count of device onboarding summary information for the import task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The identifier of the import task for which information is requested.
+    - name: get-wireless-gateway-certificate
+      description: Gets the ID of the certificate that is currently associated with a wireless gateway.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the resource to get.
+    - name: get-wireless-gateway-firmware-information
+      description: Gets the firmware version and other information about a wireless gateway.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the resource to get.
+    - name: get-wireless-gateway-task-definition
+      description: Gets information about a wireless gateway task definition.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the resource to get.
+    - name: list-multicast-groups
+      description: Lists the multicast groups registered to your AWS account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: ""
+        --next-token=: To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.
+    - name: delete-wireless-device
+      description: Deletes a wireless device.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The ID of the resource to delete.
-    - name: disassociate-wireless-device-from-thing
-      description: Disassociates a wireless device from its currently associated thing.
+    - name: disassociate-multicast-group-from-fuota-task
+      description: Disassociates a multicast group from a FUOTA task.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the resource to update.
+        --id=!: ""
+        --multicast-group-id=!: ""
+    - name: get-metrics
+      description: Get the summary metrics for this AWS account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --summary-metric-queries=: The list of queries to retrieve the summary metrics.
+    - name: get-position-configuration
+      description: Get position configuration for a given resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-identifier=!: Resource identifier used in a position configuration.
+        --resource-type=!: Resource type of the resource for which position configuration is retrieved.
+      completion:
+        flag:
+            resource-type:
+                - WirelessDevice
+                - WirelessGateway
+    - name: list-queued-messages
+      description: List queued messages in the downlink queue.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of a given wireless device which the downlink message packets are being sent.
+        --max-results=: The maximum number of results to return in this operation.
+        --next-token=: To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.
+        --wireless-device-type=: The wireless device type, whic can be either Sidewalk or LoRaWAN.
+      completion:
+        flag:
+            wireless-device-type:
+                - Sidewalk
+                - LoRaWAN
     - name: list-wireless-devices
       description: Lists the wireless devices registered to your AWS account.
       flags:
@@ -1111,40 +1089,61 @@ commands:
             wireless-device-type:
                 - Sidewalk
                 - LoRaWAN
-    - name: list-wireless-gateways
-      description: Lists the wireless gateways registered to your AWS account.
+    - name: reset-all-resource-log-levels
+      description: Removes the log-level overrides for all resources; wireless devices, wireless gateways, and FUOTA tasks.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in this operation.
-        --next-token=: To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.
-    - name: associate-wireless-gateway-with-certificate
-      description: Associates a wireless gateway with a certificate.
+    - name: cancel-multicast-group-session
+      description: Cancels an existing multicast group session.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: ""
+    - name: delete-wireless-gateway
+      description: Deletes a wireless gateway.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the resource to delete.
+    - name: disassociate-wireless-gateway-from-certificate
+      description: Disassociates a wireless gateway from its currently associated certificate.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The ID of the resource to update.
-        --iot-certificate-id=!: The ID of the certificate to associate with the wireless gateway.
-    - name: list-wireless-gateway-task-definitions
-      description: List the wireless gateway tasks definitions registered to your AWS account.
+    - name: get-device-profile
+      description: Gets information about a device profile.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in this operation.
-        --next-token=: To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.
-        --task-definition-type=: A filter to list only the wireless gateway task definitions that use this task definition type.
+        --id=!: The ID of the resource to get.
+    - name: get-service-profile
+      description: Gets information about a service profile.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the resource to get.
+    - name: list-devices-for-wireless-device-import-task
+      description: List the Sidewalk devices in an import task and their onboarding status.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The identifier of the import task for which wireless devices are listed.
+        --max-results=: ""
+        --next-token=: To retrieve the next set of results, the `nextToken` value from a previous response; otherwise `null` to receive the first set of results.
+        --status=: The status of the devices in the import task.
       completion:
         flag:
-            task-definition-type:
-                - UPDATE
-    - name: update-wireless-device-import-task
-      description: Update an import task to add more devices to the task.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The identifier of the import task to be updated.
-        --sidewalk=!: The Sidewalk-related parameters of the import task to be updated.
+            status:
+                - INITIALIZED
+                - PENDING
+                - ONBOARDED
+                - FAILED

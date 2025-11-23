@@ -1,34 +1,6 @@
 name: drs
 description: Elastic Disaster Recovery Service
 commands:
-    - name: delete-source-server
-      description: Deletes a single Source Server by ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-server-id=!: The ID of the Source Server to be deleted.
-    - name: get-launch-configuration
-      description: Gets a LaunchConfiguration, filtered by Source Server IDs.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-server-id=!: The ID of the Source Server that we want to retrieve a Launch Configuration for.
-    - name: get-replication-configuration
-      description: Gets a ReplicationConfiguration, filtered by Source Server ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-server-id=!: The ID of the Source Serve for this Replication Configuration.r
-    - name: start-replication
-      description: Starts replication for a stopped Source Server.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-server-id=!: The ID of the Source Server to start replication for.
     - name: stop-replication
       description: Stops replication for a Source Server.
       flags:
@@ -36,14 +8,53 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --source-server-id=!: The ID of the Source Server to stop replication for.
-    - name: associate-source-network-stack
-      description: Associate a Source Network to an existing CloudFormation Stack and modify launch templates to use this network.
+    - name: update-replication-configuration-template
+      description: Updates a ReplicationConfigurationTemplate by ID.
       flags:
-        --cfn-stack-name=!: CloudFormation template to associate with a Source Network.
+        --arn=: The Replication Configuration Template ARN.
+        --associate-default-security-group: Whether to associate the default Elastic Disaster Recovery Security group with the Replication Configuration Template.
+        --auto-replicate-new-disks: Whether to allow the AWS replication agent to automatically replicate newly added disks.
+        --bandwidth-throttling=: Configure bandwidth throttling for the outbound data transfer rate of the Source Server in Mbps.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --create-public-ip: Whether to create a Public IP for the Recovery Instance by default.
+        --data-plane-routing=: The data plane routing mechanism that will be used for replication.
+        --default-large-staging-disk-type=: The Staging Disk EBS volume type to be used during replication.
+        --ebs-encryption-key-arn=: The ARN of the EBS encryption key to be used during replication.
+        --ebs-encryption=: The type of EBS encryption to be used during replication.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-associate-default-security-group: Whether to associate the default Elastic Disaster Recovery Security group with the Replication Configuration Template.
+        --no-auto-replicate-new-disks: Whether to allow the AWS replication agent to automatically replicate newly added disks.
+        --no-create-public-ip: Whether to create a Public IP for the Recovery Instance by default.
+        --no-use-dedicated-replication-server: Whether to use a dedicated Replication Server in the replication staging area.
+        --pit-policy=: The Point in time (PIT) policy to manage snapshots taken during replication.
+        --replication-configuration-template-id=!: The Replication Configuration Template ID.
+        --replication-server-instance-type=: The instance type to be used for the replication server.
+        --replication-servers-security-groups-ids=: The security group IDs that will be used by the replication server.
+        --staging-area-subnet-id=: The subnet to be used by the replication staging area.
+        --staging-area-tags=: 'A set of tags to be associated with all resources created in the replication staging area: EC2 replication server, EBS volumes, EBS snapshots, etc.'
+        --use-dedicated-replication-server: Whether to use a dedicated Replication Server in the replication staging area.
+      completion:
+        flag:
+            data-plane-routing:
+                - PRIVATE_IP
+                - PUBLIC_IP
+            default-large-staging-disk-type:
+                - GP2
+                - GP3
+                - ST1
+                - AUTO
+            ebs-encryption:
+                - DEFAULT
+                - CUSTOM
+                - NONE
+    - name: delete-recovery-instance
+      description: Deletes a single Recovery Instance by ID.
+      flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-network-id=!: The Source Network ID to associate with CloudFormation template.
+        --recovery-instance-id=!: The ID of the Recovery Instance to be deleted.
     - name: delete-source-network
       description: Delete Source Network resource.
       flags:
@@ -51,223 +62,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --source-network-id=!: ID of the Source Network to delete.
-    - name: describe-job-log-items
-      description: Retrieves a detailed Job log with pagination.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The ID of the Job for which Job log items will be retrieved.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Maximum number of Job log items to retrieve.
-        --next-token=: The token of the next Job log items to retrieve.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: describe-recovery-snapshots
-      description: Lists all Recovery Snapshots for a single Source Server.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: A set of filters by which to return Recovery Snapshots.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Maximum number of Recovery Snapshots to retrieve.
-        --next-token=: The token of the next Recovery Snapshot to retrieve.
-        --order=: The sorted ordering by which to return Recovery Snapshots.
-        --page-size=: The size of each page to get in the AWS service call.
-        --source-server-id=!: Filter Recovery Snapshots by Source Server ID.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            order:
-                - ASC
-                - DESC
-    - name: list-launch-actions
-      description: Lists resource launch actions.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters to apply when listing resource launch actions.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Maximum amount of items to return when listing resource launch actions.
-        --next-token=: Next token to use when listing resource launch actions.
-        --page-size=: The size of each page to get in the AWS service call.
-        --resource-id=!: ""
-        --starting-token=: A token to specify where to start paginating.
-    - name: put-launch-action
-      description: Puts a resource launch action.
-      flags:
-        --action-code=!: Launch action code.
-        --action-id=!: ""
-        --action-version=!: ""
-        --active!: Whether the launch action is active.
-        --category=!: ""
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=!: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: ""
-        --no-active!: Whether the launch action is active.
-        --no-optional!: Whether the launch will not be marked as failed if this action fails.
-        --optional!: Whether the launch will not be marked as failed if this action fails.
-        --order=!: ""
-        --parameters=: ""
-        --resource-id=!: ""
-      completion:
-        flag:
-            category:
-                - MONITORING
-                - VALIDATION
-                - CONFIGURATION
-                - SECURITY
-                - OTHER
-    - name: terminate-recovery-instances
-      description: Initiates a Job for terminating the EC2 resources associated with the specified Recovery Instances, and then will delete the Recovery Instances from the Elastic Disaster Recovery service.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recovery-instance-ids=!: The IDs of the Recovery Instances that should be terminated.
-    - name: update-failback-replication-configuration
-      description: Allows you to update the failback replication configuration of a Recovery Instance by ID.
-      flags:
-        --bandwidth-throttling=: Configure bandwidth throttling for the outbound data transfer rate of the Recovery Instance in Mbps.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: The name of the Failback Replication Configuration.
-        --no-use-private-ip: Whether to use Private IP for the failback replication of the Recovery Instance.
-        --recovery-instance-id=!: The ID of the Recovery Instance.
-        --use-private-ip: Whether to use Private IP for the failback replication of the Recovery Instance.
-    - name: describe-jobs
-      description: Returns a list of Jobs.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: A set of filters by which to return Jobs.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Maximum number of Jobs to retrieve.
-        --next-token=: The token of the next Job to retrieve.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: describe-source-networks
-      description: Lists all Source Networks or multiple Source Networks filtered by ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: A set of filters by which to return Source Networks.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Maximum number of Source Networks to retrieve.
-        --next-token=: The token of the next Source Networks to retrieve.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: get-failback-replication-configuration
-      description: Lists all Failback ReplicationConfigurations, filtered by Recovery Instance ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recovery-instance-id=!: The ID of the Recovery Instance whose failback replication configuration should be returned.
-    - name: initialize-service
-      description: Initialize Elastic Disaster Recovery.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: start-recovery
-      description: Launches Recovery Instances for the specified Source Servers.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --is-drill: Whether this Source Server Recovery operation is a drill or not.
-        --no-is-drill: Whether this Source Server Recovery operation is a drill or not.
-        --source-servers=!: The Source Servers that we want to start a Recovery Job for.
-        --tags=: The tags to be associated with the Recovery Job.
-    - name: start-source-network-recovery
-      description: Deploy VPC for the specified Source Network and modify launch templates to use this network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deploy-as-new: Don't update existing CloudFormation Stack, recover the network using a new stack.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-deploy-as-new: Don't update existing CloudFormation Stack, recover the network using a new stack.
-        --source-networks=!: The Source Networks that we want to start a Recovery Job for.
-        --tags=: The tags to be associated with the Source Network recovery Job.
-    - name: tag-resource
-      description: Adds or overwrites only the specified tags for the specified Elastic Disaster Recovery resource or resources.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: ARN of the resource for which tags are to be added or updated.
-        --tags=!: Array of tags to be added or updated.
-    - name: untag-resource
-      description: Deletes the specified set of tags from the specified set of Elastic Disaster Recovery resources.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: ARN of the resource for which tags are to be removed.
-        --tag-keys=!: Array of tags to be removed.
-    - name: create-launch-configuration-template
-      description: Creates a new Launch Configuration Template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --copy-private-ip: Copy private IP.
-        --copy-tags: Copy tags.
-        --export-bucket-arn=: S3 bucket ARN to export Source Network templates.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --launch-disposition=: Launch disposition.
-        --launch-into-source-instance: DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.
-        --licensing=: Licensing.
-        --no-copy-private-ip: Copy private IP.
-        --no-copy-tags: Copy tags.
-        --no-launch-into-source-instance: DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.
-        --no-post-launch-enabled: Whether we want to activate post-launch actions.
-        --post-launch-enabled: Whether we want to activate post-launch actions.
-        --tags=: Request to associate tags during creation of a Launch Configuration Template.
-        --target-instance-type-right-sizing-method=: Target instance type right-sizing method.
-      completion:
-        flag:
-            launch-disposition:
-                - STOPPED
-                - STARTED
-            target-instance-type-right-sizing-method:
-                - NONE
-                - BASIC
-                - IN_AWS
-    - name: delete-launch-action
-      description: Deletes a resource launch action.
-      flags:
-        --action-id=!: ""
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-id=!: ""
-    - name: delete-launch-configuration-template
-      description: Deletes a single Launch Configuration Template by ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --launch-configuration-template-id=!: The ID of the Launch Configuration Template to be deleted.
-    - name: describe-recovery-instances
-      description: Lists all Recovery Instances or multiple Recovery Instances by ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: A set of filters by which to return Recovery Instances.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Maximum number of Recovery Instances to retrieve.
-        --next-token=: The token of the next Recovery Instance to retrieve.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
     - name: describe-source-servers
       description: Lists all Source Servers or multiple Source Servers filtered by ID.
       flags:
@@ -291,13 +85,73 @@ commands:
         --next-token=: The token of the next staging Account to retrieve.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: List all tags for your Elastic Disaster Recovery resources.
+    - name: retry-data-replication
+      description: 'WARNING: RetryDataReplication is deprecated.'
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource whose tags should be returned.
+        --source-server-id=!: The ID of the Source Server whose data replication should be retried.
+    - name: start-failback-launch
+      description: Initiates a Job for launching the machine that is being failed back to from the specified Recovery Instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recovery-instance-ids=!: The IDs of the Recovery Instance whose failback launch we want to request.
+        --tags=: The tags to be associated with the failback launch Job.
+    - name: start-source-network-recovery
+      description: Deploy VPC for the specified Source Network and modify launch templates to use this network.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --deploy-as-new: Don't update existing CloudFormation Stack, recover the network using a new stack.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-deploy-as-new: Don't update existing CloudFormation Stack, recover the network using a new stack.
+        --source-networks=!: The Source Networks that we want to start a Recovery Job for.
+        --tags=: The tags to be associated with the Source Network recovery Job.
+    - name: disconnect-source-server
+      description: Disconnects a specific Source Server from Elastic Disaster Recovery.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-server-id=!: The ID of the Source Server to disconnect.
+    - name: start-source-network-replication
+      description: Starts replication for a Source Network.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-network-id=!: ID of the Source Network to replicate.
+    - name: update-launch-configuration-template
+      description: Updates an existing Launch Configuration Template by ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --copy-private-ip: Copy private IP.
+        --copy-tags: Copy tags.
+        --export-bucket-arn=: S3 bucket ARN to export Source Network templates.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --launch-configuration-template-id=!: Launch Configuration Template ID.
+        --launch-disposition=: Launch disposition.
+        --launch-into-source-instance: DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.
+        --licensing=: Licensing.
+        --no-copy-private-ip: Copy private IP.
+        --no-copy-tags: Copy tags.
+        --no-launch-into-source-instance: DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.
+        --no-post-launch-enabled: Whether we want to activate post-launch actions.
+        --post-launch-enabled: Whether we want to activate post-launch actions.
+        --target-instance-type-right-sizing-method=: Target instance type right-sizing method.
+      completion:
+        flag:
+            launch-disposition:
+                - STOPPED
+                - STARTED
+            target-instance-type-right-sizing-method:
+                - NONE
+                - BASIC
+                - IN_AWS
     - name: update-replication-configuration
       description: Allows you to update a ReplicationConfiguration by Source Server ID.
       flags:
@@ -339,131 +193,6 @@ commands:
                 - DEFAULT
                 - CUSTOM
                 - NONE
-    - name: create-source-network
-      description: Create a new Source Network resource for a provided VPC ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --origin-account-id=!: Account containing the VPC to protect.
-        --origin-region=!: Region containing the VPC to protect.
-        --tags=: A set of tags to be associated with the Source Network resource.
-        --vpc-id=!: Which VPC ID to protect.
-    - name: disconnect-source-server
-      description: Disconnects a specific Source Server from Elastic Disaster Recovery.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-server-id=!: The ID of the Source Server to disconnect.
-    - name: retry-data-replication
-      description: 'WARNING: RetryDataReplication is deprecated.'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-server-id=!: The ID of the Source Server whose data replication should be retried.
-    - name: start-failback-launch
-      description: Initiates a Job for launching the machine that is being failed back to from the specified Recovery Instance.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recovery-instance-ids=!: The IDs of the Recovery Instance whose failback launch we want to request.
-        --tags=: The tags to be associated with the failback launch Job.
-    - name: start-source-network-replication
-      description: Starts replication for a Source Network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-network-id=!: ID of the Source Network to replicate.
-    - name: update-launch-configuration
-      description: Updates a LaunchConfiguration by Source Server ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --copy-private-ip: Whether we should copy the Private IP of the Source Server to the Recovery Instance.
-        --copy-tags: Whether we want to copy the tags of the Source Server to the EC2 machine of the Recovery Instance.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --launch-disposition=: The state of the Recovery Instance in EC2 after the recovery operation.
-        --launch-into-instance-properties=: Launch into existing instance properties.
-        --licensing=: The licensing configuration to be used for this launch configuration.
-        --name=: The name of the launch configuration.
-        --no-copy-private-ip: Whether we should copy the Private IP of the Source Server to the Recovery Instance.
-        --no-copy-tags: Whether we want to copy the tags of the Source Server to the EC2 machine of the Recovery Instance.
-        --no-post-launch-enabled: Whether we want to enable post-launch actions for the Source Server.
-        --post-launch-enabled: Whether we want to enable post-launch actions for the Source Server.
-        --source-server-id=!: The ID of the Source Server that we want to retrieve a Launch Configuration for.
-        --target-instance-type-right-sizing-method=: Whether Elastic Disaster Recovery should try to automatically choose the instance type that best matches the OS, CPU, and RAM of your Source Server.
-      completion:
-        flag:
-            launch-disposition:
-                - STOPPED
-                - STARTED
-            target-instance-type-right-sizing-method:
-                - NONE
-                - BASIC
-                - IN_AWS
-    - name: update-replication-configuration-template
-      description: Updates a ReplicationConfigurationTemplate by ID.
-      flags:
-        --arn=: The Replication Configuration Template ARN.
-        --associate-default-security-group: Whether to associate the default Elastic Disaster Recovery Security group with the Replication Configuration Template.
-        --auto-replicate-new-disks: Whether to allow the AWS replication agent to automatically replicate newly added disks.
-        --bandwidth-throttling=: Configure bandwidth throttling for the outbound data transfer rate of the Source Server in Mbps.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --create-public-ip: Whether to create a Public IP for the Recovery Instance by default.
-        --data-plane-routing=: The data plane routing mechanism that will be used for replication.
-        --default-large-staging-disk-type=: The Staging Disk EBS volume type to be used during replication.
-        --ebs-encryption-key-arn=: The ARN of the EBS encryption key to be used during replication.
-        --ebs-encryption=: The type of EBS encryption to be used during replication.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-associate-default-security-group: Whether to associate the default Elastic Disaster Recovery Security group with the Replication Configuration Template.
-        --no-auto-replicate-new-disks: Whether to allow the AWS replication agent to automatically replicate newly added disks.
-        --no-create-public-ip: Whether to create a Public IP for the Recovery Instance by default.
-        --no-use-dedicated-replication-server: Whether to use a dedicated Replication Server in the replication staging area.
-        --pit-policy=: The Point in time (PIT) policy to manage snapshots taken during replication.
-        --replication-configuration-template-id=!: The Replication Configuration Template ID.
-        --replication-server-instance-type=: The instance type to be used for the replication server.
-        --replication-servers-security-groups-ids=: The security group IDs that will be used by the replication server.
-        --staging-area-subnet-id=: The subnet to be used by the replication staging area.
-        --staging-area-tags=: 'A set of tags to be associated with all resources created in the replication staging area: EC2 replication server, EBS volumes, EBS snapshots, etc.'
-        --use-dedicated-replication-server: Whether to use a dedicated Replication Server in the replication staging area.
-      completion:
-        flag:
-            data-plane-routing:
-                - PRIVATE_IP
-                - PUBLIC_IP
-            default-large-staging-disk-type:
-                - GP2
-                - GP3
-                - ST1
-                - AUTO
-            ebs-encryption:
-                - DEFAULT
-                - CUSTOM
-                - NONE
-    - name: describe-replication-configuration-templates
-      description: Lists all ReplicationConfigurationTemplates, filtered by Source Server IDs.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Maximum number of Replication Configuration Templates to retrieve.
-        --next-token=: The token of the next Replication Configuration Template to retrieve.
-        --page-size=: The size of each page to get in the AWS service call.
-        --replication-configuration-template-i-ds=: The IDs of the Replication Configuration Templates to retrieve.
-        --starting-token=: A token to specify where to start paginating.
-    - name: reverse-replication
-      description: Start replication to origin / target region - applies only to protected instances that originated in EC2.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recovery-instance-id=!: The ID of the Recovery Instance that we want to reverse the replication for.
     - name: delete-job
       description: Deletes a single Job by ID.
       flags:
@@ -471,6 +200,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --job-id=!: The ID of the Job to be deleted.
+    - name: delete-launch-action
+      description: Deletes a resource launch action.
+      flags:
+        --action-id=!: ""
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-id=!: ""
     - name: delete-replication-configuration-template
       description: Deletes a single Replication Configuration Template by ID
       flags:
@@ -478,60 +215,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --replication-configuration-template-id=!: The ID of the Replication Configuration Template to be deleted.
-    - name: describe-launch-configuration-templates
-      description: Lists all Launch Configuration Templates, filtered by Launch Configuration Template IDs
+    - name: get-replication-configuration
+      description: Gets a ReplicationConfiguration, filtered by Source Server ID.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --launch-configuration-template-ids=: Request to filter Launch Configuration Templates list by Launch Configuration Template ID.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Maximum results to be returned in DescribeLaunchConfigurationTemplates.
-        --next-token=: The token of the next Launch Configuration Template to retrieve.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: disconnect-recovery-instance
-      description: Disconnect a Recovery Instance from Elastic Disaster Recovery.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recovery-instance-id=!: The ID of the Recovery Instance to disconnect.
-    - name: update-launch-configuration-template
-      description: Updates an existing Launch Configuration Template by ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --copy-private-ip: Copy private IP.
-        --copy-tags: Copy tags.
-        --export-bucket-arn=: S3 bucket ARN to export Source Network templates.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --launch-configuration-template-id=!: Launch Configuration Template ID.
-        --launch-disposition=: Launch disposition.
-        --launch-into-source-instance: DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.
-        --licensing=: Licensing.
-        --no-copy-private-ip: Copy private IP.
-        --no-copy-tags: Copy tags.
-        --no-launch-into-source-instance: DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.
-        --no-post-launch-enabled: Whether we want to activate post-launch actions.
-        --post-launch-enabled: Whether we want to activate post-launch actions.
-        --target-instance-type-right-sizing-method=: Target instance type right-sizing method.
-      completion:
-        flag:
-            launch-disposition:
-                - STOPPED
-                - STARTED
-            target-instance-type-right-sizing-method:
-                - NONE
-                - BASIC
-                - IN_AWS
-    - name: export-source-network-cfn-template
-      description: Export the Source Network CloudFormation template to an S3 bucket.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-network-id=!: The Source Network ID to export its CloudFormation template to an S3 bucket.
+        --source-server-id=!: The ID of the Source Serve for this Replication Configuration.r
     - name: list-extensible-source-servers
       description: 'Returns a list of source servers on a staging account that are extensible, which means that: a.'
       flags:
@@ -544,20 +234,24 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --staging-account-id=!: The Id of the staging Account to retrieve extensible source servers from.
         --starting-token=: A token to specify where to start paginating.
-    - name: stop-failback
-      description: Stops the failback process for a specified Recovery Instance.
+    - name: terminate-recovery-instances
+      description: Initiates a Job for terminating the EC2 resources associated with the specified Recovery Instances, and then will delete the Recovery Instances from the Elastic Disaster Recovery service.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recovery-instance-id=!: The ID of the Recovery Instance we want to stop failback for.
-    - name: stop-source-network-replication
-      description: Stops replication for a Source Network.
+        --recovery-instance-ids=!: The IDs of the Recovery Instances that should be terminated.
+    - name: update-failback-replication-configuration
+      description: Allows you to update the failback replication configuration of a Recovery Instance by ID.
       flags:
+        --bandwidth-throttling=: Configure bandwidth throttling for the outbound data transfer rate of the Recovery Instance in Mbps.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-network-id=!: ID of the Source Network to stop replication.
+        --name=: The name of the Failback Replication Configuration.
+        --no-use-private-ip: Whether to use Private IP for the failback replication of the Recovery Instance.
+        --recovery-instance-id=!: The ID of the Recovery Instance.
+        --use-private-ip: Whether to use Private IP for the failback replication of the Recovery Instance.
     - name: create-extended-source-server
       description: Create an extended source server in the target Account based on the source server in staging account.
       flags:
@@ -566,6 +260,124 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --source-server-arn=!: This defines the ARN of the source server in staging Account based on which you want to create an extended source server.
         --tags=: A list of tags associated with the extended source server.
+    - name: describe-jobs
+      description: Returns a list of Jobs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: A set of filters by which to return Jobs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of Jobs to retrieve.
+        --next-token=: The token of the next Job to retrieve.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-source-networks
+      description: Lists all Source Networks or multiple Source Networks filtered by ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: A set of filters by which to return Source Networks.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of Source Networks to retrieve.
+        --next-token=: The token of the next Source Networks to retrieve.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-launch-configuration
+      description: Gets a LaunchConfiguration, filtered by Source Server IDs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-server-id=!: The ID of the Source Server that we want to retrieve a Launch Configuration for.
+    - name: tag-resource
+      description: Adds or overwrites only the specified tags for the specified Elastic Disaster Recovery resource or resources.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: ARN of the resource for which tags are to be added or updated.
+        --tags=!: Array of tags to be added or updated.
+    - name: create-source-network
+      description: Create a new Source Network resource for a provided VPC ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --origin-account-id=!: Account containing the VPC to protect.
+        --origin-region=!: Region containing the VPC to protect.
+        --tags=: A set of tags to be associated with the Source Network resource.
+        --vpc-id=!: Which VPC ID to protect.
+    - name: describe-launch-configuration-templates
+      description: Lists all Launch Configuration Templates, filtered by Launch Configuration Template IDs
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --launch-configuration-template-ids=: Request to filter Launch Configuration Templates list by Launch Configuration Template ID.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum results to be returned in DescribeLaunchConfigurationTemplates.
+        --next-token=: The token of the next Launch Configuration Template to retrieve.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-recovery-instances
+      description: Lists all Recovery Instances or multiple Recovery Instances by ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: A set of filters by which to return Recovery Instances.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of Recovery Instances to retrieve.
+        --next-token=: The token of the next Recovery Instance to retrieve.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: disconnect-recovery-instance
+      description: Disconnect a Recovery Instance from Elastic Disaster Recovery.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recovery-instance-id=!: The ID of the Recovery Instance to disconnect.
+    - name: get-failback-replication-configuration
+      description: Lists all Failback ReplicationConfigurations, filtered by Recovery Instance ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recovery-instance-id=!: The ID of the Recovery Instance whose failback replication configuration should be returned.
+    - name: initialize-service
+      description: Initialize Elastic Disaster Recovery.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: start-recovery
+      description: Launches Recovery Instances for the specified Source Servers.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --is-drill: Whether this Source Server Recovery operation is a drill or not.
+        --no-is-drill: Whether this Source Server Recovery operation is a drill or not.
+        --source-servers=!: The Source Servers that we want to start a Recovery Job for.
+        --tags=: The tags to be associated with the Recovery Job.
+    - name: stop-source-network-replication
+      description: Stops replication for a Source Network.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-network-id=!: ID of the Source Network to stop replication.
+    - name: associate-source-network-stack
+      description: Associate a Source Network to an existing CloudFormation Stack and modify launch templates to use this network.
+      flags:
+        --cfn-stack-name=!: CloudFormation template to associate with a Source Network.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-network-id=!: The Source Network ID to associate with CloudFormation template.
     - name: create-replication-configuration-template
       description: Creates a new ReplicationConfigurationTemplate.
       flags:
@@ -605,10 +417,198 @@ commands:
                 - DEFAULT
                 - CUSTOM
                 - NONE
-    - name: delete-recovery-instance
-      description: Deletes a single Recovery Instance by ID.
+    - name: delete-source-server
+      description: Deletes a single Source Server by ID.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recovery-instance-id=!: The ID of the Recovery Instance to be deleted.
+        --source-server-id=!: The ID of the Source Server to be deleted.
+    - name: describe-job-log-items
+      description: Retrieves a detailed Job log with pagination.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The ID of the Job for which Job log items will be retrieved.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of Job log items to retrieve.
+        --next-token=: The token of the next Job log items to retrieve.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-recovery-snapshots
+      description: Lists all Recovery Snapshots for a single Source Server.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: A set of filters by which to return Recovery Snapshots.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of Recovery Snapshots to retrieve.
+        --next-token=: The token of the next Recovery Snapshot to retrieve.
+        --order=: The sorted ordering by which to return Recovery Snapshots.
+        --page-size=: The size of each page to get in the AWS service call.
+        --source-server-id=!: Filter Recovery Snapshots by Source Server ID.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            order:
+                - ASC
+                - DESC
+    - name: export-source-network-cfn-template
+      description: Export the Source Network CloudFormation template to an S3 bucket.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-network-id=!: The Source Network ID to export its CloudFormation template to an S3 bucket.
+    - name: list-launch-actions
+      description: Lists resource launch actions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters to apply when listing resource launch actions.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum amount of items to return when listing resource launch actions.
+        --next-token=: Next token to use when listing resource launch actions.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-id=!: ""
+        --starting-token=: A token to specify where to start paginating.
+    - name: reverse-replication
+      description: Start replication to origin / target region - applies only to protected instances that originated in EC2.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recovery-instance-id=!: The ID of the Recovery Instance that we want to reverse the replication for.
+    - name: create-launch-configuration-template
+      description: Creates a new Launch Configuration Template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --copy-private-ip: Copy private IP.
+        --copy-tags: Copy tags.
+        --export-bucket-arn=: S3 bucket ARN to export Source Network templates.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --launch-disposition=: Launch disposition.
+        --launch-into-source-instance: DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.
+        --licensing=: Licensing.
+        --no-copy-private-ip: Copy private IP.
+        --no-copy-tags: Copy tags.
+        --no-launch-into-source-instance: DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.
+        --no-post-launch-enabled: Whether we want to activate post-launch actions.
+        --post-launch-enabled: Whether we want to activate post-launch actions.
+        --tags=: Request to associate tags during creation of a Launch Configuration Template.
+        --target-instance-type-right-sizing-method=: Target instance type right-sizing method.
+      completion:
+        flag:
+            launch-disposition:
+                - STOPPED
+                - STARTED
+            target-instance-type-right-sizing-method:
+                - NONE
+                - BASIC
+                - IN_AWS
+    - name: delete-launch-configuration-template
+      description: Deletes a single Launch Configuration Template by ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --launch-configuration-template-id=!: The ID of the Launch Configuration Template to be deleted.
+    - name: start-replication
+      description: Starts replication for a stopped Source Server.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-server-id=!: The ID of the Source Server to start replication for.
+    - name: stop-failback
+      description: Stops the failback process for a specified Recovery Instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recovery-instance-id=!: The ID of the Recovery Instance we want to stop failback for.
+    - name: untag-resource
+      description: Deletes the specified set of tags from the specified set of Elastic Disaster Recovery resources.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: ARN of the resource for which tags are to be removed.
+        --tag-keys=!: Array of tags to be removed.
+    - name: update-launch-configuration
+      description: Updates a LaunchConfiguration by Source Server ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --copy-private-ip: Whether we should copy the Private IP of the Source Server to the Recovery Instance.
+        --copy-tags: Whether we want to copy the tags of the Source Server to the EC2 machine of the Recovery Instance.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --launch-disposition=: The state of the Recovery Instance in EC2 after the recovery operation.
+        --launch-into-instance-properties=: Launch into existing instance properties.
+        --licensing=: The licensing configuration to be used for this launch configuration.
+        --name=: The name of the launch configuration.
+        --no-copy-private-ip: Whether we should copy the Private IP of the Source Server to the Recovery Instance.
+        --no-copy-tags: Whether we want to copy the tags of the Source Server to the EC2 machine of the Recovery Instance.
+        --no-post-launch-enabled: Whether we want to enable post-launch actions for the Source Server.
+        --post-launch-enabled: Whether we want to enable post-launch actions for the Source Server.
+        --source-server-id=!: The ID of the Source Server that we want to retrieve a Launch Configuration for.
+        --target-instance-type-right-sizing-method=: Whether Elastic Disaster Recovery should try to automatically choose the instance type that best matches the OS, CPU, and RAM of your Source Server.
+      completion:
+        flag:
+            launch-disposition:
+                - STOPPED
+                - STARTED
+            target-instance-type-right-sizing-method:
+                - NONE
+                - BASIC
+                - IN_AWS
+    - name: describe-replication-configuration-templates
+      description: Lists all ReplicationConfigurationTemplates, filtered by Source Server IDs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of Replication Configuration Templates to retrieve.
+        --next-token=: The token of the next Replication Configuration Template to retrieve.
+        --page-size=: The size of each page to get in the AWS service call.
+        --replication-configuration-template-i-ds=: The IDs of the Replication Configuration Templates to retrieve.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: List all tags for your Elastic Disaster Recovery resources.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource whose tags should be returned.
+    - name: put-launch-action
+      description: Puts a resource launch action.
+      flags:
+        --action-code=!: Launch action code.
+        --action-id=!: ""
+        --action-version=!: ""
+        --active!: Whether the launch action is active.
+        --category=!: ""
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: ""
+        --no-active!: Whether the launch action is active.
+        --no-optional!: Whether the launch will not be marked as failed if this action fails.
+        --optional!: Whether the launch will not be marked as failed if this action fails.
+        --order=!: ""
+        --parameters=: ""
+        --resource-id=!: ""
+      completion:
+        flag:
+            category:
+                - MONITORING
+                - VALIDATION
+                - CONFIGURATION
+                - SECURITY
+                - OTHER

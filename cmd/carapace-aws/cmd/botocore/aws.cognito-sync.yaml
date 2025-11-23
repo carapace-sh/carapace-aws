@@ -1,6 +1,128 @@
 name: cognito-sync
 description: Amazon Cognito Sync
 commands:
+    - name: describe-identity-usage
+      description: Gets usage information for an identity, including number of datasets and data usage.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-id=!: A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
+        --identity-pool-id=!: A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
+    - name: get-bulk-publish-details
+      description: Get the status of the last BulkPublish operation for an identity pool.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-pool-id=!: A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
+    - name: set-identity-pool-configuration
+      description: Sets the necessary configuration for push sync.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cognito-streams=: Options to apply to this identity pool for Amazon Cognito streams.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-pool-id=!: A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
+        --push-sync=: Options to apply to this identity pool for push synchronization.
+    - name: unsubscribe-from-dataset
+      description: Unsubscribes from receiving notifications when a dataset is modified by another device.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-name=!: The name of the dataset from which to unsubcribe.
+        --device-id=!: The unique ID generated for this device by Cognito.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-id=!: Unique ID for this identity.
+        --identity-pool-id=!: A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
+    - name: describe-dataset
+      description: Gets meta data about a dataset by identity and dataset name.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-name=!: A string of up to 128 characters.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-id=!: A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
+        --identity-pool-id=!: A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
+    - name: list-identity-pool-usage
+      description: Gets a list of identity pools registered with Cognito.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to be returned.
+        --next-token=: A pagination token for obtaining the next page of results.
+    - name: bulk-publish
+      description: Initiates a bulk publish of all existing datasets for an Identity Pool to the configured stream.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-pool-id=!: A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
+    - name: list-records
+      description: Gets paginated records, optionally changed after a particular sync count for a dataset and identity.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-name=!: A string of up to 128 characters.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-id=!: A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
+        --identity-pool-id=!: A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
+        --last-sync-count=: The last server sync count for this record.
+        --max-results=: The maximum number of results to be returned.
+        --next-token=: A pagination token for obtaining the next page of results.
+        --sync-session-token=: A token containing a session ID, identity ID, and expiration.
+    - name: set-cognito-events
+      description: Sets the AWS Lambda function for a given event type for an identity pool.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --events=!: The events to configure
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-pool-id=!: The Cognito Identity Pool to use when configuring Cognito Events
+    - name: update-records
+      description: Posts updates to records and adds and deletes records for a dataset and user.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-context=: Intended to supply a device ID that will populate the lastModifiedBy field referenced in other methods.
+        --dataset-name=!: A string of up to 128 characters.
+        --device-id=: The unique ID generated for this device by Cognito.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-id=!: A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
+        --identity-pool-id=!: A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
+        --record-patches=: A list of patch operations.
+        --sync-session-token=!: The SyncSessionToken returned by a previous call to ListRecords for this dataset and identity.
+    - name: delete-dataset
+      description: Deletes the specific dataset.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-name=!: A string of up to 128 characters.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-id=!: A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
+        --identity-pool-id=!: A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
+    - name: describe-identity-pool-usage
+      description: Gets usage details (for example, data storage) about a particular identity pool.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-pool-id=!: A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
+    - name: get-cognito-events
+      description: Gets the events and the corresponding Lambda functions associated with an identity pool.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-pool-id=!: The Cognito Identity Pool ID for the request
+    - name: get-identity-pool-configuration
+      description: Gets the configuration settings of an identity pool.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-pool-id=!: A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
     - name: list-datasets
       description: Lists datasets for an identity.
       flags:
@@ -11,36 +133,6 @@ commands:
         --identity-pool-id=!: A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
         --max-results=: The maximum number of results to be returned.
         --next-token=: A pagination token for obtaining the next page of results.
-    - name: list-identity-pool-usage
-      description: Gets a list of identity pools registered with Cognito.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to be returned.
-        --next-token=: A pagination token for obtaining the next page of results.
-    - name: get-bulk-publish-details
-      description: Get the status of the last BulkPublish operation for an identity pool.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-pool-id=!: A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
-    - name: set-cognito-events
-      description: Sets the AWS Lambda function for a given event type for an identity pool.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --events=!: The events to configure
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-pool-id=!: The Cognito Identity Pool to use when configuring Cognito Events
-    - name: get-identity-pool-configuration
-      description: Gets the configuration settings of an identity pool.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-pool-id=!: A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
     - name: register-device
       description: Registers a device to receive push sync notifications.
       flags:
@@ -68,95 +160,3 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identity-id=!: Unique ID for this identity.
         --identity-pool-id=!: A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
-    - name: update-records
-      description: Posts updates to records and adds and deletes records for a dataset and user.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-context=: Intended to supply a device ID that will populate the lastModifiedBy field referenced in other methods.
-        --dataset-name=!: A string of up to 128 characters.
-        --device-id=: The unique ID generated for this device by Cognito.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-id=!: A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
-        --identity-pool-id=!: A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
-        --record-patches=: A list of patch operations.
-        --sync-session-token=!: The SyncSessionToken returned by a previous call to ListRecords for this dataset and identity.
-    - name: bulk-publish
-      description: Initiates a bulk publish of all existing datasets for an Identity Pool to the configured stream.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-pool-id=!: A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
-    - name: describe-dataset
-      description: Gets meta data about a dataset by identity and dataset name.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-name=!: A string of up to 128 characters.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-id=!: A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
-        --identity-pool-id=!: A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
-    - name: describe-identity-pool-usage
-      description: Gets usage details (for example, data storage) about a particular identity pool.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-pool-id=!: A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
-    - name: describe-identity-usage
-      description: Gets usage information for an identity, including number of datasets and data usage.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-id=!: A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
-        --identity-pool-id=!: A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
-    - name: list-records
-      description: Gets paginated records, optionally changed after a particular sync count for a dataset and identity.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-name=!: A string of up to 128 characters.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-id=!: A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
-        --identity-pool-id=!: A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
-        --last-sync-count=: The last server sync count for this record.
-        --max-results=: The maximum number of results to be returned.
-        --next-token=: A pagination token for obtaining the next page of results.
-        --sync-session-token=: A token containing a session ID, identity ID, and expiration.
-    - name: set-identity-pool-configuration
-      description: Sets the necessary configuration for push sync.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cognito-streams=: Options to apply to this identity pool for Amazon Cognito streams.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-pool-id=!: A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
-        --push-sync=: Options to apply to this identity pool for push synchronization.
-    - name: unsubscribe-from-dataset
-      description: Unsubscribes from receiving notifications when a dataset is modified by another device.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-name=!: The name of the dataset from which to unsubcribe.
-        --device-id=!: The unique ID generated for this device by Cognito.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-id=!: Unique ID for this identity.
-        --identity-pool-id=!: A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
-    - name: delete-dataset
-      description: Deletes the specific dataset.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-name=!: A string of up to 128 characters.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-id=!: A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
-        --identity-pool-id=!: A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.
-    - name: get-cognito-events
-      description: Gets the events and the corresponding Lambda functions associated with an identity pool.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-pool-id=!: The Cognito Identity Pool ID for the request

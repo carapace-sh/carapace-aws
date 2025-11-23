@@ -1,46 +1,6 @@
 name: codestar-notifications
 description: AWS CodeStar Notifications
 commands:
-    - name: list-notification-rules
-      description: Returns a list of the notification rules for an Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: The filters to use to return information by service or resource type.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: A non-negative integer used to limit the number of returned results.
-        --next-token=: An enumeration token that, when provided in a request, returns the next batch of the results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-targets
-      description: Returns a list of the notification rule targets for an Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: The filters to use to return information by service or resource type.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: A non-negative integer used to limit the number of returned results.
-        --next-token=: An enumeration token that, when provided in a request, returns the next batch of the results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: unsubscribe
-      description: Removes an association between a notification rule and an Amazon Q Developer in chat applications topic so that subscribers to that topic stop receiving notifications when the events described in the rule are triggered.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the notification rule.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --target-address=!: The ARN of the Amazon Q Developer in chat applications topic to unsubscribe from the notification rule.
-    - name: untag-resource
-      description: Removes the association between one or more provided tags and a notification rule.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the notification rule from which to remove the tags.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tag-keys=!: The key names of the tags to remove.
     - name: create-notification-rule
       description: Creates a notification rule for a resource.
       flags:
@@ -63,15 +23,25 @@ commands:
             status:
                 - ENABLED
                 - DISABLED
-    - name: delete-target
-      description: Deletes a specified target for notifications.
+    - name: describe-notification-rule
+      description: Returns information about a specified notification rule.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the notification rule.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-notification-rules
+      description: Returns a list of the notification rules for an Amazon Web Services account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --force-unsubscribe-all: A Boolean value that can be used to delete all associations with this Amazon Q Developer in chat applications topic.
+        --filters=: The filters to use to return information by service or resource type.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-force-unsubscribe-all: A Boolean value that can be used to delete all associations with this Amazon Q Developer in chat applications topic.
-        --target-address=!: The Amazon Resource Name (ARN) of the Amazon Q Developer in chat applications topic or Amazon Q Developer in chat applications client to delete.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: A non-negative integer used to limit the number of returned results.
+        --next-token=: An enumeration token that, when provided in a request, returns the next batch of the results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-tags-for-resource
       description: Returns a list of the tags associated with a notification rule.
       flags:
@@ -79,15 +49,18 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: subscribe
-      description: Creates an association between a notification rule and an Amazon Q Developer in chat applications topic or Amazon Q Developer in chat applications client so that the associated target can receive notifications when the events described in the rule are triggered.
+    - name: list-targets
+      description: Returns a list of the notification rule targets for an Amazon Web Services account.
       flags:
-        --arn=!: The Amazon Resource Name (ARN) of the notification rule for which you want to create the association.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: An enumeration token that, when provided in a request, returns the next batch of the results.
+        --filters=: The filters to use to return information by service or resource type.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --target=!: ""
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: A non-negative integer used to limit the number of returned results.
+        --next-token=: An enumeration token that, when provided in a request, returns the next batch of the results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: tag-resource
       description: Associates a set of provided tags with a notification rule.
       flags:
@@ -123,13 +96,15 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-notification-rule
-      description: Returns information about a specified notification rule.
+    - name: delete-target
+      description: Deletes a specified target for notifications.
       flags:
-        --arn=!: The Amazon Resource Name (ARN) of the notification rule.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --force-unsubscribe-all: A Boolean value that can be used to delete all associations with this Amazon Q Developer in chat applications topic.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-force-unsubscribe-all: A Boolean value that can be used to delete all associations with this Amazon Q Developer in chat applications topic.
+        --target-address=!: The Amazon Resource Name (ARN) of the Amazon Q Developer in chat applications topic or Amazon Q Developer in chat applications client to delete.
     - name: list-event-types
       description: Returns information about the event types available for configuring notifications.
       flags:
@@ -142,3 +117,28 @@ commands:
         --next-token=: An enumeration token that, when provided in a request, returns the next batch of the results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: subscribe
+      description: Creates an association between a notification rule and an Amazon Q Developer in chat applications topic or Amazon Q Developer in chat applications client so that the associated target can receive notifications when the events described in the rule are triggered.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the notification rule for which you want to create the association.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: An enumeration token that, when provided in a request, returns the next batch of the results.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --target=!: ""
+    - name: unsubscribe
+      description: Removes an association between a notification rule and an Amazon Q Developer in chat applications topic so that subscribers to that topic stop receiving notifications when the events described in the rule are triggered.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the notification rule.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --target-address=!: The ARN of the Amazon Q Developer in chat applications topic to unsubscribe from the notification rule.
+    - name: untag-resource
+      description: Removes the association between one or more provided tags and a notification rule.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the notification rule from which to remove the tags.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tag-keys=!: The key names of the tags to remove.

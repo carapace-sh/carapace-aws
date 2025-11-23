@@ -1,73 +1,26 @@
 name: snow-device-management
 description: AWS Snow Device Management
 commands:
-    - name: cancel-task
-      description: Sends a cancel request for a specified task.
+    - name: list-device-resources
+      description: Returns a list of the Amazon Web Services resources available for a device.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --task-id=!: The ID of the task that you are attempting to cancel.
-    - name: describe-device
-      description: Checks device-specific information, such as the device type, software version, IP addresses, and lock status.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --managed-device-id=!: The ID of the device that you are checking the information of.
-    - name: describe-device-ec2-instances
-      description: Checks the current state of the Amazon EC2 instances.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-ids=!: A list of instance IDs associated with the managed device.
-        --managed-device-id=!: The ID of the managed device.
-    - name: describe-execution
-      description: Checks the status of a remote task running on one or more target devices.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --managed-device-id=!: The ID of the managed device.
-        --task-id=!: The ID of the task that the action is describing.
-    - name: describe-task
-      description: Checks the metadata for a given task on a device.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --task-id=!: The ID of the task to be described.
-    - name: list-devices
-      description: Returns a list of all devices on your Amazon Web Services account that have Amazon Web Services Snow Device Management enabled in the Amazon Web Services Region where the command is run.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=: The ID of the job used to order the device.
+        --managed-device-id=!: The ID of the managed device that you are listing the resources of.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of devices to list per page.
+        --max-results=: The maximum number of resources per page.
         --next-token=: A pagination token to continue to the next page of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-tasks
-      description: Returns a list of tasks that can be filtered by state.
+        --type=: A structure used to filter the results by type of resource.
+    - name: list-tags-for-resource
+      description: Returns a list of tags for a managed device or task.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of tasks per page.
-        --next-token=: A pagination token to continue to the next page of tasks.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --state=: A structure used to filter the list of tasks.
-      completion:
-        flag:
-            state:
-                - IN_PROGRESS
-                - CANCELED
-                - COMPLETED
+        --resource-arn=!: The Amazon Resource Name (ARN) of the device or task.
     - name: tag-resource
       description: Adds or replaces tags on a device or task.
       flags:
@@ -87,19 +40,25 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --tags=: Optional metadata that you assign to a resource.
         --targets=!: A list of managed device IDs.
-    - name: list-device-resources
-      description: Returns a list of the Amazon Web Services resources available for a device.
+    - name: describe-device
+      description: Checks device-specific information, such as the device type, software version, IP addresses, and lock status.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --managed-device-id=!: The ID of the managed device that you are listing the resources of.
+        --managed-device-id=!: The ID of the device that you are checking the information of.
+    - name: list-devices
+      description: Returns a list of all devices on your Amazon Web Services account that have Amazon Web Services Snow Device Management enabled in the Amazon Web Services Region where the command is run.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=: The ID of the job used to order the device.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of resources per page.
+        --max-results=: The maximum number of devices to list per page.
         --next-token=: A pagination token to continue to the next page of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-        --type=: A structure used to filter the results by type of resource.
     - name: list-executions
       description: Returns the status of tasks for one or more target devices.
       flags:
@@ -123,13 +82,24 @@ commands:
                 - SUCCEEDED
                 - REJECTED
                 - TIMED_OUT
-    - name: list-tags-for-resource
-      description: Returns a list of tags for a managed device or task.
+    - name: list-tasks
+      description: Returns a list of tasks that can be filtered by state.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the device or task.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of tasks per page.
+        --next-token=: A pagination token to continue to the next page of tasks.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --state=: A structure used to filter the list of tasks.
+      completion:
+        flag:
+            state:
+                - IN_PROGRESS
+                - CANCELED
+                - COMPLETED
     - name: untag-resource
       description: Removes a tag from a device or task.
       flags:
@@ -138,3 +108,33 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the device or task.
         --tag-keys=!: Optional metadata that you assign to a resource.
+    - name: cancel-task
+      description: Sends a cancel request for a specified task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --task-id=!: The ID of the task that you are attempting to cancel.
+    - name: describe-device-ec2-instances
+      description: Checks the current state of the Amazon EC2 instances.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-ids=!: A list of instance IDs associated with the managed device.
+        --managed-device-id=!: The ID of the managed device.
+    - name: describe-execution
+      description: Checks the status of a remote task running on one or more target devices.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --managed-device-id=!: The ID of the managed device.
+        --task-id=!: The ID of the task that the action is describing.
+    - name: describe-task
+      description: Checks the metadata for a given task on a device.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --task-id=!: The ID of the task to be described.
