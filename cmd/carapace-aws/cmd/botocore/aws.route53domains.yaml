@@ -1,94 +1,21 @@
 name: route53domains
 description: Amazon Route 53 Domains
 commands:
-    - name: enable-domain-transfer-lock
-      description: This operation sets the transfer lock on the domain (specifically the `clientTransferProhibited` status) to prevent domain transfers.
+    - name: disable-domain-auto-renew
+      description: This operation disables automatic renewal of domain registration for the specified domain.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain that you want to set the transfer lock for.
+        --domain-name=!: The name of the domain that you want to disable automatic renewal for.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: This operation sets the transfer lock on the domain (specifically the `clientTransferProhibited` status) to prevent domain transfers. Successful submission returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant will be notified by email.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            domain-name: The name of the domain that you want to set the transfer lock for.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: update-tags-for-domain
-      description: This operation adds or updates tags for a specified domain.
+    - name: disassociate-delegation-signer-from-domain
+      description: Deletes a delegation signer (DS) record in the registry zone for this domain name.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The domain for which you want to add or update tags.
+        --domain-name=!: Name of the domain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags-to-update=: A list of the tag keys and values that you want to add or update.
-      documentation:
-        command: |-
-            This operation adds or updates tags for a specified domain.
-
-            All tag operations are eventually consistent; subsequent operations might not immediately represent all issued operations.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            domain-name: The domain for which you want to add or update tags.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            tags-to-update: A list of the tag keys and values that you want to add or update. If you specify a key that already exists, the corresponding value will be replaced.
-    - name: associate-delegation-signer-to-domain
-      description: Creates a delegation signer (DS) record in the registry zone for this domain name.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --signing-attributes=!: The information about a key, including the algorithm, public key-value, and flags.
-      documentation:
-        command: |-
-            Creates a delegation signer (DS) record in the registry zone for this domain name.
-
-            Note that creating DS record at the registry impacts DNSSEC validation of your DNS records. This action may render your domain name unavailable on the internet if the steps are completed in the wrong order, or with incorrect timing. For more information about DNSSEC signing, see [Configuring DNSSEC signing](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-configuring-dnssec.html) in the *Route 53 developer guide*.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            domain-name: The name of the domain.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            signing-attributes: The information about a key, including the algorithm, public key-value, and flags.
+        --id=!: An internal identification number assigned to each DS record after it’s created.
     - name: get-contact-reachability-status
       description: For operations that require confirmation that the email address for the registrant contact is valid, such as registering a new domain, this operation returns information about whether the registrant contact has responded.
       flags:
@@ -96,327 +23,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain-name=: The name of the domain for which you want to know whether the registrant contact has confirmed that the email address is valid.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: |-
-            For operations that require confirmation that the email address for the registrant contact is valid, such as registering a new domain, this operation returns information about whether the registrant contact has responded.
-
-            If you want us to resend the email, use the `ResendContactReachabilityEmail` operation.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            domain-name: The name of the domain for which you want to know whether the registrant contact has confirmed that the email address is valid.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: transfer-domain-to-another-aws-account
-      description: Transfers a domain from the current Amazon Web Services account to another Amazon Web Services account.
-      flags:
-        --account-id=!: The account ID of the Amazon Web Services account that you want to transfer the domain to, for example, `111122223333`.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain that you want to transfer from the current Amazon Web Services account to another account.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: |-
-            Transfers a domain from the current Amazon Web Services account to another Amazon Web Services account. Note the following:
-
-            - The Amazon Web Services account that you're transferring the domain to must accept the transfer. If the other account doesn't accept the transfer within 3 days, we cancel the transfer. See [AcceptDomainTransferFromAnotherAwsAccount](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_AcceptDomainTransferFromAnotherAwsAccount.html).
-            - You can cancel the transfer before the other account accepts it. See [CancelDomainTransferToAnotherAwsAccount](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_CancelDomainTransferToAnotherAwsAccount.html).
-            - The other account can reject the transfer. See [RejectDomainTransferFromAnotherAwsAccount](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_RejectDomainTransferFromAnotherAwsAccount.html).
-
-            When you transfer a domain from one Amazon Web Services account to another, Route 53 doesn't transfer the hosted zone that is associated with the domain. DNS resolution isn't affected if the domain and the hosted zone are owned by separate accounts, so transferring the hosted zone is optional. For information about transferring the hosted zone to another Amazon Web Services account, see [Migrating a Hosted Zone to a Different Amazon Web Services Account](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-migrating.html) in the *Amazon Route 53 Developer Guide*.
-
-            Use either [ListOperations](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ListOperations.html) or [GetOperationDetail](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html) to determine whether the operation succeeded. [GetOperationDetail](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html) provides additional information, for example, `Domain Transfer from Aws Account 111122223333 has been cancelled`.
-        flag:
-            account-id: The account ID of the Amazon Web Services account that you want to transfer the domain to, for example, `111122223333`.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            domain-name: The name of the domain that you want to transfer from the current Amazon Web Services account to another account.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: view-billing
-      description: Returns all the domain-related billing records for the current Amazon Web Services account for a specified period
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --end-time=: The end date and time for the time period for which you want a list of billing records.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: For an initial request for a list of billing records, omit this element.
-        --max-items=: The number of billing records to be returned.
-        --page-size=: The size of each page to get in the AWS service call.
-        --start-time=: The beginning date and time for the time period for which you want a list of billing records.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Returns all the domain-related billing records for the current Amazon Web Services account for a specified period
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            end-time: The end date and time for the time period for which you want a list of billing records. Specify the date and time in Unix time format and Coordinated Universal time (UTC).
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            marker: |-
-                For an initial request for a list of billing records, omit this element. If the number of billing records that are associated with the current Amazon Web Services account during the specified period is greater than the value that you specified for `MaxItems`, you can use `Marker` to return additional billing records. Get the value of `NextPageMarker` from the previous response, and submit another request that includes the value of `NextPageMarker` in the `Marker` element.
-
-                Constraints: The marker must match the value of `NextPageMarker` that was returned in the previous response.
-            max-items: |-
-                The number of billing records to be returned.
-
-                Default: 20
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            start-time: The beginning date and time for the time period for which you want a list of billing records. Specify the date and time in Unix time format and Coordinated Universal time (UTC).
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: check-domain-transferability
-      description: Checks whether a domain name can be transferred to Amazon Route 53.
-      flags:
-        --auth-code=: If the registrar for the top-level domain (TLD) requires an authorization code to transfer the domain, the code that you got from the current registrar for the domain.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain that you want to transfer to Route 53. The top-level domain (TLD), such as .com, must be a TLD that Route 53 supports.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Checks whether a domain name can be transferred to Amazon Route 53.
-        flag:
-            auth-code: If the registrar for the top-level domain (TLD) requires an authorization code to transfer the domain, the code that you got from the current registrar for the domain.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            domain-name: |-
-                The name of the domain that you want to transfer to Route 53. The top-level domain (TLD), such as .com, must be a TLD that Route 53 supports. For a list of supported TLDs, see [Domains that You Can Register with Amazon Route 53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html) in the *Amazon Route 53 Developer Guide*.
-
-                The domain name can contain only the following characters:
-
-                - Letters a through z. Domain names are not case sensitive.
-                - Numbers 0 through 9.
-                - Hyphen (-). You can't specify a hyphen at the beginning or end of a label.
-                - Period (.) to separate the labels in the name, such as the `.` in `example.com`.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: delete-tags-for-domain
-      description: This operation deletes the specified tags for a domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The domain for which you want to delete one or more tags.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags-to-delete=!: A list of tag keys to delete.
-      documentation:
-        command: |-
-            This operation deletes the specified tags for a domain.
-
-            All tag operations are eventually consistent; subsequent operations might not immediately represent all issued operations.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            domain-name: The domain for which you want to delete one or more tags.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            tags-to-delete: A list of tag keys to delete.
-    - name: list-prices
-      description: 'Lists the following prices for either all the TLDs supported by Route 53, or the specified TLD:'
+    - name: get-operation-detail
+      description: This operation returns the current status of an operation that is not completed.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: For an initial request for a list of prices, omit this element.
-        --max-items=: Number of `Prices` to be returned.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --tld=: The TLD for which you want to receive the pricing information.
-      documentation:
-        command: |-
-            Lists the following prices for either all the TLDs supported by Route 53, or the specified TLD:
-
-            - Registration
-            - Transfer
-            - Owner change
-            - Domain renewal
-            - Domain restoration
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            marker: |-
-                For an initial request for a list of prices, omit this element. If the number of prices that are not yet complete is greater than the value that you specified for `MaxItems`, you can use `Marker` to return additional prices. Get the value of `NextPageMarker` from the previous response, and submit another request that includes the value of `NextPageMarker` in the `Marker` element.
-
-                Used only for all TLDs. If you specify a TLD, don't specify a `Marker`.
-            max-items: |-
-                Number of `Prices` to be returned.
-
-                Used only for all TLDs. If you specify a TLD, don't specify a `MaxItems`.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            tld: |-
-                The TLD for which you want to receive the pricing information. For example. `.net`.
-
-                If a `Tld` value is not provided, a list of prices for all TLDs supported by Route 53 is returned.
-    - name: resend-operation-authorization
-      description: Resend the form of authorization email for this operation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --operation-id=!: Operation ID.
-      documentation:
-        command: Resend the form of authorization email for this operation.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            operation-id: Operation ID.
-    - name: update-domain-contact-privacy
-      description: This operation updates the specified domain contact's privacy setting.
-      flags:
-        --admin-privacy: Whether you want to conceal contact information from WHOIS queries.
-        --billing-privacy: Whether you want to conceal contact information from WHOIS queries.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain that you want to update the privacy setting for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-admin-privacy: Whether you want to conceal contact information from WHOIS queries.
-        --no-billing-privacy: Whether you want to conceal contact information from WHOIS queries.
-        --no-registrant-privacy: Whether you want to conceal contact information from WHOIS queries.
-        --no-tech-privacy: Whether you want to conceal contact information from WHOIS queries.
-        --registrant-privacy: Whether you want to conceal contact information from WHOIS queries.
-        --tech-privacy: Whether you want to conceal contact information from WHOIS queries.
-      documentation:
-        command: |-
-            This operation updates the specified domain contact's privacy setting. When privacy protection is enabled, your contact information is replaced with contact information for the registrar or with the phrase "REDACTED FOR PRIVACY", or "On behalf of &lt;domain name&gt; owner."
-
-            While some domains may allow different privacy settings per contact, we recommend specifying the same privacy setting for all contacts.
-
-            This operation affects only the contact information for the specified contact type (administrative, registrant, or technical). If the request succeeds, Amazon Route 53 returns an operation ID that you can use with [GetOperationDetail](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html) to track the progress and completion of the action. If the request doesn't complete successfully, the domain registrant will be notified by email.
-
-            By disabling the privacy service via API, you consent to the publication of the contact information provided for this domain via the public WHOIS database. You certify that you are the registrant of this domain name and have the authority to make this decision. You may withdraw your consent at any time by enabling privacy protection using either `UpdateDomainContactPrivacy` or the Route 53 console. Enabling privacy protection removes the contact information provided for this domain from the WHOIS database. For more information on our privacy practices, see [https://aws.amazon.com/privacy/](https://aws.amazon.com/privacy/).
-        flag:
-            admin-privacy: |-
-                Whether you want to conceal contact information from WHOIS queries. If you specify `true`, WHOIS ("who is") queries return contact information either for Amazon Registrar or for our registrar associate, Gandi. If you specify `false`, WHOIS queries return the information that you entered for the admin contact.
-
-                You must specify the same privacy setting for the administrative, billing, registrant, and technical contacts.
-            billing-privacy: |-
-                Whether you want to conceal contact information from WHOIS queries. If you specify `true`, WHOIS ("who is") queries return contact information either for Amazon Registrar or for our registrar associate, Gandi. If you specify `false`, WHOIS queries return the information that you entered for the billing contact.
-
-                You must specify the same privacy setting for the administrative, billing, registrant, and technical contacts.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            domain-name: The name of the domain that you want to update the privacy setting for.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            registrant-privacy: |-
-                Whether you want to conceal contact information from WHOIS queries. If you specify `true`, WHOIS ("who is") queries return contact information either for Amazon Registrar or for our registrar associate, Gandi. If you specify `false`, WHOIS queries return the information that you entered for the registrant contact (domain owner).
-
-                You must specify the same privacy setting for the administrative, billing, registrant, and technical contacts.
-            tech-privacy: |-
-                Whether you want to conceal contact information from WHOIS queries. If you specify `true`, WHOIS ("who is") queries return contact information either for Amazon Registrar or for our registrar associate, Gandi. If you specify `false`, WHOIS queries return the information that you entered for the technical contact.
-
-                You must specify the same privacy setting for the administrative, billing, registrant, and technical contacts.
+        --operation-id=!: The identifier for the operation for which you want to get the status.
     - name: list-domains
       description: This operation returns all the domain names registered with Amazon Route 53 for the current Amazon Web Services account if no filtering conditions are used.
       flags:
@@ -429,174 +42,21 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --sort-condition=: A complex type that contains information about the requested ordering of domains in the returned list.
         --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: This operation returns all the domain names registered with Amazon Route 53 for the current Amazon Web Services account if no filtering conditions are used.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            filter-conditions: A complex type that contains information about the filters applied during the `ListDomains` request. The filter conditions can include domain name and domain expiration.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            marker: |-
-                For an initial request for a list of domains, omit this element. If the number of domains that are associated with the current Amazon Web Services account is greater than the value that you specified for `MaxItems`, you can use `Marker` to return additional domains. Get the value of `NextPageMarker` from the previous response, and submit another request that includes the value of `NextPageMarker` in the `Marker` element.
-
-                Constraints: The marker must match the value specified in the previous request.
-            max-items: |-
-                Number of domains to be returned.
-
-                Default: 20
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            sort-condition: A complex type that contains information about the requested ordering of domains in the returned list.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: accept-domain-transfer-from-another-aws-account
-      description: Accepts the transfer of a domain from another Amazon Web Services account to the currentAmazon Web Services account.
+    - name: reject-domain-transfer-from-another-aws-account
+      description: Rejects the transfer of a domain from another Amazon Web Services account to the current Amazon Web Services account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain-name=!: The name of the domain that was specified when another Amazon Web Services account submitted a [TransferDomainToAnotherAwsAccount](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html) request.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --password=!: The password that was returned by the [TransferDomainToAnotherAwsAccount](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html) request.
-      documentation:
-        command: |-
-            Accepts the transfer of a domain from another Amazon Web Services account to the currentAmazon Web Services account. You initiate a transfer between Amazon Web Services accounts using [TransferDomainToAnotherAwsAccount](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html).
-
-            If you use the CLI command at [accept-domain-transfer-from-another-aws-account](https://docs.aws.amazon.com/cli/latest/reference/route53domains/accept-domain-transfer-from-another-aws-account.html), use JSON format as input instead of text because otherwise CLI will throw an error from domain transfer input that includes single quotes.
-
-            Use either [ListOperations](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ListOperations.html) or [GetOperationDetail](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html) to determine whether the operation succeeded. [GetOperationDetail](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html) provides additional information, for example, `Domain Transfer from Aws Account 111122223333 has been cancelled`.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            domain-name: The name of the domain that was specified when another Amazon Web Services account submitted a [TransferDomainToAnotherAwsAccount](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html) request.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            password: The password that was returned by the [TransferDomainToAnotherAwsAccount](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html) request.
-    - name: cancel-domain-transfer-to-another-aws-account
-      description: Cancels the transfer of a domain from the current Amazon Web Services account to another Amazon Web Services account.
+    - name: associate-delegation-signer-to-domain
+      description: Creates a delegation signer (DS) record in the registry zone for this domain name.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain for which you want to cancel the transfer to another Amazon Web Services account.
+        --domain-name=!: The name of the domain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: |-
-            Cancels the transfer of a domain from the current Amazon Web Services account to another Amazon Web Services account. You initiate a transfer betweenAmazon Web Services accounts using [TransferDomainToAnotherAwsAccount](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html).
-
-            You must cancel the transfer before the other Amazon Web Services account accepts the transfer using [AcceptDomainTransferFromAnotherAwsAccount](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_AcceptDomainTransferFromAnotherAwsAccount.html).
-
-            Use either [ListOperations](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ListOperations.html) or [GetOperationDetail](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html) to determine whether the operation succeeded. [GetOperationDetail](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html) provides additional information, for example, `Domain Transfer from Aws Account 111122223333 has been cancelled`.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            domain-name: The name of the domain for which you want to cancel the transfer to another Amazon Web Services account.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: check-domain-availability
-      description: This operation checks the availability of one domain name.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain that you want to get availability for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --idn-lang-code=: Reserved for future use.
-      documentation:
-        command: This operation checks the availability of one domain name. Note that if the availability status of a domain is pending, you must submit another request to determine the availability of the domain name.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            domain-name: |-
-                The name of the domain that you want to get availability for. The top-level domain (TLD), such as .com, must be a TLD that Route 53 supports. For a list of supported TLDs, see [Domains that You Can Register with Amazon Route 53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html) in the *Amazon Route 53 Developer Guide*.
-
-                The domain name can contain only the following characters:
-
-                - Letters a through z. Domain names are not case sensitive.
-                - Numbers 0 through 9.
-                - Hyphen (-). You can't specify a hyphen at the beginning or end of a label.
-                - Period (.) to separate the labels in the name, such as the `.` in `example.com`.
-
-                Internationalized domain names are not supported for some top-level domains. To determine whether the TLD that you want to use supports internationalized domain names, see [Domains that You Can Register with Amazon Route 53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html). For more information, see [Formatting Internationalized Domain Names](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html#domain-name-format-idns).
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            idn-lang-code: Reserved for future use.
-    - name: disable-domain-auto-renew
-      description: This operation disables automatic renewal of domain registration for the specified domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain that you want to disable automatic renewal for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: This operation disables automatic renewal of domain registration for the specified domain.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            domain-name: The name of the domain that you want to disable automatic renewal for.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
+        --signing-attributes=!: The information about a key, including the algorithm, public key-value, and flags.
     - name: disable-domain-transfer-lock
       description: This operation removes the transfer lock on the domain (specifically the `clientTransferProhibited` status) to allow domain transfers.
       flags:
@@ -604,25 +64,15 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain-name=!: The name of the domain that you want to remove the transfer lock for.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: This operation removes the transfer lock on the domain (specifically the `clientTransferProhibited` status) to allow domain transfers. We recommend you refrain from performing this action unless you intend to transfer the domain to a different registrar. Successful submission returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant will be notified by email.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            domain-name: The name of the domain that you want to remove the transfer lock for.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
+    - name: renew-domain
+      description: This operation renews a domain for the specified number of years.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --current-expiry-year=!: The year when the registration for the domain is set to expire.
+        --domain-name=!: The name of the domain that you want to renew.
+        --duration-in-years=: The number of years that you want to renew the domain for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: enable-domain-auto-renew
       description: This operation configures Amazon Route 53 to automatically renew the specified domain before the domain registration expires.
       flags:
@@ -630,87 +80,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain-name=!: The name of the domain that you want to enable automatic renewal for.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: |-
-            This operation configures Amazon Route 53 to automatically renew the specified domain before the domain registration expires. The cost of renewing your domain registration is billed to your Amazon Web Services account.
-
-            The period during which you can renew a domain name varies by TLD. For a list of TLDs and their renewal policies, see [Domains That You Can Register with Amazon Route 53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html) in the *Amazon Route 53 Developer Guide*. Route 53 requires that you renew before the end of the renewal period so we can complete processing before the deadline.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            domain-name: The name of the domain that you want to enable automatic renewal for.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: delete-domain
-      description: This operation deletes the specified domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: Name of the domain to be deleted.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: |-
-            This operation deletes the specified domain. This action is permanent. For more information, see [Deleting a domain name registration](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-delete.html).
-
-            To transfer the domain registration to another registrar, use the transfer process that’s provided by the registrar to which you want to transfer the registration. Otherwise, the following apply:
-
-            1. You can’t get a refund for the cost of a deleted domain registration.
-            2. The registry for the top-level domain might hold the domain name for a brief time before releasing it for other users to register (varies by registry).
-            3. When the registration has been deleted, we'll send you a confirmation to the registrant contact. The email will come from `noreply@domainnameverification.net` or `noreply@registrar.amazon.com`.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            domain-name: Name of the domain to be deleted.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: get-domain-detail
-      description: This operation returns detailed information about a specified domain that is associated with the current Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain that you want to get detailed information about.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: This operation returns detailed information about a specified domain that is associated with the current Amazon Web Services account. Contact information for the domain is also returned as part of the output.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            domain-name: The name of the domain that you want to get detailed information about.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
     - name: list-operations
       description: Returns information about all of the operations that return an operation ID and that have ever been performed on domains that were registered by the current account.
       flags:
@@ -733,347 +102,44 @@ commands:
             sort-order:
                 - ASC
                 - DESC
-      documentation:
-        command: |-
-            Returns information about all of the operations that return an operation ID and that have ever been performed on domains that were registered by the current account.
-
-            This command runs only in the us-east-1 Region.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            marker: For an initial request for a list of operations, omit this element. If the number of operations that are not yet complete is greater than the value that you specified for `MaxItems`, you can use `Marker` to return additional operations. Get the value of `NextPageMarker` from the previous response, and submit another request that includes the value of `NextPageMarker` in the `Marker` element.
-            max-items: |-
-                Number of domains to be returned.
-
-                Default: 20
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            sort-by: The sort type for returned values.
-            sort-order: The sort order for returned values, either ascending or descending.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            status: The status of the operations.
-            submitted-since: An optional parameter that lets you get information about all the operations that you submitted after a specified date and time. Specify the date and time in Unix time format and Coordinated Universal time (UTC).
-            type: An arrays of the domains operation types.
-    - name: reject-domain-transfer-from-another-aws-account
-      description: Rejects the transfer of a domain from another Amazon Web Services account to the current Amazon Web Services account.
+    - name: resend-operation-authorization
+      description: Resend the form of authorization email for this operation.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain that was specified when another Amazon Web Services account submitted a [TransferDomainToAnotherAwsAccount](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html) request.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: |-
-            Rejects the transfer of a domain from another Amazon Web Services account to the current Amazon Web Services account. You initiate a transfer betweenAmazon Web Services accounts using [TransferDomainToAnotherAwsAccount](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html).
-
-            Use either [ListOperations](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ListOperations.html) or [GetOperationDetail](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html) to determine whether the operation succeeded. [GetOperationDetail](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html) provides additional information, for example, `Domain Transfer from Aws Account 111122223333 has been cancelled`.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            domain-name: The name of the domain that was specified when another Amazon Web Services account submitted a [TransferDomainToAnotherAwsAccount](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html) request.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: renew-domain
-      description: This operation renews a domain for the specified number of years.
+        --operation-id=!: Operation ID.
+    - name: update-domain-contact-privacy
+      description: This operation updates the specified domain contact's privacy setting.
+      flags:
+        --admin-privacy: Whether you want to conceal contact information from WHOIS queries.
+        --billing-privacy: Whether you want to conceal contact information from WHOIS queries.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain that you want to update the privacy setting for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-admin-privacy: Whether you want to conceal contact information from WHOIS queries.
+        --no-billing-privacy: Whether you want to conceal contact information from WHOIS queries.
+        --no-registrant-privacy: Whether you want to conceal contact information from WHOIS queries.
+        --no-tech-privacy: Whether you want to conceal contact information from WHOIS queries.
+        --registrant-privacy: Whether you want to conceal contact information from WHOIS queries.
+        --tech-privacy: Whether you want to conceal contact information from WHOIS queries.
+    - name: check-domain-transferability
+      description: Checks whether a domain name can be transferred to Amazon Route 53.
+      flags:
+        --auth-code=: If the registrar for the top-level domain (TLD) requires an authorization code to transfer the domain, the code that you got from the current registrar for the domain.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain that you want to transfer to Route 53. The top-level domain (TLD), such as .com, must be a TLD that Route 53 supports.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-tags-for-domain
+      description: This operation deletes the specified tags for a domain.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --current-expiry-year=!: The year when the registration for the domain is set to expire.
-        --domain-name=!: The name of the domain that you want to renew.
-        --duration-in-years=: The number of years that you want to renew the domain for.
+        --domain-name=!: The domain for which you want to delete one or more tags.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: |-
-            This operation renews a domain for the specified number of years. The cost of renewing your domain is billed to your Amazon Web Services account.
-
-            We recommend that you renew your domain several weeks before the expiration date. Some TLD registries delete domains before the expiration date if you haven't renewed far enough in advance. For more information about renewing domain registration, see [Renewing Registration for a Domain](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-renew.html) in the *Amazon Route 53 Developer Guide*.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            current-expiry-year: The year when the registration for the domain is set to expire. This value must match the current expiration date for the domain.
-            domain-name: The name of the domain that you want to renew.
-            duration-in-years: |-
-                The number of years that you want to renew the domain for. The maximum number of years depends on the top-level domain. For the range of valid values for your domain, see [Domains that You Can Register with Amazon Route 53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html) in the *Amazon Route 53 Developer Guide*.
-
-                Default: 1
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: update-domain-contact
-      description: This operation updates the contact information for a particular domain.
-      flags:
-        --admin-contact=: Provides detailed contact information.
-        --billing-contact=: Provides detailed contact information.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --consent=: Customer's consent for the owner change request.
-        --domain-name=!: The name of the domain that you want to update contact information for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --registrant-contact=: Provides detailed contact information.
-        --tech-contact=: Provides detailed contact information.
-      documentation:
-        command: |-
-            This operation updates the contact information for a particular domain. You must specify information for at least one contact: registrant, administrator, or technical.
-
-            If the update is successful, this method returns an operation ID that you can use to track the progress and completion of the operation. If the request is not completed successfully, the domain registrant will be notified by email.
-        flag:
-            admin-contact: Provides detailed contact information.
-            billing-contact: Provides detailed contact information.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            consent: Customer's consent for the owner change request. Required if the domain is not free (consent price is more than $0.00).
-            domain-name: The name of the domain that you want to update contact information for.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            registrant-contact: Provides detailed contact information.
-            tech-contact: Provides detailed contact information.
-    - name: update-domain-nameservers
-      description: This operation replaces the current set of name servers for the domain with the specified set of name servers.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain that you want to change name servers for.
-        --fi-auth-key=: The authorization key for .fi domains
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --nameservers=!: A list of new name servers for the domain.
-      documentation:
-        command: |-
-            This operation replaces the current set of name servers for the domain with the specified set of name servers. If you use Amazon Route 53 as your DNS service, specify the four name servers in the delegation set for the hosted zone for the domain.
-
-            If successful, this operation returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant will be notified by email.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            domain-name: The name of the domain that you want to change name servers for.
-            fi-auth-key: The authorization key for .fi domains
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            nameservers: A list of new name servers for the domain.
-    - name: get-domain-suggestions
-      description: The GetDomainSuggestions operation returns a list of suggested domain names.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: A domain name that you want to use as the basis for a list of possible domain names.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-only-available!: If `OnlyAvailable` is `true`, Route 53 returns only domain names that are available.
-        --only-available!: If `OnlyAvailable` is `true`, Route 53 returns only domain names that are available.
-        --suggestion-count=!: The number of suggested domain names that you want Route 53 to return.
-      documentation:
-        command: The GetDomainSuggestions operation returns a list of suggested domain names.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            domain-name: |-
-                A domain name that you want to use as the basis for a list of possible domain names. The top-level domain (TLD), such as .com, must be a TLD that Route 53 supports. For a list of supported TLDs, see [Domains that You Can Register with Amazon Route 53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html) in the *Amazon Route 53 Developer Guide*.
-
-                The domain name can contain only the following characters:
-
-                - Letters a through z. Domain names are not case sensitive.
-                - Numbers 0 through 9.
-                - Hyphen (-). You can't specify a hyphen at the beginning or end of a label.
-                - Period (.) to separate the labels in the name, such as the `.` in `example.com`.
-
-                Internationalized domain names are not supported for some top-level domains. To determine whether the TLD that you want to use supports internationalized domain names, see [Domains that You Can Register with Amazon Route 53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html).
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            only-available: If `OnlyAvailable` is `true`, Route 53 returns only domain names that are available. If `OnlyAvailable` is `false`, Route 53 returns domain names without checking whether they're available to be registered. To determine whether the domain is available, you can call `checkDomainAvailability` for each suggestion.
-            suggestion-count: The number of suggested domain names that you want Route 53 to return. Specify a value between 1 and 50.
-    - name: push-domain
-      description: Moves a domain from Amazon Web Services to another registrar.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: Name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --target=!: New IPS tag for the domain.
-      documentation:
-        command: |-
-            Moves a domain from Amazon Web Services to another registrar.
-
-            Supported actions:
-
-            - Changes the IPS tags of a .uk domain, and pushes it to transit. Transit means that the domain is ready to be transferred to another registrar.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            domain-name: Name of the domain.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            target: New IPS tag for the domain.
-    - name: register-domain
-      description: This operation registers a domain.
-      flags:
-        --admin-contact=!: Provides detailed contact information.
-        --auto-renew: Indicates whether the domain will be automatically renewed (`true`) or not (`false`).
-        --billing-contact=: Provides detailed contact information.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The domain name that you want to register.
-        --duration-in-years=!: The number of years that you want to register the domain for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --idn-lang-code=: Reserved for future use.
-        --no-auto-renew: Indicates whether the domain will be automatically renewed (`true`) or not (`false`).
-        --no-privacy-protect-admin-contact: Whether you want to conceal contact information from WHOIS queries.
-        --no-privacy-protect-billing-contact: Whether you want to conceal contact information from WHOIS queries.
-        --no-privacy-protect-registrant-contact: Whether you want to conceal contact information from WHOIS queries.
-        --no-privacy-protect-tech-contact: Whether you want to conceal contact information from WHOIS queries.
-        --privacy-protect-admin-contact: Whether you want to conceal contact information from WHOIS queries.
-        --privacy-protect-billing-contact: Whether you want to conceal contact information from WHOIS queries.
-        --privacy-protect-registrant-contact: Whether you want to conceal contact information from WHOIS queries.
-        --privacy-protect-tech-contact: Whether you want to conceal contact information from WHOIS queries.
-        --registrant-contact=!: Provides detailed contact information.
-        --tech-contact=!: Provides detailed contact information.
-      documentation:
-        command: "This operation registers a domain. For some top-level domains (TLDs), this operation requires extra parameters.\n\nWhen you register a domain, Amazon Route 53 does the following:\n\n- Creates a Route 53 hosted zone that has the same name as the domain. Route 53 assigns four name servers to your hosted zone and automatically updates your domain registration with the names of these name servers.\n- Enables auto renew, so your domain registration will renew automatically each year. We'll notify you in advance of the renewal date so you can choose whether to renew the registration.\n- Optionally enables privacy protection, so WHOIS queries return contact for the registrar or the phrase \"REDACTED FOR PRIVACY\", or \"On behalf of &lt;domain name&gt; owner.\" If you don't enable privacy protection, WHOIS queries return the information that you entered for the administrative, registrant, and technical contacts.\n  \n  While some domains may allow different privacy settings per contact, we recommend specifying the same privacy setting for all contacts.\n- If registration is successful, returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant is notified by email.\n- Charges your Amazon Web Services account an amount based on the top-level domain. For more information, see [Amazon Route 53 Pricing](http://aws.amazon.com/route53/pricing/)."
-        flag:
-            admin-contact: Provides detailed contact information. For information about the values that you specify for each element, see [ContactDetail](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ContactDetail.html).
-            auto-renew: |-
-                Indicates whether the domain will be automatically renewed (`true`) or not (`false`). Auto renewal only takes effect after the account is charged.
-
-                Default: `true`
-            billing-contact: Provides detailed contact information. For information about the values that you specify for each element, see [ContactDetail](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ContactDetail.html).
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            domain-name: |-
-                The domain name that you want to register. The top-level domain (TLD), such as .com, must be a TLD that Route 53 supports. For a list of supported TLDs, see [Domains that You Can Register with Amazon Route 53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html) in the *Amazon Route 53 Developer Guide*.
-
-                The domain name can contain only the following characters:
-
-                - Letters a through z. Domain names are not case sensitive.
-                - Numbers 0 through 9.
-                - Hyphen (-). You can't specify a hyphen at the beginning or end of a label.
-                - Period (.) to separate the labels in the name, such as the `.` in `example.com`.
-
-                Internationalized domain names are not supported for some top-level domains. To determine whether the TLD that you want to use supports internationalized domain names, see [Domains that You Can Register with Amazon Route 53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html). For more information, see [Formatting Internationalized Domain Names](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html#domain-name-format-idns).
-            duration-in-years: |-
-                The number of years that you want to register the domain for. Domains are registered for a minimum of one year. The maximum period depends on the top-level domain. For the range of valid values for your domain, see [Domains that You Can Register with Amazon Route 53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html) in the *Amazon Route 53 Developer Guide*.
-
-                Default: 1
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            idn-lang-code: Reserved for future use.
-            privacy-protect-admin-contact: |-
-                Whether you want to conceal contact information from WHOIS queries. If you specify `true`, WHOIS ("who is") queries return contact information either for Amazon Registrar or for our registrar associate, Gandi. If you specify `false`, WHOIS queries return the information that you entered for the admin contact.
-
-                You must specify the same privacy setting for the administrative, billing, registrant, and technical contacts.
-
-                Default: `true`
-            privacy-protect-billing-contact: |-
-                Whether you want to conceal contact information from WHOIS queries. If you specify `true`, WHOIS ("who is") queries return contact information either for Amazon Registrar or for our registrar associate, Gandi. If you specify `false`, WHOIS queries return the information that you entered for the billing contact.
-
-                You must specify the same privacy setting for the administrative, billing, registrant, and technical contacts.
-            privacy-protect-registrant-contact: |-
-                Whether you want to conceal contact information from WHOIS queries. If you specify `true`, WHOIS ("who is") queries return contact information either for Amazon Registrar or for our registrar associate, Gandi. If you specify `false`, WHOIS queries return the information that you entered for the registrant contact (the domain owner).
-
-                You must specify the same privacy setting for the administrative, billing, registrant, and technical contacts.
-
-                Default: `true`
-            privacy-protect-tech-contact: |-
-                Whether you want to conceal contact information from WHOIS queries. If you specify `true`, WHOIS ("who is") queries return contact information either for Amazon Registrar or for our registrar associate, Gandi. If you specify `false`, WHOIS queries return the information that you entered for the technical contact.
-
-                You must specify the same privacy setting for the administrative, billing, registrant, and technical contacts.
-
-                Default: `true`
-            registrant-contact: Provides detailed contact information. For information about the values that you specify for each element, see [ContactDetail](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ContactDetail.html).
-            tech-contact: Provides detailed contact information. For information about the values that you specify for each element, see [ContactDetail](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ContactDetail.html).
+        --tags-to-delete=!: A list of tag keys to delete.
     - name: transfer-domain
       description: Transfers a domain from another registrar to Amazon Route 53.
       flags:
@@ -1099,111 +165,49 @@ commands:
         --privacy-protect-tech-contact: Whether you want to conceal contact information from WHOIS queries.
         --registrant-contact=!: Provides detailed contact information.
         --tech-contact=!: Provides detailed contact information.
-      documentation:
-        command: |-
-            Transfers a domain from another registrar to Amazon Route 53.
-
-            For more information about transferring domains, see the following topics:
-
-            - For transfer requirements, a detailed procedure, and information about viewing the status of a domain that you're transferring to Route 53, see [Transferring Registration for a Domain to Amazon Route 53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-transfer-to-route-53.html) in the *Amazon Route 53 Developer Guide*.
-            - For information about how to transfer a domain from one Amazon Web Services account to another, see [TransferDomainToAnotherAwsAccount](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html).
-            - For information about how to transfer a domain to another domain registrar, see [Transferring a Domain from Amazon Route 53 to Another Registrar](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-transfer-from-route-53.html) in the *Amazon Route 53 Developer Guide*.
-
-            During the transfer of any country code top-level domains (ccTLDs) to Route 53, except for .cc and .tv, updates to the owner contact are ignored and the owner contact data from the registry is used. You can update the owner contact after the transfer is complete. For more information, see [UpdateDomainContact](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_UpdateDomainContact.html).
-
-            If the registrar for your domain is also the DNS service provider for the domain, we highly recommend that you transfer your DNS service to Route 53 or to another DNS service provider before you transfer your registration. Some registrars provide free DNS service when you purchase a domain registration. When you transfer the registration, the previous registrar will not renew your domain registration and could end your DNS service at any time.
-
-            If the registrar for your domain is also the DNS service provider for the domain and you don't transfer DNS service to another provider, your website, email, and the web applications associated with the domain might become unavailable.
-
-            If the transfer is successful, this method returns an operation ID that you can use to track the progress and completion of the action. If the transfer doesn't complete successfully, the domain registrant will be notified by email.
-        flag:
-            admin-contact: Provides detailed contact information.
-            auth-code: The authorization code for the domain. You get this value from the current registrar.
-            auto-renew: |-
-                Indicates whether the domain will be automatically renewed (true) or not (false). Auto renewal only takes effect after the account is charged.
-
-                Default: true
-            billing-contact: Provides detailed contact information.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            domain-name: |-
-                The name of the domain that you want to transfer to Route 53. The top-level domain (TLD), such as .com, must be a TLD that Route 53 supports. For a list of supported TLDs, see [Domains that You Can Register with Amazon Route 53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html) in the *Amazon Route 53 Developer Guide*.
-
-                The domain name can contain only the following characters:
-
-                - Letters a through z. Domain names are not case sensitive.
-                - Numbers 0 through 9.
-                - Hyphen (-). You can't specify a hyphen at the beginning or end of a label.
-                - Period (.) to separate the labels in the name, such as the `.` in `example.com`.
-            duration-in-years: |-
-                The number of years that you want to register the domain for. Domains are registered for a minimum of one year. The maximum period depends on the top-level domain.
-
-                Default: 1
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            idn-lang-code: Reserved for future use.
-            nameservers: Contains details for the host and glue IP addresses.
-            privacy-protect-admin-contact: |-
-                Whether you want to conceal contact information from WHOIS queries. If you specify `true`, WHOIS ("who is") queries return contact information for the registrar, the phrase "REDACTED FOR PRIVACY", or "On behalf of &lt;domain name&gt; owner.".
-
-                While some domains may allow different privacy settings per contact, we recommend specifying the same privacy setting for all contacts.
-
-                Default: `true`
-            privacy-protect-billing-contact: |-
-                Whether you want to conceal contact information from WHOIS queries. If you specify `true`, WHOIS ("who is") queries return contact information either for Amazon Registrar or for our registrar associate, Gandi. If you specify `false`, WHOIS queries return the information that you entered for the billing contact.
-
-                You must specify the same privacy setting for the administrative, billing, registrant, and technical contacts.
-            privacy-protect-registrant-contact: |-
-                Whether you want to conceal contact information from WHOIS queries. If you specify `true`, WHOIS ("who is") queries return contact information either for Amazon Registrar or for our registrar associate, Gandi. If you specify `false`, WHOIS queries return the information that you entered for the registrant contact (domain owner).
-
-                You must specify the same privacy setting for the administrative, billing, registrant, and technical contacts.
-
-                Default: `true`
-            privacy-protect-tech-contact: |-
-                Whether you want to conceal contact information from WHOIS queries. If you specify `true`, WHOIS ("who is") queries return contact information either for Amazon Registrar or for our registrar associate, Gandi. If you specify `false`, WHOIS queries return the information that you entered for the technical contact.
-
-                You must specify the same privacy setting for the administrative, billing, registrant, and technical contacts.
-
-                Default: `true`
-            registrant-contact: Provides detailed contact information.
-            tech-contact: Provides detailed contact information.
-    - name: get-operation-detail
-      description: This operation returns the current status of an operation that is not completed.
+    - name: enable-domain-transfer-lock
+      description: This operation sets the transfer lock on the domain (specifically the `clientTransferProhibited` status) to prevent domain transfers.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain that you want to set the transfer lock for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: accept-domain-transfer-from-another-aws-account
+      description: Accepts the transfer of a domain from another Amazon Web Services account to the currentAmazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain that was specified when another Amazon Web Services account submitted a [TransferDomainToAnotherAwsAccount](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html) request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --password=!: The password that was returned by the [TransferDomainToAnotherAwsAccount](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html) request.
+    - name: cancel-domain-transfer-to-another-aws-account
+      description: Cancels the transfer of a domain from the current Amazon Web Services account to another Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain for which you want to cancel the transfer to another Amazon Web Services account.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-domain-suggestions
+      description: The GetDomainSuggestions operation returns a list of suggested domain names.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: A domain name that you want to use as the basis for a list of possible domain names.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-only-available!: If `OnlyAvailable` is `true`, Route 53 returns only domain names that are available.
+        --only-available!: If `OnlyAvailable` is `true`, Route 53 returns only domain names that are available.
+        --suggestion-count=!: The number of suggested domain names that you want Route 53 to return.
+    - name: list-prices
+      description: 'Lists the following prices for either all the TLDs supported by Route 53, or the specified TLD:'
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --operation-id=!: The identifier for the operation for which you want to get the status.
-      documentation:
-        command: This operation returns the current status of an operation that is not completed.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            operation-id: The identifier for the operation for which you want to get the status. Route 53 returned the identifier in the response to the original request.
+        --marker=: For an initial request for a list of prices, omit this element.
+        --max-items=: Number of `Prices` to be returned.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --tld=: The TLD for which you want to receive the pricing information.
     - name: list-tags-for-domain
       description: This operation returns all of the tags that are associated with the specified domain.
       flags:
@@ -1211,28 +215,83 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain-name=!: The domain for which you want to get a list of tags.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: |-
-            This operation returns all of the tags that are associated with the specified domain.
-
-            All tag operations are eventually consistent; subsequent operations might not immediately represent all issued operations.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            domain-name: The domain for which you want to get a list of tags.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
+    - name: update-domain-contact
+      description: This operation updates the contact information for a particular domain.
+      flags:
+        --admin-contact=: Provides detailed contact information.
+        --billing-contact=: Provides detailed contact information.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --consent=: Customer's consent for the owner change request.
+        --domain-name=!: The name of the domain that you want to update contact information for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --registrant-contact=: Provides detailed contact information.
+        --tech-contact=: Provides detailed contact information.
+    - name: check-domain-availability
+      description: This operation checks the availability of one domain name.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain that you want to get availability for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --idn-lang-code=: Reserved for future use.
+    - name: get-domain-detail
+      description: This operation returns detailed information about a specified domain that is associated with the current Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain that you want to get detailed information about.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: push-domain
+      description: Moves a domain from Amazon Web Services to another registrar.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: Name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --target=!: New IPS tag for the domain.
+    - name: view-billing
+      description: Returns all the domain-related billing records for the current Amazon Web Services account for a specified period
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=: The end date and time for the time period for which you want a list of billing records.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: For an initial request for a list of billing records, omit this element.
+        --max-items=: The number of billing records to be returned.
+        --page-size=: The size of each page to get in the AWS service call.
+        --start-time=: The beginning date and time for the time period for which you want a list of billing records.
+        --starting-token=: A token to specify where to start paginating.
+    - name: delete-domain
+      description: This operation deletes the specified domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: Name of the domain to be deleted.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: register-domain
+      description: This operation registers a domain.
+      flags:
+        --admin-contact=!: Provides detailed contact information.
+        --auto-renew: Indicates whether the domain will be automatically renewed (`true`) or not (`false`).
+        --billing-contact=: Provides detailed contact information.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The domain name that you want to register.
+        --duration-in-years=!: The number of years that you want to register the domain for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --idn-lang-code=: Reserved for future use.
+        --no-auto-renew: Indicates whether the domain will be automatically renewed (`true`) or not (`false`).
+        --no-privacy-protect-admin-contact: Whether you want to conceal contact information from WHOIS queries.
+        --no-privacy-protect-billing-contact: Whether you want to conceal contact information from WHOIS queries.
+        --no-privacy-protect-registrant-contact: Whether you want to conceal contact information from WHOIS queries.
+        --no-privacy-protect-tech-contact: Whether you want to conceal contact information from WHOIS queries.
+        --privacy-protect-admin-contact: Whether you want to conceal contact information from WHOIS queries.
+        --privacy-protect-billing-contact: Whether you want to conceal contact information from WHOIS queries.
+        --privacy-protect-registrant-contact: Whether you want to conceal contact information from WHOIS queries.
+        --privacy-protect-tech-contact: Whether you want to conceal contact information from WHOIS queries.
+        --registrant-contact=!: Provides detailed contact information.
+        --tech-contact=!: Provides detailed contact information.
     - name: resend-contact-reachability-email
       description: For operations that require confirmation that the email address for the registrant contact is valid, such as registering a new domain, this operation resends the confirmation email to the current email address for the registrant contact.
       flags:
@@ -1240,25 +299,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain-name=: The name of the domain for which you want Route 53 to resend a confirmation email to the registrant contact.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: For operations that require confirmation that the email address for the registrant contact is valid, such as registering a new domain, this operation resends the confirmation email to the current email address for the registrant contact.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            domain-name: The name of the domain for which you want Route 53 to resend a confirmation email to the registrant contact.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
     - name: retrieve-domain-auth-code
       description: This operation returns the authorization code for the domain.
       flags:
@@ -1266,50 +306,28 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain-name=!: The name of the domain that you want to get an authorization code for.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: This operation returns the authorization code for the domain. To transfer a domain to another registrar, you provide this value to the new registrar.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            domain-name: The name of the domain that you want to get an authorization code for.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: disassociate-delegation-signer-from-domain
-      description: Deletes a delegation signer (DS) record in the registry zone for this domain name.
+    - name: transfer-domain-to-another-aws-account
+      description: Transfers a domain from the current Amazon Web Services account to another Amazon Web Services account.
+      flags:
+        --account-id=!: The account ID of the Amazon Web Services account that you want to transfer the domain to, for example, `111122223333`.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain that you want to transfer from the current Amazon Web Services account to another account.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-domain-nameservers
+      description: This operation replaces the current set of name servers for the domain with the specified set of name servers.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: Name of the domain.
+        --domain-name=!: The name of the domain that you want to change name servers for.
+        --fi-auth-key=: The authorization key for .fi domains
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: An internal identification number assigned to each DS record after it’s created.
-      documentation:
-        command: Deletes a delegation signer (DS) record in the registry zone for this domain name.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            domain-name: Name of the domain.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            id: An internal identification number assigned to each DS record after it’s created. You can retrieve it as part of DNSSEC information returned by [GetDomainDetail](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetDomainDetail.html).
+        --nameservers=!: A list of new name servers for the domain.
+    - name: update-tags-for-domain
+      description: This operation adds or updates tags for a specified domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The domain for which you want to add or update tags.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags-to-update=: A list of the tag keys and values that you want to add or update.

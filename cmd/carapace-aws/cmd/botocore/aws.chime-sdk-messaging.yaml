@@ -1,478 +1,42 @@
 name: chime-sdk-messaging
 description: Amazon Chime SDK Messaging
 commands:
-    - name: list-channels
-      description: Lists all Channels created under a single Chime App as a paginated list.
-      flags:
-        --app-instance-arn=!: The ARN of the `AppInstance`.
-        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of channels that you want to return.
-        --next-token=: The token passed by previous API calls until all requested channels are returned.
-        --privacy=: The privacy setting.
-      completion:
-        flag:
-            privacy:
-                - PUBLIC
-                - PRIVATE
-      documentation:
-        command: |-
-            Lists all Channels created under a single Chime App as a paginated list. You can specify filters to narrow results.
-
-            **Functionality &amp; restrictions**
-
-            - Use privacy = `PUBLIC` to retrieve all public channels in the account.
-            - Only an `AppInstanceAdmin` can set privacy = `PRIVATE` to list the private channels in an account.
-
-            The `x-amz-chime-bearer` request header is mandatory. Use the ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call as the value in the header.
-        flag:
-            app-instance-arn: The ARN of the `AppInstance`.
-            chime-bearer: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-results: The maximum number of channels that you want to return.
-            next-token: The token passed by previous API calls until all requested channels are returned.
-            privacy: The privacy setting. `PUBLIC` retrieves all the public channels. `PRIVATE` retrieves private channels. Only an `AppInstanceAdmin` can retrieve private channels.
-    - name: list-channels-associated-with-channel-flow
-      description: Lists all channels associated with a specified channel flow.
-      flags:
-        --channel-flow-arn=!: The ARN of the channel flow.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of channels that you want to return.
-        --next-token=: The token passed by previous API calls until all requested channels are returned.
-      documentation:
-        command: Lists all channels associated with a specified channel flow. You can associate a channel flow with multiple channels, but you can only associate a channel with one channel flow. This is a developer API.
-        flag:
-            channel-flow-arn: The ARN of the channel flow.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-results: The maximum number of channels that you want to return.
-            next-token: The token passed by previous API calls until all requested channels are returned.
-    - name: list-channels-moderated-by-app-instance-user
-      description: A list of the channels moderated by an `AppInstanceUser`.
-      flags:
-        --app-instance-user-arn=: The ARN of the user or bot in the moderated channel.
-        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of channels in the request.
-        --next-token=: The token returned from previous API requests until the number of channels moderated by the user is reached.
-      documentation:
-        command: |-
-            A list of the channels moderated by an `AppInstanceUser`.
-
-            The `x-amz-chime-bearer` request header is mandatory. Use the ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call as the value in the header.
-        flag:
-            app-instance-user-arn: The ARN of the user or bot in the moderated channel.
-            chime-bearer: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-results: The maximum number of channels in the request.
-            next-token: The token returned from previous API requests until the number of channels moderated by the user is reached.
-    - name: put-messaging-streaming-configurations
-      description: Sets the data streaming configuration for an `AppInstance`.
-      flags:
-        --app-instance-arn=!: The ARN of the streaming configuration.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --streaming-configurations=!: The streaming configurations.
-      documentation:
-        command: Sets the data streaming configuration for an `AppInstance`. For more information, see [Streaming messaging data](https://docs.aws.amazon.com/chime-sdk/latest/dg/streaming-export.html) in the *Amazon Chime SDK Developer Guide*.
-        flag:
-            app-instance-arn: The ARN of the streaming configuration.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            streaming-configurations: The streaming configurations.
-    - name: search-channels
-      description: Allows the `ChimeBearer` to search channels by channel members.
-      flags:
-        --chime-bearer=: The `AppInstanceUserArn` of the user making the API call.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --fields=!: A list of the `Field` objects in the channel being searched.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of channels that you want returned.
-        --next-token=: The token returned from previous API requests until the number of channels is reached.
-      documentation:
-        command: |-
-            Allows the `ChimeBearer` to search channels by channel members. Users or bots can search across the channels that they belong to. Users in the `AppInstanceAdmin` role can search across all channels.
-
-            The `x-amz-chime-bearer` request header is mandatory. Use the ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call as the value in the header.
-
-            This operation isn't supported for `AppInstanceUsers` with a large number of memberships.
-        flag:
-            chime-bearer: The `AppInstanceUserArn` of the user making the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            fields: A list of the `Field` objects in the channel being searched.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-results: The maximum number of channels that you want returned.
-            next-token: The token returned from previous API requests until the number of channels is reached.
-    - name: describe-channel
-      description: Returns the full details of a channel in an Amazon Chime `AppInstance`.
+    - name: delete-channel-message
+      description: Deletes a channel message.
       flags:
         --channel-arn=!: The ARN of the channel.
         --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: |-
-            Returns the full details of a channel in an Amazon Chime `AppInstance`.
-
-            The `x-amz-chime-bearer` request header is mandatory. Use the ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call as the value in the header.
-        flag:
-            channel-arn: The ARN of the channel.
-            chime-bearer: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: describe-channel-ban
-      description: Returns the full details of a channel ban.
-      flags:
-        --channel-arn=!: The ARN of the channel from which the user is banned.
-        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --member-arn=!: The `AppInstanceUserArn` of the member being banned.
-      documentation:
-        command: |-
-            Returns the full details of a channel ban.
-
-            The `x-amz-chime-bearer` request header is mandatory. Use the ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call as the value in the header.
-        flag:
-            channel-arn: The ARN of the channel from which the user is banned.
-            chime-bearer: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            member-arn: The `AppInstanceUserArn` of the member being banned.
-    - name: describe-channel-membership-for-app-instance-user
-      description: Returns the details of a channel based on the membership of the specified `AppInstanceUser` or `AppInstanceBot`.
-      flags:
-        --app-instance-user-arn=!: The ARN of the user or bot in a channel.
-        --channel-arn=!: The ARN of the channel to which the user belongs.
-        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: |-
-            Returns the details of a channel based on the membership of the specified `AppInstanceUser` or `AppInstanceBot`.
-
-            The `x-amz-chime-bearer` request header is mandatory. Use the ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call as the value in the header.
-        flag:
-            app-instance-user-arn: The ARN of the user or bot in a channel.
-            channel-arn: The ARN of the channel to which the user belongs.
-            chime-bearer: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: describe-channel-moderator
-      description: Returns the full details of a single ChannelModerator.
-      flags:
-        --channel-arn=!: The ARN of the channel.
-        --channel-moderator-arn=!: The `AppInstanceUserArn` of the channel moderator.
-        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: |-
-            Returns the full details of a single ChannelModerator.
-
-            The `x-amz-chime-bearer` request header is mandatory. Use the `AppInstanceUserArn` of the user that makes the API call as the value in the header.
-        flag:
-            channel-arn: The ARN of the channel.
-            channel-moderator-arn: The `AppInstanceUserArn` of the channel moderator.
-            chime-bearer: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: describe-channel-membership
-      description: Returns the full details of a user's channel membership.
-      flags:
-        --channel-arn=!: The ARN of the channel.
-        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --member-arn=!: The `AppInstanceUserArn` of the member.
+        --message-id=!: The ID of the message being deleted.
         --sub-channel-id=: The ID of the SubChannel in the request.
-      documentation:
-        command: |-
-            Returns the full details of a user's channel membership.
-
-            The `x-amz-chime-bearer` request header is mandatory. Use the ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call as the value in the header.
-        flag:
-            channel-arn: The ARN of the channel.
-            chime-bearer: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            member-arn: The `AppInstanceUserArn` of the member.
-            sub-channel-id: |-
-                The ID of the SubChannel in the request. The response contains an `ElasticChannelConfiguration` object.
-
-                Only required to get a user’s SubChannel membership details.
-    - name: get-messaging-session-endpoint
-      description: The details of the endpoint for the messaging session.
+    - name: delete-channel-moderator
+      description: Deletes a channel moderator.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --network-type=: The type of network for the messaging session endpoint.
-      completion:
-        flag:
-            network-type:
-                - IPV4_ONLY
-                - DUAL_STACK
-      documentation:
-        command: The details of the endpoint for the messaging session.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            network-type: The type of network for the messaging session endpoint. Either IPv4 only or dual-stack (IPv4 and IPv6).
-    - name: channel-flow-callback
-      description: Calls back Amazon Chime SDK messaging with a processing response message.
-      flags:
-        --callback-id=!: The identifier passed to the processor by the service when invoked.
         --channel-arn=!: The ARN of the channel.
-        --channel-message=!: Stores information about the processed message.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --delete-resource: When a processor determines that a message needs to be `DENIED`, pass this parameter with a value of true.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-delete-resource: When a processor determines that a message needs to be `DENIED`, pass this parameter with a value of true.
-      documentation:
-        command: |-
-            Calls back Amazon Chime SDK messaging with a processing response message. This should be invoked from the processor Lambda. This is a developer API.
-
-            You can return one of the following processing responses:
-
-            - Update message content or metadata
-            - Deny a message
-            - Make no changes to the message
-        flag:
-            callback-id: The identifier passed to the processor by the service when invoked. Use the identifier to call back the service.
-            channel-arn: The ARN of the channel.
-            channel-message: Stores information about the processed message.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            delete-resource: When a processor determines that a message needs to be `DENIED`, pass this parameter with a value of true.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: create-channel-membership
-      description: Adds a member to a channel.
-      flags:
-        --channel-arn=!: The ARN of the channel to which you're adding users.
+        --channel-moderator-arn=!: The `AppInstanceUserArn` of the moderator being deleted.
         --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --member-arn=!: The `AppInstanceUserArn` of the member you want to add to the channel.
+    - name: list-channel-memberships
+      description: Lists all channel memberships in a channel.
+      flags:
+        --channel-arn=!: The maximum number of channel memberships that you want returned.
+        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of channel memberships that you want returned.
+        --next-token=: The token passed by previous API calls until all requested channel memberships are returned.
         --sub-channel-id=: The ID of the SubChannel in the request.
-        --type=!: The membership type of a user, `DEFAULT` or `HIDDEN`.
+        --type=: The membership type of a user, `DEFAULT` or `HIDDEN`.
       completion:
         flag:
             type:
                 - DEFAULT
                 - HIDDEN
-      documentation:
-        command: |-
-            Adds a member to a channel. The `InvitedBy` field in `ChannelMembership` is derived from the request header. A channel member can:
-
-            - List messages
-            - Send messages
-            - Receive messages
-            - Edit their own messages
-            - Leave the channel
-
-            Privacy settings impact this action as follows:
-
-            - Public Channels: You do not need to be a member to list messages, but you must be a member to send messages.
-            - Private Channels: You must be a member to list or send messages.
-
-            The `x-amz-chime-bearer` request header is mandatory. Use the ARN of the `AppInstanceUserArn` or `AppInstanceBot` that makes the API call as the value in the header.
-        flag:
-            channel-arn: The ARN of the channel to which you're adding users.
-            chime-bearer: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            member-arn: The `AppInstanceUserArn` of the member you want to add to the channel.
-            sub-channel-id: |-
-                The ID of the SubChannel in the request.
-
-                Only required when creating membership in a SubChannel for a moderator in an elastic channel.
-            type: The membership type of a user, `DEFAULT` or `HIDDEN`. Default members are always returned as part of `ListChannelMemberships`. Hidden members are only returned if the type filter in `ListChannelMemberships` equals `HIDDEN`. Otherwise hidden members are not returned. This is only supported by moderators.
     - name: list-channel-messages
       description: List all the messages in a channel.
       flags:
@@ -492,139 +56,26 @@ commands:
             sort-order:
                 - ASCENDING
                 - DESCENDING
-      documentation:
-        command: |-
-            List all the messages in a channel. Returns a paginated list of `ChannelMessages`. By default, sorted by creation timestamp in descending order.
-
-            Redacted messages appear in the results as empty, since they are only redacted, not deleted. Deleted messages do not appear in the results. This action always returns the latest version of an edited message.
-
-            Also, the `x-amz-chime-bearer` request header is mandatory. Use the ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call as the value in the header.
-        flag:
-            channel-arn: The ARN of the channel.
-            chime-bearer: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-results: The maximum number of messages that you want returned.
-            next-token: The token passed by previous API calls until all requested messages are returned.
-            not-after: The final or ending time stamp for your requested messages.
-            not-before: The initial or starting time stamp for your requested messages.
-            sort-order: The order in which you want messages sorted. Default is Descending, based on time created.
-            sub-channel-id: |-
-                The ID of the SubChannel in the request.
-
-                Only required when listing the messages in a SubChannel that the user belongs to.
-    - name: redact-channel-message
-      description: Redacts message content and metadata.
+    - name: list-channels-moderated-by-app-instance-user
+      description: A list of the channels moderated by an `AppInstanceUser`.
       flags:
-        --channel-arn=!: The ARN of the channel containing the messages that you want to redact.
+        --app-instance-user-arn=: The ARN of the user or bot in the moderated channel.
         --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --message-id=!: The ID of the message being redacted.
-        --sub-channel-id=: The ID of the SubChannel in the request.
-      documentation:
-        command: |-
-            Redacts message content and metadata. The message exists in the back end, but the action returns null content, and the state shows as redacted.
-
-            The `x-amz-chime-bearer` request header is mandatory. Use the ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call as the value in the header.
-        flag:
-            channel-arn: The ARN of the channel containing the messages that you want to redact.
-            chime-bearer: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            message-id: The ID of the message being redacted.
-            sub-channel-id: The ID of the SubChannel in the request.
-    - name: delete-channel-flow
-      description: Deletes a channel flow, an irreversible process.
+        --max-results=: The maximum number of channels in the request.
+        --next-token=: The token returned from previous API requests until the number of channels moderated by the user is reached.
+    - name: list-sub-channels
+      description: Lists all the SubChannels in an elastic channel when given a channel ID.
       flags:
-        --channel-flow-arn=!: The ARN of the channel flow.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: |-
-            Deletes a channel flow, an irreversible process. This is a developer API.
-
-            This API works only when the channel flow is not associated with any channel. To get a list of all channels that a channel flow is associated with, use the `ListChannelsAssociatedWithChannelFlow` API. Use the `DisassociateChannelFlow` API to disassociate a channel flow from all channels.
-        flag:
-            channel-flow-arn: The ARN of the channel flow.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: disassociate-channel-flow
-      description: Disassociates a channel flow from all its channels.
-      flags:
-        --channel-arn=!: The ARN of the channel.
-        --channel-flow-arn=!: The ARN of the channel flow.
+        --channel-arn=!: The ARN of elastic channel.
         --chime-bearer=!: The `AppInstanceUserArn` of the user making the API call.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: |-
-            Disassociates a channel flow from all its channels. Once disassociated, all messages to that channel stop going through the channel flow processor.
-
-            Only administrators or channel moderators can disassociate a channel flow.
-
-            The `x-amz-chime-bearer` request header is mandatory. Use the ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call as the value in the header.
-        flag:
-            channel-arn: The ARN of the channel.
-            channel-flow-arn: The ARN of the channel flow.
-            chime-bearer: The `AppInstanceUserArn` of the user making the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
+        --max-results=: The maximum number of sub-channels that you want to return.
+        --next-token=: The token passed by previous API calls until all requested sub-channels are returned.
     - name: update-channel-flow
       description: Updates channel flow attributes.
       flags:
@@ -634,761 +85,6 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the channel flow.
         --processors=!: Information about the processor Lambda functions
-      documentation:
-        command: Updates channel flow attributes. This is a developer API.
-        flag:
-            channel-flow-arn: The ARN of the channel flow.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            name: The name of the channel flow.
-            processors: Information about the processor Lambda functions
-    - name: delete-channel
-      description: Immediately makes a channel and its memberships inaccessible and marks them for deletion.
-      flags:
-        --channel-arn=!: The ARN of the channel being deleted.
-        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: |-
-            Immediately makes a channel and its memberships inaccessible and marks them for deletion. This is an irreversible process.
-
-            The `x-amz-chime-bearer` request header is mandatory. Use the ARN of the `AppInstanceUserArn` or `AppInstanceBot` that makes the API call as the value in the header.
-        flag:
-            channel-arn: The ARN of the channel being deleted.
-            chime-bearer: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: delete-messaging-streaming-configurations
-      description: Deletes the streaming configurations for an `AppInstance`.
-      flags:
-        --app-instance-arn=!: The ARN of the streaming configurations being deleted.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Deletes the streaming configurations for an `AppInstance`. For more information, see [Streaming messaging data](https://docs.aws.amazon.com/chime-sdk/latest/dg/streaming-export.html) in the *Amazon Chime SDK Developer Guide*.
-        flag:
-            app-instance-arn: The ARN of the streaming configurations being deleted.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: get-channel-message
-      description: Gets the full details of a channel message.
-      flags:
-        --channel-arn=!: The ARN of the channel.
-        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --message-id=!: The ID of the message.
-        --sub-channel-id=: The ID of the SubChannel in the request.
-      documentation:
-        command: |-
-            Gets the full details of a channel message.
-
-            The `x-amz-chime-bearer` request header is mandatory. Use the ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call as the value in the header.
-        flag:
-            channel-arn: The ARN of the channel.
-            chime-bearer: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            message-id: The ID of the message.
-            sub-channel-id: |-
-                The ID of the SubChannel in the request.
-
-                Only required when getting messages in a SubChannel that the user belongs to.
-    - name: get-channel-message-status
-      description: Gets message status for a specified `messageId`.
-      flags:
-        --channel-arn=!: The ARN of the channel
-        --chime-bearer=!: The `AppInstanceUserArn` of the user making the API call.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --message-id=!: The ID of the message.
-        --sub-channel-id=: The ID of the SubChannel in the request.
-      documentation:
-        command: |-
-            Gets message status for a specified `messageId`. Use this API to determine the intermediate status of messages going through channel flow processing. The API provides an alternative to retrieving message status if the event was not received because a client wasn't connected to a websocket.
-
-            Messages can have any one of these statuses.
-
-            SENT
-
-            Message processed successfully
-
-            PENDING
-
-            Ongoing processing
-
-            FAILED
-
-            Processing failed
-
-            DENIED
-
-            Message denied by the processor
-
-            - This API does not return statuses for denied messages, because we don't store them once the processor denies them.
-            - Only the message sender can invoke this API.
-            - The `x-amz-chime-bearer` request header is mandatory. Use the ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call as the value in the header.
-        flag:
-            channel-arn: The ARN of the channel
-            chime-bearer: The `AppInstanceUserArn` of the user making the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            message-id: The ID of the message.
-            sub-channel-id: |-
-                The ID of the SubChannel in the request.
-
-                Only required when getting message status in a SubChannel that the user belongs to.
-    - name: get-messaging-streaming-configurations
-      description: Retrieves the data streaming configuration for an `AppInstance`.
-      flags:
-        --app-instance-arn=!: The ARN of the streaming configurations.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Retrieves the data streaming configuration for an `AppInstance`. For more information, see [Streaming messaging data](https://docs.aws.amazon.com/chime-sdk/latest/dg/streaming-export.html) in the *Amazon Chime SDK Developer Guide*.
-        flag:
-            app-instance-arn: The ARN of the streaming configurations.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: list-channel-flows
-      description: Returns a paginated lists of all the channel flows created under a single Chime.
-      flags:
-        --app-instance-arn=!: The ARN of the app instance.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of channel flows that you want to return.
-        --next-token=: The token passed by previous API calls until all requested channel flows are returned.
-      documentation:
-        command: Returns a paginated lists of all the channel flows created under a single Chime. This is a developer API.
-        flag:
-            app-instance-arn: The ARN of the app instance.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-results: The maximum number of channel flows that you want to return.
-            next-token: The token passed by previous API calls until all requested channel flows are returned.
-    - name: list-channel-memberships
-      description: Lists all channel memberships in a channel.
-      flags:
-        --channel-arn=!: The maximum number of channel memberships that you want returned.
-        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of channel memberships that you want returned.
-        --next-token=: The token passed by previous API calls until all requested channel memberships are returned.
-        --sub-channel-id=: The ID of the SubChannel in the request.
-        --type=: The membership type of a user, `DEFAULT` or `HIDDEN`.
-      completion:
-        flag:
-            type:
-                - DEFAULT
-                - HIDDEN
-      documentation:
-        command: |-
-            Lists all channel memberships in a channel.
-
-            The `x-amz-chime-bearer` request header is mandatory. Use the ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call as the value in the header.
-
-            If you want to list the channels to which a specific app instance user belongs, see the [ListChannelMembershipsForAppInstanceUser](https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_ListChannelMembershipsForAppInstanceUser.html) API.
-        flag:
-            channel-arn: The maximum number of channel memberships that you want returned.
-            chime-bearer: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-results: The maximum number of channel memberships that you want returned.
-            next-token: The token passed by previous API calls until all requested channel memberships are returned.
-            sub-channel-id: |-
-                The ID of the SubChannel in the request.
-
-                Only required when listing a user's memberships in a particular sub-channel of an elastic channel.
-            type: The membership type of a user, `DEFAULT` or `HIDDEN`. Default members are returned as part of `ListChannelMemberships` if no type is specified. Hidden members are only returned if the type filter in `ListChannelMemberships` equals `HIDDEN`.
-    - name: list-channel-moderators
-      description: Lists all the moderators for a channel.
-      flags:
-        --channel-arn=!: The ARN of the channel.
-        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of moderators that you want returned.
-        --next-token=: The token passed by previous API calls until all requested moderators are returned.
-      documentation:
-        command: |-
-            Lists all the moderators for a channel.
-
-            The `x-amz-chime-bearer` request header is mandatory. Use the ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call as the value in the header.
-        flag:
-            channel-arn: The ARN of the channel.
-            chime-bearer: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-results: The maximum number of moderators that you want returned.
-            next-token: The token passed by previous API calls until all requested moderators are returned.
-    - name: delete-channel-message
-      description: Deletes a channel message.
-      flags:
-        --channel-arn=!: The ARN of the channel.
-        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --message-id=!: The ID of the message being deleted.
-        --sub-channel-id=: The ID of the SubChannel in the request.
-      documentation:
-        command: |-
-            Deletes a channel message. Only admins can perform this action. Deletion makes messages inaccessible immediately. A background process deletes any revisions created by `UpdateChannelMessage`.
-
-            The `x-amz-chime-bearer` request header is mandatory. Use the ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call as the value in the header.
-        flag:
-            channel-arn: The ARN of the channel.
-            chime-bearer: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            message-id: The ID of the message being deleted.
-            sub-channel-id: |-
-                The ID of the SubChannel in the request.
-
-                Only required when deleting messages in a SubChannel that the user belongs to.
-    - name: put-channel-membership-preferences
-      description: Sets the membership preferences of an `AppInstanceUser` or `AppInstanceBot` for the specified channel.
-      flags:
-        --channel-arn=!: The ARN of the channel.
-        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --member-arn=!: The ARN of the member setting the preferences.
-        --preferences=!: The channel membership preferences of an `AppInstanceUser` .
-      documentation:
-        command: |-
-            Sets the membership preferences of an `AppInstanceUser` or `AppInstanceBot` for the specified channel. The user or bot must be a member of the channel. Only the user or bot who owns the membership can set preferences. Users or bots in the `AppInstanceAdmin` and channel moderator roles can't set preferences for other users. Banned users or bots can't set membership preferences for the channel from which they are banned.
-
-            The x-amz-chime-bearer request header is mandatory. Use the ARN of an `AppInstanceUser` or `AppInstanceBot` that makes the API call as the value in the header.
-        flag:
-            channel-arn: The ARN of the channel.
-            chime-bearer: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            member-arn: The ARN of the member setting the preferences.
-            preferences: The channel membership preferences of an `AppInstanceUser` .
-    - name: send-channel-message
-      description: Sends a message to a particular channel that the member is a part of.
-      flags:
-        --channel-arn=!: The ARN of the channel.
-        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=!: The `Idempotency` token for each client request.
-        --content-type=: The content type of the channel message.
-        --content=!: The content of the channel message.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --message-attributes=: The attributes for the message, used for message filtering along with a `FilterRule` defined in the `PushNotificationPreferences`.
-        --metadata=: The optional metadata for each message.
-        --persistence=!: Boolean that controls whether the message is persisted on the back end.
-        --push-notification=: The push notification configuration of the message.
-        --sub-channel-id=: The ID of the SubChannel in the request.
-        --target=: The target of a message.
-        --type=!: The type of message, `STANDARD` or `CONTROL`.
-      completion:
-        flag:
-            persistence:
-                - PERSISTENT
-                - NON_PERSISTENT
-            type:
-                - STANDARD
-                - CONTROL
-      documentation:
-        command: |-
-            Sends a message to a particular channel that the member is a part of.
-
-            The `x-amz-chime-bearer` request header is mandatory. Use the ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call as the value in the header.
-
-            Also, `STANDARD` messages can be up to 4KB in size and contain metadata. Metadata is arbitrary, and you can use it in a variety of ways, such as containing a link to an attachment.
-
-            `CONTROL` messages are limited to 30 bytes and do not contain metadata.
-        flag:
-            channel-arn: The ARN of the channel.
-            chime-bearer: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-request-token: The `Idempotency` token for each client request.
-            content: The content of the channel message.
-            content-type: The content type of the channel message.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            message-attributes: The attributes for the message, used for message filtering along with a `FilterRule` defined in the `PushNotificationPreferences`.
-            metadata: The optional metadata for each message.
-            persistence: Boolean that controls whether the message is persisted on the back end. Required.
-            push-notification: The push notification configuration of the message.
-            sub-channel-id: The ID of the SubChannel in the request.
-            target: The target of a message. Must be a member of the channel, such as another user, a bot, or the sender. Only the target and the sender can view targeted messages. Only users who can see targeted messages can take actions on them. However, administrators can delete targeted messages that they can’t see.
-            type: |-
-                The type of message, `STANDARD` or `CONTROL`.
-
-                `STANDARD` messages can be up to 4KB in size and contain metadata. Metadata is arbitrary, and you can use it in a variety of ways, such as containing a link to an attachment.
-
-                `CONTROL` messages are limited to 30 bytes and do not contain metadata.
-    - name: tag-resource
-      description: Applies the specified tags to the specified Amazon Chime SDK messaging resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The resource ARN.
-        --tags=!: The tag key-value pairs.
-      documentation:
-        command: Applies the specified tags to the specified Amazon Chime SDK messaging resource.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-arn: The resource ARN.
-            tags: The tag key-value pairs.
-    - name: untag-resource
-      description: Removes the specified tags from the specified Amazon Chime SDK messaging resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The resource ARN.
-        --tag-keys=!: The tag keys.
-      documentation:
-        command: Removes the specified tags from the specified Amazon Chime SDK messaging resource.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-arn: The resource ARN.
-            tag-keys: The tag keys.
-    - name: update-channel
-      description: Update a channel's attributes.
-      flags:
-        --channel-arn=!: The ARN of the channel.
-        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --metadata=: The metadata for the update request.
-        --mode=: The mode of the update request.
-        --name=: The name of the channel.
-      completion:
-        flag:
-            mode:
-                - UNRESTRICTED
-                - RESTRICTED
-      documentation:
-        command: |-
-            Update a channel's attributes.
-
-            **Restriction**: You can't change a channel's privacy.
-
-            The `x-amz-chime-bearer` request header is mandatory. Use the ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call as the value in the header.
-        flag:
-            channel-arn: The ARN of the channel.
-            chime-bearer: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            metadata: The metadata for the update request.
-            mode: The mode of the update request.
-            name: The name of the channel.
-    - name: update-channel-message
-      description: Updates the content of a message.
-      flags:
-        --channel-arn=!: The ARN of the channel.
-        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-type=: The content type of the channel message.
-        --content=!: The content of the channel message.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --message-id=!: The ID string of the message being updated.
-        --metadata=: The metadata of the message being updated.
-        --sub-channel-id=: The ID of the SubChannel in the request.
-      documentation:
-        command: |-
-            Updates the content of a message.
-
-            The `x-amz-chime-bearer` request header is mandatory. Use the ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call as the value in the header.
-        flag:
-            channel-arn: The ARN of the channel.
-            chime-bearer: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            content: The content of the channel message.
-            content-type: The content type of the channel message.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            message-id: The ID string of the message being updated.
-            metadata: The metadata of the message being updated.
-            sub-channel-id: |-
-                The ID of the SubChannel in the request.
-
-                Only required when updating messages in a SubChannel that the user belongs to.
-    - name: update-channel-read-marker
-      description: The details of the time when a user last read messages in a channel.
-      flags:
-        --channel-arn=!: The ARN of the channel.
-        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: |-
-            The details of the time when a user last read messages in a channel.
-
-            The `x-amz-chime-bearer` request header is mandatory. Use the ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call as the value in the header.
-        flag:
-            channel-arn: The ARN of the channel.
-            chime-bearer: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: describe-channel-flow
-      description: Returns the full details of a channel flow in an Amazon Chime `AppInstance`.
-      flags:
-        --channel-flow-arn=!: The ARN of the channel flow.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Returns the full details of a channel flow in an Amazon Chime `AppInstance`. This is a developer API.
-        flag:
-            channel-flow-arn: The ARN of the channel flow.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: delete-channel-ban
-      description: Removes a member from a channel's ban list.
-      flags:
-        --channel-arn=!: The ARN of the channel from which the `AppInstanceUser` was banned.
-        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --member-arn=!: The ARN of the `AppInstanceUser` that you want to reinstate.
-      documentation:
-        command: |-
-            Removes a member from a channel's ban list.
-
-            The `x-amz-chime-bearer` request header is mandatory. Use the ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call as the value in the header.
-        flag:
-            channel-arn: The ARN of the channel from which the `AppInstanceUser` was banned.
-            chime-bearer: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            member-arn: The ARN of the `AppInstanceUser` that you want to reinstate.
-    - name: delete-channel-moderator
-      description: Deletes a channel moderator.
-      flags:
-        --channel-arn=!: The ARN of the channel.
-        --channel-moderator-arn=!: The `AppInstanceUserArn` of the moderator being deleted.
-        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: |-
-            Deletes a channel moderator.
-
-            The `x-amz-chime-bearer` request header is mandatory. Use the ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call as the value in the header.
-        flag:
-            channel-arn: The ARN of the channel.
-            channel-moderator-arn: The `AppInstanceUserArn` of the moderator being deleted.
-            chime-bearer: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: associate-channel-flow
-      description: Associates a channel flow with a channel.
-      flags:
-        --channel-arn=!: The ARN of the channel.
-        --channel-flow-arn=!: The ARN of the channel flow.
-        --chime-bearer=!: The `AppInstanceUserArn` of the user making the API call.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: |-
-            Associates a channel flow with a channel. Once associated, all messages to that channel go through channel flow processors. To stop processing, use the `DisassociateChannelFlow` API.
-
-            Only administrators or channel moderators can associate a channel flow. The `x-amz-chime-bearer` request header is mandatory. Use the ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call as the value in the header.
-        flag:
-            channel-arn: The ARN of the channel.
-            channel-flow-arn: The ARN of the channel flow.
-            chime-bearer: The `AppInstanceUserArn` of the user making the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
     - name: create-channel
       description: Creates a channel to which you can add users and send messages.
       flags:
@@ -1416,222 +112,49 @@ commands:
             privacy:
                 - PUBLIC
                 - PRIVATE
-      documentation:
-        command: |-
-            Creates a channel to which you can add users and send messages.
-
-            **Restriction**: You can't change a channel's privacy.
-
-            The `x-amz-chime-bearer` request header is mandatory. Use the ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call as the value in the header.
-        flag:
-            app-instance-arn: The ARN of the channel request.
-            channel-id: An ID for the channel being created. If you do not specify an ID, a UUID will be created for the channel.
-            chime-bearer: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-request-token: The client token for the request. An `Idempotency` token.
-            elastic-channel-configuration: The attributes required to configure and create an elastic channel. An elastic channel can support a maximum of 1-million users, excluding moderators.
-            expiration-settings: Settings that control the interval after which the channel is automatically deleted.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            member-arns: The ARNs of the channel members in the request.
-            metadata: The metadata of the creation request. Limited to 1KB and UTF-8.
-            mode: 'The channel mode: `UNRESTRICTED` or `RESTRICTED`. Administrators, moderators, and channel members can add themselves and other members to unrestricted channels. Only administrators and moderators can add members to restricted channels.'
-            moderator-arns: The ARNs of the channel moderators in the request.
-            name: The name of the channel.
-            privacy: 'The channel''s privacy level: `PUBLIC` or `PRIVATE`. Private channels aren''t discoverable by users outside the channel. Public channels are discoverable by anyone in the `AppInstance`.'
-            tags: The tags for the creation request.
-    - name: create-channel-ban
-      description: Permanently bans a member from a channel.
+    - name: get-channel-message-status
+      description: Gets message status for a specified `messageId`.
       flags:
-        --channel-arn=!: The ARN of the ban request.
-        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
+        --channel-arn=!: The ARN of the channel
+        --chime-bearer=!: The `AppInstanceUserArn` of the user making the API call.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --member-arn=!: The `AppInstanceUserArn` of the member being banned.
-      documentation:
-        command: |-
-            Permanently bans a member from a channel. Moderators can't add banned members to a channel. To undo a ban, you first have to `DeleteChannelBan`, and then `CreateChannelMembership`. Bans are cleaned up when you delete users or channels.
-
-            If you ban a user who is already part of a channel, that user is automatically kicked from the channel.
-
-            The `x-amz-chime-bearer` request header is mandatory. Use the ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call as the value in the header.
-        flag:
-            channel-arn: The ARN of the ban request.
-            chime-bearer: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            member-arn: The `AppInstanceUserArn` of the member being banned.
-    - name: create-channel-moderator
-      description: Creates a new `ChannelModerator`.
-      flags:
-        --channel-arn=!: The ARN of the channel.
-        --channel-moderator-arn=!: The `AppInstanceUserArn` of the moderator.
-        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: |-
-            Creates a new `ChannelModerator`. A channel moderator can:
-
-            - Add and remove other members of the channel.
-            - Add and remove other moderators of the channel.
-            - Add and remove user bans for the channel.
-            - Redact messages in the channel.
-            - List messages in the channel.
-
-            The `x-amz-chime-bearer` request header is mandatory. Use the ARN of the `AppInstanceUser` or `AppInstanceBot`of the user that makes the API call as the value in the header.
-        flag:
-            channel-arn: The ARN of the channel.
-            channel-moderator-arn: The `AppInstanceUserArn` of the moderator.
-            chime-bearer: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: list-channel-bans
-      description: Lists all the users and bots banned from a particular channel.
-      flags:
-        --channel-arn=!: The ARN of the channel.
-        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of bans that you want returned.
-        --next-token=: The token passed by previous API calls until all requested bans are returned.
-      documentation:
-        command: |-
-            Lists all the users and bots banned from a particular channel.
-
-            The `x-amz-chime-bearer` request header is mandatory. Use the ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call as the value in the header.
-        flag:
-            channel-arn: The ARN of the channel.
-            chime-bearer: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-results: The maximum number of bans that you want returned.
-            next-token: The token passed by previous API calls until all requested bans are returned.
-    - name: delete-channel-membership
-      description: Removes a member from a channel.
-      flags:
-        --channel-arn=!: The ARN of the channel from which you want to remove the user.
-        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --member-arn=!: The `AppInstanceUserArn` of the member that you're removing from the channel.
+        --message-id=!: The ID of the message.
         --sub-channel-id=: The ID of the SubChannel in the request.
-      documentation:
-        command: |-
-            Removes a member from a channel.
-
-            The `x-amz-chime-bearer` request header is mandatory. Use the `AppInstanceUserArn` of the user that makes the API call as the value in the header.
-        flag:
-            channel-arn: The ARN of the channel from which you want to remove the user.
-            chime-bearer: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            member-arn: The `AppInstanceUserArn` of the member that you're removing from the channel.
-            sub-channel-id: |-
-                The ID of the SubChannel in the request.
-
-                Only for use by moderators.
-    - name: get-channel-membership-preferences
-      description: Gets the membership preferences of an `AppInstanceUser` or `AppInstanceBot` for the specified channel.
+    - name: redact-channel-message
+      description: Redacts message content and metadata.
       flags:
-        --channel-arn=!: The ARN of the channel.
+        --channel-arn=!: The ARN of the channel containing the messages that you want to redact.
         --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --member-arn=!: The `AppInstanceUserArn` of the member retrieving the preferences.
-      documentation:
-        command: |-
-            Gets the membership preferences of an `AppInstanceUser` or `AppInstanceBot` for the specified channel. A user or a bot must be a member of the channel and own the membership in order to retrieve membership preferences. Users or bots in the `AppInstanceAdmin` and channel moderator roles can't retrieve preferences for other users or bots. Banned users or bots can't retrieve membership preferences for the channel from which they are banned.
-
-            The `x-amz-chime-bearer` request header is mandatory. Use the ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call as the value in the header.
-        flag:
-            channel-arn: The ARN of the channel.
-            chime-bearer: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            member-arn: The `AppInstanceUserArn` of the member retrieving the preferences.
+        --message-id=!: The ID of the message being redacted.
+        --sub-channel-id=: The ID of the SubChannel in the request.
+    - name: associate-channel-flow
+      description: Associates a channel flow with a channel.
+      flags:
+        --channel-arn=!: The ARN of the channel.
+        --channel-flow-arn=!: The ARN of the channel flow.
+        --chime-bearer=!: The `AppInstanceUserArn` of the user making the API call.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-channel-flow
+      description: Deletes a channel flow, an irreversible process.
+      flags:
+        --channel-flow-arn=!: The ARN of the channel flow.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-messaging-streaming-configurations
+      description: Deletes the streaming configurations for an `AppInstance`.
+      flags:
+        --app-instance-arn=!: The ARN of the streaming configurations being deleted.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-channel-memberships-for-app-instance-user
       description: Lists all channels that an `AppInstanceUser` or `AppInstanceBot` is a part of.
       flags:
@@ -1642,89 +165,15 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The maximum number of users that you want returned.
         --next-token=: The token returned from previous API requests until the number of channel memberships is reached.
-      documentation:
-        command: |-
-            Lists all channels that an `AppInstanceUser` or `AppInstanceBot` is a part of. Only an `AppInstanceAdmin` can call the API with a user ARN that is not their own.
-
-            The `x-amz-chime-bearer` request header is mandatory. Use the ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call as the value in the header.
-        flag:
-            app-instance-user-arn: The ARN of the user or bot.
-            chime-bearer: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-results: The maximum number of users that you want returned.
-            next-token: The token returned from previous API requests until the number of channel memberships is reached.
-    - name: list-sub-channels
-      description: Lists all the SubChannels in an elastic channel when given a channel ID.
+    - name: list-channels-associated-with-channel-flow
+      description: Lists all channels associated with a specified channel flow.
       flags:
-        --channel-arn=!: The ARN of elastic channel.
-        --chime-bearer=!: The `AppInstanceUserArn` of the user making the API call.
+        --channel-flow-arn=!: The ARN of the channel flow.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of sub-channels that you want to return.
-        --next-token=: The token passed by previous API calls until all requested sub-channels are returned.
-      documentation:
-        command: Lists all the SubChannels in an elastic channel when given a channel ID. Available only to the app instance admins and channel moderators of elastic channels.
-        flag:
-            channel-arn: The ARN of elastic channel.
-            chime-bearer: The `AppInstanceUserArn` of the user making the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-results: The maximum number of sub-channels that you want to return.
-            next-token: The token passed by previous API calls until all requested sub-channels are returned.
-    - name: list-tags-for-resource
-      description: Lists the tags applied to an Amazon Chime SDK messaging resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource.
-      documentation:
-        command: Lists the tags applied to an Amazon Chime SDK messaging resource.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-arn: The ARN of the resource.
+        --max-results=: The maximum number of channels that you want to return.
+        --next-token=: The token passed by previous API calls until all requested channels are returned.
     - name: put-channel-expiration-settings
       description: Sets the number of days before the channel is automatically deleted.
       flags:
@@ -1734,32 +183,87 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --expiration-settings=: Settings that control the interval after which a channel is deleted.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: |-
-            Sets the number of days before the channel is automatically deleted.
-
-            - A background process deletes expired channels within 6 hours of expiration. Actual deletion times may vary.
-            - Expired channels that have not yet been deleted appear as active, and you can update their expiration settings. The system honors the new settings.
-            - The `x-amz-chime-bearer` request header is mandatory. Use the ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call as the value in the header.
-        flag:
-            channel-arn: The ARN of the channel.
-            chime-bearer: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            expiration-settings: Settings that control the interval after which a channel is deleted.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
+    - name: update-channel-message
+      description: Updates the content of a message.
+      flags:
+        --channel-arn=!: The ARN of the channel.
+        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content-type=: The content type of the channel message.
+        --content=!: The content of the channel message.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --message-id=!: The ID string of the message being updated.
+        --metadata=: The metadata of the message being updated.
+        --sub-channel-id=: The ID of the SubChannel in the request.
+    - name: get-messaging-streaming-configurations
+      description: Retrieves the data streaming configuration for an `AppInstance`.
+      flags:
+        --app-instance-arn=!: The ARN of the streaming configurations.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-channel-membership-preferences
+      description: Gets the membership preferences of an `AppInstanceUser` or `AppInstanceBot` for the specified channel.
+      flags:
+        --channel-arn=!: The ARN of the channel.
+        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --member-arn=!: The `AppInstanceUserArn` of the member retrieving the preferences.
+    - name: get-channel-message
+      description: Gets the full details of a channel message.
+      flags:
+        --channel-arn=!: The ARN of the channel.
+        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --message-id=!: The ID of the message.
+        --sub-channel-id=: The ID of the SubChannel in the request.
+    - name: create-channel-moderator
+      description: Creates a new `ChannelModerator`.
+      flags:
+        --channel-arn=!: The ARN of the channel.
+        --channel-moderator-arn=!: The `AppInstanceUserArn` of the moderator.
+        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-channel-flow
+      description: Returns the full details of a channel flow in an Amazon Chime `AppInstance`.
+      flags:
+        --channel-flow-arn=!: The ARN of the channel flow.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-channel-membership-for-app-instance-user
+      description: Returns the details of a channel based on the membership of the specified `AppInstanceUser` or `AppInstanceBot`.
+      flags:
+        --app-instance-user-arn=!: The ARN of the user or bot in a channel.
+        --channel-arn=!: The ARN of the channel to which the user belongs.
+        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-channel-moderator
+      description: Returns the full details of a single ChannelModerator.
+      flags:
+        --channel-arn=!: The ARN of the channel.
+        --channel-moderator-arn=!: The `AppInstanceUserArn` of the channel moderator.
+        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: put-messaging-streaming-configurations
+      description: Sets the data streaming configuration for an `AppInstance`.
+      flags:
+        --app-instance-arn=!: The ARN of the streaming configuration.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --streaming-configurations=!: The streaming configurations.
     - name: batch-create-channel-membership
       description: Adds a specified number of users and bots to a channel.
       flags:
@@ -1776,32 +280,208 @@ commands:
             type:
                 - DEFAULT
                 - HIDDEN
-      documentation:
-        command: Adds a specified number of users and bots to a channel.
+    - name: channel-flow-callback
+      description: Calls back Amazon Chime SDK messaging with a processing response message.
+      flags:
+        --callback-id=!: The identifier passed to the processor by the service when invoked.
+        --channel-arn=!: The ARN of the channel.
+        --channel-message=!: Stores information about the processed message.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delete-resource: When a processor determines that a message needs to be `DENIED`, pass this parameter with a value of true.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-delete-resource: When a processor determines that a message needs to be `DENIED`, pass this parameter with a value of true.
+    - name: delete-channel
+      description: Immediately makes a channel and its memberships inaccessible and marks them for deletion.
+      flags:
+        --channel-arn=!: The ARN of the channel being deleted.
+        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-channel-ban
+      description: Returns the full details of a channel ban.
+      flags:
+        --channel-arn=!: The ARN of the channel from which the user is banned.
+        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --member-arn=!: The `AppInstanceUserArn` of the member being banned.
+    - name: list-channel-bans
+      description: Lists all the users and bots banned from a particular channel.
+      flags:
+        --channel-arn=!: The ARN of the channel.
+        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of bans that you want returned.
+        --next-token=: The token passed by previous API calls until all requested bans are returned.
+    - name: list-channels
+      description: Lists all Channels created under a single Chime App as a paginated list.
+      flags:
+        --app-instance-arn=!: The ARN of the `AppInstance`.
+        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of channels that you want to return.
+        --next-token=: The token passed by previous API calls until all requested channels are returned.
+        --privacy=: The privacy setting.
+      completion:
         flag:
-            channel-arn: The ARN of the channel to which you're adding users or bots.
-            chime-bearer: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            member-arns: The ARNs of the members you want to add to the channel. Only `AppInstanceUsers` and `AppInstanceBots` can be added as a channel member.
-            sub-channel-id: |-
-                The ID of the SubChannel in the request.
-
-                Only required when creating membership in a SubChannel for a moderator in an elastic channel.
-            type: The membership type of a user, `DEFAULT` or `HIDDEN`. Default members are always returned as part of `ListChannelMemberships`. Hidden members are only returned if the type filter in `ListChannelMemberships` equals `HIDDEN`. Otherwise hidden members are not returned. This is only supported by moderators.
+            privacy:
+                - PUBLIC
+                - PRIVATE
+    - name: search-channels
+      description: Allows the `ChimeBearer` to search channels by channel members.
+      flags:
+        --chime-bearer=: The `AppInstanceUserArn` of the user making the API call.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fields=!: A list of the `Field` objects in the channel being searched.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of channels that you want returned.
+        --next-token=: The token returned from previous API requests until the number of channels is reached.
+    - name: send-channel-message
+      description: Sends a message to a particular channel that the member is a part of.
+      flags:
+        --channel-arn=!: The ARN of the channel.
+        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=!: The `Idempotency` token for each client request.
+        --content-type=: The content type of the channel message.
+        --content=!: The content of the channel message.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --message-attributes=: The attributes for the message, used for message filtering along with a `FilterRule` defined in the `PushNotificationPreferences`.
+        --metadata=: The optional metadata for each message.
+        --persistence=!: Boolean that controls whether the message is persisted on the back end.
+        --push-notification=: The push notification configuration of the message.
+        --sub-channel-id=: The ID of the SubChannel in the request.
+        --target=: The target of a message.
+        --type=!: The type of message, `STANDARD` or `CONTROL`.
+      completion:
+        flag:
+            persistence:
+                - PERSISTENT
+                - NON_PERSISTENT
+            type:
+                - STANDARD
+                - CONTROL
+    - name: list-tags-for-resource
+      description: Lists the tags applied to an Amazon Chime SDK messaging resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource.
+    - name: put-channel-membership-preferences
+      description: Sets the membership preferences of an `AppInstanceUser` or `AppInstanceBot` for the specified channel.
+      flags:
+        --channel-arn=!: The ARN of the channel.
+        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --member-arn=!: The ARN of the member setting the preferences.
+        --preferences=!: The channel membership preferences of an `AppInstanceUser` .
+    - name: update-channel
+      description: Update a channel's attributes.
+      flags:
+        --channel-arn=!: The ARN of the channel.
+        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --metadata=: The metadata for the update request.
+        --mode=: The mode of the update request.
+        --name=: The name of the channel.
+      completion:
+        flag:
+            mode:
+                - UNRESTRICTED
+                - RESTRICTED
+    - name: update-channel-read-marker
+      description: The details of the time when a user last read messages in a channel.
+      flags:
+        --channel-arn=!: The ARN of the channel.
+        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-channel-ban
+      description: Permanently bans a member from a channel.
+      flags:
+        --channel-arn=!: The ARN of the ban request.
+        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --member-arn=!: The `AppInstanceUserArn` of the member being banned.
+    - name: create-channel-membership
+      description: Adds a member to a channel.
+      flags:
+        --channel-arn=!: The ARN of the channel to which you're adding users.
+        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --member-arn=!: The `AppInstanceUserArn` of the member you want to add to the channel.
+        --sub-channel-id=: The ID of the SubChannel in the request.
+        --type=!: The membership type of a user, `DEFAULT` or `HIDDEN`.
+      completion:
+        flag:
+            type:
+                - DEFAULT
+                - HIDDEN
+    - name: delete-channel-ban
+      description: Removes a member from a channel's ban list.
+      flags:
+        --channel-arn=!: The ARN of the channel from which the `AppInstanceUser` was banned.
+        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --member-arn=!: The ARN of the `AppInstanceUser` that you want to reinstate.
+    - name: tag-resource
+      description: Applies the specified tags to the specified Amazon Chime SDK messaging resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The resource ARN.
+        --tags=!: The tag key-value pairs.
+    - name: untag-resource
+      description: Removes the specified tags from the specified Amazon Chime SDK messaging resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The resource ARN.
+        --tag-keys=!: The tag keys.
+    - name: disassociate-channel-flow
+      description: Disassociates a channel flow from all its channels.
+      flags:
+        --channel-arn=!: The ARN of the channel.
+        --channel-flow-arn=!: The ARN of the channel flow.
+        --chime-bearer=!: The `AppInstanceUserArn` of the user making the API call.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-messaging-session-endpoint
+      description: The details of the endpoint for the messaging session.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --network-type=: The type of network for the messaging session endpoint.
+      completion:
+        flag:
+            network-type:
+                - IPV4_ONLY
+                - DUAL_STACK
     - name: create-channel-flow
       description: Creates a channel flow, a container for processors.
       flags:
@@ -1813,38 +493,24 @@ commands:
         --name=!: The name of the channel flow.
         --processors=!: Information about the processor Lambda functions.
         --tags=: The tags for the creation request.
-      documentation:
-        command: |-
-            Creates a channel flow, a container for processors. Processors are AWS Lambda functions that perform actions on chat messages, such as stripping out profanity. You can associate channel flows with channels, and the processors in the channel flow then take action on all messages sent to that channel. This is a developer API.
-
-            Channel flows process the following items:
-
-            1. New and updated messages
-            2. Persistent and non-persistent messages
-            3. The Standard message type
-
-            Channel flows don't process Control or System messages. For more information about the message types provided by Chime SDK messaging, refer to [Message types](https://docs.aws.amazon.com/chime-sdk/latest/dg/using-the-messaging-sdk.html#msg-types) in the *Amazon Chime developer guide*.
-        flag:
-            app-instance-arn: The ARN of the channel flow request.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-request-token: The client token for the request. An Idempotency token.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            name: The name of the channel flow.
-            processors: Information about the processor Lambda functions.
-            tags: The tags for the creation request.
+    - name: describe-channel
+      description: Returns the full details of a channel in an Amazon Chime `AppInstance`.
+      flags:
+        --channel-arn=!: The ARN of the channel.
+        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-channel-membership
+      description: Returns the full details of a user's channel membership.
+      flags:
+        --channel-arn=!: The ARN of the channel.
+        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --member-arn=!: The `AppInstanceUserArn` of the member.
+        --sub-channel-id=: The ID of the SubChannel in the request.
     - name: describe-channel-moderated-by-app-instance-user
       description: Returns the full details of a channel moderated by the specified `AppInstanceUser` or `AppInstanceBot`.
       flags:
@@ -1854,27 +520,32 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: |-
-            Returns the full details of a channel moderated by the specified `AppInstanceUser` or `AppInstanceBot`.
-
-            The `x-amz-chime-bearer` request header is mandatory. Use the ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call as the value in the header.
-        flag:
-            app-instance-user-arn: The ARN of the user or bot in the moderated channel.
-            channel-arn: The ARN of the moderated channel.
-            chime-bearer: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
+    - name: list-channel-flows
+      description: Returns a paginated lists of all the channel flows created under a single Chime.
+      flags:
+        --app-instance-arn=!: The ARN of the app instance.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of channel flows that you want to return.
+        --next-token=: The token passed by previous API calls until all requested channel flows are returned.
+    - name: list-channel-moderators
+      description: Lists all the moderators for a channel.
+      flags:
+        --channel-arn=!: The ARN of the channel.
+        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of moderators that you want returned.
+        --next-token=: The token passed by previous API calls until all requested moderators are returned.
+    - name: delete-channel-membership
+      description: Removes a member from a channel.
+      flags:
+        --channel-arn=!: The ARN of the channel from which you want to remove the user.
+        --chime-bearer=!: The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --member-arn=!: The `AppInstanceUserArn` of the member that you're removing from the channel.
+        --sub-channel-id=: The ID of the SubChannel in the request.

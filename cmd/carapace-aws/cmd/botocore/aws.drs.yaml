@@ -1,6 +1,174 @@
 name: drs
 description: Elastic Disaster Recovery Service
 commands:
+    - name: disconnect-recovery-instance
+      description: Disconnect a Recovery Instance from Elastic Disaster Recovery.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recovery-instance-id=!: The ID of the Recovery Instance to disconnect.
+    - name: associate-source-network-stack
+      description: Associate a Source Network to an existing CloudFormation Stack and modify launch templates to use this network.
+      flags:
+        --cfn-stack-name=!: CloudFormation template to associate with a Source Network.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-network-id=!: The Source Network ID to associate with CloudFormation template.
+    - name: create-source-network
+      description: Create a new Source Network resource for a provided VPC ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --origin-account-id=!: Account containing the VPC to protect.
+        --origin-region=!: Region containing the VPC to protect.
+        --tags=: A set of tags to be associated with the Source Network resource.
+        --vpc-id=!: Which VPC ID to protect.
+    - name: describe-job-log-items
+      description: Retrieves a detailed Job log with pagination.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The ID of the Job for which Job log items will be retrieved.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of Job log items to retrieve.
+        --next-token=: The token of the next Job log items to retrieve.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-jobs
+      description: Returns a list of Jobs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: A set of filters by which to return Jobs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of Jobs to retrieve.
+        --next-token=: The token of the next Job to retrieve.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-replication-configuration-templates
+      description: Lists all ReplicationConfigurationTemplates, filtered by Source Server IDs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of Replication Configuration Templates to retrieve.
+        --next-token=: The token of the next Replication Configuration Template to retrieve.
+        --page-size=: The size of each page to get in the AWS service call.
+        --replication-configuration-template-i-ds=: The IDs of the Replication Configuration Templates to retrieve.
+        --starting-token=: A token to specify where to start paginating.
+    - name: retry-data-replication
+      description: 'WARNING: RetryDataReplication is deprecated.'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-server-id=!: The ID of the Source Server whose data replication should be retried.
+    - name: stop-source-network-replication
+      description: Stops replication for a Source Network.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-network-id=!: ID of the Source Network to stop replication.
+    - name: export-source-network-cfn-template
+      description: Export the Source Network CloudFormation template to an S3 bucket.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-network-id=!: The Source Network ID to export its CloudFormation template to an S3 bucket.
+    - name: get-failback-replication-configuration
+      description: Lists all Failback ReplicationConfigurations, filtered by Recovery Instance ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recovery-instance-id=!: The ID of the Recovery Instance whose failback replication configuration should be returned.
+    - name: list-extensible-source-servers
+      description: 'Returns a list of source servers on a staging account that are extensible, which means that: a.'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of extensible source servers to retrieve.
+        --next-token=: The token of the next extensible source server to retrieve.
+        --page-size=: The size of each page to get in the AWS service call.
+        --staging-account-id=!: The Id of the staging Account to retrieve extensible source servers from.
+        --starting-token=: A token to specify where to start paginating.
+    - name: create-launch-configuration-template
+      description: Creates a new Launch Configuration Template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --copy-private-ip: Copy private IP.
+        --copy-tags: Copy tags.
+        --export-bucket-arn=: S3 bucket ARN to export Source Network templates.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --launch-disposition=: Launch disposition.
+        --launch-into-source-instance: DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.
+        --licensing=: Licensing.
+        --no-copy-private-ip: Copy private IP.
+        --no-copy-tags: Copy tags.
+        --no-launch-into-source-instance: DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.
+        --no-post-launch-enabled: Whether we want to activate post-launch actions.
+        --post-launch-enabled: Whether we want to activate post-launch actions.
+        --tags=: Request to associate tags during creation of a Launch Configuration Template.
+        --target-instance-type-right-sizing-method=: Target instance type right-sizing method.
+      completion:
+        flag:
+            launch-disposition:
+                - STOPPED
+                - STARTED
+            target-instance-type-right-sizing-method:
+                - NONE
+                - BASIC
+                - IN_AWS
+    - name: create-replication-configuration-template
+      description: Creates a new ReplicationConfigurationTemplate.
+      flags:
+        --associate-default-security-group!: Whether to associate the default Elastic Disaster Recovery Security group with the Replication Configuration Template.
+        --auto-replicate-new-disks: Whether to allow the AWS replication agent to automatically replicate newly added disks.
+        --bandwidth-throttling=!: Configure bandwidth throttling for the outbound data transfer rate of the Source Server in Mbps.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --create-public-ip!: Whether to create a Public IP for the Recovery Instance by default.
+        --data-plane-routing=!: The data plane routing mechanism that will be used for replication.
+        --default-large-staging-disk-type=!: The Staging Disk EBS volume type to be used during replication.
+        --ebs-encryption-key-arn=: The ARN of the EBS encryption key to be used during replication.
+        --ebs-encryption=!: The type of EBS encryption to be used during replication.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-associate-default-security-group!: Whether to associate the default Elastic Disaster Recovery Security group with the Replication Configuration Template.
+        --no-auto-replicate-new-disks: Whether to allow the AWS replication agent to automatically replicate newly added disks.
+        --no-create-public-ip!: Whether to create a Public IP for the Recovery Instance by default.
+        --no-use-dedicated-replication-server!: Whether to use a dedicated Replication Server in the replication staging area.
+        --pit-policy=!: The Point in time (PIT) policy to manage snapshots taken during replication.
+        --replication-server-instance-type=!: The instance type to be used for the replication server.
+        --replication-servers-security-groups-ids=!: The security group IDs that will be used by the replication server.
+        --staging-area-subnet-id=!: The subnet to be used by the replication staging area.
+        --staging-area-tags=!: 'A set of tags to be associated with all resources created in the replication staging area: EC2 replication server, EBS volumes, EBS snapshots, etc.'
+        --tags=: A set of tags to be associated with the Replication Configuration Template resource.
+        --use-dedicated-replication-server!: Whether to use a dedicated Replication Server in the replication staging area.
+      completion:
+        flag:
+            data-plane-routing:
+                - PRIVATE_IP
+                - PUBLIC_IP
+            default-large-staging-disk-type:
+                - GP2
+                - GP3
+                - ST1
+                - AUTO
+            ebs-encryption:
+                - DEFAULT
+                - CUSTOM
+                - NONE
     - name: put-launch-action
       description: Puts a resource launch action.
       flags:
@@ -28,61 +196,35 @@ commands:
                 - CONFIGURATION
                 - SECURITY
                 - OTHER
-      documentation:
-        command: Puts a resource launch action.
-        flag:
-            action-code: Launch action code.
-            action-id: ""
-            action-version: ""
-            active: Whether the launch action is active.
-            category: ""
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            description: ""
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            name: ""
-            optional: Whether the launch will not be marked as failed if this action fails.
-            order: ""
-            parameters: ""
-            resource-id: ""
-    - name: retry-data-replication
-      description: 'WARNING: RetryDataReplication is deprecated.'
+    - name: start-source-network-replication
+      description: Starts replication for a Source Network.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-server-id=!: The ID of the Source Server whose data replication should be retried.
-      documentation:
-        command: 'WARNING: RetryDataReplication is deprecated. Causes the data replication initiation sequence to begin immediately upon next Handshake for the specified Source Server ID, regardless of when the previous initiation started. This command will work only if the Source Server is stalled or is in a DISCONNECTED or STOPPED state.'
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            source-server-id: The ID of the Source Server whose data replication should be retried.
+        --source-network-id=!: ID of the Source Network to replicate.
+    - name: tag-resource
+      description: Adds or overwrites only the specified tags for the specified Elastic Disaster Recovery resource or resources.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: ARN of the resource for which tags are to be added or updated.
+        --tags=!: Array of tags to be added or updated.
+    - name: delete-recovery-instance
+      description: Deletes a single Recovery Instance by ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recovery-instance-id=!: The ID of the Recovery Instance to be deleted.
+    - name: get-launch-configuration
+      description: Gets a LaunchConfiguration, filtered by Source Server IDs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-server-id=!: The ID of the Source Server that we want to retrieve a Launch Configuration for.
     - name: stop-replication
       description: Stops replication for a Source Server.
       flags:
@@ -90,25 +232,305 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --source-server-id=!: The ID of the Source Server to stop replication for.
-      documentation:
-        command: Stops replication for a Source Server. This action would make the Source Server unprotected, delete its existing snapshots and stop billing for it.
+    - name: start-recovery
+      description: Launches Recovery Instances for the specified Source Servers.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --is-drill: Whether this Source Server Recovery operation is a drill or not.
+        --no-is-drill: Whether this Source Server Recovery operation is a drill or not.
+        --source-servers=!: The Source Servers that we want to start a Recovery Job for.
+        --tags=: The tags to be associated with the Recovery Job.
+    - name: start-replication
+      description: Starts replication for a stopped Source Server.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-server-id=!: The ID of the Source Server to start replication for.
+    - name: terminate-recovery-instances
+      description: Initiates a Job for terminating the EC2 resources associated with the specified Recovery Instances, and then will delete the Recovery Instances from the Elastic Disaster Recovery service.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recovery-instance-ids=!: The IDs of the Recovery Instances that should be terminated.
+    - name: untag-resource
+      description: Deletes the specified set of tags from the specified set of Elastic Disaster Recovery resources.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: ARN of the resource for which tags are to be removed.
+        --tag-keys=!: Array of tags to be removed.
+    - name: update-launch-configuration
+      description: Updates a LaunchConfiguration by Source Server ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --copy-private-ip: Whether we should copy the Private IP of the Source Server to the Recovery Instance.
+        --copy-tags: Whether we want to copy the tags of the Source Server to the EC2 machine of the Recovery Instance.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --launch-disposition=: The state of the Recovery Instance in EC2 after the recovery operation.
+        --launch-into-instance-properties=: Launch into existing instance properties.
+        --licensing=: The licensing configuration to be used for this launch configuration.
+        --name=: The name of the launch configuration.
+        --no-copy-private-ip: Whether we should copy the Private IP of the Source Server to the Recovery Instance.
+        --no-copy-tags: Whether we want to copy the tags of the Source Server to the EC2 machine of the Recovery Instance.
+        --no-post-launch-enabled: Whether we want to enable post-launch actions for the Source Server.
+        --post-launch-enabled: Whether we want to enable post-launch actions for the Source Server.
+        --source-server-id=!: The ID of the Source Server that we want to retrieve a Launch Configuration for.
+        --target-instance-type-right-sizing-method=: Whether Elastic Disaster Recovery should try to automatically choose the instance type that best matches the OS, CPU, and RAM of your Source Server.
+      completion:
         flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            source-server-id: The ID of the Source Server to stop replication for.
+            launch-disposition:
+                - STOPPED
+                - STARTED
+            target-instance-type-right-sizing-method:
+                - NONE
+                - BASIC
+                - IN_AWS
+    - name: get-replication-configuration
+      description: Gets a ReplicationConfiguration, filtered by Source Server ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-server-id=!: The ID of the Source Serve for this Replication Configuration.r
+    - name: delete-job
+      description: Deletes a single Job by ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The ID of the Job to be deleted.
+    - name: delete-launch-configuration-template
+      description: Deletes a single Launch Configuration Template by ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --launch-configuration-template-id=!: The ID of the Launch Configuration Template to be deleted.
+    - name: delete-source-network
+      description: Delete Source Network resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-network-id=!: ID of the Source Network to delete.
+    - name: delete-source-server
+      description: Deletes a single Source Server by ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-server-id=!: The ID of the Source Server to be deleted.
+    - name: describe-launch-configuration-templates
+      description: Lists all Launch Configuration Templates, filtered by Launch Configuration Template IDs
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --launch-configuration-template-ids=: Request to filter Launch Configuration Templates list by Launch Configuration Template ID.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum results to be returned in DescribeLaunchConfigurationTemplates.
+        --next-token=: The token of the next Launch Configuration Template to retrieve.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-recovery-snapshots
+      description: Lists all Recovery Snapshots for a single Source Server.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: A set of filters by which to return Recovery Snapshots.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of Recovery Snapshots to retrieve.
+        --next-token=: The token of the next Recovery Snapshot to retrieve.
+        --order=: The sorted ordering by which to return Recovery Snapshots.
+        --page-size=: The size of each page to get in the AWS service call.
+        --source-server-id=!: Filter Recovery Snapshots by Source Server ID.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            order:
+                - ASC
+                - DESC
+    - name: list-staging-accounts
+      description: Returns an array of staging accounts for existing extended source servers.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of staging Accounts to retrieve.
+        --next-token=: The token of the next staging Account to retrieve.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: create-extended-source-server
+      description: Create an extended source server in the target Account based on the source server in staging account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-server-arn=!: This defines the ARN of the source server in staging Account based on which you want to create an extended source server.
+        --tags=: A list of tags associated with the extended source server.
+    - name: describe-source-networks
+      description: Lists all Source Networks or multiple Source Networks filtered by ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: A set of filters by which to return Source Networks.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of Source Networks to retrieve.
+        --next-token=: The token of the next Source Networks to retrieve.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-source-servers
+      description: Lists all Source Servers or multiple Source Servers filtered by ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: A set of filters by which to return Source Servers.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of Source Servers to retrieve.
+        --next-token=: The token of the next Source Server to retrieve.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-launch-actions
+      description: Lists resource launch actions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters to apply when listing resource launch actions.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum amount of items to return when listing resource launch actions.
+        --next-token=: Next token to use when listing resource launch actions.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-id=!: ""
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: List all tags for your Elastic Disaster Recovery resources.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource whose tags should be returned.
+    - name: start-failback-launch
+      description: Initiates a Job for launching the machine that is being failed back to from the specified Recovery Instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recovery-instance-ids=!: The IDs of the Recovery Instance whose failback launch we want to request.
+        --tags=: The tags to be associated with the failback launch Job.
+    - name: stop-failback
+      description: Stops the failback process for a specified Recovery Instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recovery-instance-id=!: The ID of the Recovery Instance we want to stop failback for.
+    - name: update-launch-configuration-template
+      description: Updates an existing Launch Configuration Template by ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --copy-private-ip: Copy private IP.
+        --copy-tags: Copy tags.
+        --export-bucket-arn=: S3 bucket ARN to export Source Network templates.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --launch-configuration-template-id=!: Launch Configuration Template ID.
+        --launch-disposition=: Launch disposition.
+        --launch-into-source-instance: DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.
+        --licensing=: Licensing.
+        --no-copy-private-ip: Copy private IP.
+        --no-copy-tags: Copy tags.
+        --no-launch-into-source-instance: DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.
+        --no-post-launch-enabled: Whether we want to activate post-launch actions.
+        --post-launch-enabled: Whether we want to activate post-launch actions.
+        --target-instance-type-right-sizing-method=: Target instance type right-sizing method.
+      completion:
+        flag:
+            launch-disposition:
+                - STOPPED
+                - STARTED
+            target-instance-type-right-sizing-method:
+                - NONE
+                - BASIC
+                - IN_AWS
+    - name: delete-replication-configuration-template
+      description: Deletes a single Replication Configuration Template by ID
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --replication-configuration-template-id=!: The ID of the Replication Configuration Template to be deleted.
+    - name: describe-recovery-instances
+      description: Lists all Recovery Instances or multiple Recovery Instances by ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: A set of filters by which to return Recovery Instances.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of Recovery Instances to retrieve.
+        --next-token=: The token of the next Recovery Instance to retrieve.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: reverse-replication
+      description: Start replication to origin / target region - applies only to protected instances that originated in EC2.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recovery-instance-id=!: The ID of the Recovery Instance that we want to reverse the replication for.
+    - name: update-failback-replication-configuration
+      description: Allows you to update the failback replication configuration of a Recovery Instance by ID.
+      flags:
+        --bandwidth-throttling=: Configure bandwidth throttling for the outbound data transfer rate of the Recovery Instance in Mbps.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The name of the Failback Replication Configuration.
+        --no-use-private-ip: Whether to use Private IP for the failback replication of the Recovery Instance.
+        --recovery-instance-id=!: The ID of the Recovery Instance.
+        --use-private-ip: Whether to use Private IP for the failback replication of the Recovery Instance.
+    - name: delete-launch-action
+      description: Deletes a resource launch action.
+      flags:
+        --action-id=!: ""
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-id=!: ""
+    - name: disconnect-source-server
+      description: Disconnects a specific Source Server from Elastic Disaster Recovery.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-server-id=!: The ID of the Source Server to disconnect.
+    - name: initialize-service
+      description: Initialize Elastic Disaster Recovery.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: start-source-network-recovery
+      description: Deploy VPC for the specified Source Network and modify launch templates to use this network.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --deploy-as-new: Don't update existing CloudFormation Stack, recover the network using a new stack.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-deploy-as-new: Don't update existing CloudFormation Stack, recover the network using a new stack.
+        --source-networks=!: The Source Networks that we want to start a Recovery Job for.
+        --tags=: The tags to be associated with the Source Network recovery Job.
     - name: update-replication-configuration
       description: Allows you to update a ReplicationConfiguration by Source Server ID.
       flags:
@@ -150,1375 +572,6 @@ commands:
                 - DEFAULT
                 - CUSTOM
                 - NONE
-      documentation:
-        command: Allows you to update a ReplicationConfiguration by Source Server ID.
-        flag:
-            associate-default-security-group: Whether to associate the default Elastic Disaster Recovery Security group with the Replication Configuration.
-            auto-replicate-new-disks: Whether to allow the AWS replication agent to automatically replicate newly added disks.
-            bandwidth-throttling: Configure bandwidth throttling for the outbound data transfer rate of the Source Server in Mbps.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            create-public-ip: Whether to create a Public IP for the Recovery Instance by default.
-            data-plane-routing: The data plane routing mechanism that will be used for replication.
-            default-large-staging-disk-type: The Staging Disk EBS volume type to be used during replication.
-            ebs-encryption: The type of EBS encryption to be used during replication.
-            ebs-encryption-key-arn: The ARN of the EBS encryption key to be used during replication.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            name: The name of the Replication Configuration.
-            pit-policy: The Point in time (PIT) policy to manage snapshots taken during replication.
-            replicated-disks: The configuration of the disks of the Source Server to be replicated.
-            replication-server-instance-type: The instance type to be used for the replication server.
-            replication-servers-security-groups-ids: The security group IDs that will be used by the replication server.
-            source-server-id: The ID of the Source Server for this Replication Configuration.
-            staging-area-subnet-id: The subnet to be used by the replication staging area.
-            staging-area-tags: 'A set of tags to be associated with all resources created in the replication staging area: EC2 replication server, EBS volumes, EBS snapshots, etc.'
-            use-dedicated-replication-server: Whether to use a dedicated Replication Server in the replication staging area.
-    - name: describe-job-log-items
-      description: Retrieves a detailed Job log with pagination.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The ID of the Job for which Job log items will be retrieved.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Maximum number of Job log items to retrieve.
-        --next-token=: The token of the next Job log items to retrieve.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Retrieves a detailed Job log with pagination.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            job-id: The ID of the Job for which Job log items will be retrieved.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: Maximum number of Job log items to retrieve.
-            next-token: The token of the next Job log items to retrieve.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: create-extended-source-server
-      description: Create an extended source server in the target Account based on the source server in staging account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-server-arn=!: This defines the ARN of the source server in staging Account based on which you want to create an extended source server.
-        --tags=: A list of tags associated with the extended source server.
-      documentation:
-        command: Create an extended source server in the target Account based on the source server in staging account.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            source-server-arn: This defines the ARN of the source server in staging Account based on which you want to create an extended source server.
-            tags: A list of tags associated with the extended source server.
-    - name: create-replication-configuration-template
-      description: Creates a new ReplicationConfigurationTemplate.
-      flags:
-        --associate-default-security-group!: Whether to associate the default Elastic Disaster Recovery Security group with the Replication Configuration Template.
-        --auto-replicate-new-disks: Whether to allow the AWS replication agent to automatically replicate newly added disks.
-        --bandwidth-throttling=!: Configure bandwidth throttling for the outbound data transfer rate of the Source Server in Mbps.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --create-public-ip!: Whether to create a Public IP for the Recovery Instance by default.
-        --data-plane-routing=!: The data plane routing mechanism that will be used for replication.
-        --default-large-staging-disk-type=!: The Staging Disk EBS volume type to be used during replication.
-        --ebs-encryption-key-arn=: The ARN of the EBS encryption key to be used during replication.
-        --ebs-encryption=!: The type of EBS encryption to be used during replication.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-associate-default-security-group!: Whether to associate the default Elastic Disaster Recovery Security group with the Replication Configuration Template.
-        --no-auto-replicate-new-disks: Whether to allow the AWS replication agent to automatically replicate newly added disks.
-        --no-create-public-ip!: Whether to create a Public IP for the Recovery Instance by default.
-        --no-use-dedicated-replication-server!: Whether to use a dedicated Replication Server in the replication staging area.
-        --pit-policy=!: The Point in time (PIT) policy to manage snapshots taken during replication.
-        --replication-server-instance-type=!: The instance type to be used for the replication server.
-        --replication-servers-security-groups-ids=!: The security group IDs that will be used by the replication server.
-        --staging-area-subnet-id=!: The subnet to be used by the replication staging area.
-        --staging-area-tags=!: 'A set of tags to be associated with all resources created in the replication staging area: EC2 replication server, EBS volumes, EBS snapshots, etc.'
-        --tags=: A set of tags to be associated with the Replication Configuration Template resource.
-        --use-dedicated-replication-server!: Whether to use a dedicated Replication Server in the replication staging area.
-      completion:
-        flag:
-            data-plane-routing:
-                - PRIVATE_IP
-                - PUBLIC_IP
-            default-large-staging-disk-type:
-                - GP2
-                - GP3
-                - ST1
-                - AUTO
-            ebs-encryption:
-                - DEFAULT
-                - CUSTOM
-                - NONE
-      documentation:
-        command: Creates a new ReplicationConfigurationTemplate.
-        flag:
-            associate-default-security-group: Whether to associate the default Elastic Disaster Recovery Security group with the Replication Configuration Template.
-            auto-replicate-new-disks: Whether to allow the AWS replication agent to automatically replicate newly added disks.
-            bandwidth-throttling: Configure bandwidth throttling for the outbound data transfer rate of the Source Server in Mbps.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            create-public-ip: Whether to create a Public IP for the Recovery Instance by default.
-            data-plane-routing: The data plane routing mechanism that will be used for replication.
-            default-large-staging-disk-type: The Staging Disk EBS volume type to be used during replication.
-            ebs-encryption: The type of EBS encryption to be used during replication.
-            ebs-encryption-key-arn: The ARN of the EBS encryption key to be used during replication.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            pit-policy: The Point in time (PIT) policy to manage snapshots taken during replication.
-            replication-server-instance-type: The instance type to be used for the replication server.
-            replication-servers-security-groups-ids: The security group IDs that will be used by the replication server.
-            staging-area-subnet-id: The subnet to be used by the replication staging area.
-            staging-area-tags: 'A set of tags to be associated with all resources created in the replication staging area: EC2 replication server, EBS volumes, EBS snapshots, etc.'
-            tags: A set of tags to be associated with the Replication Configuration Template resource.
-            use-dedicated-replication-server: Whether to use a dedicated Replication Server in the replication staging area.
-    - name: delete-recovery-instance
-      description: Deletes a single Recovery Instance by ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recovery-instance-id=!: The ID of the Recovery Instance to be deleted.
-      documentation:
-        command: Deletes a single Recovery Instance by ID. This deletes the Recovery Instance resource from Elastic Disaster Recovery. The Recovery Instance must be disconnected first in order to delete it.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            recovery-instance-id: The ID of the Recovery Instance to be deleted.
-    - name: get-launch-configuration
-      description: Gets a LaunchConfiguration, filtered by Source Server IDs.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-server-id=!: The ID of the Source Server that we want to retrieve a Launch Configuration for.
-      documentation:
-        command: Gets a LaunchConfiguration, filtered by Source Server IDs.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            source-server-id: The ID of the Source Server that we want to retrieve a Launch Configuration for.
-    - name: reverse-replication
-      description: Start replication to origin / target region - applies only to protected instances that originated in EC2.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recovery-instance-id=!: The ID of the Recovery Instance that we want to reverse the replication for.
-      documentation:
-        command: Start replication to origin / target region - applies only to protected instances that originated in EC2. For recovery instances on target region - starts replication back to origin region. For failback instances on origin region - starts replication to target region to re-protect them.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            recovery-instance-id: The ID of the Recovery Instance that we want to reverse the replication for.
-    - name: terminate-recovery-instances
-      description: Initiates a Job for terminating the EC2 resources associated with the specified Recovery Instances, and then will delete the Recovery Instances from the Elastic Disaster Recovery service.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recovery-instance-ids=!: The IDs of the Recovery Instances that should be terminated.
-      documentation:
-        command: Initiates a Job for terminating the EC2 resources associated with the specified Recovery Instances, and then will delete the Recovery Instances from the Elastic Disaster Recovery service.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            recovery-instance-ids: The IDs of the Recovery Instances that should be terminated.
-    - name: update-launch-configuration
-      description: Updates a LaunchConfiguration by Source Server ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --copy-private-ip: Whether we should copy the Private IP of the Source Server to the Recovery Instance.
-        --copy-tags: Whether we want to copy the tags of the Source Server to the EC2 machine of the Recovery Instance.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --launch-disposition=: The state of the Recovery Instance in EC2 after the recovery operation.
-        --launch-into-instance-properties=: Launch into existing instance properties.
-        --licensing=: The licensing configuration to be used for this launch configuration.
-        --name=: The name of the launch configuration.
-        --no-copy-private-ip: Whether we should copy the Private IP of the Source Server to the Recovery Instance.
-        --no-copy-tags: Whether we want to copy the tags of the Source Server to the EC2 machine of the Recovery Instance.
-        --no-post-launch-enabled: Whether we want to enable post-launch actions for the Source Server.
-        --post-launch-enabled: Whether we want to enable post-launch actions for the Source Server.
-        --source-server-id=!: The ID of the Source Server that we want to retrieve a Launch Configuration for.
-        --target-instance-type-right-sizing-method=: Whether Elastic Disaster Recovery should try to automatically choose the instance type that best matches the OS, CPU, and RAM of your Source Server.
-      completion:
-        flag:
-            launch-disposition:
-                - STOPPED
-                - STARTED
-            target-instance-type-right-sizing-method:
-                - NONE
-                - BASIC
-                - IN_AWS
-      documentation:
-        command: Updates a LaunchConfiguration by Source Server ID.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            copy-private-ip: Whether we should copy the Private IP of the Source Server to the Recovery Instance.
-            copy-tags: Whether we want to copy the tags of the Source Server to the EC2 machine of the Recovery Instance.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            launch-disposition: The state of the Recovery Instance in EC2 after the recovery operation.
-            launch-into-instance-properties: Launch into existing instance properties.
-            licensing: The licensing configuration to be used for this launch configuration.
-            name: The name of the launch configuration.
-            post-launch-enabled: Whether we want to enable post-launch actions for the Source Server.
-            source-server-id: The ID of the Source Server that we want to retrieve a Launch Configuration for.
-            target-instance-type-right-sizing-method: Whether Elastic Disaster Recovery should try to automatically choose the instance type that best matches the OS, CPU, and RAM of your Source Server.
-    - name: describe-recovery-instances
-      description: Lists all Recovery Instances or multiple Recovery Instances by ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: A set of filters by which to return Recovery Instances.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Maximum number of Recovery Instances to retrieve.
-        --next-token=: The token of the next Recovery Instance to retrieve.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Lists all Recovery Instances or multiple Recovery Instances by ID.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            filters: A set of filters by which to return Recovery Instances.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: Maximum number of Recovery Instances to retrieve.
-            next-token: The token of the next Recovery Instance to retrieve.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: disconnect-recovery-instance
-      description: Disconnect a Recovery Instance from Elastic Disaster Recovery.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recovery-instance-id=!: The ID of the Recovery Instance to disconnect.
-      documentation:
-        command: 'Disconnect a Recovery Instance from Elastic Disaster Recovery. Data replication is stopped immediately. All AWS resources created by Elastic Disaster Recovery for enabling the replication of the Recovery Instance will be terminated / deleted within 90 minutes. If the agent on the Recovery Instance has not been prevented from communicating with the Elastic Disaster Recovery service, then it will receive a command to uninstall itself (within approximately 10 minutes). The following properties of the Recovery Instance will be changed immediately: dataReplicationInfo.dataReplicationState will be set to DISCONNECTED; The totalStorageBytes property for each of dataReplicationInfo.replicatedDisks will be set to zero; dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration will be nullified.'
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            recovery-instance-id: The ID of the Recovery Instance to disconnect.
-    - name: list-launch-actions
-      description: Lists resource launch actions.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters to apply when listing resource launch actions.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Maximum amount of items to return when listing resource launch actions.
-        --next-token=: Next token to use when listing resource launch actions.
-        --page-size=: The size of each page to get in the AWS service call.
-        --resource-id=!: ""
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Lists resource launch actions.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            filters: Filters to apply when listing resource launch actions.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: Maximum amount of items to return when listing resource launch actions.
-            next-token: Next token to use when listing resource launch actions.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            resource-id: ""
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: list-tags-for-resource
-      description: List all tags for your Elastic Disaster Recovery resources.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource whose tags should be returned.
-      documentation:
-        command: List all tags for your Elastic Disaster Recovery resources.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-arn: The ARN of the resource whose tags should be returned.
-    - name: start-failback-launch
-      description: Initiates a Job for launching the machine that is being failed back to from the specified Recovery Instance.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recovery-instance-ids=!: The IDs of the Recovery Instance whose failback launch we want to request.
-        --tags=: The tags to be associated with the failback launch Job.
-      documentation:
-        command: Initiates a Job for launching the machine that is being failed back to from the specified Recovery Instance. This will run conversion on the failback client and will reboot your machine, thus completing the failback process.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            recovery-instance-ids: The IDs of the Recovery Instance whose failback launch we want to request.
-            tags: The tags to be associated with the failback launch Job.
-    - name: start-replication
-      description: Starts replication for a stopped Source Server.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-server-id=!: The ID of the Source Server to start replication for.
-      documentation:
-        command: Starts replication for a stopped Source Server. This action would make the Source Server protected again and restart billing for it.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            source-server-id: The ID of the Source Server to start replication for.
-    - name: untag-resource
-      description: Deletes the specified set of tags from the specified set of Elastic Disaster Recovery resources.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: ARN of the resource for which tags are to be removed.
-        --tag-keys=!: Array of tags to be removed.
-      documentation:
-        command: Deletes the specified set of tags from the specified set of Elastic Disaster Recovery resources.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-arn: ARN of the resource for which tags are to be removed.
-            tag-keys: Array of tags to be removed.
-    - name: update-launch-configuration-template
-      description: Updates an existing Launch Configuration Template by ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --copy-private-ip: Copy private IP.
-        --copy-tags: Copy tags.
-        --export-bucket-arn=: S3 bucket ARN to export Source Network templates.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --launch-configuration-template-id=!: Launch Configuration Template ID.
-        --launch-disposition=: Launch disposition.
-        --launch-into-source-instance: DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.
-        --licensing=: Licensing.
-        --no-copy-private-ip: Copy private IP.
-        --no-copy-tags: Copy tags.
-        --no-launch-into-source-instance: DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.
-        --no-post-launch-enabled: Whether we want to activate post-launch actions.
-        --post-launch-enabled: Whether we want to activate post-launch actions.
-        --target-instance-type-right-sizing-method=: Target instance type right-sizing method.
-      completion:
-        flag:
-            launch-disposition:
-                - STOPPED
-                - STARTED
-            target-instance-type-right-sizing-method:
-                - NONE
-                - BASIC
-                - IN_AWS
-      documentation:
-        command: Updates an existing Launch Configuration Template by ID.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            copy-private-ip: Copy private IP.
-            copy-tags: Copy tags.
-            export-bucket-arn: S3 bucket ARN to export Source Network templates.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            launch-configuration-template-id: Launch Configuration Template ID.
-            launch-disposition: Launch disposition.
-            launch-into-source-instance: DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.
-            licensing: Licensing.
-            post-launch-enabled: Whether we want to activate post-launch actions.
-            target-instance-type-right-sizing-method: Target instance type right-sizing method.
-    - name: create-source-network
-      description: Create a new Source Network resource for a provided VPC ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --origin-account-id=!: Account containing the VPC to protect.
-        --origin-region=!: Region containing the VPC to protect.
-        --tags=: A set of tags to be associated with the Source Network resource.
-        --vpc-id=!: Which VPC ID to protect.
-      documentation:
-        command: Create a new Source Network resource for a provided VPC ID.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            origin-account-id: Account containing the VPC to protect.
-            origin-region: Region containing the VPC to protect.
-            tags: A set of tags to be associated with the Source Network resource.
-            vpc-id: Which VPC ID to protect.
-    - name: delete-launch-action
-      description: Deletes a resource launch action.
-      flags:
-        --action-id=!: ""
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-id=!: ""
-      documentation:
-        command: Deletes a resource launch action.
-        flag:
-            action-id: ""
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-id: ""
-    - name: delete-launch-configuration-template
-      description: Deletes a single Launch Configuration Template by ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --launch-configuration-template-id=!: The ID of the Launch Configuration Template to be deleted.
-      documentation:
-        command: Deletes a single Launch Configuration Template by ID.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            launch-configuration-template-id: The ID of the Launch Configuration Template to be deleted.
-    - name: delete-source-network
-      description: Delete Source Network resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-network-id=!: ID of the Source Network to delete.
-      documentation:
-        command: Delete Source Network resource.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            source-network-id: ID of the Source Network to delete.
-    - name: describe-recovery-snapshots
-      description: Lists all Recovery Snapshots for a single Source Server.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: A set of filters by which to return Recovery Snapshots.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Maximum number of Recovery Snapshots to retrieve.
-        --next-token=: The token of the next Recovery Snapshot to retrieve.
-        --order=: The sorted ordering by which to return Recovery Snapshots.
-        --page-size=: The size of each page to get in the AWS service call.
-        --source-server-id=!: Filter Recovery Snapshots by Source Server ID.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            order:
-                - ASC
-                - DESC
-      documentation:
-        command: Lists all Recovery Snapshots for a single Source Server.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            filters: A set of filters by which to return Recovery Snapshots.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: Maximum number of Recovery Snapshots to retrieve.
-            next-token: The token of the next Recovery Snapshot to retrieve.
-            order: The sorted ordering by which to return Recovery Snapshots.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            source-server-id: Filter Recovery Snapshots by Source Server ID.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: list-staging-accounts
-      description: Returns an array of staging accounts for existing extended source servers.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of staging Accounts to retrieve.
-        --next-token=: The token of the next staging Account to retrieve.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Returns an array of staging accounts for existing extended source servers.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The maximum number of staging Accounts to retrieve.
-            next-token: The token of the next staging Account to retrieve.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: start-recovery
-      description: Launches Recovery Instances for the specified Source Servers.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --is-drill: Whether this Source Server Recovery operation is a drill or not.
-        --no-is-drill: Whether this Source Server Recovery operation is a drill or not.
-        --source-servers=!: The Source Servers that we want to start a Recovery Job for.
-        --tags=: The tags to be associated with the Recovery Job.
-      documentation:
-        command: Launches Recovery Instances for the specified Source Servers. For each Source Server you may choose a point in time snapshot to launch from, or use an on demand snapshot.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            is-drill: Whether this Source Server Recovery operation is a drill or not.
-            source-servers: The Source Servers that we want to start a Recovery Job for.
-            tags: The tags to be associated with the Recovery Job.
-    - name: start-source-network-recovery
-      description: Deploy VPC for the specified Source Network and modify launch templates to use this network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deploy-as-new: Don't update existing CloudFormation Stack, recover the network using a new stack.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-deploy-as-new: Don't update existing CloudFormation Stack, recover the network using a new stack.
-        --source-networks=!: The Source Networks that we want to start a Recovery Job for.
-        --tags=: The tags to be associated with the Source Network recovery Job.
-      documentation:
-        command: Deploy VPC for the specified Source Network and modify launch templates to use this network. The VPC will be deployed using a dedicated CloudFormation stack.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            deploy-as-new: Don't update existing CloudFormation Stack, recover the network using a new stack.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            source-networks: The Source Networks that we want to start a Recovery Job for.
-            tags: The tags to be associated with the Source Network recovery Job.
-    - name: get-failback-replication-configuration
-      description: Lists all Failback ReplicationConfigurations, filtered by Recovery Instance ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recovery-instance-id=!: The ID of the Recovery Instance whose failback replication configuration should be returned.
-      documentation:
-        command: Lists all Failback ReplicationConfigurations, filtered by Recovery Instance ID.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            recovery-instance-id: The ID of the Recovery Instance whose failback replication configuration should be returned.
-    - name: tag-resource
-      description: Adds or overwrites only the specified tags for the specified Elastic Disaster Recovery resource or resources.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: ARN of the resource for which tags are to be added or updated.
-        --tags=!: Array of tags to be added or updated.
-      documentation:
-        command: Adds or overwrites only the specified tags for the specified Elastic Disaster Recovery resource or resources. When you specify an existing tag key, the value is overwritten with the new value. Each resource can have a maximum of 50 tags. Each tag consists of a key and optional value.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-arn: ARN of the resource for which tags are to be added or updated.
-            tags: Array of tags to be added or updated.
-    - name: initialize-service
-      description: Initialize Elastic Disaster Recovery.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Initialize Elastic Disaster Recovery.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: list-extensible-source-servers
-      description: 'Returns a list of source servers on a staging account that are extensible, which means that: a.'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of extensible source servers to retrieve.
-        --next-token=: The token of the next extensible source server to retrieve.
-        --page-size=: The size of each page to get in the AWS service call.
-        --staging-account-id=!: The Id of the staging Account to retrieve extensible source servers from.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: 'Returns a list of source servers on a staging account that are extensible, which means that: a. The source server is not already extended into this Account. b. The source server on the Account we’re reading from is not an extension of another source server.'
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The maximum number of extensible source servers to retrieve.
-            next-token: The token of the next extensible source server to retrieve.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            staging-account-id: The Id of the staging Account to retrieve extensible source servers from.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: delete-job
-      description: Deletes a single Job by ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The ID of the Job to be deleted.
-      documentation:
-        command: Deletes a single Job by ID.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            job-id: The ID of the Job to be deleted.
-    - name: describe-source-networks
-      description: Lists all Source Networks or multiple Source Networks filtered by ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: A set of filters by which to return Source Networks.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Maximum number of Source Networks to retrieve.
-        --next-token=: The token of the next Source Networks to retrieve.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Lists all Source Networks or multiple Source Networks filtered by ID.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            filters: A set of filters by which to return Source Networks.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: Maximum number of Source Networks to retrieve.
-            next-token: The token of the next Source Networks to retrieve.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: disconnect-source-server
-      description: Disconnects a specific Source Server from Elastic Disaster Recovery.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-server-id=!: The ID of the Source Server to disconnect.
-      documentation:
-        command: 'Disconnects a specific Source Server from Elastic Disaster Recovery. Data replication is stopped immediately. All AWS resources created by Elastic Disaster Recovery for enabling the replication of the Source Server will be terminated / deleted within 90 minutes. You cannot disconnect a Source Server if it has a Recovery Instance. If the agent on the Source Server has not been prevented from communicating with the Elastic Disaster Recovery service, then it will receive a command to uninstall itself (within approximately 10 minutes). The following properties of the SourceServer will be changed immediately: dataReplicationInfo.dataReplicationState will be set to DISCONNECTED; The totalStorageBytes property for each of dataReplicationInfo.replicatedDisks will be set to zero; dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration will be nullified.'
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            source-server-id: The ID of the Source Server to disconnect.
-    - name: start-source-network-replication
-      description: Starts replication for a Source Network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-network-id=!: ID of the Source Network to replicate.
-      documentation:
-        command: Starts replication for a Source Network. This action would make the Source Network protected.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            source-network-id: ID of the Source Network to replicate.
-    - name: stop-failback
-      description: Stops the failback process for a specified Recovery Instance.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recovery-instance-id=!: The ID of the Recovery Instance we want to stop failback for.
-      documentation:
-        command: Stops the failback process for a specified Recovery Instance. This changes the Failback State of the Recovery Instance back to FAILBACK\_NOT\_STARTED.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            recovery-instance-id: The ID of the Recovery Instance we want to stop failback for.
-    - name: stop-source-network-replication
-      description: Stops replication for a Source Network.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-network-id=!: ID of the Source Network to stop replication.
-      documentation:
-        command: Stops replication for a Source Network. This action would make the Source Network unprotected.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            source-network-id: ID of the Source Network to stop replication.
-    - name: associate-source-network-stack
-      description: Associate a Source Network to an existing CloudFormation Stack and modify launch templates to use this network.
-      flags:
-        --cfn-stack-name=!: CloudFormation template to associate with a Source Network.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-network-id=!: The Source Network ID to associate with CloudFormation template.
-      documentation:
-        command: Associate a Source Network to an existing CloudFormation Stack and modify launch templates to use this network. Can be used for reverting to previously deployed CloudFormation stacks.
-        flag:
-            cfn-stack-name: CloudFormation template to associate with a Source Network.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            source-network-id: The Source Network ID to associate with CloudFormation template.
-    - name: describe-launch-configuration-templates
-      description: Lists all Launch Configuration Templates, filtered by Launch Configuration Template IDs
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --launch-configuration-template-ids=: Request to filter Launch Configuration Templates list by Launch Configuration Template ID.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Maximum results to be returned in DescribeLaunchConfigurationTemplates.
-        --next-token=: The token of the next Launch Configuration Template to retrieve.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Lists all Launch Configuration Templates, filtered by Launch Configuration Template IDs
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            launch-configuration-template-ids: Request to filter Launch Configuration Templates list by Launch Configuration Template ID.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: Maximum results to be returned in DescribeLaunchConfigurationTemplates.
-            next-token: The token of the next Launch Configuration Template to retrieve.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: describe-replication-configuration-templates
-      description: Lists all ReplicationConfigurationTemplates, filtered by Source Server IDs.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Maximum number of Replication Configuration Templates to retrieve.
-        --next-token=: The token of the next Replication Configuration Template to retrieve.
-        --page-size=: The size of each page to get in the AWS service call.
-        --replication-configuration-template-i-ds=: The IDs of the Replication Configuration Templates to retrieve.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Lists all ReplicationConfigurationTemplates, filtered by Source Server IDs.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: Maximum number of Replication Configuration Templates to retrieve.
-            next-token: The token of the next Replication Configuration Template to retrieve.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            replication-configuration-template-i-ds: The IDs of the Replication Configuration Templates to retrieve. An empty list means all Replication Configuration Templates.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
     - name: update-replication-configuration-template
       description: Updates a ReplicationConfigurationTemplate by ID.
       flags:
@@ -1559,333 +612,3 @@ commands:
                 - DEFAULT
                 - CUSTOM
                 - NONE
-      documentation:
-        command: Updates a ReplicationConfigurationTemplate by ID.
-        flag:
-            arn: The Replication Configuration Template ARN.
-            associate-default-security-group: Whether to associate the default Elastic Disaster Recovery Security group with the Replication Configuration Template.
-            auto-replicate-new-disks: Whether to allow the AWS replication agent to automatically replicate newly added disks.
-            bandwidth-throttling: Configure bandwidth throttling for the outbound data transfer rate of the Source Server in Mbps.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            create-public-ip: Whether to create a Public IP for the Recovery Instance by default.
-            data-plane-routing: The data plane routing mechanism that will be used for replication.
-            default-large-staging-disk-type: The Staging Disk EBS volume type to be used during replication.
-            ebs-encryption: The type of EBS encryption to be used during replication.
-            ebs-encryption-key-arn: The ARN of the EBS encryption key to be used during replication.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            pit-policy: The Point in time (PIT) policy to manage snapshots taken during replication.
-            replication-configuration-template-id: The Replication Configuration Template ID.
-            replication-server-instance-type: The instance type to be used for the replication server.
-            replication-servers-security-groups-ids: The security group IDs that will be used by the replication server.
-            staging-area-subnet-id: The subnet to be used by the replication staging area.
-            staging-area-tags: 'A set of tags to be associated with all resources created in the replication staging area: EC2 replication server, EBS volumes, EBS snapshots, etc.'
-            use-dedicated-replication-server: Whether to use a dedicated Replication Server in the replication staging area.
-    - name: describe-jobs
-      description: Returns a list of Jobs.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: A set of filters by which to return Jobs.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Maximum number of Jobs to retrieve.
-        --next-token=: The token of the next Job to retrieve.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Returns a list of Jobs. Use the JobsID and fromDate and toDate filters to limit which jobs are returned. The response is sorted by creationDataTime - latest date first. Jobs are created by the StartRecovery, TerminateRecoveryInstances and StartFailbackLaunch APIs. Jobs are also created by DiagnosticLaunch and TerminateDiagnosticInstances, which are APIs available only to \*Support* and only used in response to relevant support tickets.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            filters: A set of filters by which to return Jobs.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: Maximum number of Jobs to retrieve.
-            next-token: The token of the next Job to retrieve.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: describe-source-servers
-      description: Lists all Source Servers or multiple Source Servers filtered by ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: A set of filters by which to return Source Servers.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Maximum number of Source Servers to retrieve.
-        --next-token=: The token of the next Source Server to retrieve.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Lists all Source Servers or multiple Source Servers filtered by ID.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            filters: A set of filters by which to return Source Servers.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: Maximum number of Source Servers to retrieve.
-            next-token: The token of the next Source Server to retrieve.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: export-source-network-cfn-template
-      description: Export the Source Network CloudFormation template to an S3 bucket.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-network-id=!: The Source Network ID to export its CloudFormation template to an S3 bucket.
-      documentation:
-        command: Export the Source Network CloudFormation template to an S3 bucket.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            source-network-id: The Source Network ID to export its CloudFormation template to an S3 bucket.
-    - name: update-failback-replication-configuration
-      description: Allows you to update the failback replication configuration of a Recovery Instance by ID.
-      flags:
-        --bandwidth-throttling=: Configure bandwidth throttling for the outbound data transfer rate of the Recovery Instance in Mbps.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: The name of the Failback Replication Configuration.
-        --no-use-private-ip: Whether to use Private IP for the failback replication of the Recovery Instance.
-        --recovery-instance-id=!: The ID of the Recovery Instance.
-        --use-private-ip: Whether to use Private IP for the failback replication of the Recovery Instance.
-      documentation:
-        command: Allows you to update the failback replication configuration of a Recovery Instance by ID.
-        flag:
-            bandwidth-throttling: Configure bandwidth throttling for the outbound data transfer rate of the Recovery Instance in Mbps.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            name: The name of the Failback Replication Configuration.
-            recovery-instance-id: The ID of the Recovery Instance.
-            use-private-ip: Whether to use Private IP for the failback replication of the Recovery Instance.
-    - name: create-launch-configuration-template
-      description: Creates a new Launch Configuration Template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --copy-private-ip: Copy private IP.
-        --copy-tags: Copy tags.
-        --export-bucket-arn=: S3 bucket ARN to export Source Network templates.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --launch-disposition=: Launch disposition.
-        --launch-into-source-instance: DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.
-        --licensing=: Licensing.
-        --no-copy-private-ip: Copy private IP.
-        --no-copy-tags: Copy tags.
-        --no-launch-into-source-instance: DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.
-        --no-post-launch-enabled: Whether we want to activate post-launch actions.
-        --post-launch-enabled: Whether we want to activate post-launch actions.
-        --tags=: Request to associate tags during creation of a Launch Configuration Template.
-        --target-instance-type-right-sizing-method=: Target instance type right-sizing method.
-      completion:
-        flag:
-            launch-disposition:
-                - STOPPED
-                - STARTED
-            target-instance-type-right-sizing-method:
-                - NONE
-                - BASIC
-                - IN_AWS
-      documentation:
-        command: Creates a new Launch Configuration Template.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            copy-private-ip: Copy private IP.
-            copy-tags: Copy tags.
-            export-bucket-arn: S3 bucket ARN to export Source Network templates.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            launch-disposition: Launch disposition.
-            launch-into-source-instance: DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.
-            licensing: Licensing.
-            post-launch-enabled: Whether we want to activate post-launch actions.
-            tags: Request to associate tags during creation of a Launch Configuration Template.
-            target-instance-type-right-sizing-method: Target instance type right-sizing method.
-    - name: delete-replication-configuration-template
-      description: Deletes a single Replication Configuration Template by ID
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --replication-configuration-template-id=!: The ID of the Replication Configuration Template to be deleted.
-      documentation:
-        command: Deletes a single Replication Configuration Template by ID
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            replication-configuration-template-id: The ID of the Replication Configuration Template to be deleted.
-    - name: delete-source-server
-      description: Deletes a single Source Server by ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-server-id=!: The ID of the Source Server to be deleted.
-      documentation:
-        command: Deletes a single Source Server by ID. The Source Server must be disconnected first.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            source-server-id: The ID of the Source Server to be deleted.
-    - name: get-replication-configuration
-      description: Gets a ReplicationConfiguration, filtered by Source Server ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-server-id=!: The ID of the Source Serve for this Replication Configuration.r
-      documentation:
-        command: Gets a ReplicationConfiguration, filtered by Source Server ID.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            source-server-id: The ID of the Source Serve for this Replication Configuration.r

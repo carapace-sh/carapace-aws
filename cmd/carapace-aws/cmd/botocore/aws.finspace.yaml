@@ -1,34 +1,498 @@
 name: finspace
 description: FinSpace User Environment Management service
 commands:
-    - name: get-kx-volume
-      description: Retrieves the information about the volume.
+    - name: update-kx-cluster-databases
+      description: Updates the databases mounted on a kdb cluster, which includes the `changesetId` and all the dbPaths to be cached.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that ensures idempotency.
+        --cluster-name=!: A unique name for the cluster that you want to modify.
+        --databases=!: The structure of databases mounted on the cluster.
+        --deployment-configuration=: The configuration that allows you to choose how you want to update the databases on a cluster.
+        --environment-id=!: The unique identifier of a kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-kx-environment-network
+      description: Updates environment network to connect to your internal network by using a transit gateway.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that ensures idempotency.
+        --custom-dns-configuration=: A list of DNS server name and server IP.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --transit-gateway-configuration=: Specifies the transit gateway and network configuration to connect the kdb environment to an internal network.
+    - name: update-kx-user
+      description: Updates the user details.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that ensures idempotency.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --iam-role=!: The IAM role ARN that is associated with the user.
+        --user-name=!: A unique identifier for the user.
+    - name: delete-kx-user
+      description: Deletes a user in the specified kdb environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that ensures idempotency.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-name=!: A unique identifier for the user that you want to delete.
+    - name: get-kx-dataview
+      description: Retrieves details of the dataview.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --database-name=!: The name of the database where you created the dataview.
+        --dataview-name=!: A unique identifier for the dataview.
+        --environment-id=!: A unique identifier for the kdb environment, from where you want to retrieve the dataview details.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-kx-scaling-group
+      description: Retrieves details of a scaling group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scaling-group-name=!: A unique identifier for the kdb scaling group.
+    - name: update-kx-dataview
+      description: Updates the specified dataview.
+      flags:
+        --changeset-id=: A unique identifier for the changeset.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A token that ensures idempotency.
+        --database-name=!: The name of the database.
+        --dataview-name=!: The name of the dataview that you want to update.
+        --description=: The description for a dataview.
+        --environment-id=!: A unique identifier for the kdb environment, where you want to update the dataview.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --segment-configurations=: The configuration that contains the database path of the data that you want to place on each selected volume.
+    - name: create-environment
+      description: Create a new FinSpace environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-bundles=: The list of Amazon Resource Names (ARN) of the data bundles to install.
+        --description=: The description of the FinSpace environment to be created.
+        --federation-mode=: Authentication mode for the environment.
+        --federation-parameters=: Configuration information when authentication mode is FEDERATED.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-id=: The KMS key id to encrypt your data in the FinSpace environment.
+        --name=!: The name of the FinSpace environment to be created.
+        --superuser-parameters=: Configuration information for the superuser.
+        --tags=: Add tags to your FinSpace environment.
+      completion:
+        flag:
+            federation-mode:
+                - FEDERATED
+                - LOCAL
+    - name: delete-kx-cluster
+      description: Deletes a kdb cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that ensures idempotency.
+        --cluster-name=!: The name of the cluster that you want to delete.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-kx-database
+      description: Deletes the specified database and all of its associated data.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A token that ensures idempotency.
+        --database-name=!: The name of the kdb database that you want to delete.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-kx-database
+      description: Returns database information for the specified environment ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --database-name=!: The name of the kdb database.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-kx-cluster-nodes
+      description: Lists all the nodes in a kdb cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-name=!: A unique name for the cluster.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in this request.
+        --next-token=: A token that indicates where a results page should begin.
+    - name: list-kx-clusters
+      description: Returns a list of clusters.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-type=: Specifies the type of KDB database that is being created.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in this request.
+        --next-token=: A token that indicates where a results page should begin.
+      completion:
+        flag:
+            cluster-type:
+                - HDB
+                - RDB
+                - GATEWAY
+                - GP
+                - TICKERPLANT
+    - name: list-kx-databases
+      description: Returns a list of all the databases in the kdb environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in this request.
+        --next-token=: A token that indicates where a results page should begin.
+    - name: update-kx-volume
+      description: Updates the throughput or capacity of a volume.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that ensures idempotency.
+        --description=: A description of the volume.
+        --environment-id=!: A unique identifier for the kdb environment where you created the storage volume.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --nas1-configuration=: Specifies the configuration for the Network attached storage (NAS\_1) file system volume.
+        --volume-name=!: A unique identifier for the volume.
+    - name: create-kx-changeset
+      description: Creates a changeset for a kdb database.
+      flags:
+        --change-requests=!: A list of change request objects that are run in order.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A token that ensures idempotency.
+        --database-name=!: The name of the kdb database.
+        --environment-id=!: A unique identifier of the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-kx-environment
+      description: Creates a managed kdb environment for the account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that ensures idempotency.
+        --description=: A description for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-id=!: The KMS key ID to encrypt your data in the FinSpace environment.
+        --name=!: The name of the kdb environment that you want to create.
+        --tags=: A list of key-value pairs to label the kdb environment.
+    - name: create-kx-scaling-group
+      description: Creates a new scaling group.
+      flags:
+        --availability-zone-id=!: The identifier of the availability zones.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A token that ensures idempotency.
+        --environment-id=!: A unique identifier for the kdb environment, where you want to create the scaling group.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --host-type=!: The memory and CPU capabilities of the scaling group host on which FinSpace Managed kdb clusters will be placed.
+        --scaling-group-name=!: A unique identifier for the kdb scaling group.
+        --tags=: A list of key-value pairs to label the scaling group.
+    - name: list-environments
+      description: A list of all of your FinSpace environments.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in this request.
+        --next-token=: A token generated by FinSpace that specifies where to continue pagination if a previous request was truncated.
+    - name: list-kx-dataviews
+      description: Returns a list of all the dataviews in the database.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --database-name=!: The name of the database where the dataviews were created.
+        --environment-id=!: A unique identifier for the kdb environment, for which you want to retrieve a list of dataviews.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in this request.
+        --next-token=: A token that indicates where a results page should begin.
+    - name: delete-kx-volume
+      description: Deletes a volume.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that ensures idempotency.
+        --environment-id=!: A unique identifier for the kdb environment, whose clusters can attach to the volume.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --volume-name=!: The name of the volume that you want to delete.
+    - name: tag-resource
+      description: Adds metadata tags to a FinSpace resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) for the resource.
+        --tags=!: One or more tags to be assigned to the resource.
+    - name: create-kx-database
+      description: Creates a new kdb database in the environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A token that ensures idempotency.
+        --database-name=!: The name of the kdb database.
+        --description=: A description of the database.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: A list of key-value pairs to label the kdb database.
+    - name: delete-environment
+      description: Delete an FinSpace environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=!: The identifier for the FinSpace environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-kx-cluster
+      description: Retrieves information about a kdb cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-name=!: The name of the cluster that you want to retrieve.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-kx-scaling-groups
+      description: Returns a list of scaling groups in a kdb environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=!: A unique identifier for the kdb environment, for which you want to retrieve a list of scaling groups.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in this request.
+        --next-token=: A token that indicates where a results page should begin.
+    - name: list-kx-volumes
+      description: Lists all the volumes in a kdb environment.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --environment-id=!: A unique identifier for the kdb environment, whose clusters can attach to the volume.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --volume-name=!: A unique identifier for the volume.
-      documentation:
-        command: Retrieves the information about the volume.
+        --max-results=: The maximum number of results to return in this request.
+        --next-token=: A token that indicates where a results page should begin.
+        --volume-type=: The type of file system volume.
+      completion:
         flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-id: A unique identifier for the kdb environment, whose clusters can attach to the volume.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            volume-name: A unique identifier for the volume.
+            volume-type:
+                - NAS_1
+    - name: list-tags-for-resource
+      description: A list of all tags for a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name of the resource.
+    - name: untag-resource
+      description: Removes metadata tags from a FinSpace resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: A FinSpace resource from which you want to remove a tag or tags.
+        --tag-keys=!: The tag keys (names) of one or more tags to be removed.
+    - name: update-kx-cluster-code-configuration
+      description: Allows you to update code configuration on a running cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that ensures idempotency.
+        --cluster-name=!: The name of the cluster.
+        --code=!: ""
+        --command-line-arguments=: Specifies the key-value pairs to make them available inside the cluster.
+        --deployment-configuration=: The configuration that allows you to choose how you want to update the code on a cluster.
+        --environment-id=!: A unique identifier of the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --initialization-script=: Specifies a Q program that will be run at launch of a cluster.
+    - name: delete-kx-dataview
+      description: Deletes the specified dataview.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A token that ensures idempotency.
+        --database-name=!: The name of the database whose dataview you want to delete.
+        --dataview-name=!: The name of the dataview that you want to delete.
+        --environment-id=!: A unique identifier for the kdb environment, from where you want to delete the dataview.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-kx-environment
+      description: Retrieves all the information for the specified kdb environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-kx-user
+      description: Retrieves information about the specified kdb user.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-name=!: A unique identifier for the user.
+    - name: list-kx-changesets
+      description: Returns a list of all the changesets for a database.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --database-name=!: The name of the kdb database.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in this request.
+        --next-token=: A token that indicates where a results page should begin.
+    - name: list-kx-environments
+      description: Returns a list of kdb environments created in an account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in this request.
+        --next-token=: A token that indicates where a results page should begin.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-kx-users
+      description: Lists all the users in a kdb environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in this request.
+        --next-token=: A token that indicates where a results page should begin.
+    - name: update-environment
+      description: Update your FinSpace environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description of the environment.
+        --environment-id=!: The identifier of the FinSpace environment.
+        --federation-mode=: Authentication mode for the environment.
+        --federation-parameters=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The name of the environment.
+      completion:
+        flag:
+            federation-mode:
+                - FEDERATED
+                - LOCAL
+    - name: update-kx-database
+      description: Updates information for the given kdb database.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A token that ensures idempotency.
+        --database-name=!: The name of the kdb database.
+        --description=: A description of the database.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-kx-scaling-group
+      description: Deletes the specified scaling group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that ensures idempotency.
+        --environment-id=!: A unique identifier for the kdb environment, from where you want to delete the dataview.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scaling-group-name=!: A unique identifier for the kdb scaling group.
+    - name: get-kx-changeset
+      description: Returns information about a kdb changeset.
+      flags:
+        --changeset-id=!: A unique identifier of the changeset for which you want to retrieve data.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --database-name=!: The name of the kdb database.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-kx-cluster-node
+      description: Deletes the specified nodes from a cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-name=!: The name of the cluster, for which you want to delete the nodes.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --node-id=!: A unique identifier for the node that you want to delete.
+    - name: create-kx-dataview
+      description: Creates a snapshot of kdb database with tiered storage capabilities and a pre-warmed cache, ready for mounting on kdb clusters.
+      flags:
+        --auto-update: The option to specify whether you want to apply all the future additions and corrections automatically to the dataview, when you ingest new changesets.
+        --availability-zone-id=: The identifier of the availability zones.
+        --az-mode=!: The number of availability zones you want to assign per volume.
+        --changeset-id=: A unique identifier of the changeset that you want to use to ingest data.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A token that ensures idempotency.
+        --database-name=!: The name of the database where you want to create a dataview.
+        --dataview-name=!: A unique identifier for the dataview.
+        --description=: A description of the dataview.
+        --environment-id=!: A unique identifier for the kdb environment, where you want to create the dataview.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-auto-update: The option to specify whether you want to apply all the future additions and corrections automatically to the dataview, when you ingest new changesets.
+        --no-read-write: The option to specify whether you want to make the dataview writable to perform database maintenance.
+        --read-write: The option to specify whether you want to make the dataview writable to perform database maintenance.
+        --segment-configurations=: The configuration that contains the database path of the data that you want to place on each selected volume.
+        --tags=: A list of key-value pairs to label the dataview.
+      completion:
+        flag:
+            az-mode:
+                - SINGLE
+                - MULTI
+    - name: create-kx-user
+      description: Creates a user in FinSpace kdb environment with an associated IAM role.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that ensures idempotency.
+        --environment-id=!: A unique identifier for the kdb environment where you want to create a user.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --iam-role=!: The IAM role ARN that will be associated with the user.
+        --tags=: A list of key-value pairs to label the user.
+        --user-name=!: A unique identifier for the user.
+    - name: create-kx-volume
+      description: Creates a new volume with a specific amount of throughput and storage capacity.
+      flags:
+        --availability-zone-ids=!: The identifier of the availability zones.
+        --az-mode=!: The number of availability zones you want to assign per volume.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that ensures idempotency.
+        --description=: A description of the volume.
+        --environment-id=!: A unique identifier for the kdb environment, whose clusters can attach to the volume.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --nas1-configuration=: Specifies the configuration for the Network attached storage (NAS\_1) file system volume.
+        --tags=: A list of key-value pairs to label the volume.
+        --volume-name=!: A unique identifier for the volume.
+        --volume-type=!: The type of file system volume.
+      completion:
+        flag:
+            az-mode:
+                - SINGLE
+                - MULTI
+            volume-type:
+                - NAS_1
+    - name: delete-kx-environment
+      description: Deletes the kdb environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that ensures idempotency.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-kx-environment
+      description: Updates information for the given kdb environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that ensures idempotency.
+        --description=: A description of the kdb environment.
+        --environment-id=!: A unique identifier for the kdb environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The name of the kdb environment.
     - name: create-kx-cluster
       description: Creates a new kdb cluster.
       flags:
@@ -67,550 +531,6 @@ commands:
                 - GATEWAY
                 - GP
                 - TICKERPLANT
-      documentation:
-        command: Creates a new kdb cluster.
-        flag:
-            auto-scaling-configuration: The configuration based on which FinSpace will scale in or scale out nodes in your cluster.
-            availability-zone-id: The availability zone identifiers for the requested regions.
-            az-mode: |-
-                The number of availability zones you want to assign per cluster. This can be one of the following
-
-                - `SINGLE` – Assigns one availability zone per cluster.
-                - `MULTI` – Assigns all the availability zones per cluster.
-            cache-storage-configurations: The configurations for a read only cache storage associated with a cluster. This cache will be stored as an FSx Lustre that reads from the S3 store.
-            capacity-configuration: A structure for the metadata of a cluster. It includes information like the CPUs needed, memory of instances, and number of instances.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A token that ensures idempotency. This token expires in 10 minutes.
-            cluster-description: A description of the cluster.
-            cluster-name: A unique name for the cluster that you want to create.
-            cluster-type: |-
-                Specifies the type of KDB database that is being created. The following types are available:
-
-                - HDB – A Historical Database. The data is only accessible with read-only permissions from one of the FinSpace managed kdb databases mounted to the cluster.
-                - RDB – A Realtime Database. This type of database captures all the data from a ticker plant and stores it in memory until the end of day, after which it writes all of its data to a disk and reloads the HDB. This cluster type requires local storage for temporary storage of data during the savedown process. If you specify this field in your request, you must provide the `savedownStorageConfiguration` parameter.
-                - GATEWAY – A gateway cluster allows you to access data across processes in kdb systems. It allows you to create your own routing logic using the initialization scripts and custom code. This type of cluster does not require a writable local storage.
-                - GP – A general purpose cluster allows you to quickly iterate on code during development by granting greater access to system commands and enabling a fast reload of custom code. This cluster type can optionally mount databases including cache and savedown storage. For this cluster type, the node count is fixed at 1. It does not support autoscaling and supports only `SINGLE` AZ mode.
-                - Tickerplant – A tickerplant cluster allows you to subscribe to feed handlers based on IAM permissions. It can publish to RDBs, other Tickerplants, and real-time subscribers (RTS). Tickerplants can persist messages to log, which is readable by any RDB environment. It supports only single-node that is only one kdb process.
-            code: The details of the custom code that you want to use inside a cluster when analyzing a data. It consists of the S3 source bucket, location, S3 object version, and the relative path from where the custom code is loaded into the cluster.
-            command-line-arguments: Defines the key-value pairs to make them available inside the cluster.
-            databases: A list of databases that will be available for querying.
-            environment-id: A unique identifier for the kdb environment.
-            execution-role: An IAM role that defines a set of permissions associated with a cluster. These permissions are assumed when a cluster attempts to access another cluster.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            initialization-script: Specifies a Q program that will be run at launch of a cluster. It is a relative path within *.zip* file that contains the custom code, which will be loaded on the cluster. It must include the file name itself. For example, `somedir/init.q`.
-            release-label: The version of FinSpace managed kdb to run.
-            savedown-storage-configuration: The size and type of the temporary storage that is used to hold data during the savedown process. This parameter is required when you choose `clusterType` as RDB. All the data written to this storage space is lost when the cluster node is restarted.
-            scaling-group-configuration: The structure that stores the configuration details of a scaling group.
-            tags: A list of key-value pairs to label the cluster. You can add up to 50 tags to a cluster.
-            tickerplant-log-configuration: A configuration to store Tickerplant logs. It consists of a list of volumes that will be mounted to your cluster. For the cluster type `Tickerplant`, the location of the TP volume on the cluster will be available by using the global variable `.aws.tp_log_path`.
-            vpc-configuration: Configuration details about the network where the Privatelink endpoint of the cluster resides.
-    - name: delete-kx-cluster
-      description: Deletes a kdb cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures idempotency.
-        --cluster-name=!: The name of the cluster that you want to delete.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Deletes a kdb cluster.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A token that ensures idempotency. This token expires in 10 minutes.
-            cluster-name: The name of the cluster that you want to delete.
-            environment-id: A unique identifier for the kdb environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: delete-kx-environment
-      description: Deletes the kdb environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures idempotency.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Deletes the kdb environment. This action is irreversible. Deleting a kdb environment will remove all the associated data and any services running in it.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A token that ensures idempotency. This token expires in 10 minutes.
-            environment-id: A unique identifier for the kdb environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: list-kx-clusters
-      description: Returns a list of clusters.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-type=: Specifies the type of KDB database that is being created.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in this request.
-        --next-token=: A token that indicates where a results page should begin.
-      completion:
-        flag:
-            cluster-type:
-                - HDB
-                - RDB
-                - GATEWAY
-                - GP
-                - TICKERPLANT
-      documentation:
-        command: Returns a list of clusters.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cluster-type: |-
-                Specifies the type of KDB database that is being created. The following types are available:
-
-                - HDB – A Historical Database. The data is only accessible with read-only permissions from one of the FinSpace managed kdb databases mounted to the cluster.
-                - RDB – A Realtime Database. This type of database captures all the data from a ticker plant and stores it in memory until the end of day, after which it writes all of its data to a disk and reloads the HDB. This cluster type requires local storage for temporary storage of data during the savedown process. If you specify this field in your request, you must provide the `savedownStorageConfiguration` parameter.
-                - GATEWAY – A gateway cluster allows you to access data across processes in kdb systems. It allows you to create your own routing logic using the initialization scripts and custom code. This type of cluster does not require a writable local storage.
-                - GP – A general purpose cluster allows you to quickly iterate on code during development by granting greater access to system commands and enabling a fast reload of custom code. This cluster type can optionally mount databases including cache and savedown storage. For this cluster type, the node count is fixed at 1. It does not support autoscaling and supports only `SINGLE` AZ mode.
-                - Tickerplant – A tickerplant cluster allows you to subscribe to feed handlers based on IAM permissions. It can publish to RDBs, other Tickerplants, and real-time subscribers (RTS). Tickerplants can persist messages to log, which is readable by any RDB environment. It supports only single-node that is only one kdb process.
-            environment-id: A unique identifier for the kdb environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-results: The maximum number of results to return in this request.
-            next-token: A token that indicates where a results page should begin.
-    - name: delete-kx-cluster-node
-      description: Deletes the specified nodes from a cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-name=!: The name of the cluster, for which you want to delete the nodes.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --node-id=!: A unique identifier for the node that you want to delete.
-      documentation:
-        command: Deletes the specified nodes from a cluster.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cluster-name: The name of the cluster, for which you want to delete the nodes.
-            environment-id: A unique identifier for the kdb environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            node-id: A unique identifier for the node that you want to delete.
-    - name: list-kx-changesets
-      description: Returns a list of all the changesets for a database.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --database-name=!: The name of the kdb database.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in this request.
-        --next-token=: A token that indicates where a results page should begin.
-      documentation:
-        command: Returns a list of all the changesets for a database.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            database-name: The name of the kdb database.
-            environment-id: A unique identifier for the kdb environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-results: The maximum number of results to return in this request.
-            next-token: A token that indicates where a results page should begin.
-    - name: list-kx-cluster-nodes
-      description: Lists all the nodes in a kdb cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-name=!: A unique name for the cluster.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in this request.
-        --next-token=: A token that indicates where a results page should begin.
-      documentation:
-        command: Lists all the nodes in a kdb cluster.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cluster-name: A unique name for the cluster.
-            environment-id: A unique identifier for the kdb environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-results: The maximum number of results to return in this request.
-            next-token: A token that indicates where a results page should begin.
-    - name: update-kx-cluster-databases
-      description: Updates the databases mounted on a kdb cluster, which includes the `changesetId` and all the dbPaths to be cached.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures idempotency.
-        --cluster-name=!: A unique name for the cluster that you want to modify.
-        --databases=!: The structure of databases mounted on the cluster.
-        --deployment-configuration=: The configuration that allows you to choose how you want to update the databases on a cluster.
-        --environment-id=!: The unique identifier of a kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: |-
-            Updates the databases mounted on a kdb cluster, which includes the `changesetId` and all the dbPaths to be cached. This API does not allow you to change a database name or add a database if you created a cluster without one.
-
-            Using this API you can point a cluster to a different changeset and modify a list of partitions being cached.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A token that ensures idempotency. This token expires in 10 minutes.
-            cluster-name: A unique name for the cluster that you want to modify.
-            databases: The structure of databases mounted on the cluster.
-            deployment-configuration: The configuration that allows you to choose how you want to update the databases on a cluster.
-            environment-id: The unique identifier of a kdb environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: update-kx-user
-      description: Updates the user details.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures idempotency.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --iam-role=!: The IAM role ARN that is associated with the user.
-        --user-name=!: A unique identifier for the user.
-      documentation:
-        command: Updates the user details. You can only update the IAM role associated with a user.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A token that ensures idempotency. This token expires in 10 minutes.
-            environment-id: A unique identifier for the kdb environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            iam-role: The IAM role ARN that is associated with the user.
-            user-name: A unique identifier for the user.
-    - name: delete-kx-user
-      description: Deletes a user in the specified kdb environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures idempotency.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-name=!: A unique identifier for the user that you want to delete.
-      documentation:
-        command: Deletes a user in the specified kdb environment.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A token that ensures idempotency. This token expires in 10 minutes.
-            environment-id: A unique identifier for the kdb environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            user-name: A unique identifier for the user that you want to delete.
-    - name: list-kx-dataviews
-      description: Returns a list of all the dataviews in the database.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --database-name=!: The name of the database where the dataviews were created.
-        --environment-id=!: A unique identifier for the kdb environment, for which you want to retrieve a list of dataviews.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in this request.
-        --next-token=: A token that indicates where a results page should begin.
-      documentation:
-        command: Returns a list of all the dataviews in the database.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            database-name: The name of the database where the dataviews were created.
-            environment-id: A unique identifier for the kdb environment, for which you want to retrieve a list of dataviews.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-results: The maximum number of results to return in this request.
-            next-token: A token that indicates where a results page should begin.
-    - name: list-kx-scaling-groups
-      description: Returns a list of scaling groups in a kdb environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=!: A unique identifier for the kdb environment, for which you want to retrieve a list of scaling groups.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in this request.
-        --next-token=: A token that indicates where a results page should begin.
-      documentation:
-        command: Returns a list of scaling groups in a kdb environment.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-id: A unique identifier for the kdb environment, for which you want to retrieve a list of scaling groups.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-results: The maximum number of results to return in this request.
-            next-token: A token that indicates where a results page should begin.
-    - name: create-environment
-      description: Create a new FinSpace environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-bundles=: The list of Amazon Resource Names (ARN) of the data bundles to install.
-        --description=: The description of the FinSpace environment to be created.
-        --federation-mode=: Authentication mode for the environment.
-        --federation-parameters=: Configuration information when authentication mode is FEDERATED.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kms-key-id=: The KMS key id to encrypt your data in the FinSpace environment.
-        --name=!: The name of the FinSpace environment to be created.
-        --superuser-parameters=: Configuration information for the superuser.
-        --tags=: Add tags to your FinSpace environment.
-      completion:
-        flag:
-            federation-mode:
-                - FEDERATED
-                - LOCAL
-      documentation:
-        command: Create a new FinSpace environment.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            data-bundles: |-
-                The list of Amazon Resource Names (ARN) of the data bundles to install. Currently supported data bundle ARNs:
-
-                - `arn:aws:finspace:${Region}::data-bundle/capital-markets-sample` - Contains sample Capital Markets datasets, categories and controlled vocabularies.
-                - `arn:aws:finspace:${Region}::data-bundle/taq` (default) - Contains trades and quotes data in addition to sample Capital Markets data.
-            description: The description of the FinSpace environment to be created.
-            federation-mode: |-
-                Authentication mode for the environment.
-
-                - `FEDERATED` - Users access FinSpace through Single Sign On (SSO) via your Identity provider.
-                - `LOCAL` - Users access FinSpace via email and password managed within the FinSpace environment.
-            federation-parameters: Configuration information when authentication mode is FEDERATED.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            kms-key-id: The KMS key id to encrypt your data in the FinSpace environment.
-            name: The name of the FinSpace environment to be created.
-            superuser-parameters: Configuration information for the superuser.
-            tags: Add tags to your FinSpace environment.
-    - name: create-kx-changeset
-      description: Creates a changeset for a kdb database.
-      flags:
-        --change-requests=!: A list of change request objects that are run in order.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: A token that ensures idempotency.
-        --database-name=!: The name of the kdb database.
-        --environment-id=!: A unique identifier of the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Creates a changeset for a kdb database. A changeset allows you to add and delete existing files by using an ordered list of change requests.
-        flag:
-            change-requests: "A list of change request objects that are run in order. A change request object consists of `changeType` , `s3Path`, and `dbPath`. A changeType can have the following values:\n\n- PUT – Adds or updates files in a database.\n- DELETE – Deletes files in a database.\n\nAll the change requests require a mandatory `dbPath` attribute that defines the path within the database directory. All database paths must start with a leading / and end with a trailing /. The `s3Path` attribute defines the s3 source file path and is required for a PUT change type. The `s3path` must end with a trailing / if it is a directory and must end without a trailing / if it is a file.\n\nHere are few examples of how you can use the change request object:\n\n1. This request adds a single sym file at database root location.\n   \n   `{ \"changeType\": \"PUT\", \"s3Path\":\"s3://bucket/db/sym\", \"dbPath\":\"/\"}`\n2. This request adds files in the given `s3Path` under the 2020.01.02 partition of the database.\n   \n   `{ \"changeType\": \"PUT\", \"s3Path\":\"s3://bucket/db/2020.01.02/\", \"dbPath\":\"/2020.01.02/\"}`\n3. This request adds files in the given `s3Path` under the *taq* table partition of the database.\n   \n   `[ { \"changeType\": \"PUT\", \"s3Path\":\"s3://bucket/db/2020.01.02/taq/\", \"dbPath\":\"/2020.01.02/taq/\"}]`\n4. This request deletes the 2020.01.02 partition of the database.\n   \n   `[{ \"changeType\": \"DELETE\", \"dbPath\": \"/2020.01.02/\"} ]`\n5. The *DELETE* request allows you to delete the existing files under the 2020.01.02 partition of the database, and the *PUT* request adds a new taq table under it.\n   \n   `[ {\"changeType\": \"DELETE\", \"dbPath\":\"/2020.01.02/\"}, {\"changeType\": \"PUT\", \"s3Path\":\"s3://bucket/db/2020.01.02/taq/\", \"dbPath\":\"/2020.01.02/taq/\"}]`"
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A token that ensures idempotency. This token expires in 10 minutes.
-            database-name: The name of the kdb database.
-            environment-id: A unique identifier of the kdb environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: create-kx-volume
-      description: Creates a new volume with a specific amount of throughput and storage capacity.
-      flags:
-        --availability-zone-ids=!: The identifier of the availability zones.
-        --az-mode=!: The number of availability zones you want to assign per volume.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures idempotency.
-        --description=: A description of the volume.
-        --environment-id=!: A unique identifier for the kdb environment, whose clusters can attach to the volume.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --nas1-configuration=: Specifies the configuration for the Network attached storage (NAS\_1) file system volume.
-        --tags=: A list of key-value pairs to label the volume.
-        --volume-name=!: A unique identifier for the volume.
-        --volume-type=!: The type of file system volume.
-      completion:
-        flag:
-            az-mode:
-                - SINGLE
-                - MULTI
-            volume-type:
-                - NAS_1
-      documentation:
-        command: Creates a new volume with a specific amount of throughput and storage capacity.
-        flag:
-            availability-zone-ids: The identifier of the availability zones.
-            az-mode: The number of availability zones you want to assign per volume. Currently, FinSpace only supports `SINGLE` for volumes. This places dataview in a single AZ.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A token that ensures idempotency. This token expires in 10 minutes.
-            description: A description of the volume.
-            environment-id: A unique identifier for the kdb environment, whose clusters can attach to the volume.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            nas1-configuration: Specifies the configuration for the Network attached storage (NAS\_1) file system volume. This parameter is required when you choose `volumeType` as *NAS\_1*.
-            tags: A list of key-value pairs to label the volume. You can add up to 50 tags to a volume.
-            volume-name: A unique identifier for the volume.
-            volume-type: The type of file system volume. Currently, FinSpace only supports `NAS_1` volume type. When you select `NAS_1` volume type, you must also provide `nas1Configuration`.
     - name: get-environment
       description: Returns the FinSpace environment object.
       flags:
@@ -618,1071 +538,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --environment-id=!: The identifier of the FinSpace environment.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Returns the FinSpace environment object.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-id: The identifier of the FinSpace environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: get-kx-dataview
-      description: Retrieves details of the dataview.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --database-name=!: The name of the database where you created the dataview.
-        --dataview-name=!: A unique identifier for the dataview.
-        --environment-id=!: A unique identifier for the kdb environment, from where you want to retrieve the dataview details.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Retrieves details of the dataview.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            database-name: The name of the database where you created the dataview.
-            dataview-name: A unique identifier for the dataview.
-            environment-id: A unique identifier for the kdb environment, from where you want to retrieve the dataview details.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: list-kx-environments
-      description: Returns a list of kdb environments created in an account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in this request.
-        --next-token=: A token that indicates where a results page should begin.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Returns a list of kdb environments created in an account.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The maximum number of results to return in this request.
-            next-token: A token that indicates where a results page should begin.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: list-kx-users
-      description: Lists all the users in a kdb environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in this request.
-        --next-token=: A token that indicates where a results page should begin.
-      documentation:
-        command: Lists all the users in a kdb environment.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-id: A unique identifier for the kdb environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-results: The maximum number of results to return in this request.
-            next-token: A token that indicates where a results page should begin.
-    - name: get-kx-changeset
-      description: Returns information about a kdb changeset.
-      flags:
-        --changeset-id=!: A unique identifier of the changeset for which you want to retrieve data.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --database-name=!: The name of the kdb database.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Returns information about a kdb changeset.
-        flag:
-            changeset-id: A unique identifier of the changeset for which you want to retrieve data.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            database-name: The name of the kdb database.
-            environment-id: A unique identifier for the kdb environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: create-kx-environment
-      description: Creates a managed kdb environment for the account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures idempotency.
-        --description=: A description for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kms-key-id=!: The KMS key ID to encrypt your data in the FinSpace environment.
-        --name=!: The name of the kdb environment that you want to create.
-        --tags=: A list of key-value pairs to label the kdb environment.
-      documentation:
-        command: Creates a managed kdb environment for the account.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A token that ensures idempotency. This token expires in 10 minutes.
-            description: A description for the kdb environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            kms-key-id: The KMS key ID to encrypt your data in the FinSpace environment.
-            name: The name of the kdb environment that you want to create.
-            tags: A list of key-value pairs to label the kdb environment. You can add up to 50 tags to your kdb environment.
-    - name: create-kx-scaling-group
-      description: Creates a new scaling group.
-      flags:
-        --availability-zone-id=!: The identifier of the availability zones.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: A token that ensures idempotency.
-        --environment-id=!: A unique identifier for the kdb environment, where you want to create the scaling group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --host-type=!: The memory and CPU capabilities of the scaling group host on which FinSpace Managed kdb clusters will be placed.
-        --scaling-group-name=!: A unique identifier for the kdb scaling group.
-        --tags=: A list of key-value pairs to label the scaling group.
-      documentation:
-        command: Creates a new scaling group.
-        flag:
-            availability-zone-id: The identifier of the availability zones.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A token that ensures idempotency. This token expires in 10 minutes.
-            environment-id: A unique identifier for the kdb environment, where you want to create the scaling group.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            host-type: |-
-                The memory and CPU capabilities of the scaling group host on which FinSpace Managed kdb clusters will be placed.
-
-                You can add one of the following values:
-
-                - `kx.sg.large` – The host type with a configuration of 16 GiB memory and 2 vCPUs.
-                - `kx.sg.xlarge` – The host type with a configuration of 32 GiB memory and 4 vCPUs.
-                - `kx.sg.2xlarge` – The host type with a configuration of 64 GiB memory and 8 vCPUs.
-                - `kx.sg.4xlarge` – The host type with a configuration of 108 GiB memory and 16 vCPUs.
-                - `kx.sg.8xlarge` – The host type with a configuration of 216 GiB memory and 32 vCPUs.
-                - `kx.sg.16xlarge` – The host type with a configuration of 432 GiB memory and 64 vCPUs.
-                - `kx.sg.32xlarge` – The host type with a configuration of 864 GiB memory and 128 vCPUs.
-                - `kx.sg1.16xlarge` – The host type with a configuration of 1949 GiB memory and 64 vCPUs.
-                - `kx.sg1.24xlarge` – The host type with a configuration of 2948 GiB memory and 96 vCPUs.
-            scaling-group-name: A unique identifier for the kdb scaling group.
-            tags: A list of key-value pairs to label the scaling group. You can add up to 50 tags to a scaling group.
-    - name: delete-environment
-      description: Delete an FinSpace environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=!: The identifier for the FinSpace environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Delete an FinSpace environment.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-id: The identifier for the FinSpace environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: delete-kx-dataview
-      description: Deletes the specified dataview.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: A token that ensures idempotency.
-        --database-name=!: The name of the database whose dataview you want to delete.
-        --dataview-name=!: The name of the dataview that you want to delete.
-        --environment-id=!: A unique identifier for the kdb environment, from where you want to delete the dataview.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Deletes the specified dataview. Before deleting a dataview, make sure that it is not in use by any cluster.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A token that ensures idempotency. This token expires in 10 minutes.
-            database-name: The name of the database whose dataview you want to delete.
-            dataview-name: The name of the dataview that you want to delete.
-            environment-id: A unique identifier for the kdb environment, from where you want to delete the dataview.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: delete-kx-scaling-group
-      description: Deletes the specified scaling group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures idempotency.
-        --environment-id=!: A unique identifier for the kdb environment, from where you want to delete the dataview.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --scaling-group-name=!: A unique identifier for the kdb scaling group.
-      documentation:
-        command: Deletes the specified scaling group. This action is irreversible. You cannot delete a scaling group until all the clusters running on it have been deleted.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A token that ensures idempotency. This token expires in 10 minutes.
-            environment-id: A unique identifier for the kdb environment, from where you want to delete the dataview.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            scaling-group-name: A unique identifier for the kdb scaling group.
-    - name: list-kx-databases
-      description: Returns a list of all the databases in the kdb environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in this request.
-        --next-token=: A token that indicates where a results page should begin.
-      documentation:
-        command: Returns a list of all the databases in the kdb environment.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-id: A unique identifier for the kdb environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-results: The maximum number of results to return in this request.
-            next-token: A token that indicates where a results page should begin.
-    - name: tag-resource
-      description: Adds metadata tags to a FinSpace resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) for the resource.
-        --tags=!: One or more tags to be assigned to the resource.
-      documentation:
-        command: Adds metadata tags to a FinSpace resource.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-arn: The Amazon Resource Name (ARN) for the resource.
-            tags: One or more tags to be assigned to the resource.
-    - name: create-kx-dataview
-      description: Creates a snapshot of kdb database with tiered storage capabilities and a pre-warmed cache, ready for mounting on kdb clusters.
-      flags:
-        --auto-update: The option to specify whether you want to apply all the future additions and corrections automatically to the dataview, when you ingest new changesets.
-        --availability-zone-id=: The identifier of the availability zones.
-        --az-mode=!: The number of availability zones you want to assign per volume.
-        --changeset-id=: A unique identifier of the changeset that you want to use to ingest data.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: A token that ensures idempotency.
-        --database-name=!: The name of the database where you want to create a dataview.
-        --dataview-name=!: A unique identifier for the dataview.
-        --description=: A description of the dataview.
-        --environment-id=!: A unique identifier for the kdb environment, where you want to create the dataview.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-auto-update: The option to specify whether you want to apply all the future additions and corrections automatically to the dataview, when you ingest new changesets.
-        --no-read-write: The option to specify whether you want to make the dataview writable to perform database maintenance.
-        --read-write: The option to specify whether you want to make the dataview writable to perform database maintenance.
-        --segment-configurations=: The configuration that contains the database path of the data that you want to place on each selected volume.
-        --tags=: A list of key-value pairs to label the dataview.
-      completion:
-        flag:
-            az-mode:
-                - SINGLE
-                - MULTI
-      documentation:
-        command: Creates a snapshot of kdb database with tiered storage capabilities and a pre-warmed cache, ready for mounting on kdb clusters. Dataviews are only available for clusters running on a scaling group. They are not supported on dedicated clusters.
-        flag:
-            auto-update: The option to specify whether you want to apply all the future additions and corrections automatically to the dataview, when you ingest new changesets. The default value is false.
-            availability-zone-id: The identifier of the availability zones.
-            az-mode: The number of availability zones you want to assign per volume. Currently, FinSpace only supports `SINGLE` for volumes. This places dataview in a single AZ.
-            changeset-id: A unique identifier of the changeset that you want to use to ingest data.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A token that ensures idempotency. This token expires in 10 minutes.
-            database-name: The name of the database where you want to create a dataview.
-            dataview-name: A unique identifier for the dataview.
-            description: A description of the dataview.
-            environment-id: A unique identifier for the kdb environment, where you want to create the dataview.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            read-write: |-
-                The option to specify whether you want to make the dataview writable to perform database maintenance. The following are some considerations related to writable dataviews.  
-
-                - You cannot create partial writable dataviews. When you create writeable dataviews you must provide the entire database path.
-                - You cannot perform updates on a writeable dataview. Hence, `autoUpdate` must be set as **False** if `readWrite` is **True** for a dataview.
-                - You must also use a unique volume for creating a writeable dataview. So, if you choose a volume that is already in use by another dataview, the dataview creation fails.
-                - Once you create a dataview as writeable, you cannot change it to read-only. So, you cannot update the `readWrite` parameter later.
-            segment-configurations: The configuration that contains the database path of the data that you want to place on each selected volume. Each segment must have a unique database path for each volume. If you do not explicitly specify any database path for a volume, they are accessible from the cluster through the default S3/object store segment.
-            tags: A list of key-value pairs to label the dataview. You can add up to 50 tags to a dataview.
-    - name: list-kx-volumes
-      description: Lists all the volumes in a kdb environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=!: A unique identifier for the kdb environment, whose clusters can attach to the volume.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in this request.
-        --next-token=: A token that indicates where a results page should begin.
-        --volume-type=: The type of file system volume.
-      completion:
-        flag:
-            volume-type:
-                - NAS_1
-      documentation:
-        command: Lists all the volumes in a kdb environment.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-id: A unique identifier for the kdb environment, whose clusters can attach to the volume.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-results: The maximum number of results to return in this request.
-            next-token: A token that indicates where a results page should begin.
-            volume-type: The type of file system volume. Currently, FinSpace only supports `NAS_1` volume type.
-    - name: update-kx-cluster-code-configuration
-      description: Allows you to update code configuration on a running cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures idempotency.
-        --cluster-name=!: The name of the cluster.
-        --code=!: ""
-        --command-line-arguments=: Specifies the key-value pairs to make them available inside the cluster.
-        --deployment-configuration=: The configuration that allows you to choose how you want to update the code on a cluster.
-        --environment-id=!: A unique identifier of the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --initialization-script=: Specifies a Q program that will be run at launch of a cluster.
-      documentation:
-        command: Allows you to update code configuration on a running cluster. By using this API you can update the code, the initialization script path, and the command line arguments for a specific cluster. The configuration that you want to update will override any existing configurations on the cluster.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A token that ensures idempotency. This token expires in 10 minutes.
-            cluster-name: The name of the cluster.
-            code: ""
-            command-line-arguments: |-
-                Specifies the key-value pairs to make them available inside the cluster.
-
-                You cannot update this parameter for a `NO_RESTART` deployment.
-            deployment-configuration: The configuration that allows you to choose how you want to update the code on a cluster.
-            environment-id: A unique identifier of the kdb environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            initialization-script: |-
-                Specifies a Q program that will be run at launch of a cluster. It is a relative path within *.zip* file that contains the custom code, which will be loaded on the cluster. It must include the file name itself. For example, `somedir/init.q`.
-
-                You cannot update this parameter for a `NO_RESTART` deployment.
-    - name: update-kx-database
-      description: Updates information for the given kdb database.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: A token that ensures idempotency.
-        --database-name=!: The name of the kdb database.
-        --description=: A description of the database.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Updates information for the given kdb database.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A token that ensures idempotency. This token expires in 10 minutes.
-            database-name: The name of the kdb database.
-            description: A description of the database.
-            environment-id: A unique identifier for the kdb environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: update-kx-dataview
-      description: Updates the specified dataview.
-      flags:
-        --changeset-id=: A unique identifier for the changeset.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: A token that ensures idempotency.
-        --database-name=!: The name of the database.
-        --dataview-name=!: The name of the dataview that you want to update.
-        --description=: The description for a dataview.
-        --environment-id=!: A unique identifier for the kdb environment, where you want to update the dataview.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --segment-configurations=: The configuration that contains the database path of the data that you want to place on each selected volume.
-      documentation:
-        command: Updates the specified dataview. The dataviews get automatically updated when any new changesets are ingested. Each update of the dataview creates a new version, including changeset details and cache configurations
-        flag:
-            changeset-id: A unique identifier for the changeset.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A token that ensures idempotency. This token expires in 10 minutes.
-            database-name: The name of the database.
-            dataview-name: The name of the dataview that you want to update.
-            description: The description for a dataview.
-            environment-id: A unique identifier for the kdb environment, where you want to update the dataview.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            segment-configurations: The configuration that contains the database path of the data that you want to place on each selected volume. Each segment must have a unique database path for each volume. If you do not explicitly specify any database path for a volume, they are accessible from the cluster through the default S3/object store segment.
-    - name: update-kx-environment-network
-      description: Updates environment network to connect to your internal network by using a transit gateway.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures idempotency.
-        --custom-dns-configuration=: A list of DNS server name and server IP.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --transit-gateway-configuration=: Specifies the transit gateway and network configuration to connect the kdb environment to an internal network.
-      documentation:
-        command: |-
-            Updates environment network to connect to your internal network by using a transit gateway. This API supports request to create a transit gateway attachment from FinSpace VPC to your transit gateway ID and create a custom Route-53 outbound resolvers.
-
-            Once you send a request to update a network, you cannot change it again. Network update might require termination of any clusters that are running in the existing network.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A token that ensures idempotency. This token expires in 10 minutes.
-            custom-dns-configuration: A list of DNS server name and server IP. This is used to set up Route-53 outbound resolvers.
-            environment-id: A unique identifier for the kdb environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            transit-gateway-configuration: Specifies the transit gateway and network configuration to connect the kdb environment to an internal network.
-    - name: create-kx-database
-      description: Creates a new kdb database in the environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: A token that ensures idempotency.
-        --database-name=!: The name of the kdb database.
-        --description=: A description of the database.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: A list of key-value pairs to label the kdb database.
-      documentation:
-        command: Creates a new kdb database in the environment.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A token that ensures idempotency. This token expires in 10 minutes.
-            database-name: The name of the kdb database.
-            description: A description of the database.
-            environment-id: A unique identifier for the kdb environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            tags: A list of key-value pairs to label the kdb database. You can add up to 50 tags to your kdb database
-    - name: create-kx-user
-      description: Creates a user in FinSpace kdb environment with an associated IAM role.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures idempotency.
-        --environment-id=!: A unique identifier for the kdb environment where you want to create a user.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --iam-role=!: The IAM role ARN that will be associated with the user.
-        --tags=: A list of key-value pairs to label the user.
-        --user-name=!: A unique identifier for the user.
-      documentation:
-        command: Creates a user in FinSpace kdb environment with an associated IAM role.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A token that ensures idempotency. This token expires in 10 minutes.
-            environment-id: A unique identifier for the kdb environment where you want to create a user.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            iam-role: The IAM role ARN that will be associated with the user.
-            tags: A list of key-value pairs to label the user. You can add up to 50 tags to a user.
-            user-name: A unique identifier for the user.
-    - name: delete-kx-volume
-      description: Deletes a volume.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures idempotency.
-        --environment-id=!: A unique identifier for the kdb environment, whose clusters can attach to the volume.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --volume-name=!: The name of the volume that you want to delete.
-      documentation:
-        command: Deletes a volume. You can only delete a volume if it's not attached to a cluster or a dataview. When a volume is deleted, any data on the volume is lost. This action is irreversible.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A token that ensures idempotency. This token expires in 10 minutes.
-            environment-id: A unique identifier for the kdb environment, whose clusters can attach to the volume.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            volume-name: The name of the volume that you want to delete.
-    - name: get-kx-database
-      description: Returns database information for the specified environment ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --database-name=!: The name of the kdb database.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Returns database information for the specified environment ID.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            database-name: The name of the kdb database.
-            environment-id: A unique identifier for the kdb environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: get-kx-scaling-group
-      description: Retrieves details of a scaling group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --scaling-group-name=!: A unique identifier for the kdb scaling group.
-      documentation:
-        command: Retrieves details of a scaling group.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-id: A unique identifier for the kdb environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            scaling-group-name: A unique identifier for the kdb scaling group.
-    - name: get-kx-user
-      description: Retrieves information about the specified kdb user.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-name=!: A unique identifier for the user.
-      documentation:
-        command: Retrieves information about the specified kdb user.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-id: A unique identifier for the kdb environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            user-name: A unique identifier for the user.
-    - name: list-environments
-      description: A list of all of your FinSpace environments.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in this request.
-        --next-token=: A token generated by FinSpace that specifies where to continue pagination if a previous request was truncated.
-      documentation:
-        command: A list of all of your FinSpace environments.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-results: The maximum number of results to return in this request.
-            next-token: A token generated by FinSpace that specifies where to continue pagination if a previous request was truncated. To get the next set of pages, pass in the `nextToken`nextToken value from the response object of the previous page call.
-    - name: list-tags-for-resource
-      description: A list of all tags for a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name of the resource.
-      documentation:
-        command: A list of all tags for a resource.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-arn: The Amazon Resource Name of the resource.
-    - name: delete-kx-database
-      description: Deletes the specified database and all of its associated data.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: A token that ensures idempotency.
-        --database-name=!: The name of the kdb database that you want to delete.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Deletes the specified database and all of its associated data. This action is irreversible. You must copy any data out of the database before deleting it if the data is to be retained.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A token that ensures idempotency. This token expires in 10 minutes.
-            database-name: The name of the kdb database that you want to delete.
-            environment-id: A unique identifier for the kdb environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: untag-resource
-      description: Removes metadata tags from a FinSpace resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: A FinSpace resource from which you want to remove a tag or tags.
-        --tag-keys=!: The tag keys (names) of one or more tags to be removed.
-      documentation:
-        command: Removes metadata tags from a FinSpace resource.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-arn: A FinSpace resource from which you want to remove a tag or tags. The value for this parameter is an Amazon Resource Name (ARN).
-            tag-keys: The tag keys (names) of one or more tags to be removed.
-    - name: update-environment
-      description: Update your FinSpace environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The description of the environment.
-        --environment-id=!: The identifier of the FinSpace environment.
-        --federation-mode=: Authentication mode for the environment.
-        --federation-parameters=: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: The name of the environment.
-      completion:
-        flag:
-            federation-mode:
-                - FEDERATED
-                - LOCAL
-      documentation:
-        command: Update your FinSpace environment.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            description: The description of the environment.
-            environment-id: The identifier of the FinSpace environment.
-            federation-mode: |-
-                Authentication mode for the environment.
-
-                - `FEDERATED` - Users access FinSpace through Single Sign On (SSO) via your Identity provider.
-                - `LOCAL` - Users access FinSpace via email and password managed within the FinSpace environment.
-            federation-parameters: ""
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            name: The name of the environment.
-    - name: update-kx-environment
-      description: Updates information for the given kdb environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures idempotency.
-        --description=: A description of the kdb environment.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: The name of the kdb environment.
-      documentation:
-        command: Updates information for the given kdb environment.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A token that ensures idempotency. This token expires in 10 minutes.
-            description: A description of the kdb environment.
-            environment-id: A unique identifier for the kdb environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            name: The name of the kdb environment.
-    - name: update-kx-volume
-      description: Updates the throughput or capacity of a volume.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures idempotency.
-        --description=: A description of the volume.
-        --environment-id=!: A unique identifier for the kdb environment where you created the storage volume.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --nas1-configuration=: Specifies the configuration for the Network attached storage (NAS\_1) file system volume.
-        --volume-name=!: A unique identifier for the volume.
-      documentation:
-        command: Updates the throughput or capacity of a volume. During the update process, the filesystem might be unavailable for a few minutes. You can retry any operations after the update is complete.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A token that ensures idempotency. This token expires in 10 minutes.
-            description: A description of the volume.
-            environment-id: A unique identifier for the kdb environment where you created the storage volume.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            nas1-configuration: Specifies the configuration for the Network attached storage (NAS\_1) file system volume.
-            volume-name: A unique identifier for the volume.
-    - name: get-kx-cluster
-      description: Retrieves information about a kdb cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-name=!: The name of the cluster that you want to retrieve.
-        --environment-id=!: A unique identifier for the kdb environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Retrieves information about a kdb cluster.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cluster-name: The name of the cluster that you want to retrieve.
-            environment-id: A unique identifier for the kdb environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
     - name: get-kx-connection-string
       description: Retrieves a connection string for a user to connect to a kdb cluster.
       flags:
@@ -1692,50 +547,11 @@ commands:
         --environment-id=!: A unique identifier for the kdb environment.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --user-arn=!: The Amazon Resource Name (ARN) that identifies the user.
-      documentation:
-        command: Retrieves a connection string for a user to connect to a kdb cluster. You must call this API using the same role that you have defined while creating a user.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cluster-name: A name of the kdb cluster.
-            environment-id: A unique identifier for the kdb environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            user-arn: The Amazon Resource Name (ARN) that identifies the user. For more information about ARNs and how to use ARNs in policies, see [IAM Identifiers](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html) in the *IAM User Guide*.
-    - name: get-kx-environment
-      description: Retrieves all the information for the specified kdb environment.
+    - name: get-kx-volume
+      description: Retrieves the information about the volume.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=!: A unique identifier for the kdb environment.
+        --environment-id=!: A unique identifier for the kdb environment, whose clusters can attach to the volume.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Retrieves all the information for the specified kdb environment.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-id: A unique identifier for the kdb environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
+        --volume-name=!: A unique identifier for the volume.

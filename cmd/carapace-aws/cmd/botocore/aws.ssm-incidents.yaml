@@ -1,441 +1,26 @@
 name: ssm-incidents
 description: AWS Systems Manager Incident Manager
 commands:
-    - name: create-replication-set
-      description: A replication set replicates and encrypts your data to the provided Regions with the provided KMS key.
+    - name: start-incident
+      description: Used to start an incident from CloudWatch alarms, EventBridge events, or manually.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures that the operation is called only once with the specified details.
+        --client-token=: A token ensuring that the operation is called only once with the specified details.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --regions=!: The Regions that Incident Manager replicates your data to.
-        --tags=: A list of tags to add to the replication set.
-      documentation:
-        command: A replication set replicates and encrypts your data to the provided Regions with the provided KMS key.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A token that ensures that the operation is called only once with the specified details.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            regions: The Regions that Incident Manager replicates your data to. You can have up to three Regions in your replication set.
-            tags: A list of tags to add to the replication set.
-    - name: list-incident-findings
-      description: Retrieves a list of the IDs of findings, plus their last modified times, that have been identified for a specified incident.
+        --impact=: Defines the impact to the customers.
+        --related-items=: Add related items to the incident for other responders to use.
+        --response-plan-arn=!: The Amazon Resource Name (ARN) of the response plan that pre-defines summary, chat channels, Amazon SNS topics, runbooks, title, and impact of the incident.
+        --title=: Provide a title for the incident.
+        --trigger-details=: Details of what created the incident record in Incident Manager.
+    - name: tag-resource
+      description: Adds a tag to a response plan.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --incident-record-arn=!: The Amazon Resource Name (ARN) of the incident for which you want to view associated findings.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of findings to retrieve per call.
-        --next-token=: The pagination token for the next set of items to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Retrieves a list of the IDs of findings, plus their last modified times, that have been identified for a specified incident. A finding represents a recent application environment change made by an CloudFormation stack creation or update or an CodeDeploy deployment that can be investigated as a potential cause of the incident.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            incident-record-arn: The Amazon Resource Name (ARN) of the incident for which you want to view associated findings.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The maximum number of findings to retrieve per call.
-            next-token: The pagination token for the next set of items to return. (You received this token from a previous call.)
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: list-response-plans
-      description: Lists all response plans in your account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of response plans per page.
-        --next-token=: The pagination token for the next set of items to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Lists all response plans in your account.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The maximum number of response plans per page.
-            next-token: The pagination token for the next set of items to return. (You received this token from a previous call.)
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: put-resource-policy
-      description: Adds a resource policy to the specified response plan.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy=!: Details of the resource policy.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the response plan to add the resource policy to.
-      documentation:
-        command: Adds a resource policy to the specified response plan. The resource policy is used to share the response plan using Resource Access Manager (RAM). For more information about cross-account sharing, see [Cross-Region and cross-account incident management](https://docs.aws.amazon.com/incident-manager/latest/userguide/incident-manager-cross-account-cross-region.html).
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            policy: Details of the resource policy.
-            resource-arn: The Amazon Resource Name (ARN) of the response plan to add the resource policy to.
-    - name: update-replication-set
-      description: Add or delete Regions from your replication set.
-      flags:
-        --actions=!: An action to add or delete a Region.
-        --arn=!: The Amazon Resource Name (ARN) of the replication set you're updating.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures that the operation is called only once with the specified details.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Add or delete Regions from your replication set.
-        flag:
-            actions: An action to add or delete a Region.
-            arn: The Amazon Resource Name (ARN) of the replication set you're updating.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A token that ensures that the operation is called only once with the specified details.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: get-timeline-event
-      description: Retrieves a timeline event based on its ID and incident record.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --event-id=!: The ID of the event.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --incident-record-arn=!: The Amazon Resource Name (ARN) of the incident that includes the timeline event.
-      documentation:
-        command: Retrieves a timeline event based on its ID and incident record.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            event-id: The ID of the event. You can get an event's ID when you create it, or by using `ListTimelineEvents`.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            incident-record-arn: The Amazon Resource Name (ARN) of the incident that includes the timeline event.
-    - name: update-deletion-protection
-      description: Update deletion protection to either allow or deny deletion of the final Region in a replication set.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the replication set to update.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures that the operation is called only once with the specified details.
-        --deletion-protected!: Specifies if deletion protection is turned on or off in your account.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-deletion-protected!: Specifies if deletion protection is turned on or off in your account.
-      documentation:
-        command: Update deletion protection to either allow or deny deletion of the final Region in a replication set.
-        flag:
-            arn: The Amazon Resource Name (ARN) of the replication set to update.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A token that ensures that the operation is called only once with the specified details.
-            deletion-protected: Specifies if deletion protection is turned on or off in your account.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: delete-response-plan
-      description: Deletes the specified response plan.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the response plan.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Deletes the specified response plan. Deleting a response plan stops all linked CloudWatch alarms and EventBridge events from creating an incident with this response plan.
-        flag:
-            arn: The Amazon Resource Name (ARN) of the response plan.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: list-related-items
-      description: List all related items for an incident record.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --incident-record-arn=!: The Amazon Resource Name (ARN) of the incident record containing the listed related items.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of related items per page.
-        --next-token=: The pagination token for the next set of items to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: List all related items for an incident record.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            incident-record-arn: The Amazon Resource Name (ARN) of the incident record containing the listed related items.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The maximum number of related items per page.
-            next-token: The pagination token for the next set of items to return. (You received this token from a previous call.)
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: update-timeline-event
-      description: Updates a timeline event.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures that a client calls the operation only once with the specified details.
-        --event-data=: A short description of the event.
-        --event-id=!: The ID of the event to update.
-        --event-references=: Updates all existing references in a `TimelineEvent`.
-        --event-time=: The timestamp for when the event occurred.
-        --event-type=: The type of event.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --incident-record-arn=!: The Amazon Resource Name (ARN) of the incident that includes the timeline event.
-      documentation:
-        command: Updates a timeline event. You can update events of type `Custom Event`.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A token that ensures that a client calls the operation only once with the specified details.
-            event-data: A short description of the event.
-            event-id: The ID of the event to update. You can use `ListTimelineEvents` to find an event's ID.
-            event-references: |-
-                Updates all existing references in a `TimelineEvent`. A reference is an Amazon Web Services resource involved or associated with the incident. To specify a reference, enter its Amazon Resource Name (ARN). You can also specify a related item associated with that resource. For example, to specify an Amazon DynamoDB (DynamoDB) table as a resource, use its ARN. You can also specify an Amazon CloudWatch metric associated with the DynamoDB table as a related item.
-
-                This update action overrides all existing references. If you want to keep existing references, you must specify them in the call. If you don't, this action removes any existing references and enters only new references.
-            event-time: The timestamp for when the event occurred.
-            event-type: The type of event. You can update events of type `Custom Event` and `Note`.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            incident-record-arn: The Amazon Resource Name (ARN) of the incident that includes the timeline event.
-    - name: create-timeline-event
-      description: Creates a custom timeline event on the incident details page of an incident record.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that ensures that a client calls the action only once with the specified details.
-        --event-data=!: A short description of the event.
-        --event-references=: Adds one or more references to the `TimelineEvent`.
-        --event-time=!: The timestamp for when the event occurred.
-        --event-type=!: The type of event.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --incident-record-arn=!: The Amazon Resource Name (ARN) of the incident record that the action adds the incident to.
-      documentation:
-        command: Creates a custom timeline event on the incident details page of an incident record. Incident Manager automatically creates timeline events that mark key moments during an incident. You can create custom timeline events to mark important events that Incident Manager can detect automatically.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A token that ensures that a client calls the action only once with the specified details.
-            event-data: A short description of the event.
-            event-references: Adds one or more references to the `TimelineEvent`. A reference is an Amazon Web Services resource involved or associated with the incident. To specify a reference, enter its Amazon Resource Name (ARN). You can also specify a related item associated with a resource. For example, to specify an Amazon DynamoDB (DynamoDB) table as a resource, use the table's ARN. You can also specify an Amazon CloudWatch metric associated with the DynamoDB table as a related item.
-            event-time: The timestamp for when the event occurred.
-            event-type: |-
-                The type of event. You can create timeline events of type `Custom Event` and `Note`.
-
-                To make a Note-type event appear on the *Incident notes* panel in the console, specify `eventType` as `Note`and enter the Amazon Resource Name (ARN) of the incident as the value for `eventReference`.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            incident-record-arn: The Amazon Resource Name (ARN) of the incident record that the action adds the incident to.
-    - name: untag-resource
-      description: Removes a tag from a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the response plan you're removing a tag from.
-        --tag-keys=!: The name of the tag to remove from the response plan.
-      documentation:
-        command: Removes a tag from a resource.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-arn: The Amazon Resource Name (ARN) of the response plan you're removing a tag from.
-            tag-keys: The name of the tag to remove from the response plan.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the response plan you're adding the tags to.
+        --tags=!: A list of tags to add to the response plan.
     - name: update-related-items
       description: Add or remove related items from the related items tab of an incident record.
       flags:
@@ -445,27 +30,6 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --incident-record-arn=!: The Amazon Resource Name (ARN) of the incident record that contains the related items that you update.
         --related-items-update=!: Details about the item that you are add to, or delete from, an incident.
-      documentation:
-        command: Add or remove related items from the related items tab of an incident record.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A token that ensures that a client calls the operation only once with the specified details.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            incident-record-arn: The Amazon Resource Name (ARN) of the incident record that contains the related items that you update.
-            related-items-update: Details about the item that you are add to, or delete from, an incident.
     - name: batch-get-incident-findings
       description: Retrieves details about all specified findings for an incident, including descriptive details about each finding.
       flags:
@@ -474,80 +38,32 @@ commands:
         --finding-ids=!: A list of IDs of findings for which you want to view details.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --incident-record-arn=!: The Amazon Resource Name (ARN) of the incident for which you want to view finding details.
-      documentation:
-        command: Retrieves details about all specified findings for an incident, including descriptive details about each finding. A finding represents a recent application environment change made by an CodeDeploy deployment or an CloudFormation stack creation or update that can be investigated as a potential cause of the incident.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            finding-ids: A list of IDs of findings for which you want to view details.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            incident-record-arn: The Amazon Resource Name (ARN) of the incident for which you want to view finding details.
-    - name: delete-incident-record
-      description: Delete an incident record from Incident Manager.
+    - name: update-response-plan
+      description: Updates the specified response plan.
       flags:
-        --arn=!: The Amazon Resource Name (ARN) of the incident record you are deleting.
+        --actions=: The actions that this response plan takes at the beginning of an incident.
+        --arn=!: The Amazon Resource Name (ARN) of the response plan.
+        --chat-channel=: The Chatbot chat channel used for collaboration during an incident.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token ensuring that the operation is called only once with the specified details.
+        --display-name=: The long format name of the response plan.
+        --engagements=: The Amazon Resource Name (ARN) for the contacts and escalation plans that the response plan engages during an incident.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Delete an incident record from Incident Manager.
-        flag:
-            arn: The Amazon Resource Name (ARN) of the incident record you are deleting.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: delete-resource-policy
-      description: Deletes the resource policy that Resource Access Manager uses to share your Incident Manager resource.
+        --incident-template-dedupe-string=: The string Incident Manager uses to prevent duplicate incidents from being created by the same incident in the same account.
+        --incident-template-impact=: Defines the impact to the customers.
+        --incident-template-notification-targets=: The Amazon SNS targets that are notified when updates are made to an incident.
+        --incident-template-summary=: A brief summary of the incident.
+        --incident-template-tags=: Tags to assign to the template.
+        --incident-template-title=: The short format name of the incident.
+        --integrations=: Information about third-party services integrated into the response plan.
+    - name: list-tags-for-resource
+      description: Lists the tags that are attached to the specified response plan or incident.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-id=!: The ID of the resource policy you're deleting.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource you're deleting the policy from.
-      documentation:
-        command: Deletes the resource policy that Resource Access Manager uses to share your Incident Manager resource.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            policy-id: The ID of the resource policy you're deleting.
-            resource-arn: The Amazon Resource Name (ARN) of the resource you're deleting the policy from.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the response plan or incident.
     - name: list-timeline-events
       description: Lists timeline events for the specified incident record.
       flags:
@@ -570,114 +86,33 @@ commands:
             sort-order:
                 - ASCENDING
                 - DESCENDING
-      documentation:
-        command: Lists timeline events for the specified incident record.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            filters: |-
-                Filters the timeline events based on the provided conditional values. You can filter timeline events with the following keys:
-
-                - `eventReference`
-                - `eventTime`
-                - `eventType`
-
-                Note the following when deciding how to use Filters:
-
-                - If you don't specify a Filter, the response includes all timeline events.
-                - If you specify more than one filter in a single request, the response returns timeline events that match all filters.
-                - If you specify a filter with more than one value, the response returns timeline events that match any of the values provided.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            incident-record-arn: The Amazon Resource Name (ARN) of the incident that includes the timeline event.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The maximum number of results per page.
-            next-token: The pagination token for the next set of items to return. (You received this token from a previous call.)
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            sort-by: Sort timeline events by the specified key value pair.
-            sort-order: Sorts the order of timeline events by the value specified in the `sortBy` field.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: delete-replication-set
-      description: Deletes all Regions in your replication set.
+    - name: create-response-plan
+      description: Creates a response plan that automates the initial response to incidents.
       flags:
-        --arn=!: The Amazon Resource Name (ARN) of the replication set you're deleting.
+        --actions=: The actions that the response plan starts at the beginning of an incident.
+        --chat-channel=: The Chatbot chat channel used for collaboration during an incident.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token ensuring that the operation is called only once with the specified details.
+        --display-name=: The long format of the response plan name.
+        --engagements=: The Amazon Resource Name (ARN) for the contacts and escalation plans that the response plan engages during an incident.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Deletes all Regions in your replication set. Deleting the replication set deletes all Incident Manager data.
-        flag:
-            arn: The Amazon Resource Name (ARN) of the replication set you're deleting.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: delete-timeline-event
-      description: Deletes a timeline event from an incident.
+        --incident-template=!: Details used to create an incident when using this response plan.
+        --integrations=: Information about third-party services integrated into the response plan.
+        --name=!: The short format name of the response plan.
+        --tags=: A list of tags that you are adding to the response plan.
+    - name: create-timeline-event
+      description: Creates a custom timeline event on the incident details page of an incident record.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --event-id=!: The ID of the event to update.
+        --client-token=: A token that ensures that a client calls the action only once with the specified details.
+        --event-data=!: A short description of the event.
+        --event-references=: Adds one or more references to the `TimelineEvent`.
+        --event-time=!: The timestamp for when the event occurred.
+        --event-type=!: The type of event.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --incident-record-arn=!: The Amazon Resource Name (ARN) of the incident that includes the timeline event.
-      documentation:
-        command: Deletes a timeline event from an incident.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            event-id: The ID of the event to update. You can use `ListTimelineEvents` to find an event's ID.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            incident-record-arn: The Amazon Resource Name (ARN) of the incident that includes the timeline event.
+        --incident-record-arn=!: The Amazon Resource Name (ARN) of the incident record that the action adds the incident to.
     - name: get-resource-policies
       description: Retrieves the resource policies attached to the specified response plan.
       flags:
@@ -690,231 +125,62 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --resource-arn=!: The Amazon Resource Name (ARN) of the response plan with the attached resource policy.
         --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Retrieves the resource policies attached to the specified response plan.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The maximum number of resource policies to display for each page of results.
-            next-token: The pagination token for the next set of items to return. (You received this token from a previous call.)
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            resource-arn: The Amazon Resource Name (ARN) of the response plan with the attached resource policy.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: get-response-plan
-      description: Retrieves the details of the specified response plan.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the response plan.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Retrieves the details of the specified response plan.
-        flag:
-            arn: The Amazon Resource Name (ARN) of the response plan.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: list-incident-records
-      description: Lists all incident records in your account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters the list of incident records you want to search through.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results per page.
-        --next-token=: The pagination token for the next set of items to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Lists all incident records in your account. Use this command to retrieve the Amazon Resource Name (ARN) of the incident record you want to update.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            filters: |-
-                Filters the list of incident records you want to search through. You can filter on the following keys:
-
-                - `creationTime`
-                - `impact`
-                - `status`
-                - `createdBy`
-
-                Note the following when when you use Filters:
-
-                - If you don't specify a Filter, the response includes all incident records.
-                - If you specify more than one filter in a single request, the response returns incident records that match all filters.
-                - If you specify a filter with more than one value, the response returns incident records that match any of the values provided.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The maximum number of results per page.
-            next-token: The pagination token for the next set of items to return. (You received this token from a previous call.)
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: list-replication-sets
-      description: Lists details about the replication set configured in your account.
+    - name: list-response-plans
+      description: Lists all response plans in your account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results per page.
+        --max-results=: The maximum number of response plans per page.
         --next-token=: The pagination token for the next set of items to return.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Lists details about the replication set configured in your account.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-results: The maximum number of results per page.
-            next-token: The pagination token for the next set of items to return. (You received this token from a previous call.)
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-    - name: start-incident
-      description: Used to start an incident from CloudWatch alarms, EventBridge events, or manually.
+    - name: put-resource-policy
+      description: Adds a resource policy to the specified response plan.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token ensuring that the operation is called only once with the specified details.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --impact=: Defines the impact to the customers.
-        --related-items=: Add related items to the incident for other responders to use.
-        --response-plan-arn=!: The Amazon Resource Name (ARN) of the response plan that pre-defines summary, chat channels, Amazon SNS topics, runbooks, title, and impact of the incident.
-        --title=: Provide a title for the incident.
-        --trigger-details=: Details of what created the incident record in Incident Manager.
-      documentation:
-        command: Used to start an incident from CloudWatch alarms, EventBridge events, or manually.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A token ensuring that the operation is called only once with the specified details.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            impact: |-
-                Defines the impact to the customers. Providing an impact overwrites the impact provided by a response plan.
-
-                **Supported impact codes**
-
-                - `1` - Critical
-                - `2` - High
-                - `3` - Medium
-                - `4` - Low
-                - `5` - No Impact
-            related-items: Add related items to the incident for other responders to use. Related items are Amazon Web Services resources, external links, or files uploaded to an Amazon S3 bucket.
-            response-plan-arn: The Amazon Resource Name (ARN) of the response plan that pre-defines summary, chat channels, Amazon SNS topics, runbooks, title, and impact of the incident.
-            title: Provide a title for the incident. Providing a title overwrites the title provided by the response plan.
-            trigger-details: Details of what created the incident record in Incident Manager.
+        --policy=!: Details of the resource policy.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the response plan to add the resource policy to.
+    - name: delete-incident-record
+      description: Delete an incident record from Incident Manager.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the incident record you are deleting.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-resource-policy
+      description: Deletes the resource policy that Resource Access Manager uses to share your Incident Manager resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-id=!: The ID of the resource policy you're deleting.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource you're deleting the policy from.
+    - name: list-related-items
+      description: List all related items for an incident record.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --incident-record-arn=!: The Amazon Resource Name (ARN) of the incident record containing the listed related items.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of related items per page.
+        --next-token=: The pagination token for the next set of items to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-deletion-protection
+      description: Update deletion protection to either allow or deny deletion of the final Region in a replication set.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the replication set to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that ensures that the operation is called only once with the specified details.
+        --deletion-protected!: Specifies if deletion protection is turned on or off in your account.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-deletion-protected!: Specifies if deletion protection is turned on or off in your account.
     - name: update-incident-record
       description: Update the details of an incident record.
       flags:
@@ -934,44 +200,58 @@ commands:
             status:
                 - OPEN
                 - RESOLVED
-      documentation:
-        command: Update the details of an incident record. You can use this operation to update an incident record from the defined chat channel. For more information about using actions in chat channels, see [Interacting through chat](https://docs.aws.amazon.com/incident-manager/latest/userguide/chat.html#chat-interact).
-        flag:
-            arn: The Amazon Resource Name (ARN) of the incident record you are updating.
-            chat-channel: The Chatbot chat channel where responders can collaborate.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A token that ensures that a client calls the operation only once with the specified details.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            impact: |-
-                Defines the impact of the incident to customers and applications. If you provide an impact for an incident, it overwrites the impact provided by the response plan.
-
-                **Supported impact codes**
-
-                - `1` - Critical
-                - `2` - High
-                - `3` - Medium
-                - `4` - Low
-                - `5` - No Impact
-            notification-targets: |-
-                The Amazon SNS targets that Incident Manager notifies when a client updates an incident.
-
-                Using multiple SNS topics creates redundancy in the event that a Region is down during the incident.
-            status: The status of the incident. Possible statuses are `Open` or `Resolved`.
-            summary: A longer description of what occurred during the incident.
-            title: A brief description of the incident.
+    - name: get-timeline-event
+      description: Retrieves a timeline event based on its ID and incident record.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --event-id=!: The ID of the event.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --incident-record-arn=!: The Amazon Resource Name (ARN) of the incident that includes the timeline event.
+    - name: update-timeline-event
+      description: Updates a timeline event.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that ensures that a client calls the operation only once with the specified details.
+        --event-data=: A short description of the event.
+        --event-id=!: The ID of the event to update.
+        --event-references=: Updates all existing references in a `TimelineEvent`.
+        --event-time=: The timestamp for when the event occurred.
+        --event-type=: The type of event.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --incident-record-arn=!: The Amazon Resource Name (ARN) of the incident that includes the timeline event.
+    - name: create-replication-set
+      description: A replication set replicates and encrypts your data to the provided Regions with the provided KMS key.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that ensures that the operation is called only once with the specified details.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --regions=!: The Regions that Incident Manager replicates your data to.
+        --tags=: A list of tags to add to the replication set.
+    - name: delete-response-plan
+      description: Deletes the specified response plan.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the response plan.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-timeline-event
+      description: Deletes a timeline event from an incident.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --event-id=!: The ID of the event to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --incident-record-arn=!: The Amazon Resource Name (ARN) of the incident that includes the timeline event.
+    - name: delete-replication-set
+      description: Deletes all Regions in your replication set.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the replication set you're deleting.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-incident-record
       description: Returns the details for the specified incident record.
       flags:
@@ -979,157 +259,6 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Returns the details for the specified incident record.
-        flag:
-            arn: The Amazon Resource Name (ARN) of the incident record.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: tag-resource
-      description: Adds a tag to a response plan.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the response plan you're adding the tags to.
-        --tags=!: A list of tags to add to the response plan.
-      documentation:
-        command: Adds a tag to a response plan.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-arn: The Amazon Resource Name (ARN) of the response plan you're adding the tags to.
-            tags: A list of tags to add to the response plan.
-    - name: update-response-plan
-      description: Updates the specified response plan.
-      flags:
-        --actions=: The actions that this response plan takes at the beginning of an incident.
-        --arn=!: The Amazon Resource Name (ARN) of the response plan.
-        --chat-channel=: The Chatbot chat channel used for collaboration during an incident.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token ensuring that the operation is called only once with the specified details.
-        --display-name=: The long format name of the response plan.
-        --engagements=: The Amazon Resource Name (ARN) for the contacts and escalation plans that the response plan engages during an incident.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --incident-template-dedupe-string=: The string Incident Manager uses to prevent duplicate incidents from being created by the same incident in the same account.
-        --incident-template-impact=: Defines the impact to the customers.
-        --incident-template-notification-targets=: The Amazon SNS targets that are notified when updates are made to an incident.
-        --incident-template-summary=: A brief summary of the incident.
-        --incident-template-tags=: Tags to assign to the template.
-        --incident-template-title=: The short format name of the incident.
-        --integrations=: Information about third-party services integrated into the response plan.
-      documentation:
-        command: Updates the specified response plan.
-        flag:
-            actions: The actions that this response plan takes at the beginning of an incident.
-            arn: The Amazon Resource Name (ARN) of the response plan.
-            chat-channel: |-
-                The Chatbot chat channel used for collaboration during an incident.
-
-                Use the empty structure to remove the chat channel from the response plan.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A token ensuring that the operation is called only once with the specified details.
-            display-name: The long format name of the response plan. The display name can't contain spaces.
-            engagements: The Amazon Resource Name (ARN) for the contacts and escalation plans that the response plan engages during an incident.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            incident-template-dedupe-string: The string Incident Manager uses to prevent duplicate incidents from being created by the same incident in the same account.
-            incident-template-impact: |-
-                Defines the impact to the customers. Providing an impact overwrites the impact provided by a response plan.
-
-                **Supported impact codes**
-
-                - `1` - Critical
-                - `2` - High
-                - `3` - Medium
-                - `4` - Low
-                - `5` - No Impact
-            incident-template-notification-targets: The Amazon SNS targets that are notified when updates are made to an incident.
-            incident-template-summary: A brief summary of the incident. This typically contains what has happened, what's currently happening, and next steps.
-            incident-template-tags: Tags to assign to the template. When the `StartIncident` API action is called, Incident Manager assigns the tags specified in the template to the incident. To call this action, you must also have permission to call the `TagResource` API action for the incident record resource.
-            incident-template-title: The short format name of the incident. The title can't contain spaces.
-            integrations: Information about third-party services integrated into the response plan.
-    - name: create-response-plan
-      description: Creates a response plan that automates the initial response to incidents.
-      flags:
-        --actions=: The actions that the response plan starts at the beginning of an incident.
-        --chat-channel=: The Chatbot chat channel used for collaboration during an incident.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token ensuring that the operation is called only once with the specified details.
-        --display-name=: The long format of the response plan name.
-        --engagements=: The Amazon Resource Name (ARN) for the contacts and escalation plans that the response plan engages during an incident.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --incident-template=!: Details used to create an incident when using this response plan.
-        --integrations=: Information about third-party services integrated into the response plan.
-        --name=!: The short format name of the response plan.
-        --tags=: A list of tags that you are adding to the response plan.
-      documentation:
-        command: Creates a response plan that automates the initial response to incidents. A response plan engages contacts, starts chat channel collaboration, and initiates runbooks at the beginning of an incident.
-        flag:
-            actions: The actions that the response plan starts at the beginning of an incident.
-            chat-channel: The Chatbot chat channel used for collaboration during an incident.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: A token ensuring that the operation is called only once with the specified details.
-            display-name: The long format of the response plan name. This field can contain spaces.
-            engagements: The Amazon Resource Name (ARN) for the contacts and escalation plans that the response plan engages during an incident.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            incident-template: Details used to create an incident when using this response plan.
-            integrations: Information about third-party services integrated into the response plan.
-            name: The short format name of the response plan. Can't include spaces.
-            tags: A list of tags that you are adding to the response plan.
     - name: get-replication-set
       description: Retrieve your Incident Manager replication set.
       flags:
@@ -1137,51 +266,65 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Retrieve your Incident Manager replication set.
-        flag:
-            arn: The Amazon Resource Name (ARN) of the replication set you want to retrieve.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: list-tags-for-resource
-      description: Lists the tags that are attached to the specified response plan or incident.
+    - name: list-incident-records
+      description: Lists all incident records in your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters the list of incident records you want to search through.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results per page.
+        --next-token=: The pagination token for the next set of items to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: untag-resource
+      description: Removes a tag from a resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the response plan or incident.
-      documentation:
-        command: Lists the tags that are attached to the specified response plan or incident.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-arn: The Amazon Resource Name (ARN) of the response plan or incident.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the response plan you're removing a tag from.
+        --tag-keys=!: The name of the tag to remove from the response plan.
+    - name: update-replication-set
+      description: Add or delete Regions from your replication set.
+      flags:
+        --actions=!: An action to add or delete a Region.
+        --arn=!: The Amazon Resource Name (ARN) of the replication set you're updating.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that ensures that the operation is called only once with the specified details.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-response-plan
+      description: Retrieves the details of the specified response plan.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the response plan.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-incident-findings
+      description: Retrieves a list of the IDs of findings, plus their last modified times, that have been identified for a specified incident.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --incident-record-arn=!: The Amazon Resource Name (ARN) of the incident for which you want to view associated findings.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of findings to retrieve per call.
+        --next-token=: The pagination token for the next set of items to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-replication-sets
+      description: Lists details about the replication set configured in your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results per page.
+        --next-token=: The pagination token for the next set of items to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:
@@ -1192,25 +335,6 @@ commands:
             --cli-input-json=: Read arguments from the JSON string provided.
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-          documentation:
-            command: Retrieve your Incident Manager replication set.
-            flag:
-                arn: The Amazon Resource Name (ARN) of the replication set you want to retrieve.
-                cli-input-json: |-
-                    Reads arguments from the JSON string provided.
-                    The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                    It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                cli-input-yaml: |-
-                    Reads arguments from the JSON string provided.
-                    The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                    It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                generate-cli-skeleton: |-
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
         - name: wait-for-replication-set-deleted
           description: Retrieve your Incident Manager replication set.
           flags:
@@ -1218,22 +342,3 @@ commands:
             --cli-input-json=: Read arguments from the JSON string provided.
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-          documentation:
-            command: Retrieve your Incident Manager replication set.
-            flag:
-                arn: The Amazon Resource Name (ARN) of the replication set you want to retrieve.
-                cli-input-json: |-
-                    Reads arguments from the JSON string provided.
-                    The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                    It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                cli-input-yaml: |-
-                    Reads arguments from the JSON string provided.
-                    The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                    It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                generate-cli-skeleton: |-
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.

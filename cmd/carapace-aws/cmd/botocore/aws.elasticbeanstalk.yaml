@@ -1,124 +1,42 @@
 name: elasticbeanstalk
 description: AWS Elastic Beanstalk
 commands:
-    - name: delete-application
-      description: Deletes the specified application along with all associated versions and configurations.
+    - name: describe-environments
+      description: Returns descriptions for existing environments.
       flags:
-        --application-name=!: The name of the application to delete.
+        --application-name=: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that are associated with this application.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-ids=: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that have the specified IDs.
+        --environment-names=: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that have the specified names.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-terminate-env-by-force: When set to true, running environments will be terminated before deleting the application.
-        --terminate-env-by-force: When set to true, running environments will be terminated before deleting the application.
-      documentation:
-        command: |-
-            Deletes the specified application along with all associated versions and configurations. The application versions will not be deleted from your Amazon S3 bucket.
-
-            You cannot delete an application that has a running environment.
-        flag:
-            application-name: The name of the application to delete.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            terminate-env-by-force: When set to true, running environments will be terminated before deleting the application.
-    - name: describe-configuration-options
-      description: Describes the configuration options that are used in a particular configuration template or environment, or that a specified solution stack defines.
-      flags:
-        --application-name=: The name of the application associated with the configuration template or environment.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-name=: The name of the environment whose configuration options you want to describe.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --options=: If specified, restricts the descriptions to only the specified options.
-        --platform-arn=: The ARN of the custom platform.
-        --solution-stack-name=: The name of the solution stack whose configuration options you want to describe.
-        --template-name=: The name of the configuration template whose configuration options you want to describe.
-      documentation:
-        command: Describes the configuration options that are used in a particular configuration template or environment, or that a specified solution stack defines. The description includes the values the options, their default values, and an indication of the required action on a running environment if an option value is changed.
-        flag:
-            application-name: The name of the application associated with the configuration template or environment. Only needed if you want to describe the configuration options associated with either the configuration template or environment.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-name: The name of the environment whose configuration options you want to describe.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            options: If specified, restricts the descriptions to only the specified options.
-            platform-arn: The ARN of the custom platform.
-            solution-stack-name: The name of the solution stack whose configuration options you want to describe.
-            template-name: The name of the configuration template whose configuration options you want to describe.
-    - name: terminate-environment
-      description: Terminates the specified environment.
+        --include-deleted: 'Indicates whether to include deleted environments:'
+        --included-deleted-back-to=: If specified when `IncludeDeleted` is set to `true`, then environments deleted after this date are displayed.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: For a paginated request.
+        --next-token=: For a paginated request.
+        --no-include-deleted: 'Indicates whether to include deleted environments:'
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --version-label=: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that are associated with this application version.
+    - name: list-available-solution-stacks
+      description: Returns a list of the available solution stack names, with the public version first and then in reverse chronological order.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=: The ID of the environment to terminate.
-        --environment-name=: The name of the environment to terminate.
-        --force-terminate: Terminates the target environment even if another environment in the same group is dependent on it.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-force-terminate: Terminates the target environment even if another environment in the same group is dependent on it.
-        --no-terminate-resources: 'Indicates whether the associated AWS resources should shut down when the environment is terminated:'
-        --terminate-resources: 'Indicates whether the associated AWS resources should shut down when the environment is terminated:'
-      documentation:
-        command: Terminates the specified environment.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-id: |-
-                The ID of the environment to terminate.
-
-                Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns `MissingRequiredParameter` error.
-            environment-name: |-
-                The name of the environment to terminate.
-
-                Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns `MissingRequiredParameter` error.
-            force-terminate: Terminates the target environment even if another environment in the same group is dependent on it.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            terminate-resources: |-
-                Indicates whether the associated AWS resources should shut down when the environment is terminated:
-
-                - `true`: The specified environment as well as the associated AWS resources, such as Auto Scaling group and LoadBalancer, are terminated.
-                - `false`: AWS Elastic Beanstalk resource management is removed from the environment, but the AWS resources continue to operate.
-
-                For more information, see the [AWS Elastic Beanstalk User Guide.](https://docs.aws.amazon.com/elasticbeanstalk/latest/ug/)
-
-                Default: `true`
-
-                Valid Values: `true` | `false`
+    - name: list-platform-versions
+      description: Lists the platform versions available for your account in an AWS Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Criteria for restricting the resulting list of platform versions.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: The maximum number of platform version values returned in one call.
+        --next-token=: For a paginated request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: update-application-resource-lifecycle
       description: Modifies lifecycle settings for an application.
       flags:
@@ -127,26 +45,48 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-lifecycle-config=!: The lifecycle configuration.
-      documentation:
-        command: Modifies lifecycle settings for an application.
+    - name: create-platform-version
+      description: Create a new version of your custom platform.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-name=: The name of the builder environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --option-settings=: The configuration option settings to apply to the builder environment.
+        --platform-definition-bundle=!: The location of the platform definition archive in Amazon S3.
+        --platform-name=!: The name of your custom platform.
+        --platform-version=!: The number, such as 1.0.2, for the new platform version.
+        --tags=: Specifies the tags applied to the new platform version.
+    - name: delete-platform-version
+      description: Deletes the specified version of a custom platform.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --platform-arn=: The ARN of the version of the custom platform.
+    - name: retrieve-environment-info
+      description: Retrieves the compiled information from a [RequestEnvironmentInfo]() request.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=: The ID of the data's environment.
+        --environment-name=: The name of the data's environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --info-type=!: The type of information to retrieve.
+      completion:
         flag:
-            application-name: The name of the application.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-lifecycle-config: The lifecycle configuration.
+            info-type:
+                - tail
+                - bundle
+    - name: update-application-version
+      description: Updates the specified application version to have the specified properties.
+      flags:
+        --application-name=!: The name of the application associated with this version.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A new description for this version.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --version-label=!: The name of the version to update.
     - name: update-configuration-template
       description: Updates the specified configuration template to have the specified properties or configuration option values.
       flags:
@@ -158,121 +98,24 @@ commands:
         --option-settings=: A list of configuration option settings to update with the new specified option value.
         --options-to-remove=: A list of configuration options to remove from the configuration set.
         --template-name=!: The name of the configuration template to update.
-      documentation:
-        command: |-
-            Updates the specified configuration template to have the specified properties or configuration option values.
-
-            If a property (for example, `ApplicationName`) is not provided, its value remains unchanged. To clear such properties, specify an empty string.
-
-            Related Topics
-
-            - [DescribeConfigurationOptions]()
-        flag:
-            application-name: |-
-                The name of the application associated with the configuration template to update.
-
-                If no application is found with this name, `UpdateConfigurationTemplate` returns an `InvalidParameterValue` error.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            description: A new description for the configuration.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            option-settings: A list of configuration option settings to update with the new specified option value.
-            options-to-remove: |-
-                A list of configuration options to remove from the configuration set.
-
-                Constraint: You can remove only `UserDefined` configuration options.
-            template-name: |-
-                The name of the configuration template to update.
-
-                If no configuration template is found with this name, `UpdateConfigurationTemplate` returns an `InvalidParameterValue` error.
-    - name: validate-configuration-settings
-      description: Takes a set of configuration settings and either a configuration template or environment, and determines whether those values are valid.
+    - name: update-environment
+      description: Updates the environment description, deploys a new application version, updates the configuration settings to an entirely new configuration template, or updates select configuration option values in the running environment.
       flags:
-        --application-name=!: The name of the application that the configuration template or environment belongs to.
+        --application-name=: The name of the application with which the environment is associated.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-name=: The name of the environment to validate the settings against.
+        --description=: If this parameter is specified, AWS Elastic Beanstalk updates the description of this environment.
+        --environment-id=: The ID of the environment to update.
+        --environment-name=: The name of the environment to update.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --option-settings=!: A list of the options and desired values to evaluate.
-        --template-name=: The name of the configuration template to validate the settings against.
-      documentation:
-        command: |-
-            Takes a set of configuration settings and either a configuration template or environment, and determines whether those values are valid.
-
-            This action returns a list of messages indicating any errors or warnings associated with the selection of option values.
-        flag:
-            application-name: The name of the application that the configuration template or environment belongs to.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-name: |-
-                The name of the environment to validate the settings against.
-
-                Condition: You cannot specify both this and a configuration template name.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            option-settings: A list of the options and desired values to evaluate.
-            template-name: |-
-                The name of the configuration template to validate the settings against.
-
-                Condition: You cannot specify both this and an environment name.
-    - name: create-application
-      description: Creates an application that has one configuration template named `default` and no application versions.
-      flags:
-        --application-name=!: The name of the application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: Your description of the application.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-lifecycle-config=: Specifies an application resource lifecycle configuration to prevent your application from accumulating too many versions.
-        --tags=: Specifies the tags applied to the application.
-      documentation:
-        command: Creates an application that has one configuration template named `default` and no application versions.
-        flag:
-            application-name: The name of the application. Must be unique within your account.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            description: Your description of the application.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-lifecycle-config: Specifies an application resource lifecycle configuration to prevent your application from accumulating too many versions.
-            tags: |-
-                Specifies the tags applied to the application.
-
-                Elastic Beanstalk applies these tags only to the application. Environments that you create in the application don't inherit the tags.
+        --group-name=: The name of the group to which the target environment belongs.
+        --option-settings=: If specified, AWS Elastic Beanstalk updates the configuration set associated with the running environment and sets the specified configuration options to the requested value.
+        --options-to-remove=: A list of custom user-defined configuration options to remove from the configuration set for this environment.
+        --platform-arn=: The ARN of the platform, if used.
+        --solution-stack-name=: This specifies the platform version that the environment will run after the environment is updated.
+        --template-name=: If this parameter is specified, AWS Elastic Beanstalk deploys this configuration template to the environment.
+        --tier=: This specifies the tier to use to update the environment.
+        --version-label=: If this parameter is specified, AWS Elastic Beanstalk deploys the named application version to the environment.
     - name: create-application-version
       description: Creates an application version for the specified application.
       flags:
@@ -290,99 +133,21 @@ commands:
         --source-bundle=: The Amazon S3 bucket and key that identify the location of the source bundle for this version.
         --tags=: Specifies the tags applied to the application version.
         --version-label=!: A label identifying this version.
-      documentation:
-        command: |-
-            Creates an application version for the specified application. You can create an application version from a source bundle in Amazon S3, a commit in AWS CodeCommit, or the output of an AWS CodeBuild build as follows:
-
-            Specify a commit in an AWS CodeCommit repository with `SourceBuildInformation`.
-
-            Specify a build in an AWS CodeBuild with `SourceBuildInformation` and `BuildConfiguration`.
-
-            Specify a source bundle in S3 with `SourceBundle`
-
-            Omit both `SourceBuildInformation` and `SourceBundle` to use the default sample application.
-
-            After you create an application version with a specified Amazon S3 bucket and key location, you can't change that Amazon S3 location. If you change the Amazon S3 location, you receive an exception when you attempt to launch an environment from the application version.
-        flag:
-            application-name: The name of the application. If no application is found with this name, and `AutoCreateApplication` is `false`, returns an `InvalidParameterValue` error.
-            auto-create-application: Set to `true` to create an application with the specified name if it doesn't already exist.
-            build-configuration: Settings for an AWS CodeBuild build.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            description: A description of this application version.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            process: |-
-                Pre-processes and validates the environment manifest (`env.yaml`) and configuration files (`*.config` files in the `.ebextensions` folder) in the source bundle. Validating configuration files can identify issues prior to deploying the application version to an environment.
-
-                You must turn processing on for application versions that you create using AWS CodeBuild or AWS CodeCommit. For application versions built from a source bundle in Amazon S3, processing is optional.
-
-                The `Process` option validates Elastic Beanstalk configuration files. It doesn't validate your application's configuration files, like proxy server or Docker configuration.
-            source-build-information: Specify a commit in an AWS CodeCommit Git repository to use as the source code for the application version.
-            source-bundle: |-
-                The Amazon S3 bucket and key that identify the location of the source bundle for this version.
-
-                The Amazon S3 bucket must be in the same region as the environment.
-
-                Specify a source bundle in S3 or a commit in an AWS CodeCommit repository (with `SourceBuildInformation`), but not both. If neither `SourceBundle` nor `SourceBuildInformation` are provided, Elastic Beanstalk uses a sample application.
-            tags: |-
-                Specifies the tags applied to the application version.
-
-                Elastic Beanstalk applies these tags only to the application version. Environments that use the application version don't inherit the tags.
-            version-label: |-
-                A label identifying this version.
-
-                Constraint: Must be unique per application. If an application version already exists with this label for the specified application, AWS Elastic Beanstalk returns an `InvalidParameterValue` error.
-    - name: create-platform-version
-      description: Create a new version of your custom platform.
+    - name: delete-environment-configuration
+      description: Deletes the draft configuration associated with the running environment.
+      flags:
+        --application-name=!: The name of the application the environment is associated with.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-name=!: The name of the environment to delete the draft configuration from.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-tags-for-resource
+      description: Return the tags applied to an AWS Elastic Beanstalk resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-name=: The name of the builder environment.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --option-settings=: The configuration option settings to apply to the builder environment.
-        --platform-definition-bundle=!: The location of the platform definition archive in Amazon S3.
-        --platform-name=!: The name of your custom platform.
-        --platform-version=!: The number, such as 1.0.2, for the new platform version.
-        --tags=: Specifies the tags applied to the new platform version.
-      documentation:
-        command: Create a new version of your custom platform.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-name: The name of the builder environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            option-settings: The configuration option settings to apply to the builder environment.
-            platform-definition-bundle: The location of the platform definition archive in Amazon S3.
-            platform-name: The name of your custom platform.
-            platform-version: The number, such as 1.0.2, for the new platform version.
-            tags: |-
-                Specifies the tags applied to the new platform version.
-
-                Elastic Beanstalk applies these tags only to the platform version. Environments that you create using the platform version don't inherit the tags.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resouce for which a tag list is requested.
     - name: rebuild-environment
       description: 'Deletes and recreates all of the AWS resources (for example: the Auto Scaling group, load balancer, etc.) for a specified environment and forces a restart.'
       flags:
@@ -391,209 +156,6 @@ commands:
         --environment-id=: The ID of the environment to rebuild.
         --environment-name=: The name of the environment to rebuild.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: 'Deletes and recreates all of the AWS resources (for example: the Auto Scaling group, load balancer, etc.) for a specified environment and forces a restart.'
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-id: |-
-                The ID of the environment to rebuild.
-
-                Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns `MissingRequiredParameter` error.
-            environment-name: |-
-                The name of the environment to rebuild.
-
-                Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns `MissingRequiredParameter` error.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: update-tags-for-resource
-      description: Update the list of tags applied to an AWS Elastic Beanstalk resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resouce to be updated.
-        --tags-to-add=: A list of tags to add or update.
-        --tags-to-remove=: A list of tag keys to remove.
-      documentation:
-        command: |-
-            Update the list of tags applied to an AWS Elastic Beanstalk resource. Two lists can be passed: `TagsToAdd` for tags to add or update, and `TagsToRemove`.
-
-            Elastic Beanstalk supports tagging of all of its resources. For details about resource tagging, see [Tagging Application Resources](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-tagging-resources.html).
-
-            If you create a custom IAM user policy to control permission to this operation, specify one of the following two virtual actions (or both) instead of the API operation name:
-
-            elasticbeanstalk:AddTags
-
-            Controls permission to call `UpdateTagsForResource` and pass a list of tags to add in the `TagsToAdd` parameter.
-
-            elasticbeanstalk:RemoveTags
-
-            Controls permission to call `UpdateTagsForResource` and pass a list of tag keys to remove in the `TagsToRemove` parameter.
-
-            For details about creating a custom user policy, see [Creating a Custom User Policy](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#AWSHowTo.iam.policies).
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-arn: |-
-                The Amazon Resource Name (ARN) of the resouce to be updated.
-
-                Must be the ARN of an Elastic Beanstalk resource.
-            tags-to-add: |-
-                A list of tags to add or update. If a key of an existing tag is added, the tag's value is updated.
-
-                Specify at least one of these parameters: `TagsToAdd`, `TagsToRemove`.
-            tags-to-remove: |-
-                A list of tag keys to remove. If a tag key doesn't exist, it is silently ignored.
-
-                Specify at least one of these parameters: `TagsToAdd`, `TagsToRemove`.
-    - name: delete-configuration-template
-      description: Deletes the specified configuration template.
-      flags:
-        --application-name=!: The name of the application to delete the configuration template from.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --template-name=!: The name of the configuration template to delete.
-      documentation:
-        command: |-
-            Deletes the specified configuration template.
-
-            When you launch an environment using a configuration template, the environment gets a copy of the template. You can delete or modify the environment's copy of the template without affecting the running environment.
-        flag:
-            application-name: The name of the application to delete the configuration template from.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            template-name: The name of the configuration template to delete.
-    - name: describe-application-versions
-      description: Retrieve a list of application versions.
-      flags:
-        --application-name=: Specify an application name to show only application versions for that application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: For a paginated request.
-        --next-token=: For a paginated request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --version-labels=: Specify a version label to show a specific application version.
-      documentation:
-        command: Retrieve a list of application versions.
-        flag:
-            application-name: Specify an application name to show only application versions for that application.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-records: |-
-                For a paginated request. Specify a maximum number of application versions to include in each response.
-
-                If no `MaxRecords` is specified, all available application versions are retrieved in a single response.
-            next-token: |-
-                For a paginated request. Specify a token from a previous response page to retrieve the next response page. All other parameter values must be identical to the ones specified in the initial request.
-
-                If no `NextToken` is specified, the first page is retrieved.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            version-labels: Specify a version label to show a specific application version.
-    - name: describe-instances-health
-      description: Retrieves detailed information about the health of instances in your AWS Elastic Beanstalk.
-      flags:
-        --attribute-names=: Specifies the response elements you wish to receive.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=: Specify the AWS Elastic Beanstalk environment by ID.
-        --environment-name=: Specify the AWS Elastic Beanstalk environment by name.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --next-token=: Specify the pagination token returned by a previous call.
-      documentation:
-        command: Retrieves detailed information about the health of instances in your AWS Elastic Beanstalk. This operation requires [enhanced health reporting](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html).
-        flag:
-            attribute-names: Specifies the response elements you wish to receive. To retrieve all attributes, set to `All`. If no attribute names are specified, returns a list of instances.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-id: Specify the AWS Elastic Beanstalk environment by ID.
-            environment-name: Specify the AWS Elastic Beanstalk environment by name.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            next-token: Specify the pagination token returned by a previous call.
     - name: swap-environment-cnam-es
       description: Swaps the CNAMEs of two environments.
       flags:
@@ -604,40 +166,151 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --source-environment-id=: The ID of the source environment.
         --source-environment-name=: The name of the source environment.
-      documentation:
-        command: Swaps the CNAMEs of two environments.
+    - name: describe-instances-health
+      description: Retrieves detailed information about the health of instances in your AWS Elastic Beanstalk.
+      flags:
+        --attribute-names=: Specifies the response elements you wish to receive.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=: Specify the AWS Elastic Beanstalk environment by ID.
+        --environment-name=: Specify the AWS Elastic Beanstalk environment by name.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --next-token=: Specify the pagination token returned by a previous call.
+    - name: describe-configuration-options
+      description: Describes the configuration options that are used in a particular configuration template or environment, or that a specified solution stack defines.
+      flags:
+        --application-name=: The name of the application associated with the configuration template or environment.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-name=: The name of the environment whose configuration options you want to describe.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --options=: If specified, restricts the descriptions to only the specified options.
+        --platform-arn=: The ARN of the custom platform.
+        --solution-stack-name=: The name of the solution stack whose configuration options you want to describe.
+        --template-name=: The name of the configuration template whose configuration options you want to describe.
+    - name: describe-environment-managed-actions
+      description: Lists an environment's upcoming and in-progress managed actions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=: The environment ID of the target environment.
+        --environment-name=: The name of the target environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --status=: To show only actions with a particular status, specify a status.
+      completion:
         flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            destination-environment-id: |-
-                The ID of the destination environment.
-
-                Condition: You must specify at least the `DestinationEnvironmentID` or the `DestinationEnvironmentName`. You may also specify both. You must specify the `SourceEnvironmentId` with the `DestinationEnvironmentId`.
-            destination-environment-name: |-
-                The name of the destination environment.
-
-                Condition: You must specify at least the `DestinationEnvironmentID` or the `DestinationEnvironmentName`. You may also specify both. You must specify the `SourceEnvironmentName` with the `DestinationEnvironmentName`.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            source-environment-id: |-
-                The ID of the source environment.
-
-                Condition: You must specify at least the `SourceEnvironmentID` or the `SourceEnvironmentName`. You may also specify both. If you specify the `SourceEnvironmentId`, you must specify the `DestinationEnvironmentId`.
-            source-environment-name: |-
-                The name of the source environment.
-
-                Condition: You must specify at least the `SourceEnvironmentID` or the `SourceEnvironmentName`. You may also specify both. If you specify the `SourceEnvironmentName`, you must specify the `DestinationEnvironmentName`.
+            status:
+                - Scheduled
+                - Pending
+                - Running
+                - Unknown
+    - name: describe-environment-resources
+      description: Returns AWS resources for this environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=: The ID of the environment to retrieve AWS resource usage data.
+        --environment-name=: The name of the environment to retrieve AWS resource usage data.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: restart-app-server
+      description: Causes the environment to restart the application container server running on each Amazon EC2 instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=: The ID of the environment to restart the server for.
+        --environment-name=: The name of the environment to restart the server for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: validate-configuration-settings
+      description: Takes a set of configuration settings and either a configuration template or environment, and determines whether those values are valid.
+      flags:
+        --application-name=!: The name of the application that the configuration template or environment belongs to.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-name=: The name of the environment to validate the settings against.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --option-settings=!: A list of the options and desired values to evaluate.
+        --template-name=: The name of the configuration template to validate the settings against.
+    - name: abort-environment-update
+      description: Cancels in-progress environment configuration update or application version deployment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=: This specifies the ID of the environment with the in-progress update that you want to cancel.
+        --environment-name=: This specifies the name of the environment with the in-progress update that you want to cancel.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: check-dns-availability
+      description: Checks if the specified CNAME is available.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cname-prefix=!: The prefix used when this CNAME is reserved.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-account-attributes
+      description: Returns attributes related to AWS Elastic Beanstalk that are associated with the calling AWS account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-tags-for-resource
+      description: Update the list of tags applied to an AWS Elastic Beanstalk resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resouce to be updated.
+        --tags-to-add=: A list of tags to add or update.
+        --tags-to-remove=: A list of tag keys to remove.
+    - name: compose-environments
+      description: Create or update a group of environments that each run a separate component of a single application.
+      flags:
+        --application-name=: The name of the application to which the specified source bundles belong.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-name=: The name of the group to which the target environments belong.
+        --version-labels=: A list of version labels, specifying one or more application source bundles that belong to the target application.
+    - name: create-configuration-template
+      description: Creates an AWS Elastic Beanstalk configuration template, associated with a specific Elastic Beanstalk application.
+      flags:
+        --application-name=!: The name of the Elastic Beanstalk application to associate with this configuration template.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: An optional description for this configuration.
+        --environment-id=: The ID of an environment whose settings you want to use to create the configuration template.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --option-settings=: Option values for the Elastic Beanstalk configuration, such as the instance type.
+        --platform-arn=: The Amazon Resource Name (ARN) of the custom platform.
+        --solution-stack-name=: The name of an Elastic Beanstalk solution stack (platform version) that this configuration uses.
+        --source-configuration=: An Elastic Beanstalk configuration template to base this one on.
+        --tags=: Specifies the tags applied to the configuration template.
+        --template-name=!: The name of the configuration template.
+    - name: create-application
+      description: Creates an application that has one configuration template named `default` and no application versions.
+      flags:
+        --application-name=!: The name of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: Your description of the application.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-lifecycle-config=: Specifies an application resource lifecycle configuration to prevent your application from accumulating too many versions.
+        --tags=: Specifies the tags applied to the application.
+    - name: delete-application-version
+      description: Deletes the specified version from the specified application.
+      flags:
+        --application-name=!: The name of the application to which the version belongs.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delete-source-bundle: Set to `true` to delete the source bundle from your storage bucket.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-delete-source-bundle: Set to `true` to delete the source bundle from your storage bucket.
+        --version-label=!: The label of the version to delete.
+    - name: describe-applications
+      description: Returns the descriptions of existing applications.
+      flags:
+        --application-names=: If specified, AWS Elastic Beanstalk restricts the returned descriptions to only include those with the specified names.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: describe-environment-health
       description: Returns information about the overall health of the specified environment.
       flags:
@@ -647,79 +320,6 @@ commands:
         --environment-id=: Specify the environment by ID.
         --environment-name=: Specify the environment by name.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Returns information about the overall health of the specified environment. The **DescribeEnvironmentHealth** operation is only available with AWS Elastic Beanstalk Enhanced Health.
-        flag:
-            attribute-names: Specify the response elements to return. To retrieve all attributes, set to `All`. If no attribute names are specified, returns the name of the environment.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-id: |-
-                Specify the environment by ID.
-
-                You must specify either this or an EnvironmentName, or both.
-            environment-name: |-
-                Specify the environment by name.
-
-                You must specify either this or an EnvironmentName, or both.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: describe-environment-managed-action-history
-      description: Lists an environment's completed and failed managed actions.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=: The environment ID of the target environment.
-        --environment-name=: The name of the target environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The maximum number of items to return for a single request.
-        --next-token=: The pagination token returned by a previous request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: Lists an environment's completed and failed managed actions.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-id: The environment ID of the target environment.
-            environment-name: The name of the target environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: The maximum number of items to return for a single request.
-            next-token: The pagination token returned by a previous request.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
     - name: describe-events
       description: Returns list of event descriptions matching criteria up to the last 6 weeks.
       flags:
@@ -750,476 +350,22 @@ commands:
                 - WARN
                 - ERROR
                 - FATAL
-      documentation:
-        command: |-
-            Returns list of event descriptions matching criteria up to the last 6 weeks.
-
-            This action returns the most recent 1,000 events from the specified `NextToken`.
-        flag:
-            application-name: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those associated with this application.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            end-time: If specified, AWS Elastic Beanstalk restricts the returned descriptions to those that occur up to, but not including, the `EndTime`.
-            environment-id: If specified, AWS Elastic Beanstalk restricts the returned descriptions to those associated with this environment.
-            environment-name: If specified, AWS Elastic Beanstalk restricts the returned descriptions to those associated with this environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-records: Specifies the maximum number of events that can be returned, beginning with the most recent event.
-            next-token: Pagination token. If specified, the events return the next batch of results.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            platform-arn: The ARN of a custom platform version. If specified, AWS Elastic Beanstalk restricts the returned descriptions to those associated with this custom platform version.
-            request-id: If specified, AWS Elastic Beanstalk restricts the described events to include only those associated with this request ID.
-            severity: If specified, limits the events returned from this call to include only those with the specified severity or higher.
-            start-time: If specified, AWS Elastic Beanstalk restricts the returned descriptions to those that occur on or after this time.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            template-name: If specified, AWS Elastic Beanstalk restricts the returned descriptions to those that are associated with this environment configuration.
-            version-label: If specified, AWS Elastic Beanstalk restricts the returned descriptions to those associated with this application version.
-    - name: associate-environment-operations-role
-      description: Add or change the operations role used by an environment.
+    - name: disassociate-environment-operations-role
+      description: Disassociate the operations role from an environment.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-name=!: The name of the environment to which to set the operations role.
+        --environment-name=!: The name of the environment from which to disassociate the operations role.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --operations-role=!: The Amazon Resource Name (ARN) of an existing IAM role to be used as the environment's operations role.
-      documentation:
-        command: Add or change the operations role used by an environment. After this call is made, Elastic Beanstalk uses the associated operations role for permissions to downstream services during subsequent calls acting on this environment. For more information, see [Operations roles](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html) in the *AWS Elastic Beanstalk Developer Guide*.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-name: The name of the environment to which to set the operations role.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            operations-role: The Amazon Resource Name (ARN) of an existing IAM role to be used as the environment's operations role.
-    - name: create-configuration-template
-      description: Creates an AWS Elastic Beanstalk configuration template, associated with a specific Elastic Beanstalk application.
-      flags:
-        --application-name=!: The name of the Elastic Beanstalk application to associate with this configuration template.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: An optional description for this configuration.
-        --environment-id=: The ID of an environment whose settings you want to use to create the configuration template.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --option-settings=: Option values for the Elastic Beanstalk configuration, such as the instance type.
-        --platform-arn=: The Amazon Resource Name (ARN) of the custom platform.
-        --solution-stack-name=: The name of an Elastic Beanstalk solution stack (platform version) that this configuration uses.
-        --source-configuration=: An Elastic Beanstalk configuration template to base this one on.
-        --tags=: Specifies the tags applied to the configuration template.
-        --template-name=!: The name of the configuration template.
-      documentation:
-        command: |-
-            Creates an AWS Elastic Beanstalk configuration template, associated with a specific Elastic Beanstalk application. You define application configuration settings in a configuration template. You can then use the configuration template to deploy different versions of the application with the same configuration settings.
-
-            Templates aren't associated with any environment. The `EnvironmentName` response element is always `null`.
-
-            Related Topics
-
-            - [DescribeConfigurationOptions]()
-            - [DescribeConfigurationSettings]()
-            - [ListAvailableSolutionStacks]()
-        flag:
-            application-name: The name of the Elastic Beanstalk application to associate with this configuration template.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            description: An optional description for this configuration.
-            environment-id: The ID of an environment whose settings you want to use to create the configuration template. You must specify `EnvironmentId` if you don't specify `PlatformArn`, `SolutionStackName`, or `SourceConfiguration`.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            option-settings: Option values for the Elastic Beanstalk configuration, such as the instance type. If specified, these values override the values obtained from the solution stack or the source configuration template. For a complete list of Elastic Beanstalk configuration options, see [Option Values](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options.html) in the *AWS Elastic Beanstalk Developer Guide*.
-            platform-arn: |-
-                The Amazon Resource Name (ARN) of the custom platform. For more information, see [Custom Platforms](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/custom-platforms.html) in the *AWS Elastic Beanstalk Developer Guide*.
-
-                If you specify `PlatformArn`, then don't specify `SolutionStackName`.
-            solution-stack-name: |-
-                The name of an Elastic Beanstalk solution stack (platform version) that this configuration uses. For example, `64bit Amazon Linux 2013.09 running Tomcat 7 Java 7`. A solution stack specifies the operating system, runtime, and application server for a configuration template. It also determines the set of configuration options as well as the possible and default values. For more information, see [Supported Platforms](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html) in the *AWS Elastic Beanstalk Developer Guide*.
-
-                You must specify `SolutionStackName` if you don't specify `PlatformArn`, `EnvironmentId`, or `SourceConfiguration`.
-
-                Use the [`ListAvailableSolutionStacks`](https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_ListAvailableSolutionStacks.html) API to obtain a list of available solution stacks.
-            source-configuration: |-
-                An Elastic Beanstalk configuration template to base this one on. If specified, Elastic Beanstalk uses the configuration values from the specified configuration template to create a new configuration.
-
-                Values specified in `OptionSettings` override any values obtained from the `SourceConfiguration`.
-
-                You must specify `SourceConfiguration` if you don't specify `PlatformArn`, `EnvironmentId`, or `SolutionStackName`.
-
-                Constraint: If both solution stack name and source configuration are specified, the solution stack of the source configuration template must match the specified solution stack name.
-            tags: Specifies the tags applied to the configuration template.
-            template-name: |-
-                The name of the configuration template.
-
-                Constraint: This name must be unique per application.
-    - name: delete-application-version
-      description: Deletes the specified version from the specified application.
-      flags:
-        --application-name=!: The name of the application to which the version belongs.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --delete-source-bundle: Set to `true` to delete the source bundle from your storage bucket.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-delete-source-bundle: Set to `true` to delete the source bundle from your storage bucket.
-        --version-label=!: The label of the version to delete.
-      documentation:
-        command: |-
-            Deletes the specified version from the specified application.
-
-            You cannot delete an application version that is associated with a running environment.
-        flag:
-            application-name: The name of the application to which the version belongs.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            delete-source-bundle: Set to `true` to delete the source bundle from your storage bucket. Otherwise, the application version is deleted only from Elastic Beanstalk and the source bundle remains in Amazon S3.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            version-label: The label of the version to delete.
-    - name: delete-environment-configuration
-      description: Deletes the draft configuration associated with the running environment.
-      flags:
-        --application-name=!: The name of the application the environment is associated with.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-name=!: The name of the environment to delete the draft configuration from.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: |-
-            Deletes the draft configuration associated with the running environment.
-
-            Updating a running environment with any configuration changes creates a draft configuration set. You can get the draft configuration using [DescribeConfigurationSettings]() while the update is in progress or if the update fails. The `DeploymentStatus` for the draft configuration indicates whether the deployment is in process or has failed. The draft configuration remains in existence until it is deleted with this action.
-        flag:
-            application-name: The name of the application the environment is associated with.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-name: The name of the environment to delete the draft configuration from.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: delete-platform-version
-      description: Deletes the specified version of a custom platform.
+    - name: list-platform-branches
+      description: Lists the platform branches available for your account in an AWS Region.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Criteria for restricting the resulting list of platform branches.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --platform-arn=: The ARN of the version of the custom platform.
-      documentation:
-        command: Deletes the specified version of a custom platform.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            platform-arn: The ARN of the version of the custom platform.
-    - name: check-dns-availability
-      description: Checks if the specified CNAME is available.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cname-prefix=!: The prefix used when this CNAME is reserved.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Checks if the specified CNAME is available.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cname-prefix: The prefix used when this CNAME is reserved.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: compose-environments
-      description: Create or update a group of environments that each run a separate component of a single application.
-      flags:
-        --application-name=: The name of the application to which the specified source bundles belong.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-name=: The name of the group to which the target environments belong.
-        --version-labels=: A list of version labels, specifying one or more application source bundles that belong to the target application.
-      documentation:
-        command: Create or update a group of environments that each run a separate component of a single application. Takes a list of version labels that specify application source bundles for each of the environments to create or update. The name of each environment and other required information must be included in the source bundles in an environment manifest named `env.yaml`. See [Compose Environments](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-mgmt-compose.html) for details.
-        flag:
-            application-name: The name of the application to which the specified source bundles belong.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            group-name: The name of the group to which the target environments belong. Specify a group name only if the environment name defined in each target environment's manifest ends with a + (plus) character. See [Environment Manifest (env.yaml)](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html) for details.
-            version-labels: A list of version labels, specifying one or more application source bundles that belong to the target application. Each source bundle must include an environment manifest that specifies the name of the environment and the name of the solution stack to use, and optionally can specify environment links to create.
-    - name: describe-environment-managed-actions
-      description: Lists an environment's upcoming and in-progress managed actions.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=: The environment ID of the target environment.
-        --environment-name=: The name of the target environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --status=: To show only actions with a particular status, specify a status.
-      completion:
-        flag:
-            status:
-                - Scheduled
-                - Pending
-                - Running
-                - Unknown
-      documentation:
-        command: Lists an environment's upcoming and in-progress managed actions.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-id: The environment ID of the target environment.
-            environment-name: The name of the target environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            status: To show only actions with a particular status, specify a status.
-    - name: describe-applications
-      description: Returns the descriptions of existing applications.
-      flags:
-        --application-names=: If specified, AWS Elastic Beanstalk restricts the returned descriptions to only include those with the specified names.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Returns the descriptions of existing applications.
-        flag:
-            application-names: If specified, AWS Elastic Beanstalk restricts the returned descriptions to only include those with the specified names.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: describe-platform-version
-      description: Describes a platform version.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --platform-arn=: The ARN of the platform version.
-      documentation:
-        command: |-
-            Describes a platform version. Provides full details. Compare to [ListPlatformVersions](), which provides summary information about a list of platform versions.
-
-            For definitions of platform version and other platform-related terms, see [AWS Elastic Beanstalk Platforms Glossary](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-glossary.html).
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            platform-arn: The ARN of the platform version.
-    - name: list-available-solution-stacks
-      description: Returns a list of the available solution stack names, with the public version first and then in reverse chronological order.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Returns a list of the available solution stack names, with the public version first and then in reverse chronological order.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: list-platform-versions
-      description: Lists the platform versions available for your account in an AWS Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Criteria for restricting the resulting list of platform versions.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of platform version values returned in one call.
+        --max-records=: The maximum number of platform branch values returned in one call.
         --next-token=: For a paginated request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      documentation:
-        command: |-
-            Lists the platform versions available for your account in an AWS Region. Provides summary information about each platform version. Compare to [DescribePlatformVersion](), which provides full details about a single platform version.
-
-            For definitions of platform version and other platform-related terms, see [AWS Elastic Beanstalk Platforms Glossary](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-glossary.html).
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            filters: Criteria for restricting the resulting list of platform versions. The filter is interpreted as a logical conjunction (AND) of the separate `PlatformFilter` terms.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-records: The maximum number of platform version values returned in one call.
-            next-token: |-
-                For a paginated request. Specify a token from a previous response page to retrieve the next response page. All other parameter values must be identical to the ones specified in the initial request.
-
-                If no `NextToken` is specified, the first page is retrieved.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
     - name: request-environment-info
       description: Initiates a request to compile the specified type of information of the deployed environment.
       flags:
@@ -1234,596 +380,6 @@ commands:
             info-type:
                 - tail
                 - bundle
-      documentation:
-        command: |-
-            Initiates a request to compile the specified type of information of the deployed environment.
-
-            Setting the `InfoType` to `tail` compiles the last lines from the application server log files of every Amazon EC2 instance in your environment.
-
-            Setting the `InfoType` to `bundle` compresses the application server log files for every Amazon EC2 instance into a `.zip` file. Legacy and .NET containers do not support bundle logs.
-
-            Use [RetrieveEnvironmentInfo]() to obtain the set of logs.
-
-            Related Topics
-
-            - [RetrieveEnvironmentInfo]()
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-id: |-
-                The ID of the environment of the requested data.
-
-                If no such environment is found, `RequestEnvironmentInfo` returns an `InvalidParameterValue` error.
-
-                Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns `MissingRequiredParameter` error.
-            environment-name: |-
-                The name of the environment of the requested data.
-
-                If no such environment is found, `RequestEnvironmentInfo` returns an `InvalidParameterValue` error.
-
-                Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns `MissingRequiredParameter` error.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            info-type: The type of information to request.
-    - name: describe-environment-resources
-      description: Returns AWS resources for this environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=: The ID of the environment to retrieve AWS resource usage data.
-        --environment-name=: The name of the environment to retrieve AWS resource usage data.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Returns AWS resources for this environment.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-id: |-
-                The ID of the environment to retrieve AWS resource usage data.
-
-                Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns `MissingRequiredParameter` error.
-            environment-name: |-
-                The name of the environment to retrieve AWS resource usage data.
-
-                Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns `MissingRequiredParameter` error.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: describe-environments
-      description: Returns descriptions for existing environments.
-      flags:
-        --application-name=: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that are associated with this application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-ids=: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that have the specified IDs.
-        --environment-names=: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that have the specified names.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --include-deleted: 'Indicates whether to include deleted environments:'
-        --included-deleted-back-to=: If specified when `IncludeDeleted` is set to `true`, then environments deleted after this date are displayed.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: For a paginated request.
-        --next-token=: For a paginated request.
-        --no-include-deleted: 'Indicates whether to include deleted environments:'
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --version-label=: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that are associated with this application version.
-      documentation:
-        command: Returns descriptions for existing environments.
-        flag:
-            application-name: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that are associated with this application.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-ids: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that have the specified IDs.
-            environment-names: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that have the specified names.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            include-deleted: |-
-                Indicates whether to include deleted environments:
-
-                `true`: Environments that have been deleted after `IncludedDeletedBackTo` are displayed.
-
-                `false`: Do not include deleted environments.
-            included-deleted-back-to: If specified when `IncludeDeleted` is set to `true`, then environments deleted after this date are displayed.
-            max-items: |-
-                The total number of items to return in the command's output.
-                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                Do not use the NextToken response element directly outside of the AWS CLI.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            max-records: |-
-                For a paginated request. Specify a maximum number of environments to include in each response.
-
-                If no `MaxRecords` is specified, all available environments are retrieved in a single response.
-            next-token: |-
-                For a paginated request. Specify a token from a previous response page to retrieve the next response page. All other parameter values must be identical to the ones specified in the initial request.
-
-                If no `NextToken` is specified, the first page is retrieved.
-            page-size: |-
-                The size of each page to get in the AWS service call.
-                This does not affect the number of items returned in the command's output.
-                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                This can help prevent the AWS service calls from timing out.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            starting-token: |-
-                A token to specify where to start paginating.
-                This is the NextToken from a previously truncated response.
-
-                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-            version-label: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that are associated with this application version.
-    - name: retrieve-environment-info
-      description: Retrieves the compiled information from a [RequestEnvironmentInfo]() request.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=: The ID of the data's environment.
-        --environment-name=: The name of the data's environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --info-type=!: The type of information to retrieve.
-      completion:
-        flag:
-            info-type:
-                - tail
-                - bundle
-      documentation:
-        command: |-
-            Retrieves the compiled information from a [RequestEnvironmentInfo]() request.
-
-            Related Topics
-
-            - [RequestEnvironmentInfo]()
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-id: |-
-                The ID of the data's environment.
-
-                If no such environment is found, returns an `InvalidParameterValue` error.
-
-                Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns `MissingRequiredParameter` error.
-            environment-name: |-
-                The name of the data's environment.
-
-                If no such environment is found, returns an `InvalidParameterValue` error.
-
-                Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns `MissingRequiredParameter` error.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            info-type: The type of information to retrieve.
-    - name: update-application
-      description: Updates the specified application to have the specified properties.
-      flags:
-        --application-name=!: The name of the application to update.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A new description for the application.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: |-
-            Updates the specified application to have the specified properties.
-
-            If a property (for example, `description`) is not provided, the value remains unchanged. To clear these properties, specify an empty string.
-        flag:
-            application-name: The name of the application to update. If no such application is found, `UpdateApplication` returns an `InvalidParameterValue` error.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            description: |-
-                A new description for the application.
-
-                Default: If not specified, AWS Elastic Beanstalk does not update the description.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: update-application-version
-      description: Updates the specified application version to have the specified properties.
-      flags:
-        --application-name=!: The name of the application associated with this version.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A new description for this version.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --version-label=!: The name of the version to update.
-      documentation:
-        command: |-
-            Updates the specified application version to have the specified properties.
-
-            If a property (for example, `description`) is not provided, the value remains unchanged. To clear properties, specify an empty string.
-        flag:
-            application-name: |-
-                The name of the application associated with this version.
-
-                If no application is found with this name, `UpdateApplication` returns an `InvalidParameterValue` error.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            description: A new description for this version.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            version-label: |-
-                The name of the version to update.
-
-                If no application version is found with this label, `UpdateApplication` returns an `InvalidParameterValue` error.
-    - name: abort-environment-update
-      description: Cancels in-progress environment configuration update or application version deployment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=: This specifies the ID of the environment with the in-progress update that you want to cancel.
-        --environment-name=: This specifies the name of the environment with the in-progress update that you want to cancel.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Cancels in-progress environment configuration update or application version deployment.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-id: This specifies the ID of the environment with the in-progress update that you want to cancel.
-            environment-name: This specifies the name of the environment with the in-progress update that you want to cancel.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: apply-environment-managed-action
-      description: Applies a scheduled managed action immediately.
-      flags:
-        --action-id=!: The action ID of the scheduled managed action to execute.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=: The environment ID of the target environment.
-        --environment-name=: The name of the target environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Applies a scheduled managed action immediately. A managed action can be applied only if its status is `Scheduled`. Get the status and action ID of a managed action with [DescribeEnvironmentManagedActions]().
-        flag:
-            action-id: The action ID of the scheduled managed action to execute.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-id: The environment ID of the target environment.
-            environment-name: The name of the target environment.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: create-storage-location
-      description: Creates a bucket in Amazon S3 to store application versions, logs, and other files used by Elastic Beanstalk environments.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Creates a bucket in Amazon S3 to store application versions, logs, and other files used by Elastic Beanstalk environments. The Elastic Beanstalk console and EB CLI call this API the first time you create an environment in a region. If the storage location already exists, `CreateStorageLocation` still returns the bucket name but does not create a new bucket.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: disassociate-environment-operations-role
-      description: Disassociate the operations role from an environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-name=!: The name of the environment from which to disassociate the operations role.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Disassociate the operations role from an environment. After this call is made, Elastic Beanstalk uses the caller's permissions for permissions to downstream services during subsequent calls acting on this environment. For more information, see [Operations roles](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html) in the *AWS Elastic Beanstalk Developer Guide*.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-name: The name of the environment from which to disassociate the operations role.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: list-platform-branches
-      description: Lists the platform branches available for your account in an AWS Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Criteria for restricting the resulting list of platform branches.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-records=: The maximum number of platform branch values returned in one call.
-        --next-token=: For a paginated request.
-      documentation:
-        command: |-
-            Lists the platform branches available for your account in an AWS Region. Provides summary information about each platform branch.
-
-            For definitions of platform branch and other platform-related terms, see [AWS Elastic Beanstalk Platforms Glossary](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-glossary.html).
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            filters: "Criteria for restricting the resulting list of platform branches. The filter is evaluated as a logical conjunction (AND) of the separate `SearchFilter` terms.\n\nThe following list shows valid attribute values for each of the `SearchFilter` terms. Most operators take a single value. The `in` and `not_in` operators can take multiple values.\n\n- `Attribute = BranchName`:\n  \n  - `Operator`: `=` | `!=` | `begins_with` | `ends_with` | `contains` | `in` | `not_in`\n- `Attribute = LifecycleState`:\n  \n  - `Operator`: `=` | `!=` | `in` | `not_in`\n  - `Values`: `beta` | `supported` | `deprecated` | `retired`\n- `Attribute = PlatformName`:\n  \n  - `Operator`: `=` | `!=` | `begins_with` | `ends_with` | `contains` | `in` | `not_in`\n- `Attribute = TierType`:\n  \n  - `Operator`: `=` | `!=`\n  - `Values`: `WebServer/Standard` | `Worker/SQS/HTTP`\n\nArray size: limited to 10 `SearchFilter` objects.\n\nWithin each `SearchFilter` item, the `Values` array is limited to 10 items."
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            max-records: The maximum number of platform branch values returned in one call.
-            next-token: |-
-                For a paginated request. Specify a token from a previous response page to retrieve the next response page. All other parameter values must be identical to the ones specified in the initial request.
-
-                If no `NextToken` is specified, the first page is retrieved.
-    - name: list-tags-for-resource
-      description: Return the tags applied to an AWS Elastic Beanstalk resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resouce for which a tag list is requested.
-      documentation:
-        command: |-
-            Return the tags applied to an AWS Elastic Beanstalk resource. The response contains a list of tag key-value pairs.
-
-            Elastic Beanstalk supports tagging of all of its resources. For details about resource tagging, see [Tagging Application Resources](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-tagging-resources.html).
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            resource-arn: |-
-                The Amazon Resource Name (ARN) of the resouce for which a tag list is requested.
-
-                Must be the ARN of an Elastic Beanstalk resource.
-    - name: restart-app-server
-      description: Causes the environment to restart the application container server running on each Amazon EC2 instance.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=: The ID of the environment to restart the server for.
-        --environment-name=: The name of the environment to restart the server for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: Causes the environment to restart the application container server running on each Amazon EC2 instance.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-id: |-
-                The ID of the environment to restart the server for.
-
-                Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns `MissingRequiredParameter` error.
-            environment-name: |-
-                The name of the environment to restart the server for.
-
-                Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns `MissingRequiredParameter` error.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-    - name: update-environment
-      description: Updates the environment description, deploys a new application version, updates the configuration settings to an entirely new configuration template, or updates select configuration option values in the running environment.
-      flags:
-        --application-name=: The name of the application with which the environment is associated.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: If this parameter is specified, AWS Elastic Beanstalk updates the description of this environment.
-        --environment-id=: The ID of the environment to update.
-        --environment-name=: The name of the environment to update.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-name=: The name of the group to which the target environment belongs.
-        --option-settings=: If specified, AWS Elastic Beanstalk updates the configuration set associated with the running environment and sets the specified configuration options to the requested value.
-        --options-to-remove=: A list of custom user-defined configuration options to remove from the configuration set for this environment.
-        --platform-arn=: The ARN of the platform, if used.
-        --solution-stack-name=: This specifies the platform version that the environment will run after the environment is updated.
-        --template-name=: If this parameter is specified, AWS Elastic Beanstalk deploys this configuration template to the environment.
-        --tier=: This specifies the tier to use to update the environment.
-        --version-label=: If this parameter is specified, AWS Elastic Beanstalk deploys the named application version to the environment.
-      documentation:
-        command: |-
-            Updates the environment description, deploys a new application version, updates the configuration settings to an entirely new configuration template, or updates select configuration option values in the running environment.
-
-            Attempting to update both the release and configuration is not allowed and AWS Elastic Beanstalk returns an `InvalidParameterCombination` error.
-
-            When updating the configuration settings to a new template or individual settings, a draft configuration is created and [DescribeConfigurationSettings]() for this environment returns two setting descriptions with different `DeploymentStatus` values.
-        flag:
-            application-name: The name of the application with which the environment is associated.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            description: If this parameter is specified, AWS Elastic Beanstalk updates the description of this environment.
-            environment-id: |-
-                The ID of the environment to update.
-
-                If no environment with this ID exists, AWS Elastic Beanstalk returns an `InvalidParameterValue` error.
-
-                Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns `MissingRequiredParameter` error.
-            environment-name: |-
-                The name of the environment to update. If no environment with this name exists, AWS Elastic Beanstalk returns an `InvalidParameterValue` error.
-
-                Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns `MissingRequiredParameter` error.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            group-name: The name of the group to which the target environment belongs. Specify a group name only if the environment's name is specified in an environment manifest and not with the environment name or environment ID parameters. See [Environment Manifest (env.yaml)](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html) for details.
-            option-settings: If specified, AWS Elastic Beanstalk updates the configuration set associated with the running environment and sets the specified configuration options to the requested value.
-            options-to-remove: A list of custom user-defined configuration options to remove from the configuration set for this environment.
-            platform-arn: The ARN of the platform, if used.
-            solution-stack-name: This specifies the platform version that the environment will run after the environment is updated.
-            template-name: If this parameter is specified, AWS Elastic Beanstalk deploys this configuration template to the environment. If no such configuration template is found, AWS Elastic Beanstalk returns an `InvalidParameterValue` error.
-            tier: |-
-                This specifies the tier to use to update the environment.
-
-                Condition: At this time, if you change the tier version, name, or type, AWS Elastic Beanstalk returns `InvalidParameterValue` error.
-            version-label: If this parameter is specified, AWS Elastic Beanstalk deploys the named application version to the environment. If no such application version is found, returns an `InvalidParameterValue` error.
-    - name: describe-configuration-settings
-      description: Returns a description of the settings for the specified configuration set, that is, either a configuration template or the configuration set associated with a running environment.
-      flags:
-        --application-name=!: The application for the environment or configuration template.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-name=: The name of the environment to describe.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --template-name=: The name of the configuration template to describe.
-      documentation:
-        command: |-
-            Returns a description of the settings for the specified configuration set, that is, either a configuration template or the configuration set associated with a running environment.
-
-            When describing the settings for the configuration set associated with a running environment, it is possible to receive two sets of setting descriptions. One is the deployed configuration set, and the other is a draft configuration of an environment that is either in the process of deployment or that failed to deploy.
-
-            Related Topics
-
-            - [DeleteEnvironmentConfiguration]()
-        flag:
-            application-name: The application for the environment or configuration template.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            environment-name: |-
-                The name of the environment to describe.
-
-                Condition: You must specify either this or a TemplateName, but not both. If you specify both, AWS Elastic Beanstalk returns an `InvalidParameterCombination` error. If you do not specify either, AWS Elastic Beanstalk returns `MissingRequiredParameter` error.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            template-name: |-
-                The name of the configuration template to describe.
-
-                Conditional: You must specify either this parameter or an EnvironmentName, but not both. If you specify both, AWS Elastic Beanstalk returns an `InvalidParameterCombination` error. If you do not specify either, AWS Elastic Beanstalk returns a `MissingRequiredParameter` error.
     - name: create-environment
       description: Launches an AWS Elastic Beanstalk environment for the specified application using the specified configuration.
       flags:
@@ -1844,82 +400,107 @@ commands:
         --template-name=: The name of the Elastic Beanstalk configuration template to use with the environment.
         --tier=: Specifies the tier to use in creating this environment.
         --version-label=: The name of the application version to deploy.
-      documentation:
-        command: Launches an AWS Elastic Beanstalk environment for the specified application using the specified configuration.
-        flag:
-            application-name: The name of the application that is associated with this environment.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cname-prefix: If specified, the environment attempts to use this value as the prefix for the CNAME in your Elastic Beanstalk environment URL. If not specified, the CNAME is generated automatically by appending a random alphanumeric string to the environment name.
-            description: Your description for this environment.
-            environment-name: |-
-                A unique name for the environment.
-
-                Constraint: Must be from 4 to 40 characters in length. The name can contain only letters, numbers, and hyphens. It can't start or end with a hyphen. This name must be unique within a region in your account. If the specified name already exists in the region, Elastic Beanstalk returns an `InvalidParameterValue` error.
-
-                If you don't specify the `CNAMEPrefix` parameter, the environment name becomes part of the CNAME, and therefore part of the visible URL for your application.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            group-name: The name of the group to which the target environment belongs. Specify a group name only if the environment's name is specified in an environment manifest and not with the environment name parameter. See [Environment Manifest (env.yaml)](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html) for details.
-            operations-role: The Amazon Resource Name (ARN) of an existing IAM role to be used as the environment's operations role. If specified, Elastic Beanstalk uses the operations role for permissions to downstream services during this call and during subsequent calls acting on this environment. To specify an operations role, you must have the `iam:PassRole` permission for the role. For more information, see [Operations roles](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html) in the *AWS Elastic Beanstalk Developer Guide*.
-            option-settings: If specified, AWS Elastic Beanstalk sets the specified configuration options to the requested value in the configuration set for the new environment. These override the values obtained from the solution stack or the configuration template.
-            options-to-remove: A list of custom user-defined configuration options to remove from the configuration set for this new environment.
-            platform-arn: |-
-                The Amazon Resource Name (ARN) of the custom platform to use with the environment. For more information, see [Custom Platforms](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/custom-platforms.html) in the *AWS Elastic Beanstalk Developer Guide*.
-
-                If you specify `PlatformArn`, don't specify `SolutionStackName`.
-            solution-stack-name: |-
-                The name of an Elastic Beanstalk solution stack (platform version) to use with the environment. If specified, Elastic Beanstalk sets the configuration values to the default values associated with the specified solution stack. For a list of current solution stacks, see [Elastic Beanstalk Supported Platforms](https://docs.aws.amazon.com/elasticbeanstalk/latest/platforms/platforms-supported.html) in the *AWS Elastic Beanstalk Platforms* guide.
-
-                If you specify `SolutionStackName`, don't specify `PlatformArn` or `TemplateName`.
-            tags: Specifies the tags applied to resources in the environment.
-            template-name: |-
-                The name of the Elastic Beanstalk configuration template to use with the environment.
-
-                If you specify `TemplateName`, then don't specify `SolutionStackName`.
-            tier: Specifies the tier to use in creating this environment. The environment tier that you choose determines whether Elastic Beanstalk provisions resources to support a web application that handles HTTP(S) requests or a web application that handles background-processing tasks.
-            version-label: |-
-                The name of the application version to deploy.
-
-                Default: If not specified, Elastic Beanstalk attempts to deploy the sample application.
-    - name: describe-account-attributes
-      description: Returns attributes related to AWS Elastic Beanstalk that are associated with the calling AWS account.
+    - name: create-storage-location
+      description: Creates a bucket in Amazon S3 to store application versions, logs, and other files used by Elastic Beanstalk environments.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      documentation:
-        command: |-
-            Returns attributes related to AWS Elastic Beanstalk that are associated with the calling AWS account.
-
-            The result currently has one set of attributes—resource quotas.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
+    - name: delete-application
+      description: Deletes the specified application along with all associated versions and configurations.
+      flags:
+        --application-name=!: The name of the application to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-terminate-env-by-force: When set to true, running environments will be terminated before deleting the application.
+        --terminate-env-by-force: When set to true, running environments will be terminated before deleting the application.
+    - name: describe-application-versions
+      description: Retrieve a list of application versions.
+      flags:
+        --application-name=: Specify an application name to show only application versions for that application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: For a paginated request.
+        --next-token=: For a paginated request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --version-labels=: Specify a version label to show a specific application version.
+    - name: describe-environment-managed-action-history
+      description: Lists an environment's completed and failed managed actions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=: The environment ID of the target environment.
+        --environment-name=: The name of the target environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The maximum number of items to return for a single request.
+        --next-token=: The pagination token returned by a previous request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-platform-version
+      description: Describes a platform version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --platform-arn=: The ARN of the platform version.
+    - name: terminate-environment
+      description: Terminates the specified environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=: The ID of the environment to terminate.
+        --environment-name=: The name of the environment to terminate.
+        --force-terminate: Terminates the target environment even if another environment in the same group is dependent on it.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-force-terminate: Terminates the target environment even if another environment in the same group is dependent on it.
+        --no-terminate-resources: 'Indicates whether the associated AWS resources should shut down when the environment is terminated:'
+        --terminate-resources: 'Indicates whether the associated AWS resources should shut down when the environment is terminated:'
+    - name: update-application
+      description: Updates the specified application to have the specified properties.
+      flags:
+        --application-name=!: The name of the application to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A new description for the application.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: apply-environment-managed-action
+      description: Applies a scheduled managed action immediately.
+      flags:
+        --action-id=!: The action ID of the scheduled managed action to execute.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=: The environment ID of the target environment.
+        --environment-name=: The name of the target environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: associate-environment-operations-role
+      description: Add or change the operations role used by an environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-name=!: The name of the environment to which to set the operations role.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --operations-role=!: The Amazon Resource Name (ARN) of an existing IAM role to be used as the environment's operations role.
+    - name: delete-configuration-template
+      description: Deletes the specified configuration template.
+      flags:
+        --application-name=!: The name of the application to delete the configuration template from.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --template-name=!: The name of the configuration template to delete.
+    - name: describe-configuration-settings
+      description: Returns a description of the settings for the specified configuration set, that is, either a configuration template or the configuration set associated with a running environment.
+      flags:
+        --application-name=!: The application for the environment or configuration template.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-name=: The name of the environment to describe.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --template-name=: The name of the configuration template to describe.
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:
@@ -1941,62 +522,6 @@ commands:
             --page-size=: The size of each page to get in the AWS service call.
             --starting-token=: A token to specify where to start paginating.
             --version-label=: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that are associated with this application version.
-          documentation:
-            command: Returns descriptions for existing environments.
-            flag:
-                application-name: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that are associated with this application.
-                cli-input-json: |-
-                    Reads arguments from the JSON string provided.
-                    The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                    It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                cli-input-yaml: |-
-                    Reads arguments from the JSON string provided.
-                    The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                    It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                environment-ids: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that have the specified IDs.
-                environment-names: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that have the specified names.
-                generate-cli-skeleton: |-
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                include-deleted: |-
-                    Indicates whether to include deleted environments:
-
-                    `true`: Environments that have been deleted after `IncludedDeletedBackTo` are displayed.
-
-                    `false`: Do not include deleted environments.
-                included-deleted-back-to: If specified when `IncludeDeleted` is set to `true`, then environments deleted after this date are displayed.
-                max-items: |-
-                    The total number of items to return in the command's output.
-                    If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                    To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                    Do not use the NextToken response element directly outside of the AWS CLI.
-
-                    For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-                max-records: |-
-                    For a paginated request. Specify a maximum number of environments to include in each response.
-
-                    If no `MaxRecords` is specified, all available environments are retrieved in a single response.
-                next-token: |-
-                    For a paginated request. Specify a token from a previous response page to retrieve the next response page. All other parameter values must be identical to the ones specified in the initial request.
-
-                    If no `NextToken` is specified, the first page is retrieved.
-                page-size: |-
-                    The size of each page to get in the AWS service call.
-                    This does not affect the number of items returned in the command's output.
-                    Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                    This can help prevent the AWS service calls from timing out.
-
-                    For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-                starting-token: |-
-                    A token to specify where to start paginating.
-                    This is the NextToken from a previously truncated response.
-
-                    For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-                version-label: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that are associated with this application version.
         - name: environment-updated
           description: Returns descriptions for existing environments.
           flags:
@@ -2015,62 +540,6 @@ commands:
             --page-size=: The size of each page to get in the AWS service call.
             --starting-token=: A token to specify where to start paginating.
             --version-label=: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that are associated with this application version.
-          documentation:
-            command: Returns descriptions for existing environments.
-            flag:
-                application-name: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that are associated with this application.
-                cli-input-json: |-
-                    Reads arguments from the JSON string provided.
-                    The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                    It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                cli-input-yaml: |-
-                    Reads arguments from the JSON string provided.
-                    The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                    It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                environment-ids: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that have the specified IDs.
-                environment-names: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that have the specified names.
-                generate-cli-skeleton: |-
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                include-deleted: |-
-                    Indicates whether to include deleted environments:
-
-                    `true`: Environments that have been deleted after `IncludedDeletedBackTo` are displayed.
-
-                    `false`: Do not include deleted environments.
-                included-deleted-back-to: If specified when `IncludeDeleted` is set to `true`, then environments deleted after this date are displayed.
-                max-items: |-
-                    The total number of items to return in the command's output.
-                    If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                    To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                    Do not use the NextToken response element directly outside of the AWS CLI.
-
-                    For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-                max-records: |-
-                    For a paginated request. Specify a maximum number of environments to include in each response.
-
-                    If no `MaxRecords` is specified, all available environments are retrieved in a single response.
-                next-token: |-
-                    For a paginated request. Specify a token from a previous response page to retrieve the next response page. All other parameter values must be identical to the ones specified in the initial request.
-
-                    If no `NextToken` is specified, the first page is retrieved.
-                page-size: |-
-                    The size of each page to get in the AWS service call.
-                    This does not affect the number of items returned in the command's output.
-                    Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                    This can help prevent the AWS service calls from timing out.
-
-                    For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-                starting-token: |-
-                    A token to specify where to start paginating.
-                    This is the NextToken from a previously truncated response.
-
-                    For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-                version-label: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that are associated with this application version.
         - name: environment-terminated
           description: Returns descriptions for existing environments.
           flags:
@@ -2089,59 +558,3 @@ commands:
             --page-size=: The size of each page to get in the AWS service call.
             --starting-token=: A token to specify where to start paginating.
             --version-label=: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that are associated with this application version.
-          documentation:
-            command: Returns descriptions for existing environments.
-            flag:
-                application-name: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that are associated with this application.
-                cli-input-json: |-
-                    Reads arguments from the JSON string provided.
-                    The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                    It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                cli-input-yaml: |-
-                    Reads arguments from the JSON string provided.
-                    The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                    It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                environment-ids: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that have the specified IDs.
-                environment-names: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that have the specified names.
-                generate-cli-skeleton: |-
-                    If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                    This may  not  be  specified  along with --cli-input-yaml.
-                include-deleted: |-
-                    Indicates whether to include deleted environments:
-
-                    `true`: Environments that have been deleted after `IncludedDeletedBackTo` are displayed.
-
-                    `false`: Do not include deleted environments.
-                included-deleted-back-to: If specified when `IncludeDeleted` is set to `true`, then environments deleted after this date are displayed.
-                max-items: |-
-                    The total number of items to return in the command's output.
-                    If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
-                    To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
-                    Do not use the NextToken response element directly outside of the AWS CLI.
-
-                    For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-                max-records: |-
-                    For a paginated request. Specify a maximum number of environments to include in each response.
-
-                    If no `MaxRecords` is specified, all available environments are retrieved in a single response.
-                next-token: |-
-                    For a paginated request. Specify a token from a previous response page to retrieve the next response page. All other parameter values must be identical to the ones specified in the initial request.
-
-                    If no `NextToken` is specified, the first page is retrieved.
-                page-size: |-
-                    The size of each page to get in the AWS service call.
-                    This does not affect the number of items returned in the command's output.
-                    Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
-                    This can help prevent the AWS service calls from timing out.
-
-                    For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-                starting-token: |-
-                    A token to specify where to start paginating.
-                    This is the NextToken from a previously truncated response.
-
-                    For usage examples, see Pagination in the AWS Command Line Interface User Guide.
-                version-label: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that are associated with this application version.

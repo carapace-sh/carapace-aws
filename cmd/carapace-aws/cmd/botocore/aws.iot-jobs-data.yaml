@@ -1,6 +1,17 @@
 name: iot-jobs-data
 description: AWS IoT Jobs Data Plane
 commands:
+    - name: describe-job-execution
+      description: Gets details of a job execution.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --execution-number=: Optional.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-job-document: Optional.
+        --job-id=!: The unique identifier assigned to this job when it was created.
+        --no-include-job-document: Optional.
+        --thing-name=!: The thing name associated with the device the job execution is running on.
     - name: get-pending-job-executions
       description: Gets the list of all jobs for a thing that are not in a terminal status.
       flags:
@@ -8,28 +19,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --thing-name=!: The name of the thing that is executing the job.
-      documentation:
-        command: |-
-            Gets the list of all jobs for a thing that are not in a terminal status.
-
-            Requires permission to access the [GetPendingJobExecutions](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions) action.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            thing-name: The name of the thing that is executing the job.
     - name: start-command-execution
       description: Using the command created with the `CreateCommand` API, start a command execution on a specific device.
       flags:
@@ -41,29 +30,6 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --parameters=: A list of parameters that are required by the `StartCommandExecution` API when performing the command on a device.
         --target-arn=!: The Amazon Resource Number (ARN) of the device where the command execution is occurring.
-      documentation:
-        command: Using the command created with the `CreateCommand` API, start a command execution on a specific device.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            client-token: The client token is used to implement idempotency. It ensures that the request completes no more than one time. If you retry a request with the same token and the same parameters, the request will complete successfully. However, if you retry the request using the same token but different parameters, an HTTP 409 conflict occurs. If you omit this value, Amazon Web Services SDKs will automatically generate a unique client request.
-            command-arn: The Amazon Resource Number (ARN) of the command. For example, `arn:aws:iot:<region>:<accountid>:command/<commandName>`
-            execution-timeout-seconds: Specifies the amount of time in second the device has to finish the command execution. A timer is started as soon as the command execution is created. If the command execution status is not set to another terminal state before the timer expires, it will automatically update to `TIMED_OUT`.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            parameters: A list of parameters that are required by the `StartCommandExecution` API when performing the command on a device.
-            target-arn: The Amazon Resource Number (ARN) of the device where the command execution is occurring.
     - name: start-next-pending-job-execution
       description: Gets and starts the next pending (status IN\_PROGRESS or QUEUED) job execution for a thing.
       flags:
@@ -73,36 +39,6 @@ commands:
         --status-details=: A collection of name/value pairs that describe the status of the job execution.
         --step-timeout-in-minutes=: Specifies the amount of time this device has to finish execution of this job.
         --thing-name=!: The name of the thing associated with the device.
-      documentation:
-        command: |-
-            Gets and starts the next pending (status IN\_PROGRESS or QUEUED) job execution for a thing.
-
-            Requires permission to access the [StartNextPendingJobExecution](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions) action.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            status-details: |-
-                A collection of name/value pairs that describe the status of the job execution. If not specified, the statusDetails are unchanged.
-
-                The maximum length of the value in the name/value pair is 1,024 characters.
-            step-timeout-in-minutes: |-
-                Specifies the amount of time this device has to finish execution of this job. If the job execution status is not set to a terminal state before this timer expires, or before the timer is reset (by calling `UpdateJobExecution`, setting the status to `IN_PROGRESS`, and specifying a new timeout value in field `stepTimeoutInMinutes`) the job execution status will be automatically set to `TIMED_OUT`. Note that setting the step timeout has no effect on the in progress timeout that may have been specified when the job was created (`CreateJob` using field `timeoutConfig`).
-
-                Valid values for this parameter range from 1 to 10080 (1 minute to 7 days).
-            thing-name: The name of the thing associated with the device.
     - name: update-job-execution
       description: Updates the status of a job execution.
       flags:
@@ -131,75 +67,3 @@ commands:
                 - REJECTED
                 - REMOVED
                 - CANCELED
-      documentation:
-        command: |-
-            Updates the status of a job execution.
-
-            Requires permission to access the [UpdateJobExecution](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiotjobsdataplane.html) action.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            execution-number: Optional. A number that identifies a particular job execution on a particular device.
-            expected-version: Optional. The expected current version of the job execution. Each time you update the job execution, its version is incremented. If the version of the job execution stored in Jobs does not match, the update is rejected with a VersionMismatch error, and an ErrorResponse that contains the current job execution status data is returned. (This makes it unnecessary to perform a separate DescribeJobExecution request in order to obtain the job execution status data.)
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            include-job-document: Optional. When set to true, the response contains the job document. The default is false.
-            include-job-execution-state: Optional. When included and set to true, the response contains the JobExecutionState data. The default is false.
-            job-id: The unique identifier assigned to this job when it was created.
-            status: The new status for the job execution (IN\_PROGRESS, FAILED, SUCCESS, or REJECTED). This must be specified on every update.
-            status-details: |-
-                Optional. A collection of name/value pairs that describe the status of the job execution. If not specified, the statusDetails are unchanged.
-
-                The maximum length of the value in the name/value pair is 1,024 characters.
-            step-timeout-in-minutes: |-
-                Specifies the amount of time this device has to finish execution of this job. If the job execution status is not set to a terminal state before this timer expires, or before the timer is reset (by again calling `UpdateJobExecution`, setting the status to `IN_PROGRESS`, and specifying a new timeout value in this field) the job execution status will be automatically set to `TIMED_OUT`. Note that setting or resetting the step timeout has no effect on the in progress timeout that may have been specified when the job was created (`CreateJob` using field `timeoutConfig`).
-
-                Valid values for this parameter range from 1 to 10080 (1 minute to 7 days). A value of -1 is also valid and will cancel the current step timer (created by an earlier use of `UpdateJobExecutionRequest`).
-            thing-name: The name of the thing associated with the device.
-    - name: describe-job-execution
-      description: Gets details of a job execution.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --execution-number=: Optional.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --include-job-document: Optional.
-        --job-id=!: The unique identifier assigned to this job when it was created.
-        --no-include-job-document: Optional.
-        --thing-name=!: The thing name associated with the device the job execution is running on.
-      documentation:
-        command: |-
-            Gets details of a job execution.
-
-            Requires permission to access the [DescribeJobExecution](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions) action.
-        flag:
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            execution-number: Optional. A number that identifies a particular job execution on a particular device. If not specified, the latest job execution is returned.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            include-job-document: Optional. Unless set to false, the response contains the job document. The default is true.
-            job-id: The unique identifier assigned to this job when it was created.
-            thing-name: The thing name associated with the device the job execution is running on.

@@ -1,128 +1,6 @@
 name: sagemaker-runtime
 description: Amazon SageMaker Runtime
 commands:
-    - name: invoke-endpoint-async
-      description: After you deploy a model into production using Amazon SageMaker AI hosting services, your client applications use this API to get inferences from the model hosted at the specified endpoint in an asynchronous manner.
-      flags:
-        --accept=: The desired MIME type of the inference response from the model container.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-type=: The MIME type of the input data in the request body.
-        --custom-attributes=: Provides additional information about a request for an inference submitted to a model hosted at an Amazon SageMaker AI endpoint.
-        --endpoint-name=!: The name of the endpoint that you specified when you created the endpoint using the [CreateEndpoint](https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html) API.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --inference-id=: The identifier for the inference request.
-        --input-location=!: The Amazon S3 URI where the inference request payload is stored.
-        --invocation-timeout-seconds=: Maximum amount of time in seconds a request can be processed before it is marked as expired.
-        --request-ttl-seconds=: Maximum age in seconds a request can be in the queue before it is marked as expired.
-      documentation:
-        command: |-
-            After you deploy a model into production using Amazon SageMaker AI hosting services, your client applications use this API to get inferences from the model hosted at the specified endpoint in an asynchronous manner.
-
-            Inference requests sent to this API are enqueued for asynchronous processing. The processing of the inference request may or may not complete before you receive a response from this API. The response from this API will not contain the result of the inference request but contain information about where you can locate it.
-
-            Amazon SageMaker AI strips all POST headers except those supported by the API. Amazon SageMaker AI might add additional headers. You should not rely on the behavior of headers outside those enumerated in the request syntax.
-
-            Calls to `InvokeEndpointAsync` are authenticated by using Amazon Web Services Signature Version 4. For information, see [Authenticating Requests (Amazon Web Services Signature Version 4)](https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html) in the *Amazon S3 API Reference*.
-        flag:
-            accept: The desired MIME type of the inference response from the model container.
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            content-type: The MIME type of the input data in the request body.
-            custom-attributes: |-
-                Provides additional information about a request for an inference submitted to a model hosted at an Amazon SageMaker AI endpoint. The information is an opaque value that is forwarded verbatim. You could use this value, for example, to provide an ID that you can use to track a request or to provide other metadata that a service endpoint was programmed to process. The value must consist of no more than 1024 visible US-ASCII characters as specified in [Section 3.3.6. Field Value Components](https://datatracker.ietf.org/doc/html/rfc7230#section-3.2.6) of the Hypertext Transfer Protocol (HTTP/1.1).
-
-                The code in your model is responsible for setting or updating any custom attributes in the response. If your code does not set this value in the response, an empty value is returned. For example, if a custom attribute represents the trace ID, your model can prepend the custom attribute with `Trace ID:` in your post-processing function.
-
-                This feature is currently supported in the Amazon Web Services SDKs but not in the Amazon SageMaker AI Python SDK.
-            endpoint-name: The name of the endpoint that you specified when you created the endpoint using the [CreateEndpoint](https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html) API.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            inference-id: The identifier for the inference request. Amazon SageMaker AI will generate an identifier for you if none is specified.
-            input-location: The Amazon S3 URI where the inference request payload is stored.
-            invocation-timeout-seconds: Maximum amount of time in seconds a request can be processed before it is marked as expired. The default is 15 minutes, or 900 seconds.
-            request-ttl-seconds: Maximum age in seconds a request can be in the queue before it is marked as expired. The default is 6 hours, or 21,600 seconds.
-    - name: invoke-endpoint-with-response-stream
-      description: Invokes a model at the specified endpoint to return the inference response as a stream.
-      flags:
-        --accept=: The desired MIME type of the inference response from the model container.
-        --body=!: Provides input data, in the format specified in the `ContentType` request header.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-type=: The MIME type of the input data in the request body.
-        --custom-attributes=: Provides additional information about a request for an inference submitted to a model hosted at an Amazon SageMaker AI endpoint.
-        --endpoint-name=!: The name of the endpoint that you specified when you created the endpoint using the [CreateEndpoint](https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html) API.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --inference-component-name=: If the endpoint hosts one or more inference components, this parameter specifies the name of inference component to invoke for a streaming response.
-        --inference-id=: An identifier that you assign to your request.
-        --session-id=: The ID of a stateful session to handle your request.
-        --target-container-hostname=: If the endpoint hosts multiple containers and is configured to use direct invocation, this parameter specifies the host name of the container to invoke.
-        --target-variant=: Specify the production variant to send the inference request to when invoking an endpoint that is running two or more variants.
-      documentation:
-        command: |-
-            Invokes a model at the specified endpoint to return the inference response as a stream. The inference stream provides the response payload incrementally as a series of parts. Before you can get an inference stream, you must have access to a model that's deployed using Amazon SageMaker AI hosting services, and the container for that model must support inference streaming.
-
-            For more information that can help you use this API, see the following sections in the *Amazon SageMaker AI Developer Guide*:
-
-            - For information about how to add streaming support to a model, see [How Containers Serve Requests](https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-inference-code.html#your-algorithms-inference-code-how-containe-serves-requests).
-            - For information about how to process the streaming response, see [Invoke real-time endpoints](https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints-test-endpoints.html).
-
-            Before you can use this operation, your IAM permissions must allow the `sagemaker:InvokeEndpoint` action. For more information about Amazon SageMaker AI actions for IAM policies, see [Actions, resources, and condition keys for Amazon SageMaker AI](https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonsagemaker.html) in the *IAM Service Authorization Reference*.
-
-            Amazon SageMaker AI strips all POST headers except those supported by the API. Amazon SageMaker AI might add additional headers. You should not rely on the behavior of headers outside those enumerated in the request syntax.
-
-            Calls to `InvokeEndpointWithResponseStream` are authenticated by using Amazon Web Services Signature Version 4. For information, see [Authenticating Requests (Amazon Web Services Signature Version 4)](https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html) in the *Amazon S3 API Reference*.
-        flag:
-            accept: The desired MIME type of the inference response from the model container.
-            body: |-
-                Provides input data, in the format specified in the `ContentType` request header. Amazon SageMaker AI passes all of the data in the body to the model.
-
-                For information about the format of the request body, see [Common Data Formats-Inference](https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html).
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            content-type: The MIME type of the input data in the request body.
-            custom-attributes: |-
-                Provides additional information about a request for an inference submitted to a model hosted at an Amazon SageMaker AI endpoint. The information is an opaque value that is forwarded verbatim. You could use this value, for example, to provide an ID that you can use to track a request or to provide other metadata that a service endpoint was programmed to process. The value must consist of no more than 1024 visible US-ASCII characters as specified in [Section 3.3.6. Field Value Components](https://datatracker.ietf.org/doc/html/rfc7230#section-3.2.6) of the Hypertext Transfer Protocol (HTTP/1.1).
-
-                The code in your model is responsible for setting or updating any custom attributes in the response. If your code does not set this value in the response, an empty value is returned. For example, if a custom attribute represents the trace ID, your model can prepend the custom attribute with `Trace ID:` in your post-processing function.
-
-                This feature is currently supported in the Amazon Web Services SDKs but not in the Amazon SageMaker AI Python SDK.
-            endpoint-name: The name of the endpoint that you specified when you created the endpoint using the [CreateEndpoint](https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html) API.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            inference-component-name: If the endpoint hosts one or more inference components, this parameter specifies the name of inference component to invoke for a streaming response.
-            inference-id: An identifier that you assign to your request.
-            session-id: |-
-                The ID of a stateful session to handle your request.
-
-                You can't create a stateful session by using the `InvokeEndpointWithResponseStream` action. Instead, you can create one by using the `InvokeEndpoint` action. In your request, you specify `NEW_SESSION` for the `SessionId` request parameter. The response to that request provides the session ID for the `NewSessionId` response parameter.
-            target-container-hostname: If the endpoint hosts multiple containers and is configured to use direct invocation, this parameter specifies the host name of the container to invoke.
-            target-variant: |-
-                Specify the production variant to send the inference request to when invoking an endpoint that is running two or more variants. Note that this parameter overrides the default behavior for the endpoint, which is to distribute the invocation traffic based on the variant weights.
-
-                For information about how to use variant targeting to perform a/b testing, see [Test models in production](https://docs.aws.amazon.com/sagemaker/latest/dg/model-ab-testing.html)
     - name: invoke-endpoint
       description: After you deploy a model into production using Amazon SageMaker AI hosting services, your client applications use this API to get inferences from the model hosted at the specified endpoint.
       flags:
@@ -141,61 +19,33 @@ commands:
         --target-container-hostname=: If the endpoint hosts multiple containers and is configured to use direct invocation, this parameter specifies the host name of the container to invoke.
         --target-model=: The model to request for inference when invoking a multi-model endpoint.
         --target-variant=: Specify the production variant to send the inference request to when invoking an endpoint that is running two or more variants.
-      documentation:
-        command: |-
-            After you deploy a model into production using Amazon SageMaker AI hosting services, your client applications use this API to get inferences from the model hosted at the specified endpoint.
-
-            For an overview of Amazon SageMaker AI, see [How It Works](https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html).
-
-            Amazon SageMaker AI strips all POST headers except those supported by the API. Amazon SageMaker AI might add additional headers. You should not rely on the behavior of headers outside those enumerated in the request syntax.
-
-            Calls to `InvokeEndpoint` are authenticated by using Amazon Web Services Signature Version 4. For information, see [Authenticating Requests (Amazon Web Services Signature Version 4)](https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html) in the *Amazon S3 API Reference*.
-
-            A customer's model containers must respond to requests within 60 seconds. The model itself can have a maximum processing time of 60 seconds before responding to invocations. If your model is going to take 50-60 seconds of processing time, the SDK socket timeout should be set to be 70 seconds.
-
-            Endpoints are scoped to an individual account, and are not public. The URL does not contain the account ID, but Amazon SageMaker AI determines the account ID from the authentication token that is supplied by the caller.
-        flag:
-            accept: The desired MIME type of the inference response from the model container.
-            body: |-
-                Provides input data, in the format specified in the `ContentType` request header. Amazon SageMaker AI passes all of the data in the body to the model.
-
-                For information about the format of the request body, see [Common Data Formats-Inference](https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html).
-            cli-input-json: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            cli-input-yaml: |-
-                Reads arguments from the JSON string provided.
-                The JSON string follows the  format  provided  by --generate-cli-skeleton.
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
-                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            content-type: The MIME type of the input data in the request body.
-            custom-attributes: |-
-                Provides additional information about a request for an inference submitted to a model hosted at an Amazon SageMaker AI endpoint. The information is an opaque value that is forwarded verbatim. You could use this value, for example, to provide an ID that you can use to track a request or to provide other metadata that a service endpoint was programmed to process. The value must consist of no more than 1024 visible US-ASCII characters as specified in [Section 3.3.6. Field Value Components](https://datatracker.ietf.org/doc/html/rfc7230#section-3.2.6) of the Hypertext Transfer Protocol (HTTP/1.1).
-
-                The code in your model is responsible for setting or updating any custom attributes in the response. If your code does not set this value in the response, an empty value is returned. For example, if a custom attribute represents the trace ID, your model can prepend the custom attribute with `Trace ID:` in your post-processing function.
-
-                This feature is currently supported in the Amazon Web Services SDKs but not in the Amazon SageMaker AI Python SDK.
-            enable-explanations: An optional JMESPath expression used to override the `EnableExplanations` parameter of the `ClarifyExplainerConfig` API. See the [EnableExplanations](https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-create-endpoint.html#clarify-online-explainability-create-endpoint-enable) section in the developer guide for more information.
-            endpoint-name: The name of the endpoint that you specified when you created the endpoint using the [CreateEndpoint](https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html) API.
-            generate-cli-skeleton: |-
-                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
-                This may  not  be  specified  along with --cli-input-yaml.
-            inference-component-name: If the endpoint hosts one or more inference components, this parameter specifies the name of inference component to invoke.
-            inference-id: If you provide a value, it is added to the captured data when you enable data capture on the endpoint. For information about data capture, see [Capture Data](https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-data-capture.html).
-            session-id: |-
-                Creates a stateful session or identifies an existing one. You can do one of the following:
-
-                - Create a stateful session by specifying the value `NEW_SESSION`.
-                - Send your request to an existing stateful session by specifying the ID of that session.
-
-                With a stateful session, you can send multiple requests to a stateful model. When you create a session with a stateful model, the model must create the session ID and set the expiration time. The model must also provide that information in the response to your request. You can get the ID and timestamp from the `NewSessionId` response parameter. For any subsequent request where you specify that session ID, SageMaker AI routes the request to the same instance that supports the session.
-            target-container-hostname: If the endpoint hosts multiple containers and is configured to use direct invocation, this parameter specifies the host name of the container to invoke.
-            target-model: The model to request for inference when invoking a multi-model endpoint.
-            target-variant: |-
-                Specify the production variant to send the inference request to when invoking an endpoint that is running two or more variants. Note that this parameter overrides the default behavior for the endpoint, which is to distribute the invocation traffic based on the variant weights.
-
-                For information about how to use variant targeting to perform a/b testing, see [Test models in production](https://docs.aws.amazon.com/sagemaker/latest/dg/model-ab-testing.html)
+    - name: invoke-endpoint-async
+      description: After you deploy a model into production using Amazon SageMaker AI hosting services, your client applications use this API to get inferences from the model hosted at the specified endpoint in an asynchronous manner.
+      flags:
+        --accept=: The desired MIME type of the inference response from the model container.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content-type=: The MIME type of the input data in the request body.
+        --custom-attributes=: Provides additional information about a request for an inference submitted to a model hosted at an Amazon SageMaker AI endpoint.
+        --endpoint-name=!: The name of the endpoint that you specified when you created the endpoint using the [CreateEndpoint](https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html) API.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --inference-id=: The identifier for the inference request.
+        --input-location=!: The Amazon S3 URI where the inference request payload is stored.
+        --invocation-timeout-seconds=: Maximum amount of time in seconds a request can be processed before it is marked as expired.
+        --request-ttl-seconds=: Maximum age in seconds a request can be in the queue before it is marked as expired.
+    - name: invoke-endpoint-with-response-stream
+      description: Invokes a model at the specified endpoint to return the inference response as a stream.
+      flags:
+        --accept=: The desired MIME type of the inference response from the model container.
+        --body=!: Provides input data, in the format specified in the `ContentType` request header.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content-type=: The MIME type of the input data in the request body.
+        --custom-attributes=: Provides additional information about a request for an inference submitted to a model hosted at an Amazon SageMaker AI endpoint.
+        --endpoint-name=!: The name of the endpoint that you specified when you created the endpoint using the [CreateEndpoint](https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html) API.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --inference-component-name=: If the endpoint hosts one or more inference components, this parameter specifies the name of inference component to invoke for a streaming response.
+        --inference-id=: An identifier that you assign to your request.
+        --session-id=: The ID of a stateful session to handle your request.
+        --target-container-hostname=: If the endpoint hosts multiple containers and is configured to use direct invocation, this parameter specifies the host name of the container to invoke.
+        --target-variant=: Specify the production variant to send the inference request to when invoking an endpoint that is running two or more variants.
