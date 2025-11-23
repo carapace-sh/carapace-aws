@@ -1,111 +1,640 @@
 name: servicecatalog
 description: AWS Service Catalog
 commands:
-    - name: batch-associate-service-action-with-provisioning-artifact
-      description: Associates multiple self-service actions with provisioning artifacts.
+    - name: delete-tag-option
+      description: Deletes the specified TagOption.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The TagOption identifier.
+    - name: describe-portfolio-share-status
+      description: Gets the status of the specified portfolio share operation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --portfolio-share-token=!: The token for the portfolio share operation.
+    - name: describe-provisioning-parameters
+      description: Gets information about the configuration required to provision the specified product using the specified provisioning artifact.
       flags:
         --accept-language=: The language code.
-        --service-action-associations=!: One or more associations, each consisting of the Action ID, the Product ID, and the Provisioning Artifact ID.
-    - name: describe-portfolio
-      description: Gets information about the specified portfolio.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --path-id=: The path identifier of the product.
+        --path-name=: The name of the path.
+        --product-id=: The product identifier.
+        --product-name=: The name of the product.
+        --provisioning-artifact-id=: The identifier of the provisioning artifact.
+        --provisioning-artifact-name=: The name of the provisioning artifact.
+    - name: describe-tag-option
+      description: Gets information about the specified TagOption.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The TagOption identifier.
+    - name: import-as-provisioned-product
+      description: Requests the import of a resource as an Service Catalog provisioned product that is associated to an Service Catalog product and provisioning artifact.
       flags:
         --accept-language=: The language code.
-        --id=!: The portfolio identifier.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --idempotency-token=!: A unique identifier that you provide to ensure idempotency.
+        --physical-id=!: The unique identifier of the resource to be imported.
+        --product-id=!: The product identifier.
+        --provisioned-product-name=!: The user-friendly name of the provisioned product.
+        --provisioning-artifact-id=!: The identifier of the provisioning artifact.
     - name: list-accepted-portfolio-shares
       description: Lists all imported portfolios for which account-to-account shares were accepted by this account.
       flags:
         --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
         --page-size=: The maximum number of items to return with this call.
         --page-token=: The page token for the next set of results.
         --portfolio-share-type=: The type of shared portfolios to list.
+        --starting-token=: A token to specify where to start paginating.
       completion:
         flag:
             portfolio-share-type:
                 - IMPORTED
                 - AWS_SERVICECATALOG
                 - AWS_ORGANIZATIONS
-    - name: list-launch-paths
-      description: Lists the paths to the specified product.
+    - name: list-provisioning-artifacts
+      description: Lists all provisioning artifacts (also known as versions) for the specified product.
       flags:
         --accept-language=: The language code.
-        --page-size=: The maximum number of items to return with this call.
-        --page-token=: The page token for the next set of results.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --product-id=!: The product identifier.
+    - name: describe-constraint
+      description: Gets information about the specified constraint.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The identifier of the constraint.
+    - name: associate-tag-option-with-resource
+      description: Associate the specified TagOption with the specified portfolio or product.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-id=!: The resource identifier.
+        --tag-option-id=!: The TagOption identifier.
     - name: delete-provisioning-artifact
       description: Deletes the specified provisioning artifact (also known as a version) for the specified product.
       flags:
         --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --product-id=!: The product identifier.
         --provisioning-artifact-id=!: The identifier of the provisioning artifact.
+    - name: list-portfolio-access
+      description: Lists the account IDs that have access to the specified portfolio.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --organization-parent-id=: The ID of an organization node the portfolio is shared with.
+        --page-size=: The maximum number of items to return with this call.
+        --page-token=: The page token for the next set of results.
+        --portfolio-id=!: The portfolio identifier.
+    - name: notify-terminate-provisioned-product-engine-workflow-result
+      description: Notifies the result of the terminate engine execution.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --failure-reason=: The reason why the terminate engine execution failed.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --idempotency-token=!: The idempotency token that identifies the terminate engine execution.
+        --record-id=!: The identifier of the record.
+        --status=!: The status of the terminate engine execution.
+        --workflow-token=!: The encrypted contents of the terminate engine execution payload that Service Catalog sends after the Terraform product terminate workflow starts.
+      completion:
+        flag:
+            status:
+                - SUCCEEDED
+                - FAILED
+    - name: update-provisioned-product-properties
+      description: Requests updates to the properties of the specified provisioned product.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --idempotency-token=!: The idempotency token that uniquely identifies the provisioning product update request.
+        --provisioned-product-id=!: The identifier of the provisioned product.
+        --provisioned-product-properties=!: A map that contains the provisioned product properties to be updated.
+    - name: update-provisioning-artifact
+      description: Updates the specified provisioning artifact (also known as a version) for the specified product.
+      flags:
+        --accept-language=: The language code.
+        --active: Indicates whether the product version is active.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The updated description of the provisioning artifact.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --guidance=: Information set by the administrator to provide guidance to end users about which provisioning artifacts to use.
+        --name=: The updated name of the provisioning artifact.
+        --no-active: Indicates whether the product version is active.
+        --product-id=!: The product identifier.
+        --provisioning-artifact-id=!: The identifier of the provisioning artifact.
+      completion:
+        flag:
+            guidance:
+                - DEFAULT
+                - DEPRECATED
+    - name: update-tag-option
+      description: Updates the specified TagOption.
+      flags:
+        --active: The updated active state.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The TagOption identifier.
+        --no-active: The updated active state.
+        --value=: The updated value.
+    - name: delete-service-action
+      description: Deletes a self-service action.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The self-service action identifier.
+        --idempotency-token=: A unique identifier that you provide to ensure idempotency.
+    - name: describe-copy-product-status
+      description: Gets the status of the specified copy product operation.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --copy-product-token=!: The token for the copy product operation.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: disassociate-budget-from-resource
+      description: Disassociates the specified budget from the specified resource.
+      flags:
+        --budget-name=!: The name of the budget you want to disassociate.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-id=!: The resource identifier you want to disassociate from.
+    - name: disassociate-product-from-portfolio
+      description: Disassociates the specified product from the specified portfolio.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --portfolio-id=!: The portfolio identifier.
+        --product-id=!: The product identifier.
+    - name: execute-provisioned-product-plan
+      description: Provisions or modifies a product based on the resource changes for the specified plan.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --idempotency-token=!: A unique identifier that you provide to ensure idempotency.
+        --plan-id=!: The plan identifier.
+    - name: execute-provisioned-product-service-action
+      description: Executes a self-service action against a provisioned product.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --execute-token=!: An idempotency token that uniquely identifies the execute request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --parameters=: A map of all self-service action parameters and their values.
+        --provisioned-product-id=!: The identifier of the provisioned product.
+        --service-action-id=!: The self-service action identifier.
+    - name: list-launch-paths
+      description: Lists the paths to the specified product.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --page-size=: The maximum number of items to return with this call.
+        --page-token=: The page token for the next set of results.
+        --product-id=!: The product identifier.
+        --starting-token=: A token to specify where to start paginating.
+    - name: provision-product
+      description: Provisions the specified product.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --notification-arns=: Passed to CloudFormation.
+        --path-id=: The path identifier of the product.
+        --path-name=: The name of the path.
+        --product-id=: The product identifier.
+        --product-name=: The name of the product.
+        --provision-token=!: An idempotency token that uniquely identifies the provisioning request.
+        --provisioned-product-name=!: A user-friendly name for the provisioned product.
+        --provisioning-artifact-id=: The identifier of the provisioning artifact.
+        --provisioning-artifact-name=: The name of the provisioning artifact.
+        --provisioning-parameters=: Parameters specified by the administrator that are required for provisioning the product.
+        --provisioning-preferences=: An object that contains information about the provisioning preferences for a stack set.
+        --tags=: One or more tags.
+    - name: associate-principal-with-portfolio
+      description: Associates the specified principal ARN with the specified portfolio.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --portfolio-id=!: The portfolio identifier.
+        --principal-arn=!: The ARN of the principal (user, role, or group).
+        --principal-type=!: The principal type.
+      completion:
+        flag:
+            principal-type:
+                - IAM
+                - IAM_PATTERN
+    - name: batch-disassociate-service-action-from-provisioning-artifact
+      description: Disassociates a batch of self-service actions from the specified provisioning artifact.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-action-associations=!: One or more associations, each consisting of the Action ID, the Product ID, and the Provisioning Artifact ID.
+    - name: disable-aws-organizations-access
+      description: Disable portfolio sharing through the Organizations service.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-stack-instances-for-provisioned-product
+      description: Returns summary information about stack instances that are associated with the specified `CFN_STACKSET` type provisioned product.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --page-size=: The maximum number of items to return with this call.
+        --page-token=: The page token for the next set of results.
+        --provisioned-product-id=!: The identifier of the provisioned product.
+    - name: reject-portfolio-share
+      description: Rejects an offer to share the specified portfolio.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --portfolio-id=!: The portfolio identifier.
+        --portfolio-share-type=: The type of shared portfolios to reject.
+      completion:
+        flag:
+            portfolio-share-type:
+                - IMPORTED
+                - AWS_SERVICECATALOG
+                - AWS_ORGANIZATIONS
+    - name: describe-service-action-execution-parameters
+      description: Finds the default parameters for a specific self-service action on a specific provisioned product and returns a map of the results to the user.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --provisioned-product-id=!: The identifier of the provisioned product.
+        --service-action-id=!: The self-service action identifier.
+    - name: disassociate-tag-option-from-resource
+      description: Disassociates the specified TagOption from the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-id=!: The resource identifier.
+        --tag-option-id=!: The TagOption identifier.
+    - name: search-products-as-admin
+      description: Gets information about the products for the specified portfolio or all products.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: The search filters.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --page-size=: The maximum number of items to return with this call.
+        --page-token=: The page token for the next set of results.
+        --portfolio-id=: The portfolio identifier.
+        --product-source=: Access level of the source of the product.
+        --sort-by=: The sort field.
+        --sort-order=: The sort order.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            product-source:
+                - ACCOUNT
+            sort-by:
+                - Title
+                - VersionCount
+                - CreationDate
+            sort-order:
+                - ASCENDING
+                - DESCENDING
+    - name: terminate-provisioned-product
+      description: Terminates the specified provisioned product.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ignore-errors: If set to true, Service Catalog stops managing the specified provisioned product even if it cannot delete the underlying resources.
+        --no-ignore-errors: If set to true, Service Catalog stops managing the specified provisioned product even if it cannot delete the underlying resources.
+        --no-retain-physical-resources: When this boolean parameter is set to true, the `TerminateProvisionedProduct` API deletes the Service Catalog provisioned product.
+        --provisioned-product-id=: The identifier of the provisioned product.
+        --provisioned-product-name=: The name of the provisioned product.
+        --retain-physical-resources: When this boolean parameter is set to true, the `TerminateProvisionedProduct` API deletes the Service Catalog provisioned product.
+        --terminate-token=!: An idempotency token that uniquely identifies the termination request.
+    - name: update-product
+      description: Updates the specified product.
+      flags:
+        --accept-language=: The language code.
+        --add-tags=: The tags to add to the product.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The updated description of the product.
+        --distributor=: The updated distributor of the product.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The product identifier.
+        --name=: The updated product name.
+        --owner=: The updated owner of the product.
+        --remove-tags=: The tags to remove from the product.
+        --source-connection=: Specifies connection details for the updated product and syncs the product to the connection source artifact.
+        --support-description=: The updated support description for the product.
+        --support-email=: The updated support email for the product.
+        --support-url=: The updated support URL for the product.
+    - name: describe-portfolio
+      description: Gets information about the specified portfolio.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The portfolio identifier.
+    - name: disassociate-principal-from-portfolio
+      description: Disassociates a previously associated principal ARN from a specified portfolio.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --portfolio-id=!: The portfolio identifier.
+        --principal-arn=!: The ARN of the principal (user, role, or group).
+        --principal-type=: The supported value is `IAM` if you use a fully defined ARN, or `IAM_PATTERN` if you specify an `IAM` ARN with no AccountId, with or without wildcard characters.
+      completion:
+        flag:
+            principal-type:
+                - IAM
+                - IAM_PATTERN
+    - name: list-service-actions
+      description: Lists all self-service actions.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --page-size=: The maximum number of items to return with this call.
+        --page-token=: The page token for the next set of results.
+        --starting-token=: A token to specify where to start paginating.
+    - name: create-provisioned-product-plan
+      description: Creates a plan.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --idempotency-token=!: A unique identifier that you provide to ensure idempotency.
+        --notification-arns=: Passed to CloudFormation.
+        --path-id=: The path identifier of the product.
+        --plan-name=!: The name of the plan.
+        --plan-type=!: The plan type.
+        --product-id=!: The product identifier.
+        --provisioned-product-name=!: A user-friendly name for the provisioned product.
+        --provisioning-artifact-id=!: The identifier of the provisioning artifact.
+        --provisioning-parameters=: Parameters specified by the administrator that are required for provisioning the product.
+        --tags=: One or more tags.
+      completion:
+        flag:
+            plan-type:
+                - CLOUDFORMATION
+    - name: create-tag-option
+      description: Creates a TagOption.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key=!: The TagOption key.
+        --value=!: The TagOption value.
     - name: delete-portfolio
       description: Deletes the specified portfolio.
       flags:
         --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The portfolio identifier.
-    - name: describe-product
+    - name: describe-record
+      description: Gets information about the specified request operation.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The record identifier of the provisioned product.
+        --page-size=: The maximum number of items to return with this call.
+        --page-token=: The page token for the next set of results.
+    - name: enable-aws-organizations-access
+      description: Enable portfolio sharing feature through Organizations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-service-actions-for-provisioning-artifact
+      description: Returns a paginated list of self-service actions associated with the specified Product ID and Provisioning Artifact ID.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --page-size=: The maximum number of items to return with this call.
+        --page-token=: The page token for the next set of results.
+        --product-id=!: The product identifier.
+        --provisioning-artifact-id=!: The identifier of the provisioning artifact.
+        --starting-token=: A token to specify where to start paginating.
+    - name: notify-update-provisioned-product-engine-workflow-result
+      description: Notifies the result of the update engine execution.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --failure-reason=: The reason why the update engine execution failed.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --idempotency-token=!: The idempotency token that identifies the update engine execution.
+        --outputs=: The output of the update engine execution.
+        --record-id=!: The identifier of the record.
+        --status=!: The status of the update engine execution.
+        --workflow-token=!: The encrypted contents of the update engine execution payload that Service Catalog sends after the Terraform product update workflow starts.
+      completion:
+        flag:
+            status:
+                - SUCCEEDED
+                - FAILED
+    - name: create-provisioning-artifact
+      description: Creates a provisioning artifact (also known as a version) for the specified product.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --idempotency-token=!: A unique identifier that you provide to ensure idempotency.
+        --parameters=!: The configuration for the provisioning artifact.
+        --product-id=!: The product identifier.
+    - name: describe-provisioned-product-plan
+      description: Gets information about the resource changes for the specified plan.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --page-size=: The maximum number of items to return with this call.
+        --page-token=: The page token for the next set of results.
+        --plan-id=!: The plan identifier.
+    - name: describe-provisioning-artifact
+      description: Gets information about the specified provisioning artifact (also known as a version) for the specified product.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-provisioning-artifact-parameters: Indicates if the API call response does or does not include additional details about the provisioning parameters.
+        --no-include-provisioning-artifact-parameters: Indicates if the API call response does or does not include additional details about the provisioning parameters.
+        --no-verbose: Indicates whether a verbose level of detail is enabled.
+        --product-id=: The product identifier.
+        --product-name=: The product name.
+        --provisioning-artifact-id=: The identifier of the provisioning artifact.
+        --provisioning-artifact-name=: The provisioning artifact name.
+        --verbose: Indicates whether a verbose level of detail is enabled.
+    - name: get-provisioned-product-outputs
+      description: This API takes either a `ProvisonedProductId` or a `ProvisionedProductName`, along with a list of one or more output keys, and responds with the key/value pairs of those outputs.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --output-keys=: The list of keys that the API should return with their values.
+        --page-size=: The maximum number of items to return with this call.
+        --page-token=: The page token for the next set of results.
+        --provisioned-product-id=: The identifier of the provisioned product that you want the outputs from.
+        --provisioned-product-name=: The name of the provisioned product that you want the outputs from.
+    - name: batch-associate-service-action-with-provisioning-artifact
+      description: Associates multiple self-service actions with provisioning artifacts.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-action-associations=!: One or more associations, each consisting of the Action ID, the Product ID, and the Provisioning Artifact ID.
+    - name: delete-provisioned-product-plan
+      description: Deletes the specified plan.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ignore-errors: If set to true, Service Catalog stops managing the specified provisioned product even if it cannot delete the underlying resources.
+        --no-ignore-errors: If set to true, Service Catalog stops managing the specified provisioned product even if it cannot delete the underlying resources.
+        --plan-id=!: The plan identifier.
+    - name: describe-product-view
       description: Gets information about the specified product.
       flags:
         --accept-language=: The language code.
-        --id=: The product identifier.
-        --name=: The product name.
-    - name: create-portfolio-share
-      description: Shares the specified portfolio with the specified account or organization node.
-      flags:
-        --accept-language=: The language code.
-        --account-id=: The Amazon Web Services account ID.
-        --no-share-principals: This parameter is only supported for portfolios with an **OrganizationalNode** Type of `ORGANIZATION` or `ORGANIZATIONAL_UNIT`.
-        --no-share-tag-options: Enables or disables `TagOptions` sharing when creating the portfolio share.
-        --organization-node=: The organization node to whom you are going to share.
-        --portfolio-id=!: The portfolio identifier.
-        --share-principals: This parameter is only supported for portfolios with an **OrganizationalNode** Type of `ORGANIZATION` or `ORGANIZATIONAL_UNIT`.
-        --share-tag-options: Enables or disables `TagOptions` sharing when creating the portfolio share.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The product view identifier.
     - name: create-service-action
       description: Creates a self-service action.
       flags:
         --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --definition-type=!: The service action definition type.
         --definition=!: The self-service action definition.
         --description=: The self-service action description.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --idempotency-token=!: A unique identifier that you provide to ensure idempotency.
         --name=!: The self-service action name.
       completion:
         flag:
             definition-type:
                 - SSM_AUTOMATION
-    - name: describe-copy-product-status
-      description: Gets the status of the specified copy product operation.
+    - name: delete-constraint
+      description: Deletes the specified constraint.
       flags:
         --accept-language=: The language code.
-        --copy-product-token=!: The token for the copy product operation.
-    - name: describe-product-as-admin
-      description: Gets information about the specified product.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The identifier of the constraint.
+    - name: delete-portfolio-share
+      description: Stops sharing the specified portfolio with the specified account or organization node.
       flags:
         --accept-language=: The language code.
-        --id=: The product identifier.
-        --name=: The product name.
-        --source-portfolio-id=: The unique identifier of the shared portfolio that the specified product is associated with.
-    - name: describe-provisioned-product
-      description: Gets information about the specified provisioned product.
+        --account-id=: The Amazon Web Services account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --organization-node=: The organization node to whom you are going to stop sharing.
+        --portfolio-id=!: The portfolio identifier.
+    - name: list-portfolios-for-product
+      description: Lists all portfolios that the specified product is associated with.
       flags:
         --accept-language=: The language code.
-        --id=: The provisioned product identifier.
-        --name=: The name of the provisioned product.
-    - name: list-principals-for-portfolio
-      description: Lists all `PrincipalARN`s and corresponding `PrincipalType`s associated with the specified portfolio.
-      flags:
-        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
         --page-size=: The maximum number of items to return with this call.
         --page-token=: The page token for the next set of results.
-        --portfolio-id=!: The portfolio identifier.
-    - name: list-provisioning-artifacts
-      description: Lists all provisioning artifacts (also known as versions) for the specified product.
+        --product-id=!: The product identifier.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-record-history
+      description: Lists the specified requests or all performed requests.
       flags:
         --accept-language=: The language code.
-        --product-id=!: The product identifier.
+        --access-level-filter=: The access level to use to obtain results.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --page-size=: The maximum number of items to return with this call.
+        --page-token=: The page token for the next set of results.
+        --search-filter=: The search filter to scope the results.
+        --starting-token=: A token to specify where to start paginating.
     - name: notify-provision-product-engine-workflow-result
       description: Notifies the result of the provisioning engine execution.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --failure-reason=: The reason why the provisioning engine execution failed.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --idempotency-token=!: The idempotency token that identifies the provisioning engine execution.
         --outputs=: The output of the provisioning engine execution.
         --record-id=!: The identifier of the record.
@@ -117,77 +646,14 @@ commands:
             status:
                 - SUCCEEDED
                 - FAILED
-    - name: notify-update-provisioned-product-engine-workflow-result
-      description: Notifies the result of the update engine execution.
-      flags:
-        --failure-reason=: The reason why the update engine execution failed.
-        --idempotency-token=!: The idempotency token that identifies the update engine execution.
-        --outputs=: The output of the update engine execution.
-        --record-id=!: The identifier of the record.
-        --status=!: The status of the update engine execution.
-        --workflow-token=!: The encrypted contents of the update engine execution payload that Service Catalog sends after the Terraform product update workflow starts.
-      completion:
-        flag:
-            status:
-                - SUCCEEDED
-                - FAILED
-    - name: update-portfolio-share
-      description: Updates the specified portfolio share.
-      flags:
-        --accept-language=: The language code.
-        --account-id=: The Amazon Web Services account Id of the recipient account.
-        --no-share-principals: A flag to enables or disables `Principals` sharing in the portfolio.
-        --no-share-tag-options: Enables or disables `TagOptions` sharing for the portfolio share.
-        --organization-node=: ""
-        --portfolio-id=!: The unique identifier of the portfolio for which the share will be updated.
-        --share-principals: A flag to enables or disables `Principals` sharing in the portfolio.
-        --share-tag-options: Enables or disables `TagOptions` sharing for the portfolio share.
-    - name: delete-constraint
-      description: Deletes the specified constraint.
-      flags:
-        --accept-language=: The language code.
-        --id=!: The identifier of the constraint.
-    - name: delete-provisioned-product-plan
-      description: Deletes the specified plan.
-      flags:
-        --accept-language=: The language code.
-        --ignore-errors: If set to true, Service Catalog stops managing the specified provisioned product even if it cannot delete the underlying resources.
-        --no-ignore-errors: If set to true, Service Catalog stops managing the specified provisioned product even if it cannot delete the underlying resources.
-        --plan-id=!: The plan identifier.
-    - name: describe-product-view
-      description: Gets information about the specified product.
-      flags:
-        --accept-language=: The language code.
-        --id=!: The product view identifier.
-    - name: disassociate-budget-from-resource
-      description: Disassociates the specified budget from the specified resource.
-      flags:
-        --budget-name=!: The name of the budget you want to disassociate.
-        --resource-id=!: The resource identifier you want to disassociate from.
-    - name: execute-provisioned-product-plan
-      description: Provisions or modifies a product based on the resource changes for the specified plan.
-      flags:
-        --accept-language=: The language code.
-        --idempotency-token=!: A unique identifier that you provide to ensure idempotency.
-        --plan-id=!: The plan identifier.
-    - name: list-service-actions
-      description: Lists all self-service actions.
-      flags:
-        --accept-language=: The language code.
-        --page-size=: The maximum number of items to return with this call.
-        --page-token=: The page token for the next set of results.
-    - name: list-stack-instances-for-provisioned-product
-      description: Returns summary information about stack instances that are associated with the specified `CFN_STACKSET` type provisioned product.
-      flags:
-        --accept-language=: The language code.
-        --page-size=: The maximum number of items to return with this call.
-        --page-token=: The page token for the next set of results.
-        --provisioned-product-id=!: The identifier of the provisioned product.
     - name: search-products
       description: Gets information about the products to which the caller has access.
       flags:
         --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --filters=: The search filters.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --page-size=: The maximum number of items to return with this call.
         --page-token=: The page token for the next set of results.
         --sort-by=: The sort field.
@@ -201,74 +667,248 @@ commands:
             sort-order:
                 - ASCENDING
                 - DESCENDING
+    - name: update-constraint
+      description: Updates the specified constraint.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The updated description of the constraint.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The identifier of the constraint.
+        --parameters=: The constraint parameters, in JSON format.
+    - name: create-portfolio-share
+      description: Shares the specified portfolio with the specified account or organization node.
+      flags:
+        --accept-language=: The language code.
+        --account-id=: The Amazon Web Services account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-share-principals: This parameter is only supported for portfolios with an **OrganizationalNode** Type of `ORGANIZATION` or `ORGANIZATIONAL_UNIT`.
+        --no-share-tag-options: Enables or disables `TagOptions` sharing when creating the portfolio share.
+        --organization-node=: The organization node to whom you are going to share.
+        --portfolio-id=!: The portfolio identifier.
+        --share-principals: This parameter is only supported for portfolios with an **OrganizationalNode** Type of `ORGANIZATION` or `ORGANIZATIONAL_UNIT`.
+        --share-tag-options: Enables or disables `TagOptions` sharing when creating the portfolio share.
+    - name: update-portfolio
+      description: Updates the specified portfolio.
+      flags:
+        --accept-language=: The language code.
+        --add-tags=: The tags to add.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The updated description of the portfolio.
+        --display-name=: The name to use for display purposes.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The portfolio identifier.
+        --provider-name=: The updated name of the portfolio provider.
+        --remove-tags=: The tags to remove.
+    - name: update-provisioned-product
+      description: Requests updates to the configuration of the specified provisioned product.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --path-id=: The path identifier.
+        --path-name=: The name of the path.
+        --product-id=: The identifier of the product.
+        --product-name=: The name of the product.
+        --provisioned-product-id=: The identifier of the provisioned product.
+        --provisioned-product-name=: The name of the provisioned product.
+        --provisioning-artifact-id=: The identifier of the provisioning artifact.
+        --provisioning-artifact-name=: The name of the provisioning artifact.
+        --provisioning-parameters=: The new parameters.
+        --provisioning-preferences=: An object that contains information about the provisioning preferences for a stack set.
+        --tags=: One or more tags.
+        --update-token=!: The idempotency token that uniquely identifies the provisioning update request.
+    - name: update-service-action
+      description: Updates a self-service action.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --definition=: A map that defines the self-service action.
+        --description=: The self-service action description.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The self-service action identifier.
+        --name=: The self-service action name.
+    - name: create-portfolio
+      description: Creates a portfolio.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description of the portfolio.
+        --display-name=!: The name to use for display purposes.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --idempotency-token=!: A unique identifier that you provide to ensure idempotency.
+        --provider-name=!: The name of the portfolio provider.
+        --tags=: One or more tags.
+    - name: describe-product
+      description: Gets information about the specified product.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=: The product identifier.
+        --name=: The product name.
+    - name: describe-product-as-admin
+      description: Gets information about the specified product.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=: The product identifier.
+        --name=: The product name.
+        --source-portfolio-id=: The unique identifier of the shared portfolio that the specified product is associated with.
+    - name: list-provisioning-artifacts-for-service-action
+      description: Lists all provisioning artifacts (also known as versions) for the specified self-service action.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --page-size=: The maximum number of items to return with this call.
+        --page-token=: The page token for the next set of results.
+        --service-action-id=!: The self-service action identifier.
+        --starting-token=: A token to specify where to start paginating.
+    - name: scan-provisioned-products
+      description: Lists the provisioned products that are available (not terminated).
+      flags:
+        --accept-language=: The language code.
+        --access-level-filter=: The access level to use to obtain results.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --page-size=: The maximum number of items to return with this call.
+        --page-token=: The page token for the next set of results.
+        --starting-token=: A token to specify where to start paginating.
+    - name: search-provisioned-products
+      description: Gets information about the provisioned products that meet the specified criteria.
+      flags:
+        --accept-language=: The language code.
+        --access-level-filter=: The access level to use to obtain results.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: The search filters.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --page-size=: The maximum number of items to return with this call.
+        --page-token=: The page token for the next set of results.
+        --sort-by=: The sort field.
+        --sort-order=: The sort order.
+      completion:
+        flag:
+            sort-order:
+                - ASCENDING
+                - DESCENDING
+    - name: update-portfolio-share
+      description: Updates the specified portfolio share.
+      flags:
+        --accept-language=: The language code.
+        --account-id=: The Amazon Web Services account Id of the recipient account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-share-principals: A flag to enables or disables `Principals` sharing in the portfolio.
+        --no-share-tag-options: Enables or disables `TagOptions` sharing for the portfolio share.
+        --organization-node=: ""
+        --portfolio-id=!: The unique identifier of the portfolio for which the share will be updated.
+        --share-principals: A flag to enables or disables `Principals` sharing in the portfolio.
+        --share-tag-options: Enables or disables `TagOptions` sharing for the portfolio share.
     - name: associate-product-with-portfolio
       description: Associates the specified product with the specified portfolio.
       flags:
         --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --portfolio-id=!: The portfolio identifier.
         --product-id=!: The product identifier.
         --source-portfolio-id=: The identifier of the source portfolio.
-    - name: associate-service-action-with-provisioning-artifact
-      description: Associates a self-service action with a provisioning artifact.
+    - name: disassociate-service-action-from-provisioning-artifact
+      description: Disassociates the specified self-service action association from the specified provisioning artifact.
       flags:
         --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --idempotency-token=: A unique identifier that you provide to ensure idempotency.
         --product-id=!: The product identifier.
         --provisioning-artifact-id=!: The identifier of the provisioning artifact.
         --service-action-id=!: The self-service action identifier.
-    - name: create-provisioning-artifact
-      description: Creates a provisioning artifact (also known as a version) for the specified product.
+    - name: get-aws-organizations-access-status
+      description: Get the Access Status for Organizations portfolio share feature.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-budgets-for-resource
+      description: Lists all the budgets associated to the specified resource.
       flags:
         --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --page-size=: The maximum number of items to return with this call.
+        --page-token=: The page token for the next set of results.
+        --resource-id=!: The resource identifier.
+    - name: list-provisioned-product-plans
+      description: Lists the plans for the specified provisioned product or all plans to which the user has access.
+      flags:
+        --accept-language=: The language code.
+        --access-level-filter=: The access level to use to obtain results.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --page-size=: The maximum number of items to return with this call.
+        --page-token=: The page token for the next set of results.
+        --provision-product-id=: The product identifier.
+        --starting-token=: A token to specify where to start paginating.
+    - name: associate-budget-with-resource
+      description: Associates the specified budget with the specified resource.
+      flags:
+        --budget-name=!: The name of the budget you want to associate.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-id=!: The resource identifier.
+    - name: create-constraint
+      description: Creates a constraint.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description of the constraint.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --idempotency-token=!: A unique identifier that you provide to ensure idempotency.
-        --parameters=!: The configuration for the provisioning artifact.
+        --parameters=!: The constraint parameters, in JSON format.
+        --portfolio-id=!: The portfolio identifier.
         --product-id=!: The product identifier.
+        --type=!: The type of constraint.
     - name: delete-product
       description: Deletes the specified product.
       flags:
         --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The product identifier.
-    - name: describe-portfolio-shares
-      description: Returns a summary of each of the portfolio shares that were created for the specified portfolio.
-      flags:
-        --page-size=: The maximum number of items to return with this call.
-        --page-token=: The page token for the next set of results.
-        --portfolio-id=!: The unique identifier of the portfolio for which shares will be retrieved.
-        --type=!: The type of portfolio share to summarize.
-      completion:
-        flag:
-            type:
-                - ACCOUNT
-                - ORGANIZATION
-                - ORGANIZATIONAL_UNIT
-                - ORGANIZATION_MEMBER_ACCOUNT
-    - name: describe-provisioning-artifact
-      description: Gets information about the specified provisioning artifact (also known as a version) for the specified product.
-      flags:
-        --accept-language=: The language code.
-        --include-provisioning-artifact-parameters: Indicates if the API call response does or does not include additional details about the provisioning parameters.
-        --no-include-provisioning-artifact-parameters: Indicates if the API call response does or does not include additional details about the provisioning parameters.
-        --no-verbose: Indicates whether a verbose level of detail is enabled.
-        --product-id=: The product identifier.
-        --product-name=: The product name.
-        --provisioning-artifact-id=: The identifier of the provisioning artifact.
-        --provisioning-artifact-name=: The provisioning artifact name.
-        --verbose: Indicates whether a verbose level of detail is enabled.
-    - name: describe-record
-      description: Gets information about the specified request operation.
-      flags:
-        --accept-language=: The language code.
-        --id=!: The record identifier of the provisioned product.
-        --page-size=: The maximum number of items to return with this call.
-        --page-token=: The page token for the next set of results.
-    - name: disable-aws-organizations-access
-      description: Disable portfolio sharing through the Organizations service.
     - name: create-product
       description: Creates a product.
       flags:
         --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: The description of the product.
         --distributor=: The distributor of the product.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --idempotency-token=!: A unique identifier that you provide to ensure idempotency.
         --name=!: The name of the product.
         --owner=!: The owner of the product.
@@ -287,304 +927,81 @@ commands:
                 - TERRAFORM_OPEN_SOURCE
                 - TERRAFORM_CLOUD
                 - EXTERNAL
-    - name: create-provisioned-product-plan
-      description: Creates a plan.
+    - name: describe-portfolio-shares
+      description: Returns a summary of each of the portfolio shares that were created for the specified portfolio.
       flags:
-        --accept-language=: The language code.
-        --idempotency-token=!: A unique identifier that you provide to ensure idempotency.
-        --notification-arns=: Passed to CloudFormation.
-        --path-id=: The path identifier of the product.
-        --plan-name=!: The name of the plan.
-        --plan-type=!: The plan type.
-        --product-id=!: The product identifier.
-        --provisioned-product-name=!: A user-friendly name for the provisioned product.
-        --provisioning-artifact-id=!: The identifier of the provisioning artifact.
-        --provisioning-parameters=: Parameters specified by the administrator that are required for provisioning the product.
-        --tags=: One or more tags.
-      completion:
-        flag:
-            plan-type:
-                - CLOUDFORMATION
-    - name: terminate-provisioned-product
-      description: Terminates the specified provisioned product.
-      flags:
-        --accept-language=: The language code.
-        --ignore-errors: If set to true, Service Catalog stops managing the specified provisioned product even if it cannot delete the underlying resources.
-        --no-ignore-errors: If set to true, Service Catalog stops managing the specified provisioned product even if it cannot delete the underlying resources.
-        --no-retain-physical-resources: When this boolean parameter is set to true, the `TerminateProvisionedProduct` API deletes the Service Catalog provisioned product.
-        --provisioned-product-id=: The identifier of the provisioned product.
-        --provisioned-product-name=: The name of the provisioned product.
-        --retain-physical-resources: When this boolean parameter is set to true, the `TerminateProvisionedProduct` API deletes the Service Catalog provisioned product.
-        --terminate-token=!: An idempotency token that uniquely identifies the termination request.
-    - name: update-constraint
-      description: Updates the specified constraint.
-      flags:
-        --accept-language=: The language code.
-        --description=: The updated description of the constraint.
-        --id=!: The identifier of the constraint.
-        --parameters=: The constraint parameters, in JSON format.
-    - name: update-portfolio
-      description: Updates the specified portfolio.
-      flags:
-        --accept-language=: The language code.
-        --add-tags=: The tags to add.
-        --description=: The updated description of the portfolio.
-        --display-name=: The name to use for display purposes.
-        --id=!: The portfolio identifier.
-        --provider-name=: The updated name of the portfolio provider.
-        --remove-tags=: The tags to remove.
-    - name: update-provisioned-product
-      description: Requests updates to the configuration of the specified provisioned product.
-      flags:
-        --accept-language=: The language code.
-        --path-id=: The path identifier.
-        --path-name=: The name of the path.
-        --product-id=: The identifier of the product.
-        --product-name=: The name of the product.
-        --provisioned-product-id=: The identifier of the provisioned product.
-        --provisioned-product-name=: The name of the provisioned product.
-        --provisioning-artifact-id=: The identifier of the provisioning artifact.
-        --provisioning-artifact-name=: The name of the provisioning artifact.
-        --provisioning-parameters=: The new parameters.
-        --provisioning-preferences=: An object that contains information about the provisioning preferences for a stack set.
-        --tags=: One or more tags.
-        --update-token=!: The idempotency token that uniquely identifies the provisioning update request.
-    - name: update-provisioned-product-properties
-      description: Requests updates to the properties of the specified provisioned product.
-      flags:
-        --accept-language=: The language code.
-        --idempotency-token=!: The idempotency token that uniquely identifies the provisioning product update request.
-        --provisioned-product-id=!: The identifier of the provisioned product.
-        --provisioned-product-properties=!: A map that contains the provisioned product properties to be updated.
-    - name: list-organization-portfolio-access
-      description: Lists the organization nodes that have access to the specified portfolio.
-      flags:
-        --accept-language=: The language code.
-        --organization-node-type=!: The organization node type that will be returned in the output.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --page-size=: The maximum number of items to return with this call.
         --page-token=: The page token for the next set of results.
-        --portfolio-id=!: The portfolio identifier.
+        --portfolio-id=!: The unique identifier of the portfolio for which shares will be retrieved.
+        --type=!: The type of portfolio share to summarize.
       completion:
         flag:
-            organization-node-type:
+            type:
+                - ACCOUNT
                 - ORGANIZATION
                 - ORGANIZATIONAL_UNIT
-                - ACCOUNT
-    - name: list-provisioned-product-plans
-      description: Lists the plans for the specified provisioned product or all plans to which the user has access.
+                - ORGANIZATION_MEMBER_ACCOUNT
+    - name: describe-provisioned-product
+      description: Gets information about the specified provisioned product.
       flags:
         --accept-language=: The language code.
-        --access-level-filter=: The access level to use to obtain results.
-        --page-size=: The maximum number of items to return with this call.
-        --page-token=: The page token for the next set of results.
-        --provision-product-id=: The product identifier.
-    - name: list-record-history
-      description: Lists the specified requests or all performed requests.
-      flags:
-        --accept-language=: The language code.
-        --access-level-filter=: The access level to use to obtain results.
-        --page-size=: The maximum number of items to return with this call.
-        --page-token=: The page token for the next set of results.
-        --search-filter=: The search filter to scope the results.
-    - name: update-service-action
-      description: Updates a self-service action.
-      flags:
-        --accept-language=: The language code.
-        --definition=: A map that defines the self-service action.
-        --description=: The self-service action description.
-        --id=!: The self-service action identifier.
-        --name=: The self-service action name.
-    - name: describe-portfolio-share-status
-      description: Gets the status of the specified portfolio share operation.
-      flags:
-        --portfolio-share-token=!: The token for the portfolio share operation.
-    - name: describe-provisioned-product-plan
-      description: Gets information about the resource changes for the specified plan.
-      flags:
-        --accept-language=: The language code.
-        --page-size=: The maximum number of items to return with this call.
-        --page-token=: The page token for the next set of results.
-        --plan-id=!: The plan identifier.
-    - name: describe-service-action-execution-parameters
-      description: Finds the default parameters for a specific self-service action on a specific provisioned product and returns a map of the results to the user.
-      flags:
-        --accept-language=: The language code.
-        --provisioned-product-id=!: The identifier of the provisioned product.
-        --service-action-id=!: The self-service action identifier.
-    - name: reject-portfolio-share
-      description: Rejects an offer to share the specified portfolio.
-      flags:
-        --accept-language=: The language code.
-        --portfolio-id=!: The portfolio identifier.
-        --portfolio-share-type=: The type of shared portfolios to reject.
-      completion:
-        flag:
-            portfolio-share-type:
-                - IMPORTED
-                - AWS_SERVICECATALOG
-                - AWS_ORGANIZATIONS
-    - name: associate-tag-option-with-resource
-      description: Associate the specified TagOption with the specified portfolio or product.
-      flags:
-        --resource-id=!: The resource identifier.
-        --tag-option-id=!: The TagOption identifier.
-    - name: describe-tag-option
-      description: Gets information about the specified TagOption.
-      flags:
-        --id=!: The TagOption identifier.
-    - name: disassociate-product-from-portfolio
-      description: Disassociates the specified product from the specified portfolio.
-      flags:
-        --accept-language=: The language code.
-        --portfolio-id=!: The portfolio identifier.
-        --product-id=!: The product identifier.
-    - name: list-budgets-for-resource
-      description: Lists all the budgets associated to the specified resource.
-      flags:
-        --accept-language=: The language code.
-        --page-size=: The maximum number of items to return with this call.
-        --page-token=: The page token for the next set of results.
-        --resource-id=!: The resource identifier.
-    - name: list-constraints-for-portfolio
-      description: Lists the constraints for the specified portfolio and product.
-      flags:
-        --accept-language=: The language code.
-        --page-size=: The maximum number of items to return with this call.
-        --page-token=: The page token for the next set of results.
-        --portfolio-id=!: The portfolio identifier.
-        --product-id=: The product identifier.
-    - name: copy-product
-      description: Copies the specified source product to the specified target product or a new product.
-      flags:
-        --accept-language=: The language code.
-        --copy-options=: The copy options.
-        --idempotency-token=!: A unique identifier that you provide to ensure idempotency.
-        --source-product-arn=!: The Amazon Resource Name (ARN) of the source product.
-        --source-provisioning-artifact-identifiers=: The identifiers of the provisioning artifacts (also known as versions) of the product to copy.
-        --target-product-id=: The identifier of the target product.
-        --target-product-name=: A name for the target product.
-    - name: create-tag-option
-      description: Creates a TagOption.
-      flags:
-        --key=!: The TagOption key.
-        --value=!: The TagOption value.
-    - name: describe-provisioning-parameters
-      description: Gets information about the configuration required to provision the specified product using the specified provisioning artifact.
-      flags:
-        --accept-language=: The language code.
-        --path-id=: The path identifier of the product.
-        --path-name=: The name of the path.
-        --product-id=: The product identifier.
-        --product-name=: The name of the product.
-        --provisioning-artifact-id=: The identifier of the provisioning artifact.
-        --provisioning-artifact-name=: The name of the provisioning artifact.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=: The provisioned product identifier.
+        --name=: The name of the provisioned product.
     - name: describe-service-action
       description: Describes a self-service action.
       flags:
         --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The self-service action identifier.
-    - name: disassociate-principal-from-portfolio
-      description: Disassociates a previously associated principal ARN from a specified portfolio.
+    - name: list-portfolios
+      description: Lists all portfolios in the catalog.
       flags:
         --accept-language=: The language code.
-        --portfolio-id=!: The portfolio identifier.
-        --principal-arn=!: The ARN of the principal (user, role, or group).
-        --principal-type=: The supported value is `IAM` if you use a fully defined ARN, or `IAM_PATTERN` if you specify an `IAM` ARN with no AccountId, with or without wildcard characters.
-      completion:
-        flag:
-            principal-type:
-                - IAM
-                - IAM_PATTERN
-    - name: list-provisioning-artifacts-for-service-action
-      description: Lists all provisioning artifacts (also known as versions) for the specified self-service action.
-      flags:
-        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
         --page-size=: The maximum number of items to return with this call.
         --page-token=: The page token for the next set of results.
-        --service-action-id=!: The self-service action identifier.
-    - name: search-products-as-admin
-      description: Gets information about the products for the specified portfolio or all products.
-      flags:
-        --accept-language=: The language code.
-        --filters=: The search filters.
-        --page-size=: The maximum number of items to return with this call.
-        --page-token=: The page token for the next set of results.
-        --portfolio-id=: The portfolio identifier.
-        --product-source=: Access level of the source of the product.
-        --sort-by=: The sort field.
-        --sort-order=: The sort order.
-      completion:
-        flag:
-            product-source:
-                - ACCOUNT
-            sort-by:
-                - Title
-                - VersionCount
-                - CreationDate
-            sort-order:
-                - ASCENDING
-                - DESCENDING
-    - name: search-provisioned-products
-      description: Gets information about the provisioned products that meet the specified criteria.
-      flags:
-        --accept-language=: The language code.
-        --access-level-filter=: The access level to use to obtain results.
-        --filters=: The search filters.
-        --page-size=: The maximum number of items to return with this call.
-        --page-token=: The page token for the next set of results.
-        --sort-by=: The sort field.
-        --sort-order=: The sort order.
-      completion:
-        flag:
-            sort-order:
-                - ASCENDING
-                - DESCENDING
-    - name: create-portfolio
-      description: Creates a portfolio.
-      flags:
-        --accept-language=: The language code.
-        --description=: The description of the portfolio.
-        --display-name=!: The name to use for display purposes.
-        --idempotency-token=!: A unique identifier that you provide to ensure idempotency.
-        --provider-name=!: The name of the portfolio provider.
-        --tags=: One or more tags.
-    - name: delete-service-action
-      description: Deletes a self-service action.
-      flags:
-        --accept-language=: The language code.
-        --id=!: The self-service action identifier.
-        --idempotency-token=: A unique identifier that you provide to ensure idempotency.
-    - name: list-portfolios-for-product
-      description: Lists all portfolios that the specified product is associated with.
-      flags:
-        --accept-language=: The language code.
-        --page-size=: The maximum number of items to return with this call.
-        --page-token=: The page token for the next set of results.
-        --product-id=!: The product identifier.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-resources-for-tag-option
       description: Lists the resources associated with the specified TagOption.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
         --page-size=: The maximum number of items to return with this call.
         --page-token=: The page token for the next set of results.
         --resource-type=: The resource type.
+        --starting-token=: A token to specify where to start paginating.
         --tag-option-id=!: The TagOption identifier.
-    - name: notify-terminate-provisioned-product-engine-workflow-result
-      description: Notifies the result of the terminate engine execution.
+    - name: list-tag-options
+      description: Lists the specified TagOptions or all TagOptions.
       flags:
-        --failure-reason=: The reason why the terminate engine execution failed.
-        --idempotency-token=!: The idempotency token that identifies the terminate engine execution.
-        --record-id=!: The identifier of the record.
-        --status=!: The status of the terminate engine execution.
-        --workflow-token=!: The encrypted contents of the terminate engine execution payload that Service Catalog sends after the Terraform product terminate workflow starts.
-      completion:
-        flag:
-            status:
-                - SUCCEEDED
-                - FAILED
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: The search filters.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --page-size=: The maximum number of items to return with this call.
+        --page-token=: The page token for the next set of results.
+        --starting-token=: A token to specify where to start paginating.
     - name: accept-portfolio-share
       description: Accepts an offer to share the specified portfolio.
       flags:
         --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --portfolio-id=!: The portfolio identifier.
         --portfolio-share-type=: The type of shared portfolios to accept.
       completion:
@@ -593,183 +1010,71 @@ commands:
                 - IMPORTED
                 - AWS_SERVICECATALOG
                 - AWS_ORGANIZATIONS
-    - name: batch-disassociate-service-action-from-provisioning-artifact
-      description: Disassociates a batch of self-service actions from the specified provisioning artifact.
+    - name: associate-service-action-with-provisioning-artifact
+      description: Associates a self-service action with a provisioning artifact.
       flags:
         --accept-language=: The language code.
-        --service-action-associations=!: One or more associations, each consisting of the Action ID, the Product ID, and the Provisioning Artifact ID.
-    - name: create-constraint
-      description: Creates a constraint.
-      flags:
-        --accept-language=: The language code.
-        --description=: The description of the constraint.
-        --idempotency-token=!: A unique identifier that you provide to ensure idempotency.
-        --parameters=!: The constraint parameters, in JSON format.
-        --portfolio-id=!: The portfolio identifier.
-        --product-id=!: The product identifier.
-        --type=!: The type of constraint.
-    - name: execute-provisioned-product-service-action
-      description: Executes a self-service action against a provisioned product.
-      flags:
-        --accept-language=: The language code.
-        --execute-token=!: An idempotency token that uniquely identifies the execute request.
-        --parameters=: A map of all self-service action parameters and their values.
-        --provisioned-product-id=!: The identifier of the provisioned product.
-        --service-action-id=!: The self-service action identifier.
-    - name: get-provisioned-product-outputs
-      description: This API takes either a `ProvisonedProductId` or a `ProvisionedProductName`, along with a list of one or more output keys, and responds with the key/value pairs of those outputs.
-      flags:
-        --accept-language=: The language code.
-        --output-keys=: The list of keys that the API should return with their values.
-        --page-size=: The maximum number of items to return with this call.
-        --page-token=: The page token for the next set of results.
-        --provisioned-product-id=: The identifier of the provisioned product that you want the outputs from.
-        --provisioned-product-name=: The name of the provisioned product that you want the outputs from.
-    - name: import-as-provisioned-product
-      description: Requests the import of a resource as an Service Catalog provisioned product that is associated to an Service Catalog product and provisioning artifact.
-      flags:
-        --accept-language=: The language code.
-        --idempotency-token=!: A unique identifier that you provide to ensure idempotency.
-        --physical-id=!: The unique identifier of the resource to be imported.
-        --product-id=!: The product identifier.
-        --provisioned-product-name=!: The user-friendly name of the provisioned product.
-        --provisioning-artifact-id=!: The identifier of the provisioning artifact.
-    - name: list-portfolio-access
-      description: Lists the account IDs that have access to the specified portfolio.
-      flags:
-        --accept-language=: The language code.
-        --organization-parent-id=: The ID of an organization node the portfolio is shared with.
-        --page-size=: The maximum number of items to return with this call.
-        --page-token=: The page token for the next set of results.
-        --portfolio-id=!: The portfolio identifier.
-    - name: provision-product
-      description: Provisions the specified product.
-      flags:
-        --accept-language=: The language code.
-        --notification-arns=: Passed to CloudFormation.
-        --path-id=: The path identifier of the product.
-        --path-name=: The name of the path.
-        --product-id=: The product identifier.
-        --product-name=: The name of the product.
-        --provision-token=!: An idempotency token that uniquely identifies the provisioning request.
-        --provisioned-product-name=!: A user-friendly name for the provisioned product.
-        --provisioning-artifact-id=: The identifier of the provisioning artifact.
-        --provisioning-artifact-name=: The name of the provisioning artifact.
-        --provisioning-parameters=: Parameters specified by the administrator that are required for provisioning the product.
-        --provisioning-preferences=: An object that contains information about the provisioning preferences for a stack set.
-        --tags=: One or more tags.
-    - name: associate-budget-with-resource
-      description: Associates the specified budget with the specified resource.
-      flags:
-        --budget-name=!: The name of the budget you want to associate.
-        --resource-id=!: The resource identifier.
-    - name: describe-constraint
-      description: Gets information about the specified constraint.
-      flags:
-        --accept-language=: The language code.
-        --id=!: The identifier of the constraint.
-    - name: disassociate-service-action-from-provisioning-artifact
-      description: Disassociates the specified self-service action association from the specified provisioning artifact.
-      flags:
-        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --idempotency-token=: A unique identifier that you provide to ensure idempotency.
         --product-id=!: The product identifier.
         --provisioning-artifact-id=!: The identifier of the provisioning artifact.
         --service-action-id=!: The self-service action identifier.
-    - name: disassociate-tag-option-from-resource
-      description: Disassociates the specified TagOption from the specified resource.
-      flags:
-        --resource-id=!: The resource identifier.
-        --tag-option-id=!: The TagOption identifier.
-    - name: enable-aws-organizations-access
-      description: Enable portfolio sharing feature through Organizations.
-    - name: get-aws-organizations-access-status
-      description: Get the Access Status for Organizations portfolio share feature.
-    - name: list-portfolios
-      description: Lists all portfolios in the catalog.
+    - name: list-constraints-for-portfolio
+      description: Lists the constraints for the specified portfolio and product.
       flags:
         --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
         --page-size=: The maximum number of items to return with this call.
         --page-token=: The page token for the next set of results.
-    - name: list-service-actions-for-provisioning-artifact
-      description: Returns a paginated list of self-service actions associated with the specified Product ID and Provisioning Artifact ID.
-      flags:
-        --accept-language=: The language code.
-        --page-size=: The maximum number of items to return with this call.
-        --page-token=: The page token for the next set of results.
-        --product-id=!: The product identifier.
-        --provisioning-artifact-id=!: The identifier of the provisioning artifact.
-    - name: associate-principal-with-portfolio
-      description: Associates the specified principal ARN with the specified portfolio.
-      flags:
-        --accept-language=: The language code.
         --portfolio-id=!: The portfolio identifier.
-        --principal-arn=!: The ARN of the principal (user, role, or group).
-        --principal-type=!: The principal type.
+        --product-id=: The product identifier.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-organization-portfolio-access
+      description: Lists the organization nodes that have access to the specified portfolio.
+      flags:
+        --accept-language=: The language code.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --organization-node-type=!: The organization node type that will be returned in the output.
+        --page-size=: The maximum number of items to return with this call.
+        --page-token=: The page token for the next set of results.
+        --portfolio-id=!: The portfolio identifier.
+        --starting-token=: A token to specify where to start paginating.
       completion:
         flag:
-            principal-type:
-                - IAM
-                - IAM_PATTERN
-    - name: delete-portfolio-share
-      description: Stops sharing the specified portfolio with the specified account or organization node.
+            organization-node-type:
+                - ORGANIZATION
+                - ORGANIZATIONAL_UNIT
+                - ACCOUNT
+    - name: list-principals-for-portfolio
+      description: Lists all `PrincipalARN`s and corresponding `PrincipalType`s associated with the specified portfolio.
       flags:
         --accept-language=: The language code.
-        --account-id=: The Amazon Web Services account ID.
-        --organization-node=: The organization node to whom you are going to stop sharing.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --page-size=: The maximum number of items to return with this call.
+        --page-token=: The page token for the next set of results.
         --portfolio-id=!: The portfolio identifier.
-    - name: delete-tag-option
-      description: Deletes the specified TagOption.
-      flags:
-        --id=!: The TagOption identifier.
-    - name: list-tag-options
-      description: Lists the specified TagOptions or all TagOptions.
-      flags:
-        --filters=: The search filters.
-        --page-size=: The maximum number of items to return with this call.
-        --page-token=: The page token for the next set of results.
-    - name: scan-provisioned-products
-      description: Lists the provisioned products that are available (not terminated).
+        --starting-token=: A token to specify where to start paginating.
+    - name: copy-product
+      description: Copies the specified source product to the specified target product or a new product.
       flags:
         --accept-language=: The language code.
-        --access-level-filter=: The access level to use to obtain results.
-        --page-size=: The maximum number of items to return with this call.
-        --page-token=: The page token for the next set of results.
-    - name: update-product
-      description: Updates the specified product.
-      flags:
-        --accept-language=: The language code.
-        --add-tags=: The tags to add to the product.
-        --description=: The updated description of the product.
-        --distributor=: The updated distributor of the product.
-        --id=!: The product identifier.
-        --name=: The updated product name.
-        --owner=: The updated owner of the product.
-        --remove-tags=: The tags to remove from the product.
-        --source-connection=: Specifies connection details for the updated product and syncs the product to the connection source artifact.
-        --support-description=: The updated support description for the product.
-        --support-email=: The updated support email for the product.
-        --support-url=: The updated support URL for the product.
-    - name: update-provisioning-artifact
-      description: Updates the specified provisioning artifact (also known as a version) for the specified product.
-      flags:
-        --accept-language=: The language code.
-        --active: Indicates whether the product version is active.
-        --description=: The updated description of the provisioning artifact.
-        --guidance=: Information set by the administrator to provide guidance to end users about which provisioning artifacts to use.
-        --name=: The updated name of the provisioning artifact.
-        --no-active: Indicates whether the product version is active.
-        --product-id=!: The product identifier.
-        --provisioning-artifact-id=!: The identifier of the provisioning artifact.
-      completion:
-        flag:
-            guidance:
-                - DEFAULT
-                - DEPRECATED
-    - name: update-tag-option
-      description: Updates the specified TagOption.
-      flags:
-        --active: The updated active state.
-        --id=!: The TagOption identifier.
-        --no-active: The updated active state.
-        --value=: The updated value.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --copy-options=: The copy options.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --idempotency-token=!: A unique identifier that you provide to ensure idempotency.
+        --source-product-arn=!: The Amazon Resource Name (ARN) of the source product.
+        --source-provisioning-artifact-identifiers=: The identifiers of the provisioning artifacts (also known as versions) of the product to copy.
+        --target-product-id=: The identifier of the target product.
+        --target-product-name=: A name for the target product.

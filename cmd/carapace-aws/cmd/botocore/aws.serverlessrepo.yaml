@@ -1,11 +1,22 @@
 name: serverlessrepo
 description: AWSServerlessApplicationRepository
 commands:
+    - name: unshare-application
+      description: Unshares an application from an AWS Organization.
+      flags:
+        --application-id=!: The Amazon Resource Name (ARN) of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --organization-id=!: The AWS Organization ID to unshare the application from.
     - name: create-application
       description: Creates an application, optionally including an AWS SAM file to create the first application version in the same call.
       flags:
         --author=!: The name of the author publishing the app.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=!: The description of the application.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --home-page-url=: A URL with more information about the application, for example the location of your GitHub repository for the application.
         --labels=: Labels to improve discovery of apps in search results.
         --license-body=: A local text file that contains the license of the app that matches the spdxLicenseID value of your application.
@@ -19,64 +30,17 @@ commands:
         --spdx-license-id=: A valid identifier from [https://spdx.org/licenses/](https://spdx.org/licenses/).
         --template-body=: The local raw packaged AWS SAM template file of your application.
         --template-url=: A link to the S3 object containing the packaged AWS SAM template of your application.
-    - name: get-application-policy
-      description: Retrieves the policy for the application.
-      flags:
-        --application-id=!: The Amazon Resource Name (ARN) of the application.
-    - name: get-cloud-formation-template
-      description: Gets the specified AWS CloudFormation template.
-      flags:
-        --application-id=!: The Amazon Resource Name (ARN) of the application.
-        --template-id=!: The UUID returned by CreateCloudFormationTemplate.
-    - name: list-application-dependencies
-      description: Retrieves the list of applications nested in the containing application.
-      flags:
-        --application-id=!: The Amazon Resource Name (ARN) of the application.
-        --max-items=: The total number of items to return.
-        --next-token=: A token to specify where to start paginating.
-        --semantic-version=: The semantic version of the application to get.
-    - name: list-applications
-      description: Lists applications owned by the requester.
-      flags:
-        --max-items=: The total number of items to return.
-        --next-token=: A token to specify where to start paginating.
-    - name: put-application-policy
-      description: Sets the permission policy for an application.
-      flags:
-        --application-id=!: The Amazon Resource Name (ARN) of the application.
-        --statements=!: An array of policy statements applied to the application.
-    - name: unshare-application
-      description: Unshares an application from an AWS Organization.
-      flags:
-        --application-id=!: The Amazon Resource Name (ARN) of the application.
-        --organization-id=!: The AWS Organization ID to unshare the application from.
-    - name: update-application
-      description: Updates the specified application.
-      flags:
-        --application-id=!: The Amazon Resource Name (ARN) of the application.
-        --author=: The name of the author publishing the app.
-        --description=: The description of the application.
-        --home-page-url=: A URL with more information about the application, for example the location of your GitHub repository for the application.
-        --labels=: Labels to improve discovery of apps in search results.
-        --readme-body=: A text readme file in Markdown language that contains a more detailed description of the application and how it works.
-        --readme-url=: A link to the readme file in Markdown language that contains a more detailed description of the application and how it works.
-    - name: create-application-version
-      description: Creates an application version.
-      flags:
-        --application-id=!: The Amazon Resource Name (ARN) of the application.
-        --semantic-version=!: The semantic version of the new version.
-        --source-code-archive-url=: A link to the S3 object that contains the ZIP archive of the source code for this version of your application.
-        --source-code-url=: A link to a public repository for the source code of your application, for example the URL of a specific GitHub commit.
-        --template-body=: The raw packaged AWS SAM template of your application.
-        --template-url=: A link to the packaged AWS SAM template of your application.
     - name: create-cloud-formation-change-set
       description: Creates an AWS CloudFormation change set for the given application.
       flags:
         --application-id=!: The Amazon Resource Name (ARN) of the application.
         --capabilities=: A list of values that you must specify before you can deploy certain applications.
         --change-set-name=: This property corresponds to the parameter of the same name for the *AWS CloudFormation [CreateChangeSet](https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)* API.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: This property corresponds to the parameter of the same name for the *AWS CloudFormation [CreateChangeSet](https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)* API.
         --description=: This property corresponds to the parameter of the same name for the *AWS CloudFormation [CreateChangeSet](https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)* API.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --notification-arns=: This property corresponds to the parameter of the same name for the *AWS CloudFormation [CreateChangeSet](https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)* API.
         --parameter-overrides=: A list of parameter values for the parameters of the application.
         --resource-types=: This property corresponds to the parameter of the same name for the *AWS CloudFormation [CreateChangeSet](https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)* API.
@@ -89,19 +53,103 @@ commands:
       description: Creates an AWS CloudFormation template.
       flags:
         --application-id=!: The Amazon Resource Name (ARN) of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --semantic-version=: 'The semantic version of the application:'
-    - name: delete-application
-      description: Deletes the specified application.
-      flags:
-        --application-id=!: The Amazon Resource Name (ARN) of the application.
-    - name: get-application
-      description: Gets the specified application.
-      flags:
-        --application-id=!: The Amazon Resource Name (ARN) of the application.
-        --semantic-version=: The semantic version of the application to get.
     - name: list-application-versions
       description: Lists versions for the specified application.
       flags:
         --application-id=!: The Amazon Resource Name (ARN) of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The total number of items to return.
         --next-token=: A token to specify where to start paginating.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-applications
+      description: Lists applications owned by the requester.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The total number of items to return.
+        --next-token=: A token to specify where to start paginating.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-application
+      description: Updates the specified application.
+      flags:
+        --application-id=!: The Amazon Resource Name (ARN) of the application.
+        --author=: The name of the author publishing the app.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description of the application.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --home-page-url=: A URL with more information about the application, for example the location of your GitHub repository for the application.
+        --labels=: Labels to improve discovery of apps in search results.
+        --readme-body=: A text readme file in Markdown language that contains a more detailed description of the application and how it works.
+        --readme-url=: A link to the readme file in Markdown language that contains a more detailed description of the application and how it works.
+    - name: create-application-version
+      description: Creates an application version.
+      flags:
+        --application-id=!: The Amazon Resource Name (ARN) of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --semantic-version=!: The semantic version of the new version.
+        --source-code-archive-url=: A link to the S3 object that contains the ZIP archive of the source code for this version of your application.
+        --source-code-url=: A link to a public repository for the source code of your application, for example the URL of a specific GitHub commit.
+        --template-body=: The raw packaged AWS SAM template of your application.
+        --template-url=: A link to the packaged AWS SAM template of your application.
+    - name: delete-application
+      description: Deletes the specified application.
+      flags:
+        --application-id=!: The Amazon Resource Name (ARN) of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-application
+      description: Gets the specified application.
+      flags:
+        --application-id=!: The Amazon Resource Name (ARN) of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --semantic-version=: The semantic version of the application to get.
+    - name: get-application-policy
+      description: Retrieves the policy for the application.
+      flags:
+        --application-id=!: The Amazon Resource Name (ARN) of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-cloud-formation-template
+      description: Gets the specified AWS CloudFormation template.
+      flags:
+        --application-id=!: The Amazon Resource Name (ARN) of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --template-id=!: The UUID returned by CreateCloudFormationTemplate.
+    - name: list-application-dependencies
+      description: Retrieves the list of applications nested in the containing application.
+      flags:
+        --application-id=!: The Amazon Resource Name (ARN) of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The total number of items to return.
+        --next-token=: A token to specify where to start paginating.
+        --page-size=: The size of each page to get in the AWS service call.
+        --semantic-version=: The semantic version of the application to get.
+        --starting-token=: A token to specify where to start paginating.
+    - name: put-application-policy
+      description: Sets the permission policy for an application.
+      flags:
+        --application-id=!: The Amazon Resource Name (ARN) of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --statements=!: An array of policy statements applied to the application.

@@ -1,248 +1,15 @@
 name: resiliencehub
 description: AWS Resilience Hub
 commands:
-    - name: update-app-version
-      description: Updates the Resilience Hub application version.
-      flags:
-        --additional-info=: Additional configuration parameters for an Resilience Hub application.
-        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
-    - name: create-app
-      description: Creates an Resilience Hub application.
-      flags:
-        --assessment-schedule=: Assessment execution schedule with 'Daily' or 'Disabled' values.
-        --aws-application-arn=: Amazon Resource Name (ARN) of Resource Groups group that is integrated with an AppRegistry application.
-        --client-token=: Used for an idempotency token.
-        --description=: The optional description for an app.
-        --event-subscriptions=: The list of events you would like to subscribe and get notification for.
-        --name=!: Name of the application.
-        --permission-model=: Defines the roles and credentials that Resilience Hub would use while creating the application, importing its resources, and running an assessment.
-        --policy-arn=: Amazon Resource Name (ARN) of the resiliency policy.
-        --tags=: Tags assigned to the resource.
-      completion:
-        flag:
-            assessment-schedule:
-                - Disabled
-                - Daily
-    - name: delete-app-input-source
-      description: Deletes the input source and all of its imported resources from the Resilience Hub application.
-      flags:
-        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
-        --client-token=: Used for an idempotency token.
-        --eks-source-cluster-namespace=: The namespace on your Amazon Elastic Kubernetes Service cluster that you want to delete from the Resilience Hub application.
-        --source-arn=: The Amazon Resource Name (ARN) of the imported resource you want to remove from the Resilience Hub application.
-        --terraform-source=: The imported Terraform s3 state ﬁle you want to remove from the Resilience Hub application.
-    - name: describe-app
-      description: Describes an Resilience Hub application.
-      flags:
-        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
-    - name: list-alarm-recommendations
-      description: Lists the alarm recommendations for an Resilience Hub application.
+    - name: list-sop-recommendations
+      description: Lists the standard operating procedure (SOP) recommendations for the Resilience Hub applications.
       flags:
         --assessment-arn=!: Amazon Resource Name (ARN) of the assessment.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: Maximum number of results to include in the response.
         --next-token=: Null, or the token from a previous call to get the next set of results.
-    - name: list-unsupported-app-version-resources
-      description: Lists the resources that are not currently supported in Resilience Hub.
-      flags:
-        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
-        --app-version=!: The version of the application.
-        --max-results=: Maximum number of results to include in the response.
-        --next-token=: Null, or the token from a previous call to get the next set of results.
-        --resolution-id=: The identifier for a specific resolution.
-    - name: reject-resource-grouping-recommendations
-      description: Rejects resource grouping recommendations.
-      flags:
-        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
-        --entries=!: List of resource grouping recommendations you have selected to exclude from your application.
-    - name: accept-resource-grouping-recommendations
-      description: Accepts the resource grouping recommendations suggested by Resilience Hub for your application.
-      flags:
-        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
-        --entries=!: List of resource grouping recommendations you want to include in your application.
-    - name: delete-app-assessment
-      description: Deletes an Resilience Hub application assessment.
-      flags:
-        --assessment-arn=!: Amazon Resource Name (ARN) of the assessment.
-        --client-token=: Used for an idempotency token.
-    - name: import-resources-to-draft-app-version
-      description: Imports resources to Resilience Hub application draft version from different input sources.
-      flags:
-        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
-        --eks-sources=: The input sources of the Amazon Elastic Kubernetes Service resources you need to import.
-        --import-strategy=: The import strategy you would like to set to import resources into Resilience Hub application.
-        --source-arns=: The Amazon Resource Names (ARNs) for the resources.
-        --terraform-sources=: A list of terraform file s3 URLs you need to import.
-      completion:
-        flag:
-            import-strategy:
-                - AddOnly
-                - ReplaceAll
-    - name: list-app-version-resources
-      description: Lists all the resources in an Resilience Hub application.
-      flags:
-        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
-        --app-version=!: The version of the application.
-        --max-results=: Maximum number of results to include in the response.
-        --next-token=: Null, or the token from a previous call to get the next set of results.
-        --resolution-id=: The identifier for a specific resolution.
-    - name: publish-app-version
-      description: Publishes a new version of a specific Resilience Hub application.
-      flags:
-        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
-        --version-name=: Name of the application version.
-    - name: start-app-assessment
-      description: Creates a new application assessment for an application.
-      flags:
-        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
-        --app-version=!: The version of the application.
-        --assessment-name=!: The name for the assessment.
-        --client-token=: Used for an idempotency token.
-        --tags=: Tags assigned to the resource.
-    - name: update-app
-      description: Updates an application.
-      flags:
-        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
-        --assessment-schedule=: Assessment execution schedule with 'Daily' or 'Disabled' values.
-        --clear-resiliency-policy-arn: Specifies if the resiliency policy ARN should be cleared.
-        --description=: The optional description for an app.
-        --event-subscriptions=: The list of events you would like to subscribe and get notification for.
-        --no-clear-resiliency-policy-arn: Specifies if the resiliency policy ARN should be cleared.
-        --permission-model=: Defines the roles and credentials that Resilience Hub would use while creating an application, importing its resources, and running an assessment.
-        --policy-arn=: Amazon Resource Name (ARN) of the resiliency policy.
-      completion:
-        flag:
-            assessment-schedule:
-                - Disabled
-                - Daily
-    - name: describe-resiliency-policy
-      description: Describes a specified resiliency policy for an Resilience Hub application.
-      flags:
-        --policy-arn=!: Amazon Resource Name (ARN) of the resiliency policy.
-    - name: put-draft-app-version-template
-      description: Adds or updates the app template for an Resilience Hub application draft version.
-      flags:
-        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
-        --app-template-body=!: A JSON string that provides information about your application structure.
-    - name: describe-draft-app-version-resources-import-status
-      description: Describes the status of importing resources to an application version.
-      flags:
-        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
-    - name: remove-draft-app-version-resource-mappings
-      description: Removes resource mappings from a draft application version.
-      flags:
-        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
-        --app-registry-app-names=: The names of the registered applications you want to remove from the resource mappings.
-        --eks-source-names=: The names of the Amazon Elastic Kubernetes Service clusters and namespaces you want to remove from the resource mappings.
-        --logical-stack-names=: The names of the CloudFormation stacks you want to remove from the resource mappings.
-        --resource-group-names=: The names of the resource groups you want to remove from the resource mappings.
-        --resource-names=: The names of the resources you want to remove from the resource mappings.
-        --terraform-source-names=: The names of the Terraform sources you want to remove from the resource mappings.
-    - name: start-metrics-export
-      description: Initiates the export task of metrics.
-      flags:
-        --bucket-name=: (Optional) Specifies the name of the Amazon Simple Storage Service bucket where the exported metrics will be stored.
-        --client-token=: Used for an idempotency token.
-    - name: create-app-version-app-component
-      description: Creates a new Application Component in the Resilience Hub application.
-      flags:
-        --additional-info=: Currently, there is no supported additional information for Application Components.
-        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
-        --client-token=: Used for an idempotency token.
-        --id=: Identifier of the Application Component.
-        --name=!: Name of the Application Component.
-        --type=!: Type of Application Component.
-    - name: create-app-version-resource
-      description: Adds a resource to the Resilience Hub application and assigns it to the specified Application Components.
-      flags:
-        --additional-info=: Currently, there is no supported additional information for resources.
-        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
-        --app-components=!: List of Application Components that this resource belongs to.
-        --aws-account-id=: Amazon Web Services account that owns the physical resource.
-        --aws-region=: Amazon Web Services region that owns the physical resource.
-        --client-token=: Used for an idempotency token.
-        --logical-resource-id=!: Logical identifier of the resource.
-        --physical-resource-id=!: Physical identifier of the resource.
-        --resource-name=: Name of the resource.
-        --resource-type=!: Type of resource.
-    - name: create-resiliency-policy
-      description: Creates a resiliency policy for an application.
-      flags:
-        --client-token=: Used for an idempotency token.
-        --data-location-constraint=: Specifies a high-level geographical location constraint for where your resilience policy data can be stored.
-        --policy-description=: Description of the resiliency policy.
-        --policy-name=!: Name of the resiliency policy.
-        --policy=!: The type of resiliency policy to be created, including the recovery time objective (RTO) and recovery point objective (RPO) in seconds.
-        --tags=: Tags assigned to the resource.
-        --tier=!: The tier for this resiliency policy, ranging from the highest severity (`MissionCritical`) to lowest (`NonCritical`).
-      completion:
-        flag:
-            data-location-constraint:
-                - AnyLocation
-                - SameContinent
-                - SameCountry
-            tier:
-                - MissionCritical
-                - Critical
-                - Important
-                - CoreServices
-                - NonCritical
-                - NotApplicable
-    - name: delete-resiliency-policy
-      description: Deletes a resiliency policy.
-      flags:
-        --client-token=: Used for an idempotency token.
-        --policy-arn=!: Amazon Resource Name (ARN) of the resiliency policy.
-    - name: describe-app-assessment
-      description: Describes an assessment for an Resilience Hub application.
-      flags:
-        --assessment-arn=!: Amazon Resource Name (ARN) of the assessment.
-    - name: describe-app-version-resources-resolution-status
-      description: Returns the resolution status for the specified resolution identifier for an application version.
-      flags:
-        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
-        --app-version=!: The version of the application.
-        --resolution-id=: The identifier for a specific resolution.
-    - name: delete-app-version-app-component
-      description: Deletes an Application Component from the Resilience Hub application.
-      flags:
-        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
-        --client-token=: Used for an idempotency token.
-        --id=!: Identifier of the Application Component.
-    - name: describe-app-version-app-component
-      description: Describes an Application Component in the Resilience Hub application.
-      flags:
-        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
-        --app-version=!: Resilience Hub application version.
-        --id=!: Identifier of the Application Component.
-    - name: describe-app-version-template
-      description: Describes details about an Resilience Hub application.
-      flags:
-        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
-        --app-version=!: The version of the application.
-    - name: list-app-input-sources
-      description: Lists all the input sources of the Resilience Hub application.
-      flags:
-        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
-        --app-version=!: Resilience Hub application version.
-        --max-results=: Maximum number of input sources to be displayed per Resilience Hub application.
-        --next-token=: Null, or the token from a previous call to get the next set of results.
-    - name: list-app-version-app-components
-      description: Lists all the Application Components in the Resilience Hub application.
-      flags:
-        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
-        --app-version=!: Version of the Application Component.
-        --max-results=: Maximum number of Application Components to be displayed per Resilience Hub application version.
-        --next-token=: Null, or the token from a previous call to get the next set of results.
-    - name: list-resource-grouping-recommendations
-      description: Lists the resource grouping recommendations suggested by Resilience Hub for your application.
-      flags:
-        --app-arn=: Amazon Resource Name (ARN) of the Resilience Hub application.
-        --max-results=: Maximum number of grouping recommendations to be displayed per Resilience Hub application.
-        --next-token=: Null, or the token from a previous call to get the next set of results.
-    - name: start-resource-grouping-recommendation-task
-      description: Starts grouping recommendation task.
-      flags:
-        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
     - name: update-app-version-resource
       description: Updates the resource details in the Resilience Hub application.
       flags:
@@ -251,125 +18,196 @@ commands:
         --app-components=: List of Application Components that this resource belongs to.
         --aws-account-id=: Amazon Web Services account that owns the physical resource.
         --aws-region=: Amazon Web Services region that owns the physical resource.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --excluded: Indicates if a resource is excluded from an Resilience Hub application.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --logical-resource-id=: Logical identifier of the resource.
         --no-excluded: Indicates if a resource is excluded from an Resilience Hub application.
         --physical-resource-id=: Physical identifier of the resource.
         --resource-name=: Name of the resource.
         --resource-type=: Type of resource.
-    - name: list-app-assessment-compliance-drifts
-      description: List of compliance drifts that were detected while running an assessment.
+    - name: delete-app
+      description: Deletes an Resilience Hub application.
       flags:
-        --assessment-arn=!: Amazon Resource Name (ARN) of the assessment.
-        --max-results=: Maximum number of compliance drifts requested.
-        --next-token=: Null, or the token from a previous call to get the next set of results.
-    - name: list-app-assessments
-      description: Lists the assessments for an Resilience Hub application.
+        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Used for an idempotency token.
+        --force-delete: A boolean option to force the deletion of an Resilience Hub application.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-force-delete: A boolean option to force the deletion of an Resilience Hub application.
+    - name: list-app-version-resource-mappings
+      description: Lists how the resources in an application version are mapped/sourced from.
       flags:
-        --app-arn=: Amazon Resource Name (ARN) of the Resilience Hub application.
-        --assessment-name=: The name for the assessment.
-        --assessment-status=: The current status of the assessment for the resiliency policy.
-        --compliance-status=: The current status of compliance for the resiliency policy.
-        --invoker=: Specifies the entity that invoked a specific assessment, either a `User` or the `System`.
+        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
+        --app-version=!: The version of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: Maximum number of results to include in the response.
         --next-token=: Null, or the token from a previous call to get the next set of results.
-        --no-reverse-order: The default is to sort by ascending **startTime**.
-        --reverse-order: The default is to sort by ascending **startTime**.
+    - name: list-apps
+      description: Lists your Resilience Hub applications.
+      flags:
+        --app-arn=: Amazon Resource Name (ARN) of the Resilience Hub application.
+        --aws-application-arn=: Amazon Resource Name (ARN) of Resource Groups group that is integrated with an AppRegistry application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --from-last-assessment-time=: Lower limit of the range that is used to filter applications based on their last assessment times.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Maximum number of results to include in the response.
+        --name=: The name for the one of the listed applications.
+        --next-token=: Null, or the token from a previous call to get the next set of results.
+        --no-reverse-order: The application list is sorted based on the values of `lastAppComplianceEvaluationTime` field.
+        --reverse-order: The application list is sorted based on the values of `lastAppComplianceEvaluationTime` field.
+        --to-last-assessment-time=: Upper limit of the range that is used to filter the applications based on their last assessment times.
+    - name: list-resource-grouping-recommendations
+      description: Lists the resource grouping recommendations suggested by Resilience Hub for your application.
+      flags:
+        --app-arn=: Amazon Resource Name (ARN) of the Resilience Hub application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of grouping recommendations to be displayed per Resilience Hub application.
+        --next-token=: Null, or the token from a previous call to get the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: Lists the tags for your resources in your Resilience Hub applications.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) for a specific resource in your Resilience Hub application.
+    - name: start-resource-grouping-recommendation-task
+      description: Starts grouping recommendation task.
+      flags:
+        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-app-version-resources-resolution-status
+      description: Returns the resolution status for the specified resolution identifier for an application version.
+      flags:
+        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
+        --app-version=!: The version of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resolution-id=: The identifier for a specific resolution.
+    - name: import-resources-to-draft-app-version
+      description: Imports resources to Resilience Hub application draft version from different input sources.
+      flags:
+        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --eks-sources=: The input sources of the Amazon Elastic Kubernetes Service resources you need to import.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --import-strategy=: The import strategy you would like to set to import resources into Resilience Hub application.
+        --source-arns=: The Amazon Resource Names (ARNs) for the resources.
+        --terraform-sources=: A list of terraform file s3 URLs you need to import.
       completion:
         flag:
-            compliance-status:
-                - PolicyBreached
-                - PolicyMet
-                - NotApplicable
-                - MissingPolicy
-            invoker:
-                - User
-                - System
+            import-strategy:
+                - AddOnly
+                - ReplaceAll
+    - name: list-unsupported-app-version-resources
+      description: Lists the resources that are not currently supported in Resilience Hub.
+      flags:
+        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
+        --app-version=!: The version of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Maximum number of results to include in the response.
+        --next-token=: Null, or the token from a previous call to get the next set of results.
+        --resolution-id=: The identifier for a specific resolution.
+    - name: list-metrics
+      description: Lists the metrics that can be exported.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --conditions=: Indicates the list of all the conditions that were applied on the metrics.
+        --data-source=: Indicates the data source of the metrics.
+        --fields=: Indicates the list of fields in the data source.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of results to include in the response.
+        --next-token=: Null, or the token from a previous call to get the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sorts=: (Optional) Indicates the order in which you want to sort the fields in the metrics.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-app-version-app-component
+      description: Updates an existing Application Component in the Resilience Hub application.
+      flags:
+        --additional-info=: Currently, there is no supported additional information for Application Components.
+        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: Identifier of the Application Component.
+        --name=: Name of the Application Component.
+        --type=: Type of Application Component.
+    - name: describe-app
+      description: Describes an Resilience Hub application.
+      flags:
+        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-app-version-template
+      description: Describes details about an Resilience Hub application.
+      flags:
+        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
+        --app-version=!: The version of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-resiliency-policy
+      description: Describes a specified resiliency policy for an Resilience Hub application.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-arn=!: Amazon Resource Name (ARN) of the resiliency policy.
+    - name: put-draft-app-version-template
+      description: Adds or updates the app template for an Resilience Hub application draft version.
+      flags:
+        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
+        --app-template-body=!: A JSON string that provides information about your application structure.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: tag-resource
       description: Applies one or more tags to a resource.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: Amazon Resource Name (ARN) of the resource.
         --tags=!: The tags to assign to the resource.
-    - name: untag-resource
-      description: Removes one or more tags from a resource.
-      flags:
-        --resource-arn=!: Amazon Resource Name (ARN) of the resource.
-        --tag-keys=!: The keys of the tags you want to remove.
     - name: delete-app-version-resource
       description: Deletes a resource from the Resilience Hub application.
       flags:
         --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
         --aws-account-id=: Amazon Web Services account that owns the physical resource.
         --aws-region=: Amazon Web Services region that owns the physical resource.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: Used for an idempotency token.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --logical-resource-id=: Logical identifier of the resource.
         --physical-resource-id=: Physical identifier of the resource.
         --resource-name=: Name of the resource.
-    - name: describe-app-version
-      description: Describes the Resilience Hub application version.
-      flags:
-        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
-        --app-version=!: Resilience Hub application version.
-    - name: describe-resource-grouping-recommendation-task
-      description: Describes the resource grouping recommendation tasks run by Resilience Hub for your application.
-      flags:
-        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
-        --grouping-id=: Identifier of the grouping recommendation task.
-    - name: list-app-version-resource-mappings
-      description: Lists how the resources in an application version are mapped/sourced from.
-      flags:
-        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
-        --app-version=!: The version of the application.
-        --max-results=: Maximum number of results to include in the response.
-        --next-token=: Null, or the token from a previous call to get the next set of results.
-    - name: list-resiliency-policies
-      description: Lists the resiliency policies for the Resilience Hub applications.
-      flags:
-        --max-results=: Maximum number of results to include in the response.
-        --next-token=: Null, or the token from a previous call to get the next set of results.
-        --policy-name=: Name of the resiliency policy.
-    - name: list-tags-for-resource
-      description: Lists the tags for your resources in your Resilience Hub applications.
-      flags:
-        --resource-arn=!: The Amazon Resource Name (ARN) for a specific resource in your Resilience Hub application.
-    - name: delete-app
-      description: Deletes an Resilience Hub application.
-      flags:
-        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
-        --client-token=: Used for an idempotency token.
-        --force-delete: A boolean option to force the deletion of an Resilience Hub application.
-        --no-force-delete: A boolean option to force the deletion of an Resilience Hub application.
-    - name: describe-metrics-export
-      description: Describes the metrics of the application configuration being exported.
-      flags:
-        --metrics-export-id=!: Identifier of the metrics export task.
-    - name: list-app-versions
-      description: Lists the different versions for the Resilience Hub applications.
-      flags:
-        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
-        --end-time=: Upper limit of the time range to filter the application versions.
-        --max-results=: Maximum number of results to include in the response.
-        --next-token=: Null, or the token from a previous call to get the next set of results.
-        --start-time=: Lower limit of the time range to filter the application versions.
-    - name: list-app-assessment-resource-drifts
-      description: List of resource drifts that were detected while running an assessment.
-      flags:
-        --assessment-arn=!: Amazon Resource Name (ARN) of the assessment.
-        --max-results=: Maximum number of drift results to include in the response.
-        --next-token=: Null, or the token from a previous call to get the next set of results.
-    - name: list-metrics
-      description: Lists the metrics that can be exported.
-      flags:
-        --conditions=: Indicates the list of all the conditions that were applied on the metrics.
-        --data-source=: Indicates the data source of the metrics.
-        --fields=: Indicates the list of fields in the data source.
-        --max-results=: Maximum number of results to include in the response.
-        --next-token=: Null, or the token from a previous call to get the next set of results.
-        --sorts=: (Optional) Indicates the order in which you want to sort the fields in the metrics.
     - name: update-resiliency-policy
       description: Updates a resiliency policy.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --data-location-constraint=: Specifies a high-level geographical location constraint for where your resilience policy data can be stored.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --policy-arn=!: Amazon Resource Name (ARN) of the resiliency policy.
         --policy-description=: Description of the resiliency policy.
         --policy-name=: Name of the resiliency policy.
@@ -388,18 +226,91 @@ commands:
                 - CoreServices
                 - NonCritical
                 - NotApplicable
-    - name: batch-update-recommendation-status
-      description: Enables you to include or exclude one or more operational recommendations.
+    - name: create-app-version-resource
+      description: Adds a resource to the Resilience Hub application and assigns it to the specified Application Components.
+      flags:
+        --additional-info=: Currently, there is no supported additional information for resources.
+        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
+        --app-components=!: List of Application Components that this resource belongs to.
+        --aws-account-id=: Amazon Web Services account that owns the physical resource.
+        --aws-region=: Amazon Web Services region that owns the physical resource.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Used for an idempotency token.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --logical-resource-id=!: Logical identifier of the resource.
+        --physical-resource-id=!: Physical identifier of the resource.
+        --resource-name=: Name of the resource.
+        --resource-type=!: Type of resource.
+    - name: delete-recommendation-template
+      description: Deletes a recommendation template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Used for an idempotency token.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recommendation-template-arn=!: The Amazon Resource Name (ARN) for a recommendation template.
+    - name: list-app-assessment-compliance-drifts
+      description: List of compliance drifts that were detected while running an assessment.
+      flags:
+        --assessment-arn=!: Amazon Resource Name (ARN) of the assessment.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Maximum number of compliance drifts requested.
+        --next-token=: Null, or the token from a previous call to get the next set of results.
+    - name: describe-draft-app-version-resources-import-status
+      description: Describes the status of importing resources to an application version.
       flags:
         --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
-        --request-entries=!: Defines the list of operational recommendations that need to be included or excluded.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: resolve-app-version-resources
+      description: Resolves the resources for an application version.
+      flags:
+        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
+        --app-version=!: The version of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: start-app-assessment
+      description: Creates a new application assessment for an application.
+      flags:
+        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
+        --app-version=!: The version of the application.
+        --assessment-name=!: The name for the assessment.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Used for an idempotency token.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: Tags assigned to the resource.
+    - name: reject-resource-grouping-recommendations
+      description: Rejects resource grouping recommendations.
+      flags:
+        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entries=!: List of resource grouping recommendations you have selected to exclude from your application.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: start-metrics-export
+      description: Initiates the export task of metrics.
+      flags:
+        --bucket-name=: (Optional) Specifies the name of the Amazon Simple Storage Service bucket where the exported metrics will be stored.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Used for an idempotency token.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: create-recommendation-template
       description: Creates a new recommendation template for the Resilience Hub application.
       flags:
         --assessment-arn=!: Amazon Resource Name (ARN) of the assessment.
         --bucket-name=: The name of the Amazon S3 bucket that will contain the recommendation template.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: Used for an idempotency token.
         --format=: The format for the recommendation template.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name for the recommendation template.
         --recommendation-ids=: Identifiers for the recommendations used to create a recommendation template.
         --recommendation-types=: An array of strings that specify the recommendation template type or types.
@@ -409,81 +320,6 @@ commands:
             format:
                 - CfnYaml
                 - CfnJson
-    - name: list-apps
-      description: Lists your Resilience Hub applications.
-      flags:
-        --app-arn=: Amazon Resource Name (ARN) of the Resilience Hub application.
-        --aws-application-arn=: Amazon Resource Name (ARN) of Resource Groups group that is integrated with an AppRegistry application.
-        --from-last-assessment-time=: Lower limit of the range that is used to filter applications based on their last assessment times.
-        --max-results=: Maximum number of results to include in the response.
-        --name=: The name for the one of the listed applications.
-        --next-token=: Null, or the token from a previous call to get the next set of results.
-        --no-reverse-order: The application list is sorted based on the values of `lastAppComplianceEvaluationTime` field.
-        --reverse-order: The application list is sorted based on the values of `lastAppComplianceEvaluationTime` field.
-        --to-last-assessment-time=: Upper limit of the range that is used to filter the applications based on their last assessment times.
-    - name: list-suggested-resiliency-policies
-      description: Lists the suggested resiliency policies for the Resilience Hub applications.
-      flags:
-        --max-results=: Maximum number of results to include in the response.
-        --next-token=: Null, or the token from a previous call to get the next set of results.
-    - name: list-test-recommendations
-      description: Lists the test recommendations for the Resilience Hub application.
-      flags:
-        --assessment-arn=!: Amazon Resource Name (ARN) of the assessment.
-        --max-results=: Maximum number of results to include in the response.
-        --next-token=: Null, or the token from a previous call to get the next set of results.
-    - name: resolve-app-version-resources
-      description: Resolves the resources for an application version.
-      flags:
-        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
-        --app-version=!: The version of the application.
-    - name: update-app-version-app-component
-      description: Updates an existing Application Component in the Resilience Hub application.
-      flags:
-        --additional-info=: Currently, there is no supported additional information for Application Components.
-        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
-        --id=!: Identifier of the Application Component.
-        --name=: Name of the Application Component.
-        --type=: Type of Application Component.
-    - name: list-app-component-recommendations
-      description: Lists the recommendations for an Resilience Hub Application Component.
-      flags:
-        --assessment-arn=!: Amazon Resource Name (ARN) of the assessment.
-        --max-results=: Maximum number of results to include in the response.
-        --next-token=: Null, or the token from a previous call to get the next set of results.
-    - name: list-recommendation-templates
-      description: Lists the recommendation templates for the Resilience Hub applications.
-      flags:
-        --assessment-arn=: Amazon Resource Name (ARN) of the assessment.
-        --max-results=: Maximum number of results to include in the response.
-        --name=: The name for one of the listed recommendation templates.
-        --next-token=: Null, or the token from a previous call to get the next set of results.
-        --no-reverse-order: The default is to sort by ascending **startTime**.
-        --recommendation-template-arn=: The Amazon Resource Name (ARN) for a recommendation template.
-        --reverse-order: The default is to sort by ascending **startTime**.
-        --status=: Status of the action.
-    - name: list-sop-recommendations
-      description: Lists the standard operating procedure (SOP) recommendations for the Resilience Hub applications.
-      flags:
-        --assessment-arn=!: Amazon Resource Name (ARN) of the assessment.
-        --max-results=: Maximum number of results to include in the response.
-        --next-token=: Null, or the token from a previous call to get the next set of results.
-    - name: list-app-component-compliances
-      description: Lists the compliances for an Resilience Hub Application Component.
-      flags:
-        --assessment-arn=!: Amazon Resource Name (ARN) of the assessment.
-        --max-results=: Maximum number of results to include in the response.
-        --next-token=: Null, or the token from a previous call to get the next set of results.
-    - name: add-draft-app-version-resource-mappings
-      description: Adds the source of resource-maps to the draft version of an application.
-      flags:
-        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
-        --resource-mappings=!: Mappings used to map logical resources from the template to physical resources.
-    - name: delete-recommendation-template
-      description: Deletes a recommendation template.
-      flags:
-        --client-token=: Used for an idempotency token.
-        --recommendation-template-arn=!: The Amazon Resource Name (ARN) for a recommendation template.
     - name: describe-app-version-resource
       description: Describes a resource of the Resilience Hub application.
       flags:
@@ -491,6 +327,368 @@ commands:
         --app-version=!: Resilience Hub application version.
         --aws-account-id=: Amazon Web Services account that owns the physical resource.
         --aws-region=: Amazon Web Services region that owns the physical resource.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --logical-resource-id=: Logical identifier of the resource.
         --physical-resource-id=: Physical identifier of the resource.
         --resource-name=: Name of the resource.
+    - name: describe-resource-grouping-recommendation-task
+      description: Describes the resource grouping recommendation tasks run by Resilience Hub for your application.
+      flags:
+        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --grouping-id=: Identifier of the grouping recommendation task.
+    - name: list-test-recommendations
+      description: Lists the test recommendations for the Resilience Hub application.
+      flags:
+        --assessment-arn=!: Amazon Resource Name (ARN) of the assessment.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Maximum number of results to include in the response.
+        --next-token=: Null, or the token from a previous call to get the next set of results.
+    - name: create-app
+      description: Creates an Resilience Hub application.
+      flags:
+        --assessment-schedule=: Assessment execution schedule with 'Daily' or 'Disabled' values.
+        --aws-application-arn=: Amazon Resource Name (ARN) of Resource Groups group that is integrated with an AppRegistry application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Used for an idempotency token.
+        --description=: The optional description for an app.
+        --event-subscriptions=: The list of events you would like to subscribe and get notification for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: Name of the application.
+        --permission-model=: Defines the roles and credentials that Resilience Hub would use while creating the application, importing its resources, and running an assessment.
+        --policy-arn=: Amazon Resource Name (ARN) of the resiliency policy.
+        --tags=: Tags assigned to the resource.
+      completion:
+        flag:
+            assessment-schedule:
+                - Disabled
+                - Daily
+    - name: list-app-assessment-resource-drifts
+      description: List of resource drifts that were detected while running an assessment.
+      flags:
+        --assessment-arn=!: Amazon Resource Name (ARN) of the assessment.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of drift results to include in the response.
+        --next-token=: Null, or the token from a previous call to get the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-app-version-resources
+      description: Lists all the resources in an Resilience Hub application.
+      flags:
+        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
+        --app-version=!: The version of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Maximum number of results to include in the response.
+        --next-token=: Null, or the token from a previous call to get the next set of results.
+        --resolution-id=: The identifier for a specific resolution.
+    - name: create-app-version-app-component
+      description: Creates a new Application Component in the Resilience Hub application.
+      flags:
+        --additional-info=: Currently, there is no supported additional information for Application Components.
+        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Used for an idempotency token.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=: Identifier of the Application Component.
+        --name=!: Name of the Application Component.
+        --type=!: Type of Application Component.
+    - name: delete-app-assessment
+      description: Deletes an Resilience Hub application assessment.
+      flags:
+        --assessment-arn=!: Amazon Resource Name (ARN) of the assessment.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Used for an idempotency token.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-app-version-app-component
+      description: Describes an Application Component in the Resilience Hub application.
+      flags:
+        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
+        --app-version=!: Resilience Hub application version.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: Identifier of the Application Component.
+    - name: list-app-versions
+      description: Lists the different versions for the Resilience Hub applications.
+      flags:
+        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=: Upper limit of the time range to filter the application versions.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Maximum number of results to include in the response.
+        --next-token=: Null, or the token from a previous call to get the next set of results.
+        --start-time=: Lower limit of the time range to filter the application versions.
+    - name: publish-app-version
+      description: Publishes a new version of a specific Resilience Hub application.
+      flags:
+        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --version-name=: Name of the application version.
+    - name: list-alarm-recommendations
+      description: Lists the alarm recommendations for an Resilience Hub application.
+      flags:
+        --assessment-arn=!: Amazon Resource Name (ARN) of the assessment.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Maximum number of results to include in the response.
+        --next-token=: Null, or the token from a previous call to get the next set of results.
+    - name: delete-app-version-app-component
+      description: Deletes an Application Component from the Resilience Hub application.
+      flags:
+        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Used for an idempotency token.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: Identifier of the Application Component.
+    - name: describe-app-assessment
+      description: Describes an assessment for an Resilience Hub application.
+      flags:
+        --assessment-arn=!: Amazon Resource Name (ARN) of the assessment.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: remove-draft-app-version-resource-mappings
+      description: Removes resource mappings from a draft application version.
+      flags:
+        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
+        --app-registry-app-names=: The names of the registered applications you want to remove from the resource mappings.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --eks-source-names=: The names of the Amazon Elastic Kubernetes Service clusters and namespaces you want to remove from the resource mappings.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --logical-stack-names=: The names of the CloudFormation stacks you want to remove from the resource mappings.
+        --resource-group-names=: The names of the resource groups you want to remove from the resource mappings.
+        --resource-names=: The names of the resources you want to remove from the resource mappings.
+        --terraform-source-names=: The names of the Terraform sources you want to remove from the resource mappings.
+    - name: create-resiliency-policy
+      description: Creates a resiliency policy for an application.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Used for an idempotency token.
+        --data-location-constraint=: Specifies a high-level geographical location constraint for where your resilience policy data can be stored.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-description=: Description of the resiliency policy.
+        --policy-name=!: Name of the resiliency policy.
+        --policy=!: The type of resiliency policy to be created, including the recovery time objective (RTO) and recovery point objective (RPO) in seconds.
+        --tags=: Tags assigned to the resource.
+        --tier=!: The tier for this resiliency policy, ranging from the highest severity (`MissionCritical`) to lowest (`NonCritical`).
+      completion:
+        flag:
+            data-location-constraint:
+                - AnyLocation
+                - SameContinent
+                - SameCountry
+            tier:
+                - MissionCritical
+                - Critical
+                - Important
+                - CoreServices
+                - NonCritical
+                - NotApplicable
+    - name: list-app-component-recommendations
+      description: Lists the recommendations for an Resilience Hub Application Component.
+      flags:
+        --assessment-arn=!: Amazon Resource Name (ARN) of the assessment.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Maximum number of results to include in the response.
+        --next-token=: Null, or the token from a previous call to get the next set of results.
+    - name: list-app-input-sources
+      description: Lists all the input sources of the Resilience Hub application.
+      flags:
+        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
+        --app-version=!: Resilience Hub application version.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Maximum number of input sources to be displayed per Resilience Hub application.
+        --next-token=: Null, or the token from a previous call to get the next set of results.
+    - name: list-recommendation-templates
+      description: Lists the recommendation templates for the Resilience Hub applications.
+      flags:
+        --assessment-arn=: Amazon Resource Name (ARN) of the assessment.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Maximum number of results to include in the response.
+        --name=: The name for one of the listed recommendation templates.
+        --next-token=: Null, or the token from a previous call to get the next set of results.
+        --no-reverse-order: The default is to sort by ascending **startTime**.
+        --recommendation-template-arn=: The Amazon Resource Name (ARN) for a recommendation template.
+        --reverse-order: The default is to sort by ascending **startTime**.
+        --status=: Status of the action.
+    - name: list-resiliency-policies
+      description: Lists the resiliency policies for the Resilience Hub applications.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Maximum number of results to include in the response.
+        --next-token=: Null, or the token from a previous call to get the next set of results.
+        --policy-name=: Name of the resiliency policy.
+    - name: list-suggested-resiliency-policies
+      description: Lists the suggested resiliency policies for the Resilience Hub applications.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Maximum number of results to include in the response.
+        --next-token=: Null, or the token from a previous call to get the next set of results.
+    - name: add-draft-app-version-resource-mappings
+      description: Adds the source of resource-maps to the draft version of an application.
+      flags:
+        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-mappings=!: Mappings used to map logical resources from the template to physical resources.
+    - name: batch-update-recommendation-status
+      description: Enables you to include or exclude one or more operational recommendations.
+      flags:
+        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --request-entries=!: Defines the list of operational recommendations that need to be included or excluded.
+    - name: list-app-component-compliances
+      description: Lists the compliances for an Resilience Hub Application Component.
+      flags:
+        --assessment-arn=!: Amazon Resource Name (ARN) of the assessment.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Maximum number of results to include in the response.
+        --next-token=: Null, or the token from a previous call to get the next set of results.
+    - name: untag-resource
+      description: Removes one or more tags from a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: Amazon Resource Name (ARN) of the resource.
+        --tag-keys=!: The keys of the tags you want to remove.
+    - name: update-app
+      description: Updates an application.
+      flags:
+        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
+        --assessment-schedule=: Assessment execution schedule with 'Daily' or 'Disabled' values.
+        --clear-resiliency-policy-arn: Specifies if the resiliency policy ARN should be cleared.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The optional description for an app.
+        --event-subscriptions=: The list of events you would like to subscribe and get notification for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-clear-resiliency-policy-arn: Specifies if the resiliency policy ARN should be cleared.
+        --permission-model=: Defines the roles and credentials that Resilience Hub would use while creating an application, importing its resources, and running an assessment.
+        --policy-arn=: Amazon Resource Name (ARN) of the resiliency policy.
+      completion:
+        flag:
+            assessment-schedule:
+                - Disabled
+                - Daily
+    - name: delete-app-input-source
+      description: Deletes the input source and all of its imported resources from the Resilience Hub application.
+      flags:
+        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Used for an idempotency token.
+        --eks-source-cluster-namespace=: The namespace on your Amazon Elastic Kubernetes Service cluster that you want to delete from the Resilience Hub application.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-arn=: The Amazon Resource Name (ARN) of the imported resource you want to remove from the Resilience Hub application.
+        --terraform-source=: The imported Terraform s3 state ﬁle you want to remove from the Resilience Hub application.
+    - name: list-app-version-app-components
+      description: Lists all the Application Components in the Resilience Hub application.
+      flags:
+        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
+        --app-version=!: Version of the Application Component.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Maximum number of Application Components to be displayed per Resilience Hub application version.
+        --next-token=: Null, or the token from a previous call to get the next set of results.
+    - name: update-app-version
+      description: Updates the Resilience Hub application version.
+      flags:
+        --additional-info=: Additional configuration parameters for an Resilience Hub application.
+        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: accept-resource-grouping-recommendations
+      description: Accepts the resource grouping recommendations suggested by Resilience Hub for your application.
+      flags:
+        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entries=!: List of resource grouping recommendations you want to include in your application.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-resiliency-policy
+      description: Deletes a resiliency policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Used for an idempotency token.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-arn=!: Amazon Resource Name (ARN) of the resiliency policy.
+    - name: describe-app-version
+      description: Describes the Resilience Hub application version.
+      flags:
+        --app-arn=!: Amazon Resource Name (ARN) of the Resilience Hub application.
+        --app-version=!: Resilience Hub application version.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-metrics-export
+      description: Describes the metrics of the application configuration being exported.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --metrics-export-id=!: Identifier of the metrics export task.
+    - name: list-app-assessments
+      description: Lists the assessments for an Resilience Hub application.
+      flags:
+        --app-arn=: Amazon Resource Name (ARN) of the Resilience Hub application.
+        --assessment-name=: The name for the assessment.
+        --assessment-status=: The current status of the assessment for the resiliency policy.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --compliance-status=: The current status of compliance for the resiliency policy.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --invoker=: Specifies the entity that invoked a specific assessment, either a `User` or the `System`.
+        --max-results=: Maximum number of results to include in the response.
+        --next-token=: Null, or the token from a previous call to get the next set of results.
+        --no-reverse-order: The default is to sort by ascending **startTime**.
+        --reverse-order: The default is to sort by ascending **startTime**.
+      completion:
+        flag:
+            compliance-status:
+                - PolicyBreached
+                - PolicyMet
+                - NotApplicable
+                - MissingPolicy
+            invoker:
+                - User
+                - System

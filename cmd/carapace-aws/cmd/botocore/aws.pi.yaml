@@ -1,49 +1,13 @@
 name: pi
 description: AWS Performance Insights
 commands:
-    - name: delete-performance-analysis-report
-      description: Deletes a performance analysis report.
-      flags:
-        --analysis-report-id=!: The unique identifier of the analysis report for deletion.
-        --identifier=!: An immutable identifier for a data source that is unique for an Amazon Web Services Region.
-        --service-type=!: The Amazon Web Services service for which Performance Insights will return metrics.
-      completion:
-        flag:
-            service-type:
-                - RDS
-                - DOCDB
-    - name: get-performance-analysis-report
-      description: Retrieves the report including the report ID, status, time details, and the insights with recommendations.
-      flags:
-        --accept-language=: The text language in the report.
-        --analysis-report-id=!: A unique identifier of the created analysis report.
-        --identifier=!: An immutable identifier for a data source that is unique for an Amazon Web Services Region.
-        --service-type=!: The Amazon Web Services service for which Performance Insights will return metrics.
-        --text-format=: Indicates the text format in the report.
-      completion:
-        flag:
-            accept-language:
-                - EN_US
-            service-type:
-                - RDS
-                - DOCDB
-            text-format:
-                - PLAIN_TEXT
-                - MARKDOWN
-    - name: get-resource-metadata
-      description: Retrieve the metadata for different features.
-      flags:
-        --identifier=!: An immutable identifier for a data source that is unique for an Amazon Web Services Region.
-        --service-type=!: The Amazon Web Services service for which Performance Insights returns metrics.
-      completion:
-        flag:
-            service-type:
-                - RDS
-                - DOCDB
     - name: get-resource-metrics
       description: Retrieve Performance Insights metrics for a set of data sources over a time period.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --end-time=!: The date and time specifying the end of the requested time series query range.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identifier=!: An immutable identifier for a data source that is unique for an Amazon Web Services Region.
         --max-results=: The maximum number of items to return in the response.
         --metric-queries=!: An array of one or more queries to perform.
@@ -64,6 +28,9 @@ commands:
       description: Retrieve the dimensions that can be queried for each specified metric type on a specified DB instance.
       flags:
         --authorized-actions=: The actions to discover the dimensions you are authorized to access.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identifier=!: An immutable identifier for a data source that is unique within an Amazon Web Services Region.
         --max-results=: The maximum number of items to return in the response.
         --metrics=!: The types of metrics for which to retrieve dimensions.
@@ -74,37 +41,15 @@ commands:
             service-type:
                 - RDS
                 - DOCDB
-    - name: list-available-resource-metrics
-      description: Retrieve metrics of the specified types that can be queried for a specified DB instance.
+    - name: untag-resource
+      description: Deletes the metadata tags from the Amazon RDS Performance Insights resource.
       flags:
-        --identifier=!: An immutable identifier for a data source that is unique within an Amazon Web Services Region.
-        --max-results=: The maximum number of items to return.
-        --metric-types=!: The types of metrics to return in the response.
-        --next-token=: An optional pagination token provided by a previous request.
-        --service-type=!: The Amazon Web Services service for which Performance Insights returns metrics.
-      completion:
-        flag:
-            service-type:
-                - RDS
-                - DOCDB
-    - name: list-tags-for-resource
-      description: Retrieves all the metadata tags associated with Amazon RDS Performance Insights resource.
-      flags:
-        --resource-arn=!: Lists all the tags for the Amazon RDS Performance Insights resource.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon RDS Performance Insights resource that the tags are added to.
         --service-type=!: List the tags for the Amazon Web Services service for which Performance Insights returns metrics.
-      completion:
-        flag:
-            service-type:
-                - RDS
-                - DOCDB
-    - name: create-performance-analysis-report
-      description: Creates a new performance analysis report for a specific time period for the DB instance.
-      flags:
-        --end-time=!: The end time defined for the analysis report.
-        --identifier=!: An immutable, Amazon Web Services Region-unique identifier for a data source.
-        --service-type=!: The Amazon Web Services service for which Performance Insights will return metrics.
-        --start-time=!: The start time defined for the analysis report.
-        --tags=: The metadata assigned to the analysis report consisting of a key-value pair.
+        --tag-keys=!: The metadata assigned to an Amazon RDS Performance Insights resource consisting of a key-value pair.
       completion:
         flag:
             service-type:
@@ -114,8 +59,11 @@ commands:
       description: For a specific time period, retrieve the top `N` dimension keys for a metric.
       flags:
         --additional-metrics=: Additional metrics for the top `N` dimension keys.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --end-time=!: The date and time specifying the end of the requested time series data.
         --filter=: One or more filters to apply in the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --group-by=!: A specification for how to aggregate the data points from a query result.
         --identifier=!: An immutable, Amazon Web Services Region-unique identifier for a data source.
         --max-results=: The maximum number of items to return in the response.
@@ -133,6 +81,9 @@ commands:
     - name: get-dimension-key-details
       description: Get the attributes of the specified dimension group for a DB instance or data source.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --group-identifier=!: The ID of the dimension group from which to retrieve dimension details.
         --group=!: The name of the dimension group.
         --identifier=!: The ID for a data source from which to gather dimension data.
@@ -143,9 +94,49 @@ commands:
             service-type:
                 - RDS
                 - DOCDB
+    - name: get-performance-analysis-report
+      description: Retrieves the report including the report ID, status, time details, and the insights with recommendations.
+      flags:
+        --accept-language=: The text language in the report.
+        --analysis-report-id=!: A unique identifier of the created analysis report.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: An immutable identifier for a data source that is unique for an Amazon Web Services Region.
+        --service-type=!: The Amazon Web Services service for which Performance Insights will return metrics.
+        --text-format=: Indicates the text format in the report.
+      completion:
+        flag:
+            accept-language:
+                - EN_US
+            service-type:
+                - RDS
+                - DOCDB
+            text-format:
+                - PLAIN_TEXT
+                - MARKDOWN
+    - name: list-available-resource-metrics
+      description: Retrieve metrics of the specified types that can be queried for a specified DB instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: An immutable identifier for a data source that is unique within an Amazon Web Services Region.
+        --max-results=: The maximum number of items to return.
+        --metric-types=!: The types of metrics to return in the response.
+        --next-token=: An optional pagination token provided by a previous request.
+        --service-type=!: The Amazon Web Services service for which Performance Insights returns metrics.
+      completion:
+        flag:
+            service-type:
+                - RDS
+                - DOCDB
     - name: list-performance-analysis-reports
       description: Lists all the analysis reports created for the DB instance.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identifier=!: An immutable identifier for a data source that is unique for an Amazon Web Services Region.
         --list-tags: Specifies whether or not to include the list of tags in the response.
         --max-results=: The maximum number of items to return in the response.
@@ -157,9 +148,25 @@ commands:
             service-type:
                 - RDS
                 - DOCDB
+    - name: list-tags-for-resource
+      description: Retrieves all the metadata tags associated with Amazon RDS Performance Insights resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: Lists all the tags for the Amazon RDS Performance Insights resource.
+        --service-type=!: List the tags for the Amazon Web Services service for which Performance Insights returns metrics.
+      completion:
+        flag:
+            service-type:
+                - RDS
+                - DOCDB
     - name: tag-resource
       description: Adds metadata tags to the Amazon RDS Performance Insights resource.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon RDS Performance Insights resource that the tags are added to.
         --service-type=!: The Amazon Web Services service for which Performance Insights returns metrics.
         --tags=!: The metadata assigned to an Amazon RDS resource consisting of a key-value pair.
@@ -168,12 +175,44 @@ commands:
             service-type:
                 - RDS
                 - DOCDB
-    - name: untag-resource
-      description: Deletes the metadata tags from the Amazon RDS Performance Insights resource.
+    - name: create-performance-analysis-report
+      description: Creates a new performance analysis report for a specific time period for the DB instance.
       flags:
-        --resource-arn=!: The Amazon RDS Performance Insights resource that the tags are added to.
-        --service-type=!: List the tags for the Amazon Web Services service for which Performance Insights returns metrics.
-        --tag-keys=!: The metadata assigned to an Amazon RDS Performance Insights resource consisting of a key-value pair.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=!: The end time defined for the analysis report.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: An immutable, Amazon Web Services Region-unique identifier for a data source.
+        --service-type=!: The Amazon Web Services service for which Performance Insights will return metrics.
+        --start-time=!: The start time defined for the analysis report.
+        --tags=: The metadata assigned to the analysis report consisting of a key-value pair.
+      completion:
+        flag:
+            service-type:
+                - RDS
+                - DOCDB
+    - name: delete-performance-analysis-report
+      description: Deletes a performance analysis report.
+      flags:
+        --analysis-report-id=!: The unique identifier of the analysis report for deletion.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: An immutable identifier for a data source that is unique for an Amazon Web Services Region.
+        --service-type=!: The Amazon Web Services service for which Performance Insights will return metrics.
+      completion:
+        flag:
+            service-type:
+                - RDS
+                - DOCDB
+    - name: get-resource-metadata
+      description: Retrieve the metadata for different features.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: An immutable identifier for a data source that is unique for an Amazon Web Services Region.
+        --service-type=!: The Amazon Web Services service for which Performance Insights returns metrics.
       completion:
         flag:
             service-type:

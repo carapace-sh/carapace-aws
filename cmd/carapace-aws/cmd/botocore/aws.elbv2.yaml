@@ -1,109 +1,39 @@
 name: elbv2
 description: Elastic Load Balancing
 commands:
-    - name: describe-capacity-reservation
-      description: Describes the capacity reservation status for the specified load balancer.
+    - name: describe-tags
+      description: Describes the tags for the specified Elastic Load Balancing resources.
       flags:
-        --load-balancer-arn=!: The Amazon Resource Name (ARN) of the load balancer.
-    - name: describe-load-balancers
-      description: Describes the specified load balancers or all of your load balancers.
-      flags:
-        --load-balancer-arns=: The Amazon Resource Names (ARN) of the load balancers.
-        --marker=: The marker for the next set of results.
-        --names=: The names of the load balancers.
-        --page-size=: The maximum number of results to return with this call.
-    - name: modify-rule
-      description: Replaces the specified properties of the specified rule.
-      flags:
-        --actions=: The actions.
-        --conditions=: The conditions.
-        --no-reset-transforms: Indicates whether to remove all transforms from the rule.
-        --reset-transforms: Indicates whether to remove all transforms from the rule.
-        --rule-arn=!: The Amazon Resource Name (ARN) of the rule.
-        --transforms=: The transforms to apply to requests that match this rule.
-    - name: remove-listener-certificates
-      description: Removes the specified certificate from the certificate list for the specified HTTPS or TLS listener.
-      flags:
-        --certificates=!: The certificate to remove.
-        --listener-arn=!: The Amazon Resource Name (ARN) of the listener.
-    - name: create-rule
-      description: Creates a rule for the specified listener.
-      flags:
-        --actions=!: The actions.
-        --conditions=!: The conditions.
-        --listener-arn=!: The Amazon Resource Name (ARN) of the listener.
-        --priority=!: The rule priority.
-        --tags=: The tags to assign to the rule.
-        --transforms=: The transforms to apply to requests that match this rule.
-    - name: describe-target-group-attributes
-      description: Describes the attributes for the specified target group.
-      flags:
-        --target-group-arn=!: The Amazon Resource Name (ARN) of the target group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arns=!: The Amazon Resource Names (ARN) of the resources.
     - name: describe-trust-stores
       description: Describes all trust stores for the specified account.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: The marker for the next set of results.
+        --max-items=: The  total number of items to return in the command's output.
         --names=: The names of the trust stores.
         --page-size=: The maximum number of results to return with this call.
+        --starting-token=: A token to specify where to start paginating.
         --trust-store-arns=: The Amazon Resource Name (ARN) of the trust store.
-    - name: modify-listener
-      description: Replaces the specified properties of the specified listener.
+    - name: set-rule-priorities
+      description: Sets the priorities of the specified rules.
       flags:
-        --alpn-policy=: \[TLS listeners] The name of the Application-Layer Protocol Negotiation (ALPN) policy.
-        --certificates=: \[HTTPS and TLS listeners] The default certificate for the listener.
-        --default-actions=: The actions for the default rule.
-        --listener-arn=!: The Amazon Resource Name (ARN) of the listener.
-        --mutual-authentication=: \[HTTPS listeners] The mutual authentication configuration information.
-        --port=: The port for connections from clients to the load balancer.
-        --protocol=: The protocol for connections from clients to the load balancer.
-        --ssl-policy=: \[HTTPS and TLS listeners] The security policy that defines which protocols and ciphers are supported.
-      completion:
-        flag:
-            protocol:
-                - HTTP
-                - HTTPS
-                - TCP
-                - TLS
-                - UDP
-                - TCP_UDP
-                - GENEVE
-                - QUIC
-                - TCP_QUIC
-    - name: modify-target-group
-      description: Modifies the health checks used when evaluating the health state of the targets in the specified target group.
-      flags:
-        --health-check-enabled: Indicates whether health checks are enabled.
-        --health-check-interval-seconds=: The approximate amount of time, in seconds, between health checks of an individual target.
-        --health-check-path=: \[HTTP/HTTPS health checks] The destination for health checks on the targets.
-        --health-check-port=: The port the load balancer uses when performing health checks on targets.
-        --health-check-protocol=: The protocol the load balancer uses when performing health checks on targets.
-        --health-check-timeout-seconds=: \[HTTP/HTTPS health checks] The amount of time, in seconds, during which no response means a failed health check.
-        --healthy-threshold-count=: The number of consecutive health checks successes required before considering an unhealthy target healthy.
-        --matcher=: \[HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a successful response from a target.
-        --no-health-check-enabled: Indicates whether health checks are enabled.
-        --target-group-arn=!: The Amazon Resource Name (ARN) of the target group.
-        --unhealthy-threshold-count=: The number of consecutive health check failures required before considering the target unhealthy.
-      completion:
-        flag:
-            health-check-protocol:
-                - HTTP
-                - HTTPS
-                - TCP
-                - TLS
-                - UDP
-                - TCP_UDP
-                - GENEVE
-                - QUIC
-                - TCP_QUIC
-    - name: remove-trust-store-revocations
-      description: Removes the specified revocation file from the specified trust store.
-      flags:
-        --revocation-ids=!: The revocation IDs of the revocation files you want to remove.
-        --trust-store-arn=!: The Amazon Resource Name (ARN) of the trust store.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --rule-priorities=!: The rule priorities.
     - name: set-security-groups
       description: Associates the specified security groups with the specified Application Load Balancer or Network Load Balancer.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --enforce-security-group-inbound-rules-on-private-link-traffic=: Indicates whether to evaluate inbound security group rules for traffic sent to a Network Load Balancer through Amazon Web Services PrivateLink.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --load-balancer-arn=!: The Amazon Resource Name (ARN) of the load balancer.
         --security-groups=!: The IDs of the security groups.
       completion:
@@ -111,30 +41,126 @@ commands:
             enforce-security-group-inbound-rules-on-private-link-traffic:
                 - "on"
                 - "off"
-    - name: describe-listener-certificates
-      description: Describes the default certificate and the certificate list for the specified HTTPS or TLS listener.
+    - name: create-load-balancer
+      description: Creates an Application Load Balancer, Network Load Balancer, or Gateway Load Balancer.
       flags:
-        --listener-arn=!: The Amazon Resource Names (ARN) of the listener.
-        --marker=: The marker for the next set of results.
-        --page-size=: The maximum number of results to return with this call.
-    - name: describe-target-health
-      description: Describes the health of the specified targets or all of your targets.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --customer-owned-ipv4-pool=: \[Application Load Balancers on Outposts] The ID of the customer-owned address pool (CoIP pool).
+        --enable-prefix-for-ipv6-source-nat=: \[Network Load Balancers with UDP listeners] Indicates whether to use an IPv6 prefix from each subnet for source NAT.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ip-address-type=: The IP address type.
+        --ipam-pools=: \[Application Load Balancers] The IPAM pools to use with the load balancer.
+        --name=!: The name of the load balancer.
+        --scheme=: The nodes of an Internet-facing load balancer have public IP addresses.
+        --security-groups=: \[Application Load Balancers and Network Load Balancers] The IDs of the security groups for the load balancer.
+        --subnet-mappings=: The IDs of the subnets.
+        --subnets=: The IDs of the subnets.
+        --tags=: The tags to assign to the load balancer.
+        --type=: The type of load balancer.
+      completion:
+        flag:
+            enable-prefix-for-ipv6-source-nat:
+                - "on"
+                - "off"
+            ip-address-type:
+                - ipv4
+                - dualstack
+                - dualstack-without-public-ipv4
+            scheme:
+                - internet-facing
+                - internal
+            type:
+                - application
+                - network
+                - gateway
+    - name: delete-trust-store
+      description: Deletes a trust store.
       flags:
-        --include=: Used to include anomaly detection information.
-        --target-group-arn=!: The Amazon Resource Name (ARN) of the target group.
-        --targets=: The targets.
-    - name: delete-target-group
-      description: Deletes the specified target group.
-      flags:
-        --target-group-arn=!: The Amazon Resource Name (ARN) of the target group.
-    - name: add-trust-store-revocations
-      description: Adds the specified revocation file to the specified trust store.
-      flags:
-        --revocation-contents=: The revocation file to add.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --trust-store-arn=!: The Amazon Resource Name (ARN) of the trust store.
+    - name: describe-account-limits
+      description: Describes the current Elastic Load Balancing resource limits for your Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: The marker for the next set of results.
+        --max-items=: The  total number of items to return in the command's output.
+        --page-size=: The maximum number of results to return with this call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-trust-store-associations
+      description: Describes all resources associated with the specified trust store.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: The marker for the next set of results.
+        --max-items=: The  total number of items to return in the command's output.
+        --page-size=: The maximum number of results to return with this call.
+        --starting-token=: A token to specify where to start paginating.
+        --trust-store-arn=!: The Amazon Resource Name (ARN) of the trust store.
+    - name: modify-rule
+      description: Replaces the specified properties of the specified rule.
+      flags:
+        --actions=: The actions.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --conditions=: The conditions.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-reset-transforms: Indicates whether to remove all transforms from the rule.
+        --reset-transforms: Indicates whether to remove all transforms from the rule.
+        --rule-arn=!: The Amazon Resource Name (ARN) of the rule.
+        --transforms=: The transforms to apply to requests that match this rule.
+    - name: create-trust-store
+      description: Creates a trust store.
+      flags:
+        --ca-certificates-bundle-s3-bucket=!: The Amazon S3 bucket for the ca certificates bundle.
+        --ca-certificates-bundle-s3-key=!: The Amazon S3 path for the ca certificates bundle.
+        --ca-certificates-bundle-s3-object-version=: The Amazon S3 object version for the ca certificates bundle.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the trust store.
+        --tags=: The tags to assign to the trust store.
+    - name: delete-rule
+      description: Deletes the specified rule.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --rule-arn=!: The Amazon Resource Name (ARN) of the rule.
+    - name: describe-capacity-reservation
+      description: Describes the capacity reservation status for the specified load balancer.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --load-balancer-arn=!: The Amazon Resource Name (ARN) of the load balancer.
+    - name: modify-target-group-attributes
+      description: Modifies the specified attributes of the specified target group.
+      flags:
+        --attributes=!: The target group attributes.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --target-group-arn=!: The Amazon Resource Name (ARN) of the target group.
+    - name: register-targets
+      description: Registers the specified targets with the specified target group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --target-group-arn=!: The Amazon Resource Name (ARN) of the target group.
+        --targets=!: The targets.
     - name: create-target-group
       description: Creates a target group.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --health-check-enabled: Indicates whether health checks are enabled.
         --health-check-interval-seconds=: The approximate amount of time, in seconds, between health checks of an individual target.
         --health-check-path=: \[HTTP/HTTPS health checks] The destination for health checks on the targets.
@@ -184,55 +210,126 @@ commands:
                 - ip
                 - lambda
                 - alb
-    - name: delete-shared-trust-store-association
-      description: Deletes a shared trust store association.
-      flags:
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-        --trust-store-arn=!: The Amazon Resource Name (ARN) of the trust store.
-    - name: describe-trust-store-associations
-      description: Describes all resources associated with the specified trust store.
-      flags:
-        --marker=: The marker for the next set of results.
-        --page-size=: The maximum number of results to return with this call.
-        --trust-store-arn=!: The Amazon Resource Name (ARN) of the trust store.
-    - name: get-trust-store-revocation-content
-      description: Retrieves the specified revocation file.
-      flags:
-        --revocation-id=!: The revocation ID of the revocation file.
-        --trust-store-arn=!: The Amazon Resource Name (ARN) of the trust store.
     - name: delete-listener
       description: Deletes the specified listener.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --listener-arn=!: The Amazon Resource Name (ARN) of the listener.
-    - name: get-resource-policy
-      description: Retrieves the resource policy for a specified resource.
+    - name: delete-shared-trust-store-association
+      description: Deletes a shared trust store association.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+        --trust-store-arn=!: The Amazon Resource Name (ARN) of the trust store.
+    - name: describe-listener-certificates
+      description: Describes the default certificate and the certificate list for the specified HTTPS or TLS listener.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --listener-arn=!: The Amazon Resource Names (ARN) of the listener.
+        --marker=: The marker for the next set of results.
+        --max-items=: The  total number of items to return in the command's output.
+        --page-size=: The maximum number of results to return with this call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-ssl-policies
+      description: Describes the specified policies or all policies used for SSL negotiation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --load-balancer-type=: The type of load balancer.
+        --marker=: The marker for the next set of results.
+        --max-items=: The  total number of items to return in the command's output.
+        --names=: The names of the policies.
+        --page-size=: The maximum number of results to return with this call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            load-balancer-type:
+                - application
+                - network
+                - gateway
+    - name: describe-target-health
+      description: Describes the health of the specified targets or all of your targets.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include=: Used to include anomaly detection information.
+        --target-group-arn=!: The Amazon Resource Name (ARN) of the target group.
+        --targets=: The targets.
     - name: get-trust-store-ca-certificates-bundle
       description: Retrieves the ca certificate bundle.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --trust-store-arn=!: The Amazon Resource Name (ARN) of the trust store.
-    - name: modify-target-group-attributes
-      description: Modifies the specified attributes of the specified target group.
+    - name: modify-listener
+      description: Replaces the specified properties of the specified listener.
       flags:
-        --attributes=!: The target group attributes.
-        --target-group-arn=!: The Amazon Resource Name (ARN) of the target group.
-    - name: modify-trust-store
-      description: Update the ca certificate bundle for the specified trust store.
+        --alpn-policy=: \[TLS listeners] The name of the Application-Layer Protocol Negotiation (ALPN) policy.
+        --certificates=: \[HTTPS and TLS listeners] The default certificate for the listener.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --default-actions=: The actions for the default rule.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --listener-arn=!: The Amazon Resource Name (ARN) of the listener.
+        --mutual-authentication=: \[HTTPS listeners] The mutual authentication configuration information.
+        --port=: The port for connections from clients to the load balancer.
+        --protocol=: The protocol for connections from clients to the load balancer.
+        --ssl-policy=: \[HTTPS and TLS listeners] The security policy that defines which protocols and ciphers are supported.
+      completion:
+        flag:
+            protocol:
+                - HTTP
+                - HTTPS
+                - TCP
+                - TLS
+                - UDP
+                - TCP_UDP
+                - GENEVE
+                - QUIC
+                - TCP_QUIC
+    - name: describe-load-balancer-attributes
+      description: Describes the attributes for the specified Application Load Balancer, Network Load Balancer, or Gateway Load Balancer.
       flags:
-        --ca-certificates-bundle-s3-bucket=!: The Amazon S3 bucket for the ca certificates bundle.
-        --ca-certificates-bundle-s3-key=!: The Amazon S3 path for the ca certificates bundle.
-        --ca-certificates-bundle-s3-object-version=: The Amazon S3 object version for the ca certificates bundle.
-        --trust-store-arn=!: The Amazon Resource Name (ARN) of the trust store.
-    - name: register-targets
-      description: Registers the specified targets with the specified target group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --load-balancer-arn=!: The Amazon Resource Name (ARN) of the load balancer.
+    - name: describe-rules
+      description: Describes the specified rules or the rules for the specified listener.
       flags:
-        --target-group-arn=!: The Amazon Resource Name (ARN) of the target group.
-        --targets=!: The targets.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --listener-arn=: The Amazon Resource Name (ARN) of the listener.
+        --marker=: The marker for the next set of results.
+        --max-items=: The  total number of items to return in the command's output.
+        --page-size=: The maximum number of results to return with this call.
+        --rule-arns=: The Amazon Resource Names (ARN) of the rules.
+        --starting-token=: A token to specify where to start paginating.
+    - name: modify-load-balancer-attributes
+      description: Modifies the specified attributes of the specified Application Load Balancer, Network Load Balancer, or Gateway Load Balancer.
+      flags:
+        --attributes=!: The load balancer attributes.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --load-balancer-arn=!: The Amazon Resource Name (ARN) of the load balancer.
     - name: set-subnets
       description: Enables the Availability Zones for the specified public subnets for the specified Application Load Balancer, Network Load Balancer or Gateway Load Balancer.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --enable-prefix-for-ipv6-source-nat=: \[Network Load Balancers with UDP listeners] Indicates whether to use an IPv6 prefix from each subnet for source NAT.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --ip-address-type=: The IP address type.
         --load-balancer-arn=!: The Amazon Resource Name (ARN) of the load balancer.
         --subnet-mappings=: The IDs of the public subnets.
@@ -246,27 +343,171 @@ commands:
                 - ipv4
                 - dualstack
                 - dualstack-without-public-ipv4
+    - name: create-rule
+      description: Creates a rule for the specified listener.
+      flags:
+        --actions=!: The actions.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --conditions=!: The conditions.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --listener-arn=!: The Amazon Resource Name (ARN) of the listener.
+        --priority=!: The rule priority.
+        --tags=: The tags to assign to the rule.
+        --transforms=: The transforms to apply to requests that match this rule.
+    - name: deregister-targets
+      description: Deregisters the specified targets from the specified target group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --target-group-arn=!: The Amazon Resource Name (ARN) of the target group.
+        --targets=!: The targets.
+    - name: describe-target-group-attributes
+      description: Describes the attributes for the specified target group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --target-group-arn=!: The Amazon Resource Name (ARN) of the target group.
+    - name: get-resource-policy
+      description: Retrieves the resource policy for a specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+    - name: get-trust-store-revocation-content
+      description: Retrieves the specified revocation file.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --revocation-id=!: The revocation ID of the revocation file.
+        --trust-store-arn=!: The Amazon Resource Name (ARN) of the trust store.
+    - name: modify-capacity-reservation
+      description: Modifies the capacity reservation of the specified load balancer.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --load-balancer-arn=!: The Amazon Resource Name (ARN) of the load balancer.
+        --minimum-load-balancer-capacity=: The minimum load balancer capacity reserved.
+        --no-reset-capacity-reservation: Resets the capacity reservation.
+        --reset-capacity-reservation: Resets the capacity reservation.
+    - name: modify-ip-pools
+      description: \[Application Load Balancers] Modify the IP pool associated to a load balancer.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ipam-pools=: The IPAM pools to be modified.
+        --load-balancer-arn=!: The Amazon Resource Name (ARN) of the load balancer.
+        --remove-ipam-pools=: Remove the IP pools in use by the load balancer.
+    - name: modify-target-group
+      description: Modifies the health checks used when evaluating the health state of the targets in the specified target group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --health-check-enabled: Indicates whether health checks are enabled.
+        --health-check-interval-seconds=: The approximate amount of time, in seconds, between health checks of an individual target.
+        --health-check-path=: \[HTTP/HTTPS health checks] The destination for health checks on the targets.
+        --health-check-port=: The port the load balancer uses when performing health checks on targets.
+        --health-check-protocol=: The protocol the load balancer uses when performing health checks on targets.
+        --health-check-timeout-seconds=: \[HTTP/HTTPS health checks] The amount of time, in seconds, during which no response means a failed health check.
+        --healthy-threshold-count=: The number of consecutive health checks successes required before considering an unhealthy target healthy.
+        --matcher=: \[HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a successful response from a target.
+        --no-health-check-enabled: Indicates whether health checks are enabled.
+        --target-group-arn=!: The Amazon Resource Name (ARN) of the target group.
+        --unhealthy-threshold-count=: The number of consecutive health check failures required before considering the target unhealthy.
+      completion:
+        flag:
+            health-check-protocol:
+                - HTTP
+                - HTTPS
+                - TCP
+                - TLS
+                - UDP
+                - TCP_UDP
+                - GENEVE
+                - QUIC
+                - TCP_QUIC
     - name: add-tags
       description: Adds the specified tags to the specified Elastic Load Balancing resource.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arns=!: The Amazon Resource Name (ARN) of the resource.
         --tags=!: The tags.
-    - name: describe-ssl-policies
-      description: Describes the specified policies or all policies used for SSL negotiation.
+    - name: describe-listeners
+      description: Describes the specified listeners or the listeners for the specified Application Load Balancer, Network Load Balancer, or Gateway Load Balancer.
       flags:
-        --load-balancer-type=: The type of load balancer.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --listener-arns=: The Amazon Resource Names (ARN) of the listeners.
+        --load-balancer-arn=: The Amazon Resource Name (ARN) of the load balancer.
         --marker=: The marker for the next set of results.
-        --names=: The names of the policies.
+        --max-items=: The  total number of items to return in the command's output.
         --page-size=: The maximum number of results to return with this call.
-      completion:
-        flag:
-            load-balancer-type:
-                - application
-                - network
-                - gateway
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-target-groups
+      description: Describes the specified target groups or all of your target groups.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --load-balancer-arn=: The Amazon Resource Name (ARN) of the load balancer.
+        --marker=: The marker for the next set of results.
+        --max-items=: The  total number of items to return in the command's output.
+        --names=: The names of the target groups.
+        --page-size=: The maximum number of results to return with this call.
+        --starting-token=: A token to specify where to start paginating.
+        --target-group-arns=: The Amazon Resource Names (ARN) of the target groups.
+    - name: describe-trust-store-revocations
+      description: Describes the revocation files in use by the specified trust store or revocation files.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: The marker for the next set of results.
+        --max-items=: The  total number of items to return in the command's output.
+        --page-size=: The maximum number of results to return with this call.
+        --revocation-ids=: The revocation IDs of the revocation files you want to describe.
+        --starting-token=: A token to specify where to start paginating.
+        --trust-store-arn=!: The Amazon Resource Name (ARN) of the trust store.
+    - name: modify-listener-attributes
+      description: Modifies the specified attributes of the specified listener.
+      flags:
+        --attributes=!: The listener attributes.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --listener-arn=!: The Amazon Resource Name (ARN) of the listener.
+    - name: remove-listener-certificates
+      description: Removes the specified certificate from the certificate list for the specified HTTPS or TLS listener.
+      flags:
+        --certificates=!: The certificate to remove.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --listener-arn=!: The Amazon Resource Name (ARN) of the listener.
+    - name: remove-trust-store-revocations
+      description: Removes the specified revocation file from the specified trust store.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --revocation-ids=!: The revocation IDs of the revocation files you want to remove.
+        --trust-store-arn=!: The Amazon Resource Name (ARN) of the trust store.
     - name: set-ip-address-type
       description: Sets the type of IP addresses used by the subnets of the specified load balancer.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --ip-address-type=!: The IP address type.
         --load-balancer-arn=!: The Amazon Resource Name (ARN) of the load balancer.
       completion:
@@ -275,150 +516,68 @@ commands:
                 - ipv4
                 - dualstack
                 - dualstack-without-public-ipv4
-    - name: create-load-balancer
-      description: Creates an Application Load Balancer, Network Load Balancer, or Gateway Load Balancer.
-      flags:
-        --customer-owned-ipv4-pool=: \[Application Load Balancers on Outposts] The ID of the customer-owned address pool (CoIP pool).
-        --enable-prefix-for-ipv6-source-nat=: \[Network Load Balancers with UDP listeners] Indicates whether to use an IPv6 prefix from each subnet for source NAT.
-        --ip-address-type=: The IP address type.
-        --ipam-pools=: \[Application Load Balancers] The IPAM pools to use with the load balancer.
-        --name=!: The name of the load balancer.
-        --scheme=: The nodes of an Internet-facing load balancer have public IP addresses.
-        --security-groups=: \[Application Load Balancers and Network Load Balancers] The IDs of the security groups for the load balancer.
-        --subnet-mappings=: The IDs of the subnets.
-        --subnets=: The IDs of the subnets.
-        --tags=: The tags to assign to the load balancer.
-        --type=: The type of load balancer.
-      completion:
-        flag:
-            enable-prefix-for-ipv6-source-nat:
-                - "on"
-                - "off"
-            ip-address-type:
-                - ipv4
-                - dualstack
-                - dualstack-without-public-ipv4
-            scheme:
-                - internet-facing
-                - internal
-            type:
-                - application
-                - network
-                - gateway
-    - name: create-trust-store
-      description: Creates a trust store.
-      flags:
-        --ca-certificates-bundle-s3-bucket=!: The Amazon S3 bucket for the ca certificates bundle.
-        --ca-certificates-bundle-s3-key=!: The Amazon S3 path for the ca certificates bundle.
-        --ca-certificates-bundle-s3-object-version=: The Amazon S3 object version for the ca certificates bundle.
-        --name=!: The name of the trust store.
-        --tags=: The tags to assign to the trust store.
-    - name: describe-load-balancer-attributes
-      description: Describes the attributes for the specified Application Load Balancer, Network Load Balancer, or Gateway Load Balancer.
-      flags:
-        --load-balancer-arn=!: The Amazon Resource Name (ARN) of the load balancer.
-    - name: describe-trust-store-revocations
-      description: Describes the revocation files in use by the specified trust store or revocation files.
-      flags:
-        --marker=: The marker for the next set of results.
-        --page-size=: The maximum number of results to return with this call.
-        --revocation-ids=: The revocation IDs of the revocation files you want to describe.
-        --trust-store-arn=!: The Amazon Resource Name (ARN) of the trust store.
-    - name: remove-tags
-      description: Removes the specified tags from the specified Elastic Load Balancing resources.
-      flags:
-        --resource-arns=!: The Amazon Resource Name (ARN) of the resource.
-        --tag-keys=!: The tag keys for the tags to remove.
-    - name: describe-account-limits
-      description: Describes the current Elastic Load Balancing resource limits for your Amazon Web Services account.
-      flags:
-        --marker=: The marker for the next set of results.
-        --page-size=: The maximum number of results to return with this call.
-    - name: describe-listener-attributes
-      description: Describes the attributes for the specified listener.
-      flags:
-        --listener-arn=!: The Amazon Resource Name (ARN) of the listener.
-    - name: describe-listeners
-      description: Describes the specified listeners or the listeners for the specified Application Load Balancer, Network Load Balancer, or Gateway Load Balancer.
-      flags:
-        --listener-arns=: The Amazon Resource Names (ARN) of the listeners.
-        --load-balancer-arn=: The Amazon Resource Name (ARN) of the load balancer.
-        --marker=: The marker for the next set of results.
-        --page-size=: The maximum number of results to return with this call.
-    - name: describe-rules
-      description: Describes the specified rules or the rules for the specified listener.
-      flags:
-        --listener-arn=: The Amazon Resource Name (ARN) of the listener.
-        --marker=: The marker for the next set of results.
-        --page-size=: The maximum number of results to return with this call.
-        --rule-arns=: The Amazon Resource Names (ARN) of the rules.
-    - name: describe-tags
-      description: Describes the tags for the specified Elastic Load Balancing resources.
-      flags:
-        --resource-arns=!: The Amazon Resource Names (ARN) of the resources.
     - name: add-listener-certificates
       description: Adds the specified SSL server certificate to the certificate list for the specified HTTPS or TLS listener.
       flags:
         --certificates=!: The certificate to add.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --listener-arn=!: The Amazon Resource Name (ARN) of the listener.
-    - name: delete-load-balancer
-      description: Deletes the specified Application Load Balancer, Network Load Balancer, or Gateway Load Balancer.
+    - name: add-trust-store-revocations
+      description: Adds the specified revocation file to the specified trust store.
       flags:
-        --load-balancer-arn=!: The Amazon Resource Name (ARN) of the load balancer.
-    - name: delete-rule
-      description: Deletes the specified rule.
-      flags:
-        --rule-arn=!: The Amazon Resource Name (ARN) of the rule.
-    - name: describe-target-groups
-      description: Describes the specified target groups or all of your target groups.
-      flags:
-        --load-balancer-arn=: The Amazon Resource Name (ARN) of the load balancer.
-        --marker=: The marker for the next set of results.
-        --names=: The names of the target groups.
-        --page-size=: The maximum number of results to return with this call.
-        --target-group-arns=: The Amazon Resource Names (ARN) of the target groups.
-    - name: deregister-targets
-      description: Deregisters the specified targets from the specified target group.
-      flags:
-        --target-group-arn=!: The Amazon Resource Name (ARN) of the target group.
-        --targets=!: The targets.
-    - name: modify-capacity-reservation
-      description: Modifies the capacity reservation of the specified load balancer.
-      flags:
-        --load-balancer-arn=!: The Amazon Resource Name (ARN) of the load balancer.
-        --minimum-load-balancer-capacity=: The minimum load balancer capacity reserved.
-        --no-reset-capacity-reservation: Resets the capacity reservation.
-        --reset-capacity-reservation: Resets the capacity reservation.
-    - name: modify-ip-pools
-      description: \[Application Load Balancers] Modify the IP pool associated to a load balancer.
-      flags:
-        --ipam-pools=: The IPAM pools to be modified.
-        --load-balancer-arn=!: The Amazon Resource Name (ARN) of the load balancer.
-        --remove-ipam-pools=: Remove the IP pools in use by the load balancer.
-    - name: modify-listener-attributes
-      description: Modifies the specified attributes of the specified listener.
-      flags:
-        --attributes=!: The listener attributes.
-        --listener-arn=!: The Amazon Resource Name (ARN) of the listener.
-    - name: modify-load-balancer-attributes
-      description: Modifies the specified attributes of the specified Application Load Balancer, Network Load Balancer, or Gateway Load Balancer.
-      flags:
-        --attributes=!: The load balancer attributes.
-        --load-balancer-arn=!: The Amazon Resource Name (ARN) of the load balancer.
-    - name: set-rule-priorities
-      description: Sets the priorities of the specified rules.
-      flags:
-        --rule-priorities=!: The rule priorities.
-    - name: delete-trust-store
-      description: Deletes a trust store.
-      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --revocation-contents=: The revocation file to add.
         --trust-store-arn=!: The Amazon Resource Name (ARN) of the trust store.
+    - name: describe-listener-attributes
+      description: Describes the attributes for the specified listener.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --listener-arn=!: The Amazon Resource Name (ARN) of the listener.
+    - name: describe-load-balancers
+      description: Describes the specified load balancers or all of your load balancers.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --load-balancer-arns=: The Amazon Resource Names (ARN) of the load balancers.
+        --marker=: The marker for the next set of results.
+        --max-items=: The  total number of items to return in the command's output.
+        --names=: The names of the load balancers.
+        --page-size=: The maximum number of results to return with this call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: modify-trust-store
+      description: Update the ca certificate bundle for the specified trust store.
+      flags:
+        --ca-certificates-bundle-s3-bucket=!: The Amazon S3 bucket for the ca certificates bundle.
+        --ca-certificates-bundle-s3-key=!: The Amazon S3 path for the ca certificates bundle.
+        --ca-certificates-bundle-s3-object-version=: The Amazon S3 object version for the ca certificates bundle.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --trust-store-arn=!: The Amazon Resource Name (ARN) of the trust store.
+    - name: remove-tags
+      description: Removes the specified tags from the specified Elastic Load Balancing resources.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arns=!: The Amazon Resource Name (ARN) of the resource.
+        --tag-keys=!: The tag keys for the tags to remove.
     - name: create-listener
       description: Creates a listener for the specified Application Load Balancer, Network Load Balancer, or Gateway Load Balancer.
       flags:
         --alpn-policy=: \[TLS listeners] The name of the Application-Layer Protocol Negotiation (ALPN) policy.
         --certificates=: \[HTTPS and TLS listeners] The default certificate for the listener.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --default-actions=!: The actions for the default rule.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --load-balancer-arn=!: The Amazon Resource Name (ARN) of the load balancer.
         --mutual-authentication=: \[HTTPS listeners] The mutual authentication configuration information.
         --port=: The port on which the load balancer is listening.
@@ -437,39 +596,74 @@ commands:
                 - GENEVE
                 - QUIC
                 - TCP_QUIC
+    - name: delete-load-balancer
+      description: Deletes the specified Application Load Balancer, Network Load Balancer, or Gateway Load Balancer.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --load-balancer-arn=!: The Amazon Resource Name (ARN) of the load balancer.
+    - name: delete-target-group
+      description: Deletes the specified target group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --target-group-arn=!: The Amazon Resource Name (ARN) of the target group.
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:
-        - name: target-deregistered
-          description: Describes the health of the specified targets or all of your targets.
-          flags:
-            --include=: Used to include anomaly detection information.
-            --target-group-arn=!: The Amazon Resource Name (ARN) of the target group.
-            --targets=: The targets.
         - name: load-balancer-exists
           description: Describes the specified load balancers or all of your load balancers.
           flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --load-balancer-arns=: The Amazon Resource Names (ARN) of the load balancers.
             --marker=: The marker for the next set of results.
+            --max-items=: The  total number of items to return in the command's output.
             --names=: The names of the load balancers.
             --page-size=: The maximum number of results to return with this call.
+            --starting-token=: A token to specify where to start paginating.
         - name: load-balancer-available
           description: Describes the specified load balancers or all of your load balancers.
           flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --load-balancer-arns=: The Amazon Resource Names (ARN) of the load balancers.
             --marker=: The marker for the next set of results.
+            --max-items=: The  total number of items to return in the command's output.
             --names=: The names of the load balancers.
             --page-size=: The maximum number of results to return with this call.
+            --starting-token=: A token to specify where to start paginating.
         - name: load-balancers-deleted
           description: Describes the specified load balancers or all of your load balancers.
           flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --load-balancer-arns=: The Amazon Resource Names (ARN) of the load balancers.
             --marker=: The marker for the next set of results.
+            --max-items=: The  total number of items to return in the command's output.
             --names=: The names of the load balancers.
             --page-size=: The maximum number of results to return with this call.
+            --starting-token=: A token to specify where to start paginating.
         - name: target-in-service
           description: Describes the health of the specified targets or all of your targets.
           flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --include=: Used to include anomaly detection information.
+            --target-group-arn=!: The Amazon Resource Name (ARN) of the target group.
+            --targets=: The targets.
+        - name: target-deregistered
+          description: Describes the health of the specified targets or all of your targets.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --include=: Used to include anomaly detection information.
             --target-group-arn=!: The Amazon Resource Name (ARN) of the target group.
             --targets=: The targets.

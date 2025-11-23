@@ -1,25 +1,52 @@
 name: osis
 description: Amazon OpenSearch Ingestion
 commands:
+    - name: create-pipeline-endpoint
+      description: Creates a VPC endpoint for an OpenSearch Ingestion pipeline.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pipeline-arn=!: The Amazon Resource Name (ARN) of the pipeline to create the endpoint for.
+        --vpc-options=!: Container for the VPC configuration for the pipeline endpoint, including subnet IDs and security group IDs.
+    - name: list-pipeline-blueprints
+      description: Retrieves a list of all available blueprints for Data Prepper.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-pipelines
       description: Lists all OpenSearch Ingestion pipelines in the current Amazon Web Services account and Region.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: An optional parameter that specifies the maximum number of results to return.
         --next-token=: If your initial `ListPipelines` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListPipelines` operations, which returns results in the next page.
-    - name: start-pipeline
-      description: Starts an OpenSearch Ingestion pipeline.
+    - name: tag-resource
+      description: Tags an OpenSearch Ingestion pipeline.
       flags:
-        --pipeline-name=!: The name of the pipeline to start.
+        --arn=!: The Amazon Resource Name (ARN) of the pipeline to tag.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=!: The list of key-value tags to add to the pipeline.
     - name: untag-resource
       description: Removes one or more tags from an OpenSearch Ingestion pipeline.
       flags:
         --arn=!: The Amazon Resource Name (ARN) of the pipeline to remove tags from.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --tag-keys=!: The tag keys to remove.
     - name: update-pipeline
       description: Updates an OpenSearch Ingestion pipeline.
       flags:
         --buffer-options=: Key-value pairs to configure persistent buffering for the pipeline.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --encryption-at-rest-options=: Key-value pairs to configure encryption for data that is written to a persistent buffer.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --log-publishing-options=: Key-value pairs to configure log publishing.
         --max-units=: The maximum pipeline capacity, in Ingestion Compute Units (ICUs)
         --min-units=: The minimum pipeline capacity, in Ingestion Compute Units (ICUs).
@@ -29,72 +56,87 @@ commands:
     - name: validate-pipeline
       description: Checks whether an OpenSearch Ingestion pipeline configuration is valid prior to creation.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --pipeline-configuration-body=!: The pipeline configuration in YAML format.
-    - name: get-pipeline-blueprint
-      description: Retrieves information about a specific blueprint for OpenSearch Ingestion.
-      flags:
-        --blueprint-name=!: The name of the blueprint to retrieve.
-        --format=: The format format of the blueprint to retrieve.
-    - name: get-pipeline-change-progress
-      description: Returns progress information for the current change happening on an OpenSearch Ingestion pipeline.
-      flags:
-        --pipeline-name=!: The name of the pipeline.
-    - name: list-tags-for-resource
-      description: Lists all resource tags associated with an OpenSearch Ingestion pipeline.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the pipeline to retrieve tags for.
-    - name: tag-resource
-      description: Tags an OpenSearch Ingestion pipeline.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the pipeline to tag.
-        --tags=!: The list of key-value tags to add to the pipeline.
-    - name: create-pipeline-endpoint
-      description: Creates a VPC endpoint for an OpenSearch Ingestion pipeline.
-      flags:
-        --pipeline-arn=!: The Amazon Resource Name (ARN) of the pipeline to create the endpoint for.
-        --vpc-options=!: Container for the VPC configuration for the pipeline endpoint, including subnet IDs and security group IDs.
-    - name: delete-pipeline-endpoint
-      description: Deletes a VPC endpoint for an OpenSearch Ingestion pipeline.
-      flags:
-        --endpoint-id=!: The unique identifier of the pipeline endpoint to delete.
-    - name: list-pipeline-blueprints
-      description: Retrieves a list of all available blueprints for Data Prepper.
-    - name: revoke-pipeline-endpoint-connections
-      description: Revokes pipeline endpoints from specified endpoint IDs.
-      flags:
-        --endpoint-ids=!: A list of endpoint IDs for which to revoke access to the pipeline.
-        --pipeline-arn=!: The Amazon Resource Name (ARN) of the pipeline from which to revoke endpoint connections.
     - name: delete-pipeline
       description: Deletes an OpenSearch Ingestion pipeline.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --pipeline-name=!: The name of the pipeline to delete.
-    - name: delete-resource-policy
-      description: Deletes a resource-based policy from an OpenSearch Ingestion resource.
-      flags:
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource from which to delete the policy.
     - name: get-pipeline
       description: Retrieves information about an OpenSearch Ingestion pipeline.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --pipeline-name=!: The name of the pipeline.
-    - name: list-pipeline-endpoint-connections
-      description: Lists the pipeline endpoints connected to pipelines in your account.
-      flags:
-        --max-results=: The maximum number of pipeline endpoint connections to return in the response.
-        --next-token=: If your initial `ListPipelineEndpointConnections` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListPipelineEndpointConnections` operations, which returns results in the next page.
     - name: put-resource-policy
       description: Attaches a resource-based policy to an OpenSearch Ingestion resource.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --policy=!: The resource-based policy document in JSON format.
         --resource-arn=!: The Amazon Resource Name (ARN) of the resource to attach the policy to.
+    - name: revoke-pipeline-endpoint-connections
+      description: Revokes pipeline endpoints from specified endpoint IDs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --endpoint-ids=!: A list of endpoint IDs for which to revoke access to the pipeline.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pipeline-arn=!: The Amazon Resource Name (ARN) of the pipeline from which to revoke endpoint connections.
+    - name: start-pipeline
+      description: Starts an OpenSearch Ingestion pipeline.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pipeline-name=!: The name of the pipeline to start.
     - name: stop-pipeline
       description: Stops an OpenSearch Ingestion pipeline.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --pipeline-name=!: The name of the pipeline to stop.
+    - name: delete-resource-policy
+      description: Deletes a resource-based policy from an OpenSearch Ingestion resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource from which to delete the policy.
+    - name: get-pipeline-change-progress
+      description: Returns progress information for the current change happening on an OpenSearch Ingestion pipeline.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pipeline-name=!: The name of the pipeline.
+    - name: list-pipeline-endpoints
+      description: Lists all pipeline endpoints in your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of pipeline endpoints to return in the response.
+        --next-token=: If your initial `ListPipelineEndpoints` operation returns a `NextToken`, you can include the returned `NextToken` in subsequent `ListPipelineEndpoints` operations, which returns results in the next page.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: create-pipeline
       description: Creates an OpenSearch Ingestion pipeline.
       flags:
         --buffer-options=: Key-value pairs to configure persistent buffering for the pipeline.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --encryption-at-rest-options=: Key-value pairs to configure encryption for data that is written to a persistent buffer.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --log-publishing-options=: Key-value pairs to configure log publishing.
         --max-units=!: The maximum pipeline capacity, in Ingestion Compute Units (ICUs).
         --min-units=!: The minimum pipeline capacity, in Ingestion Compute Units (ICUs).
@@ -103,12 +145,43 @@ commands:
         --pipeline-role-arn=: The Amazon Resource Name (ARN) of the IAM role that grants the pipeline permission to access Amazon Web Services resources.
         --tags=: List of tags to add to the pipeline upon creation.
         --vpc-options=: Container for the values required to configure VPC access for the pipeline.
+    - name: delete-pipeline-endpoint
+      description: Deletes a VPC endpoint for an OpenSearch Ingestion pipeline.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --endpoint-id=!: The unique identifier of the pipeline endpoint to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-pipeline-blueprint
+      description: Retrieves information about a specific blueprint for OpenSearch Ingestion.
+      flags:
+        --blueprint-name=!: The name of the blueprint to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --format=: The format format of the blueprint to retrieve.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-resource-policy
       description: Retrieves the resource-based policy attached to an OpenSearch Ingestion resource.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the resource for which to retrieve the policy.
-    - name: list-pipeline-endpoints
-      description: Lists all pipeline endpoints in your account.
+    - name: list-pipeline-endpoint-connections
+      description: Lists the pipeline endpoints connected to pipelines in your account.
       flags:
-        --max-results=: The maximum number of pipeline endpoints to return in the response.
-        --next-token=: If your initial `ListPipelineEndpoints` operation returns a `NextToken`, you can include the returned `NextToken` in subsequent `ListPipelineEndpoints` operations, which returns results in the next page.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of pipeline endpoint connections to return in the response.
+        --next-token=: If your initial `ListPipelineEndpointConnections` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListPipelineEndpointConnections` operations, which returns results in the next page.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: Lists all resource tags associated with an OpenSearch Ingestion pipeline.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the pipeline to retrieve tags for.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.

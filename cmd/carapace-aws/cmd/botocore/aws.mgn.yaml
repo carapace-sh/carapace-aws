@@ -1,53 +1,47 @@
 name: mgn
 description: Application Migration Service
 commands:
-    - name: archive-application
-      description: Archive application.
+    - name: start-test
+      description: Launches a Test Instance for specific Source Servers.
+      flags:
+        --account-id=: Start Test for Account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-server-i-ds=!: Start Test for Source Server IDs.
+        --tags=: Start Test by Tags.
+    - name: create-wave
+      description: Create wave.
       flags:
         --account-id=: Account ID.
-        --application-id=!: Application ID.
-    - name: describe-vcenter-clients
-      description: Returns a list of the installed vCenter clients.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: Wave description.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: Wave name.
+        --tags=: Wave tags.
+    - name: put-source-server-action
+      description: Put source server post migration custom action.
       flags:
-        --max-results=: Maximum results to be returned in DescribeVcenterClients.
-        --next-token=: Next pagination token to be provided for DescribeVcenterClients.
-    - name: get-launch-configuration
-      description: Lists all LaunchConfigurations available, filtered by Source Server IDs.
-      flags:
-        --account-id=: Request to get Launch Configuration information by Account ID.
-        --source-server-id=!: Request to get Launch Configuration information by Source Server ID.
-    - name: list-export-errors
-      description: List export errors.
-      flags:
-        --export-id=!: List export errors request export id.
-        --max-results=: List export errors request max results.
-        --next-token=: List export errors request next token.
-    - name: list-waves
-      description: Retrieves all waves or multiple waves by ID.
-      flags:
-        --account-id=: Request account ID.
-        --filters=: Waves list filters.
-        --max-results=: Maximum results to return when listing waves.
-        --next-token=: Request next token.
-    - name: put-template-action
-      description: Put template post migration custom action.
-      flags:
-        --action-id=!: Template post migration custom action ID.
-        --action-name=!: Template post migration custom action name.
-        --active: Template post migration custom action active status.
-        --category=: Template post migration custom action category.
-        --description=: Template post migration custom action description.
-        --document-identifier=!: Template post migration custom action document identifier.
-        --document-version=: Template post migration custom action document version.
-        --external-parameters=: Template post migration custom action external parameters.
-        --launch-configuration-template-id=!: Launch configuration template ID.
-        --must-succeed-for-cutover: Template post migration custom action must succeed for cutover.
-        --no-active: Template post migration custom action active status.
-        --no-must-succeed-for-cutover: Template post migration custom action must succeed for cutover.
-        --operating-system=: Operating system eligible for this template post migration custom action.
-        --order=!: Template post migration custom action order.
-        --parameters=: Template post migration custom action parameters.
-        --timeout-seconds=: Template post migration custom action timeout in seconds.
+        --account-id=: Source server post migration custom account ID.
+        --action-id=!: Source server post migration custom action ID.
+        --action-name=!: Source server post migration custom action name.
+        --active: Source server post migration custom action active status.
+        --category=: Source server post migration custom action category.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: Source server post migration custom action description.
+        --document-identifier=!: Source server post migration custom action document identifier.
+        --document-version=: Source server post migration custom action document version.
+        --external-parameters=: Source server post migration custom action external parameters.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --must-succeed-for-cutover: Source server post migration custom action must succeed for cutover.
+        --no-active: Source server post migration custom action active status.
+        --no-must-succeed-for-cutover: Source server post migration custom action must succeed for cutover.
+        --order=!: Source server post migration custom action order.
+        --parameters=: Source server post migration custom action parameters.
+        --source-server-id=!: Source server ID.
+        --timeout-seconds=: Source server post migration custom action timeout in seconds.
       completion:
         flag:
             category:
@@ -62,226 +56,198 @@ commands:
                 - CONFIGURATION
                 - BACKUP
                 - OTHER
-    - name: update-connector
-      description: Update Connector.
+    - name: start-import
+      description: Start import.
       flags:
-        --connector-id=!: Update Connector request connector ID.
-        --name=: Update Connector request name.
-        --ssm-command-config=: Update Connector request SSM command config.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Start import request client token.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --s3-bucket-source=!: Start import request s3 bucket source.
+    - name: create-application
+      description: Create application.
+      flags:
+        --account-id=: Account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: Application description.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: Application name.
+        --tags=: Application tags.
     - name: delete-application
       description: Delete application.
       flags:
         --account-id=: Account ID.
         --application-id=!: Application ID.
-    - name: list-import-errors
-      description: List import errors.
-      flags:
-        --import-id=!: List import errors request import id.
-        --max-results=: List import errors request max results.
-        --next-token=: List import errors request next token.
-    - name: start-export
-      description: Start export.
-      flags:
-        --s3-bucket-owner=: Start export request s3 bucket owner.
-        --s3-bucket=!: Start export request s3 bucket.
-        --s3-key=!: Start export request s3key.
-    - name: start-test
-      description: Launches a Test Instance for specific Source Servers.
-      flags:
-        --account-id=: Start Test for Account ID.
-        --source-server-i-ds=!: Start Test for Source Server IDs.
-        --tags=: Start Test by Tags.
-    - name: associate-applications
-      description: Associate applications to wave.
-      flags:
-        --account-id=: Account ID.
-        --application-ids=!: Application IDs list.
-        --wave-id=!: Wave ID.
-    - name: associate-source-servers
-      description: Associate source servers to application.
-      flags:
-        --account-id=: Account ID.
-        --application-id=!: Application ID.
-        --source-server-i-ds=!: Source server IDs list.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-job
       description: Deletes a single Job by ID.
       flags:
         --account-id=: Request to delete Job from service by Account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --job-id=!: Request to delete Job from service by Job ID.
-    - name: describe-jobs
-      description: Returns a list of Jobs.
+    - name: describe-replication-configuration-templates
+      description: Lists all ReplicationConfigurationTemplates, filtered by Source Server IDs.
       flags:
-        --account-id=: Request to describe job log items by Account ID.
-        --filters=: Request to describe Job log filters.
-        --max-results=: Request to describe job log items by max results.
-        --next-token=: Request to describe job log items by next token.
-    - name: disassociate-source-servers
-      description: Disassociate source servers from application.
-      flags:
-        --account-id=: Account ID.
-        --application-id=!: Application ID.
-        --source-server-i-ds=!: Source server IDs list.
-    - name: update-replication-configuration
-      description: Allows you to update multiple ReplicationConfigurations by Source Server ID.
-      flags:
-        --account-id=: Update replication configuration Account ID request.
-        --associate-default-security-group: Update replication configuration associate default Application Migration Service Security group request.
-        --bandwidth-throttling=: Update replication configuration bandwidth throttling request.
-        --create-public-ip: Update replication configuration create Public IP request.
-        --data-plane-routing=: Update replication configuration data plane routing request.
-        --default-large-staging-disk-type=: Update replication configuration use default large Staging Disk type request.
-        --ebs-encryption-key-arn=: Update replication configuration EBS encryption key ARN request.
-        --ebs-encryption=: Update replication configuration EBS encryption request.
-        --name=: Update replication configuration name request.
-        --no-associate-default-security-group: Update replication configuration associate default Application Migration Service Security group request.
-        --no-create-public-ip: Update replication configuration create Public IP request.
-        --no-use-dedicated-replication-server: Update replication configuration use dedicated Replication Server request.
-        --no-use-fips-endpoint: Update replication configuration use Fips Endpoint.
-        --replicated-disks=: Update replication configuration replicated disks request.
-        --replication-server-instance-type=: Update replication configuration Replication Server instance type request.
-        --replication-servers-security-groups-ids=: Update replication configuration Replication Server Security Groups IDs request.
-        --source-server-id=!: Update replication configuration Source Server ID request.
-        --staging-area-subnet-id=: Update replication configuration Staging Area subnet request.
-        --staging-area-tags=: Update replication configuration Staging Area Tags request.
-        --use-dedicated-replication-server: Update replication configuration use dedicated Replication Server request.
-        --use-fips-endpoint: Update replication configuration use Fips Endpoint.
-      completion:
-        flag:
-            data-plane-routing:
-                - PRIVATE_IP
-                - PUBLIC_IP
-            default-large-staging-disk-type:
-                - GP2
-                - ST1
-                - GP3
-            ebs-encryption:
-                - DEFAULT
-                - CUSTOM
-    - name: update-source-server
-      description: Update Source Server.
-      flags:
-        --account-id=: Update Source Server request account ID.
-        --connector-action=: Update Source Server request connector action.
-        --source-server-id=!: Update Source Server request source server ID.
-    - name: change-server-life-cycle-state
-      description: 'Allows the user to set the SourceServer.LifeCycle.state property for specific Source Server IDs to one of the following: READY\_FOR\_TEST or READY\_FOR\_CUTOVER.'
-      flags:
-        --account-id=: The request to change the source server migration account ID.
-        --life-cycle=!: The request to change the source server migration lifecycle state.
-        --source-server-id=!: The request to change the source server migration lifecycle state by source server ID.
-    - name: create-application
-      description: Create application.
-      flags:
-        --account-id=: Account ID.
-        --description=: Application description.
-        --name=!: Application name.
-        --tags=: Application tags.
-    - name: delete-connector
-      description: Delete Connector.
-      flags:
-        --connector-id=!: Delete Connector request connector ID.
-    - name: describe-launch-configuration-templates
-      description: Lists all Launch Configuration Templates, filtered by Launch Configuration Template IDs
-      flags:
-        --launch-configuration-template-ids=: Request to filter Launch Configuration Templates list by Launch Configuration Template ID.
-        --max-results=: Maximum results to be returned in DescribeLaunchConfigurationTemplates.
-        --next-token=: Next pagination token returned from DescribeLaunchConfigurationTemplates.
-    - name: list-connectors
-      description: List Connectors.
-      flags:
-        --filters=: List Connectors Request filters.
-        --max-results=: List Connectors Request max results.
-        --next-token=: List Connectors Request next token.
-    - name: start-replication
-      description: Starts replication for SNAPSHOT\_SHIPPING agents.
-      flags:
-        --account-id=: Account ID on which to start replication.
-        --source-server-id=!: ID of source server on which to start replication.
-    - name: update-launch-configuration-template
-      description: Updates an existing Launch Configuration Template by ID.
-      flags:
-        --associate-public-ip-address: Associate public Ip address.
-        --boot-mode=: Launch configuration template boot mode.
-        --copy-private-ip: Copy private Ip.
-        --copy-tags: Copy tags.
-        --enable-map-auto-tagging: Enable map auto tagging.
-        --large-volume-conf=: Large volume config.
-        --launch-configuration-template-id=!: Launch Configuration Template ID.
-        --launch-disposition=: Launch disposition.
-        --licensing=: ""
-        --map-auto-tagging-mpe-id=: Launch configuration template map auto tagging MPE ID.
-        --no-associate-public-ip-address: Associate public Ip address.
-        --no-copy-private-ip: Copy private Ip.
-        --no-copy-tags: Copy tags.
-        --no-enable-map-auto-tagging: Enable map auto tagging.
-        --post-launch-actions=: Post Launch Action to execute on the Test or Cutover instance.
-        --small-volume-conf=: Small volume config.
-        --small-volume-max-size=: Small volume maximum size.
-        --target-instance-type-right-sizing-method=: Target instance type right-sizing method.
-      completion:
-        flag:
-            boot-mode:
-                - LEGACY_BIOS
-                - UEFI
-                - USE_SOURCE
-            launch-disposition:
-                - STOPPED
-                - STARTED
-            target-instance-type-right-sizing-method:
-                - NONE
-                - BASIC
-    - name: update-wave
-      description: Update wave.
-      flags:
-        --account-id=: Account ID.
-        --description=: Wave description.
-        --name=: Wave name.
-        --wave-id=!: Wave ID.
-    - name: delete-wave
-      description: Delete wave.
-      flags:
-        --account-id=: Account ID.
-        --wave-id=!: Wave ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Request to describe Replication Configuration template by max results.
+        --next-token=: Request to describe Replication Configuration template by next token.
+        --page-size=: The size of each page to get in the AWS service call.
+        --replication-configuration-template-i-ds=: Request to describe Replication Configuration template by template IDs.
+        --starting-token=: A token to specify where to start paginating.
     - name: describe-source-servers
       description: Retrieves all SourceServers or multiple SourceServers by ID.
       flags:
         --account-id=: Request to filter Source Servers list by Accoun ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --filters=: Request to filter Source Servers list.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: Request to filter Source Servers list by maximum results.
         --next-token=: Request to filter Source Servers list by next token.
-    - name: list-applications
-      description: Retrieves all applications or multiple applications by ID.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: finalize-cutover
+      description: Finalizes the cutover immediately for specific Source Servers.
       flags:
-        --account-id=: Applications list Account ID.
-        --filters=: Applications list filters.
-        --max-results=: Maximum results to return when listing applications.
-        --next-token=: Request next token.
-    - name: list-template-actions
-      description: List template post migration custom actions.
+        --account-id=: Request to finalize Cutover by Source Account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-server-id=!: Request to finalize Cutover by Source Server ID.
+    - name: tag-resource
+      description: Adds or overwrites only the specified tags for the specified Application Migration Service resource or resources.
       flags:
-        --filters=: Filters to apply when listing template post migration custom actions.
-        --launch-configuration-template-id=!: Launch configuration template ID.
-        --max-results=: Maximum amount of items to return when listing template post migration custom actions.
-        --next-token=: Next token to use when listing template post migration custom actions.
-    - name: remove-source-server-action
-      description: Remove source server post migration custom action.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: Tag resource by ARN.
+        --tags=!: Tag resource by Tags.
+    - name: delete-wave
+      description: Delete wave.
       flags:
-        --account-id=: Source server post migration account ID.
-        --action-id=!: Source server post migration custom action ID to remove.
-        --source-server-id=!: Source server ID of the post migration custom action to remove.
-    - name: untag-resource
-      description: Deletes the specified set of tags from the specified set of Application Migration Service resources.
+        --account-id=: Account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --wave-id=!: Wave ID.
+    - name: disassociate-applications
+      description: Disassociate applications from wave.
       flags:
-        --resource-arn=!: Untag resource by ARN.
-        --tag-keys=!: Untag resource by Keys.
+        --account-id=: Account ID.
+        --application-ids=!: Application IDs list.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --wave-id=!: Wave ID.
+    - name: disconnect-from-service
+      description: Disconnects specific Source Servers from Application Migration Service.
+      flags:
+        --account-id=: Request to disconnect Source Server from service by Account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-server-id=!: Request to disconnect Source Server from service by Server ID.
+    - name: list-export-errors
+      description: List export errors.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --export-id=!: List export errors request export id.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: List export errors request max results.
+        --next-token=: List export errors request next token.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: delete-connector
+      description: Delete Connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connector-id=!: Delete Connector request connector ID.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-imports
+      description: List imports.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: List imports request filters.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: List imports request max results.
+        --next-token=: List imports request next token.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-managed-accounts
+      description: List Managed Accounts.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: List managed accounts request max results.
+        --next-token=: List managed accounts request next token.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-source-server-actions
+      description: List source server post migration custom actions.
+      flags:
+        --account-id=: Account ID to return when listing source server post migration custom actions.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters to apply when listing source server post migration custom actions.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum amount of items to return when listing source server post migration custom actions.
+        --next-token=: Next token to use when listing source server post migration custom actions.
+        --page-size=: The size of each page to get in the AWS service call.
+        --source-server-id=!: Source server ID.
+        --starting-token=: A token to specify where to start paginating.
+    - name: start-export
+      description: Start export.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --s3-bucket-owner=: Start export request s3 bucket owner.
+        --s3-bucket=!: Start export request s3 bucket.
+        --s3-key=!: Start export request s3key.
+    - name: update-wave
+      description: Update wave.
+      flags:
+        --account-id=: Account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: Wave description.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: Wave name.
+        --wave-id=!: Wave ID.
+    - name: initialize-service
+      description: Initialize Application Migration Service.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: update-launch-configuration
       description: Updates multiple LaunchConfigurations by Source Server ID.
       flags:
         --account-id=: Update Launch configuration Account ID.
         --boot-mode=: Update Launch configuration boot mode request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --copy-private-ip: Update Launch configuration copy Private IP request.
         --copy-tags: Update Launch configuration copy Tags request.
         --enable-map-auto-tagging: Enable map auto tagging.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --launch-disposition=: Update Launch configuration launch disposition request.
         --licensing=: Update Launch configuration licensing request.
         --map-auto-tagging-mpe-id=: Launch configuration map auto tagging MPE ID.
@@ -304,77 +270,214 @@ commands:
             target-instance-type-right-sizing-method:
                 - NONE
                 - BASIC
-    - name: delete-launch-configuration-template
-      description: Deletes a single Launch Configuration Template by ID.
+    - name: update-source-server
+      description: Update Source Server.
       flags:
-        --launch-configuration-template-id=!: ID of resource to be deleted.
-    - name: delete-source-server
-      description: Deletes a single source server by ID.
+        --account-id=: Update Source Server request account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connector-action=: Update Source Server request connector action.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-server-id=!: Update Source Server request source server ID.
+    - name: describe-jobs
+      description: Returns a list of Jobs.
       flags:
-        --account-id=: Request to delete Source Server from service by Account ID.
-        --source-server-id=!: Request to delete Source Server from service by Server ID.
-    - name: delete-vcenter-client
-      description: Deletes a given vCenter client by ID.
+        --account-id=: Request to describe job log items by Account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Request to describe Job log filters.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Request to describe job log items by max results.
+        --next-token=: Request to describe job log items by next token.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-launch-configuration
+      description: Lists all LaunchConfigurations available, filtered by Source Server IDs.
       flags:
-        --vcenter-client-id=!: ID of resource to be deleted.
-    - name: finalize-cutover
-      description: Finalizes the cutover immediately for specific Source Servers.
-      flags:
-        --account-id=: Request to finalize Cutover by Source Account ID.
-        --source-server-id=!: Request to finalize Cutover by Source Server ID.
+        --account-id=: Request to get Launch Configuration information by Account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-server-id=!: Request to get Launch Configuration information by Source Server ID.
     - name: get-replication-configuration
       description: Lists all ReplicationConfigurations, filtered by Source Server ID.
       flags:
         --account-id=: Request to get Replication Configuration by Account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --source-server-id=!: Request to get Replication Configuration by Source Server ID.
-    - name: remove-template-action
-      description: Remove template post migration custom action.
+    - name: remove-source-server-action
+      description: Remove source server post migration custom action.
       flags:
-        --action-id=!: Template post migration custom action ID to remove.
-        --launch-configuration-template-id=!: Launch configuration template ID of the post migration custom action to remove.
-    - name: stop-replication
-      description: Stop Replication.
+        --account-id=: Source server post migration account ID.
+        --action-id=!: Source server post migration custom action ID to remove.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-server-id=!: Source server ID of the post migration custom action to remove.
+    - name: associate-source-servers
+      description: Associate source servers to application.
       flags:
-        --account-id=: Stop Replication Request account ID.
-        --source-server-id=!: Stop Replication Request source server ID.
-    - name: tag-resource
-      description: Adds or overwrites only the specified tags for the specified Application Migration Service resource or resources.
+        --account-id=: Account ID.
+        --application-id=!: Application ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-server-i-ds=!: Source server IDs list.
+    - name: delete-replication-configuration-template
+      description: Deletes a single Replication Configuration Template by ID
       flags:
-        --resource-arn=!: Tag resource by ARN.
-        --tags=!: Tag resource by Tags.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --replication-configuration-template-id=!: Request to delete Replication Configuration Template from service by Replication Configuration Template ID.
+    - name: delete-vcenter-client
+      description: Deletes a given vCenter client by ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --vcenter-client-id=!: ID of resource to be deleted.
+    - name: describe-vcenter-clients
+      description: Returns a list of the installed vCenter clients.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum results to be returned in DescribeVcenterClients.
+        --next-token=: Next pagination token to be provided for DescribeVcenterClients.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: List all tags for your Application Migration Service resources.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: List tags for resource request by ARN.
+    - name: retry-data-replication
+      description: Causes the data replication initiation sequence to begin immediately upon next Handshake for specified SourceServer IDs, regardless of when the previous initiation started.
+      flags:
+        --account-id=: Retry data replication for Account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-server-id=!: Retry data replication for Source Server ID.
+    - name: unarchive-application
+      description: Unarchive application.
+      flags:
+        --account-id=: Account ID.
+        --application-id=!: Application ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: update-application
       description: Update application.
       flags:
         --account-id=: Account ID.
         --application-id=!: Application ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: Application description.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=: Application name.
-    - name: describe-replication-configuration-templates
-      description: Lists all ReplicationConfigurationTemplates, filtered by Source Server IDs.
+    - name: archive-wave
+      description: Archive wave.
       flags:
-        --max-results=: Request to describe Replication Configuration template by max results.
-        --next-token=: Request to describe Replication Configuration template by next token.
-        --replication-configuration-template-i-ds=: Request to describe Replication Configuration template by template IDs.
-    - name: list-managed-accounts
-      description: List Managed Accounts.
+        --account-id=: Account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --wave-id=!: Wave ID.
+    - name: associate-applications
+      description: Associate applications to wave.
       flags:
-        --max-results=: List managed accounts request max results.
-        --next-token=: List managed accounts request next token.
-    - name: create-connector
-      description: Create Connector.
+        --account-id=: Account ID.
+        --application-ids=!: Application IDs list.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --wave-id=!: Wave ID.
+    - name: create-replication-configuration-template
+      description: Creates a new ReplicationConfigurationTemplate.
       flags:
-        --name=!: Create Connector request name.
-        --ssm-command-config=: Create Connector request SSM command config.
-        --ssm-instance-id=!: Create Connector request SSM instance ID.
-        --tags=: Create Connector request tags.
+        --associate-default-security-group!: Request to associate the default Application Migration Service Security group with the Replication Settings template.
+        --bandwidth-throttling=!: Request to configure bandwidth throttling during Replication Settings template creation.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --create-public-ip!: Request to create Public IP during Replication Settings template creation.
+        --data-plane-routing=!: Request to configure data plane routing during Replication Settings template creation.
+        --default-large-staging-disk-type=!: Request to configure the default large staging disk EBS volume type during Replication Settings template creation.
+        --ebs-encryption-key-arn=: Request to configure an EBS encryption key during Replication Settings template creation.
+        --ebs-encryption=!: Request to configure EBS encryption during Replication Settings template creation.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-associate-default-security-group!: Request to associate the default Application Migration Service Security group with the Replication Settings template.
+        --no-create-public-ip!: Request to create Public IP during Replication Settings template creation.
+        --no-use-dedicated-replication-server!: Request to use Dedicated Replication Servers during Replication Settings template creation.
+        --no-use-fips-endpoint: Request to use Fips Endpoint during Replication Settings template creation.
+        --replication-server-instance-type=!: Request to configure the Replication Server instance type during Replication Settings template creation.
+        --replication-servers-security-groups-ids=!: Request to configure the Replication Server Security group ID during Replication Settings template creation.
+        --staging-area-subnet-id=!: Request to configure the Staging Area subnet ID during Replication Settings template creation.
+        --staging-area-tags=!: Request to configure Staging Area tags during Replication Settings template creation.
+        --tags=: Request to configure tags during Replication Settings template creation.
+        --use-dedicated-replication-server!: Request to use Dedicated Replication Servers during Replication Settings template creation.
+        --use-fips-endpoint: Request to use Fips Endpoint during Replication Settings template creation.
+      completion:
+        flag:
+            data-plane-routing:
+                - PRIVATE_IP
+                - PUBLIC_IP
+            default-large-staging-disk-type:
+                - GP2
+                - ST1
+                - GP3
+            ebs-encryption:
+                - DEFAULT
+                - CUSTOM
+    - name: delete-source-server
+      description: Deletes a single source server by ID.
+      flags:
+        --account-id=: Request to delete Source Server from service by Account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-server-id=!: Request to delete Source Server from service by Server ID.
+    - name: describe-job-log-items
+      description: Retrieves detailed job log items with paging.
+      flags:
+        --account-id=: Request to describe Job log Account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: Request to describe Job log job ID.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Request to describe Job log item maximum results.
+        --next-token=: Request to describe Job log next token.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-connector
+      description: Update Connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connector-id=!: Update Connector request connector ID.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: Update Connector request name.
+        --ssm-command-config=: Update Connector request SSM command config.
     - name: create-launch-configuration-template
       description: Creates a new Launch Configuration Template.
       flags:
         --associate-public-ip-address: Associate public Ip address.
         --boot-mode=: Launch configuration template boot mode.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --copy-private-ip: Copy private Ip.
         --copy-tags: Copy tags.
         --enable-map-auto-tagging: Enable map auto tagging.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --large-volume-conf=: Large volume config.
         --launch-disposition=: Launch disposition.
         --licensing=: ""
@@ -400,75 +503,40 @@ commands:
             target-instance-type-right-sizing-method:
                 - NONE
                 - BASIC
-    - name: create-replication-configuration-template
-      description: Creates a new ReplicationConfigurationTemplate.
-      flags:
-        --associate-default-security-group!: Request to associate the default Application Migration Service Security group with the Replication Settings template.
-        --bandwidth-throttling=!: Request to configure bandwidth throttling during Replication Settings template creation.
-        --create-public-ip!: Request to create Public IP during Replication Settings template creation.
-        --data-plane-routing=!: Request to configure data plane routing during Replication Settings template creation.
-        --default-large-staging-disk-type=!: Request to configure the default large staging disk EBS volume type during Replication Settings template creation.
-        --ebs-encryption-key-arn=: Request to configure an EBS encryption key during Replication Settings template creation.
-        --ebs-encryption=!: Request to configure EBS encryption during Replication Settings template creation.
-        --no-associate-default-security-group!: Request to associate the default Application Migration Service Security group with the Replication Settings template.
-        --no-create-public-ip!: Request to create Public IP during Replication Settings template creation.
-        --no-use-dedicated-replication-server!: Request to use Dedicated Replication Servers during Replication Settings template creation.
-        --no-use-fips-endpoint: Request to use Fips Endpoint during Replication Settings template creation.
-        --replication-server-instance-type=!: Request to configure the Replication Server instance type during Replication Settings template creation.
-        --replication-servers-security-groups-ids=!: Request to configure the Replication Server Security group ID during Replication Settings template creation.
-        --staging-area-subnet-id=!: Request to configure the Staging Area subnet ID during Replication Settings template creation.
-        --staging-area-tags=!: Request to configure Staging Area tags during Replication Settings template creation.
-        --tags=: Request to configure tags during Replication Settings template creation.
-        --use-dedicated-replication-server!: Request to use Dedicated Replication Servers during Replication Settings template creation.
-        --use-fips-endpoint: Request to use Fips Endpoint during Replication Settings template creation.
-      completion:
-        flag:
-            data-plane-routing:
-                - PRIVATE_IP
-                - PUBLIC_IP
-            default-large-staging-disk-type:
-                - GP2
-                - ST1
-                - GP3
-            ebs-encryption:
-                - DEFAULT
-                - CUSTOM
     - name: list-exports
       description: List exports.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --filters=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: List export request max results.
         --next-token=: List export request next token.
-    - name: list-imports
-      description: List imports.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: put-template-action
+      description: Put template post migration custom action.
       flags:
-        --filters=: List imports request filters.
-        --max-results=: List imports request max results.
-        --next-token=: List imports request next token.
-    - name: pause-replication
-      description: Pause Replication.
-      flags:
-        --account-id=: Pause Replication Request account ID.
-        --source-server-id=!: Pause Replication Request source server ID.
-    - name: put-source-server-action
-      description: Put source server post migration custom action.
-      flags:
-        --account-id=: Source server post migration custom account ID.
-        --action-id=!: Source server post migration custom action ID.
-        --action-name=!: Source server post migration custom action name.
-        --active: Source server post migration custom action active status.
-        --category=: Source server post migration custom action category.
-        --description=: Source server post migration custom action description.
-        --document-identifier=!: Source server post migration custom action document identifier.
-        --document-version=: Source server post migration custom action document version.
-        --external-parameters=: Source server post migration custom action external parameters.
-        --must-succeed-for-cutover: Source server post migration custom action must succeed for cutover.
-        --no-active: Source server post migration custom action active status.
-        --no-must-succeed-for-cutover: Source server post migration custom action must succeed for cutover.
-        --order=!: Source server post migration custom action order.
-        --parameters=: Source server post migration custom action parameters.
-        --source-server-id=!: Source server ID.
-        --timeout-seconds=: Source server post migration custom action timeout in seconds.
+        --action-id=!: Template post migration custom action ID.
+        --action-name=!: Template post migration custom action name.
+        --active: Template post migration custom action active status.
+        --category=: Template post migration custom action category.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: Template post migration custom action description.
+        --document-identifier=!: Template post migration custom action document identifier.
+        --document-version=: Template post migration custom action document version.
+        --external-parameters=: Template post migration custom action external parameters.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --launch-configuration-template-id=!: Launch configuration template ID.
+        --must-succeed-for-cutover: Template post migration custom action must succeed for cutover.
+        --no-active: Template post migration custom action active status.
+        --no-must-succeed-for-cutover: Template post migration custom action must succeed for cutover.
+        --operating-system=: Operating system eligible for this template post migration custom action.
+        --order=!: Template post migration custom action order.
+        --parameters=: Template post migration custom action parameters.
+        --timeout-seconds=: Template post migration custom action timeout in seconds.
       completion:
         flag:
             category:
@@ -483,43 +551,28 @@ commands:
                 - CONFIGURATION
                 - BACKUP
                 - OTHER
-    - name: resume-replication
-      description: Resume Replication.
+    - name: stop-replication
+      description: Stop Replication.
       flags:
-        --account-id=: Resume Replication Request account ID.
-        --source-server-id=!: Resume Replication Request source server ID.
-    - name: start-cutover
-      description: Launches a Cutover Instance for specific Source Servers.
-      flags:
-        --account-id=: Start Cutover by Account IDs
-        --source-server-i-ds=!: Start Cutover by Source Server IDs.
-        --tags=: Start Cutover by Tags.
-    - name: start-import
-      description: Start import.
-      flags:
-        --client-token=: Start import request client token.
-        --s3-bucket-source=!: Start import request s3 bucket source.
-    - name: unarchive-application
-      description: Unarchive application.
-      flags:
-        --account-id=: Account ID.
-        --application-id=!: Application ID.
-    - name: unarchive-wave
-      description: Unarchive wave.
-      flags:
-        --account-id=: Account ID.
-        --wave-id=!: Wave ID.
+        --account-id=: Stop Replication Request account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-server-id=!: Stop Replication Request source server ID.
     - name: update-replication-configuration-template
       description: Updates multiple ReplicationConfigurationTemplates by ID.
       flags:
         --arn=: Update replication configuration template ARN request.
         --associate-default-security-group: Update replication configuration template associate default Application Migration Service Security group request.
         --bandwidth-throttling=: Update replication configuration template bandwidth throttling request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --create-public-ip: Update replication configuration template create Public IP request.
         --data-plane-routing=: Update replication configuration template data plane routing request.
         --default-large-staging-disk-type=: Update replication configuration template use default large Staging Disk type request.
         --ebs-encryption-key-arn=: Update replication configuration template EBS encryption key ARN request.
         --ebs-encryption=: Update replication configuration template EBS encryption request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-associate-default-security-group: Update replication configuration template associate default Application Migration Service Security group request.
         --no-create-public-ip: Update replication configuration template create Public IP request.
         --no-use-dedicated-replication-server: Update replication configuration template use dedicated Replication Server request.
@@ -543,27 +596,280 @@ commands:
             ebs-encryption:
                 - DEFAULT
                 - CUSTOM
-    - name: archive-wave
-      description: Archive wave.
+    - name: describe-launch-configuration-templates
+      description: Lists all Launch Configuration Templates, filtered by Launch Configuration Template IDs
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --launch-configuration-template-ids=: Request to filter Launch Configuration Templates list by Launch Configuration Template ID.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum results to be returned in DescribeLaunchConfigurationTemplates.
+        --next-token=: Next pagination token returned from DescribeLaunchConfigurationTemplates.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: pause-replication
+      description: Pause Replication.
+      flags:
+        --account-id=: Pause Replication Request account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-server-id=!: Pause Replication Request source server ID.
+    - name: untag-resource
+      description: Deletes the specified set of tags from the specified set of Application Migration Service resources.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: Untag resource by ARN.
+        --tag-keys=!: Untag resource by Keys.
+    - name: delete-launch-configuration-template
+      description: Deletes a single Launch Configuration Template by ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --launch-configuration-template-id=!: ID of resource to be deleted.
+    - name: list-applications
+      description: Retrieves all applications or multiple applications by ID.
+      flags:
+        --account-id=: Applications list Account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Applications list filters.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum results to return when listing applications.
+        --next-token=: Request next token.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-connectors
+      description: List Connectors.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: List Connectors Request filters.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: List Connectors Request max results.
+        --next-token=: List Connectors Request next token.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-template-actions
+      description: List template post migration custom actions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters to apply when listing template post migration custom actions.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --launch-configuration-template-id=!: Launch configuration template ID.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum amount of items to return when listing template post migration custom actions.
+        --next-token=: Next token to use when listing template post migration custom actions.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: remove-template-action
+      description: Remove template post migration custom action.
+      flags:
+        --action-id=!: Template post migration custom action ID to remove.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --launch-configuration-template-id=!: Launch configuration template ID of the post migration custom action to remove.
+    - name: unarchive-wave
+      description: Unarchive wave.
       flags:
         --account-id=: Account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --wave-id=!: Wave ID.
-    - name: describe-job-log-items
-      description: Retrieves detailed job log items with paging.
-      flags:
-        --account-id=: Request to describe Job log Account ID.
-        --job-id=!: Request to describe Job log job ID.
-        --max-results=: Request to describe Job log item maximum results.
-        --next-token=: Request to describe Job log next token.
     - name: mark-as-archived
       description: Archives specific Source Servers by setting the SourceServer.isArchived property to true for specified SourceServers by ID.
       flags:
         --account-id=: Mark as archived by Account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --source-server-id=!: Mark as archived by Source Server ID.
+    - name: change-server-life-cycle-state
+      description: 'Allows the user to set the SourceServer.LifeCycle.state property for specific Source Server IDs to one of the following: READY\_FOR\_TEST or READY\_FOR\_CUTOVER.'
+      flags:
+        --account-id=: The request to change the source server migration account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --life-cycle=!: The request to change the source server migration lifecycle state.
+        --source-server-id=!: The request to change the source server migration lifecycle state by source server ID.
+    - name: create-connector
+      description: Create Connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: Create Connector request name.
+        --ssm-command-config=: Create Connector request SSM command config.
+        --ssm-instance-id=!: Create Connector request SSM instance ID.
+        --tags=: Create Connector request tags.
+    - name: disassociate-source-servers
+      description: Disassociate source servers from application.
+      flags:
+        --account-id=: Account ID.
+        --application-id=!: Application ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-server-i-ds=!: Source server IDs list.
+    - name: list-waves
+      description: Retrieves all waves or multiple waves by ID.
+      flags:
+        --account-id=: Request account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Waves list filters.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum results to return when listing waves.
+        --next-token=: Request next token.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: terminate-target-instances
+      description: Starts a job that terminates specific launched EC2 Test and Cutover instances.
+      flags:
+        --account-id=: Terminate Target instance by Account ID
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-server-i-ds=!: Terminate Target instance by Source Server IDs.
+        --tags=: Terminate Target instance by Tags.
+    - name: archive-application
+      description: Archive application.
+      flags:
+        --account-id=: Account ID.
+        --application-id=!: Application ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-import-errors
+      description: List import errors.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --import-id=!: List import errors request import id.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: List import errors request max results.
+        --next-token=: List import errors request next token.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: start-replication
+      description: Starts replication for SNAPSHOT\_SHIPPING agents.
+      flags:
+        --account-id=: Account ID on which to start replication.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-server-id=!: ID of source server on which to start replication.
+    - name: update-launch-configuration-template
+      description: Updates an existing Launch Configuration Template by ID.
+      flags:
+        --associate-public-ip-address: Associate public Ip address.
+        --boot-mode=: Launch configuration template boot mode.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --copy-private-ip: Copy private Ip.
+        --copy-tags: Copy tags.
+        --enable-map-auto-tagging: Enable map auto tagging.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --large-volume-conf=: Large volume config.
+        --launch-configuration-template-id=!: Launch Configuration Template ID.
+        --launch-disposition=: Launch disposition.
+        --licensing=: ""
+        --map-auto-tagging-mpe-id=: Launch configuration template map auto tagging MPE ID.
+        --no-associate-public-ip-address: Associate public Ip address.
+        --no-copy-private-ip: Copy private Ip.
+        --no-copy-tags: Copy tags.
+        --no-enable-map-auto-tagging: Enable map auto tagging.
+        --post-launch-actions=: Post Launch Action to execute on the Test or Cutover instance.
+        --small-volume-conf=: Small volume config.
+        --small-volume-max-size=: Small volume maximum size.
+        --target-instance-type-right-sizing-method=: Target instance type right-sizing method.
+      completion:
+        flag:
+            boot-mode:
+                - LEGACY_BIOS
+                - UEFI
+                - USE_SOURCE
+            launch-disposition:
+                - STOPPED
+                - STARTED
+            target-instance-type-right-sizing-method:
+                - NONE
+                - BASIC
+    - name: resume-replication
+      description: Resume Replication.
+      flags:
+        --account-id=: Resume Replication Request account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-server-id=!: Resume Replication Request source server ID.
+    - name: start-cutover
+      description: Launches a Cutover Instance for specific Source Servers.
+      flags:
+        --account-id=: Start Cutover by Account IDs
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-server-i-ds=!: Start Cutover by Source Server IDs.
+        --tags=: Start Cutover by Tags.
+    - name: update-replication-configuration
+      description: Allows you to update multiple ReplicationConfigurations by Source Server ID.
+      flags:
+        --account-id=: Update replication configuration Account ID request.
+        --associate-default-security-group: Update replication configuration associate default Application Migration Service Security group request.
+        --bandwidth-throttling=: Update replication configuration bandwidth throttling request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --create-public-ip: Update replication configuration create Public IP request.
+        --data-plane-routing=: Update replication configuration data plane routing request.
+        --default-large-staging-disk-type=: Update replication configuration use default large Staging Disk type request.
+        --ebs-encryption-key-arn=: Update replication configuration EBS encryption key ARN request.
+        --ebs-encryption=: Update replication configuration EBS encryption request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: Update replication configuration name request.
+        --no-associate-default-security-group: Update replication configuration associate default Application Migration Service Security group request.
+        --no-create-public-ip: Update replication configuration create Public IP request.
+        --no-use-dedicated-replication-server: Update replication configuration use dedicated Replication Server request.
+        --no-use-fips-endpoint: Update replication configuration use Fips Endpoint.
+        --replicated-disks=: Update replication configuration replicated disks request.
+        --replication-server-instance-type=: Update replication configuration Replication Server instance type request.
+        --replication-servers-security-groups-ids=: Update replication configuration Replication Server Security Groups IDs request.
+        --source-server-id=!: Update replication configuration Source Server ID request.
+        --staging-area-subnet-id=: Update replication configuration Staging Area subnet request.
+        --staging-area-tags=: Update replication configuration Staging Area Tags request.
+        --use-dedicated-replication-server: Update replication configuration use dedicated Replication Server request.
+        --use-fips-endpoint: Update replication configuration use Fips Endpoint.
+      completion:
+        flag:
+            data-plane-routing:
+                - PRIVATE_IP
+                - PUBLIC_IP
+            default-large-staging-disk-type:
+                - GP2
+                - ST1
+                - GP3
+            ebs-encryption:
+                - DEFAULT
+                - CUSTOM
     - name: update-source-server-replication-type
       description: Allows you to change between the AGENT\_BASED replication type and the SNAPSHOT\_SHIPPING replication type.
       flags:
         --account-id=: Account ID on which to update replication type.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --replication-type=!: Replication type to which to update source server.
         --source-server-id=!: ID of source server on which to update replication type.
       completion:
@@ -571,50 +877,3 @@ commands:
             replication-type:
                 - AGENT_BASED
                 - SNAPSHOT_SHIPPING
-    - name: delete-replication-configuration-template
-      description: Deletes a single Replication Configuration Template by ID
-      flags:
-        --replication-configuration-template-id=!: Request to delete Replication Configuration Template from service by Replication Configuration Template ID.
-    - name: retry-data-replication
-      description: Causes the data replication initiation sequence to begin immediately upon next Handshake for specified SourceServer IDs, regardless of when the previous initiation started.
-      flags:
-        --account-id=: Retry data replication for Account ID.
-        --source-server-id=!: Retry data replication for Source Server ID.
-    - name: disassociate-applications
-      description: Disassociate applications from wave.
-      flags:
-        --account-id=: Account ID.
-        --application-ids=!: Application IDs list.
-        --wave-id=!: Wave ID.
-    - name: list-source-server-actions
-      description: List source server post migration custom actions.
-      flags:
-        --account-id=: Account ID to return when listing source server post migration custom actions.
-        --filters=: Filters to apply when listing source server post migration custom actions.
-        --max-results=: Maximum amount of items to return when listing source server post migration custom actions.
-        --next-token=: Next token to use when listing source server post migration custom actions.
-        --source-server-id=!: Source server ID.
-    - name: terminate-target-instances
-      description: Starts a job that terminates specific launched EC2 Test and Cutover instances.
-      flags:
-        --account-id=: Terminate Target instance by Account ID
-        --source-server-i-ds=!: Terminate Target instance by Source Server IDs.
-        --tags=: Terminate Target instance by Tags.
-    - name: create-wave
-      description: Create wave.
-      flags:
-        --account-id=: Account ID.
-        --description=: Wave description.
-        --name=!: Wave name.
-        --tags=: Wave tags.
-    - name: disconnect-from-service
-      description: Disconnects specific Source Servers from Application Migration Service.
-      flags:
-        --account-id=: Request to disconnect Source Server from service by Account ID.
-        --source-server-id=!: Request to disconnect Source Server from service by Server ID.
-    - name: initialize-service
-      description: Initialize Application Migration Service.
-    - name: list-tags-for-resource
-      description: List all tags for your Application Migration Service resources.
-      flags:
-        --resource-arn=!: List tags for resource request by ARN.

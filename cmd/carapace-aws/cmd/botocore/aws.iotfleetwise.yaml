@@ -1,52 +1,126 @@
 name: iotfleetwise
 description: AWS IoT FleetWise
 commands:
-    - name: update-state-template
-      description: Updates a state template.
+    - name: list-state-templates
+      description: Lists information about created state templates.
       flags:
-        --data-extra-dimensions=: A list of vehicle attributes to associate with the payload published on the state template's MQTT topic.
-        --description=: A brief description of the state template.
-        --identifier=!: The unique ID of the state template.
-        --metadata-extra-dimensions=: A list of vehicle attributes to associate with user properties of the messages published on the state template's MQTT topic.
-        --state-template-properties-to-add=: Add signals from which data is collected as part of the state template.
-        --state-template-properties-to-remove=: Remove signals from which data is collected as part of the state template.
-    - name: get-signal-catalog
-      description: Retrieves information about a signal catalog.
-      flags:
-        --name=!: The name of the signal catalog to retrieve information about.
-    - name: list-signal-catalog-nodes
-      description: Lists of information about the signals (nodes) specified in a signal catalog.
-      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --list-response-scope=: 'When you set the `listResponseScope` parameter to `METADATA_ONLY`, the list response includes: state template ID, Amazon Resource Name (ARN), creation time, and last modification time.'
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of items to return, between 1 and 100, inclusive.
-        --name=!: The name of the signal catalog to list information about.
-        --next-token=: A pagination token for the next set of results.
-        --signal-node-type=: The type of node in the signal catalog.
+        --next-token=: The token to retrieve the next set of results, or `null` if there are no more results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
       completion:
         flag:
-            signal-node-type:
-                - SENSOR
-                - ACTUATOR
-                - ATTRIBUTE
-                - BRANCH
-                - CUSTOM_STRUCT
-                - CUSTOM_PROPERTY
-    - name: create-signal-catalog
-      description: Creates a collection of standardized signals that can be reused to create vehicle models.
+            list-response-scope:
+                - METADATA_ONLY
+    - name: register-account
+      description: This API operation contains deprecated parameters.
       flags:
-        --description=: A brief description of the signal catalog.
-        --name=!: The name of the signal catalog to create.
-        --nodes=: A list of information about nodes, which are a general abstraction of signals.
-        --tags=: Metadata that can be used to manage the signal catalog.
-    - name: delete-vehicle
-      description: Deletes a vehicle and removes it from any campaigns.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --iam-resources=: The IAM resource that allows Amazon Web Services IoT FleetWise to send data to Amazon Timestream.
+        --timestream-resources=: ""
+    - name: get-vehicle
+      description: Retrieves information about a vehicle.
       flags:
-        --vehicle-name=!: The ID of the vehicle to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --vehicle-name=!: The ID of the vehicle to retrieve information about.
+    - name: delete-state-template
+      description: Deletes a state template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique ID of the state template.
+    - name: get-logging-options
+      description: Retrieves the logging options.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-vehicle-status
+      description: Retrieves information about the status of campaigns, decoder manifests, or state templates associated with a vehicle.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return, between 1 and 100, inclusive.
+        --next-token=: A pagination token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --vehicle-name=!: The ID of the vehicle to retrieve information about.
+    - name: update-campaign
+      description: Updates a campaign.
+      flags:
+        --action=!: Specifies how to update a campaign.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-extra-dimensions=: A list of vehicle attributes to associate with a signal.
+        --description=: The description of the campaign.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the campaign to update.
+      completion:
+        flag:
+            action:
+                - APPROVE
+                - SUSPEND
+                - RESUME
+                - UPDATE
+    - name: import-decoder-manifest
+      description: Creates a decoder manifest using your existing CAN DBC file from your local device.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the decoder manifest to import.
+        --network-file-definitions=!: The file to load into an Amazon Web Services account.
+    - name: list-model-manifests
+      description: Retrieves a list of vehicle models (model manifests).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --list-response-scope=: 'When you set the `listResponseScope` parameter to `METADATA_ONLY`, the list response includes: model manifest name, Amazon Resource Name (ARN), creation time, and last modification time.'
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return, between 1 and 100, inclusive.
+        --next-token=: A pagination token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --signal-catalog-arn=: The ARN of a signal catalog.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            list-response-scope:
+                - METADATA_ONLY
+    - name: put-encryption-configuration
+      description: Creates or updates the encryption configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --encryption-type=!: The type of encryption.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-id=: The ID of the KMS key that is used for encryption.
+      completion:
+        flag:
+            encryption-type:
+                - KMS_BASED_ENCRYPTION
+                - FLEETWISE_DEFAULT_ENCRYPTION
     - name: create-vehicle
       description: Creates a vehicle, which is an instance of a vehicle model (model manifest).
       flags:
         --association-behavior=: An option to create a new Amazon Web Services IoT thing when creating a vehicle, or to validate an existing Amazon Web Services IoT thing as a vehicle.
         --attributes=: Static information about a vehicle in a key-value pair.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --decoder-manifest-arn=!: The ARN of a decoder manifest.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --model-manifest-arn=!: The Amazon Resource Name ARN of a vehicle model.
         --state-templates=: Associate state templates with the vehicle.
         --tags=: Metadata that can be used to manage the vehicle.
@@ -56,147 +130,165 @@ commands:
             association-behavior:
                 - CreateIotThing
                 - ValidateIotThingExists
-    - name: get-vehicle
-      description: Retrieves information about a vehicle.
+    - name: get-signal-catalog
+      description: Retrieves information about a signal catalog.
       flags:
-        --vehicle-name=!: The ID of the vehicle to retrieve information about.
-    - name: get-vehicle-status
-      description: Retrieves information about the status of campaigns, decoder manifests, or state templates associated with a vehicle.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the signal catalog to retrieve information about.
+    - name: delete-campaign
+      description: Deletes a data collection campaign.
       flags:
-        --max-results=: The maximum number of items to return, between 1 and 100, inclusive.
-        --next-token=: A pagination token for the next set of results.
-        --vehicle-name=!: The ID of the vehicle to retrieve information about.
-    - name: list-decoder-manifest-signals
-      description: A list of information about signal decoders specified in a decoder manifest.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the campaign to delete.
+    - name: delete-fleet
+      description: Deletes a fleet.
       flags:
-        --max-results=: The maximum number of items to return, between 1 and 100, inclusive.
-        --name=!: The name of the decoder manifest to list information about.
-        --next-token=: A pagination token for the next set of results.
-    - name: update-decoder-manifest
-      description: Updates a decoder manifest.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fleet-id=!: The ID of the fleet to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-campaign
+      description: Retrieves information about a campaign.
       flags:
-        --default-for-unmapped-signals=: Use default decoders for all unmapped signals in the model.
-        --description=: A brief description of the decoder manifest to update.
-        --name=!: The name of the decoder manifest to update.
-        --network-interfaces-to-add=: A list of information about the network interfaces to add to the decoder manifest.
-        --network-interfaces-to-remove=: A list of network interfaces to remove from the decoder manifest.
-        --network-interfaces-to-update=: A list of information about the network interfaces to update in the decoder manifest.
-        --signal-decoders-to-add=: A list of information about decoding additional signals to add to the decoder manifest.
-        --signal-decoders-to-remove=: A list of signal decoders to remove from the decoder manifest.
-        --signal-decoders-to-update=: A list of updated information about decoding signals to update in the decoder manifest.
-        --status=: The state of the decoder manifest.
-      completion:
-        flag:
-            default-for-unmapped-signals:
-                - CUSTOM_DECODING
-            status:
-                - ACTIVE
-                - DRAFT
-                - INVALID
-                - VALIDATING
-    - name: list-model-manifest-nodes
-      description: Lists information about nodes specified in a vehicle model (model manifest).
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the campaign to retrieve information about.
+    - name: put-logging-options
+      description: Creates or updates the logging option.
       flags:
-        --max-results=: The maximum number of items to return, between 1 and 100, inclusive.
-        --name=!: The name of the vehicle model to list information about.
-        --next-token=: A pagination token for the next set of results.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cloud-watch-log-delivery=!: Creates or updates the log delivery option to Amazon CloudWatch Logs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-register-account-status
+      description: Retrieves information about the status of registering your Amazon Web Services account, IAM, and Amazon Timestream resources so that Amazon Web Services IoT FleetWise can transfer your vehicle data to the Amazon Web Services Cloud.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: import-signal-catalog
+      description: Creates a signal catalog using your existing VSS formatted content from your local device.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A brief description of the signal catalog.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the signal catalog to import.
+        --tags=: Metadata that can be used to manage the signal catalog.
+        --vss=: The contents of the Vehicle Signal Specification (VSS) configuration.
     - name: list-vehicles
       description: Retrieves a list of summaries of created vehicles.
       flags:
         --attribute-names=: The fully qualified names of the attributes.
         --attribute-values=: Static information about a vehicle attribute value in string format.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --list-response-scope=: 'When you set the `listResponseScope` parameter to `METADATA_ONLY`, the list response includes: vehicle name, Amazon Resource Name (ARN), creation time, and last modification time.'
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of items to return, between 1 and 100, inclusive.
         --model-manifest-arn=: The Amazon Resource Name (ARN) of a vehicle model (model manifest).
         --next-token=: A pagination token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
       completion:
         flag:
             list-response-scope:
                 - METADATA_ONLY
-    - name: update-campaign
-      description: Updates a campaign.
-      flags:
-        --action=!: Specifies how to update a campaign.
-        --data-extra-dimensions=: A list of vehicle attributes to associate with a signal.
-        --description=: The description of the campaign.
-        --name=!: The name of the campaign to update.
-      completion:
-        flag:
-            action:
-                - APPROVE
-                - SUSPEND
-                - RESUME
-                - UPDATE
-    - name: update-signal-catalog
-      description: Updates a signal catalog.
-      flags:
-        --description=: A brief description of the signal catalog to update.
-        --name=!: The name of the signal catalog to update.
-        --nodes-to-add=: A list of information about nodes to add to the signal catalog.
-        --nodes-to-remove=: A list of `fullyQualifiedName` of nodes to remove from the signal catalog.
-        --nodes-to-update=: A list of information about nodes to update in the signal catalog.
-    - name: batch-create-vehicle
-      description: Creates a group, or batch, of vehicles.
-      flags:
-        --vehicles=!: A list of information about each vehicle to create.
-    - name: create-state-template
-      description: Creates a state template.
-      flags:
-        --data-extra-dimensions=: A list of vehicle attributes to associate with the payload published on the state template's MQTT topic.
-        --description=: A brief description of the state template.
-        --metadata-extra-dimensions=: A list of vehicle attributes to associate with user properties of the messages published on the state template's MQTT topic.
-        --name=!: The name of the state template.
-        --signal-catalog-arn=!: The ARN of the signal catalog associated with the state template.
-        --state-template-properties=!: A list of signals from which data is collected.
-        --tags=: Metadata that can be used to manage the state template.
-    - name: delete-fleet
-      description: Deletes a fleet.
-      flags:
-        --fleet-id=!: The ID of the fleet to delete.
-    - name: disassociate-vehicle-fleet
-      description: Removes, or disassociates, a vehicle from a fleet.
-      flags:
-        --fleet-id=!: The unique ID of a fleet.
-        --vehicle-name=!: The unique ID of the vehicle to disassociate from the fleet.
-    - name: create-decoder-manifest
-      description: Creates the decoder manifest associated with a model manifest.
-      flags:
-        --default-for-unmapped-signals=: Use default decoders for all unmapped signals in the model.
-        --description=: A brief description of the decoder manifest.
-        --model-manifest-arn=!: The Amazon Resource Name (ARN) of the vehicle model (model manifest).
-        --name=!: The unique name of the decoder manifest to create.
-        --network-interfaces=: A list of information about available network interfaces.
-        --signal-decoders=: A list of information about signal decoders.
-        --tags=: Metadata that can be used to manage the decoder manifest.
-      completion:
-        flag:
-            default-for-unmapped-signals:
-                - CUSTOM_DECODING
-    - name: put-logging-options
-      description: Creates or updates the logging option.
-      flags:
-        --cloud-watch-log-delivery=!: Creates or updates the log delivery option to Amazon CloudWatch Logs.
     - name: tag-resource
       description: Adds to or modifies the tags of the given resource.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The ARN of the resource.
         --tags=!: The new or modified tags for the resource.
-    - name: get-encryption-configuration
-      description: Retrieves the encryption configuration for resources and data in Amazon Web Services IoT FleetWise.
+    - name: delete-model-manifest
+      description: Deletes a vehicle model (model manifest).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the model manifest to delete.
+    - name: create-model-manifest
+      description: Creates a vehicle model (model manifest) that specifies signals (attributes, branches, sensors, and actuators).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A brief description of the vehicle model.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the vehicle model to create.
+        --nodes=!: A list of nodes, which are a general abstraction of signals.
+        --signal-catalog-arn=!: The Amazon Resource Name (ARN) of a signal catalog.
+        --tags=: Metadata that can be used to manage the vehicle model.
+    - name: list-fleets-for-vehicle
+      description: Retrieves a list of IDs for all fleets that the vehicle is associated with.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return, between 1 and 100, inclusive.
+        --next-token=: A pagination token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --vehicle-name=!: The ID of the vehicle to retrieve information about.
+    - name: list-vehicles-in-fleet
+      description: Retrieves a list of summaries of all vehicles associated with a fleet.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fleet-id=!: The ID of a fleet.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return, between 1 and 100, inclusive.
+        --next-token=: A pagination token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: untag-resource
+      description: Removes the given tags (metadata) from the resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource.
+        --tag-keys=!: A list of the keys of the tags to be removed from the resource.
+    - name: update-model-manifest
+      description: Updates a vehicle model (model manifest).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A brief description of the vehicle model.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the vehicle model to update.
+        --nodes-to-add=: A list of `fullyQualifiedName` of nodes, which are a general abstraction of signals, to add to the vehicle model.
+        --nodes-to-remove=: A list of `fullyQualifiedName` of nodes, which are a general abstraction of signals, to remove from the vehicle model.
+        --status=: The state of the vehicle model.
+      completion:
+        flag:
+            status:
+                - ACTIVE
+                - DRAFT
+                - INVALID
+                - VALIDATING
     - name: associate-vehicle-fleet
       description: Adds, or associates, a vehicle with a fleet.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --fleet-id=!: The ID of a fleet.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --vehicle-name=!: The unique ID of the vehicle to associate with the fleet.
-    - name: get-register-account-status
-      description: Retrieves information about the status of registering your Amazon Web Services account, IAM, and Amazon Timestream resources so that Amazon Web Services IoT FleetWise can transfer your vehicle data to the Amazon Web Services Cloud.
-    - name: get-state-template
-      description: Retrieves information about a state template.
-      flags:
-        --identifier=!: The unique ID of the state template.
     - name: create-campaign
       description: Creates an orchestration of data collection rules.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --collection-scheme=!: The data collection scheme associated with the campaign.
         --compression=: Determines whether to compress signals before transmitting data to Amazon Web Services IoT FleetWise.
         --data-destination-configs=: The destination where the campaign sends data.
@@ -205,6 +297,7 @@ commands:
         --description=: An optional description of the campaign to help identify its purpose.
         --diagnostics-mode=: Option for a vehicle to send diagnostic trouble codes to Amazon Web Services IoT FleetWise.
         --expiry-time=: The time the campaign expires, in seconds since epoch (January 1, 1970 at midnight UTC time).
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the campaign to create.
         --post-trigger-collection-duration=: How long (in milliseconds) to collect raw data after a triggering event initiates the collection.
         --priority=: A number indicating the priority of one campaign over another campaign for a certain vehicle or fleet.
@@ -226,105 +319,222 @@ commands:
             spooling-mode:
                 - "OFF"
                 - TO_DISK
-    - name: get-model-manifest
-      description: Retrieves information about a vehicle model (model manifest).
+    - name: delete-vehicle
+      description: Deletes a vehicle and removes it from any campaigns.
       flags:
-        --name=!: The name of the vehicle model to retrieve information about.
-    - name: register-account
-      description: This API operation contains deprecated parameters.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --vehicle-name=!: The ID of the vehicle to delete.
+    - name: batch-update-vehicle
+      description: Updates a group, or batch, of vehicles.
       flags:
-        --iam-resources=: The IAM resource that allows Amazon Web Services IoT FleetWise to send data to Amazon Timestream.
-        --timestream-resources=: ""
-    - name: untag-resource
-      description: Removes the given tags (metadata) from the resource.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --vehicles=!: A list of information about the vehicles to update.
+    - name: list-campaigns
+      description: Lists information about created campaigns.
       flags:
-        --resource-arn=!: The ARN of the resource.
-        --tag-keys=!: A list of the keys of the tags to be removed from the resource.
-    - name: delete-decoder-manifest
-      description: Deletes a decoder manifest.
-      flags:
-        --name=!: The name of the decoder manifest to delete.
-    - name: get-campaign
-      description: Retrieves information about a campaign.
-      flags:
-        --name=!: The name of the campaign to retrieve information about.
-    - name: get-decoder-manifest
-      description: Retrieves information about a created decoder manifest.
-      flags:
-        --name=!: The name of the decoder manifest to retrieve information about.
-    - name: get-fleet
-      description: Retrieves information about a fleet.
-      flags:
-        --fleet-id=!: The ID of the fleet to retrieve information about.
-    - name: import-signal-catalog
-      description: Creates a signal catalog using your existing VSS formatted content from your local device.
-      flags:
-        --description=: A brief description of the signal catalog.
-        --name=!: The name of the signal catalog to import.
-        --tags=: Metadata that can be used to manage the signal catalog.
-        --vss=: The contents of the Vehicle Signal Specification (VSS) configuration.
-    - name: list-signal-catalogs
-      description: Lists all the created signal catalogs in an Amazon Web Services account.
-      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --list-response-scope=: 'When you set the `listResponseScope` parameter to `METADATA_ONLY`, the list response includes: campaign name, Amazon Resource Name (ARN), creation time, and last modification time.'
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of items to return, between 1 and 100, inclusive.
         --next-token=: A pagination token for the next set of results.
-    - name: list-tags-for-resource
-      description: Lists the tags (metadata) you have assigned to the resource.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: An optional parameter to filter the results by the status of each created campaign in your account.
+      completion:
+        flag:
+            list-response-scope:
+                - METADATA_ONLY
+    - name: list-decoder-manifests
+      description: Lists decoder manifests.
       flags:
-        --resource-arn=!: The ARN of the resource.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --list-response-scope=: 'When you set the `listResponseScope` parameter to `METADATA_ONLY`, the list response includes: decoder manifest name, Amazon Resource Name (ARN), creation time, and last modification time.'
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return, between 1 and 100, inclusive.
+        --model-manifest-arn=: The Amazon Resource Name (ARN) of a vehicle model (model manifest) associated with the decoder manifest.
+        --next-token=: A pagination token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            list-response-scope:
+                - METADATA_ONLY
+    - name: update-signal-catalog
+      description: Updates a signal catalog.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A brief description of the signal catalog to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the signal catalog to update.
+        --nodes-to-add=: A list of information about nodes to add to the signal catalog.
+        --nodes-to-remove=: A list of `fullyQualifiedName` of nodes to remove from the signal catalog.
+        --nodes-to-update=: A list of information about nodes to update in the signal catalog.
+    - name: delete-signal-catalog
+      description: Deletes a signal catalog.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the signal catalog to delete.
+    - name: list-signal-catalog-nodes
+      description: Lists of information about the signals (nodes) specified in a signal catalog.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return, between 1 and 100, inclusive.
+        --name=!: The name of the signal catalog to list information about.
+        --next-token=: A pagination token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --signal-node-type=: The type of node in the signal catalog.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            signal-node-type:
+                - SENSOR
+                - ACTUATOR
+                - ATTRIBUTE
+                - BRANCH
+                - CUSTOM_STRUCT
+                - CUSTOM_PROPERTY
     - name: update-fleet
       description: Updates the description of an existing fleet.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: An updated description of the fleet.
         --fleet-id=!: The ID of the fleet to update.
-    - name: get-logging-options
-      description: Retrieves the logging options.
-    - name: import-decoder-manifest
-      description: Creates a decoder manifest using your existing CAN DBC file from your local device.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-state-template
+      description: Creates a state template.
       flags:
-        --name=!: The name of the decoder manifest to import.
-        --network-file-definitions=!: The file to load into an Amazon Web Services account.
-    - name: update-model-manifest
-      description: Updates a vehicle model (model manifest).
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-extra-dimensions=: A list of vehicle attributes to associate with the payload published on the state template's MQTT topic.
+        --description=: A brief description of the state template.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --metadata-extra-dimensions=: A list of vehicle attributes to associate with user properties of the messages published on the state template's MQTT topic.
+        --name=!: The name of the state template.
+        --signal-catalog-arn=!: The ARN of the signal catalog associated with the state template.
+        --state-template-properties=!: A list of signals from which data is collected.
+        --tags=: Metadata that can be used to manage the state template.
+    - name: disassociate-vehicle-fleet
+      description: Removes, or disassociates, a vehicle from a fleet.
       flags:
-        --description=: A brief description of the vehicle model.
-        --name=!: The name of the vehicle model to update.
-        --nodes-to-add=: A list of `fullyQualifiedName` of nodes, which are a general abstraction of signals, to add to the vehicle model.
-        --nodes-to-remove=: A list of `fullyQualifiedName` of nodes, which are a general abstraction of signals, to remove from the vehicle model.
-        --status=: The state of the vehicle model.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fleet-id=!: The unique ID of a fleet.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --vehicle-name=!: The unique ID of the vehicle to disassociate from the fleet.
+    - name: list-decoder-manifest-network-interfaces
+      description: Lists the network interfaces specified in a decoder manifest.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return, between 1 and 100, inclusive.
+        --name=!: The name of the decoder manifest to list information about.
+        --next-token=: A pagination token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-fleets
+      description: Retrieves information for each created fleet in an Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --list-response-scope=: 'When you set the `listResponseScope` parameter to `METADATA_ONLY`, the list response includes: fleet ID, Amazon Resource Name (ARN), creation time, and last modification time.'
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return, between 1 and 100, inclusive.
+        --next-token=: A pagination token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
       completion:
         flag:
+            list-response-scope:
+                - METADATA_ONLY
+    - name: list-model-manifest-nodes
+      description: Lists information about nodes specified in a vehicle model (model manifest).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return, between 1 and 100, inclusive.
+        --name=!: The name of the vehicle model to list information about.
+        --next-token=: A pagination token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-decoder-manifest
+      description: Updates a decoder manifest.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --default-for-unmapped-signals=: Use default decoders for all unmapped signals in the model.
+        --description=: A brief description of the decoder manifest to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the decoder manifest to update.
+        --network-interfaces-to-add=: A list of information about the network interfaces to add to the decoder manifest.
+        --network-interfaces-to-remove=: A list of network interfaces to remove from the decoder manifest.
+        --network-interfaces-to-update=: A list of information about the network interfaces to update in the decoder manifest.
+        --signal-decoders-to-add=: A list of information about decoding additional signals to add to the decoder manifest.
+        --signal-decoders-to-remove=: A list of signal decoders to remove from the decoder manifest.
+        --signal-decoders-to-update=: A list of updated information about decoding signals to update in the decoder manifest.
+        --status=: The state of the decoder manifest.
+      completion:
+        flag:
+            default-for-unmapped-signals:
+                - CUSTOM_DECODING
             status:
                 - ACTIVE
                 - DRAFT
                 - INVALID
                 - VALIDATING
-    - name: delete-state-template
-      description: Deletes a state template.
+    - name: get-encryption-configuration
+      description: Retrieves the encryption configuration for resources and data in Amazon Web Services IoT FleetWise.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-tags-for-resource
+      description: Lists the tags (metadata) you have assigned to the resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource.
+    - name: update-state-template
+      description: Updates a state template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-extra-dimensions=: A list of vehicle attributes to associate with the payload published on the state template's MQTT topic.
+        --description=: A brief description of the state template.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identifier=!: The unique ID of the state template.
-    - name: list-vehicles-in-fleet
-      description: Retrieves a list of summaries of all vehicles associated with a fleet.
-      flags:
-        --fleet-id=!: The ID of a fleet.
-        --max-results=: The maximum number of items to return, between 1 and 100, inclusive.
-        --next-token=: A pagination token for the next set of results.
-    - name: put-encryption-configuration
-      description: Creates or updates the encryption configuration.
-      flags:
-        --encryption-type=!: The type of encryption.
-        --kms-key-id=: The ID of the KMS key that is used for encryption.
-      completion:
-        flag:
-            encryption-type:
-                - KMS_BASED_ENCRYPTION
-                - FLEETWISE_DEFAULT_ENCRYPTION
+        --metadata-extra-dimensions=: A list of vehicle attributes to associate with user properties of the messages published on the state template's MQTT topic.
+        --state-template-properties-to-add=: Add signals from which data is collected as part of the state template.
+        --state-template-properties-to-remove=: Remove signals from which data is collected as part of the state template.
     - name: update-vehicle
       description: Updates a vehicle.
       flags:
         --attribute-update-mode=: The method the specified attributes will update the existing attributes on the vehicle.
         --attributes=: Static information about a vehicle in a key-value pair.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --decoder-manifest-arn=: The ARN of the decoder manifest associated with this vehicle.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --model-manifest-arn=: The ARN of a vehicle model (model manifest) associated with the vehicle.
         --state-templates-to-add=: Associate state templates with the vehicle.
         --state-templates-to-remove=: Remove state templates from the vehicle.
@@ -335,99 +545,105 @@ commands:
             attribute-update-mode:
                 - Overwrite
                 - Merge
-    - name: batch-update-vehicle
-      description: Updates a group, or batch, of vehicles.
+    - name: get-model-manifest
+      description: Retrieves information about a vehicle model (model manifest).
       flags:
-        --vehicles=!: A list of information about the vehicles to update.
-    - name: create-model-manifest
-      description: Creates a vehicle model (model manifest) that specifies signals (attributes, branches, sensors, and actuators).
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the vehicle model to retrieve information about.
+    - name: batch-create-vehicle
+      description: Creates a group, or batch, of vehicles.
       flags:
-        --description=: A brief description of the vehicle model.
-        --name=!: The name of the vehicle model to create.
-        --nodes=!: A list of nodes, which are a general abstraction of signals.
-        --signal-catalog-arn=!: The Amazon Resource Name (ARN) of a signal catalog.
-        --tags=: Metadata that can be used to manage the vehicle model.
-    - name: list-decoder-manifest-network-interfaces
-      description: Lists the network interfaces specified in a decoder manifest.
-      flags:
-        --max-results=: The maximum number of items to return, between 1 and 100, inclusive.
-        --name=!: The name of the decoder manifest to list information about.
-        --next-token=: A pagination token for the next set of results.
-    - name: delete-model-manifest
-      description: Deletes a vehicle model (model manifest).
-      flags:
-        --name=!: The name of the model manifest to delete.
-    - name: list-campaigns
-      description: Lists information about created campaigns.
-      flags:
-        --list-response-scope=: 'When you set the `listResponseScope` parameter to `METADATA_ONLY`, the list response includes: campaign name, Amazon Resource Name (ARN), creation time, and last modification time.'
-        --max-results=: The maximum number of items to return, between 1 and 100, inclusive.
-        --next-token=: A pagination token for the next set of results.
-        --status=: An optional parameter to filter the results by the status of each created campaign in your account.
-      completion:
-        flag:
-            list-response-scope:
-                - METADATA_ONLY
-    - name: list-fleets-for-vehicle
-      description: Retrieves a list of IDs for all fleets that the vehicle is associated with.
-      flags:
-        --max-results=: The maximum number of items to return, between 1 and 100, inclusive.
-        --next-token=: A pagination token for the next set of results.
-        --vehicle-name=!: The ID of the vehicle to retrieve information about.
-    - name: list-model-manifests
-      description: Retrieves a list of vehicle models (model manifests).
-      flags:
-        --list-response-scope=: 'When you set the `listResponseScope` parameter to `METADATA_ONLY`, the list response includes: model manifest name, Amazon Resource Name (ARN), creation time, and last modification time.'
-        --max-results=: The maximum number of items to return, between 1 and 100, inclusive.
-        --next-token=: A pagination token for the next set of results.
-        --signal-catalog-arn=: The ARN of a signal catalog.
-      completion:
-        flag:
-            list-response-scope:
-                - METADATA_ONLY
-    - name: list-decoder-manifests
-      description: Lists decoder manifests.
-      flags:
-        --list-response-scope=: 'When you set the `listResponseScope` parameter to `METADATA_ONLY`, the list response includes: decoder manifest name, Amazon Resource Name (ARN), creation time, and last modification time.'
-        --max-results=: The maximum number of items to return, between 1 and 100, inclusive.
-        --model-manifest-arn=: The Amazon Resource Name (ARN) of a vehicle model (model manifest) associated with the decoder manifest.
-        --next-token=: A pagination token for the next set of results.
-      completion:
-        flag:
-            list-response-scope:
-                - METADATA_ONLY
-    - name: list-fleets
-      description: Retrieves information for each created fleet in an Amazon Web Services account.
-      flags:
-        --list-response-scope=: 'When you set the `listResponseScope` parameter to `METADATA_ONLY`, the list response includes: fleet ID, Amazon Resource Name (ARN), creation time, and last modification time.'
-        --max-results=: The maximum number of items to return, between 1 and 100, inclusive.
-        --next-token=: A pagination token for the next set of results.
-      completion:
-        flag:
-            list-response-scope:
-                - METADATA_ONLY
-    - name: list-state-templates
-      description: Lists information about created state templates.
-      flags:
-        --list-response-scope=: 'When you set the `listResponseScope` parameter to `METADATA_ONLY`, the list response includes: state template ID, Amazon Resource Name (ARN), creation time, and last modification time.'
-        --max-results=: The maximum number of items to return, between 1 and 100, inclusive.
-        --next-token=: The token to retrieve the next set of results, or `null` if there are no more results.
-      completion:
-        flag:
-            list-response-scope:
-                - METADATA_ONLY
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --vehicles=!: A list of information about each vehicle to create.
     - name: create-fleet
       description: Creates a fleet that represents a group of vehicles.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: A brief description of the fleet to create.
         --fleet-id=!: The unique ID of the fleet to create.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --signal-catalog-arn=!: The Amazon Resource Name (ARN) of a signal catalog.
         --tags=: Metadata that can be used to manage the fleet.
-    - name: delete-campaign
-      description: Deletes a data collection campaign.
+    - name: create-signal-catalog
+      description: Creates a collection of standardized signals that can be reused to create vehicle models.
       flags:
-        --name=!: The name of the campaign to delete.
-    - name: delete-signal-catalog
-      description: Deletes a signal catalog.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A brief description of the signal catalog.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the signal catalog to create.
+        --nodes=: A list of information about nodes, which are a general abstraction of signals.
+        --tags=: Metadata that can be used to manage the signal catalog.
+    - name: delete-decoder-manifest
+      description: Deletes a decoder manifest.
       flags:
-        --name=!: The name of the signal catalog to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the decoder manifest to delete.
+    - name: get-decoder-manifest
+      description: Retrieves information about a created decoder manifest.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the decoder manifest to retrieve information about.
+    - name: list-decoder-manifest-signals
+      description: A list of information about signal decoders specified in a decoder manifest.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return, between 1 and 100, inclusive.
+        --name=!: The name of the decoder manifest to list information about.
+        --next-token=: A pagination token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-fleet
+      description: Retrieves information about a fleet.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fleet-id=!: The ID of the fleet to retrieve information about.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-state-template
+      description: Retrieves information about a state template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique ID of the state template.
+    - name: create-decoder-manifest
+      description: Creates the decoder manifest associated with a model manifest.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --default-for-unmapped-signals=: Use default decoders for all unmapped signals in the model.
+        --description=: A brief description of the decoder manifest.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --model-manifest-arn=!: The Amazon Resource Name (ARN) of the vehicle model (model manifest).
+        --name=!: The unique name of the decoder manifest to create.
+        --network-interfaces=: A list of information about available network interfaces.
+        --signal-decoders=: A list of information about signal decoders.
+        --tags=: Metadata that can be used to manage the decoder manifest.
+      completion:
+        flag:
+            default-for-unmapped-signals:
+                - CUSTOM_DECODING
+    - name: list-signal-catalogs
+      description: Lists all the created signal catalogs in an Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return, between 1 and 100, inclusive.
+        --next-token=: A pagination token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.

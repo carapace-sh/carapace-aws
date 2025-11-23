@@ -1,48 +1,357 @@
 name: eks
 description: Amazon Elastic Kubernetes Service
 commands:
-    - name: associate-encryption-config
-      description: Associates an encryption configuration to an existing cluster.
+    - name: create-fargate-profile
+      description: Creates an Fargate profile for your Amazon EKS cluster.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-request-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
         --cluster-name=!: The name of your cluster.
-        --encryption-config=!: The configuration you are using for encryption.
-    - name: list-tags-for-resource
-      description: List the tags for an Amazon EKS resource.
+        --fargate-profile-name=!: The name of the Fargate profile.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pod-execution-role-arn=!: The Amazon Resource Name (ARN) of the `Pod` execution role to use for a `Pod` that matches the selectors in the Fargate profile.
+        --selectors=: The selectors to match for a `Pod` to use this Fargate profile.
+        --subnets=: The IDs of subnets to launch a `Pod` into.
+        --tags=: Metadata that assists with categorization and organization.
+    - name: delete-access-entry
+      description: Deletes an access entry.
       flags:
-        --resource-arn=!: The Amazon Resource Name (ARN) that identifies the resource to list tags for.
-    - name: untag-resource
-      description: Deletes specified tags from an Amazon EKS resource.
-      flags:
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to delete tags from.
-        --tag-keys=!: The keys of the tags to remove.
-    - name: delete-fargate-profile
-      description: Deletes an Fargate profile.
-      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --cluster-name=!: The name of your cluster.
-        --fargate-profile-name=!: The name of the Fargate profile to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --principal-arn=!: The ARN of the IAM principal for the `AccessEntry`.
+    - name: start-insights-refresh
+      description: Initiates an on-demand refresh operation for cluster insights, getting the latest analysis outside of the standard refresh schedule.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-name=!: The name of the cluster for the refresh insights operation.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-nodegroup-version
+      description: Updates the Kubernetes version or AMI version of an Amazon EKS managed node group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --cluster-name=!: The name of your cluster.
+        --force: Force the update if any `Pod` on the existing node group can't be drained due to a `Pod` disruption budget issue.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kubernetes-version=: The Kubernetes version to update to.
+        --launch-template=: An object representing a node group's launch template specification.
+        --no-force: Force the update if any `Pod` on the existing node group can't be drained due to a `Pod` disruption budget issue.
+        --nodegroup-name=!: The name of the managed node group to update.
+        --release-version=: The AMI version of the Amazon EKS optimized AMI to use for the update.
+    - name: delete-nodegroup
+      description: Deletes a managed node group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-name=!: The name of your cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --nodegroup-name=!: The name of the node group to delete.
+    - name: delete-pod-identity-association
+      description: Deletes a EKS Pod Identity association.
+      flags:
+        --association-id=!: The ID of the association to be deleted.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-name=!: The cluster name that
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: disassociate-access-policy
+      description: Disassociates an access policy from an access entry.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-name=!: The name of your cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-arn=!: The ARN of the policy to disassociate from the access entry.
+        --principal-arn=!: The ARN of the IAM principal for the `AccessEntry`.
+    - name: update-cluster-config
+      description: Updates an Amazon EKS cluster configuration.
+      flags:
+        --access-config=: The access configuration for the cluster.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --compute-config=: Update the configuration of the compute capability of your EKS Auto Mode cluster.
+        --control-plane-scaling-config=: The control plane scaling tier configuration.
+        --deletion-protection: Specifies whether to enable or disable deletion protection for the cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kubernetes-network-config=: ""
+        --logging=: Enable or disable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs .
+        --name=!: The name of the Amazon EKS cluster to update.
+        --no-deletion-protection: Specifies whether to enable or disable deletion protection for the cluster.
+        --remote-network-config=: ""
+        --resources-vpc-config=: ""
+        --storage-config=: Update the configuration of the block storage capability of your EKS Auto Mode cluster.
+        --upgrade-policy=: You can enable or disable extended support for clusters currently on standard support.
+        --zonal-shift-config=: Enable or disable ARC zonal shift for the cluster.
+    - name: create-access-entry
+      description: Creates an access entry.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --cluster-name=!: The name of your cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kubernetes-groups=: 'The value for `name` that you''ve specified for `kind: Group` as a `subject` in a Kubernetes `RoleBinding` or `ClusterRoleBinding` object.'
+        --principal-arn=!: The ARN of the IAM principal for the `AccessEntry`.
+        --tags=: Metadata that assists with categorization and organization.
+        --type=: The type of the new access entry.
+        --username=: The username to authenticate to Kubernetes with.
+    - name: create-addon
+      description: Creates an Amazon EKS add-on.
+      flags:
+        --addon-name=!: The name of the add-on.
+        --addon-version=: The version of the add-on.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --cluster-name=!: The name of your cluster.
+        --configuration-values=: The set of configuration values for the add-on that's created.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --namespace-config=: The namespace configuration for the addon.
+        --pod-identity-associations=: An array of EKS Pod Identity associations to be created.
+        --resolve-conflicts=: How to resolve field value conflicts for an Amazon EKS add-on.
+        --service-account-role-arn=: The Amazon Resource Name (ARN) of an existing IAM role to bind to the add-on's service account.
+        --tags=: Metadata that assists with categorization and organization.
+      completion:
+        flag:
+            resolve-conflicts:
+                - OVERWRITE
+                - NONE
+                - PRESERVE
+    - name: create-cluster
+      description: Creates an Amazon EKS control plane.
+      flags:
+        --access-config=: The access configuration for the cluster.
+        --bootstrap-self-managed-addons: If you set this value to `False` when creating a cluster, the default networking add-ons will not be installed.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --compute-config=: Enable or disable the compute capability of EKS Auto Mode when creating your EKS Auto Mode cluster.
+        --control-plane-scaling-config=: The control plane scaling tier configuration.
+        --deletion-protection: Indicates whether to enable deletion protection for the cluster.
+        --encryption-config=: The encryption configuration for the cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kubernetes-network-config=: The Kubernetes network configuration for the cluster.
+        --kubernetes-version=: The desired Kubernetes version for your cluster.
+        --logging=: Enable or disable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs .
+        --name=!: The unique name to give to your cluster.
+        --no-bootstrap-self-managed-addons: If you set this value to `False` when creating a cluster, the default networking add-ons will not be installed.
+        --no-deletion-protection: Indicates whether to enable deletion protection for the cluster.
+        --outpost-config=: An object representing the configuration of your local Amazon EKS cluster on an Amazon Web Services Outpost.
+        --remote-network-config=: The configuration in the cluster for EKS Hybrid Nodes.
+        --resources-vpc-config=!: The VPC configuration that's used by the cluster control plane.
+        --role-arn=!: The Amazon Resource Name (ARN) of the IAM role that provides permissions for the Kubernetes control plane to make calls to Amazon Web Services API operations on your behalf.
+        --storage-config=: Enable or disable the block storage capability of EKS Auto Mode when creating your EKS Auto Mode cluster.
+        --tags=: Metadata that assists with categorization and organization.
+        --upgrade-policy=: New clusters, by default, have extended support enabled.
+        --zonal-shift-config=: Enable or disable ARC zonal shift for the cluster.
+    - name: describe-fargate-profile
+      description: Describes an Fargate profile.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-name=!: The name of your cluster.
+        --fargate-profile-name=!: The name of the Fargate profile to describe.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-insight
+      description: Returns details about an insight that you specify using its ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-name=!: The name of the cluster to describe the insight for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The identity of the insight to describe.
+    - name: describe-pod-identity-association
+      description: Returns descriptive information about an EKS Pod Identity association.
+      flags:
+        --association-id=!: The ID of the association that you want the description of.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-name=!: The name of the cluster that the association is in.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-access-entries
       description: Lists the access entries for your cluster.
       flags:
         --associated-policy-arn=: The ARN of an `AccessPolicy`.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --cluster-name=!: The name of your cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results, returned in paginated output.
         --next-token=: The `nextToken` value returned from a previous paginated request, where `maxResults` was used and the results exceeded the value of that parameter.
-    - name: list-insights
-      description: Returns a list of all insights checked for against the specified cluster.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: associate-identity-provider-config
+      description: Associates an identity provider configuration to a cluster.
       flags:
-        --cluster-name=!: The name of the Amazon EKS cluster associated with the insights.
-        --filter=: The criteria to filter your list of insights for your cluster.
-        --max-results=: The maximum number of identity provider configurations returned by `ListInsights` in paginated output.
-        --next-token=: The `nextToken` value returned from a previous paginated `ListInsights` request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --cluster-name=!: The name of your cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --oidc=!: An object representing an OpenID Connect (OIDC) identity provider configuration.
+        --tags=: Metadata that assists with categorization and organization.
+    - name: list-nodegroups
+      description: Lists the managed node groups associated with the specified cluster in your Amazon Web Services account in the specified Amazon Web Services Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-name=!: The name of your cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results, returned in paginated output.
+        --next-token=: The `nextToken` value returned from a previous paginated request, where `maxResults` was used and the results exceeded the value of that parameter.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: delete-addon
+      description: Deletes an Amazon EKS add-on.
+      flags:
+        --addon-name=!: The name of the add-on.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-name=!: The name of your cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-preserve: Specifying this option preserves the add-on software on your cluster but Amazon EKS stops managing any settings for the add-on.
+        --preserve: Specifying this option preserves the add-on software on your cluster but Amazon EKS stops managing any settings for the add-on.
+    - name: describe-identity-provider-config
+      description: Describes an identity provider configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-name=!: The name of your cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-provider-config=!: An object representing an identity provider configuration.
+    - name: list-fargate-profiles
+      description: Lists the Fargate profiles associated with the specified cluster in your Amazon Web Services account in the specified Amazon Web Services Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-name=!: The name of your cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results, returned in paginated output.
+        --next-token=: The `nextToken` value returned from a previous paginated request, where `maxResults` was used and the results exceeded the value of that parameter.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-addon-configuration
+      description: Returns configuration options.
+      flags:
+        --addon-name=!: The name of the add-on.
+        --addon-version=!: The version of the add-on.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-access-policies
+      description: Lists the available access policies.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results, returned in paginated output.
+        --next-token=: The `nextToken` value returned from a previous paginated request, where `maxResults` was used and the results exceeded the value of that parameter.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-addons
+      description: Lists the installed add-ons.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-name=!: The name of your cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results, returned in paginated output.
+        --next-token=: The `nextToken` value returned from a previous paginated request, where `maxResults` was used and the results exceeded the value of that parameter.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: List the tags for an Amazon EKS resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) that identifies the resource to list tags for.
+    - name: register-cluster
+      description: Connects a Kubernetes cluster to the Amazon EKS control plane.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --connector-config=!: The configuration settings required to connect the Kubernetes cluster to the Amazon EKS control plane.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: A unique name for this cluster in your Amazon Web Services Region.
+        --tags=: Metadata that assists with categorization and organization.
+    - name: update-pod-identity-association
+      description: Updates a EKS Pod Identity association.
+      flags:
+        --association-id=!: The ID of the association to be updated.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --cluster-name=!: The name of the cluster that you want to update the association in.
+        --disable-session-tags: Disable the automatic sessions tags that are appended by EKS Pod Identity.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-disable-session-tags: Disable the automatic sessions tags that are appended by EKS Pod Identity.
+        --role-arn=: The new IAM role to change in the association.
+        --target-role-arn=: The Amazon Resource Name (ARN) of the target IAM role to associate with the service account.
+    - name: delete-cluster
+      description: Deletes an Amazon EKS cluster control plane.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the cluster to delete.
+    - name: describe-eks-anywhere-subscription
+      description: Returns descriptive information about a subscription.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the subscription.
+    - name: list-associated-access-policies
+      description: Lists the access policies associated with an access entry.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-name=!: The name of your cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results, returned in paginated output.
+        --next-token=: The `nextToken` value returned from a previous paginated request, where `maxResults` was used and the results exceeded the value of that parameter.
+        --page-size=: The size of each page to get in the AWS service call.
+        --principal-arn=!: The ARN of the IAM principal for the `AccessEntry`.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-pod-identity-associations
+      description: List the EKS Pod Identity associations in a cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-name=!: The name of the cluster that the associations are in.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of EKS Pod Identity association results returned by `ListPodIdentityAssociations` in paginated output.
+        --namespace=: The name of the Kubernetes namespace inside the cluster that the associations are in.
+        --next-token=: The `nextToken` value returned from a previous paginated `ListUpdates` request where `maxResults` was used and the results exceeded the value of that parameter.
+        --page-size=: The size of each page to get in the AWS service call.
+        --service-account=: The name of the Kubernetes service account that the associations use.
+        --starting-token=: A token to specify where to start paginating.
     - name: update-addon
       description: Updates an Amazon EKS add-on.
       flags:
         --addon-name=!: The name of the add-on.
         --addon-version=: The version of the add-on.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-request-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
         --cluster-name=!: The name of your cluster.
         --configuration-values=: The set of configuration values for the add-on that's created.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --pod-identity-associations=: An array of EKS Pod Identity associations to be updated.
         --resolve-conflicts=: How to resolve field value conflicts for an Amazon EKS add-on if you've changed a value from the Amazon EKS default value.
         --service-account-role-arn=: The Amazon Resource Name (ARN) of an existing IAM role to bind to the add-on's service account.
@@ -52,19 +361,17 @@ commands:
                 - OVERWRITE
                 - NONE
                 - PRESERVE
-    - name: describe-nodegroup
-      description: Describes a managed node group.
-      flags:
-        --cluster-name=!: The name of your cluster.
-        --nodegroup-name=!: The name of the node group to describe.
     - name: create-nodegroup
       description: Creates a managed node group for an Amazon EKS cluster.
       flags:
         --ami-type=: The AMI type for your node group.
         --capacity-type=: The capacity type for your node group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-request-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
         --cluster-name=!: The name of your cluster.
         --disk-size=: The root device disk size (in GiB) for your node group instances.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-types=: Specify the instance types for a node group.
         --kubernetes-version=: The Kubernetes version to use for your managed nodes.
         --labels=: The Kubernetes `labels` to apply to the nodes in the node group when they are created.
@@ -105,19 +412,72 @@ commands:
                 - ON_DEMAND
                 - SPOT
                 - CAPACITY_BLOCK
-    - name: list-updates
-      description: Lists the updates associated with an Amazon EKS resource in your Amazon Web Services account, in the specified Amazon Web Services Region.
+    - name: create-pod-identity-association
+      description: Creates an EKS Pod Identity association between a service account in an Amazon EKS cluster and an IAM role with *EKS Pod Identity*.
       flags:
-        --addon-name=: The names of the installed add-ons that have available updates.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --cluster-name=!: The name of the cluster to create the EKS Pod Identity association in.
+        --disable-session-tags: Disable the automatic sessions tags that are appended by EKS Pod Identity.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --namespace=!: The name of the Kubernetes namespace inside the cluster to create the EKS Pod Identity association in.
+        --no-disable-session-tags: Disable the automatic sessions tags that are appended by EKS Pod Identity.
+        --role-arn=!: The Amazon Resource Name (ARN) of the IAM role to associate with the service account.
+        --service-account=!: The name of the Kubernetes service account inside the cluster to associate the IAM credentials with.
+        --tags=: Metadata that assists with categorization and organization.
+        --target-role-arn=: The Amazon Resource Name (ARN) of the target IAM role to associate with the service account.
+    - name: delete-eks-anywhere-subscription
+      description: Deletes an expired or inactive subscription.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the subscription.
+    - name: deregister-cluster
+      description: Deregisters a connected cluster to remove it from the Amazon EKS control plane.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the connected cluster to deregister.
+    - name: describe-cluster
+      description: Describes an Amazon EKS cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of your cluster.
+    - name: list-clusters
+      description: Lists the Amazon EKS clusters in your Amazon Web Services account in the specified Amazon Web Services Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include=: Indicates whether external clusters are included in the returned list.
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results, returned in paginated output.
-        --name=!: The name of the Amazon EKS cluster to list updates for.
         --next-token=: The `nextToken` value returned from a previous paginated request, where `maxResults` was used and the results exceeded the value of that parameter.
-        --nodegroup-name=: The name of the Amazon EKS managed node group to list updates for.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: associate-access-policy
+      description: Associates an access policy and its scope to an access entry.
+      flags:
+        --access-scope=!: The scope for the `AccessPolicy`.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-name=!: The name of your cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-arn=!: The ARN of the `AccessPolicy` that you're associating.
+        --principal-arn=!: The Amazon Resource Name (ARN) of the IAM user or role for the `AccessEntry` that you're associating the access policy to.
     - name: create-eks-anywhere-subscription
       description: Creates an EKS Anywhere subscription.
       flags:
         --auto-renew: A boolean indicating whether the subscription auto renews at the end of the term.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-request-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --license-quantity=: The number of licenses to purchase with the subscription.
         --license-type=: The license type for all licenses in the subscription.
         --name=!: The unique name for your subscription.
@@ -128,221 +488,169 @@ commands:
         flag:
             license-type:
                 - Cluster
-    - name: delete-pod-identity-association
-      description: Deletes a EKS Pod Identity association.
+    - name: update-nodegroup-config
+      description: Updates an Amazon EKS managed node group configuration.
       flags:
-        --association-id=!: The ID of the association to be deleted.
-        --cluster-name=!: The cluster name that
-    - name: deregister-cluster
-      description: Deregisters a connected cluster to remove it from the Amazon EKS control plane.
-      flags:
-        --name=!: The name of the connected cluster to deregister.
-    - name: describe-addon
-      description: Describes an Amazon EKS add-on.
-      flags:
-        --addon-name=!: The name of the add-on.
-        --cluster-name=!: The name of your cluster.
-    - name: register-cluster
-      description: Connects a Kubernetes cluster to the Amazon EKS control plane.
-      flags:
-        --client-request-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --connector-config=!: The configuration settings required to connect the Kubernetes cluster to the Amazon EKS control plane.
-        --name=!: A unique name for this cluster in your Amazon Web Services Region.
-        --tags=: Metadata that assists with categorization and organization.
-    - name: update-access-entry
-      description: Updates an access entry.
-      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-request-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
         --cluster-name=!: The name of your cluster.
-        --kubernetes-groups=: 'The value for `name` that you''ve specified for `kind: Group` as a `subject` in a Kubernetes `RoleBinding` or `ClusterRoleBinding` object.'
-        --principal-arn=!: The ARN of the IAM principal for the `AccessEntry`.
-        --username=: The username to authenticate to Kubernetes with.
-    - name: update-cluster-config
-      description: Updates an Amazon EKS cluster configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --labels=: The Kubernetes `labels` to apply to the nodes in the node group after the update.
+        --node-repair-config=: The node auto repair configuration for the node group.
+        --nodegroup-name=!: The name of the managed node group to update.
+        --scaling-config=: The scaling configuration details for the Auto Scaling group after the update.
+        --taints=: The Kubernetes taints to be applied to the nodes in the node group after the update.
+        --update-config=: The node group update configuration.
+    - name: list-updates
+      description: Lists the updates associated with an Amazon EKS resource in your Amazon Web Services account, in the specified Amazon Web Services Region.
       flags:
-        --access-config=: The access configuration for the cluster.
-        --client-request-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --compute-config=: Update the configuration of the compute capability of your EKS Auto Mode cluster.
-        --control-plane-scaling-config=: The control plane scaling tier configuration.
-        --deletion-protection: Specifies whether to enable or disable deletion protection for the cluster.
-        --kubernetes-network-config=: ""
-        --logging=: Enable or disable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs .
-        --name=!: The name of the Amazon EKS cluster to update.
-        --no-deletion-protection: Specifies whether to enable or disable deletion protection for the cluster.
-        --remote-network-config=: ""
-        --resources-vpc-config=: ""
-        --storage-config=: Update the configuration of the block storage capability of your EKS Auto Mode cluster.
-        --upgrade-policy=: You can enable or disable extended support for clusters currently on standard support.
-        --zonal-shift-config=: Enable or disable ARC zonal shift for the cluster.
+        --addon-name=: The names of the installed add-ons that have available updates.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results, returned in paginated output.
+        --name=!: The name of the Amazon EKS cluster to list updates for.
+        --next-token=: The `nextToken` value returned from a previous paginated request, where `maxResults` was used and the results exceeded the value of that parameter.
+        --nodegroup-name=: The name of the Amazon EKS managed node group to list updates for.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: untag-resource
+      description: Deletes specified tags from an Amazon EKS resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to delete tags from.
+        --tag-keys=!: The keys of the tags to remove.
     - name: update-eks-anywhere-subscription
       description: Update an EKS Anywhere Subscription.
       flags:
         --auto-renew!: A boolean indicating whether or not to automatically renew the subscription.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-request-token=: Unique, case-sensitive identifier to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The ID of the subscription.
         --no-auto-renew!: A boolean indicating whether or not to automatically renew the subscription.
-    - name: describe-addon-versions
-      description: Describes the versions for an add-on.
-      flags:
-        --addon-name=: The name of the add-on.
-        --kubernetes-version=: The Kubernetes versions that you can use the add-on with.
-        --max-results=: The maximum number of results, returned in paginated output.
-        --next-token=: The `nextToken` value returned from a previous paginated request, where `maxResults` was used and the results exceeded the value of that parameter.
-        --owners=: The owner of the add-on.
-        --publishers=: The publisher of the add-on.
-        --types=: The type of the add-on.
-    - name: create-fargate-profile
-      description: Creates an Fargate profile for your Amazon EKS cluster.
-      flags:
-        --client-request-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --cluster-name=!: The name of your cluster.
-        --fargate-profile-name=!: The name of the Fargate profile.
-        --pod-execution-role-arn=!: The Amazon Resource Name (ARN) of the `Pod` execution role to use for a `Pod` that matches the selectors in the Fargate profile.
-        --selectors=: The selectors to match for a `Pod` to use this Fargate profile.
-        --subnets=: The IDs of subnets to launch a `Pod` into.
-        --tags=: Metadata that assists with categorization and organization.
-    - name: describe-pod-identity-association
-      description: Returns descriptive information about an EKS Pod Identity association.
-      flags:
-        --association-id=!: The ID of the association that you want the description of.
-        --cluster-name=!: The name of the cluster that the association is in.
-    - name: list-access-policies
-      description: Lists the available access policies.
-      flags:
-        --max-results=: The maximum number of results, returned in paginated output.
-        --next-token=: The `nextToken` value returned from a previous paginated request, where `maxResults` was used and the results exceeded the value of that parameter.
-    - name: list-addons
-      description: Lists the installed add-ons.
-      flags:
-        --cluster-name=!: The name of your cluster.
-        --max-results=: The maximum number of results, returned in paginated output.
-        --next-token=: The `nextToken` value returned from a previous paginated request, where `maxResults` was used and the results exceeded the value of that parameter.
-    - name: associate-access-policy
-      description: Associates an access policy and its scope to an access entry.
-      flags:
-        --access-scope=!: The scope for the `AccessPolicy`.
-        --cluster-name=!: The name of your cluster.
-        --policy-arn=!: The ARN of the `AccessPolicy` that you're associating.
-        --principal-arn=!: The Amazon Resource Name (ARN) of the IAM user or role for the `AccessEntry` that you're associating the access policy to.
-    - name: create-cluster
-      description: Creates an Amazon EKS control plane.
-      flags:
-        --access-config=: The access configuration for the cluster.
-        --bootstrap-self-managed-addons: If you set this value to `False` when creating a cluster, the default networking add-ons will not be installed.
-        --client-request-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --compute-config=: Enable or disable the compute capability of EKS Auto Mode when creating your EKS Auto Mode cluster.
-        --control-plane-scaling-config=: The control plane scaling tier configuration.
-        --deletion-protection: Indicates whether to enable deletion protection for the cluster.
-        --encryption-config=: The encryption configuration for the cluster.
-        --kubernetes-network-config=: The Kubernetes network configuration for the cluster.
-        --kubernetes-version=: The desired Kubernetes version for your cluster.
-        --logging=: Enable or disable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs .
-        --name=!: The unique name to give to your cluster.
-        --no-bootstrap-self-managed-addons: If you set this value to `False` when creating a cluster, the default networking add-ons will not be installed.
-        --no-deletion-protection: Indicates whether to enable deletion protection for the cluster.
-        --outpost-config=: An object representing the configuration of your local Amazon EKS cluster on an Amazon Web Services Outpost.
-        --remote-network-config=: The configuration in the cluster for EKS Hybrid Nodes.
-        --resources-vpc-config=!: The VPC configuration that's used by the cluster control plane.
-        --role-arn=!: The Amazon Resource Name (ARN) of the IAM role that provides permissions for the Kubernetes control plane to make calls to Amazon Web Services API operations on your behalf.
-        --storage-config=: Enable or disable the block storage capability of EKS Auto Mode when creating your EKS Auto Mode cluster.
-        --tags=: Metadata that assists with categorization and organization.
-        --upgrade-policy=: New clusters, by default, have extended support enabled.
-        --zonal-shift-config=: Enable or disable ARC zonal shift for the cluster.
-    - name: delete-cluster
-      description: Deletes an Amazon EKS cluster control plane.
-      flags:
-        --name=!: The name of the cluster to delete.
-    - name: update-cluster-version
-      description: Updates an Amazon EKS cluster to the specified Kubernetes version.
-      flags:
-        --client-request-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --force: Set this value to `true` to override upgrade-blocking readiness checks when updating a cluster.
-        --kubernetes-version=!: The desired Kubernetes version following a successful update.
-        --name=!: The name of the Amazon EKS cluster to update.
-        --no-force: Set this value to `true` to override upgrade-blocking readiness checks when updating a cluster.
-    - name: create-addon
-      description: Creates an Amazon EKS add-on.
+    - name: describe-addon
+      description: Describes an Amazon EKS add-on.
       flags:
         --addon-name=!: The name of the add-on.
-        --addon-version=: The version of the add-on.
-        --client-request-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --cluster-name=!: The name of your cluster.
-        --configuration-values=: The set of configuration values for the add-on that's created.
-        --namespace-config=: The namespace configuration for the addon.
-        --pod-identity-associations=: An array of EKS Pod Identity associations to be created.
-        --resolve-conflicts=: How to resolve field value conflicts for an Amazon EKS add-on.
-        --service-account-role-arn=: The Amazon Resource Name (ARN) of an existing IAM role to bind to the add-on's service account.
-        --tags=: Metadata that assists with categorization and organization.
-      completion:
-        flag:
-            resolve-conflicts:
-                - OVERWRITE
-                - NONE
-                - PRESERVE
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-nodegroup
+      description: Describes a managed node group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-name=!: The name of your cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --nodegroup-name=!: The name of the node group to describe.
     - name: disassociate-identity-provider-config
       description: Disassociates an identity provider configuration from a cluster.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-request-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
         --cluster-name=!: The name of your cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identity-provider-config=!: An object representing an identity provider configuration.
-    - name: list-associated-access-policies
-      description: Lists the access policies associated with an access entry.
+    - name: list-insights
+      description: Returns a list of all insights checked for against the specified cluster.
       flags:
-        --cluster-name=!: The name of your cluster.
-        --max-results=: The maximum number of results, returned in paginated output.
-        --next-token=: The `nextToken` value returned from a previous paginated request, where `maxResults` was used and the results exceeded the value of that parameter.
-        --principal-arn=!: The ARN of the IAM principal for the `AccessEntry`.
-    - name: list-fargate-profiles
-      description: Lists the Fargate profiles associated with the specified cluster in your Amazon Web Services account in the specified Amazon Web Services Region.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-name=!: The name of the Amazon EKS cluster associated with the insights.
+        --filter=: The criteria to filter your list of insights for your cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of identity provider configurations returned by `ListInsights` in paginated output.
+        --next-token=: The `nextToken` value returned from a previous paginated `ListInsights` request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-insights-refresh
+      description: Returns the status of the latest on-demand cluster insights refresh operation.
       flags:
-        --cluster-name=!: The name of your cluster.
-        --max-results=: The maximum number of results, returned in paginated output.
-        --next-token=: The `nextToken` value returned from a previous paginated request, where `maxResults` was used and the results exceeded the value of that parameter.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-name=!: The name of the cluster associated with the insights refresh operation.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-eks-anywhere-subscriptions
+      description: Displays the full description of the subscription.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-status=: An array of subscription statuses to filter on.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of cluster results returned by ListEksAnywhereSubscriptions in paginated output.
+        --next-token=: The `nextToken` value returned from a previous paginated `ListEksAnywhereSubscriptions` request where `maxResults` was used and the results exceeded the value of that parameter.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-identity-provider-configs
       description: Lists the identity provider configurations for your cluster.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --cluster-name=!: The name of your cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results, returned in paginated output.
         --next-token=: The `nextToken` value returned from a previous paginated request, where `maxResults` was used and the results exceeded the value of that parameter.
-    - name: update-nodegroup-version
-      description: Updates the Kubernetes version or AMI version of an Amazon EKS managed node group.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-access-entry
+      description: Updates an access entry.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-request-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
         --cluster-name=!: The name of your cluster.
-        --force: Force the update if any `Pod` on the existing node group can't be drained due to a `Pod` disruption budget issue.
-        --kubernetes-version=: The Kubernetes version to update to.
-        --launch-template=: An object representing a node group's launch template specification.
-        --no-force: Force the update if any `Pod` on the existing node group can't be drained due to a `Pod` disruption budget issue.
-        --nodegroup-name=!: The name of the managed node group to update.
-        --release-version=: The AMI version of the Amazon EKS optimized AMI to use for the update.
-    - name: create-pod-identity-association
-      description: Creates an EKS Pod Identity association between a service account in an Amazon EKS cluster and an IAM role with *EKS Pod Identity*.
-      flags:
-        --client-request-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --cluster-name=!: The name of the cluster to create the EKS Pod Identity association in.
-        --disable-session-tags: Disable the automatic sessions tags that are appended by EKS Pod Identity.
-        --namespace=!: The name of the Kubernetes namespace inside the cluster to create the EKS Pod Identity association in.
-        --no-disable-session-tags: Disable the automatic sessions tags that are appended by EKS Pod Identity.
-        --role-arn=!: The Amazon Resource Name (ARN) of the IAM role to associate with the service account.
-        --service-account=!: The name of the Kubernetes service account inside the cluster to associate the IAM credentials with.
-        --tags=: Metadata that assists with categorization and organization.
-        --target-role-arn=: The Amazon Resource Name (ARN) of the target IAM role to associate with the service account.
-    - name: describe-access-entry
-      description: Describes an access entry.
-      flags:
-        --cluster-name=!: The name of your cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kubernetes-groups=: 'The value for `name` that you''ve specified for `kind: Group` as a `subject` in a Kubernetes `RoleBinding` or `ClusterRoleBinding` object.'
         --principal-arn=!: The ARN of the IAM principal for the `AccessEntry`.
+        --username=: The username to authenticate to Kubernetes with.
+    - name: update-cluster-version
+      description: Updates an Amazon EKS cluster to the specified Kubernetes version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --force: Set this value to `true` to override upgrade-blocking readiness checks when updating a cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kubernetes-version=!: The desired Kubernetes version following a successful update.
+        --name=!: The name of the Amazon EKS cluster to update.
+        --no-force: Set this value to `true` to override upgrade-blocking readiness checks when updating a cluster.
+    - name: associate-encryption-config
+      description: Associates an encryption configuration to an existing cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --cluster-name=!: The name of your cluster.
+        --encryption-config=!: The configuration you are using for encryption.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: describe-cluster-versions
       description: Lists available Kubernetes versions for Amazon EKS clusters.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --cluster-type=: The type of cluster to filter versions by.
         --cluster-versions=: List of specific cluster versions to describe.
         --default-only: Filter to show only default versions.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --include-all: Include all available versions in the response.
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: Maximum number of results to return.
         --next-token=: Pagination token for the next set of results.
         --no-default-only: Filter to show only default versions.
         --no-include-all: Include all available versions in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
         --status=: This field is deprecated.
         --version-status=: Filter versions by their current status.
       completion:
@@ -355,183 +663,118 @@ commands:
                 - UNSUPPORTED
                 - STANDARD_SUPPORT
                 - EXTENDED_SUPPORT
-    - name: describe-identity-provider-config
-      description: Describes an identity provider configuration.
-      flags:
-        --cluster-name=!: The name of your cluster.
-        --identity-provider-config=!: An object representing an identity provider configuration.
-    - name: describe-insight
-      description: Returns details about an insight that you specify using its ID.
-      flags:
-        --cluster-name=!: The name of the cluster to describe the insight for.
-        --id=!: The identity of the insight to describe.
     - name: describe-update
       description: Describes an update to an Amazon EKS resource.
       flags:
         --addon-name=: The name of the add-on.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the Amazon EKS cluster associated with the update.
         --nodegroup-name=: The name of the Amazon EKS node group associated with the update.
         --update-id=!: The ID of the update to describe.
-    - name: associate-identity-provider-config
-      description: Associates an identity provider configuration to a cluster.
+    - name: delete-fargate-profile
+      description: Deletes an Fargate profile.
       flags:
-        --client-request-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --cluster-name=!: The name of your cluster.
-        --oidc=!: An object representing an OpenID Connect (OIDC) identity provider configuration.
-        --tags=: Metadata that assists with categorization and organization.
-    - name: delete-access-entry
-      description: Deletes an access entry.
+        --fargate-profile-name=!: The name of the Fargate profile to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-access-entry
+      description: Describes an access entry.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --cluster-name=!: The name of your cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --principal-arn=!: The ARN of the IAM principal for the `AccessEntry`.
-    - name: list-pod-identity-associations
-      description: List the EKS Pod Identity associations in a cluster.
+    - name: describe-addon-versions
+      description: Describes the versions for an add-on.
       flags:
-        --cluster-name=!: The name of the cluster that the associations are in.
-        --max-results=: The maximum number of EKS Pod Identity association results returned by `ListPodIdentityAssociations` in paginated output.
-        --namespace=: The name of the Kubernetes namespace inside the cluster that the associations are in.
-        --next-token=: The `nextToken` value returned from a previous paginated `ListUpdates` request where `maxResults` was used and the results exceeded the value of that parameter.
-        --service-account=: The name of the Kubernetes service account that the associations use.
-    - name: start-insights-refresh
-      description: Initiates an on-demand refresh operation for cluster insights, getting the latest analysis outside of the standard refresh schedule.
-      flags:
-        --cluster-name=!: The name of the cluster for the refresh insights operation.
-    - name: create-access-entry
-      description: Creates an access entry.
-      flags:
-        --client-request-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --cluster-name=!: The name of your cluster.
-        --kubernetes-groups=: 'The value for `name` that you''ve specified for `kind: Group` as a `subject` in a Kubernetes `RoleBinding` or `ClusterRoleBinding` object.'
-        --principal-arn=!: The ARN of the IAM principal for the `AccessEntry`.
-        --tags=: Metadata that assists with categorization and organization.
-        --type=: The type of the new access entry.
-        --username=: The username to authenticate to Kubernetes with.
-    - name: describe-cluster
-      description: Describes an Amazon EKS cluster.
-      flags:
-        --name=!: The name of your cluster.
-    - name: describe-insights-refresh
-      description: Returns the status of the latest on-demand cluster insights refresh operation.
-      flags:
-        --cluster-name=!: The name of the cluster associated with the insights refresh operation.
-    - name: list-eks-anywhere-subscriptions
-      description: Displays the full description of the subscription.
-      flags:
-        --include-status=: An array of subscription statuses to filter on.
-        --max-results=: The maximum number of cluster results returned by ListEksAnywhereSubscriptions in paginated output.
-        --next-token=: The `nextToken` value returned from a previous paginated `ListEksAnywhereSubscriptions` request where `maxResults` was used and the results exceeded the value of that parameter.
-    - name: list-nodegroups
-      description: Lists the managed node groups associated with the specified cluster in your Amazon Web Services account in the specified Amazon Web Services Region.
-      flags:
-        --cluster-name=!: The name of your cluster.
+        --addon-name=: The name of the add-on.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kubernetes-version=: The Kubernetes versions that you can use the add-on with.
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results, returned in paginated output.
         --next-token=: The `nextToken` value returned from a previous paginated request, where `maxResults` was used and the results exceeded the value of that parameter.
-    - name: update-nodegroup-config
-      description: Updates an Amazon EKS managed node group configuration.
-      flags:
-        --client-request-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --cluster-name=!: The name of your cluster.
-        --labels=: The Kubernetes `labels` to apply to the nodes in the node group after the update.
-        --node-repair-config=: The node auto repair configuration for the node group.
-        --nodegroup-name=!: The name of the managed node group to update.
-        --scaling-config=: The scaling configuration details for the Auto Scaling group after the update.
-        --taints=: The Kubernetes taints to be applied to the nodes in the node group after the update.
-        --update-config=: The node group update configuration.
-    - name: delete-nodegroup
-      description: Deletes a managed node group.
-      flags:
-        --cluster-name=!: The name of your cluster.
-        --nodegroup-name=!: The name of the node group to delete.
-    - name: disassociate-access-policy
-      description: Disassociates an access policy from an access entry.
-      flags:
-        --cluster-name=!: The name of your cluster.
-        --policy-arn=!: The ARN of the policy to disassociate from the access entry.
-        --principal-arn=!: The ARN of the IAM principal for the `AccessEntry`.
+        --owners=: The owner of the add-on.
+        --page-size=: The size of each page to get in the AWS service call.
+        --publishers=: The publisher of the add-on.
+        --starting-token=: A token to specify where to start paginating.
+        --types=: The type of the add-on.
     - name: tag-resource
       description: Associates the specified tags to an Amazon EKS resource with the specified `resourceArn`.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the resource to add tags to.
         --tags=!: Metadata that assists with categorization and organization.
-    - name: delete-eks-anywhere-subscription
-      description: Deletes an expired or inactive subscription.
-      flags:
-        --id=!: The ID of the subscription.
-    - name: describe-eks-anywhere-subscription
-      description: Returns descriptive information about a subscription.
-      flags:
-        --id=!: The ID of the subscription.
-    - name: describe-fargate-profile
-      description: Describes an Fargate profile.
-      flags:
-        --cluster-name=!: The name of your cluster.
-        --fargate-profile-name=!: The name of the Fargate profile to describe.
-    - name: list-clusters
-      description: Lists the Amazon EKS clusters in your Amazon Web Services account in the specified Amazon Web Services Region.
-      flags:
-        --include=: Indicates whether external clusters are included in the returned list.
-        --max-results=: The maximum number of results, returned in paginated output.
-        --next-token=: The `nextToken` value returned from a previous paginated request, where `maxResults` was used and the results exceeded the value of that parameter.
-    - name: update-pod-identity-association
-      description: Updates a EKS Pod Identity association.
-      flags:
-        --association-id=!: The ID of the association to be updated.
-        --client-request-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --cluster-name=!: The name of the cluster that you want to update the association in.
-        --disable-session-tags: Disable the automatic sessions tags that are appended by EKS Pod Identity.
-        --no-disable-session-tags: Disable the automatic sessions tags that are appended by EKS Pod Identity.
-        --role-arn=: The new IAM role to change in the association.
-        --target-role-arn=: The Amazon Resource Name (ARN) of the target IAM role to associate with the service account.
-    - name: delete-addon
-      description: Deletes an Amazon EKS add-on.
-      flags:
-        --addon-name=!: The name of the add-on.
-        --cluster-name=!: The name of your cluster.
-        --no-preserve: Specifying this option preserves the add-on software on your cluster but Amazon EKS stops managing any settings for the add-on.
-        --preserve: Specifying this option preserves the add-on software on your cluster but Amazon EKS stops managing any settings for the add-on.
-    - name: describe-addon-configuration
-      description: Returns configuration options.
-      flags:
-        --addon-name=!: The name of the add-on.
-        --addon-version=!: The version of the add-on.
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:
+        - name: addon-deleted
+          description: Describes an Amazon EKS add-on.
+          flags:
+            --addon-name=!: The name of the add-on.
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --cluster-name=!: The name of your cluster.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        - name: fargate-profile-active
+          description: Describes an Fargate profile.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --cluster-name=!: The name of your cluster.
+            --fargate-profile-name=!: The name of the Fargate profile to describe.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        - name: fargate-profile-deleted
+          description: Describes an Fargate profile.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --cluster-name=!: The name of your cluster.
+            --fargate-profile-name=!: The name of the Fargate profile to describe.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        - name: cluster-active
+          description: Describes an Amazon EKS cluster.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --name=!: The name of your cluster.
         - name: cluster-deleted
           description: Describes an Amazon EKS cluster.
           flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --name=!: The name of your cluster.
         - name: nodegroup-active
           description: Describes a managed node group.
           flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
             --cluster-name=!: The name of your cluster.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --nodegroup-name=!: The name of the node group to describe.
         - name: nodegroup-deleted
           description: Describes a managed node group.
           flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
             --cluster-name=!: The name of your cluster.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --nodegroup-name=!: The name of the node group to describe.
         - name: addon-active
           description: Describes an Amazon EKS add-on.
           flags:
             --addon-name=!: The name of the add-on.
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
             --cluster-name=!: The name of your cluster.
-        - name: addon-deleted
-          description: Describes an Amazon EKS add-on.
-          flags:
-            --addon-name=!: The name of the add-on.
-            --cluster-name=!: The name of your cluster.
-        - name: fargate-profile-active
-          description: Describes an Fargate profile.
-          flags:
-            --cluster-name=!: The name of your cluster.
-            --fargate-profile-name=!: The name of the Fargate profile to describe.
-        - name: fargate-profile-deleted
-          description: Describes an Fargate profile.
-          flags:
-            --cluster-name=!: The name of your cluster.
-            --fargate-profile-name=!: The name of the Fargate profile to describe.
-        - name: cluster-active
-          description: Describes an Amazon EKS cluster.
-          flags:
-            --name=!: The name of your cluster.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.

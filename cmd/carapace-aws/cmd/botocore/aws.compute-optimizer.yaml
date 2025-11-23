@@ -1,163 +1,40 @@
 name: compute-optimizer
 description: AWS Compute Optimizer
 commands:
-    - name: export-e-c2-instance-recommendations
-      description: Exports optimization recommendations for Amazon EC2 instances.
+    - name: get-lambda-function-recommendations
+      description: Returns Lambda function recommendations.
       flags:
-        --account-ids=: The IDs of the Amazon Web Services accounts for which to export instance recommendations.
-        --fields-to-export=: The recommendations data to include in the export file.
-        --file-format=: The format of the export file.
-        --filters=: An array of objects to specify a filter that exports a more specific set of instance recommendations.
-        --include-member-accounts: Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the management account of an organization.
-        --no-include-member-accounts: Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the management account of an organization.
-        --recommendation-preferences=: An object to specify the preferences for the Amazon EC2 instance recommendations to export.
-        --s3-destination-config=!: An object to specify the destination Amazon Simple Storage Service (Amazon S3) bucket name and key prefix for the export job.
-      completion:
-        flag:
-            file-format:
-                - Csv
-    - name: get-ecs-service-recommendation-projected-metrics
-      description: Returns the projected metrics of Amazon ECS service recommendations.
-      flags:
-        --end-time=!: The timestamp of the last projected metrics data point to return.
-        --period=!: The granularity, in seconds, of the projected metrics data points.
-        --service-arn=!: The ARN that identifies the Amazon ECS service.
-        --start-time=!: The timestamp of the first projected metrics data point to return.
-        --stat=!: The statistic of the projected metrics.
-      completion:
-        flag:
-            stat:
-                - Maximum
-                - Average
-    - name: get-ecs-service-recommendations
-      description: Returns Amazon ECS service recommendations.
-      flags:
-        --account-ids=: Return the Amazon ECS service recommendations to the specified Amazon Web Services account IDs.
-        --filters=: An array of objects to specify a filter that returns a more specific list of Amazon ECS service recommendations.
-        --max-results=: The maximum number of Amazon ECS service recommendations to return with a single request.
-        --next-token=: The token to advance to the next page of Amazon ECS service recommendations.
-        --service-arns=: The ARN that identifies the Amazon ECS service.
-    - name: get-effective-recommendation-preferences
-      description: Returns the recommendation preferences that are in effect for a given resource, such as enhanced infrastructure metrics.
-      flags:
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource for which to confirm effective recommendation preferences.
-    - name: get-enrollment-status
-      description: Returns the enrollment (opt in) status of an account to the Compute Optimizer service.
-    - name: get-rds-database-recommendation-projected-metrics
-      description: Returns the projected metrics of Aurora and RDS database recommendations.
-      flags:
-        --end-time=!: The timestamp of the last projected metrics data point to return.
-        --period=!: The granularity, in seconds, of the projected metrics data points.
-        --recommendation-preferences=: ""
-        --resource-arn=!: The ARN that identifies the Amazon Aurora or RDS database.
-        --start-time=!: The timestamp of the first projected metrics data point to return.
-        --stat=!: The statistic of the projected metrics.
-      completion:
-        flag:
-            stat:
-                - Maximum
-                - Average
+        --account-ids=: The ID of the Amazon Web Services account for which to return function recommendations.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: An array of objects to specify a filter that returns a more specific list of function recommendations.
+        --function-arns=: The Amazon Resource Name (ARN) of the functions for which to return recommendations.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of function recommendations to return with a single request.
+        --next-token=: The token to advance to the next page of function recommendations.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: get-rds-database-recommendations
       description: Returns Amazon Aurora and RDS database recommendations.
       flags:
         --account-ids=: Return the Amazon Aurora and RDS database recommendations to the specified Amazon Web Services account IDs.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --filters=: An array of objects to specify a filter that returns a more specific list of Amazon Aurora and RDS database recommendations.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The maximum number of Amazon Aurora and RDS database recommendations to return with a single request.
         --next-token=: The token to advance to the next page of Amazon Aurora and RDS database recommendations.
         --recommendation-preferences=: ""
         --resource-arns=: The ARN that identifies the Amazon Aurora or RDS database.
-    - name: get-recommendation-preferences
-      description: Returns existing recommendation preferences, such as enhanced infrastructure metrics.
-      flags:
-        --max-results=: The maximum number of recommendation preferences to return with a single request.
-        --next-token=: The token to advance to the next page of recommendation preferences.
-        --resource-type=!: The target resource type of the recommendation preference for which to return preferences.
-        --scope=: An object that describes the scope of the recommendation preference to return.
-      completion:
-        flag:
-            resource-type:
-                - Ec2Instance
-                - AutoScalingGroup
-                - EbsVolume
-                - LambdaFunction
-                - NotApplicable
-                - EcsService
-                - License
-                - RdsDBInstance
-                - AuroraDBClusterStorage
-                - Idle
-    - name: export-auto-scaling-group-recommendations
-      description: Exports optimization recommendations for Auto Scaling groups.
-      flags:
-        --account-ids=: The IDs of the Amazon Web Services accounts for which to export Auto Scaling group recommendations.
-        --fields-to-export=: The recommendations data to include in the export file.
-        --file-format=: The format of the export file.
-        --filters=: An array of objects to specify a filter that exports a more specific set of Auto Scaling group recommendations.
-        --include-member-accounts: Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the management account of an organization.
-        --no-include-member-accounts: Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the management account of an organization.
-        --recommendation-preferences=: An object to specify the preferences for the Auto Scaling group recommendations to export.
-        --s3-destination-config=!: An object to specify the destination Amazon Simple Storage Service (Amazon S3) bucket name and key prefix for the export job.
-      completion:
-        flag:
-            file-format:
-                - Csv
-    - name: export-ecs-service-recommendations
-      description: Exports optimization recommendations for Amazon ECS services on Fargate.
-      flags:
-        --account-ids=: The Amazon Web Services account IDs for the export Amazon ECS service recommendations.
-        --fields-to-export=: The recommendations data to include in the export file.
-        --file-format=: The format of the export file.
-        --filters=: An array of objects to specify a filter that exports a more specific set of Amazon ECS service recommendations.
-        --include-member-accounts: If your account is the management account or the delegated administrator of an organization, this parameter indicates whether to include recommendations for resources in all member accounts of the organization.
-        --no-include-member-accounts: If your account is the management account or the delegated administrator of an organization, this parameter indicates whether to include recommendations for resources in all member accounts of the organization.
-        --s3-destination-config=!: ""
-      completion:
-        flag:
-            file-format:
-                - Csv
-    - name: export-rds-database-recommendations
-      description: Export optimization recommendations for your Amazon Aurora and Amazon Relational Database Service (Amazon RDS) databases.
-      flags:
-        --account-ids=: The Amazon Web Services account IDs for the export Amazon Aurora and RDS database recommendations.
-        --fields-to-export=: The recommendations data to include in the export file.
-        --file-format=: The format of the export file.
-        --filters=: An array of objects to specify a filter that exports a more specific set of Amazon Aurora and RDS recommendations.
-        --include-member-accounts: If your account is the management account or the delegated administrator of an organization, this parameter indicates whether to include recommendations for resources in all member accounts of the organization.
-        --no-include-member-accounts: If your account is the management account or the delegated administrator of an organization, this parameter indicates whether to include recommendations for resources in all member accounts of the organization.
-        --recommendation-preferences=: ""
-        --s3-destination-config=!: ""
-      completion:
-        flag:
-            file-format:
-                - Csv
-    - name: get-ebs-volume-recommendations
-      description: Returns Amazon Elastic Block Store (Amazon EBS) volume recommendations.
-      flags:
-        --account-ids=: The ID of the Amazon Web Services account for which to return volume recommendations.
-        --filters=: An array of objects to specify a filter that returns a more specific list of volume recommendations.
-        --max-results=: The maximum number of volume recommendations to return with a single request.
-        --next-token=: The token to advance to the next page of volume recommendations.
-        --volume-arns=: The Amazon Resource Name (ARN) of the volumes for which to return recommendations.
-    - name: get-e-c2-instance-recommendations
-      description: Returns Amazon EC2 instance recommendations.
-      flags:
-        --account-ids=: The ID of the Amazon Web Services account for which to return instance recommendations.
-        --filters=: An array of objects to specify a filter that returns a more specific list of instance recommendations.
-        --instance-arns=: The Amazon Resource Name (ARN) of the instances for which to return recommendations.
-        --max-results=: The maximum number of instance recommendations to return with a single request.
-        --next-token=: The token to advance to the next page of instance recommendations.
-        --recommendation-preferences=: An object to specify the preferences for the Amazon EC2 instance recommendations to return in the response.
-    - name: get-recommendation-summaries
-      description: Returns the optimization findings for an account.
-      flags:
-        --account-ids=: The ID of the Amazon Web Services account for which to return recommendation summaries.
-        --max-results=: The maximum number of recommendation summaries to return with a single request.
-        --next-token=: The token to advance to the next page of recommendation summaries.
     - name: put-recommendation-preferences
       description: Creates a new recommendation preference or updates an existing recommendation preference, such as enhanced infrastructure metrics.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --enhanced-infrastructure-metrics=: The status of the enhanced infrastructure metrics recommendation preference to create or update.
         --external-metrics-preference=: The provider of the external metrics recommendation preference to create or update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --inferred-workload-types=: The status of the inferred workload types recommendation preference to create or update.
         --look-back-period=: The preference to control the number of days the utilization metrics of the Amazon Web Services resource are analyzed.
         --preferred-resources=: The preference to control which resource type values are considered when generating rightsizing recommendations.
@@ -191,9 +68,323 @@ commands:
             savings-estimation-mode:
                 - AfterDiscounts
                 - BeforeDiscounts
+    - name: update-enrollment-status
+      description: Updates the enrollment (opt in and opt out) status of an account to the Compute Optimizer service.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-member-accounts: Indicates whether to enroll member accounts of the organization if the account is the management account of an organization.
+        --no-include-member-accounts: Indicates whether to enroll member accounts of the organization if the account is the management account of an organization.
+        --status=!: The new enrollment status of the account.
+      completion:
+        flag:
+            status:
+                - Active
+                - Inactive
+                - Pending
+                - Failed
+    - name: describe-recommendation-export-jobs
+      description: Describes recommendation export jobs created in the last seven days.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: An array of objects to specify a filter that returns a more specific list of export jobs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-ids=: The identification numbers of the export jobs to return.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of export jobs to return with a single request.
+        --next-token=: The token to advance to the next page of export jobs.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: export-lambda-function-recommendations
+      description: Exports optimization recommendations for Lambda functions.
+      flags:
+        --account-ids=: The IDs of the Amazon Web Services accounts for which to export Lambda function recommendations.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fields-to-export=: The recommendations data to include in the export file.
+        --file-format=: The format of the export file.
+        --filters=: An array of objects to specify a filter that exports a more specific set of Lambda function recommendations.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-member-accounts: Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the management account of an organization.
+        --no-include-member-accounts: Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the management account of an organization.
+        --s3-destination-config=!: ""
+      completion:
+        flag:
+            file-format:
+                - Csv
+    - name: export-license-recommendations
+      description: Export optimization recommendations for your licenses.
+      flags:
+        --account-ids=: The IDs of the Amazon Web Services accounts for which to export license recommendations.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fields-to-export=: The recommendations data to include in the export file.
+        --file-format=: The format of the export file.
+        --filters=: An array of objects to specify a filter that exports a more specific set of license recommendations.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-member-accounts: Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the management account of an organization.
+        --no-include-member-accounts: Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the management account of an organization.
+        --s3-destination-config=!: ""
+      completion:
+        flag:
+            file-format:
+                - Csv
+    - name: export-rds-database-recommendations
+      description: Export optimization recommendations for your Amazon Aurora and Amazon Relational Database Service (Amazon RDS) databases.
+      flags:
+        --account-ids=: The Amazon Web Services account IDs for the export Amazon Aurora and RDS database recommendations.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fields-to-export=: The recommendations data to include in the export file.
+        --file-format=: The format of the export file.
+        --filters=: An array of objects to specify a filter that exports a more specific set of Amazon Aurora and RDS recommendations.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-member-accounts: If your account is the management account or the delegated administrator of an organization, this parameter indicates whether to include recommendations for resources in all member accounts of the organization.
+        --no-include-member-accounts: If your account is the management account or the delegated administrator of an organization, this parameter indicates whether to include recommendations for resources in all member accounts of the organization.
+        --recommendation-preferences=: ""
+        --s3-destination-config=!: ""
+      completion:
+        flag:
+            file-format:
+                - Csv
+    - name: get-auto-scaling-group-recommendations
+      description: Returns Auto Scaling group recommendations.
+      flags:
+        --account-ids=: The ID of the Amazon Web Services account for which to return Auto Scaling group recommendations.
+        --auto-scaling-group-arns=: The Amazon Resource Name (ARN) of the Auto Scaling groups for which to return recommendations.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: An array of objects to specify a filter that returns a more specific list of Auto Scaling group recommendations.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of Auto Scaling group recommendations to return with a single request.
+        --next-token=: The token to advance to the next page of Auto Scaling group recommendations.
+        --recommendation-preferences=: An object to specify the preferences for the Auto Scaling group recommendations to return in the response.
+    - name: get-effective-recommendation-preferences
+      description: Returns the recommendation preferences that are in effect for a given resource, such as enhanced infrastructure metrics.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource for which to confirm effective recommendation preferences.
+    - name: get-enrollment-statuses-for-organization
+      description: Returns the Compute Optimizer enrollment (opt-in) status of organization member accounts, if your account is an organization management account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: An array of objects to specify a filter that returns a more specific list of account enrollment statuses.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of account enrollment statuses to return with a single request.
+        --next-token=: The token to advance to the next page of account enrollment statuses.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-idle-recommendations
+      description: Returns idle resource recommendations.
+      flags:
+        --account-ids=: Return the idle resource recommendations to the specified Amazon Web Services account IDs.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: An array of objects to specify a filter that returns a more specific list of idle resource recommendations.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of idle resource recommendations to return with a single request.
+        --next-token=: The token to advance to the next page of idle resource recommendations.
+        --order-by=: The order to sort the idle resource recommendations.
+        --resource-arns=: The ARN that identifies the idle resource.
+    - name: export-ebs-volume-recommendations
+      description: Exports optimization recommendations for Amazon EBS volumes.
+      flags:
+        --account-ids=: The IDs of the Amazon Web Services accounts for which to export Amazon EBS volume recommendations.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fields-to-export=: The recommendations data to include in the export file.
+        --file-format=: The format of the export file.
+        --filters=: An array of objects to specify a filter that exports a more specific set of Amazon EBS volume recommendations.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-member-accounts: Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the management account of an organization.
+        --no-include-member-accounts: Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the management account of an organization.
+        --s3-destination-config=!: ""
+      completion:
+        flag:
+            file-format:
+                - Csv
+    - name: get-ebs-volume-recommendations
+      description: Returns Amazon Elastic Block Store (Amazon EBS) volume recommendations.
+      flags:
+        --account-ids=: The ID of the Amazon Web Services account for which to return volume recommendations.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: An array of objects to specify a filter that returns a more specific list of volume recommendations.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of volume recommendations to return with a single request.
+        --next-token=: The token to advance to the next page of volume recommendations.
+        --volume-arns=: The Amazon Resource Name (ARN) of the volumes for which to return recommendations.
+    - name: get-e-c2-instance-recommendations
+      description: Returns Amazon EC2 instance recommendations.
+      flags:
+        --account-ids=: The ID of the Amazon Web Services account for which to return instance recommendations.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: An array of objects to specify a filter that returns a more specific list of instance recommendations.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-arns=: The Amazon Resource Name (ARN) of the instances for which to return recommendations.
+        --max-results=: The maximum number of instance recommendations to return with a single request.
+        --next-token=: The token to advance to the next page of instance recommendations.
+        --recommendation-preferences=: An object to specify the preferences for the Amazon EC2 instance recommendations to return in the response.
+    - name: get-e-c2-recommendation-projected-metrics
+      description: Returns the projected utilization metrics of Amazon EC2 instance recommendations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=!: The timestamp of the last projected metrics data point to return.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-arn=!: The Amazon Resource Name (ARN) of the instances for which to return recommendation projected metrics.
+        --period=!: The granularity, in seconds, of the projected metrics data points.
+        --recommendation-preferences=: An object to specify the preferences for the Amazon EC2 recommendation projected metrics to return in the response.
+        --start-time=!: The timestamp of the first projected metrics data point to return.
+        --stat=!: The statistic of the projected metrics.
+      completion:
+        flag:
+            stat:
+                - Maximum
+                - Average
+    - name: get-license-recommendations
+      description: Returns license recommendations for Amazon EC2 instances that run on a specific license.
+      flags:
+        --account-ids=: The ID of the Amazon Web Services account for which to return license recommendations.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: An array of objects to specify a filter that returns a more specific list of license recommendations.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of license recommendations to return with a single request.
+        --next-token=: The token to advance to the next page of license recommendations.
+        --resource-arns=: The ARN that identifies the Amazon EC2 instance.
+    - name: get-recommendation-preferences
+      description: Returns existing recommendation preferences, such as enhanced infrastructure metrics.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of recommendation preferences to return with a single request.
+        --next-token=: The token to advance to the next page of recommendation preferences.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-type=!: The target resource type of the recommendation preference for which to return preferences.
+        --scope=: An object that describes the scope of the recommendation preference to return.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            resource-type:
+                - Ec2Instance
+                - AutoScalingGroup
+                - EbsVolume
+                - LambdaFunction
+                - NotApplicable
+                - EcsService
+                - License
+                - RdsDBInstance
+                - AuroraDBClusterStorage
+                - Idle
+    - name: get-recommendation-summaries
+      description: Returns the optimization findings for an account.
+      flags:
+        --account-ids=: The ID of the Amazon Web Services account for which to return recommendation summaries.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of recommendation summaries to return with a single request.
+        --next-token=: The token to advance to the next page of recommendation summaries.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: export-auto-scaling-group-recommendations
+      description: Exports optimization recommendations for Auto Scaling groups.
+      flags:
+        --account-ids=: The IDs of the Amazon Web Services accounts for which to export Auto Scaling group recommendations.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fields-to-export=: The recommendations data to include in the export file.
+        --file-format=: The format of the export file.
+        --filters=: An array of objects to specify a filter that exports a more specific set of Auto Scaling group recommendations.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-member-accounts: Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the management account of an organization.
+        --no-include-member-accounts: Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the management account of an organization.
+        --recommendation-preferences=: An object to specify the preferences for the Auto Scaling group recommendations to export.
+        --s3-destination-config=!: An object to specify the destination Amazon Simple Storage Service (Amazon S3) bucket name and key prefix for the export job.
+      completion:
+        flag:
+            file-format:
+                - Csv
+    - name: export-e-c2-instance-recommendations
+      description: Exports optimization recommendations for Amazon EC2 instances.
+      flags:
+        --account-ids=: The IDs of the Amazon Web Services accounts for which to export instance recommendations.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fields-to-export=: The recommendations data to include in the export file.
+        --file-format=: The format of the export file.
+        --filters=: An array of objects to specify a filter that exports a more specific set of instance recommendations.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-member-accounts: Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the management account of an organization.
+        --no-include-member-accounts: Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the management account of an organization.
+        --recommendation-preferences=: An object to specify the preferences for the Amazon EC2 instance recommendations to export.
+        --s3-destination-config=!: An object to specify the destination Amazon Simple Storage Service (Amazon S3) bucket name and key prefix for the export job.
+      completion:
+        flag:
+            file-format:
+                - Csv
+    - name: export-idle-recommendations
+      description: Export optimization recommendations for your idle resources.
+      flags:
+        --account-ids=: The Amazon Web Services account IDs for the export idle resource recommendations.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fields-to-export=: The recommendations data to include in the export file.
+        --file-format=: The format of the export file.
+        --filters=: An array of objects to specify a filter that exports a more specific set of idle resource recommendations.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-member-accounts: If your account is the management account or the delegated administrator of an organization, this parameter indicates whether to include recommendations for resources in all member accounts of the organization.
+        --no-include-member-accounts: If your account is the management account or the delegated administrator of an organization, this parameter indicates whether to include recommendations for resources in all member accounts of the organization.
+        --s3-destination-config=!: ""
+      completion:
+        flag:
+            file-format:
+                - Csv
+    - name: get-ecs-service-recommendations
+      description: Returns Amazon ECS service recommendations.
+      flags:
+        --account-ids=: Return the Amazon ECS service recommendations to the specified Amazon Web Services account IDs.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: An array of objects to specify a filter that returns a more specific list of Amazon ECS service recommendations.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of Amazon ECS service recommendations to return with a single request.
+        --next-token=: The token to advance to the next page of Amazon ECS service recommendations.
+        --service-arns=: The ARN that identifies the Amazon ECS service.
+    - name: get-rds-database-recommendation-projected-metrics
+      description: Returns the projected metrics of Aurora and RDS database recommendations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=!: The timestamp of the last projected metrics data point to return.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --period=!: The granularity, in seconds, of the projected metrics data points.
+        --recommendation-preferences=: ""
+        --resource-arn=!: The ARN that identifies the Amazon Aurora or RDS database.
+        --start-time=!: The timestamp of the first projected metrics data point to return.
+        --stat=!: The statistic of the projected metrics.
+      completion:
+        flag:
+            stat:
+                - Maximum
+                - Average
     - name: delete-recommendation-preferences
       description: Deletes a recommendation preference, such as enhanced infrastructure metrics.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --recommendation-preference-names=!: The name of the recommendation preference to delete.
         --resource-type=!: The target resource type of the recommendation preference to delete.
         --scope=: An object that describes the scope of the recommendation preference to delete.
@@ -210,27 +401,16 @@ commands:
                 - RdsDBInstance
                 - AuroraDBClusterStorage
                 - Idle
-    - name: export-ebs-volume-recommendations
-      description: Exports optimization recommendations for Amazon EBS volumes.
+    - name: export-ecs-service-recommendations
+      description: Exports optimization recommendations for Amazon ECS services on Fargate.
       flags:
-        --account-ids=: The IDs of the Amazon Web Services accounts for which to export Amazon EBS volume recommendations.
+        --account-ids=: The Amazon Web Services account IDs for the export Amazon ECS service recommendations.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --fields-to-export=: The recommendations data to include in the export file.
         --file-format=: The format of the export file.
-        --filters=: An array of objects to specify a filter that exports a more specific set of Amazon EBS volume recommendations.
-        --include-member-accounts: Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the management account of an organization.
-        --no-include-member-accounts: Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the management account of an organization.
-        --s3-destination-config=!: ""
-      completion:
-        flag:
-            file-format:
-                - Csv
-    - name: export-idle-recommendations
-      description: Export optimization recommendations for your idle resources.
-      flags:
-        --account-ids=: The Amazon Web Services account IDs for the export idle resource recommendations.
-        --fields-to-export=: The recommendations data to include in the export file.
-        --file-format=: The format of the export file.
-        --filters=: An array of objects to specify a filter that exports a more specific set of idle resource recommendations.
+        --filters=: An array of objects to specify a filter that exports a more specific set of Amazon ECS service recommendations.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --include-member-accounts: If your account is the management account or the delegated administrator of an organization, this parameter indicates whether to include recommendations for resources in all member accounts of the organization.
         --no-include-member-accounts: If your account is the management account or the delegated administrator of an organization, this parameter indicates whether to include recommendations for resources in all member accounts of the organization.
         --s3-destination-config=!: ""
@@ -238,84 +418,15 @@ commands:
         flag:
             file-format:
                 - Csv
-    - name: export-lambda-function-recommendations
-      description: Exports optimization recommendations for Lambda functions.
+    - name: get-ecs-service-recommendation-projected-metrics
+      description: Returns the projected metrics of Amazon ECS service recommendations.
       flags:
-        --account-ids=: The IDs of the Amazon Web Services accounts for which to export Lambda function recommendations.
-        --fields-to-export=: The recommendations data to include in the export file.
-        --file-format=: The format of the export file.
-        --filters=: An array of objects to specify a filter that exports a more specific set of Lambda function recommendations.
-        --include-member-accounts: Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the management account of an organization.
-        --no-include-member-accounts: Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the management account of an organization.
-        --s3-destination-config=!: ""
-      completion:
-        flag:
-            file-format:
-                - Csv
-    - name: export-license-recommendations
-      description: Export optimization recommendations for your licenses.
-      flags:
-        --account-ids=: The IDs of the Amazon Web Services accounts for which to export license recommendations.
-        --fields-to-export=: The recommendations data to include in the export file.
-        --file-format=: The format of the export file.
-        --filters=: An array of objects to specify a filter that exports a more specific set of license recommendations.
-        --include-member-accounts: Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the management account of an organization.
-        --no-include-member-accounts: Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the management account of an organization.
-        --s3-destination-config=!: ""
-      completion:
-        flag:
-            file-format:
-                - Csv
-    - name: get-enrollment-statuses-for-organization
-      description: Returns the Compute Optimizer enrollment (opt-in) status of organization member accounts, if your account is an organization management account.
-      flags:
-        --filters=: An array of objects to specify a filter that returns a more specific list of account enrollment statuses.
-        --max-results=: The maximum number of account enrollment statuses to return with a single request.
-        --next-token=: The token to advance to the next page of account enrollment statuses.
-    - name: get-license-recommendations
-      description: Returns license recommendations for Amazon EC2 instances that run on a specific license.
-      flags:
-        --account-ids=: The ID of the Amazon Web Services account for which to return license recommendations.
-        --filters=: An array of objects to specify a filter that returns a more specific list of license recommendations.
-        --max-results=: The maximum number of license recommendations to return with a single request.
-        --next-token=: The token to advance to the next page of license recommendations.
-        --resource-arns=: The ARN that identifies the Amazon EC2 instance.
-    - name: update-enrollment-status
-      description: Updates the enrollment (opt in and opt out) status of an account to the Compute Optimizer service.
-      flags:
-        --include-member-accounts: Indicates whether to enroll member accounts of the organization if the account is the management account of an organization.
-        --no-include-member-accounts: Indicates whether to enroll member accounts of the organization if the account is the management account of an organization.
-        --status=!: The new enrollment status of the account.
-      completion:
-        flag:
-            status:
-                - Active
-                - Inactive
-                - Pending
-                - Failed
-    - name: describe-recommendation-export-jobs
-      description: Describes recommendation export jobs created in the last seven days.
-      flags:
-        --filters=: An array of objects to specify a filter that returns a more specific list of export jobs.
-        --job-ids=: The identification numbers of the export jobs to return.
-        --max-results=: The maximum number of export jobs to return with a single request.
-        --next-token=: The token to advance to the next page of export jobs.
-    - name: get-auto-scaling-group-recommendations
-      description: Returns Auto Scaling group recommendations.
-      flags:
-        --account-ids=: The ID of the Amazon Web Services account for which to return Auto Scaling group recommendations.
-        --auto-scaling-group-arns=: The Amazon Resource Name (ARN) of the Auto Scaling groups for which to return recommendations.
-        --filters=: An array of objects to specify a filter that returns a more specific list of Auto Scaling group recommendations.
-        --max-results=: The maximum number of Auto Scaling group recommendations to return with a single request.
-        --next-token=: The token to advance to the next page of Auto Scaling group recommendations.
-        --recommendation-preferences=: An object to specify the preferences for the Auto Scaling group recommendations to return in the response.
-    - name: get-e-c2-recommendation-projected-metrics
-      description: Returns the projected utilization metrics of Amazon EC2 instance recommendations.
-      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --end-time=!: The timestamp of the last projected metrics data point to return.
-        --instance-arn=!: The Amazon Resource Name (ARN) of the instances for which to return recommendation projected metrics.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --period=!: The granularity, in seconds, of the projected metrics data points.
-        --recommendation-preferences=: An object to specify the preferences for the Amazon EC2 recommendation projected metrics to return in the response.
+        --service-arn=!: The ARN that identifies the Amazon ECS service.
         --start-time=!: The timestamp of the first projected metrics data point to return.
         --stat=!: The statistic of the projected metrics.
       completion:
@@ -323,20 +434,9 @@ commands:
             stat:
                 - Maximum
                 - Average
-    - name: get-idle-recommendations
-      description: Returns idle resource recommendations.
+    - name: get-enrollment-status
+      description: Returns the enrollment (opt in) status of an account to the Compute Optimizer service.
       flags:
-        --account-ids=: Return the idle resource recommendations to the specified Amazon Web Services account IDs.
-        --filters=: An array of objects to specify a filter that returns a more specific list of idle resource recommendations.
-        --max-results=: The maximum number of idle resource recommendations to return with a single request.
-        --next-token=: The token to advance to the next page of idle resource recommendations.
-        --order-by=: The order to sort the idle resource recommendations.
-        --resource-arns=: The ARN that identifies the idle resource.
-    - name: get-lambda-function-recommendations
-      description: Returns Lambda function recommendations.
-      flags:
-        --account-ids=: The ID of the Amazon Web Services account for which to return function recommendations.
-        --filters=: An array of objects to specify a filter that returns a more specific list of function recommendations.
-        --function-arns=: The Amazon Resource Name (ARN) of the functions for which to return recommendations.
-        --max-results=: The maximum number of function recommendations to return with a single request.
-        --next-token=: The token to advance to the next page of function recommendations.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.

@@ -1,236 +1,245 @@
 name: deadline
 description: AWSDeadlineCloud
 commands:
-    - name: get-job
-      description: Gets a Deadline Cloud job.
+    - name: delete-limit
+      description: Removes a limit from the specified farm.
       flags:
-        --farm-id=!: The farm ID of the farm in the job.
-        --job-id=!: The job ID.
-        --queue-id=!: The queue ID associated with the job.
-    - name: list-storage-profiles-for-queue
-      description: Lists storage profiles for a queue.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The unique identifier of the farm that contains the limit to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit-id=!: The unique identifier of the limit to delete.
+    - name: delete-queue-fleet-association
+      description: Deletes a queue-fleet association.
       flags:
-        --farm-id=!: The farm ID of the queue's storage profile.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID of the farm that holds the queue-fleet association.
+        --fleet-id=!: The fleet ID of the queue-fleet association.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --queue-id=!: The queue ID of the queue-fleet association.
+    - name: list-job-members
+      description: Lists members on a job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID of the job to list.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The job ID to include on the list.
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return.
         --next-token=: The token for the next set of results, or `null` to start from the beginning.
-        --queue-id=!: The queue ID for the storage profile.
-    - name: update-queue-fleet-association
-      description: Updates a queue-fleet association.
-      flags:
-        --farm-id=!: The farm ID to update.
-        --fleet-id=!: The fleet ID to update.
-        --queue-id=!: The queue ID to update.
-        --status=!: The status to update.
-      completion:
-        flag:
-            status:
-                - ACTIVE
-                - STOP_SCHEDULING_AND_COMPLETE_TASKS
-                - STOP_SCHEDULING_AND_CANCEL_TASKS
-    - name: assume-fleet-role-for-read
-      description: Get Amazon Web Services credentials from the fleet role.
-      flags:
-        --farm-id=!: The farm ID for the fleet's farm.
-        --fleet-id=!: The fleet ID.
-    - name: create-storage-profile
-      description: Creates a storage profile that specifies the operating system, file type, and file location of resources used on a farm.
-      flags:
-        --client-token=: The unique token which the server uses to recognize retries of the same request.
-        --display-name=!: The display name of the storage profile.
-        --farm-id=!: The farm ID of the farm to connect to the storage profile.
-        --file-system-locations=: File system paths to include in the storage profile.
-        --os-family=!: The type of operating system (OS) for the storage profile.
-      completion:
-        flag:
-            os-family:
-                - WINDOWS
-                - LINUX
-                - MACOS
-    - name: list-available-metered-products
-      description: A list of the available metered products.
-      flags:
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next set of results, or `null` to start from the beginning.
-    - name: associate-member-to-job
-      description: Assigns a job membership level to a member
-      flags:
-        --farm-id=!: The farm ID of the job to associate with the member.
-        --identity-store-id=!: The member's identity store ID to associate with the job.
-        --job-id=!: The job ID to associate with the member.
-        --membership-level=!: The principal's membership level for the associated job.
-        --principal-id=!: The member's principal ID to associate with the job.
-        --principal-type=!: The member's principal type to associate with the job.
-        --queue-id=!: The queue ID to associate to the member.
-      completion:
-        flag:
-            membership-level:
-                - VIEWER
-                - CONTRIBUTOR
-                - OWNER
-                - MANAGER
-            principal-type:
-                - USER
-                - GROUP
-    - name: delete-worker
-      description: Deletes a worker.
-      flags:
-        --farm-id=!: The farm ID of the worker to delete.
-        --fleet-id=!: The fleet ID of the worker to delete.
-        --worker-id=!: The worker ID of the worker to delete.
-    - name: get-budget
-      description: Get a budget.
-      flags:
-        --budget-id=!: The budget ID.
-        --farm-id=!: The farm ID of the farm connected to the budget.
-    - name: create-queue-environment
-      description: Creates an environment for a queue that defines how jobs in the queue run.
-      flags:
-        --client-token=: The unique token which the server uses to recognize retries of the same request.
-        --farm-id=!: The farm ID of the farm to connect to the environment.
-        --priority=!: Sets the priority of the environments in the queue from 0 to 10,000, where 0 is the highest priority (activated first and deactivated last).
-        --queue-id=!: The queue ID to connect the queue and environment.
-        --template-type=!: The template's file type, `JSON` or `YAML`.
-        --template=!: The environment template to use in the queue.
-      completion:
-        flag:
-            template-type:
-                - JSON
-                - YAML
-    - name: list-step-consumers
-      description: Lists step consumers.
-      flags:
-        --farm-id=!: The farm ID for the list of step consumers.
-        --job-id=!: The job ID for the step consumer.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next set of results, or `null` to start from the beginning.
-        --queue-id=!: The queue ID for the step consumer.
-        --step-id=!: The step ID to include on the list.
-    - name: search-tasks
-      description: Searches for tasks.
-      flags:
-        --farm-id=!: The farm ID of the task.
-        --filter-expressions=: The filter expression, `AND` or `OR`, to use when searching among a group of search strings in a resource.
-        --item-offset=!: Defines how far into the scrollable list to start the return of results.
-        --job-id=: The job ID for the task search.
-        --page-size=: Specifies the number of items per page for the resource.
-        --queue-ids=!: The queue IDs to include in the search.
-        --sort-expressions=: The search terms for a resource.
-    - name: create-queue-fleet-association
-      description: Creates an association between a queue and a fleet.
-      flags:
-        --farm-id=!: The ID of the farm that the queue and fleet belong to.
-        --fleet-id=!: The fleet ID.
-        --queue-id=!: The queue ID.
-    - name: create-limit
-      description: Creates a limit that manages the distribution of shared resources, such as floating licenses.
-      flags:
-        --amount-requirement-name=!: The value that you specify as the `name` in the `amounts` field of the `hostRequirements` in a step of a job template to declare the limit requirement.
-        --client-token=: The unique token which the server uses to recognize retries of the same request.
-        --description=: A description of the limit.
-        --display-name=!: The display name of the limit.
-        --farm-id=!: The farm ID of the farm that contains the limit.
-        --max-count=!: The maximum number of resources constrained by this limit.
-    - name: get-sessions-statistics-aggregation
-      description: Gets a set of statistics for queues or farms.
-      flags:
-        --aggregation-id=!: The identifier returned by the `StartSessionsStatisticsAggregation` operation that identifies the aggregated statistics.
-        --farm-id=!: The identifier of the farm to include in the statistics.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next set of results, or `null` to start from the beginning.
-    - name: list-fleets
-      description: Lists fleets.
-      flags:
-        --display-name=: The display names of a list of fleets.
-        --farm-id=!: The farm ID of the fleets.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next set of results, or `null` to start from the beginning.
-        --principal-id=: The principal ID of the members to include in the fleet.
-        --status=: The status of the fleet.
-      completion:
-        flag:
-            status:
-                - ACTIVE
-                - CREATE_IN_PROGRESS
-                - UPDATE_IN_PROGRESS
-                - CREATE_FAILED
-                - UPDATE_FAILED
-                - SUSPENDED
-    - name: list-step-dependencies
-      description: Lists the dependencies for a step.
-      flags:
-        --farm-id=!: The farm ID for the step dependencies list.
-        --job-id=!: The job ID for the step dependencies list.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next set of results, or `null` to start from the beginning.
-        --queue-id=!: The queue ID for the step dependencies list.
-        --step-id=!: The step ID to include on the list.
+        --page-size=: The size of each page to get in the AWS service call.
+        --queue-id=!: The queue ID to include on the list.
+        --starting-token=: A token to specify where to start paginating.
     - name: search-jobs
       description: Searches for jobs.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --farm-id=!: The farm ID of the job.
         --filter-expressions=: The filter expression, `AND` or `OR`, to use when searching among a group of search strings in a resource.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --item-offset=!: Defines how far into the scrollable list to start the return of results.
         --page-size=: Specifies the number of items per page for the resource.
         --queue-ids=!: The queue ID to use in the job search.
         --sort-expressions=: The search terms for a resource.
-    - name: update-farm
-      description: Updates a farm.
+    - name: copy-job-template
+      description: Copies a job template to an Amazon S3 bucket.
       flags:
-        --description=: The description of the farm to update.
-        --display-name=: The display name of the farm to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID to copy.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The job ID to copy.
+        --queue-id=!: The queue ID to copy.
+        --target-s3-location=!: The Amazon S3 bucket name and key where you would like to add a copy of the job template.
+    - name: list-limits
+      description: Gets a list of limits defined in the specified farm.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The unique identifier of the farm that contains the limits.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of limits to return in each page of results.
+        --next-token=: The token for the next set of results, or `null` to start from the beginning.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-metered-products
+      description: Lists metered products.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --license-endpoint-id=!: The license endpoint ID to include on the list of metered products.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next set of results, or `null` to start from the beginning.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-worker
+      description: Gets a worker.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID for the worker.
+        --fleet-id=!: The fleet ID of the worker.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --worker-id=!: The worker ID.
+    - name: list-queue-fleet-associations
+      description: Lists queue-fleet associations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID for the queue-fleet association list.
+        --fleet-id=: The fleet ID for the queue-fleet association list.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next set of results, or `null` to start from the beginning.
+        --page-size=: The size of each page to get in the AWS service call.
+        --queue-id=: The queue ID for the queue-fleet association list.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-task
+      description: Updates a task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: The unique token which the server uses to recognize retries of the same request.
         --farm-id=!: The farm ID to update.
-    - name: create-queue-limit-association
-      description: Associates a limit with a particular queue.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The job ID to update.
+        --queue-id=!: The queue ID to update.
+        --step-id=!: The step ID to update.
+        --target-run-status=!: The run status with which to start the task.
+        --task-id=!: The task ID to update.
+      completion:
+        flag:
+            target-run-status:
+                - READY
+                - FAILED
+                - SUCCEEDED
+                - CANCELED
+                - SUSPENDED
+                - PENDING
+    - name: delete-queue
+      description: Deletes a queue.
       flags:
-        --farm-id=!: The unique identifier of the farm that contains the queue and limit to associate.
-        --limit-id=!: The unique identifier of the limit to associate with the queue.
-        --queue-id=!: The unique identifier of the queue to associate with the limit.
-    - name: get-fleet
-      description: Get a fleet.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The ID of the farm from which to remove the queue.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --queue-id=!: The queue ID of the queue to delete.
+    - name: get-session
+      description: Gets a session.
       flags:
-        --farm-id=!: The farm ID of the farm in the fleet.
-        --fleet-id=!: The fleet ID of the fleet to get.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID for the session.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The job ID for the session.
+        --queue-id=!: The queue ID for the session.
+        --session-id=!: The session ID.
+    - name: list-steps
+      description: Lists steps for a job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID to include on the list of steps.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The job ID to include on the list of steps.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next set of results, or `null` to start from the beginning.
+        --page-size=: The size of each page to get in the AWS service call.
+        --queue-id=!: The queue ID to include on the list of steps.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-fleet
+      description: Updates a fleet.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: The unique token which the server uses to recognize retries of the same request.
+        --configuration=: The fleet configuration to update.
+        --description=: The description of the fleet to update.
+        --display-name=: The display name of the fleet to update.
+        --farm-id=!: The farm ID to update.
+        --fleet-id=!: The fleet ID to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --host-configuration=: Provides a script that runs as a worker is starting up that you can use to provide additional configuration for workers in your fleet.
+        --max-worker-count=: The maximum number of workers in the fleet.
+        --min-worker-count=: The minimum number of workers in the fleet.
+        --role-arn=: The IAM role ARN that the fleet's workers assume while running jobs.
+    - name: get-queue-fleet-association
+      description: Gets a queue-fleet association.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID of the farm that contains the queue-fleet association.
+        --fleet-id=!: The fleet ID for the queue-fleet association.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --queue-id=!: The queue ID for the queue-fleet association.
     - name: list-jobs
       description: Lists jobs.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --farm-id=!: The farm ID for the jobs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return.
         --next-token=: The token for the next set of results, or `null` to start from the beginning.
+        --page-size=: The size of each page to get in the AWS service call.
         --principal-id=: The principal ID of the members on the jobs.
         --queue-id=!: The queue ID for the job.
-    - name: assume-fleet-role-for-worker
-      description: Get credentials from the fleet role for a worker.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-license-endpoints
+      description: Lists license endpoints.
       flags:
-        --farm-id=!: The farm ID for the fleet's farm.
-        --fleet-id=!: The fleet ID that contains the worker.
-        --worker-id=!: The ID of the worker assuming the fleet role.
-    - name: create-budget
-      description: Creates a budget to set spending thresholds for your rendering activity.
-      flags:
-        --actions=!: The budget actions to specify what happens when the budget runs out.
-        --approximate-dollar-limit=!: The dollar limit based on consumed usage.
-        --client-token=: The unique token which the server uses to recognize retries of the same request.
-        --description=: The description of the budget.
-        --display-name=!: The display name of the budget.
-        --farm-id=!: The farm ID to include in this budget.
-        --schedule=!: The schedule to associate with this budget.
-        --usage-tracking-resource=!: The queue ID provided to this budget to track usage.
-    - name: delete-queue-fleet-association
-      description: Deletes a queue-fleet association.
-      flags:
-        --farm-id=!: The farm ID of the farm that holds the queue-fleet association.
-        --fleet-id=!: The fleet ID of the queue-fleet association.
-        --queue-id=!: The queue ID of the queue-fleet association.
-    - name: list-farms
-      description: Lists farms.
-      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return.
         --next-token=: The token for the next set of results, or `null` to start from the beginning.
-        --principal-id=: The principal ID of the member to list on the farm.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-worker
+      description: Updates a worker.
+      flags:
+        --capabilities=: The worker capabilities to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID to update.
+        --fleet-id=!: The fleet ID to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --host-properties=: The host properties to update.
+        --status=: The worker status to update.
+        --worker-id=!: The worker ID to update.
+      completion:
+        flag:
+            status:
+                - STARTED
+                - STOPPING
+                - STOPPED
+    - name: update-worker-schedule
+      description: Updates the schedule for a worker.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID to update.
+        --fleet-id=!: The fleet ID to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --updated-session-actions=: The session actions associated with the worker schedule to update.
+        --worker-id=!: The worker ID to update.
     - name: associate-member-to-queue
       description: Assigns a queue membership level to a member
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --farm-id=!: The farm ID of the queue to associate with the member.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identity-store-id=!: The member's identity store ID to associate with the queue.
         --membership-level=!: The principal's membership level for the associated queue.
         --principal-id=!: The member's principal ID to associate with the queue.
@@ -246,387 +255,55 @@ commands:
             principal-type:
                 - USER
                 - GROUP
-    - name: assume-queue-role-for-worker
-      description: Allows a worker to assume a queue role.
+    - name: assume-fleet-role-for-read
+      description: Get Amazon Web Services credentials from the fleet role.
       flags:
-        --farm-id=!: The farm ID of the worker assuming the queue role.
-        --fleet-id=!: The fleet ID of the worker assuming the queue role.
-        --queue-id=!: The queue ID of the worker assuming the queue role.
-        --worker-id=!: The worker ID of the worker assuming the queue role.
-    - name: get-storage-profile-for-queue
-      description: Gets a storage profile for a queue.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID for the fleet's farm.
+        --fleet-id=!: The fleet ID.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-queue-limit-association
+      description: Removes the association between a queue and a limit.
       flags:
-        --farm-id=!: The farm ID for the queue in storage profile.
-        --queue-id=!: The queue ID the queue in the storage profile.
-        --storage-profile-id=!: The storage profile ID for the storage profile in the queue.
-    - name: list-budgets
-      description: A list of budgets in a farm.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The unique identifier of the farm that contains the queue and limit to disassociate.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit-id=!: The unique identifier of the limit to disassociate.
+        --queue-id=!: The unique identifier of the queue to disassociate.
+    - name: get-job
+      description: Gets a Deadline Cloud job.
       flags:
-        --farm-id=!: The farm ID associated with the budgets.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID of the farm in the job.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The job ID.
+        --queue-id=!: The queue ID associated with the job.
+    - name: list-step-dependencies
+      description: Lists the dependencies for a step.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID for the step dependencies list.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The job ID for the step dependencies list.
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return.
         --next-token=: The token for the next set of results, or `null` to start from the beginning.
-        --status=: The status to list for the budgets.
-      completion:
-        flag:
-            status:
-                - ACTIVE
-                - INACTIVE
-    - name: update-fleet
-      description: Updates a fleet.
-      flags:
-        --client-token=: The unique token which the server uses to recognize retries of the same request.
-        --configuration=: The fleet configuration to update.
-        --description=: The description of the fleet to update.
-        --display-name=: The display name of the fleet to update.
-        --farm-id=!: The farm ID to update.
-        --fleet-id=!: The fleet ID to update.
-        --host-configuration=: Provides a script that runs as a worker is starting up that you can use to provide additional configuration for workers in your fleet.
-        --max-worker-count=: The maximum number of workers in the fleet.
-        --min-worker-count=: The minimum number of workers in the fleet.
-        --role-arn=: The IAM role ARN that the fleet's workers assume while running jobs.
-    - name: create-fleet
-      description: Creates a fleet.
-      flags:
-        --client-token=: The unique token which the server uses to recognize retries of the same request.
-        --configuration=!: The configuration settings for the fleet.
-        --description=: The description of the fleet.
-        --display-name=!: The display name of the fleet.
-        --farm-id=!: The farm ID of the farm to connect to the fleet.
-        --host-configuration=: Provides a script that runs as a worker is starting up that you can use to provide additional configuration for workers in your fleet.
-        --max-worker-count=!: The maximum number of workers for the fleet.
-        --min-worker-count=: The minimum number of workers for the fleet.
-        --role-arn=!: The IAM role ARN for the role that the fleet's workers will use.
-        --tags=: Each tag consists of a tag key and a tag value.
-    - name: delete-fleet
-      description: Deletes a fleet.
-      flags:
-        --client-token=: The unique token which the server uses to recognize retries of the same request.
-        --farm-id=!: The farm ID of the farm to remove from the fleet.
-        --fleet-id=!: The fleet ID of the fleet to delete.
-    - name: list-monitors
-      description: Gets a list of your monitors in Deadline Cloud.
-      flags:
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next set of results, or `null` to start from the beginning.
-    - name: list-sessions-for-worker
-      description: Lists sessions for a worker.
-      flags:
-        --farm-id=!: The farm ID for the session.
-        --fleet-id=!: The fleet ID for the session.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next set of results, or `null` to start from the beginning.
-        --worker-id=!: The worker ID for the session.
-    - name: disassociate-member-from-queue
-      description: Disassociates a member from a queue.
-      flags:
-        --farm-id=!: The farm ID for the queue to disassociate from a member.
-        --principal-id=!: A member's principal ID to disassociate from a queue.
-        --queue-id=!: The queue ID of the queue in which you're disassociating from a member.
-    - name: list-limits
-      description: Gets a list of limits defined in the specified farm.
-      flags:
-        --farm-id=!: The unique identifier of the farm that contains the limits.
-        --max-results=: The maximum number of limits to return in each page of results.
-        --next-token=: The token for the next set of results, or `null` to start from the beginning.
-    - name: update-budget
-      description: Updates a budget that sets spending thresholds for rendering activity.
-      flags:
-        --actions-to-add=: The budget actions to add.
-        --actions-to-remove=: The budget actions to remove from the budget.
-        --approximate-dollar-limit=: The dollar limit to update on the budget.
-        --budget-id=!: The budget ID to update.
-        --client-token=: The unique token which the server uses to recognize retries of the same request.
-        --description=: The description of the budget to update.
-        --display-name=: The display name of the budget to update.
-        --farm-id=!: The farm ID of the budget to update.
-        --schedule=: The schedule to update.
-        --status=: Updates the status of the budget.
-      completion:
-        flag:
-            status:
-                - ACTIVE
-                - INACTIVE
-    - name: get-queue-fleet-association
-      description: Gets a queue-fleet association.
-      flags:
-        --farm-id=!: The farm ID of the farm that contains the queue-fleet association.
-        --fleet-id=!: The fleet ID for the queue-fleet association.
-        --queue-id=!: The queue ID for the queue-fleet association.
-    - name: list-license-endpoints
-      description: Lists license endpoints.
-      flags:
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next set of results, or `null` to start from the beginning.
-    - name: tag-resource
-      description: Tags a resource using the resource's ARN and desired tags.
-      flags:
-        --resource-arn=!: The ARN of the resource to apply tags to.
-        --tags=: Each tag consists of a tag key and a tag value.
-    - name: update-queue
-      description: Updates a queue.
-      flags:
-        --allowed-storage-profile-ids-to-add=: The storage profile IDs to add.
-        --allowed-storage-profile-ids-to-remove=: The storage profile ID to remove.
-        --client-token=: The idempotency token to update in the queue.
-        --default-budget-action=: The default action to take for a queue update if a budget isn't configured.
-        --description=: The description of the queue to update.
-        --display-name=: The display name of the queue to update.
-        --farm-id=!: The farm ID to update in the queue.
-        --job-attachment-settings=: The job attachment settings to update for the queue.
-        --job-run-as-user=: Update the jobs in the queue to run as a specified POSIX user.
-        --queue-id=!: The queue ID to update.
-        --required-file-system-location-names-to-add=: The required file system location names to add to the queue.
-        --required-file-system-location-names-to-remove=: The required file system location names to remove from the queue.
-        --role-arn=: The IAM role ARN that's used to run jobs from this queue.
-      completion:
-        flag:
-            default-budget-action:
-                - NONE
-                - STOP_SCHEDULING_AND_COMPLETE_TASKS
-                - STOP_SCHEDULING_AND_CANCEL_TASKS
-    - name: update-task
-      description: Updates a task.
-      flags:
-        --client-token=: The unique token which the server uses to recognize retries of the same request.
-        --farm-id=!: The farm ID to update.
-        --job-id=!: The job ID to update.
-        --queue-id=!: The queue ID to update.
-        --step-id=!: The step ID to update.
-        --target-run-status=!: The run status with which to start the task.
-        --task-id=!: The task ID to update.
-      completion:
-        flag:
-            target-run-status:
-                - READY
-                - FAILED
-                - SUCCEEDED
-                - CANCELED
-                - SUSPENDED
-                - PENDING
-    - name: get-monitor
-      description: Gets information about the specified monitor.
-      flags:
-        --monitor-id=!: The unique identifier for the monitor.
-    - name: start-sessions-statistics-aggregation
-      description: Starts an asynchronous request for getting aggregated statistics about queues and farms.
-      flags:
-        --end-time=!: The Linux timestamp of the date and time that the statistics end.
-        --farm-id=!: The identifier of the farm that contains queues or fleets to return statistics for.
-        --group-by=!: The field to use to group the statistics.
-        --period=: The period to aggregate the statistics.
-        --resource-ids=!: A list of fleet IDs or queue IDs to gather statistics for.
-        --start-time=!: The Linux timestamp of the date and time that the statistics start.
-        --statistics=!: One to four statistics to return.
-        --timezone=: The timezone to use for the statistics.
-      completion:
-        flag:
-            period:
-                - HOURLY
-                - DAILY
-                - WEEKLY
-                - MONTHLY
-    - name: get-license-endpoint
-      description: Gets a licence endpoint.
-      flags:
-        --license-endpoint-id=!: The license endpoint ID.
-    - name: create-job
-      description: Creates a job.
-      flags:
-        --attachments=: The attachments for the job.
-        --client-token=: The unique token which the server uses to recognize retries of the same request.
-        --farm-id=!: The farm ID of the farm to connect to the job.
-        --max-failed-tasks-count=: The number of task failures before the job stops running and is marked as `FAILED`.
-        --max-retries-per-task=: The maximum number of retries for each task.
-        --max-worker-count=: The maximum number of worker hosts that can concurrently process a job.
-        --parameters=: The parameters for the job.
-        --priority=!: The priority of the job.
-        --queue-id=!: The ID of the queue that the job is submitted to.
-        --source-job-id=: The job ID for the source job.
-        --storage-profile-id=: The storage profile ID for the storage profile to connect to the job.
-        --target-task-run-status=: The initial job status when it is created.
-        --template-type=: The file type for the job template.
-        --template=: The job template to use for this job.
-      completion:
-        flag:
-            target-task-run-status:
-                - READY
-                - SUSPENDED
-            template-type:
-                - JSON
-                - YAML
-    - name: delete-farm
-      description: Deletes a farm.
-      flags:
-        --farm-id=!: The farm ID of the farm to delete.
-    - name: list-queue-fleet-associations
-      description: Lists queue-fleet associations.
-      flags:
-        --farm-id=!: The farm ID for the queue-fleet association list.
-        --fleet-id=: The fleet ID for the queue-fleet association list.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next set of results, or `null` to start from the beginning.
-        --queue-id=: The queue ID for the queue-fleet association list.
-    - name: update-storage-profile
-      description: Updates a storage profile.
-      flags:
-        --client-token=: The unique token which the server uses to recognize retries of the same request.
-        --display-name=: The display name of the storage profile to update.
-        --farm-id=!: The farm ID to update.
-        --file-system-locations-to-add=: The file system location names to add.
-        --file-system-locations-to-remove=: The file system location names to remove.
-        --os-family=: The OS system to update.
-        --storage-profile-id=!: The storage profile ID to update.
-      completion:
-        flag:
-            os-family:
-                - WINDOWS
-                - LINUX
-                - MACOS
-    - name: list-queue-limit-associations
-      description: Gets a list of the associations between queues and limits defined in a farm.
-      flags:
-        --farm-id=!: The unique identifier of the farm that contains the limits and associations.
-        --limit-id=: Specifies that the operation should return only the queue limit associations for the specified limit.
-        --max-results=: The maximum number of associations to return in each page of results.
-        --next-token=: The token for the next set of results, or `null` to start from the beginning.
-        --queue-id=: Specifies that the operation should return only the queue limit associations for the specified queue.
-    - name: list-workers
-      description: Lists workers.
-      flags:
-        --farm-id=!: The farm ID connected to the workers.
-        --fleet-id=!: The fleet ID of the workers.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next set of results, or `null` to start from the beginning.
-    - name: search-steps
-      description: Searches for steps.
-      flags:
-        --farm-id=!: The farm ID to use for the step search.
-        --filter-expressions=: The filter expression, `AND` or `OR`, to use when searching among a group of search strings in a resource.
-        --item-offset=!: Defines how far into the scrollable list to start the return of results.
-        --job-id=: The job ID to use in the step search.
-        --page-size=: Specifies the number of items per page for the resource.
-        --queue-ids=!: The queue IDs in the step search.
-        --sort-expressions=: The search terms for a resource.
-    - name: update-worker-schedule
-      description: Updates the schedule for a worker.
-      flags:
-        --farm-id=!: The farm ID to update.
-        --fleet-id=!: The fleet ID to update.
-        --updated-session-actions=: The session actions associated with the worker schedule to update.
-        --worker-id=!: The worker ID to update.
-    - name: get-queue-environment
-      description: Gets a queue environment.
-      flags:
-        --farm-id=!: The farm ID for the queue environment.
-        --queue-environment-id=!: The queue environment ID.
-        --queue-id=!: The queue ID for the queue environment.
-    - name: list-job-members
-      description: Lists members on a job.
-      flags:
-        --farm-id=!: The farm ID of the job to list.
-        --job-id=!: The job ID to include on the list.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next set of results, or `null` to start from the beginning.
-        --queue-id=!: The queue ID to include on the list.
-    - name: put-metered-product
-      description: Adds a metered product.
-      flags:
-        --license-endpoint-id=!: The license endpoint ID to add to the metered product.
-        --product-id=!: The product ID to add to the metered product.
-    - name: get-step
-      description: Gets a step.
-      flags:
-        --farm-id=!: The farm ID for the step.
-        --job-id=!: The job ID for the step.
-        --queue-id=!: The queue ID for the step.
-        --step-id=!: The step ID.
-    - name: associate-member-to-fleet
-      description: Assigns a fleet membership level to a member.
-      flags:
-        --farm-id=!: The farm ID of the fleet to associate with the member.
-        --fleet-id=!: The ID of the fleet to associate with a member.
-        --identity-store-id=!: The member's identity store ID to associate with the fleet.
-        --membership-level=!: The principal's membership level for the associated fleet.
-        --principal-id=!: The member's principal ID to associate with a fleet.
-        --principal-type=!: The member's principal type to associate with the fleet.
-      completion:
-        flag:
-            membership-level:
-                - VIEWER
-                - CONTRIBUTOR
-                - OWNER
-                - MANAGER
-            principal-type:
-                - USER
-                - GROUP
-    - name: create-license-endpoint
-      description: Creates a license endpoint to integrate your various licensed software used for rendering on Deadline Cloud.
-      flags:
-        --client-token=: The unique token which the server uses to recognize retries of the same request.
-        --security-group-ids=!: The security group IDs.
-        --subnet-ids=!: The subnet IDs.
-        --tags=: Each tag consists of a tag key and a tag value.
-        --vpc-id=!: The VPC (virtual private cloud) ID to use with the license endpoint.
-    - name: delete-limit
-      description: Removes a limit from the specified farm.
-      flags:
-        --farm-id=!: The unique identifier of the farm that contains the limit to delete.
-        --limit-id=!: The unique identifier of the limit to delete.
-    - name: delete-monitor
-      description: Removes a Deadline Cloud monitor.
-      flags:
-        --monitor-id=!: The unique identifier of the monitor to delete.
-    - name: get-farm
-      description: Get a farm.
-      flags:
-        --farm-id=!: The farm ID of the farm.
-    - name: list-fleet-members
-      description: Lists fleet members.
-      flags:
-        --farm-id=!: The farm ID of the fleet.
-        --fleet-id=!: The fleet ID to include on the list.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next set of results, or `null` to start from the beginning.
-    - name: list-sessions
-      description: Lists sessions.
-      flags:
-        --farm-id=!: The farm ID for the list of sessions.
-        --job-id=!: The job ID for the list of sessions.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next set of results, or `null` to start from the beginning.
-        --queue-id=!: The queue ID for the list of sessions
-    - name: assume-queue-role-for-read
-      description: Gets Amazon Web Services credentials from the queue role.
-      flags:
-        --farm-id=!: The farm ID of the farm containing the queue.
-        --queue-id=!: The queue ID.
-    - name: list-queues
-      description: Lists queues.
-      flags:
-        --farm-id=!: The farm ID of the queue.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next set of results, or `null` to start from the beginning.
-        --principal-id=: The principal IDs to include in the list of queues.
-        --status=: The status of the queues listed.
-      completion:
-        flag:
-            status:
-                - IDLE
-                - SCHEDULING
-                - SCHEDULING_BLOCKED
-    - name: update-limit
-      description: Updates the properties of the specified limit.
-      flags:
-        --description=: The new description of the limit.
-        --display-name=: The new display name of the limit.
-        --farm-id=!: The unique identifier of the farm that contains the limit.
-        --limit-id=!: The unique identifier of the limit to update.
-        --max-count=: The maximum number of resources constrained by this limit.
+        --page-size=: The size of each page to get in the AWS service call.
+        --queue-id=!: The queue ID for the step dependencies list.
+        --starting-token=: A token to specify where to start paginating.
+        --step-id=!: The step ID to include on the list.
     - name: update-queue-environment
       description: Updates the queue environment.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: The unique token which the server uses to recognize retries of the same request.
         --farm-id=!: The farm ID of the queue environment to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --priority=: The priority to update.
         --queue-environment-id=!: The queue environment ID to update.
         --queue-id=!: The queue ID of the queue environment to update.
@@ -637,290 +314,44 @@ commands:
             template-type:
                 - JSON
                 - YAML
-    - name: create-monitor
-      description: Creates an Amazon Web Services Deadline Cloud monitor that you can use to view your farms, queues, and fleets.
+    - name: create-limit
+      description: Creates a limit that manages the distribution of shared resources, such as floating licenses.
       flags:
+        --amount-requirement-name=!: The value that you specify as the `name` in the `amounts` field of the `hostRequirements` in a step of a job template to declare the limit requirement.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: The unique token which the server uses to recognize retries of the same request.
-        --display-name=!: The name that you give the monitor that is displayed in the Deadline Cloud console.
-        --identity-center-instance-arn=!: The Amazon Resource Name (ARN) of the IAM Identity Center instance that authenticates monitor users.
-        --role-arn=!: The Amazon Resource Name (ARN) of the IAM role that the monitor uses to connect to Deadline Cloud.
-        --subdomain=!: The subdomain to use when creating the monitor URL.
-        --tags=: The tags to add to your monitor.
-    - name: get-queue-limit-association
-      description: Gets information about a specific association between a queue and a limit.
+        --description=: A description of the limit.
+        --display-name=!: The display name of the limit.
+        --farm-id=!: The farm ID of the farm that contains the limit.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-count=!: The maximum number of resources constrained by this limit.
+    - name: get-license-endpoint
+      description: Gets a licence endpoint.
       flags:
-        --farm-id=!: The unique identifier of the farm that contains the associated queue and limit.
-        --limit-id=!: The unique identifier of the limit associated with the queue.
-        --queue-id=!: The unique identifier of the queue associated with the limit.
-    - name: get-worker
-      description: Gets a worker.
-      flags:
-        --farm-id=!: The farm ID for the worker.
-        --fleet-id=!: The fleet ID of the worker.
-        --worker-id=!: The worker ID.
-    - name: list-farm-members
-      description: Lists the members of a farm.
-      flags:
-        --farm-id=!: The farm ID.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next set of results, or `null` to start from the beginning.
-    - name: update-step
-      description: Updates a step.
-      flags:
-        --client-token=: The unique token which the server uses to recognize retries of the same request.
-        --farm-id=!: The farm ID to update.
-        --job-id=!: The job ID to update.
-        --queue-id=!: The queue ID to update.
-        --step-id=!: The step ID to update.
-        --target-task-run-status=!: The task status to update the step's tasks to.
-      completion:
-        flag:
-            target-task-run-status:
-                - READY
-                - FAILED
-                - SUCCEEDED
-                - CANCELED
-                - SUSPENDED
-                - PENDING
-    - name: create-farm
-      description: Creates a farm to allow space for queues and fleets.
-      flags:
-        --client-token=: The unique token which the server uses to recognize retries of the same request.
-        --description=: The description of the farm.
-        --display-name=!: The display name of the farm.
-        --kms-key-arn=: The ARN of the KMS key to use on the farm.
-        --tags=: The tags to add to your farm.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --license-endpoint-id=!: The license endpoint ID.
     - name: get-task
       description: Gets a task.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --farm-id=!: The farm ID of the farm connected to the task.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --job-id=!: The job ID of the job connected to the task.
         --queue-id=!: The queue ID for the queue connected to the task.
         --step-id=!: The step ID for the step connected to the task.
         --task-id=!: The task ID.
-    - name: delete-storage-profile
-      description: Deletes a storage profile.
-      flags:
-        --farm-id=!: The farm ID of the farm from which to remove the storage profile.
-        --storage-profile-id=!: The storage profile ID of the storage profile to delete.
-    - name: disassociate-member-from-job
-      description: Disassociates a member from a job.
-      flags:
-        --farm-id=!: The farm ID for the job to disassociate from the member.
-        --job-id=!: The job ID to disassociate from a member in a job.
-        --principal-id=!: A member's principal ID to disassociate from a job.
-        --queue-id=!: The queue ID connected to a job for which you're disassociating a member.
-    - name: list-job-parameter-definitions
-      description: Lists parameter definitions of a job.
-      flags:
-        --farm-id=!: The farm ID of the job to list.
-        --job-id=!: The job ID to include on the list.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next set of results, or `null` to start from the beginning.
-        --queue-id=!: The queue ID to include on the list.
-    - name: delete-queue-limit-association
-      description: Removes the association between a queue and a limit.
-      flags:
-        --farm-id=!: The unique identifier of the farm that contains the queue and limit to disassociate.
-        --limit-id=!: The unique identifier of the limit to disassociate.
-        --queue-id=!: The unique identifier of the queue to disassociate.
-    - name: disassociate-member-from-fleet
-      description: Disassociates a member from a fleet.
-      flags:
-        --farm-id=!: The farm ID of the fleet to disassociate a member from.
-        --fleet-id=!: The fleet ID of the fleet to from which to disassociate a member.
-        --principal-id=!: A member's principal ID to disassociate from a fleet.
-    - name: get-session
-      description: Gets a session.
-      flags:
-        --farm-id=!: The farm ID for the session.
-        --job-id=!: The job ID for the session.
-        --queue-id=!: The queue ID for the session.
-        --session-id=!: The session ID.
-    - name: update-worker
-      description: Updates a worker.
-      flags:
-        --capabilities=: The worker capabilities to update.
-        --farm-id=!: The farm ID to update.
-        --fleet-id=!: The fleet ID to update.
-        --host-properties=: The host properties to update.
-        --status=: The worker status to update.
-        --worker-id=!: The worker ID to update.
-      completion:
-        flag:
-            status:
-                - STARTED
-                - STOPPING
-                - STOPPED
-    - name: batch-get-job-entity
-      description: Get batched job details for a worker.
-      flags:
-        --farm-id=!: The farm ID of the worker that's fetching job details.
-        --fleet-id=!: The fleet ID of the worker that's fetching job details.
-        --identifiers=!: The job identifiers to include within the job entity batch details.
-        --worker-id=!: The worker ID of the worker containing the job details to get.
-    - name: delete-queue
-      description: Deletes a queue.
-      flags:
-        --farm-id=!: The ID of the farm from which to remove the queue.
-        --queue-id=!: The queue ID of the queue to delete.
-    - name: list-queue-environments
-      description: Lists queue environments.
-      flags:
-        --farm-id=!: The farm ID for the queue environment list.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next set of results, or `null` to start from the beginning.
-        --queue-id=!: The queue ID for the queue environment list.
-    - name: list-tags-for-resource
-      description: Lists tags for a resource.
-      flags:
-        --resource-arn=!: The resource ARN to list tags for.
-    - name: get-session-action
-      description: Gets a session action for the job.
-      flags:
-        --farm-id=!: The farm ID for the session action.
-        --job-id=!: The job ID for the session.
-        --queue-id=!: The queue ID for the session action.
-        --session-action-id=!: The session action ID for the session.
-    - name: get-limit
-      description: Gets information about a specific limit.
-      flags:
-        --farm-id=!: The unique identifier of the farm that contains the limit.
-        --limit-id=!: The unique identifier of the limit to return.
-    - name: list-tasks
-      description: Lists tasks for a job.
-      flags:
-        --farm-id=!: The farm ID connected to the tasks.
-        --job-id=!: The job ID for the tasks.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next set of results, or `null` to start from the beginning.
-        --queue-id=!: The queue ID connected to the tasks.
-        --step-id=!: The step ID for the tasks.
-    - name: copy-job-template
-      description: Copies a job template to an Amazon S3 bucket.
-      flags:
-        --farm-id=!: The farm ID to copy.
-        --job-id=!: The job ID to copy.
-        --queue-id=!: The queue ID to copy.
-        --target-s3-location=!: The Amazon S3 bucket name and key where you would like to add a copy of the job template.
-    - name: create-worker
-      description: Creates a worker.
-      flags:
-        --client-token=: The unique token which the server uses to recognize retries of the same request.
-        --farm-id=!: The farm ID of the farm to connect to the worker.
-        --fleet-id=!: The fleet ID to connect to the worker.
-        --host-properties=: The IP address and host name of the worker.
-        --tags=: Each tag consists of a tag key and a tag value.
-    - name: delete-budget
-      description: Deletes a budget.
-      flags:
-        --budget-id=!: The budget ID of the budget to delete.
-        --farm-id=!: The farm ID of the farm to remove from the budget.
-    - name: disassociate-member-from-farm
-      description: Disassociates a member from a farm.
-      flags:
-        --farm-id=!: The farm ID of the farm to disassociate from the member.
-        --principal-id=!: A member's principal ID to disassociate from a farm.
-    - name: get-storage-profile
-      description: Gets a storage profile.
-      flags:
-        --farm-id=!: The farm ID for the storage profile.
-        --storage-profile-id=!: The storage profile ID.
-    - name: list-session-actions
-      description: Lists session actions.
-      flags:
-        --farm-id=!: The farm ID for the session actions list.
-        --job-id=!: The job ID for the session actions list.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next set of results, or `null` to start from the beginning.
-        --queue-id=!: The queue ID for the session actions list.
-        --session-id=: The session ID to include on the sessions action list.
-        --task-id=: The task ID for the session actions list.
-    - name: list-steps
-      description: Lists steps for a job.
-      flags:
-        --farm-id=!: The farm ID to include on the list of steps.
-        --job-id=!: The job ID to include on the list of steps.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next set of results, or `null` to start from the beginning.
-        --queue-id=!: The queue ID to include on the list of steps.
-    - name: update-queue-limit-association
-      description: Updates the status of the queue.
-      flags:
-        --farm-id=!: The unique identifier of the farm that contains the associated queues and limits.
-        --limit-id=!: The unique identifier of the limit associated to the queue.
-        --queue-id=!: The unique identifier of the queue associated to the limit.
-        --status=!: Sets the status of the limit.
-      completion:
-        flag:
-            status:
-                - ACTIVE
-                - STOP_LIMIT_USAGE_AND_COMPLETE_TASKS
-                - STOP_LIMIT_USAGE_AND_CANCEL_TASKS
-    - name: associate-member-to-farm
-      description: Assigns a farm membership level to a member.
-      flags:
-        --farm-id=!: The ID of the farm to associate with the member.
-        --identity-store-id=!: The identity store ID of the member to associate with the farm.
-        --membership-level=!: The principal's membership level for the associated farm.
-        --principal-id=!: The member's principal ID to associate with the farm.
-        --principal-type=!: The principal type of the member to associate with the farm.
-      completion:
-        flag:
-            membership-level:
-                - VIEWER
-                - CONTRIBUTOR
-                - OWNER
-                - MANAGER
-            principal-type:
-                - USER
-                - GROUP
-    - name: assume-queue-role-for-user
-      description: Allows a user to assume a role for a queue.
-      flags:
-        --farm-id=!: The farm ID of the queue that the user assumes the role for.
-        --queue-id=!: The queue ID of the queue that the user assumes the role for.
-    - name: delete-license-endpoint
-      description: Deletes a license endpoint.
-      flags:
-        --license-endpoint-id=!: The license endpoint ID of the license endpoint to delete.
-    - name: list-metered-products
-      description: Lists metered products.
-      flags:
-        --license-endpoint-id=!: The license endpoint ID to include on the list of metered products.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next set of results, or `null` to start from the beginning.
-    - name: list-queue-members
-      description: Lists the members in a queue.
-      flags:
-        --farm-id=!: The farm ID for the queue.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next set of results, or `null` to start from the beginning.
-        --queue-id=!: The queue ID to include on the list.
-    - name: list-storage-profiles
-      description: Lists storage profiles.
-      flags:
-        --farm-id=!: The farm ID of the storage profile.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next set of results, or `null` to start from the beginning.
-    - name: update-session
-      description: Updates a session.
-      flags:
-        --client-token=: The unique token which the server uses to recognize retries of the same request.
-        --farm-id=!: The farm ID to update in the session.
-        --job-id=!: The job ID to update in the session.
-        --queue-id=!: The queue ID to update in the session.
-        --session-id=!: The session ID to update.
-        --target-lifecycle-status=!: The life cycle status to update in the session.
-      completion:
-        flag:
-            target-lifecycle-status:
-                - ENDED
     - name: update-job
       description: Updates a job.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: The unique token which the server uses to recognize retries of the same request.
         --farm-id=!: The farm ID of the job to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --job-id=!: The job ID to update.
         --lifecycle-status=: The status of a job in its lifecycle.
         --max-failed-tasks-count=: The number of task failures before the job stops running and is marked as `FAILED`.
@@ -940,15 +371,713 @@ commands:
                 - CANCELED
                 - SUSPENDED
                 - PENDING
+    - name: assume-fleet-role-for-worker
+      description: Get credentials from the fleet role for a worker.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID for the fleet's farm.
+        --fleet-id=!: The fleet ID that contains the worker.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --worker-id=!: The ID of the worker assuming the fleet role.
+    - name: disassociate-member-from-farm
+      description: Disassociates a member from a farm.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID of the farm to disassociate from the member.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --principal-id=!: A member's principal ID to disassociate from a farm.
+    - name: list-available-metered-products
+      description: A list of the available metered products.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next set of results, or `null` to start from the beginning.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-sessions
+      description: Lists sessions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID for the list of sessions.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The job ID for the list of sessions.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next set of results, or `null` to start from the beginning.
+        --page-size=: The size of each page to get in the AWS service call.
+        --queue-id=!: The queue ID for the list of sessions
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-step
+      description: Updates a step.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: The unique token which the server uses to recognize retries of the same request.
+        --farm-id=!: The farm ID to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The job ID to update.
+        --queue-id=!: The queue ID to update.
+        --step-id=!: The step ID to update.
+        --target-task-run-status=!: The task status to update the step's tasks to.
+      completion:
+        flag:
+            target-task-run-status:
+                - READY
+                - FAILED
+                - SUCCEEDED
+                - CANCELED
+                - SUSPENDED
+                - PENDING
+    - name: create-queue-fleet-association
+      description: Creates an association between a queue and a fleet.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The ID of the farm that the queue and fleet belong to.
+        --fleet-id=!: The fleet ID.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --queue-id=!: The queue ID.
+    - name: create-storage-profile
+      description: Creates a storage profile that specifies the operating system, file type, and file location of resources used on a farm.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: The unique token which the server uses to recognize retries of the same request.
+        --display-name=!: The display name of the storage profile.
+        --farm-id=!: The farm ID of the farm to connect to the storage profile.
+        --file-system-locations=: File system paths to include in the storage profile.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --os-family=!: The type of operating system (OS) for the storage profile.
+      completion:
+        flag:
+            os-family:
+                - WINDOWS
+                - LINUX
+                - MACOS
+    - name: delete-budget
+      description: Deletes a budget.
+      flags:
+        --budget-id=!: The budget ID of the budget to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID of the farm to remove from the budget.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-farm
+      description: Deletes a farm.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID of the farm to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-fleet
+      description: Deletes a fleet.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: The unique token which the server uses to recognize retries of the same request.
+        --farm-id=!: The farm ID of the farm to remove from the fleet.
+        --fleet-id=!: The fleet ID of the fleet to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-step
+      description: Gets a step.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID for the step.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The job ID for the step.
+        --queue-id=!: The queue ID for the step.
+        --step-id=!: The step ID.
+    - name: get-storage-profile
+      description: Gets a storage profile.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID for the storage profile.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --storage-profile-id=!: The storage profile ID.
+    - name: list-queue-environments
+      description: Lists queue environments.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID for the queue environment list.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next set of results, or `null` to start from the beginning.
+        --page-size=: The size of each page to get in the AWS service call.
+        --queue-id=!: The queue ID for the queue environment list.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-session
+      description: Updates a session.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: The unique token which the server uses to recognize retries of the same request.
+        --farm-id=!: The farm ID to update in the session.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The job ID to update in the session.
+        --queue-id=!: The queue ID to update in the session.
+        --session-id=!: The session ID to update.
+        --target-lifecycle-status=!: The life cycle status to update in the session.
+      completion:
+        flag:
+            target-lifecycle-status:
+                - ENDED
+    - name: create-fleet
+      description: Creates a fleet.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: The unique token which the server uses to recognize retries of the same request.
+        --configuration=!: The configuration settings for the fleet.
+        --description=: The description of the fleet.
+        --display-name=!: The display name of the fleet.
+        --farm-id=!: The farm ID of the farm to connect to the fleet.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --host-configuration=: Provides a script that runs as a worker is starting up that you can use to provide additional configuration for workers in your fleet.
+        --max-worker-count=!: The maximum number of workers for the fleet.
+        --min-worker-count=: The minimum number of workers for the fleet.
+        --role-arn=!: The IAM role ARN for the role that the fleet's workers will use.
+        --tags=: Each tag consists of a tag key and a tag value.
+    - name: list-budgets
+      description: A list of budgets in a farm.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID associated with the budgets.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next set of results, or `null` to start from the beginning.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: The status to list for the budgets.
+      completion:
+        flag:
+            status:
+                - ACTIVE
+                - INACTIVE
+    - name: assume-queue-role-for-user
+      description: Allows a user to assume a role for a queue.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID of the queue that the user assumes the role for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --queue-id=!: The queue ID of the queue that the user assumes the role for.
+    - name: update-farm
+      description: Updates a farm.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description of the farm to update.
+        --display-name=: The display name of the farm to update.
+        --farm-id=!: The farm ID to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-monitor
+      description: Creates an Amazon Web Services Deadline Cloud monitor that you can use to view your farms, queues, and fleets.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: The unique token which the server uses to recognize retries of the same request.
+        --display-name=!: The name that you give the monitor that is displayed in the Deadline Cloud console.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-center-instance-arn=!: The Amazon Resource Name (ARN) of the IAM Identity Center instance that authenticates monitor users.
+        --role-arn=!: The Amazon Resource Name (ARN) of the IAM role that the monitor uses to connect to Deadline Cloud.
+        --subdomain=!: The subdomain to use when creating the monitor URL.
+        --tags=: The tags to add to your monitor.
+    - name: disassociate-member-from-queue
+      description: Disassociates a member from a queue.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID for the queue to disassociate from a member.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --principal-id=!: A member's principal ID to disassociate from a queue.
+        --queue-id=!: The queue ID of the queue in which you're disassociating from a member.
+    - name: get-storage-profile-for-queue
+      description: Gets a storage profile for a queue.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID for the queue in storage profile.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --queue-id=!: The queue ID the queue in the storage profile.
+        --storage-profile-id=!: The storage profile ID for the storage profile in the queue.
+    - name: list-fleets
+      description: Lists fleets.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --display-name=: The display names of a list of fleets.
+        --farm-id=!: The farm ID of the fleets.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next set of results, or `null` to start from the beginning.
+        --page-size=: The size of each page to get in the AWS service call.
+        --principal-id=: The principal ID of the members to include in the fleet.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: The status of the fleet.
+      completion:
+        flag:
+            status:
+                - ACTIVE
+                - CREATE_IN_PROGRESS
+                - UPDATE_IN_PROGRESS
+                - CREATE_FAILED
+                - UPDATE_FAILED
+                - SUSPENDED
+    - name: associate-member-to-job
+      description: Assigns a job membership level to a member
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID of the job to associate with the member.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-store-id=!: The member's identity store ID to associate with the job.
+        --job-id=!: The job ID to associate with the member.
+        --membership-level=!: The principal's membership level for the associated job.
+        --principal-id=!: The member's principal ID to associate with the job.
+        --principal-type=!: The member's principal type to associate with the job.
+        --queue-id=!: The queue ID to associate to the member.
+      completion:
+        flag:
+            membership-level:
+                - VIEWER
+                - CONTRIBUTOR
+                - OWNER
+                - MANAGER
+            principal-type:
+                - USER
+                - GROUP
+    - name: list-job-parameter-definitions
+      description: Lists parameter definitions of a job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID of the job to list.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The job ID to include on the list.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next set of results, or `null` to start from the beginning.
+        --page-size=: The size of each page to get in the AWS service call.
+        --queue-id=!: The queue ID to include on the list.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-storage-profiles
+      description: Lists storage profiles.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID of the storage profile.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next set of results, or `null` to start from the beginning.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: search-steps
+      description: Searches for steps.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID to use for the step search.
+        --filter-expressions=: The filter expression, `AND` or `OR`, to use when searching among a group of search strings in a resource.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --item-offset=!: Defines how far into the scrollable list to start the return of results.
+        --job-id=: The job ID to use in the step search.
+        --page-size=: Specifies the number of items per page for the resource.
+        --queue-ids=!: The queue IDs in the step search.
+        --sort-expressions=: The search terms for a resource.
+    - name: update-monitor
+      description: Modifies the settings for a Deadline Cloud monitor.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --display-name=: The new value to use for the monitor's display name.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --monitor-id=!: The unique identifier of the monitor to update.
+        --role-arn=: The Amazon Resource Name (ARN) of the new IAM role to use with the monitor.
+        --subdomain=: The new value of the subdomain to use when forming the monitor URL.
+    - name: create-budget
+      description: Creates a budget to set spending thresholds for your rendering activity.
+      flags:
+        --actions=!: The budget actions to specify what happens when the budget runs out.
+        --approximate-dollar-limit=!: The dollar limit based on consumed usage.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: The unique token which the server uses to recognize retries of the same request.
+        --description=: The description of the budget.
+        --display-name=!: The display name of the budget.
+        --farm-id=!: The farm ID to include in this budget.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --schedule=!: The schedule to associate with this budget.
+        --usage-tracking-resource=!: The queue ID provided to this budget to track usage.
+    - name: create-license-endpoint
+      description: Creates a license endpoint to integrate your various licensed software used for rendering on Deadline Cloud.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: The unique token which the server uses to recognize retries of the same request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --security-group-ids=!: The security group IDs.
+        --subnet-ids=!: The subnet IDs.
+        --tags=: Each tag consists of a tag key and a tag value.
+        --vpc-id=!: The VPC (virtual private cloud) ID to use with the license endpoint.
+    - name: delete-worker
+      description: Deletes a worker.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID of the worker to delete.
+        --fleet-id=!: The fleet ID of the worker to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --worker-id=!: The worker ID of the worker to delete.
+    - name: get-farm
+      description: Get a farm.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID of the farm.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-farm-members
+      description: Lists the members of a farm.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next set of results, or `null` to start from the beginning.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: create-queue-limit-association
+      description: Associates a limit with a particular queue.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The unique identifier of the farm that contains the queue and limit to associate.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit-id=!: The unique identifier of the limit to associate with the queue.
+        --queue-id=!: The unique identifier of the queue to associate with the limit.
+    - name: start-sessions-statistics-aggregation
+      description: Starts an asynchronous request for getting aggregated statistics about queues and farms.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=!: The Linux timestamp of the date and time that the statistics end.
+        --farm-id=!: The identifier of the farm that contains queues or fleets to return statistics for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-by=!: The field to use to group the statistics.
+        --period=: The period to aggregate the statistics.
+        --resource-ids=!: A list of fleet IDs or queue IDs to gather statistics for.
+        --start-time=!: The Linux timestamp of the date and time that the statistics start.
+        --statistics=!: One to four statistics to return.
+        --timezone=: The timezone to use for the statistics.
+      completion:
+        flag:
+            period:
+                - HOURLY
+                - DAILY
+                - WEEKLY
+                - MONTHLY
+    - name: assume-queue-role-for-worker
+      description: Allows a worker to assume a queue role.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID of the worker assuming the queue role.
+        --fleet-id=!: The fleet ID of the worker assuming the queue role.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --queue-id=!: The queue ID of the worker assuming the queue role.
+        --worker-id=!: The worker ID of the worker assuming the queue role.
+    - name: batch-get-job-entity
+      description: Get batched job details for a worker.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID of the worker that's fetching job details.
+        --fleet-id=!: The fleet ID of the worker that's fetching job details.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifiers=!: The job identifiers to include within the job entity batch details.
+        --worker-id=!: The worker ID of the worker containing the job details to get.
+    - name: create-farm
+      description: Creates a farm to allow space for queues and fleets.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: The unique token which the server uses to recognize retries of the same request.
+        --description=: The description of the farm.
+        --display-name=!: The display name of the farm.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-arn=: The ARN of the KMS key to use on the farm.
+        --tags=: The tags to add to your farm.
+    - name: create-queue-environment
+      description: Creates an environment for a queue that defines how jobs in the queue run.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: The unique token which the server uses to recognize retries of the same request.
+        --farm-id=!: The farm ID of the farm to connect to the environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --priority=!: Sets the priority of the environments in the queue from 0 to 10,000, where 0 is the highest priority (activated first and deactivated last).
+        --queue-id=!: The queue ID to connect the queue and environment.
+        --template-type=!: The template's file type, `JSON` or `YAML`.
+        --template=!: The environment template to use in the queue.
+      completion:
+        flag:
+            template-type:
+                - JSON
+                - YAML
+    - name: list-tags-for-resource
+      description: Lists tags for a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The resource ARN to list tags for.
+    - name: update-queue-fleet-association
+      description: Updates a queue-fleet association.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID to update.
+        --fleet-id=!: The fleet ID to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --queue-id=!: The queue ID to update.
+        --status=!: The status to update.
+      completion:
+        flag:
+            status:
+                - ACTIVE
+                - STOP_SCHEDULING_AND_COMPLETE_TASKS
+                - STOP_SCHEDULING_AND_CANCEL_TASKS
+    - name: get-budget
+      description: Get a budget.
+      flags:
+        --budget-id=!: The budget ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID of the farm connected to the budget.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: search-tasks
+      description: Searches for tasks.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID of the task.
+        --filter-expressions=: The filter expression, `AND` or `OR`, to use when searching among a group of search strings in a resource.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --item-offset=!: Defines how far into the scrollable list to start the return of results.
+        --job-id=: The job ID for the task search.
+        --page-size=: Specifies the number of items per page for the resource.
+        --queue-ids=!: The queue IDs to include in the search.
+        --sort-expressions=: The search terms for a resource.
+    - name: search-workers
+      description: Searches for workers.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID in the workers search.
+        --filter-expressions=: The filter expression, `AND` or `OR`, to use when searching among a group of search strings in a resource.
+        --fleet-ids=!: The fleet ID of the workers to search for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --item-offset=!: Defines how far into the scrollable list to start the return of results.
+        --page-size=: Specifies the number of items per page for the resource.
+        --sort-expressions=: The search terms for a resource.
+    - name: create-worker
+      description: Creates a worker.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: The unique token which the server uses to recognize retries of the same request.
+        --farm-id=!: The farm ID of the farm to connect to the worker.
+        --fleet-id=!: The fleet ID to connect to the worker.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --host-properties=: The IP address and host name of the worker.
+        --tags=: Each tag consists of a tag key and a tag value.
+    - name: get-queue-environment
+      description: Gets a queue environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID for the queue environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --queue-environment-id=!: The queue environment ID.
+        --queue-id=!: The queue ID for the queue environment.
+    - name: delete-queue-environment
+      description: Deletes a queue environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID of the farm from which to remove the queue environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --queue-environment-id=!: The queue environment ID of the queue environment to delete.
+        --queue-id=!: The queue ID of the queue environment to delete.
+    - name: get-limit
+      description: Gets information about a specific limit.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The unique identifier of the farm that contains the limit.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit-id=!: The unique identifier of the limit to return.
+    - name: get-monitor
+      description: Gets information about the specified monitor.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --monitor-id=!: The unique identifier for the monitor.
+    - name: list-workers
+      description: Lists workers.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID connected to the workers.
+        --fleet-id=!: The fleet ID of the workers.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next set of results, or `null` to start from the beginning.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: associate-member-to-fleet
+      description: Assigns a fleet membership level to a member.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID of the fleet to associate with the member.
+        --fleet-id=!: The ID of the fleet to associate with a member.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-store-id=!: The member's identity store ID to associate with the fleet.
+        --membership-level=!: The principal's membership level for the associated fleet.
+        --principal-id=!: The member's principal ID to associate with a fleet.
+        --principal-type=!: The member's principal type to associate with the fleet.
+      completion:
+        flag:
+            membership-level:
+                - VIEWER
+                - CONTRIBUTOR
+                - OWNER
+                - MANAGER
+            principal-type:
+                - USER
+                - GROUP
+    - name: delete-monitor
+      description: Removes a Deadline Cloud monitor.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --monitor-id=!: The unique identifier of the monitor to delete.
+    - name: get-queue
+      description: Gets a queue.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID of the farm in the queue.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --queue-id=!: The queue ID for the queue to retrieve.
+    - name: list-farms
+      description: Lists farms.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next set of results, or `null` to start from the beginning.
+        --page-size=: The size of each page to get in the AWS service call.
+        --principal-id=: The principal ID of the member to list on the farm.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-monitors
+      description: Gets a list of your monitors in Deadline Cloud.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next set of results, or `null` to start from the beginning.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-session-action
+      description: Gets a session action for the job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID for the session action.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The job ID for the session.
+        --queue-id=!: The queue ID for the session action.
+        --session-action-id=!: The session action ID for the session.
+    - name: list-queue-members
+      description: Lists the members in a queue.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID for the queue.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next set of results, or `null` to start from the beginning.
+        --page-size=: The size of each page to get in the AWS service call.
+        --queue-id=!: The queue ID to include on the list.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-step-consumers
+      description: Lists step consumers.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID for the list of step consumers.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The job ID for the step consumer.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next set of results, or `null` to start from the beginning.
+        --page-size=: The size of each page to get in the AWS service call.
+        --queue-id=!: The queue ID for the step consumer.
+        --starting-token=: A token to specify where to start paginating.
+        --step-id=!: The step ID to include on the list.
+    - name: untag-resource
+      description: Removes a tag from a resource using the resource's ARN and tag to remove.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource to remove the tag from.
+        --tag-keys=!: They keys of the tag.
+    - name: assume-queue-role-for-read
+      description: Gets Amazon Web Services credentials from the queue role.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID of the farm containing the queue.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --queue-id=!: The queue ID.
     - name: create-queue
       description: Creates a queue to coordinate the order in which jobs run on a farm.
       flags:
         --allowed-storage-profile-ids=: The storage profile IDs to include in the queue.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: The unique token which the server uses to recognize retries of the same request.
         --default-budget-action=: The default action to take on a queue if a budget isn't configured.
         --description=: The description of the queue.
         --display-name=!: The display name of the queue.
         --farm-id=!: The farm ID of the farm to connect to the queue.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --job-attachment-settings=: The job attachment settings for the queue.
         --job-run-as-user=: The jobs in the queue run as the specified POSIX user.
         --required-file-system-location-names=: The file system location name to include in the queue.
@@ -960,84 +1089,405 @@ commands:
                 - NONE
                 - STOP_SCHEDULING_AND_COMPLETE_TASKS
                 - STOP_SCHEDULING_AND_CANCEL_TASKS
-    - name: delete-queue-environment
-      description: Deletes a queue environment.
+    - name: update-budget
+      description: Updates a budget that sets spending thresholds for rendering activity.
       flags:
-        --farm-id=!: The farm ID of the farm from which to remove the queue environment.
-        --queue-environment-id=!: The queue environment ID of the queue environment to delete.
-        --queue-id=!: The queue ID of the queue environment to delete.
-    - name: get-queue
-      description: Gets a queue.
+        --actions-to-add=: The budget actions to add.
+        --actions-to-remove=: The budget actions to remove from the budget.
+        --approximate-dollar-limit=: The dollar limit to update on the budget.
+        --budget-id=!: The budget ID to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: The unique token which the server uses to recognize retries of the same request.
+        --description=: The description of the budget to update.
+        --display-name=: The display name of the budget to update.
+        --farm-id=!: The farm ID of the budget to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --schedule=: The schedule to update.
+        --status=: Updates the status of the budget.
+      completion:
+        flag:
+            status:
+                - ACTIVE
+                - INACTIVE
+    - name: delete-license-endpoint
+      description: Deletes a license endpoint.
       flags:
-        --farm-id=!: The farm ID of the farm in the queue.
-        --queue-id=!: The queue ID for the queue to retrieve.
-    - name: search-workers
-      description: Searches for workers.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --license-endpoint-id=!: The license endpoint ID of the license endpoint to delete.
+    - name: get-queue-limit-association
+      description: Gets information about a specific association between a queue and a limit.
       flags:
-        --farm-id=!: The farm ID in the workers search.
-        --filter-expressions=: The filter expression, `AND` or `OR`, to use when searching among a group of search strings in a resource.
-        --fleet-ids=!: The fleet ID of the workers to search for.
-        --item-offset=!: Defines how far into the scrollable list to start the return of results.
-        --page-size=: Specifies the number of items per page for the resource.
-        --sort-expressions=: The search terms for a resource.
-    - name: untag-resource
-      description: Removes a tag from a resource using the resource's ARN and tag to remove.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The unique identifier of the farm that contains the associated queue and limit.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit-id=!: The unique identifier of the limit associated with the queue.
+        --queue-id=!: The unique identifier of the queue associated with the limit.
+    - name: update-queue-limit-association
+      description: Updates the status of the queue.
       flags:
-        --resource-arn=!: The ARN of the resource to remove the tag from.
-        --tag-keys=!: They keys of the tag.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The unique identifier of the farm that contains the associated queues and limits.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit-id=!: The unique identifier of the limit associated to the queue.
+        --queue-id=!: The unique identifier of the queue associated to the limit.
+        --status=!: Sets the status of the limit.
+      completion:
+        flag:
+            status:
+                - ACTIVE
+                - STOP_LIMIT_USAGE_AND_COMPLETE_TASKS
+                - STOP_LIMIT_USAGE_AND_CANCEL_TASKS
+    - name: update-storage-profile
+      description: Updates a storage profile.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: The unique token which the server uses to recognize retries of the same request.
+        --display-name=: The display name of the storage profile to update.
+        --farm-id=!: The farm ID to update.
+        --file-system-locations-to-add=: The file system location names to add.
+        --file-system-locations-to-remove=: The file system location names to remove.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --os-family=: The OS system to update.
+        --storage-profile-id=!: The storage profile ID to update.
+      completion:
+        flag:
+            os-family:
+                - WINDOWS
+                - LINUX
+                - MACOS
+    - name: associate-member-to-farm
+      description: Assigns a farm membership level to a member.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The ID of the farm to associate with the member.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-store-id=!: The identity store ID of the member to associate with the farm.
+        --membership-level=!: The principal's membership level for the associated farm.
+        --principal-id=!: The member's principal ID to associate with the farm.
+        --principal-type=!: The principal type of the member to associate with the farm.
+      completion:
+        flag:
+            membership-level:
+                - VIEWER
+                - CONTRIBUTOR
+                - OWNER
+                - MANAGER
+            principal-type:
+                - USER
+                - GROUP
+    - name: disassociate-member-from-fleet
+      description: Disassociates a member from a fleet.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID of the fleet to disassociate a member from.
+        --fleet-id=!: The fleet ID of the fleet to from which to disassociate a member.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --principal-id=!: A member's principal ID to disassociate from a fleet.
+    - name: list-fleet-members
+      description: Lists fleet members.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID of the fleet.
+        --fleet-id=!: The fleet ID to include on the list.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next set of results, or `null` to start from the beginning.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-storage-profiles-for-queue
+      description: Lists storage profiles for a queue.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID of the queue's storage profile.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next set of results, or `null` to start from the beginning.
+        --page-size=: The size of each page to get in the AWS service call.
+        --queue-id=!: The queue ID for the storage profile.
+        --starting-token=: A token to specify where to start paginating.
+    - name: tag-resource
+      description: Tags a resource using the resource's ARN and desired tags.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource to apply tags to.
+        --tags=: Each tag consists of a tag key and a tag value.
     - name: delete-metered-product
       description: Deletes a metered product.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --license-endpoint-id=!: The ID of the license endpoint from which to remove the metered product.
         --product-id=!: The product ID to remove from the license endpoint.
-    - name: update-monitor
-      description: Modifies the settings for a Deadline Cloud monitor.
+    - name: delete-storage-profile
+      description: Deletes a storage profile.
       flags:
-        --display-name=: The new value to use for the monitor's display name.
-        --monitor-id=!: The unique identifier of the monitor to update.
-        --role-arn=: The Amazon Resource Name (ARN) of the new IAM role to use with the monitor.
-        --subdomain=: The new value of the subdomain to use when forming the monitor URL.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID of the farm from which to remove the storage profile.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --storage-profile-id=!: The storage profile ID of the storage profile to delete.
+    - name: disassociate-member-from-job
+      description: Disassociates a member from a job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID for the job to disassociate from the member.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The job ID to disassociate from a member in a job.
+        --principal-id=!: A member's principal ID to disassociate from a job.
+        --queue-id=!: The queue ID connected to a job for which you're disassociating a member.
+    - name: put-metered-product
+      description: Adds a metered product.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --license-endpoint-id=!: The license endpoint ID to add to the metered product.
+        --product-id=!: The product ID to add to the metered product.
+    - name: update-limit
+      description: Updates the properties of the specified limit.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The new description of the limit.
+        --display-name=: The new display name of the limit.
+        --farm-id=!: The unique identifier of the farm that contains the limit.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit-id=!: The unique identifier of the limit to update.
+        --max-count=: The maximum number of resources constrained by this limit.
+    - name: list-sessions-for-worker
+      description: Lists sessions for a worker.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID for the session.
+        --fleet-id=!: The fleet ID for the session.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next set of results, or `null` to start from the beginning.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --worker-id=!: The worker ID for the session.
+    - name: get-fleet
+      description: Get a fleet.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID of the farm in the fleet.
+        --fleet-id=!: The fleet ID of the fleet to get.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-queue-limit-associations
+      description: Gets a list of the associations between queues and limits defined in a farm.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The unique identifier of the farm that contains the limits and associations.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit-id=: Specifies that the operation should return only the queue limit associations for the specified limit.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of associations to return in each page of results.
+        --next-token=: The token for the next set of results, or `null` to start from the beginning.
+        --page-size=: The size of each page to get in the AWS service call.
+        --queue-id=: Specifies that the operation should return only the queue limit associations for the specified queue.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-queues
+      description: Lists queues.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID of the queue.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next set of results, or `null` to start from the beginning.
+        --page-size=: The size of each page to get in the AWS service call.
+        --principal-id=: The principal IDs to include in the list of queues.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: The status of the queues listed.
+      completion:
+        flag:
+            status:
+                - IDLE
+                - SCHEDULING
+                - SCHEDULING_BLOCKED
+    - name: list-session-actions
+      description: Lists session actions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID for the session actions list.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The job ID for the session actions list.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next set of results, or `null` to start from the beginning.
+        --page-size=: The size of each page to get in the AWS service call.
+        --queue-id=!: The queue ID for the session actions list.
+        --session-id=: The session ID to include on the sessions action list.
+        --starting-token=: A token to specify where to start paginating.
+        --task-id=: The task ID for the session actions list.
+    - name: list-tasks
+      description: Lists tasks for a job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The farm ID connected to the tasks.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The job ID for the tasks.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next set of results, or `null` to start from the beginning.
+        --page-size=: The size of each page to get in the AWS service call.
+        --queue-id=!: The queue ID connected to the tasks.
+        --starting-token=: A token to specify where to start paginating.
+        --step-id=!: The step ID for the tasks.
+    - name: update-queue
+      description: Updates a queue.
+      flags:
+        --allowed-storage-profile-ids-to-add=: The storage profile IDs to add.
+        --allowed-storage-profile-ids-to-remove=: The storage profile ID to remove.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: The idempotency token to update in the queue.
+        --default-budget-action=: The default action to take for a queue update if a budget isn't configured.
+        --description=: The description of the queue to update.
+        --display-name=: The display name of the queue to update.
+        --farm-id=!: The farm ID to update in the queue.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-attachment-settings=: The job attachment settings to update for the queue.
+        --job-run-as-user=: Update the jobs in the queue to run as a specified POSIX user.
+        --queue-id=!: The queue ID to update.
+        --required-file-system-location-names-to-add=: The required file system location names to add to the queue.
+        --required-file-system-location-names-to-remove=: The required file system location names to remove from the queue.
+        --role-arn=: The IAM role ARN that's used to run jobs from this queue.
+      completion:
+        flag:
+            default-budget-action:
+                - NONE
+                - STOP_SCHEDULING_AND_COMPLETE_TASKS
+                - STOP_SCHEDULING_AND_CANCEL_TASKS
+    - name: get-sessions-statistics-aggregation
+      description: Gets a set of statistics for queues or farms.
+      flags:
+        --aggregation-id=!: The identifier returned by the `StartSessionsStatisticsAggregation` operation that identifies the aggregated statistics.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --farm-id=!: The identifier of the farm to include in the statistics.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next set of results, or `null` to start from the beginning.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: create-job
+      description: Creates a job.
+      flags:
+        --attachments=: The attachments for the job.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: The unique token which the server uses to recognize retries of the same request.
+        --farm-id=!: The farm ID of the farm to connect to the job.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-failed-tasks-count=: The number of task failures before the job stops running and is marked as `FAILED`.
+        --max-retries-per-task=: The maximum number of retries for each task.
+        --max-worker-count=: The maximum number of worker hosts that can concurrently process a job.
+        --parameters=: The parameters for the job.
+        --priority=!: The priority of the job.
+        --queue-id=!: The ID of the queue that the job is submitted to.
+        --source-job-id=: The job ID for the source job.
+        --storage-profile-id=: The storage profile ID for the storage profile to connect to the job.
+        --target-task-run-status=: The initial job status when it is created.
+        --template-type=: The file type for the job template.
+        --template=: The job template to use for this job.
+      completion:
+        flag:
+            target-task-run-status:
+                - READY
+                - SUSPENDED
+            template-type:
+                - JSON
+                - YAML
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:
-        - name: license-endpoint-valid
-          description: Gets a licence endpoint.
-          flags:
-            --license-endpoint-id=!: The license endpoint ID.
-        - name: queue-fleet-association-stopped
-          description: Gets a queue-fleet association.
-          flags:
-            --farm-id=!: The farm ID of the farm that contains the queue-fleet association.
-            --fleet-id=!: The fleet ID for the queue-fleet association.
-            --queue-id=!: The queue ID for the queue-fleet association.
-        - name: queue-limit-association-stopped
-          description: Gets information about a specific association between a queue and a limit.
-          flags:
-            --farm-id=!: The unique identifier of the farm that contains the associated queue and limit.
-            --limit-id=!: The unique identifier of the limit associated with the queue.
-            --queue-id=!: The unique identifier of the queue associated with the limit.
-        - name: queue-scheduling
-          description: Gets a queue.
-          flags:
-            --farm-id=!: The farm ID of the farm in the queue.
-            --queue-id=!: The queue ID for the queue to retrieve.
-        - name: queue-scheduling-blocked
-          description: Gets a queue.
-          flags:
-            --farm-id=!: The farm ID of the farm in the queue.
-            --queue-id=!: The queue ID for the queue to retrieve.
         - name: fleet-active
           description: Get a fleet.
           flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
             --farm-id=!: The farm ID of the farm in the fleet.
             --fleet-id=!: The fleet ID of the fleet to get.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         - name: job-create-complete
           description: Gets a Deadline Cloud job.
           flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
             --farm-id=!: The farm ID of the farm in the job.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --job-id=!: The job ID.
             --queue-id=!: The queue ID associated with the job.
         - name: license-endpoint-deleted
           description: Gets a licence endpoint.
           flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --license-endpoint-id=!: The license endpoint ID.
+        - name: license-endpoint-valid
+          description: Gets a licence endpoint.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --license-endpoint-id=!: The license endpoint ID.
+        - name: queue-fleet-association-stopped
+          description: Gets a queue-fleet association.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --farm-id=!: The farm ID of the farm that contains the queue-fleet association.
+            --fleet-id=!: The fleet ID for the queue-fleet association.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --queue-id=!: The queue ID for the queue-fleet association.
+        - name: queue-limit-association-stopped
+          description: Gets information about a specific association between a queue and a limit.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --farm-id=!: The unique identifier of the farm that contains the associated queue and limit.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --limit-id=!: The unique identifier of the limit associated with the queue.
+            --queue-id=!: The unique identifier of the queue associated with the limit.
+        - name: queue-scheduling
+          description: Gets a queue.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --farm-id=!: The farm ID of the farm in the queue.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --queue-id=!: The queue ID for the queue to retrieve.
+        - name: queue-scheduling-blocked
+          description: Gets a queue.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --farm-id=!: The farm ID of the farm in the queue.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --queue-id=!: The queue ID for the queue to retrieve.

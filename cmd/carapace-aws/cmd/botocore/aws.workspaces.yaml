@@ -1,12 +1,347 @@
 name: workspaces
 description: Amazon WorkSpaces
 commands:
+    - name: describe-workspace-directories
+      description: Describes the available directories that are registered with Amazon WorkSpaces.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-ids=: The identifiers of the directories.
+        --filters=: The filter condition for the WorkSpaces.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of directories to return.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.
+        --starting-token=: A token to specify where to start paginating.
+        --workspace-directory-names=: The names of the WorkSpace directories.
+    - name: describe-workspaces-pools
+      description: Describes the specified WorkSpaces Pools.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: The filter conditions for the WorkSpaces Pool to return.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of items to return.
+        --next-token=: If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.
+        --pool-ids=: The identifier of the WorkSpaces Pools.
+    - name: modify-endpoint-encryption-mode
+      description: Modifies the endpoint encryption mode that allows you to configure the specified directory between Standard TLS and FIPS 140-2 validated mode.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The identifier of the directory.
+        --endpoint-encryption-mode=!: The encryption mode used for endpoint connections when streaming to WorkSpaces Personal or WorkSpace Pools.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            endpoint-encryption-mode:
+                - STANDARD_TLS
+                - FIPS_VALIDATED
+    - name: modify-workspace-access-properties
+      description: Specifies which devices and operating systems users can use to access their WorkSpaces.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-id=!: The identifier of the directory.
+        --workspace-access-properties=!: The device types and operating systems to enable or disable for access.
+    - name: reboot-workspaces
+      description: Reboots the specified WorkSpaces.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --reboot-workspace-requests=!: The WorkSpaces to reboot.
+    - name: create-workspace-bundle
+      description: Creates the specified WorkSpace bundle.
+      flags:
+        --bundle-description=!: The description of the bundle.
+        --bundle-name=!: The name of the bundle.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --compute-type=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-id=!: The identifier of the image that is used to create the bundle.
+        --root-storage=: ""
+        --tags=: The tags associated with the bundle.
+        --user-storage=!: ""
+    - name: create-workspaces
+      description: Creates one or more WorkSpaces.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workspaces=!: The WorkSpaces to create.
+    - name: describe-workspaces-pool-sessions
+      description: Retrieves a list that describes the streaming sessions for a specified pool.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum size of each page of results.
+        --next-token=: If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.
+        --pool-id=!: The identifier of the pool.
+        --user-id=: The identifier of the user.
+    - name: update-workspaces-pool
+      description: Updates the specified pool.
+      flags:
+        --application-settings=: The persistent application settings for users in the pool.
+        --bundle-id=: The identifier of the bundle.
+        --capacity=: The desired capacity for the pool.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: Describes the specified pool to update.
+        --directory-id=: The identifier of the directory.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pool-id=!: The identifier of the specified pool to update.
+        --running-mode=: The desired running mode for the pool.
+        --timeout-settings=: Indicates the timeout settings of the specified pool.
+      completion:
+        flag:
+            running-mode:
+                - AUTO_STOP
+                - ALWAYS_ON
+    - name: associate-connection-alias
+      description: Associates the specified connection alias with the specified directory to enable cross-Region redirection.
+      flags:
+        --alias-id=!: The identifier of the connection alias.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-id=!: The identifier of the directory to associate the connection alias with.
+    - name: create-updated-workspace-image
+      description: Creates a new updated WorkSpace image based on the specified source image.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=!: A description of whether updates for the WorkSpace image are available.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the new updated WorkSpace image.
+        --source-image-id=!: The identifier of the source WorkSpace image.
+        --tags=: The tags that you want to add to the new updated WorkSpace image.
+    - name: list-available-management-cidr-ranges
+      description: Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that you can use for the network management interface when you enable Bring Your Own License (BYOL).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --management-cidr-range-constraint=!: The IP address range to search.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return.
+        --next-token=: If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: migrate-workspace
+      description: Migrates a WorkSpace from one operating system or bundle type to another, while retaining the data on the user volume.
+      flags:
+        --bundle-id=!: The identifier of the target bundle type to migrate the WorkSpace to.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-workspace-id=!: The identifier of the WorkSpace to migrate from.
+    - name: revoke-ip-rules
+      description: Removes one or more rules from the specified IP access control group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-id=!: The identifier of the group.
+        --user-rules=!: The rules to remove from the group.
+    - name: start-workspaces-pool
+      description: Starts the specified pool.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pool-id=!: The identifier of the pool.
+    - name: update-connect-client-add-in
+      description: Updates a Amazon Connect client add-in.
+      flags:
+        --add-in-id=!: The identifier of the client add-in to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The name of the client add-in.
+        --resource-id=!: The directory identifier for which the client add-in is configured.
+        --url=: The endpoint URL of the Amazon Connect client add-in.
+    - name: delete-workspace-bundle
+      description: Deletes the specified WorkSpace bundle.
+      flags:
+        --bundle-id=: The identifier of the bundle.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-workspace-image
+      description: Deletes the specified image from your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-id=!: The identifier of the image.
+    - name: describe-connection-alias-permissions
+      description: Describes the permissions that the owner of a connection alias has granted to another Amazon Web Services account for the specified connection alias.
+      flags:
+        --alias-id=!: The identifier of the connection alias.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return.
+        --next-token=: If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.
+    - name: describe-tags
+      description: Describes the specified tags for the specified WorkSpaces resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-id=!: The identifier of the WorkSpaces resource.
+    - name: list-account-links
+      description: Lists all account links.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --link-status-filter=: Filters the account based on their link status.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of accounts to return.
+        --next-token=: The token to use to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: modify-certificate-based-auth-properties
+      description: Modifies the properties of the certificate-based authentication you want to use with your WorkSpaces.
+      flags:
+        --certificate-based-auth-properties=: The properties of the certificate-based authentication.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --properties-to-delete=: The properties of the certificate-based authentication you want to delete.
+        --resource-id=!: The resource identifiers, in the form of directory IDs.
+    - name: modify-selfservice-permissions
+      description: Modifies the self-service WorkSpace management capabilities for your users.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-id=!: The identifier of the directory.
+        --selfservice-permissions=!: The permissions to enable or disable self-service capabilities.
+    - name: modify-workspace-creation-properties
+      description: Modify the default properties used to create WorkSpaces.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-id=!: The identifier of the directory.
+        --workspace-creation-properties=!: The default properties for creating WorkSpaces.
+    - name: associate-ip-groups
+      description: Associates the specified IP access control group with the specified directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The identifier of the directory.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-ids=!: The identifiers of one or more IP access control groups.
+    - name: create-connect-client-add-in
+      description: Creates a client-add-in for Amazon Connect within a directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the client add-in.
+        --resource-id=!: The directory identifier for which to configure the client add-in.
+        --url=!: The endpoint URL of the Amazon Connect client add-in.
+    - name: delete-tags
+      description: Deletes the specified tags from the specified WorkSpaces resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-id=!: The identifier of the WorkSpaces resource.
+        --tag-keys=!: The tag keys.
+    - name: describe-ip-groups
+      description: Describes one or more of your IP access control groups.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-ids=: The identifiers of one or more IP access control groups.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return.
+        --next-token=: If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-workspace-snapshots
+      description: Describes the snapshots for the specified WorkSpace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workspace-id=!: The identifier of the WorkSpace.
+    - name: modify-workspace-properties
+      description: Modifies the specified WorkSpace properties.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-replication=: Indicates the data replication status.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workspace-id=!: The identifier of the WorkSpace.
+        --workspace-properties=: The properties of the WorkSpace.
+      completion:
+        flag:
+            data-replication:
+                - NO_REPLICATION
+                - PRIMARY_AS_SOURCE
+    - name: reject-account-link-invitation
+      description: Rejects the account link invitation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: The client token of the account link invitation to reject.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --link-id=!: The identifier of the account link
+    - name: stop-workspaces
+      description: Stops the specified WorkSpaces.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --stop-workspace-requests=!: The WorkSpaces to stop.
+    - name: accept-account-link-invitation
+      description: Accepts the account link invitation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A string of up to 64 ASCII characters that Amazon WorkSpaces uses to ensure idempotent creation.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --link-id=!: The identifier of the account link.
+    - name: create-ip-group
+      description: Creates an IP access control group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-desc=: The description of the group.
+        --group-name=!: The name of the group.
+        --tags=: The tags.
+        --user-rules=: The rules to add to the group.
+    - name: describe-workspace-bundles
+      description: Retrieves a list that describes the available WorkSpace bundles.
+      flags:
+        --bundle-ids=: The identifiers of the bundles.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The token for the next set of results.
+        --owner=: The owner of the bundles.
+        --starting-token=: A token to specify where to start paginating.
     - name: register-workspace-directory
       description: Registers the specified directory.
       flags:
         --active-directory-config=: The active directory config of the directory.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --directory-id=: The identifier of the directory.
         --enable-self-service: Indicates whether self-service capabilities are enabled or disabled.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --idc-instance-arn=: The Amazon Resource Name (ARN) of the identity center instance.
         --microsoft-entra-config=: The details about Microsoft Entra config.
         --no-enable-self-service: Indicates whether self-service capabilities are enabled or disabled.
@@ -29,263 +364,243 @@ commands:
             workspace-type:
                 - PERSONAL
                 - POOLS
-    - name: disassociate-connection-alias
-      description: Disassociates a connection alias from a directory.
+    - name: describe-image-associations
+      description: Describes the associations between the applications and the specified image.
       flags:
-        --alias-id=!: The identifier of the connection alias to disassociate.
-    - name: list-available-management-cidr-ranges
-      description: Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that you can use for the network management interface when you enable Bring Your Own License (BYOL).
-      flags:
-        --management-cidr-range-constraint=!: The IP address range to search.
-        --max-results=: The maximum number of items to return.
-        --next-token=: If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.
-    - name: modify-endpoint-encryption-mode
-      description: Modifies the endpoint encryption mode that allows you to configure the specified directory between Standard TLS and FIPS 140-2 validated mode.
-      flags:
-        --directory-id=!: The identifier of the directory.
-        --endpoint-encryption-mode=!: The encryption mode used for endpoint connections when streaming to WorkSpaces Personal or WorkSpace Pools.
-      completion:
-        flag:
-            endpoint-encryption-mode:
-                - STANDARD_TLS
-                - FIPS_VALIDATED
-    - name: update-connection-alias-permission
-      description: Shares or unshares a connection alias with one account by specifying whether that account has permission to associate the connection alias with a directory.
-      flags:
-        --alias-id=!: The identifier of the connection alias that you want to update permissions for.
-        --connection-alias-permission=!: Indicates whether to share or unshare the connection alias with the specified Amazon Web Services account.
-    - name: create-workspaces-pool
-      description: Creates a pool of WorkSpaces.
-      flags:
-        --application-settings=: Indicates the application settings of the pool.
-        --bundle-id=!: The identifier of the bundle for the pool.
-        --capacity=!: The user capacity of the pool.
-        --description=!: The pool description.
-        --directory-id=!: The identifier of the directory for the pool.
-        --pool-name=!: The name of the pool.
-        --running-mode=: The running mode for the pool.
-        --tags=: The tags for the pool.
-        --timeout-settings=: Indicates the timeout settings of the pool.
-      completion:
-        flag:
-            running-mode:
-                - AUTO_STOP
-                - ALWAYS_ON
-    - name: describe-workspace-bundles
-      description: Retrieves a list that describes the available WorkSpace bundles.
-      flags:
-        --bundle-ids=: The identifiers of the bundles.
-        --next-token=: The token for the next set of results.
-        --owner=: The owner of the bundles.
+        --associated-resource-types=!: The resource types of the associated resource.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-id=!: The identifier of the image.
     - name: describe-workspace-image-permissions
       description: Describes the permissions that the owner of an image has granted to other Amazon Web Services accounts for an image.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --image-id=!: The identifier of the image.
         --max-results=: The maximum number of items to return.
         --next-token=: If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.
-    - name: terminate-workspaces-pool
-      description: Terminates the specified pool.
-      flags:
-        --pool-id=!: The identifier of the pool.
-    - name: update-workspace-image-permission
-      description: Shares or unshares an image with one account in the same Amazon Web Services Region by specifying whether that account has permission to copy the image.
-      flags:
-        --allow-copy-image!: The permission to copy the image.
-        --image-id=!: The identifier of the image.
-        --no-allow-copy-image!: The permission to copy the image.
-        --shared-account-id=!: The identifier of the Amazon Web Services account to share or unshare the image with.
-    - name: associate-workspace-application
-      description: Associates the specified application to the specified WorkSpace.
-      flags:
-        --application-id=!: The identifier of the application.
-        --workspace-id=!: The identifier of the WorkSpace.
-    - name: copy-workspace-image
-      description: Copies the specified image from the specified Region to the current Region.
-      flags:
-        --description=: A description of the image.
-        --name=!: The name of the image.
-        --source-image-id=!: The identifier of the source image.
-        --source-region=!: The identifier of the source Region.
-        --tags=: The tags for the image.
-    - name: delete-account-link-invitation
-      description: Deletes the account link invitation.
-      flags:
-        --client-token=: A string of up to 64 ASCII characters that Amazon WorkSpaces uses to ensure idempotent creation.
-        --link-id=!: The identifier of the account link.
-    - name: describe-applications
-      description: Describes the specified applications by filtering based on their compute types, license availability, operating systems, and owners.
-      flags:
-        --application-ids=: The identifiers of one or more applications.
-        --compute-type-names=: The compute types supported by the applications.
-        --license-type=: The license availability for the applications.
-        --max-results=: The maximum number of applications to return.
-        --next-token=: If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.
-        --operating-system-names=: The operating systems supported by the applications.
-        --owner=: The owner of the applications.
-      completion:
-        flag:
-            license-type:
-                - LICENSED
-                - UNLICENSED
-    - name: describe-custom-workspace-image-import
-      description: Retrieves information about a WorkSpace BYOL image being imported via ImportCustomWorkspaceImage.
-      flags:
-        --image-id=!: The identifier of the WorkSpace image.
-    - name: reboot-workspaces
-      description: Reboots the specified WorkSpaces.
-      flags:
-        --reboot-workspace-requests=!: The WorkSpaces to reboot.
     - name: restore-workspace
       description: Restores the specified WorkSpace to its last known healthy state.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --workspace-id=!: The identifier of the WorkSpace.
-    - name: revoke-ip-rules
-      description: Removes one or more rules from the specified IP access control group.
+    - name: start-workspaces
+      description: Starts the specified WorkSpaces.
       flags:
-        --group-id=!: The identifier of the group.
-        --user-rules=!: The rules to remove from the group.
-    - name: create-account-link-invitation
-      description: Creates the account link invitation.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --start-workspace-requests=!: The WorkSpaces to start.
+    - name: terminate-workspaces-pool
+      description: Terminates the specified pool.
       flags:
-        --client-token=: A string of up to 64 ASCII characters that Amazon WorkSpaces uses to ensure idempotent creation.
-        --target-account-id=!: The identifier of the target account.
-    - name: delete-ip-group
-      description: Deletes the specified IP access control group.
-      flags:
-        --group-id=!: The identifier of the IP access control group.
-    - name: describe-ip-groups
-      description: Describes one or more of your IP access control groups.
-      flags:
-        --group-ids=: The identifiers of one or more IP access control groups.
-        --max-results=: The maximum number of items to return.
-        --next-token=: If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.
-    - name: update-workspaces-pool
-      description: Updates the specified pool.
-      flags:
-        --application-settings=: The persistent application settings for users in the pool.
-        --bundle-id=: The identifier of the bundle.
-        --capacity=: The desired capacity for the pool.
-        --description=: Describes the specified pool to update.
-        --directory-id=: The identifier of the directory.
-        --pool-id=!: The identifier of the specified pool to update.
-        --running-mode=: The desired running mode for the pool.
-        --timeout-settings=: Indicates the timeout settings of the specified pool.
-      completion:
-        flag:
-            running-mode:
-                - AUTO_STOP
-                - ALWAYS_ON
-    - name: create-standby-workspaces
-      description: Creates a standby WorkSpace in a secondary Region.
-      flags:
-        --primary-region=!: The Region of the primary WorkSpace.
-        --standby-workspaces=!: Information about the standby WorkSpace to be created.
-    - name: deregister-workspace-directory
-      description: Deregisters the specified directory.
-      flags:
-        --directory-id=!: The identifier of the directory.
-    - name: describe-account
-      description: Retrieves a list that describes the configuration of Bring Your Own License (BYOL) for the specified account.
-    - name: disassociate-ip-groups
-      description: Disassociates the specified IP access control group from the specified directory.
-      flags:
-        --directory-id=!: The identifier of the directory.
-        --group-ids=!: The identifiers of one or more IP access control groups.
-    - name: associate-connection-alias
-      description: Associates the specified connection alias with the specified directory to enable cross-Region redirection.
-      flags:
-        --alias-id=!: The identifier of the connection alias.
-        --resource-id=!: The identifier of the directory to associate the connection alias with.
-    - name: create-connect-client-add-in
-      description: Creates a client-add-in for Amazon Connect within a directory.
-      flags:
-        --name=!: The name of the client add-in.
-        --resource-id=!: The directory identifier for which to configure the client add-in.
-        --url=!: The endpoint URL of the Amazon Connect client add-in.
-    - name: delete-tags
-      description: Deletes the specified tags from the specified WorkSpaces resource.
-      flags:
-        --resource-id=!: The identifier of the WorkSpaces resource.
-        --tag-keys=!: The tag keys.
-    - name: delete-workspace-image
-      description: Deletes the specified image from your account.
-      flags:
-        --image-id=!: The identifier of the image.
-    - name: deploy-workspace-applications
-      description: Deploys associated applications to the specified WorkSpace
-      flags:
-        --force: Indicates whether the force flag is applied for the specified WorkSpace.
-        --no-force: Indicates whether the force flag is applied for the specified WorkSpace.
-        --workspace-id=!: The identifier of the WorkSpace.
-    - name: describe-application-associations
-      description: Describes the associations between the application and the specified associated resources.
-      flags:
-        --application-id=!: The identifier of the specified application.
-        --associated-resource-types=!: The resource type of the associated resources.
-        --max-results=: The maximum number of associations to return.
-        --next-token=: If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.
-    - name: modify-streaming-properties
-      description: Modifies the specified streaming properties.
-      flags:
-        --resource-id=!: The identifier of the resource.
-        --streaming-properties=: The streaming properties to configure.
-    - name: modify-workspace-access-properties
-      description: Specifies which devices and operating systems users can use to access their WorkSpaces.
-      flags:
-        --resource-id=!: The identifier of the directory.
-        --workspace-access-properties=!: The device types and operating systems to enable or disable for access.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pool-id=!: The identifier of the pool.
     - name: describe-connection-aliases
       description: Retrieves a list that describes the connection aliases used for cross-Region redirection.
       flags:
         --alias-ids=: The identifiers of the connection aliases to describe.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --limit=: The maximum number of connection aliases to return.
         --next-token=: If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.
         --resource-id=: The identifier of the directory associated with the connection alias.
-    - name: describe-workspaces-pool-sessions
-      description: Retrieves a list that describes the streaming sessions for a specified pool.
+    - name: disassociate-connection-alias
+      description: Disassociates a connection alias from a directory.
       flags:
-        --limit=: The maximum size of each page of results.
-        --next-token=: If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.
-        --pool-id=!: The identifier of the pool.
-        --user-id=: The identifier of the user.
-    - name: modify-workspace-properties
-      description: Modifies the specified WorkSpace properties.
+        --alias-id=!: The identifier of the connection alias to disassociate.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: authorize-ip-rules
+      description: Adds one or more rules to the specified IP access control group.
       flags:
-        --data-replication=: Indicates the data replication status.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-id=!: The identifier of the group.
+        --user-rules=!: The rules to add to the group.
+    - name: describe-bundle-associations
+      description: Describes the associations between the applications and the specified bundle.
+      flags:
+        --associated-resource-types=!: The resource types of the associated resource.
+        --bundle-id=!: The identifier of the bundle.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-workspace-associations
+      description: Describes the associations betweens applications and the specified WorkSpace.
+      flags:
+        --associated-resource-types=!: The resource types of the associated resources.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --workspace-id=!: The identifier of the WorkSpace.
-        --workspace-properties=: The properties of the WorkSpace.
+    - name: disassociate-ip-groups
+      description: Disassociates the specified IP access control group from the specified directory.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The identifier of the directory.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-ids=!: The identifiers of one or more IP access control groups.
+    - name: modify-workspace-state
+      description: Sets the state of the specified WorkSpace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workspace-id=!: The identifier of the WorkSpace.
+        --workspace-state=!: The WorkSpace state.
       completion:
         flag:
-            data-replication:
-                - NO_REPLICATION
-                - PRIMARY_AS_SOURCE
-    - name: terminate-workspaces-pool-session
-      description: Terminates the pool session.
+            workspace-state:
+                - AVAILABLE
+                - ADMIN_MAINTENANCE
+    - name: rebuild-workspaces
+      description: Rebuilds the specified WorkSpace.
       flags:
-        --session-id=!: The identifier of the pool session.
-    - name: create-tags
-      description: Creates the specified tags for the specified WorkSpaces resource.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --rebuild-workspace-requests=!: The WorkSpace to rebuild.
+    - name: update-workspace-image-permission
+      description: Shares or unshares an image with one account in the same Amazon Web Services Region by specifying whether that account has permission to copy the image.
       flags:
-        --resource-id=!: The identifier of the WorkSpaces resource.
-        --tags=!: The tags.
-    - name: create-workspaces
-      description: Creates one or more WorkSpaces.
-      flags:
-        --workspaces=!: The WorkSpaces to create.
+        --allow-copy-image!: The permission to copy the image.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-id=!: The identifier of the image.
+        --no-allow-copy-image!: The permission to copy the image.
+        --shared-account-id=!: The identifier of the Amazon Web Services account to share or unshare the image with.
     - name: import-client-branding
       description: Imports client branding.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --device-type-android=: The branding information to import for Android devices.
         --device-type-ios=: The branding information to import for iOS devices.
         --device-type-linux=: The branding information to import for Linux devices.
         --device-type-osx=: The branding information to import for macOS devices.
         --device-type-web=: The branding information to import for web access.
         --device-type-windows=: The branding information to import for Windows devices.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-id=!: The directory identifier of the WorkSpace for which you want to import client branding.
+    - name: create-connection-alias
+      description: Creates the specified connection alias for use with cross-Region redirection.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connection-string=!: A connection string in the form of a fully qualified domain name (FQDN), such as `www.example.com`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: The tags to associate with the connection alias.
+    - name: delete-connection-alias
+      description: Deletes the specified connection alias.
+      flags:
+        --alias-id=!: The identifier of the connection alias to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-client-branding
+      description: Describes the specified client branding.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-id=!: The directory identifier of the WorkSpace for which you want to view client branding information.
+    - name: describe-workspaces
+      description: Describes the specified WorkSpaces.
+      flags:
+        --bundle-id=: The identifier of the bundle.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=: The identifier of the directory.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of items to return.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --user-name=: The name of the directory user.
+        --workspace-ids=: The identifiers of the WorkSpaces.
+        --workspace-name=: The name of the user-decoupled WorkSpace.
+    - name: import-workspace-image
+      description: Imports the specified Windows 10 or 11 Bring Your Own License (BYOL) image into Amazon WorkSpaces.
+      flags:
+        --applications=: If specified, the version of Microsoft Office to subscribe to.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --ec2-image-id=!: The identifier of the EC2 image.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-description=!: The description of the WorkSpace image.
+        --image-name=!: The name of the WorkSpace image.
+        --ingestion-process=!: The ingestion process to be used when importing the image, depending on which protocol you want to use for your BYOL Workspace image, either PCoIP, WSP, or bring your own protocol (BYOP).
+        --tags=: The tags.
+      completion:
+        flag:
+            ingestion-process:
+                - BYOL_REGULAR
+                - BYOL_GRAPHICS
+                - BYOL_GRAPHICSPRO
+                - BYOL_GRAPHICS_G4DN
+                - BYOL_REGULAR_WSP
+                - BYOL_GRAPHICS_G4DN_WSP
+                - BYOL_REGULAR_BYOP
+                - BYOL_GRAPHICS_G4DN_BYOP
+    - name: terminate-workspaces
+      description: Terminates the specified WorkSpaces.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --terminate-workspace-requests=!: The WorkSpaces to terminate.
+    - name: terminate-workspaces-pool-session
+      description: Terminates the pool session.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --session-id=!: The identifier of the pool session.
+    - name: associate-workspace-application
+      description: Associates the specified application to the specified WorkSpace.
+      flags:
+        --application-id=!: The identifier of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workspace-id=!: The identifier of the WorkSpace.
+    - name: deploy-workspace-applications
+      description: Deploys associated applications to the specified WorkSpace
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --force: Indicates whether the force flag is applied for the specified WorkSpace.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-force: Indicates whether the force flag is applied for the specified WorkSpace.
+        --workspace-id=!: The identifier of the WorkSpace.
+    - name: disassociate-workspace-application
+      description: Disassociates the specified application from a WorkSpace.
+      flags:
+        --application-id=!: The identifier of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workspace-id=!: The identifier of the WorkSpace.
     - name: import-custom-workspace-image
       description: Imports the specified Windows 10 or 11 Bring Your Own License (BYOL) image into Amazon WorkSpaces using EC2 Image Builder.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --compute-type=!: The supported compute type for the WorkSpace image.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --image-description=!: The description of the WorkSpace image.
         --image-name=!: The name of the WorkSpace image.
         --image-source=!: The options for image import source.
@@ -308,294 +623,276 @@ commands:
                 - PCOIP
                 - DCV
                 - BYOP
-    - name: import-workspace-image
-      description: Imports the specified Windows 10 or 11 Bring Your Own License (BYOL) image into Amazon WorkSpaces.
-      flags:
-        --applications=: If specified, the version of Microsoft Office to subscribe to.
-        --ec2-image-id=!: The identifier of the EC2 image.
-        --image-description=!: The description of the WorkSpace image.
-        --image-name=!: The name of the WorkSpace image.
-        --ingestion-process=!: The ingestion process to be used when importing the image, depending on which protocol you want to use for your BYOL Workspace image, either PCoIP, WSP, or bring your own protocol (BYOP).
-        --tags=: The tags.
-      completion:
-        flag:
-            ingestion-process:
-                - BYOL_REGULAR
-                - BYOL_GRAPHICS
-                - BYOL_GRAPHICSPRO
-                - BYOL_GRAPHICS_G4DN
-                - BYOL_REGULAR_WSP
-                - BYOL_GRAPHICS_G4DN_WSP
-                - BYOL_REGULAR_BYOP
-                - BYOL_GRAPHICS_G4DN_BYOP
     - name: modify-saml-properties
       description: Modifies multiple properties related to SAML 2.0 authentication, including the enablement status, user access URL, and relay state parameter name that are used for configuring federation with an SAML 2.0 identity provider.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --properties-to-delete=: The SAML properties to delete as part of your request.
         --resource-id=!: The directory identifier for which you want to configure SAML properties.
         --saml-properties=: The properties for configuring SAML 2.0 authentication.
-    - name: modify-workspace-creation-properties
-      description: Modify the default properties used to create WorkSpaces.
+    - name: modify-streaming-properties
+      description: Modifies the specified streaming properties.
       flags:
-        --resource-id=!: The identifier of the directory.
-        --workspace-creation-properties=!: The default properties for creating WorkSpaces.
-    - name: reject-account-link-invitation
-      description: Rejects the account link invitation.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-id=!: The identifier of the resource.
+        --streaming-properties=: The streaming properties to configure.
+    - name: update-rules-of-ip-group
+      description: Replaces the current rules of the specified IP access control group with the specified rules.
       flags:
-        --client-token=: The client token of the account link invitation to reject.
-        --link-id=!: The identifier of the account link
-    - name: create-ip-group
-      description: Creates an IP access control group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-id=!: The identifier of the group.
+        --user-rules=!: One or more rules.
+    - name: update-workspace-bundle
+      description: Updates a WorkSpace bundle with a new image.
       flags:
-        --group-desc=: The description of the group.
-        --group-name=!: The name of the group.
-        --tags=: The tags.
-        --user-rules=: The rules to add to the group.
-    - name: describe-connect-client-add-ins
-      description: Retrieves a list of Amazon Connect client add-ins that have been created.
+        --bundle-id=: The identifier of the bundle.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-id=: The identifier of the image.
+    - name: deregister-workspace-directory
+      description: Deregisters the specified directory.
       flags:
-        --max-results=: The maximum number of items to return.
-        --next-token=: If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.
-        --resource-id=!: The directory identifier for which the client add-in is configured.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The identifier of the directory.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-account
+      description: Retrieves a list that describes the configuration of Bring Your Own License (BYOL) for the specified account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: copy-workspace-image
+      description: Copies the specified image from the specified Region to the current Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the image.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the image.
+        --source-image-id=!: The identifier of the source image.
+        --source-region=!: The identifier of the source Region.
+        --tags=: The tags for the image.
+    - name: delete-client-branding
+      description: Deletes customized client branding.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --platforms=!: The device type for which you want to delete client branding.
+        --resource-id=!: The directory identifier of the WorkSpace for which you want to delete client branding.
+    - name: delete-ip-group
+      description: Deletes the specified IP access control group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-id=!: The identifier of the IP access control group.
     - name: describe-workspace-images
       description: Retrieves a list that describes one or more specified images, if the image identifiers are provided.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --image-ids=: The identifier of the image.
         --image-type=: The type (owned or shared) of the image.
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of items to return.
         --next-token=: If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
       completion:
         flag:
             image-type:
                 - OWNED
                 - SHARED
-    - name: modify-workspace-state
-      description: Sets the state of the specified WorkSpace.
-      flags:
-        --workspace-id=!: The identifier of the WorkSpace.
-        --workspace-state=!: The WorkSpace state.
-      completion:
-        flag:
-            workspace-state:
-                - AVAILABLE
-                - ADMIN_MAINTENANCE
-    - name: update-connect-client-add-in
-      description: Updates a Amazon Connect client add-in.
-      flags:
-        --add-in-id=!: The identifier of the client add-in to update.
-        --name=: The name of the client add-in.
-        --resource-id=!: The directory identifier for which the client add-in is configured.
-        --url=: The endpoint URL of the Amazon Connect client add-in.
-    - name: accept-account-link-invitation
-      description: Accepts the account link invitation.
-      flags:
-        --client-token=: A string of up to 64 ASCII characters that Amazon WorkSpaces uses to ensure idempotent creation.
-        --link-id=!: The identifier of the account link.
-    - name: associate-ip-groups
-      description: Associates the specified IP access control group with the specified directory.
-      flags:
-        --directory-id=!: The identifier of the directory.
-        --group-ids=!: The identifiers of one or more IP access control groups.
-    - name: create-workspace-image
-      description: Creates a new WorkSpace image from an existing WorkSpace.
-      flags:
-        --description=!: The description of the new WorkSpace image.
-        --name=!: The name of the new WorkSpace image.
-        --tags=: The tags that you want to add to the new WorkSpace image.
-        --workspace-id=!: The identifier of the source WorkSpace
-    - name: delete-workspace-bundle
-      description: Deletes the specified WorkSpace bundle.
-      flags:
-        --bundle-id=: The identifier of the bundle.
-    - name: describe-client-properties
-      description: Retrieves a list that describes one or more specified Amazon WorkSpaces clients.
-      flags:
-        --resource-ids=!: The resource identifier, in the form of directory IDs.
     - name: describe-workspaces-connection-status
       description: Describes the connection status of the specified WorkSpaces.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
         --next-token=: If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.
+        --starting-token=: A token to specify where to start paginating.
         --workspace-ids=: The identifiers of the WorkSpaces.
     - name: modify-client-properties
       description: Modifies the properties of the specified Amazon WorkSpaces clients.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-properties=!: Information about the Amazon WorkSpaces client.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-id=!: The resource identifiers, in the form of directory IDs.
-    - name: modify-selfservice-permissions
-      description: Modifies the self-service WorkSpace management capabilities for your users.
+    - name: create-workspace-image
+      description: Creates a new WorkSpace image from an existing WorkSpace.
       flags:
-        --resource-id=!: The identifier of the directory.
-        --selfservice-permissions=!: The permissions to enable or disable self-service capabilities.
-    - name: delete-connect-client-add-in
-      description: Deletes a client-add-in for Amazon Connect that is configured within a directory.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=!: The description of the new WorkSpace image.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the new WorkSpace image.
+        --tags=: The tags that you want to add to the new WorkSpace image.
+        --workspace-id=!: The identifier of the source WorkSpace
+    - name: describe-account-modifications
+      description: Retrieves a list that describes modifications to the configuration of Bring Your Own License (BYOL) for the specified account.
       flags:
-        --add-in-id=!: The identifier of the client add-in to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-application-associations
+      description: Describes the associations between the application and the specified associated resources.
+      flags:
+        --application-id=!: The identifier of the specified application.
+        --associated-resource-types=!: The resource type of the associated resources.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of associations to return.
+        --next-token=: If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.
+    - name: describe-connect-client-add-ins
+      description: Retrieves a list of Amazon Connect client add-ins that have been created.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of items to return.
+        --next-token=: If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.
         --resource-id=!: The directory identifier for which the client add-in is configured.
-    - name: delete-connection-alias
-      description: Deletes the specified connection alias.
-      flags:
-        --alias-id=!: The identifier of the connection alias to delete.
-    - name: start-workspaces
-      description: Starts the specified WorkSpaces.
-      flags:
-        --start-workspace-requests=!: The WorkSpaces to start.
-    - name: stop-workspaces
-      description: Stops the specified WorkSpaces.
-      flags:
-        --stop-workspace-requests=!: The WorkSpaces to stop.
-    - name: stop-workspaces-pool
-      description: Stops the specified pool.
-      flags:
-        --pool-id=!: The identifier of the pool.
-    - name: update-rules-of-ip-group
-      description: Replaces the current rules of the specified IP access control group with the specified rules.
-      flags:
-        --group-id=!: The identifier of the group.
-        --user-rules=!: One or more rules.
-    - name: authorize-ip-rules
-      description: Adds one or more rules to the specified IP access control group.
-      flags:
-        --group-id=!: The identifier of the group.
-        --user-rules=!: The rules to add to the group.
-    - name: describe-tags
-      description: Describes the specified tags for the specified WorkSpaces resource.
-      flags:
-        --resource-id=!: The identifier of the WorkSpaces resource.
-    - name: describe-workspaces-pools
-      description: Describes the specified WorkSpaces Pools.
-      flags:
-        --filters=: The filter conditions for the WorkSpaces Pool to return.
-        --limit=: The maximum number of items to return.
-        --next-token=: If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.
-        --pool-ids=: The identifier of the WorkSpaces Pools.
-    - name: update-workspace-bundle
-      description: Updates a WorkSpace bundle with a new image.
-      flags:
-        --bundle-id=: The identifier of the bundle.
-        --image-id=: The identifier of the image.
-    - name: create-workspace-bundle
-      description: Creates the specified WorkSpace bundle.
-      flags:
-        --bundle-description=!: The description of the bundle.
-        --bundle-name=!: The name of the bundle.
-        --compute-type=!: ""
-        --image-id=!: The identifier of the image that is used to create the bundle.
-        --root-storage=: ""
-        --tags=: The tags associated with the bundle.
-        --user-storage=!: ""
-    - name: describe-bundle-associations
-      description: Describes the associations between the applications and the specified bundle.
-      flags:
-        --associated-resource-types=!: The resource types of the associated resource.
-        --bundle-id=!: The identifier of the bundle.
-    - name: disassociate-workspace-application
-      description: Disassociates the specified application from a WorkSpace.
-      flags:
-        --application-id=!: The identifier of the application.
-        --workspace-id=!: The identifier of the WorkSpace.
-    - name: list-account-links
-      description: Lists all account links.
-      flags:
-        --link-status-filter=: Filters the account based on their link status.
-        --max-results=: The maximum number of accounts to return.
-        --next-token=: The token to use to retrieve the next page of results.
-    - name: describe-workspace-snapshots
-      description: Describes the snapshots for the specified WorkSpace.
-      flags:
-        --workspace-id=!: The identifier of the WorkSpace.
-    - name: modify-certificate-based-auth-properties
-      description: Modifies the properties of the certificate-based authentication you want to use with your WorkSpaces.
-      flags:
-        --certificate-based-auth-properties=: The properties of the certificate-based authentication.
-        --properties-to-delete=: The properties of the certificate-based authentication you want to delete.
-        --resource-id=!: The resource identifiers, in the form of directory IDs.
-    - name: rebuild-workspaces
-      description: Rebuilds the specified WorkSpace.
-      flags:
-        --rebuild-workspace-requests=!: The WorkSpace to rebuild.
-    - name: start-workspaces-pool
-      description: Starts the specified pool.
-      flags:
-        --pool-id=!: The identifier of the pool.
-    - name: terminate-workspaces
-      description: Terminates the specified WorkSpaces.
-      flags:
-        --terminate-workspace-requests=!: The WorkSpaces to terminate.
-    - name: delete-client-branding
-      description: Deletes customized client branding.
-      flags:
-        --platforms=!: The device type for which you want to delete client branding.
-        --resource-id=!: The directory identifier of the WorkSpace for which you want to delete client branding.
-    - name: describe-client-branding
-      description: Describes the specified client branding.
-      flags:
-        --resource-id=!: The directory identifier of the WorkSpace for which you want to view client branding information.
-    - name: describe-connection-alias-permissions
-      description: Describes the permissions that the owner of a connection alias has granted to another Amazon Web Services account for the specified connection alias.
-      flags:
-        --alias-id=!: The identifier of the connection alias.
-        --max-results=: The maximum number of results to return.
-        --next-token=: If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.
-    - name: describe-image-associations
-      description: Describes the associations between the applications and the specified image.
-      flags:
-        --associated-resource-types=!: The resource types of the associated resource.
-        --image-id=!: The identifier of the image.
-    - name: describe-workspace-directories
-      description: Describes the available directories that are registered with Amazon WorkSpaces.
-      flags:
-        --directory-ids=: The identifiers of the directories.
-        --filters=: The filter condition for the WorkSpaces.
-        --limit=: The maximum number of directories to return.
-        --next-token=: If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.
-        --workspace-directory-names=: The names of the WorkSpace directories.
-    - name: get-account-link
-      description: Retrieves account link information.
-      flags:
-        --link-id=: The identifier of the account to link.
-        --linked-account-id=: The identifier of the account link
     - name: modify-account
       description: Modifies the configuration of Bring Your Own License (BYOL) for the specified account.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --dedicated-tenancy-management-cidr-range=: The IP address range, specified as an IPv4 CIDR block, for the management network interface.
         --dedicated-tenancy-support=: The status of BYOL.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
       completion:
         flag:
             dedicated-tenancy-support:
                 - ENABLED
-    - name: create-connection-alias
-      description: Creates the specified connection alias for use with cross-Region redirection.
+    - name: stop-workspaces-pool
+      description: Stops the specified pool.
       flags:
-        --connection-string=!: A connection string in the form of a fully qualified domain name (FQDN), such as `www.example.com`.
-        --tags=: The tags to associate with the connection alias.
-    - name: create-updated-workspace-image
-      description: Creates a new updated WorkSpace image based on the specified source image.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pool-id=!: The identifier of the pool.
+    - name: describe-client-properties
+      description: Retrieves a list that describes one or more specified Amazon WorkSpaces clients.
       flags:
-        --description=!: A description of whether updates for the WorkSpace image are available.
-        --name=!: The name of the new updated WorkSpace image.
-        --source-image-id=!: The identifier of the source WorkSpace image.
-        --tags=: The tags that you want to add to the new updated WorkSpace image.
-    - name: describe-account-modifications
-      description: Retrieves a list that describes modifications to the configuration of Bring Your Own License (BYOL) for the specified account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-ids=!: The resource identifier, in the form of directory IDs.
+    - name: get-account-link
+      description: Retrieves account link information.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --link-id=: The identifier of the account to link.
+        --linked-account-id=: The identifier of the account link
+    - name: describe-custom-workspace-image-import
+      description: Retrieves information about a WorkSpace BYOL image being imported via ImportCustomWorkspaceImage.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-id=!: The identifier of the WorkSpace image.
+    - name: update-connection-alias-permission
+      description: Shares or unshares a connection alias with one account by specifying whether that account has permission to associate the connection alias with a directory.
+      flags:
+        --alias-id=!: The identifier of the connection alias that you want to update permissions for.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connection-alias-permission=!: Indicates whether to share or unshare the connection alias with the specified Amazon Web Services account.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-account-link-invitation
+      description: Creates the account link invitation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A string of up to 64 ASCII characters that Amazon WorkSpaces uses to ensure idempotent creation.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --target-account-id=!: The identifier of the target account.
+    - name: create-tags
+      description: Creates the specified tags for the specified WorkSpaces resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-id=!: The identifier of the WorkSpaces resource.
+        --tags=!: The tags.
+    - name: create-workspaces-pool
+      description: Creates a pool of WorkSpaces.
+      flags:
+        --application-settings=: Indicates the application settings of the pool.
+        --bundle-id=!: The identifier of the bundle for the pool.
+        --capacity=!: The user capacity of the pool.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=!: The pool description.
+        --directory-id=!: The identifier of the directory for the pool.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pool-name=!: The name of the pool.
+        --running-mode=: The running mode for the pool.
+        --tags=: The tags for the pool.
+        --timeout-settings=: Indicates the timeout settings of the pool.
+      completion:
+        flag:
+            running-mode:
+                - AUTO_STOP
+                - ALWAYS_ON
+    - name: delete-connect-client-add-in
+      description: Deletes a client-add-in for Amazon Connect that is configured within a directory.
+      flags:
+        --add-in-id=!: The identifier of the client add-in to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-id=!: The directory identifier for which the client add-in is configured.
+    - name: create-standby-workspaces
+      description: Creates a standby WorkSpace in a secondary Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --primary-region=!: The Region of the primary WorkSpace.
+        --standby-workspaces=!: Information about the standby WorkSpace to be created.
+    - name: delete-account-link-invitation
+      description: Deletes the account link invitation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A string of up to 64 ASCII characters that Amazon WorkSpaces uses to ensure idempotent creation.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --link-id=!: The identifier of the account link.
+    - name: describe-applications
+      description: Describes the specified applications by filtering based on their compute types, license availability, operating systems, and owners.
+      flags:
+        --application-ids=: The identifiers of one or more applications.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --compute-type-names=: The compute types supported by the applications.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --license-type=: The license availability for the applications.
+        --max-results=: The maximum number of applications to return.
         --next-token=: If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.
-    - name: describe-workspace-associations
-      description: Describes the associations betweens applications and the specified WorkSpace.
-      flags:
-        --associated-resource-types=!: The resource types of the associated resources.
-        --workspace-id=!: The identifier of the WorkSpace.
-    - name: describe-workspaces
-      description: Describes the specified WorkSpaces.
-      flags:
-        --bundle-id=: The identifier of the bundle.
-        --directory-id=: The identifier of the directory.
-        --limit=: The maximum number of items to return.
-        --next-token=: If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.
-        --user-name=: The name of the directory user.
-        --workspace-ids=: The identifiers of the WorkSpaces.
-        --workspace-name=: The name of the user-decoupled WorkSpace.
-    - name: migrate-workspace
-      description: Migrates a WorkSpace from one operating system or bundle type to another, while retaining the data on the user volume.
-      flags:
-        --bundle-id=!: The identifier of the target bundle type to migrate the WorkSpace to.
-        --source-workspace-id=!: The identifier of the WorkSpace to migrate from.
+        --operating-system-names=: The operating systems supported by the applications.
+        --owner=: The owner of the applications.
+      completion:
+        flag:
+            license-type:
+                - LICENSED
+                - UNLICENSED

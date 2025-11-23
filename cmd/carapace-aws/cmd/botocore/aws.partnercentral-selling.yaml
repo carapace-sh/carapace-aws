@@ -1,93 +1,217 @@
 name: partnercentral-selling
 description: Partner Central Selling API
 commands:
-    - name: get-resource-snapshot
-      description: Use this action to retrieve a specific snapshot record.
+    - name: create-resource-snapshot
+      description: This action allows you to create an immutable snapshot of a specific resource, such as an opportunity, within the context of an engagement.
       flags:
-        --catalog=!: Specifies the catalog related to the request.
-        --engagement-identifier=!: The unique identifier of the engagement associated with the snapshot.
-        --resource-identifier=!: The unique identifier of the specific resource that was snapshotted.
-        --resource-snapshot-template-identifier=!: he name of the template that defines the schema for the snapshot.
-        --resource-type=!: Specifies the type of resource that was snapshotted.
-        --revision=: Specifies which revision of the snapshot to retrieve.
+        --catalog=!: Specifies the catalog where the snapshot is created.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: Specifies a unique, client-generated UUID to ensure that the request is handled exactly once.
+        --engagement-identifier=!: The unique identifier of the engagement associated with this snapshot.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-identifier=!: The unique identifier of the specific resource to be snapshotted.
+        --resource-snapshot-template-identifier=!: The name of the template that defines the schema for the snapshot.
+        --resource-type=!: Specifies the type of resource for which the snapshot is being created.
       completion:
         flag:
             resource-type:
                 - Opportunity
-    - name: list-engagement-members
-      description: Retrieves the details of member partners in an Engagement.
+    - name: get-resource-snapshot-job
+      description: Use this action to retrieves information about a specific resource snapshot job.
       flags:
-        --catalog=!: The catalog related to the request.
-        --identifier=!: Identifier of the Engagement record to retrieve members from.
+        --catalog=!: Specifies the catalog related to the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-snapshot-job-identifier=!: The unique identifier of the resource snapshot job to be retrieved.
+    - name: list-engagement-by-accepting-invitation-tasks
+      description: Lists all in-progress, completed, or failed StartEngagementByAcceptingInvitationTask tasks that were initiated by the caller's account.
+      flags:
+        --catalog=!: Specifies the catalog related to the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --engagement-invitation-identifier=: Filters tasks by the identifiers of the engagement invitations they are processing.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Use this parameter to control the number of items returned in each request, which can be useful for performance tuning and managing large result sets.
+        --next-token=: Use this parameter for pagination when the result set spans multiple pages.
+        --opportunity-identifier=: Filters tasks by the identifiers of the opportunities they created or are associated with.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort=: Specifies the sorting criteria for the returned results.
+        --starting-token=: A token to specify where to start paginating.
+        --task-identifier=: Filters tasks by their unique identifiers.
+        --task-status=: Filters the tasks based on their current status.
+    - name: list-engagement-resource-associations
+      description: Lists the associations between resources and engagements where the caller is a member and has at least one snapshot in the engagement.
+      flags:
+        --catalog=!: Specifies the catalog in which to search for engagement-resource associations.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --created-by=: Filters the response to include only snapshots of resources owned by the specified AWS account ID.
+        --engagement-identifier=: Filters the results to include only associations related to the specified engagement.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Limits the number of results returned in a single call.
+        --next-token=: A token used for pagination of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-identifier=: Filters the results to include only associations with the specified resource.
+        --resource-type=: Filters the results to include only associations with resources of the specified type.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            resource-type:
+                - Opportunity
+    - name: list-resource-snapshots
+      description: Retrieves a list of resource view snapshots based on specified criteria.
+      flags:
+        --catalog=!: Specifies the catalog related to the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --created-by=: Filters the response to include only snapshots of resources owned by the specified AWS account.
+        --engagement-identifier=!: The unique identifier of the engagement associated with the snapshots.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return in a single call.
         --next-token=: The token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-identifier=: Filters the response to include only snapshots of the specified resource.
+        --resource-snapshot-template-identifier=: Filters the response to include only snapshots created using the specified template.
+        --resource-type=: Filters the response to include only snapshots of the specified resource type.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            resource-type:
+                - Opportunity
+    - name: assign-opportunity
+      description: Enables you to reassign an existing `Opportunity` to another user within your Partner Central account.
+      flags:
+        --assignee=!: Specifies the user or team member responsible for managing the assigned opportunity.
+        --catalog=!: Specifies the catalog associated with the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: Requires the `Opportunity`'s unique identifier when you want to assign it to another user.
+    - name: create-resource-snapshot-job
+      description: Use this action to create a job to generate a snapshot of the specified resource within an engagement.
+      flags:
+        --catalog=!: Specifies the catalog in which to create the snapshot job.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A client-generated UUID used for idempotency check.
+        --engagement-identifier=!: Specifies the identifier of the engagement associated with the resource to be snapshotted.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-identifier=!: Specifies the identifier of the specific resource to be snapshotted.
+        --resource-snapshot-template-identifier=!: Specifies the name of the template that defines the schema for the snapshot.
+        --resource-type=!: The type of resource for which the snapshot job is being created.
+        --tags=: A map of the key-value pairs of the tag or tags to assign.
+      completion:
+        flag:
+            resource-type:
+                - Opportunity
+    - name: delete-resource-snapshot-job
+      description: Use this action to deletes a previously created resource snapshot job.
+      flags:
+        --catalog=!: Specifies the catalog from which to delete the snapshot job.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-snapshot-job-identifier=!: The unique identifier of the resource snapshot job to be deleted.
+    - name: disassociate-opportunity
+      description: Allows you to remove an existing association between an `Opportunity` and related entities, such as a Partner Solution, Amazon Web Services product, or an Amazon Web Services Marketplace offer.
+      flags:
+        --catalog=!: Specifies the catalog associated with the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --opportunity-identifier=!: The opportunity's unique identifier for when you want to disassociate it from related entities.
+        --related-entity-identifier=!: The related entity's identifier that you want to disassociate from the opportunity.
+        --related-entity-type=!: The type of the entity that you're disassociating from the opportunity.
+      completion:
+        flag:
+            related-entity-type:
+                - Solutions
+                - AwsProducts
+                - AwsMarketplaceOffers
+    - name: tag-resource
+      description: Assigns one or more tags (key-value pairs) to the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource that you want to tag.
+        --tags=!: A map of the key-value pairs of the tag or tags to assign.
+    - name: get-selling-system-settings
+      description: Retrieves the currently set system settings, which include the IAM Role used for resource snapshot jobs.
+      flags:
+        --catalog=!: Specifies the catalog in which the settings are defined.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-engagements
+      description: This action allows users to retrieve a list of Engagement records from Partner Central.
+      flags:
+        --catalog=!: Specifies the catalog related to the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --created-by=: A list of AWS account IDs.
+        --engagement-identifier=: An array of strings representing engagement identifiers to retrieve.
+        --exclude-created-by=: An array of strings representing AWS Account IDs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort=: ""
+        --starting-token=: A token to specify where to start paginating.
     - name: list-resource-snapshot-jobs
       description: Lists resource snapshot jobs owned by the customer.
       flags:
         --catalog=!: Specifies the catalog related to the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --engagement-identifier=: The identifier of the engagement to filter the response.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return in a single call.
         --next-token=: The token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
         --sort=: Configures the sorting of the response.
+        --starting-token=: A token to specify where to start paginating.
         --status=: The status of the jobs to filter the response.
       completion:
         flag:
             status:
                 - Running
                 - Stopped
-    - name: create-engagement
-      description: The `CreateEngagement` action allows you to create an `Engagement`, which serves as a collaborative space between different parties such as AWS Partners and AWS Sellers.
-      flags:
-        --catalog=!: The `CreateEngagementRequest$Catalog` parameter specifies the catalog related to the engagement.
-        --client-token=!: The `CreateEngagementRequest$ClientToken` parameter specifies a unique, case-sensitive identifier to ensure that the request is handled exactly once.
-        --contexts=: The `Contexts` field is a required array of objects, with a maximum of 5 contexts allowed, specifying detailed information about customer projects associated with the Engagement.
-        --description=!: Provides a description of the `Engagement`.
-        --title=!: Specifies the title of the `Engagement`.
-    - name: get-opportunity
-      description: Fetches the `Opportunity` record from Partner Central by a given `Identifier`.
-      flags:
-        --catalog=!: Specifies the catalog associated with the request.
-        --identifier=!: Read-only, system generated `Opportunity` unique identifier.
-    - name: list-engagement-invitations
-      description: Retrieves a list of engagement invitations sent to the partner.
-      flags:
-        --catalog=!: Specifies the catalog from which to list the engagement invitations.
-        --engagement-identifier=: Retrieves a list of engagement invitation summaries based on specified filters.
-        --max-results=: Specifies the maximum number of engagement invitations to return in the response.
-        --next-token=: A pagination token used to retrieve additional pages of results when the response to a previous request was truncated.
-        --participant-type=!: Specifies the type of participant for which to list engagement invitations.
-        --payload-type=: Defines the type of payload associated with the engagement invitations to be listed.
-        --sender-aws-account-id=: List of sender AWS account IDs to filter the invitations.
-        --sort=: Specifies the sorting options for listing engagement invitations.
-        --status=: Status values to filter the invitations.
-      completion:
-        flag:
-            participant-type:
-                - SENDER
-                - RECEIVER
-    - name: list-tags-for-resource
-      description: Returns a list of tags for a resource.
-      flags:
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource for which you want to retrieve tags.
-    - name: start-engagement-by-accepting-invitation-task
-      description: This action starts the engagement by accepting an `EngagementInvitation`.
-      flags:
-        --catalog=!: Specifies the catalog related to the task.
-        --client-token=!: A unique, case-sensitive identifier provided by the client that helps to ensure the idempotency of the request.
-        --identifier=!: Specifies the unique identifier of the `EngagementInvitation` to be accepted.
-        --tags=: A map of the key-value pairs of the tag or tags to assign.
-    - name: start-resource-snapshot-job
-      description: Starts a resource snapshot job that has been previously created.
+    - name: submit-opportunity
+      description: Use this action to submit an Opportunity that was previously created by partner for AWS review.
       flags:
         --catalog=!: Specifies the catalog related to the request.
-        --resource-snapshot-job-identifier=!: The identifier of the resource snapshot job to start.
-    - name: disassociate-opportunity
-      description: Allows you to remove an existing association between an `Opportunity` and related entities, such as a Partner Solution, Amazon Web Services product, or an Amazon Web Services Marketplace offer.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The identifier of the Opportunity previously created by partner and needs to be submitted.
+        --involvement-type=!: Specifies the level of AWS sellers' involvement on the opportunity.
+        --visibility=: Determines whether to restrict visibility of the opportunity from AWS sales.
+      completion:
+        flag:
+            involvement-type:
+                - For Visibility Only
+                - Co-Sell
+            visibility:
+                - Full
+                - Limited
+    - name: associate-opportunity
+      description: Enables you to create a formal association between an `Opportunity` and various related entities, enriching the context and details of the opportunity for better collaboration and decision making.
       flags:
         --catalog=!: Specifies the catalog associated with the request.
-        --opportunity-identifier=!: The opportunity's unique identifier for when you want to disassociate it from related entities.
-        --related-entity-identifier=!: The related entity's identifier that you want to disassociate from the opportunity.
-        --related-entity-type=!: The type of the entity that you're disassociating from the opportunity.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --opportunity-identifier=!: Requires the `Opportunity`'s unique identifier when you want to associate it with a related entity.
+        --related-entity-identifier=!: Requires the related entity's unique identifier when you want to associate it with the `Opportunity`.
+        --related-entity-type=!: Specifies the entity type that you're associating with the `Opportunity`.
       completion:
         flag:
             related-entity-type:
@@ -98,60 +222,271 @@ commands:
       description: Retrieves a summary of an AWS Opportunity.
       flags:
         --catalog=!: Specifies the catalog in which the AWS Opportunity is located.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --related-opportunity-identifier=!: The unique identifier for the related partner opportunity.
-    - name: get-resource-snapshot-job
-      description: Use this action to retrieves information about a specific resource snapshot job.
+    - name: list-engagement-invitations
+      description: Retrieves a list of engagement invitations sent to the partner.
+      flags:
+        --catalog=!: Specifies the catalog from which to list the engagement invitations.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --engagement-identifier=: Retrieves a list of engagement invitation summaries based on specified filters.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specifies the maximum number of engagement invitations to return in the response.
+        --next-token=: A pagination token used to retrieve additional pages of results when the response to a previous request was truncated.
+        --page-size=: The size of each page to get in the AWS service call.
+        --participant-type=!: Specifies the type of participant for which to list engagement invitations.
+        --payload-type=: Defines the type of payload associated with the engagement invitations to be listed.
+        --sender-aws-account-id=: List of sender AWS account IDs to filter the invitations.
+        --sort=: Specifies the sorting options for listing engagement invitations.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: Status values to filter the invitations.
+      completion:
+        flag:
+            participant-type:
+                - SENDER
+                - RECEIVER
+    - name: start-resource-snapshot-job
+      description: Starts a resource snapshot job that has been previously created.
       flags:
         --catalog=!: Specifies the catalog related to the request.
-        --resource-snapshot-job-identifier=!: The unique identifier of the resource snapshot job to be retrieved.
-    - name: list-engagement-by-accepting-invitation-tasks
-      description: Lists all in-progress, completed, or failed StartEngagementByAcceptingInvitationTask tasks that were initiated by the caller's account.
-      flags:
-        --catalog=!: Specifies the catalog related to the request.
-        --engagement-invitation-identifier=: Filters tasks by the identifiers of the engagement invitations they are processing.
-        --max-results=: Use this parameter to control the number of items returned in each request, which can be useful for performance tuning and managing large result sets.
-        --next-token=: Use this parameter for pagination when the result set spans multiple pages.
-        --opportunity-identifier=: Filters tasks by the identifiers of the opportunities they created or are associated with.
-        --sort=: Specifies the sorting criteria for the returned results.
-        --task-identifier=: Filters tasks by their unique identifiers.
-        --task-status=: Filters the tasks based on their current status.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-snapshot-job-identifier=!: The identifier of the resource snapshot job to start.
     - name: reject-engagement-invitation
       description: This action rejects an `EngagementInvitation` that AWS shared.
       flags:
         --catalog=!: This is the catalog that's associated with the engagement invitation.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identifier=!: This is the unique identifier of the rejected `EngagementInvitation`.
         --rejection-reason=: This describes the reason for rejecting the engagement invitation, which helps AWS track usage patterns.
     - name: stop-resource-snapshot-job
       description: Stops a resource snapshot job.
       flags:
         --catalog=!: Specifies the catalog related to the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-snapshot-job-identifier=!: The identifier of the job to stop.
-    - name: associate-opportunity
-      description: Enables you to create a formal association between an `Opportunity` and various related entities, enriching the context and details of the opportunity for better collaboration and decision making.
+    - name: untag-resource
+      description: Removes a tag or tags from a resource.
       flags:
-        --catalog=!: Specifies the catalog associated with the request.
-        --opportunity-identifier=!: Requires the `Opportunity`'s unique identifier when you want to associate it with a related entity.
-        --related-entity-identifier=!: Requires the related entity's unique identifier when you want to associate it with the `Opportunity`.
-        --related-entity-type=!: Specifies the entity type that you're associating with the `Opportunity`.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource that you want to untag.
+        --tag-keys=!: The keys of the key-value pairs for the tag or tags you want to remove from the specified resource.
+    - name: get-engagement
+      description: Use this action to retrieve the engagement record for a given `EngagementIdentifier`.
+      flags:
+        --catalog=!: Specifies the catalog related to the engagement request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: Specifies the identifier of the Engagement record to retrieve.
+    - name: get-resource-snapshot
+      description: Use this action to retrieve a specific snapshot record.
+      flags:
+        --catalog=!: Specifies the catalog related to the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --engagement-identifier=!: The unique identifier of the engagement associated with the snapshot.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-identifier=!: The unique identifier of the specific resource that was snapshotted.
+        --resource-snapshot-template-identifier=!: he name of the template that defines the schema for the snapshot.
+        --resource-type=!: Specifies the type of resource that was snapshotted.
+        --revision=: Specifies which revision of the snapshot to retrieve.
       completion:
         flag:
-            related-entity-type:
-                - Solutions
-                - AwsProducts
-                - AwsMarketplaceOffers
+            resource-type:
+                - Opportunity
+    - name: list-engagement-from-opportunity-tasks
+      description: Lists all in-progress, completed, or failed `EngagementFromOpportunity` tasks that were initiated by the caller's account.
+      flags:
+        --catalog=!: Specifies the catalog related to the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --engagement-identifier=: Filters tasks by the identifiers of the engagements they created or are associated with.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specifies the maximum number of results to return in a single page of the response.Use this parameter to control the number of items returned in each request, which can be useful for performance tuning and managing large result sets.
+        --next-token=: The token for requesting the next page of results.
+        --opportunity-identifier=: The identifier of the original opportunity associated with this task.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort=: Specifies the sorting criteria for the returned results.
+        --starting-token=: A token to specify where to start paginating.
+        --task-identifier=: Filters tasks by their unique identifiers.
+        --task-status=: Filters the tasks based on their current status.
+    - name: list-engagement-members
+      description: Retrieves the details of member partners in an Engagement.
+      flags:
+        --catalog=!: The catalog related to the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: Identifier of the Engagement record to retrieve members from.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-solutions
+      description: Retrieves a list of Partner Solutions that the partner registered on Partner Central.
+      flags:
+        --catalog=!: Specifies the catalog associated with the request.
+        --category=: Filters the solutions based on the category to which they belong.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=: Filters the solutions based on their unique identifier.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results returned by a single call.
+        --next-token=: A pagination token used to retrieve the next set of results in subsequent calls.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort=: Object that configures sorting done on the response.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: Filters solutions based on their status.
+    - name: put-selling-system-settings
+      description: Updates the currently set system settings, which include the IAM Role used for resource snapshot jobs.
+      flags:
+        --catalog=!: Specifies the catalog in which the settings will be updated.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-snapshot-job-role-identifier=: Specifies the ARN of the IAM Role used for resource snapshot job executions.
+    - name: create-engagement
+      description: The `CreateEngagement` action allows you to create an `Engagement`, which serves as a collaborative space between different parties such as AWS Partners and AWS Sellers.
+      flags:
+        --catalog=!: The `CreateEngagementRequest$Catalog` parameter specifies the catalog related to the engagement.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: The `CreateEngagementRequest$ClientToken` parameter specifies a unique, case-sensitive identifier to ensure that the request is handled exactly once.
+        --contexts=: The `Contexts` field is a required array of objects, with a maximum of 5 contexts allowed, specifying detailed information about customer projects associated with the Engagement.
+        --description=!: Provides a description of the `Engagement`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --title=!: Specifies the title of the `Engagement`.
+    - name: get-engagement-invitation
+      description: Retrieves the details of an engagement invitation shared by AWS with a partner.
+      flags:
+        --catalog=!: Specifies the catalog associated with the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: Specifies the unique identifier for the retrieved engagement invitation.
+    - name: start-engagement-from-opportunity-task
+      description: Similar to `StartEngagementByAcceptingInvitationTask`, this action is asynchronous and performs multiple steps before completion.
+      flags:
+        --aws-submission=!: ""
+        --catalog=!: Specifies the catalog in which the engagement is tracked.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A unique token provided by the client to help ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the opportunity from which the engagement task is to be initiated.
+        --tags=: A map of the key-value pairs of the tag or tags to assign.
+    - name: update-opportunity
+      description: Updates the `Opportunity` record identified by a given `Identifier`.
+      flags:
+        --catalog=!: Specifies the catalog associated with the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --customer=: Specifies details of the customer associated with the `Opportunity`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: Read-only, system generated `Opportunity` unique identifier.
+        --last-modified-date=!: '`DateTime` when the opportunity was last modified.'
+        --life-cycle=: An object that contains lifecycle details for the `Opportunity`.
+        --marketing=: An object that contains marketing details for the `Opportunity`.
+        --national-security=: Specifies if the opportunity is associated with national security concerns.
+        --opportunity-type=: Specifies the opportunity type as a renewal, new, or expansion.
+        --partner-opportunity-identifier=: Specifies the opportunity's unique identifier in the partner's CRM system.
+        --primary-needs-from-aws=: Identifies the type of support the partner needs from Amazon Web Services.
+        --project=: An object that contains project details summary for the `Opportunity`.
+        --software-revenue=: Specifies details of a customer's procurement terms.
+      completion:
+        flag:
+            national-security:
+                - "Yes"
+                - "No"
+            opportunity-type:
+                - Net New Business
+                - Flat Renewal
+                - Expansion
+    - name: get-opportunity
+      description: Fetches the `Opportunity` record from Partner Central by a given `Identifier`.
+      flags:
+        --catalog=!: Specifies the catalog associated with the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: Read-only, system generated `Opportunity` unique identifier.
+    - name: list-opportunities
+      description: This request accepts a list of filters that retrieve opportunity subsets as well as sort options.
+      flags:
+        --catalog=!: Specifies the catalog associated with the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --customer-company-name=: Filters the opportunities based on the customer's company name.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=: Filters the opportunities based on the opportunity identifier.
+        --last-modified-date=: Filters the opportunities based on their last modified date.
+        --life-cycle-review-status=: Filters the opportunities based on their current lifecycle approval status.
+        --life-cycle-stage=: Filters the opportunities based on their lifecycle stage.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specifies the maximum number of results to return in a single call.
+        --next-token=: A pagination token used to retrieve the next set of results in subsequent calls.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort=: An object that specifies how the response is sorted.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: Returns a list of tags for a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource for which you want to retrieve tags.
+    - name: start-engagement-by-accepting-invitation-task
+      description: This action starts the engagement by accepting an `EngagementInvitation`.
+      flags:
+        --catalog=!: Specifies the catalog related to the task.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A unique, case-sensitive identifier provided by the client that helps to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: Specifies the unique identifier of the `EngagementInvitation` to be accepted.
+        --tags=: A map of the key-value pairs of the tag or tags to assign.
+    - name: accept-engagement-invitation
+      description: Use the `AcceptEngagementInvitation` action to accept an engagement invitation shared by AWS.
+      flags:
+        --catalog=!: The `CatalogType` parameter specifies the catalog associated with the engagement invitation.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The `Identifier` parameter in the `AcceptEngagementInvitationRequest` specifies the unique identifier of the `EngagementInvitation` to be accepted.
     - name: create-engagement-invitation
       description: This action creates an invitation from a sender to a single receiver to join an engagement.
       flags:
         --catalog=!: Specifies the catalog related to the engagement.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=!: Specifies a unique, client-generated UUID to ensure that the request is handled exactly once.
         --engagement-identifier=!: The unique identifier of the `Engagement` associated with the invitation.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --invitation=!: The `Invitation` object all information necessary to initiate an engagement invitation to a partner.
     - name: create-opportunity
       description: Creates an `Opportunity` record in Partner Central.
       flags:
         --catalog=!: Specifies the catalog associated with the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=!: Required to be unique, and should be unchanging, it can be randomly generated or a meaningful string.
         --customer=: Specifies customer details associated with the `Opportunity`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --life-cycle=: An object that contains lifecycle details for the `Opportunity`.
         --marketing=: This object contains marketing details and is optional for an opportunity.
         --national-security=: Indicates whether the `Opportunity` pertains to a national security project.
@@ -175,194 +510,3 @@ commands:
             origin:
                 - AWS Referral
                 - Partner Referral
-    - name: delete-resource-snapshot-job
-      description: Use this action to deletes a previously created resource snapshot job.
-      flags:
-        --catalog=!: Specifies the catalog from which to delete the snapshot job.
-        --resource-snapshot-job-identifier=!: The unique identifier of the resource snapshot job to be deleted.
-    - name: get-engagement
-      description: Use this action to retrieve the engagement record for a given `EngagementIdentifier`.
-      flags:
-        --catalog=!: Specifies the catalog related to the engagement request.
-        --identifier=!: Specifies the identifier of the Engagement record to retrieve.
-    - name: list-engagements
-      description: This action allows users to retrieve a list of Engagement records from Partner Central.
-      flags:
-        --catalog=!: Specifies the catalog related to the request.
-        --created-by=: A list of AWS account IDs.
-        --engagement-identifier=: An array of strings representing engagement identifiers to retrieve.
-        --exclude-created-by=: An array of strings representing AWS Account IDs.
-        --max-results=: The maximum number of results to return in a single call.
-        --next-token=: The token for the next set of results.
-        --sort=: ""
-    - name: create-resource-snapshot-job
-      description: Use this action to create a job to generate a snapshot of the specified resource within an engagement.
-      flags:
-        --catalog=!: Specifies the catalog in which to create the snapshot job.
-        --client-token=!: A client-generated UUID used for idempotency check.
-        --engagement-identifier=!: Specifies the identifier of the engagement associated with the resource to be snapshotted.
-        --resource-identifier=!: Specifies the identifier of the specific resource to be snapshotted.
-        --resource-snapshot-template-identifier=!: Specifies the name of the template that defines the schema for the snapshot.
-        --resource-type=!: The type of resource for which the snapshot job is being created.
-        --tags=: A map of the key-value pairs of the tag or tags to assign.
-      completion:
-        flag:
-            resource-type:
-                - Opportunity
-    - name: list-solutions
-      description: Retrieves a list of Partner Solutions that the partner registered on Partner Central.
-      flags:
-        --catalog=!: Specifies the catalog associated with the request.
-        --category=: Filters the solutions based on the category to which they belong.
-        --identifier=: Filters the solutions based on their unique identifier.
-        --max-results=: The maximum number of results returned by a single call.
-        --next-token=: A pagination token used to retrieve the next set of results in subsequent calls.
-        --sort=: Object that configures sorting done on the response.
-        --status=: Filters solutions based on their status.
-    - name: put-selling-system-settings
-      description: Updates the currently set system settings, which include the IAM Role used for resource snapshot jobs.
-      flags:
-        --catalog=!: Specifies the catalog in which the settings will be updated.
-        --resource-snapshot-job-role-identifier=: Specifies the ARN of the IAM Role used for resource snapshot job executions.
-    - name: start-engagement-from-opportunity-task
-      description: Similar to `StartEngagementByAcceptingInvitationTask`, this action is asynchronous and performs multiple steps before completion.
-      flags:
-        --aws-submission=!: ""
-        --catalog=!: Specifies the catalog in which the engagement is tracked.
-        --client-token=!: A unique token provided by the client to help ensure the idempotency of the request.
-        --identifier=!: The unique identifier of the opportunity from which the engagement task is to be initiated.
-        --tags=: A map of the key-value pairs of the tag or tags to assign.
-    - name: submit-opportunity
-      description: Use this action to submit an Opportunity that was previously created by partner for AWS review.
-      flags:
-        --catalog=!: Specifies the catalog related to the request.
-        --identifier=!: The identifier of the Opportunity previously created by partner and needs to be submitted.
-        --involvement-type=!: Specifies the level of AWS sellers' involvement on the opportunity.
-        --visibility=: Determines whether to restrict visibility of the opportunity from AWS sales.
-      completion:
-        flag:
-            involvement-type:
-                - For Visibility Only
-                - Co-Sell
-            visibility:
-                - Full
-                - Limited
-    - name: untag-resource
-      description: Removes a tag or tags from a resource.
-      flags:
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource that you want to untag.
-        --tag-keys=!: The keys of the key-value pairs for the tag or tags you want to remove from the specified resource.
-    - name: update-opportunity
-      description: Updates the `Opportunity` record identified by a given `Identifier`.
-      flags:
-        --catalog=!: Specifies the catalog associated with the request.
-        --customer=: Specifies details of the customer associated with the `Opportunity`.
-        --identifier=!: Read-only, system generated `Opportunity` unique identifier.
-        --last-modified-date=!: '`DateTime` when the opportunity was last modified.'
-        --life-cycle=: An object that contains lifecycle details for the `Opportunity`.
-        --marketing=: An object that contains marketing details for the `Opportunity`.
-        --national-security=: Specifies if the opportunity is associated with national security concerns.
-        --opportunity-type=: Specifies the opportunity type as a renewal, new, or expansion.
-        --partner-opportunity-identifier=: Specifies the opportunity's unique identifier in the partner's CRM system.
-        --primary-needs-from-aws=: Identifies the type of support the partner needs from Amazon Web Services.
-        --project=: An object that contains project details summary for the `Opportunity`.
-        --software-revenue=: Specifies details of a customer's procurement terms.
-      completion:
-        flag:
-            national-security:
-                - "Yes"
-                - "No"
-            opportunity-type:
-                - Net New Business
-                - Flat Renewal
-                - Expansion
-    - name: create-resource-snapshot
-      description: This action allows you to create an immutable snapshot of a specific resource, such as an opportunity, within the context of an engagement.
-      flags:
-        --catalog=!: Specifies the catalog where the snapshot is created.
-        --client-token=!: Specifies a unique, client-generated UUID to ensure that the request is handled exactly once.
-        --engagement-identifier=!: The unique identifier of the engagement associated with this snapshot.
-        --resource-identifier=!: The unique identifier of the specific resource to be snapshotted.
-        --resource-snapshot-template-identifier=!: The name of the template that defines the schema for the snapshot.
-        --resource-type=!: Specifies the type of resource for which the snapshot is being created.
-      completion:
-        flag:
-            resource-type:
-                - Opportunity
-    - name: get-selling-system-settings
-      description: Retrieves the currently set system settings, which include the IAM Role used for resource snapshot jobs.
-      flags:
-        --catalog=!: Specifies the catalog in which the settings are defined.
-    - name: list-engagement-from-opportunity-tasks
-      description: Lists all in-progress, completed, or failed `EngagementFromOpportunity` tasks that were initiated by the caller's account.
-      flags:
-        --catalog=!: Specifies the catalog related to the request.
-        --engagement-identifier=: Filters tasks by the identifiers of the engagements they created or are associated with.
-        --max-results=: Specifies the maximum number of results to return in a single page of the response.Use this parameter to control the number of items returned in each request, which can be useful for performance tuning and managing large result sets.
-        --next-token=: The token for requesting the next page of results.
-        --opportunity-identifier=: The identifier of the original opportunity associated with this task.
-        --sort=: Specifies the sorting criteria for the returned results.
-        --task-identifier=: Filters tasks by their unique identifiers.
-        --task-status=: Filters the tasks based on their current status.
-    - name: list-engagement-resource-associations
-      description: Lists the associations between resources and engagements where the caller is a member and has at least one snapshot in the engagement.
-      flags:
-        --catalog=!: Specifies the catalog in which to search for engagement-resource associations.
-        --created-by=: Filters the response to include only snapshots of resources owned by the specified AWS account ID.
-        --engagement-identifier=: Filters the results to include only associations related to the specified engagement.
-        --max-results=: Limits the number of results returned in a single call.
-        --next-token=: A token used for pagination of results.
-        --resource-identifier=: Filters the results to include only associations with the specified resource.
-        --resource-type=: Filters the results to include only associations with resources of the specified type.
-      completion:
-        flag:
-            resource-type:
-                - Opportunity
-    - name: list-opportunities
-      description: This request accepts a list of filters that retrieve opportunity subsets as well as sort options.
-      flags:
-        --catalog=!: Specifies the catalog associated with the request.
-        --customer-company-name=: Filters the opportunities based on the customer's company name.
-        --identifier=: Filters the opportunities based on the opportunity identifier.
-        --last-modified-date=: Filters the opportunities based on their last modified date.
-        --life-cycle-review-status=: Filters the opportunities based on their current lifecycle approval status.
-        --life-cycle-stage=: Filters the opportunities based on their lifecycle stage.
-        --max-results=: Specifies the maximum number of results to return in a single call.
-        --next-token=: A pagination token used to retrieve the next set of results in subsequent calls.
-        --sort=: An object that specifies how the response is sorted.
-    - name: list-resource-snapshots
-      description: Retrieves a list of resource view snapshots based on specified criteria.
-      flags:
-        --catalog=!: Specifies the catalog related to the request.
-        --created-by=: Filters the response to include only snapshots of resources owned by the specified AWS account.
-        --engagement-identifier=!: The unique identifier of the engagement associated with the snapshots.
-        --max-results=: The maximum number of results to return in a single call.
-        --next-token=: The token for the next set of results.
-        --resource-identifier=: Filters the response to include only snapshots of the specified resource.
-        --resource-snapshot-template-identifier=: Filters the response to include only snapshots created using the specified template.
-        --resource-type=: Filters the response to include only snapshots of the specified resource type.
-      completion:
-        flag:
-            resource-type:
-                - Opportunity
-    - name: accept-engagement-invitation
-      description: Use the `AcceptEngagementInvitation` action to accept an engagement invitation shared by AWS.
-      flags:
-        --catalog=!: The `CatalogType` parameter specifies the catalog associated with the engagement invitation.
-        --identifier=!: The `Identifier` parameter in the `AcceptEngagementInvitationRequest` specifies the unique identifier of the `EngagementInvitation` to be accepted.
-    - name: assign-opportunity
-      description: Enables you to reassign an existing `Opportunity` to another user within your Partner Central account.
-      flags:
-        --assignee=!: Specifies the user or team member responsible for managing the assigned opportunity.
-        --catalog=!: Specifies the catalog associated with the request.
-        --identifier=!: Requires the `Opportunity`'s unique identifier when you want to assign it to another user.
-    - name: get-engagement-invitation
-      description: Retrieves the details of an engagement invitation shared by AWS with a partner.
-      flags:
-        --catalog=!: Specifies the catalog associated with the request.
-        --identifier=!: Specifies the unique identifier for the retrieved engagement invitation.
-    - name: tag-resource
-      description: Assigns one or more tags (key-value pairs) to the specified resource.
-      flags:
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource that you want to tag.
-        --tags=!: A map of the key-value pairs of the tag or tags to assign.

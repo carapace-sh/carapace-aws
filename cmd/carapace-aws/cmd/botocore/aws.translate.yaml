@@ -1,24 +1,113 @@
 name: translate
 description: Amazon Translate
 commands:
+    - name: list-text-translation-jobs
+      description: Gets a list of the batch translation jobs that you have submitted.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: The parameters that specify which batch translation jobs to retrieve.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in each page.
+        --next-token=: The token to request the next page of results.
+    - name: untag-resource
+      description: Removes a specific tag associated with an Amazon Translate resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the given Amazon Translate resource from which you want to remove the tags.
+        --tag-keys=!: The initial part of a key-value pair that forms a tag being removed from a given resource.
+    - name: describe-text-translation-job
+      description: Gets the properties associated with an asynchronous batch translation job including name, ID, status, source and target languages, input/output S3 buckets, and so on.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The identifier that Amazon Translate generated for the job.
+    - name: list-parallel-data
+      description: Provides a list of your parallel data resources in Amazon Translate.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of parallel data resources returned for each request.
+        --next-token=: A string that specifies the next page of results to return in a paginated response.
+    - name: start-text-translation-job
+      description: Starts an asynchronous batch translation job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A unique identifier for the request.
+        --data-access-role-arn=!: The Amazon Resource Name (ARN) of an AWS Identity Access and Management (IAM) role that grants Amazon Translate read access to your input data.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-data-config=!: Specifies the format and location of the input documents for the translation job.
+        --job-name=: The name of the batch translation job to be performed.
+        --output-data-config=!: Specifies the S3 folder to which your job output will be saved.
+        --parallel-data-names=: The name of a parallel data resource to add to the translation job.
+        --settings=: Settings to configure your translation output.
+        --source-language-code=!: The language code of the input language.
+        --target-language-codes=!: The target languages of the translation job.
+        --terminology-names=: The name of a custom terminology resource to add to the translation job.
+    - name: translate-text
+      description: Translates input text from the source language to the target language.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --settings=: Settings to configure your translation output.
+        --source-language-code=!: The language code for the language of the source text.
+        --target-language-code=!: The language code requested for the language of the target text.
+        --terminology-names=: The name of a terminology list file to add to the translation job.
+        --text=!: The text to translate.
     - name: create-parallel-data
       description: Creates a parallel data resource in Amazon Translate by importing an input file from Amazon S3.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=!: A unique identifier for the request.
         --description=: A custom description for the parallel data resource in Amazon Translate.
         --encryption-key=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: A custom name for the parallel data resource in Amazon Translate.
         --parallel-data-config=!: Specifies the format and S3 location of the parallel data input file.
         --tags=: Tags to be associated with this resource.
-    - name: get-parallel-data
-      description: Provides information about a parallel data resource.
+    - name: delete-terminology
+      description: A synchronous action that deletes a custom terminology.
       flags:
-        --name=!: The name of the parallel data resource that is being retrieved.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the custom terminology being deleted.
+    - name: get-terminology
+      description: Retrieves a custom terminology.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the custom terminology being retrieved.
+        --terminology-data-format=: The data format of the custom terminology being retrieved.
+      completion:
+        flag:
+            terminology-data-format:
+                - CSV
+                - TMX
+                - TSV
+    - name: delete-parallel-data
+      description: Deletes a parallel data resource in Amazon Translate.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the parallel data resource that is being deleted.
     - name: import-terminology
       description: Creates or updates a custom terminology, depending on whether one already exists for the given terminology name.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: The description of the custom terminology being imported.
         --encryption-key=: The encryption key for the custom terminology being imported.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --merge-strategy=!: The merge strategy of the custom terminology being imported.
         --name=!: The name of the custom terminology being imported.
         --tags=: Tags to be associated with this resource.
@@ -30,95 +119,64 @@ commands:
     - name: list-terminologies
       description: Provides a list of custom terminologies associated with your account.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of custom terminologies returned per list request.
         --next-token=: If the result of the request to ListTerminologies was truncated, include the NextToken to fetch the next group of custom terminologies.
-    - name: list-text-translation-jobs
-      description: Gets a list of the batch translation jobs that you have submitted.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: stop-text-translation-job
+      description: Stops an asynchronous batch translation job that is in progress.
       flags:
-        --filter=: The parameters that specify which batch translation jobs to retrieve.
-        --max-results=: The maximum number of results to return in each page.
-        --next-token=: The token to request the next page of results.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The job ID of the job to be stopped.
+    - name: tag-resource
+      description: Associates a specific tag with a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the given Amazon Translate resource to which you want to associate the tags.
+        --tags=!: Tags being associated with a specific Amazon Translate resource.
     - name: translate-document
       description: Translates the input document from the source language to the target language.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --document=!: The content and content type for the document to be translated.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --settings=: Settings to configure your translation output.
         --source-language-code=!: The language code for the language of the source text.
         --target-language-code=!: The language code requested for the translated document.
         --terminology-names=: The name of a terminology list file to add to the translation job.
-    - name: translate-text
-      description: Translates input text from the source language to the target language.
-      flags:
-        --settings=: Settings to configure your translation output.
-        --source-language-code=!: The language code for the language of the source text.
-        --target-language-code=!: The language code requested for the language of the target text.
-        --terminology-names=: The name of a terminology list file to add to the translation job.
-        --text=!: The text to translate.
     - name: update-parallel-data
       description: Updates a previously created parallel data resource by importing a new input file from Amazon S3.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=!: A unique identifier for the request.
         --description=: A custom description for the parallel data resource in Amazon Translate.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the parallel data resource being updated.
         --parallel-data-config=!: Specifies the format and S3 location of the parallel data input file.
-    - name: delete-terminology
-      description: A synchronous action that deletes a custom terminology.
+    - name: get-parallel-data
+      description: Provides information about a parallel data resource.
       flags:
-        --name=!: The name of the custom terminology being deleted.
-    - name: start-text-translation-job
-      description: Starts an asynchronous batch translation job.
-      flags:
-        --client-token=!: A unique identifier for the request.
-        --data-access-role-arn=!: The Amazon Resource Name (ARN) of an AWS Identity Access and Management (IAM) role that grants Amazon Translate read access to your input data.
-        --input-data-config=!: Specifies the format and location of the input documents for the translation job.
-        --job-name=: The name of the batch translation job to be performed.
-        --output-data-config=!: Specifies the S3 folder to which your job output will be saved.
-        --parallel-data-names=: The name of a parallel data resource to add to the translation job.
-        --settings=: Settings to configure your translation output.
-        --source-language-code=!: The language code of the input language.
-        --target-language-codes=!: The target languages of the translation job.
-        --terminology-names=: The name of a custom terminology resource to add to the translation job.
-    - name: stop-text-translation-job
-      description: Stops an asynchronous batch translation job that is in progress.
-      flags:
-        --job-id=!: The job ID of the job to be stopped.
-    - name: describe-text-translation-job
-      description: Gets the properties associated with an asynchronous batch translation job including name, ID, status, source and target languages, input/output S3 buckets, and so on.
-      flags:
-        --job-id=!: The identifier that Amazon Translate generated for the job.
-    - name: list-parallel-data
-      description: Provides a list of your parallel data resources in Amazon Translate.
-      flags:
-        --max-results=: The maximum number of parallel data resources returned for each request.
-        --next-token=: A string that specifies the next page of results to return in a paginated response.
-    - name: list-tags-for-resource
-      description: Lists all tags associated with a given Amazon Translate resource.
-      flags:
-        --resource-arn=!: The Amazon Resource Name (ARN) of the given Amazon Translate resource you are querying.
-    - name: tag-resource
-      description: Associates a specific tag with a resource.
-      flags:
-        --resource-arn=!: The Amazon Resource Name (ARN) of the given Amazon Translate resource to which you want to associate the tags.
-        --tags=!: Tags being associated with a specific Amazon Translate resource.
-    - name: delete-parallel-data
-      description: Deletes a parallel data resource in Amazon Translate.
-      flags:
-        --name=!: The name of the parallel data resource that is being deleted.
-    - name: get-terminology
-      description: Retrieves a custom terminology.
-      flags:
-        --name=!: The name of the custom terminology being retrieved.
-        --terminology-data-format=: The data format of the custom terminology being retrieved.
-      completion:
-        flag:
-            terminology-data-format:
-                - CSV
-                - TMX
-                - TSV
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the parallel data resource that is being retrieved.
     - name: list-languages
       description: Provides a list of languages (RFC-5646 codes and names) that Amazon Translate supports.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --display-language-code=: The language code for the language to use to display the language names in the response.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The maximum number of results to return in each response.
         --next-token=: Include the NextToken value to fetch the next group of supported languages.
       completion:
@@ -134,8 +192,10 @@ commands:
                 - pt
                 - zh
                 - zh-TW
-    - name: untag-resource
-      description: Removes a specific tag associated with an Amazon Translate resource.
+    - name: list-tags-for-resource
+      description: Lists all tags associated with a given Amazon Translate resource.
       flags:
-        --resource-arn=!: The Amazon Resource Name (ARN) of the given Amazon Translate resource from which you want to remove the tags.
-        --tag-keys=!: The initial part of a key-value pair that forms a tag being removed from a given resource.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the given Amazon Translate resource you are querying.

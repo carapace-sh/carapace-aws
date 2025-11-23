@@ -261,7 +261,7 @@ func parseService(name, folder string) command.Command {
 		case isStreaming(service, operation):
 			subCmd.Completion.Positional = [][]string{{"$files"}}
 		default:
-			addCustomFlags(subCmd, paginators, name)
+			addCustomFlags(&subCmd, paginators, name)
 		}
 
 		if shape, ok := service.Shapes[operation.Input.Shape]; ok {
@@ -350,7 +350,7 @@ func isStreaming(service Service, operation Operation) bool {
 	return false
 }
 
-func addCustomFlags(subCmd command.Command, paginators map[string]Paginator, name string) {
+func addCustomFlags(subCmd *command.Command, paginators map[string]Paginator, name string) {
 	subCmd.AddFlag(command.Flag{Longhand: "--cli-input-json", Usage: "Read arguments from the JSON string provided.", Value: true})
 	subCmd.AddFlag(command.Flag{Longhand: "--cli-input-yaml", Usage: "Read arguments from the YAML string provided.", Value: true})
 	subCmd.AddFlag(command.Flag{Longhand: "--generate-cli-skeleton", Usage: "Prints a JSON skeleton to standard output without sending an API request."})
