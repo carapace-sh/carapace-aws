@@ -49,7 +49,7 @@ var removals = map[string][]string{
 		"retrieve-and-generate-stream",
 	},
 	"bedrock-agentcore": {
-		"bedrock-agentcore",
+		"invoke-code-interpreter",
 	},
 	"qbusiness": {
 		"chat",
