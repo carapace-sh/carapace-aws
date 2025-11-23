@@ -39,7 +39,7 @@ func TestService(t *testing.T) {
 				}
 			}
 
-			for operation := range botocore.Operations("ec2") {
+			for operation := range botocore.Operations(service) {
 				t.Run(operation, func(t *testing.T) {
 					t.Parallel()
 					patch := carapace.DiffPatch(
