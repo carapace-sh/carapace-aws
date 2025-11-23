@@ -1,6 +1,86 @@
 name: evidently
 description: Amazon CloudWatch Evidently
 commands:
+    - name: update-project-data-delivery
+      description: Updates the data storage options for this project.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cloud-watch-logs=: A structure containing the CloudWatch Logs log group where you want to store evaluation events.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --project=!: The name or ARN of the project that you want to modify the data storage options for.
+        --s3-destination=: A structure containing the S3 bucket name and bucket prefix where you want to store evaluation events.
+    - name: list-segments
+      description: Returns a list of audience segments that you have created in your account in this Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to include in the response.
+        --next-token=: The token to use when requesting the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: Displays the tags associated with an Evidently resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource that you want to see the tags of.
+    - name: get-feature
+      description: Returns the details about one feature.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --feature=!: The name of the feature that you want to retrieve information for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --project=!: The name or ARN of the project that contains the feature.
+    - name: list-projects
+      description: Returns configuration details about all the projects in the current Region in your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to include in the response.
+        --next-token=: The token to use when requesting the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: untag-resource
+      description: Removes one or more tags from the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the CloudWatch Evidently resource that you're removing tags from.
+        --tag-keys=!: The list of tag keys to remove from the resource.
+    - name: create-project
+      description: Creates a project, which is the logical object in Evidently that can contain features, launches, and experiments.
+      flags:
+        --app-config-resource=: Use this parameter if the project will use *client-side evaluation powered by AppConfig*.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-delivery=: A structure that contains information about where Evidently is to store evaluation events for longer term storage, if you choose to do so.
+        --description=: An optional description of the project.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name for the project.
+        --tags=: Assigns one or more tags (key-value pairs) to the project.
+    - name: delete-launch
+      description: Deletes an Evidently launch.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --launch=!: The name of the launch to delete.
+        --project=!: The name or ARN of the project that contains the launch to delete.
+    - name: delete-project
+      description: Deletes an Evidently project.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --project=!: The name or ARN of the project to delete.
     - name: get-experiment-results
       description: Retrieves the results of a running or completed experiment.
       flags:
@@ -28,38 +108,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --segment=!: The ARN of the segment to return information for.
-    - name: list-experiments
-      description: Returns configuration details about all the experiments in the specified project.
+    - name: put-project-events
+      description: Sends performance events to Evidently.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --events=!: An array of event structures that contain the performance data that is being sent to Evidently.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to include in the response.
-        --next-token=: The token to use when requesting the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --project=!: The name or ARN of the project to return the experiment list from.
-        --starting-token=: A token to specify where to start paginating.
-        --status=: Use this optional parameter to limit the returned results to only the experiments with the status that you specify here.
-      completion:
-        flag:
-            status:
-                - CREATED
-                - UPDATING
-                - RUNNING
-                - COMPLETED
-                - CANCELLED
-    - name: list-segments
-      description: Returns a list of audience segments that you have created in your account in this Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to include in the response.
-        --next-token=: The token to use when requesting the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+        --project=!: The name or ARN of the project to write the events to.
     - name: stop-launch
       description: Stops a launch that is currently running.
       flags:
@@ -70,6 +126,51 @@ commands:
         --launch=!: The name of the launch to stop.
         --project=!: The name or ARN of the project that contains the launch that you want to stop.
         --reason=: A string that describes why you are stopping the launch.
+      completion:
+        flag:
+            desired-state:
+                - COMPLETED
+                - CANCELLED
+    - name: create-launch
+      description: Creates a *launch* of a given feature.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: An optional description for the launch.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --groups=!: An array of structures that contains the feature and variations that are to be used for the launch.
+        --metric-monitors=: An array of structures that define the metrics that will be used to monitor the launch performance.
+        --name=!: The name for the new launch.
+        --project=!: The name or ARN of the project that you want to create the launch in.
+        --randomization-salt=: When Evidently assigns a particular user session to a launch, it must use a randomization ID to determine which variation the user session is served.
+        --scheduled-splits-config=: An array of structures that define the traffic allocation percentages among the feature variations during each step of the launch.
+        --tags=: Assigns one or more tags (key-value pairs) to the launch.
+    - name: delete-experiment
+      description: Deletes an Evidently experiment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --experiment=!: The name of the experiment to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --project=!: The name or ARN of the project that contains the experiment to delete.
+    - name: delete-feature
+      description: Deletes an Evidently feature.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --feature=!: The name of the feature to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --project=!: The name or ARN of the project that contains the feature to delete.
+    - name: stop-experiment
+      description: Stops an experiment that is currently running.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --desired-state=: Specify whether the experiment is to be considered `COMPLETED` or `CANCELLED` after it stops.
+        --experiment=!: The name of the experiment to stop.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --project=!: The name or ARN of the project that contains the experiment to stop.
+        --reason=: A string that describes why you are stopping the experiment.
       completion:
         flag:
             desired-state:
@@ -91,143 +192,22 @@ commands:
         --segment=: Specifies an audience *segment* to use in the experiment.
         --tags=: Assigns one or more tags (key-value pairs) to the experiment.
         --treatments=!: An array of structures that describe the configuration of each feature variation used in the experiment.
-    - name: create-launch
-      description: Creates a *launch* of a given feature.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: An optional description for the launch.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --groups=!: An array of structures that contains the feature and variations that are to be used for the launch.
-        --metric-monitors=: An array of structures that define the metrics that will be used to monitor the launch performance.
-        --name=!: The name for the new launch.
-        --project=!: The name or ARN of the project that you want to create the launch in.
-        --randomization-salt=: When Evidently assigns a particular user session to a launch, it must use a randomization ID to determine which variation the user session is served.
-        --scheduled-splits-config=: An array of structures that define the traffic allocation percentages among the feature variations during each step of the launch.
-        --tags=: Assigns one or more tags (key-value pairs) to the launch.
-    - name: delete-feature
-      description: Deletes an Evidently feature.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --feature=!: The name of the feature to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --project=!: The name or ARN of the project that contains the feature to delete.
-    - name: evaluate-feature
-      description: This operation assigns a feature variation to one given user session.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --entity-id=!: An internal ID that represents a unique user of the application.
-        --evaluation-context=: A JSON object of attributes that you can optionally pass in as part of the evaluation event sent to Evidently from the user session.
-        --feature=!: The name of the feature being evaluated.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --project=!: The name or ARN of the project that contains this feature.
-    - name: start-experiment
-      description: Starts an existing experiment.
-      flags:
-        --analysis-complete-time=!: The date and time to end the experiment.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --experiment=!: The name of the experiment to start.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --project=!: The name or ARN of the project that contains the experiment to start.
-    - name: batch-evaluate-feature
-      description: This operation assigns feature variation to user sessions.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --project=!: The name or ARN of the project that contains the feature being evaluated.
-        --requests=!: An array of structures, where each structure assigns a feature variation to one user session.
-    - name: delete-project
-      description: Deletes an Evidently project.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --project=!: The name or ARN of the project to delete.
-    - name: delete-segment
-      description: Deletes a segment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --segment=!: Specifies the segment to delete.
-    - name: get-feature
-      description: Returns the details about one feature.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --feature=!: The name of the feature that you want to retrieve information for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --project=!: The name or ARN of the project that contains the feature.
-    - name: stop-experiment
-      description: Stops an experiment that is currently running.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --desired-state=: Specify whether the experiment is to be considered `COMPLETED` or `CANCELLED` after it stops.
-        --experiment=!: The name of the experiment to stop.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --project=!: The name or ARN of the project that contains the experiment to stop.
-        --reason=: A string that describes why you are stopping the experiment.
-      completion:
-        flag:
-            desired-state:
-                - COMPLETED
-                - CANCELLED
-    - name: update-project
-      description: Updates the description of an existing project.
-      flags:
-        --app-config-resource=: Use this parameter if the project will use client-side evaluation powered by AppConfig.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: An optional description of the project.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --project=!: The name or ARN of the project to update.
-    - name: create-feature
-      description: Creates an Evidently *feature* that you want to launch or test.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --default-variation=: The name of the variation to use as the default variation.
-        --description=: An optional description of the feature.
-        --entity-overrides=: Specify users that should always be served a specific variation of a feature.
-        --evaluation-strategy=: Specify `ALL_RULES` to activate the traffic allocation specified by any ongoing launches or experiments.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name for the new feature.
-        --project=!: The name or ARN of the project that is to contain the new feature.
-        --tags=: Assigns one or more tags (key-value pairs) to the feature.
-        --variations=!: An array of structures that contain the configuration of the feature's different variations.
-      completion:
-        flag:
-            evaluation-strategy:
-                - ALL_RULES
-                - DEFAULT_VARIATION
-    - name: get-project
+    - name: get-launch
       description: Returns the details about one launch.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --project=!: The name or ARN of the project that you want to see the details of.
-    - name: put-project-events
-      description: Sends performance events to Evidently.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --events=!: An array of event structures that contain the performance data that is being sent to Evidently.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --project=!: The name or ARN of the project to write the events to.
-    - name: tag-resource
-      description: Assigns one or more tags (key-value pairs) to the specified CloudWatch Evidently resource.
+        --launch=!: The name of the launch that you want to see the details of.
+        --project=!: The name or ARN of the project that contains the launch.
+    - name: start-launch
+      description: Starts an existing launch.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the CloudWatch Evidently resource that you're adding tags to.
-        --tags=!: The list of key-value pairs to associate with the resource.
+        --launch=!: The name of the launch to start.
+        --project=!: The name or ARN of the project that contains the launch to start.
     - name: update-feature
       description: Updates an existing feature.
       flags:
@@ -247,123 +227,48 @@ commands:
             evaluation-strategy:
                 - ALL_RULES
                 - DEFAULT_VARIATION
-    - name: update-project-data-delivery
-      description: Updates the data storage options for this project.
+    - name: start-experiment
+      description: Starts an existing experiment.
+      flags:
+        --analysis-complete-time=!: The date and time to end the experiment.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --experiment=!: The name of the experiment to start.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --project=!: The name or ARN of the project that contains the experiment to start.
+    - name: create-feature
+      description: Creates an Evidently *feature* that you want to launch or test.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cloud-watch-logs=: A structure containing the CloudWatch Logs log group where you want to store evaluation events.
+        --default-variation=: The name of the variation to use as the default variation.
+        --description=: An optional description of the feature.
+        --entity-overrides=: Specify users that should always be served a specific variation of a feature.
+        --evaluation-strategy=: Specify `ALL_RULES` to activate the traffic allocation specified by any ongoing launches or experiments.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --project=!: The name or ARN of the project that you want to modify the data storage options for.
-        --s3-destination=: A structure containing the S3 bucket name and bucket prefix where you want to store evaluation events.
-    - name: delete-experiment
-      description: Deletes an Evidently experiment.
+        --name=!: The name for the new feature.
+        --project=!: The name or ARN of the project that is to contain the new feature.
+        --tags=: Assigns one or more tags (key-value pairs) to the feature.
+        --variations=!: An array of structures that contain the configuration of the feature's different variations.
+      completion:
+        flag:
+            evaluation-strategy:
+                - ALL_RULES
+                - DEFAULT_VARIATION
+    - name: delete-segment
+      description: Deletes a segment.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --experiment=!: The name of the experiment to delete.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --project=!: The name or ARN of the project that contains the experiment to delete.
-    - name: delete-launch
-      description: Deletes an Evidently launch.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --launch=!: The name of the launch to delete.
-        --project=!: The name or ARN of the project that contains the launch to delete.
-    - name: get-launch
+        --segment=!: Specifies the segment to delete.
+    - name: get-project
       description: Returns the details about one launch.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --launch=!: The name of the launch that you want to see the details of.
-        --project=!: The name or ARN of the project that contains the launch.
-    - name: list-segment-references
-      description: Use this operation to find which experiments or launches are using a specified segment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to include in the response.
-        --next-token=: The token to use when requesting the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --segment=!: The ARN of the segment that you want to view information for.
-        --starting-token=: A token to specify where to start paginating.
-        --type=!: Specifies whether to return information about launches or experiments that use this segment.
-      completion:
-        flag:
-            type:
-                - EXPERIMENT
-                - LAUNCH
-    - name: update-launch
-      description: Updates a launch of a given feature.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: An optional description for the launch.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --groups=: An array of structures that contains the feature and variations that are to be used for the launch.
-        --launch=!: The name of the launch that is to be updated.
-        --metric-monitors=: An array of structures that define the metrics that will be used to monitor the launch performance.
-        --project=!: The name or ARN of the project that contains the launch that you want to update.
-        --randomization-salt=: When Evidently assigns a particular user session to a launch, it must use a randomization ID to determine which variation the user session is served.
-        --scheduled-splits-config=: An array of structures that define the traffic allocation percentages among the feature variations during each step of the launch.
-    - name: list-projects
-      description: Returns configuration details about all the projects in the current Region in your account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to include in the response.
-        --next-token=: The token to use when requesting the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: Displays the tags associated with an Evidently resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource that you want to see the tags of.
-    - name: test-segment-pattern
-      description: Use this operation to test a rules pattern that you plan to use to create an audience segment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --pattern=!: The pattern to test.
-        --payload=!: A sample `evaluationContext` JSON block to test against the specified pattern.
-    - name: untag-resource
-      description: Removes one or more tags from the specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the CloudWatch Evidently resource that you're removing tags from.
-        --tag-keys=!: The list of tag keys to remove from the resource.
-    - name: create-project
-      description: Creates a project, which is the logical object in Evidently that can contain features, launches, and experiments.
-      flags:
-        --app-config-resource=: Use this parameter if the project will use *client-side evaluation powered by AppConfig*.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-delivery=: A structure that contains information about where Evidently is to store evaluation events for longer term storage, if you choose to do so.
-        --description=: An optional description of the project.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name for the project.
-        --tags=: Assigns one or more tags (key-value pairs) to the project.
-    - name: get-experiment
-      description: Returns the details about one experiment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --experiment=!: The name of the experiment that you want to see the details of.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --project=!: The name or ARN of the project that contains the experiment.
+        --project=!: The name or ARN of the project that you want to see the details of.
     - name: list-features
       description: Returns configuration details about all the features in the specified project.
       flags:
@@ -397,14 +302,40 @@ commands:
                 - RUNNING
                 - COMPLETED
                 - CANCELLED
-    - name: start-launch
-      description: Starts an existing launch.
+    - name: list-segment-references
+      description: Use this operation to find which experiments or launches are using a specified segment.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --launch=!: The name of the launch to start.
-        --project=!: The name or ARN of the project that contains the launch to start.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to include in the response.
+        --next-token=: The token to use when requesting the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --segment=!: The ARN of the segment that you want to view information for.
+        --starting-token=: A token to specify where to start paginating.
+        --type=!: Specifies whether to return information about launches or experiments that use this segment.
+      completion:
+        flag:
+            type:
+                - EXPERIMENT
+                - LAUNCH
+    - name: test-segment-pattern
+      description: Use this operation to test a rules pattern that you plan to use to create an audience segment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pattern=!: The pattern to test.
+        --payload=!: A sample `evaluationContext` JSON block to test against the specified pattern.
+    - name: batch-evaluate-feature
+      description: This operation assigns feature variation to user sessions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --project=!: The name or ARN of the project that contains the feature being evaluated.
+        --requests=!: An array of structures, where each structure assigns a feature variation to one user session.
     - name: create-segment
       description: Use this operation to define a *segment* of your audience.
       flags:
@@ -415,6 +346,35 @@ commands:
         --name=!: A name for the segment.
         --pattern=!: The pattern to use for the segment.
         --tags=: Assigns one or more tags (key-value pairs) to the segment.
+    - name: get-experiment
+      description: Returns the details about one experiment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --experiment=!: The name of the experiment that you want to see the details of.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --project=!: The name or ARN of the project that contains the experiment.
+    - name: list-experiments
+      description: Returns configuration details about all the experiments in the specified project.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to include in the response.
+        --next-token=: The token to use when requesting the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --project=!: The name or ARN of the project to return the experiment list from.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: Use this optional parameter to limit the returned results to only the experiments with the status that you specify here.
+      completion:
+        flag:
+            status:
+                - CREATED
+                - UPDATING
+                - RUNNING
+                - COMPLETED
+                - CANCELLED
     - name: update-experiment
       description: Updates an Evidently experiment.
       flags:
@@ -432,3 +392,43 @@ commands:
         --sampling-rate=: The portion of the available audience that you want to allocate to this experiment, in thousandths of a percent.
         --segment=: Adds an audience *segment* to an experiment.
         --treatments=: An array of structures that define the variations being tested in the experiment.
+    - name: update-launch
+      description: Updates a launch of a given feature.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: An optional description for the launch.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --groups=: An array of structures that contains the feature and variations that are to be used for the launch.
+        --launch=!: The name of the launch that is to be updated.
+        --metric-monitors=: An array of structures that define the metrics that will be used to monitor the launch performance.
+        --project=!: The name or ARN of the project that contains the launch that you want to update.
+        --randomization-salt=: When Evidently assigns a particular user session to a launch, it must use a randomization ID to determine which variation the user session is served.
+        --scheduled-splits-config=: An array of structures that define the traffic allocation percentages among the feature variations during each step of the launch.
+    - name: evaluate-feature
+      description: This operation assigns a feature variation to one given user session.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entity-id=!: An internal ID that represents a unique user of the application.
+        --evaluation-context=: A JSON object of attributes that you can optionally pass in as part of the evaluation event sent to Evidently from the user session.
+        --feature=!: The name of the feature being evaluated.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --project=!: The name or ARN of the project that contains this feature.
+    - name: tag-resource
+      description: Assigns one or more tags (key-value pairs) to the specified CloudWatch Evidently resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the CloudWatch Evidently resource that you're adding tags to.
+        --tags=!: The list of key-value pairs to associate with the resource.
+    - name: update-project
+      description: Updates the description of an existing project.
+      flags:
+        --app-config-resource=: Use this parameter if the project will use client-side evaluation powered by AppConfig.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: An optional description of the project.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --project=!: The name or ARN of the project to update.

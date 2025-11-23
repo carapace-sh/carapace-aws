@@ -12,6 +12,7 @@ import (
 
 	htmltomarkdown "github.com/JohannesKaufmann/html-to-markdown/v2"
 	"github.com/carapace-sh/carapace"
+	"github.com/carapace-sh/carapace-aws/cmd/carapace-spec-botocore/cmd/customizations"
 	"github.com/carapace-sh/carapace-spec/pkg/command"
 	"github.com/neurosnap/sentences/english"
 	"github.com/spf13/cobra"
@@ -246,6 +247,10 @@ func parseService(name, folder string) command.Command {
 	cmd.Documentation.Command, _ = htmltomarkdown.ConvertString(service.Documentation)
 
 	for name, operation := range service.Operations {
+		if customizations.Removal(cmd.Name, CamelCaseToDash(name)) {
+			continue
+		}
+
 		opdoc, _ := htmltomarkdown.ConvertString(operation.Documentation)
 		subCmd := command.Command{
 			Name: CamelCaseToDash(name),

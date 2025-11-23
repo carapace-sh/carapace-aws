@@ -1,12 +1,64 @@
 name: resource-groups
 description: AWS Resource Groups
 commands:
+    - name: tag
+      description: Adds tags to a resource group with the specified Amazon resource name (ARN).
+      flags:
+        --arn=!: The Amazon resource name (ARN) of the resource group to which to add tags.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=!: The tags to add to the specified resource group.
+    - name: delete-group
+      description: Deletes the specified resource group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-name=: Deprecated - don't use this parameter.
+        --group=: The name or the Amazon resource name (ARN) of the resource group to delete.
     - name: get-account-settings
       description: Retrieves the current status of optional features in Resource Groups.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-group
+      description: Returns information about a specified resource group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-name=: Deprecated - don't use this parameter.
+        --group=: The name or the Amazon resource name (ARN) of the resource group to retrieve.
+    - name: list-group-resources
+      description: Returns a list of Amazon resource names (ARNs) of the resources that are members of a specified resource group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters, formatted as [ResourceFilter]() objects, that you want to apply to a `ListGroupResources` operation.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-name=: '***Deprecated - don''t use this parameter.'
+        --group=: The name or the Amazon resource name (ARN) of the resource group.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The total number of results that you want included on each page of the response.
+        --next-token=: The parameter for receiving additional results if you receive a `NextToken` response in a previous request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: create-group
+      description: Creates a resource group with the specified name and description.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration=: A configuration associates the resource group with an Amazon Web Services service and specifies how the service can interact with the resources in the group.
+        --criticality=: The critical rank of the application group on a scale of 1 to 10, with a rank of 1 being the most critical, and a rank of 10 being least critical.
+        --description=: The description of the resource group.
+        --display-name=: The name of the application group, which you can change at any time.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the group, which is the identifier of the group in other operations.
+        --owner=: A name, email address or other identifier for the person or group who is considered as the owner of this application group within your organization.
+        --resource-query=: The resource query that determines which Amazon Web Services resources are members of this group.
+        --tags=: The tags to add to the group.
     - name: get-group-query
       description: Retrieves the resource query associated with the specified resource group.
       flags:
@@ -15,6 +67,65 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --group-name=: Don't use this parameter.
         --group=: The name or the Amazon resource name (ARN) of the resource group to query.
+    - name: get-tags
+      description: Returns a list of tags that are associated with a resource group, specified by an Amazon resource name (ARN).
+      flags:
+        --arn=!: The Amazon resource name (ARN) of the resource group whose tags you want to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: group-resources
+      description: Adds the specified resources to the specified group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group=!: The name or the Amazon resource name (ARN) of the resource group to add resources to.
+        --resource-arns=!: The list of Amazon resource names (ARNs) of the resources to be added to the group.
+    - name: list-tag-sync-tasks
+      description: Returns a list of tag-sync tasks.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: The Amazon resource name (ARN) or name of the application group for which you want to return a list of tag-sync tasks.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to be included in the response.
+        --next-token=: The parameter for receiving additional results if you receive a `NextToken` response in a previous request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-group
+      description: Updates the description for an existing group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --criticality=: The critical rank of the application group on a scale of 1 to 10, with a rank of 1 being the most critical, and a rank of 10 being least critical.
+        --description=: The new description that you want to update the resource group with.
+        --display-name=: The name of the application group, which you can change at any time.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-name=: Don't use this parameter.
+        --group=: The name or the ARN of the resource group to update.
+        --owner=: A name, email address or other identifier for the person or group who is considered as the owner of this application group within your organization.
+    - name: cancel-tag-sync-task
+      description: Cancels the specified tag-sync task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --task-arn=!: The Amazon resource name (ARN) of the tag-sync task.
+    - name: list-grouping-statuses
+      description: Returns the status of the last grouping or ungrouping action for each resource in the specified application group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: The filter name and value pair that is used to return more specific results from a list of resources.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group=!: The application group identifier, expressed as an Amazon resource name (ARN) or the application group name.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of resources and their statuses returned in the response.
+        --next-token=: The parameter for receiving additional results if you receive a `NextToken` response in a previous request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-groups
       description: Returns a list of existing Resource Groups in your account.
       flags:
@@ -35,25 +146,6 @@ commands:
         --configuration=: The new configuration to associate with the specified group.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --group=: The name or Amazon resource name (ARN) of the resource group with the configuration that you want to update.
-    - name: start-tag-sync-task
-      description: Creates a new tag-sync task to onboard and sync resources tagged with a specific tag key-value pair to an application.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group=!: The Amazon resource name (ARN) or name of the application group for which you want to create a tag-sync task.
-        --resource-query=: The query you can use to create the tag-sync task.
-        --role-arn=!: The Amazon resource name (ARN) of the role assumed by the service to tag and untag resources on your behalf.
-        --tag-key=: The tag key.
-        --tag-value=: The tag value.
-    - name: tag
-      description: Adds tags to a resource group with the specified Amazon resource name (ARN).
-      flags:
-        --arn=!: The Amazon resource name (ARN) of the resource group to which to add tags.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=!: The tags to add to the specified resource group.
     - name: ungroup-resources
       description: Removes the specified resources from the specified group.
       flags:
@@ -70,47 +162,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --keys=!: The keys of the tags to be removed.
-    - name: delete-group
-      description: Deletes the specified resource group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-name=: Deprecated - don't use this parameter.
-        --group=: The name or the Amazon resource name (ARN) of the resource group to delete.
-    - name: get-group-configuration
-      description: Retrieves the service configuration associated with the specified resource group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group=: The name or the Amazon resource name (ARN) of the resource group for which you want to retrive the service configuration.
-    - name: list-group-resources
-      description: Returns a list of Amazon resource names (ARNs) of the resources that are members of a specified resource group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters, formatted as [ResourceFilter]() objects, that you want to apply to a `ListGroupResources` operation.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-name=: '***Deprecated - don''t use this parameter.'
-        --group=: The name or the Amazon resource name (ARN) of the resource group.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The total number of results that you want included on each page of the response.
-        --next-token=: The parameter for receiving additional results if you receive a `NextToken` response in a previous request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-tag-sync-tasks
-      description: Returns a list of tag-sync tasks.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: The Amazon resource name (ARN) or name of the application group for which you want to return a list of tag-sync tasks.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to be included in the response.
-        --next-token=: The parameter for receiving additional results if you receive a `NextToken` response in a previous request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
     - name: update-account-settings
       description: Turns on or turns off optional features in Resource Groups.
       flags:
@@ -132,27 +183,13 @@ commands:
         --group-name=: Don't use this parameter.
         --group=: The name or the Amazon resource name (ARN) of the resource group to query.
         --resource-query=!: The resource query to determine which Amazon Web Services resources are members of this resource group.
-    - name: cancel-tag-sync-task
-      description: Cancels the specified tag-sync task.
+    - name: get-group-configuration
+      description: Retrieves the service configuration associated with the specified resource group.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --task-arn=!: The Amazon resource name (ARN) of the tag-sync task.
-    - name: create-group
-      description: Creates a resource group with the specified name and description.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration=: A configuration associates the resource group with an Amazon Web Services service and specifies how the service can interact with the resources in the group.
-        --criticality=: The critical rank of the application group on a scale of 1 to 10, with a rank of 1 being the most critical, and a rank of 10 being least critical.
-        --description=: The description of the resource group.
-        --display-name=: The name of the application group, which you can change at any time.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the group, which is the identifier of the group in other operations.
-        --owner=: A name, email address or other identifier for the person or group who is considered as the owner of this application group within your organization.
-        --resource-query=: The resource query that determines which Amazon Web Services resources are members of this group.
-        --tags=: The tags to add to the group.
+        --group=: The name or the Amazon resource name (ARN) of the resource group for which you want to retrive the service configuration.
     - name: get-tag-sync-task
       description: Returns information about a specified tag-sync task.
       flags:
@@ -160,54 +197,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --task-arn=!: The Amazon resource name (ARN) of the tag-sync task.
-    - name: get-tags
-      description: Returns a list of tags that are associated with a resource group, specified by an Amazon resource name (ARN).
-      flags:
-        --arn=!: The Amazon resource name (ARN) of the resource group whose tags you want to retrieve.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-grouping-statuses
-      description: Returns the status of the last grouping or ungrouping action for each resource in the specified application group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: The filter name and value pair that is used to return more specific results from a list of resources.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group=!: The application group identifier, expressed as an Amazon resource name (ARN) or the application group name.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of resources and their statuses returned in the response.
-        --next-token=: The parameter for receiving additional results if you receive a `NextToken` response in a previous request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-group
-      description: Updates the description for an existing group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --criticality=: The critical rank of the application group on a scale of 1 to 10, with a rank of 1 being the most critical, and a rank of 10 being least critical.
-        --description=: The new description that you want to update the resource group with.
-        --display-name=: The name of the application group, which you can change at any time.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-name=: Don't use this parameter.
-        --group=: The name or the ARN of the resource group to update.
-        --owner=: A name, email address or other identifier for the person or group who is considered as the owner of this application group within your organization.
-    - name: get-group
-      description: Returns information about a specified resource group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-name=: Deprecated - don't use this parameter.
-        --group=: The name or the Amazon resource name (ARN) of the resource group to retrieve.
-    - name: group-resources
-      description: Adds the specified resources to the specified group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group=!: The name or the Amazon resource name (ARN) of the resource group to add resources to.
-        --resource-arns=!: The list of Amazon resource names (ARNs) of the resources to be added to the group.
     - name: search-resources
       description: Returns a list of Amazon Web Services resource identifiers that matches the specified query.
       flags:
@@ -220,3 +209,14 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --resource-query=!: The search query, using the same formats that are supported for resource group definition.
         --starting-token=: A token to specify where to start paginating.
+    - name: start-tag-sync-task
+      description: Creates a new tag-sync task to onboard and sync resources tagged with a specific tag key-value pair to an application.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group=!: The Amazon resource name (ARN) or name of the application group for which you want to create a tag-sync task.
+        --resource-query=: The query you can use to create the tag-sync task.
+        --role-arn=!: The Amazon resource name (ARN) of the role assumed by the service to tag and untag resources on your behalf.
+        --tag-key=: The tag key.
+        --tag-value=: The tag value.

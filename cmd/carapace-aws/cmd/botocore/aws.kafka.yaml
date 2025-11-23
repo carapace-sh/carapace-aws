@@ -1,6 +1,68 @@
 name: kafka
 description: Managed Streaming for Kafka
 commands:
+    - name: reboot-broker
+      description: Reboots brokers.
+      flags:
+        --broker-ids=!: The list of broker IDs to be rebooted.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The Amazon Resource Name (ARN) of the cluster to be updated.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-broker-type
+      description: Updates EC2 instance type.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+        --current-version=!: The cluster version that you want to change.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --target-instance-type=!: The Amazon MSK broker type that you want all of the brokers in this cluster to be.
+    - name: delete-cluster
+      description: Deletes the MSK cluster specified by the Amazon Resource Name (ARN) in the request.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+        --current-version=: The current version of the MSK cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: batch-disassociate-scram-secret
+      description: Disassociates one or more Scram Secrets from an Amazon MSK cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The Amazon Resource Name (ARN) of the cluster to be updated.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --secret-arn-list=!: List of AWS Secrets Manager secret ARNs.
+    - name: list-configuration-revisions
+      description: Returns a list of all the MSK configurations in this Region.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration and all of its revisions.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: The paginated results marker.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: Returns a list of the tags associated with the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the resource that's associated with the tags.
+    - name: update-cluster-kafka-version
+      description: Updates the Apache Kafka version for the cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The Amazon Resource Name (ARN) of the cluster to be updated.
+        --configuration-info=: The custom configuration that should be applied on the new version of cluster.
+        --current-version=!: Current cluster version.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --target-kafka-version=!: Target Kafka version.
     - name: update-storage
       description: Updates cluster broker volume size (or) sets cluster storage mode to TIERED.
       flags:
@@ -17,88 +79,18 @@ commands:
             storage-mode:
                 - LOCAL
                 - TIERED
-    - name: delete-replicator
-      description: Deletes a replicator.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --current-version=: The current version of the replicator.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --replicator-arn=!: The Amazon Resource Name (ARN) of the replicator to be deleted.
-    - name: list-clusters
+    - name: list-clusters-v2
       description: Returns a list of all the MSK clusters in the current Region.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-name-filter=: Specify a prefix of the name of the clusters that you want to list.
+        --cluster-name-filter=: Specify a prefix of the names of the clusters that you want to list.
+        --cluster-type-filter=: Specify either PROVISIONED or SERVERLESS.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return in the response.
         --next-token=: The paginated results marker.
         --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: Returns a list of the tags associated with the specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the resource that's associated with the tags.
-    - name: update-connectivity
-      description: Updates the cluster's connectivity configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-arn=!: The Amazon Resource Name (ARN) of the configuration.
-        --connectivity-info=!: Information about the broker access configuration.
-        --current-version=!: The version of the MSK cluster to update.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: batch-associate-scram-secret
-      description: Associates one or more Scram Secrets with an Amazon MSK cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-arn=!: The Amazon Resource Name (ARN) of the cluster to be updated.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --secret-arn-list=!: List of AWS Secrets Manager secret ARNs.
-    - name: describe-configuration
-      description: Returns a description of this MSK configuration.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration and all of its revisions.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-topic
-      description: Returns topic details of this topic on a MSK cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the cluster.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --topic-name=!: The Kafka topic name that uniquely identifies the topic.
-    - name: list-configuration-revisions
-      description: Returns a list of all the MSK configurations in this Region.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration and all of its revisions.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in the response.
-        --next-token=: The paginated results marker.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-replicators
-      description: Lists the replicators.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in the response.
-        --next-token=: If the response of ListReplicators is truncated, it returns a NextToken in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --replicator-name-filter=: Returns replicators starting with given name.
         --starting-token=: A token to specify where to start paginating.
     - name: list-scram-secrets
       description: Returns a list of the Scram Secrets associated with an Amazon MSK cluster.
@@ -112,6 +104,141 @@ commands:
         --next-token=: The nextToken of the query.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: put-cluster-policy
+      description: Creates or updates the MSK cluster policy specified by the cluster Amazon Resource Name (ARN) in the request.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The Amazon Resource Name (ARN) of the cluster.
+        --current-version=: The policy version.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy=!: The policy.
+    - name: get-cluster-policy
+      description: Get the MSK cluster policy specified by the Amazon Resource Name (ARN) in the request.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The Amazon Resource Name (ARN) of the cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-clusters
+      description: Returns a list of all the MSK clusters in the current Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-name-filter=: Specify a prefix of the name of the clusters that you want to list.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: The paginated results marker.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: create-configuration
+      description: Creates a new MSK configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description of the configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kafka-versions=: The versions of Apache Kafka with which you can use this MSK configuration.
+        --name=!: The name of the configuration.
+        --server-properties=!: Contents of the server.properties file.
+    - name: describe-replicator
+      description: Describes a replicator.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --replicator-arn=!: The Amazon Resource Name (ARN) of the replicator to be described.
+    - name: list-kafka-versions
+      description: Returns a list of Apache Kafka versions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: The paginated results marker.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-broker-storage
+      description: Updates the EBS storage associated with MSK brokers.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+        --current-version=!: The version of cluster to update from.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --target-broker-ebs-volume-info=!: Describes the target volume size and the ID of the broker to apply the update to.
+    - name: update-configuration
+      description: Updates an MSK configuration.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the configuration.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description of the configuration revision.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --server-properties=!: Contents of the server.properties file.
+    - name: update-security
+      description: Updates the security settings for the cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-authentication=: Includes all client authentication related information.
+        --cluster-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+        --current-version=!: The version of the MSK cluster to update.
+        --encryption-info=: Includes all encryption-related information.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-vpc-connection
+      description: Creates a new MSK VPC connection.
+      flags:
+        --authentication=!: The authentication type of VPC connection.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-subnets=!: The list of client subnets.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --security-groups=!: The list of security groups.
+        --tags=: A map of tags for the VPC connection.
+        --target-cluster-arn=!: The cluster Amazon Resource Name (ARN) for the VPC connection.
+        --vpc-id=!: The VPC ID of VPC connection.
+    - name: list-cluster-operations
+      description: Returns a list of all the operations that have been performed on the specified MSK cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: The paginated results marker.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-configurations
+      description: Returns a list of all the MSK configurations in this Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: The paginated results marker.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: reject-client-vpc-connection
+      description: Returns empty response.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The Amazon Resource Name (ARN) of the cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --vpc-connection-arn=!: The VPC connection ARN.
+    - name: tag-resource
+      description: Adds tags to the specified MSK resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the resource that's associated with the tags.
+        --tags=!: The key-value pair for the resource tag.
     - name: update-monitoring
       description: Updates the monitoring settings for the cluster.
       flags:
@@ -130,6 +257,27 @@ commands:
                 - PER_BROKER
                 - PER_TOPIC_PER_BROKER
                 - PER_TOPIC_PER_PARTITION
+    - name: update-rebalancing
+      description: Use this resource to update the intelligent rebalancing status of an Amazon MSK Provisioned cluster with Express brokers.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The Amazon Resource Name (ARN) of the cluster.
+        --current-version=!: The current version of the cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --rebalancing=!: Specifies if intelligent rebalancing should be turned on for your cluster.
+    - name: update-replication-info
+      description: Updates replication info of a replicator.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --consumer-group-replication=: Updated consumer group replication information.
+        --current-version=!: Current replicator version.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --replicator-arn=!: The Amazon Resource Name (ARN) of the replicator to be updated.
+        --source-kafka-cluster-arn=!: The ARN of the source Kafka cluster.
+        --target-kafka-cluster-arn=!: The ARN of the target Kafka cluster.
+        --topic-replication=: Updated topic replication information.
     - name: create-cluster-v2
       description: Creates a new MSK cluster.
       flags:
@@ -140,27 +288,38 @@ commands:
         --provisioned=: Information about the provisioned cluster.
         --serverless=: Information about the serverless cluster.
         --tags=: A map of tags that you want the cluster to have.
-    - name: batch-disassociate-scram-secret
-      description: Disassociates one or more Scram Secrets from an Amazon MSK cluster.
+    - name: describe-cluster-operation
+      description: Returns a description of the cluster operation specified by the ARN.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-arn=!: The Amazon Resource Name (ARN) of the cluster to be updated.
+        --cluster-operation-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the MSK cluster operation.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --secret-arn-list=!: List of AWS Secrets Manager secret ARNs.
-    - name: list-kafka-versions
-      description: Returns a list of Apache Kafka versions.
+    - name: describe-cluster-operation-v2
+      description: Returns a description of the cluster operation specified by the ARN.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-operation-arn=!: ARN of the cluster operation to describe.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in the response.
-        --next-token=: The paginated results marker.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-nodes
-      description: Returns a list of the broker nodes in the cluster.
+    - name: describe-configuration-revision
+      description: Returns a description of this revision of the configuration.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration and all of its revisions.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --revision=!: A string that uniquely identifies a revision of an MSK configuration.
+    - name: describe-topic
+      description: Returns topic details of this topic on a MSK cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --topic-name=!: The Kafka topic name that uniquely identifies the topic.
+    - name: describe-topic-partitions
+      description: Returns partition details of this topic on a MSK cluster.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -171,6 +330,40 @@ commands:
         --next-token=: The paginated results marker.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+        --topic-name=!: The Kafka topic name that uniquely identifies the topic.
+    - name: describe-vpc-connection
+      description: Returns a description of this MSK VPC connection.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) that uniquely identifies a MSK VPC connection.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-replicators
+      description: Lists the replicators.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: If the response of ListReplicators is truncated, it returns a NextToken in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --replicator-name-filter=: Returns replicators starting with given name.
+        --starting-token=: A token to specify where to start paginating.
+    - name: delete-vpc-connection
+      description: Deletes a MSK VPC connection.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) that uniquely identifies an MSK VPC connection.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-cluster
+      description: Returns a description of the MSK cluster whose Amazon Resource Name (ARN) is specified in the request.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-client-vpc-connections
       description: Returns a list of all the VPC connections in this Region.
       flags:
@@ -183,15 +376,51 @@ commands:
         --next-token=: The paginated results marker.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: update-rebalancing
-      description: Use this resource to update the intelligent rebalancing status of an Amazon MSK Provisioned cluster with Express brokers.
+    - name: list-vpc-connections
+      description: Returns a list of all the VPC connections in this Region.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-arn=!: The Amazon Resource Name (ARN) of the cluster.
-        --current-version=!: The current version of the cluster.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --rebalancing=!: Specifies if intelligent rebalancing should be turned on for your cluster.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: The paginated results marker.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: untag-resource
+      description: Removes the tags associated with the keys that are provided in the query.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the resource that's associated with the tags.
+        --tag-keys=!: Tag keys must be unique for a given cluster.
+    - name: update-broker-count
+      description: Updates the number of broker nodes in the cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+        --current-version=!: The version of cluster to update from.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --target-number-of-broker-nodes=!: The number of broker nodes that you want the cluster to have after this operation completes successfully.
+    - name: update-connectivity
+      description: Updates the cluster's connectivity configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The Amazon Resource Name (ARN) of the configuration.
+        --connectivity-info=!: Information about the broker access configuration.
+        --current-version=!: The version of the MSK cluster to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: batch-associate-scram-secret
+      description: Associates one or more Scram Secrets with an Amazon MSK cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The Amazon Resource Name (ARN) of the cluster to be updated.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --secret-arn-list=!: List of AWS Secrets Manager secret ARNs.
     - name: create-cluster
       description: Creates a new MSK cluster.
       flags:
@@ -221,16 +450,56 @@ commands:
             storage-mode:
                 - LOCAL
                 - TIERED
-    - name: create-configuration
-      description: Creates a new MSK configuration.
+    - name: delete-configuration
+      description: Deletes an MSK Configuration.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-replicator
+      description: Deletes a replicator.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The description of the configuration.
+        --current-version=: The current version of the replicator.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kafka-versions=: The versions of Apache Kafka with which you can use this MSK configuration.
-        --name=!: The name of the configuration.
-        --server-properties=!: Contents of the server.properties file.
+        --replicator-arn=!: The Amazon Resource Name (ARN) of the replicator to be deleted.
+    - name: get-bootstrap-brokers
+      description: A list of brokers that a client application can use to bootstrap.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-compatible-kafka-versions
+      description: Gets the Apache Kafka versions to which you can update the MSK cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=: The Amazon Resource Name (ARN) of the cluster check.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-nodes
+      description: Returns a list of the broker nodes in the cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: The paginated results marker.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-cluster-configuration
+      description: Updates the cluster with the configuration that is specified in the request body.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+        --configuration-info=!: Represents the configuration that you want MSK to use for the brokers in a cluster.
+        --current-version=!: The version of the cluster that needs to be updated.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: create-replicator
       description: Creates the replicator.
       flags:
@@ -243,93 +512,27 @@ commands:
         --replicator-name=!: The name of the replicator.
         --service-execution-role-arn=!: The ARN of the IAM role used by the replicator to access resources in the customer's account (e.g source and target clusters)
         --tags=: List of tags to attach to created Replicator.
-    - name: describe-configuration-revision
-      description: Returns a description of this revision of the configuration.
+    - name: delete-cluster-policy
+      description: Deletes the MSK cluster policy specified by the Amazon Resource Name (ARN) in the request.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The Amazon Resource Name (ARN) of the cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-cluster-v2
+      description: Returns a description of the MSK cluster whose Amazon Resource Name (ARN) is specified in the request.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-configuration
+      description: Returns a description of this MSK configuration.
       flags:
         --arn=!: The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration and all of its revisions.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --revision=!: A string that uniquely identifies a revision of an MSK configuration.
-    - name: describe-vpc-connection
-      description: Returns a description of this MSK VPC connection.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) that uniquely identifies a MSK VPC connection.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: reject-client-vpc-connection
-      description: Returns empty response.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-arn=!: The Amazon Resource Name (ARN) of the cluster.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --vpc-connection-arn=!: The VPC connection ARN.
-    - name: update-broker-type
-      description: Updates EC2 instance type.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the cluster.
-        --current-version=!: The cluster version that you want to change.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --target-instance-type=!: The Amazon MSK broker type that you want all of the brokers in this cluster to be.
-    - name: update-configuration
-      description: Updates an MSK configuration.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the configuration.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The description of the configuration revision.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --server-properties=!: Contents of the server.properties file.
-    - name: delete-configuration
-      description: Deletes an MSK Configuration.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-vpc-connection
-      description: Deletes a MSK VPC connection.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) that uniquely identifies an MSK VPC connection.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-topic-partitions
-      description: Returns partition details of this topic on a MSK cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the cluster.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in the response.
-        --next-token=: The paginated results marker.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --topic-name=!: The Kafka topic name that uniquely identifies the topic.
-    - name: get-cluster-policy
-      description: Get the MSK cluster policy specified by the Amazon Resource Name (ARN) in the request.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-arn=!: The Amazon Resource Name (ARN) of the cluster.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-cluster-operations
-      description: Returns a list of all the operations that have been performed on the specified MSK cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the cluster.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in the response.
-        --next-token=: The paginated results marker.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
     - name: list-cluster-operations-v2
       description: Returns a list of all the operations that have been performed on the specified MSK cluster.
       flags:
@@ -342,176 +545,6 @@ commands:
         --next-token=: The nextToken of the query.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: update-cluster-configuration
-      description: Updates the cluster with the configuration that is specified in the request body.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the cluster.
-        --configuration-info=!: Represents the configuration that you want MSK to use for the brokers in a cluster.
-        --current-version=!: The version of the cluster that needs to be updated.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-cluster-kafka-version
-      description: Updates the Apache Kafka version for the cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-arn=!: The Amazon Resource Name (ARN) of the cluster to be updated.
-        --configuration-info=: The custom configuration that should be applied on the new version of cluster.
-        --current-version=!: Current cluster version.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --target-kafka-version=!: Target Kafka version.
-    - name: describe-cluster
-      description: Returns a description of the MSK cluster whose Amazon Resource Name (ARN) is specified in the request.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the cluster.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-cluster-v2
-      description: Returns a description of the MSK cluster whose Amazon Resource Name (ARN) is specified in the request.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the cluster.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-cluster-operation
-      description: Returns a description of the cluster operation specified by the ARN.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-operation-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the MSK cluster operation.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-cluster-operation-v2
-      description: Returns a description of the cluster operation specified by the ARN.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-operation-arn=!: ARN of the cluster operation to describe.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-bootstrap-brokers
-      description: A list of brokers that a client application can use to bootstrap.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the cluster.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-configurations
-      description: Returns a list of all the MSK configurations in this Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in the response.
-        --next-token=: The paginated results marker.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: put-cluster-policy
-      description: Creates or updates the MSK cluster policy specified by the cluster Amazon Resource Name (ARN) in the request.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-arn=!: The Amazon Resource Name (ARN) of the cluster.
-        --current-version=: The policy version.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy=!: The policy.
-    - name: update-broker-count
-      description: Updates the number of broker nodes in the cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the cluster.
-        --current-version=!: The version of cluster to update from.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --target-number-of-broker-nodes=!: The number of broker nodes that you want the cluster to have after this operation completes successfully.
-    - name: create-vpc-connection
-      description: Creates a new MSK VPC connection.
-      flags:
-        --authentication=!: The authentication type of VPC connection.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-subnets=!: The list of client subnets.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --security-groups=!: The list of security groups.
-        --tags=: A map of tags for the VPC connection.
-        --target-cluster-arn=!: The cluster Amazon Resource Name (ARN) for the VPC connection.
-        --vpc-id=!: The VPC ID of VPC connection.
-    - name: delete-cluster
-      description: Deletes the MSK cluster specified by the Amazon Resource Name (ARN) in the request.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the cluster.
-        --current-version=: The current version of the MSK cluster.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-cluster-policy
-      description: Deletes the MSK cluster policy specified by the Amazon Resource Name (ARN) in the request.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-arn=!: The Amazon Resource Name (ARN) of the cluster.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-clusters-v2
-      description: Returns a list of all the MSK clusters in the current Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-name-filter=: Specify a prefix of the names of the clusters that you want to list.
-        --cluster-type-filter=: Specify either PROVISIONED or SERVERLESS.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in the response.
-        --next-token=: The paginated results marker.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: reboot-broker
-      description: Reboots brokers.
-      flags:
-        --broker-ids=!: The list of broker IDs to be rebooted.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-arn=!: The Amazon Resource Name (ARN) of the cluster to be updated.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: tag-resource
-      description: Adds tags to the specified MSK resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the resource that's associated with the tags.
-        --tags=!: The key-value pair for the resource tag.
-    - name: untag-resource
-      description: Removes the tags associated with the keys that are provided in the query.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the resource that's associated with the tags.
-        --tag-keys=!: Tag keys must be unique for a given cluster.
-    - name: update-broker-storage
-      description: Updates the EBS storage associated with MSK brokers.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the cluster.
-        --current-version=!: The version of cluster to update from.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --target-broker-ebs-volume-info=!: Describes the target volume size and the ID of the broker to apply the update to.
-    - name: describe-replicator
-      description: Describes a replicator.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --replicator-arn=!: The Amazon Resource Name (ARN) of the replicator to be described.
-    - name: get-compatible-kafka-versions
-      description: Gets the Apache Kafka versions to which you can update the MSK cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-arn=: The Amazon Resource Name (ARN) of the cluster check.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-topics
       description: List topics in a MSK cluster.
       flags:
@@ -525,36 +558,3 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
         --topic-name-filter=: Returns topics starting with given name.
-    - name: list-vpc-connections
-      description: Returns a list of all the VPC connections in this Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in the response.
-        --next-token=: The paginated results marker.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-replication-info
-      description: Updates replication info of a replicator.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --consumer-group-replication=: Updated consumer group replication information.
-        --current-version=!: Current replicator version.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --replicator-arn=!: The Amazon Resource Name (ARN) of the replicator to be updated.
-        --source-kafka-cluster-arn=!: The ARN of the source Kafka cluster.
-        --target-kafka-cluster-arn=!: The ARN of the target Kafka cluster.
-        --topic-replication=: Updated topic replication information.
-    - name: update-security
-      description: Updates the security settings for the cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-authentication=: Includes all client authentication related information.
-        --cluster-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the cluster.
-        --current-version=!: The version of the MSK cluster to update.
-        --encryption-info=: Includes all encryption-related information.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.

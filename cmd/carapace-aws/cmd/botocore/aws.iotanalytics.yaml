@@ -1,13 +1,54 @@
 name: iotanalytics
 description: AWS IoT Analytics
 commands:
-    - name: delete-datastore
-      description: Deletes the specified data store.
+    - name: create-pipeline
+      description: Creates a pipeline.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --datastore-name=!: The name of the data store to delete.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pipeline-activities=!: A list of `PipelineActivity` objects.
+        --pipeline-name=!: The name of the pipeline.
+        --tags=: Metadata which can be used to manage the pipeline.
+    - name: describe-datastore
+      description: Retrieves information about a data store.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --datastore-name=!: The name of the data store
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-statistics: If true, additional statistical information about the data store is included in the response.
+        --no-include-statistics: If true, additional statistical information about the data store is included in the response.
+    - name: get-dataset-content
+      description: Retrieves the contents of a dataset as presigned URIs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-name=!: The name of the dataset whose contents are retrieved.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --version-id=: The version of the dataset whose contents are retrieved.
+    - name: update-datastore
+      description: Used to update the settings of a data store.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --datastore-name=!: The name of the data store to be updated.
+        --datastore-storage=: Where data in a data store is stored.. You can choose `serviceManagedS3` storage, `customerManagedS3` storage, or `iotSiteWiseMultiLayerStorage` storage.
+        --file-format-configuration=: Contains the configuration information of file formats.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --retention-period=: How long, in days, message data is kept for the data store.
+    - name: create-datastore
+      description: Creates a data store, which is a repository for messages.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --datastore-name=!: The name of the data store.
+        --datastore-partitions=: Contains information about the partition dimensions in a data store.
+        --datastore-storage=: Where data in a data store is stored.. You can choose `serviceManagedS3` storage, `customerManagedS3` storage, or `iotSiteWiseMultiLayerStorage` storage.
+        --file-format-configuration=: Contains the configuration information of file formats.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --retention-period=: How long, in days, message data is kept for the data store.
+        --tags=: Metadata which can be used to manage the data store.
     - name: describe-channel
       description: Retrieves information about a channel.
       flags:
@@ -17,14 +58,54 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --include-statistics: If true, additional statistical information about the channel is included in the response.
         --no-include-statistics: If true, additional statistical information about the channel is included in the response.
-    - name: get-dataset-content
-      description: Retrieves the contents of a dataset as presigned URIs.
+    - name: list-pipelines
+      description: Retrieves a list of pipelines.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-name=!: The name of the dataset whose contents are retrieved.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --version-id=: The version of the dataset whose contents are retrieved.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in this request.
+        --next-token=: The token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: Lists the tags (metadata) that you have assigned to the resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource whose tags you want to list.
+    - name: create-dataset-content
+      description: Creates the content of a dataset by applying a `queryAction` (a SQL query) or a `containerAction` (executing a containerized application).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-name=!: The name of the dataset.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --version-id=: The version ID of the dataset content.
+    - name: delete-channel
+      description: Deletes the specified channel.
+      flags:
+        --channel-name=!: The name of the channel to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-dataset-content
+      description: Deletes the content of the specified dataset.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-name=!: The name of the dataset whose content is deleted.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --version-id=: The version of the dataset whose content is deleted.
+    - name: delete-datastore
+      description: Deletes the specified data store.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --datastore-name=!: The name of the data store to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-datastores
       description: Retrieves a list of data stores.
       flags:
@@ -36,14 +117,25 @@ commands:
         --next-token=: The token for the next set of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: untag-resource
-      description: Removes the given tags (metadata) from the resource.
+    - name: list-datasets
+      description: Retrieves information about datasets.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource whose tags you want to remove.
-        --tag-keys=!: The keys of those tags which you want to remove.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in this request.
+        --next-token=: The token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-pipeline
+      description: Updates the settings of a pipeline.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pipeline-activities=!: A list of `PipelineActivity` objects.
+        --pipeline-name=!: The name of the pipeline to update.
     - name: create-channel
       description: Used to create a channel.
       flags:
@@ -68,24 +160,13 @@ commands:
         --tags=: Metadata which can be used to manage the dataset.
         --triggers=: A list of triggers.
         --versioning-configuration=: Optional.
-    - name: list-datasets
-      description: Retrieves information about datasets.
+    - name: describe-dataset
+      description: Retrieves information about a dataset.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-name=!: The name of the dataset whose information is retrieved.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in this request.
-        --next-token=: The token for the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: Lists the tags (metadata) that you have assigned to the resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource whose tags you want to list.
     - name: put-logging-options
       description: Sets or updates the IoT Analytics logging options.
       flags:
@@ -93,59 +174,26 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --logging-options=!: The new values of the IoT Analytics logging options.
-    - name: create-datastore
-      description: Creates a data store, which is a repository for messages.
+    - name: run-pipeline-activity
+      description: Simulates the results of running a pipeline activity on a message payload.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --datastore-name=!: The name of the data store.
-        --datastore-partitions=: Contains information about the partition dimensions in a data store.
-        --datastore-storage=: Where data in a data store is stored.. You can choose `serviceManagedS3` storage, `customerManagedS3` storage, or `iotSiteWiseMultiLayerStorage` storage.
-        --file-format-configuration=: Contains the configuration information of file formats.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --retention-period=: How long, in days, message data is kept for the data store.
-        --tags=: Metadata which can be used to manage the data store.
+        --payloads=!: The sample message payloads on which the pipeline activity is run.
+        --pipeline-activity=!: The pipeline activity that is run.
+    - name: delete-pipeline
+      description: Deletes the specified pipeline.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pipeline-name=!: The name of the pipeline to delete.
     - name: describe-logging-options
       description: Retrieves the current settings of the IoT Analytics logging options.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-channels
-      description: Retrieves a list of channels.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in this request.
-        --next-token=: The token for the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: start-pipeline-reprocessing
-      description: Starts the reprocessing of raw message data through the pipeline.
-      flags:
-        --channel-messages=: Specifies one or more sets of channel messages that you want to reprocess.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --end-time=: The end time (exclusive) of raw message data that is reprocessed.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --pipeline-name=!: The name of the pipeline on which to start reprocessing.
-        --start-time=: The start time (inclusive) of raw message data that is reprocessed.
-    - name: create-dataset-content
-      description: Creates the content of a dataset by applying a `queryAction` (a SQL query) or a `containerAction` (executing a containerized application).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-name=!: The name of the dataset.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --version-id=: The version ID of the dataset content.
-    - name: describe-dataset
-      description: Retrieves information about a dataset.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-name=!: The name of the dataset whose information is retrieved.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: describe-pipeline
       description: Retrieves information about a pipeline.
@@ -154,59 +202,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --pipeline-name=!: The name of the pipeline whose information is retrieved.
-    - name: list-pipelines
-      description: Retrieves a list of pipelines.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in this request.
-        --next-token=: The token for the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-channel
-      description: Used to update the settings of a channel.
-      flags:
-        --channel-name=!: The name of the channel to be updated.
-        --channel-storage=: Where channel data is stored.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --retention-period=: How long, in days, message data is kept for the channel.
-    - name: update-datastore
-      description: Used to update the settings of a data store.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --datastore-name=!: The name of the data store to be updated.
-        --datastore-storage=: Where data in a data store is stored.. You can choose `serviceManagedS3` storage, `customerManagedS3` storage, or `iotSiteWiseMultiLayerStorage` storage.
-        --file-format-configuration=: Contains the configuration information of file formats.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --retention-period=: How long, in days, message data is kept for the data store.
-    - name: create-pipeline
-      description: Creates a pipeline.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --pipeline-activities=!: A list of `PipelineActivity` objects.
-        --pipeline-name=!: The name of the pipeline.
-        --tags=: Metadata which can be used to manage the pipeline.
-    - name: delete-dataset
-      description: Deletes the specified dataset.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-name=!: The name of the dataset to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-pipeline
-      description: Deletes the specified pipeline.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --pipeline-name=!: The name of the pipeline to delete.
     - name: list-dataset-contents
       description: Lists information about dataset contents that have been created.
       flags:
@@ -229,6 +224,14 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The ARN of the resource whose tags you want to modify.
         --tags=!: The new or modified tags for the resource.
+    - name: untag-resource
+      description: Removes the given tags (metadata) from the resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource whose tags you want to remove.
+        --tag-keys=!: The keys of those tags which you want to remove.
     - name: sample-channel-data
       description: Retrieves a sample of messages from the specified channel ingested during the specified timeframe.
       flags:
@@ -239,14 +242,56 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-messages=: The number of sample messages to be retrieved.
         --start-time=: The start of the time window from which sample messages are retrieved.
-    - name: update-pipeline
-      description: Updates the settings of a pipeline.
+    - name: start-pipeline-reprocessing
+      description: Starts the reprocessing of raw message data through the pipeline.
+      flags:
+        --channel-messages=: Specifies one or more sets of channel messages that you want to reprocess.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=: The end time (exclusive) of raw message data that is reprocessed.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pipeline-name=!: The name of the pipeline on which to start reprocessing.
+        --start-time=: The start time (inclusive) of raw message data that is reprocessed.
+    - name: update-dataset
+      description: Updates the settings of a dataset.
+      flags:
+        --actions=!: A list of `DatasetAction` objects.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content-delivery-rules=: When dataset contents are created, they are delivered to destinations specified here.
+        --dataset-name=!: The name of the dataset to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --late-data-rules=: A list of data rules that send notifications to CloudWatch, when data arrives late.
+        --retention-period=: How long, in days, dataset contents are kept for the dataset.
+        --triggers=: A list of `DatasetTrigger` objects.
+        --versioning-configuration=: Optional.
+    - name: delete-dataset
+      description: Deletes the specified dataset.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-name=!: The name of the dataset to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-channels
+      description: Retrieves a list of channels.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --pipeline-activities=!: A list of `PipelineActivity` objects.
-        --pipeline-name=!: The name of the pipeline to update.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in this request.
+        --next-token=: The token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-channel
+      description: Used to update the settings of a channel.
+      flags:
+        --channel-name=!: The name of the channel to be updated.
+        --channel-storage=: Where channel data is stored.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --retention-period=: How long, in days, message data is kept for the channel.
     - name: batch-put-message
       description: Sends messages to a channel.
       flags:
@@ -263,48 +308,3 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --pipeline-name=!: The name of pipeline for which data reprocessing is canceled.
         --reprocessing-id=!: The ID of the reprocessing task (returned by `StartPipelineReprocessing`).
-    - name: delete-channel
-      description: Deletes the specified channel.
-      flags:
-        --channel-name=!: The name of the channel to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-dataset
-      description: Updates the settings of a dataset.
-      flags:
-        --actions=!: A list of `DatasetAction` objects.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-delivery-rules=: When dataset contents are created, they are delivered to destinations specified here.
-        --dataset-name=!: The name of the dataset to update.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --late-data-rules=: A list of data rules that send notifications to CloudWatch, when data arrives late.
-        --retention-period=: How long, in days, dataset contents are kept for the dataset.
-        --triggers=: A list of `DatasetTrigger` objects.
-        --versioning-configuration=: Optional.
-    - name: delete-dataset-content
-      description: Deletes the content of the specified dataset.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-name=!: The name of the dataset whose content is deleted.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --version-id=: The version of the dataset whose content is deleted.
-    - name: describe-datastore
-      description: Retrieves information about a data store.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --datastore-name=!: The name of the data store
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --include-statistics: If true, additional statistical information about the data store is included in the response.
-        --no-include-statistics: If true, additional statistical information about the data store is included in the response.
-    - name: run-pipeline-activity
-      description: Simulates the results of running a pipeline activity on a message payload.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --payloads=!: The sample message payloads on which the pipeline activity is run.
-        --pipeline-activity=!: The pipeline activity that is run.

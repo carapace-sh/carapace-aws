@@ -1,46 +1,6 @@
 name: route53-recovery-readiness
 description: AWS Route53 Recovery Readiness
 commands:
-    - name: update-resource-set
-      description: Updates a resource set.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-set-name=!: Name of a resource set.
-        --resource-set-type=!: The resource type of the resources in the resource set.
-        --resources=!: A list of resource objects.
-    - name: get-cell-readiness-summary
-      description: Gets readiness for a cell.
-      flags:
-        --cell-name=!: The name of the cell.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The number of objects that you want to return with this call.
-        --next-token=: The token that identifies which batch of results you want to see.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: delete-resource-set
-      description: Deletes a resource set.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-set-name=!: Name of a resource set.
-    - name: get-readiness-check-status
-      description: Gets the readiness status for an individual readiness check.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The number of objects that you want to return with this call.
-        --next-token=: The token that identifies which batch of results you want to see.
-        --page-size=: The size of each page to get in the AWS service call.
-        --readiness-check-name=!: Name of a readiness check.
-        --starting-token=: A token to specify where to start paginating.
     - name: list-cells
       description: Lists the cells for an account.
       flags:
@@ -52,14 +12,58 @@ commands:
         --next-token=: The token that identifies which batch of results you want to see.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: untag-resource
-      description: Removes a tag from a resource.
+    - name: list-rules
+      description: Lists all readiness rules, or lists the readiness rules for a specific resource type.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) for a resource.
-        --tag-keys=!: The keys for tags you add to resources.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The number of objects that you want to return with this call.
+        --next-token=: The token that identifies which batch of results you want to see.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-type=: The resource type that a readiness rule applies to.
+        --starting-token=: A token to specify where to start paginating.
+    - name: delete-cross-account-authorization
+      description: Deletes cross account readiness authorization.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cross-account-authorization=!: The cross-account authorization.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-cell
+      description: Gets information about a cell including cell name, cell Amazon Resource Name (ARN), ARNs of nested cells for this cell, and a list of those cell ARNs with their associated recovery group ARNs.
+      flags:
+        --cell-name=!: The name of the cell.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-resource-sets
+      description: Lists the resource sets in an account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The number of objects that you want to return with this call.
+        --next-token=: The token that identifies which batch of results you want to see.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-readiness-check
+      description: Updates a readiness check.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --readiness-check-name=!: Name of a readiness check.
+        --resource-set-name=!: The name of the resource set to be checked.
+    - name: delete-readiness-check
+      description: Deletes a readiness check.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --readiness-check-name=!: Name of a readiness check.
     - name: create-cell
       description: Creates a cell in an account.
       flags:
@@ -88,17 +92,8 @@ commands:
         --resource-set-type=!: The resource type of the resources in the resource set.
         --resources=!: A list of resource objects in the resource set.
         --tags=: A tag to associate with the parameters for a resource set.
-    - name: get-architecture-recommendations
-      description: Gets recommendations about architecture designs for improving resiliency for an application, based on a recovery group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The number of objects that you want to return with this call.
-        --next-token=: The token that identifies which batch of results you want to see.
-        --recovery-group-name=!: The name of a recovery group.
-    - name: list-cross-account-authorizations
-      description: Lists the cross-account readiness authorizations that are in place for an account.
+    - name: get-readiness-check-status
+      description: Gets the readiness status for an individual readiness check.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -107,7 +102,79 @@ commands:
         --max-results=: The number of objects that you want to return with this call.
         --next-token=: The token that identifies which batch of results you want to see.
         --page-size=: The size of each page to get in the AWS service call.
+        --readiness-check-name=!: Name of a readiness check.
         --starting-token=: A token to specify where to start paginating.
+    - name: create-readiness-check
+      description: Creates a readiness check in an account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --readiness-check-name=!: The name of the readiness check to create.
+        --resource-set-name=!: The name of the resource set to check.
+        --tags=: ""
+    - name: delete-cell
+      description: Delete a cell.
+      flags:
+        --cell-name=!: The name of the cell.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: untag-resource
+      description: Removes a tag from a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) for a resource.
+        --tag-keys=!: The keys for tags you add to resources.
+    - name: update-cell
+      description: Updates a cell to replace the list of nested cells with a new list of nested cells.
+      flags:
+        --cell-name=!: The name of the cell.
+        --cells=!: A list of cell Amazon Resource Names (ARNs), which completely replaces the previous list.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-recovery-group
+      description: Updates a recovery group.
+      flags:
+        --cells=!: A list of cell Amazon Resource Names (ARNs).
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recovery-group-name=!: The name of a recovery group.
+    - name: get-readiness-check
+      description: Gets details about a readiness check.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --readiness-check-name=!: Name of a readiness check.
+    - name: get-resource-set
+      description: Displays the details about a resource set, including a list of the resources in the set.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-set-name=!: Name of a resource set.
+    - name: tag-resource
+      description: Adds a tag to a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) for a resource.
+        --tags=!: ""
+    - name: update-resource-set
+      description: Updates a resource set.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-set-name=!: Name of a resource set.
+        --resource-set-type=!: The resource type of the resources in the resource set.
+        --resources=!: A list of resource objects.
     - name: delete-recovery-group
       description: Deletes a recovery group.
       flags:
@@ -127,38 +194,6 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --recovery-group-name=!: The name of a recovery group.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-recovery-groups
-      description: Lists the recovery groups in an account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The number of objects that you want to return with this call.
-        --next-token=: The token that identifies which batch of results you want to see.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: create-cross-account-authorization
-      description: Creates a cross-account readiness authorization.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cross-account-authorization=!: The cross-account authorization.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-cross-account-authorization
-      description: Deletes cross account readiness authorization.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cross-account-authorization=!: The cross-account authorization.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-readiness-check
-      description: Deletes a readiness check.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --readiness-check-name=!: Name of a readiness check.
     - name: list-readiness-checks
       description: Lists the readiness checks for an account.
       flags:
@@ -170,52 +205,8 @@ commands:
         --next-token=: The token that identifies which batch of results you want to see.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: tag-resource
-      description: Adds a tag to a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) for a resource.
-        --tags=!: ""
-    - name: update-recovery-group
-      description: Updates a recovery group.
-      flags:
-        --cells=!: A list of cell Amazon Resource Names (ARNs).
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recovery-group-name=!: The name of a recovery group.
-    - name: delete-cell
-      description: Delete a cell.
-      flags:
-        --cell-name=!: The name of the cell.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-cell
-      description: Gets information about a cell including cell name, cell Amazon Resource Name (ARN), ARNs of nested cells for this cell, and a list of those cell ARNs with their associated recovery group ARNs.
-      flags:
-        --cell-name=!: The name of the cell.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-readiness-check
-      description: Gets details about a readiness check.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --readiness-check-name=!: Name of a readiness check.
-    - name: get-resource-set
-      description: Displays the details about a resource set, including a list of the resources in the set.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-set-name=!: Name of a resource set.
-    - name: list-rules
-      description: Lists all readiness rules, or lists the readiness rules for a specific resource type.
+    - name: list-recovery-groups
+      description: Lists the recovery groups in an account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -224,7 +215,6 @@ commands:
         --max-results=: The number of objects that you want to return with this call.
         --next-token=: The token that identifies which batch of results you want to see.
         --page-size=: The size of each page to get in the AWS service call.
-        --resource-type=: The resource type that a readiness rule applies to.
         --starting-token=: A token to specify where to start paginating.
     - name: list-tags-for-resources
       description: Lists the tags for a resource.
@@ -233,23 +223,22 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) for a resource.
-    - name: update-readiness-check
-      description: Updates a readiness check.
+    - name: create-cross-account-authorization
+      description: Creates a cross-account readiness authorization.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cross-account-authorization=!: The cross-account authorization.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-architecture-recommendations
+      description: Gets recommendations about architecture designs for improving resiliency for an application, based on a recovery group.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --readiness-check-name=!: Name of a readiness check.
-        --resource-set-name=!: The name of the resource set to be checked.
-    - name: create-readiness-check
-      description: Creates a readiness check in an account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --readiness-check-name=!: The name of the readiness check to create.
-        --resource-set-name=!: The name of the resource set to check.
-        --tags=: ""
+        --max-results=: The number of objects that you want to return with this call.
+        --next-token=: The token that identifies which batch of results you want to see.
+        --recovery-group-name=!: The name of a recovery group.
     - name: get-readiness-check-resource-status
       description: Gets individual readiness status for a readiness check.
       flags:
@@ -270,8 +259,8 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --recovery-group-name=!: The name of a recovery group.
-    - name: list-resource-sets
-      description: Lists the resource sets in an account.
+    - name: list-cross-account-authorizations
+      description: Lists the cross-account readiness authorizations that are in place for an account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -281,11 +270,22 @@ commands:
         --next-token=: The token that identifies which batch of results you want to see.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: update-cell
-      description: Updates a cell to replace the list of nested cells with a new list of nested cells.
+    - name: delete-resource-set
+      description: Deletes a resource set.
       flags:
-        --cell-name=!: The name of the cell.
-        --cells=!: A list of cell Amazon Resource Names (ARNs), which completely replaces the previous list.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-set-name=!: Name of a resource set.
+    - name: get-cell-readiness-summary
+      description: Gets readiness for a cell.
+      flags:
+        --cell-name=!: The name of the cell.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The number of objects that you want to return with this call.
+        --next-token=: The token that identifies which batch of results you want to see.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.

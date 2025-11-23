@@ -1,26 +1,67 @@
 name: accessanalyzer
 description: Access Analyzer
 commands:
-    - name: get-finding-recommendation
-      description: Retrieves information about a finding recommendation for the specified analyzer.
+    - name: get-finding-v2
+      description: Retrieves information about the specified finding.
       flags:
-        --analyzer-arn=!: The [ARN of the analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources) used to generate the finding recommendation.
+        --analyzer-arn=!: The [ARN of the analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources) that generated the finding.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The unique ID for the finding recommendation.
+        --id=!: The ID of the finding to retrieve.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return in the response.
         --next-token=: A token used for pagination of results returned.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: get-analyzer
-      description: Retrieves information about the specified analyzer.
+    - name: get-generated-policy
+      description: Retrieves the policy that was generated using `StartPolicyGeneration`.
       flags:
-        --analyzer-name=!: The name of the analyzer retrieved.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-resource-placeholders: The level of detail that you want to generate.
+        --include-service-level-template: The level of detail that you want to generate.
+        --job-id=!: The `JobId` that is returned by the `StartPolicyGeneration` operation.
+        --no-include-resource-placeholders: The level of detail that you want to generate.
+        --no-include-service-level-template: The level of detail that you want to generate.
+    - name: check-no-public-access
+      description: Checks whether a resource policy can grant public access to the specified resource type.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-document=!: The JSON policy document to evaluate for public access.
+        --resource-type=!: The type of resource to evaluate for public access.
+      completion:
+        flag:
+            resource-type:
+                - AWS::DynamoDB::Table
+                - AWS::DynamoDB::Stream
+                - AWS::EFS::FileSystem
+                - AWS::OpenSearchService::Domain
+                - AWS::Kinesis::Stream
+                - AWS::Kinesis::StreamConsumer
+                - AWS::KMS::Key
+                - AWS::Lambda::Function
+                - AWS::S3::Bucket
+                - AWS::S3::AccessPoint
+                - AWS::S3Express::DirectoryBucket
+                - AWS::S3::Glacier
+                - AWS::S3Outposts::Bucket
+                - AWS::S3Outposts::AccessPoint
+                - AWS::SecretsManager::Secret
+                - AWS::SNS::Topic
+                - AWS::SQS::Queue
+                - AWS::IAM::AssumeRolePolicyDocument
+                - AWS::S3Tables::TableBucket
+                - AWS::ApiGateway::RestApi
+                - AWS::CodeArtifact::Domain
+                - AWS::Backup::BackupVault
+                - AWS::CloudTrail::Dashboard
+                - AWS::CloudTrail::EventDataStore
+                - AWS::S3Tables::Table
+                - AWS::S3Express::AccessPoint
     - name: delete-analyzer
       description: Deletes the specified analyzer.
       flags:
@@ -29,15 +70,50 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A client token.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-archive-rule
-      description: Deletes the specified archive rule.
+    - name: get-access-preview
+      description: Retrieves information about an access preview for the specified analyzer.
       flags:
-        --analyzer-name=!: The name of the analyzer that associated with the archive rule to delete.
+        --access-preview-id=!: The unique ID for the access preview.
+        --analyzer-arn=!: The [ARN of the analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources) used to generate the access preview.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A client token.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --rule-name=!: The name of the rule to delete.
+    - name: get-analyzed-resource
+      description: Retrieves information about a resource that was analyzed.
+      flags:
+        --analyzer-arn=!: The [ARN of the analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources) to retrieve information from.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource to retrieve information about.
+    - name: get-analyzer
+      description: Retrieves information about the specified analyzer.
+      flags:
+        --analyzer-name=!: The name of the analyzer retrieved.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-findings-statistics
+      description: Retrieves a list of aggregated finding statistics for an external access or unused access analyzer.
+      flags:
+        --analyzer-arn=!: The [ARN of the analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources) used to generate the statistics.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: check-access-not-granted
+      description: Checks whether the specified access isn't allowed by a policy.
+      flags:
+        --access=!: An access object containing the permissions that shouldn't be granted by the specified policy.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-document=!: The JSON policy document to use as the content for the policy.
+        --policy-type=!: The type of policy.
+      completion:
+        flag:
+            policy-type:
+                - IDENTITY_POLICY
+                - RESOURCE_POLICY
     - name: generate-finding-recommendation
       description: Creates a recommendation for an unused permissions finding.
       flags:
@@ -46,14 +122,71 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The unique ID for the finding recommendation.
-    - name: get-archive-rule
-      description: Retrieves information about an archive rule.
+    - name: list-analyzed-resources
+      description: Retrieves a list of resources of the specified type that have been analyzed by the specified analyzer.
       flags:
-        --analyzer-name=!: The name of the analyzer to retrieve rules from.
+        --analyzer-arn=!: The [ARN of the analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources) to retrieve a list of analyzed resources from.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --rule-name=!: The name of the rule to retrieve.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: A token used for pagination of results returned.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-type=: The type of resource.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            resource-type:
+                - AWS::S3::Bucket
+                - AWS::IAM::Role
+                - AWS::SQS::Queue
+                - AWS::Lambda::Function
+                - AWS::Lambda::LayerVersion
+                - AWS::KMS::Key
+                - AWS::SecretsManager::Secret
+                - AWS::EFS::FileSystem
+                - AWS::EC2::Snapshot
+                - AWS::ECR::Repository
+                - AWS::RDS::DBSnapshot
+                - AWS::RDS::DBClusterSnapshot
+                - AWS::SNS::Topic
+                - AWS::S3Express::DirectoryBucket
+                - AWS::DynamoDB::Table
+                - AWS::DynamoDB::Stream
+                - AWS::IAM::User
+    - name: list-tags-for-resource
+      description: Retrieves a list of tags applied to the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource to retrieve tags from.
+    - name: start-resource-scan
+      description: Immediately starts a scan of the policies applied to the specified resource.
+      flags:
+        --analyzer-arn=!: The [ARN of the analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources) to use to scan the policies applied to the specified resource.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource to scan.
+        --resource-owner-account=: The Amazon Web Services account ID that owns the resource.
+    - name: update-findings
+      description: Updates the status for the specified findings.
+      flags:
+        --analyzer-arn=!: The [ARN of the analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources) that generated the findings to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A client token.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ids=: The IDs of the findings to update.
+        --resource-arn=: The ARN of the resource identified in the finding.
+        --status=!: The state represents the action to take to update the finding Status.
+      completion:
+        flag:
+            status:
+                - ACTIVE
+                - ARCHIVED
     - name: validate-policy
       description: Requests the validation of a policy and returns a list of findings.
       flags:
@@ -94,6 +227,142 @@ commands:
                 - AWS::S3ObjectLambda::AccessPoint
                 - AWS::IAM::AssumeRolePolicyDocument
                 - AWS::DynamoDB::Table
+    - name: apply-archive-rule
+      description: Retroactively applies the archive rule to existing findings that meet the archive rule criteria.
+      flags:
+        --analyzer-arn=!: The Amazon resource name (ARN) of the analyzer.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A client token.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --rule-name=!: The name of the rule to apply.
+    - name: cancel-policy-generation
+      description: Cancels the requested policy generation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The `JobId` that is returned by the `StartPolicyGeneration` operation.
+    - name: create-access-preview
+      description: Creates an access preview that allows you to preview IAM Access Analyzer findings for your resource before deploying resource permissions.
+      flags:
+        --analyzer-arn=!: The [ARN of the account analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources) used to generate the access preview.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A client token.
+        --configurations=!: Access control configuration for your resource that is used to generate the access preview.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-archive-rule
+      description: Creates an archive rule for the specified analyzer.
+      flags:
+        --analyzer-name=!: The name of the created analyzer.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A client token.
+        --filter=!: The criteria for the rule.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --rule-name=!: The name of the rule to create.
+    - name: delete-archive-rule
+      description: Deletes the specified archive rule.
+      flags:
+        --analyzer-name=!: The name of the analyzer that associated with the archive rule to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A client token.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --rule-name=!: The name of the rule to delete.
+    - name: get-finding-recommendation
+      description: Retrieves information about a finding recommendation for the specified analyzer.
+      flags:
+        --analyzer-arn=!: The [ARN of the analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources) used to generate the finding recommendation.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The unique ID for the finding recommendation.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: A token used for pagination of results returned.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-access-preview-findings
+      description: Retrieves a list of access preview findings generated by the specified access preview.
+      flags:
+        --access-preview-id=!: The unique ID for the access preview.
+        --analyzer-arn=!: The [ARN of the analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources) used to generate the access.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: Criteria to filter the returned findings.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: A token used for pagination of results returned.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-policy-generations
+      description: Lists all of the policy generations requested in the last seven days.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: A token used for pagination of results returned.
+        --page-size=: The size of each page to get in the AWS service call.
+        --principal-arn=: The ARN of the IAM entity (user or role) for which you are generating a policy.
+        --starting-token=: A token to specify where to start paginating.
+    - name: check-no-new-access
+      description: Checks whether new access is allowed for an updated policy when compared to the existing policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --existing-policy-document=!: The JSON policy document to use as the content for the existing policy.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --new-policy-document=!: The JSON policy document to use as the content for the updated policy.
+        --policy-type=!: The type of policy to compare.
+      completion:
+        flag:
+            policy-type:
+                - IDENTITY_POLICY
+                - RESOURCE_POLICY
+    - name: update-archive-rule
+      description: Updates the criteria and values for the specified archive rule.
+      flags:
+        --analyzer-name=!: The name of the analyzer to update the archive rules for.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A client token.
+        --filter=!: A filter to match for the rules to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --rule-name=!: The name of the rule to update.
+    - name: create-analyzer
+      description: Creates an analyzer for your account.
+      flags:
+        --analyzer-name=!: The name of the analyzer to create.
+        --archive-rules=: Specifies the archive rules to add for the analyzer.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A client token.
+        --configuration=: Specifies the configuration of the analyzer.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: An array of key-value pairs to apply to the analyzer.
+        --type=!: The type of analyzer to create.
+      completion:
+        flag:
+            type:
+                - ACCOUNT
+                - ORGANIZATION
+                - ACCOUNT_UNUSED_ACCESS
+                - ORGANIZATION_UNUSED_ACCESS
+                - ACCOUNT_INTERNAL_ACCESS
+                - ORGANIZATION_INTERNAL_ACCESS
+    - name: get-archive-rule
+      description: Retrieves information about an archive rule.
+      flags:
+        --analyzer-name=!: The name of the analyzer to retrieve rules from.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --rule-name=!: The name of the rule to retrieve.
     - name: list-analyzers
       description: Retrieves a list of analyzers.
       flags:
@@ -115,205 +384,6 @@ commands:
                 - ORGANIZATION_UNUSED_ACCESS
                 - ACCOUNT_INTERNAL_ACCESS
                 - ORGANIZATION_INTERNAL_ACCESS
-    - name: get-access-preview
-      description: Retrieves information about an access preview for the specified analyzer.
-      flags:
-        --access-preview-id=!: The unique ID for the access preview.
-        --analyzer-arn=!: The [ARN of the analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources) used to generate the access preview.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-analyzed-resource
-      description: Retrieves information about a resource that was analyzed.
-      flags:
-        --analyzer-arn=!: The [ARN of the analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources) to retrieve information from.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource to retrieve information about.
-    - name: get-finding-v2
-      description: Retrieves information about the specified finding.
-      flags:
-        --analyzer-arn=!: The [ARN of the analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources) that generated the finding.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the finding to retrieve.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in the response.
-        --next-token=: A token used for pagination of results returned.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-access-preview-findings
-      description: Retrieves a list of access preview findings generated by the specified access preview.
-      flags:
-        --access-preview-id=!: The unique ID for the access preview.
-        --analyzer-arn=!: The [ARN of the analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources) used to generate the access.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: Criteria to filter the returned findings.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in the response.
-        --next-token=: A token used for pagination of results returned.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-analyzer
-      description: Modifies the configuration of an existing analyzer.
-      flags:
-        --analyzer-name=!: The name of the analyzer to modify.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration=: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: cancel-policy-generation
-      description: Cancels the requested policy generation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The `JobId` that is returned by the `StartPolicyGeneration` operation.
-    - name: get-generated-policy
-      description: Retrieves the policy that was generated using `StartPolicyGeneration`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --include-resource-placeholders: The level of detail that you want to generate.
-        --include-service-level-template: The level of detail that you want to generate.
-        --job-id=!: The `JobId` that is returned by the `StartPolicyGeneration` operation.
-        --no-include-resource-placeholders: The level of detail that you want to generate.
-        --no-include-service-level-template: The level of detail that you want to generate.
-    - name: list-access-previews
-      description: Retrieves a list of access previews for the specified analyzer.
-      flags:
-        --analyzer-arn=!: The [ARN of the analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources) used to generate the access preview.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in the response.
-        --next-token=: A token used for pagination of results returned.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: start-resource-scan
-      description: Immediately starts a scan of the policies applied to the specified resource.
-      flags:
-        --analyzer-arn=!: The [ARN of the analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources) to use to scan the policies applied to the specified resource.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource to scan.
-        --resource-owner-account=: The Amazon Web Services account ID that owns the resource.
-    - name: untag-resource
-      description: Removes a tag from the specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource to remove the tag from.
-        --tag-keys=!: The key for the tag to add.
-    - name: list-analyzed-resources
-      description: Retrieves a list of resources of the specified type that have been analyzed by the specified analyzer.
-      flags:
-        --analyzer-arn=!: The [ARN of the analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources) to retrieve a list of analyzed resources from.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in the response.
-        --next-token=: A token used for pagination of results returned.
-        --page-size=: The size of each page to get in the AWS service call.
-        --resource-type=: The type of resource.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            resource-type:
-                - AWS::S3::Bucket
-                - AWS::IAM::Role
-                - AWS::SQS::Queue
-                - AWS::Lambda::Function
-                - AWS::Lambda::LayerVersion
-                - AWS::KMS::Key
-                - AWS::SecretsManager::Secret
-                - AWS::EFS::FileSystem
-                - AWS::EC2::Snapshot
-                - AWS::ECR::Repository
-                - AWS::RDS::DBSnapshot
-                - AWS::RDS::DBClusterSnapshot
-                - AWS::SNS::Topic
-                - AWS::S3Express::DirectoryBucket
-                - AWS::DynamoDB::Table
-                - AWS::DynamoDB::Stream
-                - AWS::IAM::User
-    - name: apply-archive-rule
-      description: Retroactively applies the archive rule to existing findings that meet the archive rule criteria.
-      flags:
-        --analyzer-arn=!: The Amazon resource name (ARN) of the analyzer.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A client token.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --rule-name=!: The name of the rule to apply.
-    - name: check-no-new-access
-      description: Checks whether new access is allowed for an updated policy when compared to the existing policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --existing-policy-document=!: The JSON policy document to use as the content for the existing policy.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --new-policy-document=!: The JSON policy document to use as the content for the updated policy.
-        --policy-type=!: The type of policy to compare.
-      completion:
-        flag:
-            policy-type:
-                - IDENTITY_POLICY
-                - RESOURCE_POLICY
-    - name: get-finding
-      description: Retrieves information about the specified finding.
-      flags:
-        --analyzer-arn=!: The [ARN of the analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources) that generated the finding.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the finding to retrieve.
-    - name: start-policy-generation
-      description: Starts the policy generation request.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --cloud-trail-details=: A `CloudTrailDetails` object that contains details about a `Trail` that you want to analyze to generate policies.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-generation-details=!: Contains the ARN of the IAM entity (user or role) for which you are generating a policy.
-    - name: tag-resource
-      description: Adds a tag to the specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource to add the tag to.
-        --tags=!: The tags to add to the resource.
-    - name: update-archive-rule
-      description: Updates the criteria and values for the specified archive rule.
-      flags:
-        --analyzer-name=!: The name of the analyzer to update the archive rules for.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A client token.
-        --filter=!: A filter to match for the rules to update.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --rule-name=!: The name of the rule to update.
-    - name: create-archive-rule
-      description: Creates an archive rule for the specified analyzer.
-      flags:
-        --analyzer-name=!: The name of the created analyzer.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A client token.
-        --filter=!: The criteria for the rule.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --rule-name=!: The name of the rule to create.
     - name: list-findings
       description: Retrieves a list of findings generated by the specified analyzer.
       flags:
@@ -342,9 +412,35 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --sort=: ""
         --starting-token=: A token to specify where to start paginating.
-    - name: list-policy-generations
-      description: Lists all of the policy generations requested in the last seven days.
+    - name: start-policy-generation
+      description: Starts the policy generation request.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --cloud-trail-details=: A `CloudTrailDetails` object that contains details about a `Trail` that you want to analyze to generate policies.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-generation-details=!: Contains the ARN of the IAM entity (user or role) for which you are generating a policy.
+    - name: tag-resource
+      description: Adds a tag to the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource to add the tag to.
+        --tags=!: The tags to add to the resource.
+    - name: untag-resource
+      description: Removes a tag from the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource to remove the tag from.
+        --tag-keys=!: The key for the tag to add.
+    - name: list-access-previews
+      description: Retrieves a list of access previews for the specified analyzer.
+      flags:
+        --analyzer-arn=!: The [ARN of the analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources) used to generate the access preview.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -352,82 +448,7 @@ commands:
         --max-results=: The maximum number of results to return in the response.
         --next-token=: A token used for pagination of results returned.
         --page-size=: The size of each page to get in the AWS service call.
-        --principal-arn=: The ARN of the IAM entity (user or role) for which you are generating a policy.
         --starting-token=: A token to specify where to start paginating.
-    - name: check-no-public-access
-      description: Checks whether a resource policy can grant public access to the specified resource type.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-document=!: The JSON policy document to evaluate for public access.
-        --resource-type=!: The type of resource to evaluate for public access.
-      completion:
-        flag:
-            resource-type:
-                - AWS::DynamoDB::Table
-                - AWS::DynamoDB::Stream
-                - AWS::EFS::FileSystem
-                - AWS::OpenSearchService::Domain
-                - AWS::Kinesis::Stream
-                - AWS::Kinesis::StreamConsumer
-                - AWS::KMS::Key
-                - AWS::Lambda::Function
-                - AWS::S3::Bucket
-                - AWS::S3::AccessPoint
-                - AWS::S3Express::DirectoryBucket
-                - AWS::S3::Glacier
-                - AWS::S3Outposts::Bucket
-                - AWS::S3Outposts::AccessPoint
-                - AWS::SecretsManager::Secret
-                - AWS::SNS::Topic
-                - AWS::SQS::Queue
-                - AWS::IAM::AssumeRolePolicyDocument
-                - AWS::S3Tables::TableBucket
-                - AWS::ApiGateway::RestApi
-                - AWS::CodeArtifact::Domain
-                - AWS::Backup::BackupVault
-                - AWS::CloudTrail::Dashboard
-                - AWS::CloudTrail::EventDataStore
-                - AWS::S3Tables::Table
-                - AWS::S3Express::AccessPoint
-    - name: create-access-preview
-      description: Creates an access preview that allows you to preview IAM Access Analyzer findings for your resource before deploying resource permissions.
-      flags:
-        --analyzer-arn=!: The [ARN of the account analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources) used to generate the access preview.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A client token.
-        --configurations=!: Access control configuration for your resource that is used to generate the access preview.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-analyzer
-      description: Creates an analyzer for your account.
-      flags:
-        --analyzer-name=!: The name of the analyzer to create.
-        --archive-rules=: Specifies the archive rules to add for the analyzer.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A client token.
-        --configuration=: Specifies the configuration of the analyzer.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: An array of key-value pairs to apply to the analyzer.
-        --type=!: The type of analyzer to create.
-      completion:
-        flag:
-            type:
-                - ACCOUNT
-                - ORGANIZATION
-                - ACCOUNT_UNUSED_ACCESS
-                - ORGANIZATION_UNUSED_ACCESS
-                - ACCOUNT_INTERNAL_ACCESS
-                - ORGANIZATION_INTERNAL_ACCESS
-    - name: get-findings-statistics
-      description: Retrieves a list of aggregated finding statistics for an external access or unused access analyzer.
-      flags:
-        --analyzer-arn=!: The [ARN of the analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources) used to generate the statistics.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-archive-rules
       description: Retrieves a list of archive rules created for the specified analyzer.
       flags:
@@ -440,40 +461,19 @@ commands:
         --next-token=: A token used for pagination of results returned.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: Retrieves a list of tags applied to the specified resource.
+    - name: update-analyzer
+      description: Modifies the configuration of an existing analyzer.
       flags:
+        --analyzer-name=!: The name of the analyzer to modify.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-finding
+      description: Retrieves information about the specified finding.
+      flags:
+        --analyzer-arn=!: The [ARN of the analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources) that generated the finding.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource to retrieve tags from.
-    - name: update-findings
-      description: Updates the status for the specified findings.
-      flags:
-        --analyzer-arn=!: The [ARN of the analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources) that generated the findings to update.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A client token.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ids=: The IDs of the findings to update.
-        --resource-arn=: The ARN of the resource identified in the finding.
-        --status=!: The state represents the action to take to update the finding Status.
-      completion:
-        flag:
-            status:
-                - ACTIVE
-                - ARCHIVED
-    - name: check-access-not-granted
-      description: Checks whether the specified access isn't allowed by a policy.
-      flags:
-        --access=!: An access object containing the permissions that shouldn't be granted by the specified policy.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-document=!: The JSON policy document to use as the content for the policy.
-        --policy-type=!: The type of policy.
-      completion:
-        flag:
-            policy-type:
-                - IDENTITY_POLICY
-                - RESOURCE_POLICY
+        --id=!: The ID of the finding to retrieve.

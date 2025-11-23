@@ -1,15 +1,94 @@
 name: swf
 description: Amazon Simple Workflow Service
 commands:
-    - name: poll-for-activity-task
-      description: Used by workers to get an [ActivityTask]() from the specified activity `taskList`.
+    - name: count-pending-decision-tasks
+      description: Returns the estimated number of decision tasks in the specified task list.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain=!: The name of the domain that contains the task lists being polled.
+        --domain=!: The name of the domain that contains the task list.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity=: Identity of the worker making the request, recorded in the `ActivityTaskStarted` event in the workflow history.
-        --task-list=!: Specifies the task list to poll for activity tasks.
+        --task-list=!: The name of the task list.
+    - name: deprecate-workflow-type
+      description: Deprecates the specified *workflow type*.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain=!: The name of the domain in which the workflow type is registered.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workflow-type=!: The workflow type to deprecate.
+    - name: respond-activity-task-completed
+      description: Used by workers to tell the service that the [ActivityTask]() identified by the `taskToken` completed successfully with a `result` (if provided).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --result=: The result of the activity task.
+        --task-token=!: The `taskToken` of the [ActivityTask]().
+    - name: signal-workflow-execution
+      description: Records a `WorkflowExecutionSignaled` event in the workflow execution history and creates a decision task for the workflow execution identified by the given domain, workflowId and runId.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain=!: The name of the domain containing the workflow execution to signal.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input=: Data to attach to the `WorkflowExecutionSignaled` event in the target workflow execution's history.
+        --run-id=: The runId of the workflow execution to signal.
+        --signal-name=!: The name of the signal.
+        --workflow-id=!: The workflowId of the workflow execution to signal.
+    - name: deprecate-activity-type
+      description: Deprecates the specified *activity type*.
+      flags:
+        --activity-type=!: The activity type to deprecate.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain=!: The name of the domain in which the activity type is registered.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-domain
+      description: Returns information about the specified domain, including description and status.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the domain to describe.
+    - name: untag-resource
+      description: Remove a tag from a Amazon SWF domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) for the Amazon SWF domain.
+        --tag-keys=!: The list of tags to remove from the Amazon SWF domain.
+    - name: list-workflow-types
+      description: Returns information about workflow types in the specified domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain=!: The name of the domain in which the workflow types have been registered.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --maximum-page-size=: The maximum number of results that are returned per call.
+        --name=: If specified, lists the workflow type with this name.
+        --next-page-token=: If `NextPageToken` is returned there are more results available.
+        --no-reverse-order: When set to `true`, returns the results in reverse order.
+        --page-size=: The size of each page to get in the AWS service call.
+        --registration-status=!: Specifies the registration status of the workflow types to list.
+        --reverse-order: When set to `true`, returns the results in reverse order.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            registration-status:
+                - REGISTERED
+                - DEPRECATED
+    - name: respond-activity-task-failed
+      description: Used by workers to tell the service that the [ActivityTask]() identified by the `taskToken` has failed with `reason` (if specified).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --details=: Detailed information about the failure.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --reason=: Description of the error that may assist in diagnostics.
+        --task-token=!: The `taskToken` of the [ActivityTask]().
     - name: terminate-workflow-execution
       description: Records a `WorkflowExecutionTerminated` event and forces closure of the workflow execution identified by the given domain, runId, and workflowId.
       flags:
@@ -28,45 +107,27 @@ commands:
                 - TERMINATE
                 - REQUEST_CANCEL
                 - ABANDON
-    - name: deprecate-activity-type
-      description: Deprecates the specified *activity type*.
-      flags:
-        --activity-type=!: The activity type to deprecate.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain=!: The name of the domain in which the activity type is registered.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: deprecate-workflow-type
-      description: Deprecates the specified *workflow type*.
+    - name: undeprecate-workflow-type
+      description: Undeprecates a previously deprecated *workflow type*.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain=!: The name of the domain in which the workflow type is registered.
+        --domain=!: The name of the domain of the deprecated workflow type.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --workflow-type=!: The workflow type to deprecate.
-    - name: tag-resource
-      description: Add a tag to a Amazon SWF domain.
+        --workflow-type=!: The name of the domain of the deprecated workflow type.
+    - name: count-closed-workflow-executions
+      description: Returns the number of closed workflow executions within the given domain that meet the specified filtering criteria.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --close-status-filter=: If specified, only workflow executions that match this close status are counted.
+        --close-time-filter=: If specified, only workflow executions that meet the close time criteria of the filter are counted.
+        --domain=!: The name of the domain containing the workflow executions to count.
+        --execution-filter=: If specified, only workflow executions matching the `WorkflowId` in the filter are counted.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) for the Amazon SWF domain.
-        --tags=!: The list of tags to add to a domain.
-    - name: undeprecate-domain
-      description: Undeprecates a previously deprecated domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the domain of the deprecated workflow type.
-    - name: respond-activity-task-canceled
-      description: Used by workers to tell the service that the [ActivityTask]() identified by the `taskToken` was successfully canceled.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --details=: Information about the cancellation.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --task-token=!: The `taskToken` of the [ActivityTask]().
+        --start-time-filter=: If specified, only workflow executions that meet the start time criteria of the filter are counted.
+        --tag-filter=: If specified, only executions that have a tag that matches the filter are counted.
+        --type-filter=: If specified, indicates the type of the workflow executions to be counted.
     - name: count-pending-activity-tasks
       description: Returns the estimated number of activity tasks in the specified task list.
       flags:
@@ -75,14 +136,6 @@ commands:
         --domain=!: The name of the domain that contains the task list.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --task-list=!: The name of the task list.
-    - name: describe-workflow-type
-      description: Returns information about the specified *workflow type*.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain=!: The name of the domain in which this workflow type is registered.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --workflow-type=!: The workflow type to describe.
     - name: list-closed-workflow-executions
       description: Returns a list of closed workflow executions in the specified domain that meet the filtering criteria.
       flags:
@@ -103,36 +156,36 @@ commands:
         --starting-token=: A token to specify where to start paginating.
         --tag-filter=: If specified, only executions that have the matching tag are listed.
         --type-filter=: If specified, only executions of the type specified in the filter are returned.
-    - name: list-domains
-      description: Returns the list of domains registered in the account.
+    - name: register-workflow-type
+      description: Registers a new *workflow type* and its configuration settings in the specified domain.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --default-child-policy=: If set, specifies the default policy to use for the child workflow executions when a workflow execution of this type is terminated, by calling the [TerminateWorkflowExecution]() action explicitly or due to an expired timeout.
+        --default-execution-start-to-close-timeout=: If set, specifies the default maximum duration for executions of this workflow type.
+        --default-lambda-role=: The default IAM role attached to this workflow type.
+        --default-task-list=: If set, specifies the default task list to use for scheduling decision tasks for executions of this workflow type.
+        --default-task-priority=: The default task priority to assign to the workflow type.
+        --default-task-start-to-close-timeout=: If set, specifies the default maximum duration of decision tasks for this workflow type.
+        --description=: Textual description of the workflow type.
+        --domain=!: The name of the domain in which to register the workflow type.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --maximum-page-size=: The maximum number of results that are returned per call.
-        --next-page-token=: If `NextPageToken` is returned there are more results available.
-        --no-reverse-order: When set to `true`, returns the results in reverse order.
-        --page-size=: The size of each page to get in the AWS service call.
-        --registration-status=!: Specifies the registration status of the domains to list.
-        --reverse-order: When set to `true`, returns the results in reverse order.
-        --starting-token=: A token to specify where to start paginating.
+        --name=!: The name of the workflow type.
+        --workflow-version=!: The version of the workflow type.
       completion:
         flag:
-            registration-status:
-                - REGISTERED
-                - DEPRECATED
-    - name: signal-workflow-execution
-      description: Records a `WorkflowExecutionSignaled` event in the workflow execution history and creates a decision task for the workflow execution identified by the given domain, workflowId and runId.
+            default-child-policy:
+                - TERMINATE
+                - REQUEST_CANCEL
+                - ABANDON
+    - name: respond-activity-task-canceled
+      description: Used by workers to tell the service that the [ActivityTask]() identified by the `taskToken` was successfully canceled.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain=!: The name of the domain containing the workflow execution to signal.
+        --details=: Information about the cancellation.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input=: Data to attach to the `WorkflowExecutionSignaled` event in the target workflow execution's history.
-        --run-id=: The runId of the workflow execution to signal.
-        --signal-name=!: The name of the signal.
-        --workflow-id=!: The workflowId of the workflow execution to signal.
+        --task-token=!: The `taskToken` of the [ActivityTask]().
     - name: start-workflow-execution
       description: Starts an execution of the workflow type in the specified domain using the provided `workflowId` and input data.
       flags:
@@ -156,19 +209,47 @@ commands:
                 - TERMINATE
                 - REQUEST_CANCEL
                 - ABANDON
-    - name: count-closed-workflow-executions
-      description: Returns the number of closed workflow executions within the given domain that meet the specified filtering criteria.
+    - name: get-workflow-execution-history
+      description: Returns the history of the specified workflow execution.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --close-status-filter=: If specified, only workflow executions that match this close status are counted.
-        --close-time-filter=: If specified, only workflow executions that meet the close time criteria of the filter are counted.
-        --domain=!: The name of the domain containing the workflow executions to count.
-        --execution-filter=: If specified, only workflow executions matching the `WorkflowId` in the filter are counted.
+        --domain=!: The name of the domain containing the workflow execution.
+        --execution=!: Specifies the workflow execution for which to return the history.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --start-time-filter=: If specified, only workflow executions that meet the start time criteria of the filter are counted.
-        --tag-filter=: If specified, only executions that have a tag that matches the filter are counted.
-        --type-filter=: If specified, indicates the type of the workflow executions to be counted.
+        --max-items=: The  total number of items to return in the command's output.
+        --maximum-page-size=: The maximum number of results that are returned per call.
+        --next-page-token=: If `NextPageToken` is returned there are more results available.
+        --no-reverse-order: When set to `true`, returns the events in reverse order.
+        --page-size=: The size of each page to get in the AWS service call.
+        --reverse-order: When set to `true`, returns the events in reverse order.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-open-workflow-executions
+      description: Returns a list of open workflow executions in the specified domain that meet the filtering criteria.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain=!: The name of the domain that contains the workflow executions to list.
+        --execution-filter=: If specified, only workflow executions matching the workflow ID specified in the filter are returned.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --maximum-page-size=: The maximum number of results that are returned per call.
+        --next-page-token=: If `NextPageToken` is returned there are more results available.
+        --no-reverse-order: When set to `true`, returns the results in reverse order.
+        --page-size=: The size of each page to get in the AWS service call.
+        --reverse-order: When set to `true`, returns the results in reverse order.
+        --start-time-filter=!: Workflow executions are included in the returned results based on whether their start times are within the range specified by this filter.
+        --starting-token=: A token to specify where to start paginating.
+        --tag-filter=: If specified, only executions that have the matching tag are listed.
+        --type-filter=: If specified, only executions of the type specified in the filter are returned.
+    - name: tag-resource
+      description: Add a tag to a Amazon SWF domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) for the Amazon SWF domain.
+        --tags=!: The list of tags to add to a domain.
     - name: delete-activity-type
       description: Deletes the specified *activity type*.
       flags:
@@ -177,46 +258,22 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain=!: The name of the domain in which the activity type is registered.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: deprecate-domain
-      description: Deprecates the specified domain.
+    - name: delete-workflow-type
+      description: Deletes the specified *workflow type*.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain=!: The name of the domain in which the workflow type is registered.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the domain to deprecate.
-    - name: describe-domain
-      description: Returns information about the specified domain, including description and status.
+        --workflow-type=!: The workflow type to delete.
+    - name: describe-activity-type
+      description: Returns information about the specified activity type.
       flags:
+        --activity-type=!: The activity type to get information about.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain=!: The name of the domain in which the activity type is registered.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the domain to describe.
-    - name: poll-for-decision-task
-      description: Used by deciders to get a [DecisionTask]() from the specified decision `taskList`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain=!: The name of the domain containing the task lists to poll.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity=: Identity of the decider making the request, which is recorded in the DecisionTaskStarted event in the workflow history.
-        --max-items=: The  total number of items to return in the command's output.
-        --maximum-page-size=: The maximum number of results that are returned per call.
-        --next-page-token=: If `NextPageToken` is returned there are more results available.
-        --no-reverse-order: When set to `true`, returns the events in reverse order.
-        --no-start-at-previous-started-event: When set to `true`, returns the events with `eventTimestamp` greater than or equal to `eventTimestamp` of the most recent `DecisionTaskStarted` event.
-        --page-size=: The size of each page to get in the AWS service call.
-        --reverse-order: When set to `true`, returns the events in reverse order.
-        --start-at-previous-started-event: When set to `true`, returns the events with `eventTimestamp` greater than or equal to `eventTimestamp` of the most recent `DecisionTaskStarted` event.
-        --starting-token=: A token to specify where to start paginating.
-        --task-list=!: Specifies the task list to poll for decision tasks.
-    - name: count-pending-decision-tasks
-      description: Returns the estimated number of decision tasks in the specified task list.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain=!: The name of the domain that contains the task list.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --task-list=!: The name of the task list.
     - name: list-activity-types
       description: Returns information about all activities registered in the specified domain that match the specified name and registration status.
       flags:
@@ -238,17 +295,22 @@ commands:
             registration-status:
                 - REGISTERED
                 - DEPRECATED
-    - name: respond-decision-task-completed
-      description: Used by deciders to tell the service that the [DecisionTask]() identified by the `taskToken` has successfully completed.
+    - name: poll-for-activity-task
+      description: Used by workers to get an [ActivityTask]() from the specified activity `taskList`.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --decisions=: The list of decisions (possibly empty) made by the decider while processing this decision task.
-        --execution-context=: User defined context to add to workflow execution.
+        --domain=!: The name of the domain that contains the task lists being polled.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --task-list-schedule-to-start-timeout=: Specifies a timeout (in seconds) for the task list override.
-        --task-list=: The task list to use for the future decision tasks of this workflow execution.
-        --task-token=!: The `taskToken` from the [DecisionTask]().
+        --identity=: Identity of the worker making the request, recorded in the `ActivityTaskStarted` event in the workflow history.
+        --task-list=!: Specifies the task list to poll for activity tasks.
+    - name: undeprecate-domain
+      description: Undeprecates a previously deprecated domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the domain of the deprecated workflow type.
     - name: count-open-workflow-executions
       description: Returns the number of open workflow executions within the given domain that meet the specified filtering criteria.
       flags:
@@ -260,40 +322,66 @@ commands:
         --start-time-filter=!: Specifies the start time criteria that workflow executions must meet in order to be counted.
         --tag-filter=: If specified, only executions that have a tag that matches the filter are counted.
         --type-filter=: Specifies the type of the workflow executions to be counted.
-    - name: delete-workflow-type
-      description: Deletes the specified *workflow type*.
+    - name: deprecate-domain
+      description: Deprecates the specified domain.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain=!: The name of the domain in which the workflow type is registered.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --workflow-type=!: The workflow type to delete.
-    - name: describe-activity-type
-      description: Returns information about the specified activity type.
+        --name=!: The name of the domain to deprecate.
+    - name: describe-workflow-execution
+      description: Returns information about the specified workflow execution including its type and some statistics.
       flags:
-        --activity-type=!: The activity type to get information about.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain=!: The name of the domain in which the activity type is registered.
+        --domain=!: The name of the domain containing the workflow execution.
+        --execution=!: The workflow execution to describe.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-open-workflow-executions
-      description: Returns a list of open workflow executions in the specified domain that meet the filtering criteria.
+    - name: register-domain
+      description: Registers a new domain.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain=!: The name of the domain that contains the workflow executions to list.
-        --execution-filter=: If specified, only workflow executions matching the workflow ID specified in the filter are returned.
+        --description=: A text description of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: Name of the domain to register.
+        --tags=: Tags to be added when registering a domain.
+        --workflow-execution-retention-period-in-days=!: The duration (in days) that records and histories of workflow executions on the domain should be kept by the service.
+    - name: undeprecate-activity-type
+      description: Undeprecates a previously deprecated *activity type*.
+      flags:
+        --activity-type=!: The activity type to undeprecate.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain=!: The name of the domain of the deprecated activity type.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-workflow-type
+      description: Returns information about the specified *workflow type*.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain=!: The name of the domain in which this workflow type is registered.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workflow-type=!: The workflow type to describe.
+    - name: list-domains
+      description: Returns the list of domains registered in the account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --maximum-page-size=: The maximum number of results that are returned per call.
         --next-page-token=: If `NextPageToken` is returned there are more results available.
         --no-reverse-order: When set to `true`, returns the results in reverse order.
         --page-size=: The size of each page to get in the AWS service call.
+        --registration-status=!: Specifies the registration status of the domains to list.
         --reverse-order: When set to `true`, returns the results in reverse order.
-        --start-time-filter=!: Workflow executions are included in the returned results based on whether their start times are within the range specified by this filter.
         --starting-token=: A token to specify where to start paginating.
-        --tag-filter=: If specified, only executions that have the matching tag are listed.
-        --type-filter=: If specified, only executions of the type specified in the filter are returned.
+      completion:
+        flag:
+            registration-status:
+                - REGISTERED
+                - DEPRECATED
     - name: list-tags-for-resource
       description: List tags for a given domain.
       flags:
@@ -301,6 +389,24 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) for the Amazon SWF domain.
+    - name: poll-for-decision-task
+      description: Used by deciders to get a [DecisionTask]() from the specified decision `taskList`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain=!: The name of the domain containing the task lists to poll.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity=: Identity of the decider making the request, which is recorded in the DecisionTaskStarted event in the workflow history.
+        --max-items=: The  total number of items to return in the command's output.
+        --maximum-page-size=: The maximum number of results that are returned per call.
+        --next-page-token=: If `NextPageToken` is returned there are more results available.
+        --no-reverse-order: When set to `true`, returns the events in reverse order.
+        --no-start-at-previous-started-event: When set to `true`, returns the events with `eventTimestamp` greater than or equal to `eventTimestamp` of the most recent `DecisionTaskStarted` event.
+        --page-size=: The size of each page to get in the AWS service call.
+        --reverse-order: When set to `true`, returns the events in reverse order.
+        --start-at-previous-started-event: When set to `true`, returns the events with `eventTimestamp` greater than or equal to `eventTimestamp` of the most recent `DecisionTaskStarted` event.
+        --starting-token=: A token to specify where to start paginating.
+        --task-list=!: Specifies the task list to poll for decision tasks.
     - name: record-activity-task-heartbeat
       description: Used by activity workers to report to the service that the [ActivityTask]() represented by the specified `taskToken` is still making progress.
       flags:
@@ -325,16 +431,6 @@ commands:
         --domain=!: The name of the domain in which this activity is to be registered.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the activity type within the domain.
-    - name: register-domain
-      description: Registers a new domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A text description of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: Name of the domain to register.
-        --tags=: Tags to be added when registering a domain.
-        --workflow-execution-retention-period-in-days=!: The duration (in days) that records and histories of workflow executions on the domain should be kept by the service.
     - name: request-cancel-workflow-execution
       description: Records a `WorkflowExecutionCancelRequested` event in the currently running workflow execution identified by the given domain, workflowId, and runId.
       flags:
@@ -344,110 +440,14 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --run-id=: The runId of the workflow execution to cancel.
         --workflow-id=!: The workflowId of the workflow execution to cancel.
-    - name: list-workflow-types
-      description: Returns information about workflow types in the specified domain.
+    - name: respond-decision-task-completed
+      description: Used by deciders to tell the service that the [DecisionTask]() identified by the `taskToken` has successfully completed.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain=!: The name of the domain in which the workflow types have been registered.
+        --decisions=: The list of decisions (possibly empty) made by the decider while processing this decision task.
+        --execution-context=: User defined context to add to workflow execution.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --maximum-page-size=: The maximum number of results that are returned per call.
-        --name=: If specified, lists the workflow type with this name.
-        --next-page-token=: If `NextPageToken` is returned there are more results available.
-        --no-reverse-order: When set to `true`, returns the results in reverse order.
-        --page-size=: The size of each page to get in the AWS service call.
-        --registration-status=!: Specifies the registration status of the workflow types to list.
-        --reverse-order: When set to `true`, returns the results in reverse order.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            registration-status:
-                - REGISTERED
-                - DEPRECATED
-    - name: register-workflow-type
-      description: Registers a new *workflow type* and its configuration settings in the specified domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --default-child-policy=: If set, specifies the default policy to use for the child workflow executions when a workflow execution of this type is terminated, by calling the [TerminateWorkflowExecution]() action explicitly or due to an expired timeout.
-        --default-execution-start-to-close-timeout=: If set, specifies the default maximum duration for executions of this workflow type.
-        --default-lambda-role=: The default IAM role attached to this workflow type.
-        --default-task-list=: If set, specifies the default task list to use for scheduling decision tasks for executions of this workflow type.
-        --default-task-priority=: The default task priority to assign to the workflow type.
-        --default-task-start-to-close-timeout=: If set, specifies the default maximum duration of decision tasks for this workflow type.
-        --description=: Textual description of the workflow type.
-        --domain=!: The name of the domain in which to register the workflow type.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the workflow type.
-        --workflow-version=!: The version of the workflow type.
-      completion:
-        flag:
-            default-child-policy:
-                - TERMINATE
-                - REQUEST_CANCEL
-                - ABANDON
-    - name: respond-activity-task-completed
-      description: Used by workers to tell the service that the [ActivityTask]() identified by the `taskToken` completed successfully with a `result` (if provided).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --result=: The result of the activity task.
-        --task-token=!: The `taskToken` of the [ActivityTask]().
-    - name: undeprecate-activity-type
-      description: Undeprecates a previously deprecated *activity type*.
-      flags:
-        --activity-type=!: The activity type to undeprecate.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain=!: The name of the domain of the deprecated activity type.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: untag-resource
-      description: Remove a tag from a Amazon SWF domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) for the Amazon SWF domain.
-        --tag-keys=!: The list of tags to remove from the Amazon SWF domain.
-    - name: describe-workflow-execution
-      description: Returns information about the specified workflow execution including its type and some statistics.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain=!: The name of the domain containing the workflow execution.
-        --execution=!: The workflow execution to describe.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: respond-activity-task-failed
-      description: Used by workers to tell the service that the [ActivityTask]() identified by the `taskToken` has failed with `reason` (if specified).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --details=: Detailed information about the failure.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --reason=: Description of the error that may assist in diagnostics.
-        --task-token=!: The `taskToken` of the [ActivityTask]().
-    - name: undeprecate-workflow-type
-      description: Undeprecates a previously deprecated *workflow type*.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain=!: The name of the domain of the deprecated workflow type.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --workflow-type=!: The name of the domain of the deprecated workflow type.
-    - name: get-workflow-execution-history
-      description: Returns the history of the specified workflow execution.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain=!: The name of the domain containing the workflow execution.
-        --execution=!: Specifies the workflow execution for which to return the history.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --maximum-page-size=: The maximum number of results that are returned per call.
-        --next-page-token=: If `NextPageToken` is returned there are more results available.
-        --no-reverse-order: When set to `true`, returns the events in reverse order.
-        --page-size=: The size of each page to get in the AWS service call.
-        --reverse-order: When set to `true`, returns the events in reverse order.
-        --starting-token=: A token to specify where to start paginating.
+        --task-list-schedule-to-start-timeout=: Specifies a timeout (in seconds) for the task list override.
+        --task-list=: The task list to use for the future decision tasks of this workflow execution.
+        --task-token=!: The `taskToken` from the [DecisionTask]().

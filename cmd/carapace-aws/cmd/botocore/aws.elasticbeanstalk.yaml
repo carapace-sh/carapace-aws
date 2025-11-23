@@ -1,174 +1,28 @@
 name: elasticbeanstalk
 description: AWS Elastic Beanstalk
 commands:
-    - name: associate-environment-operations-role
-      description: Add or change the operations role used by an environment.
+    - name: request-environment-info
+      description: Initiates a request to compile the specified type of information of the deployed environment.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-name=!: The name of the environment to which to set the operations role.
+        --environment-id=: The ID of the environment of the requested data.
+        --environment-name=: The name of the environment of the requested data.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --operations-role=!: The Amazon Resource Name (ARN) of an existing IAM role to be used as the environment's operations role.
-    - name: compose-environments
-      description: Create or update a group of environments that each run a separate component of a single application.
+        --info-type=!: The type of information to request.
+      completion:
+        flag:
+            info-type:
+                - tail
+                - bundle
+    - name: update-application
+      description: Updates the specified application to have the specified properties.
       flags:
-        --application-name=: The name of the application to which the specified source bundles belong.
+        --application-name=!: The name of the application to update.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A new description for the application.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-name=: The name of the group to which the target environments belong.
-        --version-labels=: A list of version labels, specifying one or more application source bundles that belong to the target application.
-    - name: create-application-version
-      description: Creates an application version for the specified application.
-      flags:
-        --application-name=!: The name of the application.
-        --auto-create-application: Set to `true` to create an application with the specified name if it doesn't already exist.
-        --build-configuration=: Settings for an AWS CodeBuild build.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description of this application version.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-auto-create-application: Set to `true` to create an application with the specified name if it doesn't already exist.
-        --no-process: Pre-processes and validates the environment manifest (`env.yaml`) and configuration files (`*.config` files in the `.ebextensions` folder) in the source bundle.
-        --process: Pre-processes and validates the environment manifest (`env.yaml`) and configuration files (`*.config` files in the `.ebextensions` folder) in the source bundle.
-        --source-build-information=: Specify a commit in an AWS CodeCommit Git repository to use as the source code for the application version.
-        --source-bundle=: The Amazon S3 bucket and key that identify the location of the source bundle for this version.
-        --tags=: Specifies the tags applied to the application version.
-        --version-label=!: A label identifying this version.
-    - name: describe-configuration-settings
-      description: Returns a description of the settings for the specified configuration set, that is, either a configuration template or the configuration set associated with a running environment.
-      flags:
-        --application-name=!: The application for the environment or configuration template.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-name=: The name of the environment to describe.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --template-name=: The name of the configuration template to describe.
-    - name: swap-environment-cnam-es
-      description: Swaps the CNAMEs of two environments.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --destination-environment-id=: The ID of the destination environment.
-        --destination-environment-name=: The name of the destination environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-environment-id=: The ID of the source environment.
-        --source-environment-name=: The name of the source environment.
-    - name: update-configuration-template
-      description: Updates the specified configuration template to have the specified properties or configuration option values.
-      flags:
-        --application-name=!: The name of the application associated with the configuration template to update.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A new description for the configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --option-settings=: A list of configuration option settings to update with the new specified option value.
-        --options-to-remove=: A list of configuration options to remove from the configuration set.
-        --template-name=!: The name of the configuration template to update.
-    - name: update-tags-for-resource
-      description: Update the list of tags applied to an AWS Elastic Beanstalk resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resouce to be updated.
-        --tags-to-add=: A list of tags to add or update.
-        --tags-to-remove=: A list of tag keys to remove.
-    - name: create-application
-      description: Creates an application that has one configuration template named `default` and no application versions.
-      flags:
-        --application-name=!: The name of the application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: Your description of the application.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-lifecycle-config=: Specifies an application resource lifecycle configuration to prevent your application from accumulating too many versions.
-        --tags=: Specifies the tags applied to the application.
-    - name: describe-application-versions
-      description: Retrieve a list of application versions.
-      flags:
-        --application-name=: Specify an application name to show only application versions for that application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: For a paginated request.
-        --next-token=: For a paginated request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --version-labels=: Specify a version label to show a specific application version.
-    - name: list-available-solution-stacks
-      description: Returns a list of the available solution stack names, with the public version first and then in reverse chronological order.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-platform-versions
-      description: Lists the platform versions available for your account in an AWS Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Criteria for restricting the resulting list of platform versions.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of platform version values returned in one call.
-        --next-token=: For a paginated request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-application-version
-      description: Updates the specified application version to have the specified properties.
-      flags:
-        --application-name=!: The name of the application associated with this version.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A new description for this version.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --version-label=!: The name of the version to update.
-    - name: update-environment
-      description: Updates the environment description, deploys a new application version, updates the configuration settings to an entirely new configuration template, or updates select configuration option values in the running environment.
-      flags:
-        --application-name=: The name of the application with which the environment is associated.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: If this parameter is specified, AWS Elastic Beanstalk updates the description of this environment.
-        --environment-id=: The ID of the environment to update.
-        --environment-name=: The name of the environment to update.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-name=: The name of the group to which the target environment belongs.
-        --option-settings=: If specified, AWS Elastic Beanstalk updates the configuration set associated with the running environment and sets the specified configuration options to the requested value.
-        --options-to-remove=: A list of custom user-defined configuration options to remove from the configuration set for this environment.
-        --platform-arn=: The ARN of the platform, if used.
-        --solution-stack-name=: This specifies the platform version that the environment will run after the environment is updated.
-        --template-name=: If this parameter is specified, AWS Elastic Beanstalk deploys this configuration template to the environment.
-        --tier=: This specifies the tier to use to update the environment.
-        --version-label=: If this parameter is specified, AWS Elastic Beanstalk deploys the named application version to the environment.
-    - name: describe-applications
-      description: Returns the descriptions of existing applications.
-      flags:
-        --application-names=: If specified, AWS Elastic Beanstalk restricts the returned descriptions to only include those with the specified names.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-environment-managed-action-history
-      description: Lists an environment's completed and failed managed actions.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=: The environment ID of the target environment.
-        --environment-name=: The name of the target environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The maximum number of items to return for a single request.
-        --next-token=: The pagination token returned by a previous request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-application-resource-lifecycle
-      description: Modifies lifecycle settings for an application.
-      flags:
-        --application-name=!: The name of the application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-lifecycle-config=!: The lifecycle configuration.
     - name: apply-environment-managed-action
       description: Applies a scheduled managed action immediately.
       flags:
@@ -178,81 +32,24 @@ commands:
         --environment-id=: The environment ID of the target environment.
         --environment-name=: The name of the target environment.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-configuration-template
-      description: Creates an AWS Elastic Beanstalk configuration template, associated with a specific Elastic Beanstalk application.
+    - name: delete-application-version
+      description: Deletes the specified version from the specified application.
       flags:
-        --application-name=!: The name of the Elastic Beanstalk application to associate with this configuration template.
+        --application-name=!: The name of the application to which the version belongs.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: An optional description for this configuration.
-        --environment-id=: The ID of an environment whose settings you want to use to create the configuration template.
+        --delete-source-bundle: Set to `true` to delete the source bundle from your storage bucket.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --option-settings=: Option values for the Elastic Beanstalk configuration, such as the instance type.
-        --platform-arn=: The Amazon Resource Name (ARN) of the custom platform.
-        --solution-stack-name=: The name of an Elastic Beanstalk solution stack (platform version) that this configuration uses.
-        --source-configuration=: An Elastic Beanstalk configuration template to base this one on.
-        --tags=: Specifies the tags applied to the configuration template.
-        --template-name=!: The name of the configuration template.
-    - name: delete-application
-      description: Deletes the specified application along with all associated versions and configurations.
+        --no-delete-source-bundle: Set to `true` to delete the source bundle from your storage bucket.
+        --version-label=!: The label of the version to delete.
+    - name: delete-configuration-template
+      description: Deletes the specified configuration template.
       flags:
-        --application-name=!: The name of the application to delete.
+        --application-name=!: The name of the application to delete the configuration template from.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-terminate-env-by-force: When set to true, running environments will be terminated before deleting the application.
-        --terminate-env-by-force: When set to true, running environments will be terminated before deleting the application.
-    - name: delete-environment-configuration
-      description: Deletes the draft configuration associated with the running environment.
-      flags:
-        --application-name=!: The name of the application the environment is associated with.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-name=!: The name of the environment to delete the draft configuration from.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-platform-version
-      description: Deletes the specified version of a custom platform.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --platform-arn=: The ARN of the version of the custom platform.
-    - name: describe-environment-health
-      description: Returns information about the overall health of the specified environment.
-      flags:
-        --attribute-names=: Specify the response elements to return.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=: Specify the environment by ID.
-        --environment-name=: Specify the environment by name.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-environments
-      description: Returns descriptions for existing environments.
-      flags:
-        --application-name=: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that are associated with this application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-ids=: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that have the specified IDs.
-        --environment-names=: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that have the specified names.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --include-deleted: 'Indicates whether to include deleted environments:'
-        --included-deleted-back-to=: If specified when `IncludeDeleted` is set to `true`, then environments deleted after this date are displayed.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: For a paginated request.
-        --next-token=: For a paginated request.
-        --no-include-deleted: 'Indicates whether to include deleted environments:'
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --version-label=: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that are associated with this application version.
-    - name: list-platform-branches
-      description: Lists the platform branches available for your account in an AWS Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Criteria for restricting the resulting list of platform branches.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-records=: The maximum number of platform branch values returned in one call.
-        --next-token=: For a paginated request.
+        --template-name=!: The name of the configuration template to delete.
     - name: describe-events
       description: Returns list of event descriptions matching criteria up to the last 6 weeks.
       flags:
@@ -283,20 +80,11 @@ commands:
                 - WARN
                 - ERROR
                 - FATAL
-    - name: describe-platform-version
-      description: Describes a platform version.
+    - name: list-available-solution-stacks
+      description: Returns a list of the available solution stack names, with the public version first and then in reverse chronological order.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --platform-arn=: The ARN of the platform version.
-    - name: update-application
-      description: Updates the specified application to have the specified properties.
-      flags:
-        --application-name=!: The name of the application to update.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A new description for the application.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: abort-environment-update
       description: Cancels in-progress environment configuration update or application version deployment.
@@ -305,74 +93,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --environment-id=: This specifies the ID of the environment with the in-progress update that you want to cancel.
         --environment-name=: This specifies the name of the environment with the in-progress update that you want to cancel.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: check-dns-availability
-      description: Checks if the specified CNAME is available.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cname-prefix=!: The prefix used when this CNAME is reserved.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-application-version
-      description: Deletes the specified version from the specified application.
-      flags:
-        --application-name=!: The name of the application to which the version belongs.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --delete-source-bundle: Set to `true` to delete the source bundle from your storage bucket.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-delete-source-bundle: Set to `true` to delete the source bundle from your storage bucket.
-        --version-label=!: The label of the version to delete.
-    - name: describe-configuration-options
-      description: Describes the configuration options that are used in a particular configuration template or environment, or that a specified solution stack defines.
-      flags:
-        --application-name=: The name of the application associated with the configuration template or environment.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-name=: The name of the environment whose configuration options you want to describe.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --options=: If specified, restricts the descriptions to only the specified options.
-        --platform-arn=: The ARN of the custom platform.
-        --solution-stack-name=: The name of the solution stack whose configuration options you want to describe.
-        --template-name=: The name of the configuration template whose configuration options you want to describe.
-    - name: describe-environment-managed-actions
-      description: Lists an environment's upcoming and in-progress managed actions.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=: The environment ID of the target environment.
-        --environment-name=: The name of the target environment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --status=: To show only actions with a particular status, specify a status.
-      completion:
-        flag:
-            status:
-                - Scheduled
-                - Pending
-                - Running
-                - Unknown
-    - name: describe-environment-resources
-      description: Returns AWS resources for this environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=: The ID of the environment to retrieve AWS resource usage data.
-        --environment-name=: The name of the environment to retrieve AWS resource usage data.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: disassociate-environment-operations-role
-      description: Disassociate the operations role from an environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-name=!: The name of the environment from which to disassociate the operations role.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: restart-app-server
-      description: Causes the environment to restart the application container server running on each Amazon EC2 instance.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=: The ID of the environment to restart the server for.
-        --environment-name=: The name of the environment to restart the server for.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: create-environment
       description: Launches an AWS Elastic Beanstalk environment for the specified application using the specified configuration.
@@ -394,12 +114,22 @@ commands:
         --template-name=: The name of the Elastic Beanstalk configuration template to use with the environment.
         --tier=: Specifies the tier to use in creating this environment.
         --version-label=: The name of the application version to deploy.
-    - name: create-storage-location
-      description: Creates a bucket in Amazon S3 to store application versions, logs, and other files used by Elastic Beanstalk environments.
+    - name: describe-environment-managed-actions
+      description: Lists an environment's upcoming and in-progress managed actions.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=: The environment ID of the target environment.
+        --environment-name=: The name of the target environment.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --status=: To show only actions with a particular status, specify a status.
+      completion:
+        flag:
+            status:
+                - Scheduled
+                - Pending
+                - Running
+                - Unknown
     - name: describe-instances-health
       description: Retrieves detailed information about the health of instances in your AWS Elastic Beanstalk.
       flags:
@@ -410,57 +140,82 @@ commands:
         --environment-name=: Specify the AWS Elastic Beanstalk environment by name.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --next-token=: Specify the pagination token returned by a previous call.
-    - name: list-tags-for-resource
-      description: Return the tags applied to an AWS Elastic Beanstalk resource.
+    - name: describe-platform-version
+      description: Describes a platform version.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resouce for which a tag list is requested.
-    - name: request-environment-info
-      description: Initiates a request to compile the specified type of information of the deployed environment.
+        --platform-arn=: The ARN of the platform version.
+    - name: swap-environment-cnam-es
+      description: Swaps the CNAMEs of two environments.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=: The ID of the environment of the requested data.
-        --environment-name=: The name of the environment of the requested data.
+        --destination-environment-id=: The ID of the destination environment.
+        --destination-environment-name=: The name of the destination environment.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --info-type=!: The type of information to request.
-      completion:
-        flag:
-            info-type:
-                - tail
-                - bundle
-    - name: terminate-environment
-      description: Terminates the specified environment.
+        --source-environment-id=: The ID of the source environment.
+        --source-environment-name=: The name of the source environment.
+    - name: update-application-resource-lifecycle
+      description: Modifies lifecycle settings for an application.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=: The ID of the environment to terminate.
-        --environment-name=: The name of the environment to terminate.
-        --force-terminate: Terminates the target environment even if another environment in the same group is dependent on it.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-force-terminate: Terminates the target environment even if another environment in the same group is dependent on it.
-        --no-terminate-resources: 'Indicates whether the associated AWS resources should shut down when the environment is terminated:'
-        --terminate-resources: 'Indicates whether the associated AWS resources should shut down when the environment is terminated:'
-    - name: validate-configuration-settings
-      description: Takes a set of configuration settings and either a configuration template or environment, and determines whether those values are valid.
-      flags:
-        --application-name=!: The name of the application that the configuration template or environment belongs to.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-name=: The name of the environment to validate the settings against.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --option-settings=!: A list of the options and desired values to evaluate.
-        --template-name=: The name of the configuration template to validate the settings against.
-    - name: delete-configuration-template
-      description: Deletes the specified configuration template.
-      flags:
-        --application-name=!: The name of the application to delete the configuration template from.
+        --application-name=!: The name of the application.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --template-name=!: The name of the configuration template to delete.
+        --resource-lifecycle-config=!: The lifecycle configuration.
+    - name: update-environment
+      description: Updates the environment description, deploys a new application version, updates the configuration settings to an entirely new configuration template, or updates select configuration option values in the running environment.
+      flags:
+        --application-name=: The name of the application with which the environment is associated.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: If this parameter is specified, AWS Elastic Beanstalk updates the description of this environment.
+        --environment-id=: The ID of the environment to update.
+        --environment-name=: The name of the environment to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-name=: The name of the group to which the target environment belongs.
+        --option-settings=: If specified, AWS Elastic Beanstalk updates the configuration set associated with the running environment and sets the specified configuration options to the requested value.
+        --options-to-remove=: A list of custom user-defined configuration options to remove from the configuration set for this environment.
+        --platform-arn=: The ARN of the platform, if used.
+        --solution-stack-name=: This specifies the platform version that the environment will run after the environment is updated.
+        --template-name=: If this parameter is specified, AWS Elastic Beanstalk deploys this configuration template to the environment.
+        --tier=: This specifies the tier to use to update the environment.
+        --version-label=: If this parameter is specified, AWS Elastic Beanstalk deploys the named application version to the environment.
+    - name: associate-environment-operations-role
+      description: Add or change the operations role used by an environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-name=!: The name of the environment to which to set the operations role.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --operations-role=!: The Amazon Resource Name (ARN) of an existing IAM role to be used as the environment's operations role.
+    - name: create-application
+      description: Creates an application that has one configuration template named `default` and no application versions.
+      flags:
+        --application-name=!: The name of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: Your description of the application.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-lifecycle-config=: Specifies an application resource lifecycle configuration to prevent your application from accumulating too many versions.
+        --tags=: Specifies the tags applied to the application.
+    - name: create-configuration-template
+      description: Creates an AWS Elastic Beanstalk configuration template, associated with a specific Elastic Beanstalk application.
+      flags:
+        --application-name=!: The name of the Elastic Beanstalk application to associate with this configuration template.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: An optional description for this configuration.
+        --environment-id=: The ID of an environment whose settings you want to use to create the configuration template.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --option-settings=: Option values for the Elastic Beanstalk configuration, such as the instance type.
+        --platform-arn=: The Amazon Resource Name (ARN) of the custom platform.
+        --solution-stack-name=: The name of an Elastic Beanstalk solution stack (platform version) that this configuration uses.
+        --source-configuration=: An Elastic Beanstalk configuration template to base this one on.
+        --tags=: Specifies the tags applied to the configuration template.
+        --template-name=!: The name of the configuration template.
     - name: create-platform-version
       description: Create a new version of your custom platform.
       flags:
@@ -479,14 +234,75 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: rebuild-environment
-      description: 'Deletes and recreates all of the AWS resources (for example: the Auto Scaling group, load balancer, etc.) for a specified environment and forces a restart.'
+    - name: describe-configuration-options
+      description: Describes the configuration options that are used in a particular configuration template or environment, or that a specified solution stack defines.
+      flags:
+        --application-name=: The name of the application associated with the configuration template or environment.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-name=: The name of the environment whose configuration options you want to describe.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --options=: If specified, restricts the descriptions to only the specified options.
+        --platform-arn=: The ARN of the custom platform.
+        --solution-stack-name=: The name of the solution stack whose configuration options you want to describe.
+        --template-name=: The name of the configuration template whose configuration options you want to describe.
+    - name: describe-environment-health
+      description: Returns information about the overall health of the specified environment.
+      flags:
+        --attribute-names=: Specify the response elements to return.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=: Specify the environment by ID.
+        --environment-name=: Specify the environment by name.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-tags-for-resource
+      description: Return the tags applied to an AWS Elastic Beanstalk resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=: The ID of the environment to rebuild.
-        --environment-name=: The name of the environment to rebuild.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resouce for which a tag list is requested.
+    - name: create-application-version
+      description: Creates an application version for the specified application.
+      flags:
+        --application-name=!: The name of the application.
+        --auto-create-application: Set to `true` to create an application with the specified name if it doesn't already exist.
+        --build-configuration=: Settings for an AWS CodeBuild build.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of this application version.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-auto-create-application: Set to `true` to create an application with the specified name if it doesn't already exist.
+        --no-process: Pre-processes and validates the environment manifest (`env.yaml`) and configuration files (`*.config` files in the `.ebextensions` folder) in the source bundle.
+        --process: Pre-processes and validates the environment manifest (`env.yaml`) and configuration files (`*.config` files in the `.ebextensions` folder) in the source bundle.
+        --source-build-information=: Specify a commit in an AWS CodeCommit Git repository to use as the source code for the application version.
+        --source-bundle=: The Amazon S3 bucket and key that identify the location of the source bundle for this version.
+        --tags=: Specifies the tags applied to the application version.
+        --version-label=!: A label identifying this version.
+    - name: create-storage-location
+      description: Creates a bucket in Amazon S3 to store application versions, logs, and other files used by Elastic Beanstalk environments.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-environments
+      description: Returns descriptions for existing environments.
+      flags:
+        --application-name=: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that are associated with this application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-ids=: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that have the specified IDs.
+        --environment-names=: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that have the specified names.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-deleted: 'Indicates whether to include deleted environments:'
+        --included-deleted-back-to=: If specified when `IncludeDeleted` is set to `true`, then environments deleted after this date are displayed.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: For a paginated request.
+        --next-token=: For a paginated request.
+        --no-include-deleted: 'Indicates whether to include deleted environments:'
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --version-label=: If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that are associated with this application version.
     - name: retrieve-environment-info
       description: Retrieves the compiled information from a [RequestEnvironmentInfo]() request.
       flags:
@@ -501,6 +317,190 @@ commands:
             info-type:
                 - tail
                 - bundle
+    - name: terminate-environment
+      description: Terminates the specified environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=: The ID of the environment to terminate.
+        --environment-name=: The name of the environment to terminate.
+        --force-terminate: Terminates the target environment even if another environment in the same group is dependent on it.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-force-terminate: Terminates the target environment even if another environment in the same group is dependent on it.
+        --no-terminate-resources: 'Indicates whether the associated AWS resources should shut down when the environment is terminated:'
+        --terminate-resources: 'Indicates whether the associated AWS resources should shut down when the environment is terminated:'
+    - name: update-tags-for-resource
+      description: Update the list of tags applied to an AWS Elastic Beanstalk resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resouce to be updated.
+        --tags-to-add=: A list of tags to add or update.
+        --tags-to-remove=: A list of tag keys to remove.
+    - name: validate-configuration-settings
+      description: Takes a set of configuration settings and either a configuration template or environment, and determines whether those values are valid.
+      flags:
+        --application-name=!: The name of the application that the configuration template or environment belongs to.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-name=: The name of the environment to validate the settings against.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --option-settings=!: A list of the options and desired values to evaluate.
+        --template-name=: The name of the configuration template to validate the settings against.
+    - name: compose-environments
+      description: Create or update a group of environments that each run a separate component of a single application.
+      flags:
+        --application-name=: The name of the application to which the specified source bundles belong.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-name=: The name of the group to which the target environments belong.
+        --version-labels=: A list of version labels, specifying one or more application source bundles that belong to the target application.
+    - name: delete-platform-version
+      description: Deletes the specified version of a custom platform.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --platform-arn=: The ARN of the version of the custom platform.
+    - name: describe-application-versions
+      description: Retrieve a list of application versions.
+      flags:
+        --application-name=: Specify an application name to show only application versions for that application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: For a paginated request.
+        --next-token=: For a paginated request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --version-labels=: Specify a version label to show a specific application version.
+    - name: describe-environment-resources
+      description: Returns AWS resources for this environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=: The ID of the environment to retrieve AWS resource usage data.
+        --environment-name=: The name of the environment to retrieve AWS resource usage data.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-platform-branches
+      description: Lists the platform branches available for your account in an AWS Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Criteria for restricting the resulting list of platform branches.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-records=: The maximum number of platform branch values returned in one call.
+        --next-token=: For a paginated request.
+    - name: restart-app-server
+      description: Causes the environment to restart the application container server running on each Amazon EC2 instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=: The ID of the environment to restart the server for.
+        --environment-name=: The name of the environment to restart the server for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-application-version
+      description: Updates the specified application version to have the specified properties.
+      flags:
+        --application-name=!: The name of the application associated with this version.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A new description for this version.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --version-label=!: The name of the version to update.
+    - name: check-dns-availability
+      description: Checks if the specified CNAME is available.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cname-prefix=!: The prefix used when this CNAME is reserved.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-application
+      description: Deletes the specified application along with all associated versions and configurations.
+      flags:
+        --application-name=!: The name of the application to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-terminate-env-by-force: When set to true, running environments will be terminated before deleting the application.
+        --terminate-env-by-force: When set to true, running environments will be terminated before deleting the application.
+    - name: delete-environment-configuration
+      description: Deletes the draft configuration associated with the running environment.
+      flags:
+        --application-name=!: The name of the application the environment is associated with.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-name=!: The name of the environment to delete the draft configuration from.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-applications
+      description: Returns the descriptions of existing applications.
+      flags:
+        --application-names=: If specified, AWS Elastic Beanstalk restricts the returned descriptions to only include those with the specified names.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-configuration-settings
+      description: Returns a description of the settings for the specified configuration set, that is, either a configuration template or the configuration set associated with a running environment.
+      flags:
+        --application-name=!: The application for the environment or configuration template.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-name=: The name of the environment to describe.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --template-name=: The name of the configuration template to describe.
+    - name: describe-environment-managed-action-history
+      description: Lists an environment's completed and failed managed actions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=: The environment ID of the target environment.
+        --environment-name=: The name of the target environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The maximum number of items to return for a single request.
+        --next-token=: The pagination token returned by a previous request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: disassociate-environment-operations-role
+      description: Disassociate the operations role from an environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-name=!: The name of the environment from which to disassociate the operations role.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: rebuild-environment
+      description: 'Deletes and recreates all of the AWS resources (for example: the Auto Scaling group, load balancer, etc.) for a specified environment and forces a restart.'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=: The ID of the environment to rebuild.
+        --environment-name=: The name of the environment to rebuild.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-platform-versions
+      description: Lists the platform versions available for your account in an AWS Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Criteria for restricting the resulting list of platform versions.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: The maximum number of platform version values returned in one call.
+        --next-token=: For a paginated request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-configuration-template
+      description: Updates the specified configuration template to have the specified properties or configuration option values.
+      flags:
+        --application-name=!: The name of the application associated with the configuration template to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A new description for the configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --option-settings=: A list of configuration option settings to update with the new specified option value.
+        --options-to-remove=: A list of configuration options to remove from the configuration set.
+        --template-name=!: The name of the configuration template to update.
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:

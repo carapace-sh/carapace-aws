@@ -1,6 +1,59 @@
 name: bedrock-runtime
 description: Amazon Bedrock Runtime
 commands:
+    - name: get-async-invoke
+      description: Retrieve information about an asynchronous invocation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --invocation-arn=!: The invocation's ARN.
+    - name: list-async-invokes
+      description: Lists asynchronous invocations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of invocations to return in one page of results.
+        --next-token=: Specify the pagination token from a previous request to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort-by=: How to sort the response.
+        --sort-order=: The sorting order for the response.
+        --starting-token=: A token to specify where to start paginating.
+        --status-equals=: Filter invocations by status.
+        --submit-time-after=: Include invocations submitted after this time.
+        --submit-time-before=: Include invocations submitted before this time.
+      completion:
+        flag:
+            sort-by:
+                - SubmissionTime
+            sort-order:
+                - Ascending
+                - Descending
+            status-equals:
+                - InProgress
+                - Completed
+                - Failed
+    - name: apply-guardrail
+      description: The action to apply a guardrail.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content=!: The content details used in the request to apply the guardrail.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --guardrail-identifier=!: The guardrail identifier used in the request to apply the guardrail.
+        --guardrail-version=!: The guardrail version used in the request to apply the guardrail.
+        --output-scope=: Specifies the scope of the output that you get in the response.
+        --source=!: The source of data used in the request to apply the guardrail.
+      completion:
+        flag:
+            output-scope:
+                - INTERVENTIONS
+                - FULL
+            source:
+                - INPUT
+                - OUTPUT
     - name: converse
       description: Sends messages to the specified Amazon Bedrock model.
       flags:
@@ -54,41 +107,6 @@ commands:
                 - ENABLED_FULL
         positional:
             - - $files
-    - name: invoke-model-with-bidirectional-stream
-      description: Invoke the specified Amazon Bedrock model to run inference using the bidirectional stream.
-      flags:
-        --body=!: The prompt and inference parameters in the format specified in the `BidirectionalInputPayloadPart` in the header.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-id=!: The model ID or ARN of the model ID to use.
-    - name: list-async-invokes
-      description: Lists asynchronous invocations.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of invocations to return in one page of results.
-        --next-token=: Specify the pagination token from a previous request to retrieve the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --sort-by=: How to sort the response.
-        --sort-order=: The sorting order for the response.
-        --starting-token=: A token to specify where to start paginating.
-        --status-equals=: Filter invocations by status.
-        --submit-time-after=: Include invocations submitted after this time.
-        --submit-time-before=: Include invocations submitted before this time.
-      completion:
-        flag:
-            sort-by:
-                - SubmissionTime
-            sort-order:
-                - Ascending
-                - Descending
-            status-equals:
-                - InProgress
-                - Completed
-                - Failed
     - name: start-async-invoke
       description: Starts an asynchronous invocation.
       flags:
@@ -100,75 +118,3 @@ commands:
         --model-input=!: Input to send to the model.
         --output-data-config=!: Where to store the output.
         --tags=: Tags to apply to the invocation.
-    - name: apply-guardrail
-      description: The action to apply a guardrail.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content=!: The content details used in the request to apply the guardrail.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --guardrail-identifier=!: The guardrail identifier used in the request to apply the guardrail.
-        --guardrail-version=!: The guardrail version used in the request to apply the guardrail.
-        --output-scope=: Specifies the scope of the output that you get in the response.
-        --source=!: The source of data used in the request to apply the guardrail.
-      completion:
-        flag:
-            output-scope:
-                - INTERVENTIONS
-                - FULL
-            source:
-                - INPUT
-                - OUTPUT
-    - name: converse-stream
-      description: Sends messages to the specified Amazon Bedrock model and returns the response in a stream.
-      flags:
-        --additional-model-request-fields=: Additional inference parameters that the model supports, beyond the base set of inference parameters that `Converse` and `ConverseStream` support in the `inferenceConfig` field.
-        --additional-model-response-field-paths=: Additional model parameters field paths to return in the response.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --guardrail-config=: Configuration information for a guardrail that you want to use in the request.
-        --inference-config=: Inference parameters to pass to the model.
-        --messages=: The messages that you want to send to the model.
-        --model-id=!: Specifies the model or throughput with which to run inference, or the prompt resource to use in inference.
-        --performance-config=: Model performance settings for the request.
-        --prompt-variables=: Contains a map of variables in a prompt from Prompt management to objects containing the values to fill in for them when running model invocation.
-        --request-metadata=: Key-value pairs that you can use to filter invocation logs.
-        --service-tier=: Specifies the processing tier configuration used for serving the request.
-        --system=: A prompt that provides instructions or context to the model about the task it should perform, or the persona it should adopt during the conversation.
-        --tool-config=: Configuration information for the tools that the model can use when generating a response.
-    - name: get-async-invoke
-      description: Retrieve information about an asynchronous invocation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --invocation-arn=!: The invocation's ARN.
-    - name: invoke-model-with-response-stream
-      description: Invoke the specified Amazon Bedrock model to run inference using the prompt and inference parameters provided in the request body.
-      flags:
-        --accept=: The desired MIME type of the inference body in the response.
-        --body=: The prompt and inference parameters in the format specified in the `contentType` in the header.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-type=: The MIME type of the input data in the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --guardrail-identifier=: The unique identifier of the guardrail that you want to use.
-        --guardrail-version=: The version number for the guardrail.
-        --model-id=!: The unique identifier of the model to invoke to run inference.
-        --performance-config-latency=: Model performance settings for the request.
-        --service-tier=: Specifies the processing tier type used for serving the request.
-        --trace=: Specifies whether to enable or disable the Bedrock trace.
-      completion:
-        flag:
-            performance-config-latency:
-                - standard
-                - optimized
-            service-tier:
-                - priority
-                - default
-                - flex
-            trace:
-                - ENABLED
-                - DISABLED
-                - ENABLED_FULL

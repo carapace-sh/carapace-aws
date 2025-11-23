@@ -1,12 +1,64 @@
 name: organizations
 description: AWS Organizations
 commands:
-    - name: describe-organization
-      description: Retrieves information about the organization that the user's account belongs to.
+    - name: create-account
+      description: Creates an Amazon Web Services account that is automatically a member of the organization whose credentials made the request.
+      flags:
+        --account-name=!: The friendly name of the member account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --email=!: The email address of the owner to assign to the new member account.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --iam-user-access-to-billing=: If set to `ALLOW`, the new account enables IAM users to access account billing information *if* they have the required permissions.
+        --role-name=: The name of an IAM role that Organizations automatically preconfigures in the new member account.
+        --tags=: A list of tags that you want to attach to the newly created account.
+      completion:
+        flag:
+            iam-user-access-to-billing:
+                - ALLOW
+                - DENY
+    - name: create-policy
+      description: Creates a policy of a specified type that you can attach to a root, an organizational unit (OU), or an individual Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content=!: The policy text content to add to the new policy.
+        --description=!: An optional description to assign to the policy.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The friendly name to assign to the policy.
+        --tags=: A list of tags that you want to attach to the newly created policy.
+        --type=!: The type of policy to create.
+      completion:
+        flag:
+            type:
+                - SERVICE_CONTROL_POLICY
+                - RESOURCE_CONTROL_POLICY
+                - TAG_POLICY
+                - BACKUP_POLICY
+                - AISERVICES_OPT_OUT_POLICY
+                - CHATBOT_POLICY
+                - DECLARATIVE_POLICY_EC2
+                - SECURITYHUB_POLICY
+                - INSPECTOR_POLICY
+                - UPGRADE_ROLLOUT_POLICY
+    - name: delete-resource-policy
+      description: Deletes the resource policy from your organization.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-accounts-for-parent
+      description: Lists the accounts in an organization that are contained by the specified target root or organizational unit (OU).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return in the response.
+        --next-token=: The parameter for receiving additional results if you receive a `NextToken` response in a previous request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --parent-id=!: The unique identifier (ID) for the parent root or organization unit (OU) whose accounts you want to list.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-tags-for-resource
       description: Lists tags that are attached to the specified resource.
       flags:
@@ -17,61 +69,26 @@ commands:
         --next-token=: The parameter for receiving additional results if you receive a `NextToken` response in a previous request.
         --resource-id=!: The ID of the resource with the tags to list.
         --starting-token=: A token to specify where to start paginating.
-    - name: create-gov-cloud-account
-      description: 'This action is available if all of the following are true:'
+    - name: move-account
+      description: Moves an account from its current source parent root or organizational unit (OU) to the specified destination parent root or OU.
       flags:
-        --account-name=!: The friendly name of the member account.
+        --account-id=!: ID for the account that you want to move.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --email=!: Specifies the email address of the owner to assign to the new member account in the commercial Region.
+        --destination-parent-id=!: ID for the root or organizational unit that you want to move the account to.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --iam-user-access-to-billing=: If set to `ALLOW`, the new linked account in the commercial Region enables IAM users to access account billing information *if* they have the required permissions.
-        --role-name=: (Optional)
-        --tags=: A list of tags that you want to attach to the newly created account.
-      completion:
-        flag:
-            iam-user-access-to-billing:
-                - ALLOW
-                - DENY
-    - name: delete-policy
-      description: Deletes the specified policy from your organization.
+        --source-parent-id=!: ID for the root or organizational unit that you want to move the account from.
+    - name: terminate-responsibility-transfer
+      description: Ends a transfer.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-timestamp=: Timestamp when the responsibility transfer is to end.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-id=!: ID for the policy that you want to delete.
-    - name: invite-organization-to-transfer-responsibility
-      description: Sends an invitation to another organization's management account to designate your account with the specified responsibilities for their organization.
+        --id=!: ID for the transfer.
+    - name: describe-resource-policy
+      description: Retrieves information about a resource policy.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --notes=: Additional information that you want to include in the invitation.
-        --source-name=!: Name you want to assign to the transfer.
-        --start-timestamp=!: Timestamp when the recipient will begin managing the specified responsibilities.
-        --tags=: A list of tags that you want to attach to the transfer.
-        --target=!: A `HandshakeParty` object.
-        --type=!: The type of responsibility you want to designate to your organization.
-      completion:
-        flag:
-            type:
-                - BILLING
-    - name: list-targets-for-policy
-      description: Lists all the roots, organizational units (OUs), and accounts that the specified policy is attached to.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to return in the response.
-        --next-token=: The parameter for receiving additional results if you receive a `NextToken` response in a previous request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --policy-id=!: ID for the policy whose attachments you want to know.
-        --starting-token=: A token to specify where to start paginating.
-    - name: remove-account-from-organization
-      description: Removes the specified account from the organization.
-      flags:
-        --account-id=!: ID for the member account that you want to remove from the organization.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -81,43 +98,6 @@ commands:
         --account-id=!: The unique identifier (ID) of the Amazon Web Services account that you want information about.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-inbound-responsibility-transfers
-      description: Lists transfers that allow you to manage the specified responsibilities for another organization.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=: ID for the transfer.
-        --max-results=: The maximum number of items to return in the response.
-        --next-token=: The parameter for receiving additional results if you receive a `NextToken` response in a previous request.
-        --type=!: The type of responsibility.
-      completion:
-        flag:
-            type:
-                - BILLING
-    - name: tag-resource
-      description: Adds one or more tags to the specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-id=!: The ID of the resource to add a tag to.
-        --tags=!: A list of tags to add to the specified resource.
-    - name: terminate-responsibility-transfer
-      description: Ends a transfer.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --end-timestamp=: Timestamp when the responsibility transfer is to end.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: ID for the transfer.
-    - name: describe-create-account-status
-      description: Retrieves the current status of an asynchronous request to create an account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --create-account-request-id=!: Specifies the `Id` value that uniquely identifies the `CreateAccount` request.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-children
       description: Lists all of the organizational units (OUs) or accounts that are contained in the specified parent OU or root.
@@ -137,91 +117,29 @@ commands:
             child-type:
                 - ACCOUNT
                 - ORGANIZATIONAL_UNIT
-    - name: list-handshakes-for-organization
-      description: Lists the recent handshakes that you have sent.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: A `HandshakeFilter` object.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to return in the response.
-        --next-token=: The parameter for receiving additional results if you receive a `NextToken` response in a previous request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-roots
-      description: Lists the roots that are defined in the current organization.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to return in the response.
-        --next-token=: The parameter for receiving additional results if you receive a `NextToken` response in a previous request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: put-resource-policy
-      description: Creates or updates a resource policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content=!: If provided, the new content for the resource policy.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: A list of tags that you want to attach to the newly created resource policy.
-    - name: update-policy
-      description: Updates an existing policy with a new name, description, or content.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content=: If provided, the new content for the policy.
-        --description=: If provided, the new description for the policy.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: If provided, the new name for the policy.
-        --policy-id=!: ID for the policy that you want to update.
-    - name: update-responsibility-transfer
-      description: Updates a transfer.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: ID for the transfer.
-        --name=!: New name you want to assign to the transfer.
-    - name: create-account
-      description: Creates an Amazon Web Services account that is automatically a member of the organization whose credentials made the request.
+    - name: create-gov-cloud-account
+      description: 'This action is available if all of the following are true:'
       flags:
         --account-name=!: The friendly name of the member account.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --email=!: The email address of the owner to assign to the new member account.
+        --email=!: Specifies the email address of the owner to assign to the new member account in the commercial Region.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --iam-user-access-to-billing=: If set to `ALLOW`, the new account enables IAM users to access account billing information *if* they have the required permissions.
-        --role-name=: The name of an IAM role that Organizations automatically preconfigures in the new member account.
+        --iam-user-access-to-billing=: If set to `ALLOW`, the new linked account in the commercial Region enables IAM users to access account billing information *if* they have the required permissions.
+        --role-name=: (Optional)
         --tags=: A list of tags that you want to attach to the newly created account.
       completion:
         flag:
             iam-user-access-to-billing:
                 - ALLOW
                 - DENY
-    - name: describe-organizational-unit
-      description: Retrieves information about an organizational unit (OU).
+    - name: describe-responsibility-transfer
+      description: Returns details for a transfer.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --organizational-unit-id=!: ID for the organizational unit that you want details about.
-    - name: describe-policy
-      description: Retrieves information about a policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-id=!: ID for the policy that you want details about.
-    - name: describe-resource-policy
-      description: Retrieves information about a resource policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: ID for the transfer.
     - name: disable-policy-type
       description: Disables an organizational policy type in a root.
       flags:
@@ -243,61 +161,10 @@ commands:
                 - SECURITYHUB_POLICY
                 - INSPECTOR_POLICY
                 - UPGRADE_ROLLOUT_POLICY
-    - name: leave-organization
-      description: Removes a member account from its parent organization.
+    - name: list-parents
+      description: Lists the root or organizational units (OUs) that serve as the immediate parent of the specified child OU or account.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-handshakes-for-account
-      description: Lists the recent handshakes that you have received.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: A `HandshakeFilter` object.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to return in the response.
-        --next-token=: The parameter for receiving additional results if you receive a `NextToken` response in a previous request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: close-account
-      description: Closes an Amazon Web Services member account within an organization.
-      flags:
-        --account-id=!: Retrieves the Amazon Web Services account Id for the current `CloseAccount` API request.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-organization
-      description: Creates an Amazon Web Services organization.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --feature-set=: Specifies the feature set supported by the new organization.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      completion:
-        flag:
-            feature-set:
-                - ALL
-                - CONSOLIDATED_BILLING
-    - name: decline-handshake
-      description: Declines a [Handshake]().
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --handshake-id=!: ID for the handshake that you want to decline.
-    - name: disable-aws-service-access
-      description: Disables the integration of an Amazon Web Services service (the service that is specified by `ServicePrincipal`) with Organizations.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --service-principal=!: The service principal name of the Amazon Web Services service for which you want to disable integration with your organization.
-    - name: list-delegated-services-for-account
-      description: List the Amazon Web Services services for which the specified account is a delegated administrator.
-      flags:
-        --account-id=!: The account ID number of a delegated administrator account in the organization.
+        --child-id=!: ID for the OU or account whose parent containers you want to list.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -313,17 +180,49 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --handshake-id=!: ID for the handshake that you want to cancel.
-    - name: describe-effective-policy
-      description: Returns the contents of the effective policy for specified policy type and account.
+    - name: list-handshakes-for-account
+      description: Lists the recent handshakes that you have received.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: A `HandshakeFilter` object.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return in the response.
+        --next-token=: The parameter for receiving additional results if you receive a `NextToken` response in a previous request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-outbound-responsibility-transfers
+      description: Lists transfers that allow an account outside your organization to manage the specified responsibilities for your organization.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-type=!: The type of policy that you want information about.
-        --target-id=: When you're signed in as the management account, specify the ID of the account that you want details about.
+        --max-results=: The maximum number of items to return in the response.
+        --next-token=: The parameter for receiving additional results if you receive a `NextToken` response in a previous request.
+        --type=!: The type of responsibility.
       completion:
         flag:
-            policy-type:
+            type:
+                - BILLING
+    - name: list-policies-for-target
+      description: Lists the policies that are directly attached to the specified target root, organizational unit (OU), or account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=!: The type of policy that you want to include in the returned list.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return in the response.
+        --next-token=: The parameter for receiving additional results if you receive a `NextToken` response in a previous request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --target-id=!: ID for the root, organizational unit, or account whose policies you want to list.
+      completion:
+        flag:
+            filter:
+                - SERVICE_CONTROL_POLICY
+                - RESOURCE_CONTROL_POLICY
                 - TAG_POLICY
                 - BACKUP_POLICY
                 - AISERVICES_OPT_OUT_POLICY
@@ -340,12 +239,6 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --policy-id=!: ID for the policy that you want to attach to the target.
         --target-id=!: ID for the root, OU, or account that you want to attach the policy to.
-    - name: delete-resource-policy
-      description: Deletes the resource policy from your organization.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: describe-handshake
       description: Returns details for a handshake.
       flags:
@@ -353,138 +246,18 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --handshake-id=!: ID for the handshake that you want information about.
-    - name: update-organizational-unit
-      description: Renames the specified organizational unit (OU).
+    - name: describe-organization
+      description: Retrieves information about the organization that the user's account belongs to.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: The new name that you want to assign to the OU.
-        --organizational-unit-id=!: ID for the OU that you want to rename.
-    - name: enable-aws-service-access
-      description: Provides an Amazon Web Services service (the service that is specified by `ServicePrincipal`) with permissions to view the structure of an organization, create a [service-linked role](https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html) in all the accounts in the organization, and allow the service to perform operations on behalf of the organization and its accounts.
+    - name: enable-all-features
+      description: Enables all features in an organization.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --service-principal=!: The service principal name of the Amazon Web Services service for which you want to enable integration with your organization.
-    - name: invite-account-to-organization
-      description: Sends an invitation to another account to join your organization as a member account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --notes=: Additional information that you want to include in the generated email to the recipient account owner.
-        --tags=: A list of tags that you want to attach to the account when it becomes a member of the organization.
-        --target=!: The identifier (ID) of the Amazon Web Services account that you want to invite to join your organization.
-    - name: list-effective-policy-validation-errors
-      description: Lists all the validation errors on an [effective policy](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_effective.html) for a specified account and policy type.
-      flags:
-        --account-id=!: The ID of the account that you want details about.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to return in the response.
-        --next-token=: The parameter for receiving additional results if you receive a `NextToken` response in a previous request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --policy-type=!: The type of policy that you want information about.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            policy-type:
-                - TAG_POLICY
-                - BACKUP_POLICY
-                - AISERVICES_OPT_OUT_POLICY
-                - CHATBOT_POLICY
-                - DECLARATIVE_POLICY_EC2
-                - SECURITYHUB_POLICY
-                - INSPECTOR_POLICY
-                - UPGRADE_ROLLOUT_POLICY
-    - name: list-parents
-      description: Lists the root or organizational units (OUs) that serve as the immediate parent of the specified child OU or account.
-      flags:
-        --child-id=!: ID for the OU or account whose parent containers you want to list.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to return in the response.
-        --next-token=: The parameter for receiving additional results if you receive a `NextToken` response in a previous request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: register-delegated-administrator
-      description: Enables the specified member account to administer the Organizations features of the specified Amazon Web Services service.
-      flags:
-        --account-id=!: The account ID number of the member account in the organization to register as a delegated administrator.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --service-principal=!: The service principal of the Amazon Web Services service for which you want to make the member account a delegated administrator.
-    - name: untag-resource
-      description: Removes any tags with the specified keys from the specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-id=!: The ID of the resource to remove a tag from.
-        --tag-keys=!: The list of keys for tags to remove from the specified resource.
-    - name: list-aws-service-access-for-organization
-      description: Returns a list of the Amazon Web Services services that you enabled to integrate with your organization.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to return in the response.
-        --next-token=: The parameter for receiving additional results if you receive a `NextToken` response in a previous request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-delegated-administrators
-      description: Lists the Amazon Web Services accounts that are designated as delegated administrators in this organization.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to return in the response.
-        --next-token=: The parameter for receiving additional results if you receive a `NextToken` response in a previous request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --service-principal=: Specifies a service principal name.
-        --starting-token=: A token to specify where to start paginating.
-    - name: move-account
-      description: Moves an account from its current source parent root or organizational unit (OU) to the specified destination parent root or OU.
-      flags:
-        --account-id=!: ID for the account that you want to move.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --destination-parent-id=!: ID for the root or organizational unit that you want to move the account to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-parent-id=!: ID for the root or organizational unit that you want to move the account from.
-    - name: list-create-account-status
-      description: Lists the account creation requests that match the specified status that is currently being tracked for the organization.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to return in the response.
-        --next-token=: The parameter for receiving additional results if you receive a `NextToken` response in a previous request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --states=: A list of one or more states that you want included in the response.
-    - name: list-organizational-units-for-parent
-      description: Lists the organizational units (OUs) in a parent organizational unit or root.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to return in the response.
-        --next-token=: The parameter for receiving additional results if you receive a `NextToken` response in a previous request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --parent-id=!: ID for the root or OU whose child OUs you want to list.
-        --starting-token=: A token to specify where to start paginating.
     - name: list-policies
       description: Retrieves the list of all policies in an organization of a specified type.
       flags:
@@ -510,6 +283,114 @@ commands:
                 - SECURITYHUB_POLICY
                 - INSPECTOR_POLICY
                 - UPGRADE_ROLLOUT_POLICY
+    - name: tag-resource
+      description: Adds one or more tags to the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-id=!: The ID of the resource to add a tag to.
+        --tags=!: A list of tags to add to the specified resource.
+    - name: list-targets-for-policy
+      description: Lists all the roots, organizational units (OUs), and accounts that the specified policy is attached to.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return in the response.
+        --next-token=: The parameter for receiving additional results if you receive a `NextToken` response in a previous request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --policy-id=!: ID for the policy whose attachments you want to know.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-effective-policy
+      description: Returns the contents of the effective policy for specified policy type and account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-type=!: The type of policy that you want information about.
+        --target-id=: When you're signed in as the management account, specify the ID of the account that you want details about.
+      completion:
+        flag:
+            policy-type:
+                - TAG_POLICY
+                - BACKUP_POLICY
+                - AISERVICES_OPT_OUT_POLICY
+                - CHATBOT_POLICY
+                - DECLARATIVE_POLICY_EC2
+                - SECURITYHUB_POLICY
+                - INSPECTOR_POLICY
+                - UPGRADE_ROLLOUT_POLICY
+    - name: invite-organization-to-transfer-responsibility
+      description: Sends an invitation to another organization's management account to designate your account with the specified responsibilities for their organization.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --notes=: Additional information that you want to include in the invitation.
+        --source-name=!: Name you want to assign to the transfer.
+        --start-timestamp=!: Timestamp when the recipient will begin managing the specified responsibilities.
+        --tags=: A list of tags that you want to attach to the transfer.
+        --target=!: A `HandshakeParty` object.
+        --type=!: The type of responsibility you want to designate to your organization.
+      completion:
+        flag:
+            type:
+                - BILLING
+    - name: list-delegated-services-for-account
+      description: List the Amazon Web Services services for which the specified account is a delegated administrator.
+      flags:
+        --account-id=!: The account ID number of a delegated administrator account in the organization.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return in the response.
+        --next-token=: The parameter for receiving additional results if you receive a `NextToken` response in a previous request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-inbound-responsibility-transfers
+      description: Lists transfers that allow you to manage the specified responsibilities for another organization.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=: ID for the transfer.
+        --max-results=: The maximum number of items to return in the response.
+        --next-token=: The parameter for receiving additional results if you receive a `NextToken` response in a previous request.
+        --type=!: The type of responsibility.
+      completion:
+        flag:
+            type:
+                - BILLING
+    - name: untag-resource
+      description: Removes any tags with the specified keys from the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-id=!: The ID of the resource to remove a tag from.
+        --tag-keys=!: The list of keys for tags to remove from the specified resource.
+    - name: create-organization
+      description: Creates an Amazon Web Services organization.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --feature-set=: Specifies the feature set supported by the new organization.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            feature-set:
+                - ALL
+                - CONSOLIDATED_BILLING
+    - name: delete-organizational-unit
+      description: Deletes an organizational unit (OU) from a root or another OU.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --organizational-unit-id=!: ID for the organizational unit that you want to delete.
     - name: deregister-delegated-administrator
       description: Removes the specified member Amazon Web Services account as a delegated administrator for the specified Amazon Web Services service.
       flags:
@@ -518,6 +399,58 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --service-principal=!: The service principal name of an Amazon Web Services service for which the account is a delegated administrator.
+    - name: describe-create-account-status
+      description: Retrieves the current status of an asynchronous request to create an account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --create-account-request-id=!: Specifies the `Id` value that uniquely identifies the `CreateAccount` request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: close-account
+      description: Closes an Amazon Web Services member account within an organization.
+      flags:
+        --account-id=!: Retrieves the Amazon Web Services account Id for the current `CloseAccount` API request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-organization
+      description: Deletes the organization.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: disable-aws-service-access
+      description: Disables the integration of an Amazon Web Services service (the service that is specified by `ServicePrincipal`) with Organizations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-principal=!: The service principal name of the Amazon Web Services service for which you want to disable integration with your organization.
+    - name: enable-aws-service-access
+      description: Provides an Amazon Web Services service (the service that is specified by `ServicePrincipal`) with permissions to view the structure of an organization, create a [service-linked role](https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html) in all the accounts in the organization, and allow the service to perform operations on behalf of the organization and its accounts.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-principal=!: The service principal name of the Amazon Web Services service for which you want to enable integration with your organization.
+    - name: update-policy
+      description: Updates an existing policy with a new name, description, or content.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content=: If provided, the new content for the policy.
+        --description=: If provided, the new description for the policy.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: If provided, the new name for the policy.
+        --policy-id=!: ID for the policy that you want to update.
+    - name: update-responsibility-transfer
+      description: Updates a transfer.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: ID for the transfer.
+        --name=!: New name you want to assign to the transfer.
     - name: detach-policy
       description: Detaches a policy from a target root, organizational unit (OU), or account.
       flags:
@@ -526,35 +459,56 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --policy-id=!: ID for the policy you want to detach.
         --target-id=!: ID for the root, OU, or account that you want to detach the policy from.
-    - name: enable-all-features
-      description: Enables all features in an organization.
+    - name: list-aws-service-access-for-organization
+      description: Returns a list of the Amazon Web Services services that you enabled to integrate with your organization.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-organizational-unit
-      description: Creates an organizational unit (OU) within a root or parent OU.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return in the response.
+        --next-token=: The parameter for receiving additional results if you receive a `NextToken` response in a previous request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-delegated-administrators
+      description: Lists the Amazon Web Services accounts that are designated as delegated administrators in this organization.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The friendly name to assign to the new OU.
-        --parent-id=!: ID for the parent root or OU that you want to create the new OU in.
-        --tags=: A list of tags that you want to attach to the newly created OU.
-    - name: delete-organizational-unit
-      description: Deletes an organizational unit (OU) from a root or another OU.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return in the response.
+        --next-token=: The parameter for receiving additional results if you receive a `NextToken` response in a previous request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --service-principal=: Specifies a service principal name.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-organizational-units-for-parent
+      description: Lists the organizational units (OUs) in a parent organizational unit or root.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --organizational-unit-id=!: ID for the organizational unit that you want to delete.
-    - name: describe-responsibility-transfer
-      description: Returns details for a transfer.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return in the response.
+        --next-token=: The parameter for receiving additional results if you receive a `NextToken` response in a previous request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --parent-id=!: ID for the root or OU whose child OUs you want to list.
+        --starting-token=: A token to specify where to start paginating.
+    - name: register-delegated-administrator
+      description: Enables the specified member account to administer the Organizations features of the specified Amazon Web Services service.
+      flags:
+        --account-id=!: The account ID number of the member account in the organization to register as a delegated administrator.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-principal=!: The service principal of the Amazon Web Services service for which you want to make the member account a delegated administrator.
+    - name: accept-handshake
+      description: Accepts a handshake by sending an `ACCEPTED` response to the sender.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: ID for the transfer.
+        --handshake-id=!: ID for the handshake that you want to accept.
     - name: list-accounts
       description: Lists all the accounts in the organization.
       flags:
@@ -566,18 +520,69 @@ commands:
         --next-token=: The parameter for receiving additional results if you receive a `NextToken` response in a previous request.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-accounts-for-parent
-      description: Lists the accounts in an organization that are contained by the specified target root or organizational unit (OU).
+    - name: list-handshakes-for-organization
+      description: Lists the recent handshakes that you have sent.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: A `HandshakeFilter` object.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of items to return in the response.
         --next-token=: The parameter for receiving additional results if you receive a `NextToken` response in a previous request.
         --page-size=: The size of each page to get in the AWS service call.
-        --parent-id=!: The unique identifier (ID) for the parent root or organization unit (OU) whose accounts you want to list.
         --starting-token=: A token to specify where to start paginating.
+    - name: put-resource-policy
+      description: Creates or updates a resource policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content=!: If provided, the new content for the resource policy.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: A list of tags that you want to attach to the newly created resource policy.
+    - name: remove-account-from-organization
+      description: Removes the specified account from the organization.
+      flags:
+        --account-id=!: ID for the member account that you want to remove from the organization.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: decline-handshake
+      description: Declines a [Handshake]().
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --handshake-id=!: ID for the handshake that you want to decline.
+    - name: delete-policy
+      description: Deletes the specified policy from your organization.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-id=!: ID for the policy that you want to delete.
+    - name: describe-policy
+      description: Retrieves information about a policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-id=!: ID for the policy that you want details about.
+    - name: invite-account-to-organization
+      description: Sends an invitation to another account to join your organization as a member account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --notes=: Additional information that you want to include in the generated email to the recipient account owner.
+        --tags=: A list of tags that you want to attach to the account when it becomes a member of the organization.
+        --target=!: The identifier (ID) of the Amazon Web Services account that you want to invite to join your organization.
+    - name: leave-organization
+      description: Removes a member account from its parent organization.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-accounts-with-invalid-effective-policy
       description: Lists all the accounts in an organization that have invalid effective policies.
       flags:
@@ -601,48 +606,22 @@ commands:
                 - SECURITYHUB_POLICY
                 - INSPECTOR_POLICY
                 - UPGRADE_ROLLOUT_POLICY
-    - name: accept-handshake
-      description: Accepts a handshake by sending an `ACCEPTED` response to the sender.
+    - name: list-effective-policy-validation-errors
+      description: Lists all the validation errors on an [effective policy](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_effective.html) for a specified account and policy type.
       flags:
+        --account-id=!: The ID of the account that you want details about.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --handshake-id=!: ID for the handshake that you want to accept.
-    - name: delete-organization
-      description: Deletes the organization.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-outbound-responsibility-transfers
-      description: Lists transfers that allow an account outside your organization to manage the specified responsibilities for your organization.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of items to return in the response.
         --next-token=: The parameter for receiving additional results if you receive a `NextToken` response in a previous request.
-        --type=!: The type of responsibility.
+        --page-size=: The size of each page to get in the AWS service call.
+        --policy-type=!: The type of policy that you want information about.
+        --starting-token=: A token to specify where to start paginating.
       completion:
         flag:
-            type:
-                - BILLING
-    - name: create-policy
-      description: Creates a policy of a specified type that you can attach to a root, an organizational unit (OU), or an individual Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content=!: The policy text content to add to the new policy.
-        --description=!: An optional description to assign to the policy.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The friendly name to assign to the policy.
-        --tags=: A list of tags that you want to attach to the newly created policy.
-        --type=!: The type of policy to create.
-      completion:
-        flag:
-            type:
-                - SERVICE_CONTROL_POLICY
-                - RESOURCE_CONTROL_POLICY
+            policy-type:
                 - TAG_POLICY
                 - BACKUP_POLICY
                 - AISERVICES_OPT_OUT_POLICY
@@ -651,6 +630,53 @@ commands:
                 - SECURITYHUB_POLICY
                 - INSPECTOR_POLICY
                 - UPGRADE_ROLLOUT_POLICY
+    - name: list-roots
+      description: Lists the roots that are defined in the current organization.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return in the response.
+        --next-token=: The parameter for receiving additional results if you receive a `NextToken` response in a previous request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: create-organizational-unit
+      description: Creates an organizational unit (OU) within a root or parent OU.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The friendly name to assign to the new OU.
+        --parent-id=!: ID for the parent root or OU that you want to create the new OU in.
+        --tags=: A list of tags that you want to attach to the newly created OU.
+    - name: list-create-account-status
+      description: Lists the account creation requests that match the specified status that is currently being tracked for the organization.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return in the response.
+        --next-token=: The parameter for receiving additional results if you receive a `NextToken` response in a previous request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --states=: A list of one or more states that you want included in the response.
+    - name: update-organizational-unit
+      description: Renames the specified organizational unit (OU).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The new name that you want to assign to the OU.
+        --organizational-unit-id=!: ID for the OU that you want to rename.
+    - name: describe-organizational-unit
+      description: Retrieves information about an organizational unit (OU).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --organizational-unit-id=!: ID for the organizational unit that you want details about.
     - name: enable-policy-type
       description: Enables a policy type in a root.
       flags:
@@ -662,32 +688,6 @@ commands:
       completion:
         flag:
             policy-type:
-                - SERVICE_CONTROL_POLICY
-                - RESOURCE_CONTROL_POLICY
-                - TAG_POLICY
-                - BACKUP_POLICY
-                - AISERVICES_OPT_OUT_POLICY
-                - CHATBOT_POLICY
-                - DECLARATIVE_POLICY_EC2
-                - SECURITYHUB_POLICY
-                - INSPECTOR_POLICY
-                - UPGRADE_ROLLOUT_POLICY
-    - name: list-policies-for-target
-      description: Lists the policies that are directly attached to the specified target root, organizational unit (OU), or account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=!: The type of policy that you want to include in the returned list.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to return in the response.
-        --next-token=: The parameter for receiving additional results if you receive a `NextToken` response in a previous request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --target-id=!: ID for the root, organizational unit, or account whose policies you want to list.
-      completion:
-        flag:
-            filter:
                 - SERVICE_CONTROL_POLICY
                 - RESOURCE_CONTROL_POLICY
                 - TAG_POLICY

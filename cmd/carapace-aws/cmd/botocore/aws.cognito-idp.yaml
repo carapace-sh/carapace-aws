@@ -1,66 +1,303 @@
 name: cognito-idp
 description: Amazon Cognito Identity Provider
 commands:
-    - name: create-identity-provider
-      description: Adds a configuration and trust relationship between a third-party identity provider (IdP) and a user pool.
+    - name: admin-set-user-password
+      description: Sets the specified user's password in a user pool.
       flags:
-        --attribute-mapping=: A mapping of IdP attributes to standard and custom user pool attributes.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --idp-identifiers=: 'An array of IdP identifiers, for example `"IdPIdentifiers": [ "MyIdP", "MyIdP2" ]`.'
-        --provider-details=!: The scopes, URLs, and identifiers for your external identity provider.
-        --provider-name=!: The name that you want to assign to the IdP.
-        --provider-type=!: The type of IdP that you want to add.
-        --user-pool-id=!: The Id of the user pool where you want to create an IdP.
+        --no-permanent: Set to `true` to set a password that the user can immediately sign in with.
+        --password=!: The new temporary or permanent password that you want to set for the user.
+        --permanent: Set to `true` to set a password that the user can immediately sign in with.
+        --user-pool-id=!: The ID of the user pool where you want to set the user's password.
+        --username=!: The name of the user that you want to query or modify.
+    - name: create-managed-login-branding
+      description: Creates a new set of branding settings for a user pool style and associates it with an app client.
+      flags:
+        --assets=: An array of image files that you want to apply to functions like backgrounds, logos, and icons.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-id=!: The app client that you want to create the branding style for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-use-cognito-provided-values: When true, applies the default branding style options.
+        --settings=: A JSON file, encoded as a `Document` type, with the the settings that you want to apply to your style.
+        --use-cognito-provided-values: When true, applies the default branding style options.
+        --user-pool-id=!: The ID of the user pool where you want to create a new branding style.
+    - name: get-user
+      description: Gets user attributes and and MFA settings for the currently signed-in user.
+      flags:
+        --access-token=!: A valid access token that Amazon Cognito issued to the currently signed-in user.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-tags-for-resource
+      description: Lists the tags that are assigned to an Amazon Cognito user pool.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the user pool that the tags are assigned to.
+    - name: confirm-sign-up
+      description: Confirms the account of a new user.
+      flags:
+        --analytics-metadata=: Information that supports analytics outcomes with Amazon Pinpoint, including the user's endpoint ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-id=!: The ID of the app client associated with the user pool.
+        --client-metadata=: A map of custom key-value pairs that you can provide as input for any custom workflows that this action triggers.
+        --confirmation-code=!: The confirmation code that your user pool sent in response to the `SignUp` request.
+        --force-alias-creation: When `true`, forces user confirmation despite any existing aliases.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-force-alias-creation: When `true`, forces user confirmation despite any existing aliases.
+        --secret-hash=: A keyed-hash message authentication code (HMAC) calculated using the secret key of a user pool client and username plus the client ID in the message.
+        --session=: The optional session ID from a `SignUp` API request.
+        --user-context-data=: Contextual data about your user session like the device fingerprint, IP address, or location.
+        --username=!: The name of the user that you want to query or modify.
+    - name: describe-user-pool-domain
+      description: Given a user pool domain name, returns information about the domain configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain=!: The domain that you want to describe.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-web-authn-credentials
+      description: Generates a list of the currently signed-in user's registered passkey, or WebAuthn, credentials.
+      flags:
+        --access-token=!: A valid access token that Amazon Cognito issued to the currently signed-in user.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of the user's passkey credentials that you want to return.
+        --next-token=: This API operation returns a limited number of results.
+    - name: update-user-pool
+      description: Updates the configuration of a user pool.
+      flags:
+        --account-recovery-setting=: The available verified method a user can use to recover their password when they call `ForgotPassword`.
+        --admin-create-user-config=: The configuration for administrative creation of users.
+        --auto-verified-attributes=: The attributes that you want your user pool to automatically verify.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --deletion-protection=: When active, `DeletionProtection` prevents accidental deletion of your user pool.
+        --device-configuration=: The device-remembering configuration for a user pool.
+        --email-configuration=: The email configuration of your user pool.
+        --email-verification-message=: This parameter is no longer used.
+        --email-verification-subject=: This parameter is no longer used.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lambda-config=: A collection of user pool Lambda triggers.
+        --mfa-configuration=: Sets multi-factor authentication (MFA) to be on, off, or optional.
+        --policies=: The password policy and sign-in policy in the user pool.
+        --pool-name=: The updated name of your user pool.
+        --sms-authentication-message=: The contents of the SMS message that your user pool sends to users in SMS authentication.
+        --sms-configuration=: The SMS configuration with the settings for your Amazon Cognito user pool to send SMS message with Amazon Simple Notification Service.
+        --sms-verification-message=: This parameter is no longer used.
+        --user-attribute-update-settings=: The settings for updates to user attributes.
+        --user-pool-add-ons=: Contains settings for activation of threat protection, including the operating mode and additional authentication types.
+        --user-pool-id=!: The ID of the user pool you want to update.
+        --user-pool-tags=: The tag keys and values to assign to the user pool.
+        --user-pool-tier=: The user pool [feature plan](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-sign-in-feature-plans.html), or tier.
+        --verification-message-template=: The template for the verification message that your user pool delivers to users who set an email address or phone number attribute.
       completion:
         flag:
-            provider-type:
-                - SAML
-                - Facebook
-                - Google
-                - LoginWithAmazon
-                - SignInWithApple
-                - OIDC
-    - name: create-user-import-job
-      description: Creates a user import job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cloud-watch-logs-role-arn=!: You must specify an IAM role that has permission to log import-job results to Amazon CloudWatch Logs.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-name=!: A friendly name for the user import job.
-        --user-pool-id=!: The ID of the user pool that you want to import users into.
-    - name: delete-identity-provider
-      description: Deletes a user pool identity provider (IdP).
+            deletion-protection:
+                - ACTIVE
+                - INACTIVE
+            mfa-configuration:
+                - "OFF"
+                - "ON"
+                - OPTIONAL
+            user-pool-tier:
+                - LITE
+                - ESSENTIALS
+                - PLUS
+    - name: admin-enable-user
+      description: Activates sign-in for a user profile that previously had sign-in access disabled.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --provider-name=!: The name of the IdP that you want to delete.
-        --user-pool-id=!: The ID of the user pool where you want to delete the identity provider.
-    - name: delete-terms
-      description: Deletes the terms documents with the requested ID from your app client.
+        --user-pool-id=!: The ID of the user pool where you want to activate sign-in for the user.
+        --username=!: The name of the user that you want to query or modify.
+    - name: admin-remove-user-from-group
+      description: Given a username and a group name, removes them from the group.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --terms-id=!: The ID of the terms documents that you want to delete.
-        --user-pool-id=!: The ID of the user pool that contains the terms documents that you want to delete.
-    - name: delete-user-pool
-      description: Deletes a user pool.
+        --group-name=!: The name of the group that you want to remove the user from, for example `MyTestGroup`.
+        --user-pool-id=!: The ID of the user pool that contains the group and the user that you want to remove.
+        --username=!: The name of the user that you want to query or modify.
+    - name: admin-respond-to-auth-challenge
+      description: Some API operations in a user pool generate a challenge, like a prompt for an MFA code, for device authentication that bypasses MFA, or for a custom authentication challenge.
+      flags:
+        --analytics-metadata=: Information that supports analytics outcomes with Amazon Pinpoint, including the user's endpoint ID.
+        --challenge-name=!: The name of the challenge that you are responding to.
+        --challenge-responses=: The responses to the challenge that you received in the previous request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-id=!: The ID of the app client where you initiated sign-in.
+        --client-metadata=: A map of custom key-value pairs that you can provide as input for any custom workflows that this action triggers.
+        --context-data=: Contextual data about your user session like the device fingerprint, IP address, or location.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --session=: The session identifier that maintains the state of authentication requests and challenge responses.
+        --user-pool-id=!: The ID of the user pool where you want to respond to an authentication challenge.
+      completion:
+        flag:
+            challenge-name:
+                - SMS_MFA
+                - EMAIL_OTP
+                - SOFTWARE_TOKEN_MFA
+                - SELECT_MFA_TYPE
+                - MFA_SETUP
+                - PASSWORD_VERIFIER
+                - CUSTOM_CHALLENGE
+                - SELECT_CHALLENGE
+                - DEVICE_SRP_AUTH
+                - DEVICE_PASSWORD_VERIFIER
+                - ADMIN_NO_SRP_AUTH
+                - NEW_PASSWORD_REQUIRED
+                - SMS_OTP
+                - PASSWORD
+                - WEB_AUTHN
+                - PASSWORD_SRP
+    - name: create-user-pool-domain
+      description: A user pool domain hosts managed login, an authorization server and web server for authentication in your application.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --custom-domain-config=: The configuration for a custom domain.
+        --domain=!: The domain string.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --managed-login-version=: The version of managed login branding that you want to apply to your domain.
+        --user-pool-id=!: The ID of the user pool where you want to add a domain.
+    - name: describe-resource-server
+      description: Describes a resource server.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-pool-id=!: The ID of the user pool that you want to delete.
-    - name: get-signing-certificate
-      description: Given a user pool ID, returns the signing certificate for SAML 2.0 federation.
+        --identifier=!: A unique resource server identifier for the resource server.
+        --user-pool-id=!: The ID of the user pool that hosts the resource server.
+    - name: admin-disable-provider-for-user
+      description: Prevents the user from signing in with the specified external (SAML or social) identity provider (IdP).
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-pool-id=!: The ID of the user pool where you want to view the signing certificate.
+        --user-pool-id=!: The ID of the user pool where you want to delete the user's linked identities.
+        --user=!: The user profile that you want to delete a linked identity from.
+    - name: admin-disable-user
+      description: Deactivates a user profile and revokes all access tokens for the user.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-pool-id=!: The ID of the user pool where you want to disable the user.
+        --username=!: The name of the user that you want to query or modify.
+    - name: list-terms
+      description: Returns details about all terms documents for the requested user pool.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of terms documents that you want Amazon Cognito to return in the response.
+        --next-token=: This API operation returns a limited number of results.
+        --user-pool-id=!: The ID of the user pool where you want to list terms documents.
+    - name: list-user-import-jobs
+      description: Given a user pool ID, returns user import jobs and their details.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=!: The maximum number of import jobs that you want Amazon Cognito to return in the response.
+        --pagination-token=: This API operation returns a limited number of results.
+        --user-pool-id=!: The ID of the user pool where you want to list import jobs.
+    - name: list-user-pools
+      description: Lists user pools and their details in the current Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=!: The maximum number of user pools that you want Amazon Cognito to return in the response.
+        --next-token=: This API operation returns a limited number of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: verify-user-attribute
+      description: Submits a verification code for a signed-in user who has added or changed a value of an auto-verified attribute.
+      flags:
+        --access-token=!: A valid access token that Amazon Cognito issued to the currently signed-in user.
+        --attribute-name=!: The name of the attribute that you want to verify.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --code=!: The verification code that your user pool sent to the added or changed attribute, for example the user's email address.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-managed-login-branding
+      description: Configures the branding settings for a user pool style.
+      flags:
+        --assets=: An array of image files that you want to apply to roles like backgrounds, logos, and icons.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --managed-login-branding-id=: The ID of the managed login branding style that you want to update.
+        --no-use-cognito-provided-values: When `true`, applies the default branding style options.
+        --settings=: A JSON file, encoded as a `Document` type, with the the settings that you want to apply to your style.
+        --use-cognito-provided-values: When `true`, applies the default branding style options.
+        --user-pool-id=: The ID of the user pool that contains the managed login branding style that you want to update.
+    - name: set-risk-configuration
+      description: Configures threat protection for a user pool or app client.
+      flags:
+        --account-takeover-risk-configuration=: The settings for automated responses and notification templates for adaptive authentication with threat protection.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-id=: The ID of the app client where you want to set a risk configuration.
+        --compromised-credentials-risk-configuration=: The configuration of automated reactions to detected compromised credentials.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --risk-exception-configuration=: A set of IP-address overrides to threat protection.
+        --user-pool-id=!: The ID of the user pool where you want to set a risk configuration.
+    - name: set-log-delivery-configuration
+      description: Sets up or modifies the logging configuration of a user pool.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-configurations=!: A collection of the logging configurations for a user pool.
+        --user-pool-id=!: The ID of the user pool where you want to configure logging.
+    - name: set-user-pool-mfa-config
+      description: Sets user pool multi-factor authentication (MFA) and passkey configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --email-mfa-configuration=: Sets configuration for user pool email message MFA and sign-in with one-time passwords (OTPs).
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mfa-configuration=: Sets multi-factor authentication (MFA) to be on, off, or optional.
+        --sms-mfa-configuration=: Configures user pool SMS messages for MFA.
+        --software-token-mfa-configuration=: Configures a user pool for time-based one-time password (TOTP) MFA.
+        --user-pool-id=!: The user pool ID.
+        --web-authn-configuration=: The configuration of your user pool for passkey, or WebAuthn, authentication and registration.
+      completion:
+        flag:
+            mfa-configuration:
+                - "OFF"
+                - "ON"
+                - OPTIONAL
+    - name: admin-delete-user
+      description: Deletes a user profile in your user pool.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-pool-id=!: The ID of the user pool where you want to delete the user.
+        --username=!: The name of the user that you want to query or modify.
+    - name: admin-delete-user-attributes
+      description: Deletes attribute values from a user.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-attribute-names=!: An array of strings representing the user attribute names you want to delete.
+        --user-pool-id=!: The ID of the user pool where you want to delete user attributes.
+        --username=!: The name of the user that you want to query or modify.
     - name: list-users
       description: Given a user pool ID, returns a list of users and their basic details in a user pool.
       flags:
@@ -75,32 +312,21 @@ commands:
         --pagination-token=: This API operation returns a limited number of results.
         --starting-token=: A token to specify where to start paginating.
         --user-pool-id=!: The ID of the user pool where you want to display or search for users.
-    - name: get-ui-customization
-      description: Given a user pool ID or app client, returns information about classic hosted UI branding that you applied, if any.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-id=: The ID of the app client that you want to query for branding settings.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-pool-id=!: The ID of the user pool that you want to query for branding settings.
-    - name: confirm-device
-      description: Confirms a device that a user wants to remember.
-      flags:
-        --access-token=!: A valid access token that Amazon Cognito issued to the currently signed-in user.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --device-key=!: The unique identifier, or device key, of the device that you want to update the status for.
-        --device-name=: A friendly name for the device, for example `MyMobilePhone`.
-        --device-secret-verifier-config=: The configuration of the device secret verifier.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-terms
-      description: Returns details for the requested terms documents ID.
+    - name: describe-user-pool
+      description: Given a user pool ID, returns configuration information.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --terms-id=!: The ID of the terms documents that you want to describe.
-        --user-pool-id=!: The ID of the user pool that contains the terms documents that you want to describe.
+        --user-pool-id=!: The ID of the user pool you want to describe.
+    - name: forget-device
+      description: Given a device key, deletes a remembered device as the currently signed-in user.
+      flags:
+        --access-token=: A valid access token that Amazon Cognito issued to the currently signed-in user.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --device-key=!: The unique identifier, or device key, of the device that the user wants to forget.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: initiate-auth
       description: Declares an authentication flow and initiates sign-in for a user in the Amazon Cognito user directory.
       flags:
@@ -125,6 +351,313 @@ commands:
                 - USER_PASSWORD_AUTH
                 - ADMIN_USER_PASSWORD_AUTH
                 - USER_AUTH
+    - name: stop-user-import-job
+      description: Instructs your user pool to stop a running job that's importing users from a CSV file that contains their usernames and attributes.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The ID of a running user import job.
+        --user-pool-id=!: The ID of the user pool that you want to stop.
+    - name: get-log-delivery-configuration
+      description: Given a user pool ID, returns the logging configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-pool-id=!: The ID of the user pool that has the logging configuration that you want to view.
+    - name: get-ui-customization
+      description: Given a user pool ID or app client, returns information about classic hosted UI branding that you applied, if any.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-id=: The ID of the app client that you want to query for branding settings.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-pool-id=!: The ID of the user pool that you want to query for branding settings.
+    - name: update-group
+      description: Given the name of a user pool group, updates any of the properties for precedence, IAM role, or description.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A new description of the existing group.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-name=!: The name of the group that you want to update.
+        --precedence=: A non-negative integer value that specifies the precedence of this group relative to the other groups that a user can belong to in the user pool.
+        --role-arn=: The Amazon Resource Name (ARN) of an IAM role that you want to associate with the group.
+        --user-pool-id=!: The ID of the user pool that contains the group you want to update.
+    - name: create-terms
+      description: Creates terms documents for the requested app client.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-id=!: The ID of the app client where you want to create terms documents.
+        --enforcement=!: This parameter is reserved for future use and currently accepts only one value.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --links=: A map of URLs to languages.
+        --terms-name=!: A friendly name for the document that you want to create in the current request.
+        --terms-source=!: This parameter is reserved for future use and currently accepts only one value.
+        --user-pool-id=!: The ID of the user pool where you want to create terms documents.
+      completion:
+        flag:
+            enforcement:
+                - NONE
+            terms-source:
+                - LINK
+    - name: delete-user-pool
+      description: Deletes a user pool.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-pool-id=!: The ID of the user pool that you want to delete.
+    - name: delete-terms
+      description: Deletes the terms documents with the requested ID from your app client.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --terms-id=!: The ID of the terms documents that you want to delete.
+        --user-pool-id=!: The ID of the user pool that contains the terms documents that you want to delete.
+    - name: global-sign-out
+      description: Invalidates the identity, access, and refresh tokens that Amazon Cognito issued to a user.
+      flags:
+        --access-token=!: A valid access token that Amazon Cognito issued to the currently signed-in user.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-managed-login-branding
+      description: Deletes a managed login branding style.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --managed-login-branding-id=!: The ID of the managed login branding style that you want to delete.
+        --user-pool-id=!: The ID of the user pool that contains the managed login branding style that you want to delete.
+    - name: delete-user
+      description: Deletes the profile of the currently signed-in user.
+      flags:
+        --access-token=!: A valid access token that Amazon Cognito issued to the currently signed-in user.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-devices
+      description: Lists the devices that Amazon Cognito has registered to the currently signed-in user.
+      flags:
+        --access-token=!: A valid access token that Amazon Cognito issued to the currently signed-in user.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of devices that you want Amazon Cognito to return in the response.
+        --pagination-token=: This API operation returns a limited number of results.
+    - name: admin-add-user-to-group
+      description: Adds a user to a group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-name=!: The name of the group that you want to add your user to.
+        --user-pool-id=!: The ID of the user pool that contains the group that you want to add the user to.
+        --username=!: The name of the user that you want to query or modify.
+    - name: delete-user-pool-client
+      description: Deletes a user pool app client.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-id=!: The ID of the user pool app client that you want to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-pool-id=!: The ID of the user pool where you want to delete the client.
+    - name: get-user-pool-mfa-config
+      description: Given a user pool ID, returns configuration for sign-in with WebAuthn authenticators and for multi-factor authentication (MFA).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-pool-id=!: The ID of the user pool where you want to query WebAuthn and MFA configuration.
+    - name: delete-user-attributes
+      description: Deletes attributes from the currently signed-in user.
+      flags:
+        --access-token=!: A valid access token that Amazon Cognito issued to the currently signed-in user.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-attribute-names=!: An array of strings representing the user attribute names you want to delete.
+    - name: change-password
+      description: Changes the password for the currently signed-in user.
+      flags:
+        --access-token=!: A valid access token that Amazon Cognito issued to the user whose password you want to change.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --previous-password=: The user's previous password.
+        --proposed-password=!: A new password that you prompted the user to enter in your application.
+    - name: create-group
+      description: Creates a new group in the specified user pool.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the group that you're creating.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-name=!: A name for the group.
+        --precedence=: A non-negative integer value that specifies the precedence of this group relative to the other groups that a user can belong to in the user pool.
+        --role-arn=: The Amazon Resource Name (ARN) for the IAM role that you want to associate with the group.
+        --user-pool-id=!: The ID of the user pool where you want to create a user group.
+    - name: sign-up
+      description: Registers a user with an app client and requests a user name, password, and user attributes in the user pool.
+      flags:
+        --analytics-metadata=: Information that supports analytics outcomes with Amazon Pinpoint, including the user's endpoint ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-id=!: The ID of the app client where the user wants to sign up.
+        --client-metadata=: A map of custom key-value pairs that you can provide as input for any custom workflows that this action triggers.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --password=: The user's proposed password.
+        --secret-hash=: A keyed-hash message authentication code (HMAC) calculated using the secret key of a user pool client and username plus the client ID in the message.
+        --user-attributes=: An array of name-value pairs representing user attributes.
+        --user-context-data=: Contextual data about your user session like the device fingerprint, IP address, or location.
+        --username=!: The username of the user that you want to sign up.
+        --validation-data=: Temporary user attributes that contribute to the outcomes of your pre sign-up Lambda trigger.
+    - name: create-identity-provider
+      description: Adds a configuration and trust relationship between a third-party identity provider (IdP) and a user pool.
+      flags:
+        --attribute-mapping=: A mapping of IdP attributes to standard and custom user pool attributes.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --idp-identifiers=: 'An array of IdP identifiers, for example `"IdPIdentifiers": [ "MyIdP", "MyIdP2" ]`.'
+        --provider-details=!: The scopes, URLs, and identifiers for your external identity provider.
+        --provider-name=!: The name that you want to assign to the IdP.
+        --provider-type=!: The type of IdP that you want to add.
+        --user-pool-id=!: The Id of the user pool where you want to create an IdP.
+      completion:
+        flag:
+            provider-type:
+                - SAML
+                - Facebook
+                - Google
+                - LoginWithAmazon
+                - SignInWithApple
+                - OIDC
+    - name: admin-create-user
+      description: Creates a new user in the specified user pool.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-metadata=: A map of custom key-value pairs that you can provide as input for any custom workflows that this action triggers.
+        --desired-delivery-mediums=: Specify `EMAIL` if email will be used to send the welcome message.
+        --force-alias-creation: This parameter is used only if the `phone_number_verified` or `email_verified` attribute is set to `True`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --message-action=: Set to `RESEND` to resend the invitation message to a user that already exists, and to reset the temporary-password duration with a new temporary password.
+        --no-force-alias-creation: This parameter is used only if the `phone_number_verified` or `email_verified` attribute is set to `True`.
+        --temporary-password=: The user's temporary password.
+        --user-attributes=: An array of name-value pairs that contain user attributes and attribute values to be set for the user to be created.
+        --user-pool-id=!: The ID of the user pool where you want to create a user.
+        --username=!: The value that you want to set as the username sign-in attribute.
+        --validation-data=: Temporary user attributes that contribute to the outcomes of your pre sign-up Lambda trigger.
+      completion:
+        flag:
+            message-action:
+                - RESEND
+                - SUPPRESS
+    - name: admin-list-devices
+      description: Lists a user's registered devices.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of devices that you want Amazon Cognito to return in the response.
+        --pagination-token=: This API operation returns a limited number of results.
+        --user-pool-id=!: The ID of the user pool where the device owner is a user.
+        --username=!: The name of the user that you want to query or modify.
+    - name: start-web-authn-registration
+      description: Requests credential creation options from your user pool for the currently signed-in user.
+      flags:
+        --access-token=!: A valid access token that Amazon Cognito issued to the currently signed-in user.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-resource-server
+      description: Creates a new OAuth2.0 resource server and defines custom scopes within it.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: A unique resource server identifier for the resource server.
+        --name=!: A friendly name for the resource server.
+        --scopes=: A list of custom scopes.
+        --user-pool-id=!: The ID of the user pool where you want to create a resource server.
+    - name: update-terms
+      description: Modifies existing terms documents for the requested app client.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --enforcement=: This parameter is reserved for future use and currently accepts only one value.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --links=: A map of URLs to languages.
+        --terms-id=!: The ID of the terms document that you want to update.
+        --terms-name=: The new name that you want to apply to the requested terms documents.
+        --terms-source=: This parameter is reserved for future use and currently accepts only one value.
+        --user-pool-id=!: The ID of the user pool that contains the terms that you want to update.
+      completion:
+        flag:
+            enforcement:
+                - NONE
+            terms-source:
+                - LINK
+    - name: update-user-pool-client
+      description: Given a user pool app client ID, updates the configuration.
+      flags:
+        --access-token-validity=: The access token time limit.
+        --allowed-o-auth-flows-user-pool-client: Set to `true` to use OAuth 2.0 authorization server features in your app client.
+        --allowed-o-auth-flows=: The OAuth grant types that you want your app client to generate.
+        --allowed-o-auth-scopes=: The OAuth, OpenID Connect (OIDC), and custom scopes that you want to permit your app client to authorize access with.
+        --analytics-configuration=: The user pool analytics configuration for collecting metrics and sending them to your Amazon Pinpoint campaign.
+        --auth-session-validity=: Amazon Cognito creates a session token for each API request in an authentication flow.
+        --callback-urls=: A list of allowed redirect, or callback, URLs for managed login authentication.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-id=!: The ID of the app client that you want to update.
+        --client-name=: A friendly name for the app client.
+        --default-redirect-uri=: The default redirect URI.
+        --enable-propagate-additional-user-context-data: When `true`, your application can include additional `UserContextData` in authentication requests.
+        --enable-token-revocation: Activates or deactivates [token revocation](https://docs.aws.amazon.com/cognito/latest/developerguide/token-revocation.html) in the target app client.
+        --explicit-auth-flows=: The [authentication flows](https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-authentication-flow-methods.html) that you want your user pool client to support.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id-token-validity=: The ID token time limit.
+        --logout-urls=: A list of allowed logout URLs for managed login authentication.
+        --no-allowed-o-auth-flows-user-pool-client: Set to `true` to use OAuth 2.0 authorization server features in your app client.
+        --no-enable-propagate-additional-user-context-data: When `true`, your application can include additional `UserContextData` in authentication requests.
+        --no-enable-token-revocation: Activates or deactivates [token revocation](https://docs.aws.amazon.com/cognito/latest/developerguide/token-revocation.html) in the target app client.
+        --prevent-user-existence-errors=: When `ENABLED`, suppresses messages that might indicate a valid user exists when someone attempts sign-in.
+        --read-attributes=: The list of user attributes that you want your app client to have read access to.
+        --refresh-token-rotation=: The configuration of your app client for refresh token rotation.
+        --refresh-token-validity=: The refresh token time limit.
+        --supported-identity-providers=: A list of provider names for the identity providers (IdPs) that are supported on this client.
+        --token-validity-units=: The units that validity times are represented in.
+        --user-pool-id=!: The ID of the user pool where you want to update the app client.
+        --write-attributes=: The list of user attributes that you want your app client to have write access to.
+      completion:
+        flag:
+            prevent-user-existence-errors:
+                - LEGACY
+                - ENABLED
+    - name: update-resource-server
+      description: Updates the name and scopes of a resource server.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: A unique resource server identifier for the resource server.
+        --name=!: The updated name of the resource server.
+        --scopes=: An array of updated custom scope names and descriptions that you want to associate with your resource server.
+        --user-pool-id=!: The ID of the user pool that contains the resource server that you want to update.
+    - name: delete-web-authn-credential
+      description: Deletes a registered passkey, or WebAuthn, authenticator for the currently signed-in user.
+      flags:
+        --access-token=!: A valid access token that Amazon Cognito issued to the currently signed-in user.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --credential-id=!: The unique identifier of the passkey that you want to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-groups
       description: Given a user pool ID, returns user pool groups and their details.
       flags:
@@ -137,45 +670,105 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
         --user-pool-id=!: The ID of the user pool where you want to list user groups.
-    - name: list-resource-servers
-      description: Given a user pool ID, returns all resource servers and their details.
+    - name: set-user-mfa-preference
+      description: Set the user's multi-factor authentication (MFA) method preference, including which MFA factors are activated and if any are preferred.
+      flags:
+        --access-token=!: A valid access token that Amazon Cognito issued to the currently signed-in user.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --email-mfa-settings=: User preferences for email message MFA.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --sms-mfa-settings=: User preferences for SMS message MFA.
+        --software-token-mfa-settings=: User preferences for time-based one-time password (TOTP) MFA.
+    - name: verify-software-token
+      description: Registers the current user's time-based one-time password (TOTP) authenticator with a code generated in their authenticator app from a private key that's supplied by your user pool.
+      flags:
+        --access-token=: A valid access token that Amazon Cognito issued to the currently signed-in user.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --friendly-device-name=: A friendly name for the device that's running the TOTP authenticator.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --session=: The session ID from an `AssociateSoftwareToken` request.
+        --user-code=!: A TOTP that the user generated in their configured authenticator app.
+    - name: admin-get-device
+      description: Given the device key, returns details for a user's device.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --device-key=!: The key of the device that you want to delete.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of resource servers that you want Amazon Cognito to return in the response.
-        --next-token=: This API operation returns a limited number of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --user-pool-id=!: The ID of the user pool where you want to list resource servers.
-    - name: admin-disable-user
-      description: Deactivates a user profile and revokes all access tokens for the user.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-pool-id=!: The ID of the user pool where you want to disable the user.
+        --user-pool-id=!: The ID of the user pool where the device owner is a user.
         --username=!: The name of the user that you want to query or modify.
-    - name: admin-reset-user-password
-      description: Begins the password reset process.
+    - name: admin-update-auth-event-feedback
+      description: Provides the feedback for an authentication event generated by threat protection features.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-metadata=: A map of custom key-value pairs that you can provide as input for any custom workflows that this action triggers.
+        --event-id=!: The ID of the threat protection authentication event that you want to update.
+        --feedback-value=!: Your feedback to the authentication event.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-pool-id=!: The ID of the user pool where you want to reset the user's password.
+        --user-pool-id=!: The ID of the user pool where you want to submit authentication-event feedback.
         --username=!: The name of the user that you want to query or modify.
-    - name: create-resource-server
-      description: Creates a new OAuth2.0 resource server and defines custom scopes within it.
+      completion:
+        flag:
+            feedback-value:
+                - Valid
+                - Invalid
+    - name: create-user-import-job
+      description: Creates a user import job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cloud-watch-logs-role-arn=!: You must specify an IAM role that has permission to log import-job results to Amazon CloudWatch Logs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-name=!: A friendly name for the user import job.
+        --user-pool-id=!: The ID of the user pool that you want to import users into.
+    - name: get-signing-certificate
+      description: Given a user pool ID, returns the signing certificate for SAML 2.0 federation.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: A unique resource server identifier for the resource server.
-        --name=!: A friendly name for the resource server.
-        --scopes=: A list of custom scopes.
-        --user-pool-id=!: The ID of the user pool where you want to create a resource server.
+        --user-pool-id=!: The ID of the user pool where you want to view the signing certificate.
+    - name: set-user-settings
+      description: '*This action is no longer supported.* You can use it to configure only SMS MFA.'
+      flags:
+        --access-token=!: A valid access token that Amazon Cognito issued to the currently signed-in user.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mfa-options=!: You can use this parameter only to set an SMS configuration that uses SMS for delivery.
+    - name: start-user-import-job
+      description: Instructs your user pool to start importing users from a CSV file that contains their usernames and attributes.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The ID of a user import job that you previously created.
+        --user-pool-id=!: The ID of the user pool that you want to start importing users into.
+    - name: update-device-status
+      description: Updates the status of a the currently signed-in user's device so that it is marked as remembered or not remembered for the purpose of device authentication.
+      flags:
+        --access-token=!: A valid access token that Amazon Cognito issued to the currently signed-in user.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --device-key=!: The device key of the device you want to update, for example `us-west-2_a1b2c3d4-5678-90ab-cdef-EXAMPLE11111`.
+        --device-remembered-status=: To enable device authentication with the specified device, set to `remembered`.To disable, set to `not_remembered`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            device-remembered-status:
+                - remembered
+                - not_remembered
+    - name: admin-forget-device
+      description: Forgets, or deletes, a remembered device from a user's profile.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --device-key=!: The key ID of the device that you want to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-pool-id=!: The ID of the user pool where the device owner is a user.
+        --username=!: The name of the user that you want to query or modify.
     - name: create-user-pool
       description: Creates a new Amazon Cognito user pool.
       flags:
@@ -219,59 +812,59 @@ commands:
                 - LITE
                 - ESSENTIALS
                 - PLUS
-    - name: delete-resource-server
-      description: Deletes a resource server.
+    - name: revoke-token
+      description: Revokes all of the access tokens generated by, and at the same time as, the specified refresh token.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-id=!: The ID of the app client where the token that you want to revoke was issued.
+        --client-secret=: The client secret of the requested app client, if the client has a secret.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The identifier of the resource server that you want to delete.
-        --user-pool-id=!: The ID of the user pool where you want to delete the resource server.
-    - name: describe-user-import-job
-      description: Describes a user import job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The Id of the user import job that you want to describe.
-        --user-pool-id=!: The ID of the user pool that's associated with the import job.
-    - name: get-user-auth-factors
-      description: Lists the authentication options for the currently signed-in user.
+        --token=!: The refresh token that you want to revoke.
+    - name: update-user-attributes
+      description: Updates the currently signed-in user's attributes.
       flags:
         --access-token=!: A valid access token that Amazon Cognito issued to the currently signed-in user.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-metadata=: A map of custom key-value pairs that you can provide as input for any custom workflows that this action initiates.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-user-import-jobs
-      description: Given a user pool ID, returns user import jobs and their details.
+        --user-attributes=!: An array of name-value pairs representing user attributes.
+    - name: update-user-pool-domain
+      description: A user pool domain hosts managed login, an authorization server and web server for authentication in your application.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --custom-domain-config=: The configuration for a custom domain that hosts managed login for your application.
+        --domain=!: The name of the domain that you want to update.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=!: The maximum number of import jobs that you want Amazon Cognito to return in the response.
-        --pagination-token=: This API operation returns a limited number of results.
-        --user-pool-id=!: The ID of the user pool where you want to list import jobs.
-    - name: update-managed-login-branding
-      description: Configures the branding settings for a user pool style.
+        --managed-login-version=: A version number that indicates the state of managed login for your domain.
+        --user-pool-id=!: The ID of the user pool that is associated with the domain you're updating.
+    - name: admin-initiate-auth
+      description: Starts sign-in for applications with a server-side component, for example a traditional web application.
       flags:
-        --assets=: An array of image files that you want to apply to roles like backgrounds, logos, and icons.
+        --analytics-metadata=: Information that supports analytics outcomes with Amazon Pinpoint, including the user's endpoint ID.
+        --auth-flow=!: The authentication flow that you want to initiate.
+        --auth-parameters=: The authentication parameters.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-id=!: The ID of the app client where the user wants to sign in.
+        --client-metadata=: A map of custom key-value pairs that you can provide as input for certain custom workflows that this action triggers.
+        --context-data=: Contextual data about your user session like the device fingerprint, IP address, or location.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --managed-login-branding-id=: The ID of the managed login branding style that you want to update.
-        --no-use-cognito-provided-values: When `true`, applies the default branding style options.
-        --settings=: A JSON file, encoded as a `Document` type, with the the settings that you want to apply to your style.
-        --use-cognito-provided-values: When `true`, applies the default branding style options.
-        --user-pool-id=: The ID of the user pool that contains the managed login branding style that you want to update.
-    - name: admin-add-user-to-group
-      description: Adds a user to a group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-name=!: The name of the group that you want to add your user to.
-        --user-pool-id=!: The ID of the user pool that contains the group that you want to add the user to.
-        --username=!: The name of the user that you want to query or modify.
+        --session=: The optional session ID from a `ConfirmSignUp` API request.
+        --user-pool-id=!: The ID of the user pool where the user wants to sign in.
+      completion:
+        flag:
+            auth-flow:
+                - USER_SRP_AUTH
+                - REFRESH_TOKEN_AUTH
+                - REFRESH_TOKEN
+                - CUSTOM_AUTH
+                - ADMIN_NO_SRP_AUTH
+                - USER_PASSWORD_AUTH
+                - ADMIN_USER_PASSWORD_AUTH
+                - USER_AUTH
     - name: admin-update-user-attributes
       description: Updates the specified user's attributes.
       flags:
@@ -282,72 +875,165 @@ commands:
         --user-attributes=!: An array of name-value pairs representing user attributes.
         --user-pool-id=!: The ID of the user pool where you want to update user attributes.
         --username=!: The name of the user that you want to query or modify.
-    - name: delete-user-attributes
-      description: Deletes attributes from the currently signed-in user.
+    - name: delete-group
+      description: Deletes a group from the specified user pool.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-name=!: The name of the group that you want to delete.
+        --user-pool-id=!: The ID of the user pool where you want to delete the group.
+    - name: describe-risk-configuration
+      description: Given an app client or user pool ID where threat protection is configured, describes the risk configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-id=: The ID of the app client with the risk configuration that you want to inspect.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-pool-id=!: The ID of the user pool with the risk configuration that you want to inspect.
+    - name: get-device
+      description: Given a device key, returns information about a remembered device for the current user.
+      flags:
+        --access-token=: A valid access token that Amazon Cognito issued to the currently signed-in user.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --device-key=!: The key of the device that you want to get information about.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: admin-update-device-status
+      description: Updates the status of a user's device so that it is marked as remembered or not remembered for the purpose of device authentication.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --device-key=!: The unique identifier, or device key, of the device that you want to update the status for.
+        --device-remembered-status=: To enable device authentication with the specified device, set to `remembered`.To disable, set to `not_remembered`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-pool-id=!: The ID of the user pool where you want to change a user's device status.
+        --username=!: The name of the user that you want to query or modify.
+      completion:
+        flag:
+            device-remembered-status:
+                - remembered
+                - not_remembered
+    - name: admin-user-global-sign-out
+      description: Invalidates the identity, access, and refresh tokens that Amazon Cognito issued to a user.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-pool-id=!: The ID of the user pool where you want to sign out a user.
+        --username=!: The name of the user that you want to query or modify.
+    - name: describe-managed-login-branding-by-client
+      description: Given the ID of a user pool app client, returns detailed information about the style assigned to the app client.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-id=!: The app client that's assigned to the branding style that you want more information about.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-return-merged-resources: When `true`, returns values for branding options that are unchanged from Amazon Cognito defaults.
+        --return-merged-resources: When `true`, returns values for branding options that are unchanged from Amazon Cognito defaults.
+        --user-pool-id=!: The ID of the user pool that contains the app client where you want more information about the managed login branding style.
+    - name: delete-resource-server
+      description: Deletes a resource server.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The identifier of the resource server that you want to delete.
+        --user-pool-id=!: The ID of the user pool where you want to delete the resource server.
+    - name: describe-identity-provider
+      description: Given a user pool ID and identity provider (IdP) name, returns details about the IdP.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --provider-name=!: The name of the IdP that you want to describe.
+        --user-pool-id=!: The ID of the user pool that has the IdP that you want to describe..
+    - name: get-identity-provider-by-identifier
+      description: Given the identifier of an identity provider (IdP), for example `examplecorp`, returns information about the user pool configuration for that IdP.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --idp-identifier=!: The identifier that you assigned to your user pool.
+        --user-pool-id=!: The ID of the user pool where you want to get information about the IdP.
+    - name: tag-resource
+      description: Assigns a set of tags to an Amazon Cognito user pool.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the user pool to assign the tags to.
+        --tags=!: An array of tag keys and values that you want to assign to the user pool.
+    - name: complete-web-authn-registration
+      description: Completes registration of a passkey authenticator for the currently signed-in user.
       flags:
         --access-token=!: A valid access token that Amazon Cognito issued to the currently signed-in user.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --credential=!: A [RegistrationResponseJSON](https://www.w3.org/TR/WebAuthn-3/#dictdef-registrationresponsejson) public-key credential response from the user's passkey provider.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-attribute-names=!: An array of strings representing the user attribute names you want to delete.
-    - name: delete-web-authn-credential
-      description: Deletes a registered passkey, or WebAuthn, authenticator for the currently signed-in user.
+    - name: delete-user-pool-domain
+      description: Given a user pool ID and domain identifier, deletes a user pool domain.
       flags:
-        --access-token=!: A valid access token that Amazon Cognito issued to the currently signed-in user.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --credential-id=!: The unique identifier of the passkey that you want to delete.
+        --domain=!: The domain that you want to delete.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: forgot-password
-      description: Sends a password-reset confirmation code to the email address or phone number of the requested username.
+        --user-pool-id=!: The ID of the user pool where you want to delete the domain.
+    - name: describe-user-import-job
+      description: Describes a user import job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The Id of the user import job that you want to describe.
+        --user-pool-id=!: The ID of the user pool that's associated with the import job.
+    - name: describe-user-pool-client
+      description: Given an app client ID, returns configuration information.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-id=!: The ID of the app client that you want to describe.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-pool-id=!: The ID of the user pool that contains the app client you want to describe.
+    - name: get-group
+      description: Given a user pool ID and a group name, returns information about the user group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-name=!: The name of the group that you want to get information about.
+        --user-pool-id=!: The ID of the user pool that contains the group that you want to query.
+    - name: resend-confirmation-code
+      description: Resends the code that confirms a new account for a user who has signed up in your user pool.
       flags:
         --analytics-metadata=: Information that supports analytics outcomes with Amazon Pinpoint, including the user's endpoint ID.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-id=!: The ID of the user pool app client associated with the current signed-in user.
+        --client-id=!: The ID of the user pool app client where the user signed up.
         --client-metadata=: A map of custom key-value pairs that you can provide as input for any custom workflows that this action triggers.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --secret-hash=: A keyed-hash message authentication code (HMAC) calculated using the secret key of a user pool client and username plus the client ID in the message.
         --user-context-data=: Contextual data about your user session like the device fingerprint, IP address, or location.
         --username=!: The name of the user that you want to query or modify.
-    - name: get-csv-header
-      description: Given a user pool ID, generates a comma-separated value (CSV) list populated with available user attributes in the user pool.
+    - name: set-ui-customization
+      description: Configures UI branding settings for domains with the hosted UI (classic) branding version.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-id=: The ID of the app client that you want to customize.
+        --css=: A plaintext CSS file that contains the custom fields that you want to apply to your user pool or app client.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-pool-id=!: The ID of the user pool that you want to import users into.
-    - name: list-user-pool-clients
-      description: Given a user pool ID, lists app clients.
+        --image-file=: The image that you want to set as your login in the classic hosted UI, as a Base64-formatted binary object.
+        --user-pool-id=!: The ID of the user pool where you want to apply branding to the classic hosted UI.
+    - name: add-custom-attributes
+      description: Adds additional user attributes to the user pool schema.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --custom-attributes=!: An array of custom attribute names and other properties.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of app clients that you want Amazon Cognito to return in the response.
-        --next-token=: This API operation returns a limited number of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --user-pool-id=!: The ID of the user pool where you want to list user pool clients.
-    - name: update-group
-      description: Given the name of a user pool group, updates any of the properties for precedence, IAM role, or description.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A new description of the existing group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-name=!: The name of the group that you want to update.
-        --precedence=: A non-negative integer value that specifies the precedence of this group relative to the other groups that a user can belong to in the user pool.
-        --role-arn=: The Amazon Resource Name (ARN) of an IAM role that you want to associate with the group.
-        --user-pool-id=!: The ID of the user pool that contains the group you want to update.
-    - name: untag-resource
-      description: Given tag IDs that you previously assigned to a user pool, removes them.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the user pool that the tags are assigned to.
-        --tag-keys=!: An array of tag keys that you want to remove from the user pool.
+        --user-pool-id=!: The ID of the user pool where you want to add custom attributes.
     - name: admin-confirm-sign-up
       description: Confirms user sign-up as an administrator.
       flags:
@@ -357,321 +1043,6 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --user-pool-id=!: The ID of the user pool where you want to confirm a user's sign-up request.
         --username=!: The name of the user that you want to query or modify.
-    - name: admin-forget-device
-      description: Forgets, or deletes, a remembered device from a user's profile.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --device-key=!: The key ID of the device that you want to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-pool-id=!: The ID of the user pool where the device owner is a user.
-        --username=!: The name of the user that you want to query or modify.
-    - name: list-tags-for-resource
-      description: Lists the tags that are assigned to an Amazon Cognito user pool.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the user pool that the tags are assigned to.
-    - name: get-identity-provider-by-identifier
-      description: Given the identifier of an identity provider (IdP), for example `examplecorp`, returns information about the user pool configuration for that IdP.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --idp-identifier=!: The identifier that you assigned to your user pool.
-        --user-pool-id=!: The ID of the user pool where you want to get information about the IdP.
-    - name: update-identity-provider
-      description: Modifies the configuration and trust relationship between a third-party identity provider (IdP) and a user pool.
-      flags:
-        --attribute-mapping=: A mapping of IdP attributes to standard and custom user pool attributes.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --idp-identifiers=: 'An array of IdP identifiers, for example `"IdPIdentifiers": [ "MyIdP", "MyIdP2" ]`.'
-        --provider-details=: The scopes, URLs, and identifiers for your external identity provider.
-        --provider-name=!: The name of the IdP that you want to update.
-        --user-pool-id=!: The Id of the user pool where you want to update your IdP.
-    - name: admin-enable-user
-      description: Activates sign-in for a user profile that previously had sign-in access disabled.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-pool-id=!: The ID of the user pool where you want to activate sign-in for the user.
-        --username=!: The name of the user that you want to query or modify.
-    - name: associate-software-token
-      description: Begins setup of time-based one-time password (TOTP) multi-factor authentication (MFA) for a user, with a unique private key that Amazon Cognito generates and returns in the API response.
-      flags:
-        --access-token=: A valid access token that Amazon Cognito issued to the currently signed-in user.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --session=: The session identifier that maintains the state of authentication requests and challenge responses.
-    - name: change-password
-      description: Changes the password for the currently signed-in user.
-      flags:
-        --access-token=!: A valid access token that Amazon Cognito issued to the user whose password you want to change.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --previous-password=: The user's previous password.
-        --proposed-password=!: A new password that you prompted the user to enter in your application.
-    - name: forget-device
-      description: Given a device key, deletes a remembered device as the currently signed-in user.
-      flags:
-        --access-token=: A valid access token that Amazon Cognito issued to the currently signed-in user.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --device-key=!: The unique identifier, or device key, of the device that the user wants to forget.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-tokens-from-refresh-token
-      description: Given a refresh token, issues new ID, access, and optionally refresh tokens for the user who owns the submitted token.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-id=!: The app client that issued the refresh token to the user who wants to request new tokens.
-        --client-metadata=: A map of custom key-value pairs that you can provide as input for certain custom workflows that this action triggers.
-        --client-secret=: The client secret of the requested app client, if the client has a secret.
-        --device-key=: When you enable device remembering, Amazon Cognito issues a device key that you can use for device authentication that bypasses multi-factor authentication (MFA).
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --refresh-token=!: A valid refresh token that can authorize the request for new tokens.
-    - name: update-resource-server
-      description: Updates the name and scopes of a resource server.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: A unique resource server identifier for the resource server.
-        --name=!: The updated name of the resource server.
-        --scopes=: An array of updated custom scope names and descriptions that you want to associate with your resource server.
-        --user-pool-id=!: The ID of the user pool that contains the resource server that you want to update.
-    - name: set-risk-configuration
-      description: Configures threat protection for a user pool or app client.
-      flags:
-        --account-takeover-risk-configuration=: The settings for automated responses and notification templates for adaptive authentication with threat protection.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-id=: The ID of the app client where you want to set a risk configuration.
-        --compromised-credentials-risk-configuration=: The configuration of automated reactions to detected compromised credentials.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --risk-exception-configuration=: A set of IP-address overrides to threat protection.
-        --user-pool-id=!: The ID of the user pool where you want to set a risk configuration.
-    - name: update-user-pool
-      description: Updates the configuration of a user pool.
-      flags:
-        --account-recovery-setting=: The available verified method a user can use to recover their password when they call `ForgotPassword`.
-        --admin-create-user-config=: The configuration for administrative creation of users.
-        --auto-verified-attributes=: The attributes that you want your user pool to automatically verify.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deletion-protection=: When active, `DeletionProtection` prevents accidental deletion of your user pool.
-        --device-configuration=: The device-remembering configuration for a user pool.
-        --email-configuration=: The email configuration of your user pool.
-        --email-verification-message=: This parameter is no longer used.
-        --email-verification-subject=: This parameter is no longer used.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lambda-config=: A collection of user pool Lambda triggers.
-        --mfa-configuration=: Sets multi-factor authentication (MFA) to be on, off, or optional.
-        --policies=: The password policy and sign-in policy in the user pool.
-        --pool-name=: The updated name of your user pool.
-        --sms-authentication-message=: The contents of the SMS message that your user pool sends to users in SMS authentication.
-        --sms-configuration=: The SMS configuration with the settings for your Amazon Cognito user pool to send SMS message with Amazon Simple Notification Service.
-        --sms-verification-message=: This parameter is no longer used.
-        --user-attribute-update-settings=: The settings for updates to user attributes.
-        --user-pool-add-ons=: Contains settings for activation of threat protection, including the operating mode and additional authentication types.
-        --user-pool-id=!: The ID of the user pool you want to update.
-        --user-pool-tags=: The tag keys and values to assign to the user pool.
-        --user-pool-tier=: The user pool [feature plan](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-sign-in-feature-plans.html), or tier.
-        --verification-message-template=: The template for the verification message that your user pool delivers to users who set an email address or phone number attribute.
-      completion:
-        flag:
-            deletion-protection:
-                - ACTIVE
-                - INACTIVE
-            mfa-configuration:
-                - "OFF"
-                - "ON"
-                - OPTIONAL
-            user-pool-tier:
-                - LITE
-                - ESSENTIALS
-                - PLUS
-    - name: admin-delete-user-attributes
-      description: Deletes attribute values from a user.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-attribute-names=!: An array of strings representing the user attribute names you want to delete.
-        --user-pool-id=!: The ID of the user pool where you want to delete user attributes.
-        --username=!: The name of the user that you want to query or modify.
-    - name: admin-set-user-settings
-      description: '*This action is no longer supported.* You can use it to configure only SMS MFA.'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mfa-options=!: You can use this parameter only to set an SMS configuration that uses SMS for delivery.
-        --user-pool-id=!: The ID of the user pool that contains the user whose options you're setting.
-        --username=!: The name of the user that you want to query or modify.
-    - name: get-log-delivery-configuration
-      description: Given a user pool ID, returns the logging configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-pool-id=!: The ID of the user pool that has the logging configuration that you want to view.
-    - name: list-terms
-      description: Returns details about all terms documents for the requested user pool.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of terms documents that you want Amazon Cognito to return in the response.
-        --next-token=: This API operation returns a limited number of results.
-        --user-pool-id=!: The ID of the user pool where you want to list terms documents.
-    - name: set-user-pool-mfa-config
-      description: Sets user pool multi-factor authentication (MFA) and passkey configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --email-mfa-configuration=: Sets configuration for user pool email message MFA and sign-in with one-time passwords (OTPs).
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mfa-configuration=: Sets multi-factor authentication (MFA) to be on, off, or optional.
-        --sms-mfa-configuration=: Configures user pool SMS messages for MFA.
-        --software-token-mfa-configuration=: Configures a user pool for time-based one-time password (TOTP) MFA.
-        --user-pool-id=!: The user pool ID.
-        --web-authn-configuration=: The configuration of your user pool for passkey, or WebAuthn, authentication and registration.
-      completion:
-        flag:
-            mfa-configuration:
-                - "OFF"
-                - "ON"
-                - OPTIONAL
-    - name: start-web-authn-registration
-      description: Requests credential creation options from your user pool for the currently signed-in user.
-      flags:
-        --access-token=!: A valid access token that Amazon Cognito issued to the currently signed-in user.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: admin-get-user
-      description: Given a username, returns details about a user profile in a user pool.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-pool-id=!: The ID of the user pool where you want to get information about the user.
-        --username=!: The name of the user that you want to query or modify.
-    - name: update-user-pool-client
-      description: Given a user pool app client ID, updates the configuration.
-      flags:
-        --access-token-validity=: The access token time limit.
-        --allowed-o-auth-flows-user-pool-client: Set to `true` to use OAuth 2.0 authorization server features in your app client.
-        --allowed-o-auth-flows=: The OAuth grant types that you want your app client to generate.
-        --allowed-o-auth-scopes=: The OAuth, OpenID Connect (OIDC), and custom scopes that you want to permit your app client to authorize access with.
-        --analytics-configuration=: The user pool analytics configuration for collecting metrics and sending them to your Amazon Pinpoint campaign.
-        --auth-session-validity=: Amazon Cognito creates a session token for each API request in an authentication flow.
-        --callback-urls=: A list of allowed redirect, or callback, URLs for managed login authentication.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-id=!: The ID of the app client that you want to update.
-        --client-name=: A friendly name for the app client.
-        --default-redirect-uri=: The default redirect URI.
-        --enable-propagate-additional-user-context-data: When `true`, your application can include additional `UserContextData` in authentication requests.
-        --enable-token-revocation: Activates or deactivates [token revocation](https://docs.aws.amazon.com/cognito/latest/developerguide/token-revocation.html) in the target app client.
-        --explicit-auth-flows=: The [authentication flows](https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-authentication-flow-methods.html) that you want your user pool client to support.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id-token-validity=: The ID token time limit.
-        --logout-urls=: A list of allowed logout URLs for managed login authentication.
-        --no-allowed-o-auth-flows-user-pool-client: Set to `true` to use OAuth 2.0 authorization server features in your app client.
-        --no-enable-propagate-additional-user-context-data: When `true`, your application can include additional `UserContextData` in authentication requests.
-        --no-enable-token-revocation: Activates or deactivates [token revocation](https://docs.aws.amazon.com/cognito/latest/developerguide/token-revocation.html) in the target app client.
-        --prevent-user-existence-errors=: When `ENABLED`, suppresses messages that might indicate a valid user exists when someone attempts sign-in.
-        --read-attributes=: The list of user attributes that you want your app client to have read access to.
-        --refresh-token-rotation=: The configuration of your app client for refresh token rotation.
-        --refresh-token-validity=: The refresh token time limit.
-        --supported-identity-providers=: A list of provider names for the identity providers (IdPs) that are supported on this client.
-        --token-validity-units=: The units that validity times are represented in.
-        --user-pool-id=!: The ID of the user pool where you want to update the app client.
-        --write-attributes=: The list of user attributes that you want your app client to have write access to.
-      completion:
-        flag:
-            prevent-user-existence-errors:
-                - LEGACY
-                - ENABLED
-    - name: list-web-authn-credentials
-      description: Generates a list of the currently signed-in user's registered passkey, or WebAuthn, credentials.
-      flags:
-        --access-token=!: A valid access token that Amazon Cognito issued to the currently signed-in user.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of the user's passkey credentials that you want to return.
-        --next-token=: This API operation returns a limited number of results.
-    - name: admin-remove-user-from-group
-      description: Given a username and a group name, removes them from the group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-name=!: The name of the group that you want to remove the user from, for example `MyTestGroup`.
-        --user-pool-id=!: The ID of the user pool that contains the group and the user that you want to remove.
-        --username=!: The name of the user that you want to query or modify.
-    - name: confirm-sign-up
-      description: Confirms the account of a new user.
-      flags:
-        --analytics-metadata=: Information that supports analytics outcomes with Amazon Pinpoint, including the user's endpoint ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-id=!: The ID of the app client associated with the user pool.
-        --client-metadata=: A map of custom key-value pairs that you can provide as input for any custom workflows that this action triggers.
-        --confirmation-code=!: The confirmation code that your user pool sent in response to the `SignUp` request.
-        --force-alias-creation: When `true`, forces user confirmation despite any existing aliases.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-force-alias-creation: When `true`, forces user confirmation despite any existing aliases.
-        --secret-hash=: A keyed-hash message authentication code (HMAC) calculated using the secret key of a user pool client and username plus the client ID in the message.
-        --session=: The optional session ID from a `SignUp` API request.
-        --user-context-data=: Contextual data about your user session like the device fingerprint, IP address, or location.
-        --username=!: The name of the user that you want to query or modify.
-    - name: describe-user-pool-domain
-      description: Given a user pool domain name, returns information about the domain configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain=!: The domain that you want to describe.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-user-pool-mfa-config
-      description: Given a user pool ID, returns configuration for sign-in with WebAuthn authenticators and for multi-factor authentication (MFA).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-pool-id=!: The ID of the user pool where you want to query WebAuthn and MFA configuration.
-    - name: list-identity-providers
-      description: Given a user pool ID, returns information about configured identity providers (IdPs).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of IdPs that you want Amazon Cognito to return in the response.
-        --next-token=: This API operation returns a limited number of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --user-pool-id=!: The ID of the user pool where you want to list IdPs.
-    - name: list-user-pools
-      description: Lists user pools and their details in the current Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=!: The maximum number of user pools that you want Amazon Cognito to return in the response.
-        --next-token=: This API operation returns a limited number of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
     - name: admin-list-groups-for-user
       description: Lists the groups that a user belongs to.
       flags:
@@ -685,28 +1056,14 @@ commands:
         --starting-token=: A token to specify where to start paginating.
         --user-pool-id=!: The ID of the user pool where you want to view a user's groups.
         --username=!: The name of the user that you want to query or modify.
-    - name: admin-update-auth-event-feedback
-      description: Provides the feedback for an authentication event generated by threat protection features.
+    - name: admin-reset-user-password
+      description: Begins the password reset process.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --event-id=!: The ID of the threat protection authentication event that you want to update.
-        --feedback-value=!: Your feedback to the authentication event.
+        --client-metadata=: A map of custom key-value pairs that you can provide as input for any custom workflows that this action triggers.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-pool-id=!: The ID of the user pool where you want to submit authentication-event feedback.
-        --username=!: The name of the user that you want to query or modify.
-      completion:
-        flag:
-            feedback-value:
-                - Valid
-                - Invalid
-    - name: admin-user-global-sign-out
-      description: Invalidates the identity, access, and refresh tokens that Amazon Cognito issued to a user.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-pool-id=!: The ID of the user pool where you want to sign out a user.
+        --user-pool-id=!: The ID of the user pool where you want to reset the user's password.
         --username=!: The name of the user that you want to query or modify.
     - name: confirm-forgot-password
       description: This public API operation accepts a confirmation code that Amazon Cognito sent to a user and accepts a new password for that user.
@@ -722,58 +1079,58 @@ commands:
         --secret-hash=: A keyed-hash message authentication code (HMAC) calculated using the secret key of a user pool client and username plus the client ID in the message.
         --user-context-data=: Contextual data about your user session like the device fingerprint, IP address, or location.
         --username=!: The name of the user that you want to query or modify.
-    - name: create-managed-login-branding
-      description: Creates a new set of branding settings for a user pool style and associates it with an app client.
-      flags:
-        --assets=: An array of image files that you want to apply to functions like backgrounds, logos, and icons.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-id=!: The app client that you want to create the branding style for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-use-cognito-provided-values: When true, applies the default branding style options.
-        --settings=: A JSON file, encoded as a `Document` type, with the the settings that you want to apply to your style.
-        --use-cognito-provided-values: When true, applies the default branding style options.
-        --user-pool-id=!: The ID of the user pool where you want to create a new branding style.
-    - name: describe-managed-login-branding
-      description: Given the ID of a managed login branding style, returns detailed information about the style.
+    - name: list-user-pool-clients
+      description: Given a user pool ID, lists app clients.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --managed-login-branding-id=!: The ID of the managed login branding style that you want to get more information about.
-        --no-return-merged-resources: When `true`, returns values for branding options that are unchanged from Amazon Cognito defaults.
-        --return-merged-resources: When `true`, returns values for branding options that are unchanged from Amazon Cognito defaults.
-        --user-pool-id=!: The ID of the user pool that contains the managed login branding style that you want to get information about.
-    - name: describe-user-pool-client
-      description: Given an app client ID, returns configuration information.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of app clients that you want Amazon Cognito to return in the response.
+        --next-token=: This API operation returns a limited number of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --user-pool-id=!: The ID of the user pool where you want to list user pool clients.
+    - name: respond-to-auth-challenge
+      description: Some API operations in a user pool generate a challenge, like a prompt for an MFA code, for device authentication that bypasses MFA, or for a custom authentication challenge.
       flags:
+        --analytics-metadata=: Information that supports analytics outcomes with Amazon Pinpoint, including the user's endpoint ID.
+        --challenge-name=!: The name of the challenge that you are responding to.
+        --challenge-responses=: The responses to the challenge that you received in the previous request.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-id=!: The ID of the app client that you want to describe.
+        --client-id=!: The ID of the app client where the user is signing in.
+        --client-metadata=: A map of custom key-value pairs that you can provide as input for any custom workflows that this action triggers.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-pool-id=!: The ID of the user pool that contains the app client you want to describe.
-    - name: admin-set-user-password
-      description: Sets the specified user's password in a user pool.
+        --session=: The session identifier that maintains the state of authentication requests and challenge responses.
+        --user-context-data=: Contextual data about your user session like the device fingerprint, IP address, or location.
+      completion:
+        flag:
+            challenge-name:
+                - SMS_MFA
+                - EMAIL_OTP
+                - SOFTWARE_TOKEN_MFA
+                - SELECT_MFA_TYPE
+                - MFA_SETUP
+                - PASSWORD_VERIFIER
+                - CUSTOM_CHALLENGE
+                - SELECT_CHALLENGE
+                - DEVICE_SRP_AUTH
+                - DEVICE_PASSWORD_VERIFIER
+                - ADMIN_NO_SRP_AUTH
+                - NEW_PASSWORD_REQUIRED
+                - SMS_OTP
+                - PASSWORD
+                - WEB_AUTHN
+                - PASSWORD_SRP
+    - name: associate-software-token
+      description: Begins setup of time-based one-time password (TOTP) multi-factor authentication (MFA) for a user, with a unique private key that Amazon Cognito generates and returns in the API response.
       flags:
+        --access-token=: A valid access token that Amazon Cognito issued to the currently signed-in user.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-permanent: Set to `true` to set a password that the user can immediately sign in with.
-        --password=!: The new temporary or permanent password that you want to set for the user.
-        --permanent: Set to `true` to set a password that the user can immediately sign in with.
-        --user-pool-id=!: The ID of the user pool where you want to set the user's password.
-        --username=!: The name of the user that you want to query or modify.
-    - name: create-group
-      description: Creates a new group in the specified user pool.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description of the group that you're creating.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-name=!: A name for the group.
-        --precedence=: A non-negative integer value that specifies the precedence of this group relative to the other groups that a user can belong to in the user pool.
-        --role-arn=: The Amazon Resource Name (ARN) for the IAM role that you want to associate with the group.
-        --user-pool-id=!: The ID of the user pool where you want to create a user group.
+        --session=: The session identifier that maintains the state of authentication requests and challenge responses.
     - name: create-user-pool-client
       description: Creates an app client in a user pool.
       flags:
@@ -812,96 +1169,13 @@ commands:
             prevent-user-existence-errors:
                 - LEGACY
                 - ENABLED
-    - name: describe-resource-server
-      description: Describes a resource server.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: A unique resource server identifier for the resource server.
-        --user-pool-id=!: The ID of the user pool that hosts the resource server.
-    - name: start-user-import-job
-      description: Instructs your user pool to start importing users from a CSV file that contains their usernames and attributes.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The ID of a user import job that you previously created.
-        --user-pool-id=!: The ID of the user pool that you want to start importing users into.
-    - name: admin-disable-provider-for-user
-      description: Prevents the user from signing in with the specified external (SAML or social) identity provider (IdP).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-pool-id=!: The ID of the user pool where you want to delete the user's linked identities.
-        --user=!: The user profile that you want to delete a linked identity from.
-    - name: complete-web-authn-registration
-      description: Completes registration of a passkey authenticator for the currently signed-in user.
+    - name: get-user-auth-factors
+      description: Lists the authentication options for the currently signed-in user.
       flags:
         --access-token=!: A valid access token that Amazon Cognito issued to the currently signed-in user.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --credential=!: A [RegistrationResponseJSON](https://www.w3.org/TR/WebAuthn-3/#dictdef-registrationresponsejson) public-key credential response from the user's passkey provider.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: sign-up
-      description: Registers a user with an app client and requests a user name, password, and user attributes in the user pool.
-      flags:
-        --analytics-metadata=: Information that supports analytics outcomes with Amazon Pinpoint, including the user's endpoint ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-id=!: The ID of the app client where the user wants to sign up.
-        --client-metadata=: A map of custom key-value pairs that you can provide as input for any custom workflows that this action triggers.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --password=: The user's proposed password.
-        --secret-hash=: A keyed-hash message authentication code (HMAC) calculated using the secret key of a user pool client and username plus the client ID in the message.
-        --user-attributes=: An array of name-value pairs representing user attributes.
-        --user-context-data=: Contextual data about your user session like the device fingerprint, IP address, or location.
-        --username=!: The username of the user that you want to sign up.
-        --validation-data=: Temporary user attributes that contribute to the outcomes of your pre sign-up Lambda trigger.
-    - name: update-user-attributes
-      description: Updates the currently signed-in user's attributes.
-      flags:
-        --access-token=!: A valid access token that Amazon Cognito issued to the currently signed-in user.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-metadata=: A map of custom key-value pairs that you can provide as input for any custom workflows that this action initiates.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-attributes=!: An array of name-value pairs representing user attributes.
-    - name: delete-managed-login-branding
-      description: Deletes a managed login branding style.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --managed-login-branding-id=!: The ID of the managed login branding style that you want to delete.
-        --user-pool-id=!: The ID of the user pool that contains the managed login branding style that you want to delete.
-    - name: describe-managed-login-branding-by-client
-      description: Given the ID of a user pool app client, returns detailed information about the style assigned to the app client.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-id=!: The app client that's assigned to the branding style that you want more information about.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-return-merged-resources: When `true`, returns values for branding options that are unchanged from Amazon Cognito defaults.
-        --return-merged-resources: When `true`, returns values for branding options that are unchanged from Amazon Cognito defaults.
-        --user-pool-id=!: The ID of the user pool that contains the app client where you want more information about the managed login branding style.
-    - name: add-custom-attributes
-      description: Adds additional user attributes to the user pool schema.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --custom-attributes=!: An array of custom attribute names and other properties.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-pool-id=!: The ID of the user pool where you want to add custom attributes.
-    - name: stop-user-import-job
-      description: Instructs your user pool to stop a running job that's importing users from a CSV file that contains their usernames and attributes.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The ID of a running user import job.
-        --user-pool-id=!: The ID of the user pool that you want to stop.
     - name: admin-link-provider-for-user
       description: Links an existing user account in a user pool, or `DestinationUser`, to an identity from an external IdP, or `SourceUser`, based on a specified attribute name and value from the external IdP.
       flags:
@@ -911,47 +1185,61 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --source-user=!: An external IdP account for a user who doesn't exist yet in the user pool.
         --user-pool-id=!: The ID of the user pool where you want to link a federated identity.
-    - name: admin-respond-to-auth-challenge
-      description: Some API operations in a user pool generate a challenge, like a prompt for an MFA code, for device authentication that bypasses MFA, or for a custom authentication challenge.
-      flags:
-        --analytics-metadata=: Information that supports analytics outcomes with Amazon Pinpoint, including the user's endpoint ID.
-        --challenge-name=!: The name of the challenge that you are responding to.
-        --challenge-responses=: The responses to the challenge that you received in the previous request.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-id=!: The ID of the app client where you initiated sign-in.
-        --client-metadata=: A map of custom key-value pairs that you can provide as input for any custom workflows that this action triggers.
-        --context-data=: Contextual data about your user session like the device fingerprint, IP address, or location.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --session=: The session identifier that maintains the state of authentication requests and challenge responses.
-        --user-pool-id=!: The ID of the user pool where you want to respond to an authentication challenge.
-      completion:
-        flag:
-            challenge-name:
-                - SMS_MFA
-                - EMAIL_OTP
-                - SOFTWARE_TOKEN_MFA
-                - SELECT_MFA_TYPE
-                - MFA_SETUP
-                - PASSWORD_VERIFIER
-                - CUSTOM_CHALLENGE
-                - SELECT_CHALLENGE
-                - DEVICE_SRP_AUTH
-                - DEVICE_PASSWORD_VERIFIER
-                - ADMIN_NO_SRP_AUTH
-                - NEW_PASSWORD_REQUIRED
-                - SMS_OTP
-                - PASSWORD
-                - WEB_AUTHN
-                - PASSWORD_SRP
-    - name: set-user-settings
+    - name: admin-set-user-settings
       description: '*This action is no longer supported.* You can use it to configure only SMS MFA.'
       flags:
-        --access-token=!: A valid access token that Amazon Cognito issued to the currently signed-in user.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --mfa-options=!: You can use this parameter only to set an SMS configuration that uses SMS for delivery.
+        --user-pool-id=!: The ID of the user pool that contains the user whose options you're setting.
+        --username=!: The name of the user that you want to query or modify.
+    - name: describe-terms
+      description: Returns details for the requested terms documents ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --terms-id=!: The ID of the terms documents that you want to describe.
+        --user-pool-id=!: The ID of the user pool that contains the terms documents that you want to describe.
+    - name: forgot-password
+      description: Sends a password-reset confirmation code to the email address or phone number of the requested username.
+      flags:
+        --analytics-metadata=: Information that supports analytics outcomes with Amazon Pinpoint, including the user's endpoint ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-id=!: The ID of the user pool app client associated with the current signed-in user.
+        --client-metadata=: A map of custom key-value pairs that you can provide as input for any custom workflows that this action triggers.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --secret-hash=: A keyed-hash message authentication code (HMAC) calculated using the secret key of a user pool client and username plus the client ID in the message.
+        --user-context-data=: Contextual data about your user session like the device fingerprint, IP address, or location.
+        --username=!: The name of the user that you want to query or modify.
+    - name: get-csv-header
+      description: Given a user pool ID, generates a comma-separated value (CSV) list populated with available user attributes in the user pool.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-pool-id=!: The ID of the user pool that you want to import users into.
+    - name: update-identity-provider
+      description: Modifies the configuration and trust relationship between a third-party identity provider (IdP) and a user pool.
+      flags:
+        --attribute-mapping=: A mapping of IdP attributes to standard and custom user pool attributes.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --idp-identifiers=: 'An array of IdP identifiers, for example `"IdPIdentifiers": [ "MyIdP", "MyIdP2" ]`.'
+        --provider-details=: The scopes, URLs, and identifiers for your external identity provider.
+        --provider-name=!: The name of the IdP that you want to update.
+        --user-pool-id=!: The Id of the user pool where you want to update your IdP.
+    - name: admin-get-user
+      description: Given a username, returns details about a user profile in a user pool.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-pool-id=!: The ID of the user pool where you want to get information about the user.
+        --username=!: The name of the user that you want to query or modify.
     - name: admin-list-user-auth-events
       description: Requests a history of user activity and any risks detected as part of Amazon Cognito threat protection.
       flags:
@@ -976,66 +1264,25 @@ commands:
         --software-token-mfa-settings=: User preferences for time-based one-time password (TOTP) MFA.
         --user-pool-id=!: The ID of the user pool where you want to set a user's MFA preferences.
         --username=!: The name of the user that you want to query or modify.
-    - name: get-user
-      description: Gets user attributes and and MFA settings for the currently signed-in user.
-      flags:
-        --access-token=!: A valid access token that Amazon Cognito issued to the currently signed-in user.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: respond-to-auth-challenge
-      description: Some API operations in a user pool generate a challenge, like a prompt for an MFA code, for device authentication that bypasses MFA, or for a custom authentication challenge.
-      flags:
-        --analytics-metadata=: Information that supports analytics outcomes with Amazon Pinpoint, including the user's endpoint ID.
-        --challenge-name=!: The name of the challenge that you are responding to.
-        --challenge-responses=: The responses to the challenge that you received in the previous request.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-id=!: The ID of the app client where the user is signing in.
-        --client-metadata=: A map of custom key-value pairs that you can provide as input for any custom workflows that this action triggers.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --session=: The session identifier that maintains the state of authentication requests and challenge responses.
-        --user-context-data=: Contextual data about your user session like the device fingerprint, IP address, or location.
-      completion:
-        flag:
-            challenge-name:
-                - SMS_MFA
-                - EMAIL_OTP
-                - SOFTWARE_TOKEN_MFA
-                - SELECT_MFA_TYPE
-                - MFA_SETUP
-                - PASSWORD_VERIFIER
-                - CUSTOM_CHALLENGE
-                - SELECT_CHALLENGE
-                - DEVICE_SRP_AUTH
-                - DEVICE_PASSWORD_VERIFIER
-                - ADMIN_NO_SRP_AUTH
-                - NEW_PASSWORD_REQUIRED
-                - SMS_OTP
-                - PASSWORD
-                - WEB_AUTHN
-                - PASSWORD_SRP
-    - name: admin-create-user
-      description: Creates a new user in the specified user pool.
+    - name: delete-identity-provider
+      description: Deletes a user pool identity provider (IdP).
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-metadata=: A map of custom key-value pairs that you can provide as input for any custom workflows that this action triggers.
-        --desired-delivery-mediums=: Specify `EMAIL` if email will be used to send the welcome message.
-        --force-alias-creation: This parameter is used only if the `phone_number_verified` or `email_verified` attribute is set to `True`.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --message-action=: Set to `RESEND` to resend the invitation message to a user that already exists, and to reset the temporary-password duration with a new temporary password.
-        --no-force-alias-creation: This parameter is used only if the `phone_number_verified` or `email_verified` attribute is set to `True`.
-        --temporary-password=: The user's temporary password.
-        --user-attributes=: An array of name-value pairs that contain user attributes and attribute values to be set for the user to be created.
-        --user-pool-id=!: The ID of the user pool where you want to create a user.
-        --username=!: The value that you want to set as the username sign-in attribute.
-        --validation-data=: Temporary user attributes that contribute to the outcomes of your pre sign-up Lambda trigger.
-      completion:
-        flag:
-            message-action:
-                - RESEND
-                - SUPPRESS
+        --provider-name=!: The name of the IdP that you want to delete.
+        --user-pool-id=!: The ID of the user pool where you want to delete the identity provider.
+    - name: get-tokens-from-refresh-token
+      description: Given a refresh token, issues new ID, access, and optionally refresh tokens for the user who owns the submitted token.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-id=!: The app client that issued the refresh token to the user who wants to request new tokens.
+        --client-metadata=: A map of custom key-value pairs that you can provide as input for certain custom workflows that this action triggers.
+        --client-secret=: The client secret of the requested app client, if the client has a secret.
+        --device-key=: When you enable device remembering, Amazon Cognito issues a device key that you can use for device authentication that bypasses multi-factor authentication (MFA).
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --refresh-token=!: A valid refresh token that can authorize the request for new tokens.
     - name: get-user-attribute-verification-code
       description: Given an attribute name, sends a user attribute verification code for the specified attribute name to the currently signed-in user.
       flags:
@@ -1045,279 +1292,71 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-metadata=: A map of custom key-value pairs that you can provide as input for any custom workflows that this action triggers.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-terms
-      description: Modifies existing terms documents for the requested app client.
+    - name: list-identity-providers
+      description: Given a user pool ID, returns information about configured identity providers (IdPs).
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --enforcement=: This parameter is reserved for future use and currently accepts only one value.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --links=: A map of URLs to languages.
-        --terms-id=!: The ID of the terms document that you want to update.
-        --terms-name=: The new name that you want to apply to the requested terms documents.
-        --terms-source=: This parameter is reserved for future use and currently accepts only one value.
-        --user-pool-id=!: The ID of the user pool that contains the terms that you want to update.
-      completion:
-        flag:
-            enforcement:
-                - NONE
-            terms-source:
-                - LINK
-    - name: update-user-pool-domain
-      description: A user pool domain hosts managed login, an authorization server and web server for authentication in your application.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of IdPs that you want Amazon Cognito to return in the response.
+        --next-token=: This API operation returns a limited number of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --user-pool-id=!: The ID of the user pool where you want to list IdPs.
+    - name: list-resource-servers
+      description: Given a user pool ID, returns all resource servers and their details.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --custom-domain-config=: The configuration for a custom domain that hosts managed login for your application.
-        --domain=!: The name of the domain that you want to update.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --managed-login-version=: A version number that indicates the state of managed login for your domain.
-        --user-pool-id=!: The ID of the user pool that is associated with the domain you're updating.
-    - name: admin-initiate-auth
-      description: Starts sign-in for applications with a server-side component, for example a traditional web application.
-      flags:
-        --analytics-metadata=: Information that supports analytics outcomes with Amazon Pinpoint, including the user's endpoint ID.
-        --auth-flow=!: The authentication flow that you want to initiate.
-        --auth-parameters=: The authentication parameters.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-id=!: The ID of the app client where the user wants to sign in.
-        --client-metadata=: A map of custom key-value pairs that you can provide as input for certain custom workflows that this action triggers.
-        --context-data=: Contextual data about your user session like the device fingerprint, IP address, or location.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --session=: The optional session ID from a `ConfirmSignUp` API request.
-        --user-pool-id=!: The ID of the user pool where the user wants to sign in.
-      completion:
-        flag:
-            auth-flow:
-                - USER_SRP_AUTH
-                - REFRESH_TOKEN_AUTH
-                - REFRESH_TOKEN
-                - CUSTOM_AUTH
-                - ADMIN_NO_SRP_AUTH
-                - USER_PASSWORD_AUTH
-                - ADMIN_USER_PASSWORD_AUTH
-                - USER_AUTH
-    - name: create-terms
-      description: Creates terms documents for the requested app client.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-id=!: The ID of the app client where you want to create terms documents.
-        --enforcement=!: This parameter is reserved for future use and currently accepts only one value.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --links=: A map of URLs to languages.
-        --terms-name=!: A friendly name for the document that you want to create in the current request.
-        --terms-source=!: This parameter is reserved for future use and currently accepts only one value.
-        --user-pool-id=!: The ID of the user pool where you want to create terms documents.
-      completion:
-        flag:
-            enforcement:
-                - NONE
-            terms-source:
-                - LINK
-    - name: delete-user
-      description: Deletes the profile of the currently signed-in user.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of resource servers that you want Amazon Cognito to return in the response.
+        --next-token=: This API operation returns a limited number of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --user-pool-id=!: The ID of the user pool where you want to list resource servers.
+    - name: confirm-device
+      description: Confirms a device that a user wants to remember.
       flags:
         --access-token=!: A valid access token that Amazon Cognito issued to the currently signed-in user.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-user-pool-domain
-      description: Given a user pool ID and domain identifier, deletes a user pool domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain=!: The domain that you want to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-pool-id=!: The ID of the user pool where you want to delete the domain.
-    - name: admin-get-device
-      description: Given the device key, returns details for a user's device.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --device-key=!: The key of the device that you want to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-pool-id=!: The ID of the user pool where the device owner is a user.
-        --username=!: The name of the user that you want to query or modify.
-    - name: admin-list-devices
-      description: Lists a user's registered devices.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of devices that you want Amazon Cognito to return in the response.
-        --pagination-token=: This API operation returns a limited number of results.
-        --user-pool-id=!: The ID of the user pool where the device owner is a user.
-        --username=!: The name of the user that you want to query or modify.
-    - name: admin-update-device-status
-      description: Updates the status of a user's device so that it is marked as remembered or not remembered for the purpose of device authentication.
-      flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --device-key=!: The unique identifier, or device key, of the device that you want to update the status for.
-        --device-remembered-status=: To enable device authentication with the specified device, set to `remembered`.To disable, set to `not_remembered`.
+        --device-name=: A friendly name for the device, for example `MyMobilePhone`.
+        --device-secret-verifier-config=: The configuration of the device secret verifier.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-pool-id=!: The ID of the user pool where you want to change a user's device status.
-        --username=!: The name of the user that you want to query or modify.
-      completion:
-        flag:
-            device-remembered-status:
-                - remembered
-                - not_remembered
-    - name: describe-identity-provider
-      description: Given a user pool ID and identity provider (IdP) name, returns details about the IdP.
+    - name: describe-managed-login-branding
+      description: Given the ID of a managed login branding style, returns detailed information about the style.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --provider-name=!: The name of the IdP that you want to describe.
-        --user-pool-id=!: The ID of the user pool that has the IdP that you want to describe..
-    - name: describe-risk-configuration
-      description: Given an app client or user pool ID where threat protection is configured, describes the risk configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-id=: The ID of the app client with the risk configuration that you want to inspect.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-pool-id=!: The ID of the user pool with the risk configuration that you want to inspect.
-    - name: set-ui-customization
-      description: Configures UI branding settings for domains with the hosted UI (classic) branding version.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-id=: The ID of the app client that you want to customize.
-        --css=: A plaintext CSS file that contains the custom fields that you want to apply to your user pool or app client.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-file=: The image that you want to set as your login in the classic hosted UI, as a Base64-formatted binary object.
-        --user-pool-id=!: The ID of the user pool where you want to apply branding to the classic hosted UI.
-    - name: tag-resource
-      description: Assigns a set of tags to an Amazon Cognito user pool.
+        --managed-login-branding-id=!: The ID of the managed login branding style that you want to get more information about.
+        --no-return-merged-resources: When `true`, returns values for branding options that are unchanged from Amazon Cognito defaults.
+        --return-merged-resources: When `true`, returns values for branding options that are unchanged from Amazon Cognito defaults.
+        --user-pool-id=!: The ID of the user pool that contains the managed login branding style that you want to get information about.
+    - name: list-users-in-group
+      description: Given a user pool ID and a group name, returns a list of users in the group.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the user pool to assign the tags to.
-        --tags=!: An array of tag keys and values that you want to assign to the user pool.
-    - name: update-device-status
-      description: Updates the status of a the currently signed-in user's device so that it is marked as remembered or not remembered for the purpose of device authentication.
-      flags:
-        --access-token=!: A valid access token that Amazon Cognito issued to the currently signed-in user.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --device-key=!: The device key of the device you want to update, for example `us-west-2_a1b2c3d4-5678-90ab-cdef-EXAMPLE11111`.
-        --device-remembered-status=: To enable device authentication with the specified device, set to `remembered`.To disable, set to `not_remembered`.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      completion:
-        flag:
-            device-remembered-status:
-                - remembered
-                - not_remembered
-    - name: admin-delete-user
-      description: Deletes a user profile in your user pool.
+        --group-name=!: The name of the group that you want to query for user membership.
+        --limit=: The maximum number of groups that you want Amazon Cognito to return in the response.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: This API operation returns a limited number of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --user-pool-id=!: The ID of the user pool where you want to view the membership of the requested group.
+    - name: untag-resource
+      description: Given tag IDs that you previously assigned to a user pool, removes them.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-pool-id=!: The ID of the user pool where you want to delete the user.
-        --username=!: The name of the user that you want to query or modify.
-    - name: describe-user-pool
-      description: Given a user pool ID, returns configuration information.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-pool-id=!: The ID of the user pool you want to describe.
-    - name: global-sign-out
-      description: Invalidates the identity, access, and refresh tokens that Amazon Cognito issued to a user.
-      flags:
-        --access-token=!: A valid access token that Amazon Cognito issued to the currently signed-in user.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-devices
-      description: Lists the devices that Amazon Cognito has registered to the currently signed-in user.
-      flags:
-        --access-token=!: A valid access token that Amazon Cognito issued to the currently signed-in user.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of devices that you want Amazon Cognito to return in the response.
-        --pagination-token=: This API operation returns a limited number of results.
-    - name: revoke-token
-      description: Revokes all of the access tokens generated by, and at the same time as, the specified refresh token.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-id=!: The ID of the app client where the token that you want to revoke was issued.
-        --client-secret=: The client secret of the requested app client, if the client has a secret.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --token=!: The refresh token that you want to revoke.
-    - name: verify-software-token
-      description: Registers the current user's time-based one-time password (TOTP) authenticator with a code generated in their authenticator app from a private key that's supplied by your user pool.
-      flags:
-        --access-token=: A valid access token that Amazon Cognito issued to the currently signed-in user.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --friendly-device-name=: A friendly name for the device that's running the TOTP authenticator.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --session=: The session ID from an `AssociateSoftwareToken` request.
-        --user-code=!: A TOTP that the user generated in their configured authenticator app.
-    - name: create-user-pool-domain
-      description: A user pool domain hosts managed login, an authorization server and web server for authentication in your application.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --custom-domain-config=: The configuration for a custom domain.
-        --domain=!: The domain string.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --managed-login-version=: The version of managed login branding that you want to apply to your domain.
-        --user-pool-id=!: The ID of the user pool where you want to add a domain.
-    - name: delete-group
-      description: Deletes a group from the specified user pool.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-name=!: The name of the group that you want to delete.
-        --user-pool-id=!: The ID of the user pool where you want to delete the group.
-    - name: get-device
-      description: Given a device key, returns information about a remembered device for the current user.
-      flags:
-        --access-token=: A valid access token that Amazon Cognito issued to the currently signed-in user.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --device-key=!: The key of the device that you want to get information about.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-group
-      description: Given a user pool ID and a group name, returns information about the user group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-name=!: The name of the group that you want to get information about.
-        --user-pool-id=!: The ID of the user pool that contains the group that you want to query.
-    - name: verify-user-attribute
-      description: Submits a verification code for a signed-in user who has added or changed a value of an auto-verified attribute.
-      flags:
-        --access-token=!: A valid access token that Amazon Cognito issued to the currently signed-in user.
-        --attribute-name=!: The name of the attribute that you want to verify.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --code=!: The verification code that your user pool sent to the added or changed attribute, for example the user's email address.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: resend-confirmation-code
-      description: Resends the code that confirms a new account for a user who has signed up in your user pool.
-      flags:
-        --analytics-metadata=: Information that supports analytics outcomes with Amazon Pinpoint, including the user's endpoint ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-id=!: The ID of the user pool app client where the user signed up.
-        --client-metadata=: A map of custom key-value pairs that you can provide as input for any custom workflows that this action triggers.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --secret-hash=: A keyed-hash message authentication code (HMAC) calculated using the secret key of a user pool client and username plus the client ID in the message.
-        --user-context-data=: Contextual data about your user session like the device fingerprint, IP address, or location.
-        --username=!: The name of the user that you want to query or modify.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the user pool that the tags are assigned to.
+        --tag-keys=!: An array of tag keys that you want to remove from the user pool.
     - name: update-auth-event-feedback
       description: Provides the feedback for an authentication event generated by threat protection features.
       flags:
@@ -1334,42 +1373,3 @@ commands:
             feedback-value:
                 - Valid
                 - Invalid
-    - name: set-log-delivery-configuration
-      description: Sets up or modifies the logging configuration of a user pool.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --log-configurations=!: A collection of the logging configurations for a user pool.
-        --user-pool-id=!: The ID of the user pool where you want to configure logging.
-    - name: delete-user-pool-client
-      description: Deletes a user pool app client.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-id=!: The ID of the user pool app client that you want to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-pool-id=!: The ID of the user pool where you want to delete the client.
-    - name: list-users-in-group
-      description: Given a user pool ID and a group name, returns a list of users in the group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-name=!: The name of the group that you want to query for user membership.
-        --limit=: The maximum number of groups that you want Amazon Cognito to return in the response.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: This API operation returns a limited number of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --user-pool-id=!: The ID of the user pool where you want to view the membership of the requested group.
-    - name: set-user-mfa-preference
-      description: Set the user's multi-factor authentication (MFA) method preference, including which MFA factors are activated and if any are preferred.
-      flags:
-        --access-token=!: A valid access token that Amazon Cognito issued to the currently signed-in user.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --email-mfa-settings=: User preferences for email message MFA.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --sms-mfa-settings=: User preferences for SMS message MFA.
-        --software-token-mfa-settings=: User preferences for time-based one-time password (TOTP) MFA.

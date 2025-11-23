@@ -1,8 +1,58 @@
 name: chime-sdk-media-pipelines
 description: Amazon Chime SDK Media Pipelines
 commands:
+    - name: create-media-live-connector-pipeline
+      description: Creates a media live connector pipeline in an Amazon Chime SDK meeting.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: The token assigned to the client making the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --sinks=!: The media live connector pipeline's data sinks.
+        --sources=!: The media live connector pipeline's data sources.
+        --tags=: The tags associated with the media live connector pipeline.
+    - name: create-media-pipeline-kinesis-video-stream-pool
+      description: Creates an Amazon Kinesis Video Stream pool for use with media stream pipelines.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: The token assigned to the client making the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pool-name=!: The name of the pool.
+        --stream-configuration=!: The configuration settings for the stream.
+        --tags=: The tags assigned to the stream pool.
     - name: get-media-insights-pipeline-configuration
       description: Gets the configuration settings for a media insights pipeline.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the requested resource.
+    - name: get-media-pipeline
+      description: Gets an existing media pipeline.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --media-pipeline-id=!: The ID of the pipeline that you want to get.
+    - name: list-media-insights-pipeline-configurations
+      description: Lists the available media insights pipeline configurations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token used to return the next page of results.
+    - name: list-media-pipelines
+      description: Returns a list of media pipelines.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token used to retrieve the next page of results.
+    - name: delete-media-pipeline-kinesis-video-stream-pool
+      description: Deletes an Amazon Kinesis Video Stream pool.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -16,22 +66,45 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The maximum number of results to return in a single call.
         --next-token=: The token used to return the next page of results.
-    - name: tag-resource
-      description: The ARN of the media pipeline that you want to tag.
+    - name: stop-speaker-search-task
+      description: Stops a speaker search task.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the media pipeline associated with any tags.
-        --tags=!: The tags associated with the specified media pipeline.
-    - name: list-media-insights-pipeline-configurations
-      description: Lists the available media insights pipeline configurations.
+        --identifier=!: The unique identifier of the resource to be updated.
+        --speaker-search-task-id=!: The speaker search task ID.
+    - name: update-media-insights-pipeline-status
+      description: Updates the status of a media insights pipeline.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in a single call.
-        --next-token=: The token used to return the next page of results.
+        --identifier=!: The unique identifier of the resource to be updated.
+        --update-status=!: The requested status of the media insights pipeline.
+      completion:
+        flag:
+            update-status:
+                - Pause
+                - Resume
+    - name: update-media-pipeline-kinesis-video-stream-pool
+      description: Updates an Amazon Kinesis Video Stream pool in a media pipeline.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the requested resource.
+        --stream-configuration=: The configuration settings for the video stream.
+    - name: create-media-stream-pipeline
+      description: Creates a streaming media pipeline.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: The token assigned to the client making the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --sinks=!: The data sink for the media pipeline.
+        --sources=!: The data sources for the media pipeline.
+        --tags=: The tags assigned to the media pipeline.
     - name: start-voice-tone-analysis-task
       description: Starts a voice tone analysis task.
       flags:
@@ -46,191 +119,6 @@ commands:
         flag:
             language-code:
                 - en-US
-    - name: stop-speaker-search-task
-      description: Stops a speaker search task.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The unique identifier of the resource to be updated.
-        --speaker-search-task-id=!: The speaker search task ID.
-    - name: create-media-concatenation-pipeline
-      description: Creates a media concatenation pipeline.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: The unique identifier for the client request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --sinks=!: An object that specifies the data sinks for the media concatenation pipeline.
-        --sources=!: An object that specifies the sources for the media concatenation pipeline.
-        --tags=: The tags associated with the media concatenation pipeline.
-    - name: create-media-insights-pipeline
-      description: Creates a media insights pipeline.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: The unique identifier for the media insights pipeline request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kinesis-video-stream-recording-source-runtime-configuration=: The runtime configuration for the Kinesis video recording stream source.
-        --kinesis-video-stream-source-runtime-configuration=: The runtime configuration for the Kinesis video stream source of the media insights pipeline.
-        --media-insights-pipeline-configuration-arn=!: The ARN of the pipeline's configuration.
-        --media-insights-runtime-metadata=: The runtime metadata for the media insights pipeline.
-        --s3-recording-sink-runtime-configuration=: The runtime configuration for the S3 recording sink.
-        --tags=: The tags assigned to the media insights pipeline.
-    - name: delete-media-pipeline-kinesis-video-stream-pool
-      description: Deletes an Amazon Kinesis Video Stream pool.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The unique identifier of the requested resource.
-    - name: get-media-pipeline
-      description: Gets an existing media pipeline.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --media-pipeline-id=!: The ID of the pipeline that you want to get.
-    - name: list-media-capture-pipelines
-      description: Returns a list of media pipelines.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in a single call.
-        --next-token=: The token used to retrieve the next page of results.
-    - name: create-media-insights-pipeline-configuration
-      description: A structure that contains the static configurations for a media insights pipeline.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: The unique identifier for the media insights pipeline configuration request.
-        --elements=!: The elements in the request, such as a processor for Amazon Transcribe or a sink for a Kinesis Data Stream.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --media-insights-pipeline-configuration-name=!: The name of the media insights pipeline configuration.
-        --real-time-alert-configuration=: The configuration settings for the real-time alerts in a media insights pipeline configuration.
-        --resource-access-role-arn=!: The ARN of the role used by the service to access Amazon Web Services resources, including `Transcribe` and `Transcribe Call Analytics`, on the caller’s behalf.
-        --tags=: The tags assigned to the media insights pipeline configuration.
-    - name: create-media-pipeline-kinesis-video-stream-pool
-      description: Creates an Amazon Kinesis Video Stream pool for use with media stream pipelines.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: The token assigned to the client making the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --pool-name=!: The name of the pool.
-        --stream-configuration=!: The configuration settings for the stream.
-        --tags=: The tags assigned to the stream pool.
-    - name: delete-media-capture-pipeline
-      description: Deletes the media pipeline.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --media-pipeline-id=!: The ID of the media pipeline being deleted.
-    - name: delete-media-insights-pipeline-configuration
-      description: Deletes the specified configuration settings.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The unique identifier of the resource to be deleted.
-    - name: get-speaker-search-task
-      description: Retrieves the details of the specified speaker search task.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The unique identifier of the resource to be updated.
-        --speaker-search-task-id=!: The ID of the speaker search task.
-    - name: list-tags-for-resource
-      description: Lists the tags available for a media pipeline.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the media pipeline associated with any tags.
-    - name: get-media-capture-pipeline
-      description: Gets an existing media pipeline.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --media-pipeline-id=!: The ID of the pipeline that you want to get.
-    - name: get-media-pipeline-kinesis-video-stream-pool
-      description: Gets an Kinesis video stream pool.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The unique identifier of the requested resource.
-    - name: get-voice-tone-analysis-task
-      description: Retrieves the details of a voice tone analysis task.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The unique identifier of the resource to be updated.
-        --voice-tone-analysis-task-id=!: The ID of the voice tone analysis task.
-    - name: list-media-pipelines
-      description: Returns a list of media pipelines.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in a single call.
-        --next-token=: The token used to retrieve the next page of results.
-    - name: stop-voice-tone-analysis-task
-      description: Stops a voice tone analysis task.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The unique identifier of the resource to be updated.
-        --voice-tone-analysis-task-id=!: The ID of the voice tone analysis task.
-    - name: update-media-insights-pipeline-configuration
-      description: Updates the media insights pipeline's configuration settings.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --elements=!: The elements in the request, such as a processor for Amazon Transcribe or a sink for a Kinesis Data Stream..
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The unique identifier for the resource to be updated.
-        --real-time-alert-configuration=: The configuration settings for real-time alerts for the media insights pipeline.
-        --resource-access-role-arn=!: The ARN of the role used by the service to access Amazon Web Services resources.
-    - name: update-media-insights-pipeline-status
-      description: Updates the status of a media insights pipeline.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The unique identifier of the resource to be updated.
-        --update-status=!: The requested status of the media insights pipeline.
-      completion:
-        flag:
-            update-status:
-                - Pause
-                - Resume
-    - name: create-media-stream-pipeline
-      description: Creates a streaming media pipeline.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: The token assigned to the client making the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --sinks=!: The data sink for the media pipeline.
-        --sources=!: The data sources for the media pipeline.
-        --tags=: The tags assigned to the media pipeline.
-    - name: start-speaker-search-task
-      description: Starts a speaker search task.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: The unique identifier for the client request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The unique identifier of the resource to be updated.
-        --kinesis-video-stream-source-task-configuration=: The task configuration for the Kinesis video stream source of the media insights pipeline.
-        --voice-profile-domain-arn=!: The ARN of the voice profile domain that will store the voice profile.
     - name: create-media-capture-pipeline
       description: Creates a media pipeline.
       flags:
@@ -252,24 +140,46 @@ commands:
                 - S3Bucket
             source-type:
                 - ChimeSdkMeeting
-    - name: create-media-live-connector-pipeline
-      description: Creates a media live connector pipeline in an Amazon Chime SDK meeting.
+    - name: create-media-insights-pipeline-configuration
+      description: A structure that contains the static configurations for a media insights pipeline.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: The token assigned to the client making the request.
+        --client-request-token=: The unique identifier for the media insights pipeline configuration request.
+        --elements=!: The elements in the request, such as a processor for Amazon Transcribe or a sink for a Kinesis Data Stream.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --sinks=!: The media live connector pipeline's data sinks.
-        --sources=!: The media live connector pipeline's data sources.
-        --tags=: The tags associated with the media live connector pipeline.
-    - name: update-media-pipeline-kinesis-video-stream-pool
-      description: Updates an Amazon Kinesis Video Stream pool in a media pipeline.
+        --media-insights-pipeline-configuration-name=!: The name of the media insights pipeline configuration.
+        --real-time-alert-configuration=: The configuration settings for the real-time alerts in a media insights pipeline configuration.
+        --resource-access-role-arn=!: The ARN of the role used by the service to access Amazon Web Services resources, including `Transcribe` and `Transcribe Call Analytics`, on the caller’s behalf.
+        --tags=: The tags assigned to the media insights pipeline configuration.
+    - name: get-media-capture-pipeline
+      description: Gets an existing media pipeline.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The unique identifier of the requested resource.
-        --stream-configuration=: The configuration settings for the video stream.
+        --media-pipeline-id=!: The ID of the pipeline that you want to get.
+    - name: get-speaker-search-task
+      description: Retrieves the details of the specified speaker search task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the resource to be updated.
+        --speaker-search-task-id=!: The ID of the speaker search task.
+    - name: create-media-insights-pipeline
+      description: Creates a media insights pipeline.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: The unique identifier for the media insights pipeline request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kinesis-video-stream-recording-source-runtime-configuration=: The runtime configuration for the Kinesis video recording stream source.
+        --kinesis-video-stream-source-runtime-configuration=: The runtime configuration for the Kinesis video stream source of the media insights pipeline.
+        --media-insights-pipeline-configuration-arn=!: The ARN of the pipeline's configuration.
+        --media-insights-runtime-metadata=: The runtime metadata for the media insights pipeline.
+        --s3-recording-sink-runtime-configuration=: The runtime configuration for the S3 recording sink.
+        --tags=: The tags assigned to the media insights pipeline.
     - name: delete-media-pipeline
       description: Deletes the media pipeline.
       flags:
@@ -277,6 +187,73 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --media-pipeline-id=!: The ID of the media pipeline to delete.
+    - name: list-media-capture-pipelines
+      description: Returns a list of media pipelines.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token used to retrieve the next page of results.
+    - name: update-media-insights-pipeline-configuration
+      description: Updates the media insights pipeline's configuration settings.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --elements=!: The elements in the request, such as a processor for Amazon Transcribe or a sink for a Kinesis Data Stream..
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier for the resource to be updated.
+        --real-time-alert-configuration=: The configuration settings for real-time alerts for the media insights pipeline.
+        --resource-access-role-arn=!: The ARN of the role used by the service to access Amazon Web Services resources.
+    - name: create-media-concatenation-pipeline
+      description: Creates a media concatenation pipeline.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: The unique identifier for the client request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --sinks=!: An object that specifies the data sinks for the media concatenation pipeline.
+        --sources=!: An object that specifies the sources for the media concatenation pipeline.
+        --tags=: The tags associated with the media concatenation pipeline.
+    - name: delete-media-capture-pipeline
+      description: Deletes the media pipeline.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --media-pipeline-id=!: The ID of the media pipeline being deleted.
+    - name: delete-media-insights-pipeline-configuration
+      description: Deletes the specified configuration settings.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the resource to be deleted.
+    - name: list-tags-for-resource
+      description: Lists the tags available for a media pipeline.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the media pipeline associated with any tags.
+    - name: start-speaker-search-task
+      description: Starts a speaker search task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: The unique identifier for the client request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the resource to be updated.
+        --kinesis-video-stream-source-task-configuration=: The task configuration for the Kinesis video stream source of the media insights pipeline.
+        --voice-profile-domain-arn=!: The ARN of the voice profile domain that will store the voice profile.
+    - name: tag-resource
+      description: The ARN of the media pipeline that you want to tag.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the media pipeline associated with any tags.
+        --tags=!: The tags associated with the specified media pipeline.
     - name: untag-resource
       description: Removes any tags from a media pipeline.
       flags:
@@ -285,3 +262,26 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The ARN of the pipeline that you want to untag.
         --tag-keys=!: The key/value pairs in the tag that you want to remove.
+    - name: get-media-pipeline-kinesis-video-stream-pool
+      description: Gets an Kinesis video stream pool.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the requested resource.
+    - name: get-voice-tone-analysis-task
+      description: Retrieves the details of a voice tone analysis task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the resource to be updated.
+        --voice-tone-analysis-task-id=!: The ID of the voice tone analysis task.
+    - name: stop-voice-tone-analysis-task
+      description: Stops a voice tone analysis task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the resource to be updated.
+        --voice-tone-analysis-task-id=!: The ID of the voice tone analysis task.

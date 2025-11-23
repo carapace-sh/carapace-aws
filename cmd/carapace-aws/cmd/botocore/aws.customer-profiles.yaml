@@ -1,6 +1,124 @@
 name: customer-profiles
 description: Amazon Connect Customer Profiles
 commands:
+    - name: get-profile-history-record
+      description: Returns a history record for a specific profile, for a specific domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain for which to return a profile history record.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The unique identifier of the profile history record to return.
+        --profile-id=!: The unique identifier of the profile for which to return a history record.
+    - name: get-profile-object-type
+      description: Returns the object types for a specific domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --object-type-name=!: The name of the profile object type.
+    - name: get-profile-object-type-template
+      description: Returns the template information for a specific object type.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --template-id=!: A unique identifier for the object template.
+    - name: list-calculated-attribute-definitions
+      description: Lists calculated attribute definitions for Customer Profiles
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of calculated attribute definitions returned per page.
+        --next-token=: The pagination token from the previous call to ListCalculatedAttributeDefinitions.
+    - name: create-domain-layout
+      description: Creates the layout to view data for a specific domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=!: The description of the layout
+        --display-name=!: The display name of the layout
+        --domain-name=!: The unique name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --is-default: If set to true for a layout, this layout will be used by default to view data.
+        --layout-definition-name=!: The unique name of the layout.
+        --layout-type=!: The type of layout that can be used to view data under a Customer Profiles domain.
+        --layout=!: A customizable layout that can be used to view data under a Customer Profiles domain.
+        --no-is-default: If set to true for a layout, this layout will be used by default to view data.
+        --tags=: The tags used to organize, track, or control access for this resource.
+      completion:
+        flag:
+            layout-type:
+                - PROFILE_EXPLORER
+    - name: create-segment-estimate
+      description: Creates a segment estimate query.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --segment-query=!: The segment query for calculating a segment estimate.
+    - name: list-event-streams
+      description: Returns a list of all the event streams in a specific domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of objects returned per page.
+        --next-token=: Identifies the next page of results to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-identity-resolution-job
+      description: Returns information about an Identity Resolution Job in a specific domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The unique identifier of the Identity Resolution Job.
+    - name: list-upload-jobs
+      description: This API retrieves a list of upload jobs for the specified domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain to list upload jobs for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of upload jobs to return per page.
+        --next-token=: The pagination token from the previous call to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: start-upload-job
+      description: This API starts the processing of an upload job to ingest profile data.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain containing the upload job to start.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The unique identifier of the upload job to start.
+    - name: create-event-stream
+      description: Creates an event stream, which is a subscription to real-time events, such as when profiles are created and updated through Amazon Connect Customer Profiles.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain.
+        --event-stream-name=!: The name of the event stream.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: The tags used to organize, track, or control access for this resource.
+        --uri=!: The StreamARN of the destination to deliver profile events to.
+    - name: delete-profile
+      description: Deletes the standard customer profile and all data pertaining to the profile.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profile-id=!: The unique identifier of a customer profile.
     - name: delete-profile-key
       description: Removes a searchable key from a customer profile.
       flags:
@@ -11,15 +129,14 @@ commands:
         --key-name=!: A searchable identifier of a customer profile.
         --profile-id=!: The unique identifier of a customer profile.
         --values=!: A list of key values.
-    - name: get-segment-snapshot
-      description: Retrieve the latest status of a segment snapshot.
+    - name: get-domain-layout
+      description: Gets the layout to view data for a specific domain.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique identifier of the domain.
+        --domain-name=!: The unique name of the domain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --segment-definition-name=!: The unique name of the segment definition.
-        --snapshot-id=!: The unique identifier of the segment snapshot.
+        --layout-definition-name=!: The unique name of the layout.
     - name: list-domain-layouts
       description: Lists the existing layouts that can be used to view data for a specific domain.
       flags:
@@ -32,18 +149,15 @@ commands:
         --next-token=: Identifies the next page of results to return.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-profile-objects
-      description: Returns a list of objects associated with a profile of a given ProfileObjectType.
+    - name: list-profile-object-types
+      description: Lists all of the templates available within the service.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain-name=!: The unique name of the domain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The maximum number of objects returned per page.
-        --next-token=: The pagination token from the previous call to ListProfileObjects.
-        --object-filter=: Applies a filter to the response to include profile objects with the specified index values.
-        --object-type-name=!: The name of the profile object type.
-        --profile-id=!: The unique identifier of a customer profile.
+        --next-token=: Identifies the next page of results to return.
     - name: update-domain
       description: Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key.
       flags:
@@ -57,6 +171,114 @@ commands:
         --matching=: The process of matching duplicate profiles.
         --rule-based-matching=: The process of matching duplicate profiles using the rule-Based matching.
         --tags=: The tags used to organize, track, or control access for this resource.
+    - name: create-calculated-attribute-definition
+      description: Creates a new calculated attribute definition.
+      flags:
+        --attribute-details=!: Mathematical expression and a list of attribute items specified in that expression.
+        --calculated-attribute-name=!: The unique name of the calculated attribute.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --conditions=: The conditions including range, object count, and threshold for the calculated attribute.
+        --description=: The description of the calculated attribute.
+        --display-name=: The display name of the calculated attribute.
+        --domain-name=!: The unique name of the domain.
+        --filter=: Defines how to filter incoming objects to include part of the Calculated Attribute.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-use-historical-data: Whether historical data ingested before the Calculated Attribute was created should be included in calculations.
+        --statistic=!: The aggregation operation to perform for the calculated attribute.
+        --tags=: The tags used to organize, track, or control access for this resource.
+        --use-historical-data: Whether historical data ingested before the Calculated Attribute was created should be included in calculations.
+      completion:
+        flag:
+            statistic:
+                - FIRST_OCCURRENCE
+                - LAST_OCCURRENCE
+                - COUNT
+                - SUM
+                - MINIMUM
+                - MAXIMUM
+                - AVERAGE
+                - MAX_OCCURRENCE
+    - name: delete-domain
+      description: Deletes a specific domain and all of its customer data, such as customer profile attributes and their related objects.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-event-stream
+      description: Disables and deletes the specified event stream.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain.
+        --event-stream-name=!: The name of the event stream
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-event-stream
+      description: Returns information about the specified event stream in a specific domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain.
+        --event-stream-name=!: The name of the event stream provided during create operations.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-object-type-attributes
+      description: Fetch the possible attribute values given the attribute name.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique identifier of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of objects returned per page.
+        --next-token=: The pagination token from the previous call.
+        --object-type-name=!: The name of the profile object type.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-segment-definitions
+      description: Lists all segment definitions under a domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique identifier of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of objects returned per page.
+        --next-token=: The pagination token from the previous call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: untag-resource
+      description: Removes one or more tags from the specified Amazon Connect Customer Profiles resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource from which you are removing tags.
+        --tag-keys=!: The list of tag keys to remove from the resource.
+    - name: add-profile-key
+      description: Associates a new key value with a specific profile, such as a Contact Record ContactId.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-name=!: A searchable identifier of a customer profile.
+        --profile-id=!: The unique identifier of a customer profile.
+        --values=!: A list of key values.
+    - name: create-event-trigger
+      description: Creates an event trigger, which specifies the rules when to perform action based on customer's ingested data.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description of the event trigger.
+        --domain-name=!: The unique name of the domain.
+        --event-trigger-conditions=!: A list of conditions that determine when an event should trigger the destination.
+        --event-trigger-limits=: Defines limits controlling whether an event triggers the destination, based on ingestion latency and the number of invocations per profile over specific time periods.
+        --event-trigger-name=!: The unique name of the event trigger.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --object-type-name=!: The unique name of the object type.
+        --segment-filter=: The destination is triggered only for profiles that meet the criteria of a segment definition.
+        --tags=: An array of key-value pairs to apply to this resource.
     - name: create-segment-definition
       description: Creates a segment definition associated to the given domain.
       flags:
@@ -69,14 +291,114 @@ commands:
         --segment-definition-name=!: The unique name of the segment definition.
         --segment-groups=!: Specifies the base segments and dimensions for a segment definition along with their respective relationship.
         --tags=: The tags used to organize, track, or control access for this resource.
-    - name: delete-calculated-attribute-definition
-      description: Deletes an existing calculated attribute definition.
+    - name: create-segment-snapshot
+      description: Triggers a job to export a segment to a specified destination.
       flags:
-        --calculated-attribute-name=!: The unique name of the calculated attribute.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-format=!: The format in which the segment will be exported.
+        --destination-uri=: The destination to which the segment will be exported.
+        --domain-name=!: The unique name of the domain.
+        --encryption-key=: The Amazon Resource Name (ARN) of the KMS key used to encrypt the exported segment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --role-arn=: The Amazon Resource Name (ARN) of the IAM role that allows Customer Profiles service principal to assume the role for conducting KMS and S3 operations.
+        --segment-definition-name=!: The name of the segment definition used in this snapshot request.
+      completion:
+        flag:
+            data-format:
+                - CSV
+                - JSONL
+                - ORC
+    - name: create-upload-job
+      description: Creates an Upload job to ingest data for segment imports.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-expiry=: The expiry duration for the profiles ingested with the job.
+        --display-name=!: The unique name of the upload job.
+        --domain-name=!: The unique name of the domain.
+        --fields=!: The mapping between CSV Columns and Profile Object attributes.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --unique-key=!: The unique key columns for de-duping the profiles used to map data to the profile.
+    - name: get-domain
+      description: Returns information about a specific domain.
+      flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain-name=!: The unique name of the domain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-integration
+      description: Returns an integration for a domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --uri=!: The URI of the S3 bucket or any other type of data source.
+    - name: get-segment-membership
+      description: Determines if the given profiles are within a segment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profile-ids=!: The list of profile IDs to query for.
+        --segment-definition-name=!: The Id of the wanted segment.
+    - name: batch-get-calculated-attribute-for-profile
+      description: Fetch the possible attribute values given the attribute name.
+      flags:
+        --calculated-attribute-name=!: The unique name of the calculated attribute.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --condition-overrides=: Overrides the condition block within the original calculated attribute definition.
+        --domain-name=!: The unique name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profile-ids=!: List of unique identifiers for customer profiles to retrieve.
+    - name: create-profile
+      description: Creates a standard profile.
+      flags:
+        --account-number=: An account number that you have assigned to the customer.
+        --additional-information=: Any additional information relevant to the customer’s profile.
+        --address=: A generic address associated with the customer that is not mailing, shipping, or billing.
+        --attributes=: A key value pair of attributes of a customer profile.
+        --billing-address=: The customer’s billing address.
+        --birth-date=: The customer’s birth date.
+        --business-email-address=: The customer’s business email address.
+        --business-name=: The name of the customer’s business.
+        --business-phone-number=: The customer’s business phone number.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain.
+        --email-address=: The customer’s email address, which has not been specified as a personal or business address.
+        --engagement-preferences=: Object that defines the preferred methods of engagement, per channel.
+        --first-name=: The customer’s first name.
+        --gender-string=: An alternative to `Gender` which accepts any string as input.
+        --gender=: The gender with which the customer identifies.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --home-phone-number=: The customer’s home phone number.
+        --last-name=: The customer’s last name.
+        --mailing-address=: The customer’s mailing address.
+        --middle-name=: The customer’s middle name.
+        --mobile-phone-number=: The customer’s mobile phone number.
+        --party-type-string=: An alternative to `PartyType` which accepts any string as input.
+        --party-type=: The type of profile used to describe the customer.
+        --personal-email-address=: The customer’s personal email address.
+        --phone-number=: The customer’s phone number, which has not been specified as a mobile, home, or business number.
+        --profile-type=: The type of the profile.
+        --shipping-address=: The customer’s shipping address.
+      completion:
+        flag:
+            gender:
+                - MALE
+                - FEMALE
+                - UNSPECIFIED
+            party-type:
+                - INDIVIDUAL
+                - BUSINESS
+                - OTHER
+            profile-type:
+                - ACCOUNT_PROFILE
+                - PROFILE
     - name: list-account-integrations
       description: Lists all of the integrations associated to a specific URI in the AWS account.
       flags:
@@ -88,15 +410,16 @@ commands:
         --next-token=: The pagination token from the previous ListAccountIntegrations API call.
         --no-include-hidden: Boolean to indicate if hidden integration should be returned.
         --uri=!: The URI of the S3 bucket or any other type of data source.
-    - name: list-calculated-attribute-definitions
-      description: Lists calculated attribute definitions for Customer Profiles
+    - name: list-calculated-attributes-for-profile
+      description: Retrieve a list of calculated attributes for a customer profile.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain-name=!: The unique name of the domain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of calculated attribute definitions returned per page.
-        --next-token=: The pagination token from the previous call to ListCalculatedAttributeDefinitions.
+        --max-results=: The maximum number of calculated attributes returned per page.
+        --next-token=: The pagination token from the previous call to ListCalculatedAttributesForProfile.
+        --profile-id=!: The unique identifier of a customer profile.
     - name: list-profile-history-records
       description: Returns a list of history records for a specific profile, for a specific domain.
       flags:
@@ -122,15 +445,86 @@ commands:
                 - EXPIRED
                 - MERGED
                 - DELETED_BY_MERGE
-    - name: list-profile-object-types
-      description: Lists all of the templates available within the service.
+    - name: list-workflows
+      description: Query to list all workflows.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return per page.
+        --next-token=: The token for the next set of results.
+        --query-end-date=: Retrieve workflows ended after timestamp.
+        --query-start-date=: Retrieve workflows started after timestamp.
+        --status=: Status of workflow execution.
+        --workflow-type=: The type of workflow.
+      completion:
+        flag:
+            status:
+                - NOT_STARTED
+                - IN_PROGRESS
+                - COMPLETE
+                - FAILED
+                - SPLIT
+                - RETRY
+                - CANCELLED
+            workflow-type:
+                - APPFLOW_INTEGRATION
+    - name: stop-upload-job
+      description: This API stops the processing of an upload job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain containing the upload job to stop.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The unique identifier of the upload job to stop.
+    - name: delete-calculated-attribute-definition
+      description: Deletes an existing calculated attribute definition.
+      flags:
+        --calculated-attribute-name=!: The unique name of the calculated attribute.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-calculated-attribute-for-profile
+      description: Retrieve a calculated attribute for a customer profile.
+      flags:
+        --calculated-attribute-name=!: The unique name of the calculated attribute.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profile-id=!: The unique identifier of a customer profile.
+    - name: get-segment-estimate
+      description: Gets the result of a segment estimate query.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain.
+        --estimate-id=!: The query Id passed by a previous `CreateSegmentEstimate` operation.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-profile-objects
+      description: Returns a list of objects associated with a profile of a given ProfileObjectType.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain-name=!: The unique name of the domain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The maximum number of objects returned per page.
-        --next-token=: Identifies the next page of results to return.
+        --next-token=: The pagination token from the previous call to ListProfileObjects.
+        --object-filter=: Applies a filter to the response to include profile objects with the specified index values.
+        --object-type-name=!: The name of the profile object type.
+        --profile-id=!: The unique identifier of a customer profile.
+    - name: merge-profiles
+      description: 'Runs an AWS Lambda job that does the following:'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain.
+        --field-source-profile-ids=: The identifiers of the fields in the profile that has the information you want to apply to the merge.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --main-profile-id=!: The identifier of the profile to be taken.
+        --profile-ids-to-be-merged=!: The identifier of the profile to be merged into MainProfileId.
     - name: tag-resource
       description: Assigns one or more tags (key-value pairs) to the specified Amazon Connect Customer Profiles resource.
       flags:
@@ -139,112 +533,29 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The ARN of the resource that you're adding tags to.
         --tags=!: The tags used to organize, track, or control access for this resource.
-    - name: update-calculated-attribute-definition
-      description: Updates an existing calculated attribute definition.
+    - name: get-calculated-attribute-definition
+      description: Provides more information on a calculated attribute definition for Customer Profiles.
       flags:
         --calculated-attribute-name=!: The unique name of the calculated attribute.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --conditions=: The conditions including range, object count, and threshold for the calculated attribute.
-        --description=: The description of the calculated attribute.
-        --display-name=: The display name of the calculated attribute.
         --domain-name=!: The unique name of the domain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-segment-snapshot
-      description: Triggers a job to export a segment to a specified destination.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-format=!: The format in which the segment will be exported.
-        --destination-uri=: The destination to which the segment will be exported.
-        --domain-name=!: The unique name of the domain.
-        --encryption-key=: The Amazon Resource Name (ARN) of the KMS key used to encrypt the exported segment.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --role-arn=: The Amazon Resource Name (ARN) of the IAM role that allows Customer Profiles service principal to assume the role for conducting KMS and S3 operations.
-        --segment-definition-name=!: The name of the segment definition used in this snapshot request.
-      completion:
-        flag:
-            data-format:
-                - CSV
-                - JSONL
-                - ORC
-    - name: delete-domain
-      description: Deletes a specific domain and all of its customer data, such as customer profile attributes and their related objects.
+    - name: get-segment-definition
+      description: Gets a segment definition from the domain.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain-name=!: The unique name of the domain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-event-stream
-      description: Disables and deletes the specified event stream.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique name of the domain.
-        --event-stream-name=!: The name of the event stream
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-event-trigger
-      description: Get a specific Event Trigger from the domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique name of the domain.
-        --event-trigger-name=!: The unique name of the event trigger.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-identity-resolution-job
-      description: Returns information about an Identity Resolution Job in a specific domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The unique identifier of the Identity Resolution Job.
-    - name: get-workflow-steps
-      description: Get granular list of steps in workflow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return per page.
-        --next-token=: The token for the next set of results.
-        --workflow-id=!: Unique identifier for the workflow.
-    - name: list-calculated-attributes-for-profile
-      description: Retrieve a list of calculated attributes for a customer profile.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of calculated attributes returned per page.
-        --next-token=: The pagination token from the previous call to ListCalculatedAttributesForProfile.
-        --profile-id=!: The unique identifier of a customer profile.
-    - name: update-domain-layout
-      description: Updates the layout used to view data for a specific domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The description of the layout
-        --display-name=: The display name of the layout
-        --domain-name=!: The unique name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --is-default: If set to true for a layout, this layout will be used by default to view data.
-        --layout-definition-name=!: The unique name of the layout.
-        --layout-type=: The type of layout that can be used to view data under a Customer Profiles domain.
-        --layout=: A customizable layout that can be used to view data under a Customer Profiles domain.
-        --no-is-default: If set to true for a layout, this layout will be used by default to view data.
-      completion:
-        flag:
-            layout-type:
-                - PROFILE_EXPLORER
-    - name: list-profile-object-type-templates
-      description: Lists all of the template information for object types.
+        --segment-definition-name=!: The unique name of the segment definition.
+    - name: list-tags-for-resource
+      description: Displays the tags associated with an Amazon Connect Customer Profiles resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of objects returned per page.
-        --next-token=: The pagination token from the previous ListObjectTypeTemplates API call.
+        --resource-arn=!: The ARN of the resource for which you want to view tags.
     - name: update-profile
       description: Updates the properties of a profile.
       flags:
@@ -291,47 +602,42 @@ commands:
             profile-type:
                 - ACCOUNT_PROFILE
                 - PROFILE
-    - name: add-profile-key
-      description: Associates a new key value with a specific profile, such as a Contact Record ContactId.
+    - name: delete-profile-object
+      description: Removes an object associated with a profile of a given ProfileObjectType.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain-name=!: The unique name of the domain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-name=!: A searchable identifier of a customer profile.
+        --object-type-name=!: The name of the profile object type.
         --profile-id=!: The unique identifier of a customer profile.
-        --values=!: A list of key values.
-    - name: get-event-stream
-      description: Returns information about the specified event stream in a specific domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique name of the domain.
-        --event-stream-name=!: The name of the event stream provided during create operations.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-profile-object-type-template
-      description: Returns the template information for a specific object type.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --template-id=!: A unique identifier for the object template.
-    - name: get-segment-definition
-      description: Gets a segment definition from the domain.
+        --profile-object-unique-key=!: The unique identifier of the profile object generated by the service.
+    - name: delete-segment-definition
+      description: Deletes a segment definition from the domain.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain-name=!: The unique name of the domain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --segment-definition-name=!: The unique name of the segment definition.
-    - name: get-workflow
-      description: Get details of specified workflow.
+    - name: get-auto-merging-preview
+      description: Tests the auto-merging settings of your Identity Resolution Job without merging your data.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --conflict-resolution=!: How the auto-merging process should resolve conflicts between different profiles.
+        --consolidation=!: A list of matching attributes that represent matching criteria.
         --domain-name=!: The unique name of the domain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --workflow-id=!: Unique identifier for the workflow.
+        --min-allowed-confidence-score-for-merging=: Minimum confidence score required for profiles within a matching group to be merged during the auto-merge process.
+    - name: list-domains
+      description: Returns a list of all the domains for an AWS account that have been created.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of objects returned per page.
+        --next-token=: The pagination token from the previous ListDomain API call.
     - name: list-identity-resolution-jobs
       description: Lists all of the Identity Resolution Jobs in your domain.
       flags:
@@ -341,101 +647,44 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The maximum number of results to return per page.
         --next-token=: The token for the next set of results.
-    - name: list-tags-for-resource
-      description: Displays the tags associated with an Amazon Connect Customer Profiles resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource for which you want to view tags.
-    - name: put-integration
-      description: Adds an integration between the service and a third-party service, which includes Amazon AppFlow and Amazon Connect.
+    - name: list-rule-based-matches
+      description: Returns a set of `MatchIds` that belong to the given domain.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain-name=!: The unique name of the domain.
-        --event-trigger-names=: A list of unique names for active event triggers associated with the integration.
-        --flow-definition=: The configuration that controls how Customer Profiles retrieves data from the source.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --object-type-name=: The name of the profile object type.
-        --object-type-names=: A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an `ObjectTypeName` (template) used to ingest the event.
-        --role-arn=: The Amazon Resource Name (ARN) of the IAM role.
-        --tags=: The tags used to organize, track, or control access for this resource.
-        --uri=: The URI of the S3 bucket or any other type of data source.
-    - name: create-profile
-      description: Creates a standard profile.
-      flags:
-        --account-number=: An account number that you have assigned to the customer.
-        --additional-information=: Any additional information relevant to the customer’s profile.
-        --address=: A generic address associated with the customer that is not mailing, shipping, or billing.
-        --attributes=: A key value pair of attributes of a customer profile.
-        --billing-address=: The customer’s billing address.
-        --birth-date=: The customer’s birth date.
-        --business-email-address=: The customer’s business email address.
-        --business-name=: The name of the customer’s business.
-        --business-phone-number=: The customer’s business phone number.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique name of the domain.
-        --email-address=: The customer’s email address, which has not been specified as a personal or business address.
-        --engagement-preferences=: Object that defines the preferred methods of engagement, per channel.
-        --first-name=: The customer’s first name.
-        --gender-string=: An alternative to `Gender` which accepts any string as input.
-        --gender=: The gender with which the customer identifies.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --home-phone-number=: The customer’s home phone number.
-        --last-name=: The customer’s last name.
-        --mailing-address=: The customer’s mailing address.
-        --middle-name=: The customer’s middle name.
-        --mobile-phone-number=: The customer’s mobile phone number.
-        --party-type-string=: An alternative to `PartyType` which accepts any string as input.
-        --party-type=: The type of profile used to describe the customer.
-        --personal-email-address=: The customer’s personal email address.
-        --phone-number=: The customer’s phone number, which has not been specified as a mobile, home, or business number.
-        --profile-type=: The type of the profile.
-        --shipping-address=: The customer’s shipping address.
-      completion:
-        flag:
-            gender:
-                - MALE
-                - FEMALE
-                - UNSPECIFIED
-            party-type:
-                - INDIVIDUAL
-                - BUSINESS
-                - OTHER
-            profile-type:
-                - ACCOUNT_PROFILE
-                - PROFILE
-    - name: detect-profile-object-type
-      description: The process of detecting profile object type mapping by using given objects.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --objects=!: A string that is serialized from a JSON object.
-    - name: get-integration
-      description: Returns an integration for a domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --uri=!: The URI of the S3 bucket or any other type of data source.
-    - name: list-object-type-attributes
-      description: Fetch the possible attribute values given the attribute name.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique identifier of the domain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of objects returned per page.
-        --next-token=: The pagination token from the previous call.
-        --object-type-name=!: The name of the profile object type.
+        --max-results=: The maximum number of `MatchIds` returned per page.
+        --next-token=: The pagination token from the previous `ListRuleBasedMatches` API call.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: delete-domain-layout
+      description: Deletes the layout used to view data for a specific domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --layout-definition-name=!: The unique name of the layout.
+    - name: delete-workflow
+      description: Deletes the specified workflow and all its corresponding resources.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workflow-id=!: Unique identifier for the workflow.
+    - name: get-workflow-steps
+      description: Get granular list of steps in workflow.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return per page.
+        --next-token=: The token for the next set of results.
+        --workflow-id=!: Unique identifier for the workflow.
     - name: search-profiles
       description: Searches for profiles within a specific domain using one or more predefined search keys (e.g., \_fullName, \_phone, \_email, \_account, etc.) and/or custom-defined search keys.
       flags:
@@ -454,46 +703,6 @@ commands:
             logical-operator:
                 - AND
                 - OR
-    - name: untag-resource
-      description: Removes one or more tags from the specified Amazon Connect Customer Profiles resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource from which you are removing tags.
-        --tag-keys=!: The list of tag keys to remove from the resource.
-    - name: batch-get-profile
-      description: Get a batch of profiles.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --profile-ids=!: List of unique identifiers for customer profiles to retrieve.
-    - name: create-segment-estimate
-      description: Creates a segment estimate query.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --segment-query=!: The segment query for calculating a segment estimate.
-    - name: get-segment-estimate
-      description: Gets the result of a segment estimate query.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique name of the domain.
-        --estimate-id=!: The query Id passed by a previous `CreateSegmentEstimate` operation.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-upload-job
-      description: This API retrieves the details of a specific upload job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique name of the domain containing the upload job.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The unique identifier of the upload job to retrieve.
     - name: get-upload-job-path
       description: This API retrieves the pre-signed URL and client token for uploading the file associated with the upload job.
       flags:
@@ -502,66 +711,26 @@ commands:
         --domain-name=!: The unique name of the domain containing the upload job.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --job-id=!: The unique identifier of the upload job to retrieve the upload path for.
-    - name: put-profile-object
-      description: Adds additional objects to customer profiles of a given ObjectType.
+    - name: update-calculated-attribute-definition
+      description: Updates an existing calculated attribute definition.
+      flags:
+        --calculated-attribute-name=!: The unique name of the calculated attribute.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --conditions=: The conditions including range, object count, and threshold for the calculated attribute.
+        --description=: The description of the calculated attribute.
+        --display-name=: The display name of the calculated attribute.
+        --domain-name=!: The unique name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-matches
+      description: 'Before calling this API, use [CreateDomain](https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html) or [UpdateDomain](https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html) to enable identity resolution: set `Matching` to true.'
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain-name=!: The unique name of the domain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --object-type-name=!: The name of the profile object type.
-        --object=!: A string that is serialized from a JSON object.
-    - name: start-upload-job
-      description: This API starts the processing of an upload job to ingest profile data.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique name of the domain containing the upload job to start.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The unique identifier of the upload job to start.
-    - name: create-domain-layout
-      description: Creates the layout to view data for a specific domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=!: The description of the layout
-        --display-name=!: The display name of the layout
-        --domain-name=!: The unique name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --is-default: If set to true for a layout, this layout will be used by default to view data.
-        --layout-definition-name=!: The unique name of the layout.
-        --layout-type=!: The type of layout that can be used to view data under a Customer Profiles domain.
-        --layout=!: A customizable layout that can be used to view data under a Customer Profiles domain.
-        --no-is-default: If set to true for a layout, this layout will be used by default to view data.
-        --tags=: The tags used to organize, track, or control access for this resource.
-      completion:
-        flag:
-            layout-type:
-                - PROFILE_EXPLORER
-    - name: delete-domain-layout
-      description: Deletes the layout used to view data for a specific domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --layout-definition-name=!: The unique name of the layout.
-    - name: delete-segment-definition
-      description: Deletes a segment definition from the domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --segment-definition-name=!: The unique name of the segment definition.
-    - name: get-domain-layout
-      description: Gets the layout to view data for a specific domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --layout-definition-name=!: The unique name of the layout.
+        --max-results=: The maximum number of results to return per page.
+        --next-token=: The token for the next set of results.
     - name: get-similar-profiles
       description: Returns a set of profiles that belong to the same matching group using the `matchId` or `profileId`.
       flags:
@@ -582,19 +751,41 @@ commands:
             match-type:
                 - RULE_BASED_MATCHING
                 - ML_BASED_MATCHING
-    - name: create-domain
-      description: Creates a domain, which is a container for all customer data, such as customer profile attributes, object types, profile keys, and encryption keys.
+    - name: get-upload-job
+      description: This API retrieves the details of a specific upload job.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dead-letter-queue-url=: The URL of the SQS dead letter queue, which is used for reporting errors associated with ingesting data from third party applications.
-        --default-encryption-key=: The default encryption key, which is an AWS managed key, is used when no specific type of encryption key is specified.
-        --default-expiration-days=!: The default number of days until the data within the domain expires.
+        --domain-name=!: The unique name of the domain containing the upload job.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The unique identifier of the upload job to retrieve.
+    - name: put-profile-object
+      description: Adds additional objects to customer profiles of a given ObjectType.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain-name=!: The unique name of the domain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --matching=: The process of matching duplicate profiles.
-        --rule-based-matching=: The process of matching duplicate profiles using the Rule-Based matching.
-        --tags=: The tags used to organize, track, or control access for this resource.
+        --object-type-name=!: The name of the profile object type.
+        --object=!: A string that is serialized from a JSON object.
+    - name: update-domain-layout
+      description: Updates the layout used to view data for a specific domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description of the layout
+        --display-name=: The display name of the layout
+        --domain-name=!: The unique name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --is-default: If set to true for a layout, this layout will be used by default to view data.
+        --layout-definition-name=!: The unique name of the layout.
+        --layout-type=: The type of layout that can be used to view data under a Customer Profiles domain.
+        --layout=: A customizable layout that can be used to view data under a Customer Profiles domain.
+        --no-is-default: If set to true for a layout, this layout will be used by default to view data.
+      completion:
+        flag:
+            layout-type:
+                - PROFILE_EXPLORER
     - name: create-integration-workflow
       description: Creates an integration workflow.
       flags:
@@ -611,55 +802,6 @@ commands:
         flag:
             workflow-type:
                 - APPFLOW_INTEGRATION
-    - name: list-workflows
-      description: Query to list all workflows.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return per page.
-        --next-token=: The token for the next set of results.
-        --query-end-date=: Retrieve workflows ended after timestamp.
-        --query-start-date=: Retrieve workflows started after timestamp.
-        --status=: Status of workflow execution.
-        --workflow-type=: The type of workflow.
-      completion:
-        flag:
-            status:
-                - NOT_STARTED
-                - IN_PROGRESS
-                - COMPLETE
-                - FAILED
-                - SPLIT
-                - RETRY
-                - CANCELLED
-            workflow-type:
-                - APPFLOW_INTEGRATION
-    - name: create-event-stream
-      description: Creates an event stream, which is a subscription to real-time events, such as when profiles are created and updated through Amazon Connect Customer Profiles.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique name of the domain.
-        --event-stream-name=!: The name of the event stream.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: The tags used to organize, track, or control access for this resource.
-        --uri=!: The StreamARN of the destination to deliver profile events to.
-    - name: create-event-trigger
-      description: Creates an event trigger, which specifies the rules when to perform action based on customer's ingested data.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The description of the event trigger.
-        --domain-name=!: The unique name of the domain.
-        --event-trigger-conditions=!: A list of conditions that determine when an event should trigger the destination.
-        --event-trigger-limits=: Defines limits controlling whether an event triggers the destination, based on ingestion latency and the number of invocations per profile over specific time periods.
-        --event-trigger-name=!: The unique name of the event trigger.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --object-type-name=!: The unique name of the object type.
-        --segment-filter=: The destination is triggered only for profiles that meet the criteria of a segment definition.
-        --tags=: An array of key-value pairs to apply to this resource.
     - name: delete-event-trigger
       description: Disable and deletes the Event Trigger.
       flags:
@@ -667,163 +809,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain-name=!: The unique name of the domain.
         --event-trigger-name=!: The unique name of the event trigger.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-profile-object-type
-      description: Returns the object types for a specific domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --object-type-name=!: The name of the profile object type.
-    - name: get-segment-membership
-      description: Determines if the given profiles are within a segment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --profile-ids=!: The list of profile IDs to query for.
-        --segment-definition-name=!: The Id of the wanted segment.
-    - name: list-profile-attribute-values
-      description: Fetch the possible attribute values given the attribute name.
-      flags:
-        --attribute-name=!: The attribute name.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique identifier of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: merge-profiles
-      description: 'Runs an AWS Lambda job that does the following:'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique name of the domain.
-        --field-source-profile-ids=: The identifiers of the fields in the profile that has the information you want to apply to the merge.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --main-profile-id=!: The identifier of the profile to be taken.
-        --profile-ids-to-be-merged=!: The identifier of the profile to be merged into MainProfileId.
-    - name: create-calculated-attribute-definition
-      description: Creates a new calculated attribute definition.
-      flags:
-        --attribute-details=!: Mathematical expression and a list of attribute items specified in that expression.
-        --calculated-attribute-name=!: The unique name of the calculated attribute.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --conditions=: The conditions including range, object count, and threshold for the calculated attribute.
-        --description=: The description of the calculated attribute.
-        --display-name=: The display name of the calculated attribute.
-        --domain-name=!: The unique name of the domain.
-        --filter=: Defines how to filter incoming objects to include part of the Calculated Attribute.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-use-historical-data: Whether historical data ingested before the Calculated Attribute was created should be included in calculations.
-        --statistic=!: The aggregation operation to perform for the calculated attribute.
-        --tags=: The tags used to organize, track, or control access for this resource.
-        --use-historical-data: Whether historical data ingested before the Calculated Attribute was created should be included in calculations.
-      completion:
-        flag:
-            statistic:
-                - FIRST_OCCURRENCE
-                - LAST_OCCURRENCE
-                - COUNT
-                - SUM
-                - MINIMUM
-                - MAXIMUM
-                - AVERAGE
-                - MAX_OCCURRENCE
-    - name: get-profile-history-record
-      description: Returns a history record for a specific profile, for a specific domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique name of the domain for which to return a profile history record.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The unique identifier of the profile history record to return.
-        --profile-id=!: The unique identifier of the profile for which to return a history record.
-    - name: list-segment-definitions
-      description: Lists all segment definitions under a domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique identifier of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of objects returned per page.
-        --next-token=: The pagination token from the previous call.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: delete-workflow
-      description: Deletes the specified workflow and all its corresponding resources.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --workflow-id=!: Unique identifier for the workflow.
-    - name: list-integrations
-      description: Lists all of the integrations in your domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --include-hidden: Boolean to indicate if hidden integration should be returned.
-        --max-results=: The maximum number of objects returned per page.
-        --next-token=: The pagination token from the previous ListIntegrations API call.
-        --no-include-hidden: Boolean to indicate if hidden integration should be returned.
-    - name: get-auto-merging-preview
-      description: Tests the auto-merging settings of your Identity Resolution Job without merging your data.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --conflict-resolution=!: How the auto-merging process should resolve conflicts between different profiles.
-        --consolidation=!: A list of matching attributes that represent matching criteria.
-        --domain-name=!: The unique name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --min-allowed-confidence-score-for-merging=: Minimum confidence score required for profiles within a matching group to be merged during the auto-merge process.
-    - name: create-upload-job
-      description: Creates an Upload job to ingest data for segment imports.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-expiry=: The expiry duration for the profiles ingested with the job.
-        --display-name=!: The unique name of the upload job.
-        --domain-name=!: The unique name of the domain.
-        --fields=!: The mapping between CSV Columns and Profile Object attributes.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --unique-key=!: The unique key columns for de-duping the profiles used to map data to the profile.
-    - name: delete-integration
-      description: Removes an integration from a specific domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --uri=!: The URI of the S3 bucket or any other type of data source.
-    - name: delete-profile
-      description: Deletes the standard customer profile and all data pertaining to the profile.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --profile-id=!: The unique identifier of a customer profile.
-    - name: delete-profile-object
-      description: Removes an object associated with a profile of a given ProfileObjectType.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --object-type-name=!: The name of the profile object type.
-        --profile-id=!: The unique identifier of a customer profile.
-        --profile-object-unique-key=!: The unique identifier of the profile object generated by the service.
-    - name: get-domain
-      description: Returns information about a specific domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique name of the domain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-event-triggers
       description: List all Event Triggers under a domain.
@@ -837,26 +822,122 @@ commands:
         --next-token=: The pagination token to use with ListEventTriggers.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: get-calculated-attribute-definition
-      description: Provides more information on a calculated attribute definition for Customer Profiles.
-      flags:
-        --calculated-attribute-name=!: The unique name of the calculated attribute.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-event-streams
-      description: Returns a list of all the event streams in a specific domain.
+    - name: batch-get-profile
+      description: Get a batch of profiles.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain-name=!: The unique name of the domain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
+        --profile-ids=!: List of unique identifiers for customer profiles to retrieve.
+    - name: create-domain
+      description: Creates a domain, which is a container for all customer data, such as customer profile attributes, object types, profile keys, and encryption keys.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dead-letter-queue-url=: The URL of the SQS dead letter queue, which is used for reporting errors associated with ingesting data from third party applications.
+        --default-encryption-key=: The default encryption key, which is an AWS managed key, is used when no specific type of encryption key is specified.
+        --default-expiration-days=!: The default number of days until the data within the domain expires.
+        --domain-name=!: The unique name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --matching=: The process of matching duplicate profiles.
+        --rule-based-matching=: The process of matching duplicate profiles using the Rule-Based matching.
+        --tags=: The tags used to organize, track, or control access for this resource.
+    - name: detect-profile-object-type
+      description: The process of detecting profile object type mapping by using given objects.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --objects=!: A string that is serialized from a JSON object.
+    - name: get-event-trigger
+      description: Get a specific Event Trigger from the domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain.
+        --event-trigger-name=!: The unique name of the event trigger.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-segment-snapshot
+      description: Retrieve the latest status of a segment snapshot.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique identifier of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --segment-definition-name=!: The unique name of the segment definition.
+        --snapshot-id=!: The unique identifier of the segment snapshot.
+    - name: list-integrations
+      description: Lists all of the integrations in your domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-hidden: Boolean to indicate if hidden integration should be returned.
         --max-results=: The maximum number of objects returned per page.
-        --next-token=: Identifies the next page of results to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+        --next-token=: The pagination token from the previous ListIntegrations API call.
+        --no-include-hidden: Boolean to indicate if hidden integration should be returned.
+    - name: list-profile-attribute-values
+      description: Fetch the possible attribute values given the attribute name.
+      flags:
+        --attribute-name=!: The attribute name.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique identifier of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-event-trigger
+      description: Update the properties of an Event Trigger.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description of the event trigger.
+        --domain-name=!: The unique name of the domain.
+        --event-trigger-conditions=: A list of conditions that determine when an event should trigger the destination.
+        --event-trigger-limits=: Defines limits controlling whether an event triggers the destination, based on ingestion latency and the number of invocations per profile over specific time periods.
+        --event-trigger-name=!: The unique name of the event trigger.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --object-type-name=: The unique name of the object type.
+        --segment-filter=: The destination is triggered only for profiles that meet the criteria of a segment definition.
+    - name: delete-profile-object-type
+      description: Removes a ProfileObjectType from a specific domain as well as removes all the ProfileObjects of that type.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --object-type-name=!: The name of the profile object type.
+    - name: get-workflow
+      description: Get details of specified workflow.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workflow-id=!: Unique identifier for the workflow.
+    - name: list-profile-object-type-templates
+      description: Lists all of the template information for object types.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of objects returned per page.
+        --next-token=: The pagination token from the previous ListObjectTypeTemplates API call.
+    - name: put-integration
+      description: Adds an integration between the service and a third-party service, which includes Amazon AppFlow and Amazon Connect.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain.
+        --event-trigger-names=: A list of unique names for active event triggers associated with the integration.
+        --flow-definition=: The configuration that controls how Customer Profiles retrieves data from the source.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --object-type-name=: The name of the profile object type.
+        --object-type-names=: A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an `ObjectTypeName` (template) used to ingest the event.
+        --role-arn=: The Amazon Resource Name (ARN) of the IAM role.
+        --tags=: The tags used to organize, track, or control access for this resource.
+        --uri=: The URI of the S3 bucket or any other type of data source.
     - name: put-profile-object-type
       description: Defines a ProfileObjectType.
       flags:
@@ -876,92 +957,11 @@ commands:
         --source-last-updated-timestamp-format=: The format of your `sourceLastUpdatedTimestamp` that was previously set up.
         --tags=: The tags used to organize, track, or control access for this resource.
         --template-id=: A unique identifier for the object template.
-    - name: get-matches
-      description: 'Before calling this API, use [CreateDomain](https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html) or [UpdateDomain](https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html) to enable identity resolution: set `Matching` to true.'
+    - name: delete-integration
+      description: Removes an integration from a specific domain.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain-name=!: The unique name of the domain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return per page.
-        --next-token=: The token for the next set of results.
-    - name: list-domains
-      description: Returns a list of all the domains for an AWS account that have been created.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of objects returned per page.
-        --next-token=: The pagination token from the previous ListDomain API call.
-    - name: list-rule-based-matches
-      description: Returns a set of `MatchIds` that belong to the given domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of `MatchIds` returned per page.
-        --next-token=: The pagination token from the previous `ListRuleBasedMatches` API call.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: stop-upload-job
-      description: This API stops the processing of an upload job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique name of the domain containing the upload job to stop.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The unique identifier of the upload job to stop.
-    - name: update-event-trigger
-      description: Update the properties of an Event Trigger.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The description of the event trigger.
-        --domain-name=!: The unique name of the domain.
-        --event-trigger-conditions=: A list of conditions that determine when an event should trigger the destination.
-        --event-trigger-limits=: Defines limits controlling whether an event triggers the destination, based on ingestion latency and the number of invocations per profile over specific time periods.
-        --event-trigger-name=!: The unique name of the event trigger.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --object-type-name=: The unique name of the object type.
-        --segment-filter=: The destination is triggered only for profiles that meet the criteria of a segment definition.
-    - name: batch-get-calculated-attribute-for-profile
-      description: Fetch the possible attribute values given the attribute name.
-      flags:
-        --calculated-attribute-name=!: The unique name of the calculated attribute.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --condition-overrides=: Overrides the condition block within the original calculated attribute definition.
-        --domain-name=!: The unique name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --profile-ids=!: List of unique identifiers for customer profiles to retrieve.
-    - name: delete-profile-object-type
-      description: Removes a ProfileObjectType from a specific domain as well as removes all the ProfileObjects of that type.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --object-type-name=!: The name of the profile object type.
-    - name: get-calculated-attribute-for-profile
-      description: Retrieve a calculated attribute for a customer profile.
-      flags:
-        --calculated-attribute-name=!: The unique name of the calculated attribute.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --profile-id=!: The unique identifier of a customer profile.
-    - name: list-upload-jobs
-      description: This API retrieves a list of upload jobs for the specified domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The unique name of the domain to list upload jobs for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of upload jobs to return per page.
-        --next-token=: The pagination token from the previous call to retrieve the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+        --uri=!: The URI of the S3 bucket or any other type of data source.
