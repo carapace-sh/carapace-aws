@@ -1,4 +1,4 @@
-//go:build integration
+//#go:build integration
 
 package main
 
@@ -39,16 +39,20 @@ func TestService(t *testing.T) {
 				}
 			}
 
-			for operation := range botocore.Operations(service) {
-				t.Run(operation, func(t *testing.T) {
+			command, err := botocore.Get(fmt.Sprintf("aws.%s.yaml", service))
+			if err != nil {
+				t.Fatal(err.Error())
+			}
+			for _, operation := range command.Commands {
+				t.Run(operation.Name, func(t *testing.T) {
 					t.Parallel()
 					patch := carapace.DiffPatch(
 						bridge.ActionAws("aws"),
 						bridge.ActionCarapace("carapace-aws"),
-						carapace.NewContext(service, operation, "--"),
+						carapace.NewContext(service, operation.Name, "--"),
 					)
 
-					s := []string{fmt.Sprintf("\033[2m# %v %v\033[0m", service, operation)}
+					s := []string{fmt.Sprintf("\033[2m# %v %v\033[0m", service, operation.Name)}
 					for _, line := range patch {
 						switch {
 						case strings.HasPrefix(line, "-"):
