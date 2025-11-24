@@ -33,6 +33,15 @@ var rootCmd = &cobra.Command{
 			stripDoc(command)
 		}
 
+		if cmd.Flag("stdout").Changed {
+			m, err := yaml.Marshal(command)
+			if err != nil {
+				return err
+			}
+			fmt.Println(string(m))
+			return nil
+		}
+
 		dir, err := os.MkdirTemp("", "carapace-spec-botocore-*")
 		if err != nil {
 			return err
@@ -71,6 +80,7 @@ func Execute() error {
 func init() {
 	carapace.Gen(rootCmd).Standalone()
 	rootCmd.Flags().Bool("no-doc", false, "strip documentation")
+	rootCmd.Flags().Bool("stdout", false, "print to stdout")
 }
 
 func CamelCaseToDash(s string) string {
